@@ -9,7 +9,8 @@ import SwiftUI
 
 struct OnboardingView: View {
     @StateObject private var viewModel = OnboardingViewModel()
-    @State private var navigateToAuth = false
+
+    @State private var navigateToSignup = false
     @State private var navigateToLogin = false
     
     var body: some View {
@@ -64,7 +65,7 @@ struct OnboardingView: View {
                 VStack(spacing: 12) {
                     // Create Account Button
                     Button(action: {
-                        navigateToAuth = true
+                        navigateToSignup = true
                     }) {
                         Text("Create Account")
                             .font(.headline)
@@ -74,8 +75,8 @@ struct OnboardingView: View {
                             .background(RoundedRectangle(cornerRadius: 10).stroke(Color.gray))
                     }
                     // Navigate to AuthView
-                    .navigationDestination(isPresented: $navigateToAuth) {
-                        AuthView()
+                    .navigationDestination(isPresented: $navigateToSignup) {
+                        AuthView(mode: .signup)
                     }
                     
                     // Log In Button
@@ -92,7 +93,7 @@ struct OnboardingView: View {
                     }
                     // Navigate to LoginView (replace with your LoginView)
                     .navigationDestination(isPresented: $navigateToLogin) {
-                        QuestionFlowView() // Replace with your actual LoginView
+                        AuthView(mode: .login)
                     }
                     
                     Button(action: { viewModel.skip() }) {

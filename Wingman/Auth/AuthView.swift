@@ -9,13 +9,20 @@ import SwiftUI
 import Combine
 
 struct AuthView: View {
-    @Environment(\.dismiss) private var dismiss
-    @StateObject private var viewModel = AuthViewModel()
-    @FocusState private var focusedField: Field?
-    
-    enum Field {
-        case email, password
-    }
+    let mode: AuthMode
+
+        @Environment(\.dismiss) private var dismiss
+        @StateObject private var viewModel: AuthViewModel
+        @FocusState private var focusedField: Field?
+
+        enum Field {
+            case email, password
+        }
+
+        init(mode: AuthMode) {
+            self.mode = mode
+            _viewModel = StateObject(wrappedValue: AuthViewModel(mode: mode))
+        }
     
     // Computed progress for the top bar (email -> 0.5, password -> 1.0, complete -> 1.0)
     private var progress: CGFloat {
@@ -35,7 +42,7 @@ struct AuthView: View {
                         viewModel.goBackToEmail()
                     } else {
                         // Dismiss or handle navigation back if embedded in a stack
-                        dismiss()                         
+                        dismiss()
                     }
                 } label: {
                     Image(systemName: "chevron.left")
@@ -54,17 +61,15 @@ struct AuthView: View {
             .padding(.horizontal, 24)
             .padding(.bottom, 12)
             
-            // MARK: - Header (Title + Subtitle)
+            // MARK: - Header (Title + Subtitle) - DYNAMIC BASED ON MODE
             VStack(spacing: 16) {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text(viewModel.currentStep == .email ? "Create Account" : "Set a Password")
+                    Text(headerTitle)
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .foregroundColor(.black)
                     
-                    Text(viewModel.currentStep == .email
-                         ? "Save your progress, sync across devices, and more."
-                         : "Your password needs to be at least 6 characters.")
+                    Text(headerSubtitle)
                         .font(.body)
                         .foregroundColor(.secondary)
                 }
@@ -102,9 +107,9 @@ struct AuthView: View {
                 } else if viewModel.currentStep == .password {
                     inputField(title: "Password", text: $viewModel.password, errorMessage: viewModel.passwordErrorMessage, isSecure: true, focused: .password)
                     
-                    // Create Account Button - Filled Primary
-                    filledButton(title: "Create Account", isEnabled: viewModel.isPasswordValid) {
-                        viewModel.createAccount()
+                    // Primary Action Button - Dynamic Text Based on Mode
+                    filledButton(title: primaryButtonTitle, isEnabled: viewModel.isPasswordValid) {
+                        viewModel.submit()
                     }
                     
                     // Back Button - Outline Secondary
@@ -135,6 +140,27 @@ struct AuthView: View {
             focusedField = .email
         }
         .padding(.top, 8)
+    }
+    
+    // MARK: - Computed Properties for Dynamic Text
+    private var headerTitle: String {
+        if viewModel.mode == .signup {
+            return viewModel.currentStep == .email ? "Create Account" : "Set a Password"
+        } else {
+            return viewModel.currentStep == .email ? "Login" : "Enter Password"
+        }
+    }
+    
+    private var headerSubtitle: String {
+        if viewModel.currentStep == .email {
+            return "Save your progress, sync across devices, and more."
+        } else {
+            return "Your password needs to be at least 6 characters."
+        }
+    }
+    
+    private var primaryButtonTitle: String {
+        return viewModel.mode == .signup ? "Create Account" : "Login"
     }
     
     // MARK: - Progress Bar View
@@ -254,6 +280,10 @@ struct AuthView: View {
     }
 }
 
-#Preview {
-    AuthView()
+#Preview("Signup") {
+    AuthView(mode: .signup)
+}
+
+#Preview("Login") {
+    AuthView(mode: .login)
 }
