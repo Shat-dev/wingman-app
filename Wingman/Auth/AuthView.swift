@@ -12,6 +12,7 @@ struct AuthView: View {
     let mode: AuthMode
 
         @Environment(\.dismiss) private var dismiss
+        @EnvironmentObject var authManager: AuthManager
         @StateObject private var viewModel: AuthViewModel
         @FocusState private var focusedField: Field?
 
@@ -138,6 +139,12 @@ struct AuthView: View {
         }
         .onAppear {
             focusedField = .email
+        }
+        .onChange(of: viewModel.currentStep) { newStep in
+            // When auth is complete, mark onboarding as done
+            if newStep == .complete {
+                authManager.completeOnboarding()
+            }
         }
         .padding(.top, 8)
     }

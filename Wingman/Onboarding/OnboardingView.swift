@@ -9,7 +9,8 @@ import SwiftUI
 
 struct OnboardingView: View {
     @StateObject private var viewModel = OnboardingViewModel()
-
+    @EnvironmentObject var authManager: AuthManager
+    
     @State private var navigateToSignup = false
     @State private var navigateToLogin = false
     
@@ -46,7 +47,7 @@ struct OnboardingView: View {
                         .tag(index)
                     }
                 }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))  // hide default dots
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 .frame(height: 500)
                 
                 // MARK: - Custom Page Indicator
@@ -74,7 +75,6 @@ struct OnboardingView: View {
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 10).stroke(Color.gray))
                     }
-                    // Navigate to AuthView
                     .navigationDestination(isPresented: $navigateToSignup) {
                         AuthView(mode: .signup)
                     }
@@ -91,12 +91,13 @@ struct OnboardingView: View {
                             .background(Color.black)
                             .cornerRadius(10)
                     }
-                    // Navigate to LoginView (replace with your LoginView)
                     .navigationDestination(isPresented: $navigateToLogin) {
                         AuthView(mode: .login)
                     }
                     
-                    Button(action: { viewModel.skip() }) {
+                    Button(action: {
+                        authManager.skipOnboarding()
+                    }) {
                         Text("Skip for now")
                             .foregroundColor(.gray)
                             .padding(.top, 4)
@@ -112,4 +113,5 @@ struct OnboardingView: View {
 
 #Preview {
     OnboardingView()
+        .environmentObject(AuthManager())
 }
