@@ -5,19 +5,19 @@ struct ContentView: View {
     
     // MARK: - Dummy onboarding data (you will replace later)
     let pages = [
-        OnboardingModel(title: "Stop Overthinking, Start Approaching",
+        LandingModel(title: "Stop Overthinking, Start Approaching",
                        description: "Build the confidence to talk to strangers naturally without letting fear hold you back.",
                        imageName: "wingman_logo"),
         
-        OnboardingModel(title: "Turn anxiety into action",
+        LandingModel(title: "Turn anxiety into action",
                        description: "Daily practice and real-world tracking help you approach more and worry less.",
                        imageName: "wingman_logo"),
         
-        OnboardingModel(title: "Learn what actually works",
+        LandingModel(title: "Learn what actually works",
                        description: "Master mindset, approach mechanics, and conversation skills step-by-step.",
                        imageName: "wingman_logo"),
         
-        OnboardingModel(title: "Track your progress Stay consistent",
+        LandingModel(title: "Track your progress Stay consistent",
                        description: "Log every attempt  and watch your confidence grow with real data.",
                        imageName: "wingman_logo")
     ]

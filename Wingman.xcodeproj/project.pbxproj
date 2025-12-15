@@ -19,9 +19,22 @@
 		18CACE352EDB2650002B0AF9 /* Wingman.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wingman.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		31C6693B2EF079D700057058 /* Exceptions for "Wingman" folder in "Wingman" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 18CACE342EDB2650002B0AF9 /* Wingman */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		18CACE372EDB2650002B0AF9 /* Wingman */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				31C6693B2EF079D700057058 /* Exceptions for "Wingman" folder in "Wingman" target */,
+			);
 			path = Wingman;
 			sourceTree = "<group>";
 		};
@@ -280,6 +293,7 @@
 				DEVELOPMENT_TEAM = Q4XUFY2C89;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Wingman/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -313,6 +327,7 @@
 				DEVELOPMENT_TEAM = Q4XUFY2C89;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Wingman/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

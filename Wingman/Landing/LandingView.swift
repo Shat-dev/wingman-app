@@ -8,108 +8,121 @@
 import SwiftUI
 
 struct LandingView: View {
-    @StateObject private var viewModel = OnboardingViewModel()
+    @StateObject private var viewModel = LandingViewModel()
     @EnvironmentObject var authManager: AuthManager
-    
+
     @State private var navigateToSignup = false
     @State private var navigateToLogin = false
-    
+
     var body: some View {
         NavigationStack {
             VStack {
-                
+
                 // MARK: - Carousel
                 TabView(selection: $viewModel.currentPage) {
                     ForEach(viewModel.pages.indices, id: \.self) { index in
                         let page = viewModel.pages[index]
-                        
-                        VStack(spacing: 10) {
+
+                        VStack(spacing: 14) {
+
+                            // MARK: - Heading
                             Text(page.title)
-                                .font(.title)
-                                .fontWeight(.bold)
+                                .font(.custom("Manrope-SemiBold", size: 32))
+                                .foregroundColor(.black)
                                 .multilineTextAlignment(.leading)
                                 .frame(maxWidth: .infinity, alignment: .leading)
-                                .lineSpacing(0)
                                 .padding(.horizontal, 20)
-                            
+
+                            // MARK: - Description
                             Text(page.description)
-                                .font(.body)
-                                .foregroundColor(.gray)
+                                .font(.custom("Manrope-Regular", size: 16))
+                                .foregroundColor(Color.black.opacity(0.55))
                                 .multilineTextAlignment(.leading)
+                                .lineSpacing(3)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.horizontal, 20)
-                            
+
+                            // MARK: - Image
                             Image(page.imageName)
                                 .resizable()
                                 .scaledToFit()
-                                .frame(height: 280)
+                                .frame(height: 320)
+                                .padding(.top, 10)
                         }
                         .tag(index)
                     }
                 }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                .frame(height: 500)
+                .tabViewStyle(.page(indexDisplayMode: .never))
+                .frame(height: 520)
+
                 
-                // MARK: - Custom Page Indicator
-                HStack {
-                    ForEach(viewModel.pages.indices, id: \.self) { index in
-                        Circle()
-                            .frame(width: 8, height: 8)
-                            .foregroundColor(viewModel.currentPage == index ? .black : .gray.opacity(0.3))
-                    }
-                }
-                .padding(.bottom, 20)
-                
-                Spacer()
-                
-                // MARK: - Buttons
+
+                // MARK: - CTA Buttons
                 VStack(spacing: 12) {
-                    // Create Account Button
-                    Button(action: {
+                    
+                    // MARK: - Page Indicator
+                    HStack(spacing: 6) {
+                        ForEach(viewModel.pages.indices, id: \.self) { index in
+                            Circle()
+                                .fill(viewModel.currentPage == index ? Color.black : Color.black.opacity(0.25))
+                                .frame(width: 6, height: 6)
+                        }
+                    }
+                    .padding(.bottom, 5)
+
+                    // Create Account
+                    Button {
                         navigateToSignup = true
-                    }) {
+                    } label: {
                         Text("Create Account")
-                            .font(.headline)
+                            .font(.custom("Manrope-SemiBold", size: 16))
                             .foregroundColor(.black)
                             .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(RoundedRectangle(cornerRadius: 10).stroke(Color.gray))
+                            .frame(height: 52)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(Color.black, lineWidth: 1)
+                            )
                     }
                     .navigationDestination(isPresented: $navigateToSignup) {
                         AuthView(mode: .signup)
                     }
-                    
-                    // Log In Button
-                    Button(action: {
+
+                    // Log In
+                    Button {
                         navigateToLogin = true
-                    }) {
+                    } label: {
                         Text("Log In")
-                            .font(.headline)
+                            .font(.custom("Manrope-SemiBold", size: 16))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
-                            .padding()
+                            .frame(height: 52)
                             .background(Color.black)
-                            .cornerRadius(10)
+                            .cornerRadius(5)
                     }
                     .navigationDestination(isPresented: $navigateToLogin) {
                         AuthView(mode: .login)
                     }
-                    
-                    Button(action: {
+
+                    // Skip
+                    Button {
                         authManager.skipOnboarding()
-                    }) {
+                    } label: {
                         Text("Skip for now")
-                            .foregroundColor(.gray)
-                            .padding(.top, 4)
+                            .font(.custom("Manrope-SemiBold", size: 16))
+                            .foregroundColor(Color.black)
+                            .underline()
+                            .padding(.top, 6)
                     }
                 }
-                .padding(.horizontal)
-                
-                Spacer().frame(height: 20)
+                .padding(.horizontal, 20)
+
+                Spacer().frame(height: 24)
             }
         }
     }
 }
+
 
 #Preview {
     LandingView()

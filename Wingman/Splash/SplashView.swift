@@ -11,7 +11,7 @@ struct SplashView: View {
 
     var body: some View {
         if isActive {
-            OnboardingView()  // Your main screen
+            LandingView()  // Your main screen
         } else {
             ZStack {
                 Color.white.ignoresSafeArea()
