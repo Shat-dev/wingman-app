@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OnboardingView: View {
+struct LandingView: View {
     @StateObject private var viewModel = OnboardingViewModel()
     @EnvironmentObject var authManager: AuthManager
     
@@ -112,6 +112,6 @@ struct OnboardingView: View {
 }
 
 #Preview {
-    OnboardingView()
+    LandingView()
         .environmentObject(AuthManager())
 }
