@@ -13,6 +13,7 @@ import Auth
 struct DashboardView: View {
     @EnvironmentObject var authManager: AuthManager
     @State private var showPaywall = false
+    @State private var navigateToPractice = false
     
     var body: some View {
         NavigationStack {
@@ -34,6 +35,25 @@ struct DashboardView: View {
                 Spacer()
              
                 VStack(spacing: 12) {
+                    // Daily Practice Button
+                                       Button(action: {
+                                           navigateToPractice = true
+                                       }) {
+                                           HStack {
+                                               Image(systemName: "brain.head.profile")
+                                                   .font(.system(size: 20))
+                                               Text("Daily Practice")
+                                                   .fontWeight(.semibold)
+                                           }
+                                           .frame(maxWidth: .infinity)
+                                           .padding()
+                                           .foregroundColor(.white)
+                                           .background(Color.blue)
+                                           .cornerRadius(10)
+                                       }
+                                       .navigationDestination(isPresented: $navigateToPractice) {
+                                           PracticeView()
+                                       }
                     
                     // Payment Button (for testing)
                     Button(action: {

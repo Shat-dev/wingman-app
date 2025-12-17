@@ -1,0 +1,67 @@
+//
+//  ReferralView.swift
+//  Wingman
+//
+//  Created by Adnan Khan on 18/12/2025.
+//
+
+import SwiftUI
+
+import SwiftUI
+
+struct ReferralView: View {
+
+    @State private var referralCode = ""
+
+    var body: some View {
+        VStack(spacing: 20) {
+
+            VStack(alignment: .leading, spacing: 16) {
+
+                Text("Enter referral code (optional)")
+                    .font(.manropeSemiBold(size: 24))
+
+                TextField("Referral code", text: $referralCode)
+                    .padding()
+                    .background(Color.gray.opacity(0.15))
+                    .cornerRadius(6)
+
+                Button {
+                    print("➡️ Referral submitted:",referralCode)
+                } label: {
+                    Text("Next")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(referralCode.isEmpty ? Color.gray : Color.black)
+                        .cornerRadius(6)
+                }
+                .disabled(referralCode.isEmpty)
+
+                // ✅ CENTERED SKIP (below button)
+                HStack {
+                    Spacer()
+                    Button {
+                        print("⏭️ Referral skipped")
+                    } label: {
+                        Text("Skip")
+                            .foregroundColor(.black)
+                            .font(.manropeSemiBold(size: 16))
+                            .underline()
+                            .font(.manropeSemiBold(size: 16))
+                    }
+                    Spacer()
+                }
+            }
+            .padding(.top, 24)
+
+            Spacer()
+        }
+        .padding(.horizontal, 24)
+        .navigationTitle("Referral code")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+}
+#Preview {
+    ReferralView()
+}

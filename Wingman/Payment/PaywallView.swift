@@ -10,104 +10,100 @@ import SwiftUI
 
 struct PaywallView: View {
 
-    @State private var selectedPlan: Plan = .yearly
-    @State private var currentPage: Int = 1
+    @StateObject private var viewModel = PaywallViewModel()
+    @State private var navigateToReferral = false
 
     var body: some View {
-        VStack(spacing: 0) {
+        NavigationStack {
+            VStack {
 
-            // MARK: - Illustration
-            Image("paywall_illustration")
-                .resizable()
-                .scaledToFit()
-                .frame(height: 240)
-                .padding(.top, 24)
+                // MARK: - Carousel
+                TabView(selection: $viewModel.currentPage) {
+                    ForEach(viewModel.pages.indices, id: \.self) { index in
+                        let page = viewModel.pages[index]
 
-            // MARK: - Feature List
-            VStack(alignment: .leading, spacing: 14) {
-                featureRow("Stop overthinking your next move")
-                featureRow("Build confidence through short daily reps")
-                featureRow("Feel more natural every time you approach")
-            }
-            .padding(.top, 16)
-            .padding(.horizontal, 32)
+                        VStack(spacing: 20) {
 
-            // MARK: - Page Indicator
-            HStack(spacing: 6) {
-                ForEach(0..<3) { index in
-                    Circle()
-                        .fill(index == currentPage ? Color.black : Color.black.opacity(0.25))
-                        .frame(width: 6, height: 6)
+                            Image(page.imageName)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 260)
+
+                            VStack(alignment: .leading, spacing: 12) {
+                                ForEach(page.bullets, id: \.self) { bullet in
+                                    HStack(alignment: .top, spacing: 10) {
+                                        Image(systemName: "checkmark")
+                                        Text(bullet)
+                                    }
+                                    .font(.subheadline)
+                                }
+                            }
+                            .padding(.horizontal, 24)
+                        }
+                        .tag(index)
+                    }
                 }
-            }
-            .padding(.top, 18)
+                .tabViewStyle(.page(indexDisplayMode: .never))
+                .frame(height: 420)
 
-            Spacer(minLength: 24)
+                
 
-            // MARK: - Plans
-            VStack(spacing: 12) {
+                // MARK: - Plans
+                VStack(spacing: 12) {
+                    
+                    // MARK: - Page Indicator
+                    HStack(spacing: 6) {
+                        ForEach(viewModel.pages.indices, id: \.self) { index in
+                            Circle()
+                                .fill(viewModel.currentPage == index ? .black : .black.opacity(0.25))
+                                .frame(width: 6, height: 6)
+                        }
+                    }
+                    .padding(.bottom, 10)
 
-                PlanCard(
-                    title: "Yearly Plan",
-                    subtitle: "$79.99 per year",
-                    priceNote: "only $0.96 per week",
-                    isSelected: selectedPlan == .yearly,
-                    badgeText: "Save 69%"
-                ) {
-                    selectedPlan = .yearly
+                    PlanRow(
+                        title: "Yearly Plan",
+                        price: "$44.99 per year",
+                        weekly: "only $0.96 per week",
+                        isSelected: viewModel.selectedPlan == .yearly
+                    ) {
+                        viewModel.selectPlan(.yearly)
+                    }
+
+                    PlanRow(
+                        title: "Monthly Plan",
+                        price: "$12.99",
+                        weekly: "only $2.29 per week",
+                        isSelected: viewModel.selectedPlan == .monthly
+                    ) {
+                        viewModel.selectPlan(.monthly)
+                    }
                 }
+                .padding(.horizontal, 20)
 
-                PlanCard(
-                    title: "Monthly Plan",
-                    subtitle: "$14.99",
-                    priceNote: "only $2.29 per week",
-                    isSelected: selectedPlan == .monthly
-                ) {
-                    selectedPlan = .monthly
+                Spacer()
+
+                // MARK: - Continue
+                Button {
+                    viewModel.continueTapped()
+                    navigateToReferral = true
+                } label: {
+                    Text("Continue")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(Color.black)
+                        .cornerRadius(5)
                 }
+                .padding(.horizontal, 20)
+                .padding(.bottom, 12)
+
+                NavigationLink("", destination: ReferralView(), isActive: $navigateToReferral)
             }
-            .padding(.horizontal, 24)
-
-            // MARK: - Continue Button
-            Button(action: {
-                // Handle purchase
-            }) {
-                Text("Continue")
-                    .font(.custom("Manrope-SemiBold", size: 16))
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 56)
-                    .background(Color.black)
-                    .cornerRadius(12)
-            }
-            .padding(.horizontal, 24)
-            .padding(.top, 20)
-            .padding(.bottom, 24)
-        }
-        .background(Color.white)
-    }
-
-    // MARK: - Feature Row
-    private func featureRow(_ text: String) -> some View {
-        HStack(alignment: .top, spacing: 10) {
-            Image(systemName: "checkmark")
-                .font(.system(size: 14, weight: .bold))
-                .foregroundColor(.black)
-                .padding(.top, 3)
-
-            Text(text)
-                .font(.custom("Manrope-Regular", size: 15))
-                .foregroundColor(.black)
-                .fixedSize(horizontal: false, vertical: true)
         }
     }
 }
 
-// MARK: - Plan Enum
-enum Plan {
-    case yearly
-    case monthly
-}
 
 #Preview {
     PaywallView()
