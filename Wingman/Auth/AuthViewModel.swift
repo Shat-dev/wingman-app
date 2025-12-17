@@ -44,6 +44,7 @@ final class AuthViewModel: ObservableObject {
     // MARK: - Init
     init(mode: AuthMode) {
         self.mode = mode
+        print("🔧 AuthViewModel initialized with mode: \(mode == .signup ? "SIGNUP" : "LOGIN")")
         setupEmailValidation()
         setupPasswordValidation()
     }
@@ -106,43 +107,78 @@ final class AuthViewModel: ObservableObject {
     func continueToPassword() {
         emailTouched = true
         guard isEmailValid else { return }
+        print("📧 Email validated, moving to password step")
         currentStep = .password
     }
 
     func goBackToEmail() {
+        print("⬅️ Going back to email step")
         currentStep = .email
     }
 
     // MARK: - Supabase Submit (LOGIN + SIGNUP)
+    // LINE WHERE ACCOUNT CREATION/LOGIN HAPPENS
     func submit() {
+        print("\n🚀 ========== SUBMIT CALLED ==========")
+        print("📝 Mode: \(mode == .signup ? "SIGNUP" : "LOGIN")")
+        print("📧 Email: \(email)")
+        
         passwordTouched = true
-        guard isEmailValid && isPasswordValid else { return }
+        guard isEmailValid && isPasswordValid else {
+            print("❌ Validation failed")
+            return
+        }
 
         isLoading = true
+        print("⏳ Loading started...")
 
         Task {
             do {
                 if mode == .signup {
-                    try await SupabaseManager.shared.client.auth.signUp(
+                    // LINE 145-148: SIGNUP HAPPENS HERE
+                    print("\n📤 Sending SIGNUP request to Supabase...")
+                    let response = try await SupabaseManager.shared.client.auth.signUp(
                         email: email,
                         password: password
                     )
+                    print("✅ SIGNUP Response received:")
+                    print("   - User ID: \(response.user.id)")
+                    print("   - Email: \(response.user.email ?? "nil")")
+                    //print("   - Access Token exists: \(response.accessToken.isEmpty ? "NO" : "YES")")
+                    print("   - Session type: \(type(of: response))")
+                    
                 } else {
-                    try await SupabaseManager.shared.client.auth.signIn(
+                    // LINE 158-161: LOGIN HAPPENS HERE
+                    print("\n📤 Sending LOGIN request to Supabase...")
+                    let response = try await SupabaseManager.shared.client.auth.signIn(
                         email: email,
                         password: password
                     )
+                    print("✅ LOGIN Response received:")
+                    print("   - User ID: \(response.user.id)")
+                    print("   - Email: \(response.user.email ?? "nil")")
+                    print("   - Access Token exists: \(response.accessToken.isEmpty ? "NO" : "YES")")
+                    print("   - Session type: \(type(of: response))")
                 }
 
+                // LINE 170-174: NAVIGATION TO .complete HAPPENS HERE
                 await MainActor.run {
                     self.isLoading = false
+                    print("✅ Setting currentStep to .complete")
                     self.currentStep = .complete
+                    print("🎯 Current step is now: \(self.currentStep)")
                 }
 
             } catch {
+                print("\n❌ ========== ERROR ==========")
+                print("❌ Error type: \(type(of: error))")
+                print("❌ Error description: \(error.localizedDescription)")
+                print("❌ Full error: \(error)")
+                
                 await MainActor.run {
                     self.isLoading = false
                     self.passwordErrorMessage = error.localizedDescription
+                    print("❌ Error message set: \(error.localizedDescription)")
                 }
             }
         }

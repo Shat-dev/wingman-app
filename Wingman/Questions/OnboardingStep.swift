@@ -12,7 +12,7 @@ enum StepType {
     case statistic
 }
 
-struct QuestionStep: Identifiable {
+struct OnboardingStep: Identifiable {
     let id = UUID()
     let type: StepType
     

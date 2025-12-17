@@ -7,9 +7,12 @@
 
 
 import SwiftUI
+import Supabase
+import Auth
 
 struct DashboardView: View {
     @EnvironmentObject var authManager: AuthManager
+    @State private var showPaywall = false
     
     var body: some View {
         NavigationStack {
@@ -22,21 +25,58 @@ struct DashboardView: View {
                     .font(.body)
                     .foregroundColor(.secondary)
                 
-                Spacer()
+                if let email = authManager.currentUser?.email {
+                    Text("Email: \(email)")
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                }
                 
-                // Logout Button
-                Button(action: {
-                    Task {
-                        await authManager.signOut()
+                Spacer()
+             
+                VStack(spacing: 12) {
+                    
+                    // Payment Button (for testing)
+                    Button(action: {
+                        showPaywall = true
+                    }) {
+                        Text("Payment test")
+                            .fontWeight(.semibold)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .foregroundColor(.white)
+                            .background(Color.green)
+                            .cornerRadius(10)
                     }
-                }) {
-                    Text("Sign Out")
-                        .fontWeight(.semibold)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(Color.red)
-                        .cornerRadius(10)
+                    .navigationDestination(isPresented: $showPaywall) {
+                        PaywallView()
+                    }
+                    // Reset Questions (for testing)
+                    Button(action: {
+                        authManager.resetQuestions()
+                    }) {
+                        Text("Reset Questions (Test)")
+                            .fontWeight(.semibold)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .foregroundColor(.white)
+                            .background(Color.orange)
+                            .cornerRadius(10)
+                    }
+                    
+                    // Logout Button
+                    Button(action: {
+                        Task {
+                            await authManager.signOut()
+                        }
+                    }) {
+                        Text("Sign Out")
+                            .fontWeight(.semibold)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .foregroundColor(.white)
+                            .background(Color.red)
+                            .cornerRadius(10)
+                    }
                 }
                 .padding(.horizontal, 24)
                 .padding(.bottom, 40)

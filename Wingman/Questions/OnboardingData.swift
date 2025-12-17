@@ -1,8 +1,8 @@
-// e.g., QuestionnaireData.swift
+// e.g., OnBoardingData.swift
 import Foundation
 
-let questionnaireSteps: [QuestionStep] = [
-    QuestionStep(
+let onboardingSteps: [OnboardingStep] = [
+    OnboardingStep(
         type: .question,
         title: "How old are you?",
         subtitle: nil,
@@ -10,7 +10,7 @@ let questionnaireSteps: [QuestionStep] = [
         chartImage: nil,
         progress: 0.16
     ),
-    QuestionStep(
+    OnboardingStep(
         type: .question,
         title: "When was the last time you spoke to a woman in public?",
         subtitle: nil,
@@ -18,7 +18,7 @@ let questionnaireSteps: [QuestionStep] = [
         chartImage: nil,
         progress: 0.32
     ),
-    QuestionStep(
+    OnboardingStep(
         type: .question,
         title: "Do you often want to approach women in public but stop yourself?",
         subtitle: nil,
@@ -26,7 +26,7 @@ let questionnaireSteps: [QuestionStep] = [
         chartImage: nil,
         progress: 0.48
     ),
-    QuestionStep(
+    OnboardingStep(
         type: .question,
         title: "What usually stops you from doing so?",
         subtitle: nil,
@@ -34,7 +34,7 @@ let questionnaireSteps: [QuestionStep] = [
         chartImage: nil,
         progress: 0.64
     ),
-    QuestionStep(
+    OnboardingStep(
         type: .question,
         title: "What are you mainly hoping to improve?",
         subtitle: nil,

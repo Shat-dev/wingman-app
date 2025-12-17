@@ -15,6 +15,9 @@ struct AuthView: View {
         @EnvironmentObject var authManager: AuthManager
         @StateObject private var viewModel: AuthViewModel
         @FocusState private var focusedField: Field?
+        
+        @State private var isWaitingForAuth = false
+        @State private var showSignupSuccessMessage = false
 
         enum Field {
             case email, password
@@ -23,6 +26,7 @@ struct AuthView: View {
         init(mode: AuthMode) {
             self.mode = mode
             _viewModel = StateObject(wrappedValue: AuthViewModel(mode: mode))
+            print("🎬 AuthView initialized with mode: \(mode == .signup ? "SIGNUP" : "LOGIN")")
         }
     
     // Computed progress for the top bar (email -> 0.5, password -> 1.0, complete -> 1.0)
@@ -39,12 +43,7 @@ struct AuthView: View {
             // MARK: - Top Row: Back Chevron + Progress Bar inline
             HStack(spacing: 12) {
                 Button {
-                    if viewModel.currentStep == .password {
-                        viewModel.goBackToEmail()
-                    } else {
-                        // Dismiss or handle navigation back if embedded in a stack
-                        dismiss()
-                    }
+                    handleBackButton()
                 } label: {
                     Image(systemName: "chevron.left")
                         .font(.system(size: 20, weight: .bold))
@@ -53,8 +52,8 @@ struct AuthView: View {
                         .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
+                .disabled(isWaitingForAuth) // Disable during auth wait
                 
-                // Progress bar should expand to fill remaining width
                 progressBar(progress: progress)
                     .frame(height: 10)
             }
@@ -66,12 +65,11 @@ struct AuthView: View {
             VStack(spacing: 16) {
                 VStack(alignment: .leading, spacing: 8) {
                     Text(headerTitle)
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
+                        .font(.manropeSemiBold(size: 28))
                         .foregroundColor(.black)
                     
                     Text(headerSubtitle)
-                        .font(.body)
+                        .font(.manropeRegular(size: 16))
                         .foregroundColor(.secondary)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -85,16 +83,13 @@ struct AuthView: View {
                 if viewModel.currentStep == .email {
                     inputField(title: "Email", text: $viewModel.email, errorMessage: viewModel.emailErrorMessage, isSecure: false, focused: .email)
                     
-                    // Continue Button - Filled Primary
                     filledButton(title: "Continue", isEnabled: viewModel.isEmailValid) {
                         viewModel.continueToPassword()
                     }
                     
-                    // Divider with "or" like Figma
                     orDivider()
                         .padding(.vertical, 8)
                     
-                    // Social Login Buttons - Outline Secondary
                     VStack(spacing: 12) {
                         outlineButton(title: "Continue with Google", systemImage: "g.circle.fill") {
                             // Handle Google login
@@ -108,27 +103,37 @@ struct AuthView: View {
                 } else if viewModel.currentStep == .password {
                     inputField(title: "Password", text: $viewModel.password, errorMessage: viewModel.passwordErrorMessage, isSecure: true, focused: .password)
                     
-                    // Primary Action Button - Dynamic Text Based on Mode
                     filledButton(title: primaryButtonTitle, isEnabled: viewModel.isPasswordValid) {
                         viewModel.submit()
                     }
                     
-                    // Back Button - Outline Secondary
                     outlineButton(title: "Back") {
                         viewModel.goBackToEmail()
                     }
+                    
+                } else if viewModel.currentStep == .complete {
+                    // Show waiting state
+                    VStack(spacing: 20) {
+                        ProgressView()
+                            .scaleEffect(1.5)
+                        
+                        Text("Setting up your account...")
+                            .font(.manropeRegular(size: 16))
+                            .foregroundColor(.secondary)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
             .padding(.horizontal, 24)
             
             Spacer()
         }
-        // Hide system back button if embedded in NavigationStack/NavigationView
         .navigationBarBackButtonHidden(true)
-        // If presented as a sheet and you want to prevent drag-to-dismiss, uncomment:
-        // .interactiveDismissDisabled(true)
         .animation(.easeInOut(duration: 0.3), value: viewModel.currentStep)
+        // LINE 125-145: HANDLES STEP CHANGES AND TRIGGERS ONBOARDING COMPLETION
         .onChange(of: viewModel.currentStep) { newStep in
+            print("\n📍 AuthView: currentStep changed to: \(newStep)")
+            
             focusedField = {
                 switch newStep {
                 case .email: return .email
@@ -136,17 +141,128 @@ struct AuthView: View {
                 case .complete: return nil
                 }
             }()
-        }
-        .onAppear {
-            focusedField = .email
-        }
-        .onChange(of: viewModel.currentStep) { newStep in
-            // When auth is complete, mark onboarding as done
+            
+            // LINE 137: When auth is complete, mark onboarding as done and wait for auth
             if newStep == .complete {
+                print("✅ AuthView: Auth complete! Calling authManager.completeOnboarding()")
                 authManager.completeOnboarding()
+                isWaitingForAuth = true
+                
+                print("📊 Current auth state:")
+                print("   - isAuthenticated: \(authManager.isAuthenticated)")
+                print("   - hasCompletedOnboarding: \(authManager.hasCompletedOnboarding)")
+                print("   - hasCompletedQuestions: \(authManager.hasCompletedQuestions)")
+                
+                // For signup mode, show success message
+                if viewModel.mode == .signup {
+                    // Wait briefly then show success message
+                    Task {
+                        try? await Task.sleep(nanoseconds: 500_000_000) // 0.5 second
+                        await MainActor.run {
+                            showSignupSuccessMessage = true
+                        }
+                        
+                        // Auto-dismiss after 2.5 seconds
+                        try? await Task.sleep(nanoseconds: 2_500_000_000) // 2.5 seconds
+                        await MainActor.run {
+                            showSignupSuccessMessage = false
+                            // Navigation will happen automatically via RootView
+                        }
+                    }
+                }
+                
+                // Wait for auth state to update (max 5 seconds)
+                Task {
+                    for i in 1...50 {
+                        try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 second
+                        if authManager.isAuthenticated {
+                            print("✅ Auth state updated after \(i * 100)ms")
+                            break
+                        }
+                    }
+                    
+                    if !authManager.isAuthenticated {
+                        print("⚠️ WARNING: Auth state didn't update after 5 seconds")
+                        print("⚠️ This might be an email confirmation issue in Supabase")
+                    }
+                }
             }
         }
+        .onAppear {
+            print("👁️ AuthView appeared")
+            focusedField = .email
+        }
+        .onDisappear {
+            print("👋 AuthView disappeared")
+        }
         .padding(.top, 8)
+        .overlay(
+            // SUCCESS MESSAGE OVERLAY
+            Group {
+                if showSignupSuccessMessage {
+                    ZStack {
+                        // Semi-transparent background
+                        Color.black.opacity(0.4)
+                            .ignoresSafeArea()
+                        
+                        // Success card
+                        VStack(spacing: 16) {
+                            // Success icon
+                            ZStack {
+                                Circle()
+                                    .fill(Color.green)
+                                    .frame(width: 60, height: 60)
+                                
+                                Image(systemName: "checkmark")
+                                    .font(.system(size: 30, weight: .bold))
+                                    .foregroundColor(.white)
+                            }
+                            
+                            // Success message
+                            VStack(spacing: 8) {
+                                Text("Signup Successful!")
+                                    .font(.manropeSemiBold(size: 22))
+                                    .foregroundColor(.black)
+                                
+                                Text("Please login to continue")
+                                    .font(.manropeRegular(size: 16))
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                        .padding(32)
+                        .background(
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(Color.white)
+                                .shadow(color: Color.black.opacity(0.2), radius: 20, x: 0, y: 10)
+                        )
+                        .padding(.horizontal, 40)
+                    }
+                    .transition(.asymmetric(
+                        insertion: .scale.combined(with: .opacity),
+                        removal: .opacity
+                    ))
+                }
+            }
+            .animation(.spring(response: 0.5, dampingFraction: 0.7), value: showSignupSuccessMessage)
+        )
+    }
+    
+    // MARK: - Handle Back Button
+    private func handleBackButton() {
+        if viewModel.currentStep == .complete {
+            print("⚠️ Back button pressed during auth completion - ignoring")
+            return
+        }
+        
+        if viewModel.currentStep == .password {
+            print("⬅️ Back button: Going to email step")
+            viewModel.goBackToEmail()
+        } else {
+            print("⬅️ Back button: Dismissing AuthView (returning to LandingView)")
+            // Reset onboarding so user goes back to Landing
+            authManager.resetOnboarding()
+            dismiss()
+        }
     }
     
     // MARK: - Computed Properties for Dynamic Text
@@ -210,9 +326,10 @@ struct AuthView: View {
                     .focused($focusedField, equals: focused)
                     .padding()
                     .background(Color(.systemGray6))
-                    .cornerRadius(10)
+                    .cornerRadius(5)
+                    .font(.manropeRegular(size: 16))
                     .overlay(
-                        RoundedRectangle(cornerRadius: 10)
+                        RoundedRectangle(cornerRadius: 5)
                             .stroke(errorMessage.isEmpty ? Color.clear : Color.red, lineWidth: 1)
                     )
                     .onChange(of: text.wrappedValue) { _ in
@@ -226,9 +343,10 @@ struct AuthView: View {
                     .focused($focusedField, equals: focused)
                     .padding()
                     .background(Color(.systemGray6))
-                    .cornerRadius(10)
+                    .cornerRadius(5)
+                    .font(.manropeRegular(size: 16))
                     .overlay(
-                        RoundedRectangle(cornerRadius: 10)
+                        RoundedRectangle(cornerRadius: 5)
                             .stroke(errorMessage.isEmpty ? Color.clear : Color.red, lineWidth: 1)
                     )
                     .onChange(of: text.wrappedValue) { _ in
@@ -245,7 +363,7 @@ struct AuthView: View {
         }
     }
 
-    // MARK: - Filled Button (Primary like Create Account on onboarding)
+    // MARK: - Filled Button
     private func filledButton(title: String, isEnabled: Bool, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             if viewModel.isLoading {
@@ -260,13 +378,13 @@ struct AuthView: View {
                     .padding()
                     .foregroundColor(.white)
                     .background(isEnabled ? Color.black : Color.gray.opacity(0.5))
-                    .cornerRadius(10)
+                    .cornerRadius(5)
             }
         }
         .disabled(!isEnabled || viewModel.isLoading)
     }
     
-    // MARK: - Outline Button (Secondary like Login on onboarding)
+    // MARK: - Outline Button
     private func outlineButton(title: String, systemImage: String = "", action: @escaping () -> Void) -> some View {
         Button(action: action) {
             HStack(spacing: 10) {
@@ -280,7 +398,7 @@ struct AuthView: View {
             .padding()
             .foregroundColor(.black)
             .overlay(
-                RoundedRectangle(cornerRadius: 10)
+                RoundedRectangle(cornerRadius: 5)
                     .stroke(Color.gray.opacity(0.6), lineWidth: 1)
             )
         }
@@ -289,8 +407,10 @@ struct AuthView: View {
 
 #Preview("Signup") {
     AuthView(mode: .signup)
+        .environmentObject(AuthManager())
 }
 
 #Preview("Login") {
     AuthView(mode: .login)
+        .environmentObject(AuthManager())
 }

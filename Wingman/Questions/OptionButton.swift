@@ -18,9 +18,9 @@ struct OptionButton: View {
             .background(isSelected ? Color.black : Color.white)
             .foregroundColor(isSelected ? .white : .black)
             .overlay(
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color.black.opacity(0.3), lineWidth: 1)
+                RoundedRectangle(cornerRadius: 5)
+                    .stroke(Color.black, lineWidth: 1)
             )
-            .cornerRadius(8)
+            .cornerRadius(5)
     }
 }

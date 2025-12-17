@@ -7,12 +7,13 @@
 import SwiftUI
 import Combine
 
-struct QuestionFlowView: View {
+struct OnboardingView: View {
     @State private var stepIndex: Int = 0
     @State private var selectedOption: String? = nil
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var authManager: AuthManager
     
-    let steps: [QuestionStep] = questionnaireSteps
+    let steps: [OnboardingStep] = onboardingSteps
     
     var body: some View {
         let step = steps[stepIndex]
@@ -25,7 +26,6 @@ struct QuestionFlowView: View {
                     if stepIndex > 0 {
                         stepIndex -= 1
                     } else {
-                        // Pop back to previous screen in the same NavigationStack
                         dismiss()
                     }
                 } label: {
@@ -49,8 +49,8 @@ struct QuestionFlowView: View {
                 
                 // Title + Subtitle
                 Text(step.title)
-                    .font(.title2)
-                    .bold()
+                    .font(.manropeSemiBold(size: 24))
+                
                 
                 if let subtitle = step.subtitle {
                     Text(subtitle)
@@ -58,7 +58,7 @@ struct QuestionFlowView: View {
                         .foregroundColor(.gray)
                 }
                 
-                // MARK: — If question screen
+                // MARK: – If question screen
                 if step.type == .question {
                     
                     if let options = step.options {
@@ -74,7 +74,7 @@ struct QuestionFlowView: View {
                     }
                     
                 } else {
-                    // MARK: — Statistic screen
+                    // MARK: – Statistic screen
                     if let chartImage = step.chartImage {
                         Image(chartImage)
                             .resizable()
@@ -88,24 +88,14 @@ struct QuestionFlowView: View {
                 // Bottom Buttons
                 VStack(spacing: 12) {
                     
-                    // Skip (only for questions)
-                    if step.type == .question {
-                        Button("Skip") {
-                            moveToNext()
-                        }
-                        .font(.footnote)
-                        .foregroundColor(.gray)
-                    }
-                    
                     Button("Next") {
-                        // save selectedOption someday → API
                         moveToNext()
                     }
                     .frame(maxWidth: .infinity)
                     .padding()
                     .background(Color.black)
                     .foregroundColor(.white)
-                    .cornerRadius(8)
+                    .cornerRadius(5)
                     .opacity(step.type == .question && selectedOption == nil ? 0.4 : 1)
                     .disabled(step.type == .question && selectedOption == nil)
                 }
@@ -113,11 +103,11 @@ struct QuestionFlowView: View {
             .padding(.horizontal, 24)
             .padding(.bottom, 16)
         }
-        .navigationBarBackButtonHidden(true) // Hide the system back button
+        .navigationBarBackButtonHidden(true)
         .animation(.easeInOut, value: stepIndex)
     }
     
-    // MARK: - Progress Bar View (same as in AuthView)
+    // MARK: - Progress Bar View
     private func progressBar(progress: CGFloat) -> some View {
         GeometryReader { geo in
             ZStack(alignment: .leading) {
@@ -135,17 +125,28 @@ struct QuestionFlowView: View {
     }
     
     func moveToNext() {
+        // Save the selected answer (you can store this in an array or upload to Supabase later)
+        if let answer = selectedOption {
+            print("Question \(stepIndex + 1): \(answer)")
+            // TODO: Save to array or Supabase
+        }
+        
         selectedOption = nil
         
         if stepIndex < steps.count - 1 {
             stepIndex += 1
         } else {
-            print("Finished all questions")
+            // All questions completed
+            print("✅ Finished all questions")
+            authManager.completeQuestions()
+            // Navigation will happen automatically via RootView
         }
     }
 }
+
 struct QuestionFlowView_Previews: PreviewProvider {
     static var previews: some View {
-        QuestionFlowView()
+        OnboardingView()
+            .environmentObject(AuthManager())
     }
 }
