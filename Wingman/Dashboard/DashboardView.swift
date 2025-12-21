@@ -7,6 +7,8 @@
 
 
 import SwiftUI
+import Foundation
+import Combine
 import Supabase
 import Auth
 
@@ -32,28 +34,60 @@ struct DashboardView: View {
                         .foregroundColor(.gray)
                 }
                 
+                // Safely read user metadata from Supabase (AnyJSON-backed)
+                if let user = SupabaseManager.shared.client.auth.currentUser {
+                    let name = user.userMetadata["display_name"]?.stringValue
+                    let onboardingCompleted = user.userMetadata["onboarding_completed"]?.boolValue
+                    let updatedAt = user.userMetadata["updated_at"]?.stringValue
+                    
+                    // Display some of it if available
+                    VStack(spacing: 4) {
+                        if let name = name, !name.isEmpty {
+                            Text("Name: \(name)")
+                                .font(.caption)
+                                .foregroundColor(.gray)
+                        }
+                        if let onboardingCompleted = onboardingCompleted {
+                            Text("Onboarding Completed: \(onboardingCompleted ? "Yes" : "No")")
+                                .font(.caption)
+                                .foregroundColor(.gray)
+                        }
+                        if let updatedAt = updatedAt, !updatedAt.isEmpty {
+                            Text("Updated At: \(updatedAt)")
+                                .font(.caption)
+                                .foregroundColor(.gray)
+                        }
+                    }
+                    .onAppear {
+                        // Debug prints moved out of the View builder
+                        print(name ?? "")
+                        print(onboardingCompleted ?? false)
+                        print(updatedAt ?? "")
+                    }
+                }
+                
                 Spacer()
              
                 VStack(spacing: 12) {
                     // Daily Practice Button
-                                       Button(action: {
-                                           navigateToPractice = true
-                                       }) {
-                                           HStack {
-                                               Image(systemName: "brain.head.profile")
-                                                   .font(.system(size: 20))
-                                               Text("Daily Practice")
-                                                   .fontWeight(.semibold)
-                                           }
-                                           .frame(maxWidth: .infinity)
-                                           .padding()
-                                           .foregroundColor(.white)
-                                           .background(Color.blue)
-                                           .cornerRadius(10)
-                                       }
-                                       .navigationDestination(isPresented: $navigateToPractice) {
-                                           PracticeView()
-                                       }
+                    Button(action: {
+                        navigateToPractice = true
+                    }) {
+                        HStack {
+                            Image(systemName: "brain.head.profile")
+                                .font(.system(size: 20))
+                            Text("Daily Practice")
+                                .fontWeight(.semibold)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                    }
+                    .navigationDestination(isPresented: $navigateToPractice) {
+                        PracticeView()
+                    }
                     
                     // Payment Button (for testing)
                     Button(action: {
@@ -70,6 +104,7 @@ struct DashboardView: View {
                     .navigationDestination(isPresented: $showPaywall) {
                         PaywallView()
                     }
+                    
                     // Reset Questions (for testing)
                     Button(action: {
                         authManager.resetQuestions()

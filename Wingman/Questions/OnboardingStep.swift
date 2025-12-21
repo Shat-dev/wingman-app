@@ -8,8 +8,10 @@
 import SwiftUI
 
 enum StepType {
+    case name
     case question
     case statistic
+    case loading
 }
 
 struct OnboardingStep: Identifiable {
@@ -22,5 +24,6 @@ struct OnboardingStep: Identifiable {
     let options: [String]?        // for questions
     let chartImage: String?       // for statistics
     
-    let progress: Double          // 0.0—1.0
+    let progress: Double          // 0.0–1.0
+    let questionKey: String?      // for saving answers
 }

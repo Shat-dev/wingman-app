@@ -79,7 +79,7 @@ final class AuthManager: ObservableObject {
                 if let session = session {
                     self.isAuthenticated = true
                     self.currentUser = session.user
-                    
+                    UserDefaults.standard.set(session.user.id.uuidString, forKey: "current_user_id")
                     // Load user's question completion status from UserDefaults or Supabase
                     await checkUserQuestionStatus(userId: session.user.id.uuidString)
                     
