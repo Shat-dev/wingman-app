@@ -33,7 +33,7 @@ struct HomeView: View {
                         
                         // Streak Badge
                         HStack(spacing: 4) {
-                            Image(systemName: "flame")
+                            Image("flame")
                                 .font(.system(size: 14))
                                 .foregroundColor(.black)
                             
@@ -50,49 +50,60 @@ struct HomeView: View {
                         VStack(spacing: 24) {
                             
                             // MARK: - Daily Practice Card
+                            // MARK: - Daily Practice Card
                             VStack(alignment: .leading, spacing: 0) {
-                                
-                                // W Icon placeholder
-                                HStack {
-                                    Text("W")
-                                        .font(.system(size: 60, weight: .bold))
-                                        .foregroundColor(.gray.opacity(0.1))
-                                    Spacer()
-                                }
-                                .padding(.horizontal, 20)
-                                .padding(.top, 16)
-                                
-                                VStack(alignment: .leading, spacing: 8) {
-                                    HStack {
+
+                                ZStack(alignment: .topLeading) {
+
+                                    // Watermark W (faint, left side)
+                                     Image("wingman_logo")
+                                           .resizable()
+                                        .scaledToFit()
+                                         .frame(width: 200, height: 200)
+                                          .foregroundColor(Color.gray.opacity(0.13))   // if it's a template image
+                                           .opacity(0.18)                               // keep very light
+                                           .offset(x: -55, y: -38)                      // pushes it off-screen likdesign
+                                            .frame(maxWidth: .infinity, maxHeight: .infinity,alignment:.topLeading)
+                                              .clipped()
+
+                                    VStack(spacing: 0) {
+
+                                        Spacer(minLength: 20)
+
+                                        // Title
                                         Text("Daily Practice")
                                             .font(.manropeSemiBold(size: 16))
                                             .foregroundColor(.black)
-                                        Spacer()
+                                            .frame(maxWidth: .infinity, alignment: .center)
+
+                                        // Subtitle
+                                        Text("Suggested")
+                                            .font(.manropeRegular(size: 12))
+                                            .foregroundColor(Color.gray)
+                                            .padding(.top, 4)
+                                            .frame(maxWidth: .infinity, alignment: .center)
+
+                                        Spacer(minLength: 16)
+
+                                        // Start Button
+                                        Button(action: {
+                                            navigateToPractice = true
+                                        }) {
+                                            Text("Start")
+                                                .font(.manropeSemiBold(size: 15))
+                                                .foregroundColor(.white)
+                                                .frame(maxWidth: .infinity)
+                                                .frame(height: 48)
+                                                .background(Color.black)
+                                                .cornerRadius(5)
+                                        }
+                                        .padding(.horizontal, 20)
+
+                                        Spacer(minLength: 16)
                                     }
-                                    
-                                    Text("Suggested")
-                                        .font(.manropeRegular(size: 12))
-                                        .foregroundColor(.gray)
                                 }
-                                .padding(.horizontal, 20)
-                                .padding(.top, -30)
-                                
-                                // Start Button
-                                Button(action: {
-                                    navigateToPractice = true
-                                }) {
-                                    Text("Start")
-                                        .font(.manropeSemiBold(size: 15))
-                                        .foregroundColor(.white)
-                                        .frame(maxWidth: .infinity)
-                                        .frame(height: 48)
-                                        .background(Color.black)
-                                        .cornerRadius(5)
-                                }
-                                .padding(.horizontal, 20)
-                                .padding(.top, 16)
-                                .padding(.bottom, 20)
                             }
+                            .frame(height: 140)
                             .background(Color.white)
                             .cornerRadius(8)
                             .overlay(
