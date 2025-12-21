@@ -33,29 +33,36 @@ struct OnboardingView: View {
             // Main content
             VStack(spacing: 0) {
 
-                // MARK: - Top Row: Back Chevron + Progress Bar inline
-                HStack(spacing: 12) {
-                    Button {
-                        handleBackButton()
-                    } label: {
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: 20, weight: .bold))
-                            .foregroundColor(.black)
-                            .frame(width: 44, height: 44, alignment: .center)
-                            .contentShape(Rectangle())
-                    }
-                    .buttonStyle(.plain)
-
-                    progressBar(progress: CGFloat(steps[stepIndex].progress))
-                        .frame(height: 10)
-                }
-                .padding(.top, 8)
-                .padding(.horizontal, 24)
-                .padding(.bottom, 12)
-
-                // MARK: - Content based on step type
+                // NOTE: compute step early so we can decide whether to show the top bar
                 let step = steps[stepIndex]
 
+                // MARK: - Top Row: Back Chevron + Progress Bar inline
+                // Hide both chevron and progress bar when we're on the loading state
+                if step.type != .loading {
+                    HStack(spacing: 12) {
+                        Button {
+                            handleBackButton()
+                        } label: {
+                            Image(systemName: "chevron.left")
+                                .font(.system(size: 20, weight: .bold))
+                                .foregroundColor(.black)
+                                .frame(width: 44, height: 44, alignment: .center)
+                                .contentShape(Rectangle())
+                        }
+                        .buttonStyle(.plain)
+
+                        progressBar(progress: CGFloat(steps[stepIndex].progress))
+                            .frame(height: 10)
+                    }
+                    .padding(.top, 8)
+                    .padding(.horizontal, 24)
+                    .padding(.bottom, 12)
+                } else {
+                    // Optional: keep a little top spacing while hiding the bar so layout doesn't jump
+                    Spacer().frame(height: 20)
+                }
+
+                // MARK: - Content based on step type
                 if step.type == .name {
                     nameInputView(step: step)
                 } else if step.type == .question {
