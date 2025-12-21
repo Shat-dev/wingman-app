@@ -7,10 +7,9 @@
 
 import SwiftUI
 
-import SwiftUI
-
 struct ReferralView: View {
 
+    @EnvironmentObject var authManager: AuthManager
     @State private var referralCode = ""
 
     var body: some View {
@@ -26,29 +25,30 @@ struct ReferralView: View {
                     .background(Color.gray.opacity(0.15))
                     .cornerRadius(6)
 
+                // ✅ NEXT → COMPLETE PAYWALL FLOW → DASHBOARD
                 Button {
-                    print("➡️ Referral submitted:",referralCode)
+                    print("➡️ Referral submitted:", referralCode)
+                    authManager.completePaywallFlow()
                 } label: {
                     Text("Next")
                         .frame(maxWidth: .infinity)
                         .padding()
                         .foregroundColor(.white)
-                        .background(referralCode.isEmpty ? Color.gray : Color.black)
+                        .background(Color.black)
                         .cornerRadius(6)
                 }
-                .disabled(referralCode.isEmpty)
 
-                // ✅ CENTERED SKIP (below button)
+                // ✅ SKIP → COMPLETE PAYWALL FLOW → DASHBOARD
                 HStack {
                     Spacer()
                     Button {
                         print("⏭️ Referral skipped")
+                        authManager.completePaywallFlow()
                     } label: {
                         Text("Skip")
                             .foregroundColor(.black)
                             .font(.manropeSemiBold(size: 16))
                             .underline()
-                            .font(.manropeSemiBold(size: 16))
                     }
                     Spacer()
                 }
@@ -62,6 +62,8 @@ struct ReferralView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 }
+
 #Preview {
     ReferralView()
+        .environmentObject(AuthManager())
 }
