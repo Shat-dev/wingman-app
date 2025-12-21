@@ -41,10 +41,10 @@ struct RootView: View {
                         PaywallView()
                     }
 
-                // ✅ 3) Paywall + Referral finished → Dashboard
+                // ✅ 3) Paywall + Referral finished → MainTabView (Home)
                 } else {
-                    let _ = print("🎯 RootView: Showing DashboardView (paywall flow completed)")
-                    DashboardView()
+                    let _ = print("🎯 RootView: Showing MainTabView (paywall flow completed)")
+                    MainTabView()
                 }
 
             } else if authManager.hasCompletedOnboarding {
