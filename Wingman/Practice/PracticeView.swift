@@ -137,9 +137,9 @@ struct PracticeView: View {
             .padding(16)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(buttonBackgroundColor(isSelected: isSelected, isCorrect: isCorrect, isWrong: isWrong))
-            .cornerRadius(10)
+            .cornerRadius(5)
             .overlay(
-                RoundedRectangle(cornerRadius: 10)
+                RoundedRectangle(cornerRadius: 5)
                     .stroke(buttonBorderColor(isSelected: isSelected, isCorrect: isCorrect, isWrong: isWrong), lineWidth: 1)
             )
         }
@@ -191,7 +191,7 @@ struct PracticeView: View {
                     .font(.manropeSemiBold(size: 18))
                     .foregroundColor(viewModel.isAnswerCorrect ? Color(red: 0.2, green: 0.6, blue: 0.4) : Color(red: 0.8, green: 0.3, blue: 0.3))
             }
-            .padding(.horizontal, 24)
+            
             
             // Explanation text
             Text(viewModel.isAnswerCorrect ? viewModel.currentQuestion.correctExplanation : viewModel.currentQuestion.incorrectExplanation)
@@ -210,18 +210,19 @@ struct PracticeView: View {
                     .frame(maxWidth: .infinity)
                     .frame(height: 52)
                     .background(viewModel.isAnswerCorrect ? Color(red: 0.3, green: 0.7, blue: 0.5) : Color(red: 0.8, green: 0.4, blue: 0.4))
-                    .cornerRadius(10)
+                    .cornerRadius(5)
             }
         }
-        .padding(20)
+        .padding(.vertical, 20)
+        .padding(.horizontal, 10)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(
             viewModel.isAnswerCorrect
                 ? Color(red: 0.9, green: 0.97, blue: 0.94)
                 : Color(red: 1.0, green: 0.93, blue: 0.93)
         )
-        .cornerRadius(16, corners: [.topLeft, .topRight]) // Only round top corners
-        .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: -5)
+        .cornerRadius(16)
+        .padding(.horizontal,12)
     }
     
     // MARK: - Action Button (Check Answer - before checking)
