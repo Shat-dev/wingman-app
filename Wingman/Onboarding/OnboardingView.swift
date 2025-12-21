@@ -5,6 +5,13 @@
 //  Created by Adnan Khan on 30/11/2025.
 //
 
+//
+//  QuestionFlowView.swift
+//  Wingman
+//
+//  Created by Adnan Khan on 30/11/2025.
+//
+
 import SwiftUI
 import Combine
 import Supabase
@@ -33,7 +40,7 @@ struct OnboardingView: View {
             // Main content
             VStack(spacing: 0) {
 
-                // NOTE: compute step early so we can decide whether to show the top bar
+                // NOTE: compute step early so we can conditionally show/hide top bar
                 let step = steps[stepIndex]
 
                 // MARK: - Top Row: Back Chevron + Progress Bar inline
@@ -107,17 +114,24 @@ struct OnboardingView: View {
 
             // Buttons
             VStack(spacing: 12) {
-                Button("Next") {
+                // Full-area tappable Next button
+                let isNameEmpty = userName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+
+                Button(action: {
                     isNameFieldFocused = false
                     answers["name"] = userName.trimmingCharacters(in: .whitespacesAndNewlines)
                     moveToNext()
+                }) {
+                    Text("Next")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(isNameEmpty ? Color.gray.opacity(0.4) : Color.black)
+                        .foregroundColor(.white)
+                        .cornerRadius(5)
                 }
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(userName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? Color.gray.opacity(0.4) : Color.black)
-                .foregroundColor(.white)
-                .cornerRadius(5)
-                .disabled(userName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                .buttonStyle(.plain)
+                .contentShape(Rectangle())
+                .disabled(isNameEmpty)
 
                 Button("Skip") {
                     isNameFieldFocused = false
@@ -162,17 +176,23 @@ struct OnboardingView: View {
 
             Spacer()
 
-            // Next Button
-            Button("Next") {
+            // Next Button (full-area tappable)
+            let isDisabled = (step.type == .question && selectedOption == nil)
+
+            Button(action: {
                 moveToNext()
+            }) {
+                Text("Next")
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.black)
+                    .foregroundColor(.white)
+                    .cornerRadius(5)
             }
-            .frame(maxWidth: .infinity)
-            .padding()
-            .background(Color.black)
-            .foregroundColor(.white)
-            .cornerRadius(5)
-            .opacity(step.type == .question && selectedOption == nil ? 0.4 : 1)
-            .disabled(step.type == .question && selectedOption == nil)
+            .buttonStyle(.plain)
+            .contentShape(Rectangle())
+            .opacity(isDisabled ? 0.4 : 1)
+            .disabled(isDisabled)
         }
         .padding(.horizontal, 24)
         .padding(.bottom, 16)
@@ -220,11 +240,12 @@ struct OnboardingView: View {
                 .padding(.horizontal, 24)
                 .padding(.bottom, 12)
 
+                // Main statistic content
                 VStack(spacing: 20) {
 
                     // Heading
                     Text(statistic.heading)
-                        .font(.manropeSemiBold(size: 28))
+                        .font(.manropeSemiBold(size: 24))
                         .foregroundColor(.black)
                         .lineSpacing(4)
                         .multilineTextAlignment(.leading)
@@ -250,18 +271,25 @@ struct OnboardingView: View {
 
                     // Fact
                     Text(statistic.fact)
-                        .font(.manropeRegular(size: 15))
+                        .font(.manropeRegular(size: 16))
                         .foregroundColor(.gray)
                         .lineSpacing(4)
                         .multilineTextAlignment(.center)
                         .frame(maxWidth: .infinity)
 
-                    Spacer()
+                    Spacer() // push content up so the button sits at bottom
+                }
+                .padding(.horizontal, 24)
 
-                    // Tap to Continue
+                // Bottom-right Tap to Continue
+                HStack {
+                    Spacer()
                     TapToContinueButton {
                         continueFromStatistic()
                     }
+                    // make the tappable area a little larger
+                    .padding(.trailing, 4)
+                    .font(.manropeMedium(size: 14))
                 }
                 .padding(.horizontal, 24)
                 .padding(.bottom, 24)
@@ -271,18 +299,22 @@ struct OnboardingView: View {
 
     // MARK: - Loading View
     private func loadingView(step: OnboardingStep) -> some View {
-        VStack(spacing: 30) {
+        // check if this exact text needs the smaller font
+        let isPersonalizingText = step.title == "Personalizing an experience just for you..."
+
+        return VStack(spacing: 12) {
             Spacer()
 
-            // Loading Dots Animation
-            LoadingDotsView()
-
-            // Loading Text
+            // Loading Text (20pt only for the specific string)
             Text(step.title)
-                .font(.manropeSemiBold(size: 24))
+                .font(isPersonalizingText ? .manropeSemiBold(size: 20) : .manropeSemiBold(size: 24))
                 .foregroundColor(.black)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 40)
+
+            // Loading Dots Animation (dots are below the text)
+            LoadingDotsView()
+                .padding(.top, 6)
 
             Spacer()
         }
@@ -298,6 +330,7 @@ struct OnboardingView: View {
             }
         }
     }
+
 
     // MARK: - Progress Bar View
     private func progressBar(progress: CGFloat) -> some View {
@@ -458,10 +491,10 @@ struct OnboardingView: View {
         if questionKey == "goals" {
             return StatisticContent(
                 heading: "Half of men don't approach. Most who do, succeed.",
-                subheading: "Which side do you want to be on?",
-                imageName: "stat_success",
-                fact: "58% of men who consistently approach get a number, date, or relationship"
-            )
+                    subheading: "Which side do you want to be on?",
+                    imageName: "stat_success",
+                    fact: "58% of men who consistently approach get a number, date, or relationship"
+                )
         }
 
         return nil
@@ -687,32 +720,30 @@ struct TapToContinueButton: View {
     }
 }
 
-// MARK: - Loading Dots View
+// MARK: - Loading Dots View (small carousel-like black/gray dots)
 struct LoadingDotsView: View {
-    @State private var animationTrigger = false
+    @State private var activeIndex = 0
+    private let timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
+    private let dotSize: CGFloat = 8
 
     var body: some View {
         HStack(spacing: 8) {
-            ForEach(0..<3) { index in
+            ForEach(0..<3) { idx in
                 Circle()
-                    .fill(Color.black)
-                    .frame(width: 12, height: 12)
-                    .scaleEffect(animationTrigger ? 1.5 : 1.0)
-                    .animation(
-                        Animation.easeInOut(duration: 0.6)
-                            .repeatForever()
-                            .delay(Double(index) * 0.2),
-                        value: animationTrigger
-                    )
+                    .fill(idx == activeIndex ? Color.black : Color.gray.opacity(0.45))
+                    .frame(width: dotSize, height: dotSize)
+                    .animation(.easeInOut(duration: 0.25), value: activeIndex)
             }
         }
-        .onAppear {
-            animationTrigger.toggle()
+        .onReceive(timer) { _ in
+            withAnimation {
+                activeIndex = (activeIndex + 1) % 3
+            }
         }
     }
 }
 
-// MARK: - TextField Placeholder Extension
+ // MARK: - TextField Placeholder Extension
 extension View {
     func placeholder<Content: View>(
         when shouldShow: Bool,
