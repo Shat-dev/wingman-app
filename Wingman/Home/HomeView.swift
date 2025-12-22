@@ -4,6 +4,8 @@
 //
 
 import SwiftUI
+import Auth
+import Supabase
 
 struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
@@ -24,9 +26,28 @@ struct HomeView: View {
                                 .font(.manropeMedium(size: 24))
                                 .foregroundColor(.black)
                             
-                            Text(viewModel.userName)
-                                .font(.manropeMedium(size: 24))
-                                .foregroundColor(.black)
+                            // ✅ Show user name like Dashboard (from Supabase userMetadata["display_name"])
+                            if let user = SupabaseManager.shared.client.auth.currentUser {
+                                let name = user.userMetadata["display_name"]?.stringValue
+                                
+                                if let name = name, !name.isEmpty {
+                                    Text(name)
+                                        .font(.manropeMedium(size: 24))
+                                        .foregroundColor(.black)
+                                } else if let email = user.email, !email.isEmpty {
+                                    Text(email)
+                                        .font(.manropeMedium(size: 24))
+                                        .foregroundColor(.black)
+                                } else {
+                                    Text("User")
+                                        .font(.manropeMedium(size: 24))
+                                        .foregroundColor(.black)
+                                }
+                            } else {
+                                Text("User")
+                                    .font(.manropeMedium(size: 24))
+                                    .foregroundColor(.black)
+                            }
                         }
                         
                         Spacer()
@@ -49,7 +70,6 @@ struct HomeView: View {
                     ScrollView(showsIndicators: false) {
                         VStack(spacing: 24) {
                             
-                            // MARK: - Daily Practice Card
                             // MARK: - Daily Practice Card
                             VStack(alignment: .leading, spacing: 0) {
 
