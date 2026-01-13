@@ -10,7 +10,18 @@ import Supabase
 struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
     @State private var navigateToPractice = false
-    @State private var navigateToLogApproach = false
+    @State private var showLogApproachSheet = false
+    
+    init() {
+        for family in UIFont.familyNames.sorted() {
+            if family.contains("Manrope") {
+                print(family)
+                for name in UIFont.fontNames(forFamilyName: family) {
+                    print("  \(name)")
+                }
+            }
+        }
+    }
     
     var body: some View {
         NavigationStack {
@@ -19,6 +30,7 @@ struct HomeView: View {
                 
                 VStack(spacing: 0) {
                     
+                    
                     // MARK: - Header
                     HStack(alignment: .top) {
                         VStack(alignment: .leading, spacing: 2) {
@@ -26,7 +38,7 @@ struct HomeView: View {
                                 .font(.manropeMedium(size: 24))
                                 .foregroundColor(.black)
                             
-                            // ✅ Show user name like Dashboard (from Supabase userMetadata["display_name"])
+                            // Show user name like Dashboard (from Supabase userMetadata["display_name"])
                             if let user = SupabaseManager.shared.client.auth.currentUser {
                                 let name = user.userMetadata["display_name"]?.stringValue
                                 
@@ -80,10 +92,10 @@ struct HomeView: View {
                                            .resizable()
                                         .scaledToFit()
                                          .frame(width: 200, height: 200)
-                                          .foregroundColor(Color.gray.opacity(0.13))   // if it's a template image
-                                           .opacity(0.18)                               // keep very light
-                                           .offset(x: -55, y: -38)                      // pushes it off-screen likdesign
-                                            .frame(maxWidth: .infinity, maxHeight: .infinity,alignment:.topLeading)
+                                          .foregroundColor(Color.gray.opacity(0.13))
+                                           .opacity(0.18)
+                                           .offset(x: -55, y: -38)
+                                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                                               .clipped()
 
                                     VStack(spacing: 0) {
@@ -134,7 +146,7 @@ struct HomeView: View {
                             
                             // MARK: - Log Today's Approach
                             Button(action: {
-                                navigateToLogApproach = true
+                                showLogApproachSheet = true
                             }) {
                                 HStack(spacing: 12) {
                                     Image(systemName: "pencil")
@@ -248,8 +260,11 @@ struct HomeView: View {
             .navigationDestination(isPresented: $navigateToPractice) {
                 PracticeView()
             }
-            .navigationDestination(isPresented: $navigateToLogApproach) {
-                LogApproachView()
+            .sheet(isPresented: $showLogApproachSheet) {
+                LogApproachBottomSheet(isPresented: $showLogApproachSheet)
+                    .presentationDetents([.large])
+                    .presentationDragIndicator(.hidden)
+                    .presentationCornerRadius(20)
             }
             .onAppear {
                 print("👁️ HomeView appeared")
@@ -376,30 +391,6 @@ struct ModuleCard: View {
             RoundedRectangle(cornerRadius: 8)
                 .stroke(Color.gray.opacity(0.2), lineWidth: 1)
         )
-    }
-}
-
-// MARK: - Log Approach View (Placeholder)
-struct LogApproachView: View {
-    @Environment(\.dismiss) private var dismiss
-    
-    var body: some View {
-        VStack {
-            Text("Log Today's Approach")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-            
-            Text("Coming Soon")
-                .foregroundColor(.gray)
-            
-            Spacer()
-            
-            Button("Back") {
-                dismiss()
-            }
-            .padding()
-        }
-        .navigationBarBackButtonHidden(true)
     }
 }
 

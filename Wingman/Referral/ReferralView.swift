@@ -18,7 +18,7 @@ struct ReferralView: View {
             VStack(alignment: .leading, spacing: 16) {
 
                 Text("Enter referral code (optional)")
-                    .font(.manropeSemiBold(size: 24))
+                    .font(.manropeMedium(size: 24))
 
                 TextField("Referral code", text: $referralCode)
                     .padding()

@@ -8,19 +8,32 @@
 import SwiftUI
 
 extension Font {
-    static func manropeBold(size: CGFloat) -> Font {
-        .custom("Manrope-Bold", size: size)
-    }
-    
-    static func manropeSemiBold(size: CGFloat) -> Font {
-        .custom("Manrope-SemiBold", size: size)
-    }
-    
-    static func manropeMedium(size: CGFloat) -> Font {
-        .custom("Manrope-Medium", size: size)
+
+    static func manropeBold(
+        size: CGFloat,
+        relativeTo textStyle: Font.TextStyle = .body
+    ) -> Font {
+        .custom("Manrope-Bold", size: size, relativeTo: textStyle)
     }
 
-    static func manropeRegular(size: CGFloat) -> Font {
-        .custom("Manrope-Regular", size: size)
+    static func manropeSemiBold(
+        size: CGFloat,
+        relativeTo textStyle: Font.TextStyle = .body
+    ) -> Font {
+        .custom("Manrope-SemiBold", size: size, relativeTo: textStyle)
+    }
+
+    static func manropeMedium(
+        size: CGFloat,
+        relativeTo textStyle: Font.TextStyle = .body
+    ) -> Font {
+        .custom("Manrope-Medium", size: size, relativeTo: textStyle)
+    }
+
+    static func manropeRegular(
+        size: CGFloat,
+        relativeTo textStyle: Font.TextStyle = .body
+    ) -> Font {
+        .custom("Manrope-Regular", size: size, relativeTo: textStyle)
     }
 }

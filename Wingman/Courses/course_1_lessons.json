@@ -1,0 +1,93 @@
+[
+  {
+    "id": "lesson_1",
+    "courseId": "1",
+    "lessonNumber": 1,
+    "title": "Your are not your thoughts",
+    "subtitle": "Courage Comes first, Confidence follows",
+    "duration": 3,
+    "isCompleted": false,
+    "isLocked": false,
+    "content": [
+      {
+        "id": "content_1_1",
+        "text": "When you know you smell fresh, look clean, and feel put together, you can stop worrying about how you come across.",
+        "order": 0
+      },
+      {
+        "id": "content_1_2",
+        "text": "Good hygiene is about removing the invisible barriers that push people away. Foul scent, dirty nails, or stale breath override everything else, no matter how confident or charming you are.",
+        "order": 1
+      },
+      {
+        "id": "content_1_3",
+        "text": "Good hygiene also gives you a sense of internal certainty. When you know you are clean, you can move closer, speak freely, and interact more easily.",
+        "order": 2
+      },
+      {
+        "id": "content_1_4",
+        "text": "That ease helps you become more confident in social settings.",
+        "order": 3
+      }
+    ]
+  },
+  {
+    "id": "lesson_2",
+    "courseId": "1",
+    "lessonNumber": 2,
+    "title": "Building Confidence",
+    "subtitle": "Step by step approach",
+    "duration": 5,
+    "isCompleted": false,
+    "isLocked": true,
+    "content": [
+      {
+        "id": "content_2_1",
+        "text": "Confidence isn't something you're born with.",
+        "order": 0
+      },
+      {
+        "id": "content_2_2",
+        "text": "It's built through consistent action and experience.",
+        "order": 1
+      },
+      {
+        "id": "content_2_3",
+        "text": "Every small step you take builds momentum.",
+        "order": 2
+      },
+      {
+        "id": "content_2_4",
+        "text": "Start with small interactions and gradually increase the challenge.",
+        "order": 3
+      }
+    ]
+  },
+  {
+    "id": "lesson_3",
+    "courseId": "1",
+    "lessonNumber": 3,
+    "title": "Overcoming Fear",
+    "subtitle": "Face your challenges",
+    "duration": 4,
+    "isCompleted": false,
+    "isLocked": true,
+    "content": [
+      {
+        "id": "content_3_1",
+        "text": "Fear is a natural response to the unknown.",
+        "order": 0
+      },
+      {
+        "id": "content_3_2",
+        "text": "The key is to recognize it and move forward anyway.",
+        "order": 1
+      },
+      {
+        "id": "content_3_3",
+        "text": "Each time you face your fear, it becomes smaller.",
+        "order": 2
+      }
+    ]
+  }
+]
