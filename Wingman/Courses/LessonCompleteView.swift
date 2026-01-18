@@ -17,42 +17,48 @@ struct LessonCompleteView: View {
             VStack(spacing: 0) {
                 Spacer()
                 
-                // Checkmark icon
+                // MARK: - Checkmark Icon
                 ZStack {
-                    RoundedRectangle(cornerRadius: 20)
+                    // Diamond shape (rotated rounded rectangle)
+                    RoundedRectangle(cornerRadius: 24)
                         .stroke(Color.black, lineWidth: 2)
                         .frame(width: 120, height: 120)
                         .rotationEffect(.degrees(45))
                     
+                    // Checkmark
                     Image(systemName: "checkmark")
-                        .font(.system(size: 50, weight: .medium))
+                        .font(.system(size: 48, weight: .medium))
                         .foregroundColor(.black)
                 }
                 .padding(.bottom, 40)
                 
-                // Title
+                // MARK: - Title
                 Text("Lesson Complete!")
                     .font(.manropeSemiBold(size: 28))
                     .foregroundColor(.black)
+                    .kerning(-0.3)
                     .padding(.bottom, 32)
                 
-                // Up Next section
+                // MARK: - Up Next Section
                 if let nextLesson = nextLessonInfo {
-                    VStack(spacing: 8) {
+                    VStack(spacing: 10) {
                         Text("Up Next")
                             .font(.manropeRegular(size: 14))
-                            .foregroundColor(.gray)
+                            .foregroundColor(Color("888888"))
                         
-                        Text(nextLesson.subtitle)
-                            .font(.manropeRegular(size: 16))
+                        Text(nextLesson.title)
+                            .font(.manropeMedium(size: 17))
                             .foregroundColor(.black)
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 40)
                     }
                 } else {
-                    VStack(spacing: 8) {
+                    VStack(spacing: 10) {
+                        Text("🎉")
+                            .font(.system(size: 32))
+                        
                         Text("Course Complete!")
-                            .font(.manropeRegular(size: 16))
+                            .font(.manropeMedium(size: 17))
                             .foregroundColor(.black)
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 40)
@@ -61,7 +67,7 @@ struct LessonCompleteView: View {
                 
                 Spacer()
                 
-                // Continue button
+                // MARK: - Continue Button
                 Button(action: {
                     onContinue()
                     dismiss()
@@ -84,9 +90,16 @@ struct LessonCompleteView: View {
 #Preview {
     LessonCompleteView(
         nextLessonInfo: NextLessonInfo(
-            title: "Building Confidence",
+            title: "Rejection isn't personal",
             subtitle: "Courage Comes first, Confidence follows"
         ),
+        onContinue: {}
+    )
+}
+
+#Preview("Course Complete") {
+    LessonCompleteView(
+        nextLessonInfo: nil,
         onContinue: {}
     )
 }

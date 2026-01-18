@@ -2,89 +2,195 @@
 //  LessonDataService.swift
 //  Wingman
 //
-//  Created by Adnan Khan on 08/01/2026.
-//
-
-
-//
-//  LessonDataService.swift
-//  Wingman
-//
 
 import Foundation
 
-class LessonDataService {
+final class LessonDataService {
+    
+    // MARK: - Singleton
     static let shared = LessonDataService()
     
     private init() {}
     
-    // MARK: - Load Lessons from Local JSON
+    // MARK: - Cache
+    private var lessonsCache: [String: [Lesson]] = [:]
+    
+    // MARK: - Course ID to JSON filename mapping
+    // Maps courseId to JSON filename (without .json extension)
+    // Format: {category}_{course_name}
+    private let courseJsonMapping: [String: String] = [
+        // Mindset & Foundations (cat_1)
+        "course_1": "1_1_mindset_foundations_beliefs_reframes",
+        "course_2": "2_1_mindset_foundations_fear_exposure",
+        "course_3": "mindset_foundations_presence_expressions",
+        "course_4": "mindset_foundations_inner_stability",
+        "course_5": "mindset_foundations_non_negotiables",
+        
+        // Approach Mechanics (cat_2)
+        "course_6": "approach_mechanics_approach_readiness",
+        "course_7": "approach_mechanics_physical_approach",
+        "course_8": "approach_mechanics_the_opener",
+        "course_9": "approach_mechanics_reading_responding",
+        "course_10": "approach_mechanics_situational_approaches",
+        "course_11": "approach_mechanics_advanced_opening",
+        
+        // Conversation Flow (cat_3)
+        "course_12": "conversation_flow_small_talk_momentum",
+        "course_13": "conversation_flow_listening_attunement",
+        "course_14": "conversation_flow_sharing_vulnerability",
+        "course_15": "conversation_flow_closing",
+        "course_16": "conversation_flow_advanced_skills",
+        
+        // Flirting & Chemistry (cat_4)
+        "course_17": "flirting_chemistry_prerequisites",
+        "course_18": "flirting_chemistry_playfulness_spark",
+        "course_19": "flirting_chemistry_compliments_verbal",
+        "course_20": "flirting_chemistry_physical_escalation",
+        "course_21": "flirting_chemistry_advanced_skills",
+        
+        // Integration & Mastery (cat_5)
+        "course_22": "integration_mastery_lifestyle_upgrade",
+        "course_23": "integration_mastery_creating_opportunities",
+        "course_24": "integration_mastery_mastery_identity",
+        "course_25": "integration_mastery_learning_discovery"
+    ]
+    
+    // MARK: - Load Lessons for a Course
     func loadLessonsForCourse(courseId: String) -> [Lesson] {
-        // Try to load from JSON file
-        if let lessons = loadFromJSON(courseId: courseId) {
+        // Check cache first
+        if let cached = lessonsCache[courseId] {
+            print("📚 Returning cached lessons for course: \(courseId)")
+            return cached
+        }
+        
+        // Get JSON filename for this course
+        guard let jsonFilename = courseJsonMapping[courseId] else {
+            print("⚠️ No JSON mapping found for course: \(courseId)")
+            print("💡 Add '\(courseId)' to courseJsonMapping in LessonDataService")
+            return []
+        }
+        
+        // Load from JSON file
+        guard let url = Bundle.main.url(forResource: jsonFilename, withExtension: "json") else {
+            print("❌ Could not find \(jsonFilename).json in bundle")
+            print("💡 Make sure \(jsonFilename).json exists and is added to the project")
+            return []
+        }
+        
+        do {
+            let data = try Data(contentsOf: url)
+            let decoder = JSONDecoder()
+            var lessons = try decoder.decode([Lesson].self, from: data)
+            
+            // Sort by lesson number
+            lessons.sort { $0.lessonNumber < $1.lessonNumber }
+            
+            // Apply saved progress
+            let progress = loadLessonProgress(courseId: courseId)
+            for i in 0..<lessons.count {
+                if progress.completed.contains(lessons[i].id) {
+                    lessons[i].isCompleted = true
+                }
+                if progress.unlocked.contains(lessons[i].id) {
+                    lessons[i].isLocked = false
+                }
+            }
+            
+            // Cache the results
+            lessonsCache[courseId] = lessons
+            
+            print("✅ Loaded \(lessons.count) lessons for course: \(courseId) from \(jsonFilename).json")
             return lessons
+            
+        } catch {
+            print("❌ Error loading lessons from \(jsonFilename).json: \(error)")
+            if let decodingError = error as? DecodingError {
+                print("📋 Decoding error details: \(decodingError)")
+            }
+            return []
         }
-        
-        // Fallback to sample data
-        return getSampleLessons(courseId: courseId)
     }
     
-    private func loadFromJSON(courseId: String) -> [Lesson]? {
-        guard let url = Bundle.main.url(forResource: "course_\(courseId)_lessons", withExtension: "json"),
-              let data = try? Data(contentsOf: url),
-              let lessons = try? JSONDecoder().decode([Lesson].self, from: data) else {
-            return nil
-        }
-        return lessons
-    }
-    
-    // MARK: - Get Next Lesson Info
-    func getNextLesson(currentLessonId: String, courseId: String) -> NextLessonInfo? {
+    // MARK: - Get Single Lesson
+    func getLesson(lessonId: String, courseId: String) -> Lesson? {
         let lessons = loadLessonsForCourse(courseId: courseId)
-        
-        guard let currentIndex = lessons.firstIndex(where: { $0.id == currentLessonId }),
-              currentIndex + 1 < lessons.count else {
+        return lessons.first { $0.id == lessonId }
+    }
+    
+    // MARK: - Get Next Lesson
+    func getNextLesson(after currentLesson: Lesson) -> Lesson? {
+        let lessons = loadLessonsForCourse(courseId: currentLesson.courseId)
+        guard let currentIndex = lessons.firstIndex(where: { $0.id == currentLesson.id }) else {
             return nil
         }
         
-        let nextLesson = lessons[currentIndex + 1]
-        return NextLessonInfo(title: nextLesson.title, subtitle: nextLesson.subtitle)
+        let nextIndex = currentIndex + 1
+        guard nextIndex < lessons.count else {
+            return nil // No more lessons
+        }
+        
+        return lessons[nextIndex]
     }
     
-    // MARK: - Sample Data (for testing)
-    private func getSampleLessons(courseId: String) -> [Lesson] {
-        return [
-            Lesson(
-                id: "lesson_1",
-                courseId: courseId,
-                lessonNumber: 1,
-                title: "Your are not your thoughts",
-                subtitle: "Courage Comes first, Confidence follows",
-                duration: 3,
-                content: [
-                    LessonContent(text: "When you know you smell fresh, look clean, and feel put together, you can stop worrying about how you come across.", order: 0),
-                    LessonContent(text: "Good hygiene is about removing the invisible barriers that push people away. Foul scent, dirty nails, or stale breath override everything else, no matter how confident or charming you are.", order: 1),
-                    LessonContent(text: "Good hygiene also gives you a sense of internal certainty. When you know you are clean, you can move closer, speak freely, and interact more easily.", order: 2),
-                    LessonContent(text: "That ease helps you become more confident in social settings.", order: 3)
-                ],
-                isCompleted: false,
-                isLocked: false
-            ),
-            Lesson(
-                id: "lesson_2",
-                courseId: courseId,
-                lessonNumber: 2,
-                title: "Building Confidence",
-                subtitle: "Step by step approach",
-                duration: 5,
-                content: [
-                    LessonContent(text: "Confidence isn't something you're born with.", order: 0),
-                    LessonContent(text: "It's built through consistent action and experience.", order: 1),
-                    LessonContent(text: "Every small step you take builds momentum.", order: 2)
-                ],
-                isCompleted: false,
-                isLocked: true
-            )
-        ]
+    // MARK: - Mark Lesson as Completed
+    func markLessonCompleted(lessonId: String, courseId: String) {
+        guard var lessons = lessonsCache[courseId] else { return }
+        
+        if let index = lessons.firstIndex(where: { $0.id == lessonId }) {
+            lessons[index].isCompleted = true
+            
+            // Unlock next lesson
+            let nextIndex = index + 1
+            if nextIndex < lessons.count {
+                lessons[nextIndex].isLocked = false
+            }
+            
+            lessonsCache[courseId] = lessons
+            
+            // Persist to UserDefaults
+            saveLessonProgress(courseId: courseId, lessons: lessons)
+            
+            print("✅ Marked lesson \(lessonId) as completed")
+            if nextIndex < lessons.count {
+                print("🔓 Unlocked next lesson: \(lessons[nextIndex].id)")
+            }
+        }
+    }
+    
+    // MARK: - Persistence (UserDefaults)
+    private func saveLessonProgress(courseId: String, lessons: [Lesson]) {
+        let completedIds = lessons.filter { $0.isCompleted }.map { $0.id }
+        let unlockedIds = lessons.filter { !$0.isLocked }.map { $0.id }
+        
+        UserDefaults.standard.set(completedIds, forKey: "completed_lessons_\(courseId)")
+        UserDefaults.standard.set(unlockedIds, forKey: "unlocked_lessons_\(courseId)")
+    }
+    
+    func loadLessonProgress(courseId: String) -> (completed: [String], unlocked: [String]) {
+        let completed = UserDefaults.standard.stringArray(forKey: "completed_lessons_\(courseId)") ?? []
+        let unlocked = UserDefaults.standard.stringArray(forKey: "unlocked_lessons_\(courseId)") ?? []
+        return (completed, unlocked)
+    }
+    
+    // MARK: - Clear Cache
+    func clearCache() {
+        lessonsCache.removeAll()
+        print("🗑️ Cleared all lessons cache")
+    }
+    
+    // MARK: - Reset Progress (for testing)
+    func resetProgress(courseId: String) {
+        UserDefaults.standard.removeObject(forKey: "completed_lessons_\(courseId)")
+        UserDefaults.standard.removeObject(forKey: "unlocked_lessons_\(courseId)")
+        lessonsCache.removeValue(forKey: courseId)
+        print("🔄 Reset progress for course: \(courseId)")
+    }
+    
+    // MARK: - Reset All Progress (for testing)
+    func resetAllProgress() {
+        for courseId in courseJsonMapping.keys {
+            resetProgress(courseId: courseId)
+        }
+        print("🔄 Reset all course progress")
     }
 }

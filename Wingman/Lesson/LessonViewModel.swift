@@ -79,10 +79,14 @@ class LessonViewModel: ObservableObject {
     
     // MARK: - Next Lesson
     private func loadNextLessonInfo() {
-        nextLessonInfo = dataService.getNextLesson(
-            currentLessonId: lesson.id,
-            courseId: lesson.courseId
-        )
+        if let nextLesson = dataService.getNextLesson(after: lesson) {
+            nextLessonInfo = NextLessonInfo(
+                title: nextLesson.title,
+                subtitle: nextLesson.subtitle ?? "Continue your learning journey"
+            )
+        } else {
+            nextLessonInfo = nil
+        }
     }
     
     // MARK: - Complete Lesson

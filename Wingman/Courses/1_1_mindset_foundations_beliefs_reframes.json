@@ -1,0 +1,413 @@
+[
+  {
+    "id": "lesson_1_1",
+    "courseId": "course_1",
+    "courseSummary": "Learn to strengthen confidence by reframing limiting beliefs.",
+    "lessonNumber": 1,
+    "title": "You are not your thoughts",
+    "subtitle": "Courage Comes first, Confidence follows",
+    "duration": 3,
+    "summary": "Learn why negative thoughts feel convincing and how to stop letting them control you.",
+    "isCompleted": false,
+    "isLocked": false,
+    "content": [
+      {
+        "id": "content_1_1_1",
+        "text": "Your mind produces around 60,000 thoughts a day. Most are repetitive, some are negative, and nearly all vanish without impact. Yet we treat them like evidence of who we are.",
+        "order": 0
+      },
+      {
+        "id": "content_1_1_2",
+        "text": "These thoughts aren't conscious choices; they are automatic reactions shaped by habit, fear, and memory. The problem isn't having them; it's believing each one reflects reality.",
+        "order": 1
+      },
+      {
+        "id": "content_1_1_3",
+        "text": "A single thought—\"I sounded awkward\"—can shift your entire state. It tightens your body, changes how you speak, and changes how you see yourself.",
+        "order": 2
+      },
+      {
+        "id": "content_1_1_4",
+        "text": "You begin responding not to the world as it is, but to the critical story you have started telling yourself.",
+        "order": 3
+      },
+      {
+        "id": "content_1_1_5",
+        "text": "You walk away from a conversation and replay every word. A pause becomes proof that you were boring. A glance becomes judgment.",
+        "order": 4
+      },
+      {
+        "id": "content_1_1_6",
+        "text": "Within minutes, your brain builds a story that never happened. That is what the mind does. It fills gaps with fear, not fact.",
+        "order": 5
+      },
+      {
+        "id": "content_1_1_7",
+        "text": "The brain evolved to predict danger, not to measure truth. What once kept us safe, imagining threats before they appeared, now fuels overthinking and hesitation.",
+        "order": 6
+      },
+      {
+        "id": "content_1_1_8",
+        "text": "But thoughts aren't always true. You can't choose when they arrive, but you can choose whether you believe them.",
+        "order": 7
+      },
+      {
+        "id": "content_1_1_9",
+        "text": "When you notice the space between thinking and believing, something shifts. You stop taking the static personally. The voice in your head isn't identity; it is background noise.",
+        "order": 8
+      },
+      {
+        "id": "content_1_1_10",
+        "text": "Confidence doesn't come from controlling your thoughts; it comes from recognizing them for what they are. The strongest individuals aren't the ones with quiet minds, but the ones who know not to believe every word inside their heads.",
+        "order": 9
+      },
+      {
+        "id": "content_1_1_11",
+        "text": "When you can step back and watch your thoughts, you stop reacting to every spark of fear or doubt. The idea still comes up: she won't like me; you will mess this up, but it loses its pull. You respond from awareness, not emotion.",
+        "order": 10
+      },
+      {
+        "id": "content_1_1_12",
+        "text": "This shift, the difference between being your thoughts and observing them, is the foundation of composure. Every moment you pause long enough to notice the story your mind is spinning, you reclaim control.",
+        "order": 11
+      },
+      {
+        "id": "content_1_1_13",
+        "text": "You are not broken for having doubt. What changes everything is realizing you don't have to believe it.",
+        "order": 12
+      },
+      {
+        "id": "content_1_1_14",
+        "text": "The thoughts will keep coming and going. Let them. They are just noise, not your truth. You are the one who decides which voice to listen to.",
+        "order": 13
+      }
+    ]
+  },
+  {
+    "id": "lesson_1_2",
+    "courseId": "course_1",
+    "lessonNumber": 2,
+    "title": "Rejection isn't personal",
+    "subtitle": "Courage Comes first, Confidence follows",
+    "duration": 2,
+    "summary": "Learn to interpret rejection accurately so it does not affect your confidence or identity.",
+    "isCompleted": false,
+    "isLocked": true,
+    "content": [
+      {
+        "id": "content_1_2_1",
+        "text": "Rejection hurts because it feels like evidence that you weren't enough. But rejection rarely means that. Most people pull back to protect their comfort, not to judge your worth.",
+        "order": 0
+      },
+      {
+        "id": "content_1_2_2",
+        "text": "Authenticity, confidence, or emotion can all feel like confrontation to someone who isn't ready for it. When safety feels uncertain, most people don't lean in; they withdraw.",
+        "order": 1
+      },
+      {
+        "id": "content_1_2_3",
+        "text": "Rejection, at its core, is often self-protection mistaken as judgment.",
+        "order": 2
+      },
+      {
+        "id": "content_1_2_4",
+        "text": "You approach someone and start talking. For a moment, it feels natural, until their expression shifts. They glance away, fold their arms, or excuse themselves.",
+        "order": 3
+      },
+      {
+        "id": "content_1_2_5",
+        "text": "Instinctively, you assume you said or did something wrong. But often, nothing was wrong. Maybe they had a rough day. Maybe your directness caught them off guard. Perhaps they simply weren't in the headspace to connect.",
+        "order": 4
+      },
+      {
+        "id": "content_1_2_6",
+        "text": "People withdraw for countless invisible reasons that have nothing to do with you, most of which stem from their mood, insecurity, or timing.",
+        "order": 5
+      },
+      {
+        "id": "content_1_2_7",
+        "text": "Your authentic energy exposed a tension they needed to manage. What feels like rejection is almost always someone protecting their own internal ground.",
+        "order": 6
+      },
+      {
+        "id": "content_1_2_8",
+        "text": "Confidence isn't about avoiding rejection; it is about understanding it. When you stop treating someone's reaction as a reflection of yourself, you stop giving it power over you. Most people's responses are reflections of their own comfort, not verdicts on your value.",
+        "order": 7
+      },
+      {
+        "id": "content_1_2_9",
+        "text": "Every man will face moments of retreat, someone turning away, shutting down, or pulling back. Let them. Your job is not to chase or correct their reaction; it is to keep true to yourself.",
+        "order": 8
+      },
+      {
+        "id": "content_1_2_10",
+        "text": "When you stop internalizing every retreat, you return to yourself. The steadiness you carry after rejection says more about you than any approval ever could.",
+        "order": 9
+      },
+      {
+        "id": "content_1_2_11",
+        "text": "That is where confidence lives, not in being wanted, but in staying whole when you are not.",
+        "order": 10
+      }
+    ]
+  },
+  {
+    "id": "lesson_1_3",
+    "courseId": "course_1",
+    "lessonNumber": 3,
+    "title": "Rewrite the Story",
+    "subtitle": "Courage Comes first, Confidence follows",
+    "duration": 2,
+    "summary": "Learn how to reinterpret awkward moments without letting them become personal labels.",
+    "isCompleted": false,
+    "isLocked": true,
+    "content": [
+      {
+        "id": "content_1_3_1",
+        "text": "We don't live our experiences, we live our explanations of them. Every person has a story they keep replaying: a bad first impression, an awkward exchange, a moment they froze.",
+        "order": 0
+      },
+      {
+        "id": "content_1_3_2",
+        "text": "The event ended long ago, but the story stayed. Each time you revisit it, the edges sharpen until it feels like the truth. The stories you rehearse slowly become the stories you trust.",
+        "order": 1
+      },
+      {
+        "id": "content_1_3_3",
+        "text": "The mind wants certainty and will attach meaning to anything to get it, even if the meaning is damaging.",
+        "order": 2
+      },
+      {
+        "id": "content_1_3_4",
+        "text": "When a repeated interpretation hardens into something that feels factual, confidence weakens. The issue is rarely the moment, but the memory you keep reinforcing.",
+        "order": 3
+      },
+      {
+        "id": "content_1_3_5",
+        "text": "You're in a group conversation with new people, and you make a joke. It lands flat. No one laughs. You feel the silence.",
+        "order": 4
+      },
+      {
+        "id": "content_1_3_6",
+        "text": "Later that night, you replay it endlessly. The silence stretches. Their faces twist into pity. You turn into the person who kills the mood.",
+        "order": 5
+      },
+      {
+        "id": "content_1_3_7",
+        "text": "Then you catch yourself. You notice the spiral starting. You ask what actually happened.",
+        "order": 6
+      },
+      {
+        "id": "content_1_3_8",
+        "text": "You made a joke that didn't land, and the conversation moved on within seconds. No one mentioned it again. No one treated you differently.",
+        "order": 7
+      },
+      {
+        "id": "content_1_3_9",
+        "text": "The discomfort lasted ten seconds. Everything after that came from you, not from them.",
+        "order": 8
+      },
+      {
+        "id": "content_1_3_10",
+        "text": "So you choose a new version to believe. Not every joke works, and that is fine. One quiet moment does not define you. What felt like shame becomes nothing more than a passing beat that everyone else has already forgotten.",
+        "order": 9
+      },
+      {
+        "id": "content_1_3_11",
+        "text": "You have more influence over your narrative than you realise. Awkward moments and mistakes only gain power when you treat them as character traits instead of events.",
+        "order": 10
+      },
+      {
+        "id": "content_1_3_12",
+        "text": "Strength comes from challenging that story and choosing a different interpretation.",
+        "order": 11
+      },
+      {
+        "id": "content_1_3_13",
+        "text": "Rewriting it does not deny what happened; it frees you from letting it decide who you are.",
+        "order": 12
+      },
+      {
+        "id": "content_1_3_14",
+        "text": "You can't control every moment, but moving forward, you can choose the meaning it carries.",
+        "order": 13
+      },
+      {
+        "id": "content_1_3_15",
+        "text": "Perspective is authorship, and the story that once confined you can also become the one that frees you.",
+        "order": 14
+      }
+    ]
+  },
+  {
+    "id": "lesson_1_4",
+    "courseId": "course_1",
+    "lessonNumber": 4,
+    "title": "Confidence Comes from Evidence",
+    "subtitle": "Courage Comes first, Confidence follows",
+    "duration": 2,
+    "summary": "Learn why acting before feeling ready is crucial in building confidence.",
+    "isCompleted": false,
+    "isLocked": true,
+    "content": [
+      {
+        "id": "content_1_4_1",
+        "text": "Confidence doesn't start in your head; it starts in your history. Every time you act and survive, you collect proof that you can. That proof becomes belief.",
+        "order": 0
+      },
+      {
+        "id": "content_1_4_2",
+        "text": "The mind trusts what it can measure, not what it imagines. You can't outthink doubt; you outwork it. The more evidence you gather, the quieter doubt becomes.",
+        "order": 1
+      },
+      {
+        "id": "content_1_4_3",
+        "text": "You don't wake up confident; you accumulate it. Every small risk you take leaves a mark.",
+        "order": 2
+      },
+      {
+        "id": "content_1_4_4",
+        "text": "Speaking up when you would usually stay quiet. Holding eye contact a second longer. Following through when it would be easier to quit. Each of these moments becomes data your brain can't ignore, proof that you acted and nothing broke.",
+        "order": 3
+      },
+      {
+        "id": "content_1_4_5",
+        "text": "Psychologists call this the competence confidence loop. You act first, and confidence follows. The mind updates based on results, not on reassurance. Just like muscles strengthen through resistance, belief strengthens through exposure.",
+        "order": 4
+      },
+      {
+        "id": "content_1_4_6",
+        "text": "Avoiding challenge protects comfort; repetition builds certainty. Confidence isn't built by convincing yourself; it is built by collecting proof.",
+        "order": 5
+      },
+      {
+        "id": "content_1_4_7",
+        "text": "Every time you follow through despite uncertainty, you teach your body that fear isn't final. The signal it remembers isn't \"I believed in myself,\" it is \"I did it anyway.\"",
+        "order": 6
+      },
+      {
+        "id": "content_1_4_8",
+        "text": "You hesitate before speaking, then say it anyway. The room doesn't fall apart. That is confidence forming, quietly, through experience.",
+        "order": 7
+      },
+      {
+        "id": "content_1_4_9",
+        "text": "The difference between men who seem naturally confident and those who hesitate isn't personality; it is repetition.",
+        "order": 8
+      },
+      {
+        "id": "content_1_4_10",
+        "text": "One has a record his brain can rely on. The other is still arguing with himself.",
+        "order": 9
+      },
+      {
+        "id": "content_1_4_11",
+        "text": "The longer you wait to feel ready, the longer you delay the evidence that would make you so.",
+        "order": 10
+      },
+      {
+        "id": "content_1_4_12",
+        "text": "Confidence isn't a mystery; it is a memory of what you have already proven. You don't need to become someone new; you only need to notice the evidence you have already earned and keep adding to it.",
+        "order": 11
+      },
+      {
+        "id": "content_1_4_13",
+        "text": "Each small act of follow-through is a quiet reminder: you can trust yourself.",
+        "order": 12
+      },
+      {
+        "id": "content_1_4_14",
+        "text": "You have built proof before. You can do it again.",
+        "order": 13
+      }
+    ]
+  },
+  {
+    "id": "lesson_1_5",
+    "courseId": "course_1",
+    "lessonNumber": 5,
+    "title": "Growth mindset vs Fixed mindset",
+    "subtitle": "Courage Comes first, Confidence follows",
+    "duration": 3,
+    "summary": "Learn how a growth mindset turns failure into feedback and keeps you improving.",
+    "isCompleted": false,
+    "isLocked": true,
+    "content": [
+      {
+        "id": "content_1_5_1",
+        "text": "We all remember times when someone else seemed to learn faster. It's easy to treat that as proof of your ceiling.",
+        "order": 0
+      },
+      {
+        "id": "content_1_5_2",
+        "text": "But learning speed isn't important. Persistence is a far stronger predictor.",
+        "order": 1
+      },
+      {
+        "id": "content_1_5_3",
+        "text": "A growth mindset is the belief that abilities can be developed through effort and practice. A fixed mindset is the belief that abilities are inherent and unchangeable.",
+        "order": 2
+      },
+      {
+        "id": "content_1_5_4",
+        "text": "This distinction matters because what you believe about your capacity to improve determines whether you try.",
+        "order": 3
+      },
+      {
+        "id": "content_1_5_5",
+        "text": "People with fixed mindsets avoid challenges because failure confirms their worst fear: they're not capable.",
+        "order": 4
+      },
+      {
+        "id": "content_1_5_6",
+        "text": "But people with growth mindsets seek challenges because failure is just information about what to practice next.",
+        "order": 5
+      },
+      {
+        "id": "content_1_5_7",
+        "text": "When you have a fixed mindset about social skills, rejection feels like proof you're fundamentally deficient. When you have a growth mindset, rejection is data. Your brain stays engaged. It asks what you can adjust next time.",
+        "order": 6
+      },
+      {
+        "id": "content_1_5_8",
+        "text": "A guy tries to start a conversation at a coffee shop. It goes poorly. He feels awkward. She gives short answers and leaves quickly. He walks away thinking, \"I'm so bad at this. I'll never be the guy who can just talk to people.\" That thought stops him from trying again.",
+        "order": 7
+      },
+      {
+        "id": "content_1_5_9",
+        "text": "Another man has the same awkward interaction. Same short answers. Same quick exit. He walks away thinking, \"That didn't work. What could I try differently next time?\"",
+        "order": 8
+      },
+      {
+        "id": "content_1_5_10",
+        "text": "He tries the next day with a different approach. Still awkward but slightly better. He keeps adjusting. Within weeks, he's having decent conversations.",
+        "order": 9
+      },
+      {
+        "id": "content_1_5_11",
+        "text": "The first man concluded he lacked ability. The second man concluded he lacked practice. One stopped. One continued. That's the only difference.",
+        "order": 10
+      },
+      {
+        "id": "content_1_5_12",
+        "text": "Your belief about whether skills can be developed determines whether you practice. If you practice, you improve. If you don't practice, you don't improve.",
+        "order": 11
+      },
+      {
+        "id": "content_1_5_13",
+        "text": "Then your lack of improvement confirms your original belief. This is how fixed mindset becomes a self-fulfilling prophecy.",
+        "order": 12
+      },
+      {
+        "id": "content_1_5_14",
+        "text": "A growth mindset breaks the cycle by keeping you in the game long enough for improvement to take hold. It reframes failure from \"proof I can't\" to \"information about what to adjust.\" That reframe changes everything.",
+        "order": 13
+      },
+      {
+        "id": "content_1_5_15",
+        "text": "You are not limited by where you started. Your only limit is how quickly you decide the story is over.",
+        "order": 14
+      }
+    ]
+  }
+]
