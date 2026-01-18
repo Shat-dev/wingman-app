@@ -7,8 +7,9 @@ import SwiftUI
 
 struct CoursesView: View {
     @StateObject private var viewModel = CoursesViewModel()
-    @State private var selectedCourse: Course? = nil
     @State private var scrollProxy: ScrollViewProxy? = nil
+    @State private var categoryScrollProxy: ScrollViewProxy? = nil
+    @State private var isUserScrolling = false  // Track if user manually clicked a pill
     
     var body: some View {
         NavigationStack {
@@ -38,22 +39,35 @@ struct CoursesView: View {
                             .padding(.bottom, 16)
                         
                         // MARK: - Category Pills
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 8) {
-                                ForEach(viewModel.availableCategories) { category in
-                                    CategoryPill(
-                                        title: category.name,
-                                        isSelected: viewModel.selectedCategoryId == category.id
-                                    ) {
-                                        withAnimation(.easeInOut(duration: 0.3)) {
-                                            viewModel.selectCategory(category.id)
-                                            // Scroll to the selected category
-                                            scrollProxy?.scrollTo(category.id, anchor: .top)
+                        ScrollViewReader { categoryProxy in
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack(spacing: 8) {
+                                    ForEach(viewModel.availableCategories) { category in
+                                        CategoryPill(
+                                            title: category.name,
+                                            isSelected: viewModel.selectedCategoryId == category.id
+                                        ) {
+                                            withAnimation(.easeInOut(duration: 0.3)) {
+                                                // Set flag to indicate user manually clicked
+                                                isUserScrolling = true
+                                                viewModel.selectCategory(category.id)
+                                                // Scroll to the selected category
+                                                scrollProxy?.scrollTo(category.id, anchor: .top)
+                                                
+                                                // Reset flag after animation completes
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                                    isUserScrolling = false
+                                                }
+                                            }
                                         }
+                                        .id("pill_\(category.id)")
                                     }
                                 }
+                                .padding(.horizontal, 20)
                             }
-                            .padding(.horizontal, 20)
+                            .onAppear {
+                                categoryScrollProxy = categoryProxy
+                            }
                         }
                         .padding(.bottom, 20)
                         
@@ -63,15 +77,19 @@ struct CoursesView: View {
                                 LazyVStack(alignment: .leading, spacing: 20, pinnedViews: [.sectionHeaders]) {
                                     ForEach(viewModel.availableCategories) { category in
                                         Section(header: CategoryHeader(title: category.name)) {
-                                            CoursesGrid(
-                                                courses: category.courses,
-                                                onCourseTap: { course in
-                                                    viewModel.selectCourse(course)
-                                                    selectedCourse = course
-                                                }
-                                            )
+                                            CoursesGrid(courses: category.courses)
                                         }
                                         .id(category.id)
+                                        .onAppear {
+                                            // Only auto-select if user is NOT manually scrolling
+                                            if !isUserScrolling {
+                                                withAnimation(.easeInOut(duration: 0.2)) {
+                                                    viewModel.selectCategory(category.id)
+                                                    // Auto-scroll the category pills to keep selected one visible
+                                                    categoryScrollProxy?.scrollTo("pill_\(category.id)", anchor: .center)
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                                 .padding(.horizontal, 20)
@@ -86,9 +104,6 @@ struct CoursesView: View {
                 }
             }
             .navigationBarHidden(true)
-            .sheet(item: $selectedCourse) { course in
-                CourseDetailSheet(course: course)
-            }
             .onAppear {
                 print("👁️ CoursesView appeared")
             }
@@ -139,7 +154,6 @@ struct CategoryHeader: View {
 // MARK: - Courses Grid
 struct CoursesGrid: View {
     let courses: [Course]
-    let onCourseTap: (Course) -> Void
     
     let columns = [
         GridItem(.flexible(), spacing: 16),
@@ -149,97 +163,101 @@ struct CoursesGrid: View {
     var body: some View {
         LazyVGrid(columns: columns, spacing: 16) {
             ForEach(courses) { course in
-                CourseCard(course: course) {
-                    onCourseTap(course)
+                NavigationLink(destination: CourseDetailSheet(course: course)) {
+                    CourseCardContent(course: course)
                 }
+                .buttonStyle(.plain)
             }
         }
     }
 }
 
-// MARK: - Course Card
-struct CourseCard: View {
+// MARK: - Course Card Content
+struct CourseCardContent: View {
     let course: Course
-    let action: () -> Void
     
     var body: some View {
-        Button(action: action) {
-            VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .leading, spacing: 0) {
+            
+            // Thumbnail with illustration - Fixed height
+            ZStack {
+                Rectangle()
+                    .fill(Color(.white))
+                    .frame(height: 160)  // Reduced slightly for better proportions
                 
-                // Thumbnail with illustration
-                ZStack {
-                    Rectangle()
-                        .fill(Color(.white))
-                        .frame(height: 200)
+                Image(getImageForCourse())
+                    .resizable()
+                    .scaledToFit()
+                    .padding(0)  // Add padding for better visual balance
                     
-                    Image(getImageForCourse())
-                        .resizable()
-                        .scaledToFit()
-                        
-                }
-                Divider()
-                    .background(Color.gray.opacity(0.2))
-                // Title section with padding
-                VStack(alignment: .leading, spacing: 0) {
-                    Text(course.title)
-                        .font(.manropeRegular(size: 16))
-                        .foregroundColor(.black)
-                        .lineSpacing(2)
-                        .multilineTextAlignment(.leading)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-                .padding(.horizontal, 16)
-                .padding(.vertical, 16)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color.white)
             }
-            .background(Color.white)
-            .cornerRadius(5)
-            .overlay(
-                RoundedRectangle(cornerRadius: 5)
-                    .stroke(Color.black.opacity(0.08), lineWidth: 1)
-            )
+            
+            Divider()
+                .background(Color.gray.opacity(0.2))
+            
+            // Title section with natural sizing
+            Text(course.title)
+                .font(.manropeMedium(size: 14))  // Slightly smaller font
+                .foregroundColor(.black)
+                .lineSpacing(1)
+                .multilineTextAlignment(.leading)
+                .lineLimit(1)  // Limit to 1 line maximum
+                .truncationMode(.tail)  // Add ellipsis at the end
+                .frame(maxWidth: .infinity, alignment: .topLeading)
+                .padding(.horizontal, 8)
+                .padding(.top, 8)
+                .padding(.bottom, 20)  // 20 points padding below the title
+                .background(Color.white)
         }
-        .buttonStyle(.plain)
+        .frame(height: 245)  // FIXED total card height
+        .background(Color.white)
+        .cornerRadius(5)
+        .overlay(
+            RoundedRectangle(cornerRadius: 5)
+                .stroke(Color.black.opacity(0.08), lineWidth: 1)
+        )
     }
     
     private func getImageForCourse() -> String {
-        // Map course titles to SF Symbols
-        let title = course.title.lowercased()
+        // Map Course thumbnailName to actual image assets
+        switch course.thumbnailName {
+        // Mindset & Foundations
+        case "course_beliefs": return "beliefandreframes"
+        case "course_fear": return "fearandexposure"
+        case "course_presence": return "presenceandexpresions"
+        case "course_stability": return "innerstability"
+        case "course_nonnegotiables": return "nonnegotiables"
         
-        //Mindset & Foundations
-        if title.contains("belief") { return "beliefandreframes" }
-        if title.contains("fear") { return "fearandexposure" }
-        if title.contains("presence") { return "presenceandexpresions" }
-        if title.contains("stability") { return "innerstability" }
-        if title.contains("non-negotiable") { return "nonnegotiables" }
-        //Approach Mechanics
-        if title.contains("readiness") { return "approachreadiness" }
-        if title.contains("physical") { return "thephysicalapproch" }
-        if title.contains("opener") { return "theopner" }
-        if title.contains("reading") { return "readingandresponding" }
-        if title.contains("situational") { return "situationspecficapproaches" }
-        if title.contains("advanced") { return "advanceopeningtechniques" }
-        //conversation flow
-        if title.contains("small talk") { return "smalltalkandmomentum" }
-        if title.contains("listening") { return "ListeningandAttunement" }
-        if title.contains("vulnerability") { return "Sharing&Vulnerability" }
-        if title.contains("closing") { return "advancedconversationskills" }
-        if title.contains("conversation") { return "advancedconversationskills"}
-        //Flirting & Chemistry
-        if title.contains("flirting") { return "FlirtingPrerequisites" }
-        if title.contains("playfulness") { return "Playfulness&Spark" }
-        if title.contains("compliment") { return "Compliments&VerbalChemistry" }
-        if title.contains("chemistry") { return "PhysicalPresence&Escalation" }
-        if title.contains("flirting") { return "advancedFlirtingSkills" }
-        //Integration & Mastery
-        if title.contains("upgrading") { return "Upgradingyourlifestyle" }
-        if title.contains("creating") { return "CreatingOpportunties" }
-        if title.contains("mastery") { return "Mastery&Identity" }
-        if title.contains("learning") { return "Learning&SelfDiscovery" }
+        // Approach Mechanics
+        case "course_readiness": return "approachreadiness"
+        case "course_physical": return "thephysicalapproch"
+        case "course_opener": return "theopner"
+        case "course_reading": return "readingandresponding"
+        case "course_situational": return "situationspecficapproaches"
+        case "course_advanced": return "advanceopeningtechniques"
         
-        return "book"
+        // Conversation Flow
+        case "course_smalltalk": return "smalltalkandmomentum"
+        case "course_listening": return "ListeningandAttunement"
+        case "course_vulnerability": return "Sharing&Vulnerability"
+        case "course_closing": return "advancedconversationskills"
+        case "course_advconvo": return "advancedconversationskills"
+        
+        // Flirting & Chemistry
+        case "course_flirtprereq": return "FlirtingPrerequisites"
+        case "course_playfulness": return "Playfulness&Spark"
+        case "course_compliments": return "Compliments&VerbalChemistry"
+        case "course_physical_presence": return "PhysicalPresence&Escalation"
+        case "course_advflirt": return "advancedFlirtingSkills"
+        
+        // Integration & Mastery
+        case "course_lifestyle": return "Upgradingyourlifestyle"
+        case "course_opportunities": return "CreatingOpportunties"
+        case "course_mastery": return "Mastery&Identity"
+        case "course_selfdiscovery": return "Learning&SelfDiscovery"
+        
+        default: return "book"
+        }
     }
 }
 

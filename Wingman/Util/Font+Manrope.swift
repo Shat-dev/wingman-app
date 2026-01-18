@@ -36,4 +36,11 @@ extension Font {
     ) -> Font {
         .custom("Manrope-Regular", size: size, relativeTo: textStyle)
     }
+    
+    static func georgiaItalic(
+        size: CGFloat,
+        relativeTo textStyle: Font.TextStyle = .body
+    ) -> Font {
+        .custom("Georgia-Italic", size: size, relativeTo: textStyle)
+    }
 }

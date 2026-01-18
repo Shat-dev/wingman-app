@@ -12,17 +12,6 @@ struct HomeView: View {
     @State private var navigateToPractice = false
     @State private var showLogApproachSheet = false
     
-    init() {
-        for family in UIFont.familyNames.sorted() {
-            if family.contains("Manrope") {
-                print(family)
-                for name in UIFont.fontNames(forFamilyName: family) {
-                    print("  \(name)")
-                }
-            }
-        }
-    }
-    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -64,16 +53,27 @@ struct HomeView: View {
                         
                         Spacer()
                         
-                        // Streak Badge
-                        HStack(spacing: 4) {
+                        // MARK: - Streak Badge
+                        HStack(spacing: 6) {
+
                             Image("flame")
-                                .font(.system(size: 14))
-                                .foregroundColor(.black)
-                            
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 16, height: 16)
+                                .padding(.leading, 16)
+
                             Text("\(viewModel.currentStreak)")
-                                .font(.manropeMedium(size: 16))
-                                .foregroundColor(.black)
+                                .font(.manropeMedium(size: 20))
+                                .padding(.trailing,16)
                         }
+                        .foregroundColor(.black)
+                        .frame(width: 64, height: 44)              // matches visual size
+                        .background(Color.white)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(Color.black.opacity(0.15), lineWidth: 1)
+                        )
+                        .cornerRadius(5)
                     }
                     .padding(.horizontal, 20)
                     .padding(.top, 12)
@@ -83,63 +83,55 @@ struct HomeView: View {
                         VStack(spacing: 24) {
                             
                             // MARK: - Daily Practice Card
-                            VStack(alignment: .leading, spacing: 0) {
+                            VStack(spacing: 0) {
 
-                                ZStack(alignment: .topLeading) {
+                                VStack(spacing: 0) {
 
-                                    // Watermark W (faint, left side)
-                                     Image("wingman_logo")
-                                           .resizable()
-                                        .scaledToFit()
-                                         .frame(width: 200, height: 200)
-                                          .foregroundColor(Color.gray.opacity(0.13))
-                                           .opacity(0.18)
-                                           .offset(x: -55, y: -38)
-                                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                                              .clipped()
+                                    Text("Daily Practice")
+                                        .font(.manropeMedium(size: 20))
+                                        .foregroundColor(.black)
+                                        .padding(.top, 20)
+                                        .frame(maxWidth: .infinity)
 
-                                    VStack(spacing: 0) {
+                                    Text("Suggested")
+                                        .font(.manropeMedium(size: 14))
+                                        .foregroundColor(.gray)
+                                        .padding(.top, 8)
+                                        .frame(maxWidth: .infinity)
 
-                                        Spacer(minLength: 20)
+                                   
 
-                                        // Title
-                                        Text("Daily Practice")
-                                            .font(.manropeSemiBold(size: 16))
-                                            .foregroundColor(.black)
-                                            .frame(maxWidth: .infinity, alignment: .center)
-
-                                        // Subtitle
-                                        Text("Suggested")
-                                            .font(.manropeRegular(size: 12))
-                                            .foregroundColor(Color.gray)
-                                            .padding(.top, 4)
-                                            .frame(maxWidth: .infinity, alignment: .center)
-
-                                        Spacer(minLength: 16)
-
-                                        // Start Button
-                                        Button(action: {
-                                            navigateToPractice = true
-                                        }) {
-                                            Text("Start")
-                                                .font(.manropeSemiBold(size: 15))
-                                                .foregroundColor(.white)
-                                                .frame(maxWidth: .infinity)
-                                                .frame(height: 48)
-                                                .background(Color.black)
-                                                .cornerRadius(5)
-                                        }
-                                        .padding(.horizontal, 20)
-
-                                        Spacer(minLength: 16)
+                                    Button("Start") {
+                                        navigateToPractice = true
                                     }
+                                    .font(.manropeSemiBold(size: 16))
+                                    .foregroundColor(.white)
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 52)
+                                    .background(Color.black)
+                                    .cornerRadius(5)
+                                    .padding(.horizontal, 20)
+                                    .padding(.bottom, 20)
+                                    .padding(.top,40)
                                 }
                             }
-                            .frame(height: 140)
+                            .frame(height: 200)
+                            .frame(maxWidth: .infinity)
                             .background(Color.white)
-                            .cornerRadius(8)
+                            .clipShape(RoundedRectangle(cornerRadius: 5))
                             .overlay(
-                                RoundedRectangle(cornerRadius: 8)
+                                // 🔥 BIG WATERMARK (intentionally larger than card)
+                                Image("wingman_logo")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 300, height: 280)          // larger than card
+                                    .opacity(0.12)
+                                    .padding(.top, -100)         // slight bleed
+                                    .padding(.trailing, 155),   // slight bleed
+                                alignment: .topTrailing
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
                                     .stroke(Color.gray.opacity(0.2), lineWidth: 1)
                             )
                             .padding(.horizontal, 20)
@@ -148,45 +140,55 @@ struct HomeView: View {
                             Button(action: {
                                 showLogApproachSheet = true
                             }) {
-                                HStack(spacing: 12) {
-                                    Image(systemName: "pencil")
-                                        .font(.system(size: 14))
+                                HStack(spacing: 10) {
+                                    Image("feather")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 22, height: 22)
+                                        .foregroundColor(.black)          // works if the asset renders as template
+
+                                    Text("Log Encounter")
+                                        .font(.manropeSemiBold(size: 16))
                                         .foregroundColor(.black)
-                                    
-                                    Text("Log Today's Approach")
-                                        .font(.manropeRegular(size: 15))
-                                        .foregroundColor(.black)
-                                    
-                                    Spacer()
                                 }
                                 .frame(maxWidth: .infinity)
-                                .padding(.vertical, 16)
-                                .padding(.horizontal, 20)
+                                .frame(height: 56)
                                 .background(Color.white)
-                                .cornerRadius(5)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 5)
-                                        .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+                                        .stroke(Color.black.opacity(0.35), lineWidth: 1)
                                 )
+                                .cornerRadius(5)
                             }
                             .padding(.horizontal, 20)
                             
+                            Divider().background(Color.gray.opacity(0.2))
+                            
                             // MARK: - Motivational Quote
-                            HStack(spacing: 8) {
-                                Image(systemName: "quote.bubble")
-                                    .font(.system(size: 20))
-                                    .foregroundColor(.gray.opacity(0.3))
-                                
+                            HStack(alignment: .top, spacing: 10) {
+
+                                // Large faint quote mark (asset)
+                                Image("quote_sign")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 40, height: 40)     // size like design
+                                    .padding(.top, -30)                 // aligns with first text line
+
                                 Text(viewModel.motivationalQuote)
-                                    .font(.manropeRegular(size: 13))
-                                    .foregroundColor(.gray)
-                                    .italic()
+                                    .font(.georgiaItalic(size: 16)) // matches screenshot style
+                                    .foregroundColor(Color.black.opacity(0.75))
+                                    
                                     .multilineTextAlignment(.leading)
-                                    .lineSpacing(2)
-                                
-                                Spacer()
+                                    .lineSpacing(3)
+                                    .padding(.top, 6)                 // pushes text down to match design
+
+                                Spacer(minLength: 0)
                             }
                             .padding(.horizontal, 20)
+                            .padding(.vertical, 10)
+
+                            
+                            Divider().background(Color.gray.opacity(0.2))
                             
                             // MARK: - Continue Section
                             VStack(alignment: .leading, spacing: 16) {
