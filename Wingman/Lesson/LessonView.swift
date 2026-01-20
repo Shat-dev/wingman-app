@@ -11,7 +11,9 @@ struct LessonView: View {
     
     @Environment(\.dismiss) private var dismiss
     @State private var currentContentIndex: Int = -1 // -1 means intro screen
+    @State private var currentPage: Int = 0 // Which "page" we're on
     @State private var showLessonComplete = false
+    @State private var availableHeight: CGFloat = 0
     
     // Content items sorted by order
     private var sortedContent: [LessonContent] {
@@ -23,10 +25,24 @@ struct LessonView: View {
         sortedContent.count
     }
     
-    // Currently visible content (accumulated)
+    // Currently visible content (accumulated up to currentContentIndex)
     private var visibleContent: [LessonContent] {
         guard currentContentIndex >= 0 else { return [] }
         return Array(sortedContent.prefix(currentContentIndex + 1))
+    }
+    
+    // Content visible on CURRENT page only
+    private var currentPageContent: [LessonContent] {
+        let pageBreaks = calculatePageBreaks()
+        
+        if currentPage >= pageBreaks.count {
+            return []
+        }
+        
+        let startIndex = pageBreaks[currentPage].startIndex
+        let endIndex = pageBreaks[currentPage].endIndex
+        
+        return Array(visibleContent[startIndex...endIndex])
     }
     
     // Progress as a percentage (0.0 to 1.0)
@@ -37,8 +53,6 @@ struct LessonView: View {
     }
     
     var body: some View {
-        let _ = print("🎬 LessonView body rendering - Content items: \(sortedContent.count), Current index: \(currentContentIndex)")
-        
         ZStack {
             Color.white.ignoresSafeArea()
             
@@ -86,8 +100,16 @@ struct LessonView: View {
                             // Intro Screen
                             IntroScreenView()
                         } else {
-                            // Content Screen
-                            ContentScreenView(visibleContent: visibleContent)
+                            // Content Screen with Page Transition
+                            ContentScreenView(
+                                content: currentPageContent,
+                                pageIndex: currentPage
+                            )
+                            .id("page_\(currentPage)") // Force re-render on page change
+                            .transition(.asymmetric(
+                                insertion: .move(edge: .trailing).combined(with: .opacity),
+                                removal: .move(edge: .leading).combined(with: .opacity)
+                            ))
                         }
                         
                         // Tap Areas (invisible overlay)
@@ -111,6 +133,9 @@ struct LessonView: View {
                                 }
                         }
                     }
+                    .onAppear {
+                        availableHeight = geometry.size.height
+                    }
                 }
                 
                 // MARK: - Bottom Bar
@@ -129,7 +154,6 @@ struct LessonView: View {
             LessonCompleteView(
                 nextLessonInfo: getNextLessonInfo(),
                 onContinue: {
-                    // Mark current lesson as completed
                     LessonDataService.shared.markLessonCompleted(
                         lessonId: lesson.id,
                         courseId: lesson.courseId
@@ -140,37 +164,112 @@ struct LessonView: View {
         }
     }
     
+    // MARK: - Calculate Page Breaks
+    struct PageBreak {
+        let startIndex: Int
+        let endIndex: Int
+    }
+    
+    private func calculatePageBreaks() -> [PageBreak] {
+        guard !visibleContent.isEmpty, availableHeight > 0 else {
+            return []
+        }
+        
+        var breaks: [PageBreak] = []
+        var currentPageStart = 0
+        var accumulatedHeight: CGFloat = 0
+        let maxHeight = availableHeight - 100 // Safety margin for padding
+        
+        let font = UIFont(name: "Manrope-Regular", size: 18) ?? UIFont.systemFont(ofSize: 18)
+        let width = UIScreen.main.bounds.width - 48 // 24pt padding each side
+        
+        for (index, content) in visibleContent.enumerated() {
+            let textHeight = content.text.heightWithConstraints(
+                width: width,
+                font: font,
+                lineSpacing: 8
+            )
+            
+            let itemHeight = textHeight + (index > currentPageStart ? 20 : 0) // Add spacing between items
+            
+            // Check if adding this item would overflow the page
+            if accumulatedHeight + itemHeight > maxHeight && index > currentPageStart {
+                // Save current page
+                breaks.append(PageBreak(
+                    startIndex: currentPageStart,
+                    endIndex: index - 1
+                ))
+                
+                // Start new page
+                currentPageStart = index
+                accumulatedHeight = textHeight
+            } else {
+                accumulatedHeight += itemHeight
+            }
+        }
+        
+        // Add final page
+        if currentPageStart < visibleContent.count {
+            breaks.append(PageBreak(
+                startIndex: currentPageStart,
+                endIndex: visibleContent.count - 1
+            ))
+        }
+        
+        return breaks
+    }
+    
     // MARK: - Navigation Functions
     private func goBack() {
-        print("⬅️ TAP DETECTED - goBack() called")
-        print("   Current index: \(currentContentIndex)")
         if currentContentIndex > -1 {
-            withAnimation(.easeInOut(duration: 0.2)) {
+            // Check if we're at the start of a page
+            let pageBreaks = calculatePageBreaks()
+            let isAtPageStart = currentPage < pageBreaks.count &&
+                                currentContentIndex == pageBreaks[currentPage].startIndex
+            
+            if isAtPageStart && currentPage > 0 {
+                // Move to previous page
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    currentPage -= 1
+                    currentContentIndex -= 1
+                }
+                print("⬅️ Previous page (\(currentPage + 1))")
+            } else {
+                // Just remove last line
                 currentContentIndex -= 1
+                print("⬅️ Back to index: \(currentContentIndex)")
             }
-            print("   ✅ Moved back to index: \(currentContentIndex)")
-        } else {
-            print("   ⚠️ Already at intro screen")
         }
     }
     
     private func goForward() {
-        print("➡️ TAP DETECTED - goForward() called")
-        print("   Current index: \(currentContentIndex)")
-        print("   Total content items: \(sortedContent.count)")
-        
         if currentContentIndex < sortedContent.count - 1 {
-            withAnimation(.easeInOut(duration: 0.2)) {
-                currentContentIndex += 1
+            currentContentIndex += 1
+            
+            // Check if we need to move to next page
+            let pageBreaks = calculatePageBreaks()
+            
+            // Find which page the current content index belongs to
+            var targetPage = 0
+            for (pageIndex, pageBreak) in pageBreaks.enumerated() {
+                if currentContentIndex <= pageBreak.endIndex {
+                    targetPage = pageIndex
+                    break
+                }
             }
-            print("   ✅ Moved forward to index: \(currentContentIndex)")
-            print("   📝 Now showing \(currentContentIndex + 1) of \(sortedContent.count) items")
-            if currentContentIndex >= 0 && currentContentIndex < sortedContent.count {
-                print("   📄 Content text: \(sortedContent[currentContentIndex].text.prefix(50))...")
+            
+            // If target page is different from current page, animate transition
+            if targetPage != currentPage {
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    currentPage = targetPage
+                }
+                print("➡️ Next page (\(currentPage + 1)) - showing content \(currentContentIndex + 1)")
+            } else {
+                print("➡️ Forward to index: \(currentContentIndex)")
             }
         } else {
             // Lesson complete
-            print("   ✅ Lesson complete!")
+            print("✅ Lesson complete!")
             showLessonComplete = true
         }
     }
@@ -194,10 +293,8 @@ struct IntroScreenView: View {
             VStack {
                 Spacer()
                 Text("Back")
-                    .font(.manropeMedium(size: 20))
-                    .foregroundColor(.black)
-                    .opacity(0.5)
-                    .padding(.leading, -55)
+                    .font(.manropeRegular(size: 15))
+                    .foregroundColor(Color(hex: "888888"))
                 Spacer()
             }
             .frame(maxWidth: .infinity)
@@ -206,10 +303,8 @@ struct IntroScreenView: View {
             VStack {
                 Spacer()
                 Text("Forward")
-                    .font(.manropeMedium(size: 20))
+                    .font(.manropeRegular(size: 15))
                     .foregroundColor(.black)
-                    .opacity(0.5)
-                    .padding(.leading, 20)
                 Spacer()
             }
             .frame(maxWidth: .infinity)
@@ -220,36 +315,48 @@ struct IntroScreenView: View {
 
 // MARK: - Content Screen View
 struct ContentScreenView: View {
-    let visibleContent: [LessonContent]
+    let content: [LessonContent]
+    let pageIndex: Int
     
     var body: some View {
-        ScrollViewReader { proxy in
-            ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: 0) {
-                    ForEach(Array(visibleContent.enumerated()), id: \.element.id) { index, content in
-                        Text(content.text)
-                            .font(.manropeRegular(size: 18))
-                            .foregroundColor(.black)
-                            .lineSpacing(8)
-                            .multilineTextAlignment(.leading)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .padding(.bottom, index == visibleContent.count - 1 ? 0 : 20)
-                            .id(content.id)
-                            .transition(.opacity.combined(with: .move(edge: .bottom)))
-                    }
-                }
-                .padding(.horizontal, 24)
-                .padding(.top, 40)
-                .padding(.bottom, 60)
-            }
-            .onChange(of: visibleContent.count) { _ in
-                if let lastContent = visibleContent.last {
-                    withAnimation(.easeInOut(duration: 0.3)) {
-                        proxy.scrollTo(lastContent.id, anchor: .bottom)
-                    }
-                }
+        VStack(alignment: .leading, spacing: 0) {
+            ForEach(Array(content.enumerated()), id: \.element.id) { index, item in
+                Text(item.text)
+                    .font(.manropeRegular(size: 18))
+                    .foregroundColor(.black)
+                    .lineSpacing(8)
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.bottom, index == content.count - 1 ? 0 : 20)
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .padding(.horizontal, 24)
+        .padding(.top, 40)
+        .padding(.bottom, 60)
+    }
+}
+
+// MARK: - String Extension for Height Calculation
+extension String {
+    func heightWithConstraints(width: CGFloat, font: UIFont, lineSpacing: CGFloat) -> CGFloat {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = lineSpacing
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: font,
+            .paragraphStyle: paragraphStyle
+        ]
+        
+        let attributedString = NSAttributedString(string: self, attributes: attributes)
+        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let boundingBox = attributedString.boundingRect(
+            with: constraintRect,
+            options: [.usesLineFragmentOrigin, .usesFontLeading],
+            context: nil
+        )
+        
+        return ceil(boundingBox.height)
     }
 }
 
@@ -285,7 +392,7 @@ extension Color {
         lesson: Lesson(
             id: "lesson_1_1",
             courseId: "course_1",
-            courseSummary: "summery...",
+            courseSummary: "Learn to strengthen confidence by reframing limiting beliefs.",
             lessonNumber: 1,
             title: "You are not your thoughts",
             subtitle: "Courage Comes first, Confidence follows",
