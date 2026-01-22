@@ -26,7 +26,7 @@ struct MainTabView: View {
                 CoursesView()
                     .tag(1)
 
-                PracticeView()
+                DailyPracticeView()
                     .tag(2)
 
                 ProfileView()

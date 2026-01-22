@@ -13,7 +13,7 @@
 
 import Foundation
 
-struct PracticeQuestion: Identifiable {
+struct DailyPracticeQuestion: Identifiable {
     let id = UUID()
     let number: Int
     let question: String
@@ -24,8 +24,8 @@ struct PracticeQuestion: Identifiable {
 }
 
 // MARK: - Dummy Data
-let practiceQuestions: [PracticeQuestion] = [
-    PracticeQuestion(
+let practiceQuestions: [DailyPracticeQuestion] = [
+    DailyPracticeQuestion(
         number: 1,
         question: "Why is approaching from a side-angle better?",
         options: [
@@ -38,7 +38,7 @@ let practiceQuestions: [PracticeQuestion] = [
         incorrectExplanation: "The shift is internal: self-respect and reduced attention on flaws changes behavior before external validation."
     ),
     
-    PracticeQuestion(
+    DailyPracticeQuestion(
         number: 2,
         question: "What does fitness primarily change before others notice your body?",
         options: [
@@ -52,7 +52,7 @@ let practiceQuestions: [PracticeQuestion] = [
         incorrectExplanation: "Building genuine attraction requires demonstrating self-respect through actions, not just conversation techniques."
     ),
     
-    PracticeQuestion(
+    DailyPracticeQuestion(
         number: 3,
         question: "What's the best way to handle rejection gracefully?",
         options: [
@@ -66,7 +66,7 @@ let practiceQuestions: [PracticeQuestion] = [
         incorrectExplanation: "Negative reactions to rejection demonstrate insecurity and poor emotional control, which are unattractive traits."
     ),
     
-    PracticeQuestion(
+    DailyPracticeQuestion(
         number: 4,
         question: "When is the best time to ask for her number?",
         options: [
@@ -80,7 +80,7 @@ let practiceQuestions: [PracticeQuestion] = [
         incorrectExplanation: "Asking too early or without connection comes across as desperate or insincere."
     ),
     
-    PracticeQuestion(
+    DailyPracticeQuestion(
         number: 5,
         question: "What's the most important factor in keeping a conversation going?",
         options: [

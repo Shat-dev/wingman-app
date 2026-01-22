@@ -260,7 +260,7 @@ struct HomeView: View {
             }
             .navigationBarHidden(true)
             .navigationDestination(isPresented: $navigateToPractice) {
-                PracticeView()
+                DailyPracticeView()
             }
             .sheet(isPresented: $showLogApproachSheet) {
                 LogApproachBottomSheet(isPresented: $showLogApproachSheet)

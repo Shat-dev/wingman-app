@@ -86,7 +86,7 @@ struct DashboardView: View {
                         .cornerRadius(10)
                     }
                     .navigationDestination(isPresented: $navigateToPractice) {
-                        PracticeView()
+                        DailyPracticeView()
                     }
                     
                     // Payment Button (for testing)

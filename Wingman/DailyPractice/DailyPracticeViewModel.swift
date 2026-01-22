@@ -14,7 +14,7 @@
 import Foundation
 import Combine
 
-final class PracticeViewModel: ObservableObject {
+final class DailyPracticeViewModel: ObservableObject {
     
     // MARK: - Published Properties
     @Published var currentQuestionIndex: Int = 0
@@ -23,10 +23,10 @@ final class PracticeViewModel: ObservableObject {
     @Published var isAnswerCorrect: Bool = false
     
     // MARK: - Data
-    let questions: [PracticeQuestion] = practiceQuestions
+    let questions: [DailyPracticeQuestion] = practiceQuestions
     
     // MARK: - Computed Properties
-    var currentQuestion: PracticeQuestion {
+    var currentQuestion: DailyPracticeQuestion {
         questions[currentQuestionIndex]
     }
     

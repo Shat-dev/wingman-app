@@ -23,8 +23,8 @@
 
 import SwiftUI
 
-struct PracticeView: View {
-    @StateObject private var viewModel = PracticeViewModel()
+struct DailyPracticeView: View {
+    @StateObject private var viewModel = DailyPracticeViewModel()
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -286,6 +286,6 @@ struct RoundedCorner: Shape {
 
 #Preview {
     NavigationStack {
-        PracticeView()
+        DailyPracticeView()
     }
 }
