@@ -19,46 +19,44 @@ struct LessonCompleteView: View {
                 
                 // MARK: - Checkmark Icon
                 ZStack {
-                    // Diamond shape (rotated rounded rectangle)
-                    RoundedRectangle(cornerRadius: 24)
-                        .stroke(Color.black, lineWidth: 2)
-                        .frame(width: 120, height: 120)
-                        .rotationEffect(.degrees(45))
-                    
                     // Checkmark
-                    Image(systemName: "checkmark")
-                        .font(.system(size: 48, weight: .medium))
-                        .foregroundColor(.black)
+                    Image("checklist")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 291, height: 291)
+                        .clipped()
+                        .allowsHitTesting(false)
                 }
-                .padding(.bottom, 40)
+                .padding(.bottom, 5)
                 
                 // MARK: - Title
                 Text("Lesson Complete!")
                     .font(.manropeSemiBold(size: 28))
                     .foregroundColor(.black)
                     .kerning(-0.3)
-                    .padding(.bottom, 32)
+                    .padding(.bottom, 20)
                 
                 // MARK: - Up Next Section
                 if let nextLesson = nextLessonInfo {
-                    VStack(spacing: 10) {
+                    VStack(spacing: 8) {
                         Text("Up Next")
-                            .font(.manropeRegular(size: 14))
-                            .foregroundColor(Color("888888"))
+                            .font(.manropeMedium(size: 14))
+                            .foregroundColor(Color.black.opacity(0.7))
                         
                         Text(nextLesson.title)
-                            .font(.manropeMedium(size: 17))
+                            .font(.manropeMedium(size: 14))
                             .foregroundColor(.black)
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 40)
                     }
+                    .padding(.bottom, 50)
                 } else {
                     VStack(spacing: 10) {
-                        Text("🎉")
+                        Text("")
                             .font(.system(size: 32))
                         
                         Text("Course Complete!")
-                            .font(.manropeMedium(size: 17))
+                            .font(.manropeMedium(size: 14))
                             .foregroundColor(.black)
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 40)
@@ -78,7 +76,7 @@ struct LessonCompleteView: View {
                         .frame(maxWidth: .infinity)
                         .frame(height: 52)
                         .background(Color.black)
-                        .cornerRadius(8)
+                        .cornerRadius(5)
                 }
                 .padding(.horizontal, 20)
                 .padding(.bottom, 40)

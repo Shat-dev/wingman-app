@@ -58,39 +58,37 @@ struct LessonView: View {
             
             VStack(spacing: 0) {
                 
-                // MARK: - Top Bar
-                HStack(alignment: .center, spacing: 12) {
-                    // Back Button
-                    Button(action: { dismiss() }) {
+                // MARK: - Top Bar (match Auth style: bold chevron + inline progress)
+                HStack(spacing: 12) {
+                    Button {
+                        dismiss()
+                    } label: {
                         Image(systemName: "chevron.left")
-                            .font(.system(size: 18, weight: .medium))
+                            .font(.system(size: 22))
                             .foregroundColor(.black)
+                            .frame(width: 44, height: 44, alignment: .center)
+                            .contentShape(Rectangle())
                     }
-                    .frame(width: 44, height: 44)
+                    .buttonStyle(.plain)
                     
-                    // Progress Bar (smooth)
                     GeometryReader { geometry in
                         ZStack(alignment: .leading) {
-                            // Background
                             Capsule()
-                                .fill(Color(hex: "E5E5E5"))
-                                .frame(height: 4)
+                                .fill(Color.gray.opacity(0.2))
+                                .frame(height: 10)
                             
-                            // Foreground (progress)
                             Capsule()
                                 .fill(Color.black)
-                                .frame(width: geometry.size.width * progress, height: 4)
-                                .animation(.easeInOut(duration: 0.2), value: progress)
+                                .frame(width: geometry.size.width * CGFloat(progress), height: 10)
+                                .animation(.easeInOut(duration: 0.25), value: progress)
                         }
                     }
-                    .frame(height: 4)
-                    
-                    // Spacer for balance
-                    Color.clear
-                        .frame(width: 44, height: 44)
+                    .frame(height: 10)
                 }
-                .padding(.horizontal, 8)
                 .padding(.top, 8)
+                .padding(.leading, 20)
+                .padding(.trailing, 59)
+                .padding(.bottom, 12)
                 
                 // MARK: - Content Area with Tap Gestures
                 GeometryReader { geometry in
@@ -141,12 +139,13 @@ struct LessonView: View {
                 // MARK: - Bottom Bar
                 VStack(spacing: 0) {
                     Text(lesson.subtitle)
-                        .font(.manropeRegular(size: 13))
-                        .foregroundColor(Color(hex: "888888"))
+                        .font(.manropeSemiBold(size: 12))
+                        .foregroundColor(Color(hex: "1A1A1A"))
+                        .opacity(0.5)
                         .multilineTextAlignment(.center)
                 }
                 .padding(.horizontal, 20)
-                .padding(.bottom, 40)
+                .padding(.bottom, 2)
             }
         }
         .navigationBarHidden(true)
@@ -287,29 +286,44 @@ struct LessonView: View {
 
 // MARK: - Intro Screen View
 struct IntroScreenView: View {
+    // Adjust this to control where the divider sits (0.0 = far left, 1.0 = far right)
+    private let dividerPosition: CGFloat = 0.4
+    
     var body: some View {
-        HStack(spacing: 0) {
-            // Back label
-            VStack {
-                Spacer()
-                Text("Back")
-                    .font(.manropeRegular(size: 15))
-                    .foregroundColor(Color(hex: "888888"))
-                Spacer()
+        GeometryReader { geo in
+            ZStack(alignment: .leading) {
+                HStack(spacing: 0) {
+                    // Back label area
+                    VStack {
+                        Spacer()
+                        Text("Back")
+                            .font(.manropeMedium(size: 20))
+                            .foregroundColor(Color(hex: "000000"))
+                            .opacity(0.5)
+                        Spacer()
+                    }
+                    .frame(width: geo.size.width * dividerPosition)
+
+                    // Forward label area
+                    VStack {
+                        Spacer()
+                        Text("Forward")
+                            .font(.manropeMedium(size: 20))
+                            .foregroundColor(Color(hex: "000000"))
+                            .opacity(0.5)
+                        Spacer()
+                    }
+                    .frame(width: geo.size.width * (1 - dividerPosition))
+                }
+
+                // Divider positioned toward Back
+                Rectangle()
+                    .fill(Color.black.opacity(0.5))
+                    .frame(width: 1, height: geo.size.height - 40) // some vertical padding
+                    .position(x: geo.size.width * dividerPosition, y: geo.size.height / 2)
             }
-            .frame(maxWidth: .infinity)
-            
-            // Forward label
-            VStack {
-                Spacer()
-                Text("Forward")
-                    .font(.manropeRegular(size: 15))
-                    .foregroundColor(.black)
-                Spacer()
-            }
-            .frame(maxWidth: .infinity)
         }
-        .padding(.horizontal, 40)
+        .padding(.horizontal, 0)
     }
 }
 
@@ -322,7 +336,7 @@ struct ContentScreenView: View {
         VStack(alignment: .leading, spacing: 0) {
             ForEach(Array(content.enumerated()), id: \.element.id) { index, item in
                 Text(item.text)
-                    .font(.manropeRegular(size: 18))
+                    .font(.manropeMedium(size: 24))
                     .foregroundColor(.black)
                     .lineSpacing(8)
                     .multilineTextAlignment(.leading)
