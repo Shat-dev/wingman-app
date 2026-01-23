@@ -74,9 +74,10 @@ struct PracticeCardView: View {
             .background(Color.white)
             .cornerRadius(5)
             .overlay(
-                RoundedRectangle(cornerRadius: 12)
+                RoundedRectangle(cornerRadius: 5)
                     .stroke(Color(hex: "#E5E5E5"), lineWidth: 1)
             )
+            .shadow(color: Color.black.opacity(0.06), radius: 5, x: 0, y: 2) // <-- added elevation / shadow
         }
         .buttonStyle(PracticeCardButtonStyle())
         .disabled(practice.isLocked)
