@@ -21,25 +21,28 @@ struct PracticeCardView: View {
                 VStack(alignment: .leading, spacing: 6) {
                     // Title
                     Text(practice.title)
-                        .font(.manropeSemiBold(size: 16))
-                        .foregroundColor(practice.isLocked ? Color(hex: "#999999") : Color(hex: "#1A1A1A"))
+                        .font(.manropeMedium(size: 18))
+                        .foregroundColor(Color(hex: "#1A1A1A").opacity(practice.isLocked ? 0.3 : 1.0))
                         .lineLimit(2)
                         .multilineTextAlignment(.leading)
                     
                     // Daily Practice Count
                     HStack(spacing: 4) {
-                        Text("🔥")
-                            .font(.system(size: 12))
+                        Image("flame")
+                            .resizable()
+                            .scaledToFit()
+                            .opacity(practice.isLocked ? 0.3 : 1.0)
+                            .frame(width: 8, height: 12)
                         
                         Text("\(practice.dailyPracticeCount) Daily Practice")
                             .font(.manropeMedium(size: 12))
-                            .foregroundColor(practice.isLocked ? Color(hex: "#BBBBBB") : Color(hex: "#666666"))
+                            .foregroundColor(Color(hex: "#1A1A1A").opacity(practice.isLocked ? 0.3 : 1.0))
                     }
                     
                     // Summary
                     Text(practice.summary)
-                        .font(.manropeRegular(size: 13))
-                        .foregroundColor(practice.isLocked ? Color(hex: "#AAAAAA") : Color(hex: "#666666"))
+                        .font(.manropeMedium(size: 14))
+                        .foregroundColor(Color(hex: "#1A1A1A").opacity(practice.isLocked ? 0.3 : 1.0))
                         .lineLimit(3)
                         .multilineTextAlignment(.leading)
                         .lineSpacing(2)
@@ -49,24 +52,27 @@ struct PracticeCardView: View {
                 // Right Content - Image & Lock
                 ZStack(alignment: .topTrailing) {
                     // Practice Image
-                    Image(practice.imageUrl)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 80, height: 80)
-                        .opacity(practice.isLocked ? 0.4 : 1.0)
+                        //Image(practice.imageUrl)
+                        Image("c_girl")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 70, height: 110)
+                            .opacity(practice.isLocked ? 0.4 : 1.0)
+                    
+                   
                     
                     // Lock Icon (if locked)
                     if practice.isLocked {
-                        Image(systemName: "lock.fill")
+                        Image("lock_icon")
                             .font(.system(size: 14, weight: .medium))
-                            .foregroundColor(Color(hex: "#999999"))
-                            .offset(x: 4, y: -4)
+                            .foregroundColor(Color(hex: "#1A1A1A"))
+                            .offset(x: 10, y: -10)
                     }
                 }
             }
-            .padding(16)
+            .padding(20)
             .background(Color.white)
-            .cornerRadius(12)
+            .cornerRadius(5)
             .overlay(
                 RoundedRectangle(cornerRadius: 12)
                     .stroke(Color(hex: "#E5E5E5"), lineWidth: 1)
@@ -74,6 +80,7 @@ struct PracticeCardView: View {
         }
         .buttonStyle(PracticeCardButtonStyle())
         .disabled(practice.isLocked)
+        .padding(.bottom, 10)
     }
 }
 
@@ -99,6 +106,6 @@ struct PracticeCardButtonStyle: ButtonStyle {
             onTap: {}
         )
     }
-    .padding(16)
+    .padding(20)
     .background(Color.white)
 }
