@@ -1,6 +1,7 @@
 // MARK: - Models (Ready for Supabase)
 import SwiftUI
 import Combine
+import Foundation
 import Supabase
 
 struct PracticeGameData: Identifiable, Codable {

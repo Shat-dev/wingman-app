@@ -5,22 +5,14 @@
 //  Created by Adnan Khan on 23/01/2026.
 //
 
-
-//
-//  PracticeView.swift
-//  Wingman
-//
-//  Created by Claude on 23/01/2026.
-//
-
 import SwiftUI
 
 struct PracticeView: View {
-    
+
     // MARK: - Properties
     @StateObject private var viewModel = PracticeViewModel()
-    @State private var navigateToPracticeDetail: Bool = false
-    
+    @State private var navigateToPracticeGame: Bool = false
+
     // MARK: - Body
     var body: some View {
         NavigationStack {
@@ -28,12 +20,12 @@ struct PracticeView: View {
                 // Background
                 Color.white
                     .ignoresSafeArea()
-                
+
                 // Content
                 VStack(spacing: 0) {
                     // Header
                     headerView
-                    
+
                     // Practice List
                     if viewModel.isLoading {
                         loadingView
@@ -45,31 +37,33 @@ struct PracticeView: View {
                 }
             }
             .navigationBarHidden(true)
-            .navigationDestination(isPresented: $navigateToPracticeDetail) {
-                if let practice = viewModel.selectedPractice {
-                    PracticeDetailView(practice: practice)
-                }
+            .navigationDestination(isPresented: $navigateToPracticeGame) {
+                // Open PracticeGame.swift
+                PracticeGame(
+                    gameData: MockData.sampleGame, // TODO: map to selected practice later
+                    userName: "You"
+                )
             }
         }
         .task {
             await viewModel.fetchPractices()
         }
     }
-    
+
     // MARK: - Header View
     private var headerView: some View {
         HStack {
             Text("Practice")
                 .font(.manropeBold(size: 28))
                 .foregroundColor(Color(hex: "#1A1A1A"))
-            
+
             Spacer()
         }
         .padding(.horizontal, 20)
         .padding(.top, 16)
         .padding(.bottom, 20)
     }
-    
+
     // MARK: - Practice List View
     private var practiceListView: some View {
         ScrollView(showsIndicators: false) {
@@ -77,7 +71,7 @@ struct PracticeView: View {
                 ForEach(viewModel.practices) { practice in
                     PracticeCardView(practice: practice) {
                         viewModel.selectPractice(practice)
-                        navigateToPracticeDetail = true
+                        navigateToPracticeGame = true
                     }
                 }
             }
@@ -85,7 +79,7 @@ struct PracticeView: View {
             .padding(.bottom, 100) // Bottom padding for tab bar
         }
     }
-    
+
     // MARK: - Loading View
     private var loadingView: some View {
         VStack {
@@ -96,21 +90,21 @@ struct PracticeView: View {
             Spacer()
         }
     }
-    
+
     // MARK: - Error View
     private func errorView(message: String) -> some View {
         VStack(spacing: 16) {
             Spacer()
-            
+
             Image(systemName: "exclamationmark.triangle")
                 .font(.system(size: 48))
                 .foregroundColor(Color(hex: "#999999"))
-            
+
             Text(message)
                 .font(.manropeMedium(size: 14))
                 .foregroundColor(Color(hex: "#666666"))
                 .multilineTextAlignment(.center)
-            
+
             Button(action: {
                 Task {
                     await viewModel.fetchPractices()
@@ -124,7 +118,7 @@ struct PracticeView: View {
                     .background(Color(hex: "#1A1A1A"))
                     .cornerRadius(8)
             }
-            
+
             Spacer()
         }
         .padding(.horizontal, 20)
