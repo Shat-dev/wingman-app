@@ -1,126 +1,546 @@
-// PracticeGame.swift
-// Created to match provided screenshot (renamed from LessonScreen)
-
+// MARK: - Models (Ready for Supabase)
 import SwiftUI
+import Combine
+import Supabase
 
-struct PracticeGame: View {
-    // progress: 0..1, default small like the screenshot
-    var progress: CGFloat = 0.12
+struct PracticeGameData: Identifiable, Codable {
+    let id: String
+    let title: String
+    let scenes: [GameScene]
+}
 
-    // optional actions
-    var backAction: (() -> Void)?
-    var forwardAction: (() -> Void)?
-
-    // allow dismiss by default if no backAction supplied
-    @Environment(\.dismiss) private var dismiss
-
-    var body: some View {
-        VStack(spacing: 0) {
-            // Top nav row with back chevron
-            HStack {
-                Button(action: {
-                    if let back = backAction { back() } else { dismiss() }
-                }) {
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 18, weight: .medium))
-                        .foregroundColor(Color(hex: "#1A1A1A"))
-                        .frame(width: 44, height: 44, alignment: .leading)
-                }
-                Spacer()
-                // placeholder to keep chevron visually aligned
-                Color.clear.frame(width: 44, height: 44)
-            }
-            .padding(.horizontal, 16)
-            .padding(.top, 12)
-
-            // Small progress capsule below nav
-            TopProgressBar(progress: progress)
-                .frame(height: 12)
-                .padding(.horizontal, 28)
-                .padding(.top, 8)
-                .padding(.bottom, 18)
-
-            // Main center content with vertical line and labels
-            GeometryReader { geo in
-                ZStack {
-                    // Center vertical line
-                    Rectangle()
-                        .fill(Color(hex: "#DADADA"))
-                        .frame(width: 1, height: geo.size.height * 0.6)
-                        .position(x: geo.size.width / 2, y: geo.size.height / 2)
-
-                    // Left: Back label/button
-                    Button(action: {
-                        if let back = backAction { back() } else { /* noop */ }
-                    }) {
-                        Text("Back")
-                            .font(.system(size: 16, weight: .regular))
-                            .foregroundColor(Color(hex: "#8E8E93"))
-                    }
-                    .position(x: geo.size.width * 0.25, y: geo.size.height / 2)
-
-                    // Right: Forward label/button
-                    Button(action: {
-                        if let forward = forwardAction { forward() } else { /* noop */ }
-                    }) {
-                        Text("Forward")
-                            .font(.system(size: 16, weight: .regular))
-                            .foregroundColor(Color(hex: "#8E8E93"))
-                    }
-                    .position(x: geo.size.width * 0.75, y: geo.size.height / 2)
-                }
-            }
-            .padding(.vertical, 16)
-
-            Spacer()
-
-            // Bottom home indicator / hint
-            RoundedRectangle(cornerRadius: 8)
-                .fill(Color(hex: "#1A1A1A"))
-                .frame(width: 80, height: 4)
-                .opacity(0.95)
-                .padding(.bottom, 12)
-        }
-        .navigationBarHidden(true)
-        .background(Color.white.ignoresSafeArea())
+struct GameScene: Identifiable, Codable {
+    let id: String
+    let type: SceneType
+    let characterName: String?
+    let text: String
+    let imageName: String?
+    let options: [GameOption]?
+    let order: Int
+    
+    enum SceneType: String, Codable {
+        case context
+        case userDialogue
+        case womanDialogue
+        case options
+        case feedback
     }
 }
 
-// MARK: - TopProgressBar
-private struct TopProgressBar: View {
-    var progress: CGFloat = 0.12 // 0..1
+struct GameOption: Identifiable, Codable {
+    let id: String
+    let text: String
+    let nextSceneId: String?
+    let isCorrect: Bool
+}
 
-    var body: some View {
-        GeometryReader { g in
-            ZStack(alignment: .leading) {
-                Capsule()
-                    .fill(Color(hex: "#F0F0F0"))
-                    .frame(height: 6)
-
-                Capsule()
-                    .fill(Color(hex: "#1A1A1A"))
-                    // ensure a minimum visible width like your screenshot
-                    .frame(width: max(28, g.size.width * progress), height: 6)
-                    .animation(.easeInOut(duration: 0.25), value: progress)
-            }
-            .frame(height: 6)
+// MARK: - ViewModel
+class PracticeGameViewModel: ObservableObject {
+    @Published var currentSceneIndex: Int = 0
+    @Published var gameCompleted: Bool = false
+    @Published var progress: Double = 0.0
+    
+    let gameData: PracticeGameData
+    let userName: String
+    
+    private var sortedScenes: [GameScene] {
+        gameData.scenes.sorted { $0.order < $1.order }
+    }
+    
+    var currentScene: GameScene? {
+        guard currentSceneIndex < sortedScenes.count else { return nil }
+        return sortedScenes[currentSceneIndex]
+    }
+    
+    var totalScenes: Int {
+        sortedScenes.count
+    }
+    
+    init(gameData: PracticeGameData, userName: String = "You") {
+        self.gameData = gameData
+        self.userName = userName
+        updateProgress()
+    }
+    
+    func goToNextScene() {
+        if currentSceneIndex < sortedScenes.count - 1 {
+            currentSceneIndex += 1
+            updateProgress()
+        } else {
+            gameCompleted = true
         }
     }
+    
+    func goToPreviousScene() {
+        if currentSceneIndex > 0 {
+            currentSceneIndex -= 1
+            updateProgress()
+        }
+    }
+    
+    func selectOption(_ option: GameOption) {
+        // If option specifies next scene, jump to it
+        if let nextSceneId = option.nextSceneId,
+           let nextIndex = sortedScenes.firstIndex(where: { $0.id == nextSceneId }) {
+            currentSceneIndex = nextIndex
+        } else {
+            // Otherwise just go to next scene
+            goToNextScene()
+        }
+        updateProgress()
+    }
+    
+    func retryCurrentScene() {
+        // Stay on same scene, just for retry action
+        updateProgress()
+    }
+    
+    private func updateProgress() {
+        progress = Double(currentSceneIndex + 1) / Double(totalScenes)
+    }
+}
+
+// MARK: - Main Game View
+struct PracticeGame: View {
+    @Environment(\.dismiss) private var dismiss
+    @StateObject private var viewModel: PracticeGameViewModel
+    @State private var showGameComplete = false
+    
+    init(gameData: PracticeGameData = MockData.sampleGame, userName: String = "You") {
+        _viewModel = StateObject(wrappedValue: PracticeGameViewModel(gameData: gameData, userName: userName))
+    }
+    
+    var body: some View {
+        ZStack {
+            Color.white.ignoresSafeArea()
+            
+            VStack(spacing: 0) {
+                // MARK: - Top Navigation Bar with Progress
+                HStack(spacing: 12) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 22, weight: .semibold))
+                            .foregroundColor(.black)
+                            .frame(width: 44, height: 44, alignment: .center)
+                            .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    
+                    GeometryReader { geometry in
+                        ZStack(alignment: .leading) {
+                            Capsule()
+                                .fill(Color.gray.opacity(0.2))
+                                .frame(height: 10)
+                            
+                            Capsule()
+                                .fill(Color.black)
+                                .frame(width: geometry.size.width * CGFloat(viewModel.progress), height: 10)
+                                .animation(.easeInOut(duration: 0.25), value: viewModel.progress)
+                        }
+                    }
+                    .frame(height: 10)
+                    
+                    Spacer()
+                        .frame(width: 15)
+                }
+                .padding(.top, 8)
+                .padding(.leading, 20)
+                .padding(.trailing, 44)
+                .padding(.bottom, 12)
+                
+                // MARK: - Game Content Area
+                if let scene = viewModel.currentScene {
+                    GameSceneView(
+                        scene: scene,
+                        userName: viewModel.userName,
+                        onTapContinue: {
+                            viewModel.goToNextScene()
+                        },
+                        onTapRetry: {
+                            viewModel.retryCurrentScene()
+                            viewModel.goToNextScene()
+                        },
+                        onSelectOption: { option in
+                            viewModel.selectOption(option)
+                        },
+                        onTapBack: {
+                            viewModel.goToPreviousScene()
+                        }
+                    )
+                }
+            }
+        }
+        .navigationBarHidden(true)
+        .onChange(of: viewModel.gameCompleted) { completed in
+            if completed {
+                showGameComplete = true
+            }
+        }
+        .fullScreenCover(isPresented: $showGameComplete) {
+            GameCompleteView {
+                dismiss()
+            }
+        }
+    }
+}
+
+// MARK: - Game Scene View (Handles all scene types)
+struct GameSceneView: View {
+    let scene: GameScene
+    let userName: String
+    let onTapContinue: () -> Void
+    let onTapRetry: () -> Void
+    let onSelectOption: (GameOption) -> Void
+    let onTapBack: () -> Void
+    
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack {
+                // Tap areas for navigation (only for non-option screens)
+                if scene.type != .options {
+                    HStack(spacing: 0) {
+                        Rectangle()
+                            .fill(Color.clear)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                onTapBack()
+                            }
+                        
+                        Rectangle()
+                            .fill(Color.clear)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                if scene.type == .feedback {
+                                    onTapRetry()
+                                } else {
+                                    onTapContinue()
+                                }
+                            }
+                    }
+                }
+                
+                // Content
+                VStack(spacing: 0) {
+                    Spacer()
+                    
+                    // Character Image (1:1 aspect ratio, centered)
+                    if let imageName = scene.imageName {
+                        Image(systemName: imageName) // Replace with actual image
+                            .resizable()
+                            .aspectRatio(1, contentMode: .fit)
+                            .frame(width: 200, height: 200)
+                            .foregroundColor(.black.opacity(0.1))
+                    }
+                    
+                    Spacer()
+                    
+                    // Scene Content Based on Type
+                    switch scene.type {
+                    case .options:
+                        OptionsContentView(
+                            options: scene.options ?? [],
+                            onSelectOption: onSelectOption
+                        )
+                        .padding(.horizontal, 24)
+                        .padding(.bottom, 40)
+                        
+                    case .context, .userDialogue, .womanDialogue, .feedback:
+                        DialogueContentView(
+                            scene: scene,
+                            userName: userName
+                        )
+                        .padding(.horizontal, 24)
+                        .padding(.bottom, 40)
+                    }
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Dialogue Content View (Context, User, Woman, Feedback)
+struct DialogueContentView: View {
+    let scene: GameScene
+    let userName: String
+    
+    private var displayName: String {
+        switch scene.type {
+        case .userDialogue:
+            return userName
+        case .womanDialogue:
+            return scene.characterName ?? "Sophie"
+        case .feedback:
+            return "Feedback"
+        default:
+            return ""
+        }
+    }
+    
+    private var actionText: String {
+        scene.type == .feedback ? "Tap to retry" : "Tap to continue"
+    }
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            // Character name label (only for dialogue and feedback)
+            if scene.type == .userDialogue || scene.type == .womanDialogue || scene.type == .feedback {
+                Text(displayName)
+                    .font(.system(size: 15, weight: .regular))
+                    .foregroundColor(.black.opacity(0.6))
+                    .padding(.leading, 4)
+            }
+            
+            // Text container
+            VStack(alignment: .leading, spacing: 0) {
+                Text(scene.text)
+                    .font(.system(size: 15, weight: .regular))
+                    .foregroundColor(.black)
+                    .lineLimit(2)
+                    .multilineTextAlignment(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 16)
+            }
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(Color.black.opacity(0.1), lineWidth: 1)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color.white)
+                    )
+            )
+            
+            // Action text
+            Text(actionText)
+                .font(.system(size: 13, weight: .regular))
+                .foregroundColor(.black.opacity(0.4))
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .padding(.top, 4)
+                .padding(.trailing, 4)
+        }
+    }
+}
+
+// MARK: - Options Content View
+struct OptionsContentView: View {
+    let options: [GameOption]
+    let onSelectOption: (GameOption) -> Void
+    
+    var body: some View {
+        VStack(spacing: 12) {
+            ForEach(options) { option in
+                Button {
+                    onSelectOption(option)
+                } label: {
+                    Text(option.text)
+                        .font(.system(size: 15, weight: .regular))
+                        .foregroundColor(.black)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(2)
+                        .frame(maxWidth: .infinity)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 16)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color.black.opacity(0.1), lineWidth: 1)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .fill(Color.white)
+                                )
+                        )
+                }
+                .buttonStyle(.plain)
+            }
+            
+            Text("Choose an option to continue")
+                .font(.system(size: 13, weight: .regular))
+                .foregroundColor(.black.opacity(0.4))
+                .padding(.top, 8)
+        }
+    }
+}
+
+// MARK: - Game Complete View
+struct GameCompleteView: View {
+    let onContinue: () -> Void
+    
+    var body: some View {
+        ZStack {
+            Color.white.ignoresSafeArea()
+            
+            VStack(spacing: 0) {
+                Spacer()
+                
+                // Checkmark icon
+                ZStack {
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(Color.black, lineWidth: 2)
+                        .frame(width: 80, height: 80)
+                        .rotationEffect(.degrees(45))
+                    
+                    Image(systemName: "checkmark")
+                        .font(.system(size: 40, weight: .regular))
+                        .foregroundColor(.black)
+                }
+                .padding(.bottom, 24)
+                
+                Text("Game Complete!")
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundColor(.black)
+                
+                Spacer()
+                
+                // Continue button
+                Button {
+                    onContinue()
+                } label: {
+                    Text("Continue")
+                        .font(.system(size: 17, weight: .semibold))
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 16)
+                        .background(Color.black)
+                        .cornerRadius(12)
+                }
+                .padding(.horizontal, 24)
+                .padding(.bottom, 40)
+            }
+        }
+    }
+}
+
+// MARK: - Mock Data
+struct MockData {
+    static let sampleGame = PracticeGameData(
+        id: "game_1",
+        title: "Practice Scenario 1",
+        scenes: [
+            // Scene 1: Context
+            GameScene(
+                id: "scene_1",
+                type: .context,
+                characterName: nil,
+                text: "Hey I know this is super random but I just had to come up and say hi",
+                imageName: "person.crop.circle",
+                options: nil,
+                order: 0
+            ),
+            
+            // Scene 2: Options
+            GameScene(
+                id: "scene_2",
+                type: .options,
+                characterName: nil,
+                text: "",
+                imageName: "person.crop.circle",
+                options: [
+                    GameOption(id: "opt_1", text: "Say hi", nextSceneId: "scene_3", isCorrect: true),
+                    GameOption(id: "opt_2", text: "Go up behind her and slap them cheeks", nextSceneId: "scene_5", isCorrect: false)
+                ],
+                order: 1
+            ),
+            
+            // Scene 3: User Dialogue (Correct choice)
+            GameScene(
+                id: "scene_3",
+                type: .userDialogue,
+                characterName: nil,
+                text: "Hey I know this is super random but I just had to come up and say hi",
+                imageName: "person.crop.circle",
+                options: nil,
+                order: 2
+            ),
+            
+            // Scene 4: Woman Dialogue
+            GameScene(
+                id: "scene_4",
+                type: .womanDialogue,
+                characterName: "Sophie",
+                text: "Inclusion reduces social tension and preserves control. Acknowledge her friends.",
+                imageName: "person.crop.circle.fill",
+                options: nil,
+                order: 3
+            ),
+            
+            // Scene 5: Feedback (Wrong choice)
+            GameScene(
+                id: "scene_5",
+                type: .feedback,
+                characterName: nil,
+                text: "While being direct sometimes works, it may come across as too forward in a cafe.",
+                imageName: "person.crop.circle",
+                options: nil,
+                order: 4
+            )
+        ]
+    )
+    
+    static let sampleGame2 = PracticeGameData(
+        id: "game_2",
+        title: "Practice Scenario 2",
+        scenes: [
+            GameScene(
+                id: "scene_1",
+                type: .context,
+                characterName: nil,
+                text: "You see an attractive woman reading a book at a coffee shop.",
+                imageName: "book.circle",
+                options: nil,
+                order: 0
+            ),
+            
+            GameScene(
+                id: "scene_2",
+                type: .options,
+                characterName: nil,
+                text: "",
+                imageName: "book.circle",
+                options: [
+                    GameOption(id: "opt_1", text: "\"Hey good looking, let me sit with you.\"", nextSceneId: "scene_5", isCorrect: false),
+                    GameOption(id: "opt_2", text: "Each approach feels higher-stakes because it's rare", nextSceneId: "scene_3", isCorrect: true),
+                    GameOption(id: "opt_3", text: "Each approach feels higher-stakes because it's rare", nextSceneId: "scene_5", isCorrect: false)
+                ],
+                order: 1
+            ),
+            
+            GameScene(
+                id: "scene_3",
+                type: .userDialogue,
+                characterName: nil,
+                text: "Is that book any good? I've been meaning to read it.",
+                imageName: "book.circle",
+                options: nil,
+                order: 2
+            ),
+            
+            GameScene(
+                id: "scene_4",
+                type: .womanDialogue,
+                characterName: "Sophie",
+                text: "Oh yes! It's really interesting. Are you into psychology?",
+                imageName: "person.crop.circle.fill",
+                options: nil,
+                order: 3
+            ),
+            
+            GameScene(
+                id: "scene_5",
+                type: .feedback,
+                characterName: nil,
+                text: "Too direct. A softer, more curious approach works better.",
+                imageName: "book.circle",
+                options: nil,
+                order: 4
+            )
+        ]
+    )
 }
 
 // MARK: - Preview
-struct PracticeGame_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            NavigationStack {
-                PracticeGame(progress: 0.12)
-            }
-            .previewDisplayName("PracticeGame")
-
-            NavigationStack {
-                PracticeGame(progress: 0.5)
-            }
-            .previewDisplayName("50% Progress")
-        }
+#Preview {
+    NavigationView {
+        PracticeGame()
     }
 }
