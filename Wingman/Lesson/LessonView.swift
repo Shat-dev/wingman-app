@@ -10,56 +10,66 @@ struct LessonView: View {
     let allLessons: [Lesson]
     
     @Environment(\.dismiss) private var dismiss
-    @State private var currentContentIndex: Int = -1 // -1 means intro screen
-    @State private var currentPage: Int = 0 // Which "page" we're on
+    @State private var currentScreenIndex: Int = -1  // -1 means intro screen
+    @State private var currentContentIndex: Int = -1 // Index within current screen's content
     @State private var showLessonComplete = false
-    @State private var availableHeight: CGFloat = 0
+    @State private var screenTransitionDirection: Edge = .trailing
     
-    // Content items sorted by order
-    private var sortedContent: [LessonContent] {
-        lesson.content.sorted { $0.order < $1.order }
+    // Screens sorted by order
+    private var sortedScreens: [LessonScreen] {
+        lesson.screens.sorted { $0.order < $1.order }
     }
     
-    // Total segments for progress bar
-    private var totalSegments: Int {
-        sortedContent.count
+    // Current screen
+    private var currentScreen: LessonScreen? {
+        guard currentScreenIndex >= 0, currentScreenIndex < sortedScreens.count else { return nil }
+        return sortedScreens[currentScreenIndex]
     }
     
-    // Currently visible content (accumulated up to currentContentIndex)
+    // Content for current screen sorted by order
+    private var currentScreenContent: [LessonContent] {
+        guard let screen = currentScreen else { return [] }
+        return screen.content.sorted { $0.order < $1.order }
+    }
+    
+    // Visible content within current screen (accumulated paragraphs)
     private var visibleContent: [LessonContent] {
         guard currentContentIndex >= 0 else { return [] }
-        return Array(sortedContent.prefix(currentContentIndex + 1))
+        let endIndex = min(currentContentIndex + 1, currentScreenContent.count)
+        return Array(currentScreenContent.prefix(endIndex))
     }
     
-    // Content visible on CURRENT page only
-    private var currentPageContent: [LessonContent] {
-        let pageBreaks = calculatePageBreaks()
+    // Total content items across all screens (for progress calculation)
+    private var totalContentCount: Int {
+        sortedScreens.reduce(0) { $0 + $1.content.count }
+    }
+    
+    // Current progress position (for progress bar)
+    private var currentProgressPosition: Int {
+        guard currentScreenIndex >= 0 else { return 0 }
         
-        if currentPage >= pageBreaks.count {
-            return []
+        var position = 0
+        for i in 0..<currentScreenIndex {
+            position += sortedScreens[i].content.count
         }
-        
-        let startIndex = pageBreaks[currentPage].startIndex
-        let endIndex = pageBreaks[currentPage].endIndex
-        
-        return Array(visibleContent[startIndex...endIndex])
+        position += (currentContentIndex + 1)
+        return position
     }
     
     // Progress as a percentage (0.0 to 1.0)
     private var progress: Double {
-        guard totalSegments > 0 else { return 0 }
-        if currentContentIndex < 0 { return 0 }
-        return Double(currentContentIndex + 1) / Double(totalSegments)
+        guard totalContentCount > 0 else { return 0 }
+        return Double(currentProgressPosition) / Double(totalContentCount)
     }
     
     var body: some View {
         ZStack {
             Color.white.ignoresSafeArea()
             
-            VStack(spacing: 0) {
+            VStack(spacing: 12) {
                 
                 // MARK: - Top Bar (match Auth style: bold chevron + inline progress)
-                HStack(spacing: 12) {
+                HStack(spacing: 10) {
                     Button {
                         dismiss()
                     } label: {
@@ -86,66 +96,47 @@ struct LessonView: View {
                     .frame(height: 10)
                 }
                 .padding(.top, 8)
-                .padding(.leading, 20)
+                .padding(.leading, 5)
                 .padding(.trailing, 59)
-                .padding(.bottom, 12)
+                .padding(.bottom, 10)
                 
                 // MARK: - Content Area with Tap Gestures
                 GeometryReader { geometry in
                     ZStack {
                         // Content
-                        if currentContentIndex == -1 {
+                        if currentScreenIndex == -1 {
                             // Intro Screen
-                            IntroScreenView()
+                            IntroScreenView(
+                                onLeftTap: { goBack() },
+                                onRightTap: { goForward() }
+                            )
                         } else {
                             // Content Screen with Page Transition
                             ContentScreenView(
-                                content: currentPageContent,
-                                pageIndex: currentPage
+                                content: visibleContent,
+                                screenIndex: currentScreenIndex,
+                                screenWidth: geometry.size.width,
+                                onLeftTap: { goBack() },
+                                onRightTap: { goForward() }
                             )
-                            .id("page_\(currentPage)") // Force re-render on page change
+                            .id("screen_\(currentScreenIndex)")  // Force re-render on screen change
                             .transition(.asymmetric(
-                                insertion: .move(edge: .trailing).combined(with: .opacity),
-                                removal: .move(edge: .leading).combined(with: .opacity)
+                                insertion: .move(edge: screenTransitionDirection).combined(with: .opacity),
+                                removal: .move(edge: screenTransitionDirection == .trailing ? .leading : .trailing).combined(with: .opacity)
                             ))
                         }
-                        
-                        // Tap Areas (invisible overlay)
-                        HStack(spacing: 0) {
-                            // Left tap area - Go Back
-                            Rectangle()
-                                .fill(Color.clear)
-                                .contentShape(Rectangle())
-                                .onTapGesture {
-                                    print("🔵 LEFT SIDE TAPPED")
-                                    goBack()
-                                }
-                            
-                            // Right tap area - Go Forward
-                            Rectangle()
-                                .fill(Color.clear)
-                                .contentShape(Rectangle())
-                                .onTapGesture {
-                                    print("🟢 RIGHT SIDE TAPPED")
-                                    goForward()
-                                }
-                        }
-                    }
-                    .onAppear {
-                        availableHeight = geometry.size.height
                     }
                 }
                 
-                // MARK: - Bottom Bar
+                // MARK: - Bottom Bar (Course Title)
                 VStack(spacing: 0) {
-                    Text(lesson.subtitle)
+                    Text(lesson.courseTitle)
                         .font(.manropeSemiBold(size: 12))
                         .foregroundColor(Color(hex: "1A1A1A"))
                         .opacity(0.5)
                         .multilineTextAlignment(.center)
                 }
-                .padding(.horizontal, 20)
-                .padding(.bottom, 2)
+                .padding(.bottom, -10)
             }
         }
         .navigationBarHidden(true)
@@ -163,113 +154,89 @@ struct LessonView: View {
         }
     }
     
-    // MARK: - Calculate Page Breaks
-    struct PageBreak {
-        let startIndex: Int
-        let endIndex: Int
-    }
-    
-    private func calculatePageBreaks() -> [PageBreak] {
-        guard !visibleContent.isEmpty, availableHeight > 0 else {
-            return []
-        }
-        
-        var breaks: [PageBreak] = []
-        var currentPageStart = 0
-        var accumulatedHeight: CGFloat = 0
-        let maxHeight = availableHeight - 100 // Safety margin for padding
-        
-        let font = UIFont(name: "Manrope-Regular", size: 18) ?? UIFont.systemFont(ofSize: 18)
-        let width = UIScreen.main.bounds.width - 48 // 24pt padding each side
-        
-        for (index, content) in visibleContent.enumerated() {
-            let textHeight = content.text.heightWithConstraints(
-                width: width,
-                font: font,
-                lineSpacing: 8
-            )
-            
-            let itemHeight = textHeight + (index > currentPageStart ? 20 : 0) // Add spacing between items
-            
-            // Check if adding this item would overflow the page
-            if accumulatedHeight + itemHeight > maxHeight && index > currentPageStart {
-                // Save current page
-                breaks.append(PageBreak(
-                    startIndex: currentPageStart,
-                    endIndex: index - 1
-                ))
-                
-                // Start new page
-                currentPageStart = index
-                accumulatedHeight = textHeight
-            } else {
-                accumulatedHeight += itemHeight
-            }
-        }
-        
-        // Add final page
-        if currentPageStart < visibleContent.count {
-            breaks.append(PageBreak(
-                startIndex: currentPageStart,
-                endIndex: visibleContent.count - 1
-            ))
-        }
-        
-        return breaks
-    }
-    
     // MARK: - Navigation Functions
+    
     private func goBack() {
-        if currentContentIndex > -1 {
-            // Check if we're at the start of a page
-            let pageBreaks = calculatePageBreaks()
-            let isAtPageStart = currentPage < pageBreaks.count &&
-                                currentContentIndex == pageBreaks[currentPage].startIndex
-            
-            if isAtPageStart && currentPage > 0 {
-                // Move to previous page
+        screenTransitionDirection = .leading
+        
+        if currentScreenIndex == -1 {
+            // Already at intro, can't go back further
+            return
+        }
+        
+        if currentContentIndex > 0 {
+            // Remove last paragraph within current screen
+            currentContentIndex -= 1
+            print("⬅️ Back to content index: \(currentContentIndex) on screen \(currentScreenIndex)")
+        } else if currentContentIndex == 0 {
+            // At first paragraph of current screen
+            if currentScreenIndex > 0 {
+                // Go to previous screen, show all its content
                 withAnimation(.easeInOut(duration: 0.3)) {
-                    currentPage -= 1
-                    currentContentIndex -= 1
+                    currentScreenIndex -= 1
+                    let prevScreenContentCount = sortedScreens[currentScreenIndex].content.count
+                    currentContentIndex = prevScreenContentCount - 1
                 }
-                print("⬅️ Previous page (\(currentPage + 1))")
+                print("⬅️ Previous screen (\(currentScreenIndex)), showing all content")
             } else {
-                // Just remove last line
-                currentContentIndex -= 1
-                print("⬅️ Back to index: \(currentContentIndex)")
+                // At first screen, first content - go to intro
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    currentScreenIndex = -1
+                    currentContentIndex = -1
+                }
+                print("⬅️ Back to intro")
+            }
+        } else {
+            // currentContentIndex == -1, at start of a screen with no content shown yet
+            if currentScreenIndex > 0 {
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    currentScreenIndex -= 1
+                    let prevScreenContentCount = sortedScreens[currentScreenIndex].content.count
+                    currentContentIndex = prevScreenContentCount - 1
+                }
+                print("⬅️ Previous screen (\(currentScreenIndex))")
+            } else {
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    currentScreenIndex = -1
+                    currentContentIndex = -1
+                }
+                print("⬅️ Back to intro")
             }
         }
     }
     
     private func goForward() {
-        if currentContentIndex < sortedContent.count - 1 {
+        screenTransitionDirection = .trailing
+        
+        if currentScreenIndex == -1 {
+            // From intro, go to first screen
+            withAnimation(.easeInOut(duration: 0.3)) {
+                currentScreenIndex = 0
+                currentContentIndex = 0
+            }
+            print("➡️ Started lesson - Screen 0, Content 0")
+            return
+        }
+        
+        let screenContentCount = currentScreenContent.count
+        
+        if currentContentIndex < screenContentCount - 1 {
+            // Show next paragraph within current screen
             currentContentIndex += 1
-            
-            // Check if we need to move to next page
-            let pageBreaks = calculatePageBreaks()
-            
-            // Find which page the current content index belongs to
-            var targetPage = 0
-            for (pageIndex, pageBreak) in pageBreaks.enumerated() {
-                if currentContentIndex <= pageBreak.endIndex {
-                    targetPage = pageIndex
-                    break
-                }
-            }
-            
-            // If target page is different from current page, animate transition
-            if targetPage != currentPage {
-                withAnimation(.easeInOut(duration: 0.3)) {
-                    currentPage = targetPage
-                }
-                print("➡️ Next page (\(currentPage + 1)) - showing content \(currentContentIndex + 1)")
-            } else {
-                print("➡️ Forward to index: \(currentContentIndex)")
-            }
+            print("➡️ Forward to content index: \(currentContentIndex) on screen \(currentScreenIndex)")
         } else {
-            // Lesson complete
-            print("✅ Lesson complete!")
-            showLessonComplete = true
+            // All paragraphs shown on current screen, move to next screen
+            if currentScreenIndex < sortedScreens.count - 1 {
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    currentScreenIndex += 1
+                    currentContentIndex = 0
+                }
+                print("➡️ Next screen (\(currentScreenIndex)), Content 0")
+            } else {
+                // Last screen, last content - lesson complete
+                print("✅ Lesson complete!")
+                showLessonComplete = true
+            }
         }
     }
     
@@ -277,7 +244,7 @@ struct LessonView: View {
         if let nextLesson = LessonDataService.shared.getNextLesson(after: lesson) {
             return NextLessonInfo(
                 title: nextLesson.title,
-                subtitle: nextLesson.subtitle
+                subtitle: nextLesson.courseTitle
             )
         }
         return nil
@@ -286,6 +253,9 @@ struct LessonView: View {
 
 // MARK: - Intro Screen View
 struct IntroScreenView: View {
+    let onLeftTap: () -> Void
+    let onRightTap: () -> Void
+    
     // Adjust this to control where the divider sits (0.0 = far left, 1.0 = far right)
     private let dividerPosition: CGFloat = 0.4
     
@@ -293,7 +263,7 @@ struct IntroScreenView: View {
         GeometryReader { geo in
             ZStack(alignment: .leading) {
                 HStack(spacing: 0) {
-                    // Back label area
+                    // Back label area (tappable)
                     VStack {
                         Spacer()
                         Text("Back")
@@ -303,8 +273,12 @@ struct IntroScreenView: View {
                         Spacer()
                     }
                     .frame(width: geo.size.width * dividerPosition)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        onLeftTap()
+                    }
 
-                    // Forward label area
+                    // Forward label area (tappable)
                     VStack {
                         Spacer()
                         Text("Forward")
@@ -314,63 +288,203 @@ struct IntroScreenView: View {
                         Spacer()
                     }
                     .frame(width: geo.size.width * (1 - dividerPosition))
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        onRightTap()
+                    }
                 }
 
-                // Divider positioned toward Back
+                // Divider with top and bottom padding
+                let topPadding: CGFloat = 20
+                let bottomPadding: CGFloat = 40
+                let paddedHeight = max(0, geo.size.height - (topPadding + bottomPadding))
+                let centerYOffset = (topPadding - bottomPadding) / 2 // shift center when paddings differ
+                
                 Rectangle()
                     .fill(Color.black.opacity(0.5))
-                    .frame(width: 1, height: geo.size.height - 40) // some vertical padding
-                    .position(x: geo.size.width * dividerPosition, y: geo.size.height / 2)
+                    .frame(width: 1, height: paddedHeight)
+                    .position(
+                        x: geo.size.width * dividerPosition,
+                        y: geo.size.height / 2 + centerYOffset
+                    )
+                    .allowsHitTesting(false)
             }
         }
         .padding(.horizontal, 0)
     }
 }
 
-// MARK: - Content Screen View
+// MARK: - Content Screen View (with scroll support and tap gestures)
 struct ContentScreenView: View {
     let content: [LessonContent]
-    let pageIndex: Int
+    let screenIndex: Int
+    let screenWidth: CGFloat
+    let onLeftTap: () -> Void
+    let onRightTap: () -> Void
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            ForEach(Array(content.enumerated()), id: \.element.id) { index, item in
-                Text(item.text)
-                    .font(.manropeMedium(size: 24))
-                    .foregroundColor(.black)
-                    .lineSpacing(8)
-                    .multilineTextAlignment(.leading)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .padding(.bottom, index == content.count - 1 ? 0 : 20)
-            }
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .padding(.horizontal, 24)
-        .padding(.top, 40)
-        .padding(.bottom, 60)
+        ScrollableContentView(
+            content: content,
+            screenWidth: screenWidth,
+            onLeftTap: onLeftTap,
+            onRightTap: onRightTap
+        )
     }
 }
 
-// MARK: - String Extension for Height Calculation
-extension String {
-    func heightWithConstraints(width: CGFloat, font: UIFont, lineSpacing: CGFloat) -> CGFloat {
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = lineSpacing
+// MARK: - UIKit ScrollView wrapper that handles both scroll and taps
+struct ScrollableContentView: UIViewRepresentable {
+    let content: [LessonContent]
+    let screenWidth: CGFloat
+    let onLeftTap: () -> Void
+    let onRightTap: () -> Void
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(screenWidth: screenWidth, onLeftTap: onLeftTap, onRightTap: onRightTap)
+    }
+    
+    func makeUIView(context: Context) -> UIScrollView {
+        let scrollView = UIScrollView()
+        scrollView.backgroundColor = .clear
+        scrollView.showsVerticalScrollIndicator = true
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.alwaysBounceVertical = true
         
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: font,
-            .paragraphStyle: paragraphStyle
-        ]
+        // Add tap gesture that doesn't interfere with scroll
+        let tapGesture = UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handleTap(_:)))
+        tapGesture.cancelsTouchesInView = false
+        tapGesture.delaysTouchesBegan = false
+        tapGesture.delaysTouchesEnded = false
+        scrollView.addGestureRecognizer(tapGesture)
         
-        let attributedString = NSAttributedString(string: self, attributes: attributes)
-        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
-        let boundingBox = attributedString.boundingRect(
-            with: constraintRect,
-            options: [.usesLineFragmentOrigin, .usesFontLeading],
-            context: nil
-        )
+        // Create content view
+        let contentView = UIView()
+        contentView.backgroundColor = .clear
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(contentView)
         
-        return ceil(boundingBox.height)
+        // Store reference
+        context.coordinator.contentView = contentView
+        context.coordinator.scrollView = scrollView
+        
+        NSLayoutConstraint.activate([
+            contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor)
+        ])
+        
+        return scrollView
+    }
+    
+    func updateUIView(_ scrollView: UIScrollView, context: Context) {
+        context.coordinator.screenWidth = screenWidth
+        context.coordinator.onLeftTap = onLeftTap
+        context.coordinator.onRightTap = onRightTap
+        
+        guard let contentView = context.coordinator.contentView else { return }
+        
+        // Remove old labels
+        contentView.subviews.forEach { $0.removeFromSuperview() }
+        
+        // Create stack of labels
+        var lastLabel: UILabel?
+        let topPadding: CGFloat = 0
+        let bottomPadding: CGFloat = 120
+        let horizontalPadding: CGFloat = 20
+        let paragraphSpacing: CGFloat = 10
+        
+        for item in content {
+            let label = UILabel()
+            label.text = item.text
+            label.numberOfLines = 0
+            label.textColor = .black
+            label.translatesAutoresizingMaskIntoConstraints = false
+            
+            // Set Manrope font
+            if let manropeFont = UIFont(name: "Manrope-Medium", size: 24) {
+                label.font = manropeFont
+            } else {
+                label.font = UIFont.systemFont(ofSize: 24, weight: .medium)
+            }
+            
+            // Set line spacing
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = 8
+            let attributedString = NSAttributedString(
+                string: item.text,
+                attributes: [
+                    .font: label.font!,
+                    .foregroundColor: UIColor.black,
+                    .paragraphStyle: paragraphStyle
+                ]
+            )
+            label.attributedText = attributedString
+            
+            contentView.addSubview(label)
+            
+            NSLayoutConstraint.activate([
+                label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: horizontalPadding),
+                label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -horizontalPadding)
+            ])
+            
+            if let last = lastLabel {
+                label.topAnchor.constraint(equalTo: last.bottomAnchor, constant: paragraphSpacing).isActive = true
+            } else {
+                label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: topPadding).isActive = true
+            }
+            
+            lastLabel = label
+        }
+        
+        // Set bottom constraint
+        if let last = lastLabel {
+            last.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -bottomPadding).isActive = true
+        }
+        
+        // Only auto-scroll when content exceeds bounds and there are multiple paragraphs
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            let needsScroll = scrollView.contentSize.height > scrollView.bounds.height + 1
+            let hasMultiple = content.count > 1
+            if needsScroll && hasMultiple {
+                let bottomOffset = CGPoint(
+                    x: 0,
+                    y: max(0, scrollView.contentSize.height - scrollView.bounds.height + scrollView.contentInset.bottom)
+                )
+                scrollView.setContentOffset(bottomOffset, animated: true)
+            } else {
+                // Keep first paragraph pinned to top
+                scrollView.setContentOffset(.zero, animated: false)
+            }
+        }
+    }
+    
+    class Coordinator: NSObject {
+        var screenWidth: CGFloat
+        var onLeftTap: () -> Void
+        var onRightTap: () -> Void
+        weak var contentView: UIView?
+        weak var scrollView: UIScrollView?
+        
+        init(screenWidth: CGFloat, onLeftTap: @escaping () -> Void, onRightTap: @escaping () -> Void) {
+            self.screenWidth = screenWidth
+            self.onLeftTap = onLeftTap
+            self.onRightTap = onRightTap
+        }
+        
+        @objc func handleTap(_ gesture: UITapGestureRecognizer) {
+            let location = gesture.location(in: gesture.view)
+            let midPoint = screenWidth / 2
+            
+            if location.x < midPoint {
+                print("🔵 LEFT TAP at x: \(location.x)")
+                onLeftTap()
+            } else {
+                print("🟢 RIGHT TAP at x: \(location.x)")
+                onRightTap()
+            }
+        }
     }
 }
 
@@ -407,18 +521,22 @@ extension Color {
             id: "lesson_1_1",
             courseId: "course_1",
             courseSummary: "Learn to strengthen confidence by reframing limiting beliefs.",
+            courseTitle: "Beliefs & Reframes",
             lessonNumber: 1,
             title: "You are not your thoughts",
-            subtitle: "Courage Comes first, Confidence follows",
             duration: 3,
             summary: "Learn why negative thoughts feel convincing and how to stop letting them control you.",
             isCompleted: false,
             isLocked: false,
-            content: [
-                LessonContent(id: "content_1_1_1", text: "Your mind produces around 60,000 thoughts a day. Most are repetitive, some are negative, and nearly all vanish without impact. Yet we treat them like evidence of who we are.", order: 0),
-                LessonContent(id: "content_1_1_2", text: "These thoughts aren't conscious choices; they are automatic reactions shaped by habit, fear, and memory. The problem isn't having them; it's believing each one reflects reality.", order: 1),
-                LessonContent(id: "content_1_1_3", text: "A single thought—\"I sounded awkward\"—can shift your entire state. It tightens your body, changes how you speak, and changes how you see yourself.", order: 2),
-                LessonContent(id: "content_1_1_4", text: "You begin responding not to the world as it is, but to the critical story you have started telling yourself.", order: 3)
+            screens: [
+                LessonScreen(id: "screen_1", order: 0, content: [
+                    LessonContent(id: "c1", text: "Your mind produces around 60,000 thoughts a day. Most are repetitive, some are negative, and nearly all vanish without impact. Yet we treat them like evidence of who we are.", order: 0),
+                    LessonContent(id: "c2", text: "These thoughts aren't conscious choices; they are automatic reactions shaped by habit, fear, and memory. The problem isn't having them; it's believing each one reflects reality.", order: 1)
+                ]),
+                LessonScreen(id: "screen_2", order: 1, content: [
+                    LessonContent(id: "c3", text: "A single thought—\"I sounded awkward\"—can shift your entire state. It tightens your body, changes how you speak, and changes how you see yourself.", order: 0),
+                    LessonContent(id: "c4", text: "You begin responding not to the world as it is, but to the critical story you have started telling yourself.", order: 1)
+                ])
             ]
         ),
         allLessons: []

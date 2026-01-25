@@ -89,7 +89,7 @@ struct LessonCompleteView: View {
     LessonCompleteView(
         nextLessonInfo: NextLessonInfo(
             title: "Rejection isn't personal",
-            subtitle: "Courage Comes first, Confidence follows"
+            subtitle: "Beliefs & Reframes"
         ),
         onContinue: {}
     )
