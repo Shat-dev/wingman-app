@@ -5,22 +5,6 @@
 //  Created by Adnan Khan on 18/12/2025.
 //
 
-
-//
-//  PracticeView.swift
-//  Wingman
-//
-
-//
-//  PracticeView.swift
-//  Wingman
-//
-
-//
-//  PracticeView.swift
-//  Wingman
-//
-
 import SwiftUI
 
 struct DailyPracticeView: View {
@@ -31,7 +15,7 @@ struct DailyPracticeView: View {
         VStack(spacing: 0) {
             
             // MARK: - Top Row: Back Chevron + Progress Bar
-            HStack(spacing: 12) {
+            HStack(spacing: 10) {
                 Button {
                     handleBackButton()
                 } label: {
@@ -47,7 +31,8 @@ struct DailyPracticeView: View {
                     .frame(height: 10)
             }
             .padding(.top, 8)
-            .padding(.horizontal, 24)
+            .padding(.leading, 8)
+            .padding(.trailing, 59)
             .padding(.bottom, 12)
             
             // MARK: - Scrollable Content
@@ -56,9 +41,9 @@ struct DailyPracticeView: View {
                     
                     // MARK: - Question Number and Text
                     Text("\(viewModel.currentQuestion.number). \(viewModel.currentQuestion.question)")
-                        .font(.manropeSemiBold(size: 24))
+                        .font(.manropeMedium(size: 20))
                         .foregroundColor(.black)
-                        .lineSpacing(4)
+                        .lineSpacing(2)
                         .fixedSize(horizontal: false, vertical: true)
                     
                     // MARK: - Options
@@ -127,20 +112,19 @@ struct DailyPracticeView: View {
         }) {
             HStack {
                 Text(text)
-                    .font(.manropeRegular(size: 16))
+                    .font(.manropeSemiBold(size: 16))
                     .foregroundColor(buttonTextColor(isSelected: isSelected, isCorrect: isCorrect, isWrong: isWrong))
-                    .multilineTextAlignment(.leading)
+                    .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
-                
-                Spacer()
+                    .frame(maxWidth: .infinity, alignment: .center)
             }
-            .padding(16)
-            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(20)
+            .frame(maxWidth: .infinity, alignment: .center)
             .background(buttonBackgroundColor(isSelected: isSelected, isCorrect: isCorrect, isWrong: isWrong))
             .cornerRadius(5)
             .overlay(
                 RoundedRectangle(cornerRadius: 5)
-                    .stroke(buttonBorderColor(isSelected: isSelected, isCorrect: isCorrect, isWrong: isWrong), lineWidth: 1)
+                    .stroke(buttonBorderColor(isSelected: isSelected, isCorrect: isCorrect, isWrong: isWrong), lineWidth: 1) // 1pt border
             )
         }
         .disabled(viewModel.hasCheckedAnswer)
@@ -148,37 +132,44 @@ struct DailyPracticeView: View {
     
     private func buttonTextColor(isSelected: Bool, isCorrect: Bool, isWrong: Bool) -> Color {
         if isCorrect {
-            return Color(red: 0.0, green: 0.5, blue: 0.3) // Dark green text
+            // Correct option text should be green
+            return Color(hex: "#3E8F6A")
         } else if isWrong {
-            return .white
+            // Red text for wrong option
+            return Color(hex: "#C9594C")
         } else if isSelected {
-            return .white
+            return Color(hex: "#FFFFFF")
         } else {
-            return .black
+            return Color(hex: "#1A1A1A")
         }
     }
     
     private func buttonBackgroundColor(isSelected: Bool, isCorrect: Bool, isWrong: Bool) -> Color {
         if isCorrect {
-            return Color(red: 0.85, green: 0.95, blue: 0.90) // Light green
+            // Keep your original correct background
+            return Color(hex: "#DAF0E6")
         } else if isWrong {
-            return Color(red: 0.85, green: 0.3, blue: 0.3) // Red
+            // Lighter red background for wrong option
+            return Color(hex: "#F4DEDB")
         } else if isSelected {
-            return .black
+            return Color(hex: "#000000")
         } else {
-            return .white
+            return Color(hex: "#FFFFFF")
         }
     }
     
     private func buttonBorderColor(isSelected: Bool, isCorrect: Bool, isWrong: Bool) -> Color {
         if isCorrect {
-            return Color(red: 0.0, green: 0.6, blue: 0.4) // Green border
+            // Green border for correct option
+            return Color(hex: "#3E8F6A")
         } else if isWrong {
-            return Color(red: 0.85, green: 0.3, blue: 0.3) // Red border
+            // Red border for wrong option
+            return Color(hex: "#C9594C")
         } else if isSelected {
-            return .black
+            return Color(hex: "#1A1A1A")
         } else {
-            return Color.gray.opacity(0.3)
+            // Default border
+            return Color(hex: "#1A1A1A").opacity(0.5)
         }
     }
     
@@ -189,14 +180,14 @@ struct DailyPracticeView: View {
             HStack {
                 Text(viewModel.isAnswerCorrect ? "Correct Answer!" : "Incorrect Answer.")
                     .font(.manropeSemiBold(size: 18))
-                    .foregroundColor(viewModel.isAnswerCorrect ? Color(red: 0.2, green: 0.6, blue: 0.4) : Color(red: 0.8, green: 0.3, blue: 0.3))
+                    .foregroundColor(viewModel.isAnswerCorrect ? Color(hex: "#339966") : Color(hex: "#CC4D4D"))
             }
             
             
             // Explanation text
             Text(viewModel.isAnswerCorrect ? viewModel.currentQuestion.correctExplanation : viewModel.currentQuestion.incorrectExplanation)
-                .font(.manropeRegular(size: 16))
-                .foregroundColor(.black.opacity(0.85))
+                .font(.manropeSemiBold(size: 16))
+                .foregroundColor(Color(hex: "#1A1A1A").opacity(0.85))
                 .lineSpacing(4)
                 .fixedSize(horizontal: false, vertical: true)
             
@@ -205,11 +196,11 @@ struct DailyPracticeView: View {
                 handleNextButton()
             }) {
                 Text("Next")
-                    .font(.manropeSemiBold(size: 17))
+                    .font(.manropeSemiBold(size: 16))
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .frame(height: 52)
-                    .background(viewModel.isAnswerCorrect ? Color(red: 0.3, green: 0.7, blue: 0.5) : Color(red: 0.8, green: 0.4, blue: 0.4))
+                    .background(viewModel.isAnswerCorrect ? Color(hex: "#3E8F6A") : Color(hex: "#C9594C"))
                     .cornerRadius(5)
             }
         }
@@ -218,11 +209,11 @@ struct DailyPracticeView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(
             viewModel.isAnswerCorrect
-                ? Color(red: 0.9, green: 0.97, blue: 0.94)
-                : Color(red: 1.0, green: 0.93, blue: 0.93)
+                ? Color(hex: "#E6F7F0")
+                : Color(hex: "#FFEDED")
         )
-        .cornerRadius(16)
-        .padding(.horizontal,12)
+        .cornerRadius(5)
+        .padding(.horizontal,8)
     }
     
     // MARK: - Action Button (Check Answer - before checking)
@@ -231,12 +222,12 @@ struct DailyPracticeView: View {
             viewModel.checkAnswer()
         }) {
             Text("Check Answer")
-                .font(.manropeSemiBold(size: 17))
+                .font(.manropeSemiBold(size: 16))
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
                 .frame(height: 52)
-                .background(viewModel.selectedOptionIndex != nil ? Color.black : Color.gray.opacity(0.4))
-                .cornerRadius(10)
+                .background(viewModel.selectedOptionIndex != nil ? Color(hex: "#000000") : Color(hex: "#000000").opacity(0.4))
+                .cornerRadius(5) // Updated to 5px corner radius
         }
         .disabled(viewModel.selectedOptionIndex == nil)
     }
@@ -247,14 +238,14 @@ struct DailyPracticeView: View {
             print("⬅️ Back button: Going to previous question")
             viewModel.previousQuestion()
         } else {
-            print("⬅️ Back button: Returning to Dashboard")
+            print("Practice session completed!")
             dismiss()
         }
     }
     
     private func handleNextButton() {
         if viewModel.isLastQuestion {
-            print("🎉 Practice session completed!")
+            print("Practice session completed!")
             // TODO: Navigate to results screen or back to dashboard
             dismiss()
         } else {
