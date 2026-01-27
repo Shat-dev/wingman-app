@@ -11,6 +11,7 @@ struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
     @State private var navigateToPractice = false
     @State private var showLogApproachSheet = false
+    @State private var selectedCourse: Course? = nil
     
     var body: some View {
         NavigationStack {
@@ -18,7 +19,6 @@ struct HomeView: View {
                 Color.white.ignoresSafeArea()
                 
                 VStack(spacing: 0) {
-                    
                     
                     // MARK: - Header
                     HStack(alignment: .top) {
@@ -55,7 +55,6 @@ struct HomeView: View {
                         
                         // MARK: - Streak Badge
                         HStack(spacing: 6) {
-
                             Image("flame")
                                 .resizable()
                                 .scaledToFit()
@@ -64,10 +63,10 @@ struct HomeView: View {
 
                             Text("\(viewModel.currentStreak)")
                                 .font(.manropeMedium(size: 20))
-                                .padding(.trailing,16)
+                                .padding(.trailing, 16)
                         }
                         .foregroundColor(.black)
-                        .frame(width: 64, height: 44)              // matches visual size
+                        .frame(width: 64, height: 44)
                         .background(Color.white)
                         .overlay(
                             RoundedRectangle(cornerRadius: 5)
@@ -84,9 +83,7 @@ struct HomeView: View {
                             
                             // MARK: - Daily Practice Card
                             VStack(spacing: 0) {
-
                                 VStack(spacing: 0) {
-
                                     Text("Daily Practice")
                                         .font(.manropeMedium(size: 20))
                                         .foregroundColor(.black)
@@ -99,8 +96,6 @@ struct HomeView: View {
                                         .padding(.top, 8)
                                         .frame(maxWidth: .infinity)
 
-                                   
-
                                     Button("Start") {
                                         navigateToPractice = true
                                     }
@@ -112,7 +107,7 @@ struct HomeView: View {
                                     .cornerRadius(5)
                                     .padding(.horizontal, 20)
                                     .padding(.bottom, 20)
-                                    .padding(.top,40)
+                                    .padding(.top, 40)
                                 }
                             }
                             .frame(height: 200)
@@ -120,14 +115,13 @@ struct HomeView: View {
                             .background(Color.white)
                             .clipShape(RoundedRectangle(cornerRadius: 5))
                             .overlay(
-                                // 🔥 BIG WATERMARK (intentionally larger than card)
                                 Image("wingman_logo")
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 300, height: 280)          // larger than card
+                                    .frame(width: 300, height: 280)
                                     .opacity(0.12)
-                                    .padding(.top, -100)         // slight bleed
-                                    .padding(.trailing, 155),   // slight bleed
+                                    .padding(.top, -100)
+                                    .padding(.trailing, 155),
                                 alignment: .topTrailing
                             )
                             .overlay(
@@ -145,7 +139,7 @@ struct HomeView: View {
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: 22, height: 22)
-                                        .foregroundColor(.black)          // works if the asset renders as template
+                                        .foregroundColor(.black)
 
                                     Text("Log Encounter")
                                         .font(.manropeSemiBold(size: 16))
@@ -166,56 +160,35 @@ struct HomeView: View {
                             
                             // MARK: - Motivational Quote
                             HStack(alignment: .top, spacing: 10) {
-
-                                // Large faint quote mark (asset)
                                 Image("quote_sign")
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 40, height: 40)     // size like design
-                                    .padding(.top, -30)                 // aligns with first text line
+                                    .frame(width: 40, height: 40)
+                                    .padding(.top, -30)
 
                                 Text(viewModel.motivationalQuote)
-                                    .font(.georgiaItalic(size: 16)) // matches screenshot style
+                                    .font(.georgiaItalic(size: 16))
                                     .foregroundColor(Color.black.opacity(0.75))
-                                    
                                     .multilineTextAlignment(.leading)
                                     .lineSpacing(3)
-                                    .padding(.top, 6)                 // pushes text down to match design
+                                    .padding(.top, 6)
 
                                 Spacer(minLength: 0)
                             }
                             .padding(.horizontal, 20)
-                            .padding(.vertical, 10)
-
                             
-                            Divider().background(Color.gray.opacity(0.2))
-                            
-                            // MARK: - Continue Section
-                            VStack(alignment: .leading, spacing: 16) {
-                                Text("Continue")
-                                    .font(.manropeSemiBold(size: 18))
-                                    .foregroundColor(.black)
-                                    .padding(.horizontal, 20)
-                                
-                                ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack(spacing: 12) {
-                                        ContinueModuleCard(
-                                            title: "Mindset & Foundations: Beliefs and Reframes",
-                                            progress: 0.69,
-                                            illustration: "continue_illust_1"
-                                        )
-                                        
-                                        ContinueModuleCard(
-                                            title: "Advanced Techniques",
-                                            progress: 0.45,
-                                            illustration: "continue_illust_2"
-                                        )
-                                        
-                                        ContinueModuleCard(
-                                            title: "Building Confidence",
-                                            progress: 0.20,
-                                            illustration: "continue_illust_3"
-                                        )
+                            // MARK: - Continue Section (Single Course - Only show if course exists)
+                            if let course = viewModel.continueCourse {
+                                VStack(alignment: .leading, spacing: 16) {
+                                    Text("Continue")
+                                        .font(.manropeSemiBold(size: 18))
+                                        .foregroundColor(.black)
+                                        .padding(.horizontal, 20)
+                                    
+                                    // Continue Course Card - Pixel Perfect Design
+                                    ContinueCourseCard(course: course) {
+                                        // Find the actual Course object and navigate
+                                        selectedCourse = findCourse(courseId: course.courseId)
                                     }
                                     .padding(.horizontal, 20)
                                 }
@@ -259,6 +232,28 @@ struct HomeView: View {
                 }
             }
             .navigationBarHidden(true)
+            .background(
+                // Hidden NavigationLink to support iOS 16+ navigation to CourseDetailSheet
+                Group {
+                    if let selected = selectedCourse {
+                        NavigationLink(
+                            destination: CourseDetailSheet(course: selected)
+                                .onDisappear { selectedCourse = nil },
+                            isActive: Binding(
+                                get: { selectedCourse != nil },
+                                set: { isActive in
+                                    if !isActive { selectedCourse = nil }
+                                }
+                            )
+                        ) {
+                            EmptyView()
+                        }
+                        .hidden()
+                    } else {
+                        EmptyView()
+                    }
+                }
+            )
             .navigationDestination(isPresented: $navigateToPractice) {
                 DailyPracticeView()
             }
@@ -269,70 +264,98 @@ struct HomeView: View {
                     .presentationCornerRadius(20)
             }
             .onAppear {
-                print("👁️ HomeView appeared")
+                print("👁️ HomeView appeared - refreshing continue course")
                 viewModel.loadUserData()
+                viewModel.loadContinueCourse()  // IMPORTANT: Refresh on every appear
             }
         }
     }
-}
-
-// MARK: - Continue Module Card
-struct ContinueModuleCard: View {
-    let title: String
-    let progress: Double
-    let illustration: String
     
-    var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            
-            // Illustration placeholder
-            ZStack {
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(Color.gray.opacity(0.05))
-                    .frame(height: 80)
-                
-                // Placeholder for illustration
-                Image(systemName: "brain.head.profile")
-                    .font(.system(size: 40))
-                    .foregroundColor(.gray.opacity(0.3))
-            }
-            
-            // Title
-            Text(title)
-                .font(.manropeRegular(size: 13))
-                .foregroundColor(.black)
-                .lineSpacing(2)
-                .fixedSize(horizontal: false, vertical: true)
-                .frame(height: 40, alignment: .top)
-            
-            // Progress bar
-            VStack(alignment: .leading, spacing: 4) {
-                GeometryReader { geometry in
-                    ZStack(alignment: .leading) {
-                        RoundedRectangle(cornerRadius: 1)
-                            .fill(Color.gray.opacity(0.2))
-                            .frame(height: 2)
-                        
-                        RoundedRectangle(cornerRadius: 1)
-                            .fill(Color.black)
-                            .frame(width: geometry.size.width * progress, height: 2)
-                    }
-                }
-                .frame(height: 2)
-                
-                Text("\(Int(progress * 100))%")
-                    .font(.manropeRegular(size: 11))
-                    .foregroundColor(.gray)
+    // MARK: - Find Course by ID
+    private func findCourse(courseId: String) -> Course? {
+        for category in CourseCategory.dummyCategories {
+            if let course = category.courses.first(where: { $0.id == courseId }) {
+                return course
             }
         }
-        .padding(16)
-        .frame(width: 200)
-        .background(Color.white)
-        .cornerRadius(8)
-        .overlay(
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(Color.gray.opacity(0.2), lineWidth: 1)
-        )
+        return nil
+    }
+}
+
+// MARK: - Continue Course Card (Pixel Perfect - Matches Screenshot)
+struct ContinueCourseCard: View {
+    let course: ContinueCourse
+    let onTap: () -> Void
+    
+    var body: some View {
+        Button(action: onTap) {
+            HStack(spacing: 16) {
+                // MARK: - Left: Square Thumbnail
+                ZStack {
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(Color.white)
+                    
+                    Image(course.thumbnailName)
+                        .resizable()
+                        .scaledToFit()
+                        .padding(8)
+                }
+                .frame(width: 100, height: 100)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.gray.opacity(0.15), lineWidth: 1)
+                )
+                
+                // MARK: - Right: Content
+                VStack(alignment: .leading, spacing: 0) {
+                    // Title: "Category: Course Name"
+                    Text("\(course.categoryName): \(course.courseName)")
+                        .font(.manropeSemiBold(size: 16))
+                        .foregroundColor(.black)
+                        .lineSpacing(4)
+                        .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
+                    
+                    Spacer()
+                    
+                    // Progress Bar with Percentage
+                    HStack(spacing: 12) {
+                        // Progress Bar
+                        GeometryReader { geometry in
+                            ZStack(alignment: .leading) {
+                                // Background track
+                                RoundedRectangle(cornerRadius: 2)
+                                    .fill(Color(hex: "E5E5E5"))
+                                    .frame(height: 4)
+                                
+                                // Filled progress
+                                RoundedRectangle(cornerRadius: 2)
+                                    .fill(Color.black)
+                                    .frame(width: geometry.size.width * course.progress, height: 4)
+                            }
+                        }
+                        .frame(height: 4)
+                        
+                        // Percentage
+                        Text("\(Int(course.progress * 100))%")
+                            .font(.manropeMedium(size: 14))
+                            .foregroundColor(Color(hex: "888888"))
+                            .frame(width: 40, alignment: .trailing)
+                    }
+                }
+                .padding(.vertical, 12)
+            }
+            .padding(16)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(height: 132)
+            .background(Color.white)
+            .cornerRadius(12)
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(Color.black.opacity(0.08), lineWidth: 1)
+            )
+        }
+        .buttonStyle(.plain)
     }
 }
 
@@ -393,6 +416,17 @@ struct ModuleCard: View {
             RoundedRectangle(cornerRadius: 8)
                 .stroke(Color.gray.opacity(0.2), lineWidth: 1)
         )
+    }
+}
+
+// MARK: - Make Course Hashable for navigationDestination
+extension Course: Hashable {
+    static func == (lhs: Course, rhs: Course) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }
 
