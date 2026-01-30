@@ -11,7 +11,21 @@ struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
     @State private var navigateToPractice = false
     @State private var showLogApproachSheet = false
+    @State private var navigateToCourse = false
     @State private var selectedCourse: Course? = nil
+    @State private var currentModulePage: Int = 0
+    
+    // Module data for carousel
+    private var modules: [(category: CourseCategory, title: String, subtitle: String, imageName: String)] {
+        let categories = CourseCategory.dummyCategories
+        return [
+            (categories[0], "Mindset & Foundations", "Suggested", "beliefandreframes"),
+            (categories[1], "Approach Mechanics", "Essential", "approachreadiness"),
+            (categories[2], "Conversation Flow", "Popular", "smalltalkandmomentum"),
+            (categories[3], "Flirting & Chemistry", "Advanced", "FlirtingPrerequisites"),
+            (categories[4], "Integration & Mastery", "Master Level", "Upgradingyourlifestyle")
+        ]
+    }
     
     var body: some View {
         NavigationStack {
@@ -54,7 +68,7 @@ struct HomeView: View {
                         Spacer()
                         
                         // MARK: - Streak Badge
-                        HStack(spacing: 6) {
+                        HStack(spacing: 2) {
                             Image("flame")
                                 .resizable()
                                 .scaledToFit()
@@ -159,29 +173,33 @@ struct HomeView: View {
                             Divider().background(Color.gray.opacity(0.2))
                             
                             // MARK: - Motivational Quote
-                            HStack(alignment: .top, spacing: 10) {
+                            // MARK: - Motivational Quote
+                            VStack(alignment: .leading, spacing: 10) {
                                 Image("quote_sign")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 40, height: 40)
-                                    .padding(.top, -30)
+
 
                                 Text(viewModel.motivationalQuote)
                                     .font(.georgiaItalic(size: 16))
                                     .foregroundColor(Color.black.opacity(0.75))
                                     .multilineTextAlignment(.leading)
                                     .lineSpacing(3)
-                                    .padding(.top, 6)
+                                    .padding(.top, 0)
 
                                 Spacer(minLength: 0)
                             }
                             .padding(.horizontal, 20)
+                            .padding(.vertical, 40)
+                            
+                            Divider().background(Color.gray.opacity(0.2))
                             
                             // MARK: - Continue Section (Single Course - Only show if course exists)
                             if let course = viewModel.continueCourse {
                                 VStack(alignment: .leading, spacing: 16) {
                                     Text("Continue")
-                                        .font(.manropeSemiBold(size: 18))
+                                        .font(.manropeMedium(size: 18))
                                         .foregroundColor(.black)
                                         .padding(.horizontal, 20)
                                     
@@ -189,40 +207,30 @@ struct HomeView: View {
                                     ContinueCourseCard(course: course) {
                                         // Find the actual Course object and navigate
                                         selectedCourse = findCourse(courseId: course.courseId)
+                                        navigateToCourse = true
                                     }
                                     .padding(.horizontal, 20)
                                 }
                             }
                             
-                            // MARK: - Your Modules Section
+                            // MARK: - Your Modules Section (Custom Swipeable Carousel with Peek)
                             VStack(alignment: .leading, spacing: 16) {
                                 Text("Your Modules")
-                                    .font(.manropeSemiBold(size: 18))
+                                    .font(.manropeMedium(size: 20))
                                     .foregroundColor(.black)
                                     .padding(.horizontal, 20)
                                 
-                                ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack(spacing: 12) {
-                                        ModuleCard(
-                                            title: "Mindset & Foundations",
-                                            subtitle: "Suggested",
-                                            illustration: "module_illust_1"
-                                        )
-                                        
-                                        ModuleCard(
-                                            title: "Body Language",
-                                            subtitle: "Popular",
-                                            illustration: "module_illust_2"
-                                        )
-                                        
-                                        ModuleCard(
-                                            title: "Conversation Skills",
-                                            subtitle: "New",
-                                            illustration: "module_illust_3"
-                                        )
+                                // Custom Swipeable Carousel with peek
+                                PeekCarousel(
+                                    modules: modules,
+                                    currentPage: $currentModulePage,
+                                    onModuleSelected: { category in
+                                        if let firstCourse = category.courses.first {
+                                            selectedCourse = firstCourse
+                                            navigateToCourse = true
+                                        }
                                     }
-                                    .padding(.horizontal, 20)
-                                }
+                                )
                             }
                             
                             Spacer().frame(height: 100)
@@ -232,30 +240,13 @@ struct HomeView: View {
                 }
             }
             .navigationBarHidden(true)
-            .background(
-                // Hidden NavigationLink to support iOS 16+ navigation to CourseDetailSheet
-                Group {
-                    if let selected = selectedCourse {
-                        NavigationLink(
-                            destination: CourseDetailSheet(course: selected)
-                                .onDisappear { selectedCourse = nil },
-                            isActive: Binding(
-                                get: { selectedCourse != nil },
-                                set: { isActive in
-                                    if !isActive { selectedCourse = nil }
-                                }
-                            )
-                        ) {
-                            EmptyView()
-                        }
-                        .hidden()
-                    } else {
-                        EmptyView()
-                    }
-                }
-            )
             .navigationDestination(isPresented: $navigateToPractice) {
                 DailyPracticeView()
+            }
+            .navigationDestination(isPresented: $navigateToCourse) {
+                if let course = selectedCourse {
+                    CourseDetailSheet(course: course)
+                }
             }
             .sheet(isPresented: $showLogApproachSheet) {
                 LogApproachBottomSheet(isPresented: $showLogApproachSheet)
@@ -266,7 +257,7 @@ struct HomeView: View {
             .onAppear {
                 print("👁️ HomeView appeared - refreshing continue course")
                 viewModel.loadUserData()
-                viewModel.loadContinueCourse()  // IMPORTANT: Refresh on every appear
+                viewModel.loadContinueCourse()
             }
         }
     }
@@ -282,6 +273,151 @@ struct HomeView: View {
     }
 }
 
+// MARK: - Peek Carousel (Custom swipeable with peek effect)
+struct PeekCarousel: View {
+    let modules: [(category: CourseCategory, title: String, subtitle: String, imageName: String)]
+    @Binding var currentPage: Int
+    let onModuleSelected: (CourseCategory) -> Void
+    
+    @State private var dragOffset: CGFloat = 0
+    @State private var screenWidth: CGFloat = UIScreen.main.bounds.width
+    
+    // Layout constants
+    private let cardSpacing: CGFloat = 12
+    private let horizontalPadding: CGFloat = 20
+    private let peekAmount: CGFloat = 40  // How much of next card to show
+    
+    private var cardWidth: CGFloat {
+        screenWidth - horizontalPadding - peekAmount - cardSpacing
+    }
+    
+    var body: some View {
+        VStack(spacing: 16) {
+            // Cards in GeometryReader
+            GeometryReader { geometry in
+                let width = geometry.size.width
+                let calculatedCardWidth = width - horizontalPadding - peekAmount - cardSpacing
+                
+                HStack(spacing: cardSpacing) {
+                    ForEach(Array(modules.enumerated()), id: \.offset) { index, module in
+                        ModuleCarouselCard(
+                            title: module.title,
+                            subtitle: module.subtitle,
+                            imageName: module.imageName
+                        ) {
+                            onModuleSelected(module.category)
+                        }
+                        .frame(width: calculatedCardWidth)
+                    }
+                }
+                .offset(x: calculateOffset(screenWidth: width, cardWidth: calculatedCardWidth))
+                .gesture(
+                    DragGesture()
+                        .onChanged { value in
+                            dragOffset = value.translation.width
+                        }
+                        .onEnded { value in
+                            let threshold = calculatedCardWidth / 3
+                            let predictedOffset = value.predictedEndTranslation.width
+                            
+                            withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+                                if predictedOffset < -threshold && currentPage < modules.count - 1 {
+                                    currentPage += 1
+                                } else if predictedOffset > threshold && currentPage > 0 {
+                                    currentPage -= 1
+                                }
+                                dragOffset = 0
+                            }
+                        }
+                )
+                .onAppear {
+                    screenWidth = width
+                }
+            }
+            .frame(height: 430) // Cards only
+            
+            // Page Indicators - OUTSIDE GeometryReader
+            HStack(spacing: 8) {
+                ForEach(0..<modules.count, id: \.self) { index in
+                    Circle()
+                        .fill(index == currentPage ? Color.black : Color.gray.opacity(0.3))
+                        .frame(width: 8, height: 8)
+                }
+            }
+            .animation(.easeInOut(duration: 0.2), value: currentPage)
+        }
+    }
+    
+    private func calculateOffset(screenWidth: CGFloat, cardWidth: CGFloat) -> CGFloat {
+        let totalCardWidth = cardWidth + cardSpacing
+        let baseOffset = horizontalPadding - (CGFloat(currentPage) * totalCardWidth)
+        return baseOffset + dragOffset
+    }
+}
+
+// MARK: - Module Carousel Card (Pixel Perfect)
+struct ModuleCarouselCard: View {
+    let title: String
+    let subtitle: String
+    let imageName: String
+    let onOpen: () -> Void
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            // Illustration Area
+            ZStack {
+                Rectangle()
+                    .fill(Color.white)
+                
+                Image(imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .padding(0)
+            }
+            .frame(height: 280)
+            
+            // Divider
+            Rectangle()
+                .fill(Color.gray.opacity(0.15))
+                .frame(height: 1)
+            
+            // Content Area
+            VStack(spacing: 10) {
+                // Title
+                Text(title)
+                    .font(.manropeMedium(size: 18))
+                    .foregroundColor(.black)
+                    .multilineTextAlignment(.center)
+                
+                // Subtitle
+                Text(subtitle)
+                    .font(.manropeMedium(size: 14))
+                    .foregroundColor(Color.gray)
+                
+                // Open Button
+                Button(action: onOpen) {
+                    Text("Open")
+                        .font(.manropeSemiBold(size: 16))
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 50)
+                        .background(Color.black)
+                        .cornerRadius(5)
+                }
+                .padding(.top, 8)
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 16)
+        }
+        .background(Color.white)
+        .cornerRadius(5)
+        .overlay(
+            RoundedRectangle(cornerRadius: 5)
+                .stroke(Color.black.opacity(0.08), lineWidth: 1)
+        )
+    }
+}
+
 // MARK: - Continue Course Card (Pixel Perfect - Matches Screenshot)
 struct ContinueCourseCard: View {
     let course: ContinueCourse
@@ -292,7 +428,7 @@ struct ContinueCourseCard: View {
             HStack(spacing: 16) {
                 // MARK: - Left: Square Thumbnail
                 ZStack {
-                    RoundedRectangle(cornerRadius: 8)
+                    RoundedRectangle(cornerRadius: 5)
                         .fill(Color.white)
                     
                     Image(course.thumbnailName)
@@ -302,7 +438,7 @@ struct ContinueCourseCard: View {
                 }
                 .frame(width: 100, height: 100)
                 .overlay(
-                    RoundedRectangle(cornerRadius: 8)
+                    RoundedRectangle(cornerRadius: 5)
                         .stroke(Color.gray.opacity(0.15), lineWidth: 1)
                 )
                 
@@ -310,7 +446,7 @@ struct ContinueCourseCard: View {
                 VStack(alignment: .leading, spacing: 0) {
                     // Title: "Category: Course Name"
                     Text("\(course.categoryName): \(course.courseName)")
-                        .font(.manropeSemiBold(size: 16))
+                        .font(.manropeMedium(size: 16))
                         .foregroundColor(.black)
                         .lineSpacing(4)
                         .multilineTextAlignment(.leading)
@@ -339,7 +475,7 @@ struct ContinueCourseCard: View {
                         // Percentage
                         Text("\(Int(course.progress * 100))%")
                             .font(.manropeMedium(size: 14))
-                            .foregroundColor(Color(hex: "888888"))
+                            .foregroundColor(Color(hex: "000000"))
                             .frame(width: 40, alignment: .trailing)
                     }
                 }
@@ -349,73 +485,13 @@ struct ContinueCourseCard: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .frame(height: 132)
             .background(Color.white)
-            .cornerRadius(12)
+            .cornerRadius(5)
             .overlay(
-                RoundedRectangle(cornerRadius: 12)
+                RoundedRectangle(cornerRadius: 5)
                     .stroke(Color.black.opacity(0.08), lineWidth: 1)
             )
         }
         .buttonStyle(.plain)
-    }
-}
-
-// MARK: - Module Card
-struct ModuleCard: View {
-    let title: String
-    let subtitle: String
-    let illustration: String
-    
-    var body: some View {
-        VStack(spacing: 16) {
-            
-            // Illustration
-            ZStack {
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(Color.gray.opacity(0.05))
-                    .frame(height: 200)
-                
-                // Placeholder illustration
-                Image(systemName: "person.2")
-                    .font(.system(size: 60))
-                    .foregroundColor(.gray.opacity(0.3))
-            }
-            
-            VStack(spacing: 8) {
-                // Title
-                Text(title)
-                    .font(.manropeSemiBold(size: 15))
-                    .foregroundColor(.black)
-                    .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true)
-                
-                // Subtitle
-                Text(subtitle)
-                    .font(.manropeRegular(size: 12))
-                    .foregroundColor(.gray)
-                
-                // Open Button
-                Button(action: {
-                    // Open module
-                }) {
-                    Text("Open")
-                        .font(.manropeSemiBold(size: 14))
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 44)
-                        .background(Color.black)
-                        .cornerRadius(5)
-                }
-            }
-            .padding(.horizontal, 16)
-            .padding(.bottom, 16)
-        }
-        .frame(width: 240)
-        .background(Color.white)
-        .cornerRadius(8)
-        .overlay(
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(Color.gray.opacity(0.2), lineWidth: 1)
-        )
     }
 }
 
