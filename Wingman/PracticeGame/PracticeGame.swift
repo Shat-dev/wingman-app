@@ -227,7 +227,8 @@ struct GameSceneView: View {
                     
                     
                     // Character Image (1:1 aspect ratio, centered) with independent horizontal margins
-                    if let imageName = scene.imageName {
+                    // Only show image for non-options scenes
+                    if scene.type != .options, let imageName = scene.imageName {
                         ZStack {
                             Image(imageName)
                                 .resizable()
@@ -245,18 +246,14 @@ struct GameSceneView: View {
                     // Scene Content Based on Type
                     switch scene.type {
                     case .options:
-                        // Center options vertically in available space
-                        VStack {
-                            Spacer(minLength: 0)
-                            OptionsContentView(
-                                options: scene.options ?? [],
-                                onSelectOption: onSelectOption
-                            )
-                            .padding(.horizontal, 24)
-                            Spacer(minLength: 0)
-                        }
-                        // Remove the bottom padding that pushed it down
-                        .padding(.bottom, 0)
+                        // Center options vertically in full available space
+                        Spacer(minLength: 0)
+                        OptionsContentView(
+                            options: scene.options ?? [],
+                            onSelectOption: onSelectOption
+                        )
+                        .padding(.horizontal, 24)
+                        Spacer(minLength: 0)
                         
                     case .context, .userDialogue, .womanDialogue, .feedback:
                         DialogueContentView(
@@ -355,13 +352,13 @@ struct OptionsContentView: View {
                     onSelectOption(option)
                 } label: {
                     Text(option.text)
-                        .font(.system(size: 15, weight: .regular))
+                        .font(.manropeSemiBold(size: 16))
                         .foregroundColor(.black)
                         .multilineTextAlignment(.center)
                         .lineLimit(2)
                         .frame(maxWidth: .infinity)
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 16)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 15)
                         .background(
                             RoundedRectangle(cornerRadius: 5)
                                 .stroke(Color.black.opacity(0.1), lineWidth: 1)
@@ -375,9 +372,11 @@ struct OptionsContentView: View {
             }
             
             Text("Choose an option to continue")
-                .font(.system(size: 13, weight: .regular))
+                .font(.manropeMedium(size: 14))
                 .foregroundColor(.black.opacity(0.4))
-                .padding(.top, 8)
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .padding(.top, 1)
+                .padding(.trailing,8)
         }
     }
 }
