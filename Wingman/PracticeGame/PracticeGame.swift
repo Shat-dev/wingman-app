@@ -224,35 +224,46 @@ struct GameSceneView: View {
                 
                 // Content
                 VStack(spacing: 0) {
-                    Spacer()
                     
-                    // Character Image (1:1 aspect ratio, centered)
+                    
+                    // Character Image (1:1 aspect ratio, centered) with independent horizontal margins
                     if let imageName = scene.imageName {
-                        Image(systemName: imageName) // Replace with actual image
-                            .resizable()
-                            .aspectRatio(1, contentMode: .fit)
-                            .frame(width: 200, height: 200)
-                            .foregroundColor(.black.opacity(0.1))
+                        ZStack {
+                            Image(imageName)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(maxWidth: .infinity)
+                                .aspectRatio(1, contentMode: .fit)
+                        }
+                        .padding(.horizontal, 20) // 20pt left/right margin only for the image
+                        .padding(.top, 10)
+                        .padding(.bottom, 70)
                     }
                     
-                    Spacer()
+                    
                     
                     // Scene Content Based on Type
                     switch scene.type {
                     case .options:
-                        OptionsContentView(
-                            options: scene.options ?? [],
-                            onSelectOption: onSelectOption
-                        )
-                        .padding(.horizontal, 24)
-                        .padding(.bottom, 40)
+                        // Center options vertically in available space
+                        VStack {
+                            Spacer(minLength: 0)
+                            OptionsContentView(
+                                options: scene.options ?? [],
+                                onSelectOption: onSelectOption
+                            )
+                            .padding(.horizontal, 24)
+                            Spacer(minLength: 0)
+                        }
+                        // Remove the bottom padding that pushed it down
+                        .padding(.bottom, 0)
                         
                     case .context, .userDialogue, .womanDialogue, .feedback:
                         DialogueContentView(
                             scene: scene,
                             userName: userName
                         )
-                        .padding(.horizontal, 24)
+                        .padding(.horizontal, 20)
                         .padding(.bottom, 40)
                     }
                 }
@@ -285,41 +296,49 @@ struct DialogueContentView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            // Character name label (only for dialogue and feedback)
-            if scene.type == .userDialogue || scene.type == .womanDialogue || scene.type == .feedback {
+            // Character name ABOVE the bubble:
+            if scene.type == .userDialogue || scene.type == .feedback {
                 Text(displayName)
-                    .font(.system(size: 15, weight: .regular))
+                    .font(.manropeMedium(size: 18))
                     .foregroundColor(.black.opacity(0.6))
-                    .padding(.leading, 4)
+                    .padding(.leading, 10)
+            } else if scene.type == .womanDialogue {
+                HStack {
+                    Spacer()
+                    Text(displayName)
+                        .font(.manropeMedium(size: 18))
+                        .foregroundColor(.black.opacity(0.6))
+                        .padding(.trailing, 10)
+                }
             }
             
-            // Text container
+            // Text container (dialogue bubble)
             VStack(alignment: .leading, spacing: 0) {
                 Text(scene.text)
-                    .font(.system(size: 15, weight: .regular))
+                    .font(.manropeMedium(size: 14))
                     .foregroundColor(.black)
                     .lineLimit(2)
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 16)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 30)
             }
             .background(
-                RoundedRectangle(cornerRadius: 12)
+                RoundedRectangle(cornerRadius: 5)
                     .stroke(Color.black.opacity(0.1), lineWidth: 1)
                     .background(
-                        RoundedRectangle(cornerRadius: 12)
+                        RoundedRectangle(cornerRadius: 5)
                             .fill(Color.white)
                     )
             )
             
             // Action text
             Text(actionText)
-                .font(.system(size: 13, weight: .regular))
-                .foregroundColor(.black.opacity(0.4))
+                .font(.manropeMedium(size: 14))
+                .foregroundColor(.black.opacity(0.5))
                 .frame(maxWidth: .infinity, alignment: .trailing)
-                .padding(.top, 4)
-                .padding(.trailing, 4)
+                .padding(.top, 5)
+                .padding(.trailing, 8)
         }
     }
 }
@@ -344,10 +363,10 @@ struct OptionsContentView: View {
                         .padding(.horizontal, 16)
                         .padding(.vertical, 16)
                         .background(
-                            RoundedRectangle(cornerRadius: 12)
+                            RoundedRectangle(cornerRadius: 5)
                                 .stroke(Color.black.opacity(0.1), lineWidth: 1)
                                 .background(
-                                    RoundedRectangle(cornerRadius: 12)
+                                    RoundedRectangle(cornerRadius: 5)
                                         .fill(Color.white)
                                 )
                         )
@@ -372,23 +391,18 @@ struct GameCompleteView: View {
             Color.white.ignoresSafeArea()
             
             VStack(spacing: 0) {
-                Spacer()
                 
-                // Checkmark icon
-                ZStack {
-                    RoundedRectangle(cornerRadius: 16)
-                        .stroke(Color.black, lineWidth: 2)
-                        .frame(width: 80, height: 80)
-                        .rotationEffect(.degrees(45))
-                    
-                    Image(systemName: "checkmark")
-                        .font(.system(size: 40, weight: .regular))
-                        .foregroundColor(.black)
-                }
-                .padding(.bottom, 24)
+                
+                // Checklist image from assets
+                Image("checklist")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 290, height: 290)
+                    .padding(.top, 50)
+                
                 
                 Text("Game Complete!")
-                    .font(.system(size: 20, weight: .semibold))
+                    .font(.manropeSemiBold(size: 24))
                     .foregroundColor(.black)
                 
                 Spacer()
@@ -403,7 +417,7 @@ struct GameCompleteView: View {
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 16)
                         .background(Color.black)
-                        .cornerRadius(12)
+                        .cornerRadius(5)
                 }
                 .padding(.horizontal, 24)
                 .padding(.bottom, 40)
@@ -424,7 +438,7 @@ struct MockData {
                 type: .context,
                 characterName: nil,
                 text: "Hey I know this is super random but I just had to come up and say hi",
-                imageName: "person.crop.circle",
+                imageName: "game_person_m",
                 options: nil,
                 order: 0
             ),
@@ -435,7 +449,7 @@ struct MockData {
                 type: .options,
                 characterName: nil,
                 text: "",
-                imageName: "person.crop.circle",
+                imageName: "nil",
                 options: [
                     GameOption(id: "opt_1", text: "Say hi", nextSceneId: "scene_3", isCorrect: true),
                     GameOption(id: "opt_2", text: "Go up behind her and slap them cheeks", nextSceneId: "scene_5", isCorrect: false)
@@ -449,7 +463,7 @@ struct MockData {
                 type: .userDialogue,
                 characterName: nil,
                 text: "Hey I know this is super random but I just had to come up and say hi",
-                imageName: "person.crop.circle",
+                imageName: "game_person_m",
                 options: nil,
                 order: 2
             ),
@@ -460,7 +474,7 @@ struct MockData {
                 type: .womanDialogue,
                 characterName: "Sophie",
                 text: "Inclusion reduces social tension and preserves control. Acknowledge her friends.",
-                imageName: "person.crop.circle.fill",
+                imageName: "game_person_f",
                 options: nil,
                 order: 3
             ),
@@ -471,7 +485,7 @@ struct MockData {
                 type: .feedback,
                 characterName: nil,
                 text: "While being direct sometimes works, it may come across as too forward in a cafe.",
-                imageName: "person.crop.circle",
+                imageName: "game_person_m",
                 options: nil,
                 order: 4
             )
@@ -521,7 +535,7 @@ struct MockData {
                 type: .womanDialogue,
                 characterName: "Sophie",
                 text: "Oh yes! It's really interesting. Are you into psychology?",
-                imageName: "person.crop.circle.fill",
+                imageName: "game_person_f",
                 options: nil,
                 order: 3
             ),
@@ -531,7 +545,7 @@ struct MockData {
                 type: .feedback,
                 characterName: nil,
                 text: "Too direct. A softer, more curious approach works better.",
-                imageName: "book.circle",
+                imageName: "game_person_m",
                 options: nil,
                 order: 4
             )

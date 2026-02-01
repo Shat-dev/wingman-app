@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import Supabase
+
 
 struct PracticeView: View {
 
     // MARK: - Properties
     @StateObject private var viewModel = PracticeViewModel()
     @State private var navigateToPracticeGame: Bool = false
+    @EnvironmentObject var authManager: AuthManager
 
     // MARK: - Body
     var body: some View {
@@ -41,13 +44,29 @@ struct PracticeView: View {
                 // Open PracticeGame.swift
                 PracticeGame(
                     gameData: MockData.sampleGame, // TODO: map to selected practice later
-                    userName: "You"
+                    userName: userDisplayName
                 )
             }
         }
         .task {
             await viewModel.fetchPractices()
         }
+    }
+
+    // MARK: - Derived user display name
+    private var userDisplayName: String {
+        // Prefer Supabase user metadata "display_name" saved during onboarding
+        if let user = SupabaseManager.shared.client.auth.currentUser {
+            if let name = user.userMetadata["display_name"]?.stringValue, !name.trimmingCharacters(in: .whitespaces).isEmpty {
+                return name
+            }
+            // Fallback to email local-part
+            if let email = user.email, let local = email.split(separator: "@").first, !local.isEmpty {
+                return String(local)
+            }
+        }
+        // Final fallback
+        return "You"
     }
 
     // MARK: - Header View
@@ -128,4 +147,5 @@ struct PracticeView: View {
 // MARK: - Preview
 #Preview {
     PracticeView()
+        .environmentObject(AuthManager())
 }
