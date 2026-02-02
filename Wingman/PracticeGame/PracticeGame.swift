@@ -298,14 +298,14 @@ struct DialogueContentView: View {
                 Text(displayName)
                     .font(.manropeMedium(size: 18))
                     .foregroundColor(.black.opacity(0.6))
-                    .padding(.leading, 10)
+                    .padding(.leading, 8)
             } else if scene.type == .womanDialogue {
                 HStack {
                     Spacer()
                     Text(displayName)
                         .font(.manropeMedium(size: 18))
                         .foregroundColor(.black.opacity(0.6))
-                        .padding(.trailing, 10)
+                        .padding(.trailing, 8)
                 }
             }
             
@@ -327,6 +327,7 @@ struct DialogueContentView: View {
                         RoundedRectangle(cornerRadius: 5)
                             .fill(Color.white)
                     )
+                    .shadow(color: Color.black.opacity(0.06), radius: 5, x: 0, y: 2) // <-- added elevation / shadow
             )
             
             // Action text
@@ -366,6 +367,7 @@ struct OptionsContentView: View {
                                     RoundedRectangle(cornerRadius: 5)
                                         .fill(Color.white)
                                 )
+                                .shadow(color: Color.black.opacity(0.06), radius: 5, x: 0, y: 2) // <-- added elevation / shadow
                         )
                 }
                 .buttonStyle(.plain)

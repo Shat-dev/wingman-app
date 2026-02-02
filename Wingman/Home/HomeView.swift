@@ -20,10 +20,10 @@ struct HomeView: View {
         let categories = CourseCategory.dummyCategories
         return [
             (categories[0], "Mindset & Foundations", "Suggested", "beliefandreframes"),
-            (categories[1], "Approach Mechanics", "Essential", "approachreadiness"),
+            (categories[1], "Approach Mechanics", "Essential", "approch_mech_ym"),
             (categories[2], "Conversation Flow", "Popular", "smalltalkandmomentum"),
-            (categories[3], "Flirting & Chemistry", "Advanced", "FlirtingPrerequisites"),
-            (categories[4], "Integration & Mastery", "Master Level", "Upgradingyourlifestyle")
+            (categories[3], "Flirting & Chemistry", "Advanced", "Flirting_ym"),
+            (categories[4], "Integration & Mastery", "Master Level", "Mastery&Identity")
         ]
     }
     
@@ -48,20 +48,20 @@ struct HomeView: View {
                                 if let name = name, !name.isEmpty {
                                     Text(name)
                                         .font(.manropeMedium(size: 24))
-                                        .foregroundColor(.black)
+                                        .foregroundColor(Color(hex: "1A1A1A").opacity(0.7))
                                 } else if let email = user.email, !email.isEmpty {
                                     Text(email)
                                         .font(.manropeMedium(size: 24))
-                                        .foregroundColor(.black)
+                                        .foregroundColor(Color(hex: "1A1A1A").opacity(0.7))
                                 } else {
                                     Text("User")
                                         .font(.manropeMedium(size: 24))
-                                        .foregroundColor(.black)
+                                        .foregroundColor(Color(hex: "1A1A1A").opacity(0.7))
                                 }
                             } else {
                                 Text("User")
                                     .font(.manropeMedium(size: 24))
-                                    .foregroundColor(.black)
+                                    .foregroundColor(Color(hex: "1A1A1A").opacity(0.7))
                             }
                         }
                         
@@ -110,15 +110,19 @@ struct HomeView: View {
                                         .padding(.top, 8)
                                         .frame(maxWidth: .infinity)
 
-                                    Button("Start") {
+                                    Button(action: {
                                         navigateToPractice = true
+                                    }) {
+                                        Text("Start")
+                                            .font(.manropeSemiBold(size: 16))
+                                            .foregroundColor(.white)
+                                            .frame(maxWidth: .infinity)
+                                            .frame(height: 52)
+                                            .background(Color.black)
+                                            .cornerRadius(5)
+                                            .contentShape(Rectangle())
                                     }
-                                    .font(.manropeSemiBold(size: 16))
-                                    .foregroundColor(.white)
-                                    .frame(maxWidth: .infinity)
-                                    .frame(height: 52)
-                                    .background(Color.black)
-                                    .cornerRadius(5)
+                                    .buttonStyle(.plain)
                                     .padding(.horizontal, 20)
                                     .padding(.bottom, 20)
                                     .padding(.top, 40)
@@ -172,7 +176,7 @@ struct HomeView: View {
                             
                             Divider().background(Color.gray.opacity(0.2))
                             
-                            // MARK: - Motivational Quote
+                            
                             // MARK: - Motivational Quote
                             VStack(alignment: .leading, spacing: 10) {
                                 Image("quote_sign")
@@ -199,7 +203,7 @@ struct HomeView: View {
                             if let course = viewModel.continueCourse {
                                 VStack(alignment: .leading, spacing: 16) {
                                     Text("Continue")
-                                        .font(.manropeMedium(size: 18))
+                                        .font(.manropeMedium(size: 20))
                                         .foregroundColor(.black)
                                         .padding(.horizontal, 20)
                                     
@@ -415,6 +419,7 @@ struct ModuleCarouselCard: View {
             RoundedRectangle(cornerRadius: 5)
                 .stroke(Color.black.opacity(0.08), lineWidth: 1)
         )
+        .shadow(color: Color.black.opacity(0.06), radius: 5, x: 0, y: 2) // <-- added elevation / shadow
     }
 }
 
@@ -436,7 +441,7 @@ struct ContinueCourseCard: View {
                         .scaledToFit()
                         .padding(8)
                 }
-                .frame(width: 100, height: 100)
+                .frame(width: 94, height: 94)
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
                         .stroke(Color.gray.opacity(0.15), lineWidth: 1)
@@ -451,6 +456,7 @@ struct ContinueCourseCard: View {
                         .lineSpacing(4)
                         .multilineTextAlignment(.leading)
                         .fixedSize(horizontal: false, vertical: true)
+                        .padding(.leading,20)
                     
                     Spacer()
                     
@@ -463,6 +469,7 @@ struct ContinueCourseCard: View {
                                 RoundedRectangle(cornerRadius: 2)
                                     .fill(Color(hex: "E5E5E5"))
                                     .frame(height: 4)
+                                    
                                 
                                 // Filled progress
                                 RoundedRectangle(cornerRadius: 2)
@@ -471,17 +478,19 @@ struct ContinueCourseCard: View {
                             }
                         }
                         .frame(height: 4)
+                        .padding(.leading,20)
                         
                         // Percentage
                         Text("\(Int(course.progress * 100))%")
                             .font(.manropeMedium(size: 14))
                             .foregroundColor(Color(hex: "000000"))
-                            .frame(width: 40, alignment: .trailing)
+                            .frame(width: 40)
+
                     }
                 }
-                .padding(.vertical, 12)
+                .padding(.vertical,10)
             }
-            .padding(16)
+            .padding(20)
             .frame(maxWidth: .infinity, alignment: .leading)
             .frame(height: 132)
             .background(Color.white)
