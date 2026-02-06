@@ -6,10 +6,14 @@
 import SwiftUI
 
 struct CoursesView: View {
+    // Observe router to receive deep-link open requests
+    @EnvironmentObject private var coursesRouter: CoursesRouter
+    
     @StateObject private var viewModel = CoursesViewModel()
     @State private var scrollProxy: ScrollViewProxy? = nil
     @State private var categoryScrollProxy: ScrollViewProxy? = nil
     @State private var isUserScrolling = false  // Track if user manually clicked a pill
+    @State private var didApplyInitialScroll = false
     
     var body: some View {
         NavigationStack {
@@ -98,6 +102,12 @@ struct CoursesView: View {
                             }
                             .onAppear {
                                 scrollProxy = proxy
+                                
+                                // Apply initial deep-linking after data is ready (once)
+                                if !didApplyInitialScroll {
+                                    didApplyInitialScroll = true
+                                    applyDeepLinkIfNeeded()
+                                }
                             }
                         }
                     }
@@ -105,7 +115,46 @@ struct CoursesView: View {
             }
             .navigationBarHidden(true)
             .onAppear {
-                print("👁️ CoursesView appeared")
+                // Try again when view appears (in case data finished after)
+                applyDeepLinkIfNeeded()
+            }
+            // React to new open requests while Courses tab is visible
+            .onReceive(coursesRouter.$trigger) { _ in
+                // Ensure we are on Courses tab when an open request arrives; MainTabView handles tab switch.
+                applyDeepLinkIfNeeded()
+            }
+        }
+    }
+    
+    private func applyDeepLinkIfNeeded() {
+        guard !viewModel.isLoading,
+              let categoryId = coursesRouter.initialSelectedCategoryId
+        else { return }
+        
+        // We are programmatically controlling selection/scrolling
+        isUserScrolling = false
+        
+        // Select the category
+        withAnimation(.easeInOut(duration: 0.25)) {
+            viewModel.selectCategory(categoryId)
+        }
+        
+        // Scroll vertical list to category section
+        if let scrollProxy {
+            withAnimation(.easeInOut(duration: 0.35)) {
+                scrollProxy.scrollTo(categoryId, anchor: .top)
+            }
+        } else {
+            // Retry shortly if proxy not ready yet
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                applyDeepLinkIfNeeded()
+            }
+        }
+        
+        // Center the horizontal pill for that category
+        if let categoryScrollProxy {
+            withAnimation(.easeInOut(duration: 0.35)) {
+                categoryScrollProxy.scrollTo("pill_\(categoryId)", anchor: .center)
             }
         }
     }

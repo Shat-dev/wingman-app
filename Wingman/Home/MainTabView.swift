@@ -5,7 +5,6 @@
 //  Created by Adnan Khan on 22/12/2025.
 //
 
-
 // MainTabView.swift
 // Pixel-perfect blurred bottom tab bar
 // Keeps the same type / method names: MainTabView, CustomTabBar, TabBarButton
@@ -15,15 +14,18 @@ import UIKit
 
 struct MainTabView: View {
     @State private var selectedTab = 0
+    @StateObject private var coursesRouter = CoursesRouter()
 
     var body: some View {
+
         ZStack(alignment: .bottom) {
-            // Main Content (keeps your existing views)
             TabView(selection: $selectedTab) {
-                HomeView()
+                HomeView(selectedTab: $selectedTab)
+                    .environmentObject(coursesRouter)
                     .tag(0)
 
                 CoursesView()
+                    .environmentObject(coursesRouter)
                     .tag(1)
 
                 PracticeView()
@@ -34,7 +36,6 @@ struct MainTabView: View {
             }
             .tabViewStyle(.automatic)
 
-            // Custom Tab Bar (blurred / frosted)
             CustomTabBar(selectedTab: $selectedTab)
         }
         .ignoresSafeArea(.keyboard)
@@ -130,8 +131,6 @@ struct TabBarButton: View {
                     .foregroundColor(isSelected ? .black : Color.gray.opacity(0.5))
                     .frame(height: 24)
 
-                // If you use Manrope font extension in your project, replace with:
-                // .font(isSelected ? .manropeSemiBold(size: 11) : .manropeRegular(size: 11))
                 Text(title)
                     .font(.system(size: 11, weight: isSelected ? .semibold : .regular))
                     .foregroundColor(isSelected ? .black : Color.gray.opacity(0.5))

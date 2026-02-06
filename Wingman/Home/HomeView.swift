@@ -8,10 +8,13 @@ import Auth
 import Supabase
 
 struct HomeView: View {
+    // Binding added so Home can change the selected tab in MainTabView
+    @Binding var selectedTab: Int
+    @EnvironmentObject private var coursesRouter: CoursesRouter
+
     @StateObject private var viewModel = HomeViewModel()
     @State private var navigateToPractice = false
     @State private var showLogApproachSheet = false
-    @State private var navigateToCourse = false
     @State private var selectedCourse: Course? = nil
     @State private var currentModulePage: Int = 0
     
@@ -19,11 +22,11 @@ struct HomeView: View {
     private var modules: [(category: CourseCategory, title: String, subtitle: String, imageName: String)] {
         let categories = CourseCategory.dummyCategories
         return [
-            (categories[0], "Mindset & Foundations", "Suggested", "beliefandreframes"),
-            (categories[1], "Approach Mechanics", "Essential", "approch_mech_ym"),
-            (categories[2], "Conversation Flow", "Popular", "smalltalkandmomentum"),
-            (categories[3], "Flirting & Chemistry", "Advanced", "Flirting_ym"),
-            (categories[4], "Integration & Mastery", "Master Level", "Mastery&Identity")
+            (categories[0], "Mindset & Foundations", "", "beliefandreframes"),
+            (categories[1], "Approach Mechanics", "", "approch_mech_ym"),
+            (categories[2], "Conversation Flow", "", "smalltalkandmomentum"),
+            (categories[3], "Flirting & Chemistry", "", "Flirting_ym"),
+            (categories[4], "Integration & Mastery", "", "Mastery&Identity")
         ]
     }
     
@@ -209,9 +212,10 @@ struct HomeView: View {
                                     
                                     // Continue Course Card - Pixel Perfect Design
                                     ContinueCourseCard(course: course) {
-                                        // Find the actual Course object and navigate
-                                        selectedCourse = findCourse(courseId: course.courseId)
-                                        navigateToCourse = true
+                                        // Restore previous behavior: push directly to the last course
+                                        if let found = findCourse(courseId: course.courseId) {
+                                            selectedCourse = found
+                                        }
                                     }
                                     .padding(.horizontal, 20)
                                 }
@@ -229,10 +233,9 @@ struct HomeView: View {
                                     modules: modules,
                                     currentPage: $currentModulePage,
                                     onModuleSelected: { category in
-                                        if let firstCourse = category.courses.first {
-                                            selectedCourse = firstCourse
-                                            navigateToCourse = true
-                                        }
+                                        // Switch tab to Courses and deep link to category
+                                        selectedTab = 1
+                                        coursesRouter.open(categoryId: category.id, courseId: category.courses.first?.id)
                                     }
                                 )
                             }
@@ -244,13 +247,23 @@ struct HomeView: View {
                 }
             }
             .navigationBarHidden(true)
+            // Hidden navigation link to push CourseDetailSheet when selectedCourse is set
+            .background(
+                NavigationLink(
+                    destination: selectedCourse.map { CourseDetailSheet(course: $0) },
+                    isActive: Binding(
+                        get: { selectedCourse != nil },
+                        set: { isActive in
+                            if !isActive { selectedCourse = nil }
+                        }
+                    )
+                ) {
+                    EmptyView()
+                }
+                .hidden()
+            )
             .navigationDestination(isPresented: $navigateToPractice) {
                 DailyPracticeView()
-            }
-            .navigationDestination(isPresented: $navigateToCourse) {
-                if let course = selectedCourse {
-                    CourseDetailSheet(course: course)
-                }
             }
             .sheet(isPresented: $showLogApproachSheet) {
                 LogApproachBottomSheet(isPresented: $showLogApproachSheet)
@@ -419,7 +432,7 @@ struct ModuleCarouselCard: View {
             RoundedRectangle(cornerRadius: 5)
                 .stroke(Color.black.opacity(0.08), lineWidth: 1)
         )
-        .shadow(color: Color.black.opacity(0.06), radius: 5, x: 0, y: 2) // <-- added elevation / shadow
+        .shadow(color: Color.black.opacity(0.06), radius: 5, x: 0, y: 2)
     }
 }
 
@@ -516,5 +529,6 @@ extension Course: Hashable {
 }
 
 #Preview {
-    HomeView()
+    // Provide a constant binding for previews
+    HomeView(selectedTab: .constant(0))
 }
