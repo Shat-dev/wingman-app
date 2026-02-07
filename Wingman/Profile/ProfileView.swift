@@ -4,9 +4,17 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ProfileView: View {
     @State private var showSettings = false
+    @State private var showEditProfile = false
+    @State private var showApproachesLogged = false
+    @State private var userName = "Shat"
+    @State private var approachesCount = 0
+    @State private var hasReflections = false
+    @State private var approachesBreakdown: [(String, Int, Double)] = []
+    @StateObject private var approachService = ApproachService.shared
     
     var body: some View {
         NavigationStack {
@@ -17,32 +25,36 @@ struct ProfileView: View {
                     VStack(spacing: 0) {
                         
                         // MARK: - User Profile Card
-                        HStack(spacing: 12) {
-                            // Avatar placeholder
-                            ZStack {
-                                Circle()
-                                    .fill(Color.gray.opacity(0.1))
-                                    .frame(width: 50, height: 50)
+                        Button(action: {
+                            showEditProfile = true
+                        }) {
+                            HStack(spacing: 12) {
+                                // Avatar placeholder
+                                ZStack {
+                                    Circle()
+                                        .fill(Color.gray.opacity(0.1))
+                                        .frame(width: 50, height: 50)
+                                    
+                                    Image(systemName: "person.fill")
+                                        .font(.system(size: 24))
+                                        .foregroundColor(.gray.opacity(0.4))
+                                }
                                 
-                                Image(systemName: "person.fill")
-                                    .font(.system(size: 24))
-                                    .foregroundColor(.gray.opacity(0.4))
+                                Text(userName)
+                                    .font(.manropeRegular(size: 18))
+                                    .foregroundColor(.black)
+                                
+                                Spacer()
+                                
+                                Image(systemName: "chevron.right")
+                                    .font(.system(size: 14, weight: .medium))
+                                    .foregroundColor(.gray)
                             }
-                            
-                            Text("Shat")
-                                .font(.manropeRegular(size: 18))
-                                .foregroundColor(.black)
-                            
-                            Spacer()
-                            
-                            Image(systemName: "chevron.right")
-                                .font(.system(size: 14, weight: .medium))
-                                .foregroundColor(.gray)
+                            .padding(16)
+                            .background(Color.white)
+                            .cornerRadius(12)
+                            .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
                         }
-                        .padding(16)
-                        .background(Color.white)
-                        .cornerRadius(12)
-                        .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
                         .padding(.horizontal, 16)
                         .padding(.top, 16)
                         
@@ -62,18 +74,18 @@ struct ProfileView: View {
                             .padding(.top, 16)
                         
                         // MARK: - Approaches Breakdown
-                        ApproachesBreakdownCard()
+                        ApproachesBreakdownCard(breakdown: approachesBreakdown)
                             .padding(.horizontal, 16)
                             .padding(.top, 16)
                         
-                        // MARK: - Approaches Logged Cards
-                        ApproachesLoggedCard(count: 0, hasReflections: false)
-                            .padding(.horizontal, 16)
-                            .padding(.top, 16)
-                        
-                        ApproachesLoggedCard(count: 69, hasReflections: true)
-                            .padding(.horizontal, 16)
-                            .padding(.top, 12)
+                        // MARK: - Approaches Logged Card
+                        Button(action: {
+                            showApproachesLogged = true
+                        }) {
+                            ApproachesLoggedCard(count: approachesCount, hasReflections: hasReflections)
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.top, 16)
                         
                         Spacer().frame(height: 100)
                     }
@@ -99,8 +111,54 @@ struct ProfileView: View {
                 }
             }
             .sheet(isPresented: $showSettings) {
-                SettingsSheet()
+                SettingsSheet(userName: userName)
             }
+            .sheet(isPresented: $showEditProfile) {
+                EditProfileSheet(currentName: userName) { newName in
+                    userName = newName
+                    // TODO: Save to Supabase
+                    UserDefaults.standard.set(newName, forKey: "user_name")
+                }
+                .presentationDetents([.medium])
+                .presentationDragIndicator(.hidden)
+                .presentationCornerRadius(20)
+            }
+            .fullScreenCover(isPresented: $showApproachesLogged) {
+                ApproachesLoggedListView()
+            }
+        }
+        .onAppear {
+            loadUserData()
+        }
+        .refreshable {
+            await loadApproachData()
+        }
+    }
+    
+    private func loadUserData() {
+        // Load user name from UserDefaults or Supabase
+        if let savedName = UserDefaults.standard.string(forKey: "user_name") {
+            userName = savedName
+        }
+        
+        // Load approach data
+        Task {
+            await loadApproachData()
+        }
+    }
+    
+    private func loadApproachData() async {
+        // Fetch fresh data from Supabase
+        await approachService.fetchApproaches()
+        
+        // Update local state with fresh data
+        await MainActor.run {
+            self.approachesCount = approachService.totalCount
+            self.hasReflections = approachService.totalCount > 0
+            self.approachesBreakdown = approachService.getApproachesBreakdown()
+            
+            // Update local stats for other parts of the app
+            approachService.updateLocalStats()
         }
     }
 }
@@ -173,29 +231,47 @@ struct WeekStreakCard: View {
 // MARK: - Invite Friends Card
 struct InviteFriendsCard: View {
     var body: some View {
-        HStack(spacing: 16) {
-            VStack(alignment: .leading, spacing: 4) {
-                Text("Invite Friends")
-                    .font(.manropeSemiBold(size: 16))
-                    .foregroundColor(.black)
+        Button(action: {
+            shareApp()
+        }) {
+            HStack(spacing: 16) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Invite Friends")
+                        .font(.manropeSemiBold(size: 16))
+                        .foregroundColor(.black)
+                    
+                    Text("Invite your friends to the community and learn together")
+                        .font(.manropeRegular(size: 13))
+                        .foregroundColor(.gray)
+                        .lineSpacing(2)
+                }
                 
-                Text("Invite your friends to the community and learn together")
-                    .font(.manropeRegular(size: 13))
-                    .foregroundColor(.gray)
-                    .lineSpacing(2)
+                Spacer()
+                
+                // Illustration placeholder
+                Image(systemName: "person.2")
+                    .font(.system(size: 50))
+                    .foregroundColor(.gray.opacity(0.2))
             }
-            
-            Spacer()
-            
-            // Illustration placeholder
-            Image(systemName: "person.2")
-                .font(.system(size: 50))
-                .foregroundColor(.gray.opacity(0.2))
+            .padding(16)
+            .background(Color.white)
+            .cornerRadius(12)
+            .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
         }
-        .padding(16)
-        .background(Color.white)
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
+    }
+    
+    private func shareApp() {
+        let appURL = "https://apps.apple.com/app/wingman" // Replace with actual app URL
+        let activityVC = UIActivityViewController(
+            activityItems: ["Join me on Wingman! \(appURL)"],
+            applicationActivities: nil
+        )
+        
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first,
+           let rootVC = window.rootViewController {
+            rootVC.present(activityVC, animated: true)
+        }
     }
 }
 
@@ -252,12 +328,7 @@ struct ConfidenceChartCard: View {
 
 // MARK: - Approaches Breakdown Card
 struct ApproachesBreakdownCard: View {
-    let approaches = [
-        ("Level 1: Social warm-up", 12, 1.0),
-        ("Level 2: Extended conversation", 8, 0.67),
-        ("Level 3: Indirect approach", 3, 0.25),
-        ("Level 4: Direct approach", 1, 0.08)
-    ]
+    let breakdown: [(String, Int, Double)]
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -265,33 +336,54 @@ struct ApproachesBreakdownCard: View {
                 .font(.manropeSemiBold(size: 16))
                 .foregroundColor(.black)
             
-            VStack(spacing: 12) {
-                ForEach(approaches, id: \.0) { approach in
-                    VStack(alignment: .leading, spacing: 6) {
-                        HStack {
-                            Text(approach.0)
-                                .font(.manropeRegular(size: 14))
-                                .foregroundColor(.black)
-                            
-                            Spacer()
-                            
-                            Text("\(approach.1)")
-                                .font(.manropeSemiBold(size: 14))
-                                .foregroundColor(.black)
-                        }
-                        
-                        GeometryReader { geometry in
-                            ZStack(alignment: .leading) {
-                                RoundedRectangle(cornerRadius: 4)
-                                    .fill(Color.gray.opacity(0.1))
-                                    .frame(height: 8)
+            if breakdown.isEmpty {
+                VStack(spacing: 8) {
+                    Image(systemName: "chart.bar")
+                        .font(.system(size: 30))
+                        .foregroundColor(.gray.opacity(0.3))
+                    
+                    Text("No approach data yet")
+                        .font(.manropeMedium(size: 14))
+                        .foregroundColor(.gray)
+                    
+                    Text("Start logging approaches to see your breakdown")
+                        .font(.manropeRegular(size: 12))
+                        .foregroundColor(.gray.opacity(0.7))
+                        .multilineTextAlignment(.center)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 20)
+            } else {
+                VStack(spacing: 12) {
+                    ForEach(breakdown, id: \.0) { approach in
+                        VStack(alignment: .leading, spacing: 6) {
+                            HStack {
+                                Text(approach.0)
+                                    .font(.manropeRegular(size: 14))
+                                    .foregroundColor(.black)
                                 
-                                RoundedRectangle(cornerRadius: 4)
-                                    .fill(Color.black)
-                                    .frame(width: geometry.size.width * approach.2, height: 8)
+                                Spacer()
+                                
+                                Text("\(approach.1)")
+                                    .font(.manropeSemiBold(size: 14))
+                                    .foregroundColor(.black)
                             }
+                            
+                            GeometryReader { geometry in
+                                ZStack(alignment: .leading) {
+                                    RoundedRectangle(cornerRadius: 4)
+                                        .fill(Color.gray.opacity(0.1))
+                                        .frame(height: 8)
+                                    
+                                    if approach.2 > 0 {
+                                        RoundedRectangle(cornerRadius: 4)
+                                            .fill(Color.black)
+                                            .frame(width: geometry.size.width * approach.2, height: 8)
+                                    }
+                                }
+                            }
+                            .frame(height: 8)
                         }
-                        .frame(height: 8)
                     }
                 }
             }
@@ -319,7 +411,7 @@ struct ApproachesLoggedCard: View {
                     .font(.manropeSemiBold(size: 15))
                     .foregroundColor(.black)
                 
-                Text(hasReflections ? "check your reflections to see insights" : "No reflections yet. Start logging approaches with notes to see your insights")
+                Text(hasReflections ? "Check your reflections to see insights" : "No reflections yet. Start logging approaches with notes to see your insights")
                     .font(.manropeRegular(size: 12))
                     .foregroundColor(.gray)
                     .lineSpacing(2)

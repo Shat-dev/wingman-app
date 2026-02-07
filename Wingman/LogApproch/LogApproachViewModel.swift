@@ -12,6 +12,7 @@ final class LogApproachViewModel: ObservableObject {
     // MARK: - Published Properties
     @Published var selectedLevel: Int = 2 // Default: Level 2
     @Published var anxietyLevel: Double = 5.0 // Range: 1-10
+    @Published var title: String = "" // NEW: Title field for the approach
     @Published var notes: String = ""
     @Published var isSaving: Bool = false
     @Published var showSuccess: Bool = false
@@ -32,22 +33,24 @@ final class LogApproachViewModel: ObservableObject {
     
     // MARK: - Computed Properties
     var canSave: Bool {
-        // At minimum, must select a level
-        return selectedLevel >= 1 && selectedLevel <= 4
+        // Must have at least a title and valid level
+        return !title.trimmingCharacters(in: .whitespaces).isEmpty
+            && selectedLevel >= 1
+            && selectedLevel <= 4
     }
     
     var anxietyLevelText: String {
         let descriptions = [
-            1: "Calm",
-            2: "Relaxed",
+            1: "Very anxious",
+            2: "Anxious",
             3: "Slightly nervous",
             4: "Moderate anxiety",
-            5: "Noticeable anxiety",
-            6: "Significant anxiety",
-            7: "High anxiety",
-            8: "Very anxious",
-            9: "Extremely anxious",
-            10: "Very anxious"
+            5: "Neutral",
+            6: "Somewhat confident",
+            7: "Confident",
+            8: "Very confident",
+            9: "Extremely confident",
+            10: "Very confident"
         ]
         
         let level = Int(anxietyLevel.rounded())
@@ -56,30 +59,31 @@ final class LogApproachViewModel: ObservableObject {
     
     // MARK: - Actions
     func selectLevel(_ level: Int) {
-        print("📍 Selected approach level: \(level)")
+        print("📝 Selected approach level: \(level)")
         print("   - Level name: \(levels[level - 1].title)")
         selectedLevel = level
     }
     
     func updateAnxietyLevel(_ value: Double) {
         anxietyLevel = value
-        print("😰 Anxiety level updated: \(Int(value))/10 - \(anxietyLevelText)")
+        print("😰 Confidence level updated: \(Int(value))/10 - \(anxietyLevelText)")
     }
     
     func showInfoSheet() {
         print("ℹ️ Info button tapped - Show approach levels guide")
-        // TODO: Show ApproachGuideBottomSheet
     }
     
     func saveApproach() {
         guard canSave else {
             print("❌ Cannot save - validation failed")
+            errorMessage = "Please provide a title for your encounter"
             return
         }
         
         print("\n💾 Saving approach log...")
+        print("   - Title: \(title)")
         print("   - Level: \(selectedLevel) - \(levels[selectedLevel - 1].title)")
-        print("   - Anxiety: \(Int(anxietyLevel))/10 - \(anxietyLevelText)")
+        print("   - Confidence: \(Int(anxietyLevel))/10 - \(anxietyLevelText)")
         print("   - Notes: \(notes.isEmpty ? "(empty)" : notes)")
         
         isSaving = true
@@ -123,6 +127,7 @@ final class LogApproachViewModel: ObservableObject {
         
         struct ApproachLog: Codable {
             let userId: String
+            let title: String
             let approachLevel: Int
             let anxietyLevel: Int
             let notes: String?
@@ -130,6 +135,7 @@ final class LogApproachViewModel: ObservableObject {
             
             enum CodingKeys: String, CodingKey {
                 case userId = "user_id"
+                case title
                 case approachLevel = "approach_level"
                 case anxietyLevel = "anxiety_level"
                 case notes
@@ -139,16 +145,28 @@ final class LogApproachViewModel: ObservableObject {
         
         let log = ApproachLog(
             userId: userId,
+            title: title,
             approachLevel: selectedLevel,
             anxietyLevel: Int(anxietyLevel),
             notes: notes.isEmpty ? nil : notes,
             loggedAt: ISO8601DateFormatter().string(from: Date())
         )
         
+        print("📤 Sending to Supabase:")
+        print("   - User ID: \(userId)")
+        print("   - Title: \(log.title)")
+        print("   - Level: \(log.approachLevel)")
+        print("   - Confidence: \(log.anxietyLevel)")
+        
         try await client
             .from("approach_logs")
             .insert(log)
             .execute()
+        
+        print("✅ Successfully inserted into database")
+        
+        // Refresh the shared approach service to update UI
+        await ApproachService.shared.fetchApproaches()
         
         // Update streak and stats
         updateUserStats()
@@ -167,6 +185,7 @@ final class LogApproachViewModel: ObservableObject {
     }
     
     private func resetForm() {
+        title = ""
         selectedLevel = 2
         anxietyLevel = 5.0
         notes = ""

@@ -40,7 +40,7 @@ struct HomeView: View {
                     // MARK: - Header
                     HStack(alignment: .top) {
                         VStack(alignment: .leading, spacing: 2) {
-                            Text("Good Morning,")
+                            Text("Good Morning," )
                                 .font(.manropeMedium(size: 24))
                                 .foregroundColor(.black)
                             

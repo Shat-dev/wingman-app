@@ -2,21 +2,18 @@
 //  SettingsSheet.swift
 //  Wingman
 //
-//  Created by Adnan Khan on 08/01/2026.
-//
-
-
-//
-//  SettingsSheet.swift
-//  Wingman
-//
 
 import SwiftUI
+import Auth
+import Supabase
 
 struct SettingsSheet: View {
     @Environment(\.dismiss) private var dismiss
     @State private var goalNotifications = true
     @State private var showingDeleteAlert = false
+    @State private var showDailyReadingGoal = false
+    @State private var dailyReadingGoal = 10
+    let userName: String
     
     var body: some View {
         NavigationStack {
@@ -36,7 +33,7 @@ struct SettingsSheet: View {
                                 .font(.system(size: 16))
                                 .foregroundColor(.black)
                             
-                            Text("shat.myapantsx10@gmail.com")
+                            Text(getUserEmail())
                                 .font(.manropeRegular(size: 15))
                                 .foregroundColor(.black)
                         }
@@ -45,7 +42,9 @@ struct SettingsSheet: View {
                     .padding(.top, 24)
                     
                     // MARK: - Daily Reading Goal
-                    NavigationLink(destination: Text("Daily Reading Goal")) {
+                    Button(action: {
+                        showDailyReadingGoal = true
+                    }) {
                         HStack {
                             Text("Daily Reading Goal")
                                 .font(.manropeRegular(size: 15))
@@ -53,7 +52,7 @@ struct SettingsSheet: View {
                             
                             Spacer()
                             
-                            Text("10 min / day")
+                            Text("\(dailyReadingGoal) min / day")
                                 .font(.manropeRegular(size: 15))
                                 .foregroundColor(.gray)
                             
@@ -79,6 +78,9 @@ struct SettingsSheet: View {
                         Toggle("", isOn: $goalNotifications)
                             .labelsHidden()
                             .tint(.green)
+                            .onChange(of: goalNotifications) { newValue in
+                                UserDefaults.standard.set(newValue, forKey: "goal_notifications")
+                            }
                     }
                     .padding(.horizontal, 24)
                     .padding(.vertical, 16)
@@ -88,7 +90,7 @@ struct SettingsSheet: View {
                     
                     // MARK: - Restore Purchase
                     Button(action: {
-                        print("Restore Purchase tapped")
+                        restorePurchase()
                     }) {
                         Text("Restore Purchase")
                             .font(.manropeRegular(size: 15))
@@ -103,7 +105,7 @@ struct SettingsSheet: View {
                     
                     // MARK: - Manage Subscriptions
                     Button(action: {
-                        print("Manage Subscriptions tapped")
+                        manageSubscriptions()
                     }) {
                         Text("Manage Subscriptions")
                             .font(.manropeRegular(size: 15))
@@ -143,7 +145,7 @@ struct SettingsSheet: View {
                     
                     // MARK: - Log Out Button
                     Button(action: {
-                        print("Log Out tapped")
+                        logOut()
                     }) {
                         Text("Log Out")
                             .font(.manropeSemiBold(size: 16))
@@ -182,15 +184,91 @@ struct SettingsSheet: View {
             .alert("Delete Account", isPresented: $showingDeleteAlert) {
                 Button("Cancel", role: .cancel) { }
                 Button("Delete", role: .destructive) {
-                    print("Account deletion confirmed")
+                    deleteAccount()
                 }
             } message: {
                 Text("Are you sure you want to delete your account? This action cannot be undone.")
+            }
+            .sheet(isPresented: $showDailyReadingGoal) {
+                DailyReadingGoalSheet(currentGoal: dailyReadingGoal) { newGoal in
+                    dailyReadingGoal = newGoal
+                }
+                .presentationDetents([.medium])
+                .presentationDragIndicator(.hidden)
+                .presentationCornerRadius(20)
+            }
+        }
+        .onAppear {
+            loadSettings()
+        }
+    }
+    
+    private func loadSettings() {
+        dailyReadingGoal = UserDefaults.standard.integer(forKey: "daily_reading_goal")
+        if dailyReadingGoal == 0 {
+            dailyReadingGoal = 10 // Default value
+        }
+        goalNotifications = UserDefaults.standard.bool(forKey: "goal_notifications")
+    }
+    
+    private func getUserEmail() -> String {
+        return UserDefaults.standard.string(forKey: "user_email") ?? "shat.myapantsx10@gmail.com"
+    }
+    
+    private func restorePurchase() {
+        // TODO: Implement restore purchase logic
+        print("Restore Purchase tapped")
+    }
+    
+    private func manageSubscriptions() {
+        // TODO: Open App Store subscriptions page
+        print("Manage Subscriptions tapped")
+        if let url = URL(string: "https://apps.apple.com/account/subscriptions") {
+            UIApplication.shared.open(url)
+        }
+    }
+    
+    private func deleteAccount() {
+        // TODO: Delete account from Supabase
+        Task {
+            do {
+                // Delete from Supabase
+                try await SupabaseManager.shared.client.auth.signOut()
+                
+                // Clear local data
+                SupabaseManager.shared.clearCurrentUser()
+                
+                // Dismiss and navigate to login screen
+                await MainActor.run {
+                    dismiss()
+                    // TODO: Navigate to login screen
+                    print("Account deleted successfully")
+                }
+            } catch {
+                print("Error deleting account: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    private func logOut() {
+        // TODO: Sign out from Supabase
+        Task {
+            do {
+                try await SupabaseManager.shared.client.auth.signOut()
+                SupabaseManager.shared.clearCurrentUser()
+                
+                await MainActor.run {
+                    dismiss()
+                    // TODO: Navigate to login screen
+                    print("Logged out successfully")
+                }
+            } catch {
+                print("Error logging out: \(error.localizedDescription)")
             }
         }
     }
 }
 
 #Preview {
-    SettingsSheet()
+    SettingsSheet(userName: "Shat")
 }

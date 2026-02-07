@@ -2,7 +2,6 @@
 //  LogApproachBottomSheet.swift
 //  Wingman
 //
-//
 
 import SwiftUI
 
@@ -11,7 +10,6 @@ struct LogApproachBottomSheet: View {
     @StateObject private var viewModel = LogApproachViewModel()
     @State private var dragOffset: CGFloat = 0
     @State private var showApproachGuide = false
-    @State private var title: String = ""
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -27,15 +25,15 @@ struct LogApproachBottomSheet: View {
                     .padding(.top, 12)
                     .padding(.bottom, 20)
 
-                // Header (ONLY title; close button moved to top-right of sheet)
+                // Header
                 HStack {
-                    Text("Log Your Approach")
+                    Text("Log Encounter")
                         .font(.manropeMedium(size: 20))
                         .foregroundColor(.black)
-                        .padding()
 
                     Spacer()
                 }
+                .padding(.horizontal, 20)
                 .padding(.bottom, 24)
 
                 // Content
@@ -156,13 +154,13 @@ struct LogApproachBottomSheet: View {
                             }
                         }
 
-                        // MARK: - Title Section
+                        // MARK: - Title Section (NOW BOUND TO VIEWMODEL)
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Title")
                                 .font(.manropeMedium(size: 16))
                                 .foregroundColor(.black)
 
-                            TextField("E.g. Approached at Cafe", text: $title)
+                            TextField("E.g. Approached at Cafe", text: $viewModel.title)
                                 .font(.manropeRegular(size: 14))
                                 .foregroundColor(.black)
                                 .padding(.horizontal, 14)
@@ -191,7 +189,7 @@ struct LogApproachBottomSheet: View {
                                 }
 
                                 TextEditor(text: $viewModel.notes)
-                                    .font(.system(size: 14))
+                                    .font(.manropeRegular(size: 14))
                                     .foregroundColor(.black)
                                     .frame(minHeight: 100)
                                     .padding(.horizontal, 10)
@@ -228,17 +226,17 @@ struct LogApproachBottomSheet: View {
                                         .font(.system(size: 16, weight: .semibold))
                                         .foregroundColor(.white)
                                     Text("Saved!")
-                                        .font(.system(size: 16, weight: .semibold))
+                                        .font(.manropeSemiBold(size: 16))
                                         .foregroundColor(.white)
                                 } else {
                                     Text("Save")
-                                        .font(.system(size: 16, weight: .semibold))
+                                        .font(.manropeSemiBold(size: 16))
                                         .foregroundColor(.white)
                                 }
                             }
                             .frame(maxWidth: .infinity)
                             .frame(height: 52)
-                            .background(Color.black)
+                            .background(viewModel.canSave ? Color.black : Color.gray.opacity(0.3))
                             .cornerRadius(8)
                         }
                         .disabled(!viewModel.canSave || viewModel.isSaving)
@@ -246,7 +244,7 @@ struct LogApproachBottomSheet: View {
                         // Error message
                         if !viewModel.errorMessage.isEmpty {
                             Text(viewModel.errorMessage)
-                                .font(.system(size: 14))
+                                .font(.manropeRegular(size: 14))
                                 .foregroundColor(.red)
                                 .multilineTextAlignment(.center)
                                 .frame(maxWidth: .infinity)
@@ -277,7 +275,7 @@ struct LogApproachBottomSheet: View {
                     }
             )
 
-            // ✅ Close button pinned to the sheet's top-right corner (like your design)
+            // Close button pinned to the sheet's top-right corner
             Button(action: {
                 withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
                     isPresented = false
@@ -286,7 +284,7 @@ struct LogApproachBottomSheet: View {
                 Image(systemName: "xmark")
                     .font(.system(size: 13, weight: .medium))
                     .foregroundColor(.gray)
-                    .frame(width: 20, height:20)
+                    .frame(width: 20, height: 20)
                     .contentShape(Rectangle())
             }
             .padding(.top, 20)
