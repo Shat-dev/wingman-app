@@ -470,14 +470,13 @@ struct ApproachesLoggedCard: View {
                 
                 Spacer()
                 
-                HStack(spacing: 8) {
+                HStack(spacing: 0) {
                     // Count pill (always shows, including 0)
                     Text("\(count)")
                         .font(.manropeMedium(size: 18))
                         .foregroundColor(.init(hex: "#1A1A1A"))
-                        .opacity(0.7)
-                        .padding(.horizontal, 10)
-                        .padding(.trailing, 2)
+                        .opacity(0.5)
+                        .padding(.horizontal, 2)
                         .background(Color.white)
                         .cornerRadius(5)
                     
