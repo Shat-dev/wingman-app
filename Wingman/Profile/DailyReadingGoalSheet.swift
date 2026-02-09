@@ -33,11 +33,20 @@ struct DailyReadingGoalSheet: View {
                 Color.white.ignoresSafeArea()
                 
                 VStack(spacing: 0) {
+                    // MARK: - Grabber (small centered gray line)
+                    HStack {
+                        Capsule()
+                            .fill(Color.gray.opacity(0.3))
+                            .frame(width: 36, height: 5)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.top, 8)
+                    .padding(.bottom, 6)
                     
                     // MARK: - Custom Title Row
                     HStack {
                         Text("Daily Reading Goal")
-                            .font(.manropeSemiBold(size: 18))
+                            .font(.manropeMedium(size: 18))
                             .foregroundColor(.black)
                         
                         Spacer()
@@ -48,11 +57,15 @@ struct DailyReadingGoalSheet: View {
                             Image(systemName: "xmark")
                                 .font(.system(size: 16, weight: .medium))
                                 .foregroundColor(.black)
+                                .padding(.top, -20)
+                                .padding(.trailing, -2)
+                                .opacity(0.5)
                         }
                         .buttonStyle(.plain)
                     }
                     .padding(.horizontal, 16)
                     .padding(.top, 12)
+                    .padding(.bottom,30)
                     
                     // Goals List
                     VStack(spacing: 0) {
@@ -62,7 +75,7 @@ struct DailyReadingGoalSheet: View {
                             }) {
                                 HStack {
                                     Text("\(goal) min / day")
-                                        .font(.manropeRegular(size: 15))
+                                        .font(.manropeRegular(size: 16))
                                         .foregroundColor(.black)
                                     
                                     Spacer()
@@ -78,13 +91,10 @@ struct DailyReadingGoalSheet: View {
                                     }
                                 }
                                 .padding(.horizontal, 24)
-                                .padding(.vertical, 16)
+                                .padding(.bottom, 20)
                             }
                             
-                            if goal != goals.last {
-                                Divider()
-                                    .padding(.horizontal, 24)
-                            }
+                          
                         }
                     }
                     .padding(.top, 8)
