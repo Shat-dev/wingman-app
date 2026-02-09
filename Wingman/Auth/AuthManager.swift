@@ -92,6 +92,12 @@ final class AuthManager: ObservableObject {
                     self.currentUser = session.user
                     UserDefaults.standard.set(session.user.id.uuidString, forKey: "current_user_id")
 
+                    // ✅ Persist email immediately
+                    if let email = session.user.email, !email.isEmpty {
+                        UserDefaults.standard.set(email, forKey: "user_email")
+                        print("📩 Saved user_email on sign-in: \(email)")
+                    }
+
                     // ✅ Load user state
                     await checkUserQuestionStatus(userId: session.user.id.uuidString)
                     await checkUserPaywallFlowStatus(userId: session.user.id.uuidString)
@@ -114,6 +120,12 @@ final class AuthManager: ObservableObject {
                     self.isAuthenticated = true
                     self.currentUser = session.user
 
+                    // ✅ Persist email on initial session
+                    if let email = session.user.email, !email.isEmpty {
+                        UserDefaults.standard.set(email, forKey: "user_email")
+                        print("📩 Saved user_email on initial session: \(email)")
+                    }
+
                     // ✅ Load user state
                     await checkUserQuestionStatus(userId: session.user.id.uuidString)
                     await checkUserPaywallFlowStatus(userId: session.user.id.uuidString)
@@ -135,6 +147,11 @@ final class AuthManager: ObservableObject {
                 print("👤 Event type: USER_UPDATED")
                 if let session = session {
                     self.currentUser = session.user
+                    // Email generally doesn’t change, but this keeps it fresh
+                    if let email = session.user.email, !email.isEmpty {
+                        UserDefaults.standard.set(email, forKey: "user_email")
+                        print("📩 Saved user_email on user update: \(email)")
+                    }
                     print("👤 User updated")
                 }
 
