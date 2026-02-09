@@ -28,7 +28,7 @@ struct PracticeCardView: View {
                     
                     // Daily Practice Count
                     HStack(spacing: 4) {
-                        Image("flame")
+                        Image("flame_fill")
                             .resizable()
                             .scaledToFit()
                             .opacity(practice.isLocked ? 0.3 : 1.0)

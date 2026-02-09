@@ -72,7 +72,7 @@ struct HomeView: View {
                         
                         // MARK: - Streak Badge
                         HStack(spacing: 2) {
-                            Image("flame")
+                            Image("flame_fill")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 16, height: 16)

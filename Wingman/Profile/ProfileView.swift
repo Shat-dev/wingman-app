@@ -24,6 +24,26 @@ struct ProfileView: View {
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 0) {
                         
+                        // MARK: - Custom Title Row (left-aligned with trailing gear)
+                        HStack {
+                            Text("Profile")
+                                .font(.manropeSemiBold(size: 20))
+                                .foregroundColor(.black)
+                            
+                            Spacer()
+                            
+                            Button(action: {
+                                showSettings = true
+                            }) {
+                                Image(systemName: "gearshape")
+                                    .font(.manropeSemiBold(size: 20))
+                                    .foregroundColor(.black)
+                            }
+                            .buttonStyle(.plain)
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.top, 12)
+                        
                         // MARK: - User Profile Card
                         Button(action: {
                             showEditProfile = true
@@ -31,17 +51,20 @@ struct ProfileView: View {
                             HStack(spacing: 12) {
                                 // Avatar placeholder
                                 ZStack {
-                                    Circle()
-                                        .fill(Color.gray.opacity(0.1))
-                                        .frame(width: 50, height: 50)
                                     
-                                    Image(systemName: "person.fill")
-                                        .font(.system(size: 24))
+                                    Image("onboard_img_1")
+                                        .resizable()
+                                        .frame(width: 50, height: 50)
                                         .foregroundColor(.gray.opacity(0.4))
+                                        .overlay(
+                                            RoundedCorner()
+                                                .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+                                        )
+                                        
                                 }
                                 
                                 Text(userName)
-                                    .font(.manropeRegular(size: 18))
+                                    .font(.manropeMedium(size: 18))
                                     .foregroundColor(.black)
                                 
                                 Spacer()
@@ -50,33 +73,35 @@ struct ProfileView: View {
                                     .font(.system(size: 14, weight: .medium))
                                     .foregroundColor(.gray)
                             }
-                            .padding(16)
+                            .padding(0)
                             .background(Color.white)
                             .cornerRadius(12)
-                            .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
+                            
                         }
-                        .padding(.horizontal, 16)
-                        .padding(.top, 16)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 40)
+                        
+                        Divider().background(Color.gray.opacity(0.2))
                         
                         // MARK: - Week Streak Card
                         WeekStreakCard()
-                            .padding(.horizontal, 16)
-                            .padding(.top, 16)
+                            .padding(.horizontal, 20)
+                            .padding(.top, 40)
                         
                         // MARK: - Invite Friends Card
                         InviteFriendsCard()
-                            .padding(.horizontal, 16)
-                            .padding(.top, 16)
+                            .padding(.horizontal, 20)
+                            .padding(.top, 40)
                         
                         // MARK: - Confidence Chart
                         ConfidenceChartCard()
-                            .padding(.horizontal, 16)
-                            .padding(.top, 16)
+                            .padding(.horizontal, 20)
+                            .padding(.top, 40)
                         
                         // MARK: - Approaches Breakdown
                         ApproachesBreakdownCard(breakdown: approachesBreakdown)
-                            .padding(.horizontal, 16)
-                            .padding(.top, 16)
+                            .padding(.horizontal, 20)
+                            .padding(.top, 40)
                         
                         // MARK: - Approaches Logged Card
                         Button(action: {
@@ -84,32 +109,18 @@ struct ProfileView: View {
                         }) {
                             ApproachesLoggedCard(count: approachesCount, hasReflections: hasReflections)
                         }
-                        .padding(.horizontal, 16)
-                        .padding(.top, 16)
+                        .padding(.horizontal, 20)
+                        .padding(.top, 40)
                         
                         Spacer().frame(height: 100)
                     }
                     .padding(.top, 8)
                 }
             }
+            // Remove system nav title and toolbar entirely
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Text("Profile")
-                        .font(.manropeSemiBold(size: 28))
-                        .foregroundColor(.black)
-                }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        showSettings = true
-                    }) {
-                        Image(systemName: "gearshape")
-                            .font(.system(size: 20, weight: .medium))
-                            .foregroundColor(.black)
-                    }
-                }
-            }
+            .navigationBarHidden(true)
+            // Keep sheets
             .sheet(isPresented: $showSettings) {
                 SettingsSheet(userName: userName)
             }
@@ -174,31 +185,35 @@ struct WeekStreakCard: View {
             HStack(spacing: 0) {
                 ForEach(0..<7) { index in
                     VStack(spacing: 4) {
-                        Image(systemName: completed[index] ? "flame.fill" : "flame")
-                            .font(.system(size: 20))
+                        Image( completed[index] ? "flame_fill_p" : "flame")
                             .foregroundColor(completed[index] ? .black : .gray.opacity(0.3))
+                            .frame(width: 17, height: 24)
+                            
                         
                         Text(days[index])
-                            .font(.manropeRegular(size: 12))
+                            .font(.manropeMedium(size: 12))
                             .foregroundColor(.gray)
                     }
                     .frame(maxWidth: .infinity)
                 }
             }
             
+            Divider().background(Color.gray.opacity(0.2))
+                .padding(.horizontal, 20)
+            
             // Current and Total
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
                     Text("current")
-                        .font(.manropeRegular(size: 11))
+                        .font(.manropeMedium(size: 12))
                         .foregroundColor(.gray)
                     
                     HStack(spacing: 4) {
-                        Image(systemName: "flame.fill")
-                            .font(.system(size: 14))
+                        Image("flame_fill_p_s")
                             .foregroundColor(.black)
+                        
                         Text("2 days")
-                            .font(.manropeSemiBold(size: 15))
+                            .font(.manropeMedium(size: 14))
                             .foregroundColor(.black)
                     }
                 }
@@ -207,23 +222,29 @@ struct WeekStreakCard: View {
                 
                 VStack(alignment: .trailing, spacing: 2) {
                     Text("total")
-                        .font(.manropeRegular(size: 11))
+                        .font(.manropeMedium(size: 12))
                         .foregroundColor(.gray)
                     
                     HStack(spacing: 4) {
-                        Image(systemName: "flame.fill")
+                        Image("flame_fill_p_s")
                             .font(.system(size: 14))
                             .foregroundColor(.black)
                         Text("69 days")
-                            .font(.manropeSemiBold(size: 15))
+                            .font(.manropeMedium(size: 14))
                             .foregroundColor(.black)
                     }
                 }
             }
+            .padding(.leading,20)
+            .padding(.trailing,20)
         }
-        .padding(16)
+        .padding(.vertical,20)
         .background(Color.white)
-        .cornerRadius(12)
+        .cornerRadius(5)
+        .overlay(
+            RoundedRectangle(cornerRadius: 5)
+                .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+        )
         .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
     }
 }
@@ -234,29 +255,39 @@ struct InviteFriendsCard: View {
         Button(action: {
             shareApp()
         }) {
-            HStack(spacing: 16) {
+            HStack() {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Invite Friends")
-                        .font(.manropeSemiBold(size: 16))
+                        .font(.manropeMedium(size: 18))
                         .foregroundColor(.black)
                     
                     Text("Invite your friends to the community and learn together")
-                        .font(.manropeRegular(size: 13))
+                        .font(.manropeRegular(size: 14))
                         .foregroundColor(.gray)
-                        .lineSpacing(2)
+                        .multilineTextAlignment(.leading)
+                        
+                        
+                        
                 }
+                .padding(.vertical,20)
+                .padding(.leading,20)
                 
                 Spacer()
                 
                 // Illustration placeholder
-                Image(systemName: "person.2")
-                    .font(.system(size: 50))
+                Image("Invite_Friends")
+                    .resizable()
+                    .frame(width: 150, height: 150)
                     .foregroundColor(.gray.opacity(0.2))
             }
-            .padding(16)
+            
             .background(Color.white)
-            .cornerRadius(12)
+            .cornerRadius(5)
             .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
+            .overlay(
+                RoundedRectangle(cornerRadius: 5)
+                    .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+            )
         }
     }
     
@@ -278,9 +309,9 @@ struct InviteFriendsCard: View {
 // MARK: - Confidence Chart Card
 struct ConfidenceChartCard: View {
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 8) {
             Text("Confidence Over Time")
-                .font(.manropeSemiBold(size: 16))
+                .font(.manropeMedium(size: 12))
                 .foregroundColor(.black)
             
             // Simple line chart placeholder
@@ -321,8 +352,12 @@ struct ConfidenceChartCard: View {
         }
         .padding(16)
         .background(Color.white)
-        .cornerRadius(12)
+        .cornerRadius(5)
         .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
+        .overlay(
+            RoundedRectangle(cornerRadius: 5)
+                .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+        )
     }
 }
 
@@ -333,8 +368,9 @@ struct ApproachesBreakdownCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("Approaches Breakdown")
-                .font(.manropeSemiBold(size: 16))
+                .font(.manropeMedium(size: 18))
                 .foregroundColor(.black)
+                .padding(.bottom,5)
             
             if breakdown.isEmpty {
                 VStack(spacing: 8) {
@@ -359,14 +395,14 @@ struct ApproachesBreakdownCard: View {
                         VStack(alignment: .leading, spacing: 6) {
                             HStack {
                                 Text(approach.0)
-                                    .font(.manropeRegular(size: 14))
-                                    .foregroundColor(.black)
+                                    .font(.manropeMedium(size: 14))
+                                    .foregroundColor(Color(hex: "#1A1A1A").opacity(0.7))
                                 
                                 Spacer()
                                 
                                 Text("\(approach.1)")
-                                    .font(.manropeSemiBold(size: 14))
-                                    .foregroundColor(.black)
+                                    .font(.manropeMedium(size: 14))
+                                    .foregroundColor(Color(hex: "#1A1A1A").opacity(0.7))
                             }
                             
                             GeometryReader { geometry in
@@ -388,10 +424,14 @@ struct ApproachesBreakdownCard: View {
                 }
             }
         }
-        .padding(16)
+        .padding(20)
         .background(Color.white)
-        .cornerRadius(12)
+        .cornerRadius(5)
         .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
+        .overlay(
+            RoundedRectangle(cornerRadius: 5)
+                .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+        )
     }
 }
 
@@ -401,38 +441,48 @@ struct ApproachesLoggedCard: View {
     let hasReflections: Bool
     
     var body: some View {
-        HStack {
-            Image(systemName: "pencil")
-                .font(.system(size: 18))
-                .foregroundColor(.black)
-            
-            VStack(alignment: .leading, spacing: 2) {
-                Text("Approaches logged")
-                    .font(.manropeSemiBold(size: 15))
+        VStack{
+            HStack {
+                Image("feather")
+                    .font(.system(size: 18))
                     .foregroundColor(.black)
                 
-                Text(hasReflections ? "Check your reflections to see insights" : "No reflections yet. Start logging approaches with notes to see your insights")
-                    .font(.manropeRegular(size: 12))
-                    .foregroundColor(.gray)
-                    .lineSpacing(2)
-            }
-            
-            Spacer()
-            
-            HStack(spacing: 4) {
-                Text("\(count)")
-                    .font(.manropeSemiBold(size: 16))
-                    .foregroundColor(.black)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Approaches logged")
+                        .font(.manropeSemiBold(size: 15))
+                        .foregroundColor(.black)
+                    
+                    
+                }
                 
-                Image(systemName: "chevron.right")
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundColor(.gray)
+                Spacer()
+                
+                HStack(spacing: 4) {
+                     
+                    
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundColor(.gray)
+                }
             }
+            .padding(16)
+            
+            
+            Text(hasReflections ? "Check your reflections to see insights" : "No reflections yet. Start logging approaches with notes to see your insights")
+                .font(.manropeRegular(size: 14))
+                .foregroundColor(.gray)
+                .lineSpacing(2)
+                .multilineTextAlignment(.leading)
+                .padding(.horizontal,20)
+                .padding(.bottom,20)
         }
-        .padding(16)
         .background(Color.white)
-        .cornerRadius(12)
+        .cornerRadius(5)
         .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
+        .overlay(
+            RoundedRectangle(cornerRadius: 5)
+                .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+        )
     }
 }
 
