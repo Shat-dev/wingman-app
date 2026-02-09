@@ -21,6 +21,27 @@ struct SettingsSheet: View {
                 Color.white.ignoresSafeArea()
                 
                 VStack(spacing: 0) {
+                    
+                    // MARK: - Custom Title Row
+                    HStack {
+                        Text("Settings")
+                            .font(.manropeSemiBold(size: 18))
+                            .foregroundColor(.black)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            dismiss()
+                        }) {
+                            Image(systemName: "xmark")
+                                .font(.system(size: 16, weight: .medium))
+                                .foregroundColor(.black)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.top, 12)
+                    
                     // MARK: - Email Section
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Email")
@@ -163,24 +184,7 @@ struct SettingsSheet: View {
                     .padding(.bottom, 32)
                 }
             }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Text("Settings")
-                        .font(.manropeSemiBold(size: 18))
-                        .foregroundColor(.black)
-                }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        Image(systemName: "xmark")
-                            .font(.system(size: 16, weight: .medium))
-                            .foregroundColor(.black)
-                    }
-                }
-            }
+            .navigationBarHidden(true)
             .alert("Delete Account", isPresented: $showingDeleteAlert) {
                 Button("Cancel", role: .cancel) { }
                 Button("Delete", role: .destructive) {

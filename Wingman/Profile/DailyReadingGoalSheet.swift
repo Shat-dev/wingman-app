@@ -33,6 +33,27 @@ struct DailyReadingGoalSheet: View {
                 Color.white.ignoresSafeArea()
                 
                 VStack(spacing: 0) {
+                    
+                    // MARK: - Custom Title Row
+                    HStack {
+                        Text("Daily Reading Goal")
+                            .font(.manropeSemiBold(size: 18))
+                            .foregroundColor(.black)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            dismiss()
+                        }) {
+                            Image(systemName: "xmark")
+                                .font(.system(size: 16, weight: .medium))
+                                .foregroundColor(.black)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.top, 12)
+                    
                     // Goals List
                     VStack(spacing: 0) {
                         ForEach(goals, id: \.self) { goal in
@@ -102,24 +123,7 @@ struct DailyReadingGoalSheet: View {
                     .padding(.bottom, 32)
                 }
             }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Text("Daily Reading Goal")
-                        .font(.manropeSemiBold(size: 18))
-                        .foregroundColor(.black)
-                }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        Image(systemName: "xmark")
-                            .font(.system(size: 16, weight: .medium))
-                            .foregroundColor(.black)
-                    }
-                }
-            }
+            .navigationBarHidden(true)
         }
     }
     

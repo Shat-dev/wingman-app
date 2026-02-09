@@ -2,14 +2,6 @@
 //  ApproachesLoggedListView.swift
 //  Wingman
 //
-//  Created by Adnan Khan on 07/02/2026.
-//
-
-
-//
-//  ApproachesLoggedListView.swift
-//  Wingman
-//
 
 import SwiftUI
 import Combine
@@ -18,8 +10,6 @@ struct ApproachesLoggedListView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var approachService = ApproachService.shared
     @State private var searchText = ""
-    @State private var isEditMode = false
-    @State private var showingEditSheet = false
     @State private var showingDeleteAlert = false
     @State private var selectedApproach: ApproachLog?
     @State private var showLogApproach = false
@@ -35,30 +25,46 @@ struct ApproachesLoggedListView: View {
                 Color.white.ignoresSafeArea()
                 
                 VStack(spacing: 0) {
-                    // Search Bar
-                    HStack(spacing: 12) {
-                        HStack(spacing: 8) {
-                            Image(systemName: "magnifyingglass")
-                                .font(.system(size: 16))
-                                .foregroundColor(.gray.opacity(0.5))
-                            
-                            TextField("Search", text: $searchText)
-                                .font(.manropeRegular(size: 15))
-                                .foregroundColor(.black)
-                        }
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 10)
-                        .background(Color(red: 0.96, green: 0.96, blue: 0.96))
-                        .cornerRadius(8)
+                    
+                    // MARK: - Custom Title Row
+                    HStack {
+                        Image("feather")
+                            .font(.system(size: 18))
+                            .foregroundColor(.black)
+                        Text("Approaches Logged")
+                            .font(.manropeSemiBold(size: 20))
+                            .foregroundColor(.black)
+                        
+                        Spacer()
                         
                         Button(action: {
-                            isEditMode.toggle()
+                            dismiss()
                         }) {
-                            Text(isEditMode ? "Done" : "Edit")
-                                .font(.manropeRegular(size: 15))
+                            Image(systemName: "xmark")
+                                .font(.system(size: 16, weight: .semibold))
                                 .foregroundColor(.black)
                         }
+                        .buttonStyle(.plain)
                     }
+                    .padding(.horizontal, 16)
+                    .padding(.top, 12)
+                    
+                    
+                    
+                    // Search Bar (no Edit button)
+                    HStack(spacing: 8) {
+                        Image(systemName: "magnifyingglass")
+                            .font(.system(size: 16))
+                            .foregroundColor(.gray.opacity(0.5))
+                        
+                        TextField("Search", text: $searchText)
+                            .font(.manropeRegular(size: 15))
+                            .foregroundColor(.black)
+                    }
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 10)
+                    .background(Color(red: 0.96, green: 0.96, blue: 0.96))
+                    .cornerRadius(8)
                     .padding(.horizontal, 16)
                     .padding(.vertical, 12)
                     
@@ -81,7 +87,7 @@ struct ApproachesLoggedListView: View {
                     } else if filteredApproaches.isEmpty {
                         VStack {
                             Spacer()
-                            Image(systemName: searchText.isEmpty ? "person.2" : "magnifyingglass")
+                            Image(systemName: searchText.isEmpty ? "tray" : "magnifyingglass")
                                 .font(.system(size: 40))
                                 .foregroundColor(.gray.opacity(0.3))
                                 .padding(.bottom, 8)
@@ -105,7 +111,6 @@ struct ApproachesLoggedListView: View {
                                 ForEach(filteredApproaches) { approach in
                                     ApproachLogRow(
                                         approach: approach,
-                                        isEditMode: isEditMode,
                                         onEdit: {
                                             selectedApproach = approach
                                             showLogApproach = true
@@ -118,7 +123,6 @@ struct ApproachesLoggedListView: View {
                                     
                                     if approach.id != filteredApproaches.last?.id {
                                         Divider()
-                                            .padding(.leading, 16)
                                     }
                                 }
                             }
@@ -148,34 +152,7 @@ struct ApproachesLoggedListView: View {
                     }
                 }
             }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    HStack(spacing: 8) {
-                        Button(action: {
-                            dismiss()
-                        }) {
-                            Image(systemName: "chevron.left")
-                                .font(.system(size: 17, weight: .semibold))
-                                .foregroundColor(.black)
-                        }
-                        
-                        Text("Approaches logged")
-                            .font(.manropeMedium(size: 20))
-                            .foregroundColor(.black)
-                    }
-                }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        Image(systemName: "xmark")
-                            .font(.system(size: 16, weight: .medium))
-                            .foregroundColor(.black)
-                    }
-                }
-            }
+            .navigationBarHidden(true)
             .alert("Delete Approach", isPresented: $showingDeleteAlert) {
                 Button("Cancel", role: .cancel) { }
                 Button("Delete", role: .destructive) {
@@ -193,10 +170,9 @@ struct ApproachesLoggedListView: View {
                 Text("Are you sure you want to delete this approach log?")
             }
             .sheet(isPresented: $showLogApproach) {
-                if let approach = selectedApproach {
+                if let _ = selectedApproach {
                     LogApproachBottomSheet(
-                        isPresented: $showLogApproach,
-                        //existingApproach: approach
+                        isPresented: $showLogApproach
                     )
                     .presentationDetents([.large])
                     .presentationDragIndicator(.hidden)
@@ -220,94 +196,99 @@ struct ApproachesLoggedListView: View {
 // MARK: - Approach Log Row
 struct ApproachLogRow: View {
     let approach: ApproachLog
-    let isEditMode: Bool
     let onEdit: () -> Void
     let onDelete: () -> Void
     
-    @State private var showMenu = false
-    
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            HStack(alignment: .top, spacing: 12) {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text(approach.title)
-                        .font(.manropeSemiBold(size: 15))
-                        .foregroundColor(.black)
-                    
-                    Text(approach.description)
-                        .font(.manropeRegular(size: 13))
-                        .foregroundColor(.gray)
-                        .lineSpacing(2)
-                        .fixedSize(horizontal: false, vertical: true)
-                    
-                    HStack(spacing: 8) {
-                        // Level Badge
-                        HStack(spacing: 4) {
-                            Image(systemName: "person.fill")
-                                .font(.system(size: 10))
-                                .foregroundColor(.gray)
-                            Text("Level \(approach.level)")
-                                .font(.manropeRegular(size: 12))
-                                .foregroundColor(.gray)
-                        }
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .background(Color(red: 0.95, green: 0.95, blue: 0.95))
-                        .cornerRadius(4)
-                        
-                        // Anxiety Badge
-                        HStack(spacing: 4) {
-                            Image(systemName: "bolt.fill")
-                                .font(.system(size: 10))
-                                .foregroundColor(.gray)
-                            Text("Anxiety: \(approach.anxietyLevel)")
-                                .font(.manropeRegular(size: 12))
-                                .foregroundColor(.gray)
-                        }
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .background(Color(red: 0.95, green: 0.95, blue: 0.95))
-                        .cornerRadius(4)
-                        
-                        // Date Badge
-                        HStack(spacing: 4) {
-                            Image(systemName: "calendar")
-                                .font(.system(size: 10))
-                                .foregroundColor(.gray)
-                            Text(approach.date.formatted(date: .abbreviated, time: .omitted))
-                                .font(.manropeRegular(size: 12))
-                                .foregroundColor(.gray)
-                        }
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .background(Color(red: 0.95, green: 0.95, blue: 0.95))
-                        .cornerRadius(4)
-                    }
-                }
+        VStack(alignment: .leading, spacing: 8) {
+            // Top row: Title + dots menu
+            HStack(alignment: .firstTextBaseline, spacing: 12) {
+                Text(approach.title)
+                    .font(.manropeRegular(size: 16))
+                    .foregroundColor(.black)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
                 
                 Spacer()
                 
-                if isEditMode {
-                    Menu {
-                        Button(action: onEdit) {
-                            Label("Edit", systemImage: "pencil")
-                        }
-                        
-                        Button(role: .destructive, action: onDelete) {
-                            Label("Delete", systemImage: "trash")
-                        }
-                    } label: {
-                        Image(systemName: "ellipsis")
-                            .font(.system(size: 16, weight: .medium))
-                            .foregroundColor(.gray)
-                            .frame(width: 40, height: 40)
-                            .contentShape(Rectangle())
+                Menu {
+                    Button(action: onEdit) {
+                        Label("Edit", systemImage: "pencil")
                     }
+                    
+                    Button(role: .destructive, action: onDelete) {
+                        Label("Delete", systemImage: "trash")
+                    }
+                } label: {
+                    Image("dots")
+                        .font(.system(size: 20, weight: .medium))
+                        .foregroundColor(.black)
+                        .frame(width: 24, height: 24)
+                        .contentShape(Rectangle())
                 }
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 16)
+            
+            // Description
+            Text(approach.description)
+                .font(.manropeRegular(size: 16))
+                .foregroundColor(.black)
+                .lineSpacing(2)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            // Info Row: Date • Level • Anxiety (right-aligned)
+            HStack(spacing: 6) {
+                HStack(spacing: 6) {
+                    Text(formatDate(approach.date))
+                    Spacer()
+                    Text("•")
+                    Spacer()
+                    Text("Level \(approach.level)")
+                    Spacer()
+                    Text("•")
+                }
+                .font(.manropeMedium(size: 12))
+                .foregroundColor(.gray)
+                
+                Spacer()
+                
+                Text("Anxiety: \(approach.anxietyLevel)/10")
+                    .font(.manropeMedium(size: 12))
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.trailing)
+                    .padding(.trailing,5)
+            }
         }
+        .padding(.horizontal, 20)
+        .padding(.vertical, 20)
+    }
+    
+    // Format date based on how recent it is
+    private func formatDate(_ date: Date) -> String {
+        let calendar = Calendar.current
+        let now = Date()
+        
+        // Calculate days difference
+        let components = calendar.dateComponents([.day], from: calendar.startOfDay(for: date), to: calendar.startOfDay(for: now))
+        
+        if let days = components.day {
+            if days == 0 {
+                return "Today"
+            } else if days == 1 {
+                return "1 day ago"
+            } else if days < 7 {
+                return "\(days) days ago"
+            } else {
+                // For older dates, show actual date
+                let formatter = DateFormatter()
+                formatter.dateFormat = "MMM d, yyyy"
+                return formatter.string(from: date)
+            }
+        }
+        
+        // Fallback
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d, yyyy"
+        return formatter.string(from: date)
     }
 }
 

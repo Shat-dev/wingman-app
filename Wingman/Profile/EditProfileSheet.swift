@@ -5,7 +5,6 @@
 //  Created by Adnan Khan on 07/02/2026.
 //
 
-
 //
 //  EditProfileSheet.swift
 //  Wingman
@@ -31,35 +30,68 @@ struct EditProfileSheet: View {
                 Color.white.ignoresSafeArea()
                 
                 VStack(spacing: 0) {
+                    
+                    // MARK: - Grabber (small centered gray line)
+                    HStack {
+                        Capsule()
+                            .fill(Color.gray.opacity(0.3))
+                            .frame(width: 36, height: 5)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.top, 8)
+                    .padding(.bottom, 6)
+                    
+                    // MARK: - Custom Title Row
+                    HStack {
+                        Text("Edit Profile")
+                            .font(.manropeMedium(size: 18))
+                            .foregroundColor(.black)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            dismiss()
+                        }) {
+                            Image(systemName: "xmark")
+                                .font(.system(size: 16, weight: .medium))
+                                .foregroundColor(.black)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.top, 6) // slightly reduced since we added grabber above
+                    
                     // Avatar Section
                     VStack(spacing: 16) {
                         // Avatar Illustration
                         ZStack {
-                            Circle()
-                                .fill(Color.gray.opacity(0.05))
-                                .frame(width: 100, height: 100)
-                            
-                            Image(systemName: "person.fill")
-                                .font(.system(size: 50))
-                                .foregroundColor(.gray.opacity(0.3))
+                            Image("onboard_img_1")
+                                .resizable()
+                                .frame(width: 64, height: 64)
+                                .foregroundColor(.gray.opacity(0.4))
+                                .overlay(
+                                    RoundedCorner()
+                                        .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+                                )
                         }
                         .padding(.top, 40)
                         
                         // Name Input
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Name")
-                                .font(.manropeMedium(size: 13))
+                                .font(.manropeMedium(size: 14))
                                 .foregroundColor(.gray)
                                 .padding(.horizontal, 24)
                             
                             TextField("Enter your name", text: $name)
-                                .font(.manropeRegular(size: 16))
+                                .font(.manropeMedium(size: 16))
                                 .foregroundColor(.black)
                                 .padding(.horizontal, 16)
                                 .padding(.vertical, 14)
                                 .background(Color(red: 0.96, green: 0.96, blue: 0.96))
-                                .cornerRadius(8)
+                                .cornerRadius(5)
                                 .padding(.horizontal, 24)
+                                .opacity(0.5)
                         }
                     }
                     
@@ -90,7 +122,7 @@ struct EditProfileSheet: View {
                         .frame(maxWidth: .infinity)
                         .frame(height: 52)
                         .background(Color.black)
-                        .cornerRadius(8)
+                        .cornerRadius(5)
                     }
                     .disabled(name.isEmpty || isSaving)
                     .opacity(name.isEmpty ? 0.5 : 1)
@@ -98,24 +130,7 @@ struct EditProfileSheet: View {
                     .padding(.bottom, 32)
                 }
             }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Text("Edit Profile")
-                        .font(.manropeSemiBold(size: 18))
-                        .foregroundColor(.black)
-                }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        Image(systemName: "xmark")
-                            .font(.system(size: 16, weight: .medium))
-                            .foregroundColor(.black)
-                    }
-                }
-            }
+            .navigationBarHidden(true)
         }
     }
     

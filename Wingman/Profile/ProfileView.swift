@@ -21,100 +21,114 @@ struct ProfileView: View {
             ZStack {
                 Color.white.ignoresSafeArea()
                 
-                ScrollView(showsIndicators: false) {
-                    VStack(spacing: 0) {
+                VStack(spacing: 0) {
+                    // MARK: - Custom Title Row (left-aligned with trailing gear) — FIXED
+                    HStack {
+                        Text("Profile")
+                            .font(.manropeSemiBold(size: 20))
+                            .foregroundColor(.black)
                         
-                        // MARK: - Custom Title Row (left-aligned with trailing gear)
-                        HStack {
-                            Text("Profile")
+                        Spacer()
+                        
+                        Button(action: {
+                            showSettings = true
+                        }) {
+                            Image(systemName: "gearshape")
                                 .font(.manropeSemiBold(size: 20))
                                 .foregroundColor(.black)
-                            
-                            Spacer()
-                            
-                            Button(action: {
-                                showSettings = true
-                            }) {
-                                Image(systemName: "gearshape")
-                                    .font(.manropeSemiBold(size: 20))
-                                    .foregroundColor(.black)
-                            }
-                            .buttonStyle(.plain)
                         }
-                        .padding(.horizontal, 16)
-                        .padding(.top, 12)
-                        
-                        // MARK: - User Profile Card
-                        Button(action: {
-                            showEditProfile = true
-                        }) {
-                            HStack(spacing: 12) {
-                                // Avatar placeholder
-                                ZStack {
-                                    
-                                    Image("onboard_img_1")
-                                        .resizable()
-                                        .frame(width: 50, height: 50)
-                                        .foregroundColor(.gray.opacity(0.4))
-                                        .overlay(
-                                            RoundedCorner()
-                                                .stroke(Color.gray.opacity(0.2), lineWidth: 1)
-                                        )
-                                        
-                                }
-                                
-                                Text(userName)
-                                    .font(.manropeMedium(size: 18))
-                                    .foregroundColor(.black)
-                                
-                                Spacer()
-                                
-                                Image(systemName: "chevron.right")
-                                    .font(.system(size: 14, weight: .medium))
-                                    .foregroundColor(.gray)
-                            }
-                            .padding(0)
-                            .background(Color.white)
-                            .cornerRadius(12)
-                            
-                        }
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 40)
-                        
-                        Divider().background(Color.gray.opacity(0.2))
-                        
-                        // MARK: - Week Streak Card
-                        WeekStreakCard()
-                            .padding(.horizontal, 20)
-                            .padding(.top, 40)
-                        
-                        // MARK: - Invite Friends Card
-                        InviteFriendsCard()
-                            .padding(.horizontal, 20)
-                            .padding(.top, 40)
-                        
-                        // MARK: - Confidence Chart
-                        ConfidenceChartCard()
-                            .padding(.horizontal, 20)
-                            .padding(.top, 40)
-                        
-                        // MARK: - Approaches Breakdown
-                        ApproachesBreakdownCard(breakdown: approachesBreakdown)
-                            .padding(.horizontal, 20)
-                            .padding(.top, 40)
-                        
-                        // MARK: - Approaches Logged Card
-                        Button(action: {
-                            showApproachesLogged = true
-                        }) {
-                            ApproachesLoggedCard(count: approachesCount, hasReflections: hasReflections)
-                        }
-                        .padding(.horizontal, 20)
-                        .padding(.top, 40)
-                        
-                        Spacer().frame(height: 100)
+                        .buttonStyle(.plain)
                     }
-                    .padding(.top, 8)
+                    .padding(.horizontal, 16)
+                    .padding(.top, 12)
+                    
+                    // Divider if you want a visual separation (optional)
+                    // Divider().background(Color.gray.opacity(0.2))
+                    
+                    // MARK: - Scrollable Content
+                    ScrollView(showsIndicators: false) {
+                        VStack(spacing: 0) {
+                            
+                            // MARK: - User Profile Card
+                            Button(action: {
+                                showEditProfile = true
+                            }) {
+                                HStack(spacing: 12) {
+                                    // Avatar placeholder
+                                    ZStack {
+                                        
+                                        Image("onboard_img_1")
+                                            .resizable()
+                                            .frame(width: 50, height: 50)
+                                            .foregroundColor(.gray.opacity(0.4))
+                                            .overlay(
+                                                RoundedCorner()
+                                                    .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+                                            )
+                                            
+                                    }
+                                    
+                                    Text(userName)
+                                        .font(.manropeMedium(size: 18))
+                                        .foregroundColor(.black)
+                                    
+                                    Spacer()
+                                    
+                                    Image(systemName: "chevron.right")
+                                        .font(.system(size: 14, weight: .medium))
+                                        .foregroundColor(.gray)
+                                }
+                                .padding(0)
+                                .background(Color.white)
+                                .cornerRadius(12)
+                                
+                            }
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 40)
+                            
+                            Divider().background(Color.gray.opacity(0.2))
+                            
+                            // MARK: - Week Streak Card
+                            WeekStreakCard()
+                                .padding(.horizontal, 20)
+                                .padding(.top, 40)
+                            
+                            // MARK: - Invite Friends Card
+                            InviteFriendsCard()
+                                .padding(.horizontal, 20)
+                                .padding(.top, 40)
+                            
+                            // MARK: - Confidence Chart
+                            //ConfidenceChartCard()
+                            //   .padding(.horizontal, 20)
+                            //    .padding(.top, 40)
+                            
+                            // MARK: - Approaches Breakdown
+                            ApproachesBreakdownCard(breakdown: approachesBreakdown)
+                                .padding(.horizontal, 20)
+                                .padding(.top, 40)
+                            
+                            // MARK: - Approaches Logged Card
+                            Group {
+                                if hasReflections {
+                                    Button(action: {
+                                        showApproachesLogged = true
+                                    }) {
+                                        ApproachesLoggedCard(count: approachesCount, hasReflections: hasReflections)
+                                    }
+                                    .buttonStyle(.plain)
+                                } else {
+                                    ApproachesLoggedCard(count: approachesCount, hasReflections: hasReflections)
+                                        .allowsHitTesting(false) // non-interactive when no reflections
+                                }
+                            }
+                            .padding(.horizontal, 20)
+                            .padding(.top, 40)
+                            
+                            Spacer().frame(height: 100)
+                        }
+                        .padding(.top, 2)
+                    }
                 }
             }
             // Remove system nav title and toolbar entirely
@@ -452,27 +466,38 @@ struct ApproachesLoggedCard: View {
                         .font(.manropeSemiBold(size: 15))
                         .foregroundColor(.black)
                     
-                    
                 }
                 
                 Spacer()
                 
-                HStack(spacing: 4) {
-                     
+                HStack(spacing: 8) {
+                    // Count pill (always shows, including 0)
+                    Text("\(count)")
+                        .font(.manropeMedium(size: 18))
+                        .foregroundColor(.init(hex: "#1A1A1A"))
+                        .opacity(0.7)
+                        .padding(.horizontal, 10)
+                        .padding(.trailing, 2)
+                        .background(Color.white)
+                        .cornerRadius(5)
                     
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 12, weight: .medium))
-                        .foregroundColor(.gray)
+                    if hasReflections {
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundColor(.gray)
+                    }
                 }
             }
-            .padding(16)
+            .padding(.horizontal,20)
+            .padding(.top,20)
+            .padding(.bottom,1)
             
             
             Text(hasReflections ? "Check your reflections to see insights" : "No reflections yet. Start logging approaches with notes to see your insights")
                 .font(.manropeRegular(size: 14))
                 .foregroundColor(.gray)
-                .lineSpacing(2)
-                .multilineTextAlignment(.leading)
+
+                .frame(maxWidth: .infinity, alignment: .leading) // key line
                 .padding(.horizontal,20)
                 .padding(.bottom,20)
         }
