@@ -63,7 +63,7 @@ final class PaywallViewModel: ObservableObject {
     
     // MARK: - Footer Links
     func openPrivacy() {
-        if let url = URL(string: "https://example.com/privacy") {
+        if let url = URL(string: "https://www.getwingman.app/privacy-policy") {
             UIApplication.shared.open(url)
         }
     }
@@ -74,7 +74,7 @@ final class PaywallViewModel: ObservableObject {
     }
     
     func openTerms() {
-        if let url = URL(string: "https://example.com/terms") {
+        if let url = URL(string: "https://www.getwingman.app/terms-and-conditions") {
             UIApplication.shared.open(url)
         }
     }
