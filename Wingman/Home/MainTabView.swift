@@ -15,6 +15,7 @@ import UIKit
 struct MainTabView: View {
     @State private var selectedTab = 0
     @StateObject private var coursesRouter = CoursesRouter()
+    @StateObject private var tabBarVisibility = TabBarVisibilityManager()
 
     var body: some View {
 
@@ -22,21 +23,28 @@ struct MainTabView: View {
             TabView(selection: $selectedTab) {
                 HomeView(selectedTab: $selectedTab)
                     .environmentObject(coursesRouter)
+                    .environmentObject(tabBarVisibility)
                     .tag(0)
 
                 CoursesView()
                     .environmentObject(coursesRouter)
+                    .environmentObject(tabBarVisibility)
                     .tag(1)
 
                 PracticeView()
+                    .environmentObject(tabBarVisibility)
                     .tag(2)
 
                 ProfileView()
+                    .environmentObject(tabBarVisibility)
                     .tag(3)
             }
             .tabViewStyle(.automatic)
 
-            CustomTabBar(selectedTab: $selectedTab)
+            if tabBarVisibility.isVisible {
+                CustomTabBar(selectedTab: $selectedTab)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
         }
         .ignoresSafeArea(.keyboard)
     }
@@ -49,57 +57,36 @@ struct CustomTabBar: View {
     var body: some View {
         HStack(spacing: 0) {
             TabBarButton(
-                icon: "house.fill",
+                icon: "home",
                 title: "Home",
                 isSelected: selectedTab == 0
             ) { selectedTab = 0 }
 
             TabBarButton(
-                icon: "play.rectangle.fill",
+                icon: "map",
                 title: "Courses",
                 isSelected: selectedTab == 1
             ) { selectedTab = 1 }
 
             TabBarButton(
-                icon: "chart.bar.fill",
-                title: "Practice",
+                icon: "calendar",
+                title: "Schedules",
                 isSelected: selectedTab == 2
             ) { selectedTab = 2 }
 
             TabBarButton(
-                icon: "person.fill",
+                icon: "user",
                 title: "Profile",
                 isSelected: selectedTab == 3
             ) { selectedTab = 3 }
         }
-        .padding(.horizontal, 8)
-        .padding(.top, 8)
-        .padding(.bottom, 0)
+        .padding(.horizontal, 0)
+        .padding(.top, 12)
+        .padding(.bottom, bottomPadding())
         .frame(maxWidth: .infinity)
         .background(
-            ZStack {
-                // Native system blur (frosted glass)
-                VisualBlurView(style: .systemUltraThinMaterialLight)
-                    .clipShape(RoundedRectangle(cornerRadius: 0, style: .continuous))
-
-                // Slight white overlay to tune brightness so it matches the screenshot
-                RoundedRectangle(cornerRadius: 0, style: .continuous)
-                    .fill(Color.white.opacity(0.06))
-
-                // Fine top stroke (separates bar from content)
-                RoundedRectangle(cornerRadius: 0, style: .continuous)
-                    .stroke(Color.black.opacity(0.06), lineWidth: 0.5)
-                    .blendMode(.normal)
-            }
+            Color(red: 0.96, green: 0.96, blue: 0.96) // Light gray background matching the image
         )
-        .overlay(
-            // Very faint outer border to match design
-            RoundedRectangle(cornerRadius: 0, style: .continuous)
-                .stroke(Color.black.opacity(0.04), lineWidth: 0.6)
-        )
-        .shadow(color: Color.black.opacity(0.12), radius: 12, x: 0, y: -6)
-        .clipShape(RoundedRectangle(cornerRadius: 0, style: .continuous))
-        .padding(.horizontal, 0)
         .ignoresSafeArea(edges: .bottom)
     }
 
@@ -111,8 +98,7 @@ struct CustomTabBar: View {
             .first { $0.isKeyWindow }?
             .safeAreaInsets.bottom ?? 0
 
-        // tuned to visually match the screenshot padding
-        return bottomSafe > 0 ? (8 ) : 0
+        return bottomSafe > 0 ? 2 : 8
     }
 }
 
@@ -125,18 +111,20 @@ struct TabBarButton: View {
 
     var body: some View {
         Button(action: action) {
-            VStack(spacing: 4) {
-                Image(systemName: icon)
-                    .font(.system(size: 22))
-                    .foregroundColor(isSelected ? .black : Color.gray.opacity(0.5))
-                    .frame(height: 24)
+            VStack(spacing: 6) {
+                Image(icon)
+                    .renderingMode(.template)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 24, height: 24)
+                    .foregroundColor(isSelected ? .black : Color(red: 0.6, green: 0.6, blue: 0.6))
 
                 Text(title)
-                    .font(.system(size: 11, weight: isSelected ? .semibold : .regular))
-                    .foregroundColor(isSelected ? .black : Color.gray.opacity(0.5))
+                    .font(.manropeMedium(size: 10))
+                    .foregroundColor(isSelected ? .primary : .secondary)
             }
             .frame(maxWidth: .infinity)
-            .padding(.vertical, 4)
+            .padding(.top,8)
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)

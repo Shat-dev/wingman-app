@@ -11,6 +11,7 @@ struct HomeView: View {
     // Binding added so Home can change the selected tab in MainTabView
     @Binding var selectedTab: Int
     @EnvironmentObject private var coursesRouter: CoursesRouter
+    @EnvironmentObject private var tabBarVisibility: TabBarVisibilityManager
 
     @StateObject private var viewModel = HomeViewModel()
     @State private var navigateToPractice = false
@@ -264,6 +265,7 @@ struct HomeView: View {
             )
             .navigationDestination(isPresented: $navigateToPractice) {
                 DailyPracticeView()
+                    .environmentObject(tabBarVisibility)
             }
             .sheet(isPresented: $showLogApproachSheet) {
                 LogApproachBottomSheet(isPresented: $showLogApproachSheet)
@@ -531,4 +533,5 @@ extension Course: Hashable {
 #Preview {
     // Provide a constant binding for previews
     HomeView(selectedTab: .constant(0))
+        .environmentObject(TabBarVisibilityManager())
 }

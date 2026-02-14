@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import Combine
 
 struct DailyPracticeView: View {
     @StateObject private var viewModel = DailyPracticeViewModel()
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var tabBarVisibility: TabBarVisibilityManager
     
     var body: some View {
         VStack(spacing: 0) {
@@ -81,10 +83,16 @@ struct DailyPracticeView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
+        .ignoresSafeArea(edges: .bottom) // Ignore bottom safe area to fill tab bar space
+        .toolbar(.hidden, for: .tabBar) // Hide system tab bar if present
         .animation(.easeInOut(duration: 0.3), value: viewModel.hasCheckedAnswer)
         .animation(.easeInOut(duration: 0.2), value: viewModel.selectedOptionIndex)
         .onAppear {
+            tabBarVisibility.hideTabBar()
             print("👁️ PracticeView appeared - Question \(viewModel.currentQuestionIndex + 1)/\(viewModel.questions.count)")
+        }
+        .onDisappear {
+            tabBarVisibility.showTabBar()
         }
     }
     
@@ -239,6 +247,7 @@ struct DailyPracticeView: View {
             viewModel.previousQuestion()
         } else {
             print("Practice session completed!")
+            tabBarVisibility.showTabBar()
             dismiss()
         }
     }
@@ -247,6 +256,7 @@ struct DailyPracticeView: View {
         if viewModel.isLastQuestion {
             print("Practice session completed!")
             // TODO: Navigate to results screen or back to dashboard
+            tabBarVisibility.showTabBar()
             dismiss()
         } else {
             viewModel.nextQuestion()
@@ -278,5 +288,6 @@ struct RoundedCorner: Shape {
 #Preview {
     NavigationStack {
         DailyPracticeView()
+            .environmentObject(TabBarVisibilityManager())
     }
 }
