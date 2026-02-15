@@ -81,13 +81,38 @@ struct CustomTabBar: View {
             ) { selectedTab = 3 }
         }
         .padding(.horizontal, 0)
-        .padding(.top, 12)
-        .padding(.bottom, bottomPadding())
+        .padding(.top, 17) // Reduced from 17 to 12
+        .padding(.bottom, -5)
         .frame(maxWidth: .infinity)
         .background(
-            Color(red: 0.96, green: 0.96, blue: 0.96) // Light gray background matching the image
+            CompatibleGlassBackground()
+                .clipShape(UnevenRoundedRectangle(
+                    topLeadingRadius: 10,
+                    bottomLeadingRadius: 0,
+                    bottomTrailingRadius: 0,
+                    topTrailingRadius: 10,
+                    style: .continuous
+                ))
+                .ignoresSafeArea(edges: .bottom)
+            
         )
-        .ignoresSafeArea(edges: .bottom)
+        .overlay(alignment: .top) {
+            // Top border that follows the rounded shape
+            UnevenRoundedRectangle(
+                topLeadingRadius: 10,
+                bottomLeadingRadius: 0,
+                bottomTrailingRadius: 0,
+                topTrailingRadius: 10,
+                style: .continuous
+            )
+            .stroke(Color.primary.opacity(0.1), lineWidth: 1)
+            .mask(
+                // Only show the top part of the stroke
+                Rectangle()
+                    .frame(height: 15) // Just enough to capture the rounded corners
+                    .frame(maxHeight: .infinity, alignment: .top)
+            )
+        }
     }
 
     private func bottomPadding() -> CGFloat {
@@ -98,7 +123,7 @@ struct CustomTabBar: View {
             .first { $0.isKeyWindow }?
             .safeAreaInsets.bottom ?? 0
 
-        return bottomSafe > 0 ? 2 : 8
+        return bottomSafe > 0 ? 0 : 2
     }
 }
 
@@ -111,7 +136,7 @@ struct TabBarButton: View {
 
     var body: some View {
         Button(action: action) {
-            VStack(spacing: 6) {
+            VStack() { // Reduced spacing from 6 to 2
                 Image(icon)
                     .renderingMode(.template)
                     .resizable()
@@ -122,9 +147,10 @@ struct TabBarButton: View {
                 Text(title)
                     .font(.manropeMedium(size: 10))
                     .foregroundColor(isSelected ? .primary : .secondary)
+                    .lineLimit(1)
+                    .fixedSize() // Prevents text from taking extra space
             }
             .frame(maxWidth: .infinity)
-            .padding(.top,8)
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
@@ -148,6 +174,33 @@ struct VisualBlurView: UIViewRepresentable {
 
     func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
         uiView.effect = UIBlurEffect(style: style)
+    }
+}
+
+// MARK: - Compatible Glass Background
+struct CompatibleGlassBackground: UIViewRepresentable {
+    func makeUIView(context: Context) -> UIVisualEffectView {
+        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
+        let visualEffectView = UIVisualEffectView(effect: blurEffect)
+        
+        // Add a subtle tint for the glass appearance
+        let tintView = UIView()
+        tintView.backgroundColor = UIColor.white.withAlphaComponent(0.1)
+        tintView.translatesAutoresizingMaskIntoConstraints = false
+        visualEffectView.contentView.addSubview(tintView)
+        
+        NSLayoutConstraint.activate([
+            tintView.topAnchor.constraint(equalTo: visualEffectView.contentView.topAnchor),
+            tintView.leadingAnchor.constraint(equalTo: visualEffectView.contentView.leadingAnchor),
+            tintView.trailingAnchor.constraint(equalTo: visualEffectView.contentView.trailingAnchor),
+            tintView.bottomAnchor.constraint(equalTo: visualEffectView.contentView.bottomAnchor)
+        ])
+        
+        return visualEffectView
+    }
+    
+    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
+        // Update if needed
     }
 }
 
