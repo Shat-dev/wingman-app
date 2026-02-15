@@ -51,13 +51,24 @@ struct DailyPracticeView: View {
                     // MARK: - Options
                     VStack(spacing: 12) {
                         ForEach(Array(viewModel.currentQuestion.options.enumerated()), id: \.offset) { index, option in
-                            optionButton(
-                                text: option,
-                                index: index,
-                                isSelected: viewModel.selectedOptionIndex == index,
-                                isCorrect: viewModel.hasCheckedAnswer && index == viewModel.currentQuestion.correctAnswerIndex,
-                                isWrong: viewModel.hasCheckedAnswer && viewModel.selectedOptionIndex == index && !viewModel.isAnswerCorrect
-                            )
+                            if viewModel.currentQuestion.questionType == .singleSelect {
+                                singleSelectOptionButton(
+                                    text: option,
+                                    index: index,
+                                    isSelected: viewModel.isOptionSelected(index),
+                                    isCorrect: viewModel.isOptionCorrect(index),
+                                    isWrong: viewModel.isOptionIncorrect(index)
+                                )
+                            } else {
+                                multipleSelectOptionButton(
+                                    text: option,
+                                    index: index,
+                                    isSelected: viewModel.isOptionSelected(index),
+                                    isCorrect: viewModel.isOptionCorrect(index),
+                                    isWrong: viewModel.isOptionIncorrect(index),
+                                    shouldShowCorrectButNotSelected: viewModel.shouldShowCorrectButNotSelected(index)
+                                )
+                            }
                         }
                     }
                     .padding(.top, 8)
@@ -87,6 +98,7 @@ struct DailyPracticeView: View {
         .toolbar(.hidden, for: .tabBar) // Hide system tab bar if present
         .animation(.easeInOut(duration: 0.3), value: viewModel.hasCheckedAnswer)
         .animation(.easeInOut(duration: 0.2), value: viewModel.selectedOptionIndex)
+        .animation(.easeInOut(duration: 0.2), value: viewModel.selectedOptionIndices)
         .onAppear {
             tabBarVisibility.hideTabBar()
             print("👁️ PracticeView appeared - Question \(viewModel.currentQuestionIndex + 1)/\(viewModel.questions.count)")
@@ -113,8 +125,8 @@ struct DailyPracticeView: View {
         .frame(height: 10)
     }
     
-    // MARK: - Option Button
-    private func optionButton(text: String, index: Int, isSelected: Bool, isCorrect: Bool, isWrong: Bool) -> some View {
+    // MARK: - Single Select Option Button
+    private func singleSelectOptionButton(text: String, index: Int, isSelected: Bool, isCorrect: Bool, isWrong: Bool) -> some View {
         Button(action: {
             viewModel.selectOption(at: index)
         }) {
@@ -138,12 +150,76 @@ struct DailyPracticeView: View {
         .disabled(viewModel.hasCheckedAnswer)
     }
     
+    // MARK: - Multiple Select Option Button with Checkbox
+    private func multipleSelectOptionButton(text: String, index: Int, isSelected: Bool, isCorrect: Bool, isWrong: Bool, shouldShowCorrectButNotSelected: Bool) -> some View {
+        Button(action: {
+            viewModel.selectOption(at: index)
+        }) {
+            HStack(spacing: 12) {
+                // Checkbox
+                checkboxView(
+                    isSelected: isSelected,
+                    isCorrect: isCorrect,
+                    isWrong: isWrong,
+                    shouldShowCorrectButNotSelected: shouldShowCorrectButNotSelected
+                )
+                
+                Text(text)
+                    .font(.manropeSemiBold(size: 16))
+                    .foregroundColor(multipleSelectTextColor(isSelected: isSelected, isCorrect: isCorrect, isWrong: isWrong, shouldShowCorrectButNotSelected: shouldShowCorrectButNotSelected))
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                Spacer()
+            }
+            .padding(20)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(multipleSelectBackgroundColor(isSelected: isSelected, isCorrect: isCorrect, isWrong: isWrong, shouldShowCorrectButNotSelected: shouldShowCorrectButNotSelected))
+            .cornerRadius(5)
+            .overlay(
+                RoundedRectangle(cornerRadius: 5)
+                    .stroke(multipleSelectBorderColor(isSelected: isSelected, isCorrect: isCorrect, isWrong: isWrong, shouldShowCorrectButNotSelected: shouldShowCorrectButNotSelected), lineWidth: 1)
+            )
+        }
+        .disabled(viewModel.hasCheckedAnswer)
+    }
+    
+    // MARK: - Checkbox View
+    private func checkboxView(isSelected: Bool, isCorrect: Bool, isWrong: Bool, shouldShowCorrectButNotSelected: Bool) -> some View {
+        ZStack {
+            // Background rectangle with rounded corners
+            RoundedRectangle(cornerRadius: 4)
+                .fill(checkboxBackgroundColor(isSelected: isSelected, isCorrect: isCorrect, isWrong: isWrong, shouldShowCorrectButNotSelected: shouldShowCorrectButNotSelected))
+                .frame(width: 20, height: 20)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 4)
+                        .stroke(checkboxBorderColor(isSelected: isSelected, isCorrect: isCorrect, isWrong: isWrong, shouldShowCorrectButNotSelected: shouldShowCorrectButNotSelected), lineWidth: 1)
+                )
+            
+            // Checkmark or X
+            if shouldShowCorrectButNotSelected {
+                // Don't show any icon for correct answers not selected by user (empty checkbox)
+                EmptyView()
+            } else if isSelected && (isCorrect || (!viewModel.hasCheckedAnswer)) {
+                // White checkmark for selected items (both before checking and correct selected items)
+                Image(systemName: "checkmark")
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundColor(.white)
+            } else if isSelected && isWrong {
+                // White X for wrong selected items
+                Image(systemName: "checkmark")
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundColor(.white)
+            }
+        }
+    }
+    
+    // MARK: - Color Functions for Single Select
     private func buttonTextColor(isSelected: Bool, isCorrect: Bool, isWrong: Bool) -> Color {
         if isCorrect {
-            // Correct option text should be green
             return Color(hex: "#3E8F6A")
         } else if isWrong {
-            // Red text for wrong option
             return Color(hex: "#C9594C")
         } else if isSelected {
             return Color(hex: "#FFFFFF")
@@ -154,10 +230,8 @@ struct DailyPracticeView: View {
     
     private func buttonBackgroundColor(isSelected: Bool, isCorrect: Bool, isWrong: Bool) -> Color {
         if isCorrect {
-            // Keep your original correct background
             return Color(hex: "#DAF0E6")
         } else if isWrong {
-            // Lighter red background for wrong option
             return Color(hex: "#F4DEDB")
         } else if isSelected {
             return Color(hex: "#000000")
@@ -168,15 +242,72 @@ struct DailyPracticeView: View {
     
     private func buttonBorderColor(isSelected: Bool, isCorrect: Bool, isWrong: Bool) -> Color {
         if isCorrect {
-            // Green border for correct option
             return Color(hex: "#3E8F6A")
         } else if isWrong {
-            // Red border for wrong option
             return Color(hex: "#C9594C")
         } else if isSelected {
             return Color(hex: "#1A1A1A")
         } else {
-            // Default border
+            return Color(hex: "#1A1A1A").opacity(0.5)
+        }
+    }
+    
+    // MARK: - Color Functions for Multiple Select
+    private func multipleSelectTextColor(isSelected: Bool, isCorrect: Bool, isWrong: Bool, shouldShowCorrectButNotSelected: Bool) -> Color {
+        if isCorrect || shouldShowCorrectButNotSelected {
+            return Color(hex: "#3E8F6A")
+        } else if isWrong {
+            return Color(hex: "#C9594C")
+        } else {
+            return Color(hex: "#1A1A1A")
+        }
+    }
+    
+    private func multipleSelectBackgroundColor(isSelected: Bool, isCorrect: Bool, isWrong: Bool, shouldShowCorrectButNotSelected: Bool) -> Color {
+        if isCorrect || shouldShowCorrectButNotSelected {
+            return Color(hex: "#DAF0E6")
+        } else if isWrong {
+            return Color(hex: "#F4DEDB")
+        } else {
+            return Color(hex: "#FFFFFF")
+        }
+    }
+    
+    private func multipleSelectBorderColor(isSelected: Bool, isCorrect: Bool, isWrong: Bool, shouldShowCorrectButNotSelected: Bool) -> Color {
+        if isCorrect || shouldShowCorrectButNotSelected {
+            return Color(hex: "#3E8F6A")
+        } else if isWrong {
+            return Color(hex: "#C9594C")
+        } else {
+            return Color(hex: "#1A1A1A").opacity(0.5)
+        }
+    }
+    
+    // MARK: - Checkbox Color Functions
+    private func checkboxBackgroundColor(isSelected: Bool, isCorrect: Bool, isWrong: Bool, shouldShowCorrectButNotSelected: Bool) -> Color {
+        if shouldShowCorrectButNotSelected {
+            return Color.white // White background for correct but unselected (empty checkbox)
+        } else if isSelected && isCorrect {
+            return Color(hex: "#3E8F6A") // Green background for selected correct items
+        } else if isSelected && isWrong {
+            return Color(hex: "#C9594C")
+        } else if isSelected {
+            return Color(hex: "#000000") // Black background for selected items before checking
+        } else {
+            return Color(hex: "#F3F3F3")
+        }
+    }
+    
+    private func checkboxBorderColor(isSelected: Bool, isCorrect: Bool, isWrong: Bool, shouldShowCorrectButNotSelected: Bool) -> Color {
+        if shouldShowCorrectButNotSelected {
+            return Color(hex: "#1A1A1A").opacity(0.5) // Black border for correct but unselected
+        } else if isCorrect {
+            return Color(hex: "#3E8F6A")
+        } else if isWrong {
+            return Color(hex: "#C9594C")
+        } else if isSelected {
+            return Color(hex: "#000000")
+        } else {
             return Color(hex: "#1A1A1A").opacity(0.5)
         }
     }
@@ -190,7 +321,6 @@ struct DailyPracticeView: View {
                     .font(.manropeSemiBold(size: 18))
                     .foregroundColor(viewModel.isAnswerCorrect ? Color(hex: "#339966") : Color(hex: "#CC4D4D"))
             }
-            
             
             // Explanation text
             Text(viewModel.isAnswerCorrect ? viewModel.currentQuestion.correctExplanation : viewModel.currentQuestion.incorrectExplanation)
@@ -221,7 +351,7 @@ struct DailyPracticeView: View {
                 : Color(hex: "#FFEDED")
         )
         .cornerRadius(5)
-        .padding(.horizontal,8)
+        .padding(.horizontal, 8)
     }
     
     // MARK: - Action Button (Check Answer - before checking)
@@ -234,10 +364,10 @@ struct DailyPracticeView: View {
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
                 .frame(height: 52)
-                .background(viewModel.selectedOptionIndex != nil ? Color(hex: "#000000") : Color(hex: "#000000").opacity(0.4))
+                .background(viewModel.isCheckAnswerEnabled ? Color(hex: "#000000") : Color(hex: "#000000").opacity(0.4))
                 .cornerRadius(5) // Updated to 5px corner radius
         }
-        .disabled(viewModel.selectedOptionIndex == nil)
+        .disabled(!viewModel.isCheckAnswerEnabled)
     }
     
     // MARK: - Navigation Handlers
@@ -261,6 +391,19 @@ struct DailyPracticeView: View {
         } else {
             viewModel.nextQuestion()
         }
+    }
+}
+
+
+
+// MARK: - Font Extension
+extension Font {
+    static func manropeMedium(size: CGFloat) -> Font {
+        return .system(size: size, weight: .medium)
+    }
+    
+    static func manropeSemiBold(size: CGFloat) -> Font {
+        return .system(size: size, weight: .semibold)
     }
 }
 
