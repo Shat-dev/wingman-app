@@ -521,16 +521,7 @@ extension Color {
     static let customExplanationRed = Color(red: 1.0, green: 0.929, blue: 0.929) // #FFEDED
 }
 
-// MARK: - Font Extension
-extension Font {
-    static func manropeMedium(size: CGFloat) -> Font {
-        return .system(size: size, weight: .medium)
-    }
-    
-    static func manropeSemiBold(size: CGFloat) -> Font {
-        return .system(size: size, weight: .semibold)
-    }
-}
+
 
 #Preview {
     NavigationStack {
