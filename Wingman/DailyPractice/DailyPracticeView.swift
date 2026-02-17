@@ -456,7 +456,7 @@ struct DailyPracticeView: View {
             }
             
             // Explanation text
-            Text(viewModel.isAnswerCorrect ? viewModel.currentQuestion.correctExplanation : viewModel.currentQuestion.incorrectExplanation)
+            Text(viewModel.currentQuestion.explanation)
                 .font(.manropeSemiBold(size: 16))
                 .foregroundColor(Color.customDark.opacity(0.85))
                 .lineSpacing(4)
@@ -576,8 +576,7 @@ extension Color {
                     "Speaking clearly"
                 ],
                 correctAnswerIndices: [0, 1, 3],
-                correctExplanation: "Great! Maintaining eye contact, standing with good posture, and speaking clearly all project confidence and make a positive first impression.",
-                incorrectExplanation: "Remember that confident body language includes maintaining eye contact, good posture, and clear speech. Avoid fidgeting or defensive postures as they can signal nervousness or discomfort."
+                explanation: "Confident body language includes maintaining eye contact, standing with good posture, and speaking clearly. These all project confidence and make a positive first impression. Avoid fidgeting as it can signal nervousness."
             ),
             
             // Question 2: Multiple Select
@@ -591,8 +590,7 @@ extension Color {
                     "Observe environment"
                 ],
                 correctAnswerIndices: [0, 1, 3],
-                correctExplanation: "Excellent! Specific compliments, asking about the event, and making environmental observations are all natural conversation starters that feel genuine and engaging.",
-                incorrectExplanation: "Focus on authentic conversation starters. Avoid generic pickup lines or immediately asking for contact information, as these can feel forced or pushy."
+                explanation: "Effective conversation starters include specific compliments, asking about the event or venue, and making environmental observations. These feel natural and engaging. Avoid generic pickup lines as they can feel forced."
             ),
             
             // Question 3: Single Select
@@ -606,8 +604,7 @@ extension Color {
                     "Need to be perfect"
                 ],
                 correctAnswerIndex: 2,
-                correctExplanation: "Perfect! Approaching with genuine curiosity takes the pressure off and makes the interaction more natural and enjoyable for both people.",
-                incorrectExplanation: "The best mindset is one of genuine curiosity. Trying to impress, seeking validation, or fearing imperfection creates pressure and can make interactions feel forced."
+                explanation: "The best mindset is genuine curiosity. This takes the pressure off and makes the interaction more natural and enjoyable for both people. Avoid trying to impress or seeking validation as this creates unnecessary pressure."
             )
         ]
         

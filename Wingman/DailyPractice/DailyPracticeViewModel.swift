@@ -38,8 +38,7 @@ final class DailyPracticeViewModel: ObservableObject {
                 question: "Loading...",
                 options: ["Please wait..."],
                 correctAnswerIndex: 0,
-                correctExplanation: "",
-                incorrectExplanation: ""
+                explanation: ""
             )
         }
         return questions[currentQuestionIndex]

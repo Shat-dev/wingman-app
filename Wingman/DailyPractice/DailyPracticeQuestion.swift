@@ -38,11 +38,10 @@ struct DailyPracticeQuestion: Identifiable, Codable {
     let questionType: QuestionType
     let correctAnswerIndex: Int? // For single select
     let correctAnswerIndices: [Int]? // For multiple select
-    let correctExplanation: String
-    let incorrectExplanation: String
+    let explanation: String
     
     // Single select initializer
-    init(number: Int, question: String, options: [String], correctAnswerIndex: Int, correctExplanation: String, incorrectExplanation: String) {
+    init(number: Int, question: String, options: [String], correctAnswerIndex: Int, explanation: String) {
         self.id = UUID()
         self.number = number
         self.question = question
@@ -50,12 +49,11 @@ struct DailyPracticeQuestion: Identifiable, Codable {
         self.questionType = .singleSelect
         self.correctAnswerIndex = correctAnswerIndex
         self.correctAnswerIndices = nil
-        self.correctExplanation = correctExplanation
-        self.incorrectExplanation = incorrectExplanation
+        self.explanation = explanation
     }
     
     // Multiple select initializer
-    init(number: Int, question: String, options: [String], correctAnswerIndices: [Int], correctExplanation: String, incorrectExplanation: String) {
+    init(number: Int, question: String, options: [String], correctAnswerIndices: [Int], explanation: String) {
         self.id = UUID()
         self.number = number
         self.question = question
@@ -63,12 +61,11 @@ struct DailyPracticeQuestion: Identifiable, Codable {
         self.questionType = .multipleSelect
         self.correctAnswerIndex = nil
         self.correctAnswerIndices = correctAnswerIndices
-        self.correctExplanation = correctExplanation
-        self.incorrectExplanation = incorrectExplanation
+        self.explanation = explanation
     }
     
     // Full initializer for Supabase
-    init(id: UUID, number: Int, question: String, options: [String], questionType: QuestionType, correctAnswerIndex: Int?, correctAnswerIndices: [Int]?, correctExplanation: String, incorrectExplanation: String) {
+    init(id: UUID, number: Int, question: String, options: [String], questionType: QuestionType, correctAnswerIndex: Int?, correctAnswerIndices: [Int]?, explanation: String) {
         self.id = id
         self.number = number
         self.question = question
@@ -76,8 +73,7 @@ struct DailyPracticeQuestion: Identifiable, Codable {
         self.questionType = questionType
         self.correctAnswerIndex = correctAnswerIndex
         self.correctAnswerIndices = correctAnswerIndices
-        self.correctExplanation = correctExplanation
-        self.incorrectExplanation = incorrectExplanation
+        self.explanation = explanation
     }
 }
 

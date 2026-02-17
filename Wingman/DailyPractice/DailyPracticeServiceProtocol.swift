@@ -24,8 +24,7 @@ struct SupabaseQuestion: Codable {
     let options: [String]
     let correctAnswerIndex: Int?
     let correctAnswerIndices: [Int]?
-    let correctExplanation: String
-    let incorrectExplanation: String
+    let explanation: String
     
     enum CodingKeys: String, CodingKey {
         case questionId = "question_id"
@@ -36,8 +35,7 @@ struct SupabaseQuestion: Codable {
         case options
         case correctAnswerIndex = "correct_answer_index"
         case correctAnswerIndices = "correct_answer_indices"
-        case correctExplanation = "correct_explanation"
-        case incorrectExplanation = "incorrect_explanation"
+        case explanation
     }
 }
 
@@ -97,8 +95,7 @@ class DailyPracticeService: DailyPracticeServiceProtocol {
                     questionType: questionType,
                     correctAnswerIndex: supabaseQ.correctAnswerIndex,
                     correctAnswerIndices: supabaseQ.correctAnswerIndices,
-                    correctExplanation: supabaseQ.correctExplanation,
-                    incorrectExplanation: supabaseQ.incorrectExplanation
+                    explanation: supabaseQ.explanation
                 )
             }
             
