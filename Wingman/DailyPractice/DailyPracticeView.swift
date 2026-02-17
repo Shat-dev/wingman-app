@@ -1,5 +1,5 @@
 //
-//  PracticeView.swift
+//  DailyPracticeView.swift
 //  Wingman
 //
 //  Created by Adnan Khan on 18/12/2025.
@@ -29,15 +29,125 @@ struct DailyPracticeView: View {
                 }
                 .buttonStyle(.plain)
                 
-                progressBar(progress: CGFloat(viewModel.progress))
-                    .frame(height: 10)
+                if !viewModel.questions.isEmpty {
+                    progressBar(progress: CGFloat(viewModel.progress))
+                        .frame(height: 10)
+                } else {
+                    // Placeholder progress bar while loading
+                    Capsule()
+                        .fill(Color.gray.opacity(0.2))
+                        .frame(height: 10)
+                }
             }
             .padding(.top, 8)
             .padding(.leading, 8)
             .padding(.trailing, 59)
             .padding(.bottom, 12)
             
-            // MARK: - Scrollable Content
+            // MARK: - Main Content Area
+            if viewModel.isLoading {
+                loadingView()
+            } else if let errorMessage = viewModel.errorMessage {
+                errorView(message: errorMessage)
+            } else if viewModel.questions.isEmpty {
+                emptyStateView()
+            } else {
+                questionContentView()
+            }
+        }
+        .navigationBarBackButtonHidden(true)
+        .ignoresSafeArea(edges: .bottom)
+        .toolbar(.hidden, for: .tabBar)
+        .animation(.easeInOut(duration: 0.3), value: viewModel.hasCheckedAnswer)
+        .animation(.easeInOut(duration: 0.2), value: viewModel.selectedOptionIndex)
+        .animation(.easeInOut(duration: 0.2), value: viewModel.selectedOptionIndices)
+        .onAppear {
+            tabBarVisibility.hideTabBar()
+            print("👁️ PracticeView appeared - Loading questions from Supabase")
+            
+            // Load today's questions from Supabase
+            viewModel.loadTodayQuestions()
+        }
+        .onDisappear {
+            tabBarVisibility.showTabBar()
+        }
+    }
+    
+    // MARK: - Loading View
+    private func loadingView() -> some View {
+        VStack(spacing: 20) {
+            Spacer()
+            
+            ProgressView()
+                .scaleEffect(1.2)
+            
+            Text("Loading today's practice questions...")
+                .font(.manropeMedium(size: 18))
+                .foregroundColor(.black.opacity(0.7))
+            
+            Spacer()
+        }
+        .frame(maxWidth: .infinity)
+    }
+    
+    // MARK: - Error View
+    private func errorView(message: String) -> some View {
+        VStack(spacing: 20) {
+            Spacer()
+            
+            Image(systemName: "exclamationmark.triangle")
+                .font(.system(size: 48, weight: .medium))
+                .foregroundColor(.orange)
+            
+            Text("Oops! Something went wrong")
+                .font(.manropeSemiBold(size: 20))
+                .foregroundColor(.black)
+            
+            Text(message)
+                .font(.manropeMedium(size: 16))
+                .foregroundColor(.black.opacity(0.7))
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 24)
+            
+            Button("Try Again") {
+                viewModel.loadTodayQuestions()
+            }
+            .buttonStyle(PrimaryButtonStyle())
+            .padding(.horizontal, 24)
+            
+            Spacer()
+        }
+        .frame(maxWidth: .infinity)
+    }
+    
+    // MARK: - Empty State View
+    private func emptyStateView() -> some View {
+        VStack(spacing: 20) {
+            Spacer()
+            
+            Image(systemName: "questionmark.circle")
+                .font(.system(size: 48, weight: .medium))
+                .foregroundColor(.gray)
+            
+            Text("No questions available")
+                .font(.manropeSemiBold(size: 20))
+                .foregroundColor(.black)
+            
+            Text("Check back later for new practice questions.")
+                .font(.manropeMedium(size: 16))
+                .foregroundColor(.black.opacity(0.7))
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 24)
+            
+            Spacer()
+        }
+        .frame(maxWidth: .infinity)
+    }
+    
+    // MARK: - Question Content View
+    private func questionContentView() -> some View {
+        VStack(spacing: 0) {
+            // Scrollable Content
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
                     
@@ -93,19 +203,6 @@ struct DailyPracticeView: View {
                     .transition(.opacity)
             }
         }
-        .navigationBarBackButtonHidden(true)
-        .ignoresSafeArea(edges: .bottom) // Ignore bottom safe area to fill tab bar space
-        .toolbar(.hidden, for: .tabBar) // Hide system tab bar if present
-        .animation(.easeInOut(duration: 0.3), value: viewModel.hasCheckedAnswer)
-        .animation(.easeInOut(duration: 0.2), value: viewModel.selectedOptionIndex)
-        .animation(.easeInOut(duration: 0.2), value: viewModel.selectedOptionIndices)
-        .onAppear {
-            tabBarVisibility.hideTabBar()
-            print("👁️ PracticeView appeared - Question \(viewModel.currentQuestionIndex + 1)/\(viewModel.questions.count)")
-        }
-        .onDisappear {
-            tabBarVisibility.showTabBar()
-        }
     }
     
     // MARK: - Progress Bar
@@ -144,7 +241,7 @@ struct DailyPracticeView: View {
             .cornerRadius(5)
             .overlay(
                 RoundedRectangle(cornerRadius: 5)
-                    .stroke(buttonBorderColor(isSelected: isSelected, isCorrect: isCorrect, isWrong: isWrong), lineWidth: 1) // 1pt border
+                    .stroke(buttonBorderColor(isSelected: isSelected, isCorrect: isCorrect, isWrong: isWrong), lineWidth: 1)
             )
         }
         .disabled(viewModel.hasCheckedAnswer)
@@ -199,18 +296,20 @@ struct DailyPracticeView: View {
             
             // Checkmark or X
             if shouldShowCorrectButNotSelected {
-                // Don't show any icon for correct answers not selected by user (empty checkbox)
-                EmptyView()
+                // Show green checkmark for correct answers not selected by user
+                Image(systemName: "checkmark")
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundColor(Color.customGreen)
             } else if isSelected && (isCorrect || (!viewModel.hasCheckedAnswer)) {
-                // White checkmark for selected items (both before checking and correct selected items)
+                // Black checkmark for selected items (before checking) or correct selected items
                 Image(systemName: "checkmark")
                     .font(.system(size: 12, weight: .bold))
-                    .foregroundColor(.white)
+                    .foregroundColor(viewModel.hasCheckedAnswer && isCorrect ? Color.customGreen : .white)
             } else if isSelected && isWrong {
-                // White X for wrong selected items
-                Image(systemName: "checkmark")
+                // Red X for wrong selected items
+                Image(systemName: "xmark")
                     .font(.system(size: 12, weight: .bold))
-                    .foregroundColor(.white)
+                    .foregroundColor(Color.customRed)
             }
         }
     }
@@ -218,68 +317,68 @@ struct DailyPracticeView: View {
     // MARK: - Color Functions for Single Select
     private func buttonTextColor(isSelected: Bool, isCorrect: Bool, isWrong: Bool) -> Color {
         if isCorrect {
-            return Color(hex: "#3E8F6A")
+            return Color.customGreen
         } else if isWrong {
-            return Color(hex: "#C9594C")
+            return Color.customRed
         } else if isSelected {
-            return Color(hex: "#FFFFFF")
+            return Color.white
         } else {
-            return Color(hex: "#1A1A1A")
+            return Color.customDark
         }
     }
     
     private func buttonBackgroundColor(isSelected: Bool, isCorrect: Bool, isWrong: Bool) -> Color {
         if isCorrect {
-            return Color(hex: "#DAF0E6")
+            return Color.customLightGreen
         } else if isWrong {
-            return Color(hex: "#F4DEDB")
+            return Color.customLightRed
         } else if isSelected {
-            return Color(hex: "#000000")
+            return Color.black
         } else {
-            return Color(hex: "#FFFFFF")
+            return Color.white
         }
     }
     
     private func buttonBorderColor(isSelected: Bool, isCorrect: Bool, isWrong: Bool) -> Color {
         if isCorrect {
-            return Color(hex: "#3E8F6A")
+            return Color.customGreen
         } else if isWrong {
-            return Color(hex: "#C9594C")
+            return Color.customRed
         } else if isSelected {
-            return Color(hex: "#1A1A1A")
+            return Color.customDark
         } else {
-            return Color(hex: "#1A1A1A").opacity(0.5)
+            return Color.customDark.opacity(0.5)
         }
     }
     
     // MARK: - Color Functions for Multiple Select
     private func multipleSelectTextColor(isSelected: Bool, isCorrect: Bool, isWrong: Bool, shouldShowCorrectButNotSelected: Bool) -> Color {
         if isCorrect || shouldShowCorrectButNotSelected {
-            return Color(hex: "#3E8F6A")
+            return Color.customGreen
         } else if isWrong {
-            return Color(hex: "#C9594C")
+            return Color.customRed
         } else {
-            return Color(hex: "#1A1A1A")
+            return Color.customDark
         }
     }
     
     private func multipleSelectBackgroundColor(isSelected: Bool, isCorrect: Bool, isWrong: Bool, shouldShowCorrectButNotSelected: Bool) -> Color {
         if isCorrect || shouldShowCorrectButNotSelected {
-            return Color(hex: "#DAF0E6")
+            return Color.customLightGreen
         } else if isWrong {
-            return Color(hex: "#F4DEDB")
+            return Color.customLightRed
         } else {
-            return Color(hex: "#FFFFFF")
+            return Color.white
         }
     }
     
     private func multipleSelectBorderColor(isSelected: Bool, isCorrect: Bool, isWrong: Bool, shouldShowCorrectButNotSelected: Bool) -> Color {
         if isCorrect || shouldShowCorrectButNotSelected {
-            return Color(hex: "#3E8F6A")
+            return Color.customGreen
         } else if isWrong {
-            return Color(hex: "#C9594C")
+            return Color.customRed
         } else {
-            return Color(hex: "#1A1A1A").opacity(0.5)
+            return Color.customDark.opacity(0.5)
         }
     }
     
@@ -288,27 +387,27 @@ struct DailyPracticeView: View {
         if shouldShowCorrectButNotSelected {
             return Color.white // White background for correct but unselected (empty checkbox)
         } else if isSelected && isCorrect {
-            return Color(hex: "#3E8F6A") // Green background for selected correct items
+            return Color.customGreen // Green background for selected correct items
         } else if isSelected && isWrong {
-            return Color(hex: "#C9594C")
+            return Color.customRed
         } else if isSelected {
-            return Color(hex: "#000000") // Black background for selected items before checking
+            return Color.black // Black background for selected items before checking
         } else {
-            return Color(hex: "#F3F3F3")
+            return Color.customLightGray
         }
     }
     
     private func checkboxBorderColor(isSelected: Bool, isCorrect: Bool, isWrong: Bool, shouldShowCorrectButNotSelected: Bool) -> Color {
         if shouldShowCorrectButNotSelected {
-            return Color(hex: "#1A1A1A").opacity(0.5) // Black border for correct but unselected
+            return Color.customDark.opacity(0.5) // Black border for correct but unselected
         } else if isCorrect {
-            return Color(hex: "#3E8F6A")
+            return Color.customGreen
         } else if isWrong {
-            return Color(hex: "#C9594C")
+            return Color.customRed
         } else if isSelected {
-            return Color(hex: "#000000")
+            return Color.black
         } else {
-            return Color(hex: "#1A1A1A").opacity(0.5)
+            return Color.customDark.opacity(0.5)
         }
     }
     
@@ -319,13 +418,13 @@ struct DailyPracticeView: View {
             HStack {
                 Text(viewModel.isAnswerCorrect ? "Correct Answer!" : "Incorrect Answer.")
                     .font(.manropeSemiBold(size: 18))
-                    .foregroundColor(viewModel.isAnswerCorrect ? Color(hex: "#339966") : Color(hex: "#CC4D4D"))
+                    .foregroundColor(viewModel.isAnswerCorrect ? Color.customCorrectGreen : Color.customIncorrectRed)
             }
             
             // Explanation text
             Text(viewModel.isAnswerCorrect ? viewModel.currentQuestion.correctExplanation : viewModel.currentQuestion.incorrectExplanation)
                 .font(.manropeSemiBold(size: 16))
-                .foregroundColor(Color(hex: "#1A1A1A").opacity(0.85))
+                .foregroundColor(Color.customDark.opacity(0.85))
                 .lineSpacing(4)
                 .fixedSize(horizontal: false, vertical: true)
             
@@ -338,7 +437,7 @@ struct DailyPracticeView: View {
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .frame(height: 52)
-                    .background(viewModel.isAnswerCorrect ? Color(hex: "#3E8F6A") : Color(hex: "#C9594C"))
+                    .background(viewModel.isAnswerCorrect ? Color.customGreen : Color.customRed)
                     .cornerRadius(5)
             }
         }
@@ -347,8 +446,8 @@ struct DailyPracticeView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(
             viewModel.isAnswerCorrect
-                ? Color(hex: "#E6F7F0")
-                : Color(hex: "#FFEDED")
+                ? Color.customExplanationGreen
+                : Color.customExplanationRed
         )
         .cornerRadius(5)
         .padding(.horizontal, 8)
@@ -364,19 +463,19 @@ struct DailyPracticeView: View {
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
                 .frame(height: 52)
-                .background(viewModel.isCheckAnswerEnabled ? Color(hex: "#000000") : Color(hex: "#000000").opacity(0.4))
-                .cornerRadius(5) // Updated to 5px corner radius
+                .background(viewModel.isCheckAnswerEnabled ? Color.black : Color.black.opacity(0.4))
+                .cornerRadius(5)
         }
         .disabled(!viewModel.isCheckAnswerEnabled)
     }
     
     // MARK: - Navigation Handlers
     private func handleBackButton() {
-        if viewModel.currentQuestionIndex > 0 {
+        if !viewModel.questions.isEmpty && viewModel.currentQuestionIndex > 0 {
             print("⬅️ Back button: Going to previous question")
             viewModel.previousQuestion()
         } else {
-            print("Practice session completed!")
+            print("Exiting practice session")
             tabBarVisibility.showTabBar()
             dismiss()
         }
@@ -385,7 +484,6 @@ struct DailyPracticeView: View {
     private func handleNextButton() {
         if viewModel.isLastQuestion {
             print("Practice session completed!")
-            // TODO: Navigate to results screen or back to dashboard
             tabBarVisibility.showTabBar()
             dismiss()
         } else {
@@ -394,7 +492,34 @@ struct DailyPracticeView: View {
     }
 }
 
+// MARK: - Custom Button Style
+struct PrimaryButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(.manropeSemiBold(size: 16))
+            .foregroundColor(.white)
+            .frame(maxWidth: .infinity)
+            .frame(height: 52)
+            .background(Color.black)
+            .cornerRadius(5)
+            .scaleEffect(configuration.isPressed ? 0.96 : 1.0)
+            .animation(.easeInOut(duration: 0.1), value: configuration.isPressed)
+    }
+}
 
+// MARK: - Custom Color Extensions
+extension Color {
+    static let customGreen = Color(red: 0.243, green: 0.561, blue: 0.416) // #3E8F6A
+    static let customRed = Color(red: 0.788, green: 0.349, blue: 0.298) // #C9594C
+    static let customDark = Color(red: 0.102, green: 0.102, blue: 0.102) // #1A1A1A
+    static let customLightGreen = Color(red: 0.855, green: 0.941, blue: 0.902) // #DAF0E6
+    static let customLightRed = Color(red: 0.957, green: 0.871, blue: 0.859) // #F4DEDB
+    static let customLightGray = Color(red: 0.953, green: 0.953, blue: 0.953) // #F3F3F3
+    static let customCorrectGreen = Color(red: 0.2, green: 0.6, blue: 0.4) // #339966
+    static let customIncorrectRed = Color(red: 0.8, green: 0.302, blue: 0.302) // #CC4D4D
+    static let customExplanationGreen = Color(red: 0.902, green: 0.969, blue: 0.941) // #E6F7F0
+    static let customExplanationRed = Color(red: 1.0, green: 0.929, blue: 0.929) // #FFEDED
+}
 
 // MARK: - Font Extension
 extension Font {
@@ -404,27 +529,6 @@ extension Font {
     
     static func manropeSemiBold(size: CGFloat) -> Font {
         return .system(size: size, weight: .semibold)
-    }
-}
-
-// MARK: - Corner Radius Extension
-extension View {
-    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-        clipShape(RoundedCorner(radius: radius, corners: corners))
-    }
-}
-
-struct RoundedCorner: Shape {
-    var radius: CGFloat = .infinity
-    var corners: UIRectCorner = .allCorners
-
-    func path(in rect: CGRect) -> Path {
-        let path = UIBezierPath(
-            roundedRect: rect,
-            byRoundingCorners: corners,
-            cornerRadii: CGSize(width: radius, height: radius)
-        )
-        return Path(path.cgPath)
     }
 }
 

@@ -69,8 +69,9 @@ struct EditProfileSheet: View {
                                 .resizable()
                                 .frame(width: 64, height: 64)
                                 .foregroundColor(.gray.opacity(0.4))
+                                .clipShape(RoundedRectangle(cornerRadius: 8))
                                 .overlay(
-                                    RoundedCorner()
+                                    RoundedRectangle(cornerRadius: 8)
                                         .stroke(Color.gray.opacity(0.2), lineWidth: 1)
                                 )
                         }

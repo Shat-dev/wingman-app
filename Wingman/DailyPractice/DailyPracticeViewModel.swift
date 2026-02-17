@@ -1,14 +1,8 @@
 //
-//  PracticeViewModel.swift
+//  DailyPracticeViewModel.swift
 //  Wingman
 //
 //  Created by Adnan Khan on 18/12/2025.
-//
-
-
-//
-//  PracticeViewModel.swift
-//  Wingman
 //
 
 import Foundation
@@ -17,25 +11,51 @@ import Combine
 final class DailyPracticeViewModel: ObservableObject {
     
     // MARK: - Published Properties
+    @Published var questions: [DailyPracticeQuestion] = []
     @Published var currentQuestionIndex: Int = 0
-    @Published var selectedOptionIndex: Int? = nil
+    @Published var selectedOptionIndex: Int? = nil // For single select
+    @Published var selectedOptionIndices: Set<Int> = [] // For multiple select
     @Published var hasCheckedAnswer: Bool = false
     @Published var isAnswerCorrect: Bool = false
+    @Published var isLoading: Bool = false
+    @Published var errorMessage: String?
     
-    // MARK: - Data
-    let questions: [DailyPracticeQuestion] = practiceQuestions
+    // MARK: - Dependencies
+    private let practiceService: DailyPracticeServiceProtocol
+    private var cancellables = Set<AnyCancellable>()
+    
+    // MARK: - Initialization
+    init(practiceService: DailyPracticeServiceProtocol = DailyPracticeService()) {
+        self.practiceService = practiceService
+    }
     
     // MARK: - Computed Properties
     var currentQuestion: DailyPracticeQuestion {
-        questions[currentQuestionIndex]
+        guard currentQuestionIndex < questions.count else {
+            // Return a dummy question to prevent crashes
+            return DailyPracticeQuestion(
+                number: 1,
+                question: "Loading...",
+                options: ["Please wait..."],
+                correctAnswerIndex: 0,
+                correctExplanation: "",
+                incorrectExplanation: ""
+            )
+        }
+        return questions[currentQuestionIndex]
     }
     
     var progress: Double {
-        Double(currentQuestionIndex + 1) / Double(questions.count)
+        guard !questions.isEmpty else { return 0.0 }
+        return Double(currentQuestionIndex + 1) / Double(questions.count)
     }
     
     var isCheckAnswerEnabled: Bool {
-        selectedOptionIndex != nil && !hasCheckedAnswer
+        if currentQuestion.questionType == .singleSelect {
+            return selectedOptionIndex != nil && !hasCheckedAnswer
+        } else {
+            return !selectedOptionIndices.isEmpty && !hasCheckedAnswer
+        }
     }
     
     var buttonTitle: String {
@@ -46,46 +66,98 @@ final class DailyPracticeViewModel: ObservableObject {
         }
     }
     
-    var buttonBackgroundColor: ButtonColorState {
-        if !hasCheckedAnswer && selectedOptionIndex == nil {
-            return .disabled // Gray
-        } else if hasCheckedAnswer && isAnswerCorrect {
-            return .correct // Green
-        } else if hasCheckedAnswer && !isAnswerCorrect {
-            return .incorrect // Red
-        } else {
-            return .enabled // Black
-        }
-    }
-    
     var isLastQuestion: Bool {
         currentQuestionIndex == questions.count - 1
     }
     
-    // MARK: - Actions
+    // MARK: - Lifecycle Methods
+    func loadTodayQuestions() {
+        Task { @MainActor in
+            isLoading = true
+            errorMessage = nil
+            
+            do {
+                let fetchedQuestions = try await practiceService.getTodayQuestions()
+                
+                self.questions = fetchedQuestions
+                self.currentQuestionIndex = 0
+                self.resetQuestion()
+                self.isLoading = false
+                
+                print("✅ Loaded \(fetchedQuestions.count) questions for today")
+                
+            } catch {
+                self.errorMessage = error.localizedDescription
+                self.isLoading = false
+                print("❌ Failed to load questions: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    // MARK: - User Actions
     func selectOption(at index: Int) {
         guard !hasCheckedAnswer else {
             print("⚠️ Cannot select option after checking answer")
             return
         }
         
-        print("📝 User selected option \(index): \(currentQuestion.options[index])")
-        selectedOptionIndex = index
+        if currentQuestion.questionType == .singleSelect {
+            print("📌 User selected option \(index): \(currentQuestion.options[index])")
+            selectedOptionIndex = index
+        } else {
+            // Multiple select - toggle selection
+            if selectedOptionIndices.contains(index) {
+                selectedOptionIndices.remove(index)
+                print("📌 User deselected option \(index): \(currentQuestion.options[index])")
+            } else {
+                selectedOptionIndices.insert(index)
+                print("📌 User selected option \(index): \(currentQuestion.options[index])")
+            }
+            print("📌 Currently selected indices: \(selectedOptionIndices)")
+        }
     }
     
     func checkAnswer() {
-        guard let selected = selectedOptionIndex else {
-            print("❌ No option selected")
-            return
+        guard !isLoading else { return }
+        
+        if currentQuestion.questionType == .singleSelect {
+            guard let selected = selectedOptionIndex else {
+                print("❌ No option selected")
+                return
+            }
+            
+            hasCheckedAnswer = true
+            isAnswerCorrect = (selected == currentQuestion.correctAnswerIndex)
+            
+            print("\n✅ Answer checked!")
+            print("   - Selected: \(currentQuestion.options[selected])")
+            print("   - Result: \(isAnswerCorrect ? "CORRECT ✅" : "INCORRECT ❌")")
+            
+            // Submit completion to backend
+            Task { @MainActor in
+                await submitCompletion(selectedAnswers: SelectedAnswers(singleSelect: selected))
+            }
+            
+        } else {
+            guard !selectedOptionIndices.isEmpty else {
+                print("❌ No options selected")
+                return
+            }
+            
+            hasCheckedAnswer = true
+            let correctSet = Set(currentQuestion.correctAnswerIndices ?? [])
+            isAnswerCorrect = (selectedOptionIndices == correctSet)
+            
+            print("\n✅ Answer checked!")
+            print("   - Selected indices: \(selectedOptionIndices)")
+            print("   - Correct indices: \(correctSet)")
+            print("   - Result: \(isAnswerCorrect ? "CORRECT ✅" : "INCORRECT ❌")")
+            
+            // Submit completion to backend
+            Task { @MainActor in
+                await submitCompletion(selectedAnswers: SelectedAnswers(multipleSelect: Array(selectedOptionIndices)))
+            }
         }
-        
-        hasCheckedAnswer = true
-        isAnswerCorrect = (selected == currentQuestion.correctAnswerIndex)
-        
-        print("\n✅ Answer checked!")
-        print("   - Selected: \(currentQuestion.options[selected])")
-        print("   - Correct answer: \(currentQuestion.options[currentQuestion.correctAnswerIndex])")
-        print("   - Result: \(isAnswerCorrect ? "CORRECT ✅" : "INCORRECT ❌")")
     }
     
     func nextQuestion() {
@@ -112,11 +184,29 @@ final class DailyPracticeViewModel: ObservableObject {
         }
     }
     
+    // MARK: - Helper Functions
     private func resetQuestion() {
         selectedOptionIndex = nil
+        selectedOptionIndices.removeAll()
         hasCheckedAnswer = false
         isAnswerCorrect = false
         print("🔄 Question state reset")
+    }
+    
+    private func submitCompletion(selectedAnswers: SelectedAnswers) async {
+        do {
+            let response = try await practiceService.submitCompletion(
+                questionId: currentQuestion.id,
+                selectedAnswers: selectedAnswers,
+                isCorrect: isAnswerCorrect
+            )
+            
+            print("✅ Completion submitted: \(response.message)")
+            
+        } catch {
+            print("❌ Failed to submit completion: \(error.localizedDescription)")
+            // Note: We don't show this error to the user as it doesn't affect their experience
+        }
     }
     
     func reset() {
@@ -124,12 +214,41 @@ final class DailyPracticeViewModel: ObservableObject {
         currentQuestionIndex = 0
         resetQuestion()
     }
-}
-
-// MARK: - Button Color State
-enum ButtonColorState {
-    case disabled
-    case enabled
-    case correct
-    case incorrect
+    
+    // MARK: - Helper functions for UI state
+    func isOptionSelected(_ index: Int) -> Bool {
+        if currentQuestion.questionType == .singleSelect {
+            return selectedOptionIndex == index
+        } else {
+            return selectedOptionIndices.contains(index)
+        }
+    }
+    
+    func isOptionCorrect(_ index: Int) -> Bool {
+        guard hasCheckedAnswer else { return false }
+        
+        if currentQuestion.questionType == .singleSelect {
+            return index == currentQuestion.correctAnswerIndex
+        } else {
+            return currentQuestion.correctAnswerIndices?.contains(index) ?? false
+        }
+    }
+    
+    func isOptionIncorrect(_ index: Int) -> Bool {
+        guard hasCheckedAnswer else { return false }
+        
+        if currentQuestion.questionType == .singleSelect {
+            return selectedOptionIndex == index && !isAnswerCorrect
+        } else {
+            return selectedOptionIndices.contains(index) &&
+                   !(currentQuestion.correctAnswerIndices?.contains(index) ?? false)
+        }
+    }
+    
+    func shouldShowCorrectButNotSelected(_ index: Int) -> Bool {
+        guard hasCheckedAnswer && currentQuestion.questionType == .multipleSelect else { return false }
+        
+        return (currentQuestion.correctAnswerIndices?.contains(index) ?? false) &&
+               !selectedOptionIndices.contains(index)
+    }
 }

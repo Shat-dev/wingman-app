@@ -61,8 +61,9 @@ struct ProfileView: View {
                                             .resizable()
                                             .frame(width: 50, height: 50)
                                             .foregroundColor(.gray.opacity(0.4))
+                                            .clipShape(RoundedRectangle(cornerRadius: 12))
                                             .overlay(
-                                                RoundedCorner()
+                                                RoundedRectangle(cornerRadius: 12)
                                                     .stroke(Color.gray.opacity(0.2), lineWidth: 1)
                                             )
                                             
