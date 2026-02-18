@@ -2,17 +2,15 @@
 //  PracticeCardView.swift
 //  Wingman
 //
-//  Created by Adnan Khan on 23/01/2026.
-//
 
 import SwiftUI
 
 struct PracticeCardView: View {
-    
+
     // MARK: - Properties
     let practice: Practice
     let onTap: () -> Void
-    
+
     // MARK: - Body
     var body: some View {
         Button(action: onTap) {
@@ -25,7 +23,7 @@ struct PracticeCardView: View {
                         .foregroundColor(Color(hex: "#1A1A1A").opacity(practice.isLocked ? 0.3 : 1.0))
                         .lineLimit(2)
                         .multilineTextAlignment(.leading)
-                    
+
                     // Daily Practice Count
                     HStack(spacing: 4) {
                         Image("flame_fill")
@@ -33,14 +31,14 @@ struct PracticeCardView: View {
                             .scaledToFit()
                             .opacity(practice.isLocked ? 0.3 : 1.0)
                             .frame(width: 8, height: 12)
-                        
+
                         Text("\(practice.dailyPracticeCount) Daily Practice")
                             .font(.manropeMedium(size: 12))
                             .foregroundColor(Color(hex: "#1A1A1A").opacity(practice.isLocked ? 0.3 : 1.0))
                     }
-                    
+
                     // Summary
-                    Text(practice.summary)
+                    Text(practice.summary ?? "")
                         .font(.manropeMedium(size: 14))
                         .foregroundColor(Color(hex: "#1A1A1A").opacity(practice.isLocked ? 0.3 : 1.0))
                         .lineLimit(3)
@@ -48,19 +46,16 @@ struct PracticeCardView: View {
                         .lineSpacing(2)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                
+
                 // Right Content - Image & Lock
                 ZStack(alignment: .topTrailing) {
                     // Practice Image
-                        //Image(practice.imageUrl)
-                        Image("c_girl")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 70, height: 110)
-                            .opacity(practice.isLocked ? 0.4 : 1.0)
-                    
-                   
-                    
+                    Image(practice.imageUrl.isEmpty ? "c_girl" : practice.imageUrl)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 70, height: 110)
+                        .opacity(practice.isLocked ? 0.4 : 1.0)
+
                     // Lock Icon (if locked)
                     if practice.isLocked {
                         Image("lock_icon")
@@ -77,7 +72,7 @@ struct PracticeCardView: View {
                 RoundedRectangle(cornerRadius: 5)
                     .stroke(Color(hex: "#E5E5E5"), lineWidth: 1)
             )
-            .shadow(color: Color.black.opacity(0.06), radius: 5, x: 0, y: 2) // <-- added elevation / shadow
+            .shadow(color: Color.black.opacity(0.06), radius: 5, x: 0, y: 2)
         }
         .buttonStyle(PracticeCardButtonStyle())
         .disabled(practice.isLocked)
@@ -97,15 +92,8 @@ struct PracticeCardButtonStyle: ButtonStyle {
 // MARK: - Preview
 #Preview {
     VStack(spacing: 12) {
-        PracticeCardView(
-            practice: Practice.mockData[0],
-            onTap: {}
-        )
-        
-        PracticeCardView(
-            practice: Practice.mockData[2],
-            onTap: {}
-        )
+        PracticeCardView(practice: Practice.mockData[0], onTap: {})
+        PracticeCardView(practice: Practice.mockData[2], onTap: {})
     }
     .padding(20)
     .background(Color.white)
