@@ -9,9 +9,19 @@ import SwiftUI
 import Combine
 
 struct DailyPracticeView: View {
-    @StateObject private var viewModel = DailyPracticeViewModel()
+    @StateObject private var viewModel: DailyPracticeViewModel
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var tabBarVisibility: TabBarVisibilityManager
+    
+    // Default initializer for production use
+    init() {
+        self._viewModel = StateObject(wrappedValue: DailyPracticeViewModel())
+    }
+    
+    // Preview initializer for Canvas testing
+    init(previewViewModel: DailyPracticeViewModel) {
+        self._viewModel = StateObject(wrappedValue: previewViewModel)
+    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -65,8 +75,10 @@ struct DailyPracticeView: View {
             tabBarVisibility.hideTabBar()
             print("👁️ PracticeView appeared - Loading questions from Supabase")
             
-            // Load today's questions from Supabase
-            viewModel.loadTodayQuestions()
+            // Only load from Supabase if questions are empty (not in preview mode)
+            if viewModel.questions.isEmpty {
+                viewModel.loadTodayQuestions()
+            }
         }
         .onDisappear {
             tabBarVisibility.showTabBar()
@@ -92,32 +104,56 @@ struct DailyPracticeView: View {
     
     // MARK: - Error View
     private func errorView(message: String) -> some View {
-        VStack(spacing: 20) {
-            Spacer()
+        print("ErrorView message: \(message)")
+        return ZStack {
+           
             
-            Image(systemName: "exclamationmark.triangle")
-                .font(.system(size: 48, weight: .medium))
-                .foregroundColor(.orange)
-            
-            Text("Oops! Something went wrong")
-                .font(.manropeSemiBold(size: 20))
-                .foregroundColor(.black)
-            
-            Text(message)
-                .font(.manropeMedium(size: 16))
-                .foregroundColor(.black.opacity(0.7))
-                .multilineTextAlignment(.center)
+            VStack {
+                
+                Spacer()
+                
+                // Center Content
+                VStack() {
+                    
+                    Text("Oops!")
+                        .font(.manropeSemiBold(size: 24))
+                        .foregroundColor(.black)
+                    Text("Somthing went wrong")
+                        .font(.manropeSemiBold(size: 16))
+                        .foregroundColor(.black)
+                        .padding(.top,2)
+                    Text("Please Try again!")
+                        .font(.manropeSemiBold(size: 16))
+                        .foregroundColor(.black)
+                    
+//                    Text(message)
+//                        .font(.manropeSemiBold(size: 16))
+//                        .foregroundColor(.black.opacity(0.7))
+//                        .multilineTextAlignment(.center)
+
+                    
+                }
                 .padding(.horizontal, 24)
-            
-            Button("Try Again") {
-                viewModel.loadTodayQuestions()
+                
+                Spacer()
+                
+                
+                // Bottom Button
+                Button(action: {
+                    viewModel.loadTodayQuestions()
+                }) {
+                    Text("Try Again")
+                        .font(.manropeSemiBold(size: 16))
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 52)
+                        .background(Color.black)
+                        .cornerRadius(5)
+                }
+                .padding(.horizontal, 24)
+                .padding(.bottom, 20)
             }
-            .buttonStyle(PrimaryButtonStyle())
-            .padding(.horizontal, 24)
-            
-            Spacer()
         }
-        .frame(maxWidth: .infinity)
     }
     
     // MARK: - Empty State View
@@ -155,7 +191,7 @@ struct DailyPracticeView: View {
                     Text("\(viewModel.currentQuestion.number). \(viewModel.currentQuestion.question)")
                         .font(.manropeMedium(size: 20))
                         .foregroundColor(.black)
-                        .lineSpacing(2)
+                        .lineSpacing(1)
                         .fixedSize(horizontal: false, vertical: true)
                     
                     // MARK: - Options
@@ -181,9 +217,9 @@ struct DailyPracticeView: View {
                             }
                         }
                     }
-                    .padding(.top, 8)
+                    .padding(.top, 2)
                 }
-                .padding(.horizontal, 24)
+                .padding(.horizontal, 20)
                 .padding(.top, 8)
                 .padding(.bottom, 100) // Extra space for bottom section
             }
@@ -198,7 +234,7 @@ struct DailyPracticeView: View {
             } else {
                 // Check Answer Button
                 actionButton()
-                    .padding(.horizontal, 24)
+                    .padding(.horizontal, 20)
                     .padding(.bottom, 24)
                     .transition(.opacity)
             }
@@ -243,6 +279,7 @@ struct DailyPracticeView: View {
                 RoundedRectangle(cornerRadius: 5)
                     .stroke(buttonBorderColor(isSelected: isSelected, isCorrect: isCorrect, isWrong: isWrong), lineWidth: 1)
             )
+            .shadow(color: Color.black.opacity(0.0002), radius: 0.03, x: 0, y: 0.01)
         }
         .disabled(viewModel.hasCheckedAnswer)
     }
@@ -278,6 +315,7 @@ struct DailyPracticeView: View {
                 RoundedRectangle(cornerRadius: 5)
                     .stroke(multipleSelectBorderColor(isSelected: isSelected, isCorrect: isCorrect, isWrong: isWrong, shouldShowCorrectButNotSelected: shouldShowCorrectButNotSelected), lineWidth: 1)
             )
+            .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 2)
         }
         .disabled(viewModel.hasCheckedAnswer)
     }
@@ -296,20 +334,18 @@ struct DailyPracticeView: View {
             
             // Checkmark or X
             if shouldShowCorrectButNotSelected {
-                // Show green checkmark for correct answers not selected by user
-                Image(systemName: "checkmark")
-                    .font(.system(size: 12, weight: .bold))
-                    .foregroundColor(Color.customGreen)
+                // Show empty checkbox for correct answers not selected by user
+               
             } else if isSelected && (isCorrect || (!viewModel.hasCheckedAnswer)) {
-                // Black checkmark for selected items (before checking) or correct selected items
+                // White checkmark for selected items (before checking) or correct selected items
                 Image(systemName: "checkmark")
                     .font(.system(size: 12, weight: .bold))
-                    .foregroundColor(viewModel.hasCheckedAnswer && isCorrect ? Color.customGreen : .white)
+                    .foregroundColor(.white)
             } else if isSelected && isWrong {
                 // Red X for wrong selected items
-                Image(systemName: "xmark")
+                Image(systemName: "checkmark")
                     .font(.system(size: 12, weight: .bold))
-                    .foregroundColor(Color.customRed)
+                    .foregroundColor(Color.white)
             }
         }
     }
@@ -344,8 +380,6 @@ struct DailyPracticeView: View {
             return Color.customGreen
         } else if isWrong {
             return Color.customRed
-        } else if isSelected {
-            return Color.customDark
         } else {
             return Color.customDark.opacity(0.5)
         }
@@ -449,8 +483,9 @@ struct DailyPracticeView: View {
                 ? Color.customExplanationGreen
                 : Color.customExplanationRed
         )
-        .cornerRadius(5)
-        .padding(.horizontal, 8)
+        .cornerRadius(10)
+        .padding(.horizontal, 10)
+        .padding(.bottom,33)
     }
     
     // MARK: - Action Button (Check Answer - before checking)
@@ -525,7 +560,63 @@ extension Color {
 
 #Preview {
     NavigationStack {
-        DailyPracticeView()
+        // Create a view model with dummy data for Canvas preview
+        let previewViewModel = DailyPracticeViewModel()
+        
+        // Add dummy questions - 2 multiple choice and 1 single option
+        let dummyQuestions = [
+            // Question 1: Multiple Select
+            DailyPracticeQuestion(
+                number: 1,
+                question: "Which are key for confident body language?",
+                options: [
+                    "Eye contact",
+                    "Good posture",
+                    "Fidgeting",
+                    "Speaking clearly"
+                ],
+                correctAnswerIndices: [0, 1, 3],
+                correctExplanation: "Great! Maintaining eye contact, standing with good posture, and speaking clearly all project confidence and make a positive first impression.",
+                incorrectExplanation: "Remember that confident body language includes maintaining eye contact, good posture, and clear speech. Avoid fidgeting or defensive postures as they can signal nervousness or discomfort."
+            ),
+            
+            // Question 2: Multiple Select
+            DailyPracticeQuestion(
+                number: 2,
+                question: "Effective ways to start a conversation?",
+                options: [
+                    "Compliment outfit",
+                    "Ask about venue",
+                    "Generic pickup line",
+                    "Observe environment"
+                ],
+                correctAnswerIndices: [0, 1, 3],
+                correctExplanation: "Excellent! Specific compliments, asking about the event, and making environmental observations are all natural conversation starters that feel genuine and engaging.",
+                incorrectExplanation: "Focus on authentic conversation starters. Avoid generic pickup lines or immediately asking for contact information, as these can feel forced or pushy."
+            ),
+            
+            // Question 3: Single Select
+            DailyPracticeQuestion(
+                number: 3,
+                question: "Best mindset when approaching someone?",
+                options: [
+                    "Need to impress",
+                    "Hope they like me",
+                    "Genuinely curious",
+                    "Need to be perfect"
+                ],
+                correctAnswerIndex: 2,
+                correctExplanation: "Perfect! Approaching with genuine curiosity takes the pressure off and makes the interaction more natural and enjoyable for both people.",
+                incorrectExplanation: "The best mindset is one of genuine curiosity. Trying to impress, seeking validation, or fearing imperfection creates pressure and can make interactions feel forced."
+            )
+        ]
+        
+        // Configure the preview view model with dummy data
+        previewViewModel.questions = dummyQuestions
+        previewViewModel.isLoading = false
+        previewViewModel.errorMessage = nil
+        
+        return DailyPracticeView(previewViewModel: previewViewModel)
             .environmentObject(TabBarVisibilityManager())
     }
 }

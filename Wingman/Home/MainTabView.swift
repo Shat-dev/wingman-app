@@ -70,7 +70,7 @@ struct CustomTabBar: View {
 
             TabBarButton(
                 icon: "calendar",
-                title: "Schedules",
+                title: "Scenarios",
                 isSelected: selectedTab == 2
             ) { selectedTab = 2 }
 
