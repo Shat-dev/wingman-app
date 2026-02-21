@@ -62,6 +62,7 @@ struct PracticeCardView: View {
                             .font(.system(size: 14, weight: .medium))
                             .foregroundColor(Color(hex: "#1A1A1A"))
                             .offset(x: 10, y: -10)
+                            .opacity(0.7)
                     }
                 }
             }

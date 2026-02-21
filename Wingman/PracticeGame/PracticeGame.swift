@@ -13,11 +13,9 @@ import Supabase
 class PracticeGameViewModel: ObservableObject {
 
     // MARK: - Published
-    @Published var currentSceneIndex: Int = 0
+    @Published var currentSceneId: String = ""
     @Published var gameCompleted: Bool = false
     @Published var progress: Double = 0.0
-    @Published var isLoading: Bool = false
-    @Published var errorMessage: String? = nil
 
     // MARK: - Data
     let gameData: PracticeGameData
@@ -25,17 +23,16 @@ class PracticeGameViewModel: ObservableObject {
     private let scenarioId: UUID?
     private let practiceService: PracticeServiceProtocol
 
-    // MARK: - Computed
-    private var sortedScenes: [GameScene] {
-        gameData.scenes.sorted { $0.order < $1.order }
-    }
+    // Scenes keyed by id for O(1) lookup
+    private var sceneMap: [String: GameScene] = [:]
 
-    var currentScene: GameScene? {
-        guard currentSceneIndex < sortedScenes.count else { return nil }
-        return sortedScenes[currentSceneIndex]
-    }
+    // The ordered "canonical" path (non-fail screens only) used purely for
+    // progress bar calculation so the bar moves forward meaningfully.
+    private let canonicalOrder: [String]
 
-    var totalScenes: Int { sortedScenes.count }
+    var currentScene: GameScene? { sceneMap[currentSceneId] }
+
+    var totalScenes: Int { canonicalOrder.count }
 
     // MARK: - Init
     init(
@@ -48,66 +45,114 @@ class PracticeGameViewModel: ObservableObject {
         self.userName = userName
         self.scenarioId = scenarioId ?? UUID(uuidString: gameData.id)
         self.practiceService = practiceService
+
+        // Build scene map
+        var map: [String: GameScene] = [:]
+        for scene in gameData.scenes { map[scene.id] = scene }
+        self.sceneMap = map
+
+        // Canonical order: scenes that are NOT fail/feedback branches
+        // (i.e. ids not containing "_fail") sorted by their order field
+        let mainPath = gameData.scenes
+            .filter { !$0.id.contains("_fail") }
+            .sorted { $0.order < $1.order }
+        self.canonicalOrder = mainPath.map { $0.id }
+
+        self.currentSceneId = gameData.startingScreenId
         updateProgress()
     }
 
-    // MARK: - Navigation
+    // MARK: - Navigate via tap-to-continue
     func goToNextScene() {
-        if currentSceneIndex < sortedScenes.count - 1 {
-            currentSceneIndex += 1
+        guard let scene = currentScene else { return }
+
+        // If this scene explicitly points to "complete", trigger game end
+        if scene.defaultNextScreenId == "complete" || scene.defaultNextScreenId == nil && isFinalCanonicalScene(scene.id) {
+            triggerCompletion()
+            return
+        }
+
+        if let nextId = scene.defaultNextScreenId {
+            currentSceneId = nextId
             updateProgress()
             persistProgress()
         } else {
-            gameCompleted = true
-            markComplete()
+            // No next defined — treat as end
+            triggerCompletion()
         }
     }
 
     func goToPreviousScene() {
-        if currentSceneIndex > 0 {
-            currentSceneIndex -= 1
+        // Back navigation: find the scene that leads to current scene
+        // Simple approach: scan for any scene whose defaultNextScreenId == currentSceneId
+        if let prev = gameData.scenes.first(where: { $0.defaultNextScreenId == currentSceneId }) {
+            currentSceneId = prev.id
             updateProgress()
         }
     }
 
-    // MARK: - Option selected (branching)
+    // MARK: - Option selected
     func selectOption(_ option: GameOption) {
-        if let nextId = option.nextSceneId,
-           let nextIndex = sortedScenes.firstIndex(where: { $0.id == nextId }) {
-            currentSceneIndex = nextIndex
+        if let nextId = option.nextSceneId {
+            if nextId == "complete" {
+                triggerCompletion()
+                return
+            }
+            currentSceneId = nextId
+            updateProgress()
+            persistProgress()
         } else {
             goToNextScene()
         }
-        updateProgress()
-        persistProgress()
     }
 
-    // MARK: - Retry — jump back to the retry target question
+    // MARK: - Retry (feedback screen tap)
     func retryCurrentScene() {
-        guard let scene = currentScene,
-              scene.type == .feedback,
-              let retryId = scene.retryTargetScreenId,
-              let retryIndex = sortedScenes.firstIndex(where: { $0.id == retryId }) else {
-            // Fallback: just advance
+        guard let scene = currentScene, scene.type == .feedback else {
             goToNextScene()
             return
         }
-        currentSceneIndex = retryIndex
+        // retryTargetScreenId is the question screen to jump back to
+        if let retryId = scene.retryTargetScreenId, sceneMap[retryId] != nil {
+            currentSceneId = retryId
+        } else if let nextId = scene.defaultNextScreenId, sceneMap[nextId] != nil {
+            // JSON stores the retry target in next_screen_id for feedback screens
+            currentSceneId = nextId
+        }
         updateProgress()
     }
 
-    // MARK: - Private helpers
+    // MARK: - Progress (based on canonical path position)
     private func updateProgress() {
-        progress = Double(currentSceneIndex + 1) / Double(totalScenes)
+        guard !canonicalOrder.isEmpty else { return }
+        // Find closest canonical screen at or before current
+        if let idx = canonicalOrder.firstIndex(of: currentSceneId) {
+            progress = Double(idx + 1) / Double(canonicalOrder.count)
+        } else {
+            // Current scene is a fail branch — keep progress at nearest canonical predecessor
+            let currentOrder = currentScene?.order ?? 0
+            let closestIdx = canonicalOrder.indices.last(where: {
+                (sceneMap[canonicalOrder[$0]]?.order ?? 0) <= currentOrder
+            }) ?? 0
+            progress = Double(closestIdx + 1) / Double(canonicalOrder.count)
+        }
+    }
+
+    private func isFinalCanonicalScene(_ id: String) -> Bool {
+        canonicalOrder.last == id
+    }
+
+    private func triggerCompletion() {
+        gameCompleted = true
+        markComplete()
     }
 
     private func persistProgress() {
-        guard let sceneId = currentScene.flatMap({ UUID(uuidString: $0.id) }),
+        guard let sceneId = UUID(uuidString: currentSceneId),
               let scenarioId = scenarioId,
               let userIdStr = SupabaseManager.shared.currentUserId,
               let userId = UUID(uuidString: userIdStr) else { return }
-
-        Task {
+        Task { @concurrent in
             try? await practiceService.saveScenarioProgress(
                 userId: userId,
                 scenarioId: scenarioId,
@@ -120,8 +165,7 @@ class PracticeGameViewModel: ObservableObject {
         guard let scenarioId = scenarioId,
               let userIdStr = SupabaseManager.shared.currentUserId,
               let userId = UUID(uuidString: userIdStr) else { return }
-
-        Task {
+        Task { @concurrent in
             try? await practiceService.completeScenario(userId: userId, scenarioId: scenarioId)
         }
     }
@@ -134,7 +178,7 @@ struct PracticeGame: View {
     @State private var showGameComplete = false
 
     init(
-        gameData: PracticeGameData = MockData.sampleGame,
+        gameData: PracticeGameData = MockData.barWindow,
         userName: String = "You",
         scenarioId: UUID? = nil
     ) {
@@ -152,11 +196,9 @@ struct PracticeGame: View {
             Color.white.ignoresSafeArea()
 
             VStack(spacing: 0) {
-                // MARK: - Top Navigation Bar with Progress
+                // Top Navigation Bar
                 HStack(spacing: 12) {
-                    Button {
-                        dismiss()
-                    } label: {
+                    Button { dismiss() } label: {
                         Image(systemName: "chevron.left")
                             .font(.system(size: 22, weight: .semibold))
                             .foregroundColor(.black)
@@ -178,31 +220,22 @@ struct PracticeGame: View {
                     }
                     .frame(height: 10)
 
-                    Spacer()
-                        .frame(width: 15)
+                    Spacer().frame(width: 15)
                 }
                 .padding(.top, 8)
                 .padding(.leading, 20)
                 .padding(.trailing, 44)
                 .padding(.bottom, 12)
 
-                // MARK: - Game Content Area
+                // Game Content
                 if let scene = viewModel.currentScene {
                     GameSceneView(
                         scene: scene,
                         userName: viewModel.userName,
-                        onTapContinue: {
-                            viewModel.goToNextScene()
-                        },
-                        onTapRetry: {
-                            viewModel.retryCurrentScene()
-                        },
-                        onSelectOption: { option in
-                            viewModel.selectOption(option)
-                        },
-                        onTapBack: {
-                            viewModel.goToPreviousScene()
-                        }
+                        onTapContinue: { viewModel.goToNextScene() },
+                        onTapRetry:    { viewModel.retryCurrentScene() },
+                        onSelectOption: { option in viewModel.selectOption(option) },
+                        onTapBack:     { viewModel.goToPreviousScene() }
                     )
                 }
             }
@@ -212,14 +245,12 @@ struct PracticeGame: View {
             if completed { showGameComplete = true }
         }
         .fullScreenCover(isPresented: $showGameComplete) {
-            GameCompleteView {
-                dismiss()
-            }
+            GameCompleteView { dismiss() }
         }
     }
 }
 
-// MARK: - Game Scene View (Handles all scene types)
+// MARK: - Game Scene View
 struct GameSceneView: View {
     let scene: GameScene
     let userName: String
@@ -229,47 +260,32 @@ struct GameSceneView: View {
     let onTapBack: () -> Void
 
     var body: some View {
-        GeometryReader { geometry in
+        GeometryReader { _ in
             ZStack {
-                // Tap areas for navigation (only for non-option screens)
                 if scene.type != .options {
                     HStack(spacing: 0) {
-                        Rectangle()
-                            .fill(Color.clear)
-                            .contentShape(Rectangle())
+                        Rectangle().fill(Color.clear).contentShape(Rectangle())
                             .onTapGesture { onTapBack() }
-
-                        Rectangle()
-                            .fill(Color.clear)
-                            .contentShape(Rectangle())
+                        Rectangle().fill(Color.clear).contentShape(Rectangle())
                             .onTapGesture {
-                                if scene.type == .feedback {
-                                    onTapRetry()
-                                } else {
-                                    onTapContinue()
-                                }
+                                if scene.type == .feedback { onTapRetry() }
+                                else { onTapContinue() }
                             }
                     }
                 }
 
-                // Content
                 VStack(spacing: 0) {
-                    // Character Image (1:1 aspect ratio, centered)
-                    // Only show image for non-options scenes
                     if scene.type != .options, let imageName = scene.imageName {
-                        ZStack {
-                            Image(imageName)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(maxWidth: .infinity)
-                                .aspectRatio(1, contentMode: .fit)
-                        }
-                        .padding(.horizontal, 20)
-                        .padding(.top, 10)
-                        .padding(.bottom, 70)
+                        Image(imageName)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxWidth: .infinity)
+                            .aspectRatio(1, contentMode: .fit)
+                            .padding(.horizontal, 20)
+                            .padding(.top, 10)
+                            .padding(.bottom, 70)
                     }
 
-                    // Scene Content Based on Type
                     switch scene.type {
                     case .options:
                         Spacer(minLength: 0)
@@ -281,12 +297,9 @@ struct GameSceneView: View {
                         Spacer(minLength: 0)
 
                     case .context, .userDialogue, .womanDialogue, .feedback:
-                        DialogueContentView(
-                            scene: scene,
-                            userName: userName
-                        )
-                        .padding(.horizontal, 20)
-                        .padding(.bottom, 40)
+                        DialogueContentView(scene: scene, userName: userName)
+                            .padding(.horizontal, 20)
+                            .padding(.bottom, 40)
                     }
                 }
             }
@@ -294,17 +307,17 @@ struct GameSceneView: View {
     }
 }
 
-// MARK: - Dialogue Content View (Context, User, Woman, Feedback)
+// MARK: - Dialogue Content View
 struct DialogueContentView: View {
     let scene: GameScene
     let userName: String
 
     private var displayName: String {
         switch scene.type {
-        case .userDialogue: return userName
-        case .womanDialogue: return scene.characterName ?? "Sophie"
-        case .feedback: return "Feedback"
-        default: return ""
+        case .userDialogue:  return userName
+        case .womanDialogue: return scene.characterName ?? "Her"
+        case .feedback:      return "Feedback"
+        default:             return ""
         }
     }
 
@@ -314,7 +327,6 @@ struct DialogueContentView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            // Character name ABOVE the bubble
             if scene.type == .userDialogue || scene.type == .feedback {
                 Text(displayName)
                     .font(.manropeMedium(size: 18))
@@ -330,7 +342,6 @@ struct DialogueContentView: View {
                 }
             }
 
-            // Text container (dialogue bubble)
             VStack(alignment: .leading, spacing: 0) {
                 Text(scene.text)
                     .font(.manropeMedium(size: 14))
@@ -344,14 +355,10 @@ struct DialogueContentView: View {
             .background(
                 RoundedRectangle(cornerRadius: 5)
                     .stroke(Color.black.opacity(0.1), lineWidth: 1)
-                    .background(
-                        RoundedRectangle(cornerRadius: 5)
-                            .fill(Color.white)
-                    )
+                    .background(RoundedRectangle(cornerRadius: 5).fill(Color.white))
                     .shadow(color: Color.black.opacity(0.06), radius: 5, x: 0, y: 2)
             )
 
-            // Action text
             Text(actionText)
                 .font(.manropeMedium(size: 14))
                 .foregroundColor(.black.opacity(0.5))
@@ -370,9 +377,7 @@ struct OptionsContentView: View {
     var body: some View {
         VStack(spacing: 12) {
             ForEach(options.sorted { $0.orderIndex < $1.orderIndex }) { option in
-                Button {
-                    onSelectOption(option)
-                } label: {
+                Button { onSelectOption(option) } label: {
                     Text(option.text)
                         .font(.manropeSemiBold(size: 16))
                         .foregroundColor(.black)
@@ -384,10 +389,7 @@ struct OptionsContentView: View {
                         .background(
                             RoundedRectangle(cornerRadius: 5)
                                 .stroke(Color.black.opacity(0.1), lineWidth: 1)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .fill(Color.white)
-                                )
+                                .background(RoundedRectangle(cornerRadius: 5).fill(Color.white))
                                 .shadow(color: Color.black.opacity(0.06), radius: 5, x: 0, y: 2)
                         )
                 }
@@ -411,7 +413,6 @@ struct GameCompleteView: View {
     var body: some View {
         ZStack {
             Color.white.ignoresSafeArea()
-
             VStack(spacing: 0) {
                 Image("checklist")
                     .resizable()
@@ -425,9 +426,7 @@ struct GameCompleteView: View {
 
                 Spacer()
 
-                Button {
-                    onContinue()
-                } label: {
+                Button { onContinue() } label: {
                     Text("Continue")
                         .font(.system(size: 17, weight: .semibold))
                         .foregroundColor(.white)
@@ -443,71 +442,384 @@ struct GameCompleteView: View {
     }
 }
 
-// MARK: - Mock Data (for SwiftUI previews only)
+// MARK: - Mock Data
+// Full "Bar Window" game — all 34 screens mapped exactly from game_1.json
+// Screen types from JSON → SceneType:
+//   "context"  → .context
+//   "question" → .options
+//   "user"     → .userDialogue
+//   "woman"    → .womanDialogue
+//   "feedback" → .feedback
+// next_screen_id == "complete" triggers gameCompleted = true
+
 struct MockData {
-    static let sampleGame = PracticeGameData(
-        id: "00000000-0000-0000-0000-000000000001",
-        title: "Practice Scenario 1",
+    static let barWindow = PracticeGameData(
+        id: "a0000001-0000-0000-0000-000000000001",
+        title: "Bar Window",
+        startingScreenId: "screen_001",
         scenes: [
-            GameScene(
-                id: "scene_1",
-                type: .context,
-                characterName: nil,
-                text: "You spot an attractive woman standing alone at the bar. She glances your way.",
-                imageName: "game_person_m",
-                options: nil,
-                order: 0,
-                defaultNextScreenId: "scene_2",
-                retryTargetScreenId: nil
-            ),
-            GameScene(
-                id: "scene_2",
-                type: .options,
-                characterName: nil,
-                text: "",
-                imageName: nil,
-                options: [
-                    GameOption(id: "opt_1", text: "Walk over with relaxed confidence and say hi", nextSceneId: "scene_3", isCorrect: true, orderIndex: 0),
-                    GameOption(id: "opt_2", text: "Go up behind her and tap her shoulder aggressively", nextSceneId: "scene_5", isCorrect: false, orderIndex: 1),
-                    GameOption(id: "opt_3", text: "Wait and hope she approaches you", nextSceneId: "scene_5", isCorrect: false, orderIndex: 2)
-                ],
-                order: 1,
-                defaultNextScreenId: nil,
-                retryTargetScreenId: nil
-            ),
-            GameScene(
-                id: "scene_3",
-                type: .userDialogue,
-                characterName: nil,
-                text: "Hey, I know this is random — but I had to come say hi.",
-                imageName: "game_person_m",
-                options: nil,
-                order: 2,
-                defaultNextScreenId: "scene_4",
-                retryTargetScreenId: nil
-            ),
-            GameScene(
-                id: "scene_4",
-                type: .womanDialogue,
-                characterName: "Sophie",
-                text: "Ha, that's actually kind of sweet. I'm Sophie.",
-                imageName: "game_person_f",
-                options: nil,
-                order: 3,
-                defaultNextScreenId: nil,
-                retryTargetScreenId: nil
-            ),
-            GameScene(
-                id: "scene_5",
-                type: .feedback,
-                characterName: nil,
-                text: "Going in too strong before building any eye contact kills the vibe. Reset.",
-                imageName: "game_person_m",
-                options: nil,
-                order: 4,
-                defaultNextScreenId: nil,
-                retryTargetScreenId: "scene_2"
-            )
+
+            // ── Context chain: venue setup ────────────────────────────────────
+            GameScene(id: "screen_001", type: .context,
+                      characterName: nil,
+                      text: "After a long week of work you've decided to unwind and get a drink at the bar.",
+                      imageName: "game_person_m", options: nil, order: 1,
+                      defaultNextScreenId: "screen_002", retryTargetScreenId: nil),
+
+            GameScene(id: "screen_002", type: .context,
+                      characterName: nil,
+                      text: "You enter the bar and see a girl standing by herself ordering a drink.",
+                      imageName: "game_person_f", options: nil, order: 2,
+                      defaultNextScreenId: "screen_003", retryTargetScreenId: nil),
+
+            GameScene(id: "screen_003", type: .context,
+                      characterName: nil,
+                      text: "She glances over at you briefly, smiles, then faces back to the bar.",
+                      imageName: "game_person_f", options: nil, order: 3,
+                      defaultNextScreenId: "screen_004", retryTargetScreenId: nil),
+
+            // ── Question 1 ────────────────────────────────────────────────────
+            GameScene(id: "screen_004", type: .options,
+                      characterName: nil, text: "", imageName: nil,
+                      options: [
+                          GameOption(id: "q1_a", text: "Wait and scout out the venue first",    nextSceneId: "screen_004_fail_a",  isCorrect: false, orderIndex: 0),
+                          GameOption(id: "q1_b", text: "Try make eye contact again then go",    nextSceneId: "screen_004_fail_a",  isCorrect: false, orderIndex: 1),
+                          GameOption(id: "q1_c", text: "Start walking towards her",             nextSceneId: "screen_005",         isCorrect: true,  orderIndex: 2),
+                      ],
+                      order: 4, defaultNextScreenId: nil, retryTargetScreenId: nil),
+
+            // Fail branch A
+            GameScene(id: "screen_004_fail_a", type: .context,
+                      characterName: nil,
+                      text: "You wait a while but by then another man starts talking to her.",
+                      imageName: "game_person_m", options: nil, order: 5,
+                      defaultNextScreenId: "screen_004_fail_aa", retryTargetScreenId: nil),
+
+            GameScene(id: "screen_004_fail_aa", type: .feedback,
+                      characterName: nil,
+                      text: "Night environments change quickly. Hesitation turns signals into missed chances.",
+                      imageName: "game_person_m", options: nil, order: 6,
+                      defaultNextScreenId: "screen_004",   // retry target
+                      retryTargetScreenId: "screen_004"),
+
+            // ── Correct path: approach ────────────────────────────────────────
+            GameScene(id: "screen_005", type: .context,
+                      characterName: nil,
+                      text: "You walk over with relaxed energy. No hesitation. Arms swinging naturally.",
+                      imageName: "game_person_m", options: nil, order: 7,
+                      defaultNextScreenId: "screen_006", retryTargetScreenId: nil),
+
+            GameScene(id: "screen_006", type: .context,
+                      characterName: nil,
+                      text: "You get closer and she's still facing the bar.",
+                      imageName: "game_person_f", options: nil, order: 8,
+                      defaultNextScreenId: "screen_007", retryTargetScreenId: nil),
+
+            // ── Question 2 ────────────────────────────────────────────────────
+            GameScene(id: "screen_007", type: .options,
+                      characterName: nil, text: "", imageName: nil,
+                      options: [
+                          GameOption(id: "q2_a", text: "Stand behind her and wait for her to turn around",  nextSceneId: "screen_007_fail_a",  isCorrect: false, orderIndex: 0),
+                          GameOption(id: "q2_b", text: "Stand beside her and open with a light comment",    nextSceneId: "screen_008",         isCorrect: true,  orderIndex: 1),
+                          GameOption(id: "q2_c", text: "Tap her shoulder and offer to buy her a drink",     nextSceneId: "screen_007_fail_c",  isCorrect: false, orderIndex: 2),
+                      ],
+                      order: 9, defaultNextScreenId: nil, retryTargetScreenId: nil),
+
+            // Fail branch A
+            GameScene(id: "screen_007_fail_a", type: .context,
+                      characterName: nil,
+                      text: "You stand a few feet away. Waiting. She picks up her drink, then she turns and leaves.",
+                      imageName: "game_person_f", options: nil, order: 10,
+                      defaultNextScreenId: "screen_007_fail_aa", retryTargetScreenId: nil),
+
+            GameScene(id: "screen_007_fail_aa", type: .feedback,
+                      characterName: nil,
+                      text: "You need to create the interaction, not wait for it to happen to you.",
+                      imageName: "game_person_m", options: nil, order: 11,
+                      defaultNextScreenId: "screen_007",
+                      retryTargetScreenId: "screen_007"),
+
+            // Fail branch C
+            GameScene(id: "screen_007_fail_c", type: .context,
+                      characterName: nil,
+                      text: "She turns, startled. Declines your offer as she already has a drink.",
+                      imageName: "game_person_f", options: nil, order: 12,
+                      defaultNextScreenId: "screen_007_fail_cc", retryTargetScreenId: nil),
+
+            GameScene(id: "screen_007_fail_cc", type: .feedback,
+                      characterName: nil,
+                      text: "Shoulder tap was invasive. Drink offer before rapport made it transactional.",
+                      imageName: "game_person_m", options: nil, order: 13,
+                      defaultNextScreenId: "screen_007",
+                      retryTargetScreenId: "screen_007"),
+
+            // ── Dialogue: opener ──────────────────────────────────────────────
+            GameScene(id: "screen_008", type: .userDialogue,
+                      characterName: nil,
+                      text: "Let me guess, vodka lemonade?",
+                      imageName: "game_person_m", options: nil, order: 14,
+                      defaultNextScreenId: "screen_009", retryTargetScreenId: nil),
+
+            GameScene(id: "screen_009", type: .womanDialogue,
+                      characterName: "Sophie",
+                      text: "Vodka soda, actually. Close though.",
+                      imageName: "game_person_f", options: nil, order: 15,
+                      defaultNextScreenId: "screen_010", retryTargetScreenId: nil),
+
+            GameScene(id: "screen_010", type: .context,
+                      characterName: nil,
+                      text: "She's engaged and shifts to face you, smiling. Holding eye contact.",
+                      imageName: "game_person_f", options: nil, order: 16,
+                      defaultNextScreenId: "screen_011", retryTargetScreenId: nil),
+
+            // ── Question 3 ────────────────────────────────────────────────────
+            GameScene(id: "screen_011", type: .options,
+                      characterName: nil, text: "", imageName: nil,
+                      options: [
+                          GameOption(id: "q3_a", text: "Ask to buy her next drink after she's done",                nextSceneId: "screen_011_fail_a",  isCorrect: false, orderIndex: 0),
+                          GameOption(id: "q3_b", text: "Build on her answer then ask what brings her here tonight", nextSceneId: "screen_012",         isCorrect: true,  orderIndex: 1),
+                          GameOption(id: "q3_c", text: "Ask her what she does for work",                           nextSceneId: "screen_011_fail_c",  isCorrect: false, orderIndex: 2),
+                      ],
+                      order: 17, defaultNextScreenId: nil, retryTargetScreenId: nil),
+
+            // Fail branch A
+            GameScene(id: "screen_011_fail_a", type: .womanDialogue,
+                      characterName: "Sophie",
+                      text: "Umm... Maybe later, I still have this one.",
+                      imageName: "game_person_f", options: nil, order: 18,
+                      defaultNextScreenId: "screen_011_fail_aa", retryTargetScreenId: nil),
+
+            GameScene(id: "screen_011_fail_aa", type: .feedback,
+                      characterName: nil,
+                      text: "Attraction isn't transactional. She was already engaged. You don't need to buy her a drink.",
+                      imageName: "game_person_m", options: nil, order: 19,
+                      defaultNextScreenId: "screen_011",
+                      retryTargetScreenId: "screen_011"),
+
+            // Fail branch C
+            GameScene(id: "screen_011_fail_c", type: .context,
+                      characterName: nil,
+                      text: "She responds with \"Marketing, what about you?\" but her energy is off.",
+                      imageName: "game_person_f", options: nil, order: 20,
+                      defaultNextScreenId: "screen_011_fail_cc", retryTargetScreenId: nil),
+
+            GameScene(id: "screen_011_fail_cc", type: .feedback,
+                      characterName: nil,
+                      text: "Nightclubs are playful and spontaneous. Interview questions kill the vibe.",
+                      imageName: "game_person_m", options: nil, order: 21,
+                      defaultNextScreenId: "screen_011",
+                      retryTargetScreenId: "screen_011"),
+
+            // ── Conversation deepens ──────────────────────────────────────────
+            GameScene(id: "screen_012", type: .userDialogue,
+                      characterName: nil,
+                      text: "Healthy choice. What brings you here tonight?",
+                      imageName: "game_person_m", options: nil, order: 22,
+                      defaultNextScreenId: "screen_013", retryTargetScreenId: nil),
+
+            GameScene(id: "screen_013", type: .womanDialogue,
+                      characterName: "Sophie",
+                      text: "We're just celebrating our friend's birthday tonight...",
+                      imageName: "game_person_f", options: nil, order: 23,
+                      defaultNextScreenId: "screen_014", retryTargetScreenId: nil),
+
+            GameScene(id: "screen_014", type: .userDialogue,
+                      characterName: nil,
+                      text: "I hope they won't be annoyed that I've stolen you away from them then.",
+                      imageName: "game_person_m", options: nil, order: 24,
+                      defaultNextScreenId: "screen_015", retryTargetScreenId: nil),
+
+            GameScene(id: "screen_015", type: .womanDialogue,
+                      characterName: "Sophie",
+                      text: "Hahaha I'm sure they'll live.",
+                      imageName: "game_person_f", options: nil, order: 25,
+                      defaultNextScreenId: "screen_016", retryTargetScreenId: nil),
+
+            GameScene(id: "screen_016", type: .context,
+                      characterName: nil,
+                      text: "You're still talking at the bar. She's laughing, leaning in close. The energy is good.",
+                      imageName: "game_person_f", options: nil, order: 26,
+                      defaultNextScreenId: "screen_017", retryTargetScreenId: nil),
+
+            GameScene(id: "screen_017", type: .context,
+                      characterName: nil,
+                      text: "However the bar's getting busier now. People keep bumping into her.",
+                      imageName: "game_person_f", options: nil, order: 27,
+                      defaultNextScreenId: "screen_018", retryTargetScreenId: nil),
+
+            // ── Question 4 ────────────────────────────────────────────────────
+            GameScene(id: "screen_018", type: .options,
+                      characterName: nil, text: "", imageName: nil,
+                      options: [
+                          GameOption(id: "q4_a", text: "Suggest moving to a quieter spot",     nextSceneId: "screen_019",        isCorrect: true,  orderIndex: 0),
+                          GameOption(id: "q4_b", text: "Ignore it and keep talking",            nextSceneId: "screen_018_fail_b", isCorrect: false, orderIndex: 1),
+                          GameOption(id: "q4_c", text: "Start pushing people away from her",   nextSceneId: "screen_018_fail_c", isCorrect: false, orderIndex: 2),
+                      ],
+                      order: 28, defaultNextScreenId: nil, retryTargetScreenId: nil),
+
+            // Fail branch B
+            GameScene(id: "screen_018_fail_b", type: .context,
+                      characterName: nil,
+                      text: "You keep talking and someone bumps her. She spills her drink.",
+                      imageName: "game_person_f", options: nil, order: 29,
+                      defaultNextScreenId: "screen_018_fail_bb", retryTargetScreenId: nil),
+
+            GameScene(id: "screen_018_fail_bb", type: .feedback,
+                      characterName: nil,
+                      text: "Notice discomfort and adjust. Ignoring it shows that you're oblivious.",
+                      imageName: "game_person_m", options: nil, order: 30,
+                      defaultNextScreenId: "screen_018",
+                      retryTargetScreenId: "screen_018"),
+
+            // Fail branch C
+            GameScene(id: "screen_018_fail_c", type: .context,
+                      characterName: nil,
+                      text: "Someone bumps her. You push them and Sophie steps back.",
+                      imageName: "game_person_m", options: nil, order: 31,
+                      defaultNextScreenId: "screen_018_fail_cc", retryTargetScreenId: nil),
+
+            GameScene(id: "screen_018_fail_cc", type: .feedback,
+                      characterName: nil,
+                      text: "Overprotecting signals insecurity. She needs leadership, not a bodyguard.",
+                      imageName: "game_person_m", options: nil, order: 32,
+                      defaultNextScreenId: "screen_018",
+                      retryTargetScreenId: "screen_018"),
+
+            // ── Move to quieter spot ──────────────────────────────────────────
+            GameScene(id: "screen_019", type: .userDialogue,
+                      characterName: nil,
+                      text: "Hey it's getting busy here, let's go sit down over there.",
+                      imageName: "game_person_m", options: nil, order: 33,
+                      defaultNextScreenId: "screen_020", retryTargetScreenId: nil),
+
+            GameScene(id: "screen_020", type: .context,
+                      characterName: nil,
+                      text: "Sophie agrees and you move to a quieter spot together alone.",
+                      imageName: "game_person_f", options: nil, order: 34,
+                      defaultNextScreenId: "screen_021", retryTargetScreenId: nil),
+
+            GameScene(id: "screen_021", type: .context,
+                      characterName: nil,
+                      text: "The two of you continue your conversation sitting down, the vibe is intimate.",
+                      imageName: "game_person_f", options: nil, order: 35,
+                      defaultNextScreenId: "screen_022", retryTargetScreenId: nil),
+
+            GameScene(id: "screen_022", type: .context,
+                      characterName: nil,
+                      text: "However you see one of her friends approaching and hovering nearby.",
+                      imageName: "game_person_f", options: nil, order: 36,
+                      defaultNextScreenId: "screen_023", retryTargetScreenId: nil),
+
+            // ── Question 5 ────────────────────────────────────────────────────
+            GameScene(id: "screen_023", type: .options,
+                      characterName: nil, text: "", imageName: nil,
+                      options: [
+                          GameOption(id: "q5_a", text: "Smile at the friend and greet her",         nextSceneId: "screen_024",        isCorrect: true,  orderIndex: 0),
+                          GameOption(id: "q5_b", text: "Ignore her and keep talking to Sophie",      nextSceneId: "screen_023_fail_b", isCorrect: false, orderIndex: 1),
+                      ],
+                      order: 37, defaultNextScreenId: nil, retryTargetScreenId: nil),
+
+            // Fail branch B
+            GameScene(id: "screen_023_fail_b", type: .context,
+                      characterName: nil,
+                      text: "You keep talking and her friend comes and pulls Sophie away.",
+                      imageName: "game_person_f", options: nil, order: 38,
+                      defaultNextScreenId: "screen_023_fail_bb", retryTargetScreenId: nil),
+
+            GameScene(id: "screen_023_fail_bb", type: .feedback,
+                      characterName: nil,
+                      text: "Inclusion reduces social tension and preserves control. Acknowledge her friends.",
+                      imageName: "game_person_m", options: nil, order: 39,
+                      defaultNextScreenId: "screen_023",
+                      retryTargetScreenId: "screen_023"),
+
+            // ── Greet the friend ──────────────────────────────────────────────
+            GameScene(id: "screen_024", type: .userDialogue,
+                      characterName: nil,
+                      text: "Hey, Happy Birthday, how are you?",
+                      imageName: "game_person_m", options: nil, order: 40,
+                      defaultNextScreenId: "screen_025", retryTargetScreenId: nil),
+
+            GameScene(id: "screen_025", type: .context,
+                      characterName: nil,
+                      text: "Her friend laughs and answers your question.",
+                      imageName: "game_person_f", options: nil, order: 41,
+                      defaultNextScreenId: "screen_026", retryTargetScreenId: nil),
+
+            GameScene(id: "screen_026", type: .context,
+                      characterName: nil,
+                      text: "However, she informs Sophie that their Uber is here and they have to leave.",
+                      imageName: "game_person_f", options: nil, order: 42,
+                      defaultNextScreenId: "screen_027", retryTargetScreenId: nil),
+
+            GameScene(id: "screen_027", type: .context,
+                      characterName: nil,
+                      text: "Sophie gets up to leave with her friend.",
+                      imageName: "game_person_f", options: nil, order: 43,
+                      defaultNextScreenId: "screen_028", retryTargetScreenId: nil),
+
+            // ── Question 6 ────────────────────────────────────────────────────
+            GameScene(id: "screen_028", type: .options,
+                      characterName: nil, text: "", imageName: nil,
+                      options: [
+                          GameOption(id: "q6_a", text: "Say \"It was nice to meet you\" and leave it", nextSceneId: "screen_028_fail_a", isCorrect: false, orderIndex: 0),
+                          GameOption(id: "q6_b", text: "Ask for her details before she leaves",        nextSceneId: "screen_029",        isCorrect: true,  orderIndex: 1),
+                      ],
+                      order: 44, defaultNextScreenId: nil, retryTargetScreenId: nil),
+
+            // Fail branch A
+            GameScene(id: "screen_028_fail_a", type: .userDialogue,
+                      characterName: nil,
+                      text: "Well it was nice to meet you. Goodbye Sophie.",
+                      imageName: "game_person_m", options: nil, order: 45,
+                      defaultNextScreenId: "screen_028_fail_aa", retryTargetScreenId: nil),
+
+            GameScene(id: "screen_028_fail_aa", type: .feedback,
+                      characterName: nil,
+                      text: "She was engaged and receptive. But you never closed, the story ends there.",
+                      imageName: "game_person_m", options: nil, order: 46,
+                      defaultNextScreenId: "screen_028",
+                      retryTargetScreenId: "screen_028"),
+
+            // ── Close ─────────────────────────────────────────────────────────
+            GameScene(id: "screen_029", type: .userDialogue,
+                      characterName: nil,
+                      text: "Hey before you leave add my Instagram.",
+                      imageName: "game_person_m", options: nil, order: 47,
+                      defaultNextScreenId: "screen_030", retryTargetScreenId: nil),
+
+            GameScene(id: "screen_030", type: .context,
+                      characterName: nil,
+                      text: "Sophie pulls out her phone and adds you happily and leaves after. Success.",
+                      imageName: "game_person_f", options: nil, order: 48,
+                      defaultNextScreenId: "screen_031", retryTargetScreenId: nil),
+
+            // ── Debrief screens ───────────────────────────────────────────────
+            GameScene(id: "screen_031", type: .context,
+                      characterName: nil,
+                      text: "You review your interaction with Sophie tonight.",
+                      imageName: "game_person_m", options: nil, order: 49,
+                      defaultNextScreenId: "screen_032", retryTargetScreenId: nil),
+
+            GameScene(id: "screen_032", type: .context,
+                      characterName: nil,
+                      text: "You opened naturally and kept it playful instead of transactional.",
+                      imageName: "game_person_m", options: nil, order: 50,
+                      defaultNextScreenId: "screen_033", retryTargetScreenId: nil),
+
+            GameScene(id: "screen_033", type: .context,
+                      characterName: nil,
+                      text: "You read the environment well by moving from the bar and also greeting her friend.",
+                      imageName: "game_person_m", options: nil, order: 51,
+                      defaultNextScreenId: "screen_034", retryTargetScreenId: nil),
+
+            // ── FINAL screen → "complete" triggers gameCompleted = true ───────
+            GameScene(id: "screen_034", type: .context,
+                      characterName: nil,
+                      text: "And you had an enjoyable fun conversation. Well done.",
+                      imageName: "game_person_m", options: nil, order: 52,
+                      defaultNextScreenId: "complete",   // ← signals game end
+                      retryTargetScreenId: nil),
         ]
     )
 }

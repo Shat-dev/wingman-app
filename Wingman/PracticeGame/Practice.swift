@@ -6,7 +6,7 @@
 import Foundation
 
 // MARK: - Practice (maps to `scenarios` table)
-struct Practice: Identifiable, Codable, Hashable {
+struct Practice: Identifiable, nonisolated Codable, Hashable, Sendable {
     let id: UUID
     let title: String
     let summary: String
@@ -42,14 +42,24 @@ struct Practice: Identifiable, Codable, Hashable {
 }
 
 // MARK: - PracticeGameData (maps to scenario + its screens in one load)
-struct PracticeGameData: Identifiable, Codable {
+struct PracticeGameData: Identifiable, nonisolated Codable, Sendable {
     let id: String
     let title: String
+    let startingScreenId: String
     var scenes: [GameScene]
+
+    init(id: String, title: String, startingScreenId: String = "", scenes: [GameScene]) {
+        self.id = id
+        self.title = title
+        self.startingScreenId = startingScreenId.isEmpty
+            ? (scenes.min(by: { $0.order < $1.order })?.id ?? "")
+            : startingScreenId
+        self.scenes = scenes
+    }
 }
 
 // MARK: - GameScene (maps to `scenario_screens` + embedded options)
-struct GameScene: Identifiable, Codable {
+struct GameScene: Identifiable, nonisolated Codable, Sendable {
     let id: String
     let type: SceneType
     let characterName: String?      // woman_name from scenario
@@ -60,7 +70,7 @@ struct GameScene: Identifiable, Codable {
     let defaultNextScreenId: String?
     let retryTargetScreenId: String?
 
-    enum SceneType: String, Codable {
+    enum SceneType: String, nonisolated Codable, Sendable {
         case context        = "context"
         case userDialogue   = "user_dialogue"
         case womanDialogue  = "woman_dialogue"
@@ -78,7 +88,7 @@ struct GameScene: Identifiable, Codable {
 }
 
 // MARK: - GameOption (maps to `screen_options`)
-struct GameOption: Identifiable, Codable {
+struct GameOption: Identifiable, nonisolated Codable, Sendable {
     let id: String
     let text: String
     let nextSceneId: String?
@@ -94,7 +104,7 @@ struct GameOption: Identifiable, Codable {
 }
 
 // MARK: - Raw Supabase response from get_scenario_screens RPC
-struct ScenarioScreenRow: Codable {
+struct ScenarioScreenRow: nonisolated Codable, Sendable {
     let screenId: String
     let screenType: String
     let orderIndex: Int
@@ -116,7 +126,7 @@ struct ScenarioScreenRow: Codable {
     }
 }
 
-struct ScreenOptionRow: Codable {
+struct ScreenOptionRow: nonisolated Codable, Sendable {
     let id: String
     let text: String
     let nextScreenId: String?
@@ -132,7 +142,7 @@ struct ScreenOptionRow: Codable {
 }
 
 // MARK: - Unlocked Scenario Row (from get_unlocked_scenarios RPC)
-struct UnlockedScenarioRow: Codable {
+struct UnlockedScenarioRow: nonisolated Codable, Sendable {
     let scenarioId: UUID
     let title: String
     let summary: String?
@@ -159,7 +169,7 @@ struct UnlockedScenarioRow: Codable {
 }
 
 // MARK: - Legacy Detail / Step models kept for PracticeDetailView
-struct PracticeDetail: Identifiable, Codable {
+struct PracticeDetail: Identifiable, nonisolated Codable, Sendable {
     let id: UUID
     let practiceId: UUID
     let content: String
@@ -179,14 +189,14 @@ struct PracticeDetail: Identifiable, Codable {
     }
 }
 
-struct PracticeStep: Identifiable, Codable, Hashable {
+struct PracticeStep: Identifiable, nonisolated Codable, Hashable, Sendable {
     let id: UUID
     let title: String
     let description: String
     let order: Int
 }
 
-struct UserPracticeProgress: Identifiable, Codable {
+struct UserPracticeProgress: Identifiable, nonisolated Codable, Sendable {
     let id: UUID
     let userId: UUID
     let practiceId: UUID

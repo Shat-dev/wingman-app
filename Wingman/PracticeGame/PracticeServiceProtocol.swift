@@ -7,15 +7,14 @@ import Foundation
 import Supabase
 
 // MARK: - Protocol
-protocol PracticeServiceProtocol {
+
+protocol PracticeServiceProtocol: Sendable {
     func fetchPractices() async throws -> [Practice]
     func fetchPracticeDetail(practiceId: UUID) async throws -> PracticeDetail?
     func fetchUserProgress(userId: UUID) async throws -> [UserPracticeProgress]
     func updateUserProgress(progress: UserPracticeProgress) async throws
     func unlockPractice(practiceId: UUID, userId: UUID) async throws
     func completePractice(practiceId: UUID, userId: UUID) async throws
-
-    // Game-specific
     func fetchGameData(scenarioId: UUID, womanName: String?) async throws -> PracticeGameData
     func saveScenarioProgress(userId: UUID, scenarioId: UUID, currentScreenId: UUID) async throws
     func completeScenario(userId: UUID, scenarioId: UUID) async throws
@@ -23,8 +22,7 @@ protocol PracticeServiceProtocol {
 }
 
 // MARK: - RPC / Request param structs
-// Keep at file scope so they are not actor-isolated. Make Encodable conformance nonisolated
-// so it can satisfy Sendable-constrained generics in Supabase SDK.
+// Must be file-scope + Sendable so the Supabase SDK generic constraint is satisfied.
 
 private struct GetScenarioScreensParams: nonisolated Encodable, Sendable {
     let p_scenario_id: String
@@ -58,7 +56,7 @@ private struct PracticeProgressUpdate: nonisolated Encodable, Sendable {
 
 // MARK: - Private decode models
 
-private struct UserScenarioProgressRow: Codable, Sendable {
+private struct UserScenarioProgressRow: nonisolated Codable, Sendable {
     let scenarioId: UUID
     let isCompleted: Bool
     let currentScreenId: UUID?
@@ -69,23 +67,43 @@ private struct UserScenarioProgressRow: Codable, Sendable {
     }
 }
 
-private struct ScenarioTitleRow: Codable, Sendable {
+private struct ScenarioTitleRow: nonisolated Codable, Sendable {
     let id: UUID
     let title: String
 }
 
 // MARK: - Live Supabase Service
+//
+// WHY nonisolated + a nonisolated computed var:
+//
+// `nonisolated func` alone does not help when the method body accesses a
+// stored property (`self.client`), because stored properties themselves are
+// still actor-isolated when the class is used from an @MainActor context.
+//
+// The correct pattern is:
+//   1. Store the client URL/key (plain Sendable Strings), OR
+//   2. Store the client as a `nonisolated let` so Swift knows it is safe to
+//      read from any isolation domain.
+//
+// SupabaseClient is a reference type that is itself Sendable (it uses internal
+// locking), so marking the stored `let` as `nonisolated` is correct and safe.
 
 final class PracticeService: PracticeServiceProtocol {
 
-    private let client: SupabaseClient
+    // MARK: - Testing toggle
+    // Set to true to force-unlock all practices locally for testing PracticeView.
+    // Remember to set back to false before shipping. Adnan
+    static var forceUnlockForTesting: Bool = false
+
+    // nonisolated let → can be read from any nonisolated async method
+    nonisolated let client: SupabaseClient
 
     init(client: SupabaseClient = SupabaseManager.shared.client) {
         self.client = client
     }
 
     // MARK: Fetch All Practices
-    func fetchPractices() async throws -> [Practice] {
+    nonisolated func fetchPractices() async throws -> [Practice] {
         guard let userIdString = SupabaseManager.shared.currentUserId,
               let userId = UUID(uuidString: userIdString) else {
             throw PracticeServiceError.notAuthenticated
@@ -114,17 +132,22 @@ final class PracticeService: PracticeServiceProtocol {
 
         return rows.map { practice in
             var p = practice
+            // Normal locking logic
             p.isLocked = totalCompleted < practice.requiredDailyPractices
             if let prog = progressMap[practice.id] {
                 p.isCompleted = prog.isCompleted
                 p.currentScreenId = prog.currentScreenId
             }
+            // Testing override
+            if PracticeService.forceUnlockForTesting {
+                p.isLocked = false
+            }
             return p
         }
     }
 
-    // MARK: Fetch Practice Detail (legacy — for PracticeDetailView)
-    func fetchPracticeDetail(practiceId: UUID) async throws -> PracticeDetail? {
+    // MARK: Fetch Practice Detail
+    nonisolated func fetchPracticeDetail(practiceId: UUID) async throws -> PracticeDetail? {
         let response: [PracticeDetail] = try await client
             .from("practice_details")
             .select("*, steps:practice_steps(*)")
@@ -135,7 +158,7 @@ final class PracticeService: PracticeServiceProtocol {
     }
 
     // MARK: Fetch User Progress
-    func fetchUserProgress(userId: UUID) async throws -> [UserPracticeProgress] {
+    nonisolated func fetchUserProgress(userId: UUID) async throws -> [UserPracticeProgress] {
         let response: [UserPracticeProgress] = try await client
             .from("user_practice_progress")
             .select()
@@ -146,7 +169,7 @@ final class PracticeService: PracticeServiceProtocol {
     }
 
     // MARK: Update User Progress
-    func updateUserProgress(progress: UserPracticeProgress) async throws {
+    nonisolated func updateUserProgress(progress: UserPracticeProgress) async throws {
         try await client
             .from("user_practice_progress")
             .upsert(progress)
@@ -154,7 +177,7 @@ final class PracticeService: PracticeServiceProtocol {
     }
 
     // MARK: Unlock Practice
-    func unlockPractice(practiceId: UUID, userId: UUID) async throws {
+    nonisolated func unlockPractice(practiceId: UUID, userId: UUID) async throws {
         let newProgress = UserPracticeProgress(
             id: UUID(),
             userId: userId,
@@ -170,7 +193,7 @@ final class PracticeService: PracticeServiceProtocol {
     }
 
     // MARK: Complete Practice
-    func completePractice(practiceId: UUID, userId: UUID) async throws {
+    nonisolated func completePractice(practiceId: UUID, userId: UUID) async throws {
         let update = PracticeProgressUpdate(
             is_completed: true,
             completed_at: ISO8601DateFormatter().string(from: Date())
@@ -184,7 +207,7 @@ final class PracticeService: PracticeServiceProtocol {
     }
 
     // MARK: Fetch Game Data
-    func fetchGameData(scenarioId: UUID, womanName: String?) async throws -> PracticeGameData {
+    nonisolated func fetchGameData(scenarioId: UUID, womanName: String?) async throws -> PracticeGameData {
         let rows: [ScenarioScreenRow] = try await client
             .rpc("get_scenario_screens", params: GetScenarioScreensParams(p_scenario_id: scenarioId.uuidString))
             .execute()
@@ -222,15 +245,17 @@ final class PracticeService: PracticeServiceProtocol {
             .execute()
             .value
 
+        let startId = scenes.min(by: { $0.order < $1.order })?.id ?? ""
         return PracticeGameData(
             id: scenarioId.uuidString,
             title: scenario?.title ?? "Practice Scenario",
+            startingScreenId: startId,
             scenes: scenes
         )
     }
 
-    // MARK: Save Scenario Progress (called on every screen advance)
-    func saveScenarioProgress(userId: UUID, scenarioId: UUID, currentScreenId: UUID) async throws {
+    // MARK: Save Scenario Progress
+    nonisolated func saveScenarioProgress(userId: UUID, scenarioId: UUID, currentScreenId: UUID) async throws {
         let upsert = ProgressUpsert(
             user_id: userId.uuidString,
             scenario_id: scenarioId.uuidString,
@@ -244,7 +269,7 @@ final class PracticeService: PracticeServiceProtocol {
     }
 
     // MARK: Complete Scenario
-    func completeScenario(userId: UUID, scenarioId: UUID) async throws {
+    nonisolated func completeScenario(userId: UUID, scenarioId: UUID) async throws {
         let update = ScenarioCompletionUpdate(
             is_completed: true,
             completed_at: ISO8601DateFormatter().string(from: Date())
@@ -267,7 +292,7 @@ final class PracticeService: PracticeServiceProtocol {
     }
 
     // MARK: Get Total Daily Practices
-    func getTotalDailyPractices(userId: UUID) async throws -> Int {
+    nonisolated func getTotalDailyPractices(userId: UUID) async throws -> Int {
         let count: Int = try await client
             .rpc("get_total_daily_practices", params: GetTotalDailyPracticesParams(p_user_id: userId.uuidString))
             .execute()
@@ -295,10 +320,9 @@ enum PracticeServiceError: LocalizedError {
 // MARK: - Mock Service (Previews / Unit Tests)
 
 final class MockPracticeService: PracticeServiceProtocol {
+    nonisolated func fetchPractices() async throws -> [Practice] { Practice.mockData }
 
-    func fetchPractices() async throws -> [Practice] { Practice.mockData }
-
-    func fetchPracticeDetail(practiceId: UUID) async throws -> PracticeDetail? {
+    nonisolated func fetchPracticeDetail(practiceId: UUID) async throws -> PracticeDetail? {
         PracticeDetail(
             id: UUID(), practiceId: practiceId,
             content: "This practice helps you understand that you are not your thoughts...",
@@ -311,14 +335,16 @@ final class MockPracticeService: PracticeServiceProtocol {
         )
     }
 
-    func fetchUserProgress(userId: UUID) async throws -> [UserPracticeProgress] { [] }
-    func updateUserProgress(progress: UserPracticeProgress) async throws {}
-    func unlockPractice(practiceId: UUID, userId: UUID) async throws {}
-    func completePractice(practiceId: UUID, userId: UUID) async throws {}
-    func fetchGameData(scenarioId: UUID, womanName: String?) async throws -> PracticeGameData { MockData.sampleGame }
-    func saveScenarioProgress(userId: UUID, scenarioId: UUID, currentScreenId: UUID) async throws {}
-    func completeScenario(userId: UUID, scenarioId: UUID) async throws {}
-    func getTotalDailyPractices(userId: UUID) async throws -> Int { 3 }
+    nonisolated func fetchUserProgress(userId: UUID) async throws -> [UserPracticeProgress] { [] }
+    nonisolated func updateUserProgress(progress: UserPracticeProgress) async throws {}
+    nonisolated func unlockPractice(practiceId: UUID, userId: UUID) async throws {}
+    nonisolated func completePractice(practiceId: UUID, userId: UUID) async throws {}
+    nonisolated func fetchGameData(scenarioId: UUID, womanName: String?) async throws -> PracticeGameData {
+        MockData.barWindow
+    }
+    nonisolated func saveScenarioProgress(userId: UUID, scenarioId: UUID, currentScreenId: UUID) async throws {}
+    nonisolated func completeScenario(userId: UUID, scenarioId: UUID) async throws {}
+    nonisolated func getTotalDailyPractices(userId: UUID) async throws -> Int { 3 }
 }
 
 // MARK: - Mock Data
@@ -326,28 +352,28 @@ final class MockPracticeService: PracticeServiceProtocol {
 extension Practice {
     static let mockData: [Practice] = [
         Practice(
-            id: UUID(), title: "The Nightclub Approach",
-            summary: "Navigate the energy of a bustling nightclub and master the art of confident social interaction.",
-            coverImageUrl: "c_girl", requiredDailyPractices: 0,
+            id: UUID(), title: "Bar Window",
+            summary: "Loud music, crowded space, short attention spans. You notice her. Do you lead or wait?",
+            coverImageUrl: "c_girl", requiredDailyPractices: 1,
             womanName: "Sophie", orderIndex: 1, isPublished: true,
             createdAt: Date(), updatedAt: Date(),
             isLocked: false, isCompleted: false, currentScreenId: nil
         ),
         Practice(
-            id: UUID(), title: "The Coffee Shop Opener",
-            summary: "Approach a woman reading a book in a relaxed daytime setting.",
+            id: UUID(), title: "Coffee Connections",
+            summary: "Bad weather, warm coffee, shared space. A simple moment turns into an opportunity.",
             coverImageUrl: "c_girl", requiredDailyPractices: 2,
-            womanName: "Emma", orderIndex: 2, isPublished: true,
+            womanName: "Lily", orderIndex: 2, isPublished: true,
             createdAt: Date(), updatedAt: Date(),
             isLocked: false, isCompleted: false, currentScreenId: nil
         ),
         Practice(
-            id: UUID(), title: "Group Social Dynamics",
-            summary: "Handle approaching a woman who is with her friends.",
-            coverImageUrl: "c_girl", requiredDailyPractices: 5,
-            womanName: "Mia", orderIndex: 3, isPublished: true,
+            id: UUID(), title: "Fetch & Flirt",
+            summary: "Laughter, eye contact, and two dogs chasing each other. Timing matters here.",
+            coverImageUrl: "c_girl", requiredDailyPractices: 3,
+            womanName: "Maya", orderIndex: 3, isPublished: true,
             createdAt: Date(), updatedAt: Date(),
-            isLocked: true, isCompleted: false, currentScreenId: nil
+            isLocked: false, isCompleted: false, currentScreenId: nil
         )
     ]
 }
