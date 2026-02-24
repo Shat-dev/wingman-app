@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import GoogleSignIn
 
 @main
 struct WingmanApp: App {
@@ -15,6 +16,10 @@ struct WingmanApp: App {
         WindowGroup {
             RootView()
                 .environmentObject(authManager)
+                .onOpenURL { url in
+                    // Handle Google Sign-In callback URL
+                    GIDSignIn.sharedInstance.handle(url)
+                }
         }
     }
 }

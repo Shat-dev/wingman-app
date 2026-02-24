@@ -9,6 +9,7 @@ import Foundation
 import Combine
 import Supabase
 import Auth
+import GoogleSignIn
 
 @MainActor
 final class AuthManager: ObservableObject {
@@ -42,9 +43,15 @@ final class AuthManager: ObservableObject {
             print("👤 currentUser changed: \(oldValue?.email ?? "nil") → \(currentUser?.email ?? "nil")")
         }
     }
+    
+    @Published var isGoogleSignInLoading: Bool = false
+    @Published var googleSignInError: String?
 
     private let client = SupabaseManager.shared.client
     private var cancellables = Set<AnyCancellable>()
+    
+    // Google OAuth Client ID
+    private let googleClientID = "915810938432-fh9l3u8icl6vcksn2j841c5nbljfh824.apps.googleusercontent.com"
 
     init() {
         print("\n🏁 ========== AuthManager INIT ==========")
@@ -227,6 +234,79 @@ final class AuthManager: ObservableObject {
         }
     }
 
+    // MARK: - Google Sign-In
+    func signInWithGoogle() async {
+        print("\n🔵 signInWithGoogle() called")
+        
+        isGoogleSignInLoading = true
+        googleSignInError = nil
+        
+        do {
+            // Get the root view controller for presenting Google Sign-In
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let rootViewController = windowScene.windows.first?.rootViewController else {
+                throw GoogleSignInError.noRootViewController
+            }
+            
+            // Configure Google Sign-In
+            let config = GIDConfiguration(clientID: googleClientID)
+            GIDSignIn.sharedInstance.configuration = config
+            
+            // Perform Google Sign-In
+            let result = try await GIDSignIn.sharedInstance.signIn(withPresenting: rootViewController)
+            
+            guard let idToken = result.user.idToken?.tokenString else {
+                throw GoogleSignInError.noIdToken
+            }
+            
+            let accessToken = result.user.accessToken.tokenString
+            
+            print("✅ Google Sign-In successful")
+            print("   - User: \(result.user.profile?.email ?? "unknown")")
+            print("   - ID Token obtained: \(idToken.prefix(20))...")
+            
+            // Sign in to Supabase with the Google ID token
+            let session = try await client.auth.signInWithIdToken(
+                credentials: .init(
+                    provider: .google,
+                    idToken: idToken,
+                    accessToken: accessToken
+                )
+            )
+            
+            print("✅ Supabase sign-in successful")
+            print("   - User ID: \(session.user.id)")
+            print("   - Email: \(session.user.email ?? "nil")")
+            
+            // Mark onboarding as complete since user used social login
+            completeOnboarding()
+            
+            isGoogleSignInLoading = false
+            
+        } catch let error as GIDSignInError {
+            isGoogleSignInLoading = false
+            
+            // Handle user cancellation gracefully
+            if error.code == .canceled {
+                print("ℹ️ Google Sign-In cancelled by user")
+                googleSignInError = nil
+            } else {
+                print("❌ Google Sign-In error: \(error.localizedDescription)")
+                googleSignInError = error.localizedDescription
+            }
+            
+        } catch let error as GoogleSignInError {
+            isGoogleSignInLoading = false
+            print("❌ Google Sign-In error: \(error.localizedDescription)")
+            googleSignInError = error.localizedDescription
+            
+        } catch {
+            isGoogleSignInLoading = false
+            print("❌ Supabase sign-in error: \(error.localizedDescription)")
+            googleSignInError = "Sign-in failed: \(error.localizedDescription)"
+        }
+    }
+
     // MARK: - Sign out / Reset
     func signOut() async {
         print("\n🚪 signOut() called")
@@ -265,6 +345,24 @@ final class AuthManager: ObservableObject {
             let key = "hasCompletedPaywallFlow_\(userId)"
             UserDefaults.standard.set(false, forKey: key)
             print("🔄 Paywall flow reset for user: \(userId)")
+        }
+    }
+}
+
+// MARK: - Google Sign-In Errors
+enum GoogleSignInError: LocalizedError {
+    case noRootViewController
+    case noIdToken
+    case signInFailed(String)
+    
+    var errorDescription: String? {
+        switch self {
+        case .noRootViewController:
+            return "Unable to find root view controller"
+        case .noIdToken:
+            return "Unable to get ID token from Google"
+        case .signInFailed(let message):
+            return "Sign-in failed: \(message)"
         }
     }
 }

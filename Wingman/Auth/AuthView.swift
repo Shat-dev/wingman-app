@@ -91,13 +91,28 @@ struct AuthView: View {
                         .padding(.vertical, 8)
                     
                     VStack(spacing: 12) {
-                        outlineButton(title: "Continue with Google", systemImage: "g.circle.fill") {
-                            // Handle Google login
+                        outlineButton(
+                            title: authManager.isGoogleSignInLoading ? "Signing in..." : "Continue with Google",
+                            systemImage: "g.circle.fill",
+                            isLoading: authManager.isGoogleSignInLoading
+                        ) {
+                            Task {
+                                await authManager.signInWithGoogle()
+                            }
                         }
+                        .disabled(authManager.isGoogleSignInLoading)
                         
                         outlineButton(title: "Continue with Apple", systemImage: "applelogo") {
                             // Handle Apple login
                         }
+                    }
+                    
+                    // Show Google Sign-In error if any
+                    if let error = authManager.googleSignInError {
+                        Text(error)
+                            .font(.caption)
+                            .foregroundColor(.red)
+                            .padding(.top, 4)
                     }
                     
                 } else if viewModel.currentStep == .password {
@@ -385,14 +400,20 @@ struct AuthView: View {
     }
     
     // MARK: - Outline Button
-    private func outlineButton(title: String, systemImage: String = "", action: @escaping () -> Void) -> some View {
+    private func outlineButton(title: String, systemImage: String = "", isLoading: Bool = false, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             HStack(spacing: 10) {
-                if !systemImage.isEmpty {
-                    Image(systemName: systemImage)
+                if isLoading {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle())
+                        .scaleEffect(0.8)
+                } else {
+                    if !systemImage.isEmpty {
+                        Image(systemName: systemImage)
+                    }
+                    Text(title)
+                        .fontWeight(.medium)
                 }
-                Text(title)
-                    .fontWeight(.medium)
             }
             .frame(maxWidth: .infinity)
             .padding()

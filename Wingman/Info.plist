@@ -3,6 +3,21 @@
 <plist version="1.0">
 <dict>
 
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>com.googleusercontent.apps.915810938432-fh9l3u8icl6vcksn2j841c5nbljfh824</string>
+            </array>
+            <key>CFBundleURLName</key>
+            <string>Google Sign-In</string>
+        </dict>
+    </array>
+
+    <key>GIDClientID</key>
+    <string>915810938432-fh9l3u8icl6vcksn2j841c5nbljfh824.apps.googleusercontent.com</string>
+
     <key>UIAppFonts</key>
     <array>
         <string>Manrope-Regular.ttf</string>
