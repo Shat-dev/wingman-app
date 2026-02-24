@@ -11,6 +11,7 @@
 //
 
 import SwiftUI
+import Supabase
 
 struct EditProfileSheet: View {
     @Environment(\.dismiss) private var dismiss
@@ -140,17 +141,51 @@ struct EditProfileSheet: View {
         
         isSaving = true
         
-        // Simulate API call
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            // TODO: Save to Supabase
-            onSave(name)
-            
-            isSaving = false
-            showSuccess = true
-            
-            // Dismiss after showing success
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                dismiss()
+        Task {
+            do {
+                // Update user metadata in Supabase auth.users
+                let updatedAt = ISO8601DateFormatter().string(from: Date())
+                
+                try await SupabaseManager.shared.client.auth.update(
+                    user: UserAttributes(
+                        data: [
+                            "display_name": AnyJSON.string(name),
+                            "updated_at": AnyJSON.string(updatedAt)
+                        ]
+                    )
+                )
+                
+                print("✅ User name updated in Supabase: \(name)")
+                
+                // Also update UserDefaults for offline access
+                UserDefaults.standard.set(name, forKey: "user_name")
+                
+                await MainActor.run {
+                    onSave(name)
+                    isSaving = false
+                    showSuccess = true
+                }
+                
+                // Dismiss after showing success
+                try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 second
+                await MainActor.run {
+                    dismiss()
+                }
+                
+            } catch {
+                print("❌ Error updating user name: \(error.localizedDescription)")
+                await MainActor.run {
+                    isSaving = false
+                    // Still call onSave to update local state
+                    onSave(name)
+                    UserDefaults.standard.set(name, forKey: "user_name")
+                    showSuccess = true
+                }
+                
+                try? await Task.sleep(nanoseconds: 1_000_000_000)
+                await MainActor.run {
+                    dismiss()
+                }
             }
         }
     }

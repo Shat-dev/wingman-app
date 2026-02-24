@@ -5,12 +5,13 @@
 
 import SwiftUI
 import Combine
+import Supabase
 
 struct ProfileView: View {
     @State private var showSettings = false
     @State private var showEditProfile = false
     @State private var showApproachesLogged = false
-    @State private var userName = "Shat"
+    @State private var userName = UserDefaults.standard.string(forKey: "user_name") ?? ""
     @State private var approachesCount = 0
     @State private var hasReflections = false
     @State private var approachesBreakdown: [(String, Int, Double)] = []
@@ -162,14 +163,44 @@ struct ProfileView: View {
     }
     
     private func loadUserData() {
-        // Load user name from UserDefaults or Supabase
-        if let savedName = UserDefaults.standard.string(forKey: "user_name") {
-            userName = savedName
-        }
-        
         // Load approach data
         Task {
             await loadApproachData()
+            await loadUserName()
+        }
+    }
+    
+    private func loadUserName() async {
+        do {
+            // Fetch current user from Supabase
+            let user = try await SupabaseManager.shared.client.auth.user()
+            
+            // Get display_name from user metadata (userMetadata is a dictionary, not optional)
+            if let displayName = user.userMetadata["display_name"]?.stringValue,
+               !displayName.isEmpty {
+                await MainActor.run {
+                    self.userName = displayName
+                    // Also cache in UserDefaults for offline access
+                    UserDefaults.standard.set(displayName, forKey: "user_name")
+                }
+                print("✅ Loaded user name from Supabase: \(displayName)")
+            } else {
+                // Fallback to UserDefaults if no metadata
+                if let savedName = UserDefaults.standard.string(forKey: "user_name") {
+                    await MainActor.run {
+                        self.userName = savedName
+                    }
+                    print("📦 Loaded user name from UserDefaults: \(savedName)")
+                }
+            }
+        } catch {
+            print("❌ Error fetching user from Supabase: \(error.localizedDescription)")
+            // Fallback to UserDefaults on error
+            if let savedName = UserDefaults.standard.string(forKey: "user_name") {
+                await MainActor.run {
+                    self.userName = savedName
+                }
+            }
         }
     }
     
