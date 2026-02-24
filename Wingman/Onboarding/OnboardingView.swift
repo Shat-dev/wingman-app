@@ -25,6 +25,7 @@ struct OnboardingView: View {
     @State private var currentStatistic: StatisticContent? = nil
     @State private var stepHistory: [Int] = []
     @State private var statisticSourceStepIndex: Int? = nil
+    @State private var isGoingBack: Bool = false  // Track navigation direction
 
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var authManager: AuthManager
@@ -37,57 +38,78 @@ struct OnboardingView: View {
 
     var body: some View {
         ZStack {
-            // Main content
-            VStack(spacing: 0) {
+            // Main content - hide when statistic is showing to prevent overlap
+            if !showStatistic {
+                VStack(spacing: 0) {
 
-                // NOTE: compute step early so we can conditionally show/hide top bar
-                let step = steps[stepIndex]
+                    // NOTE: compute step early so we can conditionally show/hide top bar
+                    let step = steps[stepIndex]
 
-                // MARK: - Top Row: Back Chevron + Progress Bar inline
-                // Hide both chevron and progress bar when we're on the loading state
-                if step.type != .loading {
-                    HStack(spacing: 12) {
-                        Button {
-                            handleBackButton()
-                        } label: {
-                            Image(systemName: "chevron.left")
-                                .font(.system(size: 20, weight: .bold))
-                                .foregroundColor(.black)
-                                .frame(width: 44, height: 44, alignment: .center)
-                                .contentShape(Rectangle())
+                    // MARK: - Top Row: Back Chevron + Progress Bar inline
+                    // Hide both chevron and progress bar when we're on the loading state
+                    if step.type != .loading {
+                        HStack(spacing: 12) {
+                            Button {
+                                handleBackButton()
+                            } label: {
+                                Image(systemName: "chevron.left")
+                                    .font(.system(size: 20, weight: .bold))
+                                    .foregroundColor(.black)
+                                    .frame(width: 44, height: 44, alignment: .center)
+                                    .contentShape(Rectangle())
+                            }
+                            .buttonStyle(.plain)
+
+                            progressBar(progress: CGFloat(steps[stepIndex].progress))
+                                .frame(height: 10)
                         }
-                        .buttonStyle(.plain)
-
-                        progressBar(progress: CGFloat(steps[stepIndex].progress))
-                            .frame(height: 10)
+                        .padding(.top, 8)
+                        .padding(.horizontal, 24)
+                        .padding(.bottom, 12)
+                    } else {
+                        // Optional: keep a little top spacing while hiding the bar so layout doesn't jump
+                        Spacer().frame(height: 20)
                     }
-                    .padding(.top, 8)
-                    .padding(.horizontal, 24)
-                    .padding(.bottom, 12)
-                } else {
-                    // Optional: keep a little top spacing while hiding the bar so layout doesn't jump
-                    Spacer().frame(height: 20)
-                }
 
-                // MARK: - Content based on step type
-                if step.type == .name {
-                    nameInputView(step: step)
-                } else if step.type == .question {
-                    questionView(step: step)
-                } else if step.type == .loading {
-                    loadingView(step: step)
+                    // MARK: - Content based on step type (wrapped for animation)
+                    ZStack {
+                        // Use ForEach with a single item to enable proper transition
+                        ForEach([stepIndex], id: \.self) { index in
+                            Group {
+                                if steps[index].type == .name {
+                                    nameInputView(step: steps[index])
+                                } else if steps[index].type == .question {
+                                    questionView(step: steps[index])
+                                } else if steps[index].type == .loading {
+                                    loadingView(step: steps[index])
+                                }
+                            }
+                            .transition(.asymmetric(
+                                insertion: .move(edge: isGoingBack ? .leading : .trailing),
+                                removal: .move(edge: isGoingBack ? .trailing : .leading)
+                            ))
+                        }
+                    }
+                    .clipped() // Clip content during animation to prevent overlap
                 }
+                .transition(.asymmetric(
+                    insertion: .move(edge: isGoingBack ? .leading : .trailing),
+                    removal: .move(edge: isGoingBack ? .trailing : .leading)
+                ))
             }
 
             // MARK: - Statistic Overlay
             if showStatistic, let statistic = currentStatistic {
                 statisticOverlay(statistic: statistic)
-                    .transition(.move(edge: .trailing))
+                    .background(Color.white)
+                    .transition(.asymmetric(
+                        insertion: .move(edge: .trailing),
+                        removal: .move(edge: isGoingBack ? .trailing : .leading)
+                    ))
             }
         }
         .navigationBarBackButtonHidden(true)
-        .animation(.easeInOut, value: stepIndex)
-        .animation(.easeInOut(duration: 0.3), value: showStatistic)
+        .animation(.easeInOut(duration: 0.35), value: showStatistic)
     }
 
     // MARK: - Name Input View
@@ -366,7 +388,10 @@ struct OnboardingView: View {
         // Check if we should show statistic
         if shouldShowStatistic() {
             statisticSourceStepIndex = stepIndex   // 🔥 track source
-            showStatistic = true
+            isGoingBack = false  // Forward direction
+            withAnimation(.easeInOut(duration: 0.35)) {
+                showStatistic = true
+            }
             return
         }
 
@@ -375,10 +400,15 @@ struct OnboardingView: View {
     }
 
     private func proceedToNextStep() {
+        // Set direction to forward
+        isGoingBack = false
+        
         stepHistory.append(stepIndex)
 
         if stepIndex < steps.count - 1 {
-            stepIndex += 1
+            withAnimation(.easeInOut(duration: 0.35)) {
+                stepIndex += 1
+            }
             restoreSelectionForCurrentStep()
         }
     }
@@ -403,27 +433,36 @@ struct OnboardingView: View {
         // question returns to the source (instead of skipping it).
         stepHistory.append(sourceIndex)
 
-        // Close statistic and advance to the next step
-        showStatistic = false
-        currentStatistic = nil
-        statisticSourceStepIndex = nil
+        // Set direction to forward (next screen slides in from right)
+        isGoingBack = false
 
-        stepIndex = sourceIndex + 1
+        // Close statistic and advance to the next step
+        withAnimation(.easeInOut(duration: 0.35)) {
+            showStatistic = false
+            currentStatistic = nil
+            statisticSourceStepIndex = nil
+            stepIndex = sourceIndex + 1
+        }
         restoreSelectionForCurrentStep()
     }
 
     // New helper to dismiss the statistic and return (without advancing)
     private func dismissStatisticAndReturnToSource() {
-        // Close statistic overlay
-        showStatistic = false
-        currentStatistic = nil
+        // Set direction to back (previous screen slides in from left)
+        isGoingBack = true
+        
+        // Close statistic overlay with animation
+        withAnimation(.easeInOut(duration: 0.35)) {
+            showStatistic = false
+            currentStatistic = nil
 
-        // If we have a recorded source index, go back to it (do NOT advance)
-        if let sourceIndex = statisticSourceStepIndex {
-            stepIndex = sourceIndex
-            statisticSourceStepIndex = nil
-            restoreSelectionForCurrentStep()
+            // If we have a recorded source index, go back to it (do NOT advance)
+            if let sourceIndex = statisticSourceStepIndex {
+                stepIndex = sourceIndex
+                statisticSourceStepIndex = nil
+            }
         }
+        restoreSelectionForCurrentStep()
     }
 
     // MARK: - Statistics Logic
@@ -590,7 +629,11 @@ struct OnboardingView: View {
 
         // Normal back navigation
         if let previousIndex = stepHistory.popLast() {
-            stepIndex = previousIndex
+            // Set direction FIRST, then change stepIndex
+            isGoingBack = true
+            withAnimation(.easeInOut(duration: 0.35)) {
+                stepIndex = previousIndex
+            }
             restoreSelectionForCurrentStep()
             return
         }
