@@ -237,6 +237,7 @@ struct PracticeGame: View {
                         onSelectOption: { option in viewModel.selectOption(option) },
                         onTapBack:     { viewModel.goToPreviousScene() }
                     )
+                    .id(scene.id) // Force view recreation for each scene
                 }
             }
         }
@@ -258,6 +259,8 @@ struct GameSceneView: View {
     let onTapRetry: () -> Void
     let onSelectOption: (GameOption) -> Void
     let onTapBack: () -> Void
+    
+    @State private var isVisible: Bool = false
 
     var body: some View {
         GeometryReader { _ in
@@ -300,7 +303,17 @@ struct GameSceneView: View {
                         DialogueContentView(scene: scene, userName: userName)
                             .padding(.horizontal, 20)
                             .padding(.bottom, 40)
+                            .scaleEffect(isVisible ? 1.0 : 0.85)
+                            .opacity(isVisible ? 1.0 : 0.0)
                     }
+                }
+            }
+        }
+        .onAppear {
+            // Animate expand effect when scene appears
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                withAnimation(.easeOut(duration: 0.25)) {
+                    isVisible = true
                 }
             }
         }
