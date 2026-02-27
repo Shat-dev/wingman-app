@@ -394,20 +394,21 @@ struct AuthView: View {
     // MARK: - Filled Button
     private func filledButton(title: String, isEnabled: Bool, action: @escaping () -> Void) -> some View {
         Button(action: action) {
-            if viewModel.isLoading {
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                    .frame(maxWidth: .infinity)
-                    .padding()
-            } else {
+            HStack(spacing: 8) {
+                if viewModel.isLoading {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                        .scaleEffect(0.8)
+                }
+                
                 Text(title)
                     .fontWeight(.semibold)
-                    .frame(maxWidth: .infinity)
-                    .padding()
                     .foregroundColor(.white)
-                    .background(isEnabled ? Color.black : Color.gray.opacity(0.5))
-                    .cornerRadius(5)
             }
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(isEnabled ? Color.black : Color.gray.opacity(0.5))
+            .cornerRadius(5)
         }
         .disabled(!isEnabled || viewModel.isLoading)
     }

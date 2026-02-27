@@ -176,6 +176,7 @@ struct PracticeGame: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel: PracticeGameViewModel
     @State private var showGameComplete = false
+    @EnvironmentObject private var tabBarVisibility: TabBarVisibilityManager
 
     init(
         gameData: PracticeGameData = MockData.barWindow,
@@ -242,6 +243,13 @@ struct PracticeGame: View {
             }
         }
         .navigationBarHidden(true)
+        .toolbar(.hidden, for: .tabBar)
+        .onAppear {
+            tabBarVisibility.hideTabBar()
+        }
+        .onDisappear {
+            tabBarVisibility.showTabBar()
+        }
         .onChange(of: viewModel.gameCompleted) { completed in
             if completed { showGameComplete = true }
         }
