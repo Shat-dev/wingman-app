@@ -102,13 +102,26 @@ struct AuthView: View {
                         }
                         .disabled(authManager.isGoogleSignInLoading)
                         
-                        outlineButton(title: "Continue with Apple", systemImage: "applelogo") {
-                            // Handle Apple login
+                        outlineButton(
+                            title: authManager.isAppleSignInLoading ? "Signing in..." : "Continue with Apple",
+                            systemImage: "apple.logo",
+                            isLoading: authManager.isAppleSignInLoading
+                        ) {
+                            authManager.signInWithApple()
                         }
+                        .disabled(authManager.isAppleSignInLoading)
                     }
                     
                     // Show Google Sign-In error if any
                     if let error = authManager.googleSignInError {
+                        Text(error)
+                            .font(.caption)
+                            .foregroundColor(.red)
+                            .padding(.top, 4)
+                    }
+                    
+                    // Show Apple Sign-In error if any
+                    if let error = authManager.appleSignInError {
                         Text(error)
                             .font(.caption)
                             .foregroundColor(.red)

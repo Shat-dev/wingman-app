@@ -10,6 +10,8 @@ import Combine
 import Supabase
 import Auth
 import GoogleSignIn
+import AuthenticationServices
+import CryptoKit
 
 @MainActor
 final class AuthManager: ObservableObject {
@@ -46,6 +48,12 @@ final class AuthManager: ObservableObject {
     
     @Published var isGoogleSignInLoading: Bool = false
     @Published var googleSignInError: String?
+    
+    @Published var isAppleSignInLoading: Bool = false
+    @Published var appleSignInError: String?
+    
+    // Store the nonce for Apple Sign-In verification
+    private var currentNonce: String?
 
     private let client = SupabaseManager.shared.client
     private var cancellables = Set<AnyCancellable>()
@@ -306,6 +314,161 @@ final class AuthManager: ObservableObject {
             googleSignInError = "Sign-in failed: \(error.localizedDescription)"
         }
     }
+    
+    // MARK: - Apple Sign-In
+    func signInWithApple() {
+        print("\n🍎 signInWithApple() called")
+        
+        isAppleSignInLoading = true
+        appleSignInError = nil
+        
+        // Generate a random nonce for security
+        let nonce = randomNonceString()
+        currentNonce = nonce
+        
+        // Create Apple ID request
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        request.nonce = sha256(nonce)
+        
+        // Create and present the authorization controller
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        let delegate = AppleSignInDelegate(authManager: self)
+        
+        // Store delegate to prevent deallocation
+        appleSignInDelegate = delegate
+        
+        authorizationController.delegate = delegate
+        authorizationController.presentationContextProvider = delegate
+        authorizationController.performRequests()
+    }
+    
+    // Store delegate reference to prevent deallocation
+    private var appleSignInDelegate: AppleSignInDelegate?
+    
+    // Called by AppleSignInDelegate when authorization succeeds
+    func handleAppleSignInSuccess(idToken: String, fullName: PersonNameComponents?) async {
+        print("✅ Apple Sign-In successful, signing in with Supabase...")
+        
+        do {
+            guard let nonce = currentNonce else {
+                throw AppleSignInError.noNonce
+            }
+            
+            // Sign in to Supabase with the Apple ID token
+            let session = try await client.auth.signInWithIdToken(
+                credentials: .init(
+                    provider: .apple,
+                    idToken: idToken,
+                    nonce: nonce
+                )
+            )
+            
+            print("✅ Supabase Apple sign-in successful")
+            print("   - User ID: \(session.user.id)")
+            print("   - Email: \(session.user.email ?? "nil")")
+            
+            // If we got the full name (first sign-in only), save it to user metadata
+            if let fullName = fullName {
+                let displayName = [fullName.givenName, fullName.familyName]
+                    .compactMap { $0 }
+                    .joined(separator: " ")
+                
+                if !displayName.isEmpty {
+                    print("📝 Saving display name: \(displayName)")
+                    
+                    // Update user metadata with the name
+                    _ = try await client.auth.update(user: UserAttributes(
+                        data: [
+                            "display_name": .string(displayName),
+                            "full_name": .string(displayName)
+                        ]
+                    ))
+                    
+                    // Also save to UserDefaults for quick access
+                    UserDefaults.standard.set(displayName, forKey: "user_name")
+                }
+            }
+            
+            // Mark onboarding as complete since user used social login
+            completeOnboarding()
+            
+            isAppleSignInLoading = false
+            currentNonce = nil
+            appleSignInDelegate = nil
+            
+        } catch {
+            isAppleSignInLoading = false
+            currentNonce = nil
+            appleSignInDelegate = nil
+            print("❌ Supabase Apple sign-in error: \(error.localizedDescription)")
+            appleSignInError = "Sign-in failed: \(error.localizedDescription)"
+        }
+    }
+    
+    // Called by AppleSignInDelegate when authorization fails
+    func handleAppleSignInFailure(error: Error) {
+        isAppleSignInLoading = false
+        currentNonce = nil
+        appleSignInDelegate = nil
+        
+        // Check if user cancelled
+        if let authError = error as? ASAuthorizationError {
+            switch authError.code {
+            case .canceled:
+                print("ℹ️ Apple Sign-In cancelled by user")
+                appleSignInError = nil
+                return
+            case .failed:
+                print("❌ Apple Sign-In failed")
+                appleSignInError = "Sign-in failed. Please try again."
+            case .invalidResponse:
+                print("❌ Apple Sign-In invalid response")
+                appleSignInError = "Invalid response from Apple. Please try again."
+            case .notHandled:
+                print("❌ Apple Sign-In not handled")
+                appleSignInError = "Sign-in was not handled. Please try again."
+            case .notInteractive:
+                print("❌ Apple Sign-In not interactive")
+                appleSignInError = "Sign-in requires user interaction."
+            case .unknown:
+                print("❌ Apple Sign-In unknown error")
+                appleSignInError = "An unknown error occurred. Please try again."
+            @unknown default:
+                print("❌ Apple Sign-In unknown error code")
+                appleSignInError = error.localizedDescription
+            }
+        } else {
+            print("❌ Apple Sign-In error: \(error.localizedDescription)")
+            appleSignInError = error.localizedDescription
+        }
+    }
+    
+    // MARK: - Nonce Generation Helpers
+    private func randomNonceString(length: Int = 32) -> String {
+        precondition(length > 0)
+        var randomBytes = [UInt8](repeating: 0, count: length)
+        let errorCode = SecRandomCopyBytes(kSecRandomDefault, randomBytes.count, &randomBytes)
+        if errorCode != errSecSuccess {
+            fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
+        }
+        
+        let charset: [Character] = Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+        let nonce = randomBytes.map { byte in
+            charset[Int(byte) % charset.count]
+        }
+        return String(nonce)
+    }
+    
+    private func sha256(_ input: String) -> String {
+        let inputData = Data(input.utf8)
+        let hashedData = SHA256.hash(data: inputData)
+        let hashString = hashedData.compactMap {
+            String(format: "%02x", $0)
+        }.joined()
+        return hashString
+    }
 
     // MARK: - Sign out / Reset
     func signOut() async {
@@ -363,6 +526,87 @@ enum GoogleSignInError: LocalizedError {
             return "Unable to get ID token from Google"
         case .signInFailed(let message):
             return "Sign-in failed: \(message)"
+        }
+    }
+}
+
+// MARK: - Apple Sign-In Errors
+enum AppleSignInError: LocalizedError {
+    case noNonce
+    case noIdentityToken
+    case invalidIdentityToken
+    case noAuthorizationCode
+    
+    var errorDescription: String? {
+        switch self {
+        case .noNonce:
+            return "Invalid state: A nonce was not generated"
+        case .noIdentityToken:
+            return "Unable to get identity token from Apple"
+        case .invalidIdentityToken:
+            return "Unable to serialize identity token"
+        case .noAuthorizationCode:
+            return "Unable to get authorization code from Apple"
+        }
+    }
+}
+
+// MARK: - Apple Sign-In Delegate
+class AppleSignInDelegate: NSObject, ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+    
+    private weak var authManager: AuthManager?
+    
+    init(authManager: AuthManager) {
+        self.authManager = authManager
+        super.init()
+    }
+    
+    // MARK: - ASAuthorizationControllerPresentationContextProviding
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first else {
+            fatalError("No window found")
+        }
+        return window
+    }
+    
+    // MARK: - ASAuthorizationControllerDelegate
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else {
+            print("❌ Invalid credential type")
+            Task { @MainActor in
+                authManager?.handleAppleSignInFailure(error: AppleSignInError.noIdentityToken)
+            }
+            return
+        }
+        
+        guard let identityTokenData = appleIDCredential.identityToken,
+              let identityToken = String(data: identityTokenData, encoding: .utf8) else {
+            print("❌ Unable to get identity token")
+            Task { @MainActor in
+                authManager?.handleAppleSignInFailure(error: AppleSignInError.noIdentityToken)
+            }
+            return
+        }
+        
+        print("✅ Apple authorization successful")
+        print("   - User ID: \(appleIDCredential.user)")
+        print("   - Email: \(appleIDCredential.email ?? "not provided")")
+        print("   - Full Name: \(appleIDCredential.fullName?.givenName ?? "not provided") \(appleIDCredential.fullName?.familyName ?? "")")
+        
+        // Pass the token and name to AuthManager
+        Task { @MainActor in
+            await authManager?.handleAppleSignInSuccess(
+                idToken: identityToken,
+                fullName: appleIDCredential.fullName
+            )
+        }
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        print("❌ Apple authorization failed: \(error.localizedDescription)")
+        Task { @MainActor in
+            authManager?.handleAppleSignInFailure(error: error)
         }
     }
 }
