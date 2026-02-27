@@ -219,6 +219,7 @@ final class AuthManager: ObservableObject {
         
         do {
             // Step 1: Try to get cached session instantly (no network required)
+            // Note: client.auth.session should read from local storage first
             let session = try await client.auth.session
             
             print("✅ Cached session found!")
@@ -238,8 +239,13 @@ final class AuthManager: ObservableObject {
             print("✅ Session restored from cache - UI ready")
             
             // Step 2: Validate session with server in background (non-blocking)
-            Task {
-                await validateSessionInBackground()
+            // Only if we have network connectivity
+            if NetworkMonitor.shared.isConnected {
+                Task.detached(priority: .background) { [weak self] in
+                    await self?.validateSessionInBackground()
+                }
+            } else {
+                print("📶 Offline - skipping background validation")
             }
             
         } catch {
@@ -257,20 +263,40 @@ final class AuthManager: ObservableObject {
     
     /// Validates session with server in background, only signs out if truly invalid
     private func validateSessionInBackground() async {
+        // Skip validation if offline - no point waiting for timeout
+        guard NetworkMonitor.shared.isConnected else {
+            print("📶 Background: Offline - skipping session validation")
+            return
+        }
+        
         print("🔄 Background: Validating session with server...")
         
+        // Use a timeout to prevent hanging
         do {
-            // Try to refresh the session token
-            let session = try await client.auth.refreshSession()
-            print("✅ Background: Session validated successfully")
-            print("   - Token refreshed for: \(session.user.email ?? "unknown")")
-            
+            try await withThrowingTaskGroup(of: Void.self) { group in
+                group.addTask {
+                    // Try to refresh the session token
+                    let session = try await self.client.auth.refreshSession()
+                    print("✅ Background: Session validated successfully")
+                    print("   - Token refreshed for: \(session.user.email ?? "unknown")")
+                }
+                
+                group.addTask {
+                    // Timeout after 5 seconds
+                    try await Task.sleep(nanoseconds: 5_000_000_000)
+                    throw NSError(domain: "SessionValidation", code: -1, userInfo: [NSLocalizedDescriptionKey: "Timeout"])
+                }
+                
+                // Wait for first task to complete (either success or timeout)
+                try await group.next()
+                group.cancelAll()
+            }
         } catch {
             print("⚠️ Background: Session validation failed: \(error.localizedDescription)")
             
-            // Only sign out if it's a real auth error, not a network error
-            if isNetworkError(error) {
-                print("📶 Background: Network error detected - keeping cached session")
+            // Only sign out if it's a real auth error, not a network error or timeout
+            if isNetworkError(error) || error.localizedDescription.contains("Timeout") {
+                print("📶 Background: Network error/timeout - keeping cached session")
                 // Don't sign out, user might just be offline
             } else if isAuthenticationError(error) {
                 print("🔐 Background: Auth error detected - session is invalid")

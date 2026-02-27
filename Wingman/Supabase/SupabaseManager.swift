@@ -18,9 +18,14 @@ final class SupabaseManager {
     
     // MARK: - Client
     lazy var client: SupabaseClient = {
-        SupabaseClient(
+        return SupabaseClient(
             supabaseURL: supabaseURL,
-            supabaseKey: supabaseKey
+            supabaseKey: supabaseKey,
+            options: SupabaseClientOptions(
+                auth: SupabaseClientOptions.AuthOptions(
+                    autoRefreshToken: false  // Disable auto-refresh to prevent hanging when offline
+                )
+            )
         )
     }()
     

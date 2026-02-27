@@ -22,7 +22,10 @@ struct PracticeView: View {
                 Color.white.ignoresSafeArea()
 
                 VStack(spacing: 0) {
-                    headerView
+                    // Only show header when data is loaded successfully
+                    if !viewModel.isLoading && viewModel.errorMessage == nil {
+                        headerView
+                    }
 
                     if viewModel.isLoading {
                         loadingView
@@ -128,29 +131,63 @@ struct PracticeView: View {
 
     // MARK: - Error View
     private func errorView(message: String) -> some View {
-        VStack(spacing: 16) {
-            Spacer()
-            Image(systemName: "exclamationmark.triangle")
-                .font(.system(size: 48))
-                .foregroundColor(Color(hex: "#999999"))
-            Text(message)
-                .font(.manropeMedium(size: 14))
-                .foregroundColor(Color(hex: "#666666"))
-                .multilineTextAlignment(.center)
-            Button(action: {
-                Task { await viewModel.fetchPractices() }
-            }) {
-                Text("Try Again")
-                    .font(.manropeSemiBold(size: 14))
-                    .foregroundColor(.white)
-                    .padding(.horizontal, 24)
-                    .padding(.vertical, 12)
-                    .background(Color(hex: "#1A1A1A"))
-                    .cornerRadius(8)
+        ZStack {
+            VStack {
+                
+                // Back button at top
+                HStack {
+                    Button {
+                        // Dismiss or go back - for tab-based view, this might not be needed
+                    } label: {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 20, weight: .bold))
+                            .foregroundColor(.black)
+                            .frame(width: 44, height: 44, alignment: .center)
+                            .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    .hidden() // Hide for now since Scenarios is a tab, not pushed view
+                    
+                    Spacer()
+                }
+                .padding(.leading, 8)
+                .padding(.top, 8)
+                
+                Spacer()
+                
+                // Center Content
+                VStack {
+                    Text("Oops!")
+                        .font(.manropeSemiBold(size: 24))
+                        .foregroundColor(.black)
+                    Text("Somthing went wrong")
+                        .font(.manropeSemiBold(size: 16))
+                        .foregroundColor(.black)
+                        .padding(.top, 2)
+                    Text("Please Try again!")
+                        .font(.manropeSemiBold(size: 16))
+                        .foregroundColor(.black)
+                }
+                .padding(.horizontal, 24)
+                
+                Spacer()
+                
+                // Bottom Button
+                Button(action: {
+                    Task { await viewModel.fetchPractices() }
+                }) {
+                    Text("Try Again")
+                        .font(.manropeSemiBold(size: 16))
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 52)
+                        .background(Color.black)
+                        .cornerRadius(5)
+                }
+                .padding(.horizontal, 20)
+                .padding(.bottom, 40)
             }
-            Spacer()
         }
-        .padding(.horizontal, 20)
     }
 }
 

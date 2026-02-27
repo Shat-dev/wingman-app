@@ -63,6 +63,11 @@ class DailyPracticeService: DailyPracticeServiceProtocol {
     }
     
     func getTodayQuestions() async throws -> [DailyPracticeQuestion] {
+        // Check network connectivity first
+        guard NetworkMonitor.shared.isConnected else {
+            throw DailyPracticeError.networkError
+        }
+        
         do {
             // Get current user ID from your existing manager
             guard let userIdString = SupabaseManager.shared.currentUserId else {
@@ -162,6 +167,7 @@ enum DailyPracticeError: LocalizedError {
     case failedToFetchQuestions(String)
     case failedToSubmitCompletion(String)
     case invalidQuestionData
+    case networkError
     
     var errorDescription: String? {
         switch self {
@@ -173,6 +179,8 @@ enum DailyPracticeError: LocalizedError {
             return "Failed to submit completion: \(message)"
         case .invalidQuestionData:
             return "Invalid question data received"
+        case .networkError:
+            return "No internet connection. Please check your network and try again."
         }
     }
 }

@@ -27,32 +27,35 @@ struct DailyPracticeView: View {
         VStack(spacing: 0) {
             
             // MARK: - Top Row: Back Chevron + Progress Bar
-            HStack(spacing: 10) {
-                Button {
-                    handleBackButton()
-                } label: {
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 20, weight: .bold))
-                        .foregroundColor(.black)
-                        .frame(width: 44, height: 44, alignment: .center)
-                        .contentShape(Rectangle())
+            // Hide when showing error (e.g., no internet)
+            if viewModel.errorMessage == nil {
+                HStack(spacing: 10) {
+                    Button {
+                        handleBackButton()
+                    } label: {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 20, weight: .bold))
+                            .foregroundColor(.black)
+                            .frame(width: 44, height: 44, alignment: .center)
+                            .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    
+                    if !viewModel.questions.isEmpty {
+                        progressBar(progress: CGFloat(viewModel.progress))
+                            .frame(height: 10)
+                    } else {
+                        // Placeholder progress bar while loading
+                        Capsule()
+                            .fill(Color.gray.opacity(0.2))
+                            .frame(height: 10)
+                    }
                 }
-                .buttonStyle(.plain)
-                
-                if !viewModel.questions.isEmpty {
-                    progressBar(progress: CGFloat(viewModel.progress))
-                        .frame(height: 10)
-                } else {
-                    // Placeholder progress bar while loading
-                    Capsule()
-                        .fill(Color.gray.opacity(0.2))
-                        .frame(height: 10)
-                }
+                .padding(.top, 8)
+                .padding(.leading, 8)
+                .padding(.trailing, 59)
+                .padding(.bottom, 12)
             }
-            .padding(.top, 8)
-            .padding(.leading, 8)
-            .padding(.trailing, 59)
-            .padding(.bottom, 12)
             
             // MARK: - Main Content Area
             if viewModel.isLoading {
@@ -106,9 +109,26 @@ struct DailyPracticeView: View {
     private func errorView(message: String) -> some View {
         print("ErrorView message: \(message)")
         return ZStack {
-           
             
             VStack {
+                
+                // Back button at top
+                HStack {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 20, weight: .bold))
+                            .foregroundColor(.black)
+                            .frame(width: 44, height: 44, alignment: .center)
+                            .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    
+                    Spacer()
+                }
+                .padding(.leading, 8)
+                .padding(.top, 8)
                 
                 Spacer()
                 
@@ -150,8 +170,8 @@ struct DailyPracticeView: View {
                         .background(Color.black)
                         .cornerRadius(5)
                 }
-                .padding(.horizontal, 24)
-                .padding(.bottom, 20)
+                .padding(.horizontal, 20)
+                .padding(.bottom, 40)
             }
         }
     }

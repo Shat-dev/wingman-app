@@ -104,6 +104,11 @@ final class PracticeService: PracticeServiceProtocol {
 
     // MARK: Fetch All Practices
     nonisolated func fetchPractices() async throws -> [Practice] {
+        // Check network connectivity first
+        guard NetworkMonitor.shared.isConnected else {
+            throw PracticeServiceError.networkError
+        }
+        
         guard let userIdString = SupabaseManager.shared.currentUserId,
               let userId = UUID(uuidString: userIdString) else {
             throw PracticeServiceError.notAuthenticated
@@ -307,12 +312,14 @@ enum PracticeServiceError: LocalizedError {
     case notAuthenticated
     case scenarioNotFound
     case invalidData(String)
+    case networkError
 
     var errorDescription: String? {
         switch self {
         case .notAuthenticated:     return "Please log in to access practices."
         case .scenarioNotFound:     return "Scenario not found."
         case .invalidData(let msg): return "Data error: \(msg)"
+        case .networkError:         return "No internet connection. Please check your network and try again."
         }
     }
 }
