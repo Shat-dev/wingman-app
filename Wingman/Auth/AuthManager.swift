@@ -20,6 +20,13 @@ final class AuthManager: ObservableObject {
             print("🔐 isAuthenticated changed: \(oldValue) → \(isAuthenticated)")
         }
     }
+    
+    // MARK: - Session Checking State
+    @Published var isCheckingSession: Bool = true {
+        didSet {
+            print("🔍 isCheckingSession changed: \(oldValue) → \(isCheckingSession)")
+        }
+    }
 
     @Published var hasCompletedOnboarding: Bool = false {
         didSet {
@@ -202,6 +209,111 @@ final class AuthManager: ObservableObject {
         let key = "hasCompletedPaywallFlow_\(userId)"
         hasCompletedPaywallFlow = UserDefaults.standard.bool(forKey: key)
         print("💳 Paywall flow status loaded: \(hasCompletedPaywallFlow) for user: \(userId)")
+    }
+    
+    // MARK: - Graceful Session Restoration (Offline-First)
+    
+    /// Restores session from local cache instantly, then validates with server in background
+    func restoreSessionGracefully() async {
+        print("\n🔄 ========== GRACEFUL SESSION RESTORE ==========")
+        
+        do {
+            // Step 1: Try to get cached session instantly (no network required)
+            let session = try await client.auth.session
+            
+            print("✅ Cached session found!")
+            print("   - User ID: \(session.user.id)")
+            print("   - Email: \(session.user.email ?? "nil")")
+            
+            // Immediately set authenticated state from cache
+            self.currentUser = session.user
+            self.isAuthenticated = true
+            
+            // Load user-specific states
+            await checkUserQuestionStatus(userId: session.user.id.uuidString)
+            await checkUserPaywallFlowStatus(userId: session.user.id.uuidString)
+            
+            // Mark session check complete - UI can now render
+            self.isCheckingSession = false
+            print("✅ Session restored from cache - UI ready")
+            
+            // Step 2: Validate session with server in background (non-blocking)
+            Task {
+                await validateSessionInBackground()
+            }
+            
+        } catch {
+            print("❌ No cached session found: \(error.localizedDescription)")
+            
+            // No session - user needs to log in
+            self.isAuthenticated = false
+            self.currentUser = nil
+            self.isCheckingSession = false
+            print("ℹ️ No session - showing login screen")
+        }
+        
+        print("================================================\n")
+    }
+    
+    /// Validates session with server in background, only signs out if truly invalid
+    private func validateSessionInBackground() async {
+        print("🔄 Background: Validating session with server...")
+        
+        do {
+            // Try to refresh the session token
+            let session = try await client.auth.refreshSession()
+            print("✅ Background: Session validated successfully")
+            print("   - Token refreshed for: \(session.user.email ?? "unknown")")
+            
+        } catch {
+            print("⚠️ Background: Session validation failed: \(error.localizedDescription)")
+            
+            // Only sign out if it's a real auth error, not a network error
+            if isNetworkError(error) {
+                print("📶 Background: Network error detected - keeping cached session")
+                // Don't sign out, user might just be offline
+            } else if isAuthenticationError(error) {
+                print("🔐 Background: Auth error detected - session is invalid")
+                // Token is truly invalid, sign out gracefully
+                await signOut()
+            } else {
+                print("❓ Background: Unknown error - keeping cached session for safety")
+            }
+        }
+    }
+    
+    // MARK: - Error Detection Helpers
+    
+    /// Checks if an error is a network-related error (offline, timeout, etc.)
+    private func isNetworkError(_ error: Error) -> Bool {
+        let nsError = error as NSError
+        
+        // Check for common network error domains and codes
+        if nsError.domain == NSURLErrorDomain {
+            let networkErrorCodes: [Int] = [
+                NSURLErrorNotConnectedToInternet,
+                NSURLErrorNetworkConnectionLost,
+                NSURLErrorTimedOut,
+                NSURLErrorCannotConnectToHost,
+                NSURLErrorCannotFindHost,
+                NSURLErrorDNSLookupFailed,
+                NSURLErrorDataNotAllowed,
+                NSURLErrorInternationalRoamingOff
+            ]
+            return networkErrorCodes.contains(nsError.code)
+        }
+        
+        // Check error description for network-related keywords
+        let errorDescription = error.localizedDescription.lowercased()
+        let networkKeywords = ["network", "internet", "offline", "connection", "timeout", "unreachable"]
+        return networkKeywords.contains { errorDescription.contains($0) }
+    }
+    
+    /// Checks if an error is an authentication error (invalid token, expired session, etc.)
+    private func isAuthenticationError(_ error: Error) -> Bool {
+        let errorDescription = error.localizedDescription.lowercased()
+        let authKeywords = ["unauthorized", "401", "invalid", "expired", "token", "authentication", "forbidden", "403"]
+        return authKeywords.contains { errorDescription.contains($0) }
     }
 
     // MARK: - Onboarding

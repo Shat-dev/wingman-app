@@ -23,12 +23,11 @@ struct CoursesView: View {
                 if viewModel.isLoading {
                     // Loading state
                     VStack {
+                        Spacer()
                         ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: Color(hex: "#1A1A1A")))
                             .scaleEffect(1.2)
-                        Text("Loading courses...")
-                            .font(.manropeRegular(size: 14))
-                            .foregroundColor(.gray)
-                            .padding(.top, 12)
+                        Spacer()
                     }
                 } else {
                     VStack(spacing: 0) {

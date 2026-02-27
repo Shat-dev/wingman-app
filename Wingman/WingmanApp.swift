@@ -26,42 +26,58 @@ struct WingmanApp: App {
 
 struct RootView: View {
     @EnvironmentObject var authManager: AuthManager
+    @StateObject private var networkMonitor = NetworkMonitor.shared
 
     var body: some View {
-        Group {
-            if authManager.isAuthenticated {
-                let _ = print("🎯 RootView: User IS authenticated")
+        ZStack {
+            Group {
+                // MARK: - Session Check in Progress
+                if authManager.isCheckingSession {
+                    let _ = print("🎯 RootView: Checking session...")
+                    SplashView()
+                    
+                // MARK: - Authenticated User Flow
+                } else if authManager.isAuthenticated {
+                    let _ = print("🎯 RootView: User IS authenticated")
 
-                // ✅ 1) Onboarding questions not finished
-                if !authManager.hasCompletedQuestions {
-                    let _ = print("🎯 RootView: Showing OnboardingView (questions NOT completed)")
-                    NavigationStack {
-                        OnboardingView()
+                    // ✅ 1) Onboarding questions not finished
+                    if !authManager.hasCompletedQuestions {
+                        let _ = print("🎯 RootView: Showing OnboardingView (questions NOT completed)")
+                        NavigationStack {
+                            OnboardingView()
+                        }
+
+                    // ✅ 2) Questions finished → show Paywall (and Referral flow)
+                    } else if !authManager.hasCompletedPaywallFlow {
+                        let _ = print("🎯 RootView: Showing PaywallView (paywall flow NOT completed)")
+                        NavigationStack {
+                            PaywallView()
+                        }
+
+                    // ✅ 3) Paywall + Referral finished → MainTabView (Home)
+                    } else {
+                        let _ = print("🎯 RootView: Showing MainTabView (paywall flow completed)")
+                        MainTabView()
                     }
 
-                // ✅ 2) Questions finished → show Paywall (and Referral flow)
-                } else if !authManager.hasCompletedPaywallFlow {
-                    let _ = print("🎯 RootView: Showing PaywallView (paywall flow NOT completed)")
+                // MARK: - Unauthenticated User Flow
+                } else if authManager.hasCompletedOnboarding {
+                    let _ = print("🎯 RootView: User NOT authenticated, but HAS seen onboarding")
                     NavigationStack {
-                        PaywallView()
+                        AuthView(mode: .login)
                     }
 
-                // ✅ 3) Paywall + Referral finished → MainTabView (Home)
                 } else {
-                    let _ = print("🎯 RootView: Showing MainTabView (paywall flow completed)")
-                    MainTabView()
+                    let _ = print("🎯 RootView: User NOT authenticated, HASN'T seen onboarding")
+                    SplashView()
                 }
-
-            } else if authManager.hasCompletedOnboarding {
-                let _ = print("🎯 RootView: User NOT authenticated, but HAS seen onboarding")
-                NavigationStack {
-                    AuthView(mode: .login)
-                }
-
-            } else {
-                let _ = print("🎯 RootView: User NOT authenticated, HASN'T seen onboarding")
-                SplashView()
             }
+            .animation(.easeInOut(duration: 0.3), value: authManager.isAuthenticated)
+            .animation(.easeInOut(duration: 0.3), value: authManager.isCheckingSession)
+        }
+        .task {
+            // Restore session gracefully on app launch
+            await authManager.restoreSessionGracefully()
         }
         .onChange(of: authManager.isAuthenticated) { newValue in
             print("\n🔔 RootView detected isAuthenticated change: \(newValue)")
