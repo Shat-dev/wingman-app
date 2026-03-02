@@ -57,6 +57,13 @@ struct PracticeView: View {
         .task {
             await viewModel.fetchPractices()
         }
+        .onAppear {
+            // Check for newly unlocked practices when the view appears
+            // This is useful when users navigate here after completing daily practice
+            Task {
+                await viewModel.checkForNewlyUnlockedPractices()
+            }
+        }
     }
 
     // MARK: - Derived user display name

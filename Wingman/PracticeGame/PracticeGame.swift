@@ -368,8 +368,8 @@ struct DialogueContentView: View {
                     .font(.manropeMedium(size: 14))
                     .foregroundColor(.black)
                     .lineLimit(2)
-                    .multilineTextAlignment(.leading)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 30)
             }
@@ -849,5 +849,6 @@ struct MockData {
 #Preview {
     NavigationView {
         PracticeGame()
+            .environmentObject(TabBarVisibilityManager())
     }
 }

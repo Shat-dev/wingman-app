@@ -268,7 +268,7 @@ struct HomeView: View {
                     .environmentObject(tabBarVisibility)
             }
             .sheet(isPresented: $showLogApproachSheet) {
-                LogApproachBottomSheet(isPresented: $showLogApproachSheet)
+                LogApproachBottomSheet(isPresented: $showLogApproachSheet, approachToEdit: nil)
                     .presentationDetents([.large])
                     .presentationDragIndicator(.hidden)
                     .presentationCornerRadius(20)

@@ -10,6 +10,14 @@ struct LogApproachBottomSheet: View {
     @StateObject private var viewModel = LogApproachViewModel()
     @State private var dragOffset: CGFloat = 0
     @State private var showApproachGuide = false
+    
+    // Optional approach for editing
+    let approachToEdit: ApproachLog?
+    
+    init(isPresented: Binding<Bool>, approachToEdit: ApproachLog? = nil) {
+        self._isPresented = isPresented
+        self.approachToEdit = approachToEdit
+    }
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -25,9 +33,9 @@ struct LogApproachBottomSheet: View {
                     .padding(.top, 12)
                     .padding(.bottom, 20)
 
-                // Header
+                // Header with dynamic title
                 HStack {
-                    Text("Log Encounter")
+                    Text(viewModel.headerTitle)
                         .font(.manropeMedium(size: 20))
                         .foregroundColor(.black)
 
@@ -175,9 +183,17 @@ struct LogApproachBottomSheet: View {
 
                         // MARK: - Notes Section
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("Notes")
-                                .font(.manropeMedium(size: 16))
-                                .foregroundColor(.black)
+                            HStack {
+                                Text("Notes")
+                                    .font(.manropeMedium(size: 16))
+                                    .foregroundColor(.black)
+                                
+                                Spacer()
+                                
+                                Text("\(viewModel.notes.count)/400")
+                                    .font(.manropeRegular(size: 12))
+                                    .foregroundColor(viewModel.notes.count > 400 ? .red : .gray)
+                            }
 
                             ZStack(alignment: .topLeading) {
                                 if viewModel.notes.isEmpty {
@@ -196,13 +212,29 @@ struct LogApproachBottomSheet: View {
                                     .padding(.vertical, 10)
                                     .scrollContentBackground(.hidden)
                                     .background(Color.clear)
+                                    .onChange(of: viewModel.notes) { newValue in
+                                        // Limit to 400 characters
+                                        if newValue.count > 400 {
+                                            viewModel.notes = String(newValue.prefix(400))
+                                        }
+                                    }
                             }
                             .background(Color(red: 0.98, green: 0.98, blue: 0.98))
                             .cornerRadius(5)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 5)
-                                    .stroke(Color(red: 0.92, green: 0.92, blue: 0.92), lineWidth: 1)
+                                    .stroke(viewModel.notes.count > 400 ? Color.red : Color(red: 0.92, green: 0.92, blue: 0.92), lineWidth: 1)
                             )
+                            
+                            // Character limit warning
+                            if viewModel.notes.count >= 380 {
+                                HStack {
+                                    Spacer()
+                                    Text(viewModel.notes.count >= 400 ? "Maximum characters reached" : "Approaching character limit")
+                                        .font(.manropeRegular(size: 11))
+                                        .foregroundColor(viewModel.notes.count >= 400 ? .red : .orange)
+                                }
+                            }
                         }
 
                         // MARK: - Save Button
@@ -225,11 +257,11 @@ struct LogApproachBottomSheet: View {
                                     Image(systemName: "checkmark")
                                         .font(.system(size: 16, weight: .semibold))
                                         .foregroundColor(.white)
-                                    Text("Saved!")
+                                    Text(viewModel.isEditMode ? "Updated!" : "Saved!")
                                         .font(.manropeSemiBold(size: 16))
                                         .foregroundColor(.white)
                                 } else {
-                                    Text("Save")
+                                    Text(viewModel.saveButtonTitle)
                                         .font(.manropeSemiBold(size: 16))
                                         .foregroundColor(.white)
                                 }
@@ -237,7 +269,7 @@ struct LogApproachBottomSheet: View {
                             .frame(maxWidth: .infinity)
                             .frame(height: 52)
                             .background(viewModel.canSave ? Color.black : Color.gray.opacity(0.3))
-                            .cornerRadius(8)
+                            .cornerRadius(5)
                         }
                         .disabled(!viewModel.canSave || viewModel.isSaving)
 
@@ -291,6 +323,15 @@ struct LogApproachBottomSheet: View {
             .padding(.trailing, 20)
             .frame(maxWidth: .infinity, alignment: .topTrailing)
         }
+        .onAppear {
+            if let approach = approachToEdit {
+                // Setup for editing existing approach
+                viewModel.setupForEditing(approach)
+            } else {
+                // Setup for new approach entry
+                viewModel.setupForNewEntry()
+            }
+        }
         .transition(.move(edge: .bottom))
         .sheet(isPresented: $showApproachGuide) {
             ApproachLevelGuideSheet()
@@ -343,7 +384,7 @@ struct RadioButton: View {
                     .ignoresSafeArea()
 
                 if isPresented {
-                    LogApproachBottomSheet(isPresented: $isPresented)
+                    LogApproachBottomSheet(isPresented: $isPresented, approachToEdit: nil)
                 }
             }
         }

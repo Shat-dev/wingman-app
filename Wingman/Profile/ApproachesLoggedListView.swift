@@ -49,25 +49,29 @@ struct ApproachesLoggedListView: View {
                     .padding(.horizontal, 16)
                     .padding(.top, 12)
                     
-                    
-                    
-                    // Search Bar (no Edit button)
-                    HStack(spacing: 8) {
-                        Image(systemName: "magnifyingglass")
-                            .font(.system(size: 16))
-                            .foregroundColor(.gray.opacity(0.5))
-                        
-                        TextField("Search", text: $searchText)
-                            .font(.manropeRegular(size: 15))
-                            .foregroundColor(.black)
+                    // Search Bar (only show if 10+ approaches)
+                    if approachService.totalCount >= 10 {
+                        HStack(spacing: 8) {
+                            Image(systemName: "magnifyingglass")
+                                .font(.system(size: 16))
+                                .foregroundColor(.gray.opacity(0.5))
+                            
+                            TextField("Search", text: $searchText)
+                                .font(.manropeRegular(size: 15))
+                                .foregroundColor(.black)
+                        }
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 10)
+                        .background(Color(red: 0.96, green: 0.96, blue: 0.96))
+                        .cornerRadius(5)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 12)
+                    } else {
+                        // Add spacing when search bar is hidden to maintain layout
+                        Spacer().frame(height: 12)
                     }
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 10)
-                    .background(Color(red: 0.96, green: 0.96, blue: 0.96))
-                    .cornerRadius(8)
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 12)
                     
+                    // Always show divider
                     Divider()
                         .background(Color.gray.opacity(0.2))
                     
@@ -170,13 +174,18 @@ struct ApproachesLoggedListView: View {
                 Text("Are you sure you want to delete this approach log?")
             }
             .sheet(isPresented: $showLogApproach) {
-                if let _ = selectedApproach {
-                    LogApproachBottomSheet(
-                        isPresented: $showLogApproach
-                    )
-                    .presentationDetents([.large])
-                    .presentationDragIndicator(.hidden)
-                    .presentationCornerRadius(20)
+                LogApproachBottomSheet(
+                    isPresented: $showLogApproach,
+                    approachToEdit: selectedApproach
+                )
+                .presentationDetents([.large])
+                .presentationDragIndicator(.hidden)
+                .presentationCornerRadius(20)
+            }
+            .onChange(of: showLogApproach) { isShowing in
+                if !isShowing {
+                    // Clear selectedApproach when sheet is dismissed
+                    selectedApproach = nil
                 }
             }
         }
@@ -233,6 +242,8 @@ struct ApproachLogRow: View {
                 .font(.manropeRegular(size: 16))
                 .foregroundColor(.black)
                 .lineSpacing(2)
+                .lineLimit(2)
+                .truncationMode(.tail)
                 .fixedSize(horizontal: false, vertical: true)
             
             // Info Row: Date • Level • Anxiety (right-aligned)
@@ -259,7 +270,7 @@ struct ApproachLogRow: View {
             }
         }
         .padding(.horizontal, 20)
-        .padding(.vertical, 20)
+        .padding(.vertical, 10)
     }
     
     // Format date based on how recent it is

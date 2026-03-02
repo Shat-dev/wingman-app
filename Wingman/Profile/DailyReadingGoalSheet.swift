@@ -20,7 +20,7 @@ struct DailyReadingGoalSheet: View {
     @State private var showSuccess = false
     let onSave: (Int) -> Void
     
-    let goals = [2, 6, 10]
+    let goals = [2, 5, 10]
     
     init(currentGoal: Int, onSave: @escaping (Int) -> Void) {
         _selectedGoal = State(initialValue: currentGoal)

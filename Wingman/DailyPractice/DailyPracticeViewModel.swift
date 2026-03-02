@@ -19,11 +19,15 @@ final class DailyPracticeViewModel: ObservableObject {
     @Published var isAnswerCorrect: Bool = false
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
-    
+    @Published var isDailyPracticeCompleted: Bool = false // Track completion of all questions
+
     // MARK: - Dependencies
     private let practiceService: DailyPracticeServiceProtocol
     private var cancellables = Set<AnyCancellable>()
-    
+
+    // MARK: - Completion Handler
+    var onDailyPracticeCompleted: (() -> Void)?
+
     // MARK: - Initialization
     init(practiceService: DailyPracticeServiceProtocol = DailyPracticeService()) {
         self.practiceService = practiceService
@@ -171,7 +175,10 @@ final class DailyPracticeViewModel: ObservableObject {
             resetQuestion()
         } else {
             print("\n🎉 All questions completed!")
-            // Handle completion - could navigate to results screen
+            isDailyPracticeCompleted = true
+            
+            // Notify that daily practice is completed - this can trigger practice unlocking checks
+            onDailyPracticeCompleted?()
         }
     }
     

@@ -14,6 +14,7 @@ final class PracticeViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     @Published var selectedPractice: Practice?
+    @Published var newlyUnlockedPractices: [Practice] = [] // Track newly unlocked practices
 
     // MARK: - Dependencies
     private let practiceService: PracticeServiceProtocol
@@ -61,6 +62,57 @@ final class PracticeViewModel: ObservableObject {
         } catch {
             errorMessage = error.localizedDescription
             return nil
+        }
+    }
+    
+    // MARK: - Check for Newly Unlocked Practices (called when returning from daily practice)
+    func checkForNewlyUnlockedPractices() async {
+        do {
+            guard let userIdString = SupabaseManager.shared.currentUserId,
+                  let userId = UUID(uuidString: userIdString) else {
+                return
+            }
+            
+            // Store previous state
+            let previouslyLockedPractices = practices.filter { $0.isLocked }
+            
+            // Refresh practices to get updated lock status
+            await fetchPractices()
+            
+            // Find practices that were locked before but are now unlocked
+            let currentlyUnlocked = practices.filter { !$0.isLocked }
+            newlyUnlockedPractices = currentlyUnlocked.filter { currentPractice in
+                previouslyLockedPractices.contains { $0.id == currentPractice.id }
+            }
+            
+            if !newlyUnlockedPractices.isEmpty {
+                print("🎉 \(newlyUnlockedPractices.count) new practice(s) unlocked!")
+                for practice in newlyUnlockedPractices {
+                    print("   - \(practice.title)")
+                }
+            }
+        } catch {
+            print("❌ Failed to check for newly unlocked practices: \(error)")
+        }
+    }
+    
+    // MARK: - Clear Newly Unlocked Practices
+    func clearNewlyUnlockedPractices() {
+        newlyUnlockedPractices.removeAll()
+    }
+    
+    // MARK: - Get Current User's Daily Practice Count
+    func getCurrentDailyPracticeCount() async -> Int {
+        do {
+            guard let userIdString = SupabaseManager.shared.currentUserId,
+                  let userId = UUID(uuidString: userIdString) else {
+                return 0
+            }
+            
+            return try await practiceService.getTotalDailyPractices(userId: userId)
+        } catch {
+            print("❌ Failed to get daily practice count: \(error)")
+            return 0
         }
     }
 }

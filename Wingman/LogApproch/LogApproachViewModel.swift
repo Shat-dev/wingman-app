@@ -18,6 +18,10 @@ final class LogApproachViewModel: ObservableObject {
     @Published var showSuccess: Bool = false
     @Published var errorMessage: String = ""
     
+    // MARK: - Edit Mode Properties
+    private var editingApproachId: UUID? = nil
+    var isEditMode: Bool { editingApproachId != nil }
+    
     // MARK: - Data
     let levels = [
         ApproachLevel(number: 1, title: "Social Warm-up"),
@@ -33,12 +37,21 @@ final class LogApproachViewModel: ObservableObject {
     
     // MARK: - Computed Properties
     var canSave: Bool {
-        // Must have at least a title and valid level
+        // Must have at least a title, valid level, and notes within character limit
         return !title.trimmingCharacters(in: .whitespaces).isEmpty
             && selectedLevel >= 1
             && selectedLevel <= 4
+            && notes.count <= 400
     }
     
+    var saveButtonTitle: String {
+        return isEditMode ? "Update Encounter" : "Log Encounter"
+    }
+    
+    var headerTitle: String {
+        return isEditMode ? "Edit Encounter" : "Log Encounter"
+    }
+
     var anxietyLevelText: String {
         let descriptions = [
             1: "Very anxious",
@@ -57,6 +70,28 @@ final class LogApproachViewModel: ObservableObject {
         return descriptions[level] ?? "Moderate"
     }
     
+    // MARK: - Setup for Editing
+    func setupForEditing(_ approach: ApproachLog) {
+        print("📝 Setting up ViewModel for editing approach: \(approach.title)")
+        editingApproachId = approach.id
+        title = approach.title
+        notes = approach.description
+        selectedLevel = approach.level
+        anxietyLevel = Double(approach.anxietyLevel)
+        
+        print("   - Title: \(title)")
+        print("   - Level: \(selectedLevel)")
+        print("   - Anxiety: \(anxietyLevel)")
+        print("   - Notes: \(notes)")
+    }
+    
+    // MARK: - Reset for New Entry
+    func setupForNewEntry() {
+        print("📝 Setting up ViewModel for new approach entry")
+        editingApproachId = nil
+        resetForm()
+    }
+
     // MARK: - Actions
     func selectLevel(_ level: Int) {
         print("📝 Selected approach level: \(level)")
@@ -80,7 +115,13 @@ final class LogApproachViewModel: ObservableObject {
             return
         }
         
-        print("\n💾 Saving approach log...")
+        if isEditMode {
+            print("\n📝 Updating approach log...")
+            print("   - ID: \(editingApproachId?.uuidString ?? "Unknown")")
+        } else {
+            print("\n💾 Saving new approach log...")
+        }
+        
         print("   - Title: \(title)")
         print("   - Level: \(selectedLevel) - \(levels[selectedLevel - 1].title)")
         print("   - Confidence: \(Int(anxietyLevel))/10 - \(anxietyLevelText)")
@@ -91,12 +132,17 @@ final class LogApproachViewModel: ObservableObject {
         
         Task {
             do {
-                try await saveToSupabase()
+                if isEditMode {
+                    try await updateInSupabase()
+                } else {
+                    try await saveToSupabase()
+                }
                 
                 await MainActor.run {
                     self.isSaving = false
                     self.showSuccess = true
-                    print("✅ Approach saved successfully!")
+                    let action = self.isEditMode ? "updated" : "saved"
+                    print("✅ Approach \(action) successfully!")
                     
                     // Auto-hide success after 2 seconds
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -106,19 +152,72 @@ final class LogApproachViewModel: ObservableObject {
                     // Reset form
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                         self.resetForm()
+                        self.editingApproachId = nil
                     }
                 }
                 
             } catch {
                 await MainActor.run {
                     self.isSaving = false
-                    self.errorMessage = "Failed to save. Please try again."
-                    print("❌ Error saving approach: \(error.localizedDescription)")
+                    let action = self.isEditMode ? "update" : "save"
+                    self.errorMessage = "Failed to \(action). Please try again."
+                    print("❌ Error \(action)ing approach: \(error.localizedDescription)")
                 }
             }
         }
     }
     
+    // MARK: - Update to Supabase
+    private func updateInSupabase() async throws {
+        guard let userId = getUserId(),
+              let approachId = editingApproachId else {
+            throw NSError(domain: "LogApproach", code: 1, userInfo: [NSLocalizedDescriptionKey: "Invalid update data"])
+        }
+        
+        struct ApproachUpdateData: Codable {
+            let title: String
+            let approachLevel: Int
+            let anxietyLevel: Int
+            let notes: String?
+            let updatedAt: String
+            
+            enum CodingKeys: String, CodingKey {
+                case title
+                case approachLevel = "approach_level"
+                case anxietyLevel = "anxiety_level"
+                case notes
+                case updatedAt = "updated_at"
+            }
+        }
+        
+        let updateData = ApproachUpdateData(
+            title: title,
+            approachLevel: selectedLevel,
+            anxietyLevel: Int(anxietyLevel),
+            notes: notes.isEmpty ? nil : notes,
+            updatedAt: ISO8601DateFormatter().string(from: Date())
+        )
+        
+        print("📤 Updating in Supabase:")
+        print("   - ID: \(approachId.uuidString)")
+        print("   - User ID: \(userId)")
+        print("   - Title: \(updateData.title)")
+        print("   - Level: \(updateData.approachLevel)")
+        print("   - Confidence: \(updateData.anxietyLevel)")
+        
+        try await client
+            .from("approach_logs")
+            .update(updateData)
+            .eq("id", value: approachId.uuidString)
+            .eq("user_id", value: userId)
+            .execute()
+        
+        print("✅ Successfully updated in database")
+        
+        // Refresh the shared approach service to update UI
+        await ApproachService.shared.fetchApproaches()
+    }
+
     // MARK: - Save to Supabase
     private func saveToSupabase() async throws {
         guard let userId = getUserId() else {
@@ -173,15 +272,18 @@ final class LogApproachViewModel: ObservableObject {
     }
     
     private func updateUserStats() {
-        // Update practice date and streak
-        UserDefaults.standard.set(Date(), forKey: "last_practice_date")
-        
-        // Increment approach count
-        let currentCount = UserDefaults.standard.integer(forKey: "total_approaches")
-        UserDefaults.standard.set(currentCount + 1, forKey: "total_approaches")
-        
-        print("📊 Stats updated:")
-        print("   - Total approaches: \(currentCount + 1)")
+        // Only update stats for new entries, not edits
+        if !isEditMode {
+            // Update practice date and streak
+            UserDefaults.standard.set(Date(), forKey: "last_practice_date")
+            
+            // Increment approach count
+            let currentCount = UserDefaults.standard.integer(forKey: "total_approaches")
+            UserDefaults.standard.set(currentCount + 1, forKey: "total_approaches")
+            
+            print("📊 Stats updated:")
+            print("   - Total approaches: \(currentCount + 1)")
+        }
     }
     
     private func resetForm() {

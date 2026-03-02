@@ -14,6 +14,7 @@ final class PracticeDetailViewModel: ObservableObject {
     @Published var practiceDetail: PracticeDetail?
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
+    @Published var hasUnlockedNewPractices: Bool = false // Track if new practices were unlocked
 
     // MARK: - Properties
     let practice: Practice
@@ -47,13 +48,73 @@ final class PracticeDetailViewModel: ObservableObject {
         // Navigation is handled in the parent view via PracticeView
     }
 
-    // MARK: - Mark Practice Complete
+    // MARK: - Mark Practice Complete with Unlocking Logic
     func markPracticeComplete(userId: UUID) async {
         do {
             try await practiceService.completePractice(practiceId: practice.id, userId: userId)
+            
+            // Check if completing this practice unlocks new ones
+            await checkForNewlyUnlockedPractices(userId: userId)
+            
         } catch {
             errorMessage = error.localizedDescription
         }
+    }
+    
+    // MARK: - Check for Newly Unlocked Practices
+    private func checkForNewlyUnlockedPractices(userId: UUID) async {
+        do {
+            // Get updated total daily practices count
+            let totalCompleted = try await practiceService.getTotalDailyPractices(userId: userId)
+            
+            // Fetch all practices to see which ones should be unlocked
+            let allPractices = try await practiceService.fetchPractices()
+            
+            // Check if any practices that were locked are now unlocked
+            let newlyUnlocked = allPractices.filter { practice in
+                return !practice.isLocked && practice.requiredDailyPractices <= totalCompleted
+            }
+            
+            // If there are newly unlocked practices, set the flag
+            hasUnlockedNewPractices = newlyUnlocked.count > 0
+            
+            if hasUnlockedNewPractices {
+                print("🔓 \(newlyUnlocked.count) new practice(s) unlocked!")
+                for practice in newlyUnlocked {
+                    print("   - \(practice.title) (required: \(practice.requiredDailyPractices))")
+                }
+            }
+            
+        } catch {
+            print("❌ Failed to check for newly unlocked practices: \(error)")
+            // Don't set error message as this is not critical for user experience
+        }
+    }
+    
+    // MARK: - Get Current Daily Practice Count
+    func getCurrentDailyPracticeCount() async -> Int {
+        do {
+            guard let userIdString = SupabaseManager.shared.currentUserId,
+                  let userId = UUID(uuidString: userIdString) else {
+                return 0
+            }
+            
+            return try await practiceService.getTotalDailyPractices(userId: userId)
+        } catch {
+            print("❌ Failed to get daily practice count: \(error)")
+            return 0
+        }
+    }
+    
+    // MARK: - Check if Practice Should Be Unlocked
+    func checkIfShouldBeUnlocked() async -> Bool {
+        let currentCount = await getCurrentDailyPracticeCount()
+        return currentCount >= practice.requiredDailyPractices
+    }
+    
+    // MARK: - Reset Unlock Status
+    func resetUnlockStatus() {
+        hasUnlockedNewPractices = false
     }
 }
 
