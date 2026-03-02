@@ -48,13 +48,11 @@ struct OnboardingView: View {
                     // MARK: - Top Row: Back Chevron + Progress Bar inline
                     // Hide both chevron and progress bar when we're on the loading state
                     if step.type != .loading {
-                        HStack(spacing: 12) {
+                        HStack() {
                             Button {
                                 handleBackButton()
                             } label: {
-                                Image(systemName: "chevron.left")
-                                    .font(.system(size: 20, weight: .bold))
-                                    .foregroundColor(.black)
+                                Image("auth_back")
                                     .frame(width: 44, height: 44, alignment: .center)
                                     .contentShape(Rectangle())
                             }
@@ -64,7 +62,8 @@ struct OnboardingView: View {
                                 .frame(height: 10)
                         }
                         .padding(.top, 8)
-                        .padding(.horizontal, 24)
+                        .padding(.leading, 10)
+                        .padding(.trailing,59)
                         .padding(.bottom, 12)
                     } else {
                         // Optional: keep a little top spacing while hiding the bar so layout doesn't jump
@@ -117,24 +116,22 @@ struct OnboardingView: View {
         VStack(alignment: .leading, spacing: 20) {
 
             Text(step.title)
-                .font(.manropeSemiBold(size: 28))
+                .font(.manropeSemiBold(size: 24))
 
             // Name TextField
             TextField("", text: $userName)
                 .placeholder(when: userName.isEmpty) {
                     Text("Enter your name")
-                        .foregroundColor(.gray.opacity(0.5))
+                        .foregroundColor(.wingmanBlack.opacity(0.3))
                 }
                 .font(.manropeRegular(size: 18))
                 .padding(16)
-                .background(Color(.systemGray6))
-                .cornerRadius(10)
+                .background(Color.wingmanBlack.opacity(0.10))
+                .cornerRadius(5)
                 .focused($isNameFieldFocused)
                 .padding(.top, 10)
 
-            Spacer()
-
-            // Buttons
+            // Buttons (moved closer to text field)
             VStack(spacing: 12) {
                 // Full-area tappable Next button
                 let isNameEmpty = userName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
@@ -146,27 +143,35 @@ struct OnboardingView: View {
                 }) {
                     Text("Next")
                         .frame(maxWidth: .infinity)
+                        .font(.manropeSemiBold(size: 16))
                         .padding()
-                        .background(isNameEmpty ? Color.gray.opacity(0.4) : Color.black)
+                        .background(isNameEmpty ? Color.wingmanBlack.opacity(0.5) : Color.wingmanBlack)
                         .foregroundColor(.white)
                         .cornerRadius(5)
                 }
                 .buttonStyle(.plain)
                 .contentShape(Rectangle())
                 .disabled(isNameEmpty)
+                
 
                 Button("Skip") {
                     isNameFieldFocused = false
                     moveToNext()
                 }
-                .foregroundColor(.gray)
+                .font(.manropeSemiBold(size: 16))
+                .foregroundColor(.black)
+                .underline()
             }
+            
+            
+            Spacer()
         }
         .padding(.horizontal, 24)
         .padding(.bottom, 16)
         .onAppear {
             isNameFieldFocused = true
         }
+        
     }
 
     // MARK: - Question View (Your existing code)
@@ -207,13 +212,13 @@ struct OnboardingView: View {
                 Text("Next")
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color.black)
-                    .foregroundColor(.white)
+                    .background(Color.wingmanBlack)
+                    .foregroundColor(.wingmanWhiteFF)
                     .cornerRadius(5)
             }
             .buttonStyle(.plain)
             .contentShape(Rectangle())
-            .opacity(isDisabled ? 0.4 : 1)
+            .opacity(isDisabled ? 0.7 : 1)
             .disabled(isDisabled)
         }
         .padding(.horizontal, 24)

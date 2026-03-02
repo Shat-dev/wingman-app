@@ -27,16 +27,16 @@ struct LandingView: View {
 
                             // MARK: - Heading
                             Text(page.title)
-                                .font(.custom("Manrope-SemiBold", size: 32))
-                                .foregroundColor(.black)
+                                .font(.manropeSemiBold(size: 32))
+                                .foregroundColor(.wingmanBlack)
                                 .multilineTextAlignment(.leading)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.horizontal, 20)
 
                             // MARK: - Description
                             Text(page.description)
-                                .font(.custom("Manrope-Regular", size: 16))
-                                .foregroundColor(Color.black.opacity(0.55))
+                                .font(.manropeRegular(size: 16))
+                                .foregroundColor(Color.wingmanBlack.opacity(0.5))
                                 .multilineTextAlignment(.leading)
                                 .lineSpacing(3)
                                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -58,7 +58,7 @@ struct LandingView: View {
                 
 
                 // MARK: - CTA Buttons
-                VStack(spacing: 12) {
+                VStack(spacing: 20) {
                     
                     // MARK: - Page Indicator
                     HStack(spacing: 6) {
@@ -75,14 +75,15 @@ struct LandingView: View {
                         navigateToSignup = true
                     } label: {
                         Text("Create Account")
-                            .font(.custom("Manrope-SemiBold", size: 16))
-                            .foregroundColor(.black)
+                            .font(.manropeSemiBold(size: 16))
+                            .foregroundColor(.wingmanBlack)
                             .frame(maxWidth: .infinity)
                             .frame(height: 52)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 5)
-                                    .stroke(Color.black, lineWidth: 1)
+                                    .stroke(Color.wingmanBlack.opacity(0.5), lineWidth: 1)
                             )
+                            .shadow(color: Color.black.opacity(0.06), radius: 5, x: 0, y: 2)
                     }
                     .navigationDestination(isPresented: $navigateToSignup) {
                         AuthView(mode: .signup)
@@ -91,13 +92,14 @@ struct LandingView: View {
                     // Log In
                     Button {
                         navigateToLogin = true
-                    } label: {
+                    }
+                    label: {
                         Text("Log In")
-                            .font(.custom("Manrope-SemiBold", size: 16))
-                            .foregroundColor(.white)
+                            .font(.manropeSemiBold(size: 16))
+                            .foregroundColor(.wingmanWhiteFF)
                             .frame(maxWidth: .infinity)
                             .frame(height: 52)
-                            .background(Color.black)
+                            .background(Color.wingmanBlack)
                             .cornerRadius(5)
                     }
                     .navigationDestination(isPresented: $navigateToLogin) {
@@ -109,15 +111,15 @@ struct LandingView: View {
                         authManager.skipOnboarding()
                     } label: {
                         Text("Skip for now")
-                            .font(.custom("Manrope-SemiBold", size: 16))
+                            .font(.manropeSemiBold(size: 16))
                             .foregroundColor(Color.black)
                             .underline()
-                            .padding(.top, 6)
+                            
                     }
                 }
                 .padding(.horizontal, 20)
 
-                Spacer().frame(height: 24)
+                Spacer().frame(height: 10)
             }
         }
     }

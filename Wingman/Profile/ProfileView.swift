@@ -62,9 +62,9 @@ struct ProfileView: View {
                                             .resizable()
                                             .frame(width: 50, height: 50)
                                             .foregroundColor(.gray.opacity(0.4))
-                                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                                            .clipShape(Circle())
                                             .overlay(
-                                                RoundedRectangle(cornerRadius: 12)
+                                                Circle()
                                                     .stroke(Color.gray.opacity(0.2), lineWidth: 1)
                                             )
                                             
@@ -442,13 +442,13 @@ struct ApproachesBreakdownCard: View {
                             HStack {
                                 Text(approach.0)
                                     .font(.manropeMedium(size: 14))
-                                    .foregroundColor(Color(hex: "#1A1A1A").opacity(0.7))
+                                    .foregroundColor(Color.wingmanBlack.opacity(0.7))
                                 
                                 Spacer()
                                 
                                 Text("\(approach.1)")
                                     .font(.manropeMedium(size: 14))
-                                    .foregroundColor(Color(hex: "#1A1A1A").opacity(0.7))
+                                    .foregroundColor(Color.wingmanBlack.opacity(0.7))
                             }
                             
                             GeometryReader { geometry in
@@ -506,7 +506,7 @@ struct ApproachesLoggedCard: View {
                     // Count pill (always shows, including 0)
                     Text("\(count)")
                         .font(.manropeMedium(size: 18))
-                        .foregroundColor(.init(hex: "#1A1A1A"))
+                        .foregroundColor(.wingmanBlack)
                         .opacity(0.5)
                         .padding(.horizontal, 2)
                         .background(Color.white)

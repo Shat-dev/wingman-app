@@ -69,7 +69,7 @@ struct PracticeDetailView: View {
             Button(action: { dismiss() }) {
                 Image(systemName: "chevron.left")
                     .font(.system(size: 18, weight: .medium))
-                    .foregroundColor(Color(hex: "#1A1A1A"))
+                    .foregroundColor(.wingmanBlack)
                     .frame(width: 44, height: 44)
             }
             
@@ -77,7 +77,7 @@ struct PracticeDetailView: View {
             
             Text("Practice")
                 .font(.manropeSemiBold(size: 17))
-                .foregroundColor(Color(hex: "#1A1A1A"))
+                .foregroundColor(.wingmanBlack)
             
             Spacer()
             

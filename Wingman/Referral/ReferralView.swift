@@ -18,7 +18,7 @@ struct ReferralView: View {
             VStack(alignment: .leading, spacing: 16) {
 
                 Text("Enter referral code (optional)")
-                    .font(.manropeMedium(size: 24))
+                    .font(.manropeSemiBold(size: 24))
 
                 TextField("Referral code", text: $referralCode)
                     .padding()
@@ -34,9 +34,10 @@ struct ReferralView: View {
                         .frame(maxWidth: .infinity)
                         .padding()
                         .foregroundColor(.white)
-                        .background(Color.black)
+                        .background(referralCode.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? Color.wingmanBlack.opacity(0.5) : Color.wingmanBlack)
                         .cornerRadius(6)
                 }
+                .disabled(referralCode.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
 
                 // ✅ SKIP → COMPLETE PAYWALL FLOW → DASHBOARD
                 HStack {
@@ -58,8 +59,7 @@ struct ReferralView: View {
             Spacer()
         }
         .padding(.horizontal, 24)
-        .navigationTitle("Referral code")
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
     }
 }
 

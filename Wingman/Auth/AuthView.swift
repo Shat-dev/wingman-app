@@ -45,8 +45,7 @@ struct AuthView: View {
                 Button {
                     handleBackButton()
                 } label: {
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 20, weight: .bold))
+                    Image("auth_back")
                         .foregroundColor(.black)
                         .frame(width: 44, height: 44, alignment: .center)
                         .contentShape(Rectangle())
@@ -54,46 +53,51 @@ struct AuthView: View {
                 .buttonStyle(.plain)
                 .disabled(isWaitingForAuth) // Disable during auth wait
                 
-                progressBar(progress: progress)
-                    .frame(height: 10)
+                Spacer()
+                
+                // progressBar(progress: progress)
+                //     .frame(height: 10)
             }
             .padding(.top, 8)
-            .padding(.horizontal, 24)
+            .padding(.leading, 8)
             .padding(.bottom, 12)
             
             // MARK: - Header (Title + Subtitle) - DYNAMIC BASED ON MODE
             VStack(spacing: 16) {
                 VStack(alignment: .leading, spacing: 8) {
                     Text(headerTitle)
-                        .font(.manropeSemiBold(size: 28))
-                        .foregroundColor(.black)
+                        .font(.manropeSemiBold(size: 32))
+                        .foregroundColor(.wingmanBlack)
                     
                     Text(headerSubtitle)
                         .font(.manropeRegular(size: 16))
                         .foregroundColor(.secondary)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 24)
+                .padding(.horizontal, 20)
             }
-            .padding(.top, 4)
-            .padding(.bottom, 24)
+            
+            .padding(.bottom, 40)
             
             // MARK: - Form
-            VStack(spacing: 12) {
+            VStack(spacing: 0) {
                 if viewModel.currentStep == .email {
                     inputField(title: "Email", text: $viewModel.email, errorMessage: viewModel.emailErrorMessage, isSecure: false, focused: .email)
                     
                     filledButton(title: "Continue", isEnabled: viewModel.isEmailValid) {
                         viewModel.continueToPassword()
                     }
+                    .padding(.top, 20)
+                    .padding(.bottom, 30)
                     
                     orDivider()
                         .padding(.vertical, 8)
+                        .padding(.bottom, 30)
                     
-                    VStack(spacing: 12) {
+                    VStack(spacing: 13) {
                         outlineButton(
                             title: authManager.isGoogleSignInLoading ? "Signing in..." : "Continue with Google",
-                            systemImage: "g.circle.fill",
+                            imageName: "auth_google_logo",
                             isLoading: authManager.isGoogleSignInLoading
                         ) {
                             Task {
@@ -101,15 +105,17 @@ struct AuthView: View {
                             }
                         }
                         .disabled(authManager.isGoogleSignInLoading)
+                        .shadow(color: Color.black.opacity(0.06), radius: 5, x: 0, y: 2)
                         
                         outlineButton(
                             title: authManager.isAppleSignInLoading ? "Signing in..." : "Continue with Apple",
-                            systemImage: "apple.logo",
+                            imageName: "auth_apple_logo",
                             isLoading: authManager.isAppleSignInLoading
                         ) {
                             authManager.signInWithApple()
                         }
                         .disabled(authManager.isAppleSignInLoading)
+                        .shadow(color: Color.black.opacity(0.06), radius: 5, x: 0, y: 2)
                     }
                     
                     // Show Google Sign-In error if any
@@ -134,10 +140,7 @@ struct AuthView: View {
                     filledButton(title: primaryButtonTitle, isEnabled: viewModel.isPasswordValid) {
                         viewModel.submit()
                     }
-                    
-                    outlineButton(title: "Back") {
-                        viewModel.goBackToEmail()
-                    }
+                    .padding(.top, 20)
                     
                 } else if viewModel.currentStep == .complete {
                     // Show waiting state
@@ -152,7 +155,7 @@ struct AuthView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
-            .padding(.horizontal, 24)
+            .padding(.horizontal, 20)
             
             Spacer()
         }
@@ -355,7 +358,7 @@ struct AuthView: View {
                     .padding()
                     .background(Color(.systemGray6))
                     .cornerRadius(5)
-                    .font(.manropeRegular(size: 16))
+                    .font(.manropeMedium(size: 16))
                     .overlay(
                         RoundedRectangle(cornerRadius: 5)
                             .stroke(errorMessage.isEmpty ? Color.clear : Color.red, lineWidth: 1)
@@ -370,7 +373,7 @@ struct AuthView: View {
                     .disableAutocorrection(true)
                     .focused($focusedField, equals: focused)
                     .padding()
-                    .background(Color(.systemGray6))
+                    .background(Color.wingmanBlack.opacity(0.1))
                     .cornerRadius(5)
                     .font(.manropeRegular(size: 16))
                     .overlay(
@@ -402,19 +405,19 @@ struct AuthView: View {
                 }
                 
                 Text(title)
-                    .fontWeight(.semibold)
+                    .font(.manropeSemiBold(size: 16))
                     .foregroundColor(.white)
             }
             .frame(maxWidth: .infinity)
             .padding()
-            .background(isEnabled ? Color.black : Color.gray.opacity(0.5))
+            .background(isEnabled ? Color.black : Color.wingmanBlack.opacity(0.5))
             .cornerRadius(5)
         }
         .disabled(!isEnabled || viewModel.isLoading)
     }
     
     // MARK: - Outline Button
-    private func outlineButton(title: String, systemImage: String = "", isLoading: Bool = false, action: @escaping () -> Void) -> some View {
+    private func outlineButton(title: String, imageName: String = "", isLoading: Bool = false, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             HStack(spacing: 10) {
                 if isLoading {
@@ -422,8 +425,11 @@ struct AuthView: View {
                         .progressViewStyle(CircularProgressViewStyle())
                         .scaleEffect(0.8)
                 } else {
-                    if !systemImage.isEmpty {
-                        Image(systemName: systemImage)
+                    if !imageName.isEmpty {
+                        Image(imageName)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
                     }
                     Text(title)
                         .fontWeight(.medium)

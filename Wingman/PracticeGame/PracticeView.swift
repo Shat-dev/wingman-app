@@ -40,7 +40,7 @@ struct PracticeView: View {
                 if isLoadingGame {
                     Color.white.opacity(0.85).ignoresSafeArea()
                     ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: Color(hex: "#1A1A1A")))
+                        .progressViewStyle(CircularProgressViewStyle(tint: .wingmanBlack))
                         .scaleEffect(1.4)
                 }
             }
@@ -79,7 +79,7 @@ struct PracticeView: View {
         HStack {
             Text("Scenarios")
                 .font(.manropeBold(size: 28))
-                .foregroundColor(Color(hex: "#1A1A1A"))
+                .foregroundColor(.wingmanBlack)
             Spacer()
         }
         .padding(.horizontal, 20)
@@ -123,7 +123,7 @@ struct PracticeView: View {
         VStack {
             Spacer()
             ProgressView()
-                .progressViewStyle(CircularProgressViewStyle(tint: Color(hex: "#1A1A1A")))
+                .progressViewStyle(CircularProgressViewStyle(tint: .wingmanBlack))
                 .scaleEffect(1.2)
             Spacer()
         }

@@ -20,7 +20,7 @@ struct PracticeCardView: View {
                     // Title
                     Text(practice.title)
                         .font(.manropeMedium(size: 18))
-                        .foregroundColor(Color(hex: "#1A1A1A").opacity(practice.isLocked ? 0.3 : 1.0))
+                        .foregroundColor(Color.wingmanBlack.opacity(practice.isLocked ? 0.3 : 1.0))
                         .lineLimit(2)
                         .multilineTextAlignment(.leading)
 
@@ -34,13 +34,13 @@ struct PracticeCardView: View {
 
                         Text("\(practice.dailyPracticeCount) Daily Practice")
                             .font(.manropeMedium(size: 12))
-                            .foregroundColor(Color(hex: "#1A1A1A").opacity(practice.isLocked ? 0.3 : 1.0))
+                            .foregroundColor(Color.wingmanBlack.opacity(practice.isLocked ? 0.3 : 1.0))
                     }
 
                     // Summary
                     Text(practice.summary ?? "")
                         .font(.manropeMedium(size: 14))
-                        .foregroundColor(Color(hex: "#1A1A1A").opacity(practice.isLocked ? 0.3 : 1.0))
+                        .foregroundColor(Color.wingmanBlack.opacity(practice.isLocked ? 0.3 : 1.0))
                         .lineLimit(3)
                         .multilineTextAlignment(.leading)
                         .lineSpacing(2)
@@ -60,7 +60,7 @@ struct PracticeCardView: View {
                     if practice.isLocked {
                         Image("lock_icon")
                             .font(.system(size: 14, weight: .medium))
-                            .foregroundColor(Color(hex: "#1A1A1A"))
+                            .foregroundColor(Color.wingmanBlack)
                             .offset(x: 10, y: -10)
                             .opacity(0.7)
                     }

@@ -32,7 +32,7 @@ struct SplashView: View {
                     // Loading indicator while checking session
                     if authManager.isCheckingSession {
                         ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle(tint: Color(hex: "#1A1A1A")))
+                            .progressViewStyle(CircularProgressViewStyle(tint: .wingmanBlack))
                             .scaleEffect(1.2)
                             .transition(.opacity)
                     }
