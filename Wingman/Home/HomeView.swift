@@ -115,18 +115,21 @@ struct HomeView: View {
                                         .frame(maxWidth: .infinity)
 
                                     Button(action: {
-                                        navigateToPractice = true
+                                        if viewModel.isDailyPracticeButtonEnabled {
+                                            navigateToPractice = true
+                                        }
                                     }) {
-                                        Text("Start")
+                                        Text(viewModel.dailyPracticeButtonText)
                                             .font(.manropeSemiBold(size: 16))
-                                            .foregroundColor(.white)
+                                            .foregroundColor(.wingmanWhiteFF)
                                             .frame(maxWidth: .infinity)
                                             .frame(height: 52)
-                                            .background(Color.black)
+                                            .background(viewModel.isDailyPracticeButtonEnabled ? Color.wingmanBlack : Color.wingmanBlack.opacity(0.5))
                                             .cornerRadius(5)
                                             .contentShape(Rectangle())
                                     }
                                     .buttonStyle(.plain)
+                                    .disabled(!viewModel.isDailyPracticeButtonEnabled)
                                     .padding(.horizontal, 20)
                                     .padding(.bottom, 20)
                                     .padding(.top, 40)
@@ -182,11 +185,11 @@ struct HomeView: View {
                             
                             
                             // MARK: - Motivational Quote
-                            VStack(alignment: .leading, spacing: 10) {
+                            VStack(alignment: .leading) {
                                 Image("quote_sign")
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 40, height: 40)
+                                    .frame(width: 30, height: 30)
 
 
                                 Text(viewModel.motivationalQuote)
@@ -274,9 +277,10 @@ struct HomeView: View {
                     .presentationCornerRadius(20)
             }
             .onAppear {
-                print("👁️ HomeView appeared - refreshing continue course")
+                print("👁️ HomeView appeared - refreshing continue course and daily practice status")
                 viewModel.loadUserData()
                 viewModel.loadContinueCourse()
+                viewModel.refreshDailyPracticeStatus()
             }
         }
     }

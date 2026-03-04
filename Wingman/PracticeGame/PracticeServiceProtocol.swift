@@ -115,6 +115,7 @@ final class PracticeService: PracticeServiceProtocol {
         }
 
         let totalCompleted = try await getTotalDailyPractices(userId: userId)
+        print("🎮 Fetching practices - Total daily practices completed: \(totalCompleted)")
 
         let rows: [Practice] = try await client
             .from("scenarios")
@@ -137,8 +138,11 @@ final class PracticeService: PracticeServiceProtocol {
 
         return rows.map { practice in
             var p = practice
-            // Normal locking logic
+            // Normal locking logic - unlock if totalCompleted >= requiredDailyPractices
             p.isLocked = totalCompleted < practice.requiredDailyPractices
+            
+            print("   📋 \(practice.title): required=\(practice.requiredDailyPractices), total=\(totalCompleted), locked=\(p.isLocked)")
+            
             if let prog = progressMap[practice.id] {
                 p.isCompleted = prog.isCompleted
                 p.currentScreenId = prog.currentScreenId

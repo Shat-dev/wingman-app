@@ -165,13 +165,8 @@ struct AuthView: View {
         .onChange(of: viewModel.currentStep) { newStep in
             print("\n📍 AuthView: currentStep changed to: \(newStep)")
             
-            focusedField = {
-                switch newStep {
-                case .email: return .email
-                case .password: return .password
-                case .complete: return nil
-                }
-            }()
+            // Removed automatic focus setting to prevent keyboard from appearing automatically
+            // The keyboard will now only appear when user explicitly taps the text field
             
             // LINE 137: When auth is complete, mark onboarding as done and wait for auth
             if newStep == .complete {
@@ -221,7 +216,7 @@ struct AuthView: View {
         }
         .onAppear {
             print("👁️ AuthView appeared")
-            focusedField = .email
+            
         }
         .onDisappear {
             print("👋 AuthView disappeared")

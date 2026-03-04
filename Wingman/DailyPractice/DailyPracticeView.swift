@@ -538,10 +538,16 @@ struct DailyPracticeView: View {
     
     private func handleNextButton() {
         if viewModel.isLastQuestion {
-            print("Practice session completed!")
+            // IMPORTANT: Call nextQuestion() first to trigger completion logic
+            // This will update streak, post notification, etc.
+            print("📍 Last question - calling nextQuestion() to trigger completion logic")
+            viewModel.nextQuestion()
+            
+            print("Practice session completed - dismissing view")
             tabBarVisibility.showTabBar()
             dismiss()
         } else {
+            print("Moving to next question")
             viewModel.nextQuestion()
         }
     }

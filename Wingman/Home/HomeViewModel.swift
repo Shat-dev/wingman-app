@@ -6,6 +6,11 @@
 import Foundation
 import Combine
 
+// MARK: - Notification Names
+extension Notification.Name {
+    static let dailyPracticeCompleted = Notification.Name("dailyPracticeCompleted")
+}
+
 // MARK: - Continue Course Model
 struct ContinueCourse {
     let courseId: String
@@ -25,18 +30,39 @@ final class HomeViewModel: ObservableObject {
     @Published var hasPracticeToday: Bool = false
     @Published var motivationalQuote: String = ""
     @Published var continueCourse: ContinueCourse? = nil
+    @Published var isDailyPracticeCompleted: Bool = false
+    @Published var dailyPracticeButtonText: String = "Start"
+    @Published var isDailyPracticeButtonEnabled: Bool = true
     
     // MARK: - UserDefaults Keys
     private static let lastAccessedCourseKey = "last_accessed_course_id"
     
     // MARK: - Services
     private let client = SupabaseManager.shared.client
+    private let dailyPracticeService: DailyPracticeServiceProtocol = DailyPracticeService()
+    private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Init
     init() {
         loadUserData()
         loadMotivationalQuote()
         loadContinueCourse()
+        setupNotifications()
+    }
+    
+    // MARK: - Notification Setup
+    private func setupNotifications() {
+        // Listen for daily practice completion notification
+        NotificationCenter.default.publisher(for: .dailyPracticeCompleted)
+            .sink { [weak self] _ in
+                print("📡 ========== NOTIFICATION RECEIVED ==========")
+                print("📡 Daily practice completion notification received in HomeViewModel")
+                print("📡 About to refresh daily practice status...")
+                self?.refreshDailyPracticeStatus()
+                print("📡 ==========================================")
+            }
+            .store(in: &cancellables)
+        print("✅ Notification listener setup complete in HomeViewModel")
     }
     
     // MARK: - Load User Data
@@ -50,17 +76,18 @@ final class HomeViewModel: ObservableObject {
             userName = "User"
         }
         
-        // Load streak from UserDefaults
-        currentStreak = UserDefaults.standard.integer(forKey: "current_streak")
-        
-        // Check if practiced today
+        // Check if practiced today (legacy check for hasPracticeToday)
         if let lastPracticeDate = UserDefaults.standard.object(forKey: "last_practice_date") as? Date {
             hasPracticeToday = Calendar.current.isDateInToday(lastPracticeDate)
         }
         
+        // Check daily practice completion status (this will also load the current streak)
+        Task {
+            await checkDailyPracticeCompletion()
+        }
+        
         print("✅ User data loaded:")
         print("   - Name: \(userName)")
-        print("   - Streak: \(currentStreak)")
         print("   - Practiced today: \(hasPracticeToday)")
     }
     
@@ -185,6 +212,49 @@ final class HomeViewModel: ObservableObject {
         motivationalQuote = quotes.randomElement() ?? quotes[0]
     }
     
+    // MARK: - Check Daily Practice Completion
+    @MainActor
+    private func checkDailyPracticeCompletion() async {
+        do {
+            print("🔄 Checking daily practice completion status...")
+            let status = try await dailyPracticeService.getDailyPracticeStatus()
+            
+            // Update UI state based on status from database (using computed properties with defaults)
+            isDailyPracticeCompleted = status.completedToday
+            dailyPracticeButtonText = status.completedToday ? "Completed" : "Start"
+            isDailyPracticeButtonEnabled = status.canContinue
+            
+            // Update streak from database (using computed property with default)
+            let oldStreak = currentStreak
+            currentStreak = status.streak
+            
+            print("✅ Daily practice status: \(status.completedToday ? "Completed" : "Not completed")")
+            print("✅ Current streak UPDATED: \(oldStreak) → \(status.streak)")
+            print("   - Button text: \(dailyPracticeButtonText)")
+            print("   - Button enabled: \(isDailyPracticeButtonEnabled)")
+            
+        } catch {
+            print("❌ Failed to check daily practice completion: \(error)")
+            // On error, default to allowing start and use cached streak
+            isDailyPracticeCompleted = false
+            dailyPracticeButtonText = "Start"
+            isDailyPracticeButtonEnabled = true
+            
+            // Try to use cached streak from UserDefaults as fallback
+            currentStreak = UserDefaults.standard.integer(forKey: "current_streak")
+        }
+    }
+    
+    // MARK: - Refresh Daily Practice Status (call this when returning from daily practice)
+    func refreshDailyPracticeStatus() {
+        print("🔄 refreshDailyPracticeStatus() called")
+        Task {
+            print("🔄 Starting async task to check daily practice completion...")
+            await checkDailyPracticeCompletion()
+            print("🔄 Async task completed")
+        }
+    }
+    
     // MARK: - Actions
     func startPractice() {
         print("🏃 Starting daily practice...")
@@ -196,10 +266,13 @@ final class HomeViewModel: ObservableObject {
         // Navigation handled by view
     }
     
-    // MARK: - Update Streak
+    // MARK: - Update Streak (Legacy - now handled by database)
     func incrementStreak() {
-        currentStreak += 1
-        UserDefaults.standard.set(currentStreak, forKey: "current_streak")
+        // Legacy method - streak is now managed by database
+        // Just refresh status to get latest streak from database
+        refreshDailyPracticeStatus()
+        
+        // Keep legacy UserDefaults for backward compatibility
         UserDefaults.standard.set(Date(), forKey: "last_practice_date")
         hasPracticeToday = true
     }

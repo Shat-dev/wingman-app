@@ -20,6 +20,10 @@ final class DailyPracticeViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     @Published var isDailyPracticeCompleted: Bool = false // Track completion of all questions
+    
+    // MARK: - Streak Tracking
+    private var totalQuestionsAnswered: Int = 0
+    private var totalCorrectAnswers: Int = 0
 
     // MARK: - Dependencies
     private let practiceService: DailyPracticeServiceProtocol
@@ -79,6 +83,10 @@ final class DailyPracticeViewModel: ObservableObject {
             isLoading = true
             errorMessage = nil
             
+            // Reset tracking for new session
+            totalQuestionsAnswered = 0
+            totalCorrectAnswers = 0
+            
             do {
                 let fetchedQuestions = try await practiceService.getTodayQuestions()
                 
@@ -136,6 +144,12 @@ final class DailyPracticeViewModel: ObservableObject {
             print("   - Selected: \(currentQuestion.options[selected])")
             print("   - Result: \(isAnswerCorrect ? "CORRECT ✅" : "INCORRECT ❌")")
             
+            // Update streak tracking
+            totalQuestionsAnswered += 1
+            if isAnswerCorrect {
+                totalCorrectAnswers += 1
+            }
+            
             // Submit completion to backend
             Task { @MainActor in
                 await submitCompletion(selectedAnswers: SelectedAnswers(singleSelect: selected))
@@ -156,6 +170,12 @@ final class DailyPracticeViewModel: ObservableObject {
             print("   - Correct indices: \(correctSet)")
             print("   - Result: \(isAnswerCorrect ? "CORRECT ✅" : "INCORRECT ❌")")
             
+            // Update streak tracking
+            totalQuestionsAnswered += 1
+            if isAnswerCorrect {
+                totalCorrectAnswers += 1
+            }
+            
             // Submit completion to backend
             Task { @MainActor in
                 await submitCompletion(selectedAnswers: SelectedAnswers(multipleSelect: Array(selectedOptionIndices)))
@@ -175,10 +195,58 @@ final class DailyPracticeViewModel: ObservableObject {
             resetQuestion()
         } else {
             print("\n🎉 All questions completed!")
+            print("   - Total questions: \(questions.count)")
+            print("   - Questions answered: \(totalQuestionsAnswered)")
+            print("   - Correct answers: \(totalCorrectAnswers)")
             isDailyPracticeCompleted = true
+            
+            // Update daily practice streak in the database
+            print("📊 About to update daily practice streak...")
+            Task {
+                await updateDailyPracticeStreak()
+            }
             
             // Notify that daily practice is completed - this can trigger practice unlocking checks
             onDailyPracticeCompleted?()
+            
+            // Post notification for HomeView to refresh
+            NotificationCenter.default.post(name: .dailyPracticeCompleted, object: nil)
+        }
+    }
+    
+    // MARK: - Streak Update
+    private func updateDailyPracticeStreak() async {
+        print("🔄 Updating daily practice streak...")
+        print("   - Questions answered: \(totalQuestionsAnswered)")
+        print("   - Correct answers: \(totalCorrectAnswers)")
+        
+        // Validate that we have the expected values
+        guard totalQuestionsAnswered > 0 else {
+            print("⚠️ WARNING: No questions answered tracked! This shouldn't happen.")
+            print("   - This means the tracking isn't working correctly")
+            return
+        }
+        
+        do {
+            print("📡 Calling practiceService.updateDailyPracticeStreak...")
+            let result = try await practiceService.updateDailyPracticeStreak(
+                questionsAnswered: totalQuestionsAnswered,
+                correctAnswers: totalCorrectAnswers
+            )
+            
+            print("✅ Streak updated successfully:")
+            print("   - Current streak: \(result.streak)")
+            print("   - Total completed: \(result.completed)")
+            
+        } catch let error as DailyPracticeError {
+            print("❌ Failed to update streak (DailyPracticeError):")
+            print("   - Error: \(error.errorDescription ?? "Unknown error")")
+            print("   - Full error: \(error)")
+        } catch {
+            print("❌ Failed to update streak (Unknown error):")
+            print("   - Error type: \(type(of: error))")
+            print("   - Description: \(error.localizedDescription)")
+            print("   - Full error: \(error)")
         }
     }
     
