@@ -59,6 +59,13 @@ final class AuthManager: ObservableObject {
     @Published var isAppleSignInLoading: Bool = false
     @Published var appleSignInError: String?
     
+    // MARK: - Anonymous User State
+    @Published var isAnonymousUser: Bool = false {
+        didSet {
+            print("👻 isAnonymousUser changed: \(oldValue) → \(isAnonymousUser)")
+        }
+    }
+    
     // Store the nonce for Apple Sign-In verification
     private var currentNonce: String?
 
@@ -83,6 +90,10 @@ final class AuthManager: ObservableObject {
         // Same note: actual per-user value loads after session
         hasCompletedPaywallFlow = UserDefaults.standard.bool(forKey: "hasCompletedPaywallFlow")
         print("💳 Loaded hasCompletedPaywallFlow: \(hasCompletedPaywallFlow)")
+        
+        // Check if user is in anonymous mode
+        isAnonymousUser = UserDefaults.standard.bool(forKey: "isAnonymousUser")
+        print("👻 Loaded isAnonymousUser: \(isAnonymousUser)")
 
         // Listen to auth state changes
         Task {
@@ -118,6 +129,12 @@ final class AuthManager: ObservableObject {
                     if let email = session.user.email, !email.isEmpty {
                         UserDefaults.standard.set(email, forKey: "user_email")
                         print("📩 Saved user_email on sign-in: \(email)")
+                    }
+
+                    // ✅ Check if user was anonymous and sync data
+                    if self.isAnonymousUser {
+                        print("🔄 Detected anonymous user sign-in - syncing data...")
+                        await self.syncAnonymousDataToBackend()
                     }
 
                     // ✅ Load user state
@@ -202,7 +219,22 @@ final class AuthManager: ObservableObject {
     private func checkUserQuestionStatus(userId: String) async {
         let key = "hasCompletedQuestions_\(userId)"
         hasCompletedQuestions = UserDefaults.standard.bool(forKey: key)
-        print("📋 User question status loaded: \(hasCompletedQuestions) for user: \(userId)")
+        print("📋 User question status from UserDefaults: \(hasCompletedQuestions) for user: \(userId)")
+        
+        // Also check user metadata for onboarding completion (for synced anonymous users)
+        if let user = currentUser,
+           let onboardingCompleted = user.userMetadata["onboarding_completed"]?.boolValue,
+           onboardingCompleted {
+            print("📋 Found onboarding_completed=true in user metadata - marking as completed")
+            hasCompletedQuestions = true
+            hasCompletedOnboarding = true
+            
+            // Update UserDefaults to persist this state
+            UserDefaults.standard.set(true, forKey: key)
+            UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding_\(userId)")
+        }
+        
+        print("📋 Final question status: \(hasCompletedQuestions) for user: \(userId)")
     }
 
     private func checkUserPaywallFlowStatus(userId: String) async {
@@ -353,6 +385,91 @@ final class AuthManager: ObservableObject {
         print("⏭️ skipOnboarding() called")
         hasCompletedOnboarding = true
         UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")
+    }
+    
+    // MARK: - Anonymous User Methods
+    func startAnonymousOnboarding() {
+        print("👻 startAnonymousOnboarding() called")
+        isAnonymousUser = true
+        hasCompletedOnboarding = false
+        UserDefaults.standard.set(true, forKey: "isAnonymousUser")
+        print("✅ Anonymous onboarding started - user will proceed without account")
+    }
+    
+    func completeAnonymousOnboarding() {
+        print("👻 completeAnonymousOnboarding() called")
+        hasCompletedOnboarding = true
+        AnonymousUserManager.shared.hasCompletedOnboarding = true
+        print("✅ Anonymous onboarding completed - data stored locally")
+        AnonymousUserManager.shared.printCurrentData()
+    }
+    
+    func syncAnonymousDataToBackend() async {
+        print("🔄 syncAnonymousDataToBackend() called")
+        
+        let anonymousManager = AnonymousUserManager.shared
+        
+        guard let currentUser = currentUser else {
+            print("❌ No authenticated user to sync data to")
+            return
+        }
+        
+        print("📤 Syncing anonymous data to backend for user: \(currentUser.id)")
+        
+        do {
+            // Prepare user metadata with anonymous data
+            var updates: [String: AnyJSON] = [:]
+            
+            if let name = anonymousManager.userName {
+                updates["display_name"] = AnyJSON.string(name)
+                print("   - Syncing name: \(name)")
+            }
+            
+            if let age = anonymousManager.userAge {
+                updates["age"] = AnyJSON.string(age)
+                print("   - Syncing age: \(age)")
+            }
+            
+            if let goals = anonymousManager.userGoals {
+                updates["goals"] = AnyJSON.string(goals)
+                print("   - Syncing goals: \(goals)")
+            }
+            
+            // Mark onboarding as completed if user completed anonymous onboarding
+            if anonymousManager.hasCompletedOnboarding {
+                updates["onboarding_completed"] = AnyJSON.bool(true)
+                print("   - Marking onboarding as completed")
+            }
+            
+            updates["updated_at"] = AnyJSON.string(ISO8601DateFormatter().string(from: Date()))
+            
+            // Update user metadata in Supabase
+            let attributes = UserAttributes(data: updates)
+            try await client.auth.update(user: attributes)
+            
+            print("✅ Successfully synced anonymous data to backend")
+            
+            // Mark local completion flags for the authenticated user
+            if anonymousManager.hasCompletedOnboarding {
+                hasCompletedOnboarding = true
+                hasCompletedQuestions = true
+                
+                // Save per-user completion flags
+                let userId = currentUser.id.uuidString
+                UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding_\(userId)")
+                UserDefaults.standard.set(true, forKey: "hasCompletedQuestions_\(userId)")
+                print("✅ Marked onboarding and questions as completed for user: \(userId)")
+            }
+            
+            // Clear anonymous data after successful sync
+            anonymousManager.clearAllData()
+            isAnonymousUser = false
+            UserDefaults.standard.removeObject(forKey: "isAnonymousUser")
+            print("✅ Cleared anonymous user state")
+            
+        } catch {
+            print("❌ Failed to sync anonymous data: \(error.localizedDescription)")
+        }
     }
 
     // MARK: - Questions

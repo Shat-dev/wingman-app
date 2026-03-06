@@ -18,6 +18,9 @@ import Supabase
 import Auth
 
 struct OnboardingView: View {
+    // Optional binding to control navigation back to Landing
+    var showLanding: Binding<Bool>?
+    
     @State private var stepIndex: Int = 0
     @State private var selectedOption: String? = nil
     @State private var userName: String = ""
@@ -32,6 +35,18 @@ struct OnboardingView: View {
     @FocusState private var isNameFieldFocused: Bool
 
     let steps: [OnboardingStep] = extendedOnboardingSteps
+    
+    // Default initializer for normal flow
+    init() {
+        self.showLanding = nil
+        print("🎬 OnboardingView initialized (normal flow)")
+    }
+    
+    // Initializer with showLanding binding for anonymous flow
+    init(showLanding: Binding<Bool>) {
+        self.showLanding = showLanding
+        print("🎬 OnboardingView initialized (anonymous flow with showLanding binding)")
+    }
 
     // Store answers for statistics logic
     @State private var answers: [String: String] = [:]
@@ -138,7 +153,15 @@ struct OnboardingView: View {
 
                 Button(action: {
                     isNameFieldFocused = false
-                    answers["name"] = userName.trimmingCharacters(in: .whitespacesAndNewlines)
+                    let trimmedName = userName.trimmingCharacters(in: .whitespacesAndNewlines)
+                    answers["name"] = trimmedName
+                    
+                    // Save to AnonymousUserManager if in anonymous mode
+                    if authManager.isAnonymousUser {
+                        AnonymousUserManager.shared.userName = trimmedName
+                        print("👻 Saved name to anonymous storage: \(trimmedName)")
+                    }
+                    
                     moveToNext()
                 }) {
                     Text("Next")
@@ -346,14 +369,22 @@ struct OnboardingView: View {
             Spacer()
         }
         .onAppear {
-            // Save name to Supabase
-            saveUserName()
+            // Save name to Supabase only if not anonymous
+            if !authManager.isAnonymousUser {
+                saveUserName()
+            }
 
             // Wait 3 seconds then complete
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 print("✅ Finished all questions")
-                authManager.completeQuestions()
-                // TODO: Navigate to Paywall here if needed
+                
+                if authManager.isAnonymousUser {
+                    // Complete anonymous onboarding (store data locally)
+                    authManager.completeAnonymousOnboarding()
+                } else {
+                    // Complete regular onboarding
+                    authManager.completeQuestions()
+                }
             }
         }
     }
@@ -388,6 +419,20 @@ struct OnboardingView: View {
             // Save to UserDefaults
             UserDefaults.standard.set(answer, forKey: "onboarding_\(key)")
             print("✅ Saved answer:", key, answer)
+            
+            // Save to AnonymousUserManager if in anonymous mode
+            if authManager.isAnonymousUser {
+                switch key {
+                case "age":
+                    AnonymousUserManager.shared.userAge = answer
+                    print("👻 Saved age to anonymous storage: \(answer)")
+                case "goals":
+                    AnonymousUserManager.shared.userGoals = answer
+                    print("👻 Saved goals to anonymous storage: \(answer)")
+                default:
+                    break
+                }
+            }
         }
 
         // Check if we should show statistic
@@ -626,14 +671,29 @@ struct OnboardingView: View {
 
     // MARK: - Back Button
     private func handleBackButton() {
+        print("🔙 OnboardingView: handleBackButton called - stepIndex: \(stepIndex)")
+        
         // ✅ Back from statistic ALWAYS returns to source question
         if showStatistic {
+            print("🔙 Returning from statistic overlay")
             dismissStatisticAndReturnToSource()
             return
         }
 
+        // If on first step (name input) and showLanding is bound, navigate back to Landing
+        if stepIndex == 0 {
+            if let binding = showLanding {
+                print("🔙 On first step with showLanding binding - navigating back to Landing")
+                binding.wrappedValue = false
+                return
+            } else {
+                print("🔙 On first step but no showLanding binding")
+            }
+        }
+
         // Normal back navigation
         if let previousIndex = stepHistory.popLast() {
+            print("🔙 Normal back navigation to step: \(previousIndex)")
             // Set direction FIRST, then change stepIndex
             isGoingBack = true
             withAnimation(.easeInOut(duration: 0.35)) {
@@ -643,6 +703,7 @@ struct OnboardingView: View {
             return
         }
 
+        print("🔙 No previous step - dismissing view")
         dismiss()
     }
 }

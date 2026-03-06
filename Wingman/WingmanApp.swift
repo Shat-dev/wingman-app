@@ -59,6 +59,25 @@ struct RootView: View {
                         let _ = print("🎯 RootView: Showing MainTabView (paywall flow completed)")
                         MainTabView()
                     }
+                
+                // MARK: - Anonymous User Flow (Skip for now)
+                } else if authManager.isAnonymousUser && authManager.hasCompletedOnboarding {
+                    let _ = print("🎯 RootView: Anonymous user completed onboarding")
+                    
+                    // ✅ Anonymous user - questions finished → show Paywall
+                    if !authManager.hasCompletedPaywallFlow {
+                        let _ = print("🎯 RootView: Anonymous user - showing PaywallView")
+                        NavigationStack {
+                            PaywallView()
+                        }
+                    
+                    // ✅ Anonymous user - paywall finished → require account creation
+                    } else {
+                        let _ = print("🎯 RootView: Anonymous user - requiring account creation")
+                        NavigationStack {
+                            AuthView(mode: .signup)
+                        }
+                    }
 
                 // MARK: - Unauthenticated User Flow
                 } else if authManager.hasCompletedOnboarding {
@@ -68,12 +87,13 @@ struct RootView: View {
                     }
 
                 } else {
-                    let _ = print("🎯 RootView: User NOT authenticated, HASN'T seen onboarding")
-                    SplashView()
+                    let _ = print("🎯 RootView: User NOT authenticated, showing Landing")
+                    LandingView()
                 }
             }
             .animation(.easeInOut(duration: 0.3), value: authManager.isAuthenticated)
             .animation(.easeInOut(duration: 0.3), value: authManager.isCheckingSession)
+            .animation(.easeInOut(duration: 0.3), value: authManager.isAnonymousUser)
         }
         .task {
             // Restore session gracefully on app launch

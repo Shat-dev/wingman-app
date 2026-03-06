@@ -13,6 +13,7 @@ struct LandingView: View {
 
     @State private var navigateToSignup = false
     @State private var navigateToLogin = false
+    @State private var navigateToOnboarding = false
 
     var body: some View {
         NavigationStack {
@@ -108,7 +109,9 @@ struct LandingView: View {
 
                     // Skip
                     Button {
-                        authManager.skipOnboarding()
+                        print("🔘 Skip for now button tapped")
+                        authManager.startAnonymousOnboarding()
+                        navigateToOnboarding = true
                     } label: {
                         Text("Skip for now")
                             .font(.manropeSemiBold(size: 16))
@@ -116,11 +119,17 @@ struct LandingView: View {
                             .underline()
                             
                     }
+                    .navigationDestination(isPresented: $navigateToOnboarding) {
+                        OnboardingView(showLanding: $navigateToOnboarding)
+                    }
                 }
                 .padding(.horizontal, 20)
 
                 Spacer().frame(height: 10)
             }
+        }
+        .onChange(of: navigateToOnboarding) { newValue in
+            print("📊 LandingView: navigateToOnboarding changed to: \(newValue)")
         }
     }
 }
