@@ -13,6 +13,8 @@ struct OptionButton: View {
     
     var body: some View {
         Text(text)
+            .lineLimit(2)
+            .multilineTextAlignment(.center)
             .frame(maxWidth: .infinity)
             .padding()
             .background(isSelected ? Color.black : Color.white)

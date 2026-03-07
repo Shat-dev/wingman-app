@@ -5,13 +5,6 @@
 //  Created by Adnan Khan on 30/11/2025.
 //
 
-//
-//  QuestionFlowView.swift
-//  Wingman
-//
-//  Created by Adnan Khan on 30/11/2025.
-//
-
 import SwiftUI
 import Combine
 import Supabase
@@ -132,19 +125,35 @@ struct OnboardingView: View {
 
             Text(step.title)
                 .font(.manropeSemiBold(size: 24))
+                .lineLimit(2)
+                .multilineTextAlignment(.leading)
 
-            // Name TextField
-            TextField("", text: $userName)
-                .placeholder(when: userName.isEmpty) {
-                    Text("Enter your name")
-                        .foregroundColor(.wingmanBlack.opacity(0.3))
-                }
-                .font(.manropeRegular(size: 18))
-                .padding(16)
-                .background(Color.wingmanBlack.opacity(0.10))
-                .cornerRadius(5)
-                .focused($isNameFieldFocused)
-                .padding(.top, 10)
+            // Name TextField with character limit
+            VStack(alignment: .trailing, spacing: 4) {
+                TextField("", text: $userName)
+                    .placeholder(when: userName.isEmpty) {
+                        Text("Enter your name")
+                            .foregroundColor(.wingmanBlack.opacity(0.3))
+                    }
+                    .font(.manropeRegular(size: 18))
+                    .padding(16)
+                    .background(Color.wingmanBlack.opacity(0.10))
+                    .cornerRadius(5)
+                    .focused($isNameFieldFocused)
+                    .onChange(of: userName) { newValue in
+                        // Limit username to 10 characters
+                        if newValue.count > 10 {
+                            userName = String(newValue.prefix(10))
+                        }
+                    }
+                    .padding(.top, 10)
+                
+                // Character counter
+                Text("\(userName.count)/10")
+                    .font(.caption)
+                    .foregroundColor(userName.count > 8 ? .red : .gray)
+                    .padding(.trailing, 4)
+            }
 
             // Buttons (moved closer to text field)
             VStack(spacing: 12) {
@@ -204,11 +213,15 @@ struct OnboardingView: View {
             // Title
             Text(step.title)
                 .font(.manropeSemiBold(size: 24))
+                .lineLimit(2)
+                .multilineTextAlignment(.leading)
 
             if let subtitle = step.subtitle {
                 Text(subtitle)
                     .font(.subheadline)
                     .foregroundColor(.gray)
+                    .lineLimit(2)
+                    .multilineTextAlignment(.leading)
             }
 
             // Options
@@ -343,6 +356,27 @@ struct OnboardingView: View {
                 }
                 .padding(.horizontal, 24)
                 .padding(.bottom, 24)
+            }
+            
+            // Invisible overlay to control tap areas - only right side should progress
+            HStack(spacing: 0) {
+                // Left half - blocks any tap gestures, not tappable for progression
+                Rectangle()
+                    .fill(Color.clear)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        // Explicitly do nothing - left side should not progress
+                        print("🚫 Left side tapped - no action")
+                    }
+                
+                // Right half - tappable area for progression
+                Rectangle()
+                    .fill(Color.clear)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        print("✅ Right side tapped - continuing")
+                        continueFromStatistic()
+                    }
             }
         }
     }

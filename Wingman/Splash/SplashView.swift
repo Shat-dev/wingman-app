@@ -30,13 +30,13 @@ struct SplashView: View {
                         .frame(width: 200)
                     
                     // Loading indicator while checking session
-                    if authManager.isCheckingSession {
-                        ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle(tint: .wingmanBlack))
-                            .scaleEffect(1.2)
-                            .transition(.opacity)
-                    }
-                    
+//                    if authManager.isCheckingSession {
+//                        ProgressView()
+//                            .progressViewStyle(CircularProgressViewStyle(tint: .wingmanBlack))
+//                            .scaleEffect(1.2)
+//                            .transition(.opacity)
+//                    }
+//                    
                     Spacer()
                     
                     // Offline banner at bottom
