@@ -20,6 +20,8 @@ final class DailyPracticeViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     @Published var isDailyPracticeCompleted: Bool = false // Track completion of all questions
+    @Published var currentStreak: Int = 0 // Current streak count for completion view
+    @Published var showCompletionView: Bool = false // Controls showing the completion view
     
     // MARK: - Streak Tracking
     private var totalQuestionsAnswered: Int = 0
@@ -224,6 +226,12 @@ final class DailyPracticeViewModel: ObservableObject {
         guard totalQuestionsAnswered > 0 else {
             print("⚠️ WARNING: No questions answered tracked! This shouldn't happen.")
             print("   - This means the tracking isn't working correctly")
+            
+            // Show completion view with default streak count
+            await MainActor.run {
+                currentStreak = 1 // Default if update fails
+                showCompletionView = true
+            }
             return
         }
         
@@ -238,15 +246,33 @@ final class DailyPracticeViewModel: ObservableObject {
             print("   - Current streak: \(result.streak)")
             print("   - Total completed: \(result.completed)")
             
+            // Update UI with the streak result and show completion view
+            await MainActor.run {
+                currentStreak = result.streak
+                showCompletionView = true
+            }
+            
         } catch let error as DailyPracticeError {
             print("❌ Failed to update streak (DailyPracticeError):")
             print("   - Error: \(error.errorDescription ?? "Unknown error")")
             print("   - Full error: \(error)")
+            
+            // Show completion view with fallback streak count
+            await MainActor.run {
+                currentStreak = 1 // Fallback if update fails
+                showCompletionView = true
+            }
         } catch {
             print("❌ Failed to update streak (Unknown error):")
             print("   - Error type: \(type(of: error))")
             print("   - Description: \(error.localizedDescription)")
             print("   - Full error: \(error)")
+            
+            // Show completion view with fallback streak count
+            await MainActor.run {
+                currentStreak = 1 // Fallback if update fails
+                showCompletionView = true
+            }
         }
     }
     

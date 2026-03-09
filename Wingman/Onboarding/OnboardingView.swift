@@ -213,7 +213,6 @@ struct OnboardingView: View {
             // Title
             Text(step.title)
                 .font(.manropeSemiBold(size: 24))
-                .lineLimit(2)
                 .multilineTextAlignment(.leading)
 
             if let subtitle = step.subtitle {

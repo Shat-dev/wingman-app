@@ -15,6 +15,9 @@ struct ProfileView: View {
     @State private var approachesCount = 0
     @State private var hasReflections = false
     @State private var approachesBreakdown: [(String, Int, Double)] = []
+    @State private var currentStreak = 0
+    @State private var totalStreak = 0
+    @State private var completedDates: Set<String> = []  // Dates when daily practice was completed
     @StateObject private var approachService = ApproachService.shared
     
     var body: some View {
@@ -91,7 +94,7 @@ struct ProfileView: View {
                             Divider().background(Color.gray.opacity(0.2))
                             
                             // MARK: - Week Streak Card
-                            WeekStreakCard()
+                            WeekStreakCard(currentStreak: currentStreak, totalStreak: totalStreak, completedDates: completedDates)
                                 .padding(.horizontal, 20)
                                 .padding(.top, 40)
                             
@@ -156,9 +159,13 @@ struct ProfileView: View {
         }
         .onAppear {
             loadUserData()
+            Task {
+                await loadStreakData()
+            }
         }
         .refreshable {
             await loadApproachData()
+            await loadStreakData()
         }
     }
     
@@ -218,25 +225,161 @@ struct ProfileView: View {
             approachService.updateLocalStats()
         }
     }
+    
+    private func loadStreakData() async {
+        do {
+            let user = try await SupabaseManager.shared.client.auth.user()
+            let userId = user.id.uuidString
+            
+            // Create properly typed params
+            let params = GetDailyStatusParams(
+                p_user_id: userId,
+                p_date: Date().formatted(.iso8601.year().month().day())
+            )
+            
+            print("🔄 ProfileView: Fetching streak data for user: \(userId)")
+            
+            // RPC returns an array of DailyPracticeStatusResponse
+            let resultArray: [DailyPracticeStatusResponse] = try await SupabaseManager.shared.client
+                .rpc("get_daily_practice_status", params: params)
+                .execute()
+                .value
+            
+            if let result = resultArray.first {
+                print("✅ ProfileView: Loaded streak data: current_streak=\(result.current_streak ?? 0), total_completed=\(result.total_completed ?? 0)")
+                
+                await MainActor.run {
+                    self.currentStreak = result.current_streak ?? 0
+                    self.totalStreak = result.total_completed ?? 0
+                }
+                print("✅ ProfileView: Updated UI - Current streak: \(self.currentStreak), Total streak: \(self.totalStreak)")
+            } else {
+                print("⚠️ ProfileView: No streak data returned, setting defaults")
+                await MainActor.run {
+                    self.currentStreak = 0
+                    self.totalStreak = 0
+                }
+            }
+            
+            // Fetch completed dates for the current week from user_daily_practice_sessions
+            await fetchCompletedDatesForCurrentWeek(userId: userId)
+            
+        } catch {
+            print("❌ ProfileView: Error fetching streak data: \(error.localizedDescription)")
+            print("❌ ProfileView: Full error: \(error)")
+            // Set defaults on error
+            await MainActor.run {
+                self.currentStreak = 0
+                self.totalStreak = 0
+            }
+        }
+    }
+    
+    private func fetchCompletedDatesForCurrentWeek(userId: String) async {
+        do {
+            // Get start and end of current week (Sunday to Saturday)
+            let calendar = Calendar.current
+            let today = Date()
+            
+            // Find the start of the week (Sunday)
+            let weekday = calendar.component(.weekday, from: today)
+            let daysFromSunday = weekday - 1 // Sunday = 1, so daysFromSunday = 0 for Sunday
+            guard let startOfWeek = calendar.date(byAdding: .day, value: -daysFromSunday, to: today) else { return }
+            guard let endOfWeek = calendar.date(byAdding: .day, value: 6, to: startOfWeek) else { return }
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let startDateStr = dateFormatter.string(from: startOfWeek)
+            let endDateStr = dateFormatter.string(from: endOfWeek)
+            
+            print("🔄 ProfileView: Fetching completed dates from \(startDateStr) to \(endDateStr)")
+            
+            // Query user_daily_practice_sessions for dates in the current week
+            let sessions: [DailyPracticeSessionResponse] = try await SupabaseManager.shared.client
+                .from("user_daily_practice_sessions")
+                .select("date")
+                .eq("user_id", value: userId)
+                .gte("date", value: startDateStr)
+                .lte("date", value: endDateStr)
+                .execute()
+                .value
+            
+            let dates = Set(sessions.map { $0.date })
+            print("✅ ProfileView: Completed dates this week: \(dates)")
+            
+            await MainActor.run {
+                self.completedDates = dates
+            }
+        } catch {
+            print("❌ ProfileView: Error fetching completed dates: \(error)")
+        }
+    }
+}
+
+// MARK: - RPC Params
+private struct GetDailyStatusParams: nonisolated Encodable, Sendable {
+    let p_user_id: String
+    let p_date: String
+}
+
+// MARK: - RPC Response
+private struct DailyPracticeStatusResponse: nonisolated Decodable, Sendable {
+    let current_streak: Int?
+    let total_completed: Int?
+    let is_completed_today: Bool?
+    let can_resume: Bool?
+}
+
+// MARK: - Session Response for fetching completed dates
+private struct DailyPracticeSessionResponse: nonisolated Decodable, Sendable {
+    let date: String
 }
 
 // MARK: - Week Streak Card
 struct WeekStreakCard: View {
-    let days = ["T", "W", "T", "F", "S", "S", "M"]
-    let completed = [true, true, false, false, false, false, false]
+    let currentStreak: Int
+    let totalStreak: Int
+    let completedDates: Set<String>
+    
+    // Get the days of the current week dynamically
+    private var weekDays: [(String, String, Bool)] {
+        let calendar = Calendar.current
+        let today = Date()
+        
+        // Find the start of the week (Sunday)
+        let weekday = calendar.component(.weekday, from: today)
+        let daysFromSunday = weekday - 1
+        guard let startOfWeek = calendar.date(byAdding: .day, value: -daysFromSunday, to: today) else {
+            return []
+        }
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        let dayLetters = ["S", "M", "T", "W", "T", "F", "S"]
+        
+        var result: [(String, String, Bool)] = []
+        for i in 0..<7 {
+            guard let date = calendar.date(byAdding: .day, value: i, to: startOfWeek) else { continue }
+            let dateString = dateFormatter.string(from: date)
+            let isCompleted = completedDates.contains(dateString)
+            result.append((dayLetters[i], dateString, isCompleted))
+        }
+        
+        return result
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             // Week days with flames
             HStack(spacing: 0) {
-                ForEach(0..<7) { index in
+                ForEach(weekDays, id: \.1) { day in
                     VStack(spacing: 4) {
-                        Image( completed[index] ? "flame_fill_p" : "flame")
-                            .foregroundColor(completed[index] ? .black : .gray.opacity(0.3))
+                        Image(day.2 ? "flame_fill_p" : "flame")
+                            .foregroundColor(day.2 ? .black : .gray.opacity(0.3))
                             .frame(width: 17, height: 24)
-                            
                         
-                        Text(days[index])
+                        Text(day.0)
                             .font(.manropeMedium(size: 12))
                             .foregroundColor(.gray)
                     }
@@ -258,7 +401,7 @@ struct WeekStreakCard: View {
                         Image("flame_fill_p_s")
                             .foregroundColor(.black)
                         
-                        Text("2 days")
+                        Text("\(currentStreak) days")
                             .font(.manropeMedium(size: 14))
                             .foregroundColor(.black)
                     }
@@ -275,7 +418,7 @@ struct WeekStreakCard: View {
                         Image("flame_fill_p_s")
                             .font(.system(size: 14))
                             .foregroundColor(.black)
-                        Text("69 days")
+                        Text("\(totalStreak) days")
                             .font(.manropeMedium(size: 14))
                             .foregroundColor(.black)
                     }

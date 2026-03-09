@@ -22,37 +22,37 @@ final class LessonDataService {
         // Mindset & Foundations (cat_1)
         "course_1": "1_1_mindset_foundations_beliefs_reframes",
         "course_2": "2_1_mindset_foundations_fear_exposure",
-        "course_3": "mindset_foundations_presence_expressions",
-        "course_4": "mindset_foundations_inner_stability",
-        "course_5": "mindset_foundations_non_negotiables",
-        
+        "course_3": "3_1_mindset_foundations_presence_expression",
+        "course_4": "4_1_mindset_foundations_inner_stability",
+        "course_5": "5_1_mindset_foundations_non-negotiables",
+
         // Approach Mechanics (cat_2)
-        "course_6": "approach_mechanics_approach_readiness",
-        "course_7": "approach_mechanics_physical_approach",
-        "course_8": "approach_mechanics_the_opener",
-        "course_9": "approach_mechanics_reading_responding",
-        "course_10": "approach_mechanics_situational_approaches",
-        "course_11": "approach_mechanics_advanced_opening",
-        
+        "course_6": "1_2_approach_mechanics_approach_readiness",
+        "course_7": "2_2_approach_mechanics_the_physical_approach",
+        "course_8": "3_2_approach_mechanics_the_opener",
+        "course_9": "4_2_approach_mechanics_reading_responding",
+        "course_10": "5_2_approach_mechanics_situational_specific_approaches",
+        "course_11": "6_2_approach_mechanics_advanced_opening_techniques",
+
         // Conversation Flow (cat_3)
-        "course_12": "conversation_flow_small_talk_momentum",
-        "course_13": "conversation_flow_listening_attunement",
-        "course_14": "conversation_flow_sharing_vulnerability",
-        "course_15": "conversation_flow_closing",
-        "course_16": "conversation_flow_advanced_skills",
-        
+        "course_12": "1_3_conversational_flow_small_talk_momentum",
+        "course_13": "2_3_conversational_flow_listening_attunement",
+        "course_14": "3_3_conversational_flow_sharing_vulnerability",
+        "course_15": "4_3_conversational_flow_closing",
+        "course_16": "5_3_conversational_flow_advanced_conversational_skills",
+
         // Flirting & Chemistry (cat_4)
-        "course_17": "flirting_chemistry_prerequisites",
-        "course_18": "flirting_chemistry_playfulness_spark",
-        "course_19": "flirting_chemistry_compliments_verbal",
-        "course_20": "flirting_chemistry_physical_escalation",
-        "course_21": "flirting_chemistry_advanced_skills",
-        
+        "course_17": "1_4_flirting_chemistry_flirting_prerequisites",
+        "course_18": "2_4_flirting_chemistry_playfulness_spark",
+        "course_19": "3_4_flirting_chemistry_compliments_verbal_chemistry",
+        "course_20": "4_4_flirting_chemistry_physical_presence_escalation",
+        "course_21": "5_4_flirting_chemistry_advanced_flirting_skills",
+
         // Integration & Mastery (cat_5)
-        "course_22": "integration_mastery_lifestyle_upgrade",
-        "course_23": "integration_mastery_creating_opportunities",
-        "course_24": "integration_mastery_mastery_identity",
-        "course_25": "integration_mastery_learning_discovery"
+        "course_22": "1_5_integration_mastery_upgrading_lifestyle",
+        "course_23": "2_5_integration_mastery_creating_opportunities",
+        "course_24": "3_5_integration_mastery_mastery_identity",
+        "course_25": "4_5_integration_mastery_learning_self-discovery"
     ]
     
     // MARK: - Load Lessons for a Course

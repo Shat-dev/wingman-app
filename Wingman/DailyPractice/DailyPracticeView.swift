@@ -74,6 +74,16 @@ struct DailyPracticeView: View {
         .animation(.easeInOut(duration: 0.3), value: viewModel.hasCheckedAnswer)
         .animation(.easeInOut(duration: 0.2), value: viewModel.selectedOptionIndex)
         .animation(.easeInOut(duration: 0.2), value: viewModel.selectedOptionIndices)
+        .navigationDestination(isPresented: $viewModel.showCompletionView) {
+            QuestionsCompleteView(
+                currentStreak: viewModel.currentStreak,
+                showCompletionView: $viewModel.showCompletionView,
+                dismissDailyPractice: {
+                    dismiss()
+                }
+            )
+            .environmentObject(tabBarVisibility)
+        }
         .onAppear {
             tabBarVisibility.hideTabBar()
             print("👁️ PracticeView appeared - Loading questions from Supabase")
@@ -84,7 +94,7 @@ struct DailyPracticeView: View {
             }
         }
         .onDisappear {
-            tabBarVisibility.showTabBar()
+            print("👋 PracticeView disappeared")
         }
     }
     
@@ -255,7 +265,7 @@ struct DailyPracticeView: View {
                 // Check Answer Button
                 actionButton()
                     .padding(.horizontal, 20)
-                    .padding(.bottom, 24)
+                    .padding(.bottom, 30)
                     .transition(.opacity)
             }
         }
@@ -539,13 +549,13 @@ struct DailyPracticeView: View {
     private func handleNextButton() {
         if viewModel.isLastQuestion {
             // IMPORTANT: Call nextQuestion() first to trigger completion logic
-            // This will update streak, post notification, etc.
+            // This will update streak, show completion view, etc.
             print("📍 Last question - calling nextQuestion() to trigger completion logic")
             viewModel.nextQuestion()
             
-            print("Practice session completed - dismissing view")
-            tabBarVisibility.showTabBar()
-            dismiss()
+            // Don't dismiss here - let the completion view sheet handle navigation
+            // The completion view will dismiss this view when user taps "Continue"
+            print("✅ Completion logic triggered - completion view will be shown")
         } else {
             print("Moving to next question")
             viewModel.nextQuestion()

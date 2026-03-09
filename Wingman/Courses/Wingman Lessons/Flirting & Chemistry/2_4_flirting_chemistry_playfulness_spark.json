@@ -1,0 +1,372 @@
+[
+    {
+      "id": "lesson_2_1",
+      "courseId": "course_2",
+      "courseSummary": "Learn how to use playfulness to shift from friendly to flirty.",
+      "courseTitle": "Playfulness & Spark",
+      "lessonNumber": 1,
+      "title": "Humour: Banter and Teasing",
+      "duration": 3,
+      "summary": "Learn how to keep interactions fun instead of serious.",
+      "isCompleted": false,
+      "isLocked": false,
+      "screens": [
+        {
+          "id": "screen_2_1_1",
+          "order": 0,
+          "content": [
+            {
+              "id": "content_2_1_1",
+              "text": "Most people feel closer to someone after they've shared a laugh, even if the interaction was brief. Humor has a way of shortening distance.",
+              "order": 0
+            },
+            {
+              "id": "content_2_1_2",
+              "text": "Humor, banter, and teasing are playful communication styles that create light-hearted tension and energy.",
+              "order": 1
+            },
+            {
+              "id": "content_2_1_3",
+              "text": "Humor makes her laugh. Banter is playful back-and-forth. Teasing challenges gently or exaggerates what she says in a way that's fun, not mean.",
+              "order": 2
+            }
+          ]
+        },
+        {
+          "id": "screen_2_1_2",
+          "order": 1,
+          "content": [
+            {
+              "id": "content_2_1_4",
+              "text": "This matters because polite, serious conversation doesn't create romantic chemistry. It creates a friendly rapport at best.",
+              "order": 0
+            },
+            {
+              "id": "content_2_1_5",
+              "text": "Attraction requires tension, and playfulness can achieve it. When you tease her about being overly organized, you're making a moment of playful challenge. She has to defend herself or play along. That back-and-forth creates energy.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_2_1_3",
+          "order": 2,
+          "content": [
+            {
+              "id": "content_2_1_6",
+              "text": "A man is talking to a woman at a coffee shop. She mentions she's really into yoga. He responds with earnest acknowledgment about the health benefits of yoga. She nods in agreement. The topic exhausts itself immediately. He moves to another question.",
+              "order": 0
+            },
+            {
+              "id": "content_2_1_7",
+              "text": "The conversation continues, but there's no spark because it's all friendly and informational.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_2_1_4",
+          "order": 3,
+          "content": [
+            {
+              "id": "content_2_1_8",
+              "text": "Another man hears she's into yoga. He jokes about whether she can touch her toes. She laughs and clarifies she's not quite as flexible as he suggests, but shares an accomplishment. Now they're bantering. She's teasing him back about his inflexibility.",
+              "order": 0
+            },
+            {
+              "id": "content_2_1_9",
+              "text": "The conversation now has energy because he introduced playfulness instead of staying serious.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_2_1_5",
+          "order": 4,
+          "content": [
+            {
+              "id": "content_2_1_10",
+              "text": "Playfulness creates the tension that separates flirtation from friendly conversation. When everything is serious and polite, there's no spark.",
+              "order": 0
+            },
+            {
+              "id": "content_2_1_11",
+              "text": "When you introduce humor, banter, or light teasing, you create energy and chemistry.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_2_1_6",
+          "order": 5,
+          "content": [
+            {
+              "id": "content_2_1_12",
+              "text": "The key is calibration. Humor should be light-hearted, not cruel. It works best when it's about things she's not insecure about.",
+              "order": 0
+            },
+            {
+              "id": "content_2_1_13",
+              "text": "Tease about her being organized, competitive, or bad at cooking. Don't joke about her appearance, intelligence, or things she might actually be sensitive about. You're exaggerating or playfully challenging what she said, not insulting her.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_2_1_7",
+          "order": 6,
+          "content": [
+            {
+              "id": "content_2_1_14",
+              "text": "Finally, be willing to be teased back. If you dish it out but can't take it, you come across as insecure.",
+              "order": 0
+            },
+            {
+              "id": "content_2_1_15",
+              "text": "When she teases you back, laugh and build on it. That reciprocal playfulness is where real chemistry lives.",
+              "order": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson_2_2",
+      "courseId": "course_2",
+      "courseTitle": "Playfulness & Spark",
+      "lessonNumber": 2,
+      "title": "Light, Playful Challenges",
+      "duration": 4,
+      "summary": "Learn why playful competition sparks attraction faster than basic information.",
+      "isCompleted": false,
+      "isLocked": true,
+      "screens": [
+        {
+          "id": "screen_2_2_1",
+          "order": 0,
+          "content": [
+            {
+              "id": "content_2_2_1",
+              "text": "A tiny, playful challenge can create chemistry faster than any line. It gives the moment a little tension, a shared stake, and turns you from strangers into teammates or rivals for a second.",
+              "order": 0
+            },
+            {
+              "id": "content_2_2_2",
+              "text": "A light challenge is a small, playful competition that creates investment without real stakes.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_2_2_2",
+          "order": 1,
+          "content": [
+            {
+              "id": "content_2_2_3",
+              "text": "Humans naturally tune in when there's something to win or lose, even if it's meaningless, which is why challenges make flirting feel more alive than regular conversation. Conversations can stay passive. A challenge requires her to participate, choose a side, and engage with you.",
+              "order": 0
+            },
+            {
+              "id": "content_2_2_4",
+              "text": "What matters isn't the game itself but the spark it creates. That small tension brings out banter, teasing, and connection in a way that feels exciting, not serious.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_2_2_3",
+          "order": 2,
+          "content": [
+            {
+              "id": "content_2_2_5",
+              "text": "A guy is talking to a woman at the bar. The vibe is light and relaxed. She asks, \"How old are you?\" Instead of answering, he turns it into a playful exchange. \"How old do I look? Guess.\" She laughs, studies him, and gives a number.",
+              "order": 0
+            },
+            {
+              "id": "content_2_2_6",
+              "text": "He reacts with mock shock, she laughs harder, and suddenly the moment has sparked. He guesses her age back, and they tease each other about being way off. They're sharing a moment, not just trading facts.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_2_2_4",
+          "order": 3,
+          "content": [
+            {
+              "id": "content_2_2_7",
+              "text": "Another guy would answer her age question directly, then move into predictable small talk. She would stay polite but disengaged. He tried to build rapport with information.",
+              "order": 0
+            },
+            {
+              "id": "content_2_2_8",
+              "text": "The first guy did it with play. One felt like work. The other felt like fun.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_2_2_5",
+          "order": 4,
+          "content": [
+            {
+              "id": "content_2_2_9",
+              "text": "Challenges create chemistry because they move you from talking to actually doing something together.",
+              "order": 0
+            },
+            {
+              "id": "content_2_2_10",
+              "text": "A small, playful bet gives her permission to engage, be competitive, and show personality instead of just answering questions.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_2_2_6",
+          "order": 5,
+          "content": [
+            {
+              "id": "content_2_2_11",
+              "text": "The formula is simple: notice something, turn it into a tiny game, keep the stakes meaningless, and let the banter flow. The challenge should feel like an invitation, not a test.",
+              "order": 0
+            },
+            {
+              "id": "content_2_2_12",
+              "text": "Use something both of you can play with, not something she has to prove knowledge about. The best challenges work no matter who wins, because either outcome creates an easy reason to keep the interaction going.",
+              "order": 1
+            },
+            {
+              "id": "content_2_2_13",
+              "text": "The goal isn't winning. It's keeping the moment fun.",
+              "order": 2
+            }
+          ]
+        },
+        {
+          "id": "screen_2_2_7",
+          "order": 6,
+          "content": [
+            {
+              "id": "content_2_2_14",
+              "text": "The best connections happen when you stop worrying about what to say and start creating moments you both enjoy. A light challenge is one of the simplest ways to do that.",
+              "order": 0
+            },
+            {
+              "id": "content_2_2_15",
+              "text": "Keep it easy, keep it warm, keep it fun. When the moment feels good for both of you, attraction takes care of itself.",
+              "order": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson_2_3",
+      "courseId": "course_2",
+      "courseTitle": "Playfulness & Spark",
+      "lessonNumber": 3,
+      "title": "Add a Little Bit of Cheek",
+      "duration": 3,
+      "summary": "Learn how to use cheeky pushback to create spark and momentum.",
+      "isCompleted": false,
+      "isLocked": true,
+      "screens": [
+        {
+          "id": "screen_2_3_1",
+          "order": 0,
+          "content": [
+            {
+              "id": "content_2_3_1",
+              "text": "Many conversations stay flat because both people play it safe. Add a touch of cheek, and suddenly there's tension, rhythm, and personality in the moment. It's not teasing. It's not humor. It's simply showing you're not afraid to be a little bold in a warm, playful way.",
+              "order": 0
+            },
+            {
+              "id": "content_2_3_2",
+              "text": "Cheekiness is a light, playful pushback that shows confidence without crossing into rudeness. It's the verbal version of a smirk. Instead of agreeing with everything she says, you offer a cheeky perspective that shows you have your own point of view.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_2_3_2",
+          "order": 1,
+          "content": [
+            {
+              "id": "content_2_3_3",
+              "text": "This works because most men default to being overly agreeable, which kills attraction. Cheekiness breaks that pattern.",
+              "order": 0
+            },
+            {
+              "id": "content_2_3_4",
+              "text": "The key is warmth. Delivered with a smile, it creates a spark. Delivered with tension, it just feels rude.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_2_3_3",
+          "order": 2,
+          "content": [
+            {
+              "id": "content_2_3_5",
+              "text": "A guy stands next to a woman in line at a cafe. She says, \"I can never decide what to get here.\" He replies, \"Yeah, everything looks good.\" She gives a polite smile and turns back to the menu.",
+              "order": 0
+            },
+            {
+              "id": "content_2_3_6",
+              "text": "The moment stays flat. He was friendly, but he added nothing. There was no spark, no personality, nothing for her to react to.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_2_3_4",
+          "order": 3,
+          "content": [
+            {
+              "id": "content_2_3_7",
+              "text": "Same cafe, different approach. She says the same line. He smiles and says sarcastically. \"Yeah, it's a big decision, isn't it?\" She laughs. Now they are joking back, asking what he recommends. The energy lifts instantly.",
+              "order": 0
+            },
+            {
+              "id": "content_2_3_8",
+              "text": "He didn't try to impress her. He just added a little cheekiness to the moment, and she stepped into it.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_2_3_5",
+          "order": 4,
+          "content": [
+            {
+              "id": "content_2_3_9",
+              "text": "The idea is simple: instead of instantly agreeing, offer a light, unexpected angle. Not mean, just cheeky. The tone matters more than the words. You're not judging her, you're exaggerating playfully, and your smile makes that clear.",
+              "order": 0
+            },
+            {
+              "id": "content_2_3_10",
+              "text": "This creates a rhythm where she pushes back, you push back, and the conversation becomes flirty instead of flat.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_2_3_6",
+          "order": 5,
+          "content": [
+            {
+              "id": "content_2_3_11",
+              "text": "Some women won't match that style, and that's fine. The ones who do will engage much more deeply because the interaction feels alive.",
+              "order": 0
+            },
+            {
+              "id": "content_2_3_12",
+              "text": "When you stop trying to be perfectly agreeable and add a little edge to the interaction, you become more memorable. Keep it warm, keep it light, and let the rhythm build naturally. That's all flirting needs.",
+              "order": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]

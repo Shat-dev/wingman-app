@@ -1,0 +1,556 @@
+[
+    {
+      "id": "lesson_4_1",
+      "courseId": "course_4",
+      "courseSummary": "Learn how to turn every interaction into insight that sharpens your social instincts.",
+      "courseTitle": "Learning & Self discovery",
+      "lessonNumber": 1,
+      "title": "The Experimental Mindset",
+      "duration": 4,
+      "summary": "Learn how rejection becomes data instead of emotional damage.",
+      "isCompleted": false,
+      "isLocked": false,
+      "screens": [
+        {
+          "id": "screen_4_1_1",
+          "order": 0,
+          "content": [
+            {
+              "id": "content_4_1_1",
+              "text": "Skill development is built on trial and error, not talent. You learned every difficult skill in your life by experimenting. Approaching women should be the same.",
+              "order": 0
+            },
+            {
+              "id": "content_4_1_2",
+              "text": "The experimental mindset treats social interactions as data collection rather than as performance evaluations. It's the shift from \"did I succeed or fail\" to \"what did I learn.\"",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_4_1_2",
+          "order": 1,
+          "content": [
+            {
+              "id": "content_4_1_3",
+              "text": "This matters because when your ego is attached to outcomes, rejection becomes unbearable.",
+              "order": 0
+            },
+            {
+              "id": "content_4_1_4",
+              "text": "But when you're collecting data, rejection is just information. The interaction didn't work. That tells you something. Now you adjust and try again.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_4_1_3",
+          "order": 2,
+          "content": [
+            {
+              "id": "content_4_1_5",
+              "text": "You have a hypothesis: \"This opener will create interest.\" You test it. If it doesn't work, that's useful information. Now you know that particular approach doesn't resonate with that person in that context.",
+              "order": 0
+            },
+            {
+              "id": "content_4_1_6",
+              "text": "You didn't fail. You gathered data.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_4_1_4",
+          "order": 3,
+          "content": [
+            {
+              "id": "content_4_1_7",
+              "text": "A guy approaches a woman and tries to be funny. His joke lands flat. She doesn't laugh. He walks away mortified. Thinks \"I'm just not a funny person.\"",
+              "order": 0
+            },
+            {
+              "id": "content_4_1_8",
+              "text": "He tried to be funny; it didn't work, and he took it as proof that he doesn't have that ability.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_4_1_5",
+          "order": 4,
+          "content": [
+            {
+              "id": "content_4_1_9",
+              "text": "Another man makes the same bad joke. Gets the same non-reaction. Thinks \"that joke didn't work. Was it the timing? The delivery? The content? Let me try a different type of humor next time.\" He's analyzing variables. His next attempt is observational humor instead of a joke. Gets a better reaction. He's learning what style of humor fits his personality and what audiences respond to.",
+              "order": 0
+            },
+            {
+              "id": "content_4_1_10",
+              "text": "One man quit after one failed experiment. The other kept testing until he found what worked.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_4_1_6",
+          "order": 5,
+          "content": [
+            {
+              "id": "content_4_1_11",
+              "text": "Every interaction teaches you something, whether it goes well or not. The experimental mindset allows you to fail without feeling like a failure. You're not trying to prove you're good at this. You're trying to figure out what works.",
+              "order": 0
+            },
+            {
+              "id": "content_4_1_12",
+              "text": "Most approaches won't lead to dates. That's normal. But each one gives you information that makes the next one better.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_4_1_7",
+          "order": 6,
+          "content": [
+            {
+              "id": "content_4_1_13",
+              "text": "The experimental mindset also allows you to systematically test variables. You can try different openers and see which ones create engagement. Test different energy levels and see what feels authentic. This systematic testing is how you develop calibration.",
+              "order": 0
+            },
+            {
+              "id": "content_4_1_14",
+              "text": "You're building a database of what works in different contexts with different people.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_4_1_8",
+          "order": 7,
+          "content": [
+            {
+              "id": "content_4_1_15",
+              "text": "You don't have to get it right today. You only need to stay curious enough to try again tomorrow.",
+              "order": 0
+            },
+            {
+              "id": "content_4_1_16",
+              "text": "When you stop labelling experiences as success or failure, you free yourself to actually learn from them.",
+              "order": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson_4_2",
+      "courseId": "course_4",
+      "courseTitle": "Learning & Self discovery",
+      "lessonNumber": 2,
+      "title": "Your Authentic Style",
+      "duration": 3,
+      "summary": "Learn how to leverage your existing strengths socially.",
+      "isCompleted": false,
+      "isLocked": true,
+      "screens": [
+        {
+          "id": "screen_4_2_1",
+          "order": 0,
+          "content": [
+            {
+              "id": "content_4_2_1",
+              "text": "You've had conversations in your life where you felt sharp, calm, and natural. Those moments are not accidents. They're clues to how you communicate best.",
+              "order": 0
+            },
+            {
+              "id": "content_4_2_2",
+              "text": "Your authentic style is the version of you that aligns with your existing personality. When you're pretending to be someone else, you're using cognitive resources to maintain the performance. That leaves less mental capacity for actually connecting with the person in front of you.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_4_2_2",
+          "order": 1,
+          "content": [
+            {
+              "id": "content_4_2_3",
+              "text": "Authenticity isn't about being completely unfiltered or refusing to learn new skills.",
+              "order": 0
+            },
+            {
+              "id": "content_4_2_4",
+              "text": "It's about taking principles that work and expressing them in ways that fit your personality.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_4_2_3",
+          "order": 2,
+          "content": [
+            {
+              "id": "content_4_2_5",
+              "text": "A guy watches a POV pickup instructor who's naturally loud and energetic. The instructor approaches women with huge energy and makes direct, bold statements. It works for him.",
+              "order": 0
+            },
+            {
+              "id": "content_4_2_6",
+              "text": "The guy tries to copy it. Approaches a woman with forced high energy. Makes a bold statement that feels off coming out of his mouth. She looks confused. The interaction dies quickly. He tries this a few more times. Same result.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_4_2_4",
+          "order": 3,
+          "content": [
+            {
+              "id": "content_4_2_7",
+              "text": "The problem wasn't his approach. It was that he was trying to be someone he's not. He's naturally calm and thoughtful.",
+              "order": 0
+            },
+            {
+              "id": "content_4_2_8",
+              "text": "The high-energy style clashed with his actual personality.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_4_2_5",
+          "order": 4,
+          "content": [
+            {
+              "id": "content_4_2_9",
+              "text": "Another man with the same personality sees the same instructor. But instead of copying the exact behavior, he extracts the principle: create tension early.",
+              "order": 0
+            },
+            {
+              "id": "content_4_2_10",
+              "text": "He does it his way. Uses pauses. Direct eye contact. Asks unexpected questions. Creates depth instead of energy. It works because it's authentic to who he is.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_4_2_6",
+          "order": 5,
+          "content": [
+            {
+              "id": "content_4_2_11",
+              "text": "Every effective approach is built on principles: build rapport, show interest, create tension, and escalate gradually. These principles are universal, but the way you express them is personal.",
+              "order": 0
+            },
+            {
+              "id": "content_4_2_12",
+              "text": "A naturally funny person creates tension through humor. A naturally intense person creates it through eye contact and pauses. Both work. Neither is copying the other.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_4_2_7",
+          "order": 6,
+          "content": [
+            {
+              "id": "content_4_2_13",
+              "text": "You already have strengths from other areas of your life. Maybe you're good at making people laugh. Maybe you're good at making people feel heard. Maybe you're naturally calm, and that puts people at ease.",
+              "order": 0
+            },
+            {
+              "id": "content_4_2_14",
+              "text": "Those strengths don't disappear when you approach women; you just need to use them intentionally. What feels like \"you\" will consistently outperform what feels borrowed.",
+              "order": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson_4_3",
+      "courseId": "course_4",
+      "courseTitle": "Learning & Self discovery",
+      "lessonNumber": 3,
+      "title": "Identify Your Sticking Point",
+      "duration": 3,
+      "summary": "Learn how focused practice creates rapid improvement.",
+      "isCompleted": false,
+      "isLocked": true,
+      "screens": [
+        {
+          "id": "screen_4_3_1",
+          "order": 0,
+          "content": [
+            {
+              "id": "content_4_3_1",
+              "text": "You can improve in several areas and still feel stuck. Progress stalls when the real problem stays untouched.",
+              "order": 0
+            },
+            {
+              "id": "content_4_3_2",
+              "text": "A sticking point is the specific, recurring place where your interactions consistently fail. It's not a general weakness—it's the exact moment where things fall apart repeatedly.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_4_3_2",
+          "order": 1,
+          "content": [
+            {
+              "id": "content_4_3_3",
+              "text": "Sticking points reveal themselves through pattern recognition.",
+              "order": 0
+            },
+            {
+              "id": "content_4_3_4",
+              "text": "If you're getting ten approaches but zero conversations, your sticking point is the opening. If you're having great conversations but never getting numbers, your sticking point is closing.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_4_3_3",
+          "order": 2,
+          "content": [
+            {
+              "id": "content_4_3_5",
+              "text": "Two men are both struggling. The first has been working on \"being more confident\" generally. Reads about body language, tonality, presence, and frame control.",
+              "order": 0
+            },
+            {
+              "id": "content_4_3_6",
+              "text": "He tries to embody confidence in every interaction but is not getting results because \"confidence\" is too broad.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_4_3_4",
+          "order": 3,
+          "content": [
+            {
+              "id": "content_4_3_7",
+              "text": "The second man identifies his specific sticking point through pattern observation. He can open. He can have conversations. He can close. But every interaction stays surface-level and friendly.",
+              "order": 0
+            },
+            {
+              "id": "content_4_3_8",
+              "text": "Women like him, but don't seem attracted to him. His sticking point: he never creates romantic tension. Stays too safe. Never flirts, teases, or escalates the vibe beyond friendly.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_4_3_5",
+          "order": 4,
+          "content": [
+            {
+              "id": "content_4_3_9",
+              "text": "Once identified, he focuses specifically on introducing one moment of tension per interaction. Sustained eye contact. A playful tease. A light touch. That focused practice on his actual sticking point produces results.",
+              "order": 0
+            },
+            {
+              "id": "content_4_3_10",
+              "text": "Women start responding differently because he's finally addressing the specific thing that was missing.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_4_3_6",
+          "order": 5,
+          "content": [
+            {
+              "id": "content_4_3_11",
+              "text": "Your sticking point is wherever your interactions consistently fail. Identify it by honestly reviewing your last interactions.",
+              "order": 0
+            },
+            {
+              "id": "content_4_3_12",
+              "text": "Where does the pattern emerge? Do you struggle to start conversations? Do conversations happen but feel flat and friendless? Do you build rapport but never escalate physically? Do you escalate but never close? The recurring failure point is your sticking point.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_4_3_7",
+          "order": 6,
+          "content": [
+            {
+              "id": "content_4_3_13",
+              "text": "Once identified, focus all improvement efforts on that area. If your sticking point is opening, practice only that. Approach twenty people with the sole goal of opening successfully. Don't worry about what happens after.",
+              "order": 0
+            },
+            {
+              "id": "content_4_3_14",
+              "text": "If your sticking point is escalation, practice only that. Assume you can already open and converse. Focus every interaction on introducing physical escalation earlier than feels comfortable.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_4_3_8",
+          "order": 7,
+          "content": [
+            {
+              "id": "content_4_3_15",
+              "text": "You don't need to work harder. You only need to direct your effort more precisely.",
+              "order": 0
+            },
+            {
+              "id": "content_4_3_16",
+              "text": "When your effort aligns with the real issue, progress starts moving again.",
+              "order": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson_4_4",
+      "courseId": "course_4",
+      "courseTitle": "Learning & Self discovery",
+      "lessonNumber": 4,
+      "title": "The Growth Plateau",
+      "duration": 4,
+      "summary": "Learn how patience keeps you progressing long-term.",
+      "isCompleted": false,
+      "isLocked": true,
+      "screens": [
+        {
+          "id": "screen_4_4_1",
+          "order": 0,
+          "content": [
+            {
+              "id": "content_4_4_1",
+              "text": "Most skills improve quickly at first, then seem to stop. You keep showing up, doing the same work, and nothing appears to change.",
+              "order": 0
+            },
+            {
+              "id": "content_4_4_2",
+              "text": "A growth plateau is a period where visible progress stops despite continued practice. You're doing the work, but not seeing results improve.",
+              "order": 1
+            },
+            {
+              "id": "content_4_4_3",
+              "text": "This feels like stagnation, but it's actually part of the process because skill acquisition isn't linear.",
+              "order": 2
+            }
+          ]
+        },
+        {
+          "id": "screen_4_4_2",
+          "order": 1,
+          "content": [
+            {
+              "id": "content_4_4_4",
+              "text": "Two men both hit plateaus at the same time. Both have been approaching for two months. Both see their progress stall. The first man takes it personally. He's been doing the work, and nothing's improving. Clearly he's reached his natural limit. Some guys are just naturals, and he's not one of them. He stops approaching.",
+              "order": 0
+            },
+            {
+              "id": "content_4_4_5",
+              "text": "Three months later, he's back where he started—anxious and rusty.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_4_4_3",
+          "order": 2,
+          "content": [
+            {
+              "id": "content_4_4_6",
+              "text": "The second man also notices the plateau. But he's been here before with other skills.",
+              "order": 0
+            },
+            {
+              "id": "content_4_4_7",
+              "text": "Remembers that, when learning to play basketball, his free-throw percentage stayed stuck at 60% for 2 months before suddenly jumping to 75%. Recognizes this is how skill development works.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_4_4_4",
+          "order": 3,
+          "content": [
+            {
+              "id": "content_4_4_8",
+              "text": "Instead of quitting, he changes one variable; he starts approaching in different environments. Within two weeks, the new context forces calibration adjustments that unlock improvement. His plateau breaks.",
+              "order": 0
+            },
+            {
+              "id": "content_4_4_9",
+              "text": "Six months later, he's dating someone he met during what would have been his \"quit\" period if he had made the first man's choice.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_4_4_5",
+          "order": 4,
+          "content": [
+            {
+              "id": "content_4_4_10",
+              "text": "Plateaus are normal stages of skill development where progress continues invisibly. They're not proof you've stopped improving, they're proof you're at a threshold where the next level of skill is being built beneath the surface.",
+              "order": 0
+            },
+            {
+              "id": "content_4_4_11",
+              "text": "Strategies for pushing through plateaus include intentionally increasing difficulty. If you're getting polite conversations, try for a deeper connection or earlier escalation.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_4_4_6",
+          "order": 5,
+          "content": [
+            {
+              "id": "content_4_4_12",
+              "text": "Increasing difficulty forces adaptation and breaks the plateau. Change environments entirely. If you've been practicing in the same venues with the same type of women, switch to a different context.",
+              "order": 0
+            },
+            {
+              "id": "content_4_4_13",
+              "text": "Different environments require different calibration. That forces new learning and can restart progress.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_4_4_7",
+          "order": 6,
+          "content": [
+            {
+              "id": "content_4_4_14",
+              "text": "Focus on one specific micro-skill. Instead of trying to improve everything, identify one precise element to refine. Eye contact quality. Conversation pacing. Physical escalation timing.",
+              "order": 0
+            },
+            {
+              "id": "content_4_4_15",
+              "text": "Focused practice on one variable often unlocks broader improvement.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_4_4_8",
+          "order": 7,
+          "content": [
+            {
+              "id": "content_4_4_16",
+              "text": "When improvement slows, patience becomes part of the skill.",
+              "order": 0
+            },
+            {
+              "id": "content_4_4_17",
+              "text": "Trusting the process keeps you in the game long enough to benefit.",
+              "order": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]

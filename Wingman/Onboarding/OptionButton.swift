@@ -13,8 +13,9 @@ struct OptionButton: View {
     
     var body: some View {
         Text(text)
-            .lineLimit(2)
+            .font(.manropeSemiBold(size: 16)) // Ensure font size allows for wrapping
             .multilineTextAlignment(.center)
+            .fixedSize(horizontal: false, vertical: true) // <--- THIS IS KEY
             .frame(maxWidth: .infinity)
             .padding()
             .background(isSelected ? Color.black : Color.white)

@@ -42,11 +42,18 @@ struct MainTabView: View {
             .tabViewStyle(.automatic)
 
             if tabBarVisibility.isVisible {
+                let _ = print("🏠 MainTabView: Tab bar is VISIBLE - showing CustomTabBar")
                 CustomTabBar(selectedTab: $selectedTab)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
+            } else {
+                let _ = print("🏠 MainTabView: Tab bar is HIDDEN - CustomTabBar not shown")
             }
         }
         .ignoresSafeArea(.keyboard)
+        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("NavigateToHomeView"))) { _ in
+            print("📱 MainTabView: Received NavigateToHomeView notification - switching to Home tab")
+            selectedTab = 0
+        }
     }
 }
 

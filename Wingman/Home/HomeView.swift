@@ -304,23 +304,28 @@ struct PeekCarousel: View {
     
     @State private var dragOffset: CGFloat = 0
     @State private var screenWidth: CGFloat = UIScreen.main.bounds.width
-    
+    @GestureState private var isHorizontalDrag: Bool = false
+    @State private var horizontalDragActive: Bool = false
+
     // Layout constants
     private let cardSpacing: CGFloat = 12
     private let horizontalPadding: CGFloat = 20
     private let peekAmount: CGFloat = 40  // How much of next card to show
-    
+
     private var cardWidth: CGFloat {
         screenWidth - horizontalPadding - peekAmount - cardSpacing
     }
-    
+
+    // Toggle to enable/disable custom horizontal pan detection overlay for the carousel
+    private let useCarouselPan = true
+
     var body: some View {
         VStack(spacing: 16) {
             // Cards in GeometryReader
             GeometryReader { geometry in
                 let width = geometry.size.width
                 let calculatedCardWidth = width - horizontalPadding - peekAmount - cardSpacing
-                
+
                 HStack(spacing: cardSpacing) {
                     ForEach(Array(modules.enumerated()), id: \.offset) { index, module in
                         ModuleCarouselCard(
@@ -334,31 +339,48 @@ struct PeekCarousel: View {
                     }
                 }
                 .offset(x: calculateOffset(screenWidth: width, cardWidth: calculatedCardWidth))
-                .gesture(
-                    DragGesture()
-                        .onChanged { value in
-                            dragOffset = value.translation.width
-                        }
-                        .onEnded { value in
-                            let threshold = calculatedCardWidth / 3
-                            let predictedOffset = value.predictedEndTranslation.width
-                            
-                            withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
-                                if predictedOffset < -threshold && currentPage < modules.count - 1 {
-                                    currentPage += 1
-                                } else if predictedOffset > threshold && currentPage > 0 {
-                                    currentPage -= 1
+                // Overlay the UIViewRepresentable for robust horizontal pan detection
+                .overlay(
+                    Group {
+                        if useCarouselPan {
+                            HorizontalPanGestureView(
+                                onChanged: { translation in
+                                    DispatchQueue.main.async {
+                                        // clamp offset
+                                        let maxOffset = calculatedCardWidth + 60
+                                        let x = max(min(translation.x, maxOffset), -maxOffset)
+                                        dragOffset = x
+                                        horizontalDragActive = true
+                                    }
+                                },
+                                onEnded: { translation, velocity in
+                                    DispatchQueue.main.async {
+                                        let predicted = translation.x + velocity.x * 0.18
+                                        let threshold = calculatedCardWidth / 3
+                                        withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+                                            if predicted < -threshold && currentPage < modules.count - 1 {
+                                                currentPage += 1
+                                            } else if predicted > threshold && currentPage > 0 {
+                                                currentPage -= 1
+                                            }
+                                            dragOffset = 0
+                                            horizontalDragActive = false
+                                        }
+                                    }
                                 }
-                                dragOffset = 0
-                            }
+                            )
+                        } else {
+                            // No overlay when disabled to allow native ScrollView gestures
+                            EmptyView()
                         }
+                    }
                 )
                 .onAppear {
                     screenWidth = width
                 }
             }
             .frame(height: 430) // Cards only
-            
+
             // Page Indicators - OUTSIDE GeometryReader
             HStack(spacing: 8) {
                 ForEach(0..<modules.count, id: \.self) { index in
@@ -370,7 +392,7 @@ struct PeekCarousel: View {
             .animation(.easeInOut(duration: 0.2), value: currentPage)
         }
     }
-    
+
     private func calculateOffset(screenWidth: CGFloat, cardWidth: CGFloat) -> CGFloat {
         let totalCardWidth = cardWidth + cardSpacing
         let baseOffset = horizontalPadding - (CGFloat(currentPage) * totalCardWidth)
@@ -538,4 +560,85 @@ extension Course: Hashable {
     // Provide a constant binding for previews
     HomeView(selectedTab: .constant(0))
         .environmentObject(TabBarVisibilityManager())
+}
+
+struct HorizontalPanGestureView: UIViewRepresentable {
+    let onChanged: (CGPoint) -> Void
+    let onEnded: (CGPoint, CGPoint) -> Void
+
+    init(onChanged: @escaping (CGPoint) -> Void, onEnded: @escaping (CGPoint, CGPoint) -> Void) {
+        self.onChanged = onChanged
+        self.onEnded = onEnded
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(onChanged: onChanged, onEnded: onEnded)
+    }
+
+    func makeUIView(context: Context) -> UIView {
+        let view = UIView(frame: .zero)
+        view.backgroundColor = .clear
+        let panGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handlePan(_:)))
+        panGesture.delegate = context.coordinator
+        // Do not cancel or delay touches so vertical scrolling isn't blocked
+        panGesture.cancelsTouchesInView = false
+        panGesture.delaysTouchesBegan = false
+        panGesture.delaysTouchesEnded = false
+        panGesture.minimumNumberOfTouches = 1
+        panGesture.maximumNumberOfTouches = 1
+        view.addGestureRecognizer(panGesture)
+        return view
+    }
+
+    func updateUIView(_ uiView: UIView, context: Context) {
+        // No update logic needed
+    }
+
+    class Coordinator: NSObject, UIGestureRecognizerDelegate {
+        let onChanged: (CGPoint) -> Void
+        let onEnded: (CGPoint, CGPoint) -> Void
+
+        init(onChanged: @escaping (CGPoint) -> Void, onEnded: @escaping (CGPoint, CGPoint) -> Void) {
+            self.onChanged = onChanged
+            self.onEnded = onEnded
+        }
+
+        @objc func handlePan(_ pan: UIPanGestureRecognizer) {
+            let translation = pan.translation(in: pan.view)
+            let velocity = pan.velocity(in: pan.view)
+
+            switch pan.state {
+            case .changed:
+                // Only forward predominantly horizontal movements
+                if abs(translation.x) > abs(translation.y) {
+                    onChanged(translation)
+                }
+            case .ended, .cancelled, .failed:
+                onEnded(translation, velocity)
+            default:
+                break
+            }
+        }
+
+        // Allow simultaneous recognition so vertical scroll remains responsive
+        func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+            return true
+        }
+
+        // Only begin the pan if the initial velocity/translation indicates a horizontal gesture
+        func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+            guard let pan = gestureRecognizer as? UIPanGestureRecognizer, let view = pan.view else { return false }
+            let velocity = pan.velocity(in: view)
+            // If we have clear horizontal velocity, begin
+            if abs(velocity.x) > abs(velocity.y) * 1.3 && abs(velocity.x) > 20 {
+                return true
+            }
+            // Otherwise use translation as fallback
+            let translation = pan.translation(in: view)
+            if abs(translation.x) > abs(translation.y) * 1.6 && abs(translation.x) > 12 {
+                return true
+            }
+            return false
+        }
+    }
 }

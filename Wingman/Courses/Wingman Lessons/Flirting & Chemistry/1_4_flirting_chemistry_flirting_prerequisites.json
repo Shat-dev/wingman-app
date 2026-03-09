@@ -1,0 +1,475 @@
+[
+    {
+      "id": "lesson_1_1",
+      "courseId": "course_1",
+      "courseSummary": "Learn the core conditions that allow flirting to unfold effortlessly.",
+      "courseTitle": "Flirting Pre-Requisites",
+      "lessonNumber": 1,
+      "title": "The Goal of Flirting",
+      "duration": 3,
+      "summary": "Learn why creating a good moment matters more than getting results.",
+      "isCompleted": false,
+      "isLocked": false,
+      "screens": [
+        {
+          "id": "screen_1_1_1",
+          "order": 0,
+          "content": [
+            {
+              "id": "content_1_1_1",
+              "text": "People rarely remember exactly what was said in a flirtatious exchange. They remember how the moment made them feel.",
+              "order": 0
+            },
+            {
+              "id": "content_1_1_2",
+              "text": "The real goal of flirting is to create a moment where both people feel more energized, noticed, and alive than they did before the interaction.",
+              "order": 1
+            },
+            {
+              "id": "content_1_1_3",
+              "text": "It's not about getting her number, making her attracted to you, or proving your worth. It's simply about creating an enjoyable interaction where possibilities can grow.",
+              "order": 2
+            }
+          ]
+        },
+        {
+          "id": "screen_1_1_2",
+          "order": 1,
+          "content": [
+            {
+              "id": "content_1_1_4",
+              "text": "A guy approaches a woman at a bar. His goal: make her attracted and get her to come home with him tonight. That outcome is driving everything.",
+              "order": 0
+            },
+            {
+              "id": "content_1_1_5",
+              "text": "He's complimenting too much. Trying to create sexual tension he hasn't earned. Moving physically closer than rapport justifies. She feels the agenda from a mile away.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_1_3",
+          "order": 2,
+          "content": [
+            {
+              "id": "content_1_1_6",
+              "text": "Another man approaches a woman at the same bar. His goal: have a fun conversation for the next few minutes. That's it. He's not thinking about taking her home. He's just creating an enjoyable exchange right now.",
+              "order": 0
+            },
+            {
+              "id": "content_1_1_7",
+              "text": "They banter about the terrible DJ. Make fun of someone's dance moves. She's laughing because there's no pressure.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_1_4",
+          "order": 3,
+          "content": [
+            {
+              "id": "content_1_1_8",
+              "text": "Flirting works when you treat it as play, not seduction. The goal isn't to get her number. It's to create a moment—however brief—where you both feel more noticed and alive than you did before.",
+              "order": 0
+            },
+            {
+              "id": "content_1_1_9",
+              "text": "Three-minute conversation where you both laughed? That's success. That's the goal achieved. Whether she gives you her number is secondary. When you reframe the goal this way, several things happen.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_1_5",
+          "order": 4,
+          "content": [
+            {
+              "id": "content_1_1_10",
+              "text": "First, you stop treating interactions as pass/fail. Every conversation that has positive energy is a win.",
+              "order": 0
+            },
+            {
+              "id": "content_1_1_11",
+              "text": "Second, you become more present because you're not thinking three steps ahead to the close.",
+              "order": 1
+            },
+            {
+              "id": "content_1_1_12",
+              "text": "Third, she feels less pressure because there's no hidden agenda.",
+              "order": 2
+            },
+            {
+              "id": "content_1_1_13",
+              "text": "Fourth, paradoxically, you get better outcomes because outcome independence is attractive.",
+              "order": 3
+            }
+          ]
+        },
+        {
+          "id": "screen_1_1_6",
+          "order": 5,
+          "content": [
+            {
+              "id": "content_1_1_14",
+              "text": "The practice is simple: before every flirting attempt, remind yourself, \"My goal is to create an enjoyable moment, not to get anything.\"",
+              "order": 0
+            },
+            {
+              "id": "content_1_1_15",
+              "text": "You are not failing when a moment ends without a result. You only need to show up and enjoy the moment you're already in.",
+              "order": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson_1_2",
+      "courseId": "course_1",
+      "courseTitle": "Flirting Pre-Requisites",
+      "lessonNumber": 2,
+      "title": "Identifying the Signals",
+      "duration": 2,
+      "summary": "Learn to respond to signals instead of guessing or forcing.",
+      "isCompleted": false,
+      "isLocked": true,
+      "screens": [
+        {
+          "id": "screen_1_2_1",
+          "order": 0,
+          "content": [
+            {
+              "id": "content_1_2_1",
+              "text": "The easiest way to know whether to keep flirting is to watch how she responds, not how you feel.",
+              "order": 0
+            },
+            {
+              "id": "content_1_2_2",
+              "text": "Interest is rarely stated directly. It shows up in how much she invests. When she's interested, she's flirty & playful, asks questions back, stays engaged, and makes the interaction easy.",
+              "order": 1
+            },
+            {
+              "id": "content_1_2_3",
+              "text": "When she's not, her answers stay short, her attention drifts, and she looks for exits.",
+              "order": 2
+            }
+          ]
+        },
+        {
+          "id": "screen_1_2_2",
+          "order": 1,
+          "content": [
+            {
+              "id": "content_1_2_4",
+              "text": "Knowing the difference between genuine interest and polite tolerance keeps you focused on real opportunities rather than dead ends.",
+              "order": 0
+            }
+          ]
+        },
+        {
+          "id": "screen_1_2_3",
+          "order": 2,
+          "content": [
+            {
+              "id": "content_1_2_5",
+              "text": "A guy approaches a woman working on her laptop. She gives short answers, avoids eye contact, and returns to her screen.",
+              "order": 0
+            },
+            {
+              "id": "content_1_2_6",
+              "text": "He keeps pushing until she finally says she needs to focus. He thinks she was rude, but she signalled disinterest from the start, and he ignored it.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_2_4",
+          "order": 3,
+          "content": [
+            {
+              "id": "content_1_2_7",
+              "text": "Same coffee shop, different moment. Another guy asks a woman about the book she's reading. She smiles, closes the book slightly, and engages. She expands on her answers, asks him questions, turns toward him, and stays in the conversation even when he offers to leave.",
+              "order": 0
+            },
+            {
+              "id": "content_1_2_8",
+              "text": "These are clear signals of interest, inviting flirting.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_2_5",
+          "order": 4,
+          "content": [
+            {
+              "id": "content_1_2_9",
+              "text": "Green lights mean continue. Yellow lights mean slow down. Red lights mean stop.",
+              "order": 0
+            },
+            {
+              "id": "content_1_2_10",
+              "text": "Green looks like this: she flirts back, stays engaged, faces you, smiles, makes eye contact, laughs genuinely, or creates openings for plans. When you see several, you can continue flirting.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_2_6",
+          "order": 5,
+          "content": [
+            {
+              "id": "content_1_2_11",
+              "text": "Yellow looks like this: she's polite but not enthusiastic, answers but doesn't ask back, and her body language is neutral. She might warm up, but if it stays yellow, it's not moving forward, and you should hold back on the flirting.",
+              "order": 0
+            },
+            {
+              "id": "content_1_2_12",
+              "text": "Red looks like this: short answers, checking her phone, looking around, turning her body away, mentioning she needs to go, or saying she has a boyfriend. Red means exit politely and move on.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_2_7",
+          "order": 6,
+          "content": [
+            {
+              "id": "content_1_2_13",
+              "text": "You don't create interest by pushing. You create a connection by responding to reality.",
+              "order": 0
+            },
+            {
+              "id": "content_1_2_14",
+              "text": "Read the signals, move when it's welcomed, and step away when it's not.",
+              "order": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson_1_3",
+      "courseId": "course_1",
+      "courseTitle": "Flirting Pre-Requisites",
+      "lessonNumber": 3,
+      "title": "Respect",
+      "duration": 2,
+      "summary": "Learn why respecting boundaries is the baseline for attraction.",
+      "isCompleted": false,
+      "isLocked": true,
+      "screens": [
+        {
+          "id": "screen_1_3_1",
+          "order": 0,
+          "content": [
+            {
+              "id": "content_1_3_1",
+              "text": "A woman steps back, gives short answers, looks for an exit, and he keeps leaning in. He thinks he's being confident. Everyone else sees disrespect. Flirting only works when she feels safe enough to enjoy it.",
+              "order": 0
+            },
+            {
+              "id": "content_1_3_2",
+              "text": "Respect in flirting means valuing her comfort and boundaries more than your desired outcome. It is reading her signals, adjusting when she hesitates, and accepting a no without pushing or negotiating.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_3_2",
+          "order": 1,
+          "content": [
+            {
+              "id": "content_1_3_3",
+              "text": "Real respect is being okay with her not being interested and moving on gracefully.",
+              "order": 0
+            },
+            {
+              "id": "content_1_3_4",
+              "text": "That isn't weakness; it is maturity, and it makes women far more open to a yes because they feel safe exploring it.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_3_3",
+          "order": 2,
+          "content": [
+            {
+              "id": "content_1_3_5",
+              "text": "A guy talks to a woman in a bookstore. She gives short answers, avoids asking questions, and angles her body away. He ignores it all and keeps pushing the conversation.",
+              "order": 0
+            },
+            {
+              "id": "content_1_3_6",
+              "text": "She finally excuses herself, and he walks away frustrated, not realizing he crossed a line by refusing to read her disinterest.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_3_4",
+          "order": 3,
+          "content": [
+            {
+              "id": "content_1_3_7",
+              "text": "Same setting, different awareness. Another guy notices the same signals within a minute and ends the interaction politely.",
+              "order": 0
+            },
+            {
+              "id": "content_1_3_8",
+              "text": "She leaves with a good impression instead of discomfort.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_3_5",
+          "order": 4,
+          "content": [
+            {
+              "id": "content_1_3_9",
+              "text": "Respect is the foundation of attraction, and without it, everything collapses. Read her signals and honor them. If she isn't engaged or looks uncomfortable, step back. If she says she has a boyfriend, believe her and move on.",
+              "order": 0
+            },
+            {
+              "id": "content_1_3_10",
+              "text": "Politeness is not interest, so don't confuse a smile for chemistry. Never touch without clear signs she's comfortable, and stop immediately if she pulls away. Accept rejection without guilt trips or attitude. These aren't extras. They're the baseline.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_3_6",
+          "order": 5,
+          "content": [
+            {
+              "id": "content_1_3_11",
+              "text": "Flirting without respect isn't flirting, and the men who ignore this get rejected because they make women uncomfortable, not because women are difficult.",
+              "order": 0
+            },
+            {
+              "id": "content_1_3_12",
+              "text": "Respect protects both people. It keeps you honest, keeps her safe, and keeps the moment light enough for a real connection to grow if it's meant to.",
+              "order": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson_1_4",
+      "courseId": "course_1",
+      "courseTitle": "Flirting Pre-Requisites",
+      "lessonNumber": 4,
+      "title": "Energy",
+      "duration": 3,
+      "summary": "Learn how emotional tone attracts more than words or tactics.",
+      "isCompleted": false,
+      "isLocked": true,
+      "screens": [
+        {
+          "id": "screen_1_4_1",
+          "order": 0,
+          "content": [
+            {
+              "id": "content_1_4_1",
+              "text": "Humans are drawn to energy before words. When your vibe is warm, upbeat, and grounded, people feel safe leaning in, and flirting starts working without you having to try.",
+              "order": 0
+            },
+            {
+              "id": "content_1_4_2",
+              "text": "Energy isn't about being loud or extroverted. It is the emotional tone you bring into the moment.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_4_2",
+          "order": 1,
+          "content": [
+            {
+              "id": "content_1_4_3",
+              "text": "People naturally move toward what feels warm and engaging and pull away from what feels flat or draining.",
+              "order": 0
+            },
+            {
+              "id": "content_1_4_4",
+              "text": "Low energy makes conversations feel heavy and short. Good energy makes people feel lighter and more alive. It invites them to open up, play, and stay in the interaction.",
+              "order": 1
+            },
+            {
+              "id": "content_1_4_5",
+              "text": "The words you use matter far less than the feeling you create, and that feeling is what makes flirting possible.",
+              "order": 2
+            }
+          ]
+        },
+        {
+          "id": "screen_1_4_3",
+          "order": 2,
+          "content": [
+            {
+              "id": "content_1_4_6",
+              "text": "A guy approaches a woman at a bar after a long day. He's tired, low-energy, and it shows. His voice is flat, his body language dull.",
+              "order": 0
+            },
+            {
+              "id": "content_1_4_7",
+              "text": "She answers politely but briefly, then excuses herself. Nothing he said was wrong. It just didn't feel good to talk to him.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_4_4",
+          "order": 3,
+          "content": [
+            {
+              "id": "content_1_4_8",
+              "text": "Same bar, different guy. He's also tired but takes a few minutes to reset. He chats with the bartender, warms up, and gets himself into a better state. When he approaches a lively group, he matches their energy with a relaxed smile and upbeat tone.",
+              "order": 0
+            },
+            {
+              "id": "content_1_4_9",
+              "text": "They respond immediately, welcome him in, and the interaction flows. The difference wasn't in the lines or the looks. It was energy.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_4_5",
+          "order": 4,
+          "content": [
+            {
+              "id": "content_1_4_10",
+              "text": "Your energy needs to match or slightly exceed the person or group you're talking to. That is calibration. If they are relaxed, stay relaxed. If they are lively, bring a little more spark.",
+              "order": 0
+            },
+            {
+              "id": "content_1_4_11",
+              "text": "People protect the moods they enjoy, so when your energy disrupts theirs, they pull back. When you match or elevate it, they welcome you.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_4_6",
+          "order": 5,
+          "content": [
+            {
+              "id": "content_1_4_12",
+              "text": "The best flirts are the ones who make every moment feel better than it did before they arrived.",
+              "order": 0
+            },
+            {
+              "id": "content_1_4_13",
+              "text": "Matching the mood of the moment is a simple skill you can adjust every time. Shift your state first, then show up. Flirting becomes easier when the vibe feels shared.",
+              "order": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]

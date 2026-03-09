@@ -1,0 +1,495 @@
+[
+    {
+      "id": "lesson_1_1",
+      "courseId": "course_1",
+      "courseSummary": "Learn to create engaging conversations that feel mutual, relaxed, and alive.",
+      "courseTitle": "Small Talk & Momentum",
+      "lessonNumber": 1,
+      "title": "Never Run Out of Things to Say",
+      "duration": 2,
+      "summary": "Learn to build conversations by expanding on details she already shares.",
+      "isCompleted": false,
+      "isLocked": false,
+      "screens": [
+        {
+          "id": "screen_1_1_1",
+          "order": 0,
+          "content": [
+            {
+              "id": "content_1_1_1",
+              "text": "Every conversation is full of small clues. A word, a place, an emotion, a detail. They appear in almost every sentence, but many people stick to safe, predictable questions. That is how an interaction turns into an interview instead of a connection.",
+              "order": 0
+            },
+            {
+              "id": "content_1_1_2",
+              "text": "Threading is the skill of taking one detail from what she says and using it to guide the conversation forward.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_1_2",
+          "order": 1,
+          "content": [
+            {
+              "id": "content_1_1_3",
+              "text": "Instead of jumping to a new question, you build on the thread she already opened.",
+              "order": 0
+            },
+            {
+              "id": "content_1_1_4",
+              "text": "This works because it keeps the conversation from feeling forced and turns it into a genuine exchange between two people who are actually listening.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_1_3",
+          "order": 2,
+          "content": [
+            {
+              "id": "content_1_1_5",
+              "text": "You ask her where she's from. She says, \"I grew up in Canada, studied in New York, and moved here last year.\" Three threads appear in one line, yet some men might respond with their own city and dig themselves into small talk.",
+              "order": 0
+            },
+            {
+              "id": "content_1_1_6",
+              "text": "Picking even one thread changes everything. \"Canada's so beautiful, how come you decided to move here after New York?\" invites a real story. It shows you heard her. The moment feels more natural now because you listened, asked, and expanded on what she said.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_1_4",
+          "order": 3,
+          "content": [
+            {
+              "id": "content_1_1_7",
+              "text": "When you build on what she shares instead of searching for the perfect response, the conversation opens up on its own.",
+              "order": 0
+            },
+            {
+              "id": "content_1_1_8",
+              "text": "Every response contains multiple threads. Your job is to listen for them and pick one to explore. When she says \"I work in marketing,\" she's given you threads about marketing, work, her specific role, the company, and the industry.",
+              "order": 1
+            },
+            {
+              "id": "content_1_1_9",
+              "text": "Don't immediately jump to \"Where are you from?\" Follow one of the threads she just gave you.",
+              "order": 2
+            }
+          ]
+        },
+        {
+          "id": "screen_1_1_5",
+          "order": 4,
+          "content": [
+            {
+              "id": "content_1_1_10",
+              "text": "Threading reminds you that good conversation is not a performance. When you trust the details she gives you, you never run out of things to say.",
+              "order": 0
+            },
+            {
+              "id": "content_1_1_11",
+              "text": "The path forward is always in the last sentence she spoke.",
+              "order": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson_1_2",
+      "courseId": "course_1",
+      "courseTitle": "Small Talk & Momentum",
+      "lessonNumber": 2,
+      "title": "Use Observations and Statements",
+      "duration": 3,
+      "summary": "Learn to contribute without constantly asking questions.",
+      "isCompleted": false,
+      "isLocked": true,
+      "screens": [
+        {
+          "id": "screen_1_2_1",
+          "order": 0,
+          "content": [
+            {
+              "id": "content_1_2_1",
+              "text": "Questions are valuable because they naturally continue a conversation, but they also place a quiet demand on the other person. Too many in a row may create an uneven exchange.",
+              "order": 0
+            },
+            {
+              "id": "content_1_2_2",
+              "text": "Observations are comments about what you notice. Statements are declarations of your own thoughts or experiences.",
+              "order": 1
+            },
+            {
+              "id": "content_1_2_3",
+              "text": "Both create conversational investment without the burden of questions.",
+              "order": 2
+            }
+          ]
+        },
+        {
+          "id": "screen_1_2_2",
+          "order": 1,
+          "content": [
+            {
+              "id": "content_1_2_4",
+              "text": "This matters because questions create asymmetry. You ask, she answers. You ask again, she answers again. The pattern is extractive.",
+              "order": 0
+            },
+            {
+              "id": "content_1_2_5",
+              "text": "You're taking information and giving nothing back. That feels like an interview, not a conversation.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_2_3",
+          "order": 2,
+          "content": [
+            {
+              "id": "content_1_2_6",
+              "text": "Observations and statements give them something to work with. This evens out the exchange and makes the moment feel more like two people sharing rather than one person collecting information.",
+              "order": 0
+            },
+            {
+              "id": "content_1_2_7",
+              "text": "That shift is what keeps the connection feeling warm rather than tense.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_2_4",
+          "order": 3,
+          "content": [
+            {
+              "id": "content_1_2_8",
+              "text": "You are talking to a woman in a bar and ask how her week has been. She says, \"Pretty full on. Lots of late nights.\" Some men would follow up with, \"What do you do for work?\" and lock her into another answer.",
+              "order": 0
+            },
+            {
+              "id": "content_1_2_9",
+              "text": "Instead, you say, \"Well, it sounds like you earned your drink tonight.\" She smiles and explains her workload on her own. The moment feels smoother because she chose what to share.",
+              "order": 1
+            },
+            {
+              "id": "content_1_2_10",
+              "text": "Your statement lowered the pressure and made the space feel shared rather than demanded.",
+              "order": 2
+            }
+          ]
+        },
+        {
+          "id": "screen_1_2_5",
+          "order": 4,
+          "content": [
+            {
+              "id": "content_1_2_11",
+              "text": "Questions extract. Observations and statements contribute. Balanced conversations require both.",
+              "order": 0
+            },
+            {
+              "id": "content_1_2_12",
+              "text": "When you only ask questions, you're making her do all the work. She provides content, you consume it, and ask for more. That's exhausting for her and creates no real connection.",
+              "order": 1
+            },
+            {
+              "id": "content_1_2_13",
+              "text": "But when you mix in observations and statements, you're contributing to the conversation.",
+              "order": 2
+            }
+          ]
+        },
+        {
+          "id": "screen_1_2_6",
+          "order": 5,
+          "content": [
+            {
+              "id": "content_1_2_14",
+              "text": "Observations show you're paying attention. \"You have a cool phone case,\" gives her something to respond to while demonstrating attentiveness.",
+              "order": 0
+            },
+            {
+              "id": "content_1_2_15",
+              "text": "Statements reveal your perspective. \"This place has the best cocktails\" gives her something to react to while sharing something about your taste.",
+              "order": 1
+            },
+            {
+              "id": "content_1_2_16",
+              "text": "Both create openings for her to engage without the burden of answering another question.",
+              "order": 2
+            }
+          ]
+        },
+        {
+          "id": "screen_1_2_7",
+          "order": 6,
+          "content": [
+            {
+              "id": "content_1_2_17",
+              "text": "You already have enough to create a balanced conversation. A simple observation or small statement is often all it takes.",
+              "order": 0
+            },
+            {
+              "id": "content_1_2_18",
+              "text": "Connection grows when the moment feels shared, not extracted.",
+              "order": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson_1_3",
+      "courseId": "course_1",
+      "courseTitle": "Small Talk & Momentum",
+      "lessonNumber": 3,
+      "title": "Maintain Momentum",
+      "duration": 2,
+      "summary": "Learn why inaction guarantees regret while action always creates possibility.",
+      "isCompleted": false,
+      "isLocked": true,
+      "screens": [
+        {
+          "id": "screen_1_3_1",
+          "order": 0,
+          "content": [
+            {
+              "id": "content_1_3_1",
+              "text": "You've been in conversations where everything felt easy and others where it felt like work.",
+              "order": 0
+            },
+            {
+              "id": "content_1_3_2",
+              "text": "Maintaining momentum means keeping conversational energy moving forward through balanced contribution. It's the ability to prevent both awkward silences and one-sided monologues by staying actively engaged without dominating.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_3_2",
+          "order": 1,
+          "content": [
+            {
+              "id": "content_1_3_3",
+              "text": "This matters because conversations have rhythm. When that rhythm breaks—either through someone talking too much or too little—the interaction loses flow.",
+              "order": 0
+            },
+            {
+              "id": "content_1_3_4",
+              "text": "Good pacing is a back-and-forth, not a broadcast. You offer something, then you make room. You share an opinion, then you check in.",
+              "order": 1
+            },
+            {
+              "id": "content_1_3_5",
+              "text": "The more you tune into their cues, the easier it becomes to guide the conversation without overwhelming it.",
+              "order": 2
+            }
+          ]
+        },
+        {
+          "id": "screen_1_3_3",
+          "order": 2,
+          "content": [
+            {
+              "id": "content_1_3_6",
+              "text": "You're having a drink together, and she mentions she went to Japan last year. You get excited and launch into a monologue about your own trip. Halfway through, you realise she is nodding politely but not contributing.",
+              "order": 0
+            },
+            {
+              "id": "content_1_3_7",
+              "text": "The energy drops because you took over instead of checking in.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_3_4",
+          "order": 3,
+          "content": [
+            {
+              "id": "content_1_3_8",
+              "text": "Now imagine the same moment with better pacing. She says she went to Japan, and you respond with a short, \"I loved it there too. What part did you end up staying in?\"",
+              "order": 0
+            },
+            {
+              "id": "content_1_3_9",
+              "text": "She adds her story, you add a line of your own, and the rhythm stays balanced.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_3_5",
+          "order": 4,
+          "content": [
+            {
+              "id": "content_1_3_10",
+              "text": "When you stay engaged without forcing the conversation, you create a rhythm that invites her in rather than overwhelming her or leaving her to carry it.",
+              "order": 0
+            },
+            {
+              "id": "content_1_3_11",
+              "text": "When you dominate, you kill her investment. When you go silent, you force her to carry the load alone. Both extremes kill attraction. The balance is contributing regularly without monopolizing.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_3_6",
+          "order": 5,
+          "content": [
+            {
+              "id": "content_1_3_12",
+              "text": "Share brief stories, not monologues. Make observations. Ask questions. Build on what she says. But always leave space for her to contribute.",
+              "order": 0
+            },
+            {
+              "id": "content_1_3_13",
+              "text": "Balanced momentum is not about saying more or less, but about knowing when to add and when to make space.",
+              "order": 1
+            },
+            {
+              "id": "content_1_3_14",
+              "text": "When you start creating room for her to join you, the interaction feels lighter, more equal, and far more alive.",
+              "order": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson_1_4",
+      "courseId": "course_1",
+      "courseTitle": "Small Talk & Momentum",
+      "lessonNumber": 4,
+      "title": "When Silence Works",
+      "duration": 3,
+      "summary": "Learn why silence can deepen connection instead of breaking it.",
+      "isCompleted": false,
+      "isLocked": true,
+      "screens": [
+        {
+          "id": "screen_1_4_1",
+          "order": 0,
+          "content": [
+            {
+              "id": "content_1_4_1",
+              "text": "Silence is often treated as a problem to fix. In reality, it is one of the cleanest signals of composure you can give. A calm pause can invite her in, let the moment breathe, and make what you do say land with more impact.",
+              "order": 0
+            },
+            {
+              "id": "content_1_4_2",
+              "text": "When you are comfortable holding that space, the interaction slows down in a way that feels intentional rather than awkward.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_4_2",
+          "order": 1,
+          "content": [
+            {
+              "id": "content_1_4_3",
+              "text": "Silence in conversation is the deliberate pause between exchanges. It's the space where nothing is said, yet communication still happens through presence, eye contact, and a sense of comfort with the moment.",
+              "order": 0
+            },
+            {
+              "id": "content_1_4_4",
+              "text": "Silence matters because it prevents the conversation from becoming crowded.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_4_3",
+          "order": 2,
+          "content": [
+            {
+              "id": "content_1_4_5",
+              "text": "Most men rush to respond because they fear losing momentum, but speed often creates pressure rather than connection.",
+              "order": 0
+            },
+            {
+              "id": "content_1_4_6",
+              "text": "A steady pause in the right places keeps the pacing balanced and allows her to think, react, and contribute without feeling pushed.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_4_4",
+          "order": 3,
+          "content": [
+            {
+              "id": "content_1_4_7",
+              "text": "You're standing with her outside a cafe. She tells you she just changed careers and isn't sure she made the right call. You feel the urge to jump in, reassure her, and fill the space with advice.",
+              "order": 0
+            },
+            {
+              "id": "content_1_4_8",
+              "text": "Instead, you pause. You hold eye contact, nod once, and wait. She keeps going, opening up about what pushed her to make the move.",
+              "order": 1
+            },
+            {
+              "id": "content_1_4_9",
+              "text": "That extra two seconds of silence gave her room to reveal something real.",
+              "order": 2
+            }
+          ]
+        },
+        {
+          "id": "screen_1_4_5",
+          "order": 4,
+          "content": [
+            {
+              "id": "content_1_4_10",
+              "text": "The moment deepened not because you had the perfect line, but because you didn't rush to fill the gap.",
+              "order": 0
+            },
+            {
+              "id": "content_1_4_11",
+              "text": "When you use silence instead of speed, the interaction becomes shared rather than managed.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_4_6",
+          "order": 5,
+          "content": [
+            {
+              "id": "content_1_4_12",
+              "text": "After she shares something meaningful, pause. Let it land. Show you're processing. Don't rush to respond or redirect. The space shows you're processing her words, not just waiting for your turn to talk.",
+              "order": 0
+            },
+            {
+              "id": "content_1_4_13",
+              "text": "The same applies before you speak—a brief hesitation makes what you say feel considered rather than reactive. These small pauses communicate that both her words and yours have weight.",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "screen_1_4_7",
+          "order": 6,
+          "content": [
+            {
+              "id": "content_1_4_14",
+              "text": "You already know how to slow a conversation down. One calm breath, one steady pause, and the pressure drops for both of you.",
+              "order": 0
+            },
+            {
+              "id": "content_1_4_15",
+              "text": "Let silence work for you rather than against you.",
+              "order": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
