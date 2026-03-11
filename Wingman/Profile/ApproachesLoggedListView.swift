@@ -242,7 +242,6 @@ struct ApproachLogRow: View {
                 .font(.manropeRegular(size: 16))
                 .foregroundColor(.black)
                 .lineSpacing(2)
-                .lineLimit(2)
                 .truncationMode(.tail)
                 .fixedSize(horizontal: false, vertical: true)
             

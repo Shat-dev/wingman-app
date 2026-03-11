@@ -7,6 +7,7 @@
 
 import SwiftUI
 import GoogleSignIn
+import UserNotifications
 
 @main
 struct WingmanApp: App {
@@ -20,7 +21,21 @@ struct WingmanApp: App {
                     // Handle Google Sign-In callback URL
                     GIDSignIn.sharedInstance.handle(url)
                 }
+                .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+                    // Clear notification badge when app enters foreground
+                    clearNotificationBadge()
+                }
+                .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+                    // Clear notification badge when app becomes active
+                    clearNotificationBadge()
+                }
         }
+    }
+    
+    // MARK: - Clear Notification Badge
+    private func clearNotificationBadge() {
+        print("🔔 App became active - clearing notification badge")
+        NotificationManager.shared.clearNotificationBadgeAndDelivered()
     }
 }
 
@@ -96,8 +111,14 @@ struct RootView: View {
             .animation(.easeInOut(duration: 0.3), value: authManager.isAnonymousUser)
         }
         .task {
+            // Clear any existing notification badge on app launch
+            NotificationManager.shared.clearNotificationBadgeAndDelivered()
+            
             // Restore session gracefully on app launch
             await authManager.restoreSessionGracefully()
+            
+            // Setup notifications on app launch
+            NotificationManager.shared.setupNotificationsOnLaunch()
         }
         .onChange(of: authManager.isAuthenticated) { newValue in
             print("\n🔔 RootView detected isAuthenticated change: \(newValue)")

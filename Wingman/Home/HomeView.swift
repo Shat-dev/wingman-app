@@ -140,14 +140,15 @@ struct HomeView: View {
                             .background(Color.white)
                             .clipShape(RoundedRectangle(cornerRadius: 5))
                             .overlay(
-                                Image("wingman_logo")
+                                Image("dp_wm_logo")
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 300, height: 280)
-                                    .opacity(0.12)
-                                    .padding(.top, -100)
-                                    .padding(.trailing, 155),
-                                alignment: .topTrailing
+                                    .frame(width: 109) // Adjust height automatically to maintain aspect ratio
+                                    .opacity(0.10)
+                                    // No heavy negative padding needed
+                                    .padding(.top, 3)    // Small nudge from the top edge
+                                    .padding(.leading, 3), // Small nudge from the right edge
+                                alignment: .topLeading // This anchors it to the corner
                             )
                             .overlay(
                                 RoundedRectangle(cornerRadius: 5)

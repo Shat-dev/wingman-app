@@ -123,6 +123,14 @@ struct SettingsSheet: View {
                             .tint(.green)
                             .onChange(of: goalNotifications) { newValue in
                                 UserDefaults.standard.set(newValue, forKey: "goal_notifications")
+                                
+                                // Update notifications based on toggle
+                                Task {
+                                    await NotificationManager.shared.updateDailyReadingGoalNotification(
+                                        enabled: newValue,
+                                        goalMinutes: dailyReadingGoal
+                                    )
+                                }
                             }
                     }
                     .padding(.horizontal, 20)
@@ -227,6 +235,14 @@ struct SettingsSheet: View {
             dailyReadingGoal = 10 // Default value
         }
         goalNotifications = UserDefaults.standard.bool(forKey: "goal_notifications")
+        
+        // If goal notifications is true but UserDefaults returns false for a first-time user,
+        // we should keep the default true value. Only change if explicitly set.
+        if !UserDefaults.standard.bool(forKey: "goal_notifications") &&
+           UserDefaults.standard.object(forKey: "goal_notifications") == nil {
+            goalNotifications = true // Default to enabled for new users
+            UserDefaults.standard.set(true, forKey: "goal_notifications")
+        }
     }
     
     private func getUserEmail() -> String {

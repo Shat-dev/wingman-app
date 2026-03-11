@@ -142,9 +142,20 @@ struct DailyReadingGoalSheet: View {
         
         // Simulate API call
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            // TODO: Save to Supabase or UserDefaults
+            // Save to UserDefaults
             onSave(selectedGoal)
             UserDefaults.standard.set(selectedGoal, forKey: "daily_reading_goal")
+            
+            // Update notifications if they are enabled
+            let goalNotificationsEnabled = UserDefaults.standard.bool(forKey: "goal_notifications")
+            if goalNotificationsEnabled {
+                Task {
+                    await NotificationManager.shared.updateDailyReadingGoalNotification(
+                        enabled: true,
+                        goalMinutes: selectedGoal
+                    )
+                }
+            }
             
             isSaving = false
             showSuccess = true
