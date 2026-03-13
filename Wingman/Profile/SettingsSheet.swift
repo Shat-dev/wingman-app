@@ -9,10 +9,14 @@ import Supabase
 
 struct SettingsSheet: View {
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var authManager: AuthManager
     @State private var goalNotifications = true
     @State private var showingDeleteAlert = false
     @State private var showDailyReadingGoal = false
     @State private var dailyReadingGoal = 10
+    @State private var isDeleting = false // Loading state for account deletion
+    @State private var showingErrorAlert = false
+    @State private var errorMessage = ""
     let userName: String
     
     var body: some View {
@@ -169,15 +173,18 @@ struct SettingsSheet: View {
                     }) {
                         Text("Delete Account")
                             .font(.manropeMedium(size: 14))
-                            .foregroundColor(.red)
+                            .foregroundColor(Color.wingmanBlack)
                             .underline()
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
+                    .disabled(isDeleting)
+                    .opacity(isDeleting ? 0.5 : 1.0)
+                    .animation(.easeInOut(duration: 0.3), value: isDeleting)
                     .padding(.horizontal, 24)
                     .padding(.bottom, 16)
                     
                     // MARK: - Version
-                    Text("V 6.9.0")
+                    Text("V \(getAppVersion())")
                         .font(.manropeMedium(size: 14))
                         .foregroundColor(.gray)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -207,26 +214,67 @@ struct SettingsSheet: View {
                 }
             }
             .navigationBarHidden(true)
-            .alert("Delete Account", isPresented: $showingDeleteAlert) {
-                Button("Cancel", role: .cancel) { }
-                Button("Delete", role: .destructive) {
-                    deleteAccount()
+            .disabled(isDeleting) // Disable interaction during deletion
+            
+            // MARK: - Loading Overlay
+            if isDeleting {
+                ZStack {
+                    Color.black.opacity(0.3)
+                        .ignoresSafeArea()
+                    
+                    VStack(spacing: 16) {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: .wingmanBlack))
+                            .scaleEffect(1.2)
+                        
+                        Text("Deleting Account...")
+                            .font(.manropeMedium(size: 16))
+                            .foregroundColor(.wingmanBlack)
+                        
+                        Text("This may take a moment")
+                            .font(.manropeRegular(size: 14))
+                            .foregroundColor(.gray)
+                    }
+                    .padding(24)
+                    .background(Color.white)
+                    .cornerRadius(12)
+                    .shadow(radius: 10)
                 }
-            } message: {
-                Text("Are you sure you want to delete your account? This action cannot be undone.")
+                .transition(.opacity)
             }
-            .sheet(isPresented: $showDailyReadingGoal) {
-                DailyReadingGoalSheet(currentGoal: dailyReadingGoal) { newGoal in
-                    dailyReadingGoal = newGoal
-                }
-                .presentationDetents([.medium])
-                .presentationDragIndicator(.hidden)
-                .presentationCornerRadius(20)
+        }
+        .animation(.easeInOut, value: isDeleting)
+        .alert("Delete Account", isPresented: $showingDeleteAlert) {
+            Button("Cancel", role: .cancel) { }
+            Button("Delete", role: .destructive) {
+                deleteAccount()
             }
+        } message: {
+            Text("Are you sure you want to delete your account? This action cannot be undone.")
+        }
+        .alert("Error", isPresented: $showingErrorAlert) {
+            Button("OK") { }
+        } message: {
+            Text(errorMessage)
+        }
+        .sheet(isPresented: $showDailyReadingGoal) {
+            DailyReadingGoalSheet(currentGoal: dailyReadingGoal) { newGoal in
+                dailyReadingGoal = newGoal
+            }
+            .presentationDetents([.medium])
+            .presentationDragIndicator(.hidden)
+            .presentationCornerRadius(20)
         }
         .onAppear {
             loadSettings()
         }
+    }
+    
+    private func getAppVersion() -> String {
+        guard let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
+            return "Unknown"
+        }
+        return version
     }
     
     private func loadSettings() {
@@ -263,29 +311,90 @@ struct SettingsSheet: View {
     }
     
     private func deleteAccount() {
-        // TODO: Delete account from Supabase
+        print("🗑️ Delete account confirmation received")
+        
         Task {
             do {
-                // Delete from Supabase
-                try await SupabaseManager.shared.client.auth.signOut()
-                
-                // Clear local data
-                SupabaseManager.shared.clearCurrentUser()
-                
-                // Dismiss and navigate to login screen
+                // Start loading state
                 await MainActor.run {
+                    isDeleting = true
+                    print("🗑️ Showing deletion loading state...")
+                }
+                
+                print("🗑️ Initiating account deletion process...")
+                
+                // Call AuthManager's secure deletion method
+                try await authManager.deleteAccount()
+                
+                print("✅ Account deletion successful")
+                
+                // Account deletion was successful - AuthManager has already:
+                // 1. Deleted all user data from database
+                // 2. Deleted the auth account
+                // 3. Cleared all local data
+                // 4. Updated auth state (isAuthenticated = false)
+                
+                await MainActor.run {
+                    // Stop loading state
+                    isDeleting = false
+                    
+                    // Dismiss the settings sheet
                     dismiss()
-                    // TODO: Navigate to login screen
-                    print("Account deleted successfully")
+                    
+                    // The app will automatically navigate to login/onboarding screen
+                    // because AuthManager has set isAuthenticated = false
+                    print("✅ Account deletion completed - returning to auth flow")
+                }
+                
+            } catch AccountDeletionError.notAuthenticated {
+                await MainActor.run {
+                    isDeleting = false
+                    print("❌ User not authenticated")
+                    // Handle error - maybe show an alert
+                }
+            } catch AccountDeletionError.invalidSession {
+                await MainActor.run {
+                    isDeleting = false
+                    print("❌ Invalid session")
+                    // Handle error - session might have expired
+                }
+            } catch AccountDeletionError.networkError(let message) {
+                await MainActor.run {
+                    isDeleting = false
+                    print("❌ Network error during deletion: \(message)")
+                    // Show network error to user
+                    showDeletionError("Network error: Please check your connection and try again.")
+                }
+            } catch AccountDeletionError.deletionFailed(let message) {
+                await MainActor.run {
+                    isDeleting = false
+                    print("❌ Account deletion failed: \(message)")
+                    // Show server error to user
+                    showDeletionError("Deletion failed: \(message)")
+                }
+            } catch AccountDeletionError.invalidResponse {
+                await MainActor.run {
+                    isDeleting = false
+                    print("❌ Invalid response from server")
+                    showDeletionError("Server error: Please try again later.")
                 }
             } catch {
-                print("Error deleting account: \(error.localizedDescription)")
+                await MainActor.run {
+                    isDeleting = false
+                    print("❌ Unexpected error during account deletion: \(error.localizedDescription)")
+                    showDeletionError("An unexpected error occurred. Please try again.")
+                }
             }
         }
     }
     
+    private func showDeletionError(_ message: String) {
+        errorMessage = message
+        showingErrorAlert = true
+        print("🚨 Deletion Error: \(message)")
+    }
+    
     private func logOut() {
-        // TODO: Sign out from Supabase
         Task {
             do {
                 try await SupabaseManager.shared.client.auth.signOut()
@@ -293,7 +402,6 @@ struct SettingsSheet: View {
                 
                 await MainActor.run {
                     dismiss()
-                    // TODO: Navigate to login screen
                     print("Logged out successfully")
                 }
             } catch {
@@ -305,4 +413,5 @@ struct SettingsSheet: View {
 
 #Preview {
     SettingsSheet(userName: "Shat")
+        .environmentObject(AuthManager())
 }

@@ -765,6 +765,118 @@ final class AuthManager: ObservableObject {
             print("🔄 Paywall flow reset for user: \(userId)")
         }
     }
+
+    // MARK: - Account Deletion
+    func deleteAccount() async throws {
+        print("\n🗑️ deleteAccount() called")
+        
+        guard let currentUser = currentUser else {
+            throw AccountDeletionError.notAuthenticated
+        }
+        
+        guard let session = try? await client.auth.session else {
+            throw AccountDeletionError.invalidSession
+        }
+        
+        let userId = currentUser.id.uuidString
+        print("🗑️ Starting account deletion for user: \(userId)")
+        
+        do {
+            // Call the Supabase Edge Function using direct HTTP request
+            // Since functions.invoke is not working, use URLSession directly
+            let functionURL = URL(string: "https://bnckmgnysfliiypvxxii.supabase.co/functions/v1/delete-user-account")!
+            
+            var request = URLRequest(url: functionURL)
+            request.httpMethod = "POST"
+            request.setValue("Bearer \(session.accessToken)", forHTTPHeaderField: "Authorization")
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJuY2ttZ255c2ZsaWl5cHZ4eGlpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM1NDc2NjIsImV4cCI6MjA0OTEyMzY2Mn0.IEcnoOKUbEUqXSZfZ4S6VbxZhb9z_YJXvVcgKLOeXXs", forHTTPHeaderField: "apikey")
+            request.httpBody = Data() // Empty body as user ID comes from JWT
+            
+            print("🔄 Calling edge function at: \(functionURL.absoluteString)")
+            
+            let (data, response) = try await URLSession.shared.data(for: request)
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                throw AccountDeletionError.invalidResponse
+            }
+            
+            print("✅ Edge function response received with status: \(httpResponse.statusCode)")
+            
+            // Log the raw response data for debugging 500 errors
+            if let responseString = String(data: data, encoding: .utf8) {
+                print("📄 Raw response body: \(responseString)")
+            }
+            
+            if httpResponse.statusCode == 200 {
+                let decoder = JSONDecoder()
+                let deletionResponse = try decoder.decode(AccountDeletionResponse.self, from: data)
+                
+                if deletionResponse.success {
+                    print("✅ Account deletion successful: \(deletionResponse.message)")
+                    print("🗑️ Deleted user ID: \(deletionResponse.deletedUserId ?? "unknown")")
+                    
+                    // Clear all local data
+                    clearAllLocalData()
+                    
+                    // Update auth state
+                    isAuthenticated = false
+                    self.currentUser = nil
+                    hasCompletedOnboarding = false
+                    hasCompletedQuestions = false
+                    hasCompletedPaywallFlow = false
+                    isCheckingSession = false
+                    
+                    print("✅ Account deletion completed successfully")
+                    
+                } else {
+                    print("❌ Account deletion failed: \(deletionResponse.error ?? "Unknown error")")
+                    throw AccountDeletionError.deletionFailed(deletionResponse.error ?? "Unknown error")
+                }
+            } else {
+                // Try to parse error response
+                if let errorData = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+                   let errorMessage = errorData["error"] as? String {
+                    throw AccountDeletionError.deletionFailed(errorMessage)
+                } else {
+                    throw AccountDeletionError.deletionFailed("HTTP \(httpResponse.statusCode)")
+                }
+            }
+            
+        } catch let error as AccountDeletionError {
+            throw error
+        } catch {
+            print("❌ Account deletion error: \(error.localizedDescription)")
+            throw AccountDeletionError.networkError(error.localizedDescription)
+        }
+    }
+    
+    private func clearAllLocalData() {
+        print("🧹 Clearing all local data...")
+        
+        // Clear user-specific data
+        let userDefaults = UserDefaults.standard
+        let userId = currentUser?.id.uuidString ?? ""
+        
+        // Remove user-specific keys
+        userDefaults.removeObject(forKey: "hasCompletedOnboarding_\(userId)")
+        userDefaults.removeObject(forKey: "hasCompletedQuestions_\(userId)")
+        userDefaults.removeObject(forKey: "hasCompletedPaywallFlow_\(userId)")
+        userDefaults.removeObject(forKey: "current_user_id")
+        userDefaults.removeObject(forKey: "user_email")
+        userDefaults.removeObject(forKey: "user_name")
+        
+        // Clear general app data
+        userDefaults.removeObject(forKey: "hasCompletedOnboarding")
+        userDefaults.removeObject(forKey: "daily_reading_goal")
+        userDefaults.removeObject(forKey: "goal_notifications")
+        
+        // Clear anonymous user data
+        userDefaults.removeObject(forKey: "isAnonymousUser")
+        AnonymousUserManager.shared.clearAllData()
+        
+        print("✅ All local data cleared")
+    }
 }
 
 // MARK: - Google Sign-In Errors
