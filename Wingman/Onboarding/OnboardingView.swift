@@ -21,6 +21,7 @@ struct OnboardingView: View {
     @State private var currentStatistic: StatisticContent? = nil
     @State private var stepHistory: [Int] = []
     @State private var statisticSourceStepIndex: Int? = nil
+    @State private var statisticAnimationId: UUID = UUID()  // Unique ID to force view refresh
     @State private var isGoingBack: Bool = false  // Track navigation direction
 
     @Environment(\.dismiss) private var dismiss
@@ -45,78 +46,346 @@ struct OnboardingView: View {
     @State private var answers: [String: String] = [:]
 
     var body: some View {
-        ZStack {
-            // Main content - hide when statistic is showing to prevent overlap
-            if !showStatistic {
-                VStack(spacing: 0) {
-
-                    // NOTE: compute step early so we can conditionally show/hide top bar
-                    let step = steps[stepIndex]
-
-                    // MARK: - Top Row: Back Chevron + Progress Bar inline
-                    // Hide both chevron and progress bar when we're on the loading state
-                    if step.type != .loading {
-                        HStack() {
-                            Button {
-                                handleBackButton()
-                            } label: {
-                                Image("auth_back")
-                                    .frame(width: 44, height: 44, alignment: .center)
-                                    .contentShape(Rectangle())
-                            }
-                            .buttonStyle(.plain)
-
-                            progressBar(progress: CGFloat(steps[stepIndex].progress))
-                                .frame(height: 10)
-                        }
-                        .padding(.top, 8)
-                        .padding(.leading, 10)
-                        .padding(.trailing,59)
-                        .padding(.bottom, 12)
-                    } else {
-                        // Optional: keep a little top spacing while hiding the bar so layout doesn't jump
-                        Spacer().frame(height: 20)
+        let step = steps[stepIndex]
+        
+        // Calculate progress for the current view (statistic or regular step)
+        let currentProgress: CGFloat = {
+            if showStatistic, let src = statisticSourceStepIndex, src >= 0, src < steps.count - 1 {
+                // Statistic screen progress: halfway between source and next question
+                return CGFloat((steps[src].progress + steps[src + 1].progress) / 2.0)
+            } else {
+                return CGFloat(step.progress)
+            }
+        }()
+        
+        VStack(spacing: 0) {
+            // MARK: - Fixed Top Bar (Back Chevron + Progress Bar)
+            // This stays fixed and doesn't animate - only hide on loading screen
+            if step.type != .loading || showStatistic {
+                HStack {
+                    Button {
+                        handleBackButton()
+                    } label: {
+                        Image("auth_back")
+                            .frame(width: 44, height: 44, alignment: .center)
+                            .contentShape(Rectangle())
                     }
-
-                    // MARK: - Content based on step type (wrapped for animation)
-                    ZStack {
-                        // Use ForEach with a single item to enable proper transition
-                        ForEach([stepIndex], id: \.self) { index in
-                            Group {
-                                if steps[index].type == .name {
-                                    nameInputView(step: steps[index])
-                                } else if steps[index].type == .question {
-                                    questionView(step: steps[index])
-                                } else if steps[index].type == .loading {
-                                    loadingView(step: steps[index])
-                                }
-                            }
-                            .transition(.asymmetric(
-                                insertion: .move(edge: isGoingBack ? .leading : .trailing),
-                                removal: .move(edge: isGoingBack ? .trailing : .leading)
-                            ))
-                        }
-                    }
-                    .clipped() // Clip content during animation to prevent overlap
+                    .buttonStyle(.plain)
+                    
+                    progressBar(progress: currentProgress)
+                        .frame(height: 10)
                 }
-                .transition(.asymmetric(
-                    insertion: .move(edge: isGoingBack ? .leading : .trailing),
-                    removal: .move(edge: isGoingBack ? .trailing : .leading)
-                ))
+                .padding(.top, 8)
+                .padding(.leading, 10)
+                .padding(.trailing, 59)
+                .padding(.bottom, 12)
+            } else {
+                // Keep spacing consistent when loading
+                Spacer().frame(height: 20)
+            }
+            
+            // MARK: - Animated Content Area
+            ZStack {
+                // Main content - hide when statistic is showing
+                if !showStatistic {
+                    // Use ForEach with a single item to enable proper transition
+                    ForEach([stepIndex], id: \.self) { index in
+                        Group {
+                            if steps[index].type == .name {
+                                nameInputContentView(step: steps[index])
+                            } else if steps[index].type == .question {
+                                questionContentView(step: steps[index])
+                            } else if steps[index].type == .loading {
+                                loadingContentView(step: steps[index])
+                            }
+                        }
+                        .transition(.asymmetric(
+                            insertion: .move(edge: isGoingBack ? .leading : .trailing),
+                            removal: .move(edge: isGoingBack ? .trailing : .leading)
+                        ))
+                    }
+                }
+                
+                // MARK: - Statistic Content (without its own top bar)
+                if showStatistic, let statistic = currentStatistic {
+                    statisticContentView(statistic: statistic)
+                        .background(Color.white)
+                        .id(statisticAnimationId)
+                        .transition(.asymmetric(
+                            insertion: .move(edge: isGoingBack ? .leading : .trailing),
+                            removal: .move(edge: isGoingBack ? .trailing : .leading)
+                        ))
+                }
+            }
+            .clipped() // Clip content during animation to prevent overlap
+        }
+        .background(Color.white)
+        .navigationBarBackButtonHidden(true)
+        .animation(.easeInOut(duration: 0.35), value: stepIndex)
+        .animation(.easeInOut(duration: 0.35), value: showStatistic)
+        .animation(.easeInOut(duration: 0.35), value: isGoingBack)
+        .animation(.easeInOut(duration: 0.35), value: statisticAnimationId)
+    }
+
+    // MARK: - Name Input Content View (without top bar)
+    private func nameInputContentView(step: OnboardingStep) -> some View {
+        VStack(alignment: .leading, spacing: 20) {
+            Text(step.title)
+                .font(.manropeSemiBold(size: 24))
+                .lineLimit(2)
+                .multilineTextAlignment(.leading)
+
+            // Name TextField with character limit
+            VStack(alignment: .trailing, spacing: 4) {
+                TextField("", text: $userName)
+                    .placeholder(when: userName.isEmpty) {
+                        Text("Enter your name")
+                            .foregroundColor(.wingmanBlack.opacity(0.3))
+                    }
+                    .font(.manropeRegular(size: 18))
+                    .padding(16)
+                    .background(Color.wingmanBlack.opacity(0.10))
+                    .cornerRadius(5)
+                    .focused($isNameFieldFocused)
+                    .onChange(of: userName) { newValue in
+                        // Limit username to 10 characters
+                        if newValue.count > 10 {
+                            userName = String(newValue.prefix(10))
+                        }
+                    }
+                    .padding(.top, 10)
+                
+                // Character counter
+                Text("\(userName.count)/10")
+                    .font(.caption)
+                    .foregroundColor(userName.count > 8 ? .red : .gray)
+                    .padding(.trailing, 4)
             }
 
-            // MARK: - Statistic Overlay
-            if showStatistic, let statistic = currentStatistic {
-                statisticOverlay(statistic: statistic)
-                    .background(Color.white)
-                    .transition(.asymmetric(
-                        insertion: .move(edge: .trailing),
-                        removal: .move(edge: isGoingBack ? .trailing : .leading)
-                    ))
+            // Buttons (moved closer to text field)
+            VStack(spacing: 12) {
+                // Full-area tappable Next button
+                let isNameEmpty = userName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+
+                Button(action: {
+                    isNameFieldFocused = false
+                    let trimmedName = userName.trimmingCharacters(in: .whitespacesAndNewlines)
+                    answers["name"] = trimmedName
+                    
+                    // Save to AnonymousUserManager if in anonymous mode
+                    if authManager.isAnonymousUser {
+                        AnonymousUserManager.shared.userName = trimmedName
+                        print("👻 Saved name to anonymous storage: \(trimmedName)")
+                    }
+                    
+                    moveToNext()
+                }) {
+                    Text("Next")
+                        .frame(maxWidth: .infinity)
+                        .font(.manropeSemiBold(size: 16))
+                        .padding()
+                        .background(isNameEmpty ? Color.wingmanBlack.opacity(0.5) : Color.wingmanBlack)
+                        .foregroundColor(.white)
+                        .cornerRadius(5)
+                }
+                .buttonStyle(.plain)
+                .contentShape(Rectangle())
+                .disabled(isNameEmpty)
+
+                Button("Skip") {
+                    isNameFieldFocused = false
+                    moveToNext()
+                }
+                .font(.manropeSemiBold(size: 16))
+                .foregroundColor(.black)
+                .underline()
+            }
+            
+            Spacer()
+        }
+        .padding(.horizontal, 24)
+        .padding(.bottom, 16)
+        .onAppear {
+            isNameFieldFocused = true
+        }
+    }
+    
+    // MARK: - Question Content View (without top bar)
+    private func questionContentView(step: OnboardingStep) -> some View {
+        VStack(alignment: .leading, spacing: 20) {
+            // Title
+            Text(step.title)
+                .font(.manropeSemiBold(size: 24))
+                .multilineTextAlignment(.leading)
+
+            if let subtitle = step.subtitle {
+                Text(subtitle)
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                    .lineLimit(2)
+                    .multilineTextAlignment(.leading)
+            }
+
+            // Options
+            if let options = step.options {
+                VStack(spacing: 10) {
+                    ForEach(options, id: \.self) { option in
+                        Button(action: {
+                            selectedOption = option
+                        }) {
+                            OptionButton(text: option, isSelected: selectedOption == option)
+                        }
+                    }
+                }
+            }
+
+            Spacer()
+
+            // Next Button (full-area tappable)
+            let isDisabled = (step.type == .question && selectedOption == nil)
+
+            Button(action: {
+                moveToNext()
+            }) {
+                Text("Next")
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.wingmanBlack)
+                    .foregroundColor(.wingmanWhiteFF)
+                    .cornerRadius(5)
+            }
+            .buttonStyle(.plain)
+            .contentShape(Rectangle())
+            .opacity(isDisabled ? 0.7 : 1)
+            .disabled(isDisabled)
+        }
+        .padding(.horizontal, 24)
+        .padding(.bottom, 16)
+    }
+    
+    // MARK: - Loading Content View (without top bar)
+    private func loadingContentView(step: OnboardingStep) -> some View {
+        // check if this exact text needs the smaller font
+        let isPersonalizingText = step.title == "Personalizing an experience just for you..."
+
+        return VStack(spacing: 12) {
+            Spacer()
+
+            // Loading Text (20pt only for the specific string)
+            Text(step.title)
+                .font(isPersonalizingText ? .manropeSemiBold(size: 20) : .manropeSemiBold(size: 24))
+                .foregroundColor(.black)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 40)
+
+            // Loading Dots Animation (dots are below the text)
+            LoadingDotsView()
+                .padding(.top, 6)
+
+            Spacer()
+        }
+        .onAppear {
+            // Save name to Supabase only if not anonymous
+            if !authManager.isAnonymousUser {
+                saveUserName()
+            }
+
+            // Wait 3 seconds then complete
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                print("✅ Finished all questions")
+                
+                if authManager.isAnonymousUser {
+                    // Complete anonymous onboarding (store data locally)
+                    authManager.completeAnonymousOnboarding()
+                } else {
+                    // Complete regular onboarding
+                    authManager.completeQuestions()
+                }
             }
         }
-        .navigationBarBackButtonHidden(true)
-        .animation(.easeInOut(duration: 0.35), value: showStatistic)
+    }
+    
+    // MARK: - Statistic Content View (without top bar - uses shared top bar)
+    private func statisticContentView(statistic: StatisticContent) -> some View {
+        ZStack {
+            Color.white
+
+            VStack(spacing: 0) {
+                // Main statistic content
+                VStack(spacing: 20) {
+                    // Heading
+                    Text(statistic.heading)
+                        .font(.manropeSemiBold(size: 24))
+                        .foregroundColor(.black)
+                        .lineSpacing(4)
+                        .multilineTextAlignment(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
+                    // Subheading
+                    Text(statistic.subheading)
+                        .font(.manropeRegular(size: 16))
+                        .foregroundColor(.gray)
+                        .lineSpacing(4)
+                        .multilineTextAlignment(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
+                    Spacer().frame(height: 40)
+
+                    // Image
+                    Image(statistic.imageName)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 250)
+
+                    Spacer().frame(height: 40)
+
+                    // Fact
+                    Text(statistic.fact)
+                        .font(.manropeRegular(size: 16))
+                        .foregroundColor(.gray)
+                        .lineSpacing(4)
+                        .multilineTextAlignment(.center)
+                        .frame(maxWidth: .infinity)
+
+                    Spacer() // push content up so the button sits at bottom
+                }
+                .padding(.horizontal, 24)
+
+                // Bottom-right Tap to Continue
+                HStack {
+                    Spacer()
+                    TapToContinueButton {
+                        continueFromStatistic()
+                    }
+                    // make the tappable area a little larger
+                    .padding(.trailing, 4)
+                    .font(.manropeMedium(size: 14))
+                }
+                .padding(.horizontal, 24)
+                .padding(.bottom, 24)
+            }
+            
+            // Invisible overlay to control tap areas - only right side should progress
+            HStack(spacing: 0) {
+                // Left half - blocks any tap gestures, not tappable for progression
+                Rectangle()
+                    .fill(Color.clear)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        // Explicitly do nothing - left side should not progress
+                        print("🚫 Left side tapped - no action")
+                    }
+                
+                // Right half - tappable area for progression
+                Rectangle()
+                    .fill(Color.clear)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        print("✅ Right side tapped - continuing")
+                        continueFromStatistic()
+                    }
+            }
+        }
     }
 
     // MARK: - Name Input View
@@ -358,24 +627,33 @@ struct OnboardingView: View {
             }
             
             // Invisible overlay to control tap areas - only right side should progress
-            HStack(spacing: 0) {
-                // Left half - blocks any tap gestures, not tappable for progression
+            // BUT exclude the top bar area so the back button remains clickable
+            VStack(spacing: 0) {
+                // Top area - no overlay (so back button is clickable)
                 Rectangle()
                     .fill(Color.clear)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        // Explicitly do nothing - left side should not progress
-                        print("🚫 Left side tapped - no action")
-                    }
+                    .frame(height: 64) // Height of top bar area
                 
-                // Right half - tappable area for progression
-                Rectangle()
-                    .fill(Color.clear)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        print("✅ Right side tapped - continuing")
-                        continueFromStatistic()
-                    }
+                // Bottom area - split left/right for tap control
+                HStack(spacing: 0) {
+                    // Left half - blocks any tap gestures, not tappable for progression
+                    Rectangle()
+                        .fill(Color.clear)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            // Explicitly do nothing - left side should not progress
+                            print("🚫 Left side tapped - no action")
+                        }
+                    
+                    // Right half - tappable area for progression
+                    Rectangle()
+                        .fill(Color.clear)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            print("✅ Right side tapped - continuing")
+                            continueFromStatistic()
+                        }
+                }
             }
         }
     }
@@ -472,6 +750,7 @@ struct OnboardingView: View {
         if shouldShowStatistic() {
             statisticSourceStepIndex = stepIndex   // 🔥 track source
             isGoingBack = false  // Forward direction
+            statisticAnimationId = UUID()  // Generate new ID for fresh animation
             withAnimation(.easeInOut(duration: 0.35)) {
                 showStatistic = true
             }
@@ -512,9 +791,13 @@ struct OnboardingView: View {
     private func continueFromStatistic() {
         guard let sourceIndex = statisticSourceStepIndex else { return }
 
-        // **Append the source question to history** so back-navigation from the next
-        // question returns to the source (instead of skipping it).
-        stepHistory.append(sourceIndex)
+        // **Add both the source question AND the statistic to history** so back-navigation
+        // from the next question goes: next question -> statistic -> source question
+        stepHistory.append(sourceIndex)        // The source question
+        stepHistory.append(-1)                 // Special marker for statistic screen
+        
+        print("📝 Added to step history: source=\(sourceIndex), statistic=-1")
+        print("📝 Current step history: \(stepHistory)")
 
         // Set direction to forward (next screen slides in from right)
         isGoingBack = false
@@ -526,26 +809,39 @@ struct OnboardingView: View {
             statisticSourceStepIndex = nil
             stepIndex = sourceIndex + 1
         }
+        
+        print("📝 Advanced to step index: \(stepIndex)")
         restoreSelectionForCurrentStep()
     }
 
     // New helper to dismiss the statistic and return (without advancing)
     private func dismissStatisticAndReturnToSource() {
-        // Set direction to back (previous screen slides in from left)
-        isGoingBack = true
+        print("🔙 dismissStatisticAndReturnToSource() called")
         
-        // Close statistic overlay with animation
+        guard let sourceIndex = statisticSourceStepIndex else {
+            print("❌ No source index recorded")
+            return
+        }
+        
+        print("🔙 Returning to source question at index: \(sourceIndex)")
+        
+        // Set direction to back immediately (before any animation)
+        isGoingBack = true
+        print("🔙 Set isGoingBack = true - statistic will slide out RIGHT")
+        
+        // Close statistic overlay and navigate back in one animation
         withAnimation(.easeInOut(duration: 0.35)) {
             showStatistic = false
-            currentStatistic = nil
-
-            // If we have a recorded source index, go back to it (do NOT advance)
-            if let sourceIndex = statisticSourceStepIndex {
-                stepIndex = sourceIndex
-                statisticSourceStepIndex = nil
-            }
+            stepIndex = sourceIndex
         }
-        restoreSelectionForCurrentStep()
+        
+        // Clean up and restore after animation completes
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            self.currentStatistic = nil
+            self.statisticSourceStepIndex = nil
+            self.restoreSelectionForCurrentStep()
+            print("✅ Returned to source question at index \(sourceIndex)")
+        }
     }
 
     // MARK: - Statistics Logic
@@ -726,18 +1022,148 @@ struct OnboardingView: View {
 
         // Normal back navigation
         if let previousIndex = stepHistory.popLast() {
-            print("🔙 Normal back navigation to step: \(previousIndex)")
-            // Set direction FIRST, then change stepIndex
-            isGoingBack = true
-            withAnimation(.easeInOut(duration: 0.35)) {
-                stepIndex = previousIndex
+            print("🔙 Popped index from history: \(previousIndex)")
+            print("🔙 Current step history after pop: \(stepHistory)")
+            
+            // Check if this is a statistics screen marker
+            if previousIndex == -1 {
+                // This is a statistic screen - find the source question for this statistic
+                // We need to find the most recent non-(-1) step in the history
+                var sourceIndex: Int? = nil
+                
+                // Look backwards through the history to find the source question
+                for i in stride(from: stepHistory.count - 1, through: 0, by: -1) {
+                    if stepHistory[i] != -1 {
+                        sourceIndex = stepHistory[i]
+                        break
+                    }
+                }
+                
+                if let sourceIndex = sourceIndex {
+                    print("🔙 Reconstructing statistic screen for source question: \(sourceIndex)")
+                    print("🔙 Navigation depth: User has navigated back through \(stepHistory.count) steps")
+                    
+                    // Step 1: Clear current statistic state completely and force view refresh
+                    currentStatistic = nil
+                    showStatistic = false
+                    statisticSourceStepIndex = nil
+                    print("🔙 Step 1: Completely cleared existing statistic state")
+                    
+                    // Step 2: Force state update cycle to ensure SwiftUI recognizes changes
+                    DispatchQueue.main.async {
+                        // Step 3: Set up for back navigation
+                        self.isGoingBack = true
+                        self.statisticSourceStepIndex = sourceIndex
+                        print("🔙 Step 3: Set isGoingBack = true, sourceIndex = \(sourceIndex)")
+                        
+                        // Step 4: Determine which statistic to show
+                        let sourceStep = self.steps[sourceIndex]
+                        if let questionKey = sourceStep.questionKey,
+                           let answer = self.answers[questionKey] {
+                            let ageGroup = self.answers["age"] ?? ""
+                            
+                            print("🔙 Step 4: Preparing statistic for \(questionKey) = \(answer)")
+                            
+                            // Step 5: Create new statistic with proper timing
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                let newStatistic = self.getStatistic(ageGroup: ageGroup, questionKey: questionKey, answer: answer)
+                                self.currentStatistic = newStatistic
+                                print("🔙 Step 5: Set new statistic: \(newStatistic?.heading ?? "nil")")
+                                
+                                // Step 6: Use helper method for clean state management
+                                self.animateStatisticFromBack()
+                            }
+                        }
+                    }
+                    return
+                } else {
+                    print("❌ No source question found in history for statistic")
+                }
+            } else {
+                // Normal question navigation
+                // Check if we're trying to navigate to the same step (means we need to pop again)
+                if previousIndex == stepIndex {
+                    print("🔙 Popped index equals current step, popping again...")
+                    if let actualPreviousIndex = stepHistory.popLast() {
+                        // Skip any -1 markers (statistics)
+                        if actualPreviousIndex == -1 {
+                            // There's a statistic screen before this question - show it
+                            if let statSourceIndex = stepHistory.last, statSourceIndex != -1 {
+                                print("🔙 Found statistic before question, reconstructing statistic for source: \(statSourceIndex)")
+                                
+                                // Set up for back navigation to statistic
+                                DispatchQueue.main.async {
+                                    self.isGoingBack = true
+                                    self.statisticSourceStepIndex = statSourceIndex
+                                    
+                                    let sourceStep = self.steps[statSourceIndex]
+                                    if let questionKey = sourceStep.questionKey,
+                                       let answer = self.answers[questionKey] {
+                                        let ageGroup = self.answers["age"] ?? ""
+                                        
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                            self.currentStatistic = self.getStatistic(ageGroup: ageGroup, questionKey: questionKey, answer: answer)
+                                            self.animateStatisticFromBack()
+                                        }
+                                    }
+                                }
+                                return
+                            }
+                        }
+                        
+                        print("🔙 Navigating to actual previous step: \(actualPreviousIndex)")
+                        isGoingBack = true
+                        withAnimation(.easeInOut(duration: 0.35)) {
+                            stepIndex = actualPreviousIndex
+                        }
+                        restoreSelectionForCurrentStep()
+                        return
+                    }
+                } else {
+                    print("🔙 Navigating to previous step: \(previousIndex)")
+                    isGoingBack = true
+                    withAnimation(.easeInOut(duration: 0.35)) {
+                        stepIndex = previousIndex
+                    }
+                    restoreSelectionForCurrentStep()
+                    return
+                }
             }
-            restoreSelectionForCurrentStep()
-            return
         }
 
         print("🔙 No previous step - dismissing view")
         dismiss()
+    }
+    
+    // MARK: - Helper for clean statistic animation from back navigation
+    private func animateStatisticFromBack() {
+        // Ensure isGoingBack is explicitly set to true
+        isGoingBack = true
+        
+        // Generate a new unique ID to force SwiftUI to create a fresh view
+        // This is crucial for ensuring animations work on multiple back navigations
+        statisticAnimationId = UUID()
+        
+        print("🔙 animateStatisticFromBack() called")
+        print("🔙 Generated new animation ID: \(statisticAnimationId)")
+        print("🔙 State check - isGoingBack: \(isGoingBack), currentStatistic: \(currentStatistic?.heading ?? "nil")")
+        
+        // Small delay to ensure all state is properly set
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            print("🔙 About to animate statistic from LEFT (back navigation)")
+            print("🔙 Final state - isGoingBack: \(self.isGoingBack), showStatistic: \(self.showStatistic)")
+            
+            // Animate with explicit state check
+            withAnimation(.easeInOut(duration: 0.35)) {
+                self.showStatistic = true
+            }
+            
+            // Verify animation completion
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                print("✅ Back navigation statistic animation completed")
+                print("✅ Final state - shown: \(self.showStatistic), isGoingBack: \(self.isGoingBack)")
+            }
+        }
     }
 }
 
