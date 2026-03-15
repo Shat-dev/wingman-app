@@ -1,481 +1,481 @@
 [
-    {
-      "id": "lesson_2_1",
-      "courseId": "course_2",
-      "courseSummary": "Learn to make others feel heard through attunement, not performance.",
-      "courseTitle": "Listening & Attunement",
-      "lessonNumber": 1,
-      "title": "Listen for Subtext, Not Just Words",
-      "duration": 2,
-      "summary": "Learn why responding to feeling creates deeper engagement than responding to facts.",
-      "isCompleted": false,
-      "isLocked": false,
-      "screens": [
-        {
-          "id": "screen_2_1_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_2_1_1",
-              "text": "Everyone has had a moment where someone said, \"I'm fine\" and you knew they weren't. If you only listen for information, you may miss the message they are trying to communicate.",
-              "order": 0
-            },
-            {
-              "id": "content_2_1_2",
-              "text": "Subtext is the gap between the words and the feeling behind them.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_1_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_2_1_3",
-              "text": "People reveal interest, doubt, excitement, or tension through how they say something, not just what they say.",
-              "order": 0
-            },
-            {
-              "id": "content_2_1_4",
-              "text": "When you listen only for information, you miss the emotional cues that guide the conversation. Picking up on those cues is what makes the interaction feel attuned instead of mechanical.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_1_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_2_1_5",
-              "text": "Two men both talk to women who mention they moved to the city recently. The first responds to literal content. \"Oh, nice. What brought you here?\" She says work. He asks what she does.",
-              "order": 0
-            },
-            {
-              "id": "content_2_1_6",
-              "text": "The conversation stays surface level.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_1_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_2_1_7",
-              "text": "The second man hears the subtext in \"recently\"—new to the city implies still adjusting. \"How's the transition been? Moving to a new city can be isolating at first.\" She's immediately more engaged because he acknowledged the emotional reality she was hinting at.",
-              "order": 0
-            },
-            {
-              "id": "content_2_1_8",
-              "text": "The first man treated it as a data point. The second recognized it as an invitation to discuss her actual experience.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_1_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_2_1_9",
-              "text": "Subtext is where the real conversation happens. What people say literally is often not what they're actually communicating.",
-              "order": 0
-            },
-            {
-              "id": "content_2_1_10",
-              "text": "The real message lives in tone, emphasis, qualifiers, what's omitted, and the emotion beneath the words. Your job is to listen for all of that, not just the content.",
-              "order": 1
-            },
-            {
-              "id": "content_2_1_11",
-              "text": "Your job is to listen for all of that, not just the content.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_2_1_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_2_1_12",
-              "text": "When you respond to subtext, you show you're actually hearing her. That creates a connection because she feels understood.",
-              "order": 0
-            },
-            {
-              "id": "content_2_1_13",
-              "text": "When you only respond to literal words, you stay stuck in surface-level conversation because you're missing the actual communication.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_1_7",
-          "order": 6,
-          "content": [
-            {
-              "id": "content_2_1_14",
-              "text": "You already have the ability to understand people beneath their words.",
-              "order": 0
-            },
-            {
-              "id": "content_2_1_15",
-              "text": "The more you trust that skill and respond to what you feel, the more natural and engaging your conversations become.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "lesson_2_2",
-      "courseId": "course_2",
-      "courseTitle": "Listening & Attunement",
-      "lessonNumber": 2,
-      "title": "Listen to understand, not to reply",
-      "duration": 3,
-      "summary": "Learn why real listening creates stronger connection than perfect responses.",
-      "isCompleted": false,
-      "isLocked": true,
-      "screens": [
-        {
-          "id": "screen_2_2_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_2_2_1",
-              "text": "Think about the last time someone disagreed with you. Your mind didn't pause to understand their point; it started assembling a response before they were finished speaking. You weren't listening to understand them; you were focused on preparing your next move.",
-              "order": 0
-            },
-            {
-              "id": "content_2_2_2",
-              "text": "Listening to understand means being fully present to absorb what they're actually communicating without planning your response.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_2_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_2_2_3",
-              "text": "This matters because people can tell when you're not really listening. Your eyes glaze slightly. Your responses are generic or don't connect to what they just said. You jump in too quickly without letting their words land.",
-              "order": 0
-            },
-            {
-              "id": "content_2_2_4",
-              "text": "All of this signals you were waiting for your turn, not actually hearing them.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_2_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_2_2_5",
-              "text": "When you listen to respond, you're focused on yourself. What will I say? How will I sound? Does my story match theirs? That internal focus takes you out of the moment.",
-              "order": 0
-            },
-            {
-              "id": "content_2_2_6",
-              "text": "You miss details. You miss subtext. You miss the opportunity to actually connect because you're performing instead of being present.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_2_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_2_2_7",
-              "text": "You meet someone new at a friend's gathering. She says, \"I'm still getting used to this city,\" and you immediately start listing restaurants and places she should try. She nods, but the conversation feels flat. If you replay it later, you notice the tiny pause she gave before speaking.",
-              "order": 0
-            },
-            {
-              "id": "content_2_2_8",
-              "text": "She wasn't looking for recommendations. She was opening a window to talk about feeling unsettled. You filled it before you understood it.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_2_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_2_2_9",
-              "text": "True listening means being fully present to what she's saying without your mind jumping ahead to what you'll say next.",
-              "order": 0
-            },
-            {
-              "id": "content_2_2_10",
-              "text": "This requires discipline. Your brain wants to prepare responses. That feels safer than being spontaneously present. But that preparation takes you out of the moment and prevents real understanding.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_2_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_2_2_11",
-              "text": "The practice is simple but difficult: when she's talking, focus only on what she's saying. Not on what you'll say. Not on how her story relates to yours. Just on her words, her tone, her meaning.",
-              "order": 0
-            },
-            {
-              "id": "content_2_2_12",
-              "text": "When she finishes, take a beat. Then respond based on what you actually heard, not what you pre-planned.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_2_7",
-          "order": 6,
-          "content": [
-            {
-              "id": "content_2_2_13",
-              "text": "You'll never catch every cue, but you can choose to be the man who listens before he reacts.",
-              "order": 0
-            },
-            {
-              "id": "content_2_2_14",
-              "text": "That choice alone is often the difference between a conversation that stays on the surface and one that feels genuinely understood.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "lesson_2_3",
-      "courseId": "course_2",
-      "courseTitle": "Listening & Attunement",
-      "lessonNumber": 3,
-      "title": "Validating Her Response First",
-      "duration": 2,
-      "summary": "Learn why recognition lands stronger than advice.",
-      "isCompleted": false,
-      "isLocked": true,
-      "screens": [
-        {
-          "id": "screen_2_3_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_2_3_1",
-              "text": "You can feel when someone only responds to the headline of what you said. They miss the meaning underneath and move straight into advice or commentary.",
-              "order": 0
-            },
-            {
-              "id": "content_2_3_2",
-              "text": "Validating follow-ups are brief acknowledgments that show what she said matters before you continue. Instead of immediately asking the next question, you pause to validate her response, then ask a specific question that builds on it.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_3_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_2_3_3",
-              "text": "Validating her first keeps you anchored in the moment, helps her feel understood, and creates space for a more genuine exchange.",
-              "order": 0
-            },
-            {
-              "id": "content_2_3_4",
-              "text": "Psychologically, validation creates safety. When people think their experiences are acknowledged, they open up more.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_3_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_2_3_5",
-              "text": "A guy is talking to a woman at a bar. She mentions she just got back from visiting her sister in Portland. \"Cool. Do you travel a lot then?\"",
-              "order": 0
-            },
-            {
-              "id": "content_2_3_6",
-              "text": "The guy moved immediately to the next question without acknowledging what she said about her sister.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_3_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_2_3_7",
-              "text": "Another man hears the same thing. \"It's nice that you're close enough with your sister to visit.\" Validation. Then: \"Does she live there permanently or just temporarily?\" She explains that her sister moved there for a job five years ago.",
-              "order": 0
-            },
-            {
-              "id": "content_2_3_8",
-              "text": "\"Long-distance sibling relationships take effort—good on you for maintaining it.\" Another validation. \"Do you get out there often?\" The conversation flows because he's acknowledging her experience between questions.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_3_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_2_3_9",
-              "text": "Recognition always lands stronger than advice. The gap between her answer and your next question is where validation lives.",
-              "order": 0
-            },
-            {
-              "id": "content_2_3_10",
-              "text": "Don't rush through it. Pause. Acknowledge what she said. Then ask your follow-up.",
-              "order": 1
-            },
-            {
-              "id": "content_2_3_11",
-              "text": "\"That sounds challenging.\" \"I can see why that matters to you.\" \"That takes real commitment.\" \"That must have been tough.\" These brief statements show that her words landed.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_2_3_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_2_3_12",
-              "text": "You already know how to do this. When you give yourself a second to actually hear her, the proper follow-up comes naturally.",
-              "order": 0
-            },
-            {
-              "id": "content_2_3_13",
-              "text": "Understanding is a skill that grows every time you choose to use it.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "lesson_2_4",
-      "courseId": "course_2",
-      "courseTitle": "Listening & Attunement",
-      "lessonNumber": 4,
-      "title": "Non-Verbal Listening Cues",
-      "duration": 2,
-      "summary": "Learn how to signal engagement through body language.",
-      "isCompleted": false,
-      "isLocked": true,
-      "screens": [
-        {
-          "id": "screen_2_4_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_2_4_1",
-              "text": "You can listen to every word she says and still make her feel unheard if your body is somewhere else.",
-              "order": 0
-            },
-            {
-              "id": "content_2_4_2",
-              "text": "Attention isn't invisible. It shows up in your posture, your eyes, and the angle of your body. These cues reveal your engagement instantly, whether you notice it or not.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_4_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_2_4_3",
-              "text": "Non-verbal listening cues are the physical signals you send through body language that communicate engagement and attention. They tell the speaker you're present and processing what they're saying.",
-              "order": 0
-            },
-            {
-              "id": "content_2_4_4",
-              "text": "Your body reacts faster than your words, and people can read that instantly. If your posture, eyes, or orientation signal distraction, it doesn't matter how thoughtful your responses are. The nervous system trusts what it sees, not what it hears.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_4_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_2_4_5",
-              "text": "A woman is sharing a funny story about something that happened to her. First guy listens but doesn't smile. Doesn't laugh. His body is still. She finishes the story. He says, \"That's funny\" but his face and body didn't show it.",
-              "order": 0
-            },
-            {
-              "id": "content_2_4_6",
-              "text": "She feels like he was just being polite even though he was actually invested.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_4_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_2_4_7",
-              "text": "The second guy smiles during the setup. Laughs at the punchline. His body language is animated in response to her energy. She feels validated because his non-verbal responses matched what she was sharing.",
-              "order": 0
-            },
-            {
-              "id": "content_2_4_8",
-              "text": "The first man's lack of physical response made his words ring hollow. The second man's engaged body language made the exchange feel real.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_4_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_2_4_9",
-              "text": "Presence is physical before it is verbal. Face her. Maintain natural eye contact. Let your facial expressions respond to what she's saying. Nod at key points. Keep your posture open. Lean in slightly to show interest.",
-              "order": 0
-            },
-            {
-              "id": "content_2_4_10",
-              "text": "All of these cues tell her \"I'm here. I'm engaged. What you're saying matters.\"",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_4_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_2_4_11",
-              "text": "You have more influence than you think. When you steady your body and place your attention on the person in front of you, conversations feel easier and more natural.",
-              "order": 0
-            },
-            {
-              "id": "content_2_4_12",
-              "text": "The skill grows each time you practice it.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    }
-  ]
+  {
+    "id": "lesson_13_1",
+    "courseId": "course_13",
+    "lessonNumber": 1,
+    "courseTitle": "Listening & Attunement",
+    "title": "Listen for Subtext, Not Just Words",
+    "duration": 2,
+    "summary": "Learn why responding to feeling creates deeper engagement than responding to facts.",
+    "isCompleted": false,
+    "isLocked": false,
+    "screens": [
+      {
+        "id": "screen_13_1_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_13_1_1_1",
+            "text": "Everyone has had a moment where someone said, \"I'm fine\" and you knew they weren't. If you only listen for information, you may miss the message they are trying to communicate.",
+            "order": 0
+          },
+          {
+            "id": "content_13_1_1_2",
+            "text": "Subtext is the gap between the words and the feeling behind them.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_13_1_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_13_1_2_1",
+            "text": "People reveal interest, doubt, excitement, or tension through how they say something, not just what they say.",
+            "order": 0
+          },
+          {
+            "id": "content_13_1_2_2",
+            "text": "When you listen only for information, you miss the emotional cues that guide the conversation. Picking up on those cues is what makes the interaction feel attuned instead of mechanical.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_13_1_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_13_1_3_1",
+            "text": "Two men both talk to women who mention they moved to the city recently. The first responds to literal content. \"Oh, nice. What brought you here?\" She says work. He asks what she does.",
+            "order": 0
+          },
+          {
+            "id": "content_13_1_3_2",
+            "text": "The conversation stays surface level.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_13_1_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_13_1_4_1",
+            "text": "The second man hears the subtext in \"recently\"—new to the city implies still adjusting. \"How's the transition been? Moving to a new city can be isolating at first.\" She's immediately more engaged because he acknowledged the emotional reality she was hinting at.",
+            "order": 0
+          },
+          {
+            "id": "content_13_1_4_2",
+            "text": "The first man treated it as a data point. The second recognized it as an invitation to discuss her actual experience.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_13_1_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_13_1_5_1",
+            "text": "Subtext is where the real conversation happens. What people say literally is often not what they're actually communicating.",
+            "order": 0
+          },
+          {
+            "id": "content_13_1_5_2",
+            "text": "The real message lives in tone, emphasis, qualifiers, what's omitted, and the emotion beneath the words. Your job is to listen for all of that, not just the content.",
+            "order": 1
+          },
+          {
+            "id": "content_13_1_5_3",
+            "text": "Your job is to listen for all of that, not just the content.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_13_1_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_13_1_6_1",
+            "text": "When you respond to subtext, you show you're actually hearing her. That creates a connection because she feels understood.",
+            "order": 0
+          },
+          {
+            "id": "content_13_1_6_2",
+            "text": "When you only respond to literal words, you stay stuck in surface-level conversation because you're missing the actual communication.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_13_1_7",
+        "order": 6,
+        "content": [
+          {
+            "id": "content_13_1_7_1",
+            "text": "You already have the ability to understand people beneath their words.",
+            "order": 0
+          },
+          {
+            "id": "content_13_1_7_2",
+            "text": "The more you trust that skill and respond to what you feel, the more natural and engaging your conversations become.",
+            "order": 1
+          }
+        ]
+      }
+    ],
+    "courseSummary": "Learn to make others feel heard through attunement, not performance."
+  },
+  {
+    "id": "lesson_13_2",
+    "courseId": "course_13",
+    "lessonNumber": 2,
+    "courseTitle": "Listening & Attunement",
+    "title": "Listen to understand, not to reply",
+    "duration": 3,
+    "summary": "Learn why real listening creates stronger connection than perfect responses.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_13_2_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_13_2_1_1",
+            "text": "Think about the last time someone disagreed with you. Your mind didn't pause to understand their point; it started assembling a response before they were finished speaking. You weren't listening to understand them; you were focused on preparing your next move.",
+            "order": 0
+          },
+          {
+            "id": "content_13_2_1_2",
+            "text": "Listening to understand means being fully present to absorb what they're actually communicating without planning your response.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_13_2_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_13_2_2_1",
+            "text": "This matters because people can tell when you're not really listening. Your eyes glaze slightly. Your responses are generic or don't connect to what they just said. You jump in too quickly without letting their words land.",
+            "order": 0
+          },
+          {
+            "id": "content_13_2_2_2",
+            "text": "All of this signals you were waiting for your turn, not actually hearing them.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_13_2_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_13_2_3_1",
+            "text": "When you listen to respond, you're focused on yourself. What will I say? How will I sound? Does my story match theirs? That internal focus takes you out of the moment.",
+            "order": 0
+          },
+          {
+            "id": "content_13_2_3_2",
+            "text": "You miss details. You miss subtext. You miss the opportunity to actually connect because you're performing instead of being present.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_13_2_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_13_2_4_1",
+            "text": "You meet someone new at a friend's gathering. She says, \"I'm still getting used to this city,\" and you immediately start listing restaurants and places she should try. She nods, but the conversation feels flat. If you replay it later, you notice the tiny pause she gave before speaking.",
+            "order": 0
+          },
+          {
+            "id": "content_13_2_4_2",
+            "text": "She wasn't looking for recommendations. She was opening a window to talk about feeling unsettled. You filled it before you understood it.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_13_2_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_13_2_5_1",
+            "text": "True listening means being fully present to what she's saying without your mind jumping ahead to what you'll say next.",
+            "order": 0
+          },
+          {
+            "id": "content_13_2_5_2",
+            "text": "This requires discipline. Your brain wants to prepare responses. That feels safer than being spontaneously present. But that preparation takes you out of the moment and prevents real understanding.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_13_2_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_13_2_6_1",
+            "text": "The practice is simple but difficult: when she's talking, focus only on what she's saying. Not on what you'll say. Not on how her story relates to yours. Just on her words, her tone, her meaning.",
+            "order": 0
+          },
+          {
+            "id": "content_13_2_6_2",
+            "text": "When she finishes, take a beat. Then respond based on what you actually heard, not what you pre-planned.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_13_2_7",
+        "order": 6,
+        "content": [
+          {
+            "id": "content_13_2_7_1",
+            "text": "You'll never catch every cue, but you can choose to be the man who listens before he reacts.",
+            "order": 0
+          },
+          {
+            "id": "content_13_2_7_2",
+            "text": "That choice alone is often the difference between a conversation that stays on the surface and one that feels genuinely understood.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesson_13_3",
+    "courseId": "course_13",
+    "lessonNumber": 3,
+    "courseTitle": "Listening & Attunement",
+    "title": "Validating Her Response First",
+    "duration": 2,
+    "summary": "Learn why recognition lands stronger than advice.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_13_3_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_13_3_1_1",
+            "text": "You can feel when someone only responds to the headline of what you said. They miss the meaning underneath and move straight into advice or commentary.",
+            "order": 0
+          },
+          {
+            "id": "content_13_3_1_2",
+            "text": "Validating follow-ups are brief acknowledgments that show what she said matters before you continue. Instead of immediately asking the next question, you pause to validate her response, then ask a specific question that builds on it.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_13_3_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_13_3_2_1",
+            "text": "Validating her first keeps you anchored in the moment, helps her feel understood, and creates space for a more genuine exchange.",
+            "order": 0
+          },
+          {
+            "id": "content_13_3_2_2",
+            "text": "Psychologically, validation creates safety. When people think their experiences are acknowledged, they open up more.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_13_3_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_13_3_3_1",
+            "text": "A guy is talking to a woman at a bar. She mentions she just got back from visiting her sister in Portland. \"Cool. Do you travel a lot then?\"",
+            "order": 0
+          },
+          {
+            "id": "content_13_3_3_2",
+            "text": "The guy moved immediately to the next question without acknowledging what she said about her sister.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_13_3_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_13_3_4_1",
+            "text": "Another man hears the same thing. \"It's nice that you're close enough with your sister to visit.\" Validation. Then: \"Does she live there permanently or just temporarily?\" She explains that her sister moved there for a job five years ago.",
+            "order": 0
+          },
+          {
+            "id": "content_13_3_4_2",
+            "text": "\"Long-distance sibling relationships take effort—good on you for maintaining it.\" Another validation. \"Do you get out there often?\" The conversation flows because he's acknowledging her experience between questions.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_13_3_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_13_3_5_1",
+            "text": "Recognition always lands stronger than advice. The gap between her answer and your next question is where validation lives.",
+            "order": 0
+          },
+          {
+            "id": "content_13_3_5_2",
+            "text": "Don't rush through it. Pause. Acknowledge what she said. Then ask your follow-up.",
+            "order": 1
+          },
+          {
+            "id": "content_13_3_5_3",
+            "text": "\"That sounds challenging.\" \"I can see why that matters to you.\" \"That takes real commitment.\" \"That must have been tough.\" These brief statements show that her words landed.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_13_3_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_13_3_6_1",
+            "text": "You already know how to do this. When you give yourself a second to actually hear her, the proper follow-up comes naturally.",
+            "order": 0
+          },
+          {
+            "id": "content_13_3_6_2",
+            "text": "Understanding is a skill that grows every time you choose to use it.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesson_13_4",
+    "courseId": "course_13",
+    "lessonNumber": 4,
+    "courseTitle": "Listening & Attunement",
+    "title": "Non-Verbal Listening Cues",
+    "duration": 2,
+    "summary": "Learn how to signal engagement through body language.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_13_4_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_13_4_1_1",
+            "text": "You can listen to every word she says and still make her feel unheard if your body is somewhere else.",
+            "order": 0
+          },
+          {
+            "id": "content_13_4_1_2",
+            "text": "Attention isn't invisible. It shows up in your posture, your eyes, and the angle of your body. These cues reveal your engagement instantly, whether you notice it or not.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_13_4_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_13_4_2_1",
+            "text": "Non-verbal listening cues are the physical signals you send through body language that communicate engagement and attention. They tell the speaker you're present and processing what they're saying.",
+            "order": 0
+          },
+          {
+            "id": "content_13_4_2_2",
+            "text": "Your body reacts faster than your words, and people can read that instantly. If your posture, eyes, or orientation signal distraction, it doesn't matter how thoughtful your responses are. The nervous system trusts what it sees, not what it hears.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_13_4_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_13_4_3_1",
+            "text": "A woman is sharing a funny story about something that happened to her. First guy listens but doesn't smile. Doesn't laugh. His body is still. She finishes the story. He says, \"That's funny\" but his face and body didn't show it.",
+            "order": 0
+          },
+          {
+            "id": "content_13_4_3_2",
+            "text": "She feels like he was just being polite even though he was actually invested.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_13_4_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_13_4_4_1",
+            "text": "The second guy smiles during the setup. Laughs at the punchline. His body language is animated in response to her energy. She feels validated because his non-verbal responses matched what she was sharing.",
+            "order": 0
+          },
+          {
+            "id": "content_13_4_4_2",
+            "text": "The first man's lack of physical response made his words ring hollow. The second man's engaged body language made the exchange feel real.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_13_4_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_13_4_5_1",
+            "text": "Presence is physical before it is verbal. Face her. Maintain natural eye contact. Let your facial expressions respond to what she's saying. Nod at key points. Keep your posture open. Lean in slightly to show interest.",
+            "order": 0
+          },
+          {
+            "id": "content_13_4_5_2",
+            "text": "All of these cues tell her \"I'm here. I'm engaged. What you're saying matters.\"",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_13_4_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_13_4_6_1",
+            "text": "You have more influence than you think. When you steady your body and place your attention on the person in front of you, conversations feel easier and more natural.",
+            "order": 0
+          },
+          {
+            "id": "content_13_4_6_2",
+            "text": "The skill grows each time you practice it.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  }
+]

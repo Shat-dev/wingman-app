@@ -1,501 +1,501 @@
 [
-    {
-      "id": "lesson_2_1",
-      "courseId": "course_2",
-      "courseSummary": "Learn to make approaches feel natural, respectful, and safe from the start.",
-      "courseTitle": "The Physical Approach",
-      "lessonNumber": 1,
-      "title": "The 3-Second Rule",
-      "duration": 3,
-      "summary": "Learn how acting quickly prevents overthinking from sabotaging your approach.",
-      "isCompleted": false,
-      "isLocked": false,
-      "screens": [
-        {
-          "id": "screen_2_1_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_2_1_1",
-              "text": "You don't talk yourself into courage, you talk yourself out of it. The longer you wait, the louder your mind becomes, and the less likely you are to actually commit.",
-              "order": 0
-            },
-            {
-              "id": "content_2_1_2",
-              "text": "The three-second rule is moving to approach within three seconds of deciding you want to.",
-              "order": 1
-            },
-            {
-              "id": "content_2_1_3",
-              "text": "It's not about having the perfect opener ready. It's about acting before your brain talks you out of it.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_2_1_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_2_1_4",
-              "text": "The moment you consider approaching, your threat detection system activates. It starts generating reasons not to approach. She's busy. She won't be interested. You'll look stupid. This is your brain trying to keep you safe from potential embarrassment.",
-              "order": 0
-            },
-            {
-              "id": "content_2_1_5",
-              "text": "The longer you wait, the more ammunition your brain generates. After three seconds, the list of reasons not to approach becomes overwhelming. After thirty seconds, it's nearly impossible to overcome.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_1_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_2_1_6",
-              "text": "But if you move within three seconds, you act on the initial impulse before resistance builds.",
-              "order": 0
-            },
-            {
-              "id": "content_2_1_7",
-              "text": "Psychologically, this is acting before the prefrontal cortex sabotages the limbic impulse. You see someone attractive. Your limbic system says, \"approach.\" That's instinct. Then your prefrontal cortex, the analytical part of your brain, kicks in to assess risk. That's where hesitation comes from.",
-              "order": 1
-            },
-            {
-              "id": "content_2_1_8",
-              "text": "The three-second rule bypasses analysis paralysis by acting before analysis completes.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_2_1_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_2_1_9",
-              "text": "You are at a bar. She glances at you, smiles faintly, then turns back to her drink. You look down, sip, and plan your opener. Thirty seconds pass.",
-              "order": 0
-            },
-            {
-              "id": "content_2_1_10",
-              "text": "By the time you stand, someone else is already talking to her. What stopped you wasn't fear of her, it was fear of how you would feel if it went wrong. That pause turned instinct into overthinking.",
-              "order": 1
-            },
-            {
-              "id": "content_2_1_11",
-              "text": "Hesitation is not preparation. It's self-sabotage. Your brain will always find reasons to wait if you give it time.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_2_1_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_2_1_12",
-              "text": "The three-second rule circumvents this by acting before analysis completes. You see someone attractive. You decide you want to approach. You move immediately.",
-              "order": 0
-            },
-            {
-              "id": "content_2_1_13",
-              "text": "The quality of your opener matters far less than the fact that you approached at all. A mediocre opener delivered within three seconds beats a perfect opener you never delivered.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_1_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_2_1_14",
-              "text": "You don't need to be fearless to move; you just need to move before fear multiplies.",
-              "order": 0
-            },
-            {
-              "id": "content_2_1_15",
-              "text": "The next time you see her, count down from three and go. Action teaches confidence faster than thought ever will.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "lesson_2_2",
-      "courseId": "course_2",
-      "courseTitle": "The Physical Approach",
-      "lessonNumber": 2,
-      "title": "Approach Angle & Distance",
-      "duration": 2,
-      "summary": "Learn how proper angle and distance create comfort instead of pressure.",
-      "isCompleted": false,
-      "isLocked": true,
-      "screens": [
-        {
-          "id": "screen_2_2_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_2_2_1",
-              "text": "Everyone worries about coming off the wrong way. Too close, and it feels aggressive. Too far, and it feels disinterested. But the truth is simple: any approach can work; some just give you a smoother start.",
-              "order": 0
-            },
-            {
-              "id": "content_2_2_2",
-              "text": "Approach angle is the direction from which you enter someone's space. Approach distance is how close you get when you initiate. Both determine whether your approach registers as comfortable or threatening.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_2_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_2_2_3",
-              "text": "The best approaches balance clarity with comfort, showing you are confident enough to close space but also aware enough not to invade it.",
-              "order": 0
-            },
-            {
-              "id": "content_2_2_4",
-              "text": "This allows her to focus on what you're saying rather than managing her discomfort with your proximity.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_2_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_2_2_5",
-              "text": "A man approaches a woman at a bar. She's standing in a tight space between the bar and a wall.",
-              "order": 0
-            },
-            {
-              "id": "content_2_2_6",
-              "text": "He walks up and positions himself between her and the exit. Stands about eighteen inches away because the space is crowded. She's immediately uncomfortable. Can't move without him moving first. Too close for comfort. The conversation is brief and forced.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_2_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_2_2_7",
-              "text": "Another man approaches a woman in a more open area of the bar. Stops at an angle about three feet away. Doesn't block any potential exit path. \"Hey, what are you drinking?\" She has space to breathe and move if she wants.",
-              "order": 0
-            },
-            {
-              "id": "content_2_2_8",
-              "text": "His distance and angle communicated respect for her space. She's able to engage in the conversation because she doesn't feel trapped.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_2_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_2_2_9",
-              "text": "Approaching from behind, moving straight at someone from a distance, getting too close, or blocking exit paths all trigger discomfort.",
-              "order": 0
-            },
-            {
-              "id": "content_2_2_10",
-              "text": "None of those are conscious choices she's making. They're automatic threat responses.",
-              "order": 1
-            },
-            {
-              "id": "content_2_2_11",
-              "text": "When you approach from a 45-degree angle, stay visible during your approach, stop at social distance, and don't block her movement, you bypass those responses.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_2_2_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_2_2_12",
-              "text": "Any approach can work, but thoughtful ones work more often.",
-              "order": 0
-            },
-            {
-              "id": "content_2_2_13",
-              "text": "When you understand how to enter someone's space with ease, you remove barriers that never needed to be there in the first place.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "lesson_2_3",
-      "courseId": "course_2",
-      "courseTitle": "The Physical Approach",
-      "lessonNumber": 3,
-      "title": "Your Body in Motion",
-      "duration": 3,
-      "summary": "Learn how posture and pace shape first impressions instantly.",
-      "isCompleted": false,
-      "isLocked": true,
-      "screens": [
-        {
-          "id": "screen_2_3_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_2_3_1",
-              "text": "The moment you start walking, she is already reading you. Your movement tells her what kind of man is walking up long before your words do.",
-              "order": 0
-            },
-            {
-              "id": "content_2_3_2",
-              "text": "The brain reads motion as intent; smooth movement signals comfort, jerky movement signals tension.",
-              "order": 1
-            },
-            {
-              "id": "content_2_3_3",
-              "text": "Men may lose presence not from what they say, but from how they fidget, hover, or rush.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_2_3_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_2_3_4",
-              "text": "When you're tense, it shows. Hunched shoulders, rigid arms, stiff gait, fast or hesitant pace—all of these signal anxiety.",
-              "order": 0
-            },
-            {
-              "id": "content_2_3_5",
-              "text": "When you're relaxed, that shows too. Shoulders back but not stiff. Arms swinging naturally. Smooth gait. Steady pace. These signal confidence and ease.",
-              "order": 1
-            },
-            {
-              "id": "content_2_3_6",
-              "text": "The interaction can then start on a positive footing because your physical presence was non-threatening.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_2_3_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_2_3_7",
-              "text": "Two men both approach women sitting at outdoor cafes. The first walks over with fast, almost scurrying steps. His body language is apologetic. Hunched slightly, arms close to his body. He looks like he's trying to make himself smaller.",
-              "order": 0
-            },
-            {
-              "id": "content_2_3_8",
-              "text": "She sees him coming, and her guard goes up because his body language signals that even he doesn't think he should be approaching.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_3_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_2_3_9",
-              "text": "The second man walks over with normal, confident strides. Posture upright but not rigid. Arms swinging naturally. He looks like he belongs in the space and is comfortable moving through it.",
-              "order": 0
-            },
-            {
-              "id": "content_2_3_10",
-              "text": "She sees him coming and stays neutral because his body language didn't trigger any discomfort.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_3_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_2_3_11",
-              "text": "Your body communicates before your words. A tense, awkward approach creates tension in the interaction. A relaxed, purposeful approach creates ease.",
-              "order": 0
-            },
-            {
-              "id": "content_2_3_12",
-              "text": "This is within your control. You can't always control how nervous you feel, but you can control how you move.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_3_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_2_3_13",
-              "text": "Walk with purpose but not urgency. Steady pace, not rushed or hesitant. Keep your shoulders back and down, not hunched or raised. Let your arms swing naturally at your sides; don't lock them rigid or cross them.",
-              "order": 0
-            },
-            {
-              "id": "content_2_3_14",
-              "text": "Maintain an upright posture without being stiff. Head up, making casual eye contact with your surroundings as you move through them, not staring at the ground or locking onto your target.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_3_7",
-          "order": 6,
-          "content": [
-            {
-              "id": "content_2_3_15",
-              "text": "These physical adjustments don't eliminate anxiety, but they prevent your anxiety from being broadcast through your body language.",
-              "order": 0
-            },
-            {
-              "id": "content_2_3_16",
-              "text": "Walk like you belong there, and your presence will speak long before you do.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "lesson_2_4",
-      "courseId": "course_2",
-      "courseTitle": "The Physical Approach",
-      "lessonNumber": 4,
-      "title": "Eye Contact & First Impression",
-      "duration": 3,
-      "summary": "Learn to signal friendliness and intention before entering personal space.",
-      "isCompleted": false,
-      "isLocked": true,
-      "screens": [
-        {
-          "id": "screen_2_4_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_2_4_1",
-              "text": "Every connection starts with a look, and you only get one. The right look doesn't impress, it reassures. The eyes set the tone for everything that follows.",
-              "order": 0
-            },
-            {
-              "id": "content_2_4_2",
-              "text": "A calm, steady look communicates composure and interest before you ever speak. Eye contact also signals intention. If you avoid it until the moment you arrive, it can feel like you appeared out of nowhere.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_4_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_2_4_3",
-              "text": "A brief look and a small smile as you approach tells her you are coming over to talk and that the interaction will be friendly.",
-              "order": 0
-            },
-            {
-              "id": "content_2_4_4",
-              "text": "That simple transparency creates comfort.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_4_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_2_4_5",
-              "text": "A guy sees a woman waiting for a train. Decides to approach. He walks across the space with his eyes down, looking at his phone, staring at the ground. Arrives next to her. Suddenly looks up and makes direct eye contact. \"Excuse me...\" She's startled.",
-              "order": 0
-            },
-            {
-              "id": "content_2_4_6",
-              "text": "She didn't see him coming. Didn't have time to assess whether he seemed safe. His sudden appearance in her space without visual warning put her on alert.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_4_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_2_4_7",
-              "text": "Another man sees a woman waiting for a train. Positions himself where she can see him in her peripheral vision. Makes eye contact once she glances his way. Small smile. Then walks over.",
-              "order": 0
-            },
-            {
-              "id": "content_2_4_8",
-              "text": "\"Hey, I know the train's coming soon, but I wanted to say hi.\" She's more comfortable because she saw him, assessed him visually, and his expression communicated friendliness before he was in her immediate space.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_4_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_2_4_9",
-              "text": "Eye contact prepares her for your approach. When she sees you coming and sees your face before you arrive, she's had time to do a preliminary safety assessment. She's not caught off guard.",
-              "order": 0
-            },
-            {
-              "id": "content_2_4_10",
-              "text": "That preparation makes her more receptive because surprise tends to trigger defensiveness.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_4_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_2_4_11",
-              "text": "Also important: your eyes communicate confidence or anxiety just as much as your body does. Darting eyes, looking down repeatedly, or intense staring all communicate discomfort or aggression.",
-              "order": 0
-            },
-            {
-              "id": "content_2_4_12",
-              "text": "Calm, friendly eye contact that breaks naturally communicates social calibration and ease. It signals to her nervous system that you are safe to engage with, not someone she needs to brace against.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_2_4_7",
-          "order": 6,
-          "content": [
-            {
-              "id": "content_2_4_13",
-              "text": "Eye contact is about giving the other person time to register your presence.",
-              "order": 0
-            },
-            {
-              "id": "content_2_4_14",
-              "text": "When you make friendly eye contact beforehand, the approach feels safe rather than abrupt.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    }
+  {
+    "id": "lesson_7_1",
+    "courseId": "course_7",
+    "lessonNumber": 1,
+    "courseTitle": "The Physical Approach",
+    "title": "The 3-Second Rule",
+    "duration": 3,
+    "summary": "Learn how acting quickly prevents overthinking from sabotaging your approach.",
+    "isCompleted": false,
+    "isLocked": false,
+    "screens": [
+      {
+        "id": "screen_7_1_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_7_1_1_1",
+            "text": "You don't talk yourself into courage, you talk yourself out of it. The longer you wait, the louder your mind becomes, and the less likely you are to actually commit.",
+            "order": 0
+          },
+          {
+            "id": "content_7_1_1_2",
+            "text": "The three-second rule is moving to approach within three seconds of deciding you want to.",
+            "order": 1
+          },
+          {
+            "id": "content_7_1_1_3",
+            "text": "It's not about having the perfect opener ready. It's about acting before your brain talks you out of it.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_7_1_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_7_1_2_1",
+            "text": "The moment you consider approaching, your threat detection system activates. It starts generating reasons not to approach. She's busy. She won't be interested. You'll look stupid. This is your brain trying to keep you safe from potential embarrassment.",
+            "order": 0
+          },
+          {
+            "id": "content_7_1_2_2",
+            "text": "The longer you wait, the more ammunition your brain generates. After three seconds, the list of reasons not to approach becomes overwhelming. After thirty seconds, it's nearly impossible to overcome.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_7_1_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_7_1_3_1",
+            "text": "But if you move within three seconds, you act on the initial impulse before resistance builds.",
+            "order": 0
+          },
+          {
+            "id": "content_7_1_3_2",
+            "text": "Psychologically, this is acting before the prefrontal cortex sabotages the limbic impulse. You see someone attractive. Your limbic system says, \"approach.\" That's instinct. Then your prefrontal cortex, the analytical part of your brain, kicks in to assess risk. That's where hesitation comes from.",
+            "order": 1
+          },
+          {
+            "id": "content_7_1_3_3",
+            "text": "The three-second rule bypasses analysis paralysis by acting before analysis completes.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_7_1_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_7_1_4_1",
+            "text": "You are at a bar. She glances at you, smiles faintly, then turns back to her drink. You look down, sip, and plan your opener. Thirty seconds pass.",
+            "order": 0
+          },
+          {
+            "id": "content_7_1_4_2",
+            "text": "By the time you stand, someone else is already talking to her. What stopped you wasn't fear of her, it was fear of how you would feel if it went wrong. That pause turned instinct into overthinking.",
+            "order": 1
+          },
+          {
+            "id": "content_7_1_4_3",
+            "text": "Hesitation is not preparation. It's self-sabotage. Your brain will always find reasons to wait if you give it time.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_7_1_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_7_1_5_1",
+            "text": "The three-second rule circumvents this by acting before analysis completes. You see someone attractive. You decide you want to approach. You move immediately.",
+            "order": 0
+          },
+          {
+            "id": "content_7_1_5_2",
+            "text": "The quality of your opener matters far less than the fact that you approached at all. A mediocre opener delivered within three seconds beats a perfect opener you never delivered.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_7_1_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_7_1_6_1",
+            "text": "You don't need to be fearless to move; you just need to move before fear multiplies.",
+            "order": 0
+          },
+          {
+            "id": "content_7_1_6_2",
+            "text": "The next time you see her, count down from three and go. Action teaches confidence faster than thought ever will.",
+            "order": 1
+          }
+        ]
+      }
+    ],
+    "courseSummary": "Learn to make approaches feel natural, respectful, and safe from the start."
+  },
+  {
+    "id": "lesson_7_2",
+    "courseId": "course_7",
+    "lessonNumber": 2,
+    "courseTitle": "The Physical Approach",
+    "title": "Approach Angle & Distance",
+    "duration": 2,
+    "summary": "Learn how proper angle and distance create comfort instead of pressure.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_7_2_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_7_2_1_1",
+            "text": "Everyone worries about coming off the wrong way. Too close, and it feels aggressive. Too far, and it feels disinterested. But the truth is simple: any approach can work; some just give you a smoother start.",
+            "order": 0
+          },
+          {
+            "id": "content_7_2_1_2",
+            "text": "Approach angle is the direction from which you enter someone's space. Approach distance is how close you get when you initiate. Both determine whether your approach registers as comfortable or threatening.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_7_2_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_7_2_2_1",
+            "text": "The best approaches balance clarity with comfort, showing you are confident enough to close space but also aware enough not to invade it.",
+            "order": 0
+          },
+          {
+            "id": "content_7_2_2_2",
+            "text": "This allows her to focus on what you're saying rather than managing her discomfort with your proximity.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_7_2_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_7_2_3_1",
+            "text": "A man approaches a woman at a bar. She's standing in a tight space between the bar and a wall.",
+            "order": 0
+          },
+          {
+            "id": "content_7_2_3_2",
+            "text": "He walks up and positions himself between her and the exit. Stands about eighteen inches away because the space is crowded. She's immediately uncomfortable. Can't move without him moving first. Too close for comfort. The conversation is brief and forced.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_7_2_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_7_2_4_1",
+            "text": "Another man approaches a woman in a more open area of the bar. Stops at an angle about three feet away. Doesn't block any potential exit path. \"Hey, what are you drinking?\" She has space to breathe and move if she wants.",
+            "order": 0
+          },
+          {
+            "id": "content_7_2_4_2",
+            "text": "His distance and angle communicated respect for her space. She's able to engage in the conversation because she doesn't feel trapped.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_7_2_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_7_2_5_1",
+            "text": "Approaching from behind, moving straight at someone from a distance, getting too close, or blocking exit paths all trigger discomfort.",
+            "order": 0
+          },
+          {
+            "id": "content_7_2_5_2",
+            "text": "None of those are conscious choices she's making. They're automatic threat responses.",
+            "order": 1
+          },
+          {
+            "id": "content_7_2_5_3",
+            "text": "When you approach from a 45-degree angle, stay visible during your approach, stop at social distance, and don't block her movement, you bypass those responses.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_7_2_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_7_2_6_1",
+            "text": "Any approach can work, but thoughtful ones work more often.",
+            "order": 0
+          },
+          {
+            "id": "content_7_2_6_2",
+            "text": "When you understand how to enter someone's space with ease, you remove barriers that never needed to be there in the first place.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesson_7_3",
+    "courseId": "course_7",
+    "lessonNumber": 3,
+    "courseTitle": "The Physical Approach",
+    "title": "Your Body in Motion",
+    "duration": 3,
+    "summary": "Learn how posture and pace shape first impressions instantly.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_7_3_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_7_3_1_1",
+            "text": "The moment you start walking, she is already reading you. Your movement tells her what kind of man is walking up long before your words do.",
+            "order": 0
+          },
+          {
+            "id": "content_7_3_1_2",
+            "text": "The brain reads motion as intent; smooth movement signals comfort, jerky movement signals tension.",
+            "order": 1
+          },
+          {
+            "id": "content_7_3_1_3",
+            "text": "Men may lose presence not from what they say, but from how they fidget, hover, or rush.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_7_3_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_7_3_2_1",
+            "text": "When you're tense, it shows. Hunched shoulders, rigid arms, stiff gait, fast or hesitant pace—all of these signal anxiety.",
+            "order": 0
+          },
+          {
+            "id": "content_7_3_2_2",
+            "text": "When you're relaxed, that shows too. Shoulders back but not stiff. Arms swinging naturally. Smooth gait. Steady pace. These signal confidence and ease.",
+            "order": 1
+          },
+          {
+            "id": "content_7_3_2_3",
+            "text": "The interaction can then start on a positive footing because your physical presence was non-threatening.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_7_3_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_7_3_3_1",
+            "text": "Two men both approach women sitting at outdoor cafes. The first walks over with fast, almost scurrying steps. His body language is apologetic. Hunched slightly, arms close to his body. He looks like he's trying to make himself smaller.",
+            "order": 0
+          },
+          {
+            "id": "content_7_3_3_2",
+            "text": "She sees him coming, and her guard goes up because his body language signals that even he doesn't think he should be approaching.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_7_3_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_7_3_4_1",
+            "text": "The second man walks over with normal, confident strides. Posture upright but not rigid. Arms swinging naturally. He looks like he belongs in the space and is comfortable moving through it.",
+            "order": 0
+          },
+          {
+            "id": "content_7_3_4_2",
+            "text": "She sees him coming and stays neutral because his body language didn't trigger any discomfort.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_7_3_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_7_3_5_1",
+            "text": "Your body communicates before your words. A tense, awkward approach creates tension in the interaction. A relaxed, purposeful approach creates ease.",
+            "order": 0
+          },
+          {
+            "id": "content_7_3_5_2",
+            "text": "This is within your control. You can't always control how nervous you feel, but you can control how you move.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_7_3_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_7_3_6_1",
+            "text": "Walk with purpose but not urgency. Steady pace, not rushed or hesitant. Keep your shoulders back and down, not hunched or raised. Let your arms swing naturally at your sides; don't lock them rigid or cross them.",
+            "order": 0
+          },
+          {
+            "id": "content_7_3_6_2",
+            "text": "Maintain an upright posture without being stiff. Head up, making casual eye contact with your surroundings as you move through them, not staring at the ground or locking onto your target.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_7_3_7",
+        "order": 6,
+        "content": [
+          {
+            "id": "content_7_3_7_1",
+            "text": "These physical adjustments don't eliminate anxiety, but they prevent your anxiety from being broadcast through your body language.",
+            "order": 0
+          },
+          {
+            "id": "content_7_3_7_2",
+            "text": "Walk like you belong there, and your presence will speak long before you do.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesson_7_4",
+    "courseId": "course_7",
+    "lessonNumber": 4,
+    "courseTitle": "The Physical Approach",
+    "title": "Eye Contact & First Impression",
+    "duration": 3,
+    "summary": "Learn to signal friendliness and intention before entering personal space.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_7_4_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_7_4_1_1",
+            "text": "Every connection starts with a look, and you only get one. The right look doesn't impress, it reassures. The eyes set the tone for everything that follows.",
+            "order": 0
+          },
+          {
+            "id": "content_7_4_1_2",
+            "text": "A calm, steady look communicates composure and interest before you ever speak. Eye contact also signals intention. If you avoid it until the moment you arrive, it can feel like you appeared out of nowhere.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_7_4_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_7_4_2_1",
+            "text": "A brief look and a small smile as you approach tells her you are coming over to talk and that the interaction will be friendly.",
+            "order": 0
+          },
+          {
+            "id": "content_7_4_2_2",
+            "text": "That simple transparency creates comfort.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_7_4_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_7_4_3_1",
+            "text": "A guy sees a woman waiting for a train. Decides to approach. He walks across the space with his eyes down, looking at his phone, staring at the ground. Arrives next to her. Suddenly looks up and makes direct eye contact. \"Excuse me...\" She's startled.",
+            "order": 0
+          },
+          {
+            "id": "content_7_4_3_2",
+            "text": "She didn't see him coming. Didn't have time to assess whether he seemed safe. His sudden appearance in her space without visual warning put her on alert.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_7_4_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_7_4_4_1",
+            "text": "Another man sees a woman waiting for a train. Positions himself where she can see him in her peripheral vision. Makes eye contact once she glances his way. Small smile. Then walks over.",
+            "order": 0
+          },
+          {
+            "id": "content_7_4_4_2",
+            "text": "\"Hey, I know the train's coming soon, but I wanted to say hi.\" She's more comfortable because she saw him, assessed him visually, and his expression communicated friendliness before he was in her immediate space.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_7_4_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_7_4_5_1",
+            "text": "Eye contact prepares her for your approach. When she sees you coming and sees your face before you arrive, she's had time to do a preliminary safety assessment. She's not caught off guard.",
+            "order": 0
+          },
+          {
+            "id": "content_7_4_5_2",
+            "text": "That preparation makes her more receptive because surprise tends to trigger defensiveness.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_7_4_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_7_4_6_1",
+            "text": "Also important: your eyes communicate confidence or anxiety just as much as your body does. Darting eyes, looking down repeatedly, or intense staring all communicate discomfort or aggression.",
+            "order": 0
+          },
+          {
+            "id": "content_7_4_6_2",
+            "text": "Calm, friendly eye contact that breaks naturally communicates social calibration and ease. It signals to her nervous system that you are safe to engage with, not someone she needs to brace against.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_7_4_7",
+        "order": 6,
+        "content": [
+          {
+            "id": "content_7_4_7_1",
+            "text": "Eye contact is about giving the other person time to register your presence.",
+            "order": 0
+          },
+          {
+            "id": "content_7_4_7_2",
+            "text": "When you make friendly eye contact beforehand, the approach feels safe rather than abrupt.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  }
 ]

@@ -1,388 +1,388 @@
 [
-    {
-      "id": "lesson_3_1",
-      "courseId": "course_3",
-      "courseSummary": "Learn how consistency turns effort into identity.",
-      "courseTitle": "Mastery & Identity",
-      "lessonNumber": 1,
-      "title": "Volume Creates Familiarity",
-      "duration": 3,
-      "summary": "Learn how every rep matters, even when nothing comes from it.",
-      "isCompleted": false,
-      "isLocked": false,
-      "screens": [
-        {
-          "id": "screen_3_1_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_3_1_1",
-              "text": "Humans adapt fastest to what they experience often. When interactions are rare, the nervous system stays on alert. When they're frequent, the brain learns what is safe and predictable. This is why repetition matters.",
-              "order": 0
-            },
-            {
-              "id": "content_3_1_2",
-              "text": "Volume means repeatedly and consistently approaching until your nervous system learns it's not dangerous. This then allows you to access your skills under pressure.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_1_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_3_1_3",
-              "text": "Approach anxiety does not resolve through thinking or preparation but only through repeated experience.",
-              "order": 0
-            },
-            {
-              "id": "content_3_1_4",
-              "text": "With enough reps, your system learns that approaching has no real consequences.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_1_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_3_1_5",
-              "text": "This works through habituation. When a stimulus is encountered repeatedly without harm, the nervous system reduces its threat response. A single approach feels intense because it is unfamiliar. Your body reads it as risky.",
-              "order": 0
-            },
-            {
-              "id": "content_3_1_6",
-              "text": "But repeated exposure changes the pattern. Ten, twenty, or fifty approaches teach your system that nothing bad follows. The fear peaks lower, fades faster, and eventually stops dominating your behavior.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_1_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_3_1_7",
-              "text": "One man studies the approach methods obsessively. Books, videos, techniques. But when he sees a woman he wants to talk to, his body panics. His mind blanks. Nothing he learned comes out.",
-              "order": 0
-            },
-            {
-              "id": "content_3_1_8",
-              "text": "Months pass with almost no real practice. His nervous system never adapts.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_1_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_3_1_9",
-              "text": "Another man focuses on a single small interaction each day. Coffee shop. Gym. Grocery line. Each rep teaches his body that talking to strangers is safe. After a few weeks, the fear response fades.",
-              "order": 0
-            },
-            {
-              "id": "content_3_1_10",
-              "text": "When he approaches a woman at a bar, he stays calm because he is used to it. His body knows what to do.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_1_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_3_1_11",
-              "text": "Volume is what makes the act of approaching familiar enough that fear no longer blocks your ability to perform. You already know what to say and how to create a connection.",
-              "order": 0
-            },
-            {
-              "id": "content_3_1_12",
-              "text": "But that knowledge is inaccessible when your nervous system is in threat mode. Volume teaches your nervous system, through repeated safe exposure, that approaching isn't dangerous.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_1_7",
-          "order": 6,
-          "content": [
-            {
-              "id": "content_3_1_13",
-              "text": "That's why each approach matters, even when it doesn't lead anywhere.",
-              "order": 0
-            },
-            {
-              "id": "content_3_1_14",
-              "text": "You may not feel the shift day to day, but your nervous system is adjusting. What feels difficult now can become familiar with enough exposure.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "lesson_3_2",
-      "courseId": "course_3",
-      "courseTitle": "Mastery & Identity",
-      "lessonNumber": 2,
-      "title": "Stay Consistent",
-      "duration": 3,
-      "summary": "Learn how consistency protects progress from skill decay.",
-      "isCompleted": false,
-      "isLocked": true,
-      "screens": [
-        {
-          "id": "screen_3_2_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_3_2_1",
-              "text": "Your mind is always coming up with reasons not to do hard things. If you give it time, it will build a case. But if you maintain consistency, you move forward before it can be built.",
-              "order": 0
-            },
-            {
-              "id": "content_3_2_2",
-              "text": "Consistency is the psychological and neurological continuity that comes from regular, uninterrupted practice. It's the difference between behavior that feels forced and behavior that feels automatic.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_2_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_3_2_3",
-              "text": "When you repeat a behavior regularly, the neural pathways strengthen.",
-              "order": 0
-            },
-            {
-              "id": "content_3_2_4",
-              "text": "The connections become more efficient, and the act requires less conscious effort.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_2_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_3_2_5",
-              "text": "Psychologically, consistency also protects against avoidance. When you take breaks, your anxiety has time to rebuild, and your mind generates new reasons not to approach.",
-              "order": 0
-            },
-            {
-              "id": "content_3_2_6",
-              "text": "But when you maintain it, you don't give your avoidance mechanisms time to entrench.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_2_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_3_2_7",
-              "text": "Two men both struggle with approach anxiety. Both commit to addressing it. The first goes hard for two weeks. Approaches every day. Pushes himself. Makes real progress. Then burns out. Takes a month off.",
-              "order": 0
-            },
-            {
-              "id": "content_3_2_8",
-              "text": "When he returns, the anxiety is back.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_2_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_3_2_9",
-              "text": "The second man takes a sustainable approach. He commits to three approaches per week. Not daily, but consistent. Never skips more than two days in a row. Never takes a full week off. The volume is lower, but the momentum is unbroken.",
-              "order": 0
-            },
-            {
-              "id": "content_3_2_10",
-              "text": "After six months, his progress is dramatically better because his nervous system never had to relearn that approaching is safe.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_2_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_3_2_11",
-              "text": "Your brain distinguishes between isolated events and established patterns. When behavior is sporadic, it remains in the category of \"thing I occasionally do.\" When behavior is consistent, it migrates to \"things I am.\"",
-              "order": 0
-            },
-            {
-              "id": "content_3_2_12",
-              "text": "That shift is what turns you into someone who sometimes approaches, to someone who just approaches.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_2_7",
-          "order": 6,
-          "content": [
-            {
-              "id": "content_3_2_13",
-              "text": "Consistency also protects against skill decay. You're not just maintaining skill during consistent practice; you're also preventing loss.",
-              "order": 0
-            },
-            {
-              "id": "content_3_2_14",
-              "text": "You don't have to restart from zero every time. A single conversation this week keeps the ground warm for the next one. Progress stays available as long as you keep in motion, even at the smallest pace.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "lesson_3_3",
-      "courseId": "course_3",
-      "courseTitle": "Mastery & Identity",
-      "lessonNumber": 3,
-      "title": "From Technique to Intuition",
-      "duration": 3,
-      "summary": "Learn how intuition emerges once fear no longer dominates.",
-      "isCompleted": false,
-      "isLocked": true,
-      "screens": [
-        {
-          "id": "screen_3_3_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_3_3_1",
-              "text": "You know a skill has clicked when you don't think about it anymore. It feels natural because it now lives in your self-image rather than your memory.",
-              "order": 0
-            },
-            {
-              "id": "content_3_3_2",
-              "text": "The shift from technique to intuition is when learned behaviors migrate from conscious execution to automatic expression. It's the moment skills stop feeling like skills and become natural parts of who you are.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_3_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_3_3_3",
-              "text": "Psychologists call this automaticity. It's the final stage of skill acquisition. Stage one is unconscious incompetence: you don't know what you don't know.",
-              "order": 0
-            },
-            {
-              "id": "content_3_3_4",
-              "text": "Stage two is conscious incompetence: you realize you're bad at it.",
-              "order": 1
-            },
-            {
-              "id": "content_3_3_5",
-              "text": "Stage three is conscious competence: you can do it, but it requires full attention and effort.",
-              "order": 2
-            },
-            {
-              "id": "content_3_3_6",
-              "text": "Stage four is unconscious competence: you do it automatically without thinking.",
-              "order": 3
-            }
-          ]
-        },
-        {
-          "id": "screen_3_3_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_3_3_7",
-              "text": "Early on, approaching is something you do. It's an action separate from who you are. But eventually, with enough repetition, it becomes part of your identity.",
-              "order": 0
-            },
-            {
-              "id": "content_3_3_8",
-              "text": "You're not \"a guy who's practicing approaching.\" You're someone who engages with people. That identity shift is what allows intuition to take over.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_3_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_3_3_9",
-              "text": "A guy learns to drive. In the first few weeks, every action is deliberate. Check mirrors. Signal. Adjust speed. Watch spacing. His attention is maxed out just executing the basics. Driving feels overwhelming.",
-              "order": 0
-            },
-            {
-              "id": "content_3_3_10",
-              "text": "Six months later, he drives to work without remembering the route. He was thinking about something else the entire time. His hands, feet, and eyes did everything automatically. He's reached automaticity.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_3_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_3_3_11",
-              "text": "The same transformation happens with social skills. Early on, maintaining eye contact, calibrating tone, reading body language, and choosing words simultaneously feels impossible.",
-              "order": 0
-            },
-            {
-              "id": "content_3_3_12",
-              "text": "But with enough repetition, it all happens automatically. You stop thinking and start flowing.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_3_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_3_3_13",
-              "text": "Mastery is when the behavior becomes inseparable from identity. You're no longer performing a skill. You're expressing who you are.",
-              "order": 0
-            },
-            {
-              "id": "content_3_3_14",
-              "text": "At this level, approaching doesn't require courage because there's no gap between who you are and what you're doing—you're not pushing yourself to act against your nature, you're simply being yourself in social situations.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_3_7",
-          "order": 6,
-          "content": [
-            {
-              "id": "content_3_3_15",
-              "text": "This shift happens through accumulated repetition that rewires not just your nervous system but your self-concept.",
-              "order": 0
-            },
-            {
-              "id": "content_3_3_16",
-              "text": "One day, you'll realize you stopped thinking during approaches. You're just flowing. That's when you know you've crossed over.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    }
-  ]
+  {
+    "id": "lesson_24_1",
+    "courseId": "course_24",
+    "lessonNumber": 1,
+    "courseTitle": "Mastery & Identity",
+    "title": "Volume Creates Familiarity",
+    "duration": 3,
+    "summary": "Learn how every rep matters, even when nothing comes from it.",
+    "isCompleted": false,
+    "isLocked": false,
+    "screens": [
+      {
+        "id": "screen_24_1_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_24_1_1_1",
+            "text": "Humans adapt fastest to what they experience often. When interactions are rare, the nervous system stays on alert. When they're frequent, the brain learns what is safe and predictable. This is why repetition matters.",
+            "order": 0
+          },
+          {
+            "id": "content_24_1_1_2",
+            "text": "Volume means repeatedly and consistently approaching until your nervous system learns it's not dangerous. This then allows you to access your skills under pressure.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_24_1_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_24_1_2_1",
+            "text": "Approach anxiety does not resolve through thinking or preparation but only through repeated experience.",
+            "order": 0
+          },
+          {
+            "id": "content_24_1_2_2",
+            "text": "With enough reps, your system learns that approaching has no real consequences.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_24_1_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_24_1_3_1",
+            "text": "This works through habituation. When a stimulus is encountered repeatedly without harm, the nervous system reduces its threat response. A single approach feels intense because it is unfamiliar. Your body reads it as risky.",
+            "order": 0
+          },
+          {
+            "id": "content_24_1_3_2",
+            "text": "But repeated exposure changes the pattern. Ten, twenty, or fifty approaches teach your system that nothing bad follows. The fear peaks lower, fades faster, and eventually stops dominating your behavior.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_24_1_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_24_1_4_1",
+            "text": "One man studies the approach methods obsessively. Books, videos, techniques. But when he sees a woman he wants to talk to, his body panics. His mind blanks. Nothing he learned comes out.",
+            "order": 0
+          },
+          {
+            "id": "content_24_1_4_2",
+            "text": "Months pass with almost no real practice. His nervous system never adapts.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_24_1_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_24_1_5_1",
+            "text": "Another man focuses on a single small interaction each day. Coffee shop. Gym. Grocery line. Each rep teaches his body that talking to strangers is safe. After a few weeks, the fear response fades.",
+            "order": 0
+          },
+          {
+            "id": "content_24_1_5_2",
+            "text": "When he approaches a woman at a bar, he stays calm because he is used to it. His body knows what to do.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_24_1_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_24_1_6_1",
+            "text": "Volume is what makes the act of approaching familiar enough that fear no longer blocks your ability to perform. You already know what to say and how to create a connection.",
+            "order": 0
+          },
+          {
+            "id": "content_24_1_6_2",
+            "text": "But that knowledge is inaccessible when your nervous system is in threat mode. Volume teaches your nervous system, through repeated safe exposure, that approaching isn't dangerous.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_24_1_7",
+        "order": 6,
+        "content": [
+          {
+            "id": "content_24_1_7_1",
+            "text": "That's why each approach matters, even when it doesn't lead anywhere.",
+            "order": 0
+          },
+          {
+            "id": "content_24_1_7_2",
+            "text": "You may not feel the shift day to day, but your nervous system is adjusting. What feels difficult now can become familiar with enough exposure.",
+            "order": 1
+          }
+        ]
+      }
+    ],
+    "courseSummary": "Learn how consistency turns effort into identity."
+  },
+  {
+    "id": "lesson_24_2",
+    "courseId": "course_24",
+    "lessonNumber": 2,
+    "courseTitle": "Mastery & Identity",
+    "title": "Stay Consistent",
+    "duration": 3,
+    "summary": "Learn how consistency protects progress from skill decay.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_24_2_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_24_2_1_1",
+            "text": "Your mind is always coming up with reasons not to do hard things. If you give it time, it will build a case. But if you maintain consistency, you move forward before it can be built.",
+            "order": 0
+          },
+          {
+            "id": "content_24_2_1_2",
+            "text": "Consistency is the psychological and neurological continuity that comes from regular, uninterrupted practice. It's the difference between behavior that feels forced and behavior that feels automatic.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_24_2_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_24_2_2_1",
+            "text": "When you repeat a behavior regularly, the neural pathways strengthen.",
+            "order": 0
+          },
+          {
+            "id": "content_24_2_2_2",
+            "text": "The connections become more efficient, and the act requires less conscious effort.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_24_2_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_24_2_3_1",
+            "text": "Psychologically, consistency also protects against avoidance. When you take breaks, your anxiety has time to rebuild, and your mind generates new reasons not to approach.",
+            "order": 0
+          },
+          {
+            "id": "content_24_2_3_2",
+            "text": "But when you maintain it, you don't give your avoidance mechanisms time to entrench.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_24_2_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_24_2_4_1",
+            "text": "Two men both struggle with approach anxiety. Both commit to addressing it. The first goes hard for two weeks. Approaches every day. Pushes himself. Makes real progress. Then burns out. Takes a month off.",
+            "order": 0
+          },
+          {
+            "id": "content_24_2_4_2",
+            "text": "When he returns, the anxiety is back.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_24_2_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_24_2_5_1",
+            "text": "The second man takes a sustainable approach. He commits to three approaches per week. Not daily, but consistent. Never skips more than two days in a row. Never takes a full week off. The volume is lower, but the momentum is unbroken.",
+            "order": 0
+          },
+          {
+            "id": "content_24_2_5_2",
+            "text": "After six months, his progress is dramatically better because his nervous system never had to relearn that approaching is safe.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_24_2_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_24_2_6_1",
+            "text": "Your brain distinguishes between isolated events and established patterns. When behavior is sporadic, it remains in the category of \"thing I occasionally do.\" When behavior is consistent, it migrates to \"things I am.\"",
+            "order": 0
+          },
+          {
+            "id": "content_24_2_6_2",
+            "text": "That shift is what turns you into someone who sometimes approaches, to someone who just approaches.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_24_2_7",
+        "order": 6,
+        "content": [
+          {
+            "id": "content_24_2_7_1",
+            "text": "Consistency also protects against skill decay. You're not just maintaining skill during consistent practice; you're also preventing loss.",
+            "order": 0
+          },
+          {
+            "id": "content_24_2_7_2",
+            "text": "You don't have to restart from zero every time. A single conversation this week keeps the ground warm for the next one. Progress stays available as long as you keep in motion, even at the smallest pace.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesson_24_3",
+    "courseId": "course_24",
+    "lessonNumber": 3,
+    "courseTitle": "Mastery & Identity",
+    "title": "From Technique to Intuition",
+    "duration": 3,
+    "summary": "Learn how intuition emerges once fear no longer dominates.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_24_3_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_24_3_1_1",
+            "text": "You know a skill has clicked when you don't think about it anymore. It feels natural because it now lives in your self-image rather than your memory.",
+            "order": 0
+          },
+          {
+            "id": "content_24_3_1_2",
+            "text": "The shift from technique to intuition is when learned behaviors migrate from conscious execution to automatic expression. It's the moment skills stop feeling like skills and become natural parts of who you are.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_24_3_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_24_3_2_1",
+            "text": "Psychologists call this automaticity. It's the final stage of skill acquisition. Stage one is unconscious incompetence: you don't know what you don't know.",
+            "order": 0
+          },
+          {
+            "id": "content_24_3_2_2",
+            "text": "Stage two is conscious incompetence: you realize you're bad at it.",
+            "order": 1
+          },
+          {
+            "id": "content_24_3_2_3",
+            "text": "Stage three is conscious competence: you can do it, but it requires full attention and effort.",
+            "order": 2
+          },
+          {
+            "id": "content_24_3_2_4",
+            "text": "Stage four is unconscious competence: you do it automatically without thinking.",
+            "order": 3
+          }
+        ]
+      },
+      {
+        "id": "screen_24_3_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_24_3_3_1",
+            "text": "Early on, approaching is something you do. It's an action separate from who you are. But eventually, with enough repetition, it becomes part of your identity.",
+            "order": 0
+          },
+          {
+            "id": "content_24_3_3_2",
+            "text": "You're not \"a guy who's practicing approaching.\" You're someone who engages with people. That identity shift is what allows intuition to take over.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_24_3_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_24_3_4_1",
+            "text": "A guy learns to drive. In the first few weeks, every action is deliberate. Check mirrors. Signal. Adjust speed. Watch spacing. His attention is maxed out just executing the basics. Driving feels overwhelming.",
+            "order": 0
+          },
+          {
+            "id": "content_24_3_4_2",
+            "text": "Six months later, he drives to work without remembering the route. He was thinking about something else the entire time. His hands, feet, and eyes did everything automatically. He's reached automaticity.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_24_3_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_24_3_5_1",
+            "text": "The same transformation happens with social skills. Early on, maintaining eye contact, calibrating tone, reading body language, and choosing words simultaneously feels impossible.",
+            "order": 0
+          },
+          {
+            "id": "content_24_3_5_2",
+            "text": "But with enough repetition, it all happens automatically. You stop thinking and start flowing.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_24_3_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_24_3_6_1",
+            "text": "Mastery is when the behavior becomes inseparable from identity. You're no longer performing a skill. You're expressing who you are.",
+            "order": 0
+          },
+          {
+            "id": "content_24_3_6_2",
+            "text": "At this level, approaching doesn't require courage because there's no gap between who you are and what you're doing—you're not pushing yourself to act against your nature, you're simply being yourself in social situations.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_24_3_7",
+        "order": 6,
+        "content": [
+          {
+            "id": "content_24_3_7_1",
+            "text": "This shift happens through accumulated repetition that rewires not just your nervous system but your self-concept.",
+            "order": 0
+          },
+          {
+            "id": "content_24_3_7_2",
+            "text": "One day, you'll realize you stopped thinking during approaches. You're just flowing. That's when you know you've crossed over.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  }
+]

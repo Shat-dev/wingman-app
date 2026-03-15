@@ -1,412 +1,412 @@
 [
-    {
-      "id": "lesson_5_1",
-      "courseId": "course_5",
-      "courseSummary": "Learn how appearance creates internal steadiness that carries into social situations.",
-      "courseTitle": "Non-negotiables",
-      "lessonNumber": 1,
-      "title": "Build the Body, Build the Belief",
-      "duration": 2,
-      "summary": "Learn how a capable body builds confidence before words or thought.",
-      "isCompleted": false,
-      "isLocked": false,
-      "screens": [
-        {
-          "id": "screen_5_1_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_5_1_1",
-              "text": "Your brain forms an opinion of your body long before anyone else does. When that opinion is positive, your confidence grows without you trying to force it.",
-              "order": 0
-            },
-            {
-              "id": "content_5_1_2",
-              "text": "Fitness shapes more than your appearance. It shapes your self-perception. When you look in the mirror and see a body you respect, your mind accepts the idea that others might feel the same way, and your confidence rises without effort.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_5_1_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_5_1_3",
-              "text": "A guy walks into a bar after months of feeling out of shape. His mind keeps checking for flaws. His shirt feels wrong. His posture collapses.",
-              "order": 0
-            },
-            {
-              "id": "content_5_1_4",
-              "text": "Every movement is tightened by micro calculations about how he might look to others. Nothing external is stopping him from approaching, but his brain keeps pulling him inward. He stays quiet.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_5_1_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_5_1_5",
-              "text": "Another guy enters the same bar a month after committing to training. He is not shredded, but he feels stronger and genuinely believes his body is more appealing. His posture holds without effort. His mind is not occupied with self-monitoring because he believes his body is capable.",
-              "order": 0
-            },
-            {
-              "id": "content_5_1_6",
-              "text": "The belief changes his behaviour before he says a word.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_5_1_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_5_1_7",
-              "text": "Real confidence starts in your body. When you move well, stand tall, and have energy to spare, everything else you do lands with more force.",
-              "order": 0
-            },
-            {
-              "id": "content_5_1_8",
-              "text": "Fitness is not decoration. It is the physical proof that you take yourself seriously, and your mind recognises that long before you speak.",
-              "order": 1
-            },
-            {
-              "id": "content_5_1_9",
-              "text": "Improving your body is one of the few changes that elevates every part of your life. Energy rises, posture shifts, confidence grows. You do not need perfection; you just need consistency.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_5_1_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_5_1_10",
-              "text": "The path is straightforward. Train your muscles, challenge your endurance, and move in ways that feel natural. Any mix of gym work, cardio training, or sport will create the shift you are looking for.",
-              "order": 0
-            },
-            {
-              "id": "content_5_1_11",
-              "text": "A capable body settles your internal noise. The doubts that used to shape your behaviour fade, and you move through social moments with a steadier sense of confidence.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "lesson_5_2",
-      "courseId": "course_5",
-      "courseTitle": "Non-negotiables",
-      "lessonNumber": 2,
-      "title": "Grooming Is Essential",
-      "duration": 2,
-      "summary": "Learn why basic upkeep changes how you feel and how others respond.",
-      "isCompleted": false,
-      "isLocked": true,
-      "screens": [
-        {
-          "id": "screen_5_2_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_5_2_1",
-              "text": "Grooming offers a simple change with a powerful effect. When your hair, beard, and skin are managed well, you carry yourself with a sharper, more polished presence.",
-              "order": 0
-            }
-          ]
-        },
-        {
-          "id": "screen_5_2_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_5_2_2",
-              "text": "It quickly improves your appearance because people process grooming right away. The right style, intentional facial hair, and clear skin set a baseline that boosts how you view yourself. That internal shift reduces self-doubt and allows confidence to rise naturally.",
-              "order": 0
-            },
-            {
-              "id": "content_5_2_3",
-              "text": "Without that baseline, everything else you do has to work harder.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_5_2_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_5_2_4",
-              "text": "A man walks into a party with overgrown hair, patchy facial hair, and oily skin. He's friendly, but he's also self-conscious. He avoids the brightest parts of the room, keeps touching his face, and second-guesses himself before approaching anyone.",
-              "order": 0
-            },
-            {
-              "id": "content_5_2_5",
-              "text": "When he finally talks to a woman, the interaction ends within minutes. She isn't rude, just unengaged. What he doesn't realize is that his grooming didn't just shape her first impression; it shaped his own. He didn't feel sharp, so he couldn't show up fully.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_5_2_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_5_2_6",
-              "text": "Same party, different man. Fresh haircut, clean beard lines, healthy-looking skin. Nothing dramatic, just maintained. He feels put together, so he stands taller, moves with more ease, and approaches without hesitation.",
-              "order": 0
-            },
-            {
-              "id": "content_5_2_7",
-              "text": "When he talks to the same woman, she holds eye contact and stays engaged. His grooming didn't create attraction. It gave him the internal steadiness to let his personality come through.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_5_2_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_5_2_8",
-              "text": "A man who looks cared for is treated as someone worth caring about.",
-              "order": 0
-            },
-            {
-              "id": "content_5_2_9",
-              "text": "Grooming removes the silent barriers that undermine confidence and presence. Attraction starts with presentation, and discipline in basic upkeep goes a long way.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_5_2_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_5_2_10",
-              "text": "You're not far from looking like the man you want to present to the world. A few deliberate habits can change how you feel and how others feel around you. Start by choosing a haircut that suits your face, keeping facial hair intentional, and building a simple skin routine you can follow every day.",
-              "order": 0
-            },
-            {
-              "id": "content_5_2_11",
-              "text": "The change starts small, but the impact reaches far beyond the mirror.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "lesson_5_3",
-      "courseId": "course_5",
-      "courseTitle": "Non-negotiables",
-      "lessonNumber": 3,
-      "title": "Hygiene Goes a Long Way",
-      "duration": 2,
-      "summary": "Learn how good hygiene removes invisible barriers to comfort and attraction.",
-      "isCompleted": false,
-      "isLocked": true,
-      "screens": [
-        {
-          "id": "screen_5_3_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_5_3_1",
-              "text": "When you know you smell fresh, look clean, and feel put together, you can stop worrying about how you come across.",
-              "order": 0
-            },
-            {
-              "id": "content_5_3_2",
-              "text": "Good hygiene is about removing the invisible barriers that push people away. Foul scent, dirty nails, or stale breath override everything else, no matter how confident or charming you are.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_5_3_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_5_3_3",
-              "text": "Good hygiene also gives you a sense of internal certainty. When you know you are clean, you can move closer, speak freely, and interact more easily. That ease helps you become more confident in social settings.",
-              "order": 0
-            }
-          ]
-        },
-        {
-          "id": "screen_5_3_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_5_3_4",
-              "text": "Two men attend the same party. One is wearing the same shirt he wore yesterday. It carries a faint stale odour he doesn't notice. The woman he approaches does. She keeps a little distance, stays polite, but ends the conversation quickly.",
-              "order": 0
-            }
-          ]
-        },
-        {
-          "id": "screen_5_3_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_5_3_5",
-              "text": "The second man shows up, freshly showered and wearing a clean shirt, with a light, subtle scent. When he speaks, she naturally steps closer. She stays engaged and comfortable.",
-              "order": 0
-            },
-            {
-              "id": "content_5_3_6",
-              "text": "His hygiene did not create attraction out of thin air. It only removed the friction that had blocked it earlier.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_5_3_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_5_3_7",
-              "text": "This is how small details can shape social outcomes: not by adding charm, but by clearing away barriers the other person feels before you even start talking.",
-              "order": 0
-            },
-            {
-              "id": "content_5_3_8",
-              "text": "Attraction cannot form when discomfort is present. One hint of bad hygiene is enough to break the rhythm and prevent anything deeper from developing.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_5_3_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_5_3_9",
-              "text": "A few minutes of care each day changes that. Keep your routine simple: trimmed nails, a fresh shower, clean clothes, steady breath, and a light cologne.",
-              "order": 0
-            },
-            {
-              "id": "content_5_3_10",
-              "text": "By keeping the essentials in check, you clear away the small barriers that interfere with attraction.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "lesson_5_4",
-      "courseId": "course_5",
-      "courseTitle": "Non-negotiables",
-      "lessonNumber": 4,
-      "title": "Fashion and Style",
-      "duration": 2,
-      "summary": "Learn why dressing well unlocks confidence already within you.",
-      "isCompleted": false,
-      "isLocked": true,
-      "screens": [
-        {
-          "id": "screen_5_4_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_5_4_1",
-              "text": "Men underestimate how far good style goes. It sharpens your presence, increases your perceived status, and removes the insecurity that comes from feeling underdressed or out of place.",
-              "order": 0
-            },
-            {
-              "id": "content_5_4_2",
-              "text": "Style works as a fast signal of who you are before you speak. People read clothing as a signal of confidence, taste, and social awareness.",
-              "order": 1
-            },
-            {
-              "id": "content_5_4_3",
-              "text": "A clean, intentional outfit suggests you understand yourself and the world around you. A sloppy or unfitted outfit suggests the opposite.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_5_4_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_5_4_4",
-              "text": "This matters because people make judgments in seconds, and those judgments shape how open they are to you.",
-              "order": 0
-            },
-            {
-              "id": "content_5_4_5",
-              "text": "Good style clears the path. Poor style creates friction you never see.",
-              "order": 1
-            },
-            {
-              "id": "content_5_4_6",
-              "text": "A few intentional choices can shift how you carry yourself and how people respond to you.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_5_4_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_5_4_7",
-              "text": "A guy meets a woman for coffee after finally upgrading his wardrobe with pieces that suit his frame. The fit makes him feel sharper than usual.",
-              "order": 0
-            },
-            {
-              "id": "content_5_4_8",
-              "text": "As they talk, he's more expressive, more playful, more grounded. He's not thinking about hiding his stomach or adjusting his shirt. His confidence feels natural instead of forced.",
-              "order": 1
-            },
-            {
-              "id": "content_5_4_9",
-              "text": "She feels the difference, too. She leans in, asks questions, and stays invested. What she's responding to isn't the clothes, but the man who feels good wearing them.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_5_4_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_5_4_10",
-              "text": "Style clears the path for attraction. When you dress poorly, interactions begin with friction you never see. When you dress well, your appearance becomes a quiet advantage, making you more receptive to others and more confident in your own skin.",
-              "order": 0
-            },
-            {
-              "id": "content_5_4_11",
-              "text": "The clothes are not the point. The confidence they unlock is what makes the difference.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_5_4_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_5_4_12",
-              "text": "You already have what you need to look and feel better. Study examples of clean, modern outfits online and copy the parts that resonate with you. Style becomes simple when you model yourself after looks that already work.",
-              "order": 0
-            },
-            {
-              "id": "content_5_4_13",
-              "text": "As you refine your style, your appearance will start to match the confidence you are trying to build.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    }
-  ]
+  {
+    "id": "lesson_5_1",
+    "courseId": "course_5",
+    "lessonNumber": 1,
+    "courseTitle": "Non-negotiables",
+    "title": "Build the Body, Build the Belief",
+    "duration": 2,
+    "summary": "Learn how a capable body builds confidence before words or thought.",
+    "isCompleted": false,
+    "isLocked": false,
+    "screens": [
+      {
+        "id": "screen_5_1_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_5_1_1_1",
+            "text": "Your brain forms an opinion of your body long before anyone else does. When that opinion is positive, your confidence grows without you trying to force it.",
+            "order": 0
+          },
+          {
+            "id": "content_5_1_1_2",
+            "text": "Fitness shapes more than your appearance. It shapes your self-perception. When you look in the mirror and see a body you respect, your mind accepts the idea that others might feel the same way, and your confidence rises without effort.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_5_1_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_5_1_2_1",
+            "text": "A guy walks into a bar after months of feeling out of shape. His mind keeps checking for flaws. His shirt feels wrong. His posture collapses.",
+            "order": 0
+          },
+          {
+            "id": "content_5_1_2_2",
+            "text": "Every movement is tightened by micro calculations about how he might look to others. Nothing external is stopping him from approaching, but his brain keeps pulling him inward. He stays quiet.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_5_1_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_5_1_3_1",
+            "text": "Another guy enters the same bar a month after committing to training. He is not shredded, but he feels stronger and genuinely believes his body is more appealing. His posture holds without effort. His mind is not occupied with self-monitoring because he believes his body is capable.",
+            "order": 0
+          },
+          {
+            "id": "content_5_1_3_2",
+            "text": "The belief changes his behaviour before he says a word.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_5_1_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_5_1_4_1",
+            "text": "Real confidence starts in your body. When you move well, stand tall, and have energy to spare, everything else you do lands with more force.",
+            "order": 0
+          },
+          {
+            "id": "content_5_1_4_2",
+            "text": "Fitness is not decoration. It is the physical proof that you take yourself seriously, and your mind recognises that long before you speak.",
+            "order": 1
+          },
+          {
+            "id": "content_5_1_4_3",
+            "text": "Improving your body is one of the few changes that elevates every part of your life. Energy rises, posture shifts, confidence grows. You do not need perfection; you just need consistency.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_5_1_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_5_1_5_1",
+            "text": "The path is straightforward. Train your muscles, challenge your endurance, and move in ways that feel natural. Any mix of gym work, cardio training, or sport will create the shift you are looking for.",
+            "order": 0
+          },
+          {
+            "id": "content_5_1_5_2",
+            "text": "A capable body settles your internal noise. The doubts that used to shape your behaviour fade, and you move through social moments with a steadier sense of confidence.",
+            "order": 1
+          }
+        ]
+      }
+    ],
+    "courseSummary": "Learn how appearance creates internal steadiness that carries into social situations."
+  },
+  {
+    "id": "lesson_5_2",
+    "courseId": "course_5",
+    "lessonNumber": 2,
+    "courseTitle": "Non-negotiables",
+    "title": "Grooming Is Essential",
+    "duration": 2,
+    "summary": "Learn why basic upkeep changes how you feel and how others respond.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_5_2_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_5_2_1_1",
+            "text": "Grooming offers a simple change with a powerful effect. When your hair, beard, and skin are managed well, you carry yourself with a sharper, more polished presence.",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "screen_5_2_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_5_2_2_1",
+            "text": "It quickly improves your appearance because people process grooming right away. The right style, intentional facial hair, and clear skin set a baseline that boosts how you view yourself. That internal shift reduces self-doubt and allows confidence to rise naturally.",
+            "order": 0
+          },
+          {
+            "id": "content_5_2_2_2",
+            "text": "Without that baseline, everything else you do has to work harder.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_5_2_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_5_2_3_1",
+            "text": "A man walks into a party with overgrown hair, patchy facial hair, and oily skin. He's friendly, but he's also self-conscious. He avoids the brightest parts of the room, keeps touching his face, and second-guesses himself before approaching anyone.",
+            "order": 0
+          },
+          {
+            "id": "content_5_2_3_2",
+            "text": "When he finally talks to a woman, the interaction ends within minutes. She isn't rude, just unengaged. What he doesn't realize is that his grooming didn't just shape her first impression; it shaped his own. He didn't feel sharp, so he couldn't show up fully.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_5_2_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_5_2_4_1",
+            "text": "Same party, different man. Fresh haircut, clean beard lines, healthy-looking skin. Nothing dramatic, just maintained. He feels put together, so he stands taller, moves with more ease, and approaches without hesitation.",
+            "order": 0
+          },
+          {
+            "id": "content_5_2_4_2",
+            "text": "When he talks to the same woman, she holds eye contact and stays engaged. His grooming didn't create attraction. It gave him the internal steadiness to let his personality come through.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_5_2_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_5_2_5_1",
+            "text": "A man who looks cared for is treated as someone worth caring about.",
+            "order": 0
+          },
+          {
+            "id": "content_5_2_5_2",
+            "text": "Grooming removes the silent barriers that undermine confidence and presence. Attraction starts with presentation, and discipline in basic upkeep goes a long way.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_5_2_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_5_2_6_1",
+            "text": "You're not far from looking like the man you want to present to the world. A few deliberate habits can change how you feel and how others feel around you. Start by choosing a haircut that suits your face, keeping facial hair intentional, and building a simple skin routine you can follow every day.",
+            "order": 0
+          },
+          {
+            "id": "content_5_2_6_2",
+            "text": "The change starts small, but the impact reaches far beyond the mirror.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesson_5_3",
+    "courseId": "course_5",
+    "lessonNumber": 3,
+    "courseTitle": "Non-negotiables",
+    "title": "Hygiene Goes a Long Way",
+    "duration": 2,
+    "summary": "Learn how good hygiene removes invisible barriers to comfort and attraction.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_5_3_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_5_3_1_1",
+            "text": "When you know you smell fresh, look clean, and feel put together, you can stop worrying about how you come across.",
+            "order": 0
+          },
+          {
+            "id": "content_5_3_1_2",
+            "text": "Good hygiene is about removing the invisible barriers that push people away. Foul scent, dirty nails, or stale breath override everything else, no matter how confident or charming you are.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_5_3_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_5_3_2_1",
+            "text": "Good hygiene also gives you a sense of internal certainty. When you know you are clean, you can move closer, speak freely, and interact more easily. That ease helps you become more confident in social settings.",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "screen_5_3_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_5_3_3_1",
+            "text": "Two men attend the same party. One is wearing the same shirt he wore yesterday. It carries a faint stale odour he doesn't notice. The woman he approaches does. She keeps a little distance, stays polite, but ends the conversation quickly.",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "screen_5_3_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_5_3_4_1",
+            "text": "The second man shows up, freshly showered and wearing a clean shirt, with a light, subtle scent. When he speaks, she naturally steps closer. She stays engaged and comfortable.",
+            "order": 0
+          },
+          {
+            "id": "content_5_3_4_2",
+            "text": "His hygiene did not create attraction out of thin air. It only removed the friction that had blocked it earlier.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_5_3_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_5_3_5_1",
+            "text": "This is how small details can shape social outcomes: not by adding charm, but by clearing away barriers the other person feels before you even start talking.",
+            "order": 0
+          },
+          {
+            "id": "content_5_3_5_2",
+            "text": "Attraction cannot form when discomfort is present. One hint of bad hygiene is enough to break the rhythm and prevent anything deeper from developing.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_5_3_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_5_3_6_1",
+            "text": "A few minutes of care each day changes that. Keep your routine simple: trimmed nails, a fresh shower, clean clothes, steady breath, and a light cologne.",
+            "order": 0
+          },
+          {
+            "id": "content_5_3_6_2",
+            "text": "By keeping the essentials in check, you clear away the small barriers that interfere with attraction.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesson_5_4",
+    "courseId": "course_5",
+    "lessonNumber": 4,
+    "courseTitle": "Non-negotiables",
+    "title": "Fashion and Style",
+    "duration": 2,
+    "summary": "Learn why dressing well unlocks confidence already within you.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_5_4_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_5_4_1_1",
+            "text": "Men underestimate how far good style goes. It sharpens your presence, increases your perceived status, and removes the insecurity that comes from feeling underdressed or out of place.",
+            "order": 0
+          },
+          {
+            "id": "content_5_4_1_2",
+            "text": "Style works as a fast signal of who you are before you speak. People read clothing as a signal of confidence, taste, and social awareness.",
+            "order": 1
+          },
+          {
+            "id": "content_5_4_1_3",
+            "text": "A clean, intentional outfit suggests you understand yourself and the world around you. A sloppy or unfitted outfit suggests the opposite.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_5_4_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_5_4_2_1",
+            "text": "This matters because people make judgments in seconds, and those judgments shape how open they are to you.",
+            "order": 0
+          },
+          {
+            "id": "content_5_4_2_2",
+            "text": "Good style clears the path. Poor style creates friction you never see.",
+            "order": 1
+          },
+          {
+            "id": "content_5_4_2_3",
+            "text": "A few intentional choices can shift how you carry yourself and how people respond to you.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_5_4_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_5_4_3_1",
+            "text": "A guy meets a woman for coffee after finally upgrading his wardrobe with pieces that suit his frame. The fit makes him feel sharper than usual.",
+            "order": 0
+          },
+          {
+            "id": "content_5_4_3_2",
+            "text": "As they talk, he's more expressive, more playful, more grounded. He's not thinking about hiding his stomach or adjusting his shirt. His confidence feels natural instead of forced.",
+            "order": 1
+          },
+          {
+            "id": "content_5_4_3_3",
+            "text": "She feels the difference, too. She leans in, asks questions, and stays invested. What she's responding to isn't the clothes, but the man who feels good wearing them.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_5_4_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_5_4_4_1",
+            "text": "Style clears the path for attraction. When you dress poorly, interactions begin with friction you never see. When you dress well, your appearance becomes a quiet advantage, making you more receptive to others and more confident in your own skin.",
+            "order": 0
+          },
+          {
+            "id": "content_5_4_4_2",
+            "text": "The clothes are not the point. The confidence they unlock is what makes the difference.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_5_4_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_5_4_5_1",
+            "text": "You already have what you need to look and feel better. Study examples of clean, modern outfits online and copy the parts that resonate with you. Style becomes simple when you model yourself after looks that already work.",
+            "order": 0
+          },
+          {
+            "id": "content_5_4_5_2",
+            "text": "As you refine your style, your appearance will start to match the confidence you are trying to build.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  }
+]

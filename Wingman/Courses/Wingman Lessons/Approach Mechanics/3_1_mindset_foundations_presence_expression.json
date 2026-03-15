@@ -1,488 +1,488 @@
 [
-    {
-      "id": "lesson_3_1",
-      "courseId": "course_3",
-      "courseSummary": "Learn to influence interactions by mastering presence.",
-      "courseTitle": "Presence & Expression",
-      "lessonNumber": 1,
-      "title": "Your body speaks first",
-      "duration": 2,
-      "summary": "Learn to remove physical signals of tension that quietly undermine connection.",
-      "isCompleted": false,
-      "isLocked": false,
-      "screens": [
-        {
-          "id": "screen_3_1_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_3_1_1",
-              "text": "Before you say a word, your body has already spoken. Posture, hands, eyes, all send signals faster than thought.",
-              "order": 0
-            },
-            {
-              "id": "content_3_1_2",
-              "text": "People decide if you are confident, tense, or trustworthy long before sound leaves your mouth.",
-              "order": 1
-            },
-            {
-              "id": "content_3_1_3",
-              "text": "The question is whether you are sending the message you mean to.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_3_1_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_3_1_4",
-              "text": "Body language is your first language, whether you realize it or not.",
-              "order": 0
-            },
-            {
-              "id": "content_3_1_5",
-              "text": "Before logic or words, the brain reads movement, posture, and micro-expressions to decide whether someone feels safe or confident.",
-              "order": 1
-            },
-            {
-              "id": "content_3_1_6",
-              "text": "When your body and words don't match, people feel the disconnect.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_3_1_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_3_1_7",
-              "text": "You approach a woman at a cafe and you are mid-conversation. You think you are doing fine, but your shoulders are tight, your arms stay crossed, and your eyes keep darting away.",
-              "order": 0
-            },
-            {
-              "id": "content_3_1_8",
-              "text": "She smiles politely, then checks her phone. You replay it later, wondering what went wrong. Nothing you said was off; it was how you showed up. Your body was broadcasting discomfort while your words tried to sound relaxed.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_1_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_3_1_9",
-              "text": "People trust what they see more than what they hear. When your posture and tone don't match your message, the connection breaks before it begins.",
-              "order": 0
-            },
-            {
-              "id": "content_3_1_10",
-              "text": "Your posture, breath, and stillness tell the truth before your voice ever does. When your body is tense, no amount of charm can disguise it; when it is relaxed, you don't need to convince anyone.",
-              "order": 1
-            },
-            {
-              "id": "content_3_1_11",
-              "text": "Being present isn't about pretending to be confident; it's about removing the signals that say you aren't.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_3_1_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_3_1_12",
-              "text": "Your body already knows how to speak with confidence; you just have to stop interrupting it.",
-              "order": 0
-            },
-            {
-              "id": "content_3_1_13",
-              "text": "When you stand tall, breathe fully, and let stillness do the work, people feel it.",
-              "order": 1
-            },
-            {
-              "id": "content_3_1_14",
-              "text": "You don't have to act differently; just let your body reflect your calm rather than your nerves.",
-              "order": 2
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "lesson_3_2",
-      "courseId": "course_3",
-      "courseTitle": "Presence & Expression",
-      "lessonNumber": 2,
-      "title": "The Power of a Calm Voice",
-      "duration": 2,
-      "summary": "Learn how a calm voice creates trust, presence, and deeper attention.",
-      "isCompleted": false,
-      "isLocked": true,
-      "screens": [
-        {
-          "id": "screen_3_2_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_3_2_1",
-              "text": "You can influence people through your voice in two ways: by raising its volume or by steadying its tone. One burns energy; the other builds gravity.",
-              "order": 0
-            },
-            {
-              "id": "content_3_2_2",
-              "text": "A calm voice makes people listen harder, not because you demand attention, but because you don't need to. It tells the brain, yours and theirs, that the moment is safe.",
-              "order": 1
-            },
-            {
-              "id": "content_3_2_3",
-              "text": "When your tone is rushed or strained, people feel it before they hear it. When your tone is calm, the moment slows down and people are drawn in, making the conversation feel relaxed rather than tense.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_3_2_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_3_2_4",
-              "text": "You are talking to someone you are attracted to. The words are fine, but you're speaking too fast; your laugh is a little louder than usual, and your voice sits higher than normal. She smiles, but you can feel the rhythm slipping.",
-              "order": 0
-            },
-            {
-              "id": "content_3_2_5",
-              "text": "Then you catch yourself. You exhale, slow your tone, and match her pace.",
-              "order": 1
-            },
-            {
-              "id": "content_3_2_6",
-              "text": "Instantly, the tension fades. Her shoulders drop, her eyes stay with you. Nothing else changed except the sound of calm in your voice. The conversation didn't need more energy; it required space.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_3_2_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_3_2_7",
-              "text": "When you control your pace, you control the dynamic of the interaction.",
-              "order": 0
-            },
-            {
-              "id": "content_3_2_8",
-              "text": "People take their cues from your tone; if you sound tense, they feel tense, if you sound at ease, they feel at ease.",
-              "order": 1
-            },
-            {
-              "id": "content_3_2_9",
-              "text": "To sound calmer, give yourself a moment before each thought and speak on an exhale instead of a rush of air. When you do, your words land with weight rather than speed.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_3_2_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_3_2_10",
-              "text": "Your voice can do more than fill silence; it can set the tone. When you slow down and speak calmly, people listen differently.",
-              "order": 0
-            },
-            {
-              "id": "content_3_2_11",
-              "text": "You already know how to do this. You have talked calmly before, and with practice, you can make that steadiness your default.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "lesson_3_3",
-      "courseId": "course_3",
-      "courseTitle": "Presence & Expression",
-      "lessonNumber": 3,
-      "title": "Energy Is Contagious",
-      "duration": 3,
-      "summary": "Learn to project energy that invites connection instead of repelling it.",
-      "isCompleted": false,
-      "isLocked": true,
-      "screens": [
-        {
-          "id": "screen_3_3_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_3_3_1",
-              "text": "Some people drain the room without saying a word. Others walk in, and everyone stands taller.",
-              "order": 0
-            },
-            {
-              "id": "content_3_3_2",
-              "text": "You either pull people toward their better selves or weigh them down.",
-              "order": 1
-            },
-            {
-              "id": "content_3_3_3",
-              "text": "Energy is the emotional tone and physical presence you bring into an interaction.",
-              "order": 2
-            },
-            {
-              "id": "content_3_3_4",
-              "text": "People respond to it instantly because we subconsciously mirror the states of those around us.",
-              "order": 3
-            }
-          ]
-        },
-        {
-          "id": "screen_3_3_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_3_3_5",
-              "text": "Psychologists call this emotional contagion. Mirror neurons fire both when we feel an emotion and when we see someone else feel it, which means your state influences theirs before either of you thinks about it.",
-              "order": 0
-            },
-            {
-              "id": "content_3_3_6",
-              "text": "Positive energy draws people in because they feel better around you. Low or negative energy pushes them away because it feels uncomfortable.",
-              "order": 1
-            },
-            {
-              "id": "content_3_3_7",
-              "text": "This is true in all social situations, but especially when approaching a stranger, since your energy is the first thing they notice.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_3_3_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_3_3_8",
-              "text": "A guy goes to a party. Stands in the corner with his arms crossed. Low energy. Hoping someone will approach him. No one does. People unconsciously avoid him because his energy says, \"Leave me alone.\"",
-              "order": 0
-            }
-          ]
-        },
-        {
-          "id": "screen_3_3_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_3_3_9",
-              "text": "Another guy at the same party walks in with positive energy. Makes eye contact. Smiles. Moves through the space with ease. Within ten minutes, three people have started conversations with him.",
-              "order": 0
-            },
-            {
-              "id": "content_3_3_10",
-              "text": "He didn't approach anyone. They came to him. His energy invited interaction. The first guy's energy repelled it.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_3_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_3_3_11",
-              "text": "People respond to your energy before they respond to your words. If your energy is off, what you say doesn't matter. The interaction starts on the wrong foot.",
-              "order": 0
-            },
-            {
-              "id": "content_3_3_12",
-              "text": "If your energy is right, even mediocre words work because the interaction feels good.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_3_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_3_3_13",
-              "text": "Your energy is also within your control. You can shift it before approaching. Take a minute to reset. Have positive affirmations. Move your body. Smile deliberately.",
-              "order": 0
-            },
-            {
-              "id": "content_3_3_14",
-              "text": "These small actions change your state, which, in turn, changes the energy you bring to the next interaction.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_3_7",
-          "order": 6,
-          "content": [
-            {
-              "id": "content_3_3_15",
-              "text": "You don't need louder words or bigger moves, just energy that feels good to be around.",
-              "order": 0
-            },
-            {
-              "id": "content_3_3_16",
-              "text": "That is what makes people lean in instead of pull away.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "lesson_3_4",
-      "courseId": "course_3",
-      "courseTitle": "Presence & Expression",
-      "lessonNumber": 4,
-      "title": "Smile First, Speak Second",
-      "duration": 4,
-      "summary": "Learn how smiling shifts both your state and theirs before the conversation starts.",
-      "isCompleted": false,
-      "isLocked": true,
-      "screens": [
-        {
-          "id": "screen_3_4_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_3_4_1",
-              "text": "Before words, people read faces. When you smile, you lower others' guard and raise your own presence. You can say nothing at all and still shift the energy of a moment.",
-              "order": 0
-            },
-            {
-              "id": "content_3_4_2",
-              "text": "A smile is a facial expression that signals warmth, safety, and positive intent. In social interactions, it functions as a green light, signaling to the other person that this exchange will be pleasant rather than threatening.",
-              "order": 1
-            },
-            {
-              "id": "content_3_4_3",
-              "text": "This matters because humans make snap judgments about safety within milliseconds.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_3_4_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_3_4_4",
-              "text": "Research shows that smiling activates the reward centers in both the person smiling and the person seeing the smile.",
-              "order": 0
-            },
-            {
-              "id": "content_3_4_5",
-              "text": "It's neurologically impossible to see a genuine smile and not have some positive response.",
-              "order": 1
-            },
-            {
-              "id": "content_3_4_6",
-              "text": "Your brain releases dopamine and serotonin when you smile, which improves your mood and reduces stress. Her brain does the same when she sees your smile.",
-              "order": 2
-            },
-            {
-              "id": "content_3_4_7",
-              "text": "By smiling first, you're creating positive feelings before the conversation even starts.",
-              "order": 3
-            }
-          ]
-        },
-        {
-          "id": "screen_3_4_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_3_4_8",
-              "text": "You catch her eye across the street. For a second, neither of you moves, just that flicker of mutual awareness.",
-              "order": 0
-            },
-            {
-              "id": "content_3_4_9",
-              "text": "Then you let a small, genuine smile break through. Her body language shifts, her shoulders loosen, her expression softens, and she matches your smile.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_4_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_3_4_10",
-              "text": "When you walk over, the tension is already gone. The smile did what words couldn't: it turned an approach into an invitation.",
-              "order": 0
-            },
-            {
-              "id": "content_3_4_11",
-              "text": "You didn't have to perform or prove anything. You simply showed you were at ease, and that gave her permission to be at ease too.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_4_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_3_4_12",
-              "text": "When you smile genuinely, you're telling her nervous system that this interaction will be pleasant. That signal matters more than your words.",
-              "order": 0
-            },
-            {
-              "id": "content_3_4_13",
-              "text": "A genuine smile uses the muscles around your eyes, not just your mouth. You can develop a more genuine smile by thinking about something that actually makes you happy.",
-              "order": 1
-            },
-            {
-              "id": "content_3_4_14",
-              "text": "That internal positive state shows in your face naturally.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_3_4_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_3_4_15",
-              "text": "Another principle: smile before you approach. Don't wait until you're standing in front of her. When you make eye contact from across the room, smile. When you're walking over, maintain a warm expression. By the time you arrive, she's already seen you as friendly. The interaction starts warm instead of neutral.",
-              "order": 0
-            },
-            {
-              "id": "content_3_4_16",
-              "text": "Finally, smiling should be your default expression in social environments, as this makes you look more approachable.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_4_7",
-          "order": 6,
-          "content": [
-            {
-              "id": "content_3_4_17",
-              "text": "A genuine smile is a small gesture, but it changes how you both feel.",
-              "order": 0
-            },
-            {
-              "id": "content_3_4_18",
-              "text": "You already know how to use this tool. All you need to do is use it a little more often.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    }
-  ]
+  {
+    "id": "lesson_3_1",
+    "courseId": "course_3",
+    "lessonNumber": 1,
+    "courseTitle": "Presence & Expressions",
+    "title": "Your body speaks first",
+    "duration": 2,
+    "summary": "Learn to remove physical signals of tension that quietly undermine connection.",
+    "isCompleted": false,
+    "isLocked": false,
+    "screens": [
+      {
+        "id": "screen_3_1_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_3_1_1_1",
+            "text": "Before you say a word, your body has already spoken. Posture, hands, eyes, all send signals faster than thought.",
+            "order": 0
+          },
+          {
+            "id": "content_3_1_1_2",
+            "text": "People decide if you are confident, tense, or trustworthy long before sound leaves your mouth.",
+            "order": 1
+          },
+          {
+            "id": "content_3_1_1_3",
+            "text": "The question is whether you are sending the message you mean to.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_3_1_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_3_1_2_1",
+            "text": "Body language is your first language, whether you realize it or not.",
+            "order": 0
+          },
+          {
+            "id": "content_3_1_2_2",
+            "text": "Before logic or words, the brain reads movement, posture, and micro-expressions to decide whether someone feels safe or confident.",
+            "order": 1
+          },
+          {
+            "id": "content_3_1_2_3",
+            "text": "When your body and words don't match, people feel the disconnect.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_3_1_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_3_1_3_1",
+            "text": "You approach a woman at a cafe and you are mid-conversation. You think you are doing fine, but your shoulders are tight, your arms stay crossed, and your eyes keep darting away.",
+            "order": 0
+          },
+          {
+            "id": "content_3_1_3_2",
+            "text": "She smiles politely, then checks her phone. You replay it later, wondering what went wrong. Nothing you said was off; it was how you showed up. Your body was broadcasting discomfort while your words tried to sound relaxed.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_3_1_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_3_1_4_1",
+            "text": "People trust what they see more than what they hear. When your posture and tone don't match your message, the connection breaks before it begins.",
+            "order": 0
+          },
+          {
+            "id": "content_3_1_4_2",
+            "text": "Your posture, breath, and stillness tell the truth before your voice ever does. When your body is tense, no amount of charm can disguise it; when it is relaxed, you don't need to convince anyone.",
+            "order": 1
+          },
+          {
+            "id": "content_3_1_4_3",
+            "text": "Being present isn't about pretending to be confident; it's about removing the signals that say you aren't.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_3_1_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_3_1_5_1",
+            "text": "Your body already knows how to speak with confidence; you just have to stop interrupting it.",
+            "order": 0
+          },
+          {
+            "id": "content_3_1_5_2",
+            "text": "When you stand tall, breathe fully, and let stillness do the work, people feel it.",
+            "order": 1
+          },
+          {
+            "id": "content_3_1_5_3",
+            "text": "You don't have to act differently; just let your body reflect your calm rather than your nerves.",
+            "order": 2
+          }
+        ]
+      }
+    ],
+    "courseSummary": "Learn to influence interactions by mastering presence."
+  },
+  {
+    "id": "lesson_3_2",
+    "courseId": "course_3",
+    "lessonNumber": 2,
+    "courseTitle": "Presence & Expressions",
+    "title": "The Power of a Calm Voice",
+    "duration": 2,
+    "summary": "Learn how a calm voice creates trust, presence, and deeper attention.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_3_2_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_3_2_1_1",
+            "text": "You can influence people through your voice in two ways: by raising its volume or by steadying its tone. One burns energy; the other builds gravity.",
+            "order": 0
+          },
+          {
+            "id": "content_3_2_1_2",
+            "text": "A calm voice makes people listen harder, not because you demand attention, but because you don't need to. It tells the brain, yours and theirs, that the moment is safe.",
+            "order": 1
+          },
+          {
+            "id": "content_3_2_1_3",
+            "text": "When your tone is rushed or strained, people feel it before they hear it. When your tone is calm, the moment slows down and people are drawn in, making the conversation feel relaxed rather than tense.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_3_2_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_3_2_2_1",
+            "text": "You are talking to someone you are attracted to. The words are fine, but you're speaking too fast; your laugh is a little louder than usual, and your voice sits higher than normal. She smiles, but you can feel the rhythm slipping.",
+            "order": 0
+          },
+          {
+            "id": "content_3_2_2_2",
+            "text": "Then you catch yourself. You exhale, slow your tone, and match her pace.",
+            "order": 1
+          },
+          {
+            "id": "content_3_2_2_3",
+            "text": "Instantly, the tension fades. Her shoulders drop, her eyes stay with you. Nothing else changed except the sound of calm in your voice. The conversation didn't need more energy; it required space.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_3_2_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_3_2_3_1",
+            "text": "When you control your pace, you control the dynamic of the interaction.",
+            "order": 0
+          },
+          {
+            "id": "content_3_2_3_2",
+            "text": "People take their cues from your tone; if you sound tense, they feel tense, if you sound at ease, they feel at ease.",
+            "order": 1
+          },
+          {
+            "id": "content_3_2_3_3",
+            "text": "To sound calmer, give yourself a moment before each thought and speak on an exhale instead of a rush of air. When you do, your words land with weight rather than speed.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_3_2_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_3_2_4_1",
+            "text": "Your voice can do more than fill silence; it can set the tone. When you slow down and speak calmly, people listen differently.",
+            "order": 0
+          },
+          {
+            "id": "content_3_2_4_2",
+            "text": "You already know how to do this. You have talked calmly before, and with practice, you can make that steadiness your default.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesson_3_3",
+    "courseId": "course_3",
+    "lessonNumber": 3,
+    "courseTitle": "Presence & Expressions",
+    "title": "Energy Is Contagious",
+    "duration": 3,
+    "summary": "Learn to project energy that invites connection instead of repelling it.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_3_3_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_3_3_1_1",
+            "text": "Some people drain the room without saying a word. Others walk in, and everyone stands taller.",
+            "order": 0
+          },
+          {
+            "id": "content_3_3_1_2",
+            "text": "You either pull people toward their better selves or weigh them down.",
+            "order": 1
+          },
+          {
+            "id": "content_3_3_1_3",
+            "text": "Energy is the emotional tone and physical presence you bring into an interaction.",
+            "order": 2
+          },
+          {
+            "id": "content_3_3_1_4",
+            "text": "People respond to it instantly because we subconsciously mirror the states of those around us.",
+            "order": 3
+          }
+        ]
+      },
+      {
+        "id": "screen_3_3_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_3_3_2_1",
+            "text": "Psychologists call this emotional contagion. Mirror neurons fire both when we feel an emotion and when we see someone else feel it, which means your state influences theirs before either of you thinks about it.",
+            "order": 0
+          },
+          {
+            "id": "content_3_3_2_2",
+            "text": "Positive energy draws people in because they feel better around you. Low or negative energy pushes them away because it feels uncomfortable.",
+            "order": 1
+          },
+          {
+            "id": "content_3_3_2_3",
+            "text": "This is true in all social situations, but especially when approaching a stranger, since your energy is the first thing they notice.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_3_3_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_3_3_3_1",
+            "text": "A guy goes to a party. Stands in the corner with his arms crossed. Low energy. Hoping someone will approach him. No one does. People unconsciously avoid him because his energy says, \"Leave me alone.\"",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "screen_3_3_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_3_3_4_1",
+            "text": "Another guy at the same party walks in with positive energy. Makes eye contact. Smiles. Moves through the space with ease. Within ten minutes, three people have started conversations with him.",
+            "order": 0
+          },
+          {
+            "id": "content_3_3_4_2",
+            "text": "He didn't approach anyone. They came to him. His energy invited interaction. The first guy's energy repelled it.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_3_3_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_3_3_5_1",
+            "text": "People respond to your energy before they respond to your words. If your energy is off, what you say doesn't matter. The interaction starts on the wrong foot.",
+            "order": 0
+          },
+          {
+            "id": "content_3_3_5_2",
+            "text": "If your energy is right, even mediocre words work because the interaction feels good.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_3_3_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_3_3_6_1",
+            "text": "Your energy is also within your control. You can shift it before approaching. Take a minute to reset. Have positive affirmations. Move your body. Smile deliberately.",
+            "order": 0
+          },
+          {
+            "id": "content_3_3_6_2",
+            "text": "These small actions change your state, which, in turn, changes the energy you bring to the next interaction.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_3_3_7",
+        "order": 6,
+        "content": [
+          {
+            "id": "content_3_3_7_1",
+            "text": "You don't need louder words or bigger moves, just energy that feels good to be around.",
+            "order": 0
+          },
+          {
+            "id": "content_3_3_7_2",
+            "text": "That is what makes people lean in instead of pull away.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesson_3_4",
+    "courseId": "course_3",
+    "lessonNumber": 4,
+    "courseTitle": "Presence & Expressions",
+    "title": "Smile First, Speak Second",
+    "duration": 4,
+    "summary": "Learn how smiling shifts both your state and theirs before the conversation starts.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_3_4_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_3_4_1_1",
+            "text": "Before words, people read faces. When you smile, you lower others' guard and raise your own presence. You can say nothing at all and still shift the energy of a moment.",
+            "order": 0
+          },
+          {
+            "id": "content_3_4_1_2",
+            "text": "A smile is a facial expression that signals warmth, safety, and positive intent. In social interactions, it functions as a green light, signaling to the other person that this exchange will be pleasant rather than threatening.",
+            "order": 1
+          },
+          {
+            "id": "content_3_4_1_3",
+            "text": "This matters because humans make snap judgments about safety within milliseconds.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_3_4_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_3_4_2_1",
+            "text": "Research shows that smiling activates the reward centers in both the person smiling and the person seeing the smile.",
+            "order": 0
+          },
+          {
+            "id": "content_3_4_2_2",
+            "text": "It's neurologically impossible to see a genuine smile and not have some positive response.",
+            "order": 1
+          },
+          {
+            "id": "content_3_4_2_3",
+            "text": "Your brain releases dopamine and serotonin when you smile, which improves your mood and reduces stress. Her brain does the same when she sees your smile.",
+            "order": 2
+          },
+          {
+            "id": "content_3_4_2_4",
+            "text": "By smiling first, you're creating positive feelings before the conversation even starts.",
+            "order": 3
+          }
+        ]
+      },
+      {
+        "id": "screen_3_4_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_3_4_3_1",
+            "text": "You catch her eye across the street. For a second, neither of you moves, just that flicker of mutual awareness.",
+            "order": 0
+          },
+          {
+            "id": "content_3_4_3_2",
+            "text": "Then you let a small, genuine smile break through. Her body language shifts, her shoulders loosen, her expression softens, and she matches your smile.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_3_4_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_3_4_4_1",
+            "text": "When you walk over, the tension is already gone. The smile did what words couldn't: it turned an approach into an invitation.",
+            "order": 0
+          },
+          {
+            "id": "content_3_4_4_2",
+            "text": "You didn't have to perform or prove anything. You simply showed you were at ease, and that gave her permission to be at ease too.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_3_4_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_3_4_5_1",
+            "text": "When you smile genuinely, you're telling her nervous system that this interaction will be pleasant. That signal matters more than your words.",
+            "order": 0
+          },
+          {
+            "id": "content_3_4_5_2",
+            "text": "A genuine smile uses the muscles around your eyes, not just your mouth. You can develop a more genuine smile by thinking about something that actually makes you happy.",
+            "order": 1
+          },
+          {
+            "id": "content_3_4_5_3",
+            "text": "That internal positive state shows in your face naturally.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_3_4_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_3_4_6_1",
+            "text": "Another principle: smile before you approach. Don't wait until you're standing in front of her. When you make eye contact from across the room, smile. When you're walking over, maintain a warm expression. By the time you arrive, she's already seen you as friendly. The interaction starts warm instead of neutral.",
+            "order": 0
+          },
+          {
+            "id": "content_3_4_6_2",
+            "text": "Finally, smiling should be your default expression in social environments, as this makes you look more approachable.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_3_4_7",
+        "order": 6,
+        "content": [
+          {
+            "id": "content_3_4_7_1",
+            "text": "A genuine smile is a small gesture, but it changes how you both feel.",
+            "order": 0
+          },
+          {
+            "id": "content_3_4_7_2",
+            "text": "You already know how to use this tool. All you need to do is use it a little more often.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  }
+]

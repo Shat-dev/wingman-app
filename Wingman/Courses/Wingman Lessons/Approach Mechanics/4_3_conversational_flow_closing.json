@@ -1,482 +1,482 @@
 [
-    {
-      "id": "lesson_4_1",
-      "courseId": "course_4",
-      "courseSummary": "Learn to end interactions in ways that preserve momentum.",
-      "courseTitle": "Closing",
-      "lessonNumber": 1,
-      "title": "Know When the Moment Is Ready",
-      "duration": 3,
-      "summary": "Learn how reading behavior makes closing predictable, not guesswork.",
-      "isCompleted": false,
-      "isLocked": false,
-      "screens": [
-        {
-          "id": "screen_4_1_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_4_1_1",
-              "text": "Engagement shows up in small, consistent signals. Her focus, pace, and energy shift in ways that tell you the connection is taking shape.",
-              "order": 0
-            },
-            {
-              "id": "content_4_1_2",
-              "text": "A pleasant chat is not always close-ready. If you move without that foundation, the ask falls flat. With the right timing, everything falls into place.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_1_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_4_1_3",
-              "text": "A moment becomes ready when she moves from simple participation to genuine investment. Early in an interaction, she is assessing you. Once she relaxes and starts contributing, the dynamic changes.",
-              "order": 0
-            },
-            {
-              "id": "content_4_1_4",
-              "text": "This investment is the signal that the connection has crossed a threshold and the moment now has enough weight to support the ask.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_1_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_4_1_5",
-              "text": "A man in a bookstore makes small talk for a few minutes, mistakes politeness for interest, and asks for a number. She declines because nothing meaningful has been built yet.",
-              "order": 0
-            },
-            {
-              "id": "content_4_1_6",
-              "text": "Another man speaks to a woman in the travel section. She expands her answers, asks questions, and stays engaged. They discover shared interests, and she freely offers personal details. When he finally asks for her number, she gives it without hesitation.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_1_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_4_1_7",
-              "text": "The difference between the two is simple.",
-              "order": 0
-            },
-            {
-              "id": "content_4_1_8",
-              "text": "One acted before she invested. The other waited until she was clearly ready for the conversation to continue.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_1_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_4_1_9",
-              "text": "The moment is ready when she is contributing more than she needs to. Investment shows in clear behaviours: longer answers, curiosity about you, sustained presence, and open posture.",
-              "order": 0
-            },
-            {
-              "id": "content_4_1_10",
-              "text": "These cues show that she is not just tolerating the interaction but choosing it.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_1_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_4_1_11",
-              "text": "Neutral engagement signals the opposite. Short replies, low energy, or distracted body language mean she has not committed enough for a close to land. Build a little more comfort before moving forward.",
-              "order": 0
-            },
-            {
-              "id": "content_4_1_12",
-              "text": "The only time to close earlier is when she has limited time, and even then, you should look for at least a basic sign of reciprocation.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_1_7",
-          "order": 6,
-          "content": [
-            {
-              "id": "content_4_1_13",
-              "text": "Men who close consistently are not guessing. They are reading.",
-              "order": 0
-            },
-            {
-              "id": "content_4_1_14",
-              "text": "When you pay attention to how much she is investing, you know exactly when to push forward and when to keep building.",
-              "order": 1
-            },
-            {
-              "id": "content_4_1_15",
-              "text": "Follow her behaviour, not your nerves. Close when she shows she wants the interaction to continue. That is the moment that works.",
-              "order": 2
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "lesson_4_2",
-      "courseId": "course_4",
-      "courseTitle": "Closing",
-      "lessonNumber": 2,
-      "title": "End on Connection, Not Luck",
-      "duration": 3,
-      "summary": "Learn to turn goodbyes into bridges, not full stops.",
-      "isCompleted": false,
-      "isLocked": true,
-      "screens": [
-        {
-          "id": "screen_4_2_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_4_2_1",
-              "text": "Ending an interaction feels like a small moment, but it is the moment she uses to decide whether you are someone worth seeing again.",
-              "order": 0
-            },
-            {
-              "id": "content_4_2_2",
-              "text": "The wrong exit makes a good conversation fade instantly. The right one makes her curious about what happens next.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_2_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_4_2_3",
-              "text": "Generic goodbyes close the interaction completely. They sound polite but signal that the moment is over.",
-              "order": 0
-            },
-            {
-              "id": "content_4_2_4",
-              "text": "A strong exit does the opposite. It leaves her with a point of connection she can remember later.",
-              "order": 1
-            },
-            {
-              "id": "content_4_2_5",
-              "text": "This isn't about being clever. It is about ending in a way that preserves the momentum you've already built.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_4_2_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_4_2_6",
-              "text": "A guy meets a woman at a coffee shop, and they talk about her upcoming trip to Portugal. She lights up when she talks about Lisbon and Porto. When he leaves, he closes with, \"Nice talking to you, have a great day.\"",
-              "order": 0
-            },
-            {
-              "id": "content_4_2_7",
-              "text": "Two days later, he texts her, but there is no link between his message and their conversation. She replies politely, and the momentum dies. His ending gave her nothing to reconnect with.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_2_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_4_2_8",
-              "text": "Now the same moment done right. Another guy hears her talk about Portugal and ends with, \"I'm jealous, Portugal is unreal. You have to try the...\" She laughs. He adds, \"Tell me how the trip goes, let me grab your number.\" When he texts later, he anchors it: \"How's the Portugal countdown going?\"",
-              "order": 0
-            },
-            {
-              "id": "content_4_2_9",
-              "text": "She responds with energy because the conversation never fully ended. He left her with a thread to continue, not a polite goodbye.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_2_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_4_2_10",
-              "text": "Your exit works when it carries something forward. Use a detail she shared, a plan she mentioned, or a moment you both enjoyed. This creates continuity and shows you were listening.",
-              "order": 0
-            },
-            {
-              "id": "content_4_2_11",
-              "text": "A single specific callback anchors the interaction and makes any follow-up feel natural rather than random. It turns goodbye into a bridge, not a full stop.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_2_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_4_2_12",
-              "text": "You do not want to be the guy she barely remembers. You want to be the guy she hopes will text her because the moment you shared felt real.",
-              "order": 0
-            },
-            {
-              "id": "content_4_2_13",
-              "text": "Pay attention to her details, use them in your goodbye, and make the exit feel like the start of something rather than the end.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "lesson_4_3",
-      "courseId": "course_4",
-      "courseTitle": "Closing",
-      "lessonNumber": 3,
-      "title": "Make It Easy to Say Yes",
-      "duration": 4,
-      "summary": "Learn how simplicity removes resistance during the close.",
-      "isCompleted": false,
-      "isLocked": true,
-      "screens": [
-        {
-          "id": "screen_4_3_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_4_3_1",
-              "text": "A close works when it fits the tone of the interaction. Suggesting a small next step builds momentum. Pitching a full date invitation too early breaks it.",
-              "order": 0
-            },
-            {
-              "id": "content_4_3_2",
-              "text": "People respond to plans that feel natural, not proposals that feel loaded.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_3_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_4_3_3",
-              "text": "The psychology behind a good close is simple: people say yes more easily when the ask feels low-stakes and aligned with the moment.",
-              "order": 0
-            },
-            {
-              "id": "content_4_3_4",
-              "text": "Early on, she decides whether she feels comfortable continuing, not whether she wants a full date. Big asks make her evaluate you. Small next steps let her stay curious. When the close matches the lightness of the moment, she can say yes without feeling like she is committing to anything.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_3_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_4_3_5",
-              "text": "That is why simple, low-pressure plans work far better than proposals.",
-              "order": 0
-            },
-            {
-              "id": "content_4_3_6",
-              "text": "They move the connection forward without triggering her instinct to pull back or protect her boundaries.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_3_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_4_3_7",
-              "text": "A guy meets a woman at a street market. They talk about the food stalls and ramen. The vibe is light, easy. Five minutes in, he feels the pressure to secure something, so he jumps straight to, \"We should go out sometime. Can I take you to dinner?\" She freezes for a moment, smiles politely, and says she is not looking for anything serious.",
-              "order": 0
-            },
-            {
-              "id": "content_4_3_8",
-              "text": "Nothing was wrong with the conversation. The ask was simply too big for the stage they were in. She was comfortable chatting, not committing.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_3_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_4_3_9",
-              "text": "Now picture the same moment handled differently. They talk about ramen again, and she laughs about never finding a good place in the city. He keeps it simple: \"I'll send you the spot I mentioned. What's your number?\" No promise, no pitch, just a small next step that matches the tone of the interaction.",
-              "order": 0
-            },
-            {
-              "id": "content_4_3_10",
-              "text": "She gives it easily because the ask feels light. There is nothing to evaluate, nothing to defend. Just a natural continuation of a moment she already enjoyed.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_3_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_4_3_11",
-              "text": "Psychologists call this choice architecture. When the decision feels small, people follow their curiosity. When it feels heavy, they pull back.",
-              "order": 0
-            },
-            {
-              "id": "content_4_3_12",
-              "text": "A good close is nothing more than shaping the moment so saying yes is the path of least resistance.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_3_7",
-          "order": 6,
-          "content": [
-            {
-              "id": "content_4_3_13",
-              "text": "A close lands when it feels like the next logical step, not a leap.",
-              "order": 0
-            },
-            {
-              "id": "content_4_3_14",
-              "text": "Keep the ask small, and the pressure disappears. You're not trying to win her over in one move. You're just opening the door for what could happen next. Keep it simple and let the connection unfold.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "lesson_4_4",
-      "courseId": "course_4",
-      "courseTitle": "Closing",
-      "lessonNumber": 4,
-      "title": "Assume she is interested",
-      "duration": 4,
-      "summary": "Learn why questions trigger doubt while assumptions preserve attraction.",
-      "isCompleted": false,
-      "isLocked": true,
-      "screens": [
-        {
-          "id": "screen_4_4_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_4_4_1",
-              "text": "People rarely reject confidence. They reject uncertainty that asks them to do emotional work.",
-              "order": 0
-            },
-            {
-              "id": "content_4_4_2",
-              "text": "Assuming the close means stating the next step as fact rather than requesting permission. Instead of \"Would you want to get coffee?\" you say \"Let's get coffee. What's your number?\" You assume she is already interested and propose the plan confidently.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_4_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_4_4_3",
-              "text": "This matters because questions invite hesitation and reconsideration. When you ask \"Do you want to exchange numbers?\" you're creating a decision point where she has to consciously evaluate whether she wants to say yes.",
-              "order": 0
-            },
-            {
-              "id": "content_4_4_4",
-              "text": "That evaluation introduces doubt. She starts thinking instead of feeling. \"Do I want to? Am I actually interested? What if it's awkward?\" The question activates her analytical mind, which can talk her out of what her emotional mind already decided.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_4_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_4_4_5",
-              "text": "Assumptions bypass that analytical evaluation. When you say \"Give me your number, we'll grab coffee this week,\" you're treating her interest as already established.",
-              "order": 0
-            },
-            {
-              "id": "content_4_4_6",
-              "text": "By stating the plan, she just needs to comply or object, and compliance is often the path of least resistance.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_4_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_4_4_7",
-              "text": "A guy is talking to a woman at a party. Good energy. Lots of laughing. He wants her number. \"So, um, this might be forward, but would you be open to maybe grabbing food sometime?\" The apologetic framing and tentative ask undercut the good energy they built. She picked up on his lack of confidence and her interest cooled.",
-              "order": 0
-            }
-          ]
-        },
-        {
-          "id": "screen_4_4_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_4_4_8",
-              "text": "Another man in a similar situation. Same fifteen minutes of good conversation. \"You're fun. We're getting food this week. Put your number in here.\" Hands her his phone with confidence. She enters her number without hesitation. His assumption that of course she wants to continue made her compliance automatic.",
-              "order": 0
-            }
-          ]
-        },
-        {
-          "id": "screen_4_4_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_4_4_9",
-              "text": "Assumed closes work because they treat her interest as established fact rather than uncertain possibility. Asking \"Do you want to see me again?\" questions that demonstrated interest. Stating \"Let's do this again\" acknowledges it and proposes the logical next step.",
-              "order": 0
-            }
-          ]
-        },
-        {
-          "id": "screen_4_4_7",
-          "order": 6,
-          "content": [
-            {
-              "id": "content_4_4_10",
-              "text": "The mechanics are simple: replace questions with statements. \"Would you want to get coffee?\" becomes \"Let's get coffee.\" \"Are you interested in exchanging numbers?\" becomes \"Give me your number.\" \"Would you want to see me again?\" becomes \"We're doing this again.\"",
-              "order": 0
-            },
-            {
-              "id": "content_4_4_11",
-              "text": "You are not forcing anything by assuming the next step. When you move forward without apology, you give the interaction a direction instead of a question mark.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    }
-  ]
+  {
+    "id": "lesson_15_1",
+    "courseId": "course_15",
+    "lessonNumber": 1,
+    "courseTitle": "Closing",
+    "title": "Know When the Moment Is Ready",
+    "duration": 3,
+    "summary": "Learn how reading behavior makes closing predictable, not guesswork.",
+    "isCompleted": false,
+    "isLocked": false,
+    "screens": [
+      {
+        "id": "screen_15_1_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_15_1_1_1",
+            "text": "Engagement shows up in small, consistent signals. Her focus, pace, and energy shift in ways that tell you the connection is taking shape.",
+            "order": 0
+          },
+          {
+            "id": "content_15_1_1_2",
+            "text": "A pleasant chat is not always close-ready. If you move without that foundation, the ask falls flat. With the right timing, everything falls into place.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_15_1_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_15_1_2_1",
+            "text": "A moment becomes ready when she moves from simple participation to genuine investment. Early in an interaction, she is assessing you. Once she relaxes and starts contributing, the dynamic changes.",
+            "order": 0
+          },
+          {
+            "id": "content_15_1_2_2",
+            "text": "This investment is the signal that the connection has crossed a threshold and the moment now has enough weight to support the ask.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_15_1_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_15_1_3_1",
+            "text": "A man in a bookstore makes small talk for a few minutes, mistakes politeness for interest, and asks for a number. She declines because nothing meaningful has been built yet.",
+            "order": 0
+          },
+          {
+            "id": "content_15_1_3_2",
+            "text": "Another man speaks to a woman in the travel section. She expands her answers, asks questions, and stays engaged. They discover shared interests, and she freely offers personal details. When he finally asks for her number, she gives it without hesitation.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_15_1_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_15_1_4_1",
+            "text": "The difference between the two is simple.",
+            "order": 0
+          },
+          {
+            "id": "content_15_1_4_2",
+            "text": "One acted before she invested. The other waited until she was clearly ready for the conversation to continue.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_15_1_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_15_1_5_1",
+            "text": "The moment is ready when she is contributing more than she needs to. Investment shows in clear behaviours: longer answers, curiosity about you, sustained presence, and open posture.",
+            "order": 0
+          },
+          {
+            "id": "content_15_1_5_2",
+            "text": "These cues show that she is not just tolerating the interaction but choosing it.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_15_1_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_15_1_6_1",
+            "text": "Neutral engagement signals the opposite. Short replies, low energy, or distracted body language mean she has not committed enough for a close to land. Build a little more comfort before moving forward.",
+            "order": 0
+          },
+          {
+            "id": "content_15_1_6_2",
+            "text": "The only time to close earlier is when she has limited time, and even then, you should look for at least a basic sign of reciprocation.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_15_1_7",
+        "order": 6,
+        "content": [
+          {
+            "id": "content_15_1_7_1",
+            "text": "Men who close consistently are not guessing. They are reading.",
+            "order": 0
+          },
+          {
+            "id": "content_15_1_7_2",
+            "text": "When you pay attention to how much she is investing, you know exactly when to push forward and when to keep building.",
+            "order": 1
+          },
+          {
+            "id": "content_15_1_7_3",
+            "text": "Follow her behaviour, not your nerves. Close when she shows she wants the interaction to continue. That is the moment that works.",
+            "order": 2
+          }
+        ]
+      }
+    ],
+    "courseSummary": "Learn to end interactions in ways that preserve momentum."
+  },
+  {
+    "id": "lesson_15_2",
+    "courseId": "course_15",
+    "lessonNumber": 2,
+    "courseTitle": "Closing",
+    "title": "End on Connection, Not Luck",
+    "duration": 3,
+    "summary": "Learn to turn goodbyes into bridges, not full stops.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_15_2_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_15_2_1_1",
+            "text": "Ending an interaction feels like a small moment, but it is the moment she uses to decide whether you are someone worth seeing again.",
+            "order": 0
+          },
+          {
+            "id": "content_15_2_1_2",
+            "text": "The wrong exit makes a good conversation fade instantly. The right one makes her curious about what happens next.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_15_2_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_15_2_2_1",
+            "text": "Generic goodbyes close the interaction completely. They sound polite but signal that the moment is over.",
+            "order": 0
+          },
+          {
+            "id": "content_15_2_2_2",
+            "text": "A strong exit does the opposite. It leaves her with a point of connection she can remember later.",
+            "order": 1
+          },
+          {
+            "id": "content_15_2_2_3",
+            "text": "This isn't about being clever. It is about ending in a way that preserves the momentum you've already built.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_15_2_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_15_2_3_1",
+            "text": "A guy meets a woman at a coffee shop, and they talk about her upcoming trip to Portugal. She lights up when she talks about Lisbon and Porto. When he leaves, he closes with, \"Nice talking to you, have a great day.\"",
+            "order": 0
+          },
+          {
+            "id": "content_15_2_3_2",
+            "text": "Two days later, he texts her, but there is no link between his message and their conversation. She replies politely, and the momentum dies. His ending gave her nothing to reconnect with.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_15_2_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_15_2_4_1",
+            "text": "Now the same moment done right. Another guy hears her talk about Portugal and ends with, \"I'm jealous, Portugal is unreal. You have to try the...\" She laughs. He adds, \"Tell me how the trip goes, let me grab your number.\" When he texts later, he anchors it: \"How's the Portugal countdown going?\"",
+            "order": 0
+          },
+          {
+            "id": "content_15_2_4_2",
+            "text": "She responds with energy because the conversation never fully ended. He left her with a thread to continue, not a polite goodbye.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_15_2_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_15_2_5_1",
+            "text": "Your exit works when it carries something forward. Use a detail she shared, a plan she mentioned, or a moment you both enjoyed. This creates continuity and shows you were listening.",
+            "order": 0
+          },
+          {
+            "id": "content_15_2_5_2",
+            "text": "A single specific callback anchors the interaction and makes any follow-up feel natural rather than random. It turns goodbye into a bridge, not a full stop.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_15_2_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_15_2_6_1",
+            "text": "You do not want to be the guy she barely remembers. You want to be the guy she hopes will text her because the moment you shared felt real.",
+            "order": 0
+          },
+          {
+            "id": "content_15_2_6_2",
+            "text": "Pay attention to her details, use them in your goodbye, and make the exit feel like the start of something rather than the end.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesson_15_3",
+    "courseId": "course_15",
+    "lessonNumber": 3,
+    "courseTitle": "Closing",
+    "title": "Make It Easy to Say Yes",
+    "duration": 4,
+    "summary": "Learn how simplicity removes resistance during the close.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_15_3_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_15_3_1_1",
+            "text": "A close works when it fits the tone of the interaction. Suggesting a small next step builds momentum. Pitching a full date invitation too early breaks it.",
+            "order": 0
+          },
+          {
+            "id": "content_15_3_1_2",
+            "text": "People respond to plans that feel natural, not proposals that feel loaded.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_15_3_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_15_3_2_1",
+            "text": "The psychology behind a good close is simple: people say yes more easily when the ask feels low-stakes and aligned with the moment.",
+            "order": 0
+          },
+          {
+            "id": "content_15_3_2_2",
+            "text": "Early on, she decides whether she feels comfortable continuing, not whether she wants a full date. Big asks make her evaluate you. Small next steps let her stay curious. When the close matches the lightness of the moment, she can say yes without feeling like she is committing to anything.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_15_3_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_15_3_3_1",
+            "text": "That is why simple, low-pressure plans work far better than proposals.",
+            "order": 0
+          },
+          {
+            "id": "content_15_3_3_2",
+            "text": "They move the connection forward without triggering her instinct to pull back or protect her boundaries.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_15_3_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_15_3_4_1",
+            "text": "A guy meets a woman at a street market. They talk about the food stalls and ramen. The vibe is light, easy. Five minutes in, he feels the pressure to secure something, so he jumps straight to, \"We should go out sometime. Can I take you to dinner?\" She freezes for a moment, smiles politely, and says she is not looking for anything serious.",
+            "order": 0
+          },
+          {
+            "id": "content_15_3_4_2",
+            "text": "Nothing was wrong with the conversation. The ask was simply too big for the stage they were in. She was comfortable chatting, not committing.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_15_3_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_15_3_5_1",
+            "text": "Now picture the same moment handled differently. They talk about ramen again, and she laughs about never finding a good place in the city. He keeps it simple: \"I'll send you the spot I mentioned. What's your number?\" No promise, no pitch, just a small next step that matches the tone of the interaction.",
+            "order": 0
+          },
+          {
+            "id": "content_15_3_5_2",
+            "text": "She gives it easily because the ask feels light. There is nothing to evaluate, nothing to defend. Just a natural continuation of a moment she already enjoyed.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_15_3_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_15_3_6_1",
+            "text": "Psychologists call this choice architecture. When the decision feels small, people follow their curiosity. When it feels heavy, they pull back.",
+            "order": 0
+          },
+          {
+            "id": "content_15_3_6_2",
+            "text": "A good close is nothing more than shaping the moment so saying yes is the path of least resistance.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_15_3_7",
+        "order": 6,
+        "content": [
+          {
+            "id": "content_15_3_7_1",
+            "text": "A close lands when it feels like the next logical step, not a leap.",
+            "order": 0
+          },
+          {
+            "id": "content_15_3_7_2",
+            "text": "Keep the ask small, and the pressure disappears. You're not trying to win her over in one move. You're just opening the door for what could happen next. Keep it simple and let the connection unfold.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesson_15_4",
+    "courseId": "course_15",
+    "lessonNumber": 4,
+    "courseTitle": "Closing",
+    "title": "Assume she is interested",
+    "duration": 4,
+    "summary": "Learn why questions trigger doubt while assumptions preserve attraction.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_15_4_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_15_4_1_1",
+            "text": "People rarely reject confidence. They reject uncertainty that asks them to do emotional work.",
+            "order": 0
+          },
+          {
+            "id": "content_15_4_1_2",
+            "text": "Assuming the close means stating the next step as fact rather than requesting permission. Instead of \"Would you want to get coffee?\" you say \"Let's get coffee. What's your number?\" You assume she is already interested and propose the plan confidently.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_15_4_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_15_4_2_1",
+            "text": "This matters because questions invite hesitation and reconsideration. When you ask \"Do you want to exchange numbers?\" you're creating a decision point where she has to consciously evaluate whether she wants to say yes.",
+            "order": 0
+          },
+          {
+            "id": "content_15_4_2_2",
+            "text": "That evaluation introduces doubt. She starts thinking instead of feeling. \"Do I want to? Am I actually interested? What if it's awkward?\" The question activates her analytical mind, which can talk her out of what her emotional mind already decided.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_15_4_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_15_4_3_1",
+            "text": "Assumptions bypass that analytical evaluation. When you say \"Give me your number, we'll grab coffee this week,\" you're treating her interest as already established.",
+            "order": 0
+          },
+          {
+            "id": "content_15_4_3_2",
+            "text": "By stating the plan, she just needs to comply or object, and compliance is often the path of least resistance.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_15_4_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_15_4_4_1",
+            "text": "A guy is talking to a woman at a party. Good energy. Lots of laughing. He wants her number. \"So, um, this might be forward, but would you be open to maybe grabbing food sometime?\" The apologetic framing and tentative ask undercut the good energy they built. She picked up on his lack of confidence and her interest cooled.",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "screen_15_4_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_15_4_5_1",
+            "text": "Another man in a similar situation. Same fifteen minutes of good conversation. \"You're fun. We're getting food this week. Put your number in here.\" Hands her his phone with confidence. She enters her number without hesitation. His assumption that of course she wants to continue made her compliance automatic.",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "screen_15_4_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_15_4_6_1",
+            "text": "Assumed closes work because they treat her interest as established fact rather than uncertain possibility. Asking \"Do you want to see me again?\" questions that demonstrated interest. Stating \"Let's do this again\" acknowledges it and proposes the logical next step.",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "screen_15_4_7",
+        "order": 6,
+        "content": [
+          {
+            "id": "content_15_4_7_1",
+            "text": "The mechanics are simple: replace questions with statements. \"Would you want to get coffee?\" becomes \"Let's get coffee.\" \"Are you interested in exchanging numbers?\" becomes \"Give me your number.\" \"Would you want to see me again?\" becomes \"We're doing this again.\"",
+            "order": 0
+          },
+          {
+            "id": "content_15_4_7_2",
+            "text": "You are not forcing anything by assuming the next step. When you move forward without apology, you give the interaction a direction instead of a question mark.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  }
+]

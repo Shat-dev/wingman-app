@@ -1,530 +1,530 @@
 [
-    {
-      "id": "lesson_4_1",
-      "courseId": "course_4",
-      "courseSummary": "Learn to carry confidence internally rather than chasing it through external validation.",
-      "courseTitle": "Inner Stability",
-      "lessonNumber": 1,
-      "title": "Nothing to Prove",
-      "duration": 3,
-      "summary": "Learn to trust your value without needing external confirmation.",
-      "isCompleted": false,
-      "isLocked": false,
-      "screens": [
-        {
-          "id": "screen_4_1_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_4_1_1",
-              "text": "Most men spend years trying to prove they are enough through success, attention, or control. But the more you chase validation, the less you feel it.",
-              "order": 0
-            },
-            {
-              "id": "content_4_1_2",
-              "text": "Confidence isn't built by convincing others; it is built by no longer needing to.",
-              "order": 1
-            },
-            {
-              "id": "content_4_1_3",
-              "text": "Approval-seeking is modifying your behavior, opinions, or personality to gain validation from others. It's operating from a frame where their acceptance determines your worth.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_4_1_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_4_1_4",
-              "text": "When you're constantly adjusting yourself to please someone, you're implicitly saying, \"I need you to like me because I don't believe I'm enough as I am.\"",
-              "order": 0
-            },
-            {
-              "id": "content_4_1_5",
-              "text": "The more you depend on others to define your worth, the less grounded and attractive you become.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_1_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_4_1_6",
-              "text": "Psychologically, approval-seeking stems from dependence on external validation.",
-              "order": 0
-            },
-            {
-              "id": "content_4_1_7",
-              "text": "Your sense of worth is tied to how others perceive you. When that's the case, every interaction becomes high stakes.",
-              "order": 1
-            },
-            {
-              "id": "content_4_1_8",
-              "text": "You need her to like you to feel okay about yourself. That need creates desperation. And desperation repels.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_4_1_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_4_1_9",
-              "text": "A guy is talking to a woman who mentions she works in marketing. He immediately says, \"Oh wow, that's so interesting,\" even though he finds marketing boring.",
-              "order": 0
-            },
-            {
-              "id": "content_4_1_10",
-              "text": "She mentions a campaign she worked on. He praises it enthusiastically even though he doesn't understand. She can feel the inauthenticity.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_1_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_4_1_11",
-              "text": "Another man hears the same thing. She works in marketing. He says, \"What's that like? I've always wondered how that industry actually works.\" Genuine curiosity, not fake enthusiasm. She explains.",
-              "order": 0
-            },
-            {
-              "id": "content_4_1_12",
-              "text": "He asks a follow-up question about something he's actually curious about. She's engaged because she can tell his interest is real, not performed for her approval.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_1_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_4_1_13",
-              "text": "When you seek approval, you communicate that you disapprove of yourself.",
-              "order": 0
-            },
-            {
-              "id": "content_4_1_14",
-              "text": "People are drawn to those who hold their own frame, think for themselves, and live by their own standards.",
-              "order": 1
-            },
-            {
-              "id": "content_4_1_15",
-              "text": "The irony is that the more you seek approval, the less likely you are to get it. And the less you need it, the more naturally it comes.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_4_1_7",
-          "order": 6,
-          "content": [
-            {
-              "id": "content_4_1_16",
-              "text": "You don't need to prove who you are; you just need to remember it. The right people will meet you where you already stand.",
-              "order": 0
-            },
-            {
-              "id": "content_4_1_17",
-              "text": "Each time you drop the need to impress, you reclaim presence, and presence is what makes you magnetic.",
-              "order": 1
-            },
-            {
-              "id": "content_4_1_18",
-              "text": "When you move through the world without needing to be seen a certain way, you stop chasing confidence and start carrying it.",
-              "order": 2
-            },
-            {
-              "id": "content_4_1_19",
-              "text": "Stick true to yourself, remember your value.",
-              "order": 3
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "lesson_4_2",
-      "courseId": "course_4",
-      "courseTitle": "Inner Stability",
-      "lessonNumber": 2,
-      "title": "Own Your Pace",
-      "duration": 3,
-      "summary": "Learn to measure progress against your past self instead of others.",
-      "isCompleted": false,
-      "isLocked": true,
-      "screens": [
-        {
-          "id": "screen_4_2_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_4_2_1",
-              "text": "The mind loves to compare, even when it has no context. You see someone's confidence and forget the years it took to build it, then judge yourself for not having it yet.",
-              "order": 0
-            },
-            {
-              "id": "content_4_2_2",
-              "text": "Owning your pace means measuring progress against your own baseline instead of comparing yourself to others. It's recognizing that everyone develops at different rates and that the only meaningful metric is whether you're better than you were before.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_2_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_4_2_3",
-              "text": "When you measure yourself against someone who's further along, you'll always feel inadequate. That feeling doesn't motivate you to work harder. It makes you want to quit.",
-              "order": 0
-            },
-            {
-              "id": "content_4_2_4",
-              "text": "Psychologically, social comparison is hardwired but destructive in skill development.",
-              "order": 1
-            },
-            {
-              "id": "content_4_2_5",
-              "text": "You're comparing your internal experience, all your doubts and struggles, against someone else's external results.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_4_2_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_4_2_6",
-              "text": "You see their highlight reel and compare it to your behind-the-scenes footage.",
-              "order": 0
-            },
-            {
-              "id": "content_4_2_7",
-              "text": "That's not a fair comparison. You don't know their starting point. You don't know how much they've actually practiced. You don't know what they're leaving out of their story.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_2_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_4_2_8",
-              "text": "Two men both struggle with approach anxiety. After two months of practice, the first man can approach, but still feels nervous every time. He sees someone online claim they eliminated their approach anxiety completely in three weeks. He thinks something is wrong with him. Why is it taking so long? Gets frustrated.",
-              "order": 0
-            },
-            {
-              "id": "content_4_2_9",
-              "text": "The second man also still feels nervous after two months. But he remembers that two months ago he couldn't approach at all. Now he can. That's progress.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_2_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_4_2_10",
-              "text": "Your only competition is who you were yesterday. That's the only comparison that matters.",
-              "order": 0
-            },
-            {
-              "id": "content_4_2_11",
-              "text": "Are you better than you were last week? Last month? Six months ago? If yes, you're winning. If no, adjust and keep going.",
-              "order": 1
-            },
-            {
-              "id": "content_4_2_12",
-              "text": "But measuring yourself against someone else's progress is meaningless. You don't know their whole story. You don't know their starting point. You don't know what advantages or disadvantages they have that you don't. Their timeline is irrelevant to your potential.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_4_2_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_4_2_13",
-              "text": "Progress also looks different for everyone. Some men need more reps to internalize skills. Some men have more severe anxiety to overcome. Some men have better social skills to start with. None of that determines your ceiling. It just determines your starting point and your pace.",
-              "order": 0
-            },
-            {
-              "id": "content_4_2_14",
-              "text": "Let your past self be the only benchmark you use. If you are better than you were before, you are on the right track.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "lesson_4_3",
-      "courseId": "course_4",
-      "courseTitle": "Inner Stability",
-      "lessonNumber": 3,
-      "title": "Outcome Independence",
-      "duration": 3,
-      "summary": "Learn to maintain confidence without needing positive feedback.",
-      "isCompleted": false,
-      "isLocked": true,
-      "screens": [
-        {
-          "id": "screen_4_3_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_4_3_1",
-              "text": "You hold the door. She walks through without a glance. No smile. No nod. Nothing. That flicker of resentment isn't about manners; it is about dependence.",
-              "order": 0
-            },
-            {
-              "id": "content_4_3_2",
-              "text": "What you really wanted was acknowledgment, however, the second your peace depends on their reaction, you have made them the judge of your worth.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_3_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_4_3_3",
-              "text": "Outcome independence is maintaining your emotional equilibrium regardless of how an interaction goes. It's the ability to engage fully without attaching your self-worth or mood to the result.",
-              "order": 0
-            },
-            {
-              "id": "content_4_3_4",
-              "text": "When you need a positive reaction to feel good, you're giving strangers control over your internal state. That dependency makes approaching terrifying because the stakes feel enormous.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_3_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_4_3_5",
-              "text": "A guy approaches a woman at a bar. She responds positively at first. They talk for a bit, then she sees her friends and excuses herself. He takes it personally and feels rejected.",
-              "order": 0
-            },
-            {
-              "id": "content_4_3_6",
-              "text": "Another man has the same experience. The woman engages, then leaves to find her friends. He doesn't take it personally. Understands she had other priorities. His mood is unchanged.",
-              "order": 1
-            },
-            {
-              "id": "content_4_3_7",
-              "text": "The first man let her decision to leave determine his emotional state. The second man maintained independence from the outcome.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_4_3_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_4_3_8",
-              "text": "Your emotional state should not be held hostage to strangers. When you tie how you feel to how others respond, you're giving away your power.",
-              "order": 0
-            },
-            {
-              "id": "content_4_3_9",
-              "text": "Every interaction becomes high stakes because your self-worth is on the line. That pressure makes you needy, which repels people, which leads to more rejection, which confirms your fear that you're not good enough. The cycle is self-perpetuating.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_3_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_4_3_10",
-              "text": "Outcome independence breaks it. You show up. You engage. The result is what it is. Your worth wasn't determined by that interaction, and it won't be determined by the next one.",
-              "order": 0
-            },
-            {
-              "id": "content_4_3_11",
-              "text": "This doesn't mean you don't care about results. It means results don't determine your emotional baseline. You can be disappointed that an interaction didn't go well while maintaining emotional equilibrium. The disappointment is about the specific outcome, not about your identity.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_3_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_4_3_12",
-              "text": "You cannot control other people's actions, but you can control your reaction to them.",
-              "order": 0
-            },
-            {
-              "id": "content_4_3_13",
-              "text": "When the result stops defining you, approaching and connecting becomes far lighter.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "lesson_4_4",
-      "courseId": "course_4",
-      "courseTitle": "Inner Stability",
-      "lessonNumber": 4,
-      "title": "Handling Positive Responses",
-      "duration": 3,
-      "summary": "Learn to stay grounded when interest is returned instead of overreacting.",
-      "isCompleted": false,
-      "isLocked": true,
-      "screens": [
-        {
-          "id": "screen_4_4_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_4_4_1",
-              "text": "The nervous system does not only react to threats. It reacts to opportunity. Sometimes, a woman liking you spikes more adrenaline than a woman rejecting you.",
-              "order": 0
-            },
-            {
-              "id": "content_4_4_2",
-              "text": "Positive feedback creates a new fear: the fear of losing it.",
-              "order": 1
-            },
-            {
-              "id": "content_4_4_3",
-              "text": "Staying level during positive responses means maintaining your energy and presence when an interaction is going well, rather than ramping up or working harder.",
-              "order": 2
-            },
-            {
-              "id": "content_4_4_4",
-              "text": "It's resisting the urge to capitalize on her interest by trying harder.",
-              "order": 3
-            }
-          ]
-        },
-        {
-          "id": "screen_4_4_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_4_4_5",
-              "text": "This matters because positive feedback can be just as destabilizing as negative feedback.",
-              "order": 0
-            },
-            {
-              "id": "content_4_4_6",
-              "text": "When she shows interest, your nervous system gets a hit of validation. That validation can activate approval-seeking behavior.",
-              "order": 1
-            },
-            {
-              "id": "content_4_4_7",
-              "text": "You want more of that feeling. So you unconsciously start working for it.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_4_4_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_4_4_8",
-              "text": "Psychologically, this happens because most men are validation-starved. When they finally get positive feedback from an attractive woman, it's intoxicating.",
-              "order": 0
-            },
-            {
-              "id": "content_4_4_9",
-              "text": "The scarcity mindset kicks in. \"This is rare. I need to make sure this works. I can't lose this opportunity.\" That mentality creates pressure.",
-              "order": 1
-            },
-            {
-              "id": "content_4_4_10",
-              "text": "Staying level requires recognizing that her interest doesn't change who you are or how you should show up.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_4_4_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_4_4_11",
-              "text": "You are mid-conversation with a woman, and it is flowing; she laughs easily, leans closer, and touches your arm. For a split second, it is perfect.",
-              "order": 0
-            },
-            {
-              "id": "content_4_4_12",
-              "text": "Then your mind jumps in: Don't mess this up. You start thinking about what to say next, how to keep it going. The rhythm dies.",
-              "order": 1
-            },
-            {
-              "id": "content_4_4_13",
-              "text": "She hasn't changed, you have. You went from being in the moment to managing it. The moment didn't collapse; it was pulled apart by your need to control it.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_4_4_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_4_4_14",
-              "text": "Positive responses should not change how you show up. The version of you that attracted her interest is the version you need to maintain.",
-              "order": 0
-            },
-            {
-              "id": "content_4_4_15",
-              "text": "Staying level means recognizing her interest without becoming attached to maintaining it. She's into you. Great. Keep being who you were. Don't start working harder to keep her attention.",
-              "order": 1
-            },
-            {
-              "id": "content_4_4_16",
-              "text": "When she shows interest, your nervous system wants to chase more of that feeling. Resisting that urge is how you demonstrate outcome independence.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_4_4_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_4_4_17",
-              "text": "When you stay level during positive responses, you're demonstrating that her interest, while nice, isn't something you're desperate to keep.",
-              "order": 0
-            },
-            {
-              "id": "content_4_4_18",
-              "text": "You don't need to prove you deserve the moment; you already do. Let it be easy. Let it breathe.",
-              "order": 1
-            },
-            {
-              "id": "content_4_4_19",
-              "text": "The same calm that carries you through rejection can carry you through connection.",
-              "order": 2
-            }
-          ]
-        }
-      ]
-    }
-  ]
+  {
+    "id": "lesson_4_1",
+    "courseId": "course_4",
+    "lessonNumber": 1,
+    "courseTitle": "Inner Stability",
+    "title": "Nothing to Prove",
+    "duration": 3,
+    "summary": "Learn to trust your value without needing external confirmation.",
+    "isCompleted": false,
+    "isLocked": false,
+    "screens": [
+      {
+        "id": "screen_4_1_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_4_1_1_1",
+            "text": "Most men spend years trying to prove they are enough through success, attention, or control. But the more you chase validation, the less you feel it.",
+            "order": 0
+          },
+          {
+            "id": "content_4_1_1_2",
+            "text": "Confidence isn't built by convincing others; it is built by no longer needing to.",
+            "order": 1
+          },
+          {
+            "id": "content_4_1_1_3",
+            "text": "Approval-seeking is modifying your behavior, opinions, or personality to gain validation from others. It's operating from a frame where their acceptance determines your worth.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_4_1_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_4_1_2_1",
+            "text": "When you're constantly adjusting yourself to please someone, you're implicitly saying, \"I need you to like me because I don't believe I'm enough as I am.\"",
+            "order": 0
+          },
+          {
+            "id": "content_4_1_2_2",
+            "text": "The more you depend on others to define your worth, the less grounded and attractive you become.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_4_1_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_4_1_3_1",
+            "text": "Psychologically, approval-seeking stems from dependence on external validation.",
+            "order": 0
+          },
+          {
+            "id": "content_4_1_3_2",
+            "text": "Your sense of worth is tied to how others perceive you. When that's the case, every interaction becomes high stakes.",
+            "order": 1
+          },
+          {
+            "id": "content_4_1_3_3",
+            "text": "You need her to like you to feel okay about yourself. That need creates desperation. And desperation repels.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_4_1_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_4_1_4_1",
+            "text": "A guy is talking to a woman who mentions she works in marketing. He immediately says, \"Oh wow, that's so interesting,\" even though he finds marketing boring.",
+            "order": 0
+          },
+          {
+            "id": "content_4_1_4_2",
+            "text": "She mentions a campaign she worked on. He praises it enthusiastically even though he doesn't understand. She can feel the inauthenticity.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_4_1_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_4_1_5_1",
+            "text": "Another man hears the same thing. She works in marketing. He says, \"What's that like? I've always wondered how that industry actually works.\" Genuine curiosity, not fake enthusiasm. She explains.",
+            "order": 0
+          },
+          {
+            "id": "content_4_1_5_2",
+            "text": "He asks a follow-up question about something he's actually curious about. She's engaged because she can tell his interest is real, not performed for her approval.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_4_1_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_4_1_6_1",
+            "text": "When you seek approval, you communicate that you disapprove of yourself.",
+            "order": 0
+          },
+          {
+            "id": "content_4_1_6_2",
+            "text": "People are drawn to those who hold their own frame, think for themselves, and live by their own standards.",
+            "order": 1
+          },
+          {
+            "id": "content_4_1_6_3",
+            "text": "The irony is that the more you seek approval, the less likely you are to get it. And the less you need it, the more naturally it comes.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_4_1_7",
+        "order": 6,
+        "content": [
+          {
+            "id": "content_4_1_7_1",
+            "text": "You don't need to prove who you are; you just need to remember it. The right people will meet you where you already stand.",
+            "order": 0
+          },
+          {
+            "id": "content_4_1_7_2",
+            "text": "Each time you drop the need to impress, you reclaim presence, and presence is what makes you magnetic.",
+            "order": 1
+          },
+          {
+            "id": "content_4_1_7_3",
+            "text": "When you move through the world without needing to be seen a certain way, you stop chasing confidence and start carrying it.",
+            "order": 2
+          },
+          {
+            "id": "content_4_1_7_4",
+            "text": "Stick true to yourself, remember your value.",
+            "order": 3
+          }
+        ]
+      }
+    ],
+    "courseSummary": "Learn to carry confidence internally rather than chasing it through external validation."
+  },
+  {
+    "id": "lesson_4_2",
+    "courseId": "course_4",
+    "lessonNumber": 2,
+    "courseTitle": "Inner Stability",
+    "title": "Own Your Pace",
+    "duration": 3,
+    "summary": "Learn to measure progress against your past self instead of others.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_4_2_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_4_2_1_1",
+            "text": "The mind loves to compare, even when it has no context. You see someone's confidence and forget the years it took to build it, then judge yourself for not having it yet.",
+            "order": 0
+          },
+          {
+            "id": "content_4_2_1_2",
+            "text": "Owning your pace means measuring progress against your own baseline instead of comparing yourself to others. It's recognizing that everyone develops at different rates and that the only meaningful metric is whether you're better than you were before.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_4_2_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_4_2_2_1",
+            "text": "When you measure yourself against someone who's further along, you'll always feel inadequate. That feeling doesn't motivate you to work harder. It makes you want to quit.",
+            "order": 0
+          },
+          {
+            "id": "content_4_2_2_2",
+            "text": "Psychologically, social comparison is hardwired but destructive in skill development.",
+            "order": 1
+          },
+          {
+            "id": "content_4_2_2_3",
+            "text": "You're comparing your internal experience, all your doubts and struggles, against someone else's external results.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_4_2_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_4_2_3_1",
+            "text": "You see their highlight reel and compare it to your behind-the-scenes footage.",
+            "order": 0
+          },
+          {
+            "id": "content_4_2_3_2",
+            "text": "That's not a fair comparison. You don't know their starting point. You don't know how much they've actually practiced. You don't know what they're leaving out of their story.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_4_2_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_4_2_4_1",
+            "text": "Two men both struggle with approach anxiety. After two months of practice, the first man can approach, but still feels nervous every time. He sees someone online claim they eliminated their approach anxiety completely in three weeks. He thinks something is wrong with him. Why is it taking so long? Gets frustrated.",
+            "order": 0
+          },
+          {
+            "id": "content_4_2_4_2",
+            "text": "The second man also still feels nervous after two months. But he remembers that two months ago he couldn't approach at all. Now he can. That's progress.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_4_2_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_4_2_5_1",
+            "text": "Your only competition is who you were yesterday. That's the only comparison that matters.",
+            "order": 0
+          },
+          {
+            "id": "content_4_2_5_2",
+            "text": "Are you better than you were last week? Last month? Six months ago? If yes, you're winning. If no, adjust and keep going.",
+            "order": 1
+          },
+          {
+            "id": "content_4_2_5_3",
+            "text": "But measuring yourself against someone else's progress is meaningless. You don't know their whole story. You don't know their starting point. You don't know what advantages or disadvantages they have that you don't. Their timeline is irrelevant to your potential.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_4_2_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_4_2_6_1",
+            "text": "Progress also looks different for everyone. Some men need more reps to internalize skills. Some men have more severe anxiety to overcome. Some men have better social skills to start with. None of that determines your ceiling. It just determines your starting point and your pace.",
+            "order": 0
+          },
+          {
+            "id": "content_4_2_6_2",
+            "text": "Let your past self be the only benchmark you use. If you are better than you were before, you are on the right track.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesson_4_3",
+    "courseId": "course_4",
+    "lessonNumber": 3,
+    "courseTitle": "Inner Stability",
+    "title": "Outcome Independence",
+    "duration": 3,
+    "summary": "Learn to maintain confidence without needing positive feedback.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_4_3_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_4_3_1_1",
+            "text": "You hold the door. She walks through without a glance. No smile. No nod. Nothing. That flicker of resentment isn't about manners; it is about dependence.",
+            "order": 0
+          },
+          {
+            "id": "content_4_3_1_2",
+            "text": "What you really wanted was acknowledgment, however, the second your peace depends on their reaction, you have made them the judge of your worth.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_4_3_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_4_3_2_1",
+            "text": "Outcome independence is maintaining your emotional equilibrium regardless of how an interaction goes. It's the ability to engage fully without attaching your self-worth or mood to the result.",
+            "order": 0
+          },
+          {
+            "id": "content_4_3_2_2",
+            "text": "When you need a positive reaction to feel good, you're giving strangers control over your internal state. That dependency makes approaching terrifying because the stakes feel enormous.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_4_3_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_4_3_3_1",
+            "text": "A guy approaches a woman at a bar. She responds positively at first. They talk for a bit, then she sees her friends and excuses herself. He takes it personally and feels rejected.",
+            "order": 0
+          },
+          {
+            "id": "content_4_3_3_2",
+            "text": "Another man has the same experience. The woman engages, then leaves to find her friends. He doesn't take it personally. Understands she had other priorities. His mood is unchanged.",
+            "order": 1
+          },
+          {
+            "id": "content_4_3_3_3",
+            "text": "The first man let her decision to leave determine his emotional state. The second man maintained independence from the outcome.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_4_3_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_4_3_4_1",
+            "text": "Your emotional state should not be held hostage to strangers. When you tie how you feel to how others respond, you're giving away your power.",
+            "order": 0
+          },
+          {
+            "id": "content_4_3_4_2",
+            "text": "Every interaction becomes high stakes because your self-worth is on the line. That pressure makes you needy, which repels people, which leads to more rejection, which confirms your fear that you're not good enough. The cycle is self-perpetuating.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_4_3_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_4_3_5_1",
+            "text": "Outcome independence breaks it. You show up. You engage. The result is what it is. Your worth wasn't determined by that interaction, and it won't be determined by the next one.",
+            "order": 0
+          },
+          {
+            "id": "content_4_3_5_2",
+            "text": "This doesn't mean you don't care about results. It means results don't determine your emotional baseline. You can be disappointed that an interaction didn't go well while maintaining emotional equilibrium. The disappointment is about the specific outcome, not about your identity.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_4_3_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_4_3_6_1",
+            "text": "You cannot control other people's actions, but you can control your reaction to them.",
+            "order": 0
+          },
+          {
+            "id": "content_4_3_6_2",
+            "text": "When the result stops defining you, approaching and connecting becomes far lighter.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesson_4_4",
+    "courseId": "course_4",
+    "lessonNumber": 4,
+    "courseTitle": "Inner Stability",
+    "title": "Handling Positive Responses",
+    "duration": 3,
+    "summary": "Learn to stay grounded when interest is returned instead of overreacting.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_4_4_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_4_4_1_1",
+            "text": "The nervous system does not only react to threats. It reacts to opportunity. Sometimes, a woman liking you spikes more adrenaline than a woman rejecting you.",
+            "order": 0
+          },
+          {
+            "id": "content_4_4_1_2",
+            "text": "Positive feedback creates a new fear: the fear of losing it.",
+            "order": 1
+          },
+          {
+            "id": "content_4_4_1_3",
+            "text": "Staying level during positive responses means maintaining your energy and presence when an interaction is going well, rather than ramping up or working harder.",
+            "order": 2
+          },
+          {
+            "id": "content_4_4_1_4",
+            "text": "It's resisting the urge to capitalize on her interest by trying harder.",
+            "order": 3
+          }
+        ]
+      },
+      {
+        "id": "screen_4_4_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_4_4_2_1",
+            "text": "This matters because positive feedback can be just as destabilizing as negative feedback.",
+            "order": 0
+          },
+          {
+            "id": "content_4_4_2_2",
+            "text": "When she shows interest, your nervous system gets a hit of validation. That validation can activate approval-seeking behavior.",
+            "order": 1
+          },
+          {
+            "id": "content_4_4_2_3",
+            "text": "You want more of that feeling. So you unconsciously start working for it.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_4_4_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_4_4_3_1",
+            "text": "Psychologically, this happens because most men are validation-starved. When they finally get positive feedback from an attractive woman, it's intoxicating.",
+            "order": 0
+          },
+          {
+            "id": "content_4_4_3_2",
+            "text": "The scarcity mindset kicks in. \"This is rare. I need to make sure this works. I can't lose this opportunity.\" That mentality creates pressure.",
+            "order": 1
+          },
+          {
+            "id": "content_4_4_3_3",
+            "text": "Staying level requires recognizing that her interest doesn't change who you are or how you should show up.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_4_4_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_4_4_4_1",
+            "text": "You are mid-conversation with a woman, and it is flowing; she laughs easily, leans closer, and touches your arm. For a split second, it is perfect.",
+            "order": 0
+          },
+          {
+            "id": "content_4_4_4_2",
+            "text": "Then your mind jumps in: Don't mess this up. You start thinking about what to say next, how to keep it going. The rhythm dies.",
+            "order": 1
+          },
+          {
+            "id": "content_4_4_4_3",
+            "text": "She hasn't changed, you have. You went from being in the moment to managing it. The moment didn't collapse; it was pulled apart by your need to control it.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_4_4_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_4_4_5_1",
+            "text": "Positive responses should not change how you show up. The version of you that attracted her interest is the version you need to maintain.",
+            "order": 0
+          },
+          {
+            "id": "content_4_4_5_2",
+            "text": "Staying level means recognizing her interest without becoming attached to maintaining it. She's into you. Great. Keep being who you were. Don't start working harder to keep her attention.",
+            "order": 1
+          },
+          {
+            "id": "content_4_4_5_3",
+            "text": "When she shows interest, your nervous system wants to chase more of that feeling. Resisting that urge is how you demonstrate outcome independence.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_4_4_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_4_4_6_1",
+            "text": "When you stay level during positive responses, you're demonstrating that her interest, while nice, isn't something you're desperate to keep.",
+            "order": 0
+          },
+          {
+            "id": "content_4_4_6_2",
+            "text": "You don't need to prove you deserve the moment; you already do. Let it be easy. Let it breathe.",
+            "order": 1
+          },
+          {
+            "id": "content_4_4_6_3",
+            "text": "The same calm that carries you through rejection can carry you through connection.",
+            "order": 2
+          }
+        ]
+      }
+    ]
+  }
+]

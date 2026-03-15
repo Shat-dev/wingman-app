@@ -1,286 +1,286 @@
 [
-    {
-      "id": "lesson_4_1",
-      "courseId": "course_4",
-      "courseSummary": "Learn to accurately read interest signals and respond without pressure or missteps.",
-      "courseTitle": "Reading & Responding",
-      "lessonNumber": 1,
-      "title": "Reading Her Response",
-      "duration": 2,
-      "summary": "Learn when to continue, slow down, or exit based on her response.",
-      "isCompleted": false,
-      "isLocked": false,
-      "screens": [
-        {
-          "id": "screen_4_1_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_4_1_1",
-              "text": "Every woman responds in one of three ways: receptive, polite, or cold. You don't need intuition to understand her interest level; her tone, posture, and pace of reply tell you instantly.",
-              "order": 0
-            },
-            {
-              "id": "content_4_1_2",
-              "text": "The real skill is knowing when to continue and when to step back so the interaction stays comfortable for both of you.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_1_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_4_1_3",
-              "text": "Women communicate interest through behaviour long before words. Receptive signals mean she's open, polite signals might mean she's unsure, and cold signals mean she isn't interested.",
-              "order": 0
-            },
-            {
-              "id": "content_4_1_4",
-              "text": "When you read her reaction, you keep the interaction comfortable for both of you and avoid crossing any lines she hasn't opened.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_1_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_4_1_5",
-              "text": "You walk up and give a simple opener. She turns toward you, smiles, and asks a question back, an easy sign she's receptive.",
-              "order": 0
-            },
-            {
-              "id": "content_4_1_6",
-              "text": "Another time, you try the same approach with a different woman. She gives a short answer, glances away, and shifts her weight. She isn't rude, just neutral. You keep it brief and exit cleanly.",
-              "order": 1
-            },
-            {
-              "id": "content_4_1_7",
-              "text": "Then there are moments when she barely turns, gives a closed-off \"hey,\" and her body angles away. That's your cue to disengage immediately.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_4_1_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_4_1_8",
-              "text": "Three situations, same approach, only her response changes. When you pay attention early, you never overstay your welcome.",
-              "order": 0
-            },
-            {
-              "id": "content_4_1_9",
-              "text": "Reading her first response is about respecting her space. Her initial behaviour tells you how much room you have. Receptive means you can build the interaction, polite means go slow or exit, and cold means walk away.",
-              "order": 1
-            },
-            {
-              "id": "content_4_1_10",
-              "text": "When you follow her cues, the moment stays comfortable for both of you.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_4_1_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_4_1_11",
-              "text": "Not every interaction is meant to continue, and that's not a failure. When you follow her signals, you stay composed, considerate, and in control of your energy.",
-              "order": 0
-            },
-            {
-              "id": "content_4_1_12",
-              "text": "The more you practice this, the more natural it becomes to approach without tension and exit without doubt.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "lesson_4_2",
-      "courseId": "course_4",
-      "courseTitle": "Reading & Responding",
-      "lessonNumber": 2,
-      "title": "Responding to Neutral Signals",
-      "duration": 2,
-      "summary": "Learn how to turn polite ambiguity into clarity with one decisive move.",
-      "isCompleted": false,
-      "isLocked": true,
-      "screens": [
-        {
-          "id": "screen_4_2_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_4_2_1",
-              "text": "Recognizing engagement, politeness, and disinterest is only half the job. Now comes the practical part: turning those signals into decisions.",
-              "order": 0
-            },
-            {
-              "id": "content_4_2_2",
-              "text": "Every initial interaction reaches a point where you either continue, test once more, or step back.",
-              "order": 1
-            },
-            {
-              "id": "content_4_2_3",
-              "text": "Some women engage openly, many are polite by default, and some want the interaction to end. Your job is to recognize which moment you are in and respond accordingly.",
-              "order": 2
-            },
-            {
-              "id": "content_4_2_4",
-              "text": "This keeps interactions smooth and pressure-free for both of you.",
-              "order": 3
-            }
-          ]
-        },
-        {
-          "id": "screen_4_2_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_4_2_5",
-              "text": "You are waiting for your drinks at a cafe. She responds politely to your opener, but her answers remain short, and she adds nothing. She isn't closed off, but she isn't pulling you in either. Most guys linger, hoping her interest will grow magically. You choose clarity instead.",
-              "order": 0
-            },
-            {
-              "id": "content_4_2_6",
-              "text": "\"You seem cool, can I have your Instagram?\"",
-              "order": 1
-            },
-            {
-              "id": "content_4_2_7",
-              "text": "She smiles and says she is seeing someone. Clean answer, clean exit. One move tells you everything and keeps the moment respectful.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_4_2_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_4_2_8",
-              "text": "Neutral responses aren't a problem; they are information. She is polite but not engaging, which means you need a decisive move, not more small talk.",
-              "order": 0
-            },
-            {
-              "id": "content_4_2_9",
-              "text": "One clear question turns ambiguity into an answer. It shows composure, gives her an easy out, and prevents you from overstaying your welcome.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_2_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_4_2_10",
-              "text": "When her engagement is clear, she asks questions, laughs, leans in, and continues building. She is giving you space to explore the connection.",
-              "order": 0
-            },
-            {
-              "id": "content_4_2_11",
-              "text": "If the response stays neutral after your test, or turns cold, step back with a clean close: \"Nice talking to you. Enjoy the rest of your day.\" The pressure drops the moment you stop guessing.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_2_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_4_2_12",
-              "text": "One decisive move is enough to know whether to continue or walk away.",
-              "order": 0
-            },
-            {
-              "id": "content_4_2_13",
-              "text": "The more you practice this, the less you overthink and the more confident your interactions become.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "lesson_4_3",
-      "courseId": "course_4",
-      "courseTitle": "Reading & Responding",
-      "lessonNumber": 3,
-      "title": "Recognizing Signals: A Guide",
-      "duration": 2,
-      "summary": "Learn clear indicators of receptiveness, politeness, and disinterest.",
-      "isCompleted": false,
-      "isLocked": true,
-      "screens": [
-        {
-          "id": "screen_4_3_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_4_3_1",
-              "text": "Use this reference during or after an approach to quickly assess her level of interest. Look for clusters of signals, not single cues. If you see 2-3 signals from the same category, that's your answer.",
-              "order": 0
-            }
-          ]
-        },
-        {
-          "id": "screen_4_3_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_4_3_2",
-              "text": "Receptive Signals — What you'll see: She turns her body fully toward you, eye contact is steady, relaxed, and natural, she smiles without forcing it, she asks questions back or expands on what you say, she pauses what she was doing to give you attention.",
-              "order": 0
-            },
-            {
-              "id": "content_4_3_3",
-              "text": "What to do: Continue building, ask deeper questions, share more about yourself, and look for opportunities to escalate.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_3_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_4_3_4",
-              "text": "Polite Signals — What you'll see: She answers but doesn't add anything, her body stays half-turned away, her smile is brief and surface-level, eye contact is short or inconsistent, she continues what she was doing (phone, work, organizing things).",
-              "order": 0
-            },
-            {
-              "id": "content_4_3_5",
-              "text": "What to do: Give her one clear opportunity to engage—ask a direct question or make a bold statement. If she stays neutral, exit cleanly.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_4_3_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_4_3_6",
-              "text": "Cold Signals — What you'll see: Her body angles away from you, her expression stays flat or closed, replies are one word or minimal, she looks around, checks her phone, or avoids eye contact, she increases physical distance, she gives excuses to leave.",
-              "order": 0
-            },
-            {
-              "id": "content_4_3_7",
-              "text": "What to do: End the interaction immediately. Cold signals are never an invitation to try harder.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    }
-  ]
+  {
+    "id": "lesson_9_1",
+    "courseId": "course_9",
+    "lessonNumber": 1,
+    "courseTitle": "Reading & Responding",
+    "title": "Reading Her Response",
+    "duration": 2,
+    "summary": "Learn when to continue, slow down, or exit based on her response.",
+    "isCompleted": false,
+    "isLocked": false,
+    "screens": [
+      {
+        "id": "screen_9_1_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_9_1_1_1",
+            "text": "Every woman responds in one of three ways: receptive, polite, or cold. You don't need intuition to understand her interest level; her tone, posture, and pace of reply tell you instantly.",
+            "order": 0
+          },
+          {
+            "id": "content_9_1_1_2",
+            "text": "The real skill is knowing when to continue and when to step back so the interaction stays comfortable for both of you.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_9_1_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_9_1_2_1",
+            "text": "Women communicate interest through behaviour long before words. Receptive signals mean she's open, polite signals might mean she's unsure, and cold signals mean she isn't interested.",
+            "order": 0
+          },
+          {
+            "id": "content_9_1_2_2",
+            "text": "When you read her reaction, you keep the interaction comfortable for both of you and avoid crossing any lines she hasn't opened.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_9_1_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_9_1_3_1",
+            "text": "You walk up and give a simple opener. She turns toward you, smiles, and asks a question back, an easy sign she's receptive.",
+            "order": 0
+          },
+          {
+            "id": "content_9_1_3_2",
+            "text": "Another time, you try the same approach with a different woman. She gives a short answer, glances away, and shifts her weight. She isn't rude, just neutral. You keep it brief and exit cleanly.",
+            "order": 1
+          },
+          {
+            "id": "content_9_1_3_3",
+            "text": "Then there are moments when she barely turns, gives a closed-off \"hey,\" and her body angles away. That's your cue to disengage immediately.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_9_1_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_9_1_4_1",
+            "text": "Three situations, same approach, only her response changes. When you pay attention early, you never overstay your welcome.",
+            "order": 0
+          },
+          {
+            "id": "content_9_1_4_2",
+            "text": "Reading her first response is about respecting her space. Her initial behaviour tells you how much room you have. Receptive means you can build the interaction, polite means go slow or exit, and cold means walk away.",
+            "order": 1
+          },
+          {
+            "id": "content_9_1_4_3",
+            "text": "When you follow her cues, the moment stays comfortable for both of you.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_9_1_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_9_1_5_1",
+            "text": "Not every interaction is meant to continue, and that's not a failure. When you follow her signals, you stay composed, considerate, and in control of your energy.",
+            "order": 0
+          },
+          {
+            "id": "content_9_1_5_2",
+            "text": "The more you practice this, the more natural it becomes to approach without tension and exit without doubt.",
+            "order": 1
+          }
+        ]
+      }
+    ],
+    "courseSummary": "Learn to accurately read interest signals and respond without pressure or missteps."
+  },
+  {
+    "id": "lesson_9_2",
+    "courseId": "course_9",
+    "lessonNumber": 2,
+    "courseTitle": "Reading & Responding",
+    "title": "Responding to Neutral Signals",
+    "duration": 2,
+    "summary": "Learn how to turn polite ambiguity into clarity with one decisive move.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_9_2_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_9_2_1_1",
+            "text": "Recognizing engagement, politeness, and disinterest is only half the job. Now comes the practical part: turning those signals into decisions.",
+            "order": 0
+          },
+          {
+            "id": "content_9_2_1_2",
+            "text": "Every initial interaction reaches a point where you either continue, test once more, or step back.",
+            "order": 1
+          },
+          {
+            "id": "content_9_2_1_3",
+            "text": "Some women engage openly, many are polite by default, and some want the interaction to end. Your job is to recognize which moment you are in and respond accordingly.",
+            "order": 2
+          },
+          {
+            "id": "content_9_2_1_4",
+            "text": "This keeps interactions smooth and pressure-free for both of you.",
+            "order": 3
+          }
+        ]
+      },
+      {
+        "id": "screen_9_2_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_9_2_2_1",
+            "text": "You are waiting for your drinks at a cafe. She responds politely to your opener, but her answers remain short, and she adds nothing. She isn't closed off, but she isn't pulling you in either. Most guys linger, hoping her interest will grow magically. You choose clarity instead.",
+            "order": 0
+          },
+          {
+            "id": "content_9_2_2_2",
+            "text": "\"You seem cool, can I have your Instagram?\"",
+            "order": 1
+          },
+          {
+            "id": "content_9_2_2_3",
+            "text": "She smiles and says she is seeing someone. Clean answer, clean exit. One move tells you everything and keeps the moment respectful.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_9_2_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_9_2_3_1",
+            "text": "Neutral responses aren't a problem; they are information. She is polite but not engaging, which means you need a decisive move, not more small talk.",
+            "order": 0
+          },
+          {
+            "id": "content_9_2_3_2",
+            "text": "One clear question turns ambiguity into an answer. It shows composure, gives her an easy out, and prevents you from overstaying your welcome.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_9_2_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_9_2_4_1",
+            "text": "When her engagement is clear, she asks questions, laughs, leans in, and continues building. She is giving you space to explore the connection.",
+            "order": 0
+          },
+          {
+            "id": "content_9_2_4_2",
+            "text": "If the response stays neutral after your test, or turns cold, step back with a clean close: \"Nice talking to you. Enjoy the rest of your day.\" The pressure drops the moment you stop guessing.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_9_2_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_9_2_5_1",
+            "text": "One decisive move is enough to know whether to continue or walk away.",
+            "order": 0
+          },
+          {
+            "id": "content_9_2_5_2",
+            "text": "The more you practice this, the less you overthink and the more confident your interactions become.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesson_9_3",
+    "courseId": "course_9",
+    "lessonNumber": 3,
+    "courseTitle": "Reading & Responding",
+    "title": "Recognizing Signals: A Guide",
+    "duration": 2,
+    "summary": "Learn clear indicators of receptiveness, politeness, and disinterest.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_9_3_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_9_3_1_1",
+            "text": "Use this reference during or after an approach to quickly assess her level of interest. Look for clusters of signals, not single cues. If you see 2-3 signals from the same category, that's your answer.",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "screen_9_3_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_9_3_2_1",
+            "text": "Receptive Signals — What you'll see: She turns her body fully toward you, eye contact is steady, relaxed, and natural, she smiles without forcing it, she asks questions back or expands on what you say, she pauses what she was doing to give you attention.",
+            "order": 0
+          },
+          {
+            "id": "content_9_3_2_2",
+            "text": "What to do: Continue building, ask deeper questions, share more about yourself, and look for opportunities to escalate.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_9_3_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_9_3_3_1",
+            "text": "Polite Signals — What you'll see: She answers but doesn't add anything, her body stays half-turned away, her smile is brief and surface-level, eye contact is short or inconsistent, she continues what she was doing (phone, work, organizing things).",
+            "order": 0
+          },
+          {
+            "id": "content_9_3_3_2",
+            "text": "What to do: Give her one clear opportunity to engage—ask a direct question or make a bold statement. If she stays neutral, exit cleanly.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_9_3_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_9_3_4_1",
+            "text": "Cold Signals — What you'll see: Her body angles away from you, her expression stays flat or closed, replies are one word or minimal, she looks around, checks her phone, or avoids eye contact, she increases physical distance, she gives excuses to leave.",
+            "order": 0
+          },
+          {
+            "id": "content_9_3_4_2",
+            "text": "What to do: End the interaction immediately. Cold signals are never an invitation to try harder.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  }
+]

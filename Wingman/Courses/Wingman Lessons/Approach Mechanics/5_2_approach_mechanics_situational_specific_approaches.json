@@ -1,377 +1,377 @@
 [
-    {
-      "id": "lesson_5_1",
-      "courseId": "course_5",
-      "courseSummary": "Learn how to adapt your approach to different environments.",
-      "courseTitle": "Situational Specific Approaches",
-      "lessonNumber": 1,
-      "title": "Daytime Approaches",
-      "duration": 3,
-      "summary": "Learn how to make daytime approaches feel natural and low pressure.",
-      "isCompleted": false,
-      "isLocked": false,
-      "screens": [
-        {
-          "id": "screen_5_1_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_5_1_1",
-              "text": "Most men feel more comfortable approaching at night, even though daytime interactions are usually more relaxed and straightforward.",
-              "order": 0
-            },
-            {
-              "id": "content_5_1_2",
-              "text": "Something about broad daylight makes the moment feel heavier. With no music or crowd to hide behind, the clarity of the setting is interpreted as pressure rather than an opportunity.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_5_1_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_5_1_3",
-              "text": "People are focused on errands and routines, not meeting new people. There is no nightlife context that signals everyone is open to conversation.",
-              "order": 0
-            },
-            {
-              "id": "content_5_1_4",
-              "text": "You are stepping slightly outside the pattern most people follow, which is why it stands out when done well.",
-              "order": 1
-            },
-            {
-              "id": "content_5_1_5",
-              "text": "Women are not opposed to meeting someone genuine in the day. They are opposed to being approached in ways that ignore comfort and respect.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_5_1_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_5_1_6",
-              "text": "A guy notices a woman browsing the fiction section. He walks up behind her, touches her shoulder, and says she is pretty. She stiffens, smiles politely, and turns back to the shelf. He leaves confused. The problem is obvious.",
-              "order": 0
-            },
-            {
-              "id": "content_5_1_7",
-              "text": "She never saw him approach. He led with her looks. He created a moment she had to manage instead of one she could participate in.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_5_1_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_5_1_8",
-              "text": "Now the same environment is handled differently. He walks into her line of sight, catches her eye, gives a calm smile, and says, \"I noticed you here and wanted to say hi. I'm...\" She looks up, surprised but comfortable.",
-              "order": 0
-            },
-            {
-              "id": "content_5_1_9",
-              "text": "He gives her space, asks what she is reading, and the conversation builds naturally. A few minutes later, he suggests coffee downstairs. She agrees. The difference is not luck. It is calibration.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_5_1_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_5_1_10",
-              "text": "Daytime success comes from being steady and clear. Approach from the front or side. Smile before you speak. Use a friendly, relaxed tone, and just keep the moment simple.",
-              "order": 0
-            },
-            {
-              "id": "content_5_1_11",
-              "text": "You are not trying to impress her. You are giving her a chance to meet someone normal in a respectful way.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_5_1_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_5_1_12",
-              "text": "Most men walk past women they would like to meet, waiting for a signal that never arrives.",
-              "order": 0
-            },
-            {
-              "id": "content_5_1_13",
-              "text": "You do not need a perfect sign. You just need to act when the moment is open and have the awareness to back off when it is not.",
-              "order": 1
-            },
-            {
-              "id": "content_5_1_14",
-              "text": "You already know how to talk to people. Daytime approaching is about using that skill when it matters.",
-              "order": 2
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "lesson_5_2",
-      "courseId": "course_5",
-      "courseTitle": "Situational Specific Approaches",
-      "lessonNumber": 2,
-      "title": "Nighttime Approaches",
-      "duration": 3,
-      "summary": "Learn how nightlife chaos creates opportunity when understood correctly.",
-      "isCompleted": false,
-      "isLocked": true,
-      "screens": [
-        {
-          "id": "screen_5_2_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_5_2_1",
-              "text": "In crowded venues, chances appear and disappear fast. She looks at you, you hesitate for a moment, and the next time you check, she is already talking to someone else.",
-              "order": 0
-            },
-            {
-              "id": "content_5_2_2",
-              "text": "Night settings create openings that do not exist during the day, but they punish hesitation more than any other environment.",
-              "order": 1
-            },
-            {
-              "id": "content_5_2_3",
-              "text": "The lighting, the volume, the crowd, and the pace all change how people respond.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_5_2_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_5_2_4",
-              "text": "Daytime rewards conversation and slow rapport. At night, you have only a few seconds to make an impression before they shift their attention away.",
-              "order": 0
-            },
-            {
-              "id": "content_5_2_5",
-              "text": "The environment can help or hurt you depending on how well you understand it.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_5_2_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_5_2_6",
-              "text": "A guy approaches a woman at a bar. Brings low energy. Speaks softly. Tries to have a deep, meaningful conversation in a loud environment. She's polite but seems disengaged. She gives a short answer, grabs her drink, and turns away.",
-              "order": 0
-            },
-            {
-              "id": "content_5_2_7",
-              "text": "He leaves thinking he was rejected. In reality, he showed uncertainty in a setting that requires clear, confident energy. He asked her to engage before giving her a reason to be interested.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_5_2_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_5_2_8",
-              "text": "Now the same scenario is handled correctly. Another man positions himself near her without crowding. When she turns his way, he catches her eye, smiles, and introduces himself. She smiles back. They begin talking, and then after he suggests they move somewhere quieter.",
-              "order": 0
-            },
-            {
-              "id": "content_5_2_9",
-              "text": "Minutes later, they are talking comfortably away from the noise. Same woman, same venue, different results because he matched the energy and understood the environment.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_5_2_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_5_2_10",
-              "text": "Night game rewards speed, calibration, and social awareness. You cannot rely on long conversations to build a connection. Her attention shifts fast, so you need to move smoothly from opener to interaction to logistics.",
-              "order": 0
-            },
-            {
-              "id": "content_5_2_11",
-              "text": "Match your energy to the room. Momentum is everything. Night venues are chaotic by design. The noise, crowds, and lighting make meeting someone feel harder, but they also create more opportunities for men who know how to navigate that chaos.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_5_2_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_5_2_12",
-              "text": "The music gives you a reason to lean in. The crowd gives you presence. The darkness softens nerves. You just need to understand how the environment works and use it to your advantage.",
-              "order": 0
-            },
-            {
-              "id": "content_5_2_13",
-              "text": "Most men wait for something to happen. You can be the one who acts when the moment is open. Don't hesitate, just act.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "lesson_5_3",
-      "courseId": "course_5",
-      "courseTitle": "Situational Specific Approaches",
-      "lessonNumber": 3,
-      "title": "Approaching Women in Groups",
-      "duration": 4,
-      "summary": "Learn to turn groups from obstacles into advantages.",
-      "isCompleted": false,
-      "isLocked": true,
-      "screens": [
-        {
-          "id": "screen_5_3_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_5_3_1",
-              "text": "Groups create a pressure that most men feel immediately. More eyes, more noise, more variables. The fear is not the woman herself. It is the sense of being judged by several people at once.",
-              "order": 0
-            },
-            {
-              "id": "content_5_3_2",
-              "text": "That pressure keeps many men watching the moment instead of stepping into it.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_5_3_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_5_3_3",
-              "text": "Approaching a group is not harder than approaching one woman. It is simply a different dynamic.",
-              "order": 0
-            },
-            {
-              "id": "content_5_3_4",
-              "text": "You are dealing with group energy, hierarchy, and shared evaluation. What most men overlook is that her friends are not barriers. They are the ones who decide whether you stay or go.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_5_3_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_5_3_5",
-              "text": "If they like you, they make the interaction easy. If you ignore them, they shut it down instantly. The mistake men make is isolating the woman they want and acting like the rest of the group does not exist.",
-              "order": 0
-            },
-            {
-              "id": "content_5_3_6",
-              "text": "That signals poor social awareness and creates immediate resistance.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_5_3_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_5_3_7",
-              "text": "A guy sees a woman he likes in a group. He walks straight to her, ignores her friends, and opens with a direct compliment. Her friends exchange looks. One steps in, another pulls her away. Within seconds, the group moves, leaving him standing alone. He did not acknowledge their presence or their role.",
-              "order": 0
-            },
-            {
-              "id": "content_5_3_8",
-              "text": "From their perspective, a stranger tried to pull their friend away without earning trust.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_5_3_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_5_3_9",
-              "text": "Another guy notices the group and approaches them as a unit. \"You all look like you are having the best night in here. What are we celebrating?\" They respond. He engages each of them briefly, matches their tone, and becomes part of the group's energy.",
-              "order": 0
-            },
-            {
-              "id": "content_5_3_10",
-              "text": "Once they accept him, he turns to the woman he likes. Her friends smile and encourage it. Minutes later, the two of them are talking separately while her friends cheer them on. Same group. Different approach. Completely different outcome.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_5_3_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_5_3_11",
-              "text": "Groups reward social intelligence. The goal is not to impress your target first. It is to be accepted by everyone, then shift your attention to her.",
-              "order": 0
-            },
-            {
-              "id": "content_5_3_12",
-              "text": "Match the group's energy. Once the group warms up to you, you can focus on her, build a moment, and suggest moving to a more comfortable spot. Her friends will not block you because you have already shown you are respectful and socially aware.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_5_3_7",
-          "order": 6,
-          "content": [
-            {
-              "id": "content_5_3_13",
-              "text": "Most men avoid groups because they assume it is harder. In reality, groups just require a different understanding of structure. When a woman is alone, she controls the entire interaction.",
-              "order": 0
-            },
-            {
-              "id": "content_5_3_14",
-              "text": "In a group, social dynamics take over, and social dynamics can work in your favour.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_5_3_8",
-          "order": 7,
-          "content": [
-            {
-              "id": "content_5_3_15",
-              "text": "You need to read the energy, engage everyone, and win the group's approval first. Her friends want her to meet someone worthwhile. If you show them you are that person, they will help the interaction rather than shut it down.",
-              "order": 0
-            },
-            {
-              "id": "content_5_3_16",
-              "text": "Stop waiting for her to be alone. She often never is. Learn to approach the group, and you open far more opportunities.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    }
-  ]
+  {
+    "id": "lesson_10_1",
+    "courseId": "course_10",
+    "lessonNumber": 1,
+    "courseTitle": "Situational Specific Approaches",
+    "title": "Daytime Approaches",
+    "duration": 3,
+    "summary": "Learn how to make daytime approaches feel natural and low pressure.",
+    "isCompleted": false,
+    "isLocked": false,
+    "screens": [
+      {
+        "id": "screen_10_1_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_10_1_1_1",
+            "text": "Most men feel more comfortable approaching at night, even though daytime interactions are usually more relaxed and straightforward.",
+            "order": 0
+          },
+          {
+            "id": "content_10_1_1_2",
+            "text": "Something about broad daylight makes the moment feel heavier. With no music or crowd to hide behind, the clarity of the setting is interpreted as pressure rather than an opportunity.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_10_1_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_10_1_2_1",
+            "text": "People are focused on errands and routines, not meeting new people. There is no nightlife context that signals everyone is open to conversation.",
+            "order": 0
+          },
+          {
+            "id": "content_10_1_2_2",
+            "text": "You are stepping slightly outside the pattern most people follow, which is why it stands out when done well.",
+            "order": 1
+          },
+          {
+            "id": "content_10_1_2_3",
+            "text": "Women are not opposed to meeting someone genuine in the day. They are opposed to being approached in ways that ignore comfort and respect.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_10_1_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_10_1_3_1",
+            "text": "A guy notices a woman browsing the fiction section. He walks up behind her, touches her shoulder, and says she is pretty. She stiffens, smiles politely, and turns back to the shelf. He leaves confused. The problem is obvious.",
+            "order": 0
+          },
+          {
+            "id": "content_10_1_3_2",
+            "text": "She never saw him approach. He led with her looks. He created a moment she had to manage instead of one she could participate in.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_10_1_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_10_1_4_1",
+            "text": "Now the same environment is handled differently. He walks into her line of sight, catches her eye, gives a calm smile, and says, \"I noticed you here and wanted to say hi. I'm...\" She looks up, surprised but comfortable.",
+            "order": 0
+          },
+          {
+            "id": "content_10_1_4_2",
+            "text": "He gives her space, asks what she is reading, and the conversation builds naturally. A few minutes later, he suggests coffee downstairs. She agrees. The difference is not luck. It is calibration.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_10_1_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_10_1_5_1",
+            "text": "Daytime success comes from being steady and clear. Approach from the front or side. Smile before you speak. Use a friendly, relaxed tone, and just keep the moment simple.",
+            "order": 0
+          },
+          {
+            "id": "content_10_1_5_2",
+            "text": "You are not trying to impress her. You are giving her a chance to meet someone normal in a respectful way.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_10_1_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_10_1_6_1",
+            "text": "Most men walk past women they would like to meet, waiting for a signal that never arrives.",
+            "order": 0
+          },
+          {
+            "id": "content_10_1_6_2",
+            "text": "You do not need a perfect sign. You just need to act when the moment is open and have the awareness to back off when it is not.",
+            "order": 1
+          },
+          {
+            "id": "content_10_1_6_3",
+            "text": "You already know how to talk to people. Daytime approaching is about using that skill when it matters.",
+            "order": 2
+          }
+        ]
+      }
+    ],
+    "courseSummary": "Learn how to adapt your approach to different environments."
+  },
+  {
+    "id": "lesson_10_2",
+    "courseId": "course_10",
+    "lessonNumber": 2,
+    "courseTitle": "Situational Specific Approaches",
+    "title": "Nighttime Approaches",
+    "duration": 3,
+    "summary": "Learn how nightlife chaos creates opportunity when understood correctly.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_10_2_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_10_2_1_1",
+            "text": "In crowded venues, chances appear and disappear fast. She looks at you, you hesitate for a moment, and the next time you check, she is already talking to someone else.",
+            "order": 0
+          },
+          {
+            "id": "content_10_2_1_2",
+            "text": "Night settings create openings that do not exist during the day, but they punish hesitation more than any other environment.",
+            "order": 1
+          },
+          {
+            "id": "content_10_2_1_3",
+            "text": "The lighting, the volume, the crowd, and the pace all change how people respond.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_10_2_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_10_2_2_1",
+            "text": "Daytime rewards conversation and slow rapport. At night, you have only a few seconds to make an impression before they shift their attention away.",
+            "order": 0
+          },
+          {
+            "id": "content_10_2_2_2",
+            "text": "The environment can help or hurt you depending on how well you understand it.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_10_2_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_10_2_3_1",
+            "text": "A guy approaches a woman at a bar. Brings low energy. Speaks softly. Tries to have a deep, meaningful conversation in a loud environment. She's polite but seems disengaged. She gives a short answer, grabs her drink, and turns away.",
+            "order": 0
+          },
+          {
+            "id": "content_10_2_3_2",
+            "text": "He leaves thinking he was rejected. In reality, he showed uncertainty in a setting that requires clear, confident energy. He asked her to engage before giving her a reason to be interested.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_10_2_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_10_2_4_1",
+            "text": "Now the same scenario is handled correctly. Another man positions himself near her without crowding. When she turns his way, he catches her eye, smiles, and introduces himself. She smiles back. They begin talking, and then after he suggests they move somewhere quieter.",
+            "order": 0
+          },
+          {
+            "id": "content_10_2_4_2",
+            "text": "Minutes later, they are talking comfortably away from the noise. Same woman, same venue, different results because he matched the energy and understood the environment.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_10_2_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_10_2_5_1",
+            "text": "Night game rewards speed, calibration, and social awareness. You cannot rely on long conversations to build a connection. Her attention shifts fast, so you need to move smoothly from opener to interaction to logistics.",
+            "order": 0
+          },
+          {
+            "id": "content_10_2_5_2",
+            "text": "Match your energy to the room. Momentum is everything. Night venues are chaotic by design. The noise, crowds, and lighting make meeting someone feel harder, but they also create more opportunities for men who know how to navigate that chaos.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_10_2_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_10_2_6_1",
+            "text": "The music gives you a reason to lean in. The crowd gives you presence. The darkness softens nerves. You just need to understand how the environment works and use it to your advantage.",
+            "order": 0
+          },
+          {
+            "id": "content_10_2_6_2",
+            "text": "Most men wait for something to happen. You can be the one who acts when the moment is open. Don't hesitate, just act.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesson_10_3",
+    "courseId": "course_10",
+    "lessonNumber": 3,
+    "courseTitle": "Situational Specific Approaches",
+    "title": "Approaching Women in Groups",
+    "duration": 4,
+    "summary": "Learn to turn groups from obstacles into advantages.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_10_3_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_10_3_1_1",
+            "text": "Groups create a pressure that most men feel immediately. More eyes, more noise, more variables. The fear is not the woman herself. It is the sense of being judged by several people at once.",
+            "order": 0
+          },
+          {
+            "id": "content_10_3_1_2",
+            "text": "That pressure keeps many men watching the moment instead of stepping into it.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_10_3_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_10_3_2_1",
+            "text": "Approaching a group is not harder than approaching one woman. It is simply a different dynamic.",
+            "order": 0
+          },
+          {
+            "id": "content_10_3_2_2",
+            "text": "You are dealing with group energy, hierarchy, and shared evaluation. What most men overlook is that her friends are not barriers. They are the ones who decide whether you stay or go.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_10_3_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_10_3_3_1",
+            "text": "If they like you, they make the interaction easy. If you ignore them, they shut it down instantly. The mistake men make is isolating the woman they want and acting like the rest of the group does not exist.",
+            "order": 0
+          },
+          {
+            "id": "content_10_3_3_2",
+            "text": "That signals poor social awareness and creates immediate resistance.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_10_3_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_10_3_4_1",
+            "text": "A guy sees a woman he likes in a group. He walks straight to her, ignores her friends, and opens with a direct compliment. Her friends exchange looks. One steps in, another pulls her away. Within seconds, the group moves, leaving him standing alone. He did not acknowledge their presence or their role.",
+            "order": 0
+          },
+          {
+            "id": "content_10_3_4_2",
+            "text": "From their perspective, a stranger tried to pull their friend away without earning trust.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_10_3_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_10_3_5_1",
+            "text": "Another guy notices the group and approaches them as a unit. \"You all look like you are having the best night in here. What are we celebrating?\" They respond. He engages each of them briefly, matches their tone, and becomes part of the group's energy.",
+            "order": 0
+          },
+          {
+            "id": "content_10_3_5_2",
+            "text": "Once they accept him, he turns to the woman he likes. Her friends smile and encourage it. Minutes later, the two of them are talking separately while her friends cheer them on. Same group. Different approach. Completely different outcome.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_10_3_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_10_3_6_1",
+            "text": "Groups reward social intelligence. The goal is not to impress your target first. It is to be accepted by everyone, then shift your attention to her.",
+            "order": 0
+          },
+          {
+            "id": "content_10_3_6_2",
+            "text": "Match the group's energy. Once the group warms up to you, you can focus on her, build a moment, and suggest moving to a more comfortable spot. Her friends will not block you because you have already shown you are respectful and socially aware.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_10_3_7",
+        "order": 6,
+        "content": [
+          {
+            "id": "content_10_3_7_1",
+            "text": "Most men avoid groups because they assume it is harder. In reality, groups just require a different understanding of structure. When a woman is alone, she controls the entire interaction.",
+            "order": 0
+          },
+          {
+            "id": "content_10_3_7_2",
+            "text": "In a group, social dynamics take over, and social dynamics can work in your favour.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_10_3_8",
+        "order": 7,
+        "content": [
+          {
+            "id": "content_10_3_8_1",
+            "text": "You need to read the energy, engage everyone, and win the group's approval first. Her friends want her to meet someone worthwhile. If you show them you are that person, they will help the interaction rather than shut it down.",
+            "order": 0
+          },
+          {
+            "id": "content_10_3_8_2",
+            "text": "Stop waiting for her to be alone. She often never is. Learn to approach the group, and you open far more opportunities.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  }
+]

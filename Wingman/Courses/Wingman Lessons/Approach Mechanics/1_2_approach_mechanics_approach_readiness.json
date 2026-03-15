@@ -1,506 +1,506 @@
 [
-    {
-        "id": "lesson_1_1",
-        "courseId": "course_1",
-        "courseSummary": "Learn how to move from hesitation to action so opportunities stop passing you by.",
-        "courseTitle": "Approach Readiness",
-        "lessonNumber": 1,
-        "title": "Hesitation Guarantees the Loss",
-        "duration": 3,
-        "summary": "Learn why inaction guarantees regret while action always creates possibility.",
-        "isCompleted": false,
-        "isLocked": false,
-        "screens": [
-        {
-            "id": "screen_1_1_1",
-            "order": 0,
-            "content": [
-            {
-                "id": "content_1_1_1",
-                "text": "Everyone has experienced the instant regret that follows after letting a moment pass. What hurts isn't a conversation that goes nowhere, but the chance you never took.",
-                "order": 0
-            },
-            {
-                "id": "content_1_1_2",
-                "text": "Hesitation guarantees the outcome you're trying to avoid. When you don't approach, you get the same result as rejection: no connection, no possibility, no opportunity.",
-                "order": 1
-            },
-            {
-                "id": "content_1_1_3",
-                "text": "The difference is that rejection gives you experience. Not approaching gives you nothing.",
-                "order": 2
-            }
-            ]
-        },
-        {
-            "id": "screen_1_1_2",
-            "order": 1,
-            "content": [
-            {
-                "id": "content_1_1_4",
-                "text": "A guy on the train notices a woman reading a book he loves. Wants to approach. Spends the entire ride thinking about it. The train reaches his stop.",
-                "order": 0
-            },
-            {
-                "id": "content_1_1_5",
-                "text": "He gets off without saying anything. Regrets it immediately. That regret sits with him for days. He keeps thinking about what could have happened if he'd just said something.",
-                "order": 1
-            }
-            ]
-        },
-        {
-            "id": "screen_1_1_3",
-            "order": 2,
-            "content": [
-            {
-                "id": "content_1_1_6",
-                "text": "Another man sees a woman on the train. Walks over. And asks about the book she's reading. She smiles. They talk until his stop.",
-                "order": 0
-            },
-            {
-                "id": "content_1_1_7",
-                "text": "She seems interested. He asks for her number. She gives it. They go on a date the following week.",
-                "order": 1
-            }
-            ]
-        },
-        {
-            "id": "screen_1_1_4",
-            "order": 3,
-            "content": [
-            {
-                "id": "content_1_1_8",
-                "text": "The first man will never know if she would have been receptive because he chose not to find out. The second man found out. The answer was yes. But even if the answer had been no, he'd have no regret because he tried.",
-                "order": 0
-            },
-            {
-                "id": "content_1_1_9",
-                "text": "Inaction guarantees failure. Action creates possibility. That's the entire equation. When you don't approach, the outcome is certain. Nothing happens. When you do approach, the outcome is uncertain, which means it could go well.",
-                "order": 1
-            }
-            ]
-        },
-        {
-            "id": "screen_1_1_5",
-            "order": 4,
-            "content": [
-            {
-                "id": "content_1_1_10",
-                "text": "Rejection is not the worst outcome. Regret is.",
-                "order": 0
-            },
-            {
-                "id": "content_1_1_11",
-                "text": "Rejection lasts seconds. You move on. Regret lasts as long as you let it.",
-                "order": 1
-            },
-            {
-                "id": "content_1_1_12",
-                "text": "You'll remember the women you didn't approach far longer than the ones who said no. Your brain will replay those missed opportunities for years. The woman outside the cafe. The one on the train. The one walking down the street. Each one is a reminder that you let fear decide instead of taking action.",
-                "order": 2
-            }
-            ]
-        },
-        {
-            "id": "screen_1_1_6",
-            "order": 5,
-            "content": [
-            {
-                "id": "content_1_1_13",
-                "text": "You will never regret trying as much as you regret standing still.",
-                "order": 0
-            },
-            {
-                "id": "content_1_1_14",
-                "text": "Give yourself the chance to find out instead of wondering what might have been. Anything is better than nothing.",
-                "order": 1
-            }
-            ]
-        }
+  {
+    "id": "lesson_6_1",
+    "courseId": "course_6",
+    "lessonNumber": 1,
+    "courseTitle": "Approach Readiness",
+    "title": "Hesitation Guarantees the Loss",
+    "duration": 3,
+    "summary": "Learn why inaction guarantees regret while action always creates possibility.",
+    "isCompleted": false,
+    "isLocked": false,
+    "screens": [
+      {
+        "id": "screen_6_1_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_6_1_1_1",
+            "text": "Everyone has experienced the instant regret that follows after letting a moment pass. What hurts isn't a conversation that goes nowhere, but the chance you never took.",
+            "order": 0
+          },
+          {
+            "id": "content_6_1_1_2",
+            "text": "Hesitation guarantees the outcome you're trying to avoid. When you don't approach, you get the same result as rejection: no connection, no possibility, no opportunity.",
+            "order": 1
+          },
+          {
+            "id": "content_6_1_1_3",
+            "text": "The difference is that rejection gives you experience. Not approaching gives you nothing.",
+            "order": 2
+          }
         ]
-    },
-    {
-        "id": "lesson_1_2",
-        "courseId": "course_1",
-        "courseTitle": "Approach Readiness",
-        "lessonNumber": 2,
-        "title": "Life's Fun If You Open Your Mouth",
-        "duration": 2,
-        "summary": "Learn to make engagement your default instead of staying silent.",
-        "isCompleted": false,
-        "isLocked": true,
-        "screens": [
-        {
-            "id": "screen_1_2_1",
-            "order": 0,
-            "content": [
-            {
-                "id": "content_1_2_1",
-                "text": "Every friend you have exists because one of you opened your mouth first. The same thing is still true today: connection begins the moment you're willing to speak.",
-                "order": 0
-            }
-            ]
-        },
-        {
-            "id": "screen_1_2_2",
-            "order": 1,
-            "content": [
-            {
-                "id": "content_1_2_2",
-                "text": "Most men underestimate how many good things in life come from simple, casual interactions. Staying quiet cuts off those chances before they begin.",
-                "order": 0
-            },
-            {
-                "id": "content_1_2_3",
-                "text": "Opening your mouth shifts that pattern by making engagement normal. When talking becomes your default, confidence grows, and connection follows naturally.",
-                "order": 1
-            }
-            ]
-        },
-        {
-            "id": "screen_1_2_3",
-            "order": 2,
-            "content": [
-            {
-                "id": "content_1_2_4",
-                "text": "A man goes to a friend's birthday and doesn't know most of the guests, so he stays quiet and sticks to the corner. Across the room, another guy walks up to people and asks how they know the host. They end up laughing, talking, and discovering they work in similar fields.",
-                "order": 0
-            },
-            {
-                "id": "content_1_2_5",
-                "text": "Later, the first man watches them connect and realizes nothing magical happened. One person simply decided to speak first.",
-                "order": 1
-            }
-            ]
-        },
-        {
-            "id": "screen_1_2_4",
-            "order": 3,
-            "content": [
-            {
-                "id": "content_1_2_6",
-                "text": "Life rewards people who engage. The more you talk to strangers, the more opportunities you create.",
-                "order": 0
-            },
-            {
-                "id": "content_1_2_7",
-                "text": "Most of them won't lead anywhere. That's fine. But some of them will lead to friendships, relationships, jobs, experiences, and stories you'll remember for years.",
-                "order": 1
-            },
-            {
-                "id": "content_1_2_8",
-                "text": "You can't predict which conversation will matter. That's why you have to be willing to start all of them.",
-                "order": 2
-            }
-            ]
-        },
-        {
-            "id": "screen_1_2_5",
-            "order": 4,
-            "content": [
-            {
-                "id": "content_1_2_9",
-                "text": "A single conversation can change your life. It can introduce you to someone who becomes important to you. It can lead to an opportunity you never saw coming. It can turn a boring day into a memorable one.",
-                "order": 0
-            },
-            {
-                "id": "content_1_2_10",
-                "text": "But none of that is possible if you stay silent. It only becomes possible if you're willing to open your mouth and say something to a stranger.",
-                "order": 1
-            }
-            ]
-        },
-        {
-            "id": "screen_1_2_6",
-            "order": 5,
-            "content": [
-            {
-                "id": "content_1_2_11",
-                "text": "You already know how to talk to people; you do it every day with the ones in your life. All you're doing now is letting that same ease reach a little farther.",
-                "order": 0
-            },
-            {
-                "id": "content_1_2_12",
-                "text": "Start small, speak once, let the moment unfold. The more you allow yourself to engage, the more life opens in return.",
-                "order": 1
-            }
-            ]
-        }
+      },
+      {
+        "id": "screen_6_1_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_6_1_2_1",
+            "text": "A guy on the train notices a woman reading a book he loves. Wants to approach. Spends the entire ride thinking about it. The train reaches his stop.",
+            "order": 0
+          },
+          {
+            "id": "content_6_1_2_2",
+            "text": "He gets off without saying anything. Regrets it immediately. That regret sits with him for days. He keeps thinking about what could have happened if he'd just said something.",
+            "order": 1
+          }
         ]
-    },
-    {
-        "id": "lesson_1_3",
-        "courseId": "course_1",
-        "courseTitle": "Approach Readiness",
-        "lessonNumber": 3,
-        "title": "Curiosity Beats Agenda",
-        "duration": 3,
-        "summary": "Learn how curiosity removes pressure and makes conversations effortless.",
-        "isCompleted": false,
-        "isLocked": true,
-        "screens": [
-        {
-            "id": "screen_1_3_1",
-            "order": 0,
-            "content": [
-            {
-                "id": "content_1_3_1",
-                "text": "The moment you stop trying to charm someone and start wondering who they are, your whole approach shifts.",
-                "order": 0
-            },
-            {
-                "id": "content_1_3_2",
-                "text": "Approaching with curiosity means engaging because you're genuinely interested in who they are, not because you're trying to extract something from them.",
-                "order": 1
-            },
-            {
-                "id": "content_1_3_3",
-                "text": "It's the difference between \"can I get something from this interaction\" and \"is this person interesting to me.\"",
-                "order": 2
-            }
-            ]
-        },
-        {
-            "id": "screen_1_3_2",
-            "order": 1,
-            "content": [
-            {
-                "id": "content_1_3_4",
-                "text": "When you approach with an agenda, you're treating them as a means to an end. Get their number. Get them attracted. Get a date. She's not a person to you in that moment. She's a goal to be achieved.",
-                "order": 0
-            },
-            {
-                "id": "content_1_3_5",
-                "text": "Curiosity removes the agenda. You're not trying to get anything. You're exploring whether this person is interesting to you.",
-                "order": 1
-            }
-            ]
-        },
-        {
-            "id": "screen_1_3_3",
-            "order": 2,
-            "content": [
-            {
-                "id": "content_1_3_6",
-                "text": "Two men both approach the same woman at a cafe. The first opens with \"Hi, I thought you were cute and wanted to meet you.\"",
-                "order": 0
-            },
-            {
-                "id": "content_1_3_7",
-                "text": "The agenda was declared immediately. She's polite but stays guarded. He tries to start a conversation, but the frame is already set: he wants something from her.",
-                "order": 1
-            }
-            ]
-        },
-        {
-            "id": "screen_1_3_4",
-            "order": 3,
-            "content": [
-            {
-                "id": "content_1_3_8",
-                "text": "The second man notices she has a laptop with stickers from places he's travelled. Opens with genuine curiosity: \"Is that a sticker from Iceland? I was just there last year.\" She lights up. Yes, she studied abroad there. They talk about Iceland for ten minutes.",
-                "order": 0
-            },
-            {
-                "id": "content_1_3_9",
-                "text": "He's not thinking about whether this is going anywhere. He's enjoying talking to someone who's been to a place he loved.",
-                "order": 1
-            },
-            {
-                "id": "content_1_3_10",
-                "text": "She asks for his number so they can share travel recommendations. His curiosity led to a connection.",
-                "order": 2
-            }
-            ]
-        },
-        {
-            "id": "screen_1_3_5",
-            "order": 4,
-            "content": [
-            {
-                "id": "content_1_3_11",
-                "text": "People are interesting when you pay attention. Every person you meet has a story, perspectives, and experiences you don't have. If you approach them as a puzzle to solve or an outcome to achieve, you miss all of that.",
-                "order": 0
-            },
-            {
-                "id": "content_1_3_12",
-                "text": "But if you approach them with genuine curiosity, the conversation becomes effortless.",
-                "order": 1
-            }
-            ]
-        },
-        {
-            "id": "screen_1_3_6",
-            "order": 5,
-            "content": [
-            {
-                "id": "content_1_3_13",
-                "text": "Individuals are drawn to people who make them feel interesting. When you ask thoughtful questions and listen to the answers, they feel seen.",
-                "order": 0
-            },
-            {
-                "id": "content_1_3_14",
-                "text": "That creates a bond that pickup lines and rehearsed stories never will.",
-                "order": 1
-            }
-            ]
-        },
-        {
-            "id": "screen_1_3_7",
-            "order": 6,
-            "content": [
-            {
-                "id": "content_1_3_15",
-                "text": "Curiosity is not a tactic. It's a mindset. Approach people because you want to know them, not because you want something from them.",
-                "order": 0
-            },
-            {
-                "id": "content_1_3_16",
-                "text": "You already know how to be curious. Stay open, stay observant, and let the conversation show you whether this person fits your world.",
-                "order": 1
-            }
-            ]
-        }
+      },
+      {
+        "id": "screen_6_1_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_6_1_3_1",
+            "text": "Another man sees a woman on the train. Walks over. And asks about the book she's reading. She smiles. They talk until his stop.",
+            "order": 0
+          },
+          {
+            "id": "content_6_1_3_2",
+            "text": "She seems interested. He asks for her number. She gives it. They go on a date the following week.",
+            "order": 1
+          }
         ]
-    },
-    {
-        "id": "lesson_1_4",
-        "courseId": "course_1",
-        "courseTitle": "Approach Readiness",
-        "lessonNumber": 4,
-        "title": "You're Always in the Field",
-        "duration": 4,
-        "summary": "Learn to approach consistently instead of selectively.",
-        "isCompleted": false,
-        "isLocked": true,
-        "screens": [
-        {
-            "id": "screen_1_4_1",
-            "order": 0,
-            "content": [
-            {
-                "id": "content_1_4_1",
-                "text": "If you spend most days in your own head, approaching someone will always feel like a jump instead of a step.",
-                "order": 0
-            },
-            {
-                "id": "content_1_4_2",
-                "text": "Being in the field means treating every environment as a place to practice social connection. It's recognizing that you can practice approaching in the coffee shop, the gym, the grocery store, or anywhere women are.",
-                "order": 1
-            }
-            ]
-        },
-        {
-            "id": "screen_1_4_2",
-            "order": 1,
-            "content": [
-            {
-                "id": "content_1_4_3",
-                "text": "When you talk to people throughout the day, approaching stops feeling like a performance and becomes your normal behaviour.",
-                "order": 0
-            },
-            {
-                "id": "content_1_4_4",
-                "text": "This shift is what makes social ease possible.",
-                "order": 1
-            }
-            ]
-        },
-        {
-            "id": "screen_1_4_3",
-            "order": 2,
-            "content": [
-            {
-                "id": "content_1_4_5",
-                "text": "A guy is at the grocery store on Sunday morning. Sees an attractive woman. Thinks about approaching, but he's in shorts and a t-shirt, hair uncombed, unshaven.",
-                "order": 0
-            },
-            {
-                "id": "content_1_4_6",
-                "text": "Tells himself, \"I look terrible, not now.\" Lets the opportunity pass. This happens repeatedly.",
-                "order": 1
-            },
-            {
-                "id": "content_1_4_7",
-                "text": "He only approaches when he's \"ready.\" Which means only on planned outings. His volume stays low.",
-                "order": 2
-            }
-            ]
-        },
-        {
-            "id": "screen_1_4_4",
-            "order": 3,
-            "content": [
-            {
-                "id": "content_1_4_8",
-                "text": "Another man is at the same grocery store in a similar condition. Sees an attractive woman. Approaches anyway.",
-                "order": 0
-            },
-            {
-                "id": "content_1_4_9",
-                "text": "\"I know I look like I just rolled out of bed, but I had to come up and say hi.\" Self-aware opener. She laughs. They chat for two minutes. She's not single, but the interaction was pleasant, and he got a rep.",
-                "order": 1
-            },
-            {
-                "id": "content_1_4_10",
-                "text": "He understands that looking perfect isn't a prerequisite for approaching.",
-                "order": 2
-            }
-            ]
-        },
-        {
-            "id": "screen_1_4_5",
-            "order": 4,
-            "content": [
-            {
-                "id": "content_1_4_11",
-                "text": "Being always in the field means approaching regardless of how put-together you are. Over time, the second guy's volume is much higher than the first guy's because he doesn't limit himself to approaching only when conditions are perfect.",
-                "order": 0
-            },
-            {
-                "id": "content_1_4_12",
-                "text": "You're either living in the field or avoiding it. Social skills sharpen through constant use, not selective effort.",
-                "order": 1
-            },
-            {
-                "id": "content_1_4_13",
-                "text": "When you treat every environment as a place to engage, confidence stops feeling like a switch you flip and becomes a natural baseline for who you are.",
-                "order": 2
-            }
-            ]
-        },
-        {
-            "id": "screen_1_4_6",
-            "order": 5,
-            "content": [
-            {
-                "id": "content_1_4_14",
-                "text": "Talking to people throughout your day keeps you warm, lowers the stakes of every interaction, and opens opportunities you would miss if you waited for perfect conditions.",
-                "order": 0
-            },
-            {
-                "id": "content_1_4_15",
-                "text": "You can start anywhere, with anyone, at any time. The more you treat everyday moments as practice, the lighter this whole process feels.",
-                "order": 1
-            }
-            ]
-        },
-        {
-            "id": "screen_1_4_7",
-            "order": 6,
-            "content": [
-            {
-                "id": "content_1_4_16",
-                "text": "Being always in the field transforms approaching from something you do occasionally into something you are consistently doing. That shift is what creates real, lasting skill.",
-                "order": 0
-            },
-            {
-                "id": "content_1_4_17",
-                "text": "Stop limiting yourself. Start recognizing opportunities are everywhere. You're always in the field.",
-                "order": 1
-            }
-            ]
-        }
+      },
+      {
+        "id": "screen_6_1_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_6_1_4_1",
+            "text": "The first man will never know if she would have been receptive because he chose not to find out. The second man found out. The answer was yes. But even if the answer had been no, he'd have no regret because he tried.",
+            "order": 0
+          },
+          {
+            "id": "content_6_1_4_2",
+            "text": "Inaction guarantees failure. Action creates possibility. That's the entire equation. When you don't approach, the outcome is certain. Nothing happens. When you do approach, the outcome is uncertain, which means it could go well.",
+            "order": 1
+          }
         ]
-    }
+      },
+      {
+        "id": "screen_6_1_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_6_1_5_1",
+            "text": "Rejection is not the worst outcome. Regret is.",
+            "order": 0
+          },
+          {
+            "id": "content_6_1_5_2",
+            "text": "Rejection lasts seconds. You move on. Regret lasts as long as you let it.",
+            "order": 1
+          },
+          {
+            "id": "content_6_1_5_3",
+            "text": "You'll remember the women you didn't approach far longer than the ones who said no. Your brain will replay those missed opportunities for years. The woman outside the cafe. The one on the train. The one walking down the street. Each one is a reminder that you let fear decide instead of taking action.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_6_1_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_6_1_6_1",
+            "text": "You will never regret trying as much as you regret standing still.",
+            "order": 0
+          },
+          {
+            "id": "content_6_1_6_2",
+            "text": "Give yourself the chance to find out instead of wondering what might have been. Anything is better than nothing.",
+            "order": 1
+          }
+        ]
+      }
+    ],
+    "courseSummary": "Learn how to move from hesitation to action so opportunities stop passing you by."
+  },
+  {
+    "id": "lesson_6_2",
+    "courseId": "course_6",
+    "lessonNumber": 2,
+    "courseTitle": "Approach Readiness",
+    "title": "Life's Fun If You Open Your Mouth",
+    "duration": 2,
+    "summary": "Learn to make engagement your default instead of staying silent.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_6_2_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_6_2_1_1",
+            "text": "Every friend you have exists because one of you opened your mouth first. The same thing is still true today: connection begins the moment you're willing to speak.",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "screen_6_2_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_6_2_2_1",
+            "text": "Most men underestimate how many good things in life come from simple, casual interactions. Staying quiet cuts off those chances before they begin.",
+            "order": 0
+          },
+          {
+            "id": "content_6_2_2_2",
+            "text": "Opening your mouth shifts that pattern by making engagement normal. When talking becomes your default, confidence grows, and connection follows naturally.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_6_2_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_6_2_3_1",
+            "text": "A man goes to a friend's birthday and doesn't know most of the guests, so he stays quiet and sticks to the corner. Across the room, another guy walks up to people and asks how they know the host. They end up laughing, talking, and discovering they work in similar fields.",
+            "order": 0
+          },
+          {
+            "id": "content_6_2_3_2",
+            "text": "Later, the first man watches them connect and realizes nothing magical happened. One person simply decided to speak first.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_6_2_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_6_2_4_1",
+            "text": "Life rewards people who engage. The more you talk to strangers, the more opportunities you create.",
+            "order": 0
+          },
+          {
+            "id": "content_6_2_4_2",
+            "text": "Most of them won't lead anywhere. That's fine. But some of them will lead to friendships, relationships, jobs, experiences, and stories you'll remember for years.",
+            "order": 1
+          },
+          {
+            "id": "content_6_2_4_3",
+            "text": "You can't predict which conversation will matter. That's why you have to be willing to start all of them.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_6_2_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_6_2_5_1",
+            "text": "A single conversation can change your life. It can introduce you to someone who becomes important to you. It can lead to an opportunity you never saw coming. It can turn a boring day into a memorable one.",
+            "order": 0
+          },
+          {
+            "id": "content_6_2_5_2",
+            "text": "But none of that is possible if you stay silent. It only becomes possible if you're willing to open your mouth and say something to a stranger.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_6_2_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_6_2_6_1",
+            "text": "You already know how to talk to people; you do it every day with the ones in your life. All you're doing now is letting that same ease reach a little farther.",
+            "order": 0
+          },
+          {
+            "id": "content_6_2_6_2",
+            "text": "Start small, speak once, let the moment unfold. The more you allow yourself to engage, the more life opens in return.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesson_6_3",
+    "courseId": "course_6",
+    "lessonNumber": 3,
+    "courseTitle": "Approach Readiness",
+    "title": "Curiosity Beats Agenda",
+    "duration": 3,
+    "summary": "Learn how curiosity removes pressure and makes conversations effortless.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_6_3_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_6_3_1_1",
+            "text": "The moment you stop trying to charm someone and start wondering who they are, your whole approach shifts.",
+            "order": 0
+          },
+          {
+            "id": "content_6_3_1_2",
+            "text": "Approaching with curiosity means engaging because you're genuinely interested in who they are, not because you're trying to extract something from them.",
+            "order": 1
+          },
+          {
+            "id": "content_6_3_1_3",
+            "text": "It's the difference between \"can I get something from this interaction\" and \"is this person interesting to me.\"",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_6_3_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_6_3_2_1",
+            "text": "When you approach with an agenda, you're treating them as a means to an end. Get their number. Get them attracted. Get a date. She's not a person to you in that moment. She's a goal to be achieved.",
+            "order": 0
+          },
+          {
+            "id": "content_6_3_2_2",
+            "text": "Curiosity removes the agenda. You're not trying to get anything. You're exploring whether this person is interesting to you.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_6_3_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_6_3_3_1",
+            "text": "Two men both approach the same woman at a cafe. The first opens with \"Hi, I thought you were cute and wanted to meet you.\"",
+            "order": 0
+          },
+          {
+            "id": "content_6_3_3_2",
+            "text": "The agenda was declared immediately. She's polite but stays guarded. He tries to start a conversation, but the frame is already set: he wants something from her.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_6_3_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_6_3_4_1",
+            "text": "The second man notices she has a laptop with stickers from places he's travelled. Opens with genuine curiosity: \"Is that a sticker from Iceland? I was just there last year.\" She lights up. Yes, she studied abroad there. They talk about Iceland for ten minutes.",
+            "order": 0
+          },
+          {
+            "id": "content_6_3_4_2",
+            "text": "He's not thinking about whether this is going anywhere. He's enjoying talking to someone who's been to a place he loved.",
+            "order": 1
+          },
+          {
+            "id": "content_6_3_4_3",
+            "text": "She asks for his number so they can share travel recommendations. His curiosity led to a connection.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_6_3_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_6_3_5_1",
+            "text": "People are interesting when you pay attention. Every person you meet has a story, perspectives, and experiences you don't have. If you approach them as a puzzle to solve or an outcome to achieve, you miss all of that.",
+            "order": 0
+          },
+          {
+            "id": "content_6_3_5_2",
+            "text": "But if you approach them with genuine curiosity, the conversation becomes effortless.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_6_3_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_6_3_6_1",
+            "text": "Individuals are drawn to people who make them feel interesting. When you ask thoughtful questions and listen to the answers, they feel seen.",
+            "order": 0
+          },
+          {
+            "id": "content_6_3_6_2",
+            "text": "That creates a bond that pickup lines and rehearsed stories never will.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_6_3_7",
+        "order": 6,
+        "content": [
+          {
+            "id": "content_6_3_7_1",
+            "text": "Curiosity is not a tactic. It's a mindset. Approach people because you want to know them, not because you want something from them.",
+            "order": 0
+          },
+          {
+            "id": "content_6_3_7_2",
+            "text": "You already know how to be curious. Stay open, stay observant, and let the conversation show you whether this person fits your world.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesson_6_4",
+    "courseId": "course_6",
+    "lessonNumber": 4,
+    "courseTitle": "Approach Readiness",
+    "title": "You're Always in the Field",
+    "duration": 4,
+    "summary": "Learn to approach consistently instead of selectively.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_6_4_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_6_4_1_1",
+            "text": "If you spend most days in your own head, approaching someone will always feel like a jump instead of a step.",
+            "order": 0
+          },
+          {
+            "id": "content_6_4_1_2",
+            "text": "Being in the field means treating every environment as a place to practice social connection. It's recognizing that you can practice approaching in the coffee shop, the gym, the grocery store, or anywhere women are.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_6_4_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_6_4_2_1",
+            "text": "When you talk to people throughout the day, approaching stops feeling like a performance and becomes your normal behaviour.",
+            "order": 0
+          },
+          {
+            "id": "content_6_4_2_2",
+            "text": "This shift is what makes social ease possible.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_6_4_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_6_4_3_1",
+            "text": "A guy is at the grocery store on Sunday morning. Sees an attractive woman. Thinks about approaching, but he's in shorts and a t-shirt, hair uncombed, unshaven.",
+            "order": 0
+          },
+          {
+            "id": "content_6_4_3_2",
+            "text": "Tells himself, \"I look terrible, not now.\" Lets the opportunity pass. This happens repeatedly.",
+            "order": 1
+          },
+          {
+            "id": "content_6_4_3_3",
+            "text": "He only approaches when he's \"ready.\" Which means only on planned outings. His volume stays low.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_6_4_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_6_4_4_1",
+            "text": "Another man is at the same grocery store in a similar condition. Sees an attractive woman. Approaches anyway.",
+            "order": 0
+          },
+          {
+            "id": "content_6_4_4_2",
+            "text": "\"I know I look like I just rolled out of bed, but I had to come up and say hi.\" Self-aware opener. She laughs. They chat for two minutes. She's not single, but the interaction was pleasant, and he got a rep.",
+            "order": 1
+          },
+          {
+            "id": "content_6_4_4_3",
+            "text": "He understands that looking perfect isn't a prerequisite for approaching.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_6_4_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_6_4_5_1",
+            "text": "Being always in the field means approaching regardless of how put-together you are. Over time, the second guy's volume is much higher than the first guy's because he doesn't limit himself to approaching only when conditions are perfect.",
+            "order": 0
+          },
+          {
+            "id": "content_6_4_5_2",
+            "text": "You're either living in the field or avoiding it. Social skills sharpen through constant use, not selective effort.",
+            "order": 1
+          },
+          {
+            "id": "content_6_4_5_3",
+            "text": "When you treat every environment as a place to engage, confidence stops feeling like a switch you flip and becomes a natural baseline for who you are.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_6_4_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_6_4_6_1",
+            "text": "Talking to people throughout your day keeps you warm, lowers the stakes of every interaction, and opens opportunities you would miss if you waited for perfect conditions.",
+            "order": 0
+          },
+          {
+            "id": "content_6_4_6_2",
+            "text": "You can start anywhere, with anyone, at any time. The more you treat everyday moments as practice, the lighter this whole process feels.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_6_4_7",
+        "order": 6,
+        "content": [
+          {
+            "id": "content_6_4_7_1",
+            "text": "Being always in the field transforms approaching from something you do occasionally into something you are consistently doing. That shift is what creates real, lasting skill.",
+            "order": 0
+          },
+          {
+            "id": "content_6_4_7_2",
+            "text": "Stop limiting yourself. Start recognizing opportunities are everywhere. You're always in the field.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  }
 ]

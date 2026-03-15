@@ -1,470 +1,470 @@
 [
-    {
-      "id": "lesson_3_1",
-      "courseId": "course_3",
-      "courseSummary": "Learn how to create momentum from the very first sentence.",
-      "courseTitle": "The Opener",
-      "lessonNumber": 1,
-      "title": "Indirect Openers",
-      "duration": 2,
-      "summary": "Learn how observation turns everyday situations into easy openers.",
-      "isCompleted": false,
-      "isLocked": false,
-      "screens": [
-        {
-          "id": "screen_3_1_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_3_1_1",
-              "text": "Indirect openers work because they feel unscripted. The best openers are already around you. The room, the music, the line you are standing in, each one gives you a way in if you are paying attention.",
-              "order": 0
-            },
-            {
-              "id": "content_3_1_2",
-              "text": "Indirect openers are conversation starters that don't explicitly state romantic interest. They're comments or questions about the situation, environment, or something you've observed.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_1_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_3_1_3",
-              "text": "Unlike direct openers, which declare intent, indirect openers disguise their approach as casual conversation.",
-              "order": 0
-            },
-            {
-              "id": "content_3_1_4",
-              "text": "When you comment on what is happening around you, it doesn't feel like an approach; it feels like a continuation of the moment you're already in.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_1_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_3_1_5",
-              "text": "Two men both approach women waiting in line at a coffee shop. The first walks up. \"I think you're really pretty and wanted to introduce myself.\"",
-              "order": 0
-            },
-            {
-              "id": "content_3_1_6",
-              "text": "She's caught off guard. Didn't expect to be approached in line for coffee. Feels put on the spot around people.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_1_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_3_1_7",
-              "text": "The second man turns to the woman behind him in line. \"This line's brutal today. Is it always like this?\" She agrees, makes a comment about the morning rush. They then chat about coffee preferences.",
-              "order": 0
-            },
-            {
-              "id": "content_3_1_8",
-              "text": "By the time they reach the counter, they've had a full conversation, and he suggests they sit together.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_1_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_3_1_9",
-              "text": "Indirect openers reduce pressure by hiding romantic intent behind a plausible conversation.",
-              "order": 0
-            },
-            {
-              "id": "content_3_1_10",
-              "text": "She's not immediately evaluating whether she's attracted to you because you haven't declared interest.",
-              "order": 1
-            },
-            {
-              "id": "content_3_1_11",
-              "text": "You're both in the same place, experiencing the same situation. \"This line is ridiculous.\" \"Have you been here before?\" \"Do you know what time this closes?\"",
-              "order": 2
-            },
-            {
-              "id": "content_3_1_12",
-              "text": "These are questions anyone might ask. That allows the interaction to develop naturally.",
-              "order": 3
-            }
-          ]
-        },
-        {
-          "id": "screen_3_1_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_3_1_13",
-              "text": "Those small shared moments create shared comfort, and that comfort is what will enable you to move closer. It is the difference between interrupting and joining.",
-              "order": 0
-            },
-            {
-              "id": "content_3_1_14",
-              "text": "The next time you notice something worth commenting on, say it. When you see what others miss, the approach stops feeling like effort and starts feeling natural.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "lesson_3_2",
-      "courseId": "course_3",
-      "courseTitle": "The Opener",
-      "lessonNumber": 2,
-      "title": "Direct Intent Openers",
-      "duration": 3,
-      "summary": "Learn how honest intent creates clarity from the start.",
-      "isCompleted": false,
-      "isLocked": true,
-      "screens": [
-        {
-          "id": "screen_3_2_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_3_2_1",
-              "text": "Direct openers work because they skip the guessing and get straight to the point. Instead of hiding behind small talk, you lead with honesty.",
-              "order": 0
-            },
-            {
-              "id": "content_3_2_2",
-              "text": "Direct intent openers are conversation starters that explicitly state you're approaching because of romantic or physical interest. These work because they replace strategy with honesty.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_2_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_3_2_3",
-              "text": "Instead of easing into the conversation with small talk, you set the terms clearly: you saw her and wanted to meet her.",
-              "order": 0
-            },
-            {
-              "id": "content_3_2_4",
-              "text": "She doesn't have to decode your intentions, and you don't have to perform around them.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_2_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_3_2_5",
-              "text": "Psychologically, direct openers immediately activate evaluation mode. She starts assessing attraction right away. This is both a strength and a weakness.",
-              "order": 0
-            },
-            {
-              "id": "content_3_2_6",
-              "text": "The weakness: if she's not attracted immediately, the interaction is over. The strength: if she is attracted or intrigued, you've skipped all the rapport-building pretence.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_2_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_3_2_7",
-              "text": "You are in a cafe waiting for your order. She is sitting alone, scrolling through her phone. Some men might hover nearby, pretending to look for a seat.",
-              "order": 0
-            },
-            {
-              "id": "content_3_2_8",
-              "text": "You decide not to play that game. You step up, give her a calm smile, and say, \"Hey, I know this is random, but you caught my eye, and I wanted to come say hi.\"",
-              "order": 1
-            },
-            {
-              "id": "content_3_2_9",
-              "text": "She laughs, puts her phone down, and engages. She doesn't need to guess your intention, and you don't need to pretend you are there for anything else.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_3_2_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_3_2_10",
-              "text": "Direct openers work best in environments that naturally support romantic approaches, such as bars, clubs, parties, and social events, where a clear expression of interest feels regular and welcome.",
-              "order": 0
-            },
-            {
-              "id": "content_3_2_11",
-              "text": "Delivery also matters. Direct openers need to be delivered with calm confidence. Not aggressive. Not apologetic. Just matter-of-fact. \"I saw you and wanted to introduce myself,\" delivered with steady eye contact and relaxed body language, communicates confidence.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_2_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_3_2_12",
-              "text": "The same line delivered nervously or apologetically communicates insecurity, which undercuts the entire point of being direct.",
-              "order": 0
-            },
-            {
-              "id": "content_3_2_13",
-              "text": "You are not looking for permission, approval, or an opening; you create one. When you speak your intent plainly, you show you are comfortable with desire and rejection.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_2_7",
-          "order": 6,
-          "content": [
-            {
-              "id": "content_3_2_14",
-              "text": "You can't control her response, but you can control the way you enter the moment.",
-              "order": 0
-            },
-            {
-              "id": "content_3_2_15",
-              "text": "Be upfront and stay composed. When you own your desire unapologetically, you turn an ordinary moment into a decisive one.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "lesson_3_3",
-      "courseId": "course_3",
-      "courseTitle": "The Opener",
-      "lessonNumber": 3,
-      "title": "Frame Control",
-      "duration": 4,
-      "summary": "Learn how framing keeps conversations engaging and forward moving.",
-      "isCompleted": false,
-      "isLocked": true,
-      "screens": [
-        {
-          "id": "screen_3_3_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_3_3_1",
-              "text": "People always default to the most exciting narrative in the room. When you bring a stronger frame, your opener becomes more compelling than whatever they were doing before you arrived.",
-              "order": 0
-            },
-            {
-              "id": "content_3_3_2",
-              "text": "Frame control means guiding the subject, pace, and energy of the moment. When you open, you're not interrupting her reality; you're introducing your own. If she follows, you're leading. If you follow her, you're seeking approval. The dynamic changes completely depending on which role you take.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_3_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_3_3_3",
-              "text": "A guy approaches a woman at a coffee shop. She's reading a book. He walks up and says, \"Sorry to bother you, but I just wanted to say hi.\" She looks up, says hi back politely, then returns to her book.",
-              "order": 0
-            },
-            {
-              "id": "content_3_3_4",
-              "text": "He's already lost. He apologized for existing. He framed the interaction as an interruption, a bother. She accepted that frame and dismissed him accordingly. His opener communicated that her book was more important than him.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_3_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_3_3_5",
-              "text": "Another guy approaches a different woman reading at the same coffee shop. He doesn't apologize. He walks up and says, \"That book any good? I've been meaning to read it.\" No apology. No permission seeking. Just a direct question that assumes she'll engage.",
-              "order": 0
-            },
-            {
-              "id": "content_3_3_6",
-              "text": "She looks up, smiles, and says it's great so far. He asks what made her pick it up. She tells him. Now they're talking.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_3_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_3_3_7",
-              "text": "The person who sets the topic controls the interaction. When you approach, your opener should be more interesting than whatever she was doing before you arrived. If it's not, she'll return to what she was doing, and you'll be dismissed.",
-              "order": 0
-            },
-            {
-              "id": "content_3_3_8",
-              "text": "When you apologize, ask permission, or try to join her existing conversation, you're signalling that her reality is more important than yours.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_3_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_3_3_9",
-              "text": "Frame control also means leading the conversation forward. You don't wait for her to escalate or give you signals. You move from small talk to a deeper conversation. From conversation to flirtation. From flirtation to physical touch. You're always one step ahead, pulling her along.",
-              "order": 0
-            },
-            {
-              "id": "content_3_3_10",
-              "text": "If you're waiting for her to lead, you've already lost the frame. She's not going to escalate for you.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_3_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_3_3_11",
-              "text": "You can lead with a smile. With humor. With curiosity. The tone doesn't matter. What matters is that you're the one deciding where this interaction goes. Not her. Not the environment. You.",
-              "order": 0
-            },
-            {
-              "id": "content_3_3_12",
-              "text": "Frame control is choosing to lead instead of waiting to be chosen. The more you trust your direction, the easier it becomes for others to follow it.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "lesson_3_4",
-      "courseId": "course_3",
-      "courseTitle": "The Opener",
-      "lessonNumber": 4,
-      "title": "Voice Mechanics",
-      "duration": 2,
-      "summary": "Learn how voice control shapes confidence before words are understood.",
-      "isCompleted": false,
-      "isLocked": true,
-      "screens": [
-        {
-          "id": "screen_3_4_1",
-          "order": 0,
-          "content": [
-            {
-              "id": "content_3_4_1",
-              "text": "Everyone hears your voice before they understand your words. In a loud bar or a quiet cafe, your volume, pace, and tone decide whether you sound confident or uncertain.",
-              "order": 0
-            },
-            {
-              "id": "content_3_4_2",
-              "text": "Voice mechanics are the volume, pacing, and clarity of your words. These elements determine her first impression before the content of your words even registers.",
-              "order": 1
-            },
-            {
-              "id": "content_3_4_3",
-              "text": "When your delivery is grounded, she feels grounded. When your voice wavers or rushes, she feels your tension.",
-              "order": 2
-            }
-          ]
-        },
-        {
-          "id": "screen_3_4_2",
-          "order": 1,
-          "content": [
-            {
-              "id": "content_3_4_4",
-              "text": "A man approaches a woman at a bar. The music is moderately loud. He speaks at normal conversation volume. She can't quite hear him. Leans in. \"What?\" He repeats himself at the same volume. She catches most of it but has to fill in gaps.",
-              "order": 0
-            },
-            {
-              "id": "content_3_4_5",
-              "text": "The interaction immediately has friction because he's not calibrating to the environment.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_4_3",
-          "order": 2,
-          "content": [
-            {
-              "id": "content_3_4_6",
-              "text": "Another man approaches a woman at the same bar. Speaks clearly and slightly louder to account for the music. She hears him perfectly the first time. No repetition needed. The interaction flows because his volume matched the environment.",
-              "order": 0
-            }
-          ]
-        },
-        {
-          "id": "screen_3_4_4",
-          "order": 3,
-          "content": [
-            {
-              "id": "content_3_4_7",
-              "text": "Your voice mechanics either reinforce or undermine your physical approach.",
-              "order": 0
-            },
-            {
-              "id": "content_3_4_8",
-              "text": "Good voice mechanics make your approach feel steady and grounded. A controlled pace shows you are present rather than rushing. Clear articulation signals that you are comfortable taking up space. A balanced volume shows awareness of the environment and awareness of her.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_4_5",
-          "order": 4,
-          "content": [
-            {
-              "id": "content_3_4_9",
-              "text": "When you speak at a calm, measured rhythm, she can follow you easily. When your words land cleanly, your confidence feels real. And when your volume is strong enough to be heard without dominating the room, you project social intelligence.",
-              "order": 0
-            },
-            {
-              "id": "content_3_4_10",
-              "text": "Together, these elements create a voice that feels composed, intentional, and easy to engage with.",
-              "order": 1
-            }
-          ]
-        },
-        {
-          "id": "screen_3_4_6",
-          "order": 5,
-          "content": [
-            {
-              "id": "content_3_4_11",
-              "text": "Slow down, breathe, and let your words land.",
-              "order": 0
-            },
-            {
-              "id": "content_3_4_12",
-              "text": "Confidence grows from control, not volume, and you already have everything you need to practice that.",
-              "order": 1
-            }
-          ]
-        }
-      ]
-    }
+  {
+    "id": "lesson_8_1",
+    "courseId": "course_8",
+    "lessonNumber": 1,
+    "courseTitle": "The Opener",
+    "title": "Indirect Openers",
+    "duration": 2,
+    "summary": "Learn how observation turns everyday situations into easy openers.",
+    "isCompleted": false,
+    "isLocked": false,
+    "screens": [
+      {
+        "id": "screen_8_1_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_8_1_1_1",
+            "text": "Indirect openers work because they feel unscripted. The best openers are already around you. The room, the music, the line you are standing in, each one gives you a way in if you are paying attention.",
+            "order": 0
+          },
+          {
+            "id": "content_8_1_1_2",
+            "text": "Indirect openers are conversation starters that don't explicitly state romantic interest. They're comments or questions about the situation, environment, or something you've observed.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_8_1_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_8_1_2_1",
+            "text": "Unlike direct openers, which declare intent, indirect openers disguise their approach as casual conversation.",
+            "order": 0
+          },
+          {
+            "id": "content_8_1_2_2",
+            "text": "When you comment on what is happening around you, it doesn't feel like an approach; it feels like a continuation of the moment you're already in.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_8_1_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_8_1_3_1",
+            "text": "Two men both approach women waiting in line at a coffee shop. The first walks up. \"I think you're really pretty and wanted to introduce myself.\"",
+            "order": 0
+          },
+          {
+            "id": "content_8_1_3_2",
+            "text": "She's caught off guard. Didn't expect to be approached in line for coffee. Feels put on the spot around people.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_8_1_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_8_1_4_1",
+            "text": "The second man turns to the woman behind him in line. \"This line's brutal today. Is it always like this?\" She agrees, makes a comment about the morning rush. They then chat about coffee preferences.",
+            "order": 0
+          },
+          {
+            "id": "content_8_1_4_2",
+            "text": "By the time they reach the counter, they've had a full conversation, and he suggests they sit together.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_8_1_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_8_1_5_1",
+            "text": "Indirect openers reduce pressure by hiding romantic intent behind a plausible conversation.",
+            "order": 0
+          },
+          {
+            "id": "content_8_1_5_2",
+            "text": "She's not immediately evaluating whether she's attracted to you because you haven't declared interest.",
+            "order": 1
+          },
+          {
+            "id": "content_8_1_5_3",
+            "text": "You're both in the same place, experiencing the same situation. \"This line is ridiculous.\" \"Have you been here before?\" \"Do you know what time this closes?\"",
+            "order": 2
+          },
+          {
+            "id": "content_8_1_5_4",
+            "text": "These are questions anyone might ask. That allows the interaction to develop naturally.",
+            "order": 3
+          }
+        ]
+      },
+      {
+        "id": "screen_8_1_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_8_1_6_1",
+            "text": "Those small shared moments create shared comfort, and that comfort is what will enable you to move closer. It is the difference between interrupting and joining.",
+            "order": 0
+          },
+          {
+            "id": "content_8_1_6_2",
+            "text": "The next time you notice something worth commenting on, say it. When you see what others miss, the approach stops feeling like effort and starts feeling natural.",
+            "order": 1
+          }
+        ]
+      }
+    ],
+    "courseSummary": "Learn how to create momentum from the very first sentence."
+  },
+  {
+    "id": "lesson_8_2",
+    "courseId": "course_8",
+    "lessonNumber": 2,
+    "courseTitle": "The Opener",
+    "title": "Direct Intent Openers",
+    "duration": 3,
+    "summary": "Learn how honest intent creates clarity from the start.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_8_2_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_8_2_1_1",
+            "text": "Direct openers work because they skip the guessing and get straight to the point. Instead of hiding behind small talk, you lead with honesty.",
+            "order": 0
+          },
+          {
+            "id": "content_8_2_1_2",
+            "text": "Direct intent openers are conversation starters that explicitly state you're approaching because of romantic or physical interest. These work because they replace strategy with honesty.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_8_2_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_8_2_2_1",
+            "text": "Instead of easing into the conversation with small talk, you set the terms clearly: you saw her and wanted to meet her.",
+            "order": 0
+          },
+          {
+            "id": "content_8_2_2_2",
+            "text": "She doesn't have to decode your intentions, and you don't have to perform around them.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_8_2_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_8_2_3_1",
+            "text": "Psychologically, direct openers immediately activate evaluation mode. She starts assessing attraction right away. This is both a strength and a weakness.",
+            "order": 0
+          },
+          {
+            "id": "content_8_2_3_2",
+            "text": "The weakness: if she's not attracted immediately, the interaction is over. The strength: if she is attracted or intrigued, you've skipped all the rapport-building pretence.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_8_2_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_8_2_4_1",
+            "text": "You are in a cafe waiting for your order. She is sitting alone, scrolling through her phone. Some men might hover nearby, pretending to look for a seat.",
+            "order": 0
+          },
+          {
+            "id": "content_8_2_4_2",
+            "text": "You decide not to play that game. You step up, give her a calm smile, and say, \"Hey, I know this is random, but you caught my eye, and I wanted to come say hi.\"",
+            "order": 1
+          },
+          {
+            "id": "content_8_2_4_3",
+            "text": "She laughs, puts her phone down, and engages. She doesn't need to guess your intention, and you don't need to pretend you are there for anything else.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_8_2_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_8_2_5_1",
+            "text": "Direct openers work best in environments that naturally support romantic approaches, such as bars, clubs, parties, and social events, where a clear expression of interest feels regular and welcome.",
+            "order": 0
+          },
+          {
+            "id": "content_8_2_5_2",
+            "text": "Delivery also matters. Direct openers need to be delivered with calm confidence. Not aggressive. Not apologetic. Just matter-of-fact. \"I saw you and wanted to introduce myself,\" delivered with steady eye contact and relaxed body language, communicates confidence.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_8_2_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_8_2_6_1",
+            "text": "The same line delivered nervously or apologetically communicates insecurity, which undercuts the entire point of being direct.",
+            "order": 0
+          },
+          {
+            "id": "content_8_2_6_2",
+            "text": "You are not looking for permission, approval, or an opening; you create one. When you speak your intent plainly, you show you are comfortable with desire and rejection.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_8_2_7",
+        "order": 6,
+        "content": [
+          {
+            "id": "content_8_2_7_1",
+            "text": "You can't control her response, but you can control the way you enter the moment.",
+            "order": 0
+          },
+          {
+            "id": "content_8_2_7_2",
+            "text": "Be upfront and stay composed. When you own your desire unapologetically, you turn an ordinary moment into a decisive one.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesson_8_3",
+    "courseId": "course_8",
+    "lessonNumber": 3,
+    "courseTitle": "The Opener",
+    "title": "Frame Control",
+    "duration": 4,
+    "summary": "Learn how framing keeps conversations engaging and forward moving.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_8_3_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_8_3_1_1",
+            "text": "People always default to the most exciting narrative in the room. When you bring a stronger frame, your opener becomes more compelling than whatever they were doing before you arrived.",
+            "order": 0
+          },
+          {
+            "id": "content_8_3_1_2",
+            "text": "Frame control means guiding the subject, pace, and energy of the moment. When you open, you're not interrupting her reality; you're introducing your own. If she follows, you're leading. If you follow her, you're seeking approval. The dynamic changes completely depending on which role you take.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_8_3_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_8_3_2_1",
+            "text": "A guy approaches a woman at a coffee shop. She's reading a book. He walks up and says, \"Sorry to bother you, but I just wanted to say hi.\" She looks up, says hi back politely, then returns to her book.",
+            "order": 0
+          },
+          {
+            "id": "content_8_3_2_2",
+            "text": "He's already lost. He apologized for existing. He framed the interaction as an interruption, a bother. She accepted that frame and dismissed him accordingly. His opener communicated that her book was more important than him.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_8_3_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_8_3_3_1",
+            "text": "Another guy approaches a different woman reading at the same coffee shop. He doesn't apologize. He walks up and says, \"That book any good? I've been meaning to read it.\" No apology. No permission seeking. Just a direct question that assumes she'll engage.",
+            "order": 0
+          },
+          {
+            "id": "content_8_3_3_2",
+            "text": "She looks up, smiles, and says it's great so far. He asks what made her pick it up. She tells him. Now they're talking.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_8_3_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_8_3_4_1",
+            "text": "The person who sets the topic controls the interaction. When you approach, your opener should be more interesting than whatever she was doing before you arrived. If it's not, she'll return to what she was doing, and you'll be dismissed.",
+            "order": 0
+          },
+          {
+            "id": "content_8_3_4_2",
+            "text": "When you apologize, ask permission, or try to join her existing conversation, you're signalling that her reality is more important than yours.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_8_3_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_8_3_5_1",
+            "text": "Frame control also means leading the conversation forward. You don't wait for her to escalate or give you signals. You move from small talk to a deeper conversation. From conversation to flirtation. From flirtation to physical touch. You're always one step ahead, pulling her along.",
+            "order": 0
+          },
+          {
+            "id": "content_8_3_5_2",
+            "text": "If you're waiting for her to lead, you've already lost the frame. She's not going to escalate for you.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_8_3_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_8_3_6_1",
+            "text": "You can lead with a smile. With humor. With curiosity. The tone doesn't matter. What matters is that you're the one deciding where this interaction goes. Not her. Not the environment. You.",
+            "order": 0
+          },
+          {
+            "id": "content_8_3_6_2",
+            "text": "Frame control is choosing to lead instead of waiting to be chosen. The more you trust your direction, the easier it becomes for others to follow it.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesson_8_4",
+    "courseId": "course_8",
+    "lessonNumber": 4,
+    "courseTitle": "The Opener",
+    "title": "Voice Mechanics",
+    "duration": 2,
+    "summary": "Learn how voice control shapes confidence before words are understood.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_8_4_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_8_4_1_1",
+            "text": "Everyone hears your voice before they understand your words. In a loud bar or a quiet cafe, your volume, pace, and tone decide whether you sound confident or uncertain.",
+            "order": 0
+          },
+          {
+            "id": "content_8_4_1_2",
+            "text": "Voice mechanics are the volume, pacing, and clarity of your words. These elements determine her first impression before the content of your words even registers.",
+            "order": 1
+          },
+          {
+            "id": "content_8_4_1_3",
+            "text": "When your delivery is grounded, she feels grounded. When your voice wavers or rushes, she feels your tension.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_8_4_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_8_4_2_1",
+            "text": "A man approaches a woman at a bar. The music is moderately loud. He speaks at normal conversation volume. She can't quite hear him. Leans in. \"What?\" He repeats himself at the same volume. She catches most of it but has to fill in gaps.",
+            "order": 0
+          },
+          {
+            "id": "content_8_4_2_2",
+            "text": "The interaction immediately has friction because he's not calibrating to the environment.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_8_4_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_8_4_3_1",
+            "text": "Another man approaches a woman at the same bar. Speaks clearly and slightly louder to account for the music. She hears him perfectly the first time. No repetition needed. The interaction flows because his volume matched the environment.",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "screen_8_4_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_8_4_4_1",
+            "text": "Your voice mechanics either reinforce or undermine your physical approach.",
+            "order": 0
+          },
+          {
+            "id": "content_8_4_4_2",
+            "text": "Good voice mechanics make your approach feel steady and grounded. A controlled pace shows you are present rather than rushing. Clear articulation signals that you are comfortable taking up space. A balanced volume shows awareness of the environment and awareness of her.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_8_4_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_8_4_5_1",
+            "text": "When you speak at a calm, measured rhythm, she can follow you easily. When your words land cleanly, your confidence feels real. And when your volume is strong enough to be heard without dominating the room, you project social intelligence.",
+            "order": 0
+          },
+          {
+            "id": "content_8_4_5_2",
+            "text": "Together, these elements create a voice that feels composed, intentional, and easy to engage with.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_8_4_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_8_4_6_1",
+            "text": "Slow down, breathe, and let your words land.",
+            "order": 0
+          },
+          {
+            "id": "content_8_4_6_2",
+            "text": "Confidence grows from control, not volume, and you already have everything you need to practice that.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  }
 ]
