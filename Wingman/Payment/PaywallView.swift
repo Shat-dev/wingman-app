@@ -67,8 +67,8 @@ struct PaywallView: View {
                             .frame(width: 8, height: 8)
                     }
                 }
-                .padding(.top, 16)
-                .padding(.bottom, 40)
+                .padding(.top, 5)
+                .padding(.bottom, 35)
 	
                 // MARK: - Plans
                 VStack(spacing: 12) {
