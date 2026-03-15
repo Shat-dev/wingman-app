@@ -17,6 +17,7 @@ struct WingmanApp: App {
         WindowGroup {
             RootView()
                 .environmentObject(authManager)
+                .preferredColorScheme(.light) // Force Light Mode
                 .onOpenURL { url in
                     // Handle Google Sign-In callback URL
                     GIDSignIn.sharedInstance.handle(url)
