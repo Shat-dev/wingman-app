@@ -243,17 +243,19 @@ struct CourseCardContent: View {
             Divider()
                 .background(Color.gray.opacity(0.2))
             
-            // Title section with natural sizing
+            // Title section with fixed 2-line height
             Text(course.title)
                 .font(.manropeMedium(size: 14))  // Slightly smaller font
                 .foregroundColor(.black)
                 .lineSpacing(1)
                 .multilineTextAlignment(.leading)
+                .lineLimit(2)  // Fixed to exactly 2 lines
                 .truncationMode(.tail)  // Add ellipsis at the end
                 .frame(maxWidth: .infinity, alignment: .topLeading)
+                .frame(height: 44)  // Fixed height for 2 lines
                 .padding(.horizontal, 8)
                 .padding(.top, 8)
-                .padding(.bottom, 20)  // 20 points padding below the title
+                .padding(.bottom, 12)  // Adjusted padding for better balance
                 .background(Color.white)
         }
         .frame(height: 245)  // FIXED total card height

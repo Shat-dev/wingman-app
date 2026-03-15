@@ -142,6 +142,9 @@ struct ProfileView: View {
             // Keep sheets
             .sheet(isPresented: $showSettings) {
                 SettingsSheet(userName: userName)
+                    .presentationDetents([.height(630)])
+                    .presentationDragIndicator(.hidden)
+                    .presentationCornerRadius(20)
             }
             .sheet(isPresented: $showEditProfile) {
                 EditProfileSheet(currentName: userName) { newName in

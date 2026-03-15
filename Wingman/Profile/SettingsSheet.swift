@@ -20,9 +20,8 @@ struct SettingsSheet: View {
     let userName: String
     
     var body: some View {
-        NavigationStack {
-            ZStack {
-                Color.white.ignoresSafeArea()
+        ZStack {
+            Color.white.ignoresSafeArea()
                 
                 VStack(spacing: 0) {
                     // MARK: - Grabber
@@ -173,7 +172,7 @@ struct SettingsSheet: View {
                     }) {
                         Text("Delete Account")
                             .font(.manropeMedium(size: 14))
-                            .foregroundColor(Color.wingmanBlack)
+                            .foregroundColor(Color(hex: "#E53935"))
                             .underline()
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
@@ -191,7 +190,6 @@ struct SettingsSheet: View {
                         .padding(.horizontal, 24)
                         .padding(.top, 8)
                     
-                    Spacer()
                     
                     // MARK: - Log Out Button
                     Button(action: {
@@ -211,38 +209,20 @@ struct SettingsSheet: View {
                     }
                     .padding(.horizontal, 24)
                     .padding(.bottom, 32)
+                    .padding(.top, 40)
                 }
-            }
-            .navigationBarHidden(true)
-            .disabled(isDeleting) // Disable interaction during deletion
-            
-            // MARK: - Loading Overlay
-            if isDeleting {
-                ZStack {
-                    Color.black.opacity(0.3)
+                
+                // MARK: - Simple Loader Overlay (inside ZStack to maintain sheet size)
+                if isDeleting {
+                    Color.white.opacity(0.9)
                         .ignoresSafeArea()
                     
-                    VStack(spacing: 16) {
-                        ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle(tint: .wingmanBlack))
-                            .scaleEffect(1.2)
-                        
-                        Text("Deleting Account...")
-                            .font(.manropeMedium(size: 16))
-                            .foregroundColor(.wingmanBlack)
-                        
-                        Text("This may take a moment")
-                            .font(.manropeRegular(size: 14))
-                            .foregroundColor(.gray)
-                    }
-                    .padding(24)
-                    .background(Color.white)
-                    .cornerRadius(12)
-                    .shadow(radius: 10)
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: Color(hex: "#1A1A1A")))
+                        .scaleEffect(1.2)
                 }
-                .transition(.opacity)
             }
-        }
+            .disabled(isDeleting) // Disable interaction during deletion
         .animation(.easeInOut, value: isDeleting)
         .alert("Delete Account", isPresented: $showingDeleteAlert) {
             Button("Cancel", role: .cancel) { }
