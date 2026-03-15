@@ -2,32 +2,30 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-
-    <key>CFBundleURLTypes</key>
-    <array>
-        <dict>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>com.googleusercontent.apps.915810938432-fh9l3u8icl6vcksn2j841c5nbljfh824</string>
-            </array>
-            <key>CFBundleURLName</key>
-            <string>Google Sign-In</string>
-        </dict>
-    </array>
-
-    <key>GIDClientID</key>
-    <string>915810938432-fh9l3u8icl6vcksn2j841c5nbljfh824.apps.googleusercontent.com</string>
-
-    <key>UIAppFonts</key>
-    <array>
-        <string>Manrope-Regular.ttf</string>
-        <string>Manrope-Medium.ttf</string>
-        <string>Manrope-SemiBold.ttf</string>
-        <string>Manrope-Bold.ttf</string>
-        <string>Manrope-Light.ttf</string>
-        <string>Manrope-ExtraLight.ttf</string>
-        <string>Manrope-ExtraBold.ttf</string>
-    </array>
-
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.915810938432-fh9l3u8icl6vcksn2j841c5nbljfh824</string>
+			</array>
+			<key>CFBundleURLName</key>
+			<string>Google Sign-In</string>
+		</dict>
+	</array>
+	<key>GIDClientID</key>
+	<string>915810938432-fh9l3u8icl6vcksn2j841c5nbljfh824.apps.googleusercontent.com</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Manrope-Regular.ttf</string>
+		<string>Manrope-Medium.ttf</string>
+		<string>Manrope-SemiBold.ttf</string>
+		<string>Manrope-Bold.ttf</string>
+		<string>Manrope-Light.ttf</string>
+		<string>Manrope-ExtraLight.ttf</string>
+		<string>Manrope-ExtraBold.ttf</string>
+	</array>
 </dict>
 </plist>
