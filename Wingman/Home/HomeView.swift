@@ -340,41 +340,32 @@ struct PeekCarousel: View {
                     }
                 }
                 .offset(x: calculateOffset(screenWidth: width, cardWidth: calculatedCardWidth))
-                // Overlay the UIViewRepresentable for robust horizontal pan detection
-                .overlay(
-                    Group {
-                        if useCarouselPan {
-                            HorizontalPanGestureView(
-                                onChanged: { translation in
-                                    DispatchQueue.main.async {
-                                        // clamp offset
-                                        let maxOffset = calculatedCardWidth + 60
-                                        let x = max(min(translation.x, maxOffset), -maxOffset)
-                                        dragOffset = x
-                                        horizontalDragActive = true
-                                    }
-                                },
-                                onEnded: { translation, velocity in
-                                    DispatchQueue.main.async {
-                                        let predicted = translation.x + velocity.x * 0.18
-                                        let threshold = calculatedCardWidth / 3
-                                        withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
-                                            if predicted < -threshold && currentPage < modules.count - 1 {
-                                                currentPage += 1
-                                            } else if predicted > threshold && currentPage > 0 {
-                                                currentPage -= 1
-                                            }
-                                            dragOffset = 0
-                                            horizontalDragActive = false
-                                        }
-                                    }
-                                }
-                            )
-                        } else {
-                            // No overlay when disabled to allow native ScrollView gestures
-                            EmptyView()
+                .simultaneousGesture(
+                    DragGesture(minimumDistance: 20)
+                        .onChanged { value in
+                            // Only handle horizontal drags
+                            if abs(value.translation.width) > abs(value.translation.height) {
+                                let maxOffset = calculatedCardWidth + 60
+                                let x = max(min(value.translation.width, maxOffset), -maxOffset)
+                                dragOffset = x
+                                horizontalDragActive = true
+                            }
                         }
-                    }
+                        .onEnded { value in
+                            if horizontalDragActive {
+                                let predicted = value.translation.width + value.predictedEndTranslation.width * 0.3
+                                let threshold = calculatedCardWidth / 3
+                                withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+                                    if predicted < -threshold && currentPage < modules.count - 1 {
+                                        currentPage += 1
+                                    } else if predicted > threshold && currentPage > 0 {
+                                        currentPage -= 1
+                                    }
+                                    dragOffset = 0
+                                    horizontalDragActive = false
+                                }
+                            }
+                        }
                 )
                 .onAppear {
                     screenWidth = width
@@ -576,28 +567,33 @@ struct HorizontalPanGestureView: UIViewRepresentable {
         Coordinator(onChanged: onChanged, onEnded: onEnded)
     }
 
-    func makeUIView(context: Context) -> UIView {
-        let view = UIView(frame: .zero)
+    func makeUIView(context: Context) -> PassThroughView {
+        let view = PassThroughView(frame: .zero)
         view.backgroundColor = .clear
+        view.isUserInteractionEnabled = true
+        view.coordinator = context.coordinator // Set coordinator reference
+        
         let panGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handlePan(_:)))
         panGesture.delegate = context.coordinator
-        // Do not cancel or delay touches so vertical scrolling isn't blocked
+        // Do not cancel or delay touches so vertical scrolling and taps aren't blocked
         panGesture.cancelsTouchesInView = false
         panGesture.delaysTouchesBegan = false
         panGesture.delaysTouchesEnded = false
         panGesture.minimumNumberOfTouches = 1
         panGesture.maximumNumberOfTouches = 1
         view.addGestureRecognizer(panGesture)
+        view.setupPanGesture(panGesture) // Pass reference to view
         return view
     }
 
-    func updateUIView(_ uiView: UIView, context: Context) {
-        // No update logic needed
+    func updateUIView(_ uiView: PassThroughView, context: Context) {
+        uiView.coordinator = context.coordinator // Update coordinator reference
     }
 
     class Coordinator: NSObject, UIGestureRecognizerDelegate {
         let onChanged: (CGPoint) -> Void
         let onEnded: (CGPoint, CGPoint) -> Void
+        var isHorizontalPan: Bool = false // Made accessible for PassThroughView
 
         init(onChanged: @escaping (CGPoint) -> Void, onEnded: @escaping (CGPoint, CGPoint) -> Void) {
             self.onChanged = onChanged
@@ -609,19 +605,25 @@ struct HorizontalPanGestureView: UIViewRepresentable {
             let velocity = pan.velocity(in: pan.view)
 
             switch pan.state {
+            case .began:
+                // Determine if this is a horizontal pan at the start
+                isHorizontalPan = abs(velocity.x) > abs(velocity.y) * 1.2
             case .changed:
                 // Only forward predominantly horizontal movements
-                if abs(translation.x) > abs(translation.y) {
+                if isHorizontalPan && abs(translation.x) > abs(translation.y) {
                     onChanged(translation)
                 }
             case .ended, .cancelled, .failed:
-                onEnded(translation, velocity)
+                if isHorizontalPan {
+                    onEnded(translation, velocity)
+                }
+                isHorizontalPan = false
             default:
                 break
             }
         }
 
-        // Allow simultaneous recognition so vertical scroll remains responsive
+        // Allow simultaneous recognition so vertical scroll and taps remain responsive
         func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
             return true
         }
@@ -641,5 +643,58 @@ struct HorizontalPanGestureView: UIViewRepresentable {
             }
             return false
         }
+        
+        // Don't require the gesture to fail before allowing other gestures
+        func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+            return false
+        }
+        
+        // Don't be required to fail by other gestures
+        func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+            return false
+        }
+    }
+}
+
+// MARK: - Pass Through View (allows taps to pass through while handling horizontal pans)
+class PassThroughView: UIView {
+    weak var coordinator: HorizontalPanGestureView.Coordinator?
+    private var panGesture: UIPanGestureRecognizer?
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.isUserInteractionEnabled = true
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    func setupPanGesture(_ gesture: UIPanGestureRecognizer) {
+        self.panGesture = gesture
+    }
+    
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        // Only allow pan gestures that are horizontal to begin on this view
+        if let pan = gestureRecognizer as? UIPanGestureRecognizer {
+            let velocity = pan.velocity(in: self)
+            return abs(velocity.x) > abs(velocity.y) * 1.2
+        }
+        return false
+    }
+    
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        // Check if we have an active horizontal pan gesture
+        if let pan = panGesture, pan.state == .began || pan.state == .changed {
+            return self
+        }
+        
+        // For initial touches, return self so our gesture recognizer can evaluate if it should begin
+        // But because cancelsTouchesInView = false, taps will still reach underlying views
+        return self
+    }
+    
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        return true
     }
 }

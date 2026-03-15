@@ -249,7 +249,6 @@ struct CourseCardContent: View {
                 .foregroundColor(.black)
                 .lineSpacing(1)
                 .multilineTextAlignment(.leading)
-                .lineLimit(1)  // Limit to 1 line maximum
                 .truncationMode(.tail)  // Add ellipsis at the end
                 .frame(maxWidth: .infinity, alignment: .topLeading)
                 .padding(.horizontal, 8)
