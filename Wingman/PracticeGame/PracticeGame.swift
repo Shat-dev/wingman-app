@@ -192,6 +192,7 @@ struct PracticeGame: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel: PracticeGameViewModel
     @State private var showGameComplete = false
+    @State private var showIntroScreen = true // Show intro screen at start
     @EnvironmentObject private var tabBarVisibility: TabBarVisibilityManager
 
     init(
@@ -245,14 +246,33 @@ struct PracticeGame: View {
                 .padding(.bottom, 12)
 
                 // Game Content
-                if let scene = viewModel.currentScene {
+                if showIntroScreen {
+                    // Intro Screen with Back/Forward instructions
+                    GameIntroScreenView(
+                        onLeftTap: { dismiss() },
+                        onRightTap: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                showIntroScreen = false
+                            }
+                        }
+                    )
+                } else if let scene = viewModel.currentScene {
                     GameSceneView(
                         scene: scene,
                         userName: viewModel.userName,
                         onTapContinue: { viewModel.goToNextScene() },
                         onTapRetry:    { viewModel.retryCurrentScene() },
                         onSelectOption: { option in viewModel.selectOption(option) },
-                        onTapBack:     { viewModel.goToPreviousScene() }
+                        onTapBack:     {
+                            // If at first scene, go back to intro screen
+                            if viewModel.currentSceneId == viewModel.gameData.startingScreenId {
+                                withAnimation(.easeInOut(duration: 0.3)) {
+                                    showIntroScreen = true
+                                }
+                            } else {
+                                viewModel.goToPreviousScene()
+                            }
+                        }
                     )
                     .id(scene.id) // Force view recreation for each scene
                 }
@@ -272,6 +292,69 @@ struct PracticeGame: View {
         .fullScreenCover(isPresented: $showGameComplete) {
             GameCompleteView { dismiss() }
         }
+    }
+}
+
+// MARK: - Game Intro Screen View (Back/Forward Instructions)
+struct GameIntroScreenView: View {
+    let onLeftTap: () -> Void
+    let onRightTap: () -> Void
+    
+    // Adjust this to control where the divider sits (0.0 = far left, 1.0 = far right)
+    private let dividerPosition: CGFloat = 0.4
+    
+    var body: some View {
+        GeometryReader { geo in
+            ZStack(alignment: .leading) {
+                HStack(spacing: 0) {
+                    // Back label area (tappable)
+                    VStack {
+                        Spacer()
+                        Text("Back")
+                            .font(.manropeMedium(size: 20))
+                            .foregroundColor(Color(hex: "000000"))
+                            .opacity(0.5)
+                        Spacer()
+                    }
+                    .frame(width: geo.size.width * dividerPosition)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        onLeftTap()
+                    }
+
+                    // Forward label area (tappable)
+                    VStack {
+                        Spacer()
+                        Text("Forward")
+                            .font(.manropeMedium(size: 20))
+                            .foregroundColor(Color(hex: "000000"))
+                            .opacity(0.5)
+                        Spacer()
+                    }
+                    .frame(width: geo.size.width * (1 - dividerPosition))
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        onRightTap()
+                    }
+                }
+
+                // Divider with top and bottom padding
+                let topPadding: CGFloat = 20
+                let bottomPadding: CGFloat = 40
+                let paddedHeight = max(0, geo.size.height - (topPadding + bottomPadding))
+                let centerYOffset = (topPadding - bottomPadding) / 2 // shift center when paddings differ
+                
+                Rectangle()
+                    .fill(Color.black.opacity(0.5))
+                    .frame(width: 1, height: paddedHeight)
+                    .position(
+                        x: geo.size.width * dividerPosition,
+                        y: geo.size.height / 2 + centerYOffset
+                    )
+                    .allowsHitTesting(false)
+            }
+        }
+        .padding(.horizontal, 0)
     }
 }
 
