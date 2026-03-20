@@ -95,10 +95,10 @@ struct CoursesView: View {
                                         }
                                     }
                                 }
-                                .padding(.horizontal, 20)
                                 
                                 Spacer().frame(height: 100)
                             }
+                            .padding(.horizontal, 20)
                             .onAppear {
                                 scrollProxy = proxy
                                 
@@ -312,4 +312,5 @@ struct CourseCardContent: View {
 
 #Preview {
     CoursesView()
+        .environmentObject(CoursesRouter())
 }

@@ -84,10 +84,26 @@ class PracticeGameViewModel: ObservableObject {
 
     func goToPreviousScene() {
         // Back navigation: find the scene that leads to current scene
-        // Simple approach: scan for any scene whose defaultNextScreenId == currentSceneId
+        // Check both defaultNextScreenId and option nextSceneIds
+        
+        // First, check if any scene's defaultNextScreenId points to current scene
         if let prev = gameData.scenes.first(where: { $0.defaultNextScreenId == currentSceneId }) {
             currentSceneId = prev.id
             updateProgress()
+            return
+        }
+        
+        // Second, check if any scene's options lead to current scene
+        for scene in gameData.scenes {
+            if let options = scene.options {
+                for option in options {
+                    if option.nextSceneId == currentSceneId {
+                        currentSceneId = scene.id
+                        updateProgress()
+                        return
+                    }
+                }
+            }
         }
     }
 
@@ -271,20 +287,25 @@ struct GameSceneView: View {
     @State private var isVisible: Bool = false
 
     var body: some View {
-        GeometryReader { _ in
+        GeometryReader { geometry in
             ZStack {
-                if scene.type != .options {
+                // For options screen - left half for back navigation (BEHIND content)
+                if scene.type == .options {
                     HStack(spacing: 0) {
-                        Rectangle().fill(Color.clear).contentShape(Rectangle())
-                            .onTapGesture { onTapBack() }
-                        Rectangle().fill(Color.clear).contentShape(Rectangle())
+                        // Left half - go back
+                        Rectangle()
+                            .fill(Color.clear)
+                            .frame(width: geometry.size.width / 2)
+                            .contentShape(Rectangle())
                             .onTapGesture {
-                                if scene.type == .feedback { onTapRetry() }
-                                else { onTapContinue() }
+                                onTapBack()
                             }
+                        
+                        Spacer()
                     }
                 }
-
+                
+                // Content layer
                 VStack(spacing: 0) {
                     if scene.type != .options, let imageName = scene.imageName {
                         Image(imageName)
@@ -313,6 +334,33 @@ struct GameSceneView: View {
                             .padding(.bottom, 40)
                             .scaleEffect(isVisible ? 1.0 : 0.85)
                             .opacity(isVisible ? 1.0 : 0.0)
+                    }
+                }
+                
+                // Tap gesture overlay - ON TOP of content for non-options screens
+                if scene.type != .options {
+                    HStack(spacing: 0) {
+                        // Left half - go back
+                        Rectangle()
+                            .fill(Color.clear)
+                            .frame(width: geometry.size.width / 2)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                onTapBack()
+                            }
+                        
+                        // Right half - go forward
+                        Rectangle()
+                            .fill(Color.clear)
+                            .frame(width: geometry.size.width / 2)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                if scene.type == .feedback {
+                                    onTapRetry()
+                                } else {
+                                    onTapContinue()
+                                }
+                            }
                     }
                 }
             }
