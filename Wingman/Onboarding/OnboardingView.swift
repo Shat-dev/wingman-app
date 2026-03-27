@@ -319,6 +319,8 @@ struct OnboardingView: View {
                         .foregroundColor(.black)
                         .lineSpacing(4)
                         .multilineTextAlignment(.leading)
+                        .lineLimit(nil)  // ← Explicitly allow unlimited lines
+                        .fixedSize(horizontal: false, vertical: true)  // ← Allow vertical expansion
                         .frame(maxWidth: .infinity, alignment: .leading)
 
                     // Subheading
@@ -327,6 +329,8 @@ struct OnboardingView: View {
                         .foregroundColor(.gray)
                         .lineSpacing(4)
                         .multilineTextAlignment(.leading)
+                        .lineLimit(nil)  // ← Explicitly allow unlimited lines
+                        .fixedSize(horizontal: false, vertical: true)  // ← Allow vertical expansion
                         .frame(maxWidth: .infinity, alignment: .leading)
 
                     Spacer().frame(height: 40)
@@ -346,6 +350,8 @@ struct OnboardingView: View {
                         .lineSpacing(4)
                         .multilineTextAlignment(.center)
                         .frame(maxWidth: .infinity)
+                        .lineLimit(nil)  // ← Explicitly allow unlimited lines
+                        .fixedSize(horizontal: false, vertical: true)  // ← Allow vertical expansion
 
                     Spacer() // push content up so the button sits at bottom
                 }

@@ -84,16 +84,12 @@ class PracticeGameViewModel: ObservableObject {
 
     func goToPreviousScene() {
         // Back navigation: find the scene that leads to current scene
-        // Check both defaultNextScreenId and option nextSceneIds
-        
-        // First, check if any scene's defaultNextScreenId points to current scene
         if let prev = gameData.scenes.first(where: { $0.defaultNextScreenId == currentSceneId }) {
             currentSceneId = prev.id
             updateProgress()
             return
         }
         
-        // Second, check if any scene's options lead to current scene
         for scene in gameData.scenes {
             if let options = scene.options {
                 for option in options {
@@ -128,11 +124,9 @@ class PracticeGameViewModel: ObservableObject {
             goToNextScene()
             return
         }
-        // retryTargetScreenId is the question screen to jump back to
         if let retryId = scene.retryTargetScreenId, sceneMap[retryId] != nil {
             currentSceneId = retryId
         } else if let nextId = scene.defaultNextScreenId, sceneMap[nextId] != nil {
-            // JSON stores the retry target in next_screen_id for feedback screens
             currentSceneId = nextId
         }
         updateProgress()
@@ -141,11 +135,9 @@ class PracticeGameViewModel: ObservableObject {
     // MARK: - Progress (based on canonical path position)
     private func updateProgress() {
         guard !canonicalOrder.isEmpty else { return }
-        // Find closest canonical screen at or before current
         if let idx = canonicalOrder.firstIndex(of: currentSceneId) {
             progress = Double(idx + 1) / Double(canonicalOrder.count)
         } else {
-            // Current scene is a fail branch — keep progress at nearest canonical predecessor
             let currentOrder = currentScene?.order ?? 0
             let closestIdx = canonicalOrder.indices.last(where: {
                 (sceneMap[canonicalOrder[$0]]?.order ?? 0) <= currentOrder
@@ -192,7 +184,7 @@ struct PracticeGame: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel: PracticeGameViewModel
     @State private var showGameComplete = false
-    @State private var showIntroScreen = true // Show intro screen at start
+    @State private var showIntroScreen = true
     @EnvironmentObject private var tabBarVisibility: TabBarVisibilityManager
 
     init(
@@ -245,9 +237,7 @@ struct PracticeGame: View {
                 .padding(.trailing, 44)
                 .padding(.bottom, 12)
 
-                // Game Content
                 if showIntroScreen {
-                    // Intro Screen with Back/Forward instructions
                     GameIntroScreenView(
                         onLeftTap: { dismiss() },
                         onRightTap: {
@@ -264,7 +254,6 @@ struct PracticeGame: View {
                         onTapRetry:    { viewModel.retryCurrentScene() },
                         onSelectOption: { option in viewModel.selectOption(option) },
                         onTapBack:     {
-                            // If at first scene, go back to intro screen
                             if viewModel.currentSceneId == viewModel.gameData.startingScreenId {
                                 withAnimation(.easeInOut(duration: 0.3)) {
                                     showIntroScreen = true
@@ -274,7 +263,7 @@ struct PracticeGame: View {
                             }
                         }
                     )
-                    .id(scene.id) // Force view recreation for each scene
+                    .id(scene.id)
                 }
             }
         }
@@ -295,19 +284,16 @@ struct PracticeGame: View {
     }
 }
 
-// MARK: - Game Intro Screen View (Back/Forward Instructions)
+// MARK: - Game Intro Screen View
 struct GameIntroScreenView: View {
     let onLeftTap: () -> Void
     let onRightTap: () -> Void
-    
-    // Adjust this to control where the divider sits (0.0 = far left, 1.0 = far right)
     private let dividerPosition: CGFloat = 0.4
     
     var body: some View {
         GeometryReader { geo in
             ZStack(alignment: .leading) {
                 HStack(spacing: 0) {
-                    // Back label area (tappable)
                     VStack {
                         Spacer()
                         Text("Back")
@@ -318,11 +304,8 @@ struct GameIntroScreenView: View {
                     }
                     .frame(width: geo.size.width * dividerPosition)
                     .contentShape(Rectangle())
-                    .onTapGesture {
-                        onLeftTap()
-                    }
+                    .onTapGesture { onLeftTap() }
 
-                    // Forward label area (tappable)
                     VStack {
                         Spacer()
                         Text("Forward")
@@ -333,16 +316,13 @@ struct GameIntroScreenView: View {
                     }
                     .frame(width: geo.size.width * (1 - dividerPosition))
                     .contentShape(Rectangle())
-                    .onTapGesture {
-                        onRightTap()
-                    }
+                    .onTapGesture { onRightTap() }
                 }
 
-                // Divider with top and bottom padding
                 let topPadding: CGFloat = 20
                 let bottomPadding: CGFloat = 40
                 let paddedHeight = max(0, geo.size.height - (topPadding + bottomPadding))
-                let centerYOffset = (topPadding - bottomPadding) / 2 // shift center when paddings differ
+                let centerYOffset = (topPadding - bottomPadding) / 2
                 
                 Rectangle()
                     .fill(Color.black.opacity(0.5))
@@ -354,7 +334,6 @@ struct GameIntroScreenView: View {
                     .allowsHitTesting(false)
             }
         }
-        .padding(.horizontal, 0)
     }
 }
 
@@ -372,33 +351,24 @@ struct GameSceneView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                // For options screen - left half for back navigation (BEHIND content)
                 if scene.type == .options {
                     HStack(spacing: 0) {
-                        // Left half - go back
                         Rectangle()
                             .fill(Color.clear)
                             .frame(width: geometry.size.width / 2)
                             .contentShape(Rectangle())
-                            .onTapGesture {
-                                onTapBack()
-                            }
-                        
+                            .onTapGesture { onTapBack() }
                         Spacer()
                     }
                 }
                 
-                // Content layer
                 VStack(spacing: 0) {
                     if scene.type != .options, let imageName = scene.imageName {
                         Image(imageName)
                             .resizable()
                             .scaledToFit()
-                            .frame(maxWidth: .infinity)
-                            .aspectRatio(1, contentMode: .fit)
                             .padding(.horizontal, 20)
-                            .padding(.top, 10)
-                            .padding(.bottom, 70)
+                            .padding(.bottom,40)
                     }
 
                     switch scene.type {
@@ -420,40 +390,29 @@ struct GameSceneView: View {
                     }
                 }
                 
-                // Tap gesture overlay - ON TOP of content for non-options screens
                 if scene.type != .options {
                     HStack(spacing: 0) {
-                        // Left half - go back
                         Rectangle()
                             .fill(Color.clear)
                             .frame(width: geometry.size.width / 2)
                             .contentShape(Rectangle())
-                            .onTapGesture {
-                                onTapBack()
-                            }
+                            .onTapGesture { onTapBack() }
                         
-                        // Right half - go forward
                         Rectangle()
                             .fill(Color.clear)
                             .frame(width: geometry.size.width / 2)
                             .contentShape(Rectangle())
                             .onTapGesture {
-                                if scene.type == .feedback {
-                                    onTapRetry()
-                                } else {
-                                    onTapContinue()
-                                }
+                                if scene.type == .feedback { onTapRetry() }
+                                else { onTapContinue() }
                             }
                     }
                 }
             }
         }
         .onAppear {
-            // Animate expand effect when scene appears
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                withAnimation(.easeOut(duration: 0.25)) {
-                    isVisible = true
-                }
+                withAnimation(.easeOut(duration: 0.25)) { isVisible = true }
             }
         }
     }
@@ -479,30 +438,30 @@ struct DialogueContentView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            if scene.type == .userDialogue || scene.type == .feedback {
-                Text(displayName)
-                    .font(.manropeMedium(size: 18))
-                    .foregroundColor(.black.opacity(0.6))
-                    .padding(.leading, 8)
-            } else if scene.type == .womanDialogue {
-                HStack {
-                    Spacer()
+            // FIXED: Reserve height for the name tag so the box doesn't jump
+            ZStack {
+                if !displayName.isEmpty {
                     Text(displayName)
                         .font(.manropeMedium(size: 18))
                         .foregroundColor(.black.opacity(0.6))
-                        .padding(.trailing, 8)
+                        .frame(maxWidth: .infinity, alignment: scene.type == .womanDialogue ? .trailing : .leading)
+                        .padding(.horizontal, 8)
+                        .padding(.top,10)
                 }
             }
+            .frame(height: 25)
 
             VStack(alignment: .leading, spacing: 0) {
+                // FIXED: Set a fixed height for text to stabilize 1 vs 2 lines
                 Text(scene.text)
                     .font(.manropeMedium(size: 14))
                     .foregroundColor(.black)
                     .lineLimit(2)
                     .multilineTextAlignment(.center)
-                    .frame(maxWidth: .infinity, alignment: .center)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 44)
                     .padding(.horizontal, 20)
-                    .padding(.vertical, 30)
+                    .padding(.vertical, 25)
             }
             .background(
                 RoundedRectangle(cornerRadius: 5)
@@ -595,23 +554,12 @@ struct GameCompleteView: View {
 }
 
 // MARK: - Mock Data
-// Full "Bar Window" game — all 34 screens mapped exactly from game_1.json
-// Screen types from JSON → SceneType:
-//   "context"  → .context
-//   "question" → .options
-//   "user"     → .userDialogue
-//   "woman"    → .womanDialogue
-//   "feedback" → .feedback
-// next_screen_id == "complete" triggers gameCompleted = true
-
 struct MockData {
     static let barWindow = PracticeGameData(
         id: "a0000001-0000-0000-0000-000000000001",
         title: "Bar Window",
         startingScreenId: "screen_001",
         scenes: [
-
-            // ── Context chain: venue setup ────────────────────────────────────
             GameScene(id: "screen_001", type: .context,
                       characterName: nil,
                       text: "After a long week of work you've decided to unwind and get a drink at the bar.",
@@ -630,7 +578,6 @@ struct MockData {
                       imageName: "game_person_f", options: nil, order: 3,
                       defaultNextScreenId: "screen_004", retryTargetScreenId: nil),
 
-            // ── Question 1 ────────────────────────────────────────────────────
             GameScene(id: "screen_004", type: .options,
                       characterName: nil, text: "", imageName: nil,
                       options: [
@@ -640,7 +587,6 @@ struct MockData {
                       ],
                       order: 4, defaultNextScreenId: nil, retryTargetScreenId: nil),
 
-            // Fail branch A
             GameScene(id: "screen_004_fail_a", type: .context,
                       characterName: nil,
                       text: "You wait a while but by then another man starts talking to her.",
@@ -651,10 +597,9 @@ struct MockData {
                       characterName: nil,
                       text: "Night environments change quickly. Hesitation turns signals into missed chances.",
                       imageName: "game_person_m", options: nil, order: 6,
-                      defaultNextScreenId: "screen_004",   // retry target
+                      defaultNextScreenId: "screen_004",
                       retryTargetScreenId: "screen_004"),
 
-            // ── Correct path: approach ────────────────────────────────────────
             GameScene(id: "screen_005", type: .context,
                       characterName: nil,
                       text: "You walk over with relaxed energy. No hesitation. Arms swinging naturally.",
@@ -667,7 +612,6 @@ struct MockData {
                       imageName: "game_person_f", options: nil, order: 8,
                       defaultNextScreenId: "screen_007", retryTargetScreenId: nil),
 
-            // ── Question 2 ────────────────────────────────────────────────────
             GameScene(id: "screen_007", type: .options,
                       characterName: nil, text: "", imageName: nil,
                       options: [
@@ -677,7 +621,6 @@ struct MockData {
                       ],
                       order: 9, defaultNextScreenId: nil, retryTargetScreenId: nil),
 
-            // Fail branch A
             GameScene(id: "screen_007_fail_a", type: .context,
                       characterName: nil,
                       text: "You stand a few feet away. Waiting. She picks up her drink, then she turns and leaves.",
@@ -691,7 +634,6 @@ struct MockData {
                       defaultNextScreenId: "screen_007",
                       retryTargetScreenId: "screen_007"),
 
-            // Fail branch C
             GameScene(id: "screen_007_fail_c", type: .context,
                       characterName: nil,
                       text: "She turns, startled. Declines your offer as she already has a drink.",
@@ -705,7 +647,6 @@ struct MockData {
                       defaultNextScreenId: "screen_007",
                       retryTargetScreenId: "screen_007"),
 
-            // ── Dialogue: opener ──────────────────────────────────────────────
             GameScene(id: "screen_008", type: .userDialogue,
                       characterName: nil,
                       text: "Let me guess, vodka lemonade?",
@@ -724,7 +665,6 @@ struct MockData {
                       imageName: "game_person_f", options: nil, order: 16,
                       defaultNextScreenId: "screen_011", retryTargetScreenId: nil),
 
-            // ── Question 3 ────────────────────────────────────────────────────
             GameScene(id: "screen_011", type: .options,
                       characterName: nil, text: "", imageName: nil,
                       options: [
@@ -734,7 +674,6 @@ struct MockData {
                       ],
                       order: 17, defaultNextScreenId: nil, retryTargetScreenId: nil),
 
-            // Fail branch A
             GameScene(id: "screen_011_fail_a", type: .womanDialogue,
                       characterName: "Sophie",
                       text: "Umm... Maybe later, I still have this one.",
@@ -748,7 +687,6 @@ struct MockData {
                       defaultNextScreenId: "screen_011",
                       retryTargetScreenId: "screen_011"),
 
-            // Fail branch C
             GameScene(id: "screen_011_fail_c", type: .context,
                       characterName: nil,
                       text: "She responds with \"Marketing, what about you?\" but her energy is off.",
@@ -762,7 +700,6 @@ struct MockData {
                       defaultNextScreenId: "screen_011",
                       retryTargetScreenId: "screen_011"),
 
-            // ── Conversation deepens ──────────────────────────────────────────
             GameScene(id: "screen_012", type: .userDialogue,
                       characterName: nil,
                       text: "Healthy choice. What brings you here tonight?",
@@ -799,7 +736,6 @@ struct MockData {
                       imageName: "game_person_f", options: nil, order: 27,
                       defaultNextScreenId: "screen_018", retryTargetScreenId: nil),
 
-            // ── Question 4 ────────────────────────────────────────────────────
             GameScene(id: "screen_018", type: .options,
                       characterName: nil, text: "", imageName: nil,
                       options: [
@@ -809,7 +745,6 @@ struct MockData {
                       ],
                       order: 28, defaultNextScreenId: nil, retryTargetScreenId: nil),
 
-            // Fail branch B
             GameScene(id: "screen_018_fail_b", type: .context,
                       characterName: nil,
                       text: "You keep talking and someone bumps her. She spills her drink.",
@@ -823,7 +758,6 @@ struct MockData {
                       defaultNextScreenId: "screen_018",
                       retryTargetScreenId: "screen_018"),
 
-            // Fail branch C
             GameScene(id: "screen_018_fail_c", type: .context,
                       characterName: nil,
                       text: "Someone bumps her. You push them and Sophie steps back.",
@@ -837,7 +771,6 @@ struct MockData {
                       defaultNextScreenId: "screen_018",
                       retryTargetScreenId: "screen_018"),
 
-            // ── Move to quieter spot ──────────────────────────────────────────
             GameScene(id: "screen_019", type: .userDialogue,
                       characterName: nil,
                       text: "Hey it's getting busy here, let's go sit down over there.",
@@ -862,7 +795,6 @@ struct MockData {
                       imageName: "game_person_f", options: nil, order: 36,
                       defaultNextScreenId: "screen_023", retryTargetScreenId: nil),
 
-            // ── Question 5 ────────────────────────────────────────────────────
             GameScene(id: "screen_023", type: .options,
                       characterName: nil, text: "", imageName: nil,
                       options: [
@@ -871,7 +803,6 @@ struct MockData {
                       ],
                       order: 37, defaultNextScreenId: nil, retryTargetScreenId: nil),
 
-            // Fail branch B
             GameScene(id: "screen_023_fail_b", type: .context,
                       characterName: nil,
                       text: "You keep talking and her friend comes and pulls Sophie away.",
@@ -885,7 +816,6 @@ struct MockData {
                       defaultNextScreenId: "screen_023",
                       retryTargetScreenId: "screen_023"),
 
-            // ── Greet the friend ──────────────────────────────────────────────
             GameScene(id: "screen_024", type: .userDialogue,
                       characterName: nil,
                       text: "Hey, Happy Birthday, how are you?",
@@ -910,7 +840,6 @@ struct MockData {
                       imageName: "game_person_f", options: nil, order: 43,
                       defaultNextScreenId: "screen_028", retryTargetScreenId: nil),
 
-            // ── Question 6 ────────────────────────────────────────────────────
             GameScene(id: "screen_028", type: .options,
                       characterName: nil, text: "", imageName: nil,
                       options: [
@@ -919,7 +848,6 @@ struct MockData {
                       ],
                       order: 44, defaultNextScreenId: nil, retryTargetScreenId: nil),
 
-            // Fail branch A
             GameScene(id: "screen_028_fail_a", type: .userDialogue,
                       characterName: nil,
                       text: "Well it was nice to meet you. Goodbye Sophie.",
@@ -933,7 +861,6 @@ struct MockData {
                       defaultNextScreenId: "screen_028",
                       retryTargetScreenId: "screen_028"),
 
-            // ── Close ─────────────────────────────────────────────────────────
             GameScene(id: "screen_029", type: .userDialogue,
                       characterName: nil,
                       text: "Hey before you leave add my Instagram.",
@@ -946,7 +873,6 @@ struct MockData {
                       imageName: "game_person_f", options: nil, order: 48,
                       defaultNextScreenId: "screen_031", retryTargetScreenId: nil),
 
-            // ── Debrief screens ───────────────────────────────────────────────
             GameScene(id: "screen_031", type: .context,
                       characterName: nil,
                       text: "You review your interaction with Sophie tonight.",
@@ -965,12 +891,11 @@ struct MockData {
                       imageName: "game_person_m", options: nil, order: 51,
                       defaultNextScreenId: "screen_034", retryTargetScreenId: nil),
 
-            // ── FINAL screen → "complete" triggers gameCompleted = true ───────
             GameScene(id: "screen_034", type: .context,
                       characterName: nil,
                       text: "And you had an enjoyable fun conversation. Well done.",
                       imageName: "game_person_m", options: nil, order: 52,
-                      defaultNextScreenId: "complete",   // ← signals game end
+                      defaultNextScreenId: "complete",
                       retryTargetScreenId: nil),
         ]
     )
@@ -981,5 +906,6 @@ struct MockData {
     NavigationView {
         PracticeGame()
             .environmentObject(TabBarVisibilityManager())
+            .environmentObject(CoursesRouter())
     }
 }
