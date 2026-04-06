@@ -8,6 +8,8 @@
 import SwiftUI
 import GoogleSignIn
 import UserNotifications
+import RevenueCat
+import RevenueCatUI
 
 @main
 struct WingmanApp: App {
@@ -67,7 +69,7 @@ struct RootView: View {
                     } else if !authManager.hasCompletedPaywallFlow {
                         let _ = print("🎯 RootView: Showing PaywallView (paywall flow NOT completed)")
                         NavigationStack {
-                            PaywallView()
+                            PaywallView(authManager: authManager)
                         }
 
                     // ✅ 3) Paywall + Referral finished → MainTabView (Home)
@@ -84,7 +86,7 @@ struct RootView: View {
                     if !authManager.hasCompletedPaywallFlow {
                         let _ = print("🎯 RootView: Anonymous user - showing PaywallView")
                         NavigationStack {
-                            PaywallView()
+                            PaywallView(authManager: authManager)
                         }
                     
                     // ✅ Anonymous user - paywall finished → require account creation
@@ -112,6 +114,9 @@ struct RootView: View {
             .animation(.easeInOut(duration: 0.3), value: authManager.isAnonymousUser)
         }
         .task {
+            // Configure RevenueCat on app launch
+            RevenueCatManager.shared.configure()
+            
             // Clear any existing notification badge on app launch
             NotificationManager.shared.clearNotificationBadgeAndDelivered()
             
@@ -126,6 +131,13 @@ struct RootView: View {
             print("   - hasCompletedQuestions: \(authManager.hasCompletedQuestions)")
             print("   - hasCompletedPaywallFlow: \(authManager.hasCompletedPaywallFlow)")
             print("   - hasCompletedOnboarding: \(authManager.hasCompletedOnboarding)")
+            
+            // Set RevenueCat user ID when user authenticates
+            if newValue, let userId = SupabaseManager.shared.currentUserId {
+                RevenueCatManager.shared.setUserID(userId)
+            } else if !newValue {
+                RevenueCatManager.shared.logoutUser()
+            }
         }
         .onChange(of: authManager.hasCompletedQuestions) { newValue in
             print("\n🔔 RootView detected hasCompletedQuestions change: \(newValue)")

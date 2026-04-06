@@ -15,9 +15,13 @@
 		1835223A2EEE088400868066 /* Realtime in Frameworks */ = {isa = PBXBuildFile; productRef = 183522392EEE088400868066 /* Realtime */; };
 		1835223C2EEE088400868066 /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = 1835223B2EEE088400868066 /* Storage */; };
 		1835223E2EEE088400868066 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 1835223D2EEE088400868066 /* Supabase */; };
+		184A381B2F8420B700357010 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 184A381A2F8420B700357010 /* RevenueCat */; };
+		184A381D2F8420B700357010 /* RevenueCatUI in Frameworks */ = {isa = PBXBuildFile; productRef = 184A381C2F8420B700357010 /* RevenueCatUI */; };
+		184A38242F842FBF00357010 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 184A38232F842FBF00357010 /* StoreKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		184A38232F842FBF00357010 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		18CACE352EDB2650002B0AF9 /* Wingman.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wingman.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -52,19 +56,31 @@
 				1835223E2EEE088400868066 /* Supabase in Frameworks */,
 				181BF4902F4CD02800D78816 /* GoogleSignInSwift in Frameworks */,
 				183522342EEE088400868066 /* Auth in Frameworks */,
+				184A381B2F8420B700357010 /* RevenueCat in Frameworks */,
 				1835223C2EEE088400868066 /* Storage in Frameworks */,
 				1835223A2EEE088400868066 /* Realtime in Frameworks */,
+				184A381D2F8420B700357010 /* RevenueCatUI in Frameworks */,
 				181BF48E2F4CD02800D78816 /* GoogleSignIn in Frameworks */,
+				184A38242F842FBF00357010 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		184A38222F842FBF00357010 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				184A38232F842FBF00357010 /* StoreKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		18CACE2C2EDB2650002B0AF9 = {
 			isa = PBXGroup;
 			children = (
 				18CACE372EDB2650002B0AF9 /* Wingman */,
+				184A38222F842FBF00357010 /* Frameworks */,
 				18CACE362EDB2650002B0AF9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -105,6 +121,8 @@
 				1835223D2EEE088400868066 /* Supabase */,
 				181BF48D2F4CD02800D78816 /* GoogleSignIn */,
 				181BF48F2F4CD02800D78816 /* GoogleSignInSwift */,
+				184A381A2F8420B700357010 /* RevenueCat */,
+				184A381C2F8420B700357010 /* RevenueCatUI */,
 			);
 			productName = Wingman;
 			productReference = 18CACE352EDB2650002B0AF9 /* Wingman.app */;
@@ -137,6 +155,7 @@
 			packageReferences = (
 				183522322EEE088400868066 /* XCRemoteSwiftPackageReference "supabase-swift" */,
 				181BF48C2F4CD02800D78816 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				184A38192F8420B700357010 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 18CACE362EDB2650002B0AF9 /* Products */;
@@ -404,6 +423,14 @@
 				minimumVersion = 2.5.1;
 			};
 		};
+		184A38192F8420B700357010 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.67.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -446,6 +473,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 183522322EEE088400868066 /* XCRemoteSwiftPackageReference "supabase-swift" */;
 			productName = Supabase;
+		};
+		184A381A2F8420B700357010 /* RevenueCat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 184A38192F8420B700357010 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
+			productName = RevenueCat;
+		};
+		184A381C2F8420B700357010 /* RevenueCatUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 184A38192F8420B700357010 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
+			productName = RevenueCatUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

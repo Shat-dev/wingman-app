@@ -12,6 +12,7 @@ import Auth
 import GoogleSignIn
 import AuthenticationServices
 import CryptoKit
+import RevenueCat
 
 @MainActor
 final class AuthManager: ObservableObject {
@@ -466,6 +467,17 @@ final class AuthManager: ObservableObject {
             isAnonymousUser = false
             UserDefaults.standard.removeObject(forKey: "isAnonymousUser")
             print("✅ Cleared anonymous user state")
+            
+            // Link RevenueCat purchases if anonymous user made purchases
+            if anonymousManager.needsRevenueCatLinking {
+                print("🔗 Starting RevenueCat customer linking...")
+                let linkSuccess = await RevenueCatManager.shared.linkAnonymousUserPurchases(currentUser.id.uuidString)
+                if linkSuccess {
+                    print("✅ RevenueCat purchases successfully linked")
+                } else {
+                    print("⚠️ RevenueCat purchase linking may have failed")
+                }
+            }
             
         } catch {
             print("❌ Failed to sync anonymous data: \(error.localizedDescription)")

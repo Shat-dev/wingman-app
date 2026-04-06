@@ -579,20 +579,6 @@ struct PrimaryButtonStyle: ButtonStyle {
 }
 
 // MARK: - Custom Color Extensions
-extension Color {
-    static let customGreen = Color(red: 0.243, green: 0.561, blue: 0.416) // #3E8F6A
-    static let customRed = Color(red: 0.788, green: 0.349, blue: 0.298) // #C9594C
-    static let customDark = Color(red: 0.102, green: 0.102, blue: 0.102) // #1A1A1A
-    static let customLightGreen = Color(red: 0.855, green: 0.941, blue: 0.902) // #DAF0E6
-    static let customLightRed = Color(red: 0.957, green: 0.871, blue: 0.859) // #F4DEDB
-    static let customLightGray = Color(red: 0.953, green: 0.953, blue: 0.953) // #F3F3F3
-    static let customCorrectGreen = Color(red: 0.2, green: 0.6, blue: 0.4) // #339966
-    static let customIncorrectRed = Color(red: 0.8, green: 0.302, blue: 0.302) // #CC4D4D
-    static let customExplanationGreen = Color(red: 0.902, green: 0.969, blue: 0.941) // #E6F7F0
-    static let customExplanationRed = Color(red: 1.0, green: 0.929, blue: 0.929) // #FFEDED
-}
-
-
 
 #Preview {
     NavigationStack {

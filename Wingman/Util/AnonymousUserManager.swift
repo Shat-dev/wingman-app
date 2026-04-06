@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RevenueCat
 
 /// Manages local storage for anonymous users before account creation
 class AnonymousUserManager {
@@ -21,6 +22,8 @@ class AnonymousUserManager {
         static let userGoals = "anonymous_user_goals"
         static let referralCode = "anonymous_referral_code"
         static let hasCompletedOnboarding = "anonymous_has_completed_onboarding"
+        static let revenueCatCustomerId = "anonymous_revenueCat_customer_id"
+        static let hasActivePurchase = "anonymous_has_active_purchase"
     }
     
     // MARK: - Anonymous User ID
@@ -32,6 +35,24 @@ class AnonymousUserManager {
         let newId = UUID().uuidString
         defaults.set(newId, forKey: Keys.anonymousUserId)
         return newId
+    }
+    
+    // MARK: - RevenueCat Data
+    
+    var revenueCatCustomerId: String? {
+        get { defaults.string(forKey: Keys.revenueCatCustomerId) }
+        set {
+            defaults.set(newValue, forKey: Keys.revenueCatCustomerId)
+            print("💰 AnonymousUserManager: RevenueCat customer ID stored: \(newValue ?? "nil")")
+        }
+    }
+    
+    var hasActivePurchase: Bool {
+        get { defaults.bool(forKey: Keys.hasActivePurchase) }
+        set {
+            defaults.set(newValue, forKey: Keys.hasActivePurchase)
+            print("💰 AnonymousUserManager: Active purchase status: \(newValue)")
+        }
     }
     
     // MARK: - User Data
@@ -61,6 +82,20 @@ class AnonymousUserManager {
         set { defaults.set(newValue, forKey: Keys.hasCompletedOnboarding) }
     }
     
+    // MARK: - RevenueCat Methods
+    
+    /// Store RevenueCat customer info after purchase
+    func storeRevenueCatPurchase(customerInfo: CustomerInfo) {
+        revenueCatCustomerId = customerInfo.originalAppUserId
+        hasActivePurchase = customerInfo.entitlements[Constants.ENTITLEMENT_ID]?.isActive == true
+        print("💰 AnonymousUserManager: Stored purchase info for customer: \(customerInfo.originalAppUserId)")
+    }
+    
+    /// Check if anonymous user has a purchase that needs to be linked
+    var needsRevenueCatLinking: Bool {
+        return revenueCatCustomerId != nil && hasActivePurchase
+    }
+    
     // MARK: - Clear Data
     
     func clearAllData() {
@@ -70,7 +105,9 @@ class AnonymousUserManager {
         defaults.removeObject(forKey: Keys.userGoals)
         defaults.removeObject(forKey: Keys.referralCode)
         defaults.removeObject(forKey: Keys.hasCompletedOnboarding)
-        print("🗑️ Cleared all anonymous user data")
+        defaults.removeObject(forKey: Keys.revenueCatCustomerId)
+        defaults.removeObject(forKey: Keys.hasActivePurchase)
+        print("🗑️ Cleared all anonymous user data including RevenueCat info")
     }
     
     // MARK: - Debug
@@ -83,5 +120,7 @@ class AnonymousUserManager {
         print("   - Goals: \(userGoals ?? "nil")")
         print("   - Referral: \(referralCode ?? "nil")")
         print("   - Completed: \(hasCompletedOnboarding)")
+        print("   - RevenueCat Customer: \(revenueCatCustomerId ?? "nil")")
+        print("   - Has Purchase: \(hasActivePurchase)")
     }
 }

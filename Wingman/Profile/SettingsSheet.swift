@@ -6,6 +6,7 @@
 import SwiftUI
 import Auth
 import Supabase
+import RevenueCat
 
 struct SettingsSheet: View {
     @Environment(\.dismiss) private var dismiss
@@ -15,15 +16,18 @@ struct SettingsSheet: View {
     @State private var showDailyReadingGoal = false
     @State private var dailyReadingGoal = 10
     @State private var isDeleting = false // Loading state for account deletion
+    @State private var isRestoringPurchases = false // Loading state for restore purchases
     @State private var showingErrorAlert = false
     @State private var errorMessage = ""
+    @State private var showingSuccessAlert = false
+    @State private var successMessage = ""
     let userName: String
     
     var body: some View {
         ZStack {
             Color.white.ignoresSafeArea()
-                
-                VStack(spacing: 0) {
+            
+            VStack(spacing: 0) {
                     // MARK: - Grabber
                     HStack {
                         Capsule()
@@ -141,14 +145,24 @@ struct SettingsSheet: View {
                     
                     // MARK: - Restore Purchase
                     Button(action: {
-                        restorePurchase()
+                        Task {
+                            await restorePurchase()
+                        }
                     }) {
-                        Text("Restore Purchase")
-                            .font(.manropeMedium(size: 14))
-                            .foregroundColor(.black)
-                            .underline()
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                        HStack(spacing: 8) {
+                            if isRestoringPurchases {
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle())
+                                    .scaleEffect(0.7)
+                            }
+                            Text(isRestoringPurchases ? "Restoring..." : "Restore Purchase")
+                                .font(.manropeMedium(size: 14))
+                                .foregroundColor(.black)
+                                .underline()
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
+                    .disabled(isRestoringPurchases)
                     .padding(.horizontal, 24)
                     .padding(.top,40)
                     .padding(.bottom, 16)
@@ -237,6 +251,11 @@ struct SettingsSheet: View {
         } message: {
             Text(errorMessage)
         }
+        .alert("Success", isPresented: $showingSuccessAlert) {
+            Button("OK") { }
+        } message: {
+            Text(successMessage)
+        }
         .sheet(isPresented: $showDailyReadingGoal) {
             DailyReadingGoalSheet(currentGoal: dailyReadingGoal) { newGoal in
                 dailyReadingGoal = newGoal
@@ -277,9 +296,35 @@ struct SettingsSheet: View {
         return UserDefaults.standard.string(forKey: "user_email") ?? "shat.myapantsx10@gmail.com"
     }
     
-    private func restorePurchase() {
-        // TODO: Implement restore purchase logic
-        print("Restore Purchase tapped")
+    private func restorePurchase() async {
+        isRestoringPurchases = true
+        
+        do {
+            let customerInfo = try await Purchases.shared.restorePurchases()
+            let hasEntitlement = customerInfo.entitlements["Wingman Pro"]?.isActive == true
+            
+            if hasEntitlement {
+                await MainActor.run {
+                    successMessage = "Purchases restored successfully!"
+                    showingSuccessAlert = true
+                }
+                print("✅ SettingsSheet: Purchases restored")
+            } else {
+                await MainActor.run {
+                    errorMessage = "No active subscriptions found to restore"
+                    showingErrorAlert = true
+                }
+                print("⚠️ SettingsSheet: No purchases to restore")
+            }
+        } catch {
+            await MainActor.run {
+                errorMessage = "Failed to restore purchases. Please try again."
+                showingErrorAlert = true
+            }
+            print("❌ SettingsSheet: Restore failed: \(error)")
+        }
+        
+        isRestoringPurchases = false
     }
     
     private func manageSubscriptions() {
