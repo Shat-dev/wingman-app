@@ -113,9 +113,9 @@ struct PaywallView: View {
                                 title: "Monthly Plan",
                                 price: viewModel.monthlyPrice,
                                 weekly: calculateWeeklyPrice(viewModel.monthlyPackage),
-                                weeklySubtitle: "per week",
-                                isSelected: viewModel.selectedPlan == .monthly,
-                                badgeText: viewModel.selectedPlan == .monthly ? "3-day Free Trial" : nil
+                                    weeklySubtitle: "per week",
+                                    isSelected: viewModel.selectedPlan == .monthly,
+                                    badgeText: viewModel.selectedPlan == .monthly ? "3-day Free Trial" : nil
                             ) {
                                 withAnimation(.easeInOut(duration: 0.2)) {
                                     viewModel.selectPlan(.monthly)
