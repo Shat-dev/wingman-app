@@ -12,12 +12,13 @@ struct PaywallView: View {
 
     @StateObject private var viewModel = PaywallViewModel()
     @State private var navigateToReferral = false
+    @EnvironmentObject var authManager: AuthManager
     
     // Optional AuthManager for anonymous user purchase tracking
-    let authManager: AuthManager?
+    let authManager_init: AuthManager?
     
     init(authManager: AuthManager? = nil) {
-        self.authManager = authManager
+        self.authManager_init = authManager
     }
 
     var body: some View {
@@ -218,7 +219,18 @@ struct PaywallView: View {
         }
         .onAppear {
             // Set AuthManager reference for anonymous user purchase tracking
-            viewModel.authManager = authManager
+            let authMgr = authManager_init ?? authManager
+            viewModel.authManager = authMgr
+            
+            // If user is returning to paywall due to subscription expiry,
+            // refresh offerings and reset UI state
+            print("📱 PaywallView appeared")
+            viewModel.loadOfferings()
+            viewModel.currentPage = 0
+            viewModel.selectPlan(.yearly)
+        }
+        .onDisappear {
+            print("📱 PaywallView disappeared")
         }
     }
     

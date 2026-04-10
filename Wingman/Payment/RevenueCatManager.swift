@@ -41,6 +41,13 @@ final class RevenueCatManager: NSObject, ObservableObject {
     
     // MARK: - Configuration
     func configure() {
+        // Skip RevenueCat configuration if using StoreKit testing mode
+        if RevenueCatConfig.useStoreKitTestingMode {
+            print("🧪 RevenueCat: SKIPPED - Using StoreKit Testing Mode")
+            return
+        }
+        
+        print("🔧 RevenueCat: Configuring with API Key")
         Purchases.logLevel = .debug
         Purchases.configure(withAPIKey: apiKey)
         Purchases.shared.delegate = self

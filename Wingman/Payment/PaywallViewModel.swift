@@ -142,12 +142,18 @@ final class PaywallViewModel: ObservableObject {
             
             if hasEntitlement {
                 print("✅ PaywallViewModel: Purchase successful")
+                print("   - Entitlement active: \(hasEntitlement)")
+                print("   - Expiry date: \(customerInfo.entitlements[Constants.ENTITLEMENT_ID]?.expirationDate?.formatted() ?? "No expiry")")
                 
                 // If user is anonymous, store purchase info for later linking
                 if authManager?.isAnonymousUser == true {
                     AnonymousUserManager.shared.storeRevenueCatPurchase(customerInfo: customerInfo)
                     print("💰 PaywallViewModel: Stored anonymous purchase for linking")
                 }
+                
+                // 🔄 Refresh subscription status immediately after purchase
+                print("🔄 PaywallViewModel: Refreshing subscription status after purchase...")
+                await SubscriptionManager.shared.refreshSubscriptionStatus()
                 
                 isPurchasing = false
                 return true
@@ -206,6 +212,10 @@ final class PaywallViewModel: ObservableObject {
                 self.error = "Purchases restored successfully!"
                 self.showAlert = true
                 print("✅ PaywallViewModel: Purchases restored")
+                
+                // 🔄 Refresh subscription status after restore
+                print("🔄 PaywallViewModel: Refreshing subscription status after restore...")
+                await SubscriptionManager.shared.refreshSubscriptionStatus()
             } else {
                 self.error = "No active subscriptions found to restore"
                 self.showAlert = true

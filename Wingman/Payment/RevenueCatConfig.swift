@@ -56,6 +56,10 @@ struct RevenueCatConfig {
         isDebug ? "Sandbox (Debug)" : "Production (Release)"
     }
     
+    /// Enable StoreKit testing mode (disables RevenueCat for local testing with StoreKit Configuration)
+    /// Set to true to test with local StoreKit config file instead of RevenueCat servers
+    static let useStoreKitTestingMode = false  // Set to true for local StoreKit testing
+    
     /// Redacted API key for logging (masks sensitive data)
     static var redactedApiKey: String {
         let key = apiKey

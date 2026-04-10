@@ -10,6 +10,7 @@ import GoogleSignIn
 import UserNotifications
 import RevenueCat
 import RevenueCatUI
+import BackgroundTasks
 
 @main
 struct WingmanApp: App {
@@ -27,6 +28,8 @@ struct WingmanApp: App {
                 .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
                     // Clear notification badge when app enters foreground
                     clearNotificationBadge()
+                    // Refresh subscription status when app returns to foreground
+                    refreshSubscriptionStatus()
                 }
                 .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
                     // Clear notification badge when app becomes active
@@ -40,7 +43,16 @@ struct WingmanApp: App {
         print("🔔 App became active - clearing notification badge")
         NotificationManager.shared.clearNotificationBadgeAndDelivered()
     }
+    
+    // MARK: - Refresh Subscription Status
+    private func refreshSubscriptionStatus() {
+        print("🔄 WingmanApp: Refreshing subscription status on foreground")
+        Task {
+            await SubscriptionManager.shared.refreshSubscriptionStatus()
+        }
+    }
 }
+
 
 struct RootView: View {
     @EnvironmentObject var authManager: AuthManager
@@ -53,6 +65,18 @@ struct RootView: View {
                 if authManager.isCheckingSession {
                     let _ = print("🎯 RootView: Checking session...")
                     SplashView()
+                    
+                // MARK: - Subscription Expiry Check (Highest Priority)
+                // If authenticated and paywall completed, but subscription expired → force paywall
+                // Only check if we've confirmed the subscription status at least once
+                } else if authManager.isAuthenticated && 
+                          authManager.hasCompletedPaywallFlow && 
+                          !authManager.hasActiveSubscription &&
+                          SubscriptionManager.shared.hasCheckedAtLeastOnce {
+                    let _ = print("🎯 RootView: Subscription expired (confirmed) - forcing PaywallView")
+                    NavigationStack {
+                        PaywallView(authManager: authManager)
+                    }
                     
                 // MARK: - Authenticated User Flow
                 } else if authManager.isAuthenticated {
@@ -112,18 +136,26 @@ struct RootView: View {
             .animation(.easeInOut(duration: 0.3), value: authManager.isAuthenticated)
             .animation(.easeInOut(duration: 0.3), value: authManager.isCheckingSession)
             .animation(.easeInOut(duration: 0.3), value: authManager.isAnonymousUser)
+            .animation(.easeInOut(duration: 0.3), value: authManager.hasActiveSubscription)
         }
         .task {
-            // Configure RevenueCat on app launch
+            // Step 1: Configure RevenueCat on app launch (MUST be first)
             RevenueCatManager.shared.configure()
             
-            // Clear any existing notification badge on app launch
+            // Step 2: Initialize subscription monitoring (after RevenueCat is ready)
+            SubscriptionManager.shared.initializeMonitoring()
+            authManager.setupSubscriptionMonitoring()
+            
+            // Step 3: Clear any existing notification badge on app launch
             NotificationManager.shared.clearNotificationBadgeAndDelivered()
             
-            // Restore session gracefully on app launch
+            // Step 4: Restore session gracefully on app launch
             await authManager.restoreSessionGracefully()
             
-            // Setup notifications on app launch
+            // Step 5: Start periodic subscription checks
+            SubscriptionManager.shared.startPeriodicChecks()
+            
+            // Step 6: Setup notifications on app launch
             NotificationManager.shared.setupNotificationsOnLaunch()
         }
         .onChange(of: authManager.isAuthenticated) { newValue in
@@ -138,6 +170,10 @@ struct RootView: View {
             } else if !newValue {
                 RevenueCatManager.shared.logoutUser()
             }
+        }
+        .onChange(of: authManager.hasActiveSubscription) { newValue in
+            print("\n🔔 RootView detected hasActiveSubscription change: \(newValue)")
+            print("   - Expiry date: \(authManager.subscriptionExpiryDate?.formatted() ?? "nil")")
         }
         .onChange(of: authManager.hasCompletedQuestions) { newValue in
             print("\n🔔 RootView detected hasCompletedQuestions change: \(newValue)")

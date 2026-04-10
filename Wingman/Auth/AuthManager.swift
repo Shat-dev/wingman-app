@@ -48,6 +48,19 @@ final class AuthManager: ObservableObject {
         }
     }
 
+    // MARK: - Subscription Status
+    @Published var hasActiveSubscription: Bool = false {
+        didSet {
+            print("💚 hasActiveSubscription changed: \(oldValue) → \(hasActiveSubscription)")
+        }
+    }
+
+    @Published var subscriptionExpiryDate: Date? {
+        didSet {
+            print("📅 subscriptionExpiryDate changed: \(oldValue?.formatted() ?? "nil") → \(subscriptionExpiryDate?.formatted() ?? "nil")")
+        }
+    }
+
     @Published var currentUser: User? {
         didSet {
             print("👤 currentUser changed: \(oldValue?.email ?? "nil") → \(currentUser?.email ?? "nil")")
@@ -96,11 +109,71 @@ final class AuthManager: ObservableObject {
         isAnonymousUser = UserDefaults.standard.bool(forKey: "isAnonymousUser")
         print("👻 Loaded isAnonymousUser: \(isAnonymousUser)")
 
+        // Don't setup subscription monitoring here - will be done after RevenueCat is configured
+
         // Listen to auth state changes
         Task {
             print("🎧 Starting to observe auth state changes...")
             await observeAuthState()
         }
+    }
+
+    // MARK: - Subscription Monitoring Setup
+    /// Setup subscription monitoring - call this AFTER RevenueCat is configured
+    func setupSubscriptionMonitoring() {
+        print("🔐 AuthManager: Setting up subscription monitoring (RevenueCat ready)")
+        
+        let subscriptionManager = SubscriptionManager.shared
+        
+        // Listen for subscription status changes
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(subscriptionStatusChanged),
+            name: SubscriptionManager.subscriptionStatusChangedNotification,
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(subscriptionExpired),
+            name: SubscriptionManager.subscriptionExpiredNotification,
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(subscriptionRestored),
+            name: SubscriptionManager.subscriptionRestoredNotification,
+            object: nil
+        )
+        
+        // Initial sync of subscription status
+        syncSubscriptionStatus()
+    }
+    
+    @objc private func subscriptionStatusChanged() {
+        print("📢 AuthManager: Subscription status changed notification received")
+        syncSubscriptionStatus()
+    }
+    
+    @objc private func subscriptionExpired() {
+        print("⚠️ AuthManager: Subscription expired notification received")
+        syncSubscriptionStatus()
+    }
+    
+    @objc private func subscriptionRestored() {
+        print("✅ AuthManager: Subscription restored notification received")
+        syncSubscriptionStatus()
+    }
+    
+    private func syncSubscriptionStatus() {
+        let subscriptionManager = SubscriptionManager.shared
+        self.hasActiveSubscription = subscriptionManager.isSubscriptionActive
+        self.subscriptionExpiryDate = subscriptionManager.subscriptionExpiryDate
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     // AUTH STATE OBSERVER - THIS HANDLES AUTOMATIC NAVIGATION
@@ -133,12 +206,14 @@ final class AuthManager: ObservableObject {
                     }
 
                     // ✅ Check if user was anonymous and sync data
+                    // NOTE: syncAnonymousDataToBackend() handles setting hasCompletedPaywallFlow
+                    // if the user had an active purchase during anonymous mode
                     if self.isAnonymousUser {
                         print("🔄 Detected anonymous user sign-in - syncing data...")
                         await self.syncAnonymousDataToBackend()
                     }
 
-                    // ✅ Load user state
+                    // ✅ Load user state (after sync, so we get the updated paywall flow status)
                     await checkUserQuestionStatus(userId: session.user.id.uuidString)
                     await checkUserPaywallFlowStatus(userId: session.user.id.uuidString)
 
@@ -169,6 +244,15 @@ final class AuthManager: ObservableObject {
                     // ✅ Load user state
                     await checkUserQuestionStatus(userId: session.user.id.uuidString)
                     await checkUserPaywallFlowStatus(userId: session.user.id.uuidString)
+                    
+                    // ✅ NEW: If user was anonymous and already paid, skip paywall
+                    let anonymousManager = AnonymousUserManager.shared
+                    if self.isAnonymousUser && anonymousManager.hasActivePurchase {
+                        print("💳 User was anonymous with active purchase - marking paywall flow as complete")
+                        self.hasCompletedPaywallFlow = true
+                        let key = "hasCompletedPaywallFlow_\(session.user.id.uuidString)"
+                        UserDefaults.standard.set(true, forKey: key)
+                    }
 
                     print("✅ Initial session found: \(session.user.email ?? "unknown")")
                 } else {
@@ -417,6 +501,11 @@ final class AuthManager: ObservableObject {
         
         print("📤 Syncing anonymous data to backend for user: \(currentUser.id)")
         
+        // ✅ IMPORTANT: Capture purchase status BEFORE clearing data
+        let hadActivePurchase = anonymousManager.hasActivePurchase
+        let needsLinking = anonymousManager.needsRevenueCatLinking
+        print("💳 Anonymous user had active purchase: \(hadActivePurchase)")
+        
         do {
             // Prepare user metadata with anonymous data
             var updates: [String: AnyJSON] = [:]
@@ -451,15 +540,25 @@ final class AuthManager: ObservableObject {
             print("✅ Successfully synced anonymous data to backend")
             
             // Mark local completion flags for the authenticated user
+            let userId = currentUser.id.uuidString
+            
             if anonymousManager.hasCompletedOnboarding {
                 hasCompletedOnboarding = true
                 hasCompletedQuestions = true
                 
                 // Save per-user completion flags
-                let userId = currentUser.id.uuidString
                 UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding_\(userId)")
                 UserDefaults.standard.set(true, forKey: "hasCompletedQuestions_\(userId)")
                 print("✅ Marked onboarding and questions as completed for user: \(userId)")
+            }
+            
+            // ✅ NEW: If anonymous user had already paid, mark paywall flow as complete
+            if hadActivePurchase {
+                print("💳 User already paid during anonymous flow - marking paywall flow as complete")
+                hasCompletedPaywallFlow = true
+                let paywallKey = "hasCompletedPaywallFlow_\(userId)"
+                UserDefaults.standard.set(true, forKey: paywallKey)
+                print("✅ Paywall flow marked complete for user: \(userId)")
             }
             
             // Clear anonymous data after successful sync
@@ -468,10 +567,10 @@ final class AuthManager: ObservableObject {
             UserDefaults.standard.removeObject(forKey: "isAnonymousUser")
             print("✅ Cleared anonymous user state")
             
-            // Link RevenueCat purchases if anonymous user made purchases
-            if anonymousManager.needsRevenueCatLinking {
+            // Link RevenueCat purchases if anonymous user made purchases (using captured value)
+            if needsLinking {
                 print("🔗 Starting RevenueCat customer linking...")
-                let linkSuccess = await RevenueCatManager.shared.linkAnonymousUserPurchases(currentUser.id.uuidString)
+                let linkSuccess = await RevenueCatManager.shared.linkAnonymousUserPurchases(userId)
                 if linkSuccess {
                     print("✅ RevenueCat purchases successfully linked")
                 } else {
