@@ -1,0 +1,743 @@
+[
+  {
+    "id": "lesson_11_1",
+    "courseId": "course_11",
+    "lessonNumber": 1,
+    "courseTitle": "Advanced Opening Techniques",
+    "title": "Curiosity Based Openers",
+    "duration": 4,
+    "summary": "Learn to design openers that make others want to lean in.",
+    "isCompleted": false,
+    "isLocked": false,
+    "screens": [
+      {
+        "id": "screen_11_1_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_11_1_1_1",
+            "text": "Most conversations end in the first five seconds. Not because of what was said, but because nothing gave the other person a reason to stay engaged.",
+            "order": 0
+          },
+          {
+            "id": "content_11_1_1_2",
+            "text": "We open our mouths expecting interest, yet offer no hook that invites it.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_11_1_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_11_1_2_1",
+            "text": "Curiosity openers are conversation starters that create an information gap. You indicate something interesting is coming without revealing what it is immediately.",
+            "order": 0
+          },
+          {
+            "id": "content_11_1_2_2",
+            "text": "This triggers the psychological drive to close the gap by engaging with you. This matters because attention is the first barrier to starting conversations.",
+            "order": 1
+          },
+          {
+            "id": "content_11_1_2_3",
+            "text": "You need something that makes her want to stop what she's doing and engage.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_11_1_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_11_1_3_1",
+            "text": "Curiosity does this better than almost anything because the human brain is hardwired to close information gaps. When you create a gap, such as \"I have a question but I need a woman's opinion first\", her brain immediately wants to know what the question is.",
+            "order": 0
+          },
+          {
+            "id": "content_11_1_3_2",
+            "text": "That drive to know is stronger than her default response to ignore strangers.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_11_1_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_11_1_4_1",
+            "text": "A guy sees a woman wearing a university sweatshirt. Approaches. \"Did you go to that school?\" She says yes. \"Cool, what did you study?\" She answers.",
+            "order": 0
+          },
+          {
+            "id": "content_11_1_4_2",
+            "text": "The exchange is informational but not engaging.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_11_1_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_11_1_5_1",
+            "text": "Another man sees a woman in a university sweatshirt. Approaches. \"I have to ask you this. I see that university's sweatshirt everywhere now. Is it actually as good as people say or is it just really good marketing?\" She laughs. \"Honestly, probably both. The marketing is insane.\"",
+            "order": 0
+          },
+          {
+            "id": "content_11_1_5_2",
+            "text": "Now they're having a conversation with energy because the curiosity opener was more interesting than asking where she went to school.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_11_1_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_11_1_6_1",
+            "text": "Curiosity openers work by creating an information gap that the brain instinctively wants to close.",
+            "order": 0
+          },
+          {
+            "id": "content_11_1_6_2",
+            "text": "The setup, such as \"I have a question,\" \"We're having a debate,\" \"I need a woman's opinion\" creates the gap. She doesn't know what comes next and her brain wants to know.",
+            "order": 1
+          },
+          {
+            "id": "content_11_1_6_3",
+            "text": "That drive to close the gap is what pulls her into engagement.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_11_1_7",
+        "order": 6,
+        "content": [
+          {
+            "id": "content_11_1_7_1",
+            "text": "The structure is setup then reveal. Setup creates curiosity. Reveal provides the actual content. The reveal should be something that invites her opinion or perspective, not just factual information.",
+            "order": 0
+          },
+          {
+            "id": "content_11_1_7_2",
+            "text": "\"Hey I have a question. What time does this place close?\" creates a gap but the reveal is boring.",
+            "order": 1
+          },
+          {
+            "id": "content_11_1_7_3",
+            "text": "\"Hey I have a question. My friend thinks bringing flowers on a first date is try-hard. Do women actually like that or does it depend?\" creates a gap and the reveal is something she has opinions about.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_11_1_8",
+        "order": 7,
+        "content": [
+          {
+            "id": "content_11_1_8_1",
+            "text": "You do not need better lines. You need a reason for the other person to lean in.",
+            "order": 0
+          },
+          {
+            "id": "content_11_1_8_2",
+            "text": "Curiosity openers can do that for you. It shifts the moment from effort to interest, and that is something you can create on purpose.",
+            "order": 1
+          }
+        ]
+      }
+    ],
+    "courseSummary": "Learn advanced ways to reduce pressure and increase engagement from the start."
+  },
+  {
+    "id": "lesson_11_2",
+    "courseId": "course_11",
+    "lessonNumber": 2,
+    "courseTitle": "Advanced Opening Techniques",
+    "title": "Assumption Based Openers",
+    "duration": 5,
+    "summary": "Learn why assumptions invite response better than generic questions.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_11_2_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_11_2_1_1",
+            "text": "People respond differently when they feel seen as individuals instead of treated as interchangeable. The moment an interaction becomes specific, attention shifts.",
+            "order": 0
+          },
+          {
+            "id": "content_11_2_1_2",
+            "text": "Assumption openers are conversation starters that make a specific claim or guess about her. They involve her immediately because assumptions require response.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_11_2_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_11_2_2_1",
+            "text": "This matters because most openers are low-investment. \"How are you?\" requires minimal engagement. She can answer on autopilot. But \"You seem like you're not from here originally\" requires actual engagement.",
+            "order": 0
+          },
+          {
+            "id": "content_11_2_2_2",
+            "text": "She has to think about why you said that. Confirm or deny it. Ask how you knew or why you guessed wrong. The assumption created a conversational hook that generic questions don't.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_11_2_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_11_2_3_1",
+            "text": "Assumptions work through two psychological mechanisms. First, specificity signals attention. When you make an assumption about her specifically, it demonstrates you're paying attention to something beyond the fact that she's attractive. That attention is flattering.",
+            "order": 0
+          },
+          {
+            "id": "content_11_2_3_2",
+            "text": "Second, assumptions create curiosity about your perception. If you're right, she wonders how you knew. If you're wrong, she wonders what gave you that impression.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_11_2_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_11_2_4_1",
+            "text": "A man sees a woman with vintage clothing and unique accessories. Approaches. \"Where do you shop? I like your style.\"",
+            "order": 0
+          },
+          {
+            "id": "content_11_2_4_2",
+            "text": "Compliment but impersonal. She thanks him and says various places. Conversation doesn't develop.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_11_2_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_11_2_5_1",
+            "text": "Another man sees a woman with similar style. \"You're someone who goes thrifting. Am I right?\" She lights up. \"Yes! How did you know?\" His assumption about her shopping habits, based on observable style, helped create immediate connection.",
+            "order": 0
+          },
+          {
+            "id": "content_11_2_5_2",
+            "text": "She's engaged because he made a specific claim about her behavior that she's excited to confirm.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_11_2_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_11_2_6_1",
+            "text": "Assumption openers work because they make it about her specifically, which requires her engagement.",
+            "order": 0
+          },
+          {
+            "id": "content_11_2_6_2",
+            "text": "Generic questions can be answered and dismissed. Assumptions about her specifically require response: correction if you're wrong, confirmation if you're right, and curiosity about how you knew either way.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_11_2_7",
+        "order": 6,
+        "content": [
+          {
+            "id": "content_11_2_7_1",
+            "text": "Base assumptions on observable evidence. Her clothing, posture, energy, what she's doing, the context she's in. This makes the assumption feel perceptive rather than random.",
+            "order": 0
+          },
+          {
+            "id": "content_11_2_7_2",
+            "text": "\"You look like you work in something creative\" when she's dressed artistically feels observant, but the same opener for a women in work attire seems out of place.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_11_2_8",
+        "order": 7,
+        "content": [
+          {
+            "id": "content_11_2_8_1",
+            "text": "Another principle: wrong assumptions can work as well as right ones. If you guess she's a dancer and she's not, she'll correct you and often explain what actually makes her move that way or what she does instead.",
+            "order": 0
+          },
+          {
+            "id": "content_11_2_8_2",
+            "text": "That correction is engagement. The key is that any response gives you something to work with and keeps the interaction moving. Being wrong isn't failure as it still provides involvement.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_11_2_9",
+        "order": 8,
+        "content": [
+          {
+            "id": "content_11_2_9_1",
+            "text": "Also important: assumptions should be neutral to positive, never negative. \"You seem like you work out\" is positive. \"You look exhausted\" is negative and off-putting.",
+            "order": 0
+          },
+          {
+            "id": "content_11_2_9_2",
+            "text": "The assumption should be something she'd be fine confirming even if it's wrong.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_11_2_10",
+        "order": 9,
+        "content": [
+          {
+            "id": "content_11_2_10_1",
+            "text": "This is not about being clever or getting it right.",
+            "order": 0
+          },
+          {
+            "id": "content_11_2_10_2",
+            "text": "It is about being present enough to observe and confident enough to state what you see. That skill is already available to you.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesson_11_3",
+    "courseId": "course_11",
+    "lessonNumber": 3,
+    "courseTitle": "Advanced Opening Techniques",
+    "title": "Opinion Openers",
+    "duration": 4,
+    "summary": "Learn how opinion framing creates natural conversational depth.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_11_3_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_11_3_1_1",
+            "text": "You have likely noticed how people light up when their opinion is taken seriously. The shift is immediate, even when the topic itself is simple.",
+            "order": 0
+          },
+          {
+            "id": "content_11_3_1_2",
+            "text": "Opinion openers are conversation starters that ask for her perspective, judgment, or input on something. They are usually framed as settling a debate or needing advice.",
+            "order": 1
+          },
+          {
+            "id": "content_11_3_1_3",
+            "text": "They make her feel valued because you're explicitly stating that her opinion matters.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_11_3_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_11_3_2_1",
+            "text": "This matters because most social interactions, especially with strangers, don't make people feel important.",
+            "order": 0
+          },
+          {
+            "id": "content_11_3_2_2",
+            "text": "Generic small talk is transactional and forgettable. But when you approach someone and say \"I need your opinion on something,\" you've immediately elevated her role.",
+            "order": 1
+          },
+          {
+            "id": "content_11_3_2_3",
+            "text": "She is not just another person you are talking to. She is someone whose judgment you are seeking. That is flattering.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_11_3_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_11_3_3_1",
+            "text": "A guy approaches a woman at a bookstore. \"Excuse me, do you know where the fiction section is?\" She points him in the right direction.",
+            "order": 0
+          },
+          {
+            "id": "content_11_3_3_2",
+            "text": "Transaction complete. No further conversation.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_11_3_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_11_3_4_1",
+            "text": "Another man approaches a different woman at the same bookstore. \"Hey, I need a woman's opinion on something. My sister's birthday is coming up and I'm trying to figure out if books are a good gift or if that's boring. What do you think?\"",
+            "order": 0
+          },
+          {
+            "id": "content_11_3_4_2",
+            "text": "She's immediately helpful and engaged. \"No, books are great! What does she like?\" Now they're having a conversation about reading preferences and gift-giving. She feels valued because he sought her judgment on something meaningful to him.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_11_3_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_11_3_5_1",
+            "text": "Opinion openers work because they make her feel important. You are not just making small talk. You are explicitly seeking her judgment and perspective.",
+            "order": 0
+          },
+          {
+            "id": "content_11_3_5_2",
+            "text": "That positioning is flattering and creates genuine engagement because people want to feel heard and valued.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_11_3_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_11_3_6_1",
+            "text": "The structure should frame why you're asking her specifically. \"What do you think?\" is weak. \"We're debating this and need a woman's opinion\" is strong because it explains why her perspective matters. \"I need a perspective on something, and you seem like the right person to ask\" is strong because it positions her judgment as valuable.",
+            "order": 0
+          },
+          {
+            "id": "content_11_3_6_2",
+            "text": "These framings make the request feel targeted, not random.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_11_3_7",
+        "order": 6,
+        "content": [
+          {
+            "id": "content_11_3_7_1",
+            "text": "Choose topics that are light, relatable, and something she'd naturally have opinions about.",
+            "order": 0
+          },
+          {
+            "id": "content_11_3_7_2",
+            "text": "Dating norms, gender differences, social behavior, everyday dilemmas. Things where there's no definitively right answer but interesting perspectives. Avoid politics, controversial topics, or anything that could create tension.",
+            "order": 1
+          },
+          {
+            "id": "content_11_3_7_3",
+            "text": "The goal is to make her feel valued, not to debate.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_11_3_8",
+        "order": 7,
+        "content": [
+          {
+            "id": "content_11_3_8_1",
+            "text": "People want to feel heard more than they want to be entertained.",
+            "order": 0
+          },
+          {
+            "id": "content_11_3_8_2",
+            "text": "When you lead with that understanding, conversations unfold naturally.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesson_11_4",
+    "courseId": "course_11",
+    "lessonNumber": 4,
+    "courseTitle": "Advanced Opening Techniques",
+    "title": "Setting Time Constraints",
+    "duration": 3,
+    "summary": "Learn how time constraints remove pressure and lower defenses instantly.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_11_4_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_11_4_1_1",
+            "text": "Approaches can feel intense because both parties may assume the conversation has to go somewhere. That expectation creates pressure before a single word is spoken. A quick time constraint cuts that weight and turns the moment into something simple and human.",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "screen_11_4_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_11_4_2_1",
+            "text": "A time constraint is an opening statement that signals you'll be leaving soon, relieving pressure on the interaction before it starts.",
+            "order": 0
+          },
+          {
+            "id": "content_11_4_2_2",
+            "text": "It works because the brain relaxes when the moment doesn't feel like a long commitment, and her guard lowers when she knows she isn't trapped in an open-ended conversation.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_11_4_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_11_4_3_1",
+            "text": "A guy sees a woman reading and walks over with a clear frame. \"Hey, I can only stay for a second. I need to rejoin my friends, but I had to ask about that book.\"",
+            "order": 0
+          },
+          {
+            "id": "content_11_4_3_2",
+            "text": "He points toward the door, body angled as if he's already on his way out. The pressure instantly drops because she knows he isn't planning to linger.",
+            "order": 1
+          },
+          {
+            "id": "content_11_4_3_3",
+            "text": "She smiles, tells him she loves the book, and asks if he's read anything similar.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_11_4_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_11_4_4_1",
+            "text": "He stays because she's engaged. He reached the hook point: she invited the interaction to continue. The moment works not because of a clever line, but because the time constraint made both people comfortable enough for the conversation to unfold naturally.",
+            "order": 0
+          },
+          {
+            "id": "content_11_4_4_2",
+            "text": "Pressure kills connection. Time constraints remove that pressure by establishing an exit before you even start.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_11_4_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_11_4_5_1",
+            "text": "For her, it's a safety signal. You're not pressuring her. You're a man with somewhere to be who chose to stop for a moment.",
+            "order": 0
+          },
+          {
+            "id": "content_11_4_5_2",
+            "text": "That frame makes her more open because she knows she's not being trapped.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_11_4_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_11_4_6_1",
+            "text": "Use the constraint casually. Don't rush the words. Don't make it sound like a trick. Just mention you're heading somewhere soon, but wanted to say hi.",
+            "order": 0
+          },
+          {
+            "id": "content_11_4_6_2",
+            "text": "Then ask something simple. Let the conversation unfold naturally. If she's interested, she'll keep it going. If not, you leave without awkwardness.",
+            "order": 1
+          },
+          {
+            "id": "content_11_4_6_3",
+            "text": "The goal is comfort, not control. When you set a light exit from the start, both of you relax. If there's interest, the conversation continues. If not, you walk away clean.",
+            "order": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesson_11_5",
+    "courseId": "course_11",
+    "lessonNumber": 5,
+    "courseTitle": "Advanced Opening Techniques",
+    "title": "Nighttime technique: False Exits",
+    "duration": 3,
+    "summary": "Learn to preserve strong impressions by walking away at the right moment.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_11_5_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_11_5_1_1",
+            "text": "Everyone has watched a great interaction flatten out. It starts exciting, then becomes polite, and then turns into an exit you did not want.",
+            "order": 0
+          },
+          {
+            "id": "content_11_5_1_2",
+            "text": "A false exit is ending an interaction while the energy is high, rather than waiting for it to fade.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_11_5_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_11_5_2_1",
+            "text": "Humans want more of what ends too soon and lose interest in what lasts too long.",
+            "order": 0
+          },
+          {
+            "id": "content_11_5_2_2",
+            "text": "Leaving at the peak signals that you have options and protects you from slipping into approval-seeking behavior. It keeps the interaction sharp and leaves her with a positive, unfinished impression.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_11_5_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_11_5_3_1",
+            "text": "A guy approaches a woman at a bar. He talks to her for two minutes. Makes her laugh. Gets her engaged. Then he says, \"You're fun. I'm going to grab a drink, but I'll come find you later.\" He walks away.",
+            "order": 0
+          },
+          {
+            "id": "content_11_5_3_2",
+            "text": "She is left with a positive impression and curiosity about whether he'll actually come back.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_11_5_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_11_5_4_1",
+            "text": "If he'd stayed for ten minutes, he could have become just another guy talking to her. By leaving early, he became memorable.",
+            "order": 0
+          },
+          {
+            "id": "content_11_5_4_2",
+            "text": "When he comes back later in the night, she's receptive. More receptive than if he'd stayed the first time and drained all the energy.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_11_5_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_11_5_5_1",
+            "text": "Attraction peaks and then declines. The false exit works because it creates a value gap.",
+            "order": 0
+          },
+          {
+            "id": "content_11_5_5_2",
+            "text": "When you leave while she's still enjoying the conversation, her brain wants to close that gap. She wanted more and didn't get it. That creates desire. When you stay until she's ready for you to leave, there's no gap. She got everything she wanted from the interaction, and she's satisfied. Satisfied means she's done. You've given her no reason to think about you after you're gone.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_11_5_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_11_5_6_1",
+            "text": "The false exit also communicates abundance. A man who has options doesn't need to squeeze every second out of one interaction.",
+            "order": 0
+          },
+          {
+            "id": "content_11_5_6_2",
+            "text": "He can walk away from a good conversation because he knows there will be others.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_11_5_7",
+        "order": 6,
+        "content": [
+          {
+            "id": "content_11_5_7_1",
+            "text": "The execution is simple, but it requires confidence. You need to be comfortable walking away from something good. Most men aren't.",
+            "order": 0
+          },
+          {
+            "id": "content_11_5_7_2",
+            "text": "They're afraid that if they leave, they'll lose the opportunity. The opposite is true. By going, you preserve and amplify the attraction. By staying too long, you might kill it.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_11_5_8",
+        "order": 7,
+        "content": [
+          {
+            "id": "content_11_5_8_1",
+            "text": "Start treating short, strong interactions as wins. You are not trying to prove yourself in one conversation. You are creating momentum.",
+            "order": 0
+          },
+          {
+            "id": "content_11_5_8_2",
+            "text": "Try leaving at the peak and let the moment work for you after you walk away.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  }
+]

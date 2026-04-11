@@ -1,0 +1,465 @@
+[
+  {
+    "id": "lesson_22_1",
+    "courseId": "course_22",
+    "lessonNumber": 1,
+    "courseTitle": "Upgrading Your Lifestyle",
+    "title": "The Effect of Social Status",
+    "duration": 3,
+    "summary": "Learn how social proof lowers resistance before an approach.",
+    "isCompleted": false,
+    "isLocked": false,
+    "screens": [
+      {
+        "id": "screen_22_1_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_22_1_1_1",
+            "text": "A man surrounded by friends, included in conversations, and spoken to with warmth signals far more than popularity. He shows that people enjoy being around him.",
+            "order": 0
+          },
+          {
+            "id": "content_22_1_1_2",
+            "text": "That social proof is one of the strongest attraction cues, because people trust what the room already agrees on.",
+            "order": 1
+          },
+          {
+            "id": "content_22_1_1_3",
+            "text": "Social status is your perceived position within a social hierarchy. In attraction, it's one of the most powerful factors influencing initial receptiveness.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_22_1_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_22_1_2_1",
+            "text": "This is because humans are social creatures who assess status instinctively and quickly. Within seconds of observing someone in a social environment, we make judgments about their social value.",
+            "order": 0
+          },
+          {
+            "id": "content_22_1_2_2",
+            "text": "Are they connected? Do others seek them out? Do they move through the space with comfort or awkwardness? These assessments happen unconsciously and powerfully influence attraction.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_22_1_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_22_1_3_1",
+            "text": "Two men both attend the same networking event. The first arrives, doesn't know anyone, and stands awkwardly holding a drink near the wall.",
+            "order": 0
+          },
+          {
+            "id": "content_22_1_3_2",
+            "text": "Eventually, he forces himself to approach a woman. She's polite but distracted. Ends the conversation quickly. He has zero status signals in this environment.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_22_1_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_22_1_4_1",
+            "text": "The second man also doesn't know many people initially. But he arrives with a friend. They chat with the host. Get introduced to others. He moves through the room confidently, joining conversations naturally.",
+            "order": 0
+          },
+          {
+            "id": "content_22_1_4_2",
+            "text": "When he approaches the same woman an hour later, she's engaged and receptive. His behavior throughout the evening built status signals that made him more attractive when he finally approached her.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_22_1_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_22_1_5_1",
+            "text": "Social status in an environment affects how receptive people are to your approach. High status makes women more open. Low status creates resistance before you speak.",
+            "order": 0
+          },
+          {
+            "id": "content_22_1_5_2",
+            "text": "Status isn't about money or fame; it's how people respond to you. It's about whether you're perceived as connected, valued, and fun to be around in the specific social environment you're in.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_22_1_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_22_1_6_1",
+            "text": "A man with real social capital doesn't force attention; he draws it naturally because people enjoy him and value his presence.",
+            "order": 0
+          },
+          {
+            "id": "content_22_1_6_2",
+            "text": "Nothing about this is out of reach. You don't need to become someone else to build status. You only need to engage with the room you're already in.",
+            "order": 1
+          }
+        ]
+      }
+    ],
+    "courseSummary": "Learn to make others feel heard through attunement, not performance."
+  },
+  {
+    "id": "lesson_22_2",
+    "courseId": "course_22",
+    "lessonNumber": 2,
+    "courseTitle": "Upgrading Your Lifestyle",
+    "title": "The Interesting Man Advantage",
+    "duration": 3,
+    "summary": "Learn how a full life creates natural conversational depth.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_22_2_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_22_2_1_1",
+            "text": "You can tell within minutes whether someone has a life outside work. Men with hobbies, curiosity, and ongoing projects speak differently. They have stories. They ask better questions. They're naturally more magnetic.",
+            "order": 0
+          },
+          {
+            "id": "content_22_2_1_2",
+            "text": "Being interesting is the result of living a life that produces real material. When your days are full of experiences, learning, and small adventures, conversation no longer feels like a performance. You're not digging for topics. You're speaking from what you actually do.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_22_2_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_22_2_2_1",
+            "text": "This matters because attraction follows interest, and people who enjoy their own lives are simply more interesting to be around.",
+            "order": 0
+          },
+          {
+            "id": "content_22_2_2_2",
+            "text": "She wants to be around someone who brings energy and perspective, not someone waiting for life to happen to them.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_22_2_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_22_2_3_1",
+            "text": "A woman asks a man what he enjoys or what he's been focused on lately. All he can say is work, gym, and catching up with friends.",
+            "order": 0
+          },
+          {
+            "id": "content_22_2_3_2",
+            "text": "There is no spark, no story, nothing to explore.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_22_2_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_22_2_4_1",
+            "text": "Compare that to another man she meets a week later. Same question. He tells her he's been alternating between Bali and Australia this year, working remotely while taking a sailing course on the side because he wants to sail around the world next year. Not a flex, just part of his life.",
+            "order": 0
+          },
+          {
+            "id": "content_22_2_4_2",
+            "text": "The conversation unfolds naturally because his life isn't empty. He's learning new things, travelling to different places, and creating unique experiences.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_22_2_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_22_2_5_1",
+            "text": "An interesting life creates its own gravity. When you build skills, explore new things, and pursue real passions, you show that you can stand on your own. That steadiness is attractive.",
+            "order": 0
+          },
+          {
+            "id": "content_22_2_5_2",
+            "text": "Women are drawn to you because they can feel you have a world beyond them, not a life waiting for someone to complete it.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_22_2_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_22_2_6_1",
+            "text": "You already have the ability to create a life worth talking about. One new habit, one new interest, one new experience at a time is enough to shift how you feel and how people respond to you.",
+            "order": 0
+          },
+          {
+            "id": "content_22_2_6_2",
+            "text": "An interesting man doesn't rely on charm alone. His life does half the work for him.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesson_22_3",
+    "courseId": "course_22",
+    "lessonNumber": 3,
+    "courseTitle": "Upgrading Your Lifestyle",
+    "title": "The Power of Mystery",
+    "duration": 3,
+    "summary": "Learn how to invite her imagination into the interaction.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_22_3_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_22_3_1_1",
+            "text": "Humans are wired to chase the unknown. When a man reveals everything up front, there's nothing left for her imagination to work with. When he shares selectively, she leans in. She wants the next layer.",
+            "order": 0
+          },
+          {
+            "id": "content_22_3_1_2",
+            "text": "Mystery works because the brain pays more attention to what it cannot fully map.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_22_3_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_22_3_2_1",
+            "text": "When you share everything at once, her mind has nothing left to process. She has the whole picture. But when you reveal yourself gradually, you create small pockets of uncertainty.",
+            "order": 0
+          },
+          {
+            "id": "content_22_3_2_2",
+            "text": "Those pockets keep her mentally engaged. She starts wondering about your life, your intentions, your inner world. That curiosity is what fuels attraction. It is not manipulation. It is pacing.",
+            "order": 1
+          },
+          {
+            "id": "content_22_3_2_3",
+            "text": "You are giving her space to discover you instead of flooding her with information.",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "screen_22_3_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_22_3_3_1",
+            "text": "A woman at a dinner party asks a man what he does for work. He launches into a ten-minute breakdown of his job, his promotion path, his daily workflow, and every project he has on his plate. She listens politely, but her interest fades.",
+            "order": 0
+          },
+          {
+            "id": "content_22_3_3_2",
+            "text": "There is nothing left to discover, nothing left for her imagination to work with.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_22_3_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_22_3_4_1",
+            "text": "Later, she asks another man the same question. He smiles and says, \"A mix of things. Mostly creative projects.\" She asks what kind. He gives one short example, then shifts the focus back to her. The door is open, but not fully. She stays curious.",
+            "order": 0
+          },
+          {
+            "id": "content_22_3_4_2",
+            "text": "As the night goes on, she finds herself circling back to him, wanting to hear more about what he does.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_22_3_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_22_3_5_1",
+            "text": "Curiosity is a powerful driver of attraction. People are most engaged when they feel there is more to learn. Mystery works because it invites her imagination into the interaction, and her imagination is often stronger than anything you could say outright.",
+            "order": 0
+          },
+          {
+            "id": "content_22_3_5_2",
+            "text": "It isn't about being evasive or refusing to answer; it's about revealing just enough to intrigue without giving everything away.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_22_3_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_22_3_6_1",
+            "text": "Answer questions without over-explaining, share stories but leave some details out, and hint at depth without displaying your entire resume.",
+            "order": 0
+          },
+          {
+            "id": "content_22_3_6_2",
+            "text": "When you stop over-explaining and start sharing with intention, you create room for connection to unfold naturally. That's something anyone can practice, one conversation at a time.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesson_22_4",
+    "courseId": "course_22",
+    "lessonNumber": 4,
+    "courseTitle": "Upgrading Your Lifestyle",
+    "title": "The Average of Your Social Circle",
+    "duration": 3,
+    "summary": "Learn how confidence grows faster in the right environment.",
+    "isCompleted": false,
+    "isLocked": true,
+    "screens": [
+      {
+        "id": "screen_22_4_1",
+        "order": 0,
+        "content": [
+          {
+            "id": "content_22_4_1_1",
+            "text": "You are the average of the five people you spend the most time with. If you surround yourself with people who push themselves, you will naturally start pushing yourself too.",
+            "order": 0
+          },
+          {
+            "id": "content_22_4_1_2",
+            "text": "Your social circle is the group of people you regularly spend time with. These people shape your behaviors, standards, and outcomes more than almost any other factor.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_22_4_2",
+        "order": 1,
+        "content": [
+          {
+            "id": "content_22_4_2_1",
+            "text": "If everyone around you avoids approaching women, approaching will feel uncomfortable and unusual.",
+            "order": 0
+          },
+          {
+            "id": "content_22_4_2_2",
+            "text": "If everyone around you actively socializes and meets new people, doing the same feels normal.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_22_4_3",
+        "order": 2,
+        "content": [
+          {
+            "id": "content_22_4_3_1",
+            "text": "A guy wants to improve his social life, but his friends prefer staying inside every weekend. They order food, play games, and talk about how dating never works out. Each time he mentions going out, the idea gets dismissed until he eventually drops it.",
+            "order": 0
+          },
+          {
+            "id": "content_22_4_3_2",
+            "text": "He hasn't lost interest. He's just surrounded by people who make action feel unnecessary.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_22_4_4",
+        "order": 3,
+        "content": [
+          {
+            "id": "content_22_4_4_1",
+            "text": "Another man has the same goal, but his circle pulls him in the opposite direction. His friends enjoy going out, meeting new people, and treating socialising as a normal part of life. When he hesitates, they nudge him forward, and when he tries, they back him up.",
+            "order": 0
+          },
+          {
+            "id": "content_22_4_4_2",
+            "text": "With them, approaching stops feeling like a big event and starts feeling like routine.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_22_4_5",
+        "order": 4,
+        "content": [
+          {
+            "id": "content_22_4_5_1",
+            "text": "Evaluate your current circle honestly. Are your friends pushing you toward growth or anchoring you to comfort? Do they celebrate when you take social risks or discourage you? Do they create opportunities to meet new people or reinforce the same small bubble?",
+            "order": 0
+          },
+          {
+            "id": "content_22_4_5_2",
+            "text": "Your answers reveal whether your circle is helping or hindering.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_22_4_6",
+        "order": 5,
+        "content": [
+          {
+            "id": "content_22_4_6_1",
+            "text": "You can want to grow, but if your closest friends stay stagnant, complain, and mock effort, your confidence will quietly shrink to match them.",
+            "order": 0
+          },
+          {
+            "id": "content_22_4_6_2",
+            "text": "Strong men take responsibility for who they give their time to. Choosing better company is not disloyal, it is a decision about the kind of man you want to become.",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "screen_22_4_7",
+        "order": 6,
+        "content": [
+          {
+            "id": "content_22_4_7_1",
+            "text": "You are not stuck with the environment you inherited. You can choose the people who shape your standards and the tone of your days.",
+            "order": 0
+          },
+          {
+            "id": "content_22_4_7_2",
+            "text": "Start by spending more time where growth feels normal. With the right circle, effort becomes lighter, and opportunities occur more often.",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  }
+]
