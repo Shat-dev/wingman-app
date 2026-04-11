@@ -2,7 +2,7 @@
 //  SubscriptionHelper.swift
 //  Wingman
 //
-//  Created by Assistant on 06/04/2026.
+//  Created by Adnan Khan on 06/04/2026.
 //
 
 import Foundation

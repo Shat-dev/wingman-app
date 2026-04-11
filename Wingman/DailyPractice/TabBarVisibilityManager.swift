@@ -2,7 +2,7 @@
 //  TabBarVisibilityManager.swift
 //  Wingman
 //
-//  Created by Assistant
+//  Created by Adnan Khan
 //
 
 import SwiftUI

@@ -2,7 +2,7 @@
 //  SubscriptionManager.swift
 //  Wingman
 //
-//  Created by Assistant on 10/04/2026.
+//  Created by Adnan Khan on 10/04/2026.
 //
 
 import Foundation
