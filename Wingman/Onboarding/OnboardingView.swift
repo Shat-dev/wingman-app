@@ -1219,7 +1219,7 @@ let extendedOnboardingSteps: [OnboardingStep] = [
     //3 Frequency Question
     OnboardingStep(
         type: .question,
-        title: "Do you often want to approach women in public but stop yourself?",
+        title: "Do you often want to talk to women but don’t?",
         subtitle: nil,
         options: ["Yes, almost every time", "Sometimes", "Rarely", "No, I usually go for it"],
         chartImage: nil,
@@ -1233,7 +1233,7 @@ let extendedOnboardingSteps: [OnboardingStep] = [
         title: "What usually stops you from doing so?",
         subtitle: nil,
         options: [
-            "Fear of rejection or being embarrased, almost every time",
+            "Fear of rejection or being embarrased",
             "Fear of social consequences",
             "Not knowing what to say or how to start",
             "Worrying about coming across wrong",

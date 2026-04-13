@@ -30,21 +30,22 @@ struct ProfileView: View {
                     HStack {
                         Text("Profile")
                             .font(.manropeSemiBold(size: 20))
-                            .foregroundColor(.black)
-                        
+                            .foregroundColor(.wingmanBlack)
+
                         Spacer()
-                        
+
                         Button(action: {
                             showSettings = true
                         }) {
                             Image(systemName: "gearshape")
                                 .font(.manropeSemiBold(size: 20))
-                                .foregroundColor(.black)
+                                .foregroundColor(.wingmanBlack)
                         }
                         .buttonStyle(.plain)
                     }
-                    .padding(.horizontal, 16)
-                    .padding(.top, 12)
+                    .padding(.horizontal, 20)
+                    .padding(.top, 16)
+                    .padding(.bottom, 20)
                     
                     // Divider if you want a visual separation (optional)
                     // Divider().background(Color.gray.opacity(0.2))
