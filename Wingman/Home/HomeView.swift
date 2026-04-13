@@ -252,21 +252,14 @@ struct HomeView: View {
                 }
             }
             .navigationBarHidden(true)
-            // Hidden navigation link to push CourseDetailSheet when selectedCourse is set
-            .background(
-                NavigationLink(
-                    destination: selectedCourse.map { CourseDetailSheet(course: $0) },
-                    isActive: Binding(
-                        get: { selectedCourse != nil },
-                        set: { isActive in
-                            if !isActive { selectedCourse = nil }
-                        }
-                    )
-                ) {
-                    EmptyView()
+            .navigationDestination(isPresented: Binding(
+                get: { selectedCourse != nil },
+                set: { if !$0 { selectedCourse = nil } }
+            )) {
+                if let course = selectedCourse {
+                    CourseDetailSheet(course: course)
                 }
-                .hidden()
-            )
+            }
             .navigationDestination(isPresented: $navigateToPractice) {
                 DailyPracticeView()
                     .environmentObject(tabBarVisibility)

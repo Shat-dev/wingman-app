@@ -67,32 +67,27 @@ final class PracticeViewModel: ObservableObject {
     
     // MARK: - Check for Newly Unlocked Practices (called when returning from daily practice)
     func checkForNewlyUnlockedPractices() async {
-        do {
-            guard let userIdString = SupabaseManager.shared.currentUserId,
-                  let userId = UUID(uuidString: userIdString) else {
-                return
+        guard SupabaseManager.shared.currentUserId != nil else {
+            return
+        }
+
+        // Store previous state
+        let previouslyLockedPractices = practices.filter { $0.isLocked }
+
+        // Refresh practices to get updated lock status
+        await fetchPractices()
+
+        // Find practices that were locked before but are now unlocked
+        let currentlyUnlocked = practices.filter { !$0.isLocked }
+        newlyUnlockedPractices = currentlyUnlocked.filter { currentPractice in
+            previouslyLockedPractices.contains { $0.id == currentPractice.id }
+        }
+
+        if !newlyUnlockedPractices.isEmpty {
+            print("🎉 \(newlyUnlockedPractices.count) new practice(s) unlocked!")
+            for practice in newlyUnlockedPractices {
+                print("   - \(practice.title)")
             }
-            
-            // Store previous state
-            let previouslyLockedPractices = practices.filter { $0.isLocked }
-            
-            // Refresh practices to get updated lock status
-            await fetchPractices()
-            
-            // Find practices that were locked before but are now unlocked
-            let currentlyUnlocked = practices.filter { !$0.isLocked }
-            newlyUnlockedPractices = currentlyUnlocked.filter { currentPractice in
-                previouslyLockedPractices.contains { $0.id == currentPractice.id }
-            }
-            
-            if !newlyUnlockedPractices.isEmpty {
-                print("🎉 \(newlyUnlockedPractices.count) new practice(s) unlocked!")
-                for practice in newlyUnlockedPractices {
-                    print("   - \(practice.title)")
-                }
-            }
-        } catch {
-            print("❌ Failed to check for newly unlocked practices: \(error)")
         }
     }
     

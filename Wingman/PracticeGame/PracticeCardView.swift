@@ -38,7 +38,7 @@ struct PracticeCardView: View {
                     }
 
                     // Summary
-                    Text(practice.summary ?? "")
+                    Text(practice.summary)
                         .font(.manropeMedium(size: 14))
                         .foregroundColor(Color.wingmanBlack.opacity(practice.isLocked ? 0.3 : 1.0))
                         .lineLimit(3)

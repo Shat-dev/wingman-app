@@ -274,7 +274,7 @@ class DailyPracticeService: DailyPracticeServiceProtocol {
                 .value
             
             // Extract the first (and should be only) result from the array
-            guard var status = statusArray.first else {
+            guard let status = statusArray.first else {
                 // If no status returned, return default values
                 print("⚠️ No status data returned from database, using defaults")
                 return DailyPracticeStatus(
