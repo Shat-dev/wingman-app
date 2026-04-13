@@ -231,6 +231,7 @@ struct OnboardingView: View {
                 VStack(spacing: 10) {
                     ForEach(options, id: \.self) { option in
                         Button(action: {
+                            HapticManager.shared.selection()
                             selectedOption = option
                         }) {
                             OptionButton(text: option, isSelected: selectedOption == option)
@@ -503,6 +504,7 @@ struct OnboardingView: View {
                 VStack(spacing: 10) {
                     ForEach(options, id: \.self) { option in
                         Button(action: {
+                            HapticManager.shared.selection()
                             selectedOption = option
                         }) {
                             OptionButton(text: option, isSelected: selectedOption == option)

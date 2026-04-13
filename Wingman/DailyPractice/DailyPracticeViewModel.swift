@@ -113,7 +113,9 @@ final class DailyPracticeViewModel: ObservableObject {
             print("⚠️ Cannot select option after checking answer")
             return
         }
-        
+
+        HapticManager.shared.selection()
+
         if currentQuestion.questionType == .singleSelect {
             print("📌 User selected option \(index): \(currentQuestion.options[index])")
             selectedOptionIndex = index
@@ -141,11 +143,18 @@ final class DailyPracticeViewModel: ObservableObject {
             
             hasCheckedAnswer = true
             isAnswerCorrect = (selected == currentQuestion.correctAnswerIndex)
-            
+
+            // Haptic feedback for answer result
+            if isAnswerCorrect {
+                HapticManager.shared.success()
+            } else {
+                HapticManager.shared.warning()
+            }
+
             print("\n✅ Answer checked!")
             print("   - Selected: \(currentQuestion.options[selected])")
             print("   - Result: \(isAnswerCorrect ? "CORRECT ✅" : "INCORRECT ❌")")
-            
+
             // Update streak tracking
             totalQuestionsAnswered += 1
             if isAnswerCorrect {
@@ -166,7 +175,14 @@ final class DailyPracticeViewModel: ObservableObject {
             hasCheckedAnswer = true
             let correctSet = Set(currentQuestion.correctAnswerIndices ?? [])
             isAnswerCorrect = (selectedOptionIndices == correctSet)
-            
+
+            // Haptic feedback for answer result
+            if isAnswerCorrect {
+                HapticManager.shared.success()
+            } else {
+                HapticManager.shared.warning()
+            }
+
             print("\n✅ Answer checked!")
             print("   - Selected indices: \(selectedOptionIndices)")
             print("   - Correct indices: \(correctSet)")
@@ -201,7 +217,8 @@ final class DailyPracticeViewModel: ObservableObject {
             print("   - Questions answered: \(totalQuestionsAnswered)")
             print("   - Correct answers: \(totalCorrectAnswers)")
             isDailyPracticeCompleted = true
-            
+            HapticManager.shared.success()
+
             // Update daily practice streak in the database
             print("📊 About to update daily practice streak...")
             Task {

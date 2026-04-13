@@ -140,7 +140,11 @@ struct LogApproachBottomSheet: View {
                                                             max(1, (value.location.x / geometry.size.width) * 9 + 1),
                                                             10
                                                         )
-                                                        viewModel.anxietyLevel = round(newValue)
+                                                        let rounded = round(newValue)
+                                                        if Int(rounded) != Int(viewModel.anxietyLevel) {
+                                                            HapticManager.shared.selection()
+                                                        }
+                                                        viewModel.anxietyLevel = rounded
                                                     }
                                             )
                                     }
@@ -239,6 +243,7 @@ struct LogApproachBottomSheet: View {
 
                         // MARK: - Save Button
                         Button(action: {
+                            HapticManager.shared.mediumImpact()
                             viewModel.saveApproach()
 
                             // Dismiss after successful save

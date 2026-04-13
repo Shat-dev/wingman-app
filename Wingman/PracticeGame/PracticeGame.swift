@@ -105,6 +105,7 @@ class PracticeGameViewModel: ObservableObject {
 
     // MARK: - Option selected
     func selectOption(_ option: GameOption) {
+        HapticManager.shared.selection()
         if let nextId = option.nextSceneId {
             if nextId == "complete" {
                 triggerCompletion()
@@ -152,6 +153,7 @@ class PracticeGameViewModel: ObservableObject {
 
     private func triggerCompletion() {
         gameCompleted = true
+        HapticManager.shared.success()
         markComplete()
     }
 

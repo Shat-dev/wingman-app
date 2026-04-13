@@ -380,6 +380,8 @@ struct WeekStreakCard: View {
                 ForEach(weekDays, id: \.1) { day in
                     VStack(spacing: 4) {
                         Image(day.2 ? "flame_fill_p" : "flame")
+                            .resizable()
+                            .scaledToFit()
                             .foregroundColor(day.2 ? .black : .gray.opacity(0.3))
                             .frame(width: 17, height: 24)
                         
@@ -403,8 +405,11 @@ struct WeekStreakCard: View {
                     
                     HStack(spacing: 4) {
                         Image("flame_fill_p_s")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 14, height: 14)
                             .foregroundColor(.black)
-                        
+
                         Text("\(currentStreak) days")
                             .font(.manropeMedium(size: 14))
                             .foregroundColor(.black)
@@ -420,7 +425,9 @@ struct WeekStreakCard: View {
                     
                     HStack(spacing: 4) {
                         Image("flame_fill_p_s")
-                            .font(.system(size: 14))
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 14, height: 14)
                             .foregroundColor(.black)
                         Text("\(totalStreak) days")
                             .font(.manropeMedium(size: 14))

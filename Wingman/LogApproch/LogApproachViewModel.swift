@@ -94,6 +94,7 @@ final class LogApproachViewModel: ObservableObject {
 
     // MARK: - Actions
     func selectLevel(_ level: Int) {
+        HapticManager.shared.selection()
         print("📝 Selected approach level: \(level)")
         print("   - Level name: \(levels[level - 1].title)")
         selectedLevel = level
@@ -141,6 +142,7 @@ final class LogApproachViewModel: ObservableObject {
                 await MainActor.run {
                     self.isSaving = false
                     self.showSuccess = true
+                    HapticManager.shared.success()
                     let action = self.isEditMode ? "updated" : "saved"
                     print("✅ Approach \(action) successfully!")
                     
@@ -159,6 +161,7 @@ final class LogApproachViewModel: ObservableObject {
             } catch {
                 await MainActor.run {
                     self.isSaving = false
+                    HapticManager.shared.error()
                     let action = self.isEditMode ? "update" : "save"
                     self.errorMessage = "Failed to \(action). Please try again."
                     print("❌ Error \(action)ing approach: \(error.localizedDescription)")

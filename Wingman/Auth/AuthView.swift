@@ -391,7 +391,10 @@ struct AuthView: View {
 
     // MARK: - Filled Button
     private func filledButton(title: String, isEnabled: Bool, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
+        Button(action: {
+            HapticManager.shared.mediumImpact()
+            action()
+        }) {
             HStack(spacing: 8) {
                 if viewModel.isLoading {
                     ProgressView()

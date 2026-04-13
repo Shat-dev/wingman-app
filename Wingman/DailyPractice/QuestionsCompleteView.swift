@@ -57,6 +57,7 @@ struct QuestionsCompleteView: View {
                 
                 // MARK: - Continue Button
                 Button(action: {
+                    HapticManager.shared.mediumImpact()
                     print("🎯 Continue button tapped - navigating to HomeView")
                     
                     // 1. Show tab bar immediately

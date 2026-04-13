@@ -116,6 +116,7 @@ struct HomeView: View {
 
                                     Button(action: {
                                         if viewModel.isDailyPracticeButtonEnabled {
+                                            HapticManager.shared.mediumImpact()
                                             navigateToPractice = true
                                         }
                                     }) {
@@ -348,6 +349,7 @@ struct PeekCarousel: View {
                             if horizontalDragActive {
                                 let predicted = value.translation.width + value.predictedEndTranslation.width * 0.3
                                 let threshold = calculatedCardWidth / 3
+                                let previousPage = currentPage
                                 withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
                                     if predicted < -threshold && currentPage < modules.count - 1 {
                                         currentPage += 1
@@ -356,6 +358,9 @@ struct PeekCarousel: View {
                                     }
                                     dragOffset = 0
                                     horizontalDragActive = false
+                                }
+                                if currentPage != previousPage {
+                                    HapticManager.shared.selection()
                                 }
                             }
                         }

@@ -67,25 +67,25 @@ struct CustomTabBar: View {
                 icon: "home",
                 title: "Home",
                 isSelected: selectedTab == 0
-            ) { selectedTab = 0 }
+            ) { HapticManager.shared.lightImpact(); selectedTab = 0 }
 
             TabBarButton(
                 icon: "map",
                 title: "Courses",
                 isSelected: selectedTab == 1
-            ) { selectedTab = 1 }
+            ) { HapticManager.shared.lightImpact(); selectedTab = 1 }
 
             TabBarButton(
                 icon: "calendar",
                 title: "Scenarios",
                 isSelected: selectedTab == 2
-            ) { selectedTab = 2 }
+            ) { HapticManager.shared.lightImpact(); selectedTab = 2 }
 
             TabBarButton(
                 icon: "user",
                 title: "Profile",
                 isSelected: selectedTab == 3
-            ) { selectedTab = 3 }
+            ) { HapticManager.shared.lightImpact(); selectedTab = 3 }
         }
         .padding(.horizontal, 0)
         .padding(.top, 17) // Reduced from 17 to 12

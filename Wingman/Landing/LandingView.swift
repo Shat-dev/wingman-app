@@ -73,6 +73,7 @@ struct LandingView: View {
 
                     // Create Account
                     Button {
+                        HapticManager.shared.mediumImpact()
                         navigateToSignup = true
                     } label: {
                         Text("Create Account")
@@ -92,6 +93,7 @@ struct LandingView: View {
 
                     // Log In
                     Button {
+                        HapticManager.shared.mediumImpact()
                         navigateToLogin = true
                     }
                     label: {

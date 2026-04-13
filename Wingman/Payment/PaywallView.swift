@@ -129,6 +129,7 @@ struct PaywallView: View {
 
                         // MARK: - Continue Button
                         Button {
+                            HapticManager.shared.mediumImpact()
                             Task {
                                 let success = await viewModel.continueTapped()
                                 if success {
@@ -216,6 +217,9 @@ struct PaywallView: View {
             }
         } message: {
             Text(viewModel.error ?? "An error occurred")
+        }
+        .onChange(of: viewModel.showAlert) { showing in
+            if showing { HapticManager.shared.error() }
         }
         .onAppear {
             // Set AuthManager reference for anonymous user purchase tracking

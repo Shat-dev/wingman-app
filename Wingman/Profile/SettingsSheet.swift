@@ -129,6 +129,7 @@ struct SettingsSheet: View {
                             .labelsHidden()
                             .tint(.green)
                             .onChange(of: goalNotifications) { newValue in
+                                HapticManager.shared.selection()
                                 UserDefaults.standard.set(newValue, forKey: "goal_notifications")
                                 
                                 // Update notifications based on toggle
@@ -182,6 +183,7 @@ struct SettingsSheet: View {
                     
                     // MARK: - Delete Account
                     Button(action: {
+                        HapticManager.shared.warning()
                         showingDeleteAlert = true
                     }) {
                         Text("Delete Account")
@@ -207,6 +209,7 @@ struct SettingsSheet: View {
                     
                     // MARK: - Log Out Button
                     Button(action: {
+                        HapticManager.shared.mediumImpact()
                         logOut()
                     }) {
                         Text("Log Out")
@@ -251,10 +254,16 @@ struct SettingsSheet: View {
         } message: {
             Text(errorMessage)
         }
+        .onChange(of: showingErrorAlert) { showing in
+            if showing { HapticManager.shared.error() }
+        }
         .alert("Success", isPresented: $showingSuccessAlert) {
             Button("OK") { }
         } message: {
             Text(successMessage)
+        }
+        .onChange(of: showingSuccessAlert) { showing in
+            if showing { HapticManager.shared.success() }
         }
         .sheet(isPresented: $showDailyReadingGoal) {
             DailyReadingGoalSheet(currentGoal: dailyReadingGoal) { newGoal in

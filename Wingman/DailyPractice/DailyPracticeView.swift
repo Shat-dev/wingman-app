@@ -521,6 +521,7 @@ struct DailyPracticeView: View {
     // MARK: - Action Button (Check Answer - before checking)
     private func actionButton() -> some View {
         Button(action: {
+            HapticManager.shared.mediumImpact()
             viewModel.checkAnswer()
         }) {
             Text("Check Answer")

@@ -51,6 +51,7 @@ struct CoursesView: View {
                                             isSelected: viewModel.selectedCategoryId == category.id
                                         ) {
                                             withAnimation(.easeInOut(duration: 0.3)) {
+                                                HapticManager.shared.selection()
                                                 // Set flag to indicate user manually clicked
                                                 isUserScrolling = true
                                                 viewModel.selectCategory(category.id)

@@ -236,6 +236,7 @@ struct LessonView: View {
             } else {
                 // Last screen, last content - lesson complete
                 print("✅ Lesson complete!")
+                HapticManager.shared.success()
                 showLessonComplete = true
             }
         }

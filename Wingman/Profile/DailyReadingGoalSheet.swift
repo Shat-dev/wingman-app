@@ -71,6 +71,7 @@ struct DailyReadingGoalSheet: View {
                     VStack(spacing: 0) {
                         ForEach(goals, id: \.self) { goal in
                             Button(action: {
+                                HapticManager.shared.selection()
                                 selectedGoal = goal
                             }) {
                                 HStack {
@@ -103,6 +104,7 @@ struct DailyReadingGoalSheet: View {
                     
                     // Save Button
                     Button(action: {
+                        HapticManager.shared.mediumImpact()
                         saveGoal()
                     }) {
                         HStack {

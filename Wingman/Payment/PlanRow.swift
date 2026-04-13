@@ -19,6 +19,7 @@ struct PlanRow: View {
 
     var body: some View {
         Button {
+            HapticManager.shared.selection()
             onSelect()
         } label: {
             VStack(alignment: .leading, spacing: 0) {
