@@ -27,21 +27,8 @@ struct ApproachLevelGuideSheet: View {
 
                 // Header
                 HStack {
-                    Button(action: {
-                        withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
-                            dismiss()
-                        }
-                    }) {
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: 17, weight: .semibold))
-                            .foregroundColor(.black)
-                    }
-
-                    
-
-                    Text("Approach level Guide")
+                    Text("Approach Level Guide")
                         .font(.manropeMedium(size: 20))
-                        .padding(.leading, 5)
                         .foregroundColor(.black)
 
                     Spacer()
