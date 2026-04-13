@@ -178,7 +178,7 @@ struct CategoryPill: View {
                         .fill(isSelected ? Color.white : Color.clear)
                         .overlay(
                             RoundedRectangle(cornerRadius: 5)
-                                .stroke(isSelected ? Color.black : Color.gray.opacity(0.3), lineWidth: 1)
+                                .strokeBorder(isSelected ? Color.black : Color.gray.opacity(0.3), lineWidth: 1)
                         )
                 )
         }
