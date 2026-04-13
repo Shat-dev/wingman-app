@@ -289,15 +289,15 @@ struct CourseCardContent: View {
         case "course_smalltalk": return "smalltalkandmomentum"
         case "course_listening": return "ListeningandAttunement"
         case "course_vulnerability": return "Sharing&Vulnerability"
-        case "course_closing": return "advancedconversationskills"
-        case "course_advconvo": return "advancedconversationskills"
+        case "course_closing": return "closing"
+        case "course_advconvo": return "Advancedconversationskills"
         
         // Flirting & Chemistry
         case "course_flirtprereq": return "FlirtingPrerequisites"
         case "course_playfulness": return "Playfulness&Spark"
         case "course_compliments": return "Compliments&VerbalChemistry"
         case "course_physical_presence": return "PhysicalPresence&Escalation"
-        case "course_advflirt": return "advancedFlirtingSkills"
+        case "course_advflirt": return "AdvancedFlirtingSkills"
         
         // Integration & Mastery
         case "course_lifestyle": return "Upgradingyourlifestyle"
