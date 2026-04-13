@@ -83,6 +83,7 @@ struct CourseDetailSheet: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true) // ensure iOS back button is hidden
+        .enableInteractivePopGesture()
         .onAppear {
             // IMPORTANT: Save this course as the last accessed course
             HomeViewModel.saveLastAccessedCourse(courseId: course.id)

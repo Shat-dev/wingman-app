@@ -58,6 +58,7 @@ struct PracticeDetailView: View {
             }
         }
         .navigationBarHidden(true)
+        .enableInteractivePopGesture()
         .task {
             await viewModel.fetchPracticeDetail()
         }

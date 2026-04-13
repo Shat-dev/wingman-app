@@ -268,6 +268,7 @@ struct PracticeGame: View {
             }
         }
         .navigationBarHidden(true)
+        .enableInteractivePopGesture()
         .toolbar(.hidden, for: .tabBar)
         .onAppear {
             tabBarVisibility.hideTabBar()

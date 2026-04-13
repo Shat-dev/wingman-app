@@ -140,6 +140,7 @@ struct LessonView: View {
             }
         }
         .navigationBarHidden(true)
+        .enableInteractivePopGesture()
         .fullScreenCover(isPresented: $showLessonComplete) {
             LessonCompleteView(
                 nextLessonInfo: getNextLessonInfo(),
