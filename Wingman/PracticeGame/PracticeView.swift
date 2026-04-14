@@ -22,12 +22,16 @@ struct PracticeView: View {
                 Color.white.ignoresSafeArea()
 
                 VStack(spacing: 0) {
-                    // Only show header when data is loaded successfully
-                    if !viewModel.isLoading && viewModel.errorMessage == nil {
+                    // Show header unless this is the very first load (no data yet)
+                    // or an error is being shown. This prevents the header from flashing
+                    // during silent background refreshes on tab re-entry.
+                    if !(viewModel.isLoading && viewModel.practices.isEmpty) && viewModel.errorMessage == nil {
                         headerView
                     }
 
-                    if viewModel.isLoading {
+                    // Only block with a full-screen loader on the very first load.
+                    // Subsequent refreshes happen silently while the existing list stays visible.
+                    if viewModel.isLoading && viewModel.practices.isEmpty {
                         loadingView
                     } else if let errorMessage = viewModel.errorMessage {
                         errorView(message: errorMessage)
@@ -55,18 +59,12 @@ struct PracticeView: View {
             }
         }
         .task {
+            // Refresh the practice list and prefetch game data on every appearance.
+            // fetchPractices picks up any newly-unlocked practices (so the previous
+            // onAppear → checkForNewlyUnlockedPractices chain is unnecessary and
+            // duplicated the network call).
             await viewModel.fetchPractices()
-            // Prefetch game data for unlocked practices so tapping a card feels instant.
             await viewModel.prefetchGameData()
-        }
-        .onAppear {
-            // Check for newly unlocked practices when the view appears
-            // This is useful when users navigate here after completing daily practice
-            Task {
-                await viewModel.checkForNewlyUnlockedPractices()
-                // Prefetch any newly-unlocked practices (skips already-cached entries).
-                await viewModel.prefetchGameData()
-            }
         }
     }
 
