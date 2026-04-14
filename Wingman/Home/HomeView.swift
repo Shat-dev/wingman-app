@@ -487,7 +487,6 @@ struct ContinueCourseCard: View {
                         .lineSpacing(4)
                         .multilineTextAlignment(.leading)
                         .fixedSize(horizontal: false, vertical: true)
-                        .padding(.leading,20)
                     
                     Spacer()
                     
@@ -509,8 +508,7 @@ struct ContinueCourseCard: View {
                             }
                         }
                         .frame(height: 4)
-                        .padding(.leading,20)
-                        
+
                         // Percentage
                         Text("\(Int(course.progress * 100))%")
                             .font(.manropeMedium(size: 14))
