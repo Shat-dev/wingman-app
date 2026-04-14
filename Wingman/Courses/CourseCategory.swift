@@ -181,7 +181,7 @@ extension CourseCategory {
                 Course(
                     id: "course_10",
                     categoryId: "cat_2",
-                    title: "Situational specific Approaches",
+                    title: "Situational Specific Approaches",
                     description: "Adapt to different social contexts",
                     courseSummary: nil,
                     thumbnailName: "course_situational",
@@ -260,7 +260,7 @@ extension CourseCategory {
                 Course(
                     id: "course_16",
                     categoryId: "cat_3",
-                    title: "Advanced conversation skills",
+                    title: "Advanced Conversation Skills",
                     description: "Master complex conversation dynamics",
                     courseSummary: nil,
                     thumbnailName: "course_advconvo",
@@ -346,7 +346,7 @@ extension CourseCategory {
                 Course(
                     id: "course_22",
                     categoryId: "cat_5",
-                    title: "Upgrading your lifestyle",
+                    title: "Upgrading Your Lifestyle",
                     description: "Become the best version of yourself",
                     courseSummary: nil,
                     thumbnailName: "course_lifestyle",
