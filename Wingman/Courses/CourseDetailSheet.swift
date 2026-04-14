@@ -110,7 +110,7 @@ struct CourseDetailSheet: View {
                             }
                         }
                         .padding(.horizontal, 20)
-                        
+
                         Spacer().frame(height: 100)
                     }
                     .padding(.top, 12)

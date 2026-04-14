@@ -107,6 +107,14 @@ struct PracticeView: View {
                         }
                     }
                 }
+
+                // MARK: - Coming Soon Footer
+                Text("More scenarios coming soon")
+                    .font(.manropeMedium(size: 13))
+                    .foregroundColor(.gray.opacity(0.7))
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(.top, 20)
+                    .padding(.bottom, 12)
             }
             .padding(.horizontal, 20)
             .padding(.bottom, 100)
