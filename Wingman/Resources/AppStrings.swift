@@ -9,17 +9,17 @@ import Foundation
 
 struct AppStrings {
     struct Onboarding {
-        static let title1 = "Stop Overthinking, Start Approaching"
-        static let description1 = "Build the confidence to talk to strangers naturally without letting fear hold you back."
+        static let title1 = "Stop Overthinking, Start Connecting"
+        static let description1 = "Learn the skills to talk to women confidently and naturally."
         
         static let title2 = "Turn anxiety into action"
-        static let description2 = "Daily practice and real-world tracking help you approach more and worry less."
+        static let description2 = "Build real confidence that carries into approaching, communication, and flirting."
         
         static let title3 = "Learn what actually works"
-        static let description3 = "Master mindset, approach mechanics, and conversation skills step-by-step."
+        static let description3 = "Master mindset, communication, flirting, and approach mechanics step-by-step."
         
         static let title4 = "Track your progress Stay consistent"
-        static let description4 = "Log every attempt  and watch your confidence grow with real data."
+        static let description4 = "Log real-world interactions and watch your results improve over time."
     }
 }
 

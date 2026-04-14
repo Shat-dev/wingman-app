@@ -90,8 +90,8 @@ struct ProfileView: View {
                                 
                             }
                             .padding(.horizontal, 20)
-                            .padding(.vertical, 40)
-                            
+                            .padding(.vertical, 28)
+
                             Divider().background(Color.gray.opacity(0.2))
                             
                             // MARK: - Week Streak Card
