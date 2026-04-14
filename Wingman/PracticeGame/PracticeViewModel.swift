@@ -16,6 +16,11 @@ final class PracticeViewModel: ObservableObject {
     @Published var selectedPractice: Practice?
     @Published var newlyUnlockedPractices: [Practice] = [] // Track newly unlocked practices
 
+    /// Session-scoped cache of fetched PracticeGameData keyed by practice ID.
+    /// PracticeGameData is immutable scenario content (scenes, text, options),
+    /// so caching is always safe. User progress is tracked separately server-side.
+    @Published private(set) var gameDataCache: [UUID: PracticeGameData] = [:]
+
     // MARK: - Dependencies
     private let practiceService: PracticeServiceProtocol
 
@@ -44,14 +49,47 @@ final class PracticeViewModel: ObservableObject {
 
     // MARK: - Fetch Game Data for selected practice
     func fetchGameData(for practice: Practice) async -> PracticeGameData? {
+        // Fast path: cache hit
+        if let cached = gameDataCache[practice.id] {
+            return cached
+        }
         do {
-            return try await practiceService.fetchGameData(
+            let data = try await practiceService.fetchGameData(
                 scenarioId: practice.id,
                 womanName: practice.womanName
             )
+            gameDataCache[practice.id] = data
+            return data
         } catch {
             errorMessage = error.localizedDescription
             return nil
+        }
+    }
+
+    // MARK: - Prefetch Game Data
+    /// Prefetches PracticeGameData for every currently-unlocked practice that is
+    /// not already cached. Fetches run concurrently via TaskGroup. Individual
+    /// failures are silently swallowed — the tap-time fallback in PracticeView
+    /// will re-attempt and surface errors if the user actually needs that data.
+    func prefetchGameData() async {
+        let toFetch = practices.filter { !$0.isLocked && gameDataCache[$0.id] == nil }
+        guard !toFetch.isEmpty else { return }
+
+        await withTaskGroup(of: (UUID, PracticeGameData?).self) { [practiceService] group in
+            for practice in toFetch {
+                group.addTask {
+                    let data = try? await practiceService.fetchGameData(
+                        scenarioId: practice.id,
+                        womanName: practice.womanName
+                    )
+                    return (practice.id, data)
+                }
+            }
+            for await (id, data) in group {
+                if let data = data {
+                    gameDataCache[id] = data
+                }
+            }
         }
     }
 

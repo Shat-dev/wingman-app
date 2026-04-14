@@ -56,12 +56,16 @@ struct PracticeView: View {
         }
         .task {
             await viewModel.fetchPractices()
+            // Prefetch game data for unlocked practices so tapping a card feels instant.
+            await viewModel.prefetchGameData()
         }
         .onAppear {
             // Check for newly unlocked practices when the view appears
             // This is useful when users navigate here after completing daily practice
             Task {
                 await viewModel.checkForNewlyUnlockedPractices()
+                // Prefetch any newly-unlocked practices (skips already-cached entries).
+                await viewModel.prefetchGameData()
             }
         }
     }
@@ -115,6 +119,16 @@ struct PracticeView: View {
     private func loadAndNavigate(practice: Practice) async {
         guard !practice.isLocked else { return }
         viewModel.selectPractice(practice)
+
+        // Fast path: prefetched data available, navigate instantly with no spinner.
+        if let cached = viewModel.gameDataCache[practice.id] {
+            loadedGameData = cached
+            navigateToPracticeGame = true
+            return
+        }
+
+        // Slow path fallback: cache miss (prefetch failed or still running).
+        // Identical to prior behavior — shows the loading overlay then navigates.
         isLoadingGame = true
         if let gameData = await viewModel.fetchGameData(for: practice) {
             loadedGameData = gameData
