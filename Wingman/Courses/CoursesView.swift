@@ -81,7 +81,7 @@ struct CoursesView: View {
                                 LazyVStack(alignment: .leading, spacing: 20, pinnedViews: [.sectionHeaders]) {
                                     ForEach(viewModel.availableCategories) { category in
                                         Section(header: CategoryHeader(title: category.name)) {
-                                            CoursesGrid(courses: category.courses)
+                                            CoursesGrid(courses: category.courses, viewModel: viewModel)
                                         }
                                         .id(category.id)
                                         .onAppear {
@@ -203,17 +203,23 @@ struct CategoryHeader: View {
 // MARK: - Courses Grid
 struct CoursesGrid: View {
     let courses: [Course]
-    
+    /// Must be @ObservedObject (not a plain `let`) so this view re-renders
+    /// when `progressVersion` is bumped after a lesson completion — otherwise
+    /// captured `lockReason` values stay stale and newly unlocked courses
+    /// still appear locked until the app is restarted.
+    @ObservedObject var viewModel: CoursesViewModel
+
     let columns = [
         GridItem(.flexible(), spacing: 16),
         GridItem(.flexible(), spacing: 16)
     ]
-    
+
     var body: some View {
         LazyVGrid(columns: columns, spacing: 16) {
             ForEach(courses) { course in
-                NavigationLink(destination: CourseDetailSheet(course: course)) {
-                    CourseCardContent(course: course)
+                let lockReason = viewModel.courseLockReason(course)
+                NavigationLink(destination: CourseDetailSheet(course: course, lockReason: lockReason)) {
+                    CourseCardContent(course: course, lockReason: lockReason)
                 }
                 .buttonStyle(.plain)
             }
@@ -224,42 +230,56 @@ struct CoursesGrid: View {
 // MARK: - Course Card Content
 struct CourseCardContent: View {
     let course: Course
-    
+    var lockReason: CourseLockReason = .unlocked
+
+    private var isLocked: Bool { lockReason.isLocked }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            
+
             // Thumbnail with illustration - Fixed height
-            ZStack {
-                Rectangle()
-                    .fill(Color(.white))
-                    .frame(height: 160)  // Reduced slightly for better proportions
-                
-                Image(getImageForCourse())
-                    .resizable()
-                    .scaledToFit()
-                    .padding(0)  // Add padding for better visual balance
-                    
+            ZStack(alignment: .topTrailing) {
+                ZStack {
+                    Rectangle()
+                        .fill(Color(.white))
+                        .frame(height: 160)
+
+                    Image(getImageForCourse())
+                        .resizable()
+                        .scaledToFit()
+                        .padding(0)
+                }
+                .opacity(isLocked ? 0.5 : 1.0)
+
+                if isLocked {
+                    Image("lock_icon")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 18, height: 18)
+                        .foregroundColor(.black)
+                        .padding(10)
+                }
             }
-            
+
             Divider()
                 .background(Color.gray.opacity(0.2))
-            
+
             // Title section with fixed 2-line height
             Text(course.title)
-                .font(.manropeMedium(size: 14))  // Slightly smaller font
-                .foregroundColor(.black)
+                .font(.manropeMedium(size: 14))
+                .foregroundColor(isLocked ? Color.black.opacity(0.5) : .black)
                 .lineSpacing(1)
                 .multilineTextAlignment(.leading)
-                .lineLimit(2)  // Fixed to exactly 2 lines
-                .truncationMode(.tail)  // Add ellipsis at the end
+                .lineLimit(2)
+                .truncationMode(.tail)
                 .frame(maxWidth: .infinity, alignment: .topLeading)
-                .frame(height: 44)  // Fixed height for 2 lines
+                .frame(height: 44)
                 .padding(.horizontal, 8)
                 .padding(.top, 8)
-                .padding(.bottom, 12)  // Adjusted padding for better balance
+                .padding(.bottom, 12)
                 .background(Color.white)
         }
-        .frame(height: 245)  // FIXED total card height
+        .frame(height: 245)
         .background(Color.white)
         .cornerRadius(5)
         .overlay(

@@ -121,7 +121,17 @@ final class HomeViewModel: ObservableObject {
             continueCourse = nil
             return
         }
-        
+
+        // Safety net: if the last-accessed course is locked (either by the
+        // hardcoded "coming soon" flag or by progression), never surface it
+        // as the Continue card. Under normal flow CourseDetailSheet already
+        // gates the save, so this is defensive.
+        if isCourseLocked(course) {
+            print("🔒 Last accessed course is locked — hiding Continue card")
+            continueCourse = nil
+            return
+        }
+
         // Calculate progress for the course
         let progress = LessonDataService.shared.loadLessonProgress(courseId: lastCourseId)
         let lessons = LessonDataService.shared.loadLessonsForCourse(courseId: lastCourseId)
@@ -149,6 +159,26 @@ final class HomeViewModel: ObservableObject {
         print("   - Progress: \(Int(progressValue * 100))% (\(completedCount)/\(totalCount) lessons)")
     }
     
+    // MARK: - Course Lock Check (matches CoursesViewModel derivation)
+    /// Returns true if the given course is effectively locked — either by
+    /// the hardcoded "coming soon" flag, or because the previous course in
+    /// the same category hasn't been fully completed.
+    private func isCourseLocked(_ course: Course) -> Bool {
+        // Hardcoded hard gate ("coming soon").
+        if course.isLocked { return true }
+
+        // Progression gate: find the previous course in the same category.
+        guard let category = CourseCategory.dummyCategories.first(where: { $0.id == course.categoryId }) else {
+            return false
+        }
+        let sorted = category.courses.sorted { $0.displayOrder < $1.displayOrder }
+        guard let idx = sorted.firstIndex(where: { $0.id == course.id }), idx > 0 else {
+            return false // first course in the category — always unlocked
+        }
+        let previous = sorted[idx - 1]
+        return !LessonDataService.shared.isCourseCompleted(courseId: previous.id)
+    }
+
     // MARK: - Get Thumbnail Image Name
     private func getThumbnailImageName(for thumbnailName: String) -> String {
         // Map Course thumbnailName to actual image assets

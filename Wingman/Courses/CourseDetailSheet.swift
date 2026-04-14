@@ -7,9 +7,16 @@ import SwiftUI
 
 struct CourseDetailSheet: View {
     let course: Course
+    /// Drives the "coming soon" / "awaiting previous course" banner and
+    /// gates lesson interaction when the course is locked. Defaults to
+    /// `.unlocked` so preview and any legacy callers still work.
+    var lockReason: CourseLockReason = .unlocked
+
     @Environment(\.dismiss) private var dismiss
     @State private var lessons: [Lesson] = []
-    
+
+    private var isLocked: Bool { lockReason.isLocked }
+
     var body: some View {
         ZStack {
             Color.white.ignoresSafeArea()
@@ -58,8 +65,37 @@ struct CourseDetailSheet: View {
                         }
                         .padding(.horizontal, 20)
                         .padding(.top, 1)
-                        .padding(.bottom, 30)
-                        
+                        .padding(.bottom, isLocked ? 16 : 30)
+
+                        // MARK: - Lock Banner (preview mode)
+                        if let bannerText = lockBannerText {
+                            HStack(alignment: .top, spacing: 10) {
+                                Image("lock_icon")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 16, height: 16)
+                                    .foregroundColor(.black)
+                                    .padding(.top, 2)
+
+                                Text(bannerText)
+                                    .font(.manropeMedium(size: 14))
+                                    .foregroundColor(.black)
+                                    .fixedSize(horizontal: false, vertical: true)
+
+                                Spacer(minLength: 0)
+                            }
+                            .padding(16)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .background(Color.black.opacity(0.05))
+                            .cornerRadius(5)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(Color.black.opacity(0.1), lineWidth: 1)
+                            )
+                            .padding(.horizontal, 20)
+                            .padding(.bottom, 20)
+                        }
+
                         // MARK: - Lessons List
                         VStack(spacing: 12) {
                             ForEach(lessons) { lesson in
@@ -85,17 +121,45 @@ struct CourseDetailSheet: View {
         .navigationBarBackButtonHidden(true) // ensure iOS back button is hidden
         .enableInteractivePopGesture()
         .onAppear {
-            // IMPORTANT: Save this course as the last accessed course
-            HomeViewModel.saveLastAccessedCourse(courseId: course.id)
+            // Only record last-accessed for unlocked courses so the Home
+            // "Continue" card never points at a locked preview.
+            if !isLocked {
+                HomeViewModel.saveLastAccessedCourse(courseId: course.id)
+            }
             loadLessons()
         }
     }
-    
+
+    /// Banner copy. Nil when the course is unlocked (no banner rendered).
+    private var lockBannerText: String? {
+        switch lockReason {
+        case .unlocked:
+            return nil
+        case .comingSoon:
+            return "This course is coming soon. Stay tuned for updates."
+        case .awaitingPrevious(let previousTitle):
+            return "Complete all lessons in \(previousTitle) to unlock this course."
+        }
+    }
+
     private func loadLessons() {
         // Clear cache to get fresh data
         LessonDataService.shared.clearCache()
-        lessons = LessonDataService.shared.loadLessonsForCourse(courseId: course.id)
-        
+        var loaded = LessonDataService.shared.loadLessonsForCourse(courseId: course.id)
+
+        // Preview mode: when the parent course is locked we force every
+        // lesson to render as locked so the existing LessonCard .disabled
+        // guard prevents any lesson from being opened. This mutation is
+        // local-only (not persisted) — saveLessonProgress is never called
+        // from this path.
+        if isLocked {
+            for i in loaded.indices {
+                loaded[i].isLocked = true
+            }
+        }
+
+        lessons = loaded
+
         // Debug: Print course summary
         if let firstLesson = lessons.first {
             print("📋 Course Summary: \(firstLesson.courseSummary ?? "No summary")")

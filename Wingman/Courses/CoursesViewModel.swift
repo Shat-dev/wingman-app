@@ -15,15 +15,22 @@ import Foundation
 import Combine
 
 final class CoursesViewModel: ObservableObject {
-    
+
     // MARK: - Published Properties
     @Published var categories: [CourseCategory] = []
     @Published var selectedCategoryId: String = ""
     @Published var isLoading: Bool = false
     @Published var errorMessage: String = ""
-    
+
+    /// Bumped every time a lesson is completed. Purely a trigger for SwiftUI
+    /// to re-render views that call `isCourseEffectivelyLocked` / `courseLockReason`,
+    /// since those are derived from non-@Published sources (UserDefaults +
+    /// LessonDataService).
+    @Published private(set) var progressVersion: Int = 0
+
     // MARK: - Services
     private let client = SupabaseManager.shared.client
+    private var lessonCompletedObserver: NSObjectProtocol?
     
     // MARK: - Computed Properties
     var selectedCategory: CourseCategory? {
@@ -38,6 +45,21 @@ final class CoursesViewModel: ObservableObject {
     init() {
         print("📚 CoursesViewModel initialized")
         loadCourses()
+
+        // Observe lesson completions so derived course-lock state re-renders.
+        lessonCompletedObserver = NotificationCenter.default.addObserver(
+            forName: .lessonCompleted,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            self?.progressVersion &+= 1
+        }
+    }
+
+    deinit {
+        if let observer = lessonCompletedObserver {
+            NotificationCenter.default.removeObserver(observer)
+        }
     }
     
     // MARK: - Load Courses
@@ -169,5 +191,63 @@ final class CoursesViewModel: ObservableObject {
             .courses
             .sorted { $0.displayOrder < $1.displayOrder }
             ?? []
+    }
+
+    // MARK: - Course Lock Derivation (Model A: per-category progression)
+    //
+    // Rule:
+    //   - The first course in a category is always progression-unlocked.
+    //   - Every subsequent course requires every lesson in the previous
+    //     course (same category) to be completed.
+    //   - The hardcoded `Course.isLocked` flag is a separate "coming soon"
+    //     hard gate that stacks on top (see `isCourseEffectivelyLocked`).
+
+    /// Finds the category a course belongs to (by categoryId).
+    private func category(for course: Course) -> CourseCategory? {
+        categories.first { $0.id == course.categoryId }
+    }
+
+    /// The course immediately before `course` in display order within its
+    /// category, or nil if `course` is the first in its category.
+    private func previousCourse(in categoryCourses: [Course], relativeTo course: Course) -> Course? {
+        let sorted = categoryCourses.sorted { $0.displayOrder < $1.displayOrder }
+        guard let idx = sorted.firstIndex(where: { $0.id == course.id }), idx > 0 else {
+            return nil
+        }
+        return sorted[idx - 1]
+    }
+
+    /// Returns true if the course is unlocked by virtue of progression —
+    /// i.e. it's the first course in its category, or the previous course
+    /// in its category has all lessons completed. Ignores the hardcoded
+    /// `Course.isLocked` flag (that's a separate "coming soon" gate).
+    func isCourseProgressionUnlocked(_ course: Course) -> Bool {
+        guard let category = category(for: course) else { return true }
+        guard let previous = previousCourse(in: category.courses, relativeTo: course) else {
+            return true // first course in the category
+        }
+        return LessonDataService.shared.isCourseCompleted(courseId: previous.id)
+    }
+
+    /// Effective lock state combining the "coming soon" hardcoded flag with
+    /// the derived progression gate. Views use this.
+    func isCourseEffectivelyLocked(_ course: Course) -> Bool {
+        if course.isLocked { return true }
+        return !isCourseProgressionUnlocked(course)
+    }
+
+    /// The reason a course is (or isn't) locked — drives UI copy for the
+    /// grid lock icon, card opacity, and the CourseDetailSheet banner.
+    func courseLockReason(_ course: Course) -> CourseLockReason {
+        if course.isLocked {
+            return .comingSoon
+        }
+        if isCourseProgressionUnlocked(course) {
+            return .unlocked
+        }
+        let previousTitle = category(for: course)
+            .flatMap { previousCourse(in: $0.courses, relativeTo: course) }?.title
+            ?? "the previous course"
+        return .awaitingPrevious(previousCourseTitle: previousTitle)
     }
 }

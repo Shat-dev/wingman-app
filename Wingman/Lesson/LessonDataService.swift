@@ -5,6 +5,14 @@
 
 import Foundation
 
+// MARK: - Notification Names
+extension Notification.Name {
+    /// Posted when a lesson is marked completed. Observers that derive state
+    /// from lesson progress (e.g. CoursesViewModel's course-lock derivation)
+    /// listen for this to invalidate their computed view state.
+    static let lessonCompleted = Notification.Name("lessonCompleted")
+}
+
 final class LessonDataService {
     
     // MARK: - Singleton
@@ -146,15 +154,29 @@ final class LessonDataService {
             }
             
             lessonsCache[courseId] = lessons
-            
+
             // Persist to UserDefaults
             saveLessonProgress(courseId: courseId, lessons: lessons)
-            
+
+            // Notify observers (e.g. CoursesViewModel) that derived state
+            // such as course-level unlock may need to refresh.
+            NotificationCenter.default.post(name: .lessonCompleted, object: nil)
+
             print("✅ Marked lesson \(lessonId) as completed")
             if nextIndex < lessons.count {
                 print("🔓 Unlocked next lesson: \(lessons[nextIndex].id)")
             }
         }
+    }
+
+    // MARK: - Course-level completion check
+    /// Returns true iff the course has at least one lesson and every lesson
+    /// in it is marked completed. Used by CoursesViewModel to derive the
+    /// progression-unlock state of the next course in the same category.
+    func isCourseCompleted(courseId: String) -> Bool {
+        let lessons = loadLessonsForCourse(courseId: courseId)
+        guard !lessons.isEmpty else { return false }
+        return lessons.allSatisfy { $0.isCompleted }
     }
     
     // MARK: - Persistence (UserDefaults)

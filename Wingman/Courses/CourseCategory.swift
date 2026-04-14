@@ -120,7 +120,7 @@ extension CourseCategory {
                     thumbnailName: "course_nonnegotiables",
                     lessonsCount: 4,
                     duration: 25,
-                    isLocked: true,
+                    isLocked: false,
                     displayOrder: 5
                 )
             ]
@@ -163,7 +163,7 @@ extension CourseCategory {
                     thumbnailName: "course_opener",
                     lessonsCount: 8,
                     duration: 42,
-                    isLocked: true,
+                    isLocked: false,
                     displayOrder: 3
                 ),
                 Course(
@@ -175,7 +175,7 @@ extension CourseCategory {
                     thumbnailName: "course_reading",
                     lessonsCount: 7,
                     duration: 38,
-                    isLocked: true,
+                    isLocked: false,
                     displayOrder: 4
                 ),
                 Course(
@@ -187,7 +187,7 @@ extension CourseCategory {
                     thumbnailName: "course_situational",
                     lessonsCount: 9,
                     duration: 48,
-                    isLocked: true,
+                    isLocked: false,
                     displayOrder: 5
                 ),
                 Course(
@@ -199,7 +199,7 @@ extension CourseCategory {
                     thumbnailName: "course_advanced",
                     lessonsCount: 10,
                     duration: 55,
-                    isLocked: true,
+                    isLocked: false,
                     displayOrder: 6
                 )
             ]
@@ -218,7 +218,7 @@ extension CourseCategory {
                     thumbnailName: "course_smalltalk",
                     lessonsCount: 6,
                     duration: 35,
-                    isLocked: true,
+                    isLocked: false,
                     displayOrder: 1
                 ),
                 Course(
@@ -230,7 +230,7 @@ extension CourseCategory {
                     thumbnailName: "course_listening",
                     lessonsCount: 5,
                     duration: 30,
-                    isLocked: true,
+                    isLocked: false,
                     displayOrder: 2
                 ),
                 Course(
@@ -242,7 +242,7 @@ extension CourseCategory {
                     thumbnailName: "course_vulnerability",
                     lessonsCount: 7,
                     duration: 40,
-                    isLocked: true,
+                    isLocked: false,
                     displayOrder: 3
                 ),
                 Course(
@@ -254,7 +254,7 @@ extension CourseCategory {
                     thumbnailName: "course_closing",
                     lessonsCount: 4,
                     duration: 22,
-                    isLocked: true,
+                    isLocked: false,
                     displayOrder: 4
                 ),
                 Course(
@@ -266,7 +266,7 @@ extension CourseCategory {
                     thumbnailName: "course_advconvo",
                     lessonsCount: 8,
                     duration: 45,
-                    isLocked: true,
+                    isLocked: false,
                     displayOrder: 5
                 )
             ]
@@ -285,7 +285,7 @@ extension CourseCategory {
                     thumbnailName: "course_flirtprereq",
                     lessonsCount: 5,
                     duration: 28,
-                    isLocked: true,
+                    isLocked: false,
                     displayOrder: 1
                 ),
                 Course(
@@ -297,7 +297,7 @@ extension CourseCategory {
                     thumbnailName: "course_playfulness",
                     lessonsCount: 6,
                     duration: 32,
-                    isLocked: true,
+                    isLocked: false,
                     displayOrder: 2
                 ),
                 Course(
@@ -309,7 +309,7 @@ extension CourseCategory {
                     thumbnailName: "course_compliments",
                     lessonsCount: 7,
                     duration: 38,
-                    isLocked: true,
+                    isLocked: false,
                     displayOrder: 3
                 ),
                 Course(
@@ -321,7 +321,7 @@ extension CourseCategory {
                     thumbnailName: "course_physical_presence",
                     lessonsCount: 8,
                     duration: 42,
-                    isLocked: true,
+                    isLocked: false,
                     displayOrder: 4
                 ),
                 Course(
@@ -333,7 +333,7 @@ extension CourseCategory {
                     thumbnailName: "course_advflirt",
                     lessonsCount: 9,
                     duration: 48,
-                    isLocked: true,
+                    isLocked: false,
                     displayOrder: 5
                 )
             ]
@@ -352,7 +352,7 @@ extension CourseCategory {
                     thumbnailName: "course_lifestyle",
                     lessonsCount: 10,
                     duration: 55,
-                    isLocked: true,
+                    isLocked: false,
                     displayOrder: 1
                 ),
                 Course(
@@ -364,7 +364,7 @@ extension CourseCategory {
                     thumbnailName: "course_opportunities",
                     lessonsCount: 6,
                     duration: 35,
-                    isLocked: true,
+                    isLocked: false,
                     displayOrder: 2
                 ),
                 Course(
@@ -376,7 +376,7 @@ extension CourseCategory {
                     thumbnailName: "course_mastery",
                     lessonsCount: 8,
                     duration: 45,
-                    isLocked: true,
+                    isLocked: false,
                     displayOrder: 3
                 ),
                 Course(
@@ -388,7 +388,7 @@ extension CourseCategory {
                     thumbnailName: "course_selfdiscovery",
                     lessonsCount: 7,
                     duration: 40,
-                    isLocked: true,
+                    isLocked: false,
                     displayOrder: 4
                 )
             ]
