@@ -43,28 +43,18 @@ final class CoursesViewModel: ObservableObject {
     // MARK: - Load Courses
     func loadCourses() {
         print("🔄 Loading courses...")
-        isLoading = true
-        
-        // TODO: Replace with Supabase fetch in future
-        // For now, use dummy data
-        Task {
-            // Simulate network delay
-            try? await Task.sleep(nanoseconds: 500_000_000) // 0.5 seconds
-            
-            await MainActor.run {
-                self.categories = CourseCategory.dummyCategories
-                
-                // Select first category by default
-                if let firstCategory = self.categories.first {
-                    self.selectedCategoryId = firstCategory.id
-                }
-                
-                self.isLoading = false
-                
-                print("✅ Loaded \(self.categories.count) categories")
-                print("✅ Total courses: \(self.categories.reduce(0) { $0 + $1.courses.count })")
-            }
+
+        // Synchronous load from static dummy data. No network, no delay.
+        // TODO: Replace with Supabase fetch in future (see fetchCoursesFromSupabase below)
+        self.categories = CourseCategory.dummyCategories
+
+        // Select first category by default
+        if let firstCategory = self.categories.first {
+            self.selectedCategoryId = firstCategory.id
         }
+
+        print("✅ Loaded \(self.categories.count) categories")
+        print("✅ Total courses: \(self.categories.reduce(0) { $0 + $1.courses.count })")
     }
     
     // MARK: - Future: Fetch from Supabase
