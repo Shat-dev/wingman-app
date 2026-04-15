@@ -298,7 +298,11 @@ final class LogApproachViewModel: ObservableObject {
     }
     
     private func getUserId() -> String? {
-        return UserDefaults.standard.string(forKey: "current_user_id")
+        // Route through SupabaseManager so there is a single source of truth
+        // for auth state (Supabase SDK session). Previously this read from a
+        // UserDefaults cache that could lag behind the SDK after session
+        // restoration and cause "notAuthenticated" failures.
+        return SupabaseManager.shared.currentUserId
     }
 }
 

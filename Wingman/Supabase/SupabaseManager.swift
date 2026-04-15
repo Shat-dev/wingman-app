@@ -32,10 +32,16 @@ final class SupabaseManager {
     private init() {}
     
     // MARK: - Authentication Helpers
+    /// Single source of truth for the current Supabase user ID.
+    /// Reads directly from the Supabase SDK's in-memory session (backed by
+    /// keychain), so it is always consistent with `client.auth.currentUser`.
+    /// No UserDefaults cache — eliminates the class of bug where the cache
+    /// could get out of sync with the SDK (e.g. after `.initialSession`
+    /// restoration or after a fresh install with a keychain-persisted session).
     var currentUserId: String? {
-        return UserDefaults.standard.string(forKey: "current_user_id")
+        return client.auth.currentUser?.id.uuidString
     }
-    
+
     var isAuthenticated: Bool {
         return currentUserId != nil
     }

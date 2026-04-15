@@ -929,7 +929,10 @@ struct OnboardingView: View {
     // MARK: - Save to Supabase
     private func saveUserName1() {
         guard let name = answers["name"], !name.isEmpty else { return }
-        guard let userId = UserDefaults.standard.string(forKey: "current_user_id") else {
+        // Route through SupabaseManager (single source of truth, backed by the
+        // Supabase SDK session) instead of the UserDefaults cache which could
+        // lag behind the SDK after `.initialSession` restoration.
+        guard let userId = SupabaseManager.shared.currentUserId else {
             print("❌ No user ID available")
             return
         }
