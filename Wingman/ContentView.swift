@@ -37,7 +37,7 @@ struct ContentView: View {
                         VStack(alignment: .leading, spacing: 8) {
                             Text(pages[index].title)
                                 .font(.system(size: 28, weight: .bold))
-                                .foregroundColor(.black)
+                                .foregroundColor(.wingmanBlack)
                             
                             Text(pages[index].description)
                                 .font(.system(size: 16))
@@ -64,7 +64,7 @@ struct ContentView: View {
             HStack(spacing: 8) {
                 ForEach(0..<pages.count, id: \.self) { index in
                     Circle()
-                        .fill(currentPage == index ? Color.black : Color.gray.opacity(0.3))
+                        .fill(currentPage == index ? Color.wingmanBlack : Color.gray.opacity(0.3))
                         .frame(width: 8, height: 8)
                 }
             }
@@ -79,7 +79,7 @@ struct ContentView: View {
                 }) {
                     Text("Create Account")
                         .font(.system(size: 17, weight: .medium))
-                        .foregroundColor(.black)
+                        .foregroundColor(.wingmanBlack)
                         .frame(maxWidth: .infinity)
                         .padding()
                         .overlay(
@@ -96,7 +96,7 @@ struct ContentView: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.black)
+                        .background(Color.wingmanBlack)
                         .cornerRadius(10)
                 }
             }

@@ -212,8 +212,8 @@ struct PracticeGame: View {
                 HStack(spacing: 12) {
                     Button { dismiss() } label: {
                         Image(systemName: "chevron.left")
-                            .font(.system(size: 22, weight: .semibold))
-                            .foregroundColor(.black)
+                            .font(.system(size: 22))
+                            .foregroundColor(.wingmanBlack)
                             .frame(width: 44, height: 44, alignment: .center)
                             .contentShape(Rectangle())
                     }
@@ -225,7 +225,7 @@ struct PracticeGame: View {
                                 .fill(Color.gray.opacity(0.2))
                                 .frame(height: 10)
                             Capsule()
-                                .fill(Color.black)
+                                .fill(Color.wingmanBlack)
                                 .frame(width: geometry.size.width * CGFloat(viewModel.progress), height: 10)
                                 .animation(.easeInOut(duration: 0.25), value: viewModel.progress)
                         }
@@ -328,7 +328,7 @@ struct GameIntroScreenView: View {
                 let centerYOffset = (topPadding - bottomPadding) / 2
                 
                 Rectangle()
-                    .fill(Color.black.opacity(0.5))
+                    .fill(Color.wingmanBlack.opacity(0.5))
                     .frame(width: 1, height: paddedHeight)
                     .position(
                         x: geo.size.width * dividerPosition,
@@ -446,7 +446,7 @@ struct DialogueContentView: View {
                 if !displayName.isEmpty {
                     Text(displayName)
                         .font(.manropeMedium(size: 18))
-                        .foregroundColor(.black.opacity(0.6))
+                        .foregroundColor(.wingmanBlack.opacity(0.6))
                         .frame(maxWidth: .infinity, alignment: scene.type == .womanDialogue ? .trailing : .leading)
                         .padding(.horizontal, 8)
                         .padding(.top,10)
@@ -458,7 +458,7 @@ struct DialogueContentView: View {
                 // FIXED: Set a fixed height for text to stabilize 1 vs 2 lines
                 Text(scene.text)
                     .font(.manropeMedium(size: 14))
-                    .foregroundColor(.black)
+                    .foregroundColor(.wingmanBlack)
                     .lineLimit(2)
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: .infinity)
@@ -468,14 +468,14 @@ struct DialogueContentView: View {
             }
             .background(
                 RoundedRectangle(cornerRadius: 5)
-                    .stroke(Color.black.opacity(0.1), lineWidth: 1)
+                    .stroke(Color.wingmanBlack.opacity(0.1), lineWidth: 1)
                     .background(RoundedRectangle(cornerRadius: 5).fill(Color.white))
-                    .shadow(color: Color.black.opacity(0.06), radius: 5, x: 0, y: 2)
+                    .shadow(color: Color.wingmanBlack.opacity(0.06), radius: 5, x: 0, y: 2)
             )
 
             Text(actionText)
                 .font(.manropeMedium(size: 14))
-                .foregroundColor(.black.opacity(0.5))
+                .foregroundColor(.wingmanBlack.opacity(0.5))
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .padding(.top, 5)
                 .padding(.trailing, 8)
@@ -494,7 +494,7 @@ struct OptionsContentView: View {
                 Button { onSelectOption(option) } label: {
                     Text(option.text)
                         .font(.manropeSemiBold(size: 16))
-                        .foregroundColor(.black)
+                        .foregroundColor(.wingmanBlack)
                         .multilineTextAlignment(.center)
                         .lineLimit(2)
                         .frame(maxWidth: .infinity)
@@ -502,9 +502,9 @@ struct OptionsContentView: View {
                         .padding(.vertical, 15)
                         .background(
                             RoundedRectangle(cornerRadius: 5)
-                                .stroke(Color.black.opacity(0.1), lineWidth: 1)
+                                .stroke(Color.wingmanBlack.opacity(0.1), lineWidth: 1)
                                 .background(RoundedRectangle(cornerRadius: 5).fill(Color.white))
-                                .shadow(color: Color.black.opacity(0.06), radius: 5, x: 0, y: 2)
+                                .shadow(color: Color.wingmanBlack.opacity(0.06), radius: 5, x: 0, y: 2)
                         )
                 }
                 .buttonStyle(.plain)
@@ -512,7 +512,7 @@ struct OptionsContentView: View {
 
             Text("Choose an option to continue")
                 .font(.manropeMedium(size: 14))
-                .foregroundColor(.black.opacity(0.4))
+                .foregroundColor(.wingmanBlack.opacity(0.4))
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .padding(.top, 1)
                 .padding(.trailing, 8)
@@ -536,7 +536,7 @@ struct GameCompleteView: View {
 
                 Text("Game Complete!")
                     .font(.manropeSemiBold(size: 24))
-                    .foregroundColor(.black)
+                    .foregroundColor(.wingmanBlack)
 
                 Spacer()
 
@@ -546,7 +546,7 @@ struct GameCompleteView: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 16)
-                        .background(Color.black)
+                        .background(Color.wingmanBlack)
                         .cornerRadius(5)
                 }
                 .padding(.horizontal, 24)

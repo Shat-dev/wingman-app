@@ -30,10 +30,10 @@ struct ApproachesLoggedListView: View {
                     HStack {
                         Image("feather")
                             .font(.system(size: 18))
-                            .foregroundColor(.black)
+                            .foregroundColor(.wingmanBlack)
                         Text("Approaches Logged")
                             .font(.manropeSemiBold(size: 20))
-                            .foregroundColor(.black)
+                            .foregroundColor(.wingmanBlack)
                         
                         Spacer()
                         
@@ -42,7 +42,7 @@ struct ApproachesLoggedListView: View {
                         }) {
                             Image(systemName: "xmark")
                                 .font(.system(size: 16, weight: .semibold))
-                                .foregroundColor(.black)
+                                .foregroundColor(.wingmanBlack)
                         }
                         .buttonStyle(.plain)
                     }
@@ -58,7 +58,7 @@ struct ApproachesLoggedListView: View {
                             
                             TextField("Search", text: $searchText)
                                 .font(.manropeRegular(size: 15))
-                                .foregroundColor(.black)
+                                .foregroundColor(.wingmanBlack)
                         }
                         .padding(.horizontal, 12)
                         .padding(.vertical, 10)
@@ -214,7 +214,7 @@ struct ApproachLogRow: View {
             HStack(alignment: .firstTextBaseline, spacing: 12) {
                 Text(approach.title)
                     .font(.manropeRegular(size: 16))
-                    .foregroundColor(.black)
+                    .foregroundColor(.wingmanBlack)
                     .lineLimit(1)
                     .truncationMode(.tail)
                 
@@ -231,7 +231,7 @@ struct ApproachLogRow: View {
                 } label: {
                     Image("dots")
                         .font(.system(size: 20, weight: .medium))
-                        .foregroundColor(.black)
+                        .foregroundColor(.wingmanBlack)
                         .frame(width: 24, height: 24)
                         .contentShape(Rectangle())
                 }
@@ -240,7 +240,7 @@ struct ApproachLogRow: View {
             // Description
             Text(approach.description)
                 .font(.manropeRegular(size: 16))
-                .foregroundColor(.black)
+                .foregroundColor(.wingmanBlack)
                 .lineSpacing(2)
                 .truncationMode(.tail)
                 .fixedSize(horizontal: false, vertical: true)

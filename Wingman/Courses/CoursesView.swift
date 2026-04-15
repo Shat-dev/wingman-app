@@ -35,7 +35,7 @@ struct CoursesView: View {
                         // MARK: - Header
                         Text("Courses")
                             .font(.manropeSemiBold(size: 20))
-                            .foregroundColor(.black)
+                            .foregroundColor(.wingmanBlack)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal, 20)
                             .padding(.top, 16)
@@ -178,7 +178,7 @@ struct CategoryPill: View {
         Button(action: action) {
             Text(title)
                 .font(.manropeMedium(size: 14))
-                .foregroundColor(isSelected ? .black : .gray)
+                .foregroundColor(isSelected ? .wingmanBlack : .gray)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
                 .background(
@@ -186,7 +186,7 @@ struct CategoryPill: View {
                         .fill(isSelected ? Color.white : Color.clear)
                         .overlay(
                             RoundedRectangle(cornerRadius: 5)
-                                .strokeBorder(isSelected ? Color.black : Color.gray.opacity(0.3), lineWidth: 1)
+                                .strokeBorder(isSelected ? Color.wingmanBlack : Color.gray.opacity(0.3), lineWidth: 1)
                         )
                 )
         }
@@ -201,7 +201,7 @@ struct CategoryHeader: View {
     var body: some View {
         Text(title)
             .font(.manropeMedium(size: 16))
-            .foregroundColor(.black)
+            .foregroundColor(.wingmanBlack)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.vertical, 12)
             .background(Color.white)
@@ -264,7 +264,7 @@ struct CourseCardContent: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 18, height: 18)
-                        .foregroundColor(.black)
+                        .foregroundColor(.wingmanBlack)
                         .padding(10)
                 }
             }
@@ -275,7 +275,7 @@ struct CourseCardContent: View {
             // Title section with fixed 2-line height
             Text(course.title)
                 .font(.manropeMedium(size: 14))
-                .foregroundColor(isLocked ? Color.black.opacity(0.5) : .black)
+                .foregroundColor(isLocked ? Color.wingmanBlack.opacity(0.5) : .wingmanBlack)
                 .lineSpacing(1)
                 .multilineTextAlignment(.leading)
                 .lineLimit(2)
@@ -292,7 +292,7 @@ struct CourseCardContent: View {
         .cornerRadius(5)
         .overlay(
             RoundedRectangle(cornerRadius: 5)
-                .stroke(Color.black.opacity(0.08), lineWidth: 1)
+                .stroke(Color.wingmanBlack.opacity(0.08), lineWidth: 1)
         )
     }
     

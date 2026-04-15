@@ -167,8 +167,8 @@ struct PracticeView: View {
                         // Dismiss or go back - for tab-based view, this might not be needed
                     } label: {
                         Image(systemName: "chevron.left")
-                            .font(.system(size: 20, weight: .bold))
-                            .foregroundColor(.black)
+                            .font(.system(size: 22))
+                            .foregroundColor(.wingmanBlack)
                             .frame(width: 44, height: 44, alignment: .center)
                             .contentShape(Rectangle())
                     }
@@ -186,14 +186,14 @@ struct PracticeView: View {
                 VStack {
                     Text("Oops!")
                         .font(.manropeSemiBold(size: 24))
-                        .foregroundColor(.black)
+                        .foregroundColor(.wingmanBlack)
                     Text("Somthing went wrong")
                         .font(.manropeSemiBold(size: 16))
-                        .foregroundColor(.black)
+                        .foregroundColor(.wingmanBlack)
                         .padding(.top, 2)
                     Text("Please Try again!")
                         .font(.manropeSemiBold(size: 16))
-                        .foregroundColor(.black)
+                        .foregroundColor(.wingmanBlack)
                 }
                 .padding(.horizontal, 24)
                 
@@ -208,7 +208,7 @@ struct PracticeView: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 52)
-                        .background(Color.black)
+                        .background(Color.wingmanBlack)
                         .cornerRadius(5)
                 }
                 .padding(.horizontal, 20)

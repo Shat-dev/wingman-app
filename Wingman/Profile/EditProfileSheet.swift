@@ -46,7 +46,7 @@ struct EditProfileSheet: View {
                     HStack {
                         Text("Edit Profile")
                             .font(.manropeMedium(size: 18))
-                            .foregroundColor(.black)
+                            .foregroundColor(.wingmanBlack)
                         
                         Spacer()
                         
@@ -55,7 +55,7 @@ struct EditProfileSheet: View {
                         }) {
                             Image(systemName: "xmark")
                                 .font(.system(size: 16, weight: .medium))
-                                .foregroundColor(.black)
+                                .foregroundColor(.wingmanBlack)
                         }
                         .buttonStyle(.plain)
                     }
@@ -87,7 +87,7 @@ struct EditProfileSheet: View {
                             
                             TextField("Enter your name", text: $name)
                                 .font(.manropeMedium(size: 16))
-                                .foregroundColor(.black)
+                                .foregroundColor(.wingmanBlack)
                                 .padding(.horizontal, 16)
                                 .padding(.vertical, 14)
                                 .background(Color(red: 0.96, green: 0.96, blue: 0.96))
@@ -124,7 +124,7 @@ struct EditProfileSheet: View {
                         }
                         .frame(maxWidth: .infinity)
                         .frame(height: 52)
-                        .background(Color.black)
+                        .background(Color.wingmanBlack)
                         .cornerRadius(5)
                     }
                     .disabled(name.isEmpty || isSaving)

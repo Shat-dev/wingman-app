@@ -66,7 +66,9 @@ struct OnboardingView: View {
                     Button {
                         handleBackButton()
                     } label: {
-                        Image("auth_back")
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 22))
+                            .foregroundColor(.wingmanBlack)
                             .frame(width: 44, height: 44, alignment: .center)
                             .contentShape(Rectangle())
                     }
@@ -125,6 +127,41 @@ struct OnboardingView: View {
         .animation(.easeInOut(duration: 0.35), value: showStatistic)
         .animation(.easeInOut(duration: 0.35), value: isGoingBack)
         .animation(.easeInOut(duration: 0.35), value: statisticAnimationId)
+        // Option A swipe-back: a rightward swipe past a distance/velocity
+        // threshold invokes the existing back-button handler. Non-interactive
+        // (the page doesn't follow the finger) so this preserves every
+        // existing back-navigation path — including statistic dismissal,
+        // history reconstruction, and the page-0-to-Landing affordance —
+        // without touching handleBackButton() or the animation system.
+        .simultaneousGesture(
+            DragGesture(minimumDistance: 20)
+                .onEnded { value in
+                    // Only handle when the system's own back chevron would be
+                    // visible. The chevron is hidden on the loading page (see
+                    // the `step.type != .loading || showStatistic` guard in
+                    // the top bar) because that page fires a one-way 3s
+                    // timer that transitions past onboarding; allowing a
+                    // swipe-back here would leave that timer in flight and
+                    // trigger unexpected navigation after the user returned.
+                    let currentStep = steps[stepIndex]
+                    guard currentStep.type != .loading || showStatistic else { return }
+
+                    // Rightward only.
+                    guard value.translation.width > 0 else { return }
+
+                    // Reject mostly-vertical drags (e.g. future scroll views,
+                    // incidental finger slips). 120pt of vertical tolerance
+                    // matches the proposal's guidance.
+                    guard abs(value.translation.height) < 120 else { return }
+
+                    let width = UIScreen.main.bounds.width
+                    let passedDistance = value.translation.width > width * 0.3
+                    let passedVelocity = value.predictedEndTranslation.width > width * 0.6
+                    guard passedDistance || passedVelocity else { return }
+
+                    handleBackButton()
+                }
+        )
     }
 
     // MARK: - Name Input Content View (without top bar)
@@ -197,7 +234,7 @@ struct OnboardingView: View {
                     moveToNext()
                 }
                 .font(.manropeSemiBold(size: 16))
-                .foregroundColor(.black)
+                .foregroundColor(.wingmanBlack)
                 .underline()
             }
             
@@ -275,7 +312,7 @@ struct OnboardingView: View {
             // Loading Text (20pt only for the specific string)
             Text(step.title)
                 .font(isPersonalizingText ? .manropeSemiBold(size: 20) : .manropeSemiBold(size: 24))
-                .foregroundColor(.black)
+                .foregroundColor(.wingmanBlack)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 40)
 
@@ -317,7 +354,7 @@ struct OnboardingView: View {
                     // Heading
                     Text(statistic.heading)
                         .font(.manropeSemiBold(size: 24))
-                        .foregroundColor(.black)
+                        .foregroundColor(.wingmanBlack)
                         .lineSpacing(4)
                         .multilineTextAlignment(.leading)
                         .lineLimit(nil)  // ← Explicitly allow unlimited lines
@@ -467,7 +504,7 @@ struct OnboardingView: View {
                     moveToNext()
                 }
                 .font(.manropeSemiBold(size: 16))
-                .foregroundColor(.black)
+                .foregroundColor(.wingmanBlack)
                 .underline()
             }
             
@@ -565,8 +602,8 @@ struct OnboardingView: View {
                         dismissStatisticAndReturnToSource()
                     } label: {
                         Image(systemName: "chevron.left")
-                            .font(.system(size: 20, weight: .bold))
-                            .foregroundColor(.black)
+                            .font(.system(size: 22))
+                            .foregroundColor(.wingmanBlack)
                             .frame(width: 44, height: 44, alignment: .center)
                             .contentShape(Rectangle())
                     }
@@ -585,7 +622,7 @@ struct OnboardingView: View {
                     // Heading
                     Text(statistic.heading)
                         .font(.manropeSemiBold(size: 24))
-                        .foregroundColor(.black)
+                        .foregroundColor(.wingmanBlack)
                         .lineSpacing(4)
                         .multilineTextAlignment(.leading)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -677,7 +714,7 @@ struct OnboardingView: View {
             // Loading Text (20pt only for the specific string)
             Text(step.title)
                 .font(isPersonalizingText ? .manropeSemiBold(size: 20) : .manropeSemiBold(size: 24))
-                .foregroundColor(.black)
+                .foregroundColor(.wingmanBlack)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 40)
 
@@ -718,7 +755,7 @@ struct OnboardingView: View {
                     .frame(height: 10)
 
                 Capsule()
-                    .fill(Color.black)
+                    .fill(Color.wingmanBlack)
                     .frame(width: geo.size.width * max(0, min(1, progress)), height: 10)
                     .animation(.easeInOut(duration: 0.25), value: progress)
             }
@@ -1309,7 +1346,7 @@ struct LoadingDotsView: View {
         HStack(spacing: 8) {
             ForEach(0..<3) { idx in
                 Circle()
-                    .fill(idx == activeIndex ? Color.black : Color.gray.opacity(0.45))
+                    .fill(idx == activeIndex ? Color.wingmanBlack : Color.gray.opacity(0.45))
                     .frame(width: dotSize, height: dotSize)
                     .animation(.easeInOut(duration: 0.25), value: activeIndex)
             }

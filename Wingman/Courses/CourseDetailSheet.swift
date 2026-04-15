@@ -29,7 +29,7 @@ struct CourseDetailSheet: View {
                     } label: {
                         Image(systemName: "chevron.left")
                             .font(.system(size: 22))
-                            .foregroundColor(.black)
+                            .foregroundColor(.wingmanBlack)
                             .frame(width: 44, height: 44, alignment: .center)
                             .contentShape(Rectangle())
                     }
@@ -48,7 +48,7 @@ struct CourseDetailSheet: View {
                         VStack(alignment: .leading, spacing: 8) {
                             Text(course.title)
                                 .font(.manropeSemiBold(size: 20))
-                                .foregroundColor(.black)
+                                .foregroundColor(.wingmanBlack)
                                 .kerning(-0.3)
                             
                             // Course Summary from lessons data (gray text)
@@ -74,23 +74,23 @@ struct CourseDetailSheet: View {
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 16, height: 16)
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.wingmanBlack)
                                     .padding(.top, 2)
 
                                 Text(bannerText)
                                     .font(.manropeMedium(size: 14))
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.wingmanBlack)
                                     .fixedSize(horizontal: false, vertical: true)
 
                                 Spacer(minLength: 0)
                             }
                             .padding(16)
                             .frame(maxWidth: .infinity, alignment: .leading)
-                            .background(Color.black.opacity(0.05))
+                            .background(Color.wingmanBlack.opacity(0.05))
                             .cornerRadius(5)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 5)
-                                    .stroke(Color.black.opacity(0.1), lineWidth: 1)
+                                    .stroke(Color.wingmanBlack.opacity(0.1), lineWidth: 1)
                             )
                             .padding(.horizontal, 20)
                             .padding(.bottom, 20)
@@ -188,7 +188,7 @@ struct LessonCard: View {
                 HStack(alignment: .top, spacing: 12) {
                     Text(lesson.title)
                         .font(.manropeMedium(size: 18))
-                        .foregroundColor(lesson.isLocked ? Color(hex: "CCCCCC") : .black)
+                        .foregroundColor(lesson.isLocked ? Color(hex: "CCCCCC") : .wingmanBlack)
                         .multilineTextAlignment(.leading)
                         .fixedSize(horizontal: false, vertical: true)
                     
@@ -196,7 +196,7 @@ struct LessonCard: View {
                     
                     if lesson.isLocked {
                         Image("lock_icon")
-                            .foregroundColor(.black)
+                            .foregroundColor(.wingmanBlack)
                             .padding(.top, -10)
                     }
                 }
@@ -223,11 +223,11 @@ struct LessonCard: View {
             .overlay(
                 RoundedRectangle(cornerRadius: 5)
                     .stroke(
-                        lesson.isCompleted ? Color.black : Color.black.opacity(0.1),
+                        lesson.isCompleted ? Color.wingmanBlack : Color.wingmanBlack.opacity(0.1),
                         lineWidth: 1 // Always 1 px border
                     )
             )
-            .shadow(color: Color.black.opacity(0.06), radius: 5, x: 0, y: 2) // elevation to match PracticeCardView
+            .shadow(color: Color.wingmanBlack.opacity(0.06), radius: 5, x: 0, y: 2) // elevation to match PracticeCardView
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)

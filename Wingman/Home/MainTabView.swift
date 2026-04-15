@@ -149,7 +149,7 @@ struct TabBarButton: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 24, height: 24)
-                    .foregroundColor(isSelected ? .black : Color(red: 0.6, green: 0.6, blue: 0.6))
+                    .foregroundColor(isSelected ? .wingmanBlack : Color(red: 0.6, green: 0.6, blue: 0.6))
 
                 Text(title)
                     .font(.manropeMedium(size: 10))

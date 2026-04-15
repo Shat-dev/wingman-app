@@ -65,7 +65,7 @@ struct LandingView: View {
                     HStack(spacing: 6) {
                         ForEach(viewModel.pages.indices, id: \.self) { index in
                             Circle()
-                                .fill(viewModel.currentPage == index ? Color.black : Color.black.opacity(0.25))
+                                .fill(viewModel.currentPage == index ? Color.wingmanBlack : Color.wingmanBlack.opacity(0.25))
                                 .frame(width: 6, height: 6)
                         }
                     }
@@ -85,7 +85,7 @@ struct LandingView: View {
                                 RoundedRectangle(cornerRadius: 5)
                                     .stroke(Color.wingmanBlack.opacity(0.5), lineWidth: 1)
                             )
-                            .shadow(color: Color.black.opacity(0.06), radius: 5, x: 0, y: 2)
+                            .shadow(color: Color.wingmanBlack.opacity(0.06), radius: 5, x: 0, y: 2)
                     }
                     .navigationDestination(isPresented: $navigateToSignup) {
                         AuthView(mode: .signup)
@@ -117,7 +117,7 @@ struct LandingView: View {
                     } label: {
                         Text("Skip for now")
                             .font(.manropeSemiBold(size: 16))
-                            .foregroundColor(Color.black)
+                            .foregroundColor(Color.wingmanBlack)
                             .underline()
                             
                     }

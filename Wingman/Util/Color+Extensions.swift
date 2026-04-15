@@ -6,6 +6,13 @@
 //
 
 import SwiftUI
+import UIKit
+
+extension UIColor {
+    /// Soft black (#1A1A1A). UIKit-side counterpart of `Color.wingmanBlack`.
+    /// Used where UIKit APIs (UILabel.textColor, NSAttributedString, etc.) need a UIColor.
+    static let wingmanBlack = UIColor(red: 0.102, green: 0.102, blue: 0.102, alpha: 1.0)
+}
 
 extension Color {
     // MARK: - Hex Color Initializer

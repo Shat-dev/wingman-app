@@ -29,7 +29,7 @@ struct PaywallView: View {
                         // MARK: - Loading State
                         Spacer()
                         ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle(tint: .black))
+                            .progressViewStyle(CircularProgressViewStyle(tint: .wingmanBlack))
                             .scaleEffect(1.2)
                         Text("Loading subscription options...")
                             .font(.manropeRegular(size: 16))
@@ -58,13 +58,13 @@ struct PaywallView: View {
                                             HStack(alignment: .top, spacing: 12) {
                                                 Image("check")
                                                     .font(.system(size: 14, weight: .medium))
-                                                    .foregroundColor(.black)
+                                                    .foregroundColor(.wingmanBlack)
                                                     .frame(width: 16, height: 16)
                                                     .padding(.top, 2)
                                                 
                                                 Text(bullet)
                                                     .font(.manropeMedium(size: 16))
-                                                    .foregroundColor(.black)
+                                                    .foregroundColor(.wingmanBlack)
                                                     .lineSpacing(2)
                                                     .fixedSize(horizontal: false, vertical: true)
                                             }
@@ -84,7 +84,7 @@ struct PaywallView: View {
                         HStack(spacing: 8) {
                             ForEach(viewModel.pages.indices, id: \.self) { index in
                                 Circle()
-                                    .fill(viewModel.currentPage == index ? Color.black : Color.black.opacity(0.2))
+                                    .fill(viewModel.currentPage == index ? Color.wingmanBlack : Color.wingmanBlack.opacity(0.2))
                                     .frame(width: 8, height: 8)
                             }
                         }
@@ -150,7 +150,7 @@ struct PaywallView: View {
                             .frame(maxWidth: .infinity)
                             .frame(height: 52)
                             .foregroundColor(.white)
-                            .background(Color.black.opacity(viewModel.isPurchasing ? 0.7 : 1.0))
+                            .background(Color.wingmanBlack.opacity(viewModel.isPurchasing ? 0.7 : 1.0))
                             .cornerRadius(5)
                         }
                         .disabled(viewModel.isPurchasing)

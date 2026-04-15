@@ -27,7 +27,7 @@ struct PlanCard: View {
                             .foregroundColor(.white)
                             .padding(.horizontal, 10)
                             .padding(.vertical, 4)
-                            .background(Color.black)
+                            .background(Color.wingmanBlack)
                             .cornerRadius(6)
 
                         Spacer()
@@ -39,7 +39,7 @@ struct PlanCard: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(title)
                             .font(.custom("Manrope-SemiBold", size: 16))
-                            .foregroundColor(.black)
+                            .foregroundColor(.wingmanBlack)
 
                         Text(subtitle)
                             .font(.custom("Manrope-Regular", size: 13))
@@ -55,14 +55,14 @@ struct PlanCard: View {
 
                         Image(systemName: isSelected ? "largecircle.fill.circle" : "circle")
                             .font(.system(size: 22))
-                            .foregroundColor(.black)
+                            .foregroundColor(.wingmanBlack)
                     }
                 }
                 .padding()
             }
             .background(
                 RoundedRectangle(cornerRadius: 12)
-                    .stroke(isSelected ? Color.black : Color.gray.opacity(0.3), lineWidth: 1)
+                    .stroke(isSelected ? Color.wingmanBlack : Color.gray.opacity(0.3), lineWidth: 1)
             )
         }
         .buttonStyle(.plain)

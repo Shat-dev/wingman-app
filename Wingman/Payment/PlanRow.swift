@@ -32,7 +32,7 @@ struct PlanRow: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal, 20)
                         .padding(.vertical, 3)
-                        .background(Color.black)
+                        .background(Color.wingmanBlack)
                         .transition(.opacity.combined(with: .move(edge: .top)))
                 }
                 
@@ -43,7 +43,7 @@ struct PlanRow: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(title)
                             .font(.manropeSemiBold(size: 16))
-                            .foregroundColor(.black)
+                            .foregroundColor(.wingmanBlack)
 
                         Text(price)
                             .font(.manropeSemiBold(size: 12))
@@ -67,12 +67,12 @@ struct PlanRow: View {
                         // Radio Button
                         ZStack {
                             Circle()
-                                .stroke(isSelected ? Color.black : Color(hex: "D1D5DB"), lineWidth: 2)
+                                .stroke(isSelected ? Color.wingmanBlack : Color(hex: "D1D5DB"), lineWidth: 2)
                                 .frame(width: 24, height: 24)
                             
                             if isSelected {
                                 Circle()
-                                    .fill(Color.black)
+                                    .fill(Color.wingmanBlack)
                                     .frame(width: 12, height: 12)
                             }
                         }
@@ -85,7 +85,7 @@ struct PlanRow: View {
             .clipShape(RoundedRectangle(cornerRadius: 5))
             .overlay(
                 RoundedRectangle(cornerRadius: 5)
-                    .stroke(isSelected ? Color.black : Color(hex: "#E8E8E8"), lineWidth: isSelected ? 1.5 : 1)
+                    .stroke(isSelected ? Color.wingmanBlack : Color(hex: "#E8E8E8"), lineWidth: isSelected ? 1.5 : 1)
             )
             .animation(.easeInOut(duration: 0.2), value: badgeText != nil)
         }

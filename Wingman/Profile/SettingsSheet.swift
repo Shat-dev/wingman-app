@@ -42,7 +42,7 @@ struct SettingsSheet: View {
                     HStack {
                         Text("Settings")
                             .font(.manropeMedium(size: 18))
-                            .foregroundColor(.black)
+                            .foregroundColor(.wingmanBlack)
                         
                         Spacer()
                         
@@ -51,7 +51,7 @@ struct SettingsSheet: View {
                         }) {
                             Image(systemName: "xmark")
                                 .font(.system(size: 16, weight: .medium))
-                                .foregroundColor(.black)
+                                .foregroundColor(.wingmanBlack)
                                 .padding(.top, -20)
                                 .padding(.trailing, -2)
                                 .opacity(0.5)
@@ -72,11 +72,11 @@ struct SettingsSheet: View {
                         HStack(spacing: 8) {
                             Image("apple_icon")
                                 .font(.system(size: 16))
-                                .foregroundColor(.black)
+                                .foregroundColor(.wingmanBlack)
                             
                             Text(getUserEmail())
                                 .font(.manropeRegular(size: 16))
-                                .foregroundColor(.black)
+                                .foregroundColor(.wingmanBlack)
                             
                             Spacer()
                         }
@@ -97,7 +97,7 @@ struct SettingsSheet: View {
                                 
                                 Text("\(dailyReadingGoal) min / day")
                                     .font(.manropeRegular(size: 16))
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.wingmanBlack)
                             }
                             
                             Spacer()
@@ -120,7 +120,7 @@ struct SettingsSheet: View {
                             
                             Text(goalNotifications ? "ON" : "OFF")
                                 .font(.manropeRegular(size: 16))
-                                .foregroundColor(.black)
+                                .foregroundColor(.wingmanBlack)
                         }
                         
                         Spacer()
@@ -158,7 +158,7 @@ struct SettingsSheet: View {
                             }
                             Text(isRestoringPurchases ? "Restoring..." : "Restore Purchase")
                                 .font(.manropeMedium(size: 14))
-                                .foregroundColor(.black)
+                                .foregroundColor(.wingmanBlack)
                                 .underline()
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -174,7 +174,7 @@ struct SettingsSheet: View {
                     }) {
                         Text("Manage Subscriptions")
                             .font(.manropeMedium(size: 14))
-                            .foregroundColor(.black)
+                            .foregroundColor(.wingmanBlack)
                             .underline()
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
@@ -214,14 +214,14 @@ struct SettingsSheet: View {
                     }) {
                         Text("Log Out")
                             .font(.manropeSemiBold(size: 16))
-                            .foregroundColor(.black)
+                            .foregroundColor(.wingmanBlack)
                             .frame(maxWidth: .infinity)
                             .frame(height: 52)
                             .background(Color.white)
                             .cornerRadius(8)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.black, lineWidth: 1)
+                                    .stroke(Color.wingmanBlack, lineWidth: 1)
                             )
                     }
                     .padding(.horizontal, 24)

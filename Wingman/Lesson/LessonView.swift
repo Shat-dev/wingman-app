@@ -75,7 +75,7 @@ struct LessonView: View {
                     } label: {
                         Image(systemName: "chevron.left")
                             .font(.system(size: 22))
-                            .foregroundColor(.black)
+                            .foregroundColor(.wingmanBlack)
                             .frame(width: 44, height: 44, alignment: .center)
                             .contentShape(Rectangle())
                     }
@@ -88,7 +88,7 @@ struct LessonView: View {
                                 .frame(height: 10)
                             
                             Capsule()
-                                .fill(Color.black)
+                                .fill(Color.wingmanBlack)
                                 .frame(width: geometry.size.width * CGFloat(progress), height: 10)
                                 .animation(.easeInOut(duration: 0.25), value: progress)
                         }
@@ -303,7 +303,7 @@ struct IntroScreenView: View {
                 let centerYOffset = (topPadding - bottomPadding) / 2 // shift center when paddings differ
                 
                 Rectangle()
-                    .fill(Color.black.opacity(0.5))
+                    .fill(Color.wingmanBlack.opacity(0.5))
                     .frame(width: 1, height: paddedHeight)
                     .position(
                         x: geo.size.width * dividerPosition,
@@ -401,7 +401,7 @@ struct ScrollableContentView: UIViewRepresentable {
             let label = UILabel()
             label.text = item.text
             label.numberOfLines = 0
-            label.textColor = .black
+            label.textColor = .wingmanBlack
             label.translatesAutoresizingMaskIntoConstraints = false
             
             // Set Manrope font
@@ -418,7 +418,7 @@ struct ScrollableContentView: UIViewRepresentable {
                 string: item.text,
                 attributes: [
                     .font: label.font!,
-                    .foregroundColor: UIColor.black,
+                    .foregroundColor: UIColor.wingmanBlack,
                     .paragraphStyle: paragraphStyle
                 ]
             )

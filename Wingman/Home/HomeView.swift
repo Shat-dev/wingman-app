@@ -43,7 +43,7 @@ struct HomeView: View {
                         VStack(alignment: .leading, spacing: 2) {
                             Text("Good Morning," )
                                 .font(.manropeMedium(size: 24))
-                                .foregroundColor(.black)
+                                .foregroundColor(.wingmanBlack)
                             
                             // Show user name like Dashboard (from Supabase userMetadata["display_name"])
                             if let user = SupabaseManager.shared.client.auth.currentUser {
@@ -83,12 +83,12 @@ struct HomeView: View {
                                 .font(.manropeMedium(size: 20))
                                 .padding(.trailing, 16)
                         }
-                        .foregroundColor(.black)
+                        .foregroundColor(.wingmanBlack)
                         .frame(width: 64, height: 44)
                         .background(Color.white)
                         .overlay(
                             RoundedRectangle(cornerRadius: 5)
-                                .stroke(Color.black.opacity(0.15), lineWidth: 1)
+                                .stroke(Color.wingmanBlack.opacity(0.15), lineWidth: 1)
                         )
                         .cornerRadius(5)
                     }
@@ -104,7 +104,7 @@ struct HomeView: View {
                                 VStack(spacing: 0) {
                                     Text("Daily Practice")
                                         .font(.manropeMedium(size: 20))
-                                        .foregroundColor(.black)
+                                        .foregroundColor(.wingmanBlack)
                                         .padding(.top, 20)
                                         .frame(maxWidth: .infinity)
 
@@ -166,18 +166,18 @@ struct HomeView: View {
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: 22, height: 22)
-                                        .foregroundColor(.black)
+                                        .foregroundColor(.wingmanBlack)
 
                                     Text("Log Encounter")
                                         .font(.manropeSemiBold(size: 16))
-                                        .foregroundColor(.black)
+                                        .foregroundColor(.wingmanBlack)
                                 }
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 56)
                                 .background(Color.white)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 5)
-                                        .stroke(Color.black.opacity(0.35), lineWidth: 1)
+                                        .stroke(Color.wingmanBlack.opacity(0.35), lineWidth: 1)
                                 )
                                 .cornerRadius(5)
                             }
@@ -196,7 +196,7 @@ struct HomeView: View {
 
                                 Text(viewModel.motivationalQuote)
                                     .font(.georgiaItalic(size: 16))
-                                    .foregroundColor(Color.black.opacity(0.75))
+                                    .foregroundColor(Color.wingmanBlack.opacity(0.75))
                                     .multilineTextAlignment(.leading)
                                     .lineSpacing(3)
                                     .padding(.top, 0)
@@ -213,7 +213,7 @@ struct HomeView: View {
                                 VStack(alignment: .leading, spacing: 16) {
                                     Text("Continue")
                                         .font(.manropeMedium(size: 20))
-                                        .foregroundColor(.black)
+                                        .foregroundColor(.wingmanBlack)
                                         .padding(.horizontal, 20)
                                     
                                     // Continue Course Card - Pixel Perfect Design
@@ -231,7 +231,7 @@ struct HomeView: View {
                             VStack(alignment: .leading, spacing: 16) {
                                 Text("Your Modules")
                                     .font(.manropeMedium(size: 20))
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.wingmanBlack)
                                     .padding(.horizontal, 20)
                                 
                                 // Custom Swipeable Carousel with peek
@@ -375,7 +375,7 @@ struct PeekCarousel: View {
             HStack(spacing: 8) {
                 ForEach(0..<modules.count, id: \.self) { index in
                     Circle()
-                        .fill(index == currentPage ? Color.black : Color.gray.opacity(0.3))
+                        .fill(index == currentPage ? Color.wingmanBlack : Color.gray.opacity(0.3))
                         .frame(width: 8, height: 8)
                 }
             }
@@ -421,7 +421,7 @@ struct ModuleCarouselCard: View {
                 // Title
                 Text(title)
                     .font(.manropeMedium(size: 18))
-                    .foregroundColor(.black)
+                    .foregroundColor(.wingmanBlack)
                     .multilineTextAlignment(.center)
                 
                 // Subtitle
@@ -436,7 +436,7 @@ struct ModuleCarouselCard: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 50)
-                        .background(Color.black)
+                        .background(Color.wingmanBlack)
                         .cornerRadius(5)
                 }
                 .padding(.top, 8)
@@ -448,9 +448,9 @@ struct ModuleCarouselCard: View {
         .cornerRadius(5)
         .overlay(
             RoundedRectangle(cornerRadius: 5)
-                .stroke(Color.black.opacity(0.08), lineWidth: 1)
+                .stroke(Color.wingmanBlack.opacity(0.08), lineWidth: 1)
         )
-        .shadow(color: Color.black.opacity(0.06), radius: 5, x: 0, y: 2)
+        .shadow(color: Color.wingmanBlack.opacity(0.06), radius: 5, x: 0, y: 2)
     }
 }
 
@@ -483,7 +483,7 @@ struct ContinueCourseCard: View {
                     // Title: "Category: Course Name"
                     Text("\(course.categoryName): \(course.courseName)")
                         .font(.manropeMedium(size: 16))
-                        .foregroundColor(.black)
+                        .foregroundColor(.wingmanBlack)
                         .lineSpacing(4)
                         .multilineTextAlignment(.leading)
                         .fixedSize(horizontal: false, vertical: true)
@@ -503,7 +503,7 @@ struct ContinueCourseCard: View {
                                 
                                 // Filled progress
                                 RoundedRectangle(cornerRadius: 2)
-                                    .fill(Color.black)
+                                    .fill(Color.wingmanBlack)
                                     .frame(width: geometry.size.width * course.progress, height: 4)
                             }
                         }
@@ -526,7 +526,7 @@ struct ContinueCourseCard: View {
             .cornerRadius(5)
             .overlay(
                 RoundedRectangle(cornerRadius: 5)
-                    .stroke(Color.black.opacity(0.08), lineWidth: 1)
+                    .stroke(Color.wingmanBlack.opacity(0.08), lineWidth: 1)
             )
         }
         .buttonStyle(.plain)

@@ -45,8 +45,9 @@ struct AuthView: View {
                 Button {
                     handleBackButton()
                 } label: {
-                    Image("auth_back")
-                        .foregroundColor(.black)
+                    Image(systemName: "chevron.left")
+                        .font(.system(size: 22))
+                        .foregroundColor(.wingmanBlack)
                         .frame(width: 44, height: 44, alignment: .center)
                         .contentShape(Rectangle())
                 }
@@ -105,7 +106,7 @@ struct AuthView: View {
                             }
                         }
                         .disabled(authManager.isGoogleSignInLoading)
-                        .shadow(color: Color.black.opacity(0.06), radius: 5, x: 0, y: 2)
+                        .shadow(color: Color.wingmanBlack.opacity(0.06), radius: 5, x: 0, y: 2)
                         
                         outlineButton(
                             title: authManager.isAppleSignInLoading ? "Signing in..." : "Continue with Apple",
@@ -115,7 +116,7 @@ struct AuthView: View {
                             authManager.signInWithApple()
                         }
                         .disabled(authManager.isAppleSignInLoading)
-                        .shadow(color: Color.black.opacity(0.06), radius: 5, x: 0, y: 2)
+                        .shadow(color: Color.wingmanBlack.opacity(0.06), radius: 5, x: 0, y: 2)
                     }
                     
                     // Show Google Sign-In error if any
@@ -228,7 +229,7 @@ struct AuthView: View {
                 if showSignupSuccessMessage {
                     ZStack {
                         // Semi-transparent background
-                        Color.black.opacity(0.4)
+                        Color.wingmanBlack.opacity(0.4)
                             .ignoresSafeArea()
                         
                         // Success card
@@ -248,7 +249,7 @@ struct AuthView: View {
                             VStack(spacing: 8) {
                                 Text("Signup Successful!")
                                     .font(.manropeSemiBold(size: 22))
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.wingmanBlack)
                                 
                                 Text("Please login to continue")
                                     .font(.manropeRegular(size: 16))
@@ -259,7 +260,7 @@ struct AuthView: View {
                         .background(
                             RoundedRectangle(cornerRadius: 20)
                                 .fill(Color.white)
-                                .shadow(color: Color.black.opacity(0.2), radius: 20, x: 0, y: 10)
+                                .shadow(color: Color.wingmanBlack.opacity(0.2), radius: 20, x: 0, y: 10)
                         )
                         .padding(.horizontal, 40)
                     }
@@ -321,7 +322,7 @@ struct AuthView: View {
                     .frame(height: 10)
 
                 Capsule()
-                    .fill(Color.black)
+                    .fill(Color.wingmanBlack)
                     .frame(width: geo.size.width * progress, height: 10)
                     .animation(.easeInOut(duration: 0.25), value: progress)
             }
@@ -408,7 +409,7 @@ struct AuthView: View {
             }
             .frame(maxWidth: .infinity)
             .padding()
-            .background(isEnabled ? Color.black : Color.wingmanBlack.opacity(0.5))
+            .background(isEnabled ? Color.wingmanBlack : Color.wingmanBlack.opacity(0.5))
             .cornerRadius(5)
         }
         .disabled(!isEnabled || viewModel.isLoading)
@@ -435,7 +436,7 @@ struct AuthView: View {
             }
             .frame(maxWidth: .infinity)
             .padding()
-            .foregroundColor(.black)
+            .foregroundColor(.wingmanBlack)
             .overlay(
                 RoundedRectangle(cornerRadius: 5)
                     .stroke(Color.gray.opacity(0.6), lineWidth: 1)

@@ -32,7 +32,7 @@ struct LessonCompleteView: View {
                 // MARK: - Title
                 Text("Lesson Complete!")
                     .font(.manropeSemiBold(size: 28))
-                    .foregroundColor(.black)
+                    .foregroundColor(.wingmanBlack)
                     .kerning(-0.3)
                     .padding(.bottom, 20)
                 
@@ -41,11 +41,11 @@ struct LessonCompleteView: View {
                     VStack(spacing: 8) {
                         Text("Up Next")
                             .font(.manropeMedium(size: 14))
-                            .foregroundColor(Color.black.opacity(0.7))
+                            .foregroundColor(Color.wingmanBlack.opacity(0.7))
                         
                         Text(nextLesson.title)
                             .font(.manropeMedium(size: 14))
-                            .foregroundColor(.black)
+                            .foregroundColor(.wingmanBlack)
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 40)
                     }
@@ -57,7 +57,7 @@ struct LessonCompleteView: View {
                         
                         Text("Course Complete!")
                             .font(.manropeMedium(size: 14))
-                            .foregroundColor(.black)
+                            .foregroundColor(.wingmanBlack)
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 40)
                     }
@@ -76,7 +76,7 @@ struct LessonCompleteView: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 52)
-                        .background(Color.black)
+                        .background(Color.wingmanBlack)
                         .cornerRadius(5)
                 }
                 .padding(.horizontal, 20)

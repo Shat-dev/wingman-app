@@ -29,16 +29,16 @@ struct ErrorViewScreen: View {
                     
                     Text("Oops!")
                         .font(.system(size: 24, weight: .semibold))
-                        .foregroundColor(.black)
+                        .foregroundColor(.wingmanBlack)
                     
                     Text(message)
                         .font(.system(size: 16, weight: .medium))
-                        .foregroundColor(.black.opacity(0.7))
+                        .foregroundColor(.wingmanBlack.opacity(0.7))
                         .multilineTextAlignment(.center)
                     
                     Text("Please try again!")
                         .font(.system(size: 16, weight: .medium))
-                        .foregroundColor(.black.opacity(0.7))
+                        .foregroundColor(.wingmanBlack.opacity(0.7))
                         .multilineTextAlignment(.center)
                 }
                 .padding(.horizontal, 24)
@@ -54,7 +54,7 @@ struct ErrorViewScreen: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 52)
-                        .background(Color.black)
+                        .background(Color.wingmanBlack)
                         .cornerRadius(10)
                 }
                 .padding(.horizontal, 24)

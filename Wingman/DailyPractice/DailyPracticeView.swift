@@ -34,8 +34,8 @@ struct DailyPracticeView: View {
                         handleBackButton()
                     } label: {
                         Image(systemName: "chevron.left")
-                            .font(.system(size: 20, weight: .bold))
-                            .foregroundColor(.black)
+                            .font(.system(size: 22))
+                            .foregroundColor(.wingmanBlack)
                             .frame(width: 44, height: 44, alignment: .center)
                             .contentShape(Rectangle())
                     }
@@ -108,7 +108,7 @@ struct DailyPracticeView: View {
             
             Text("Loading today's practice questions...")
                 .font(.manropeMedium(size: 18))
-                .foregroundColor(.black.opacity(0.7))
+                .foregroundColor(.wingmanBlack.opacity(0.7))
             
             Spacer()
         }
@@ -128,8 +128,8 @@ struct DailyPracticeView: View {
                         dismiss()
                     } label: {
                         Image(systemName: "chevron.left")
-                            .font(.system(size: 20, weight: .bold))
-                            .foregroundColor(.black)
+                            .font(.system(size: 22))
+                            .foregroundColor(.wingmanBlack)
                             .frame(width: 44, height: 44, alignment: .center)
                             .contentShape(Rectangle())
                     }
@@ -147,18 +147,18 @@ struct DailyPracticeView: View {
                     
                     Text("Oops!")
                         .font(.manropeSemiBold(size: 24))
-                        .foregroundColor(.black)
+                        .foregroundColor(.wingmanBlack)
                     Text("Somthing went wrong")
                         .font(.manropeSemiBold(size: 16))
-                        .foregroundColor(.black)
+                        .foregroundColor(.wingmanBlack)
                         .padding(.top,2)
                     Text("Please Try again!")
                         .font(.manropeSemiBold(size: 16))
-                        .foregroundColor(.black)
+                        .foregroundColor(.wingmanBlack)
                     
 //                    Text(message)
 //                        .font(.manropeSemiBold(size: 16))
-//                        .foregroundColor(.black.opacity(0.7))
+//                        .foregroundColor(.wingmanBlack.opacity(0.7))
 //                        .multilineTextAlignment(.center)
 
                     
@@ -177,7 +177,7 @@ struct DailyPracticeView: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 52)
-                        .background(Color.black)
+                        .background(Color.wingmanBlack)
                         .cornerRadius(5)
                 }
                 .padding(.horizontal, 20)
@@ -197,11 +197,11 @@ struct DailyPracticeView: View {
             
             Text("No questions available")
                 .font(.manropeSemiBold(size: 20))
-                .foregroundColor(.black)
+                .foregroundColor(.wingmanBlack)
             
             Text("Check back later for new practice questions.")
                 .font(.manropeMedium(size: 16))
-                .foregroundColor(.black.opacity(0.7))
+                .foregroundColor(.wingmanBlack.opacity(0.7))
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 24)
             
@@ -220,7 +220,7 @@ struct DailyPracticeView: View {
                     // MARK: - Question Number and Text
                     Text("\(viewModel.currentQuestion.number). \(viewModel.currentQuestion.question)")
                         .font(.manropeMedium(size: 20))
-                        .foregroundColor(.black)
+                        .foregroundColor(.wingmanBlack)
                         .lineSpacing(1)
                         .fixedSize(horizontal: false, vertical: true)
                     
@@ -280,7 +280,7 @@ struct DailyPracticeView: View {
                     .frame(height: 10)
 
                 Capsule()
-                    .fill(Color.black)
+                    .fill(Color.wingmanBlack)
                     .frame(width: geo.size.width * max(0, min(1, progress)), height: 10)
                     .animation(.easeInOut(duration: 0.25), value: progress)
             }
@@ -309,7 +309,7 @@ struct DailyPracticeView: View {
                 RoundedRectangle(cornerRadius: 5)
                     .stroke(buttonBorderColor(isSelected: isSelected, isCorrect: isCorrect, isWrong: isWrong), lineWidth: 1)
             )
-            .shadow(color: Color.black.opacity(0.0002), radius: 0.03, x: 0, y: 0.01)
+            .shadow(color: Color.wingmanBlack.opacity(0.0002), radius: 0.03, x: 0, y: 0.01)
         }
         .disabled(viewModel.hasCheckedAnswer)
     }
@@ -345,7 +345,7 @@ struct DailyPracticeView: View {
                 RoundedRectangle(cornerRadius: 5)
                     .stroke(multipleSelectBorderColor(isSelected: isSelected, isCorrect: isCorrect, isWrong: isWrong, shouldShowCorrectButNotSelected: shouldShowCorrectButNotSelected), lineWidth: 1)
             )
-            .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 2)
+            .shadow(color: .wingmanBlack.opacity(0.1), radius: 8, x: 0, y: 2)
         }
         .disabled(viewModel.hasCheckedAnswer)
     }
@@ -399,7 +399,7 @@ struct DailyPracticeView: View {
         } else if isWrong {
             return Color.customLightRed
         } else if isSelected {
-            return Color.black
+            return Color.wingmanBlack
         } else {
             return Color.white
         }
@@ -455,7 +455,7 @@ struct DailyPracticeView: View {
         } else if isSelected && isWrong {
             return Color.customRed
         } else if isSelected {
-            return Color.black // Black background for selected items before checking
+            return Color.wingmanBlack // Black background for selected items before checking
         } else {
             return Color.customLightGray
         }
@@ -469,7 +469,7 @@ struct DailyPracticeView: View {
         } else if isWrong {
             return Color.customRed
         } else if isSelected {
-            return Color.black
+            return Color.wingmanBlack
         } else {
             return Color.customDark.opacity(0.5)
         }
@@ -529,7 +529,7 @@ struct DailyPracticeView: View {
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
                 .frame(height: 52)
-                .background(viewModel.isCheckAnswerEnabled ? Color.black : Color.black.opacity(0.4))
+                .background(viewModel.isCheckAnswerEnabled ? Color.wingmanBlack : Color.wingmanBlack.opacity(0.4))
                 .cornerRadius(5)
         }
         .disabled(!viewModel.isCheckAnswerEnabled)
@@ -572,7 +572,7 @@ struct PrimaryButtonStyle: ButtonStyle {
             .foregroundColor(.white)
             .frame(maxWidth: .infinity)
             .frame(height: 52)
-            .background(Color.black)
+            .background(Color.wingmanBlack)
             .cornerRadius(5)
             .scaleEffect(configuration.isPressed ? 0.96 : 1.0)
             .animation(.easeInOut(duration: 0.1), value: configuration.isPressed)

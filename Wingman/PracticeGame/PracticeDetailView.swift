@@ -69,9 +69,10 @@ struct PracticeDetailView: View {
         HStack {
             Button(action: { dismiss() }) {
                 Image(systemName: "chevron.left")
-                    .font(.system(size: 18, weight: .medium))
+                    .font(.system(size: 22))
                     .foregroundColor(.wingmanBlack)
-                    .frame(width: 44, height: 44)
+                    .frame(width: 44, height: 44, alignment: .center)
+                    .contentShape(Rectangle())
             }
             
             Spacer()

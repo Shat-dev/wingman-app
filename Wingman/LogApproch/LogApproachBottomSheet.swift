@@ -37,7 +37,7 @@ struct LogApproachBottomSheet: View {
                 HStack {
                     Text(viewModel.headerTitle)
                         .font(.manropeMedium(size: 20))
-                        .foregroundColor(.black)
+                        .foregroundColor(.wingmanBlack)
 
                     Spacer()
                 }
@@ -53,7 +53,7 @@ struct LogApproachBottomSheet: View {
                             HStack(spacing: 6) {
                                 Text("What type of Interaction ?")
                                     .font(.manropeMedium(size: 16))
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.wingmanBlack)
 
                                 Spacer()
 
@@ -100,13 +100,13 @@ struct LogApproachBottomSheet: View {
                             HStack {
                                 Text("Confidence Level")
                                     .font(.manropeMedium(size: 16))
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.wingmanBlack)
 
                                 Spacer()
 
                                 Text("\(Int(viewModel.anxietyLevel))")
                                     .font(.manropeMedium(size: 16))
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.wingmanBlack)
                             }
 
                             VStack(spacing: 8) {
@@ -120,7 +120,7 @@ struct LogApproachBottomSheet: View {
 
                                         // Active track
                                         RoundedRectangle(cornerRadius: 2)
-                                            .fill(Color.black)
+                                            .fill(Color.wingmanBlack)
                                             .frame(
                                                 width: geometry.size.width * CGFloat((viewModel.anxietyLevel - 1) / 9),
                                                 height: 4
@@ -128,7 +128,7 @@ struct LogApproachBottomSheet: View {
 
                                         // Thumb
                                         Circle()
-                                            .fill(Color.black)
+                                            .fill(Color.wingmanBlack)
                                             .frame(width: 20, height: 20)
                                             .offset(
                                                 x: geometry.size.width * CGFloat((viewModel.anxietyLevel - 1) / 9) - 10
@@ -170,11 +170,11 @@ struct LogApproachBottomSheet: View {
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Title")
                                 .font(.manropeMedium(size: 16))
-                                .foregroundColor(.black)
+                                .foregroundColor(.wingmanBlack)
 
                             TextField("E.g. Approached at Cafe", text: $viewModel.title)
                                 .font(.manropeRegular(size: 14))
-                                .foregroundColor(.black)
+                                .foregroundColor(.wingmanBlack)
                                 .padding(.horizontal, 14)
                                 .padding(.vertical, 14)
                                 .background(Color(red: 0.98, green: 0.98, blue: 0.98))
@@ -190,7 +190,7 @@ struct LogApproachBottomSheet: View {
                             HStack {
                                 Text("Notes")
                                     .font(.manropeMedium(size: 16))
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.wingmanBlack)
                                 
                                 Spacer()
                                 
@@ -210,7 +210,7 @@ struct LogApproachBottomSheet: View {
 
                                 TextEditor(text: $viewModel.notes)
                                     .font(.manropeRegular(size: 14))
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.wingmanBlack)
                                     .frame(minHeight: 100)
                                     .padding(.horizontal, 10)
                                     .padding(.vertical, 10)
@@ -273,7 +273,7 @@ struct LogApproachBottomSheet: View {
                             }
                             .frame(maxWidth: .infinity)
                             .frame(height: 52)
-                            .background(viewModel.canSave ? Color.black : Color.gray.opacity(0.3))
+                            .background(viewModel.canSave ? Color.wingmanBlack : Color.gray.opacity(0.3))
                             .cornerRadius(5)
                         }
                         .disabled(!viewModel.canSave || viewModel.isSaving)
@@ -359,19 +359,19 @@ struct RadioButton: View {
                 // Radio circle
                 ZStack {
                     Circle()
-                        .stroke(isSelected ? Color.black : Color.gray.opacity(0.3), lineWidth: 1.5)
+                        .stroke(isSelected ? Color.wingmanBlack : Color.gray.opacity(0.3), lineWidth: 1.5)
                         .frame(width: 20, height: 20)
 
                     if isSelected {
                         Circle()
-                            .fill(Color.black)
+                            .fill(Color.wingmanBlack)
                             .frame(width: 10, height: 10)
                     }
                 }
 
                 Text(title)
                     .font(.manropeRegular(size: 16))
-                    .foregroundColor(.black)
+                    .foregroundColor(.wingmanBlack)
 
                 Spacer()
             }

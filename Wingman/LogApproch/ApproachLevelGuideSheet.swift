@@ -29,7 +29,7 @@ struct ApproachLevelGuideSheet: View {
                 HStack {
                     Text("Approach Level Guide")
                         .font(.manropeMedium(size: 20))
-                        .foregroundColor(.black)
+                        .foregroundColor(.wingmanBlack)
 
                     Spacer()
 
@@ -152,7 +152,7 @@ struct LevelSection: View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Level \(number): \(title)")
                 .font(.manropeMedium(size: 16))
-                .foregroundColor(.black)
+                .foregroundColor(.wingmanBlack)
 
             Text(description)
                 .font(.manropeRegular(size: 14))
@@ -162,7 +162,7 @@ struct LevelSection: View {
             VStack(alignment: .leading, spacing: 8) {
                 Text("Examples")
                     .font(.manropeMedium(size: 14))
-                    .foregroundColor(.black)
+                    .foregroundColor(.wingmanBlack)
                     .padding(.top, 4)
 
                 ForEach(examples, id: \.self) { example in

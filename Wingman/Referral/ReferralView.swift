@@ -47,7 +47,7 @@ struct ReferralView: View {
                         authManager.completePaywallFlow()
                     } label: {
                         Text("Skip")
-                            .foregroundColor(.black)
+                            .foregroundColor(.wingmanBlack)
                             .font(.manropeSemiBold(size: 16))
                             .underline()
                     }

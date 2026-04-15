@@ -36,7 +36,7 @@ struct QuestionsCompleteView: View {
                 // MARK: - Title
                 Text("Daily Practice Complete!")
                     .font(.manropeSemiBold(size: 24))
-                    .foregroundColor(.black)
+                    .foregroundColor(.wingmanBlack)
                     .kerning(-0.3)
                     .padding(.bottom, 30)
                 
@@ -87,7 +87,7 @@ struct QuestionsCompleteView: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 52)
-                        .background(Color.black)
+                        .background(Color.wingmanBlack)
                         .cornerRadius(5)
                 }
                 .padding(.horizontal, 20)

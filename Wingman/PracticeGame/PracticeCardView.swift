@@ -73,7 +73,7 @@ struct PracticeCardView: View {
                 RoundedRectangle(cornerRadius: 5)
                     .stroke(Color(hex: "#E5E5E5"), lineWidth: 1)
             )
-            .shadow(color: Color.black.opacity(0.06), radius: 5, x: 0, y: 2)
+            .shadow(color: Color.wingmanBlack.opacity(0.06), radius: 5, x: 0, y: 2)
         }
         .buttonStyle(PracticeCardButtonStyle())
         .disabled(practice.isLocked)

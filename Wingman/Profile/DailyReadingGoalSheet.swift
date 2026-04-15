@@ -47,7 +47,7 @@ struct DailyReadingGoalSheet: View {
                     HStack {
                         Text("Daily Reading Goal")
                             .font(.manropeMedium(size: 18))
-                            .foregroundColor(.black)
+                            .foregroundColor(.wingmanBlack)
                         
                         Spacer()
                         
@@ -56,7 +56,7 @@ struct DailyReadingGoalSheet: View {
                         }) {
                             Image(systemName: "xmark")
                                 .font(.system(size: 16, weight: .medium))
-                                .foregroundColor(.black)
+                                .foregroundColor(.wingmanBlack)
                                 .padding(.top, -20)
                                 .padding(.trailing, -2)
                                 .opacity(0.5)
@@ -77,14 +77,14 @@ struct DailyReadingGoalSheet: View {
                                 HStack {
                                     Text("\(goal) min / day")
                                         .font(.manropeRegular(size: 16))
-                                        .foregroundColor(.black)
+                                        .foregroundColor(.wingmanBlack)
                                     
                                     Spacer()
                                     
                                     if selectedGoal == goal {
                                         Image(systemName: "checkmark")
                                             .font(.system(size: 14, weight: .medium))
-                                            .foregroundColor(.black)
+                                            .foregroundColor(.wingmanBlack)
                                     } else {
                                         Image(systemName: "chevron.right")
                                             .font(.system(size: 14, weight: .medium))
@@ -127,7 +127,7 @@ struct DailyReadingGoalSheet: View {
                         }
                         .frame(maxWidth: .infinity)
                         .frame(height: 52)
-                        .background(Color.black)
+                        .background(Color.wingmanBlack)
                         .cornerRadius(8)
                     }
                     .disabled(isSaving)

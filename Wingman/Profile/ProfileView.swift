@@ -76,7 +76,7 @@ struct ProfileView: View {
                                     
                                     Text(userName)
                                         .font(.manropeMedium(size: 18))
-                                        .foregroundColor(.black)
+                                        .foregroundColor(.wingmanBlack)
                                     
                                     Spacer()
                                     
@@ -382,7 +382,7 @@ struct WeekStreakCard: View {
                         Image(day.2 ? "flame_fill_p" : "flame")
                             .resizable()
                             .scaledToFit()
-                            .foregroundColor(day.2 ? .black : .gray.opacity(0.3))
+                            .foregroundColor(day.2 ? .wingmanBlack : .gray.opacity(0.3))
                             .frame(width: 17, height: 24)
                         
                         Text(day.0)
@@ -408,11 +408,11 @@ struct WeekStreakCard: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 14, height: 14)
-                            .foregroundColor(.black)
+                            .foregroundColor(.wingmanBlack)
 
                         Text("\(currentStreak) days")
                             .font(.manropeMedium(size: 14))
-                            .foregroundColor(.black)
+                            .foregroundColor(.wingmanBlack)
                     }
                 }
                 
@@ -428,10 +428,10 @@ struct WeekStreakCard: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 14, height: 14)
-                            .foregroundColor(.black)
+                            .foregroundColor(.wingmanBlack)
                         Text("\(totalStreak) days")
                             .font(.manropeMedium(size: 14))
-                            .foregroundColor(.black)
+                            .foregroundColor(.wingmanBlack)
                     }
                 }
             }
@@ -445,7 +445,7 @@ struct WeekStreakCard: View {
             RoundedRectangle(cornerRadius: 5)
                 .stroke(Color.gray.opacity(0.2), lineWidth: 1)
         )
-        .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.wingmanBlack.opacity(0.05), radius: 8, x: 0, y: 2)
     }
 }
 
@@ -459,7 +459,7 @@ struct InviteFriendsCard: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Invite Friends")
                         .font(.manropeMedium(size: 18))
-                        .foregroundColor(.black)
+                        .foregroundColor(.wingmanBlack)
                     
                     Text("Invite your friends to the community and learn together")
                         .font(.manropeRegular(size: 14))
@@ -483,7 +483,7 @@ struct InviteFriendsCard: View {
             
             .background(Color.white)
             .cornerRadius(5)
-            .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
+            .shadow(color: Color.wingmanBlack.opacity(0.05), radius: 8, x: 0, y: 2)
             .overlay(
                 RoundedRectangle(cornerRadius: 5)
                     .stroke(Color.gray.opacity(0.2), lineWidth: 1)
@@ -512,7 +512,7 @@ struct ConfidenceChartCard: View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Confidence Over Time")
                 .font(.manropeMedium(size: 12))
-                .foregroundColor(.black)
+                .foregroundColor(.wingmanBlack)
             
             // Simple line chart placeholder
             GeometryReader { geometry in
@@ -530,7 +530,7 @@ struct ConfidenceChartCard: View {
                         path.addLine(to: CGPoint(x: x, y: y))
                     }
                 }
-                .stroke(Color.black, lineWidth: 2)
+                .stroke(Color.wingmanBlack, lineWidth: 2)
                 
                 // Data points
                 Path { path in
@@ -545,7 +545,7 @@ struct ConfidenceChartCard: View {
                         path.addEllipse(in: CGRect(x: x - 3, y: y - 3, width: 6, height: 6))
                     }
                 }
-                .fill(Color.black)
+                .fill(Color.wingmanBlack)
             }
             .frame(height: 120)
             .padding(.top, 8)
@@ -553,7 +553,7 @@ struct ConfidenceChartCard: View {
         .padding(16)
         .background(Color.white)
         .cornerRadius(5)
-        .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.wingmanBlack.opacity(0.05), radius: 8, x: 0, y: 2)
         .overlay(
             RoundedRectangle(cornerRadius: 5)
                 .stroke(Color.gray.opacity(0.2), lineWidth: 1)
@@ -569,7 +569,7 @@ struct ApproachesBreakdownCard: View {
         VStack(alignment: .leading, spacing: 16) {
             Text("Approaches Breakdown")
                 .font(.manropeMedium(size: 18))
-                .foregroundColor(.black)
+                .foregroundColor(.wingmanBlack)
                 .padding(.bottom,5)
             
             if breakdown.isEmpty {
@@ -613,7 +613,7 @@ struct ApproachesBreakdownCard: View {
                                     
                                     if approach.2 > 0 {
                                         RoundedRectangle(cornerRadius: 4)
-                                            .fill(Color.black)
+                                            .fill(Color.wingmanBlack)
                                             .frame(width: geometry.size.width * approach.2, height: 8)
                                     }
                                 }
@@ -627,7 +627,7 @@ struct ApproachesBreakdownCard: View {
         .padding(20)
         .background(Color.white)
         .cornerRadius(5)
-        .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.wingmanBlack.opacity(0.05), radius: 8, x: 0, y: 2)
         .overlay(
             RoundedRectangle(cornerRadius: 5)
                 .stroke(Color.gray.opacity(0.2), lineWidth: 1)
@@ -645,12 +645,12 @@ struct ApproachesLoggedCard: View {
             HStack {
                 Image("feather")
                     .font(.system(size: 18))
-                    .foregroundColor(.black)
+                    .foregroundColor(.wingmanBlack)
                 
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Approaches logged")
                         .font(.manropeSemiBold(size: 15))
-                        .foregroundColor(.black)
+                        .foregroundColor(.wingmanBlack)
                     
                 }
                 
@@ -688,7 +688,7 @@ struct ApproachesLoggedCard: View {
         }
         .background(Color.white)
         .cornerRadius(5)
-        .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.wingmanBlack.opacity(0.05), radius: 8, x: 0, y: 2)
         .overlay(
             RoundedRectangle(cornerRadius: 5)
                 .stroke(Color.gray.opacity(0.2), lineWidth: 1)
