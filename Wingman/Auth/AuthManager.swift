@@ -217,6 +217,11 @@ final class AuthManager: ObservableObject {
                     await checkUserQuestionStatus(userId: session.user.id.uuidString)
                     await checkUserPaywallFlowStatus(userId: session.user.id.uuidString)
 
+                    // ✅ Hydrate lesson progress from Supabase user_metadata so
+                    // users who reinstall / switch devices don't lose progress.
+                    // Non-blocking; merges cloud + local and pushes back up.
+                    await LessonDataService.shared.hydrateLessonProgressFromCloud()
+
                     print("✅ User signed in: \(session.user.email ?? "unknown")")
                     print("🎯 Auth state updated - RootView should now react")
                 }
@@ -244,7 +249,12 @@ final class AuthManager: ObservableObject {
                     // ✅ Load user state
                     await checkUserQuestionStatus(userId: session.user.id.uuidString)
                     await checkUserPaywallFlowStatus(userId: session.user.id.uuidString)
-                    
+
+                    // ✅ Hydrate lesson progress from Supabase user_metadata
+                    // after session restoration so returning users (including
+                    // post-reinstall) get their course progress back.
+                    await LessonDataService.shared.hydrateLessonProgressFromCloud()
+
                     // ✅ NEW: If user was anonymous and already paid, skip paywall
                     let anonymousManager = AnonymousUserManager.shared
                     if self.isAnonymousUser && anonymousManager.hasActivePurchase {
