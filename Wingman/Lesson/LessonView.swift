@@ -130,19 +130,22 @@ struct LessonView: View {
                     }
                 }
                 
-                // MARK: - Bottom Bar (Course Title)
+                // MARK: - Bottom Bar (Lesson Title)
                 VStack(spacing: 0) {
-                    Text(lesson.courseTitle)
+                    Text(lesson.title)
                         .font(.manropeSemiBold(size: 12))
                         .foregroundColor(Color(hex: "1A1A1A"))
                         .opacity(0.5)
                         .multilineTextAlignment(.center)
+                        .lineLimit(1)
+                        .truncationMode(.tail)
                 }
                 .padding(.bottom, -10)
             }
         }
         .navigationBarHidden(true)
         .enableInteractivePopGesture()
+        .toolbar(.hidden, for: .tabBar)
         .onAppear {
             tabBarVisibility.hideTabBar()
         }
