@@ -27,6 +27,11 @@ final class PaywallViewModel: ObservableObject {
     // MARK: - Carousel
     @Published var currentPage: Int = 0
 
+    // MARK: - In-app Safari
+    /// Drives a `.sheet(item:)` that presents Privacy/Terms in an
+    /// SFSafariViewController modal instead of bouncing out to Safari.app.
+    @Published var safariLink: IdentifiableURL?
+
     let pages: [PaywallPage] = [
         PaywallPage(
             imageName: "paywall_1",
@@ -197,7 +202,7 @@ final class PaywallViewModel: ObservableObject {
     // MARK: - Footer Links
     func openPrivacy() {
         if let url = URL(string: Constants.PRIVACY_POLICY_URL) {
-            UIApplication.shared.open(url)
+            safariLink = IdentifiableURL(url: url)
         }
     }
     
@@ -232,7 +237,7 @@ final class PaywallViewModel: ObservableObject {
     
     func openTerms() {
         if let url = URL(string: Constants.TERMS_CONDITIONS_URL) {
-            UIApplication.shared.open(url)
+            safariLink = IdentifiableURL(url: url)
         }
     }
 }

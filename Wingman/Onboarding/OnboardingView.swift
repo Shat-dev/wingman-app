@@ -58,9 +58,52 @@ struct OnboardingView: View {
             }
         }()
         
-        VStack(spacing: 0) {
-            // MARK: - Fixed Top Bar (Back Chevron + Progress Bar)
-            // This stays fixed and doesn't animate - only hide on loading screen
+        // MARK: - Animated Content Area
+        // The top bar is now pinned via `.safeAreaInset(edge: .top)` below so
+        // its Y position is decoupled from this content's size. Even when the
+        // inner content demands more vertical space than the parent has
+        // (causing center-overflow in the old layout), the top bar stays
+        // anchored to the safe-area top.
+        ZStack {
+            // Main content - hide when statistic is showing
+            if !showStatistic {
+                // Use ForEach with a single item to enable proper transition
+                ForEach([stepIndex], id: \.self) { index in
+                    Group {
+                        if steps[index].type == .name {
+                            nameInputContentView(step: steps[index])
+                        } else if steps[index].type == .question {
+                            questionContentView(step: steps[index])
+                        } else if steps[index].type == .loading {
+                            loadingContentView(step: steps[index])
+                        }
+                    }
+                    .transition(.asymmetric(
+                        insertion: .move(edge: isGoingBack ? .leading : .trailing),
+                        removal: .move(edge: isGoingBack ? .trailing : .leading)
+                    ))
+                }
+            }
+
+            // MARK: - Statistic Content (without its own top bar)
+            if showStatistic, let statistic = currentStatistic {
+                statisticContentView(statistic: statistic)
+                    .background(Color.white)
+                    .id(statisticAnimationId)
+                    .transition(.asymmetric(
+                        insertion: .move(edge: isGoingBack ? .leading : .trailing),
+                        removal: .move(edge: isGoingBack ? .trailing : .leading)
+                    ))
+            }
+        }
+        .clipped() // Clip content during animation to prevent overlap
+        // Pin the top bar to the top of the safe area via safe-area-inset.
+        // This decouples the top bar's Y coordinate from any size demands
+        // placed by inner content — SwiftUI's safe-area system positions
+        // the inset view at the safe-area top regardless of whether the
+        // content area below overflows. Fixes the 13pt center-overflow
+        // shift observed on statistic screens.
+        .safeAreaInset(edge: .top, spacing: 0) {
             if step.type != .loading || showStatistic {
                 HStack {
                     Button {
@@ -71,58 +114,101 @@ struct OnboardingView: View {
                             .foregroundColor(.wingmanBlack)
                             .frame(width: 44, height: 44, alignment: .center)
                             .contentShape(Rectangle())
+                            // DEBUG: Measure the top bar HStack's Y via its first child
+                            .background(
+                                GeometryReader { geo in
+                                    Color.clear.onChange(of: showStatistic) { newValue in
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                            let f = geo.frame(in: .global)
+                                            print("🟣 [HStack Y showStatistic→\(newValue)] frame=\(f)")
+                                        }
+                                    }
+                                }
+                            )
                     }
                     .buttonStyle(.plain)
-                    
+
                     progressBar(progress: currentProgress)
                         .frame(height: 10)
+                        // DEBUG: Multiple redundant probes to capture the
+                        // progress bar's actual Y coordinate. Remove after
+                        // diagnosis.
+                        .background(
+                            GeometryReader { geo in
+                                Color.clear
+                                    .preference(
+                                        key: ProgressBarYKey.self,
+                                        value: geo.frame(in: .global).origin.y
+                                    )
+                                    .onAppear {
+                                        let f = geo.frame(in: .global)
+                                        print("🟢 [onAppear] ProgressBar frame=\(f) | size=\(geo.size) | stepIndex=\(stepIndex) | showStatistic=\(showStatistic) | heading='\(currentStatistic?.heading.prefix(45).description ?? "—")'")
+                                    }
+                                    .onChange(of: stepIndex) { _ in
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                            let f = geo.frame(in: .global)
+                                            print("🔵 [stepIndex→\(stepIndex)] ProgressBar frame=\(f) | size=\(geo.size) | showStatistic=\(showStatistic)")
+                                        }
+                                    }
+                                    .onChange(of: showStatistic) { newValue in
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                            let f = geo.frame(in: .global)
+                                            print("🟠 [showStatistic→\(newValue)] ProgressBar frame=\(f) | size=\(geo.size) | heading='\(currentStatistic?.heading.prefix(45).description ?? "—")'")
+                                        }
+                                    }
+                            }
+                        )
                 }
                 .padding(.top, 8)
                 .padding(.leading, 10)
                 .padding(.trailing, 59)
                 .padding(.bottom, 12)
+                .background(Color.white)
             } else {
                 // Keep spacing consistent when loading
                 Spacer().frame(height: 20)
+                    .background(Color.white)
             }
-            
-            // MARK: - Animated Content Area
-            ZStack {
-                // Main content - hide when statistic is showing
-                if !showStatistic {
-                    // Use ForEach with a single item to enable proper transition
-                    ForEach([stepIndex], id: \.self) { index in
-                        Group {
-                            if steps[index].type == .name {
-                                nameInputContentView(step: steps[index])
-                            } else if steps[index].type == .question {
-                                questionContentView(step: steps[index])
-                            } else if steps[index].type == .loading {
-                                loadingContentView(step: steps[index])
-                            }
-                        }
-                        .transition(.asymmetric(
-                            insertion: .move(edge: isGoingBack ? .leading : .trailing),
-                            removal: .move(edge: isGoingBack ? .trailing : .leading)
-                        ))
+        }
+        // DEBUG: Measure the content area's Y position (no longer a VStack wrapper)
+        .background(
+            GeometryReader { geo in
+                Color.clear.onChange(of: showStatistic) { newValue in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        let f = geo.frame(in: .global)
+                        print("🔴 [ContentArea Y showStatistic→\(newValue)] frame=\(f)")
                     }
                 }
-                
-                // MARK: - Statistic Content (without its own top bar)
-                if showStatistic, let statistic = currentStatistic {
-                    statisticContentView(statistic: statistic)
-                        .background(Color.white)
-                        .id(statisticAnimationId)
-                        .transition(.asymmetric(
-                            insertion: .move(edge: isGoingBack ? .leading : .trailing),
-                            removal: .move(edge: isGoingBack ? .trailing : .leading)
-                        ))
-                }
             }
-            .clipped() // Clip content during animation to prevent overlap
-        }
+        )
         .background(Color.white)
+        // DEBUG: print the progress bar's Y coordinate whenever it changes,
+        // together with current screen identity. Remove after diagnosis.
+        .onPreferenceChange(ProgressBarYKey.self) { y in
+            let headingPrefix = currentStatistic?.heading.prefix(45).description ?? "—"
+            print("📏 [ProgressBar Y pref] \(String(format: "%.2f", y))pt | stepIndex=\(stepIndex) | showStatistic=\(showStatistic) | heading='\(headingPrefix)'")
+        }
+        .onAppear {
+            print("🎬 [OnboardingView appeared] stepIndex=\(stepIndex) | showStatistic=\(showStatistic)")
+            // Also confirm safe area + nav bar setup
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+                let window = scene?.windows.first { $0.isKeyWindow }
+                let safeTop = window?.safeAreaInsets.top ?? -1
+                let safeBottom = window?.safeAreaInsets.bottom ?? -1
+                print("📐 [SafeArea] top=\(safeTop)pt bottom=\(safeBottom)pt | window=\(window?.bounds ?? .zero)")
+            }
+        }
         .navigationBarBackButtonHidden(true)
+        // Force the NavigationStack's system nav bar to zero height on every
+        // onboarding screen. Without this, iOS decides the empty bar's height
+        // non-deterministically (content identity, layout timing, Dynamic
+        // Type all factor in), which caused the progress bar on longer-copy
+        // statistic screens (e.g. the 25+ age branch) to sit at a different
+        // Y than on shorter screens. Hiding the bar entirely makes the custom
+        // chevron+progress HStack the authoritative top element on every
+        // screen, so its position is pixel-identical everywhere.
+        .toolbar(.hidden, for: .navigationBar)
         .animation(.easeInOut(duration: 0.35), value: stepIndex)
         .animation(.easeInOut(duration: 0.35), value: showStatistic)
         .animation(.easeInOut(duration: 0.35), value: isGoingBack)
@@ -345,7 +431,13 @@ struct OnboardingView: View {
     
     // MARK: - Statistic Content View (without top bar - uses shared top bar)
     private func statisticContentView(statistic: StatisticContent) -> some View {
-        ZStack {
+        // Top-anchored ZStack so that if the inner content ever exceeds the
+        // available vertical space (long headings / facts / large Dynamic
+        // Type), the overflow drops downward and gets clipped at the bottom
+        // rather than climbing upward into the top bar area — which is what
+        // previously caused the progress bar to appear higher on statistic
+        // screens with longer copy (e.g. the 25+ age branch).
+        ZStack(alignment: .top) {
             Color.white
 
             VStack(spacing: 0) {
@@ -922,10 +1014,10 @@ struct OnboardingView: View {
                 )
             } else {
                 return StatisticContent(
-                    heading: "Almost half of men your age have not approached a women in the past year",
+                    heading: "Almost half of men your age haven't approached in the past year",
                     subheading: "You are not alone. Millions of men struggle with approaching.",
                     imageName: "stat_never_approached",
-                    fact: "48% of men aged 26-40 have not approached a women in the past year"
+                    fact: "48% of men aged 26-40 haven't approached in the past year"
                 )
             }
         }
@@ -1377,5 +1469,15 @@ struct QuestionFlowView_Previews: PreviewProvider {
     static var previews: some View {
         OnboardingView()
             .environmentObject(AuthManager())
+    }
+}
+
+// DEBUG: carries the progress bar's measured global Y coordinate up the
+// view tree via `.preference` so the outer view can log it on change.
+// Remove together with the two call sites after the diagnosis is done.
+private struct ProgressBarYKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
     }
 }

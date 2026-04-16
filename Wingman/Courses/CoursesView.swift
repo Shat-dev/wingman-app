@@ -34,7 +34,7 @@ struct CoursesView: View {
                         
                         // MARK: - Header
                         Text("Courses")
-                            .font(.manropeSemiBold(size: 20))
+                            .font(.manropeMedium(size: 24))
                             .foregroundColor(.wingmanBlack)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal, 20)

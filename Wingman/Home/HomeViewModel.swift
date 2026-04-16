@@ -248,30 +248,36 @@ final class HomeViewModel: ObservableObject {
         do {
             print("🔄 Checking daily practice completion status...")
             let status = try await dailyPracticeService.getDailyPracticeStatus()
-            
+
             // Update UI state based on status from database (using computed properties with defaults)
             isDailyPracticeCompleted = status.completedToday
             dailyPracticeButtonText = status.completedToday ? "Completed" : "Start"
             isDailyPracticeButtonEnabled = status.canContinue
-            
+
             // Update streak from database (using computed property with default)
             let oldStreak = currentStreak
             currentStreak = status.streak
-            
+
+            // Mirror streak fields into the shared store so Profile (and the
+            // on-disk cache) reflects this fetch without a second RPC call.
+            StreakStore.shared.apply(status: status)
+
             print("✅ Daily practice status: \(status.completedToday ? "Completed" : "Not completed")")
             print("✅ Current streak UPDATED: \(oldStreak) → \(status.streak)")
             print("   - Button text: \(dailyPracticeButtonText)")
             print("   - Button enabled: \(isDailyPracticeButtonEnabled)")
-            
+
         } catch {
             print("❌ Failed to check daily practice completion: \(error)")
             // On error, default to allowing start and use cached streak
             isDailyPracticeCompleted = false
             dailyPracticeButtonText = "Start"
             isDailyPracticeButtonEnabled = true
-            
-            // Try to use cached streak from UserDefaults as fallback
-            currentStreak = UserDefaults.standard.integer(forKey: "current_streak")
+
+            // Fall back to the shared store's cached value (seeded from UserDefaults
+            // on launch). Previously read a UserDefaults key that was never written,
+            // which always returned 0.
+            currentStreak = StreakStore.shared.currentStreak ?? 0
         }
     }
     

@@ -262,11 +262,15 @@ final class DailyPracticeViewModel: ObservableObject {
             print("✅ Streak updated successfully:")
             print("   - Current streak: \(result.streak)")
             print("   - Total completed: \(result.completed)")
-            
+
             // Update UI with the streak result and show completion view
             await MainActor.run {
                 currentStreak = result.streak
                 showCompletionView = true
+                // Push the authoritative post-completion values into the shared
+                // store so Profile (and the on-disk cache) reflect them
+                // immediately, without waiting for another RPC on next view entry.
+                StreakStore.shared.apply(updateResult: result)
             }
             
         } catch let error as DailyPracticeError {

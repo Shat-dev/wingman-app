@@ -69,12 +69,11 @@ struct PlanRow: View {
                             Circle()
                                 .stroke(isSelected ? Color.wingmanBlack : Color(hex: "D1D5DB"), lineWidth: 2)
                                 .frame(width: 24, height: 24)
-                            
-                            if isSelected {
-                                Circle()
-                                    .fill(Color.wingmanBlack)
-                                    .frame(width: 12, height: 12)
-                            }
+
+                            Circle()
+                                .fill(Color.wingmanBlack)
+                                .frame(width: 12, height: 12)
+                                .opacity(isSelected ? 1 : 0)
                         }
                     }
                 }

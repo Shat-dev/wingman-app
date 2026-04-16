@@ -87,7 +87,7 @@ struct PracticeView: View {
     private var headerView: some View {
         HStack {
             Text("Scenarios")
-                .font(.manropeSemiBold(size: 20))
+                .font(.manropeMedium(size: 24))
                 .foregroundColor(.wingmanBlack)
             Spacer()
         }

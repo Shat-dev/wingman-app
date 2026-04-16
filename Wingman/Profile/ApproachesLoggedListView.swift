@@ -211,7 +211,7 @@ struct ApproachLogRow: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             // Top row: Title + dots menu
-            HStack(alignment: .firstTextBaseline, spacing: 12) {
+            HStack(alignment: .center, spacing: 12) {
                 Text(approach.title)
                     .font(.manropeRegular(size: 16))
                     .foregroundColor(.wingmanBlack)
@@ -235,7 +235,7 @@ struct ApproachLogRow: View {
                         .scaledToFit()
                         .foregroundColor(.wingmanBlack.opacity(0.7))
                         .frame(width: 18, height: 18)
-                        .frame(width: 44, height: 44)
+                        .frame(width: 44, height: 44, alignment: .trailing)
                         .contentShape(Rectangle())
                 }
             }

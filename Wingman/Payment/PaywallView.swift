@@ -37,106 +37,118 @@ struct PaywallView: View {
                             .padding(.top, 16)
                         Spacer()
                     } else {
-                        // MARK: - Carousel
-                        TabView(selection: $viewModel.currentPage) {
-                            ForEach(viewModel.pages.indices, id: \.self) { index in
-                                let page = viewModel.pages[index]
-                                
-                                VStack(spacing: 0) {
-                                    
-                                    // Image
-                                    Image(page.imageName)
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(height: 220)
-                                        .padding(.top, 20)
-                                        .padding(.bottom, 15)
+                        // MARK: - Scrollable content (carousel + dots + plans)
+                        //
+                        // Placed inside a ScrollView so on small devices (SE / mini)
+                        // the user can reach everything even when total content
+                        // exceeds the screen height. The Continue button and
+                        // footer below stay pinned to the bottom regardless.
+                        ScrollView(.vertical, showsIndicators: false) {
+                            VStack(spacing: 0) {
+                                // MARK: - Carousel
+                                TabView(selection: $viewModel.currentPage) {
+                                    ForEach(viewModel.pages.indices, id: \.self) { index in
+                                        let page = viewModel.pages[index]
 
-                                    // Bullets
-                                    VStack(alignment: .leading, spacing: 16) {
-                                        ForEach(page.bullets, id: \.self) { bullet in
-                                            HStack(alignment: .top, spacing: 12) {
-                                                Image("check")
-                                                    .resizable()
-                                                    .renderingMode(.template)
-                                                    .scaledToFit()
-                                                    .foregroundColor(.wingmanBlack)
-                                                    .frame(width: 16, height: 16)
-                                                    .padding(.top, 2)
+                                        VStack(spacing: 0) {
 
-                                                Text(bullet)
-                                                    .font(.manropeMedium(size: 16))
-                                                    .foregroundColor(.wingmanBlack)
-                                                    .lineSpacing(2)
-                                                    .fixedSize(horizontal: false, vertical: true)
+                                            // Image
+                                            Image(page.imageName)
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(height: 220)
+                                                .padding(.top, 20)
+                                                .padding(.bottom, 15)
+
+                                            // Bullets
+                                            VStack(alignment: .leading, spacing: 16) {
+                                                ForEach(page.bullets, id: \.self) { bullet in
+                                                    HStack(alignment: .top, spacing: 12) {
+                                                        Image("check")
+                                                            .resizable()
+                                                            .renderingMode(.template)
+                                                            .scaledToFit()
+                                                            .foregroundColor(.wingmanBlack)
+                                                            .frame(width: 16, height: 16)
+                                                            .padding(.top, 2)
+
+                                                        Text(bullet)
+                                                            .font(.manropeMedium(size: 16))
+                                                            .foregroundColor(.wingmanBlack)
+                                                            .lineSpacing(2)
+                                                            .fixedSize(horizontal: false, vertical: true)
+                                                    }
+                                                }
                                             }
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                            .padding(.horizontal, 17)
+
+                                            Spacer()
+                                        }
+                                        .tag(index)
+                                    }
+                                }
+                                .tabViewStyle(.page(indexDisplayMode: .never))
+                                .frame(height: 445)
+
+                                // MARK: - Page Indicator
+                                HStack(spacing: 8) {
+                                    ForEach(viewModel.pages.indices, id: \.self) { index in
+                                        Circle()
+                                            .fill(viewModel.currentPage == index ? Color.wingmanBlack : Color.wingmanBlack.opacity(0.2))
+                                            .frame(width: 8, height: 8)
+                                    }
+                                }
+                                .padding(.top, 12)
+                                .padding(.bottom, 20)
+
+                                // MARK: - Plans
+                                VStack(spacing: 12) {
+
+                                    // Yearly Plan
+                                    PlanRow(
+                                        title: "Yearly Plan",
+                                        price: viewModel.yearlyPrice,
+                                        weekly: calculateWeeklyPrice(viewModel.yearlyPackage),
+                                        weeklySubtitle: "per week",
+                                        isSelected: viewModel.selectedPlan == .yearly,
+                                        badgeText: viewModel.selectedPlan == .yearly ? "3-day Free Trial" : nil
+                                    ) {
+                                        withAnimation(.easeInOut(duration: 0.2)) {
+                                            viewModel.selectPlan(.yearly)
                                         }
                                     }
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding(.horizontal, 17)
-                                    
-                                    Spacer()
+                                    .padding(.bottom,10)
+
+                                    // Monthly Plan
+                                    PlanRow(
+                                        title: "Monthly Plan",
+                                        price: viewModel.monthlyPrice,
+                                        weekly: calculateWeeklyPrice(viewModel.monthlyPackage),
+                                            weeklySubtitle: "per week",
+                                            isSelected: viewModel.selectedPlan == .monthly,
+                                            badgeText: viewModel.selectedPlan == .monthly ? "3-day Free Trial" : nil
+                                    ) {
+                                        withAnimation(.easeInOut(duration: 0.2)) {
+                                            viewModel.selectPlan(.monthly)
+                                        }
+                                    }
                                 }
-                                .tag(index)
+                                .padding(.horizontal, 20)
+                                .padding(.bottom, 8) // Breathing room before the pinned Continue button
                             }
                         }
-                        .tabViewStyle(.page(indexDisplayMode: .never))
-                        .frame(height: 420)
-                        
-                        // MARK: - Page Indicator
-                        HStack(spacing: 8) {
-                            ForEach(viewModel.pages.indices, id: \.self) { index in
-                                Circle()
-                                    .fill(viewModel.currentPage == index ? Color.wingmanBlack : Color.wingmanBlack.opacity(0.2))
-                                    .frame(width: 8, height: 8)
-                            }
-                        }
-                        .padding(.top, 20)
-                        .padding(.bottom, 35)
-            
-                        // MARK: - Plans
-                        VStack(spacing: 12) {
-                            
-                            // Yearly Plan
-                            PlanRow(
-                                title: "Yearly Plan",
-                                price: viewModel.yearlyPrice,
-                                weekly: calculateWeeklyPrice(viewModel.yearlyPackage),
-                                weeklySubtitle: "per week",
-                                isSelected: viewModel.selectedPlan == .yearly,
-                                badgeText: viewModel.selectedPlan == .yearly ? "3-day Free Trial" : nil
-                            ) {
-                                withAnimation(.easeInOut(duration: 0.2)) {
-                                    viewModel.selectPlan(.yearly)
-                                }
-                            }
-                            .padding(.bottom,10)
+                        .frame(maxHeight: .infinity)
 
-                            // Monthly Plan
-                            PlanRow(
-                                title: "Monthly Plan",
-                                price: viewModel.monthlyPrice,
-                                weekly: calculateWeeklyPrice(viewModel.monthlyPackage),
-                                    weeklySubtitle: "per week",
-                                    isSelected: viewModel.selectedPlan == .monthly,
-                                    badgeText: viewModel.selectedPlan == .monthly ? "3-day Free Trial" : nil
-                            ) {
-                                withAnimation(.easeInOut(duration: 0.2)) {
-                                    viewModel.selectPlan(.monthly)
-                                }
-                            }
-                        }
-                        .padding(.horizontal, 20)
-
-                        Spacer()
-
-                        // MARK: - Continue Button
+                        // MARK: - Pinned Continue Button
                         Button {
                             HapticManager.shared.mediumImpact()
                             Task {
                                 let success = await viewModel.continueTapped()
                                 if success {
-                                    navigateToReferral = true
+                                    // Referral screen removed from flow — complete paywall directly.
+                                    // ReferralView.swift is intentionally kept intact for possible future use.
+                                    authManager.completePaywallFlow()
                                 }
                             }
                         } label: {
@@ -158,10 +170,10 @@ struct PaywallView: View {
                         }
                         .disabled(viewModel.isPurchasing)
                         .padding(.horizontal, 20)
-                        .padding(.top, 20)
+                        .padding(.top, 12)
                         .padding(.bottom, 16)
-                        
-                        // MARK: - Footer Links
+
+                        // MARK: - Pinned Footer Links
                         HStack(spacing: 0) {
                             Button {
                                 viewModel.openPrivacy()
@@ -171,9 +183,9 @@ struct PaywallView: View {
                                     .foregroundColor(Color(hex: "6B7280"))
                                     .underline()
                             }
-                            
+
                             Spacer()
-                            
+
                             Button {
                                 Task {
                                     await viewModel.openRestore()
@@ -192,9 +204,9 @@ struct PaywallView: View {
                                 }
                             }
                             .disabled(viewModel.isLoading)
-                            
+
                             Spacer()
-                            
+
                             Button {
                                 viewModel.openTerms()
                             } label: {
@@ -220,6 +232,10 @@ struct PaywallView: View {
             }
         } message: {
             Text(viewModel.error ?? "An error occurred")
+        }
+        .sheet(item: $viewModel.safariLink) { link in
+            SafariView(url: link.url)
+                .ignoresSafeArea()
         }
         .onChange(of: viewModel.showAlert) { showing in
             if showing { HapticManager.shared.error() }
