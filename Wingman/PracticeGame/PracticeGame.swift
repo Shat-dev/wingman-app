@@ -210,7 +210,10 @@ struct PracticeGame: View {
             VStack(spacing: 0) {
                 // Top Navigation Bar
                 HStack(spacing: 12) {
-                    Button { dismiss() } label: {
+                    Button {
+                        tabBarVisibility.showTabBar()
+                        dismiss()
+                    } label: {
                         Image(systemName: "chevron.left")
                             .font(.system(size: 22))
                             .foregroundColor(.wingmanBlack)
@@ -241,7 +244,10 @@ struct PracticeGame: View {
 
                 if showIntroScreen {
                     GameIntroScreenView(
-                        onLeftTap: { dismiss() },
+                        onLeftTap: {
+                            tabBarVisibility.showTabBar()
+                            dismiss()
+                        },
                         onRightTap: {
                             withAnimation(.easeInOut(duration: 0.3)) {
                                 showIntroScreen = false
@@ -282,7 +288,10 @@ struct PracticeGame: View {
             if completed { showGameComplete = true }
         }
         .fullScreenCover(isPresented: $showGameComplete) {
-            GameCompleteView { dismiss() }
+            GameCompleteView {
+                tabBarVisibility.showTabBar()
+                dismiss()
+            }
         }
     }
 }

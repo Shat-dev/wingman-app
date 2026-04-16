@@ -8,8 +8,9 @@ import SwiftUI
 struct LessonView: View {
     let lesson: Lesson
     let allLessons: [Lesson]
-    
+
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var tabBarVisibility: TabBarVisibilityManager
     @State private var currentScreenIndex: Int = -1  // -1 means intro screen
     @State private var currentContentIndex: Int = -1 // Index within current screen's content
     @State private var showLessonComplete = false
@@ -71,6 +72,7 @@ struct LessonView: View {
                 // MARK: - Top Bar (match Auth style: bold chevron + inline progress)
                 HStack(spacing: 10) {
                     Button {
+                        tabBarVisibility.showTabBar()
                         dismiss()
                     } label: {
                         Image(systemName: "chevron.left")
@@ -141,6 +143,12 @@ struct LessonView: View {
         }
         .navigationBarHidden(true)
         .enableInteractivePopGesture()
+        .onAppear {
+            tabBarVisibility.hideTabBar()
+        }
+        .onDisappear {
+            tabBarVisibility.showTabBar()
+        }
         .fullScreenCover(isPresented: $showLessonComplete) {
             LessonCompleteView(
                 nextLessonInfo: getNextLessonInfo(),
@@ -149,6 +157,7 @@ struct LessonView: View {
                         lessonId: lesson.id,
                         courseId: lesson.courseId
                     )
+                    tabBarVisibility.showTabBar()
                     dismiss()
                 }
             )
