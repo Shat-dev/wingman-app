@@ -12,9 +12,9 @@ struct ProfileView: View {
     @State private var showEditProfile = false
     @State private var showApproachesLogged = false
     @State private var userName = UserDefaults.standard.string(forKey: "user_name") ?? ""
-    @State private var approachesCount = 0
-    @State private var hasReflections = false
-    @State private var approachesBreakdown: [(String, Int, Double)] = []
+    // Bound directly to the shared stores so any mutation elsewhere (logging,
+    // editing, deleting an approach, completing daily practice) re-renders
+    // the card instantly without waiting for onAppear/pull-to-refresh.
     @StateObject private var approachService = ApproachService.shared
     @StateObject private var streakStore = StreakStore.shared
     
@@ -114,21 +114,23 @@ struct ProfileView: View {
                             //    .padding(.top, 40)
                             
                             // MARK: - Approaches Breakdown
-                            ApproachesBreakdownCard(breakdown: approachesBreakdown)
+                            // Read directly from the shared service — body re-runs
+                            // whenever approaches/totalCount publish a change.
+                            ApproachesBreakdownCard(breakdown: approachService.getApproachesBreakdown())
                                 .padding(.horizontal, 20)
                                 .padding(.top, 40)
-                            
+
                             // MARK: - Approaches Logged Card
                             Group {
-                                if hasReflections {
+                                if approachService.totalCount > 0 {
                                     Button(action: {
                                         showApproachesLogged = true
                                     }) {
-                                        ApproachesLoggedCard(count: approachesCount, hasReflections: hasReflections)
+                                        ApproachesLoggedCard(count: approachService.totalCount, hasReflections: true)
                                     }
                                     .buttonStyle(.plain)
                                 } else {
-                                    ApproachesLoggedCard(count: approachesCount, hasReflections: hasReflections)
+                                    ApproachesLoggedCard(count: approachService.totalCount, hasReflections: false)
                                         .allowsHitTesting(false) // non-interactive when no reflections
                                 }
                             }
@@ -166,14 +168,13 @@ struct ProfileView: View {
             }
         }
         .onAppear {
+            // Tab entry fetches fresh data; view body reads directly from
+            // the shared stores, so any write elsewhere (log, edit, delete,
+            // daily-practice completion) is already reflected when we arrive.
             loadUserData()
             Task {
                 await streakStore.refresh()
             }
-        }
-        .refreshable {
-            await loadApproachData()
-            await streakStore.refresh()
         }
     }
     
@@ -220,16 +221,14 @@ struct ProfileView: View {
     }
     
     private func loadApproachData() async {
-        // Fetch fresh data from Supabase
+        // Fetch fresh data from Supabase. The view body reads ApproachService
+        // directly, so the re-render happens automatically when fetchApproaches
+        // publishes updates — no @State mirroring needed.
         await approachService.fetchApproaches()
-        
-        // Update local state with fresh data
+
+        // Keep the legacy UserDefaults mirrors (`total_approaches`,
+        // `last_practice_date`) in sync for any other code still reading them.
         await MainActor.run {
-            self.approachesCount = approachService.totalCount
-            self.hasReflections = approachService.totalCount > 0
-            self.approachesBreakdown = approachService.getApproachesBreakdown()
-            
-            // Update local stats for other parts of the app
             approachService.updateLocalStats()
         }
     }
