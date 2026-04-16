@@ -230,7 +230,9 @@ struct ApproachLogRow: View {
                     }
                 } label: {
                     Image("dots")
-                        .font(.system(size: 20, weight: .medium))
+                        .resizable()
+                        .renderingMode(.template)
+                        .scaledToFit()
                         .foregroundColor(.wingmanBlack)
                         .frame(width: 24, height: 24)
                         .contentShape(Rectangle())

@@ -57,7 +57,9 @@ struct PaywallView: View {
                                         ForEach(page.bullets, id: \.self) { bullet in
                                             HStack(alignment: .top, spacing: 12) {
                                                 Image("check")
-                                                    .font(.system(size: 14, weight: .medium))
+                                                    .resizable()
+                                                    .renderingMode(.template)
+                                                    .scaledToFit()
                                                     .foregroundColor(.wingmanBlack)
                                                     .frame(width: 16, height: 16)
                                                     .padding(.top, 2)

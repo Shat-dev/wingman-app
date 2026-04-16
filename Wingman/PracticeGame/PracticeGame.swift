@@ -464,14 +464,15 @@ struct DialogueContentView: View {
             .frame(height: 25)
 
             VStack(alignment: .leading, spacing: 0) {
-                // FIXED: Set a fixed height for text to stabilize 1 vs 2 lines
+                // Min-height reserves the 2-line layout so 1- and 2-line scenes
+                // are visually identical to before. Text is allowed to wrap to
+                // 3+ lines on smaller devices and the box grows to fit.
                 Text(scene.text)
                     .font(.manropeMedium(size: 14))
                     .foregroundColor(.wingmanBlack)
-                    .lineLimit(2)
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: .infinity)
-                    .frame(height: 44)
+                    .frame(minHeight: 44)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 25)
             }
