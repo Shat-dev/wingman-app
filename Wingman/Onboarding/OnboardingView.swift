@@ -114,50 +114,11 @@ struct OnboardingView: View {
                             .foregroundColor(.wingmanBlack)
                             .frame(width: 44, height: 44, alignment: .center)
                             .contentShape(Rectangle())
-                            // DEBUG: Measure the top bar HStack's Y via its first child
-                            .background(
-                                GeometryReader { geo in
-                                    Color.clear.onChange(of: showStatistic) { newValue in
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                            let f = geo.frame(in: .global)
-                                            print("🟣 [HStack Y showStatistic→\(newValue)] frame=\(f)")
-                                        }
-                                    }
-                                }
-                            )
                     }
                     .buttonStyle(.plain)
 
                     progressBar(progress: currentProgress)
                         .frame(height: 10)
-                        // DEBUG: Multiple redundant probes to capture the
-                        // progress bar's actual Y coordinate. Remove after
-                        // diagnosis.
-                        .background(
-                            GeometryReader { geo in
-                                Color.clear
-                                    .preference(
-                                        key: ProgressBarYKey.self,
-                                        value: geo.frame(in: .global).origin.y
-                                    )
-                                    .onAppear {
-                                        let f = geo.frame(in: .global)
-                                        print("🟢 [onAppear] ProgressBar frame=\(f) | size=\(geo.size) | stepIndex=\(stepIndex) | showStatistic=\(showStatistic) | heading='\(currentStatistic?.heading.prefix(45).description ?? "—")'")
-                                    }
-                                    .onChange(of: stepIndex) { _ in
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                            let f = geo.frame(in: .global)
-                                            print("🔵 [stepIndex→\(stepIndex)] ProgressBar frame=\(f) | size=\(geo.size) | showStatistic=\(showStatistic)")
-                                        }
-                                    }
-                                    .onChange(of: showStatistic) { newValue in
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                            let f = geo.frame(in: .global)
-                                            print("🟠 [showStatistic→\(newValue)] ProgressBar frame=\(f) | size=\(geo.size) | heading='\(currentStatistic?.heading.prefix(45).description ?? "—")'")
-                                        }
-                                    }
-                            }
-                        )
                 }
                 .padding(.top, 8)
                 .padding(.leading, 10)
@@ -170,35 +131,7 @@ struct OnboardingView: View {
                     .background(Color.white)
             }
         }
-        // DEBUG: Measure the content area's Y position (no longer a VStack wrapper)
-        .background(
-            GeometryReader { geo in
-                Color.clear.onChange(of: showStatistic) { newValue in
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        let f = geo.frame(in: .global)
-                        print("🔴 [ContentArea Y showStatistic→\(newValue)] frame=\(f)")
-                    }
-                }
-            }
-        )
         .background(Color.white)
-        // DEBUG: print the progress bar's Y coordinate whenever it changes,
-        // together with current screen identity. Remove after diagnosis.
-        .onPreferenceChange(ProgressBarYKey.self) { y in
-            let headingPrefix = currentStatistic?.heading.prefix(45).description ?? "—"
-            print("📏 [ProgressBar Y pref] \(String(format: "%.2f", y))pt | stepIndex=\(stepIndex) | showStatistic=\(showStatistic) | heading='\(headingPrefix)'")
-        }
-        .onAppear {
-            print("🎬 [OnboardingView appeared] stepIndex=\(stepIndex) | showStatistic=\(showStatistic)")
-            // Also confirm safe area + nav bar setup
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-                let window = scene?.windows.first { $0.isKeyWindow }
-                let safeTop = window?.safeAreaInsets.top ?? -1
-                let safeBottom = window?.safeAreaInsets.bottom ?? -1
-                print("📐 [SafeArea] top=\(safeTop)pt bottom=\(safeBottom)pt | window=\(window?.bounds ?? .zero)")
-            }
-        }
         .navigationBarBackButtonHidden(true)
         // Force the NavigationStack's system nav bar to zero height on every
         // onboarding screen. Without this, iOS decides the empty bar's height
@@ -449,8 +382,8 @@ struct OnboardingView: View {
                         .foregroundColor(.wingmanBlack)
                         .lineSpacing(4)
                         .multilineTextAlignment(.leading)
-                        .lineLimit(nil)  // ← Explicitly allow unlimited lines
-                        .fixedSize(horizontal: false, vertical: true)  // ← Allow vertical expansion
+                        .lineLimit(nil)
+                        .fixedSize(horizontal: false, vertical: true)
                         .frame(maxWidth: .infinity, alignment: .leading)
 
                     // Subheading
@@ -459,17 +392,22 @@ struct OnboardingView: View {
                         .foregroundColor(.gray)
                         .lineSpacing(4)
                         .multilineTextAlignment(.leading)
-                        .lineLimit(nil)  // ← Explicitly allow unlimited lines
-                        .fixedSize(horizontal: false, vertical: true)  // ← Allow vertical expansion
+                        .lineLimit(nil)
+                        .fixedSize(horizontal: false, vertical: true)
                         .frame(maxWidth: .infinity, alignment: .leading)
 
                     Spacer().frame(height: 40)
 
-                    // Image
+                    // Image — reduced from 250pt to 220pt to free up
+                    // ~30pt of vertical room for the `.fixedSize`-expanded
+                    // text above/below. Without this headroom, the longer
+                    // else-branch heading+fact would push the outer view
+                    // past its proposed size and trigger center-overflow,
+                    // shifting the top bar up by 13pt on statistic screens.
                     Image(statistic.imageName)
                         .resizable()
                         .scaledToFit()
-                        .frame(height: 250)
+                        .frame(height: 220)
 
                     Spacer().frame(height: 40)
 
@@ -480,8 +418,8 @@ struct OnboardingView: View {
                         .lineSpacing(4)
                         .multilineTextAlignment(.center)
                         .frame(maxWidth: .infinity)
-                        .lineLimit(nil)  // ← Explicitly allow unlimited lines
-                        .fixedSize(horizontal: false, vertical: true)  // ← Allow vertical expansion
+                        .lineLimit(nil)
+                        .fixedSize(horizontal: false, vertical: true)
 
                     Spacer() // push content up so the button sits at bottom
                 }
@@ -1469,15 +1407,5 @@ struct QuestionFlowView_Previews: PreviewProvider {
     static var previews: some View {
         OnboardingView()
             .environmentObject(AuthManager())
-    }
-}
-
-// DEBUG: carries the progress bar's measured global Y coordinate up the
-// view tree via `.preference` so the outer view can log it on change.
-// Remove together with the two call sites after the diagnosis is done.
-private struct ProgressBarYKey: PreferenceKey {
-    static var defaultValue: CGFloat = 0
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = nextValue()
     }
 }
