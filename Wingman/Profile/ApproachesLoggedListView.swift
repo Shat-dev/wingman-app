@@ -233,8 +233,9 @@ struct ApproachLogRow: View {
                         .resizable()
                         .renderingMode(.template)
                         .scaledToFit()
-                        .foregroundColor(.wingmanBlack)
-                        .frame(width: 24, height: 24)
+                        .foregroundColor(.wingmanBlack.opacity(0.7))
+                        .frame(width: 18, height: 18)
+                        .frame(width: 44, height: 44)
                         .contentShape(Rectangle())
                 }
             }

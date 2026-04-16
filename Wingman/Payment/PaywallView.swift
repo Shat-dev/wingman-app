@@ -63,7 +63,7 @@ struct PaywallView: View {
                                                     .foregroundColor(.wingmanBlack)
                                                     .frame(width: 16, height: 16)
                                                     .padding(.top, 2)
-                                                
+
                                                 Text(bullet)
                                                     .font(.manropeMedium(size: 16))
                                                     .foregroundColor(.wingmanBlack)
@@ -72,6 +72,7 @@ struct PaywallView: View {
                                             }
                                         }
                                     }
+                                    .frame(maxWidth: .infinity, alignment: .leading)
                                     .padding(.horizontal, 17)
                                     
                                     Spacer()
@@ -90,7 +91,7 @@ struct PaywallView: View {
                                     .frame(width: 8, height: 8)
                             }
                         }
-                        .padding(.top, 5)
+                        .padding(.top, 20)
                         .padding(.bottom, 35)
             
                         // MARK: - Plans
