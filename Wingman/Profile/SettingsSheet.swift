@@ -71,7 +71,10 @@ struct SettingsSheet: View {
                         
                         HStack(spacing: 8) {
                             Image("apple_icon")
-                                .font(.system(size: 16))
+                                .resizable()
+                                .renderingMode(.template)
+                                .scaledToFit()
+                                .frame(width: 16, height: 16)
                                 .foregroundColor(.wingmanBlack)
                             
                             Text(getUserEmail())
