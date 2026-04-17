@@ -89,14 +89,25 @@ struct RootView: View {
                             OnboardingView()
                         }
 
-                    // ✅ 2) Questions finished → show Paywall (and Referral flow)
+                    // ✅ 2) Questions finished, rating ask not yet seen →
+                    //    show RatingPromptView. Gated on `!hasCompletedPaywallFlow`
+                    //    so existing paying users (who already passed the
+                    //    paywall) never route back here after the update —
+                    //    they go straight to MainTabView below.
+                    } else if !authManager.hasCompletedPaywallFlow && !authManager.hasSeenRatingPrompt {
+                        let _ = print("🎯 RootView: Showing RatingPromptView (rating prompt NOT seen)")
+                        NavigationStack {
+                            RatingPromptView()
+                        }
+
+                    // ✅ 3) Questions + rating ack'd → show Paywall (and Referral flow)
                     } else if !authManager.hasCompletedPaywallFlow {
                         let _ = print("🎯 RootView: Showing PaywallView (paywall flow NOT completed)")
                         NavigationStack {
                             PaywallView(authManager: authManager)
                         }
 
-                    // ✅ 3) Paywall + Referral finished → MainTabView (Home)
+                    // ✅ 4) Paywall + Referral finished → MainTabView (Home)
                     } else {
                         let _ = print("🎯 RootView: Showing MainTabView (paywall flow completed)")
                         MainTabView()
@@ -105,14 +116,24 @@ struct RootView: View {
                 // MARK: - Anonymous User Flow (Skip for now)
                 } else if authManager.isAnonymousUser && authManager.hasCompletedOnboarding {
                     let _ = print("🎯 RootView: Anonymous user completed onboarding")
-                    
-                    // ✅ Anonymous user - questions finished → show Paywall
-                    if !authManager.hasCompletedPaywallFlow {
+
+                    // ✅ Anonymous user - questions finished, rating ask not
+                    //    yet seen → show RatingPromptView. Gated on
+                    //    `!hasCompletedPaywallFlow` for parity with the
+                    //    authenticated flow.
+                    if !authManager.hasCompletedPaywallFlow && !authManager.hasSeenRatingPrompt {
+                        let _ = print("🎯 RootView: Anonymous user - showing RatingPromptView")
+                        NavigationStack {
+                            RatingPromptView()
+                        }
+
+                    // ✅ Anonymous user - questions + rating ack'd → show Paywall
+                    } else if !authManager.hasCompletedPaywallFlow {
                         let _ = print("🎯 RootView: Anonymous user - showing PaywallView")
                         NavigationStack {
                             PaywallView(authManager: authManager)
                         }
-                    
+
                     // ✅ Anonymous user - paywall finished → require account creation
                     } else {
                         let _ = print("🎯 RootView: Anonymous user - requiring account creation")
@@ -180,6 +201,9 @@ struct RootView: View {
         }
         .onChange(of: authManager.hasCompletedPaywallFlow) { newValue in
             print("\n🔔 RootView detected hasCompletedPaywallFlow change: \(newValue)")
+        }
+        .onChange(of: authManager.hasSeenRatingPrompt) { newValue in
+            print("\n🔔 RootView detected hasSeenRatingPrompt change: \(newValue)")
         }
     }
 }

@@ -48,6 +48,17 @@ final class AuthManager: ObservableObject {
         }
     }
 
+    // Rating prompt (shown between onboarding questions and paywall).
+    // One-time gate: once flipped to true we never route the user back to it.
+    // Persisted per-user for authenticated users (mirrors the hasCompletedPaywallFlow
+    // pattern), and under a global key for anonymous users (they have no userId
+    // at the moment they dismiss the prompt).
+    @Published var hasSeenRatingPrompt: Bool = false {
+        didSet {
+            print("⭐ hasSeenRatingPrompt changed: \(oldValue) → \(hasSeenRatingPrompt)")
+        }
+    }
+
     // MARK: - Subscription Status
     @Published var hasActiveSubscription: Bool = false {
         didSet {
@@ -104,7 +115,13 @@ final class AuthManager: ObservableObject {
         // Same note: actual per-user value loads after session
         hasCompletedPaywallFlow = UserDefaults.standard.bool(forKey: "hasCompletedPaywallFlow")
         print("💳 Loaded hasCompletedPaywallFlow: \(hasCompletedPaywallFlow)")
-        
+
+        // Load global rating-prompt flag — covers the anonymous case at launch,
+        // and also provides a safe default before session restore overwrites
+        // with the per-user value.
+        hasSeenRatingPrompt = UserDefaults.standard.bool(forKey: "hasSeenRatingPrompt")
+        print("⭐ Loaded hasSeenRatingPrompt: \(hasSeenRatingPrompt)")
+
         // Check if user is in anonymous mode
         isAnonymousUser = UserDefaults.standard.bool(forKey: "isAnonymousUser")
         print("👻 Loaded isAnonymousUser: \(isAnonymousUser)")
@@ -216,6 +233,7 @@ final class AuthManager: ObservableObject {
                     // ✅ Load user state (after sync, so we get the updated paywall flow status)
                     await checkUserQuestionStatus(userId: session.user.id.uuidString)
                     await checkUserPaywallFlowStatus(userId: session.user.id.uuidString)
+                    await checkUserRatingPromptStatus(userId: session.user.id.uuidString)
 
                     // ✅ Hydrate lesson progress from Supabase user_metadata so
                     // users who reinstall / switch devices don't lose progress.
@@ -249,6 +267,7 @@ final class AuthManager: ObservableObject {
                     // ✅ Load user state
                     await checkUserQuestionStatus(userId: session.user.id.uuidString)
                     await checkUserPaywallFlowStatus(userId: session.user.id.uuidString)
+                    await checkUserRatingPromptStatus(userId: session.user.id.uuidString)
 
                     // ✅ Hydrate lesson progress from Supabase user_metadata
                     // after session restoration so returning users (including
@@ -337,6 +356,12 @@ final class AuthManager: ObservableObject {
         hasCompletedPaywallFlow = UserDefaults.standard.bool(forKey: key)
         print("💳 Paywall flow status loaded: \(hasCompletedPaywallFlow) for user: \(userId)")
     }
+
+    private func checkUserRatingPromptStatus(userId: String) async {
+        let key = "hasSeenRatingPrompt_\(userId)"
+        hasSeenRatingPrompt = UserDefaults.standard.bool(forKey: key)
+        print("⭐ Rating prompt status loaded: \(hasSeenRatingPrompt) for user: \(userId)")
+    }
     
     // MARK: - Graceful Session Restoration (Offline-First)
     
@@ -360,7 +385,8 @@ final class AuthManager: ObservableObject {
             // Load user-specific states
             await checkUserQuestionStatus(userId: session.user.id.uuidString)
             await checkUserPaywallFlowStatus(userId: session.user.id.uuidString)
-            
+            await checkUserRatingPromptStatus(userId: session.user.id.uuidString)
+
             // Mark session check complete - UI can now render
             self.isCheckingSession = false
             print("✅ Session restored from cache - UI ready")
@@ -633,6 +659,26 @@ final class AuthManager: ObservableObject {
             let key = "hasCompletedPaywallFlow_\(userId)"
             UserDefaults.standard.set(true, forKey: key)
             print("✅ Paywall flow completed for user: \(userId)")
+        }
+    }
+
+    // MARK: - Rating Prompt
+    /// Called from `RatingPromptView` when the user taps Continue.
+    /// Flips the in-memory flag and persists — per-user key for authenticated
+    /// users, global key for anonymous users (since they have no userId yet).
+    func completeRatingPrompt() {
+        print("⭐ completeRatingPrompt() called")
+        hasSeenRatingPrompt = true
+
+        if let userId = currentUser?.id.uuidString {
+            let key = "hasSeenRatingPrompt_\(userId)"
+            UserDefaults.standard.set(true, forKey: key)
+            print("⭐ Rating prompt marked seen for user: \(userId)")
+        } else {
+            // Anonymous: persist under the global key so the next init() load
+            // picks it up, and so the check during routing finds it.
+            UserDefaults.standard.set(true, forKey: "hasSeenRatingPrompt")
+            print("⭐ Rating prompt marked seen (anonymous)")
         }
     }
 
@@ -1001,6 +1047,7 @@ final class AuthManager: ObservableObject {
         userDefaults.removeObject(forKey: "hasCompletedOnboarding_\(userId)")
         userDefaults.removeObject(forKey: "hasCompletedQuestions_\(userId)")
         userDefaults.removeObject(forKey: "hasCompletedPaywallFlow_\(userId)")
+        userDefaults.removeObject(forKey: "hasSeenRatingPrompt_\(userId)")
         userDefaults.removeObject(forKey: "current_user_id")
         userDefaults.removeObject(forKey: "user_email")
         userDefaults.removeObject(forKey: "user_name")
