@@ -117,7 +117,7 @@ struct OnboardingView: View {
                     }
                     .buttonStyle(.plain)
 
-                    progressBar(progress: currentProgress)
+                    OnboardingProgressBar(progress: currentProgress)
                         .frame(height: 10)
                 }
                 .padding(.top, 8)
@@ -142,10 +142,13 @@ struct OnboardingView: View {
         // chevron+progress HStack the authoritative top element on every
         // screen, so its position is pixel-identical everywhere.
         .toolbar(.hidden, for: .navigationBar)
-        .animation(.easeInOut(duration: 0.35), value: stepIndex)
-        .animation(.easeInOut(duration: 0.35), value: showStatistic)
-        .animation(.easeInOut(duration: 0.35), value: isGoingBack)
-        .animation(.easeInOut(duration: 0.35), value: statisticAnimationId)
+        // Implicit-animation observers were removed here. Every mutation of
+        // `stepIndex` and `showStatistic` is already wrapped in an explicit
+        // `withAnimation(...)` block at the call site, so removing the four
+        // stacked `.animation(_:value:)` modifiers eliminates duplicate
+        // transactions per state change without losing any user-visible
+        // animation. `isGoingBack` and `statisticAnimationId` are direction
+        // flags / view-identity values that should never have been animated.
         // Option A swipe-back: a rightward swipe past a distance/velocity
         // threshold invokes the existing back-button handler. Non-interactive
         // (the page doesn't follow the finger) so this preserves every
@@ -462,337 +465,6 @@ struct OnboardingView: View {
         }
     }
 
-    // MARK: - Name Input View
-    private func nameInputView(step: OnboardingStep) -> some View {
-        VStack(alignment: .leading, spacing: 20) {
-
-            Text(step.title)
-                .font(.manropeSemiBold(size: 24))
-                .lineLimit(2)
-                .multilineTextAlignment(.leading)
-
-            // Name TextField with character limit
-            VStack(alignment: .trailing, spacing: 4) {
-                TextField("", text: $userName)
-                    .placeholder(when: userName.isEmpty) {
-                        Text("Enter your name")
-                            .foregroundColor(.wingmanBlack.opacity(0.3))
-                    }
-                    .font(.manropeRegular(size: 18))
-                    .padding(16)
-                    .background(Color.wingmanBlack.opacity(0.10))
-                    .cornerRadius(5)
-                    .focused($isNameFieldFocused)
-                    .onChange(of: userName) { newValue in
-                        // Limit username to 10 characters
-                        if newValue.count > 10 {
-                            userName = String(newValue.prefix(10))
-                        }
-                    }
-                    .padding(.top, 10)
-                
-                // Character counter
-                Text("\(userName.count)/10")
-                    .font(.caption)
-                    .foregroundColor(userName.count > 8 ? .red : .gray)
-                    .padding(.trailing, 4)
-            }
-
-            // Buttons (moved closer to text field)
-            VStack(spacing: 12) {
-                // Full-area tappable Next button
-                let isNameEmpty = userName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-
-                Button(action: {
-                    isNameFieldFocused = false
-                    let trimmedName = userName.trimmingCharacters(in: .whitespacesAndNewlines)
-                    answers["name"] = trimmedName
-                    
-                    // Save to AnonymousUserManager if in anonymous mode
-                    if authManager.isAnonymousUser {
-                        AnonymousUserManager.shared.userName = trimmedName
-                        print("👻 Saved name to anonymous storage: \(trimmedName)")
-                    }
-                    
-                    moveToNext()
-                }) {
-                    Text("Next")
-                        .frame(maxWidth: .infinity)
-                        .font(.manropeSemiBold(size: 16))
-                        .padding()
-                        .background(isNameEmpty ? Color.wingmanBlack.opacity(0.5) : Color.wingmanBlack)
-                        .foregroundColor(.white)
-                        .cornerRadius(5)
-                }
-                .buttonStyle(.plain)
-                .contentShape(Rectangle())
-                .disabled(isNameEmpty)
-                
-
-                Button("Skip") {
-                    isNameFieldFocused = false
-                    moveToNext()
-                }
-                .font(.manropeSemiBold(size: 16))
-                .foregroundColor(.wingmanBlack)
-                .underline()
-            }
-            
-            
-            Spacer()
-        }
-        .padding(.horizontal, 24)
-        .padding(.bottom, 16)
-        .onAppear {
-            isNameFieldFocused = true
-        }
-        
-    }
-
-    // MARK: - Question View (Your existing code)
-    private func questionView(step: OnboardingStep) -> some View {
-        VStack(alignment: .leading, spacing: 20) {
-
-            // Title
-            Text(step.title)
-                .font(.manropeSemiBold(size: 24))
-                .multilineTextAlignment(.leading)
-
-            if let subtitle = step.subtitle {
-                Text(subtitle)
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-                    .lineLimit(2)
-                    .multilineTextAlignment(.leading)
-            }
-
-            // Options
-            if let options = step.options {
-                VStack(spacing: 10) {
-                    ForEach(options, id: \.self) { option in
-                        Button(action: {
-                            HapticManager.shared.selection()
-                            selectedOption = option
-                        }) {
-                            OptionButton(text: option, isSelected: selectedOption == option)
-                        }
-                    }
-                }
-            }
-
-            Spacer()
-
-            // Next Button (full-area tappable)
-            let isDisabled = (step.type == .question && selectedOption == nil)
-
-            Button(action: {
-                moveToNext()
-            }) {
-                Text("Next")
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.wingmanBlack)
-                    .foregroundColor(.wingmanWhiteFF)
-                    .cornerRadius(5)
-            }
-            .buttonStyle(.plain)
-            .contentShape(Rectangle())
-            .opacity(isDisabled ? 0.7 : 1)
-            .disabled(isDisabled)
-        }
-        .padding(.horizontal, 24)
-        .padding(.bottom, 16)
-    }
-
-    // MARK: - Statistic Overlay
-    private func statisticOverlay(statistic: StatisticContent) -> some View {
-        // compute a progress for the statistic overlay that sits halfway between
-        // the source question progress and the next question's progress, so progress
-        // moves equally: question -> stat -> next question
-        let statProgress: Double = {
-            if let src = statisticSourceStepIndex,
-               src >= 0,
-               src < steps.count - 1 {
-                return (steps[src].progress + steps[src + 1].progress) / 2.0
-            } else {
-                // fallback to current step progress
-                return steps[min(stepIndex, steps.count - 1)].progress
-            }
-        }()
-
-        return ZStack {
-            Color.white.ignoresSafeArea()
-
-            VStack(spacing: 0) {
-
-                // Top Bar
-                HStack(spacing: 12) {
-                    Button {
-                        // Dismiss the statistic overlay and return to the source question
-                        dismissStatisticAndReturnToSource()
-                    } label: {
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: 22))
-                            .foregroundColor(.wingmanBlack)
-                            .frame(width: 44, height: 44, alignment: .center)
-                            .contentShape(Rectangle())
-                    }
-                    .buttonStyle(.plain)
-
-                    progressBar(progress: CGFloat(statProgress))
-                        .frame(height: 10)
-                }
-                .padding(.top, 8)
-                .padding(.horizontal, 24)
-                .padding(.bottom, 12)
-
-                // Main statistic content
-                VStack(spacing: 20) {
-
-                    // Heading
-                    Text(statistic.heading)
-                        .font(.manropeSemiBold(size: 24))
-                        .foregroundColor(.wingmanBlack)
-                        .lineSpacing(4)
-                        .multilineTextAlignment(.leading)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-
-                    // Subheading
-                    Text(statistic.subheading)
-                        .font(.manropeRegular(size: 16))
-                        .foregroundColor(.gray)
-                        .lineSpacing(4)
-                        .multilineTextAlignment(.leading)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-
-                    Spacer().frame(height: 40)
-
-                    // Image
-                    Image(statistic.imageName)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 250)
-
-                    Spacer().frame(height: 40)
-
-                    // Fact
-                    Text(statistic.fact)
-                        .font(.manropeRegular(size: 16))
-                        .foregroundColor(.gray)
-                        .lineSpacing(4)
-                        .multilineTextAlignment(.center)
-                        .frame(maxWidth: .infinity)
-
-                    Spacer() // push content up so the button sits at bottom
-                }
-                .padding(.horizontal, 24)
-
-                // Bottom-right Tap to Continue
-                HStack {
-                    Spacer()
-                    TapToContinueButton {
-                        continueFromStatistic()
-                    }
-                    // make the tappable area a little larger
-                    .padding(.trailing, 4)
-                    .font(.manropeMedium(size: 14))
-                }
-                .padding(.horizontal, 24)
-                .padding(.bottom, 24)
-            }
-            
-            // Invisible overlay to control tap areas - only right side should progress
-            // BUT exclude the top bar area so the back button remains clickable
-            VStack(spacing: 0) {
-                // Top area - no overlay (so back button is clickable)
-                Rectangle()
-                    .fill(Color.clear)
-                    .frame(height: 64) // Height of top bar area
-                
-                // Bottom area - split left/right for tap control
-                HStack(spacing: 0) {
-                    // Left half - blocks any tap gestures, not tappable for progression
-                    Rectangle()
-                        .fill(Color.clear)
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            // Explicitly do nothing - left side should not progress
-                            print("🚫 Left side tapped - no action")
-                        }
-                    
-                    // Right half - tappable area for progression
-                    Rectangle()
-                        .fill(Color.clear)
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            print("✅ Right side tapped - continuing")
-                            continueFromStatistic()
-                        }
-                }
-            }
-        }
-    }
-
-    // MARK: - Loading View
-    private func loadingView(step: OnboardingStep) -> some View {
-        // check if this exact text needs the smaller font
-        let isPersonalizingText = step.title == "Personalizing an experience just for you..."
-
-        return VStack(spacing: 12) {
-            Spacer()
-
-            // Loading Text (20pt only for the specific string)
-            Text(step.title)
-                .font(isPersonalizingText ? .manropeSemiBold(size: 20) : .manropeSemiBold(size: 24))
-                .foregroundColor(.wingmanBlack)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 40)
-
-            // Loading Dots Animation (dots are below the text)
-            LoadingDotsView()
-                .padding(.top, 6)
-
-            Spacer()
-        }
-        .onAppear {
-            // Save name to Supabase only if not anonymous
-            if !authManager.isAnonymousUser {
-                saveUserName()
-            }
-
-            // Wait 3 seconds then complete
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                print("✅ Finished all questions")
-                
-                if authManager.isAnonymousUser {
-                    // Complete anonymous onboarding (store data locally)
-                    authManager.completeAnonymousOnboarding()
-                } else {
-                    // Complete regular onboarding
-                    authManager.completeQuestions()
-                }
-            }
-        }
-    }
-
-
-    // MARK: - Progress Bar View
-    private func progressBar(progress: CGFloat) -> some View {
-        GeometryReader { geo in
-            ZStack(alignment: .leading) {
-                Capsule()
-                    .fill(Color.gray.opacity(0.2))
-                    .frame(height: 10)
-
-                Capsule()
-                    .fill(Color.wingmanBlack)
-                    .frame(width: geo.size.width * max(0, min(1, progress)), height: 10)
-                    .animation(.easeInOut(duration: 0.25), value: progress)
-            }
-        }
-        .frame(height: 10)
-    }
-
     // MARK: - Move to Next
     func moveToNext() {
         let step = steps[stepIndex]
@@ -802,21 +474,29 @@ struct OnboardingView: View {
             answers[key] = answer
             print("Question \(stepIndex + 1): \(answer)")
 
-            // Save to UserDefaults
-            UserDefaults.standard.set(answer, forKey: "onboarding_\(key)")
-            print("✅ Saved answer:", key, answer)
-            
-            // Save to AnonymousUserManager if in anonymous mode
-            if authManager.isAnonymousUser {
-                switch key {
-                case "age":
-                    AnonymousUserManager.shared.userAge = answer
-                    print("👻 Saved age to anonymous storage: \(answer)")
-                case "goals":
-                    AnonymousUserManager.shared.userGoals = answer
-                    print("👻 Saved goals to anonymous storage: \(answer)")
-                default:
-                    break
+            // Save to UserDefaults — deferred to the next runloop tick so the
+            // disk-touching synchronous write does not happen between the tap
+            // and the start of the slide animation. `restoreSelectionForCurrentStep`
+            // reads from the in-memory `answers` dict above, not from
+            // UserDefaults, so the deferred write is invisible to navigation.
+            DispatchQueue.main.async {
+                UserDefaults.standard.set(answer, forKey: "onboarding_\(key)")
+                print("✅ Saved answer:", key, answer)
+
+                // Save to AnonymousUserManager if in anonymous mode (also
+                // deferred — same rationale, and the in-memory `answers`
+                // already holds the value for any subsequent SwiftUI read).
+                if self.authManager.isAnonymousUser {
+                    switch key {
+                    case "age":
+                        AnonymousUserManager.shared.userAge = answer
+                        print("👻 Saved age to anonymous storage: \(answer)")
+                    case "goals":
+                        AnonymousUserManager.shared.userGoals = answer
+                        print("👻 Saved goals to anonymous storage: \(answer)")
+                    default:
+                        break
+                    }
                 }
             }
         }
@@ -826,7 +506,7 @@ struct OnboardingView: View {
             statisticSourceStepIndex = stepIndex   // 🔥 track source
             isGoingBack = false  // Forward direction
             statisticAnimationId = UUID()  // Generate new ID for fresh animation
-            withAnimation(.easeInOut(duration: 0.35)) {
+            withAnimation(.easeInOut(duration: 0.25)) {
                 showStatistic = true
             }
             return
@@ -843,7 +523,7 @@ struct OnboardingView: View {
         stepHistory.append(stepIndex)
 
         if stepIndex < steps.count - 1 {
-            withAnimation(.easeInOut(duration: 0.35)) {
+            withAnimation(.easeInOut(duration: 0.25)) {
                 stepIndex += 1
             }
             restoreSelectionForCurrentStep()
@@ -878,7 +558,7 @@ struct OnboardingView: View {
         isGoingBack = false
 
         // Close statistic and advance to the next step
-        withAnimation(.easeInOut(duration: 0.35)) {
+        withAnimation(.easeInOut(duration: 0.25)) {
             showStatistic = false
             currentStatistic = nil
             statisticSourceStepIndex = nil
@@ -905,7 +585,7 @@ struct OnboardingView: View {
         print("🔙 Set isGoingBack = true - statistic will slide out RIGHT")
         
         // Close statistic overlay and navigate back in one animation
-        withAnimation(.easeInOut(duration: 0.35)) {
+        withAnimation(.easeInOut(duration: 0.25)) {
             showStatistic = false
             stepIndex = sourceIndex
         }
@@ -1191,7 +871,7 @@ struct OnboardingView: View {
                         
                         print("🔙 Navigating to actual previous step: \(actualPreviousIndex)")
                         isGoingBack = true
-                        withAnimation(.easeInOut(duration: 0.35)) {
+                        withAnimation(.easeInOut(duration: 0.25)) {
                             stepIndex = actualPreviousIndex
                         }
                         restoreSelectionForCurrentStep()
@@ -1200,7 +880,7 @@ struct OnboardingView: View {
                 } else {
                     print("🔙 Navigating to previous step: \(previousIndex)")
                     isGoingBack = true
-                    withAnimation(.easeInOut(duration: 0.35)) {
+                    withAnimation(.easeInOut(duration: 0.25)) {
                         stepIndex = previousIndex
                     }
                     restoreSelectionForCurrentStep()
@@ -1232,7 +912,7 @@ struct OnboardingView: View {
             print("🔙 Final state - isGoingBack: \(self.isGoingBack), showStatistic: \(self.showStatistic)")
             
             // Animate with explicit state check
-            withAnimation(.easeInOut(duration: 0.35)) {
+            withAnimation(.easeInOut(duration: 0.25)) {
                 self.showStatistic = true
             }
             
@@ -1242,6 +922,33 @@ struct OnboardingView: View {
                 print("✅ Final state - shown: \(self.showStatistic), isGoingBack: \(self.isGoingBack)")
             }
         }
+    }
+}
+
+// MARK: - Onboarding Progress Bar
+// Extracted from a private method on `OnboardingView` so SwiftUI can give it
+// stable identity. As a method it was being re-evaluated on every
+// `OnboardingView.body` invocation — including every keystroke in the name
+// field — and its `GeometryReader` was re-measuring on each one. As its own
+// `View` struct, SwiftUI will skip body evaluation when `progress` hasn't
+// changed.
+private struct OnboardingProgressBar: View {
+    let progress: CGFloat
+
+    var body: some View {
+        GeometryReader { geo in
+            ZStack(alignment: .leading) {
+                Capsule()
+                    .fill(Color.gray.opacity(0.2))
+                    .frame(height: 10)
+
+                Capsule()
+                    .fill(Color.wingmanBlack)
+                    .frame(width: geo.size.width * max(0, min(1, progress)), height: 10)
+                    .animation(.easeInOut(duration: 0.25), value: progress)
+            }
+        }
+        .frame(height: 10)
     }
 }
 
@@ -1359,7 +1066,11 @@ struct TapToContinueButton: View {
                 .animation(.easeIn(duration: 0.5), value: isVisible)
         }
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            // Reduced from 1.5s to 0.6s. The right-side tap zone in the
+            // statistic view already accepts taps independent of this
+            // button's visibility, so the user can always advance — this
+            // delay is purely the visual hint reveal.
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                 isVisible = true
             }
         }
