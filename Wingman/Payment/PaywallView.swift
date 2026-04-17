@@ -135,7 +135,7 @@ struct PaywallView: View {
                                     }
 
                                     // Trial conversion disclosure
-                                    Text("No payment now. Cancel anytime before your trial ends to avoid being charged.")
+                                    Text("No payment now. Cancel anytime before your trial ends.")
                                         .font(.manropeMedium(size: 12))
                                         .foregroundColor(Color(hex: "6B7280"))
                                         .multilineTextAlignment(.center)

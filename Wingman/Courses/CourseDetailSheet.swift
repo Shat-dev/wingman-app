@@ -135,8 +135,6 @@ struct CourseDetailSheet: View {
         switch lockReason {
         case .unlocked:
             return nil
-        case .comingSoon:
-            return "This course is locked."
         case .awaitingPrevious(let previousTitle):
             return "Complete all lessons in \(previousTitle) to unlock this course."
         }

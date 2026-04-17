@@ -229,19 +229,14 @@ final class CoursesViewModel: ObservableObject {
         return LessonDataService.shared.isCourseCompleted(courseId: previous.id)
     }
 
-    /// Effective lock state combining the "coming soon" hardcoded flag with
-    /// the derived progression gate. Views use this.
+    /// Effective lock state derived purely from progression. Views use this.
     func isCourseEffectivelyLocked(_ course: Course) -> Bool {
-        if course.isLocked { return true }
         return !isCourseProgressionUnlocked(course)
     }
 
     /// The reason a course is (or isn't) locked — drives UI copy for the
     /// grid lock icon, card opacity, and the CourseDetailSheet banner.
     func courseLockReason(_ course: Course) -> CourseLockReason {
-        if course.isLocked {
-            return .comingSoon
-        }
         if isCourseProgressionUnlocked(course) {
             return .unlocked
         }

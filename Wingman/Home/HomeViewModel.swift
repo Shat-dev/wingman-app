@@ -161,13 +161,9 @@ final class HomeViewModel: ObservableObject {
     }
     
     // MARK: - Course Lock Check (matches CoursesViewModel derivation)
-    /// Returns true if the given course is effectively locked — either by
-    /// the hardcoded "coming soon" flag, or because the previous course in
-    /// the same category hasn't been fully completed.
+    /// Returns true if the given course is locked because the previous
+    /// course in the same category hasn't been fully completed.
     private func isCourseLocked(_ course: Course) -> Bool {
-        // Hardcoded hard gate ("coming soon").
-        if course.isLocked { return true }
-
         // Progression gate: find the previous course in the same category.
         guard let category = CourseCategory.dummyCategories.first(where: { $0.id == course.categoryId }) else {
             return false
