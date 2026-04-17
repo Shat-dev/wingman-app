@@ -49,7 +49,9 @@ final class AuthManager: ObservableObject {
     }
 
     // Rating prompt (shown between onboarding questions and paywall).
-    // One-time gate: once flipped to true we never route the user back to it.
+    // Per-onboarding-pass gate: flipped to true on Continue so the user can
+    // advance to the paywall, then reset on signOut / account deletion /
+    // start-of-anonymous-onboarding so the next onboarding pass shows it again.
     // Persisted per-user for authenticated users (mirrors the hasCompletedPaywallFlow
     // pattern), and under a global key for anonymous users (they have no userId
     // at the moment they dismiss the prompt).
@@ -250,6 +252,7 @@ final class AuthManager: ObservableObject {
                 self.currentUser = nil
                 self.hasCompletedQuestions = false
                 self.hasCompletedPaywallFlow = false
+                self.hasSeenRatingPrompt = false
                 print("🚪 User signed out")
 
             case .initialSession:
@@ -318,6 +321,7 @@ final class AuthManager: ObservableObject {
                 self.currentUser = nil
                 self.hasCompletedQuestions = false
                 self.hasCompletedPaywallFlow = false
+                self.hasSeenRatingPrompt = false
                 print("🗑️ User deleted")
 
             @unknown default:
@@ -514,6 +518,13 @@ final class AuthManager: ObservableObject {
         isAnonymousUser = true
         hasCompletedOnboarding = false
         UserDefaults.standard.set(true, forKey: "isAnonymousUser")
+
+        // Reset the rating prompt so this anonymous onboarding pass shows it
+        // again. Without this, an earlier anonymous session that dismissed the
+        // prompt leaves the global key set, causing the new flow to skip it.
+        hasSeenRatingPrompt = false
+        UserDefaults.standard.removeObject(forKey: "hasSeenRatingPrompt")
+
         print("✅ Anonymous onboarding started - user will proceed without account")
     }
     
@@ -923,10 +934,23 @@ final class AuthManager: ObservableObject {
         print("\n🚪 signOut() called")
         do {
             try await client.auth.signOut()
+
+            // Capture userId BEFORE clearing currentUser so we can wipe the
+            // per-user rating-prompt key (otherwise the next onboarding pass
+            // for this user would re-load `true` from UserDefaults and skip
+            // the rating screen).
+            let userIdForCleanup = currentUser?.id.uuidString
+
             isAuthenticated = false
             currentUser = nil
             hasCompletedQuestions = false
             hasCompletedPaywallFlow = false
+            hasSeenRatingPrompt = false
+
+            if let userId = userIdForCleanup {
+                UserDefaults.standard.removeObject(forKey: "hasSeenRatingPrompt_\(userId)")
+            }
+
             print("✅ Sign out successful")
         } catch {
             print("❌ Sign out error: \(error.localizedDescription)")
@@ -1018,6 +1042,7 @@ final class AuthManager: ObservableObject {
                     hasCompletedOnboarding = false
                     hasCompletedQuestions = false
                     hasCompletedPaywallFlow = false
+                    hasSeenRatingPrompt = false
                     isCheckingSession = false
                     
                     print("✅ Account deletion completed successfully")

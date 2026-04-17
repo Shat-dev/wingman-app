@@ -36,6 +36,101 @@ struct PaywallView: View {
                             .foregroundColor(.gray)
                             .padding(.top, 16)
                         Spacer()
+                    } else if viewModel.offerings == nil {
+                        // MARK: - Error State (offerings failed to load)
+                        Spacer()
+                        VStack(spacing: 16) {
+                            Image(systemName: "wifi.exclamationmark")
+                                .font(.system(size: 48, weight: .regular))
+                                .foregroundColor(.gray.opacity(0.7))
+
+                            Text("Can't load pricing")
+                                .font(.manropeSemiBold(size: 22))
+                                .foregroundColor(.wingmanBlack)
+
+                            Text("Check your connection and try again.")
+                                .font(.manropeRegular(size: 16))
+                                .foregroundColor(.gray)
+                                .multilineTextAlignment(.center)
+                                .padding(.horizontal, 40)
+
+                            Button {
+                                HapticManager.shared.mediumImpact()
+                                viewModel.loadOfferings()
+                            } label: {
+                                HStack(spacing: 8) {
+                                    if viewModel.isLoading {
+                                        ProgressView()
+                                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                                            .scaleEffect(0.8)
+                                    }
+                                    Text(viewModel.isLoading ? "Loading..." : "Try Again")
+                                        .font(.manropeSemiBold(size: 16))
+                                }
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 52)
+                                .background(Color.wingmanBlack.opacity(viewModel.isLoading ? 0.7 : 1.0))
+                                .cornerRadius(5)
+                            }
+                            .disabled(viewModel.isLoading)
+                            .padding(.horizontal, 20)
+                            .padding(.top, 16)
+                        }
+                        Spacer()
+
+                        // Footer still shown so existing subscribers can restore
+                        // their purchase even when offerings fail to load.
+                        HStack(spacing: 0) {
+                            Button {
+                                viewModel.openPrivacy()
+                            } label: {
+                                Text("Privacy")
+                                    .font(.manropeMedium(size: 12))
+                                    .foregroundColor(Color(hex: "6B7280"))
+                                    .underline()
+                                    .frame(minWidth: 44, minHeight: 44)
+                                    .contentShape(Rectangle())
+                            }
+
+                            Spacer()
+
+                            Button {
+                                Task {
+                                    await viewModel.openRestore()
+                                }
+                            } label: {
+                                HStack(spacing: 4) {
+                                    if viewModel.isLoading && !viewModel.isPurchasing {
+                                        ProgressView()
+                                            .progressViewStyle(CircularProgressViewStyle())
+                                            .scaleEffect(0.6)
+                                    }
+                                    Text("Restore")
+                                        .font(.manropeMedium(size: 12))
+                                        .foregroundColor(Color(hex: "6B7280"))
+                                        .underline()
+                                }
+                                .frame(minWidth: 44, minHeight: 44)
+                                .contentShape(Rectangle())
+                            }
+                            .disabled(viewModel.isLoading)
+
+                            Spacer()
+
+                            Button {
+                                viewModel.openTerms()
+                            } label: {
+                                Text("Terms")
+                                    .font(.manropeMedium(size: 12))
+                                    .foregroundColor(Color(hex: "6B7280"))
+                                    .underline()
+                                    .frame(minWidth: 44, minHeight: 44)
+                                    .contentShape(Rectangle())
+                            }
+                        }
+                        .padding(.horizontal, 60)
+                        .padding(.bottom, 8)
                     } else {
                         // MARK: - Scrollable content (carousel + dots + plans)
                         //
@@ -89,7 +184,7 @@ struct PaywallView: View {
                                     }
                                 }
                                 .tabViewStyle(.page(indexDisplayMode: .never))
-                                .frame(height: 445)
+                                .frame(height: 405)
 
                                 // MARK: - Page Indicator
                                 HStack(spacing: 8) {
@@ -108,7 +203,7 @@ struct PaywallView: View {
                                     // Yearly Plan
                                     PlanRow(
                                         title: "Yearly Plan",
-                                        price: "\(viewModel.yearlyPrice) per year",
+                                        price: viewModel.yearlyPrice.isEmpty ? "" : "\(viewModel.yearlyPrice) per year",
                                         weekly: calculateWeeklyPrice(viewModel.yearlyPackage),
                                         weeklySubtitle: "per week",
                                         isSelected: viewModel.selectedPlan == .yearly,
@@ -123,7 +218,7 @@ struct PaywallView: View {
                                     // Monthly Plan
                                     PlanRow(
                                         title: "Monthly Plan",
-                                        price: "\(viewModel.monthlyPrice) per month",
+                                        price: viewModel.monthlyPrice.isEmpty ? "" : "\(viewModel.monthlyPrice) per month",
                                         weekly: calculateWeeklyPrice(viewModel.monthlyPackage),
                                             weeklySubtitle: "per week",
                                             isSelected: viewModel.selectedPlan == .monthly,
@@ -191,6 +286,8 @@ struct PaywallView: View {
                                     .font(.manropeMedium(size: 12))
                                     .foregroundColor(Color(hex: "6B7280"))
                                     .underline()
+                                    .frame(minWidth: 44, minHeight: 44)
+                                    .contentShape(Rectangle())
                             }
 
                             Spacer()
@@ -211,6 +308,8 @@ struct PaywallView: View {
                                         .foregroundColor(Color(hex: "6B7280"))
                                         .underline()
                                 }
+                                .frame(minWidth: 44, minHeight: 44)
+                                .contentShape(Rectangle())
                             }
                             .disabled(viewModel.isLoading)
 
@@ -223,10 +322,12 @@ struct PaywallView: View {
                                     .font(.manropeMedium(size: 12))
                                     .foregroundColor(Color(hex: "6B7280"))
                                     .underline()
+                                    .frame(minWidth: 44, minHeight: 44)
+                                    .contentShape(Rectangle())
                             }
                         }
                         .padding(.horizontal, 60)
-                        .padding(.bottom, 16)
+                        .padding(.bottom, 8)
                     }
                 }
                 .background(Color.white)

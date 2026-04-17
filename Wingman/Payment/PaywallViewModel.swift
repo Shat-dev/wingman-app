@@ -82,11 +82,11 @@ final class PaywallViewModel: ObservableObject {
     }
     
     var yearlyPrice: String {
-        return yearlyPackage?.storeProduct.localizedPriceString ?? "$59.99"
+        return yearlyPackage?.storeProduct.localizedPriceString ?? ""
     }
-    
+
     var monthlyPrice: String {
-        return monthlyPackage?.storeProduct.localizedPriceString ?? "$9.99"
+        return monthlyPackage?.storeProduct.localizedPriceString ?? ""
     }
     
     var currentPackage: Package? {

@@ -1237,7 +1237,7 @@ let extendedOnboardingSteps: [OnboardingStep] = [
     // Loading Screen
     OnboardingStep(
         type: .loading,
-        title: "Personalizing an experience just for you...",
+        title: "Preparing your experience",
         subtitle: nil,
         options: nil,
         chartImage: nil,
