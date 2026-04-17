@@ -68,14 +68,15 @@ final class HomeViewModel: ObservableObject {
     // MARK: - Load User Data
     func loadUserData() {
         print("📊 Loading user data...")
-        
-        // Get user name from UserDefaults (from onboarding)
-        if let name = UserDefaults.standard.string(forKey: "onboarding_name"), !name.isEmpty {
-            userName = name
-        } else {
-            userName = "User"
-        }
-        
+
+        // Previously read a UserDefaults key ("onboarding_name") that is never
+        // written anywhere in the codebase — that branch always fell through
+        // to "User". HomeView's header reads the name directly from the
+        // Supabase auth session, so this property is only a fallback; we keep
+        // the fallback value identical to the prior behavior ("User") to
+        // guarantee no visible regression for anything reading viewModel.userName.
+        userName = UserProfileStore.shared.displayName ?? "User"
+
         // Check if practiced today (legacy check for hasPracticeToday)
         if let lastPracticeDate = UserDefaults.standard.object(forKey: "last_practice_date") as? Date {
             hasPracticeToday = Calendar.current.isDateInToday(lastPracticeDate)

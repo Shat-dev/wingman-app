@@ -519,11 +519,29 @@ final class AuthManager: ObservableObject {
         do {
             // Prepare user metadata with anonymous data
             var updates: [String: AnyJSON] = [:]
-            
-            if let name = anonymousManager.userName {
-                updates["display_name"] = AnyJSON.string(name)
-                print("   - Syncing name: \(name)")
+
+            // Pick the best available name, falling back when the anonymous
+            // user skipped the name step. Previously we only wrote display_name
+            // when a typed value existed, which left synced users with no name
+            // in metadata and an empty Profile name indefinitely. Writing a
+            // sensible default here is purely additive.
+            let typedName = anonymousManager.userName?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+            let resolvedName: String
+            if !typedName.isEmpty {
+                resolvedName = typedName
+            } else {
+                let emailPrefix = currentUser.email
+                    .flatMap { $0.split(separator: "@").first.map(String.init) }
+                if let prefix = emailPrefix, !prefix.isEmpty {
+                    resolvedName = prefix
+                } else {
+                    resolvedName = "User"
+                }
+                print("ℹ️ Anonymous user had no name — using fallback display_name: \(resolvedName)")
             }
+            updates["display_name"] = AnyJSON.string(resolvedName)
+            UserProfileStore.shared.apply(name: resolvedName)
+            print("   - Syncing name: \(resolvedName)")
             
             if let age = anonymousManager.userAge {
                 updates["age"] = AnyJSON.string(age)

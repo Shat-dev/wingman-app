@@ -56,11 +56,11 @@ struct LandingView: View {
                 .tabViewStyle(.page(indexDisplayMode: .never))
                 .frame(height: 520)
 
-                
+
 
                 // MARK: - CTA Buttons
                 VStack(spacing: 20) {
-                    
+
                     // MARK: - Page Indicator
                     HStack(spacing: 6) {
                         ForEach(viewModel.pages.indices, id: \.self) { index in

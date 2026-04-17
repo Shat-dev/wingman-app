@@ -65,13 +65,15 @@ final class SupabaseManager {
             "last_practice_date",
             "daily_reading_goal",
             "goal_notifications"
-        ] + StreakStore.cacheKeys
+        ] + StreakStore.cacheKeys + UserProfileStore.cacheKeys
         keys.forEach { UserDefaults.standard.removeObject(forKey: $0) }
 
-        // Also wipe StreakStore's in-memory state so a subsequent login
-        // on the same session doesn't briefly show the previous user's streak.
+        // Also wipe in-memory cache on the shared stores so a subsequent
+        // login on the same session doesn't briefly show the previous user's
+        // streak or name.
         Task { @MainActor in
             StreakStore.shared.clearCache()
+            UserProfileStore.shared.clearCache()
         }
     }
 }

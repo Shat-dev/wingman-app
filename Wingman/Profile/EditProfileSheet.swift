@@ -157,11 +157,11 @@ struct EditProfileSheet: View {
                 )
                 
                 print("✅ User name updated in Supabase: \(name)")
-                
-                // Also update UserDefaults for offline access
-                UserDefaults.standard.set(name, forKey: "user_name")
-                
+
                 await MainActor.run {
+                    // Push into shared store — also writes cache + legacy
+                    // "user_name" UserDefaults key, so any reader stays in sync.
+                    UserProfileStore.shared.apply(name: name)
                     onSave(name)
                     isSaving = false
                     showSuccess = true
@@ -177,9 +177,10 @@ struct EditProfileSheet: View {
                 print("❌ Error updating user name: \(error.localizedDescription)")
                 await MainActor.run {
                     isSaving = false
-                    // Still call onSave to update local state
+                    // Still update local state so the UI reflects the user's
+                    // intent even when the network call failed.
+                    UserProfileStore.shared.apply(name: name)
                     onSave(name)
-                    UserDefaults.standard.set(name, forKey: "user_name")
                     showSuccess = true
                 }
                 

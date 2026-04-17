@@ -11,12 +11,12 @@ struct ProfileView: View {
     @State private var showSettings = false
     @State private var showEditProfile = false
     @State private var showApproachesLogged = false
-    @State private var userName = UserDefaults.standard.string(forKey: "user_name") ?? ""
     // Bound directly to the shared stores so any mutation elsewhere (logging,
-    // editing, deleting an approach, completing daily practice) re-renders
-    // the card instantly without waiting for onAppear/pull-to-refresh.
+    // editing, deleting an approach, completing daily practice, editing name)
+    // re-renders the card instantly without waiting for onAppear/pull-to-refresh.
     @StateObject private var approachService = ApproachService.shared
     @StateObject private var streakStore = StreakStore.shared
+    @StateObject private var userProfileStore = UserProfileStore.shared
     
     var body: some View {
         NavigationStack {
@@ -72,7 +72,7 @@ struct ProfileView: View {
                                             
                                     }
                                     
-                                    Text(userName)
+                                    Text(userProfileStore.displayName ?? "")
                                         .font(.manropeMedium(size: 18))
                                         .foregroundColor(.wingmanBlack)
                                     
@@ -148,16 +148,17 @@ struct ProfileView: View {
             .navigationBarHidden(true)
             // Keep sheets
             .sheet(isPresented: $showSettings) {
-                SettingsSheet(userName: userName)
+                SettingsSheet(userName: userProfileStore.displayName ?? "")
                     .presentationDetents([.height(630)])
                     .presentationDragIndicator(.hidden)
                     .presentationCornerRadius(20)
             }
             .sheet(isPresented: $showEditProfile) {
-                EditProfileSheet(currentName: userName) { newName in
-                    userName = newName
-                    // TODO: Save to Supabase
-                    UserDefaults.standard.set(newName, forKey: "user_name")
+                EditProfileSheet(currentName: userProfileStore.displayName ?? "") { newName in
+                    // EditProfileSheet writes Supabase + cache itself; this
+                    // callback is additionally idempotent via apply(name:) so
+                    // the avatar card re-renders immediately on save.
+                    UserProfileStore.shared.apply(name: newName)
                 }
                 .presentationDetents([.medium])
                 .presentationDragIndicator(.hidden)
@@ -168,58 +169,16 @@ struct ProfileView: View {
             }
         }
         .onAppear {
-            // Tab entry fetches fresh data; view body reads directly from
-            // the shared stores, so any write elsewhere (log, edit, delete,
-            // daily-practice completion) is already reflected when we arrive.
-            loadUserData()
-            Task {
-                await streakStore.refresh()
-            }
+            // Tab entry refreshes each store in the background; view body reads
+            // directly from the shared stores, so any write elsewhere (log,
+            // edit, delete, daily-practice completion, name change) is already
+            // reflected when we arrive.
+            Task { await loadApproachData() }
+            Task { await streakStore.refresh() }
+            Task { await userProfileStore.refresh() }
         }
     }
-    
-    private func loadUserData() {
-        // Load approach data
-        Task {
-            await loadApproachData()
-            await loadUserName()
-        }
-    }
-    
-    private func loadUserName() async {
-        do {
-            // Fetch current user from Supabase
-            let user = try await SupabaseManager.shared.client.auth.user()
-            
-            // Get display_name from user metadata (userMetadata is a dictionary, not optional)
-            if let displayName = user.userMetadata["display_name"]?.stringValue,
-               !displayName.isEmpty {
-                await MainActor.run {
-                    self.userName = displayName
-                    // Also cache in UserDefaults for offline access
-                    UserDefaults.standard.set(displayName, forKey: "user_name")
-                }
-                print("✅ Loaded user name from Supabase: \(displayName)")
-            } else {
-                // Fallback to UserDefaults if no metadata
-                if let savedName = UserDefaults.standard.string(forKey: "user_name") {
-                    await MainActor.run {
-                        self.userName = savedName
-                    }
-                    print("📦 Loaded user name from UserDefaults: \(savedName)")
-                }
-            }
-        } catch {
-            print("❌ Error fetching user from Supabase: \(error.localizedDescription)")
-            // Fallback to UserDefaults on error
-            if let savedName = UserDefaults.standard.string(forKey: "user_name") {
-                await MainActor.run {
-                    self.userName = savedName
-                }
-            }
-        }
-    }
-    
+
     private func loadApproachData() async {
         // Fetch fresh data from Supabase. The view body reads ApproachService
         // directly, so the re-render happens automatically when fetchApproaches
