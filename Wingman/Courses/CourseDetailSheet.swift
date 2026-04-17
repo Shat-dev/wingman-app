@@ -136,7 +136,7 @@ struct CourseDetailSheet: View {
         case .unlocked:
             return nil
         case .comingSoon:
-            return "This course is coming soon. Stay tuned for updates."
+            return "This course is locked."
         case .awaitingPrevious(let previousTitle):
             return "Complete all lessons in \(previousTitle) to unlock this course."
         }

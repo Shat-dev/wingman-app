@@ -108,7 +108,7 @@ struct PaywallView: View {
                                     // Yearly Plan
                                     PlanRow(
                                         title: "Yearly Plan",
-                                        price: viewModel.yearlyPrice,
+                                        price: "\(viewModel.yearlyPrice)/yr, auto-renews after trial",
                                         weekly: calculateWeeklyPrice(viewModel.yearlyPackage),
                                         weeklySubtitle: "per week",
                                         isSelected: viewModel.selectedPlan == .yearly,
@@ -123,7 +123,7 @@ struct PaywallView: View {
                                     // Monthly Plan
                                     PlanRow(
                                         title: "Monthly Plan",
-                                        price: viewModel.monthlyPrice,
+                                        price: "\(viewModel.monthlyPrice)/mo, auto-renews after trial",
                                         weekly: calculateWeeklyPrice(viewModel.monthlyPackage),
                                             weeklySubtitle: "per week",
                                             isSelected: viewModel.selectedPlan == .monthly,
@@ -133,6 +133,15 @@ struct PaywallView: View {
                                             viewModel.selectPlan(.monthly)
                                         }
                                     }
+
+                                    // Trial conversion disclosure
+                                    Text("No payment now. Cancel anytime before your trial ends to avoid being charged.")
+                                        .font(.manropeMedium(size: 12))
+                                        .foregroundColor(Color(hex: "6B7280"))
+                                        .multilineTextAlignment(.center)
+                                        .frame(maxWidth: .infinity, alignment: .center)
+                                        .padding(.top, 8)
+                                        .padding(.horizontal, 8)
                                 }
                                 .padding(.horizontal, 20)
                                 .padding(.bottom, 8) // Breathing room before the pinned Continue button

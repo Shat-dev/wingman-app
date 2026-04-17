@@ -315,7 +315,7 @@ extension CourseCategory {
                 Course(
                     id: "course_20",
                     categoryId: "cat_4",
-                    title: "Physical Presence & Escalation",
+                    title: "Physical Presence",
                     description: "Navigate physical connection",
                     courseSummary: nil,
                     thumbnailName: "course_physical_presence",

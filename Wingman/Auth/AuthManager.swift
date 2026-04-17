@@ -758,12 +758,20 @@ final class AuthManager: ObservableObject {
     // MARK: - Apple Sign-In
     func signInWithApple() {
         print("\n🍎 signInWithApple() called")
-        
+
         isAppleSignInLoading = true
         appleSignInError = nil
-        
+
         // Generate a random nonce for security
-        let nonce = randomNonceString()
+        let nonce: String
+        do {
+            nonce = try randomNonceString()
+        } catch {
+            print("❌ Nonce generation failed: \(error.localizedDescription)")
+            isAppleSignInLoading = false
+            appleSignInError = "Couldn't start sign-in. Please try again."
+            return
+        }
         currentNonce = nonce
         
         // Create Apple ID request
@@ -886,12 +894,12 @@ final class AuthManager: ObservableObject {
     }
     
     // MARK: - Nonce Generation Helpers
-    private func randomNonceString(length: Int = 32) -> String {
+    private func randomNonceString(length: Int = 32) throws -> String {
         precondition(length > 0)
         var randomBytes = [UInt8](repeating: 0, count: length)
         let errorCode = SecRandomCopyBytes(kSecRandomDefault, randomBytes.count, &randomBytes)
         if errorCode != errSecSuccess {
-            fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
+            throw AppleSignInError.nonceGenerationFailed(errorCode)
         }
         
         let charset: [Character] = Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
@@ -1089,7 +1097,8 @@ enum AppleSignInError: LocalizedError {
     case noIdentityToken
     case invalidIdentityToken
     case noAuthorizationCode
-    
+    case nonceGenerationFailed(OSStatus)
+
     var errorDescription: String? {
         switch self {
         case .noNonce:
@@ -1100,6 +1109,8 @@ enum AppleSignInError: LocalizedError {
             return "Unable to serialize identity token"
         case .noAuthorizationCode:
             return "Unable to get authorization code from Apple"
+        case .nonceGenerationFailed(let status):
+            return "Couldn't generate sign-in security token (OSStatus \(status))"
         }
     }
 }
@@ -1116,11 +1127,14 @@ class AppleSignInDelegate: NSObject, ASAuthorizationControllerDelegate, ASAuthor
     
     // MARK: - ASAuthorizationControllerPresentationContextProviding
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let window = windowScene.windows.first else {
-            fatalError("No window found")
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
+            return window
         }
-        return window
+        // Fallback: return an empty anchor rather than crashing. Apple Sign-In
+        // will fail cleanly and surface an error the user can retry from.
+        print("⚠️ presentationAnchor: no window found, returning empty anchor")
+        return ASPresentationAnchor()
     }
     
     // MARK: - ASAuthorizationControllerDelegate
