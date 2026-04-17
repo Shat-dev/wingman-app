@@ -108,7 +108,7 @@ struct PaywallView: View {
                                     // Yearly Plan
                                     PlanRow(
                                         title: "Yearly Plan",
-                                        price: "\(viewModel.yearlyPrice)/yr, auto-renews after trial",
+                                        price: "\(viewModel.yearlyPrice) per year",
                                         weekly: calculateWeeklyPrice(viewModel.yearlyPackage),
                                         weeklySubtitle: "per week",
                                         isSelected: viewModel.selectedPlan == .yearly,
@@ -123,7 +123,7 @@ struct PaywallView: View {
                                     // Monthly Plan
                                     PlanRow(
                                         title: "Monthly Plan",
-                                        price: "\(viewModel.monthlyPrice)/mo, auto-renews after trial",
+                                        price: "\(viewModel.monthlyPrice) per month",
                                         weekly: calculateWeeklyPrice(viewModel.monthlyPackage),
                                             weeklySubtitle: "per week",
                                             isSelected: viewModel.selectedPlan == .monthly,
