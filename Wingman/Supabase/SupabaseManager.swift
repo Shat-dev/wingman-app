@@ -13,7 +13,12 @@ final class SupabaseManager {
     
     // MARK: - Configuration
     // Replace these with your actual Supabase credentials
-    private let supabaseURL = URL(string: "https://bnckmgnysfliiypvxxii.supabase.co")!
+    private let supabaseURL: URL = {
+        guard let url = URL(string: "https://bnckmgnysfliiypvxxii.supabase.co") else {
+            preconditionFailure("Invalid Supabase URL — configuration error")
+        }
+        return url
+    }()
     private let supabaseKey = "sb_publishable_B1an-2PeSHETguChW_Xdxg_50UYkPtb"
     
     // MARK: - Client
@@ -117,32 +122,9 @@ final class SupabaseManager {
      ON approach_logs FOR DELETE
      USING (auth.uid() = user_id);
 
- -- user_profiles table
- CREATE TABLE user_profiles (
-     id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
-     name TEXT NOT NULL,
-     avatar_index INTEGER DEFAULT 0,
-     email TEXT,
-     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
- );
-
- -- Row Level Security for profiles
- ALTER TABLE user_profiles ENABLE ROW LEVEL SECURITY;
-
- CREATE POLICY "Users can view their own profile"
-     ON user_profiles FOR SELECT
-     USING (auth.uid() = id);
-
- CREATE POLICY "Users can update their own profile"
-     ON user_profiles FOR UPDATE
-     USING (auth.uid() = id);
-
- CREATE POLICY "Users can insert their own profile"
-     ON user_profiles FOR INSERT
-     WITH CHECK (auth.uid() = id);
-
- CREATE POLICY "Users can delete their own profile"
-     ON user_profiles FOR DELETE
-     USING (auth.uid() = id);
+ -- Note: user profile fields (display_name, avatar_index, age, goals) are
+ -- stored on `auth.users.user_metadata` via `client.auth.update(user:)`.
+ -- No separate `user_profiles` table exists in this project — writes go
+ -- through Supabase's built-in auth metadata.
 
  */

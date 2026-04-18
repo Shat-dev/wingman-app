@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Wingman Logo.jpg",
+      "filename" : "Wingman Logo.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -13,7 +13,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "Wingman Logo 1.jpg",
+      "filename" : "Wingman Logo 1.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -25,7 +25,7 @@
           "value" : "tinted"
         }
       ],
-      "filename" : "Wingman Logo 2.jpg",
+      "filename" : "Wingman Logo 2.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"

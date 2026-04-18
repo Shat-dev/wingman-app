@@ -13,6 +13,7 @@ import GoogleSignIn
 import AuthenticationServices
 import CryptoKit
 import RevenueCat
+import StoreKit
 
 @MainActor
 final class AuthManager: ObservableObject {
@@ -584,25 +585,33 @@ final class AuthManager: ObservableObject {
                 updates["age"] = AnyJSON.string(age)
                 print("   - Syncing age: \(age)")
             }
-            
+
             if let goals = anonymousManager.userGoals {
                 updates["goals"] = AnyJSON.string(goals)
                 print("   - Syncing goals: \(goals)")
             }
-            
+
             // Mark onboarding as completed if user completed anonymous onboarding
             if anonymousManager.hasCompletedOnboarding {
                 updates["onboarding_completed"] = AnyJSON.bool(true)
                 print("   - Marking onboarding as completed")
             }
-            
+
             updates["updated_at"] = AnyJSON.string(ISO8601DateFormatter().string(from: Date()))
-            
+
             // Update user metadata in Supabase
             let attributes = UserAttributes(data: updates)
             try await client.auth.update(user: attributes)
-            
+
             print("✅ Successfully synced anonymous data to backend")
+
+            // Now that the user has an auth record, capture App Store
+            // storefront + currency. We couldn't do this while they were
+            // anonymous (no user_metadata row to write to). This closes
+            // the gap for users who went through anonymous → signup —
+            // otherwise their country/currency would only get captured
+            // if they later re-visited the paywall.
+            await captureStoreContextFromStoreKit()
             
             // Mark local completion flags for the authenticated user
             let userId = currentUser.id.uuidString
@@ -645,6 +654,121 @@ final class AuthManager: ObservableObject {
             
         } catch {
             print("❌ Failed to sync anonymous data: \(error.localizedDescription)")
+        }
+    }
+
+    // MARK: - Age Range Sync
+    /// Writes the user's age range to `auth.users.user_metadata.age` for the
+    /// currently authenticated user. Best-effort: failures are logged and
+    /// swallowed (local UserDefaults retains the answer, so nothing is lost).
+    ///
+    /// Called from OnboardingView when a non-anonymous user answers the age
+    /// question. Anonymous-signup users already get the same field synced
+    /// via `syncAnonymousDataToBackend` — this method fills the gap for
+    /// direct OAuth signups.
+    func syncAgeRangeToBackend(_ ageRange: String) async {
+        guard SupabaseManager.shared.currentUserId != nil else {
+            print("⚠️ syncAgeRangeToBackend: no authenticated user — skipping")
+            return
+        }
+
+        let trimmed = ageRange.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else {
+            print("⚠️ syncAgeRangeToBackend: empty age — skipping")
+            return
+        }
+
+        print("📤 syncAgeRangeToBackend: writing age=\(trimmed) to user_metadata")
+
+        do {
+            let attributes = UserAttributes(data: [
+                "age": AnyJSON.string(trimmed),
+                "updated_at": AnyJSON.string(ISO8601DateFormatter().string(from: Date()))
+            ])
+            try await client.auth.update(user: attributes)
+            print("✅ syncAgeRangeToBackend: wrote age to user_metadata")
+        } catch {
+            print("❌ syncAgeRangeToBackend: failed — \(error.localizedDescription)")
+        }
+    }
+
+    // MARK: - Store Context Capture
+
+    /// Resolves App Store storefront country (StoreKit 2) and currency
+    /// (from any loaded RevenueCat StoreProduct), then delegates the actual
+    /// metadata write to `captureStoreContext(country:currency:)`. Used from
+    /// `syncAnonymousDataToBackend` so anonymous-then-signup users get their
+    /// country/currency captured at signup time, without needing to revisit
+    /// the paywall.
+    ///
+    /// RevenueCat caches offerings after the user's anonymous paywall visit,
+    /// so this call is typically served from cache — no extra network hit.
+    private func captureStoreContextFromStoreKit() async {
+        // Country from StoreKit 2 storefront.
+        var country: String? = nil
+        if let storefront = await Storefront.current {
+            country = storefront.countryCode
+        }
+
+        // Currency from any loaded StoreProduct — yearly preferred, monthly fallback.
+        var currency: String? = nil
+        do {
+            let offerings = try await Purchases.shared.offerings()
+            let yearly = offerings.current?.package(identifier: "yearly") ?? offerings.current?.annual
+            let monthly = offerings.current?.package(identifier: "monthly") ?? offerings.current?.monthly
+            currency = yearly?.storeProduct.currencyCode ?? monthly?.storeProduct.currencyCode
+        } catch {
+            print("⚠️ captureStoreContextFromStoreKit: offerings fetch failed — \(error.localizedDescription)")
+        }
+
+        await captureStoreContext(country: country, currency: currency)
+    }
+
+    /// Writes App Store storefront country + currency to `user_metadata` for
+    /// the currently authenticated user. Best-effort, idempotent per user per
+    /// install via `hasCapturedStoreContext_<userId>` in UserDefaults — runs
+    /// exactly once then no-ops on subsequent calls.
+    ///
+    /// Called from `PaywallViewModel.loadOfferings()` after offerings load,
+    /// and from `syncAnonymousDataToBackend` after anonymous signup completes.
+    /// Silently skips if no authenticated user exists.
+    func captureStoreContext(country: String?, currency: String?) async {
+        guard let userId = SupabaseManager.shared.currentUserId else {
+            print("⚠️ captureStoreContext: no authenticated user — skipping")
+            return
+        }
+
+        let flagKey = "hasCapturedStoreContext_\(userId)"
+        if UserDefaults.standard.bool(forKey: flagKey) {
+            // Already captured for this user on this install — no-op.
+            return
+        }
+
+        // Need at least one useful field to bother writing.
+        guard country != nil || currency != nil else {
+            print("⚠️ captureStoreContext: no country/currency available — skipping")
+            return
+        }
+
+        print("📤 captureStoreContext: country=\(country ?? "nil") currency=\(currency ?? "nil")")
+
+        var updates: [String: AnyJSON] = [:]
+        if let country = country {
+            updates["country"] = AnyJSON.string(country)
+        }
+        if let currency = currency {
+            updates["currency"] = AnyJSON.string(currency)
+        }
+        updates["store_context_captured_at"] = AnyJSON.string(ISO8601DateFormatter().string(from: Date()))
+
+        do {
+            let attributes = UserAttributes(data: updates)
+            try await client.auth.update(user: attributes)
+            UserDefaults.standard.set(true, forKey: flagKey)
+            print("✅ captureStoreContext: wrote to user_metadata")
+        } catch {
+            // Best-effort — don't flip the flag, so next paywall open retries.
+            print("❌ captureStoreContext: failed — \(error.localizedDescription)")
         }
     }
 
@@ -1001,7 +1125,9 @@ final class AuthManager: ObservableObject {
         do {
             // Call the Supabase Edge Function using direct HTTP request
             // Since functions.invoke is not working, use URLSession directly
-            let functionURL = URL(string: "https://bnckmgnysfliiypvxxii.supabase.co/functions/v1/delete-user-account")!
+            guard let functionURL = URL(string: "https://bnckmgnysfliiypvxxii.supabase.co/functions/v1/delete-user-account") else {
+                throw AccountDeletionError.networkError("Invalid delete-account function URL")
+            }
             
             var request = URLRequest(url: functionURL)
             request.httpMethod = "POST"

@@ -488,6 +488,9 @@ struct OnboardingView: View {
                     // Save to AnonymousUserManager if in anonymous mode (also
                     // deferred — same rationale, and the in-memory `answers`
                     // already holds the value for any subsequent SwiftUI read).
+                    // For authenticated users, we additionally push `age` to
+                    // the user_profiles.age_range column so it's available
+                    // server-side for all users, not just anonymous-synced ones.
                     if self.authManager.isAnonymousUser {
                         switch key {
                         case "age":
@@ -503,6 +506,13 @@ struct OnboardingView: View {
                             print("👻 Saved goals to anonymous storage: \(answer)")
                         default:
                             break
+                        }
+                    } else if key == "age" {
+                        // Authenticated (non-anonymous) user — sync age_range
+                        // straight to Supabase. Fire-and-forget; local answer
+                        // is already persisted in UserDefaults above.
+                        Task {
+                            await self.authManager.syncAgeRangeToBackend(answer)
                         }
                     }
                 }
@@ -678,12 +688,12 @@ struct OnboardingView: View {
 
         // After "last_approach" question
         if questionKey == "last_approach" {
-            if ageGroup == "Under 18" || ageGroup == "18-24" {
+            if ageGroup == "18-24" {
                 return StatisticContent(
                     heading: "Almost half of men your age have never approached a women",
                     subheading: "You are not alone. Millions of men struggle with approaching.",
                     imageName: "stat_never_approached",
-                    fact: "45% of men aged 18-25 have never approached a woman"
+                    fact: "45% of men aged 18-24 have never approached a woman"
                 )
             } else {
                 return StatisticContent(
@@ -1172,7 +1182,7 @@ let extendedOnboardingSteps: [OnboardingStep] = [
         type: .question,
         title: "How old are you?",
         subtitle: nil,
-        options: ["Under 18", "18-24", "25-34", "35-44", "45+"],
+        options: ["18-24", "25-34", "35-44", "45+"],
         chartImage: nil,
         progress: 0.2,
         questionKey: "age"

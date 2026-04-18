@@ -10,22 +10,31 @@ import Combine
 
 struct DailyPracticeView: View {
     @StateObject private var viewModel: DailyPracticeViewModel
+    @StateObject private var networkMonitor = NetworkMonitor.shared
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var tabBarVisibility: TabBarVisibilityManager
-    
+
     // Default initializer for production use
     init() {
         self._viewModel = StateObject(wrappedValue: DailyPracticeViewModel())
     }
-    
+
     // Preview initializer for Canvas testing
     init(previewViewModel: DailyPracticeViewModel) {
         self._viewModel = StateObject(wrappedValue: previewViewModel)
     }
-    
+
     var body: some View {
         VStack(spacing: 0) {
-            
+
+            // MARK: - Offline Banner (shown only when disconnected)
+            if !networkMonitor.isConnected {
+                OfflineBannerView()
+                    .padding(.top, 8)
+                    .padding(.bottom, 4)
+                    .transition(.move(edge: .top).combined(with: .opacity))
+            }
+
             // MARK: - Top Row: Back Chevron + Progress Bar
             // Hide when showing error (e.g., no internet)
             if viewModel.errorMessage == nil {

@@ -33,6 +33,12 @@ final class HomeViewModel: ObservableObject {
     @Published var isDailyPracticeCompleted: Bool = false
     @Published var dailyPracticeButtonText: String = "Start"
     @Published var isDailyPracticeButtonEnabled: Bool = true
+    /// True while the initial daily-practice fetch is in flight. HomeView uses
+    /// this to show a subtle indicator on the streak badge until the network
+    /// response arrives. Header, motivational quote, and continue-course card
+    /// render synchronously from cache and aren't gated by this flag — so
+    /// there is no full-screen spinner and no added latency on the render path.
+    @Published var isLoading: Bool = true
     
     // MARK: - UserDefaults Keys
     private static let lastAccessedCourseKey = "last_accessed_course_id"
@@ -242,6 +248,7 @@ final class HomeViewModel: ObservableObject {
     // MARK: - Check Daily Practice Completion
     @MainActor
     private func checkDailyPracticeCompletion() async {
+        defer { isLoading = false }
         do {
             print("🔄 Checking daily practice completion status...")
             let status = try await dailyPracticeService.getDailyPracticeStatus()

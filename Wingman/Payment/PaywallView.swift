@@ -11,6 +11,7 @@ import RevenueCat
 struct PaywallView: View {
 
     @StateObject private var viewModel = PaywallViewModel()
+    @StateObject private var networkMonitor = NetworkMonitor.shared
     @State private var navigateToReferral = false
     @EnvironmentObject var authManager: AuthManager
     
@@ -25,6 +26,15 @@ struct PaywallView: View {
         NavigationStack {
             ZStack {
                 VStack(spacing: 0) {
+
+                    // MARK: - Offline Banner (shown only when disconnected)
+                    if !networkMonitor.isConnected {
+                        OfflineBannerView()
+                            .padding(.top, 8)
+                            .padding(.bottom, 4)
+                            .transition(.move(edge: .top).combined(with: .opacity))
+                    }
+
                     if viewModel.isLoading && viewModel.offerings == nil {
                         // MARK: - Loading State
                         Spacer()

@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import Combine
 import RevenueCat
+import StoreKit
 
 @MainActor
 final class PaywallViewModel: ObservableObject {
@@ -107,23 +108,48 @@ final class PaywallViewModel: ObservableObject {
     func loadOfferings() {
         Task {
             isLoading = true
-            
+
             do {
                 let fetchedOfferings = try await Purchases.shared.offerings()
                 self.offerings = fetchedOfferings
-                
+
                 // Auto-select yearly package by default
                 self.selectedPackage = yearlyPackage
-                
+
                 print("📦 PaywallViewModel: Loaded offerings")
             } catch {
                 self.error = "Failed to load subscription options. Please try again."
                 self.showAlert = true
                 print("❌ PaywallViewModel: Failed to load offerings: \(error)")
             }
-            
+
             isLoading = false
+
+            // Fire after isLoading flips so the UI unblocks immediately;
+            // the capture itself is a background metadata write that we
+            // don't want to gate paywall rendering on.
+            if self.offerings != nil {
+                await captureStoreContextIfNeeded()
+            }
         }
+    }
+
+    /// Reads App Store storefront country (StoreKit 2) and currency
+    /// (from any loaded StoreProduct), then delegates the write to
+    /// `AuthManager.captureStoreContext` which handles auth-gating,
+    /// per-user idempotency, and the actual `user_metadata` update.
+    private func captureStoreContextIfNeeded() async {
+        // Country from StoreKit 2 storefront (nil on simulator/offline).
+        var country: String? = nil
+        if let storefront = await Storefront.current {
+            country = storefront.countryCode
+        }
+
+        // Currency from a loaded StoreProduct — yearly preferred, monthly fallback.
+        let currency = yearlyPackage?.storeProduct.currencyCode
+            ?? monthlyPackage?.storeProduct.currencyCode
+
+        await authManager?.captureStoreContext(country: country, currency: currency)
     }
     
     func continueTapped() async -> Bool {

@@ -340,7 +340,6 @@ struct SettingsSheet: View {
     }
     
     private func manageSubscriptions() {
-        // TODO: Open App Store subscriptions page
         print("Manage Subscriptions tapped")
         if let url = URL(string: "https://apps.apple.com/account/subscriptions") {
             UIApplication.shared.open(url)

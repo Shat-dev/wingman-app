@@ -14,6 +14,7 @@ struct HomeView: View {
     @EnvironmentObject private var tabBarVisibility: TabBarVisibilityManager
 
     @StateObject private var viewModel = HomeViewModel()
+    @StateObject private var networkMonitor = NetworkMonitor.shared
     @State private var navigateToPractice = false
     @State private var showLogApproachSheet = false
     @State private var selectedCourse: Course? = nil
@@ -37,7 +38,15 @@ struct HomeView: View {
                 Color.white.ignoresSafeArea()
                 
                 VStack(spacing: 0) {
-                    
+
+                    // MARK: - Offline Banner (shown only when disconnected)
+                    if !networkMonitor.isConnected {
+                        OfflineBannerView()
+                            .padding(.top, 8)
+                            .padding(.bottom, 4)
+                            .transition(.move(edge: .top).combined(with: .opacity))
+                    }
+
                     // MARK: - Header
                     HStack(alignment: .top) {
                         VStack(alignment: .leading, spacing: 2) {
@@ -79,9 +88,17 @@ struct HomeView: View {
                                 .frame(width: 16, height: 16)
                                 .padding(.leading, 16)
 
-                            Text("\(viewModel.currentStreak)")
-                                .font(.manropeMedium(size: 20))
-                                .padding(.trailing, 16)
+                            if viewModel.isLoading {
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle(tint: .wingmanBlack))
+                                    .scaleEffect(0.7)
+                                    .frame(width: 20, height: 20)
+                                    .padding(.trailing, 16)
+                            } else {
+                                Text("\(viewModel.currentStreak)")
+                                    .font(.manropeMedium(size: 20))
+                                    .padding(.trailing, 16)
+                            }
                         }
                         .foregroundColor(.wingmanBlack)
                         .frame(width: 64, height: 44)
