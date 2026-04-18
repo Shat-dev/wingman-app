@@ -75,7 +75,7 @@ struct ContentView: View {
             VStack(spacing: 16) {
                 
                 Button(action: {
-                    print("Create Account tapped")
+                    log("Create Account tapped")
                 }) {
                     Text("Create Account")
                         .font(.system(size: 17, weight: .medium))
@@ -89,7 +89,7 @@ struct ContentView: View {
                 }
                 
                 Button(action: {
-                    print("Log In tapped")
+                    log("Log In tapped")
                 }) {
                     Text("Log In")
                         .font(.system(size: 17, weight: .medium))
@@ -104,7 +104,7 @@ struct ContentView: View {
             
             // MARK: Skip Button
             Button(action: {
-                print("Skip tapped")
+                log("Skip tapped")
             }) {
                 Text("Skip for now")
                     .foregroundColor(.gray)

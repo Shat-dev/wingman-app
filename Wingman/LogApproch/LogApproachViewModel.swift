@@ -72,22 +72,22 @@ final class LogApproachViewModel: ObservableObject {
     
     // MARK: - Setup for Editing
     func setupForEditing(_ approach: ApproachLog) {
-        print("📝 Setting up ViewModel for editing approach: \(approach.title)")
+        log("📝 Setting up ViewModel for editing approach: \(approach.title)")
         editingApproachId = approach.id
         title = approach.title
         notes = approach.description
         selectedLevel = approach.level
         anxietyLevel = Double(approach.anxietyLevel)
         
-        print("   - Title: \(title)")
-        print("   - Level: \(selectedLevel)")
-        print("   - Anxiety: \(anxietyLevel)")
-        print("   - Notes: \(notes)")
+        log("   - Title: \(title)")
+        log("   - Level: \(selectedLevel)")
+        log("   - Anxiety: \(anxietyLevel)")
+        log("   - Notes: \(notes)")
     }
     
     // MARK: - Reset for New Entry
     func setupForNewEntry() {
-        print("📝 Setting up ViewModel for new approach entry")
+        log("📝 Setting up ViewModel for new approach entry")
         editingApproachId = nil
         resetForm()
     }
@@ -95,38 +95,38 @@ final class LogApproachViewModel: ObservableObject {
     // MARK: - Actions
     func selectLevel(_ level: Int) {
         HapticManager.shared.selection()
-        print("📝 Selected approach level: \(level)")
-        print("   - Level name: \(levels[level - 1].title)")
+        log("📝 Selected approach level: \(level)")
+        log("   - Level name: \(levels[level - 1].title)")
         selectedLevel = level
     }
     
     func updateAnxietyLevel(_ value: Double) {
         anxietyLevel = value
-        print("😰 Confidence level updated: \(Int(value))/10 - \(anxietyLevelText)")
+        log("😰 Confidence level updated: \(Int(value))/10 - \(anxietyLevelText)")
     }
     
     func showInfoSheet() {
-        print("ℹ️ Info button tapped - Show approach levels guide")
+        log("ℹ️ Info button tapped - Show approach levels guide")
     }
     
     func saveApproach() {
         guard canSave else {
-            print("❌ Cannot save - validation failed")
+            log("❌ Cannot save - validation failed")
             errorMessage = "Please provide a title for your encounter"
             return
         }
         
         if isEditMode {
-            print("\n📝 Updating approach log...")
-            print("   - ID: \(editingApproachId?.uuidString ?? "Unknown")")
+            log("\n📝 Updating approach log...")
+            log("   - ID: \(editingApproachId?.uuidString ?? "Unknown")")
         } else {
-            print("\n💾 Saving new approach log...")
+            log("\n💾 Saving new approach log...")
         }
         
-        print("   - Title: \(title)")
-        print("   - Level: \(selectedLevel) - \(levels[selectedLevel - 1].title)")
-        print("   - Confidence: \(Int(anxietyLevel))/10 - \(anxietyLevelText)")
-        print("   - Notes: \(notes.isEmpty ? "(empty)" : notes)")
+        log("   - Title: \(title)")
+        log("   - Level: \(selectedLevel) - \(levels[selectedLevel - 1].title)")
+        log("   - Confidence: \(Int(anxietyLevel))/10 - \(anxietyLevelText)")
+        log("   - Notes: \(notes.isEmpty ? "(empty)" : notes)")
         
         isSaving = true
         errorMessage = ""
@@ -144,7 +144,7 @@ final class LogApproachViewModel: ObservableObject {
                     self.showSuccess = true
                     HapticManager.shared.success()
                     let action = self.isEditMode ? "updated" : "saved"
-                    print("✅ Approach \(action) successfully!")
+                    log("✅ Approach \(action) successfully!")
                     
                     // Auto-hide success after 2 seconds
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -164,7 +164,7 @@ final class LogApproachViewModel: ObservableObject {
                     HapticManager.shared.error()
                     let action = self.isEditMode ? "update" : "save"
                     self.errorMessage = "Failed to \(action). Please try again."
-                    print("❌ Error \(action)ing approach: \(error.localizedDescription)")
+                    log("❌ Error \(action)ing approach: \(error.localizedDescription)")
                 }
             }
         }
@@ -201,12 +201,12 @@ final class LogApproachViewModel: ObservableObject {
             updatedAt: ISO8601DateFormatter().string(from: Date())
         )
         
-        print("📤 Updating in Supabase:")
-        print("   - ID: \(approachId.uuidString)")
-        print("   - User ID: \(userId)")
-        print("   - Title: \(updateData.title)")
-        print("   - Level: \(updateData.approachLevel)")
-        print("   - Confidence: \(updateData.anxietyLevel)")
+        log("📤 Updating in Supabase:")
+        log("   - ID: \(approachId.uuidString)")
+        log("   - User ID: \(userId)")
+        log("   - Title: \(updateData.title)")
+        log("   - Level: \(updateData.approachLevel)")
+        log("   - Confidence: \(updateData.anxietyLevel)")
         
         try await client
             .from("approach_logs")
@@ -215,7 +215,7 @@ final class LogApproachViewModel: ObservableObject {
             .eq("user_id", value: userId)
             .execute()
         
-        print("✅ Successfully updated in database")
+        log("✅ Successfully updated in database")
         
         // Refresh the shared approach service to update UI
         await ApproachService.shared.fetchApproaches()
@@ -245,7 +245,7 @@ final class LogApproachViewModel: ObservableObject {
             }
         }
         
-        let log = ApproachLog(
+        let approachLog = ApproachLog(
             userId: userId,
             title: title,
             approachLevel: selectedLevel,
@@ -253,19 +253,19 @@ final class LogApproachViewModel: ObservableObject {
             notes: notes.isEmpty ? nil : notes,
             loggedAt: ISO8601DateFormatter().string(from: Date())
         )
-        
-        print("📤 Sending to Supabase:")
-        print("   - User ID: \(userId)")
-        print("   - Title: \(log.title)")
-        print("   - Level: \(log.approachLevel)")
-        print("   - Confidence: \(log.anxietyLevel)")
-        
+
+        log("📤 Sending to Supabase:")
+        log("   - User ID: \(userId)")
+        log("   - Title: \(approachLog.title)")
+        log("   - Level: \(approachLog.approachLevel)")
+        log("   - Confidence: \(approachLog.anxietyLevel)")
+
         try await client
             .from("approach_logs")
-            .insert(log)
+            .insert(approachLog)
             .execute()
         
-        print("✅ Successfully inserted into database")
+        log("✅ Successfully inserted into database")
         
         // Refresh the shared approach service to update UI
         await ApproachService.shared.fetchApproaches()
@@ -284,8 +284,8 @@ final class LogApproachViewModel: ObservableObject {
             let currentCount = UserDefaults.standard.integer(forKey: "total_approaches")
             UserDefaults.standard.set(currentCount + 1, forKey: "total_approaches")
             
-            print("📊 Stats updated:")
-            print("   - Total approaches: \(currentCount + 1)")
+            log("📊 Stats updated:")
+            log("   - Total approaches: \(currentCount + 1)")
         }
     }
     
@@ -294,7 +294,7 @@ final class LogApproachViewModel: ObservableObject {
         selectedLevel = 2
         anxietyLevel = 5.0
         notes = ""
-        print("🔄 Form reset to defaults")
+        log("🔄 Form reset to defaults")
     }
     
     private func getUserId() -> String? {

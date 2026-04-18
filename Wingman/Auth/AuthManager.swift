@@ -19,33 +19,33 @@ import StoreKit
 final class AuthManager: ObservableObject {
     @Published var isAuthenticated: Bool = false {
         didSet {
-            print("🔐 isAuthenticated changed: \(oldValue) → \(isAuthenticated)")
+            log("🔐 isAuthenticated changed: \(oldValue) → \(isAuthenticated)")
         }
     }
     
     // MARK: - Session Checking State
     @Published var isCheckingSession: Bool = true {
         didSet {
-            print("🔍 isCheckingSession changed: \(oldValue) → \(isCheckingSession)")
+            log("🔍 isCheckingSession changed: \(oldValue) → \(isCheckingSession)")
         }
     }
 
     @Published var hasCompletedOnboarding: Bool = false {
         didSet {
-            print("📋 hasCompletedOnboarding changed: \(oldValue) → \(hasCompletedOnboarding)")
+            log("📋 hasCompletedOnboarding changed: \(oldValue) → \(hasCompletedOnboarding)")
         }
     }
 
     @Published var hasCompletedQuestions: Bool = false {
         didSet {
-            print("❓ hasCompletedQuestions changed: \(oldValue) → \(hasCompletedQuestions)")
+            log("❓ hasCompletedQuestions changed: \(oldValue) → \(hasCompletedQuestions)")
         }
     }
 
     // ✅ NEW: Paywall + Referral flow completion
     @Published var hasCompletedPaywallFlow: Bool = false {
         didSet {
-            print("💳 hasCompletedPaywallFlow changed: \(oldValue) → \(hasCompletedPaywallFlow)")
+            log("💳 hasCompletedPaywallFlow changed: \(oldValue) → \(hasCompletedPaywallFlow)")
         }
     }
 
@@ -58,26 +58,26 @@ final class AuthManager: ObservableObject {
     // at the moment they dismiss the prompt).
     @Published var hasSeenRatingPrompt: Bool = false {
         didSet {
-            print("⭐ hasSeenRatingPrompt changed: \(oldValue) → \(hasSeenRatingPrompt)")
+            log("⭐ hasSeenRatingPrompt changed: \(oldValue) → \(hasSeenRatingPrompt)")
         }
     }
 
     // MARK: - Subscription Status
     @Published var hasActiveSubscription: Bool = false {
         didSet {
-            print("💚 hasActiveSubscription changed: \(oldValue) → \(hasActiveSubscription)")
+            log("💚 hasActiveSubscription changed: \(oldValue) → \(hasActiveSubscription)")
         }
     }
 
     @Published var subscriptionExpiryDate: Date? {
         didSet {
-            print("📅 subscriptionExpiryDate changed: \(oldValue?.formatted() ?? "nil") → \(subscriptionExpiryDate?.formatted() ?? "nil")")
+            log("📅 subscriptionExpiryDate changed: \(oldValue?.formatted() ?? "nil") → \(subscriptionExpiryDate?.formatted() ?? "nil")")
         }
     }
 
     @Published var currentUser: User? {
         didSet {
-            print("👤 currentUser changed: \(oldValue?.email ?? "nil") → \(currentUser?.email ?? "nil")")
+            log("👤 currentUser changed: \(oldValue?.email ?? "nil") → \(currentUser?.email ?? "nil")")
         }
     }
     
@@ -90,7 +90,7 @@ final class AuthManager: ObservableObject {
     // MARK: - Anonymous User State
     @Published var isAnonymousUser: Bool = false {
         didSet {
-            print("👻 isAnonymousUser changed: \(oldValue) → \(isAnonymousUser)")
+            log("👻 isAnonymousUser changed: \(oldValue) → \(isAnonymousUser)")
         }
     }
     
@@ -104,36 +104,36 @@ final class AuthManager: ObservableObject {
     private let googleClientID = "915810938432-fh9l3u8icl6vcksn2j841c5nbljfh824.apps.googleusercontent.com"
 
     init() {
-        print("\n🏁 ========== AuthManager INIT ==========")
+        log("\n🏁 ========== AuthManager INIT ==========")
 
         // Check if user has completed onboarding (seen landing pages)
         hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
-        print("📋 Loaded hasCompletedOnboarding: \(hasCompletedOnboarding)")
+        log("📋 Loaded hasCompletedOnboarding: \(hasCompletedOnboarding)")
 
         // This global key might not be used in your current per-user storage,
         // but keeping it doesn't hurt; the real value loads after session.
         hasCompletedQuestions = UserDefaults.standard.bool(forKey: "hasCompletedQuestions")
-        print("❓ Loaded hasCompletedQuestions: \(hasCompletedQuestions)")
+        log("❓ Loaded hasCompletedQuestions: \(hasCompletedQuestions)")
 
         // Same note: actual per-user value loads after session
         hasCompletedPaywallFlow = UserDefaults.standard.bool(forKey: "hasCompletedPaywallFlow")
-        print("💳 Loaded hasCompletedPaywallFlow: \(hasCompletedPaywallFlow)")
+        log("💳 Loaded hasCompletedPaywallFlow: \(hasCompletedPaywallFlow)")
 
         // Load global rating-prompt flag — covers the anonymous case at launch,
         // and also provides a safe default before session restore overwrites
         // with the per-user value.
         hasSeenRatingPrompt = UserDefaults.standard.bool(forKey: "hasSeenRatingPrompt")
-        print("⭐ Loaded hasSeenRatingPrompt: \(hasSeenRatingPrompt)")
+        log("⭐ Loaded hasSeenRatingPrompt: \(hasSeenRatingPrompt)")
 
         // Check if user is in anonymous mode
         isAnonymousUser = UserDefaults.standard.bool(forKey: "isAnonymousUser")
-        print("👻 Loaded isAnonymousUser: \(isAnonymousUser)")
+        log("👻 Loaded isAnonymousUser: \(isAnonymousUser)")
 
         // Don't setup subscription monitoring here - will be done after RevenueCat is configured
 
         // Listen to auth state changes
         Task {
-            print("🎧 Starting to observe auth state changes...")
+            log("🎧 Starting to observe auth state changes...")
             await observeAuthState()
         }
     }
@@ -141,7 +141,7 @@ final class AuthManager: ObservableObject {
     // MARK: - Subscription Monitoring Setup
     /// Setup subscription monitoring - call this AFTER RevenueCat is configured
     func setupSubscriptionMonitoring() {
-        print("🔐 AuthManager: Setting up subscription monitoring (RevenueCat ready)")
+        log("🔐 AuthManager: Setting up subscription monitoring (RevenueCat ready)")
         
         let subscriptionManager = SubscriptionManager.shared
         
@@ -172,17 +172,17 @@ final class AuthManager: ObservableObject {
     }
     
     @objc private func subscriptionStatusChanged() {
-        print("📢 AuthManager: Subscription status changed notification received")
+        log("📢 AuthManager: Subscription status changed notification received")
         syncSubscriptionStatus()
     }
     
     @objc private func subscriptionExpired() {
-        print("⚠️ AuthManager: Subscription expired notification received")
+        log("⚠️ AuthManager: Subscription expired notification received")
         syncSubscriptionStatus()
     }
     
     @objc private func subscriptionRestored() {
-        print("✅ AuthManager: Subscription restored notification received")
+        log("✅ AuthManager: Subscription restored notification received")
         syncSubscriptionStatus()
     }
     
@@ -198,22 +198,22 @@ final class AuthManager: ObservableObject {
 
     // AUTH STATE OBSERVER - THIS HANDLES AUTOMATIC NAVIGATION
     private func observeAuthState() async {
-        print("\n🔄 observeAuthState() started")
+        log("\n🔄 observeAuthState() started")
 
         for await (event, session) in client.auth.authStateChanges {
-            print("\n⚡️ ========== AUTH EVENT RECEIVED ==========")
-            print("📡 Event: \(event)")
-            print("🔑 Session exists: \(session != nil)")
+            log("\n⚡️ ========== AUTH EVENT RECEIVED ==========")
+            log("📡 Event: \(event)")
+            log("🔑 Session exists: \(session != nil)")
 
             if let session = session {
-                print("   - User ID: \(session.user.id)")
-                print("   - Email: \(session.user.email ?? "nil")")
-                print("   - Created at: \(session.user.createdAt)")
+                log("   - User ID: \(session.user.id)")
+                log("   - Email: \(session.user.email ?? "nil")")
+                log("   - Created at: \(session.user.createdAt)")
             }
 
             switch event {
             case .signedIn:
-                print("✅ Event type: SIGNED_IN")
+                log("✅ Event type: SIGNED_IN")
                 if let session = session {
                     self.isAuthenticated = true
                     self.currentUser = session.user
@@ -222,14 +222,14 @@ final class AuthManager: ObservableObject {
                     // ✅ Persist email immediately
                     if let email = session.user.email, !email.isEmpty {
                         UserDefaults.standard.set(email, forKey: "user_email")
-                        print("📩 Saved user_email on sign-in: \(email)")
+                        log("📩 Saved user_email on sign-in: \(email)")
                     }
 
                     // ✅ Check if user was anonymous and sync data
                     // NOTE: syncAnonymousDataToBackend() handles setting hasCompletedPaywallFlow
                     // if the user had an active purchase during anonymous mode
                     if self.isAnonymousUser {
-                        print("🔄 Detected anonymous user sign-in - syncing data...")
+                        log("🔄 Detected anonymous user sign-in - syncing data...")
                         await self.syncAnonymousDataToBackend()
                     }
 
@@ -243,21 +243,21 @@ final class AuthManager: ObservableObject {
                     // Non-blocking; merges cloud + local and pushes back up.
                     await LessonDataService.shared.hydrateLessonProgressFromCloud()
 
-                    print("✅ User signed in: \(session.user.email ?? "unknown")")
-                    print("🎯 Auth state updated - RootView should now react")
+                    log("✅ User signed in: \(session.user.email ?? "unknown")")
+                    log("🎯 Auth state updated - RootView should now react")
                 }
 
             case .signedOut:
-                print("🚪 Event type: SIGNED_OUT")
+                log("🚪 Event type: SIGNED_OUT")
                 self.isAuthenticated = false
                 self.currentUser = nil
                 self.hasCompletedQuestions = false
                 self.hasCompletedPaywallFlow = false
                 self.hasSeenRatingPrompt = false
-                print("🚪 User signed out")
+                log("🚪 User signed out")
 
             case .initialSession:
-                print("🔵 Event type: INITIAL_SESSION")
+                log("🔵 Event type: INITIAL_SESSION")
                 if let session = session {
                     self.isAuthenticated = true
                     self.currentUser = session.user
@@ -265,7 +265,7 @@ final class AuthManager: ObservableObject {
                     // ✅ Persist email on initial session
                     if let email = session.user.email, !email.isEmpty {
                         UserDefaults.standard.set(email, forKey: "user_email")
-                        print("📩 Saved user_email on initial session: \(email)")
+                        log("📩 Saved user_email on initial session: \(email)")
                     }
 
                     // ✅ Load user state
@@ -281,56 +281,56 @@ final class AuthManager: ObservableObject {
                     // ✅ NEW: If user was anonymous and already paid, skip paywall
                     let anonymousManager = AnonymousUserManager.shared
                     if self.isAnonymousUser && anonymousManager.hasActivePurchase {
-                        print("💳 User was anonymous with active purchase - marking paywall flow as complete")
+                        log("💳 User was anonymous with active purchase - marking paywall flow as complete")
                         self.hasCompletedPaywallFlow = true
                         let key = "hasCompletedPaywallFlow_\(session.user.id.uuidString)"
                         UserDefaults.standard.set(true, forKey: key)
                     }
 
-                    print("✅ Initial session found: \(session.user.email ?? "unknown")")
+                    log("✅ Initial session found: \(session.user.email ?? "unknown")")
                 } else {
                     self.isAuthenticated = false
-                    print("❌ No initial session")
+                    log("❌ No initial session")
                 }
 
             case .tokenRefreshed:
-                print("🔄 Event type: TOKEN_REFRESHED")
+                log("🔄 Event type: TOKEN_REFRESHED")
                 if let session = session {
                     self.currentUser = session.user
-                    print("🔄 Token refreshed")
+                    log("🔄 Token refreshed")
                 }
 
             case .userUpdated:
-                print("👤 Event type: USER_UPDATED")
+                log("👤 Event type: USER_UPDATED")
                 if let session = session {
                     self.currentUser = session.user
                     // Email generally doesn’t change, but this keeps it fresh
                     if let email = session.user.email, !email.isEmpty {
                         UserDefaults.standard.set(email, forKey: "user_email")
-                        print("📩 Saved user_email on user update: \(email)")
+                        log("📩 Saved user_email on user update: \(email)")
                     }
-                    print("👤 User updated")
+                    log("👤 User updated")
                 }
 
             case .passwordRecovery:
-                print("🔑 Event type: PASSWORD_RECOVERY")
-                print("🔑 Password recovery initiated")
+                log("🔑 Event type: PASSWORD_RECOVERY")
+                log("🔑 Password recovery initiated")
 
             case .userDeleted:
-                print("🗑️ Event type: USER_DELETED")
+                log("🗑️ Event type: USER_DELETED")
                 self.isAuthenticated = false
                 self.currentUser = nil
                 self.hasCompletedQuestions = false
                 self.hasCompletedPaywallFlow = false
                 self.hasSeenRatingPrompt = false
-                print("🗑️ User deleted")
+                log("🗑️ User deleted")
 
             @unknown default:
-                print("⚠️ Event type: UNKNOWN")
-                print("⚠️ Unknown auth event")
+                log("⚠️ Event type: UNKNOWN")
+                log("⚠️ Unknown auth event")
             }
 
-            print("========================================\n")
+            log("========================================\n")
         }
     }
 
@@ -338,13 +338,13 @@ final class AuthManager: ObservableObject {
     private func checkUserQuestionStatus(userId: String) async {
         let key = "hasCompletedQuestions_\(userId)"
         hasCompletedQuestions = UserDefaults.standard.bool(forKey: key)
-        print("📋 User question status from UserDefaults: \(hasCompletedQuestions) for user: \(userId)")
+        log("📋 User question status from UserDefaults: \(hasCompletedQuestions) for user: \(userId)")
         
         // Also check user metadata for onboarding completion (for synced anonymous users)
         if let user = currentUser,
            let onboardingCompleted = user.userMetadata["onboarding_completed"]?.boolValue,
            onboardingCompleted {
-            print("📋 Found onboarding_completed=true in user metadata - marking as completed")
+            log("📋 Found onboarding_completed=true in user metadata - marking as completed")
             hasCompletedQuestions = true
             hasCompletedOnboarding = true
             
@@ -353,35 +353,35 @@ final class AuthManager: ObservableObject {
             UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding_\(userId)")
         }
         
-        print("📋 Final question status: \(hasCompletedQuestions) for user: \(userId)")
+        log("📋 Final question status: \(hasCompletedQuestions) for user: \(userId)")
     }
 
     private func checkUserPaywallFlowStatus(userId: String) async {
         let key = "hasCompletedPaywallFlow_\(userId)"
         hasCompletedPaywallFlow = UserDefaults.standard.bool(forKey: key)
-        print("💳 Paywall flow status loaded: \(hasCompletedPaywallFlow) for user: \(userId)")
+        log("💳 Paywall flow status loaded: \(hasCompletedPaywallFlow) for user: \(userId)")
     }
 
     private func checkUserRatingPromptStatus(userId: String) async {
         let key = "hasSeenRatingPrompt_\(userId)"
         hasSeenRatingPrompt = UserDefaults.standard.bool(forKey: key)
-        print("⭐ Rating prompt status loaded: \(hasSeenRatingPrompt) for user: \(userId)")
+        log("⭐ Rating prompt status loaded: \(hasSeenRatingPrompt) for user: \(userId)")
     }
     
     // MARK: - Graceful Session Restoration (Offline-First)
     
     /// Restores session from local cache instantly, then validates with server in background
     func restoreSessionGracefully() async {
-        print("\n🔄 ========== GRACEFUL SESSION RESTORE ==========")
+        log("\n🔄 ========== GRACEFUL SESSION RESTORE ==========")
         
         do {
             // Step 1: Try to get cached session instantly (no network required)
             // Note: client.auth.session should read from local storage first
             let session = try await client.auth.session
             
-            print("✅ Cached session found!")
-            print("   - User ID: \(session.user.id)")
-            print("   - Email: \(session.user.email ?? "nil")")
+            log("✅ Cached session found!")
+            log("   - User ID: \(session.user.id)")
+            log("   - Email: \(session.user.email ?? "nil")")
             
             // Immediately set authenticated state from cache
             self.currentUser = session.user
@@ -394,7 +394,7 @@ final class AuthManager: ObservableObject {
 
             // Mark session check complete - UI can now render
             self.isCheckingSession = false
-            print("✅ Session restored from cache - UI ready")
+            log("✅ Session restored from cache - UI ready")
             
             // Step 2: Validate session with server in background (non-blocking)
             // Only if we have network connectivity
@@ -403,31 +403,31 @@ final class AuthManager: ObservableObject {
                     await self?.validateSessionInBackground()
                 }
             } else {
-                print("📶 Offline - skipping background validation")
+                log("📶 Offline - skipping background validation")
             }
             
         } catch {
-            print("❌ No cached session found: \(error.localizedDescription)")
+            log("❌ No cached session found: \(error.localizedDescription)")
             
             // No session - user needs to log in
             self.isAuthenticated = false
             self.currentUser = nil
             self.isCheckingSession = false
-            print("ℹ️ No session - showing login screen")
+            log("ℹ️ No session - showing login screen")
         }
         
-        print("================================================\n")
+        log("================================================\n")
     }
     
     /// Validates session with server in background, only signs out if truly invalid
     private func validateSessionInBackground() async {
         // Skip validation if offline - no point waiting for timeout
         guard NetworkMonitor.shared.isConnected else {
-            print("📶 Background: Offline - skipping session validation")
+            log("📶 Background: Offline - skipping session validation")
             return
         }
         
-        print("🔄 Background: Validating session with server...")
+        log("🔄 Background: Validating session with server...")
         
         // Use a timeout to prevent hanging
         do {
@@ -435,8 +435,8 @@ final class AuthManager: ObservableObject {
                 group.addTask {
                     // Try to refresh the session token
                     let session = try await self.client.auth.refreshSession()
-                    print("✅ Background: Session validated successfully")
-                    print("   - Token refreshed for: \(session.user.email ?? "unknown")")
+                    log("✅ Background: Session validated successfully")
+                    log("   - Token refreshed for: \(session.user.email ?? "unknown")")
                 }
                 
                 group.addTask {
@@ -450,18 +450,18 @@ final class AuthManager: ObservableObject {
                 group.cancelAll()
             }
         } catch {
-            print("⚠️ Background: Session validation failed: \(error.localizedDescription)")
+            log("⚠️ Background: Session validation failed: \(error.localizedDescription)")
             
             // Only sign out if it's a real auth error, not a network error or timeout
             if isNetworkError(error) || error.localizedDescription.contains("Timeout") {
-                print("📶 Background: Network error/timeout - keeping cached session")
+                log("📶 Background: Network error/timeout - keeping cached session")
                 // Don't sign out, user might just be offline
             } else if isAuthenticationError(error) {
-                print("🔐 Background: Auth error detected - session is invalid")
+                log("🔐 Background: Auth error detected - session is invalid")
                 // Token is truly invalid, sign out gracefully
                 await signOut()
             } else {
-                print("❓ Background: Unknown error - keeping cached session for safety")
+                log("❓ Background: Unknown error - keeping cached session for safety")
             }
         }
     }
@@ -502,20 +502,20 @@ final class AuthManager: ObservableObject {
 
     // MARK: - Onboarding
     func completeOnboarding() {
-        print("✅ completeOnboarding() called")
+        log("✅ completeOnboarding() called")
         hasCompletedOnboarding = true
         UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")
     }
 
     func skipOnboarding() {
-        print("⏭️ skipOnboarding() called")
+        log("⏭️ skipOnboarding() called")
         hasCompletedOnboarding = true
         UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")
     }
     
     // MARK: - Anonymous User Methods
     func startAnonymousOnboarding() {
-        print("👻 startAnonymousOnboarding() called")
+        log("👻 startAnonymousOnboarding() called")
         isAnonymousUser = true
         hasCompletedOnboarding = false
         UserDefaults.standard.set(true, forKey: "isAnonymousUser")
@@ -526,33 +526,33 @@ final class AuthManager: ObservableObject {
         hasSeenRatingPrompt = false
         UserDefaults.standard.removeObject(forKey: "hasSeenRatingPrompt")
 
-        print("✅ Anonymous onboarding started - user will proceed without account")
+        log("✅ Anonymous onboarding started - user will proceed without account")
     }
     
     func completeAnonymousOnboarding() {
-        print("👻 completeAnonymousOnboarding() called")
+        log("👻 completeAnonymousOnboarding() called")
         hasCompletedOnboarding = true
         AnonymousUserManager.shared.hasCompletedOnboarding = true
-        print("✅ Anonymous onboarding completed - data stored locally")
+        log("✅ Anonymous onboarding completed - data stored locally")
         AnonymousUserManager.shared.printCurrentData()
     }
     
     func syncAnonymousDataToBackend() async {
-        print("🔄 syncAnonymousDataToBackend() called")
+        log("🔄 syncAnonymousDataToBackend() called")
         
         let anonymousManager = AnonymousUserManager.shared
         
         guard let currentUser = currentUser else {
-            print("❌ No authenticated user to sync data to")
+            log("❌ No authenticated user to sync data to")
             return
         }
         
-        print("📤 Syncing anonymous data to backend for user: \(currentUser.id)")
+        log("📤 Syncing anonymous data to backend for user: \(currentUser.id)")
         
         // ✅ IMPORTANT: Capture purchase status BEFORE clearing data
         let hadActivePurchase = anonymousManager.hasActivePurchase
         let needsLinking = anonymousManager.needsRevenueCatLinking
-        print("💳 Anonymous user had active purchase: \(hadActivePurchase)")
+        log("💳 Anonymous user had active purchase: \(hadActivePurchase)")
         
         do {
             // Prepare user metadata with anonymous data
@@ -575,26 +575,26 @@ final class AuthManager: ObservableObject {
                 } else {
                     resolvedName = "User"
                 }
-                print("ℹ️ Anonymous user had no name — using fallback display_name: \(resolvedName)")
+                log("ℹ️ Anonymous user had no name — using fallback display_name: \(resolvedName)")
             }
             updates["display_name"] = AnyJSON.string(resolvedName)
             UserProfileStore.shared.apply(name: resolvedName)
-            print("   - Syncing name: \(resolvedName)")
+            log("   - Syncing name: \(resolvedName)")
             
             if let age = anonymousManager.userAge {
                 updates["age"] = AnyJSON.string(age)
-                print("   - Syncing age: \(age)")
+                log("   - Syncing age: \(age)")
             }
 
             if let goals = anonymousManager.userGoals {
                 updates["goals"] = AnyJSON.string(goals)
-                print("   - Syncing goals: \(goals)")
+                log("   - Syncing goals: \(goals)")
             }
 
             // Mark onboarding as completed if user completed anonymous onboarding
             if anonymousManager.hasCompletedOnboarding {
                 updates["onboarding_completed"] = AnyJSON.bool(true)
-                print("   - Marking onboarding as completed")
+                log("   - Marking onboarding as completed")
             }
 
             updates["updated_at"] = AnyJSON.string(ISO8601DateFormatter().string(from: Date()))
@@ -603,7 +603,7 @@ final class AuthManager: ObservableObject {
             let attributes = UserAttributes(data: updates)
             try await client.auth.update(user: attributes)
 
-            print("✅ Successfully synced anonymous data to backend")
+            log("✅ Successfully synced anonymous data to backend")
 
             // Now that the user has an auth record, capture App Store
             // storefront + currency. We couldn't do this while they were
@@ -623,37 +623,37 @@ final class AuthManager: ObservableObject {
                 // Save per-user completion flags
                 UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding_\(userId)")
                 UserDefaults.standard.set(true, forKey: "hasCompletedQuestions_\(userId)")
-                print("✅ Marked onboarding and questions as completed for user: \(userId)")
+                log("✅ Marked onboarding and questions as completed for user: \(userId)")
             }
             
             // ✅ NEW: If anonymous user had already paid, mark paywall flow as complete
             if hadActivePurchase {
-                print("💳 User already paid during anonymous flow - marking paywall flow as complete")
+                log("💳 User already paid during anonymous flow - marking paywall flow as complete")
                 hasCompletedPaywallFlow = true
                 let paywallKey = "hasCompletedPaywallFlow_\(userId)"
                 UserDefaults.standard.set(true, forKey: paywallKey)
-                print("✅ Paywall flow marked complete for user: \(userId)")
+                log("✅ Paywall flow marked complete for user: \(userId)")
             }
             
             // Clear anonymous data after successful sync
             anonymousManager.clearAllData()
             isAnonymousUser = false
             UserDefaults.standard.removeObject(forKey: "isAnonymousUser")
-            print("✅ Cleared anonymous user state")
+            log("✅ Cleared anonymous user state")
             
             // Link RevenueCat purchases if anonymous user made purchases (using captured value)
             if needsLinking {
-                print("🔗 Starting RevenueCat customer linking...")
+                log("🔗 Starting RevenueCat customer linking...")
                 let linkSuccess = await RevenueCatManager.shared.linkAnonymousUserPurchases(userId)
                 if linkSuccess {
-                    print("✅ RevenueCat purchases successfully linked")
+                    log("✅ RevenueCat purchases successfully linked")
                 } else {
-                    print("⚠️ RevenueCat purchase linking may have failed")
+                    log("⚠️ RevenueCat purchase linking may have failed")
                 }
             }
             
         } catch {
-            print("❌ Failed to sync anonymous data: \(error.localizedDescription)")
+            log("❌ Failed to sync anonymous data: \(error.localizedDescription)")
         }
     }
 
@@ -668,17 +668,17 @@ final class AuthManager: ObservableObject {
     /// direct OAuth signups.
     func syncAgeRangeToBackend(_ ageRange: String) async {
         guard SupabaseManager.shared.currentUserId != nil else {
-            print("⚠️ syncAgeRangeToBackend: no authenticated user — skipping")
+            log("⚠️ syncAgeRangeToBackend: no authenticated user — skipping")
             return
         }
 
         let trimmed = ageRange.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else {
-            print("⚠️ syncAgeRangeToBackend: empty age — skipping")
+            log("⚠️ syncAgeRangeToBackend: empty age — skipping")
             return
         }
 
-        print("📤 syncAgeRangeToBackend: writing age=\(trimmed) to user_metadata")
+        log("📤 syncAgeRangeToBackend: writing age=\(trimmed) to user_metadata")
 
         do {
             let attributes = UserAttributes(data: [
@@ -686,9 +686,9 @@ final class AuthManager: ObservableObject {
                 "updated_at": AnyJSON.string(ISO8601DateFormatter().string(from: Date()))
             ])
             try await client.auth.update(user: attributes)
-            print("✅ syncAgeRangeToBackend: wrote age to user_metadata")
+            log("✅ syncAgeRangeToBackend: wrote age to user_metadata")
         } catch {
-            print("❌ syncAgeRangeToBackend: failed — \(error.localizedDescription)")
+            log("❌ syncAgeRangeToBackend: failed — \(error.localizedDescription)")
         }
     }
 
@@ -718,7 +718,7 @@ final class AuthManager: ObservableObject {
             let monthly = offerings.current?.package(identifier: "monthly") ?? offerings.current?.monthly
             currency = yearly?.storeProduct.currencyCode ?? monthly?.storeProduct.currencyCode
         } catch {
-            print("⚠️ captureStoreContextFromStoreKit: offerings fetch failed — \(error.localizedDescription)")
+            log("⚠️ captureStoreContextFromStoreKit: offerings fetch failed — \(error.localizedDescription)")
         }
 
         await captureStoreContext(country: country, currency: currency)
@@ -734,7 +734,7 @@ final class AuthManager: ObservableObject {
     /// Silently skips if no authenticated user exists.
     func captureStoreContext(country: String?, currency: String?) async {
         guard let userId = SupabaseManager.shared.currentUserId else {
-            print("⚠️ captureStoreContext: no authenticated user — skipping")
+            log("⚠️ captureStoreContext: no authenticated user — skipping")
             return
         }
 
@@ -746,11 +746,11 @@ final class AuthManager: ObservableObject {
 
         // Need at least one useful field to bother writing.
         guard country != nil || currency != nil else {
-            print("⚠️ captureStoreContext: no country/currency available — skipping")
+            log("⚠️ captureStoreContext: no country/currency available — skipping")
             return
         }
 
-        print("📤 captureStoreContext: country=\(country ?? "nil") currency=\(currency ?? "nil")")
+        log("📤 captureStoreContext: country=\(country ?? "nil") currency=\(currency ?? "nil")")
 
         var updates: [String: AnyJSON] = [:]
         if let country = country {
@@ -765,35 +765,35 @@ final class AuthManager: ObservableObject {
             let attributes = UserAttributes(data: updates)
             try await client.auth.update(user: attributes)
             UserDefaults.standard.set(true, forKey: flagKey)
-            print("✅ captureStoreContext: wrote to user_metadata")
+            log("✅ captureStoreContext: wrote to user_metadata")
         } catch {
             // Best-effort — don't flip the flag, so next paywall open retries.
-            print("❌ captureStoreContext: failed — \(error.localizedDescription)")
+            log("❌ captureStoreContext: failed — \(error.localizedDescription)")
         }
     }
 
     // MARK: - Questions
     func completeQuestions() {
-        print("✅ completeQuestions() called")
+        log("✅ completeQuestions() called")
         hasCompletedQuestions = true
 
         // Save per user
         if let userId = currentUser?.id.uuidString {
             let key = "hasCompletedQuestions_\(userId)"
             UserDefaults.standard.set(true, forKey: key)
-            print("✅ Questions completed for user: \(userId)")
+            log("✅ Questions completed for user: \(userId)")
         }
     }
 
     // MARK: - Paywall Flow (Paywall + Referral)
     func completePaywallFlow() {
-        print("✅ completePaywallFlow() called")
+        log("✅ completePaywallFlow() called")
         hasCompletedPaywallFlow = true
 
         if let userId = currentUser?.id.uuidString {
             let key = "hasCompletedPaywallFlow_\(userId)"
             UserDefaults.standard.set(true, forKey: key)
-            print("✅ Paywall flow completed for user: \(userId)")
+            log("✅ Paywall flow completed for user: \(userId)")
         }
     }
 
@@ -802,24 +802,24 @@ final class AuthManager: ObservableObject {
     /// Flips the in-memory flag and persists — per-user key for authenticated
     /// users, global key for anonymous users (since they have no userId yet).
     func completeRatingPrompt() {
-        print("⭐ completeRatingPrompt() called")
+        log("⭐ completeRatingPrompt() called")
         hasSeenRatingPrompt = true
 
         if let userId = currentUser?.id.uuidString {
             let key = "hasSeenRatingPrompt_\(userId)"
             UserDefaults.standard.set(true, forKey: key)
-            print("⭐ Rating prompt marked seen for user: \(userId)")
+            log("⭐ Rating prompt marked seen for user: \(userId)")
         } else {
             // Anonymous: persist under the global key so the next init() load
             // picks it up, and so the check during routing finds it.
             UserDefaults.standard.set(true, forKey: "hasSeenRatingPrompt")
-            print("⭐ Rating prompt marked seen (anonymous)")
+            log("⭐ Rating prompt marked seen (anonymous)")
         }
     }
 
     // MARK: - Google Sign-In
     func signInWithGoogle() async {
-        print("\n🔵 signInWithGoogle() called")
+        log("\n🔵 signInWithGoogle() called")
         
         isGoogleSignInLoading = true
         googleSignInError = nil
@@ -844,9 +844,9 @@ final class AuthManager: ObservableObject {
             
             let accessToken = result.user.accessToken.tokenString
             
-            print("✅ Google Sign-In successful")
-            print("   - User: \(result.user.profile?.email ?? "unknown")")
-            print("   - ID Token obtained: \(idToken.prefix(20))...")
+            log("✅ Google Sign-In successful")
+            log("   - User: \(result.user.profile?.email ?? "unknown")")
+            log("   - ID Token obtained: \(idToken.prefix(20))...")
             
             // Sign in to Supabase with the Google ID token
             let session = try await client.auth.signInWithIdToken(
@@ -857,9 +857,9 @@ final class AuthManager: ObservableObject {
                 )
             )
             
-            print("✅ Supabase sign-in successful")
-            print("   - User ID: \(session.user.id)")
-            print("   - Email: \(session.user.email ?? "nil")")
+            log("✅ Supabase sign-in successful")
+            log("   - User ID: \(session.user.id)")
+            log("   - Email: \(session.user.email ?? "nil")")
             
             // Mark onboarding as complete since user used social login
             completeOnboarding()
@@ -871,28 +871,28 @@ final class AuthManager: ObservableObject {
             
             // Handle user cancellation gracefully
             if error.code == .canceled {
-                print("ℹ️ Google Sign-In cancelled by user")
+                log("ℹ️ Google Sign-In cancelled by user")
                 googleSignInError = nil
             } else {
-                print("❌ Google Sign-In error: \(error.localizedDescription)")
+                log("❌ Google Sign-In error: \(error.localizedDescription)")
                 googleSignInError = error.localizedDescription
             }
             
         } catch let error as GoogleSignInError {
             isGoogleSignInLoading = false
-            print("❌ Google Sign-In error: \(error.localizedDescription)")
+            log("❌ Google Sign-In error: \(error.localizedDescription)")
             googleSignInError = error.localizedDescription
             
         } catch {
             isGoogleSignInLoading = false
-            print("❌ Supabase sign-in error: \(error.localizedDescription)")
+            log("❌ Supabase sign-in error: \(error.localizedDescription)")
             googleSignInError = "Sign-in failed: \(error.localizedDescription)"
         }
     }
     
     // MARK: - Apple Sign-In
     func signInWithApple() {
-        print("\n🍎 signInWithApple() called")
+        log("\n🍎 signInWithApple() called")
 
         isAppleSignInLoading = true
         appleSignInError = nil
@@ -902,7 +902,7 @@ final class AuthManager: ObservableObject {
         do {
             nonce = try randomNonceString()
         } catch {
-            print("❌ Nonce generation failed: \(error.localizedDescription)")
+            log("❌ Nonce generation failed: \(error.localizedDescription)")
             isAppleSignInLoading = false
             appleSignInError = "Couldn't start sign-in. Please try again."
             return
@@ -932,7 +932,7 @@ final class AuthManager: ObservableObject {
     
     // Called by AppleSignInDelegate when authorization succeeds
     func handleAppleSignInSuccess(idToken: String, fullName: PersonNameComponents?) async {
-        print("✅ Apple Sign-In successful, signing in with Supabase...")
+        log("✅ Apple Sign-In successful, signing in with Supabase...")
         
         do {
             guard let nonce = currentNonce else {
@@ -948,9 +948,9 @@ final class AuthManager: ObservableObject {
                 )
             )
             
-            print("✅ Supabase Apple sign-in successful")
-            print("   - User ID: \(session.user.id)")
-            print("   - Email: \(session.user.email ?? "nil")")
+            log("✅ Supabase Apple sign-in successful")
+            log("   - User ID: \(session.user.id)")
+            log("   - Email: \(session.user.email ?? "nil")")
             
             // If we got the full name (first sign-in only), save it to user metadata
             if let fullName = fullName {
@@ -959,7 +959,7 @@ final class AuthManager: ObservableObject {
                     .joined(separator: " ")
                 
                 if !displayName.isEmpty {
-                    print("📝 Saving display name: \(displayName)")
+                    log("📝 Saving display name: \(displayName)")
                     
                     // Update user metadata with the name
                     _ = try await client.auth.update(user: UserAttributes(
@@ -985,7 +985,7 @@ final class AuthManager: ObservableObject {
             isAppleSignInLoading = false
             currentNonce = nil
             appleSignInDelegate = nil
-            print("❌ Supabase Apple sign-in error: \(error.localizedDescription)")
+            log("❌ Supabase Apple sign-in error: \(error.localizedDescription)")
             appleSignInError = "Sign-in failed: \(error.localizedDescription)"
         }
     }
@@ -1000,30 +1000,30 @@ final class AuthManager: ObservableObject {
         if let authError = error as? ASAuthorizationError {
             switch authError.code {
             case .canceled:
-                print("ℹ️ Apple Sign-In cancelled by user")
+                log("ℹ️ Apple Sign-In cancelled by user")
                 appleSignInError = nil
                 return
             case .failed:
-                print("❌ Apple Sign-In failed")
+                log("❌ Apple Sign-In failed")
                 appleSignInError = "Sign-in failed. Please try again."
             case .invalidResponse:
-                print("❌ Apple Sign-In invalid response")
+                log("❌ Apple Sign-In invalid response")
                 appleSignInError = "Invalid response from Apple. Please try again."
             case .notHandled:
-                print("❌ Apple Sign-In not handled")
+                log("❌ Apple Sign-In not handled")
                 appleSignInError = "Sign-in was not handled. Please try again."
             case .notInteractive:
-                print("❌ Apple Sign-In not interactive")
+                log("❌ Apple Sign-In not interactive")
                 appleSignInError = "Sign-in requires user interaction."
             case .unknown:
-                print("❌ Apple Sign-In unknown error")
+                log("❌ Apple Sign-In unknown error")
                 appleSignInError = "An unknown error occurred. Please try again."
             @unknown default:
-                print("❌ Apple Sign-In unknown error code")
+                log("❌ Apple Sign-In unknown error code")
                 appleSignInError = error.localizedDescription
             }
         } else {
-            print("❌ Apple Sign-In error: \(error.localizedDescription)")
+            log("❌ Apple Sign-In error: \(error.localizedDescription)")
             appleSignInError = error.localizedDescription
         }
     }
@@ -1055,7 +1055,7 @@ final class AuthManager: ObservableObject {
 
     // MARK: - Sign out / Reset
     func signOut() async {
-        print("\n🚪 signOut() called")
+        log("\n🚪 signOut() called")
         do {
             try await client.auth.signOut()
 
@@ -1075,41 +1075,41 @@ final class AuthManager: ObservableObject {
                 UserDefaults.standard.removeObject(forKey: "hasSeenRatingPrompt_\(userId)")
             }
 
-            print("✅ Sign out successful")
+            log("✅ Sign out successful")
         } catch {
-            print("❌ Sign out error: \(error.localizedDescription)")
+            log("❌ Sign out error: \(error.localizedDescription)")
         }
     }
 
     func resetOnboarding() {
-        print("🔄 resetOnboarding() called")
+        log("🔄 resetOnboarding() called")
         hasCompletedOnboarding = false
         UserDefaults.standard.set(false, forKey: "hasCompletedOnboarding")
     }
 
     func resetQuestions() {
-        print("🔄 resetQuestions() called")
+        log("🔄 resetQuestions() called")
         hasCompletedQuestions = false
         if let userId = currentUser?.id.uuidString {
             let key = "hasCompletedQuestions_\(userId)"
             UserDefaults.standard.set(false, forKey: key)
-            print("🔄 Questions reset for user: \(userId)")
+            log("🔄 Questions reset for user: \(userId)")
         }
     }
 
     func resetPaywallFlow() {
-        print("🔄 resetPaywallFlow() called")
+        log("🔄 resetPaywallFlow() called")
         hasCompletedPaywallFlow = false
         if let userId = currentUser?.id.uuidString {
             let key = "hasCompletedPaywallFlow_\(userId)"
             UserDefaults.standard.set(false, forKey: key)
-            print("🔄 Paywall flow reset for user: \(userId)")
+            log("🔄 Paywall flow reset for user: \(userId)")
         }
     }
 
     // MARK: - Account Deletion
     func deleteAccount() async throws {
-        print("\n🗑️ deleteAccount() called")
+        log("\n🗑️ deleteAccount() called")
         
         guard let currentUser = currentUser else {
             throw AccountDeletionError.notAuthenticated
@@ -1120,7 +1120,7 @@ final class AuthManager: ObservableObject {
         }
         
         let userId = currentUser.id.uuidString
-        print("🗑️ Starting account deletion for user: \(userId)")
+        log("🗑️ Starting account deletion for user: \(userId)")
         
         do {
             // Call the Supabase Edge Function using direct HTTP request
@@ -1136,7 +1136,7 @@ final class AuthManager: ObservableObject {
             request.setValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJuY2ttZ255c2ZsaWl5cHZ4eGlpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM1NDc2NjIsImV4cCI6MjA0OTEyMzY2Mn0.IEcnoOKUbEUqXSZfZ4S6VbxZhb9z_YJXvVcgKLOeXXs", forHTTPHeaderField: "apikey")
             request.httpBody = Data() // Empty body as user ID comes from JWT
             
-            print("🔄 Calling edge function at: \(functionURL.absoluteString)")
+            log("🔄 Calling edge function at: \(functionURL.absoluteString)")
             
             let (data, response) = try await URLSession.shared.data(for: request)
             
@@ -1144,11 +1144,11 @@ final class AuthManager: ObservableObject {
                 throw AccountDeletionError.invalidResponse
             }
             
-            print("✅ Edge function response received with status: \(httpResponse.statusCode)")
+            log("✅ Edge function response received with status: \(httpResponse.statusCode)")
             
             // Log the raw response data for debugging 500 errors
             if let responseString = String(data: data, encoding: .utf8) {
-                print("📄 Raw response body: \(responseString)")
+                log("📄 Raw response body: \(responseString)")
             }
             
             if httpResponse.statusCode == 200 {
@@ -1156,8 +1156,8 @@ final class AuthManager: ObservableObject {
                 let deletionResponse = try decoder.decode(AccountDeletionResponse.self, from: data)
                 
                 if deletionResponse.success {
-                    print("✅ Account deletion successful: \(deletionResponse.message)")
-                    print("🗑️ Deleted user ID: \(deletionResponse.deletedUserId ?? "unknown")")
+                    log("✅ Account deletion successful: \(deletionResponse.message)")
+                    log("🗑️ Deleted user ID: \(deletionResponse.deletedUserId ?? "unknown")")
                     
                     // Clear all local data
                     clearAllLocalData()
@@ -1171,10 +1171,10 @@ final class AuthManager: ObservableObject {
                     hasSeenRatingPrompt = false
                     isCheckingSession = false
                     
-                    print("✅ Account deletion completed successfully")
+                    log("✅ Account deletion completed successfully")
                     
                 } else {
-                    print("❌ Account deletion failed: \(deletionResponse.error ?? "Unknown error")")
+                    log("❌ Account deletion failed: \(deletionResponse.error ?? "Unknown error")")
                     throw AccountDeletionError.deletionFailed(deletionResponse.error ?? "Unknown error")
                 }
             } else {
@@ -1190,13 +1190,13 @@ final class AuthManager: ObservableObject {
         } catch let error as AccountDeletionError {
             throw error
         } catch {
-            print("❌ Account deletion error: \(error.localizedDescription)")
+            log("❌ Account deletion error: \(error.localizedDescription)")
             throw AccountDeletionError.networkError(error.localizedDescription)
         }
     }
     
     private func clearAllLocalData() {
-        print("🧹 Clearing all local data...")
+        log("🧹 Clearing all local data...")
         
         // Clear user-specific data
         let userDefaults = UserDefaults.standard
@@ -1220,7 +1220,7 @@ final class AuthManager: ObservableObject {
         userDefaults.removeObject(forKey: "isAnonymousUser")
         AnonymousUserManager.shared.clearAllData()
         
-        print("✅ All local data cleared")
+        log("✅ All local data cleared")
     }
 }
 
@@ -1284,14 +1284,14 @@ class AppleSignInDelegate: NSObject, ASAuthorizationControllerDelegate, ASAuthor
         }
         // Fallback: return an empty anchor rather than crashing. Apple Sign-In
         // will fail cleanly and surface an error the user can retry from.
-        print("⚠️ presentationAnchor: no window found, returning empty anchor")
+        log("⚠️ presentationAnchor: no window found, returning empty anchor")
         return ASPresentationAnchor()
     }
     
     // MARK: - ASAuthorizationControllerDelegate
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else {
-            print("❌ Invalid credential type")
+            log("❌ Invalid credential type")
             Task { @MainActor in
                 authManager?.handleAppleSignInFailure(error: AppleSignInError.noIdentityToken)
             }
@@ -1300,17 +1300,17 @@ class AppleSignInDelegate: NSObject, ASAuthorizationControllerDelegate, ASAuthor
         
         guard let identityTokenData = appleIDCredential.identityToken,
               let identityToken = String(data: identityTokenData, encoding: .utf8) else {
-            print("❌ Unable to get identity token")
+            log("❌ Unable to get identity token")
             Task { @MainActor in
                 authManager?.handleAppleSignInFailure(error: AppleSignInError.noIdentityToken)
             }
             return
         }
         
-        print("✅ Apple authorization successful")
-        print("   - User ID: \(appleIDCredential.user)")
-        print("   - Email: \(appleIDCredential.email ?? "not provided")")
-        print("   - Full Name: \(appleIDCredential.fullName?.givenName ?? "not provided") \(appleIDCredential.fullName?.familyName ?? "")")
+        log("✅ Apple authorization successful")
+        log("   - User ID: \(appleIDCredential.user)")
+        log("   - Email: \(appleIDCredential.email ?? "not provided")")
+        log("   - Full Name: \(appleIDCredential.fullName?.givenName ?? "not provided") \(appleIDCredential.fullName?.familyName ?? "")")
         
         // Pass the token and name to AuthManager
         Task { @MainActor in
@@ -1322,7 +1322,7 @@ class AppleSignInDelegate: NSObject, ASAuthorizationControllerDelegate, ASAuthor
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        print("❌ Apple authorization failed: \(error.localizedDescription)")
+        log("❌ Apple authorization failed: \(error.localizedDescription)")
         Task { @MainActor in
             authManager?.handleAppleSignInFailure(error: error)
         }

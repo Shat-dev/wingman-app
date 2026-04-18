@@ -29,23 +29,23 @@ final class RevenueCatPaywallHelper: ObservableObject {
             let needsPaywall = !hasEntitlement && !hasAnonymousPurchase
             
             if needsPaywall {
-                print("💰 RevenueCatPaywallHelper: User needs paywall - showing...")
+                log("💰 RevenueCatPaywallHelper: User needs paywall - showing...")
                 isPaywallPresented = true
                 return true
             } else {
                 if hasEntitlement {
-                    print("✅ RevenueCatPaywallHelper: User has active entitlement - no paywall needed")
+                    log("✅ RevenueCatPaywallHelper: User has active entitlement - no paywall needed")
                 } else if hasAnonymousPurchase {
-                    print("💰 RevenueCatPaywallHelper: Anonymous user has purchase - no paywall needed")
+                    log("💰 RevenueCatPaywallHelper: Anonymous user has purchase - no paywall needed")
                 }
                 return false
             }
         } catch {
-            print("❌ RevenueCatPaywallHelper: Error checking customer info: \(error)")
+            log("❌ RevenueCatPaywallHelper: Error checking customer info: \(error)")
             // On error, check if anonymous user has purchase before showing paywall
             let anonymousManager = AnonymousUserManager.shared
             if anonymousManager.hasActivePurchase {
-                print("💰 RevenueCatPaywallHelper: Anonymous purchase found despite error - no paywall")
+                log("💰 RevenueCatPaywallHelper: Anonymous purchase found despite error - no paywall")
                 return false
             }
             // If no anonymous purchase and error occurred, show paywall to be safe
@@ -61,7 +61,7 @@ final class RevenueCatPaywallHelper: ObservableObject {
     
     /// Handle successful purchase
     func handlePurchaseCompleted(_ customerInfo: CustomerInfo) {
-        print("✅ RevenueCatPaywallHelper: Purchase completed")
+        log("✅ RevenueCatPaywallHelper: Purchase completed")
         isPaywallPresented = false
         
         // Update RevenueCat manager
@@ -72,7 +72,7 @@ final class RevenueCatPaywallHelper: ObservableObject {
     
     /// Handle successful restore
     func handleRestoreCompleted(_ customerInfo: CustomerInfo) {
-        print("🔄 RevenueCatPaywallHelper: Restore completed")
+        log("🔄 RevenueCatPaywallHelper: Restore completed")
         
         // Check if entitlement is now active
         let hasEntitlement = customerInfo.entitlements[Constants.ENTITLEMENT_ID]?.isActive == true

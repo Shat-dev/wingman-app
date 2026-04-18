@@ -15,7 +15,7 @@ struct AuthView: View {
 
     init(mode: AuthMode) {
         self.mode = mode
-        print("🎬 AuthView initialized with mode: \(mode == .signup ? "SIGNUP" : "LOGIN")")
+        log("🎬 AuthView initialized with mode: \(mode == .signup ? "SIGNUP" : "LOGIN")")
     }
 
     var body: some View {
@@ -106,17 +106,17 @@ struct AuthView: View {
         }
         .navigationBarBackButtonHidden(true)
         .onAppear {
-            print("👁️ AuthView appeared")
+            log("👁️ AuthView appeared")
         }
         .onDisappear {
-            print("👋 AuthView disappeared")
+            log("👋 AuthView disappeared")
         }
         .padding(.top, 8)
     }
 
     // MARK: - Handle Back Button
     private func handleBackButton() {
-        print("⬅️ Back button: Dismissing AuthView (returning to LandingView)")
+        log("⬅️ Back button: Dismissing AuthView (returning to LandingView)")
         authManager.resetOnboarding()
         dismiss()
     }

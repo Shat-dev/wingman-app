@@ -39,13 +39,13 @@ struct OnboardingView: View {
     // Default initializer for normal flow
     init() {
         self.showLanding = nil
-        print("🎬 OnboardingView initialized (normal flow)")
+        log("🎬 OnboardingView initialized (normal flow)")
     }
     
     // Initializer with showLanding binding for anonymous flow
     init(showLanding: Binding<Bool>) {
         self.showLanding = showLanding
-        print("🎬 OnboardingView initialized (anonymous flow with showLanding binding)")
+        log("🎬 OnboardingView initialized (anonymous flow with showLanding binding)")
     }
 
     // Store answers for statistics logic
@@ -218,7 +218,7 @@ struct OnboardingView: View {
                 // Save to AnonymousUserManager if in anonymous mode
                 if authManager.isAnonymousUser {
                     AnonymousUserManager.shared.userName = trimmedName
-                    print("👻 Saved name to anonymous storage: \(trimmedName)")
+                    log("👻 Saved name to anonymous storage: \(trimmedName)")
                 }
 
                 moveToNext()
@@ -344,7 +344,7 @@ struct OnboardingView: View {
 
             // Wait 3 seconds then complete
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                print("✅ Finished all questions")
+                log("✅ Finished all questions")
                 
                 if authManager.isAnonymousUser {
                     // Complete anonymous onboarding (store data locally)
@@ -442,7 +442,7 @@ struct OnboardingView: View {
                     .contentShape(Rectangle())
                     .onTapGesture {
                         // Explicitly do nothing - left side should not progress
-                        print("🚫 Left side tapped - no action")
+                        log("🚫 Left side tapped - no action")
                     }
                 
                 // Right half - tappable area for progression
@@ -450,7 +450,7 @@ struct OnboardingView: View {
                     .fill(Color.clear)
                     .contentShape(Rectangle())
                     .onTapGesture {
-                        print("✅ Right side tapped - continuing")
+                        log("✅ Right side tapped - continuing")
                         HapticManager.shared.lightImpact()
                         continueFromStatistic()
                     }
@@ -474,7 +474,7 @@ struct OnboardingView: View {
 
             if let answer = answer {
                 answers[key] = answer
-                print("Question \(stepIndex + 1): \(answer)")
+                log("Question \(stepIndex + 1): \(answer)")
 
                 // Save to UserDefaults — deferred to the next runloop tick so the
                 // disk-touching synchronous write does not happen between the tap
@@ -483,7 +483,7 @@ struct OnboardingView: View {
                 // UserDefaults, so the deferred write is invisible to navigation.
                 DispatchQueue.main.async {
                     UserDefaults.standard.set(answer, forKey: "onboarding_\(key)")
-                    print("✅ Saved answer:", key, answer)
+                    log("✅ Saved answer:", key, answer)
 
                     // Save to AnonymousUserManager if in anonymous mode (also
                     // deferred — same rationale, and the in-memory `answers`
@@ -495,7 +495,7 @@ struct OnboardingView: View {
                         switch key {
                         case "age":
                             AnonymousUserManager.shared.userAge = answer
-                            print("👻 Saved age to anonymous storage: \(answer)")
+                            log("👻 Saved age to anonymous storage: \(answer)")
                         case "goals":
                             // For multi-select `goals`, `answer` is the comma-joined
                             // string of chosen options. `AnonymousUserManager.userGoals`
@@ -503,7 +503,7 @@ struct OnboardingView: View {
                             // as a String in `AuthManager` — no consumer parses it as
                             // a single option, so the comma-joined form is compatible.
                             AnonymousUserManager.shared.userGoals = answer
-                            print("👻 Saved goals to anonymous storage: \(answer)")
+                            log("👻 Saved goals to anonymous storage: \(answer)")
                         default:
                             break
                         }
@@ -569,11 +569,11 @@ struct OnboardingView: View {
             } else {
                 selectedOptions = []
             }
-            print("🔁 Restored multi-selection for \(key):", selectedOptions)
+            log("🔁 Restored multi-selection for \(key):", selectedOptions)
         } else {
             selectedOptions = []
             selectedOption = answers[key]
-            print("🔁 Restored selection for \(key):", selectedOption ?? "none")
+            log("🔁 Restored selection for \(key):", selectedOption ?? "none")
         }
     }
 
@@ -585,8 +585,8 @@ struct OnboardingView: View {
         stepHistory.append(sourceIndex)        // The source question
         stepHistory.append(-1)                 // Special marker for statistic screen
         
-        print("📝 Added to step history: source=\(sourceIndex), statistic=-1")
-        print("📝 Current step history: \(stepHistory)")
+        log("📝 Added to step history: source=\(sourceIndex), statistic=-1")
+        log("📝 Current step history: \(stepHistory)")
 
         // Set direction to forward (next screen slides in from right)
         isGoingBack = false
@@ -599,24 +599,24 @@ struct OnboardingView: View {
             stepIndex = sourceIndex + 1
         }
         
-        print("📝 Advanced to step index: \(stepIndex)")
+        log("📝 Advanced to step index: \(stepIndex)")
         restoreSelectionForCurrentStep()
     }
 
     // New helper to dismiss the statistic and return (without advancing)
     private func dismissStatisticAndReturnToSource() {
-        print("🔙 dismissStatisticAndReturnToSource() called")
+        log("🔙 dismissStatisticAndReturnToSource() called")
         
         guard let sourceIndex = statisticSourceStepIndex else {
-            print("❌ No source index recorded")
+            log("❌ No source index recorded")
             return
         }
         
-        print("🔙 Returning to source question at index: \(sourceIndex)")
+        log("🔙 Returning to source question at index: \(sourceIndex)")
         
         // Set direction to back immediately (before any animation)
         isGoingBack = true
-        print("🔙 Set isGoingBack = true - statistic will slide out RIGHT")
+        log("🔙 Set isGoingBack = true - statistic will slide out RIGHT")
         
         // Close statistic overlay and navigate back in one animation
         withAnimation(.spring(response: 0.35, dampingFraction: 0.86)) {
@@ -629,7 +629,7 @@ struct OnboardingView: View {
             self.currentStatistic = nil
             self.statisticSourceStepIndex = nil
             self.restoreSelectionForCurrentStep()
-            print("✅ Returned to source question at index \(sourceIndex)")
+            log("✅ Returned to source question at index \(sourceIndex)")
         }
     }
 
@@ -745,11 +745,11 @@ struct OnboardingView: View {
         // Supabase SDK session) instead of the UserDefaults cache which could
         // lag behind the SDK after `.initialSession` restoration.
         guard let userId = SupabaseManager.shared.currentUserId else {
-            print("❌ No user ID available")
+            log("❌ No user ID available")
             return
         }
 
-        print("📤 Saving name to Supabase: \(name)")
+        log("📤 Saving name to Supabase: \(name)")
 
         struct UserUpdate: Codable {
             let name: String
@@ -777,10 +777,10 @@ struct OnboardingView: View {
                     .eq("id", value: userId)
                     .execute()
 
-                print("✅ Name saved to Supabase")
+                log("✅ Name saved to Supabase")
 
             } catch {
-                print("❌ Error saving name: \(error.localizedDescription)")
+                log("❌ Error saving name: \(error.localizedDescription)")
             }
         }
     }
@@ -804,15 +804,15 @@ struct OnboardingView: View {
             } else {
                 name = "User"
             }
-            print("ℹ️ Name step skipped — using fallback display_name: \(name)")
+            log("ℹ️ Name step skipped — using fallback display_name: \(name)")
         }
 
         let updatedAt = ISO8601DateFormatter().string(from: Date())
 
-        print("📤 Saving user metadata to Supabase")
-        print("   • name:", name)
-        print("   • onboardingCompleted: true")
-        print("   • updatedAt:", updatedAt)
+        log("📤 Saving user metadata to Supabase")
+        log("   • name:", name)
+        log("   • onboardingCompleted: true")
+        log("   • updatedAt:", updatedAt)
 
         // Push into the shared store immediately so Home/Profile can render
         // the new name without waiting for the next metadata fetch round-trip.
@@ -832,21 +832,21 @@ struct OnboardingView: View {
                     )
                 )
 
-                print("✅ User metadata saved successfully")
+                log("✅ User metadata saved successfully")
 
             } catch {
-                print("❌ Error saving user metadata:", error.localizedDescription)
+                log("❌ Error saving user metadata:", error.localizedDescription)
             }
         }
     }
 
     // MARK: - Back Button
     private func handleBackButton() {
-        print("🔙 OnboardingView: handleBackButton called - stepIndex: \(stepIndex)")
+        log("🔙 OnboardingView: handleBackButton called - stepIndex: \(stepIndex)")
         
         // ✅ Back from statistic ALWAYS returns to source question
         if showStatistic {
-            print("🔙 Returning from statistic overlay")
+            log("🔙 Returning from statistic overlay")
             dismissStatisticAndReturnToSource()
             return
         }
@@ -854,18 +854,18 @@ struct OnboardingView: View {
         // If on first step (name input) and showLanding is bound, navigate back to Landing
         if stepIndex == 0 {
             if let binding = showLanding {
-                print("🔙 On first step with showLanding binding - navigating back to Landing")
+                log("🔙 On first step with showLanding binding - navigating back to Landing")
                 binding.wrappedValue = false
                 return
             } else {
-                print("🔙 On first step but no showLanding binding")
+                log("🔙 On first step but no showLanding binding")
             }
         }
 
         // Normal back navigation
         if let previousIndex = stepHistory.popLast() {
-            print("🔙 Popped index from history: \(previousIndex)")
-            print("🔙 Current step history after pop: \(stepHistory)")
+            log("🔙 Popped index from history: \(previousIndex)")
+            log("🔙 Current step history after pop: \(stepHistory)")
             
             // Check if this is a statistics screen marker
             if previousIndex == -1 {
@@ -882,21 +882,21 @@ struct OnboardingView: View {
                 }
                 
                 if let sourceIndex = sourceIndex {
-                    print("🔙 Reconstructing statistic screen for source question: \(sourceIndex)")
-                    print("🔙 Navigation depth: User has navigated back through \(stepHistory.count) steps")
+                    log("🔙 Reconstructing statistic screen for source question: \(sourceIndex)")
+                    log("🔙 Navigation depth: User has navigated back through \(stepHistory.count) steps")
                     
                     // Step 1: Clear current statistic state completely and force view refresh
                     currentStatistic = nil
                     showStatistic = false
                     statisticSourceStepIndex = nil
-                    print("🔙 Step 1: Completely cleared existing statistic state")
+                    log("🔙 Step 1: Completely cleared existing statistic state")
                     
                     // Step 2: Force state update cycle to ensure SwiftUI recognizes changes
                     DispatchQueue.main.async {
                         // Step 3: Set up for back navigation
                         self.isGoingBack = true
                         self.statisticSourceStepIndex = sourceIndex
-                        print("🔙 Step 3: Set isGoingBack = true, sourceIndex = \(sourceIndex)")
+                        log("🔙 Step 3: Set isGoingBack = true, sourceIndex = \(sourceIndex)")
                         
                         // Step 4: Determine which statistic to show
                         let sourceStep = self.steps[sourceIndex]
@@ -904,7 +904,7 @@ struct OnboardingView: View {
                            let answer = self.answers[questionKey] {
                             let ageGroup = self.answers["age"] ?? ""
                             
-                            print("🔙 Step 4: Preparing statistic for \(questionKey) = \(answer)")
+                            log("🔙 Step 4: Preparing statistic for \(questionKey) = \(answer)")
                             
                             // Step 5: Create new statistic with proper timing.
                             // Reduced from 0.1s to ~2 frames (0.033s) — still
@@ -914,7 +914,7 @@ struct OnboardingView: View {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.033) {
                                 let newStatistic = self.getStatistic(ageGroup: ageGroup, questionKey: questionKey, answer: answer)
                                 self.currentStatistic = newStatistic
-                                print("🔙 Step 5: Set new statistic: \(newStatistic?.heading ?? "nil")")
+                                log("🔙 Step 5: Set new statistic: \(newStatistic?.heading ?? "nil")")
 
                                 // Step 6: Use helper method for clean state management
                                 self.animateStatisticFromBack()
@@ -923,19 +923,19 @@ struct OnboardingView: View {
                     }
                     return
                 } else {
-                    print("❌ No source question found in history for statistic")
+                    log("❌ No source question found in history for statistic")
                 }
             } else {
                 // Normal question navigation
                 // Check if we're trying to navigate to the same step (means we need to pop again)
                 if previousIndex == stepIndex {
-                    print("🔙 Popped index equals current step, popping again...")
+                    log("🔙 Popped index equals current step, popping again...")
                     if let actualPreviousIndex = stepHistory.popLast() {
                         // Skip any -1 markers (statistics)
                         if actualPreviousIndex == -1 {
                             // There's a statistic screen before this question - show it
                             if let statSourceIndex = stepHistory.last, statSourceIndex != -1 {
-                                print("🔙 Found statistic before question, reconstructing statistic for source: \(statSourceIndex)")
+                                log("🔙 Found statistic before question, reconstructing statistic for source: \(statSourceIndex)")
                                 
                                 // Set up for back navigation to statistic
                                 DispatchQueue.main.async {
@@ -959,7 +959,7 @@ struct OnboardingView: View {
                             }
                         }
                         
-                        print("🔙 Navigating to actual previous step: \(actualPreviousIndex)")
+                        log("🔙 Navigating to actual previous step: \(actualPreviousIndex)")
                         isGoingBack = true
                         withAnimation(.spring(response: 0.35, dampingFraction: 0.86)) {
                             stepIndex = actualPreviousIndex
@@ -968,7 +968,7 @@ struct OnboardingView: View {
                         return
                     }
                 } else {
-                    print("🔙 Navigating to previous step: \(previousIndex)")
+                    log("🔙 Navigating to previous step: \(previousIndex)")
                     isGoingBack = true
                     withAnimation(.spring(response: 0.35, dampingFraction: 0.86)) {
                         stepIndex = previousIndex
@@ -979,7 +979,7 @@ struct OnboardingView: View {
             }
         }
 
-        print("🔙 No previous step - dismissing view")
+        log("🔙 No previous step - dismissing view")
         dismiss()
     }
     
@@ -992,17 +992,17 @@ struct OnboardingView: View {
         // This is crucial for ensuring animations work on multiple back navigations.
         statisticAnimationId += 1
         
-        print("🔙 animateStatisticFromBack() called")
-        print("🔙 Generated new animation ID: \(statisticAnimationId)")
-        print("🔙 State check - isGoingBack: \(isGoingBack), currentStatistic: \(currentStatistic?.heading ?? "nil")")
+        log("🔙 animateStatisticFromBack() called")
+        log("🔙 Generated new animation ID: \(statisticAnimationId)")
+        log("🔙 State check - isGoingBack: \(isGoingBack), currentStatistic: \(currentStatistic?.heading ?? "nil")")
         
         // Small delay to ensure all state is properly set.
         // Reduced from 0.05s to ~1 frame (0.016s) — SwiftUI still gets one
         // render pass to observe the id/direction mutations before the
         // animation fires, but we no longer wait three full frames for it.
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.016) {
-            print("🔙 About to animate statistic from LEFT (back navigation)")
-            print("🔙 Final state - isGoingBack: \(self.isGoingBack), showStatistic: \(self.showStatistic)")
+            log("🔙 About to animate statistic from LEFT (back navigation)")
+            log("🔙 Final state - isGoingBack: \(self.isGoingBack), showStatistic: \(self.showStatistic)")
             
             // Animate with explicit state check
             withAnimation(.spring(response: 0.35, dampingFraction: 0.86)) {
@@ -1011,8 +1011,8 @@ struct OnboardingView: View {
             
             // Verify animation completion
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                print("✅ Back navigation statistic animation completed")
-                print("✅ Final state - shown: \(self.showStatistic), isGoingBack: \(self.isGoingBack)")
+                log("✅ Back navigation statistic animation completed")
+                log("✅ Final state - shown: \(self.showStatistic), isGoingBack: \(self.isGoingBack)")
             }
         }
     }

@@ -10,7 +10,6 @@ import Combine
 
 struct DailyPracticeView: View {
     @StateObject private var viewModel: DailyPracticeViewModel
-    @StateObject private var networkMonitor = NetworkMonitor.shared
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var tabBarVisibility: TabBarVisibilityManager
 
@@ -26,14 +25,6 @@ struct DailyPracticeView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-
-            // MARK: - Offline Banner (shown only when disconnected)
-            if !networkMonitor.isConnected {
-                OfflineBannerView()
-                    .padding(.top, 8)
-                    .padding(.bottom, 4)
-                    .transition(.move(edge: .top).combined(with: .opacity))
-            }
 
             // MARK: - Top Row: Back Chevron + Progress Bar
             // Hide when showing error (e.g., no internet)
@@ -95,7 +86,7 @@ struct DailyPracticeView: View {
         }
         .onAppear {
             tabBarVisibility.hideTabBar()
-            print("👁️ PracticeView appeared - Loading questions from Supabase")
+            log("👁️ PracticeView appeared - Loading questions from Supabase")
             
             // Only load from Supabase if questions are empty (not in preview mode)
             if viewModel.questions.isEmpty {
@@ -103,7 +94,7 @@ struct DailyPracticeView: View {
             }
         }
         .onDisappear {
-            print("👋 PracticeView disappeared")
+            log("👋 PracticeView disappeared")
         }
     }
     
@@ -126,7 +117,7 @@ struct DailyPracticeView: View {
     
     // MARK: - Error View
     private func errorView(message: String) -> some View {
-        print("ErrorView message: \(message)")
+        log("ErrorView message: \(message)")
         return ZStack {
             
             VStack {
@@ -134,7 +125,10 @@ struct DailyPracticeView: View {
                 // Back button at top
                 HStack {
                     Button {
-                        dismiss()
+                        // Use the shared back handler so the custom tab bar is
+                        // always restored before dismissing, regardless of
+                        // which exit path the user takes.
+                        handleBackButton()
                     } label: {
                         Image(systemName: "chevron.left")
                             .font(.system(size: 22))
@@ -143,7 +137,7 @@ struct DailyPracticeView: View {
                             .contentShape(Rectangle())
                     }
                     .buttonStyle(.plain)
-                    
+
                     Spacer()
                 }
                 .padding(.leading, 8)
@@ -547,10 +541,10 @@ struct DailyPracticeView: View {
     // MARK: - Navigation Handlers
     private func handleBackButton() {
         if !viewModel.questions.isEmpty && viewModel.currentQuestionIndex > 0 {
-            print("⬅️ Back button: Going to previous question")
+            log("⬅️ Back button: Going to previous question")
             viewModel.previousQuestion()
         } else {
-            print("Exiting practice session")
+            log("Exiting practice session")
             tabBarVisibility.showTabBar()
             dismiss()
         }
@@ -560,14 +554,14 @@ struct DailyPracticeView: View {
         if viewModel.isLastQuestion {
             // IMPORTANT: Call nextQuestion() first to trigger completion logic
             // This will update streak, show completion view, etc.
-            print("📍 Last question - calling nextQuestion() to trigger completion logic")
+            log("📍 Last question - calling nextQuestion() to trigger completion logic")
             viewModel.nextQuestion()
             
             // Don't dismiss here - let the completion view sheet handle navigation
             // The completion view will dismiss this view when user taps "Continue"
-            print("✅ Completion logic triggered - completion view will be shown")
+            log("✅ Completion logic triggered - completion view will be shown")
         } else {
-            print("Moving to next question")
+            log("Moving to next question")
             viewModel.nextQuestion()
         }
     }

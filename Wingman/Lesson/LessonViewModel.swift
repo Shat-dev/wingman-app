@@ -146,6 +146,6 @@ class LessonViewModel: ObservableObject {
     // MARK: - Complete Lesson
     func completeLesson() {
         // Mark lesson as complete (you can persist this)
-        print("✅ Lesson \(lesson.id) completed")
+        log("✅ Lesson \(lesson.id) completed")
     }
 }

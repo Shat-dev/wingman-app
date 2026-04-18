@@ -43,11 +43,11 @@ final class RevenueCatManager: NSObject, ObservableObject {
     func configure() {
         // Skip RevenueCat configuration if using StoreKit testing mode
         if RevenueCatConfig.useStoreKitTestingMode {
-            print("🧪 RevenueCat: SKIPPED - Using StoreKit Testing Mode")
+            log("🧪 RevenueCat: SKIPPED - Using StoreKit Testing Mode")
             return
         }
         
-        print("🔧 RevenueCat: Configuring with API Key")
+        log("🔧 RevenueCat: Configuring with API Key")
         Purchases.logLevel = .debug
         Purchases.configure(withAPIKey: apiKey)
         Purchases.shared.delegate = self
@@ -64,9 +64,9 @@ final class RevenueCatManager: NSObject, ObservableObject {
             do {
                 _ = try await Purchases.shared.logIn(userID)
                 await refreshCustomerInfo()
-                print("🔑 RevenueCat: User logged in with ID: \(userID)")
+                log("🔑 RevenueCat: User logged in with ID: \(userID)")
             } catch {
-                print("❌ RevenueCat: Failed to login user: \(error)")
+                log("❌ RevenueCat: Failed to login user: \(error)")
             }
         }
     }
@@ -76,9 +76,9 @@ final class RevenueCatManager: NSObject, ObservableObject {
             do {
                 _ = try await Purchases.shared.logOut()
                 await refreshCustomerInfo()
-                print("👋 RevenueCat: User logged out")
+                log("👋 RevenueCat: User logged out")
             } catch {
-                print("❌ RevenueCat: Failed to logout user: \(error)")
+                log("❌ RevenueCat: Failed to logout user: \(error)")
             }
         }
     }
@@ -88,38 +88,38 @@ final class RevenueCatManager: NSObject, ObservableObject {
         let anonymousManager = AnonymousUserManager.shared
         
         guard anonymousManager.needsRevenueCatLinking else {
-            print("ℹ️ RevenueCat: No anonymous purchases to link")
+            log("ℹ️ RevenueCat: No anonymous purchases to link")
             return true
         }
         
         guard let anonymousCustomerID = anonymousManager.revenueCatCustomerId else {
-            print("❌ RevenueCat: No anonymous customer ID found")
+            log("❌ RevenueCat: No anonymous customer ID found")
             return false
         }
         
-        print("🔗 RevenueCat: Linking anonymous purchases to authenticated user")
-        print("   - Anonymous Customer ID: \(anonymousCustomerID)")
-        print("   - Authenticated User ID: \(userID)")
+        log("🔗 RevenueCat: Linking anonymous purchases to authenticated user")
+        log("   - Anonymous Customer ID: \(anonymousCustomerID)")
+        log("   - Authenticated User ID: \(userID)")
         
         do {
             // First, switch to the anonymous customer to get their purchases
             _ = try await Purchases.shared.logIn(anonymousCustomerID)
             let anonymousCustomerInfo = try await Purchases.shared.customerInfo()
             
-            print("📋 RevenueCat: Anonymous customer info retrieved")
-            print("   - Active entitlements: \(anonymousCustomerInfo.entitlements.active.keys)")
+            log("📋 RevenueCat: Anonymous customer info retrieved")
+            log("   - Active entitlements: \(anonymousCustomerInfo.entitlements.active.keys)")
             
             // Now login with the authenticated user ID to transfer purchases
             _ = try await Purchases.shared.logIn(userID)
             let finalCustomerInfo = try await Purchases.shared.customerInfo()
             
-            print("✅ RevenueCat: Successfully linked to authenticated user")
-            print("   - Final entitlements: \(finalCustomerInfo.entitlements.active.keys)")
+            log("✅ RevenueCat: Successfully linked to authenticated user")
+            log("   - Final entitlements: \(finalCustomerInfo.entitlements.active.keys)")
             
             // Verify the purchase was transferred
             let hasEntitlement = finalCustomerInfo.entitlements[entitlementID]?.isActive == true
             if hasEntitlement {
-                print("✅ RevenueCat: Purchase successfully transferred!")
+                log("✅ RevenueCat: Purchase successfully transferred!")
                 
                 // Clear anonymous purchase data since it's now linked
                 anonymousManager.revenueCatCustomerId = nil
@@ -132,12 +132,12 @@ final class RevenueCatManager: NSObject, ObservableObject {
                 
                 return true
             } else {
-                print("⚠️ RevenueCat: Purchase transfer may not be complete")
+                log("⚠️ RevenueCat: Purchase transfer may not be complete")
                 return false
             }
             
         } catch {
-            print("❌ RevenueCat: Failed to link anonymous purchases: \(error)")
+            log("❌ RevenueCat: Failed to link anonymous purchases: \(error)")
             return false
         }
     }
@@ -156,10 +156,10 @@ final class RevenueCatManager: NSObject, ObservableObject {
                 object: nil
             )
             
-            print("ℹ️ RevenueCat: Customer info refreshed")
+            log("ℹ️ RevenueCat: Customer info refreshed")
         } catch {
             self.error = RevenueCatError.customerInfoFailed(error.localizedDescription)
-            print("❌ RevenueCat: Failed to get customer info: \(error)")
+            log("❌ RevenueCat: Failed to get customer info: \(error)")
         }
         isLoading = false
     }
@@ -171,10 +171,10 @@ final class RevenueCatManager: NSObject, ObservableObject {
             let fetchedOfferings = try await Purchases.shared.offerings()
             offerings = fetchedOfferings
             error = nil
-            print("📦 RevenueCat: Offerings fetched: \(fetchedOfferings.all.count) offerings")
+            log("📦 RevenueCat: Offerings fetched: \(fetchedOfferings.all.count) offerings")
         } catch {
             self.error = RevenueCatError.offeringsFailed(error.localizedDescription)
-            print("❌ RevenueCat: Failed to fetch offerings: \(error)")
+            log("❌ RevenueCat: Failed to fetch offerings: \(error)")
         }
         isLoading = false
     }
@@ -188,12 +188,12 @@ final class RevenueCatManager: NSObject, ObservableObject {
             error = nil
             
             let success = customerInfo.entitlements[entitlementID]?.isActive == true
-            print("💰 RevenueCat: Purchase completed. Entitled: \(success)")
+            log("💰 RevenueCat: Purchase completed. Entitled: \(success)")
             isLoading = false
             return success
         } catch {
             self.error = RevenueCatError.purchaseFailed(error.localizedDescription)
-            print("❌ RevenueCat: Purchase failed: \(error)")
+            log("❌ RevenueCat: Purchase failed: \(error)")
             isLoading = false
             return false
         }
@@ -207,12 +207,12 @@ final class RevenueCatManager: NSObject, ObservableObject {
             error = nil
             
             let success = customerInfo.entitlements[entitlementID]?.isActive == true
-            print("🔄 RevenueCat: Restore completed. Entitled: \(success)")
+            log("🔄 RevenueCat: Restore completed. Entitled: \(success)")
             isLoading = false
             return success
         } catch {
             self.error = RevenueCatError.restoreFailed(error.localizedDescription)
-            print("❌ RevenueCat: Restore failed: \(error)")
+            log("❌ RevenueCat: Restore failed: \(error)")
             isLoading = false
             return false
         }
@@ -263,7 +263,7 @@ extension RevenueCatManager: PurchasesDelegate {
                 object: nil
             )
             
-            print("🔄 RevenueCat: Customer info updated via delegate")
+            log("🔄 RevenueCat: Customer info updated via delegate")
         }
     }
 }

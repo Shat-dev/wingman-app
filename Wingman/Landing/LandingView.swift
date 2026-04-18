@@ -111,7 +111,7 @@ struct LandingView: View {
 
                     // Skip
                     Button {
-                        print("🔘 Skip for now button tapped")
+                        log("🔘 Skip for now button tapped")
                         authManager.startAnonymousOnboarding()
                         navigateToOnboarding = true
                     } label: {
@@ -131,7 +131,7 @@ struct LandingView: View {
             }
         }
         .onChange(of: navigateToOnboarding) { newValue in
-            print("📊 LandingView: navigateToOnboarding changed to: \(newValue)")
+            log("📊 LandingView: navigateToOnboarding changed to: \(newValue)")
         }
     }
 }

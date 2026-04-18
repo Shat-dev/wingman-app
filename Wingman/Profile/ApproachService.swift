@@ -70,7 +70,7 @@ class ApproachService: ObservableObject {
         errorMessage = ""
         
         do {
-            print("🔄 Fetching approaches for user: \(userId)")
+            log("🔄 Fetching approaches for user: \(userId)")
             
             let response: [ApproachLogResponse] = try await client
                 .from("approach_logs")
@@ -83,14 +83,14 @@ class ApproachService: ObservableObject {
             self.approaches = response.map { $0.toApproachLog() }
             self.totalCount = response.count
             
-            print("✅ Fetched \(response.count) approaches")
-            print("📊 Approaches breakdown:")
+            log("✅ Fetched \(response.count) approaches")
+            log("📊 Approaches breakdown:")
             for approach in self.approaches {
-                print("   - \(approach.title) (Level \(approach.level), Anxiety: \(approach.anxietyLevel))")
+                log("   - \(approach.title) (Level \(approach.level), Anxiety: \(approach.anxietyLevel))")
             }
             
         } catch {
-            print("❌ Error fetching approaches: \(error.localizedDescription)")
+            log("❌ Error fetching approaches: \(error.localizedDescription)")
             self.errorMessage = "Failed to load approaches. Please try again."
         }
         
@@ -113,7 +113,7 @@ class ApproachService: ObservableObject {
             return response.count ?? 0
             
         } catch {
-            print("❌ Error fetching approach count: \(error.localizedDescription)")
+            log("❌ Error fetching approach count: \(error.localizedDescription)")
             return 0
         }
     }
@@ -126,7 +126,7 @@ class ApproachService: ObservableObject {
         }
         
         do {
-            print("🗑️ Deleting approach: \(approach.title)")
+            log("🗑️ Deleting approach: \(approach.title)")
             
             try await client
                 .from("approach_logs")
@@ -139,11 +139,11 @@ class ApproachService: ObservableObject {
             self.approaches.removeAll { $0.id == approach.id }
             self.totalCount = self.approaches.count
             
-            print("✅ Approach deleted successfully")
+            log("✅ Approach deleted successfully")
             return true
             
         } catch {
-            print("❌ Error deleting approach: \(error.localizedDescription)")
+            log("❌ Error deleting approach: \(error.localizedDescription)")
             self.errorMessage = "Failed to delete approach. Please try again."
             return false
         }
@@ -191,6 +191,6 @@ class ApproachService: ObservableObject {
             UserDefaults.standard.set(Date(), forKey: "last_practice_date")
         }
         
-        print("📊 Updated local stats: \(totalCount) total approaches")
+        log("📊 Updated local stats: \(totalCount) total approaches")
     }
 }

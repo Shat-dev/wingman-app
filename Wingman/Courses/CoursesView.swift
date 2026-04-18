@@ -10,7 +10,6 @@ struct CoursesView: View {
     @EnvironmentObject private var coursesRouter: CoursesRouter
     
     @StateObject private var viewModel = CoursesViewModel()
-    @StateObject private var networkMonitor = NetworkMonitor.shared
     @State private var scrollProxy: ScrollViewProxy? = nil
     @State private var categoryScrollProxy: ScrollViewProxy? = nil
     @State private var isUserScrolling = false  // Track if user manually clicked a pill
@@ -32,14 +31,6 @@ struct CoursesView: View {
                     }
                 } else {
                     VStack(spacing: 0) {
-
-                        // MARK: - Offline Banner (shown only when disconnected)
-                        if !networkMonitor.isConnected {
-                            OfflineBannerView()
-                                .padding(.top, 8)
-                                .padding(.bottom, 4)
-                                .transition(.move(edge: .top).combined(with: .opacity))
-                        }
 
                         // MARK: - Header
                         Text("Courses")

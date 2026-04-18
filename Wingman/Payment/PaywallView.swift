@@ -11,7 +11,6 @@ import RevenueCat
 struct PaywallView: View {
 
     @StateObject private var viewModel = PaywallViewModel()
-    @StateObject private var networkMonitor = NetworkMonitor.shared
     @State private var navigateToReferral = false
     @EnvironmentObject var authManager: AuthManager
     
@@ -26,15 +25,6 @@ struct PaywallView: View {
         NavigationStack {
             ZStack {
                 VStack(spacing: 0) {
-
-                    // MARK: - Offline Banner (shown only when disconnected)
-                    if !networkMonitor.isConnected {
-                        OfflineBannerView()
-                            .padding(.top, 8)
-                            .padding(.bottom, 4)
-                            .transition(.move(edge: .top).combined(with: .opacity))
-                    }
-
                     if viewModel.isLoading && viewModel.offerings == nil {
                         // MARK: - Loading State
                         Spacer()
@@ -217,7 +207,7 @@ struct PaywallView: View {
                                         weekly: calculateWeeklyPrice(viewModel.yearlyPackage),
                                         weeklySubtitle: "per week",
                                         isSelected: viewModel.selectedPlan == .yearly,
-                                        badgeText: viewModel.selectedPlan == .yearly ? "3-day Free Trial" : nil
+                                        badgeText: (viewModel.selectedPlan == .yearly && viewModel.isYearlyTrialEligible) ? "3-day Free Trial" : nil
                                     ) {
                                         withAnimation(.easeInOut(duration: 0.2)) {
                                             viewModel.selectPlan(.yearly)
@@ -232,15 +222,19 @@ struct PaywallView: View {
                                         weekly: calculateWeeklyPrice(viewModel.monthlyPackage),
                                             weeklySubtitle: "per week",
                                             isSelected: viewModel.selectedPlan == .monthly,
-                                            badgeText: viewModel.selectedPlan == .monthly ? "3-day Free Trial" : nil
+                                            badgeText: (viewModel.selectedPlan == .monthly && viewModel.isMonthlyTrialEligible) ? "3-day Free Trial" : nil
                                     ) {
                                         withAnimation(.easeInOut(duration: 0.2)) {
                                             viewModel.selectPlan(.monthly)
                                         }
                                     }
 
-                                    // Trial conversion disclosure
-                                    Text("No payment now. Cancel anytime before your trial ends.")
+                                    // Trial conversion disclosure — copy flips based on eligibility
+                                    // so returning users who've already used their trial see
+                                    // accurate "billed immediately" messaging (Apple 3.1.2).
+                                    Text(viewModel.isTrialEligible(for: viewModel.selectedPlan)
+                                         ? "No payment now. Cancel anytime before your trial ends."
+                                         : "Billed immediately. Cancel anytime in App Store settings.")
                                         .font(.manropeMedium(size: 12))
                                         .foregroundColor(Color(hex: "6B7280"))
                                         .multilineTextAlignment(.center)
@@ -367,13 +361,13 @@ struct PaywallView: View {
             
             // If user is returning to paywall due to subscription expiry,
             // refresh offerings and reset UI state
-            print("📱 PaywallView appeared")
+            log("📱 PaywallView appeared")
             viewModel.loadOfferings()
             viewModel.currentPage = 0
             viewModel.selectPlan(.yearly)
         }
         .onDisappear {
-            print("📱 PaywallView disappeared")
+            log("📱 PaywallView disappeared")
         }
     }
     

@@ -39,14 +39,6 @@ struct HomeView: View {
                 
                 VStack(spacing: 0) {
 
-                    // MARK: - Offline Banner (shown only when disconnected)
-                    if !networkMonitor.isConnected {
-                        OfflineBannerView()
-                            .padding(.top, 8)
-                            .padding(.bottom, 4)
-                            .transition(.move(edge: .top).combined(with: .opacity))
-                    }
-
                     // MARK: - Header
                     HStack(alignment: .top) {
                         VStack(alignment: .leading, spacing: 2) {
@@ -131,23 +123,29 @@ struct HomeView: View {
                                         .padding(.top, 8)
                                         .frame(maxWidth: .infinity)
 
+                                    // Offline adds a disabled "No Connection" state on top of the
+                                    // existing isDailyPracticeButtonEnabled gate (which handles
+                                    // "already completed today"). Both must be true to start.
+                                    let canStart = networkMonitor.isConnected && viewModel.isDailyPracticeButtonEnabled
+                                    let buttonText = networkMonitor.isConnected ? viewModel.dailyPracticeButtonText : "No Connection"
+
                                     Button(action: {
-                                        if viewModel.isDailyPracticeButtonEnabled {
+                                        if canStart {
                                             HapticManager.shared.mediumImpact()
                                             navigateToPractice = true
                                         }
                                     }) {
-                                        Text(viewModel.dailyPracticeButtonText)
+                                        Text(buttonText)
                                             .font(.manropeSemiBold(size: 16))
                                             .foregroundColor(.wingmanWhiteFF)
                                             .frame(maxWidth: .infinity)
                                             .frame(height: 52)
-                                            .background(viewModel.isDailyPracticeButtonEnabled ? Color.wingmanBlack : Color.wingmanBlack.opacity(0.5))
+                                            .background(canStart ? Color.wingmanBlack : Color.wingmanBlack.opacity(0.5))
                                             .cornerRadius(5)
                                             .contentShape(Rectangle())
                                     }
                                     .buttonStyle(.plain)
-                                    .disabled(!viewModel.isDailyPracticeButtonEnabled)
+                                    .disabled(!canStart)
                                     .padding(.horizontal, 20)
                                     .padding(.bottom, 20)
                                     .padding(.top, 40)
@@ -289,7 +287,7 @@ struct HomeView: View {
                     .presentationCornerRadius(20)
             }
             .onAppear {
-                print("👁️ HomeView appeared - refreshing continue course and daily practice status")
+                log("👁️ HomeView appeared - refreshing continue course and daily practice status")
                 viewModel.loadUserData()
                 viewModel.loadContinueCourse()
                 viewModel.refreshDailyPracticeStatus()

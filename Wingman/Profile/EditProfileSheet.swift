@@ -156,7 +156,7 @@ struct EditProfileSheet: View {
                     )
                 )
                 
-                print("✅ User name updated in Supabase: \(name)")
+                log("✅ User name updated in Supabase: \(name)")
 
                 await MainActor.run {
                     // Push into shared store — also writes cache + legacy
@@ -174,7 +174,7 @@ struct EditProfileSheet: View {
                 }
                 
             } catch {
-                print("❌ Error updating user name: \(error.localizedDescription)")
+                log("❌ Error updating user name: \(error.localizedDescription)")
                 await MainActor.run {
                     isSaving = false
                     // Still update local state so the UI reflects the user's
@@ -195,6 +195,6 @@ struct EditProfileSheet: View {
 
 #Preview {
     EditProfileSheet(currentName: "Shat") { newName in
-        print("New name: \(newName)")
+        log("New name: \(newName)")
     }
 }

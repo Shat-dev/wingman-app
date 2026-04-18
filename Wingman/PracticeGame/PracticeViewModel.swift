@@ -122,9 +122,9 @@ final class PracticeViewModel: ObservableObject {
         }
 
         if !newlyUnlockedPractices.isEmpty {
-            print("🎉 \(newlyUnlockedPractices.count) new practice(s) unlocked!")
+            log("🎉 \(newlyUnlockedPractices.count) new practice(s) unlocked!")
             for practice in newlyUnlockedPractices {
-                print("   - \(practice.title)")
+                log("   - \(practice.title)")
             }
         }
     }
@@ -144,7 +144,7 @@ final class PracticeViewModel: ObservableObject {
             
             return try await practiceService.getTotalDailyPractices(userId: userId)
         } catch {
-            print("❌ Failed to get daily practice count: \(error)")
+            log("❌ Failed to get daily practice count: \(error)")
             return 0
         }
     }

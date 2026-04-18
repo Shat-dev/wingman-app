@@ -40,13 +40,13 @@ struct WingmanApp: App {
     
     // MARK: - Clear Notification Badge
     private func clearNotificationBadge() {
-        print("🔔 App became active - clearing notification badge")
+        log("🔔 App became active - clearing notification badge")
         NotificationManager.shared.clearNotificationBadgeAndDelivered()
     }
     
     // MARK: - Refresh Subscription Status
     private func refreshSubscriptionStatus() {
-        print("🔄 WingmanApp: Refreshing subscription status on foreground")
+        log("🔄 WingmanApp: Refreshing subscription status on foreground")
         Task {
             await SubscriptionManager.shared.refreshSubscriptionStatus()
         }
@@ -63,7 +63,7 @@ struct RootView: View {
             Group {
                 // MARK: - Session Check in Progress
                 if authManager.isCheckingSession {
-                    let _ = print("🎯 RootView: Checking session...")
+                    let _ = log("🎯 RootView: Checking session...")
                     SplashView()
                     
                 // MARK: - Subscription Expiry Check (Highest Priority)
@@ -73,18 +73,18 @@ struct RootView: View {
                           authManager.hasCompletedPaywallFlow && 
                           !authManager.hasActiveSubscription &&
                           SubscriptionManager.shared.hasCheckedAtLeastOnce {
-                    let _ = print("🎯 RootView: Subscription expired (confirmed) - forcing PaywallView")
+                    let _ = log("🎯 RootView: Subscription expired (confirmed) - forcing PaywallView")
                     NavigationStack {
                         PaywallView(authManager: authManager)
                     }
                     
                 // MARK: - Authenticated User Flow
                 } else if authManager.isAuthenticated {
-                    let _ = print("🎯 RootView: User IS authenticated")
+                    let _ = log("🎯 RootView: User IS authenticated")
 
                     // ✅ 1) Onboarding questions not finished
                     if !authManager.hasCompletedQuestions {
-                        let _ = print("🎯 RootView: Showing OnboardingView (questions NOT completed)")
+                        let _ = log("🎯 RootView: Showing OnboardingView (questions NOT completed)")
                         NavigationStack {
                             OnboardingView()
                         }
@@ -95,48 +95,48 @@ struct RootView: View {
                     //    paywall) never route back here after the update —
                     //    they go straight to MainTabView below.
                     } else if !authManager.hasCompletedPaywallFlow && !authManager.hasSeenRatingPrompt {
-                        let _ = print("🎯 RootView: Showing RatingPromptView (rating prompt NOT seen)")
+                        let _ = log("🎯 RootView: Showing RatingPromptView (rating prompt NOT seen)")
                         NavigationStack {
                             RatingPromptView()
                         }
 
                     // ✅ 3) Questions + rating ack'd → show Paywall (and Referral flow)
                     } else if !authManager.hasCompletedPaywallFlow {
-                        let _ = print("🎯 RootView: Showing PaywallView (paywall flow NOT completed)")
+                        let _ = log("🎯 RootView: Showing PaywallView (paywall flow NOT completed)")
                         NavigationStack {
                             PaywallView(authManager: authManager)
                         }
 
                     // ✅ 4) Paywall + Referral finished → MainTabView (Home)
                     } else {
-                        let _ = print("🎯 RootView: Showing MainTabView (paywall flow completed)")
+                        let _ = log("🎯 RootView: Showing MainTabView (paywall flow completed)")
                         MainTabView()
                     }
                 
                 // MARK: - Anonymous User Flow (Skip for now)
                 } else if authManager.isAnonymousUser && authManager.hasCompletedOnboarding {
-                    let _ = print("🎯 RootView: Anonymous user completed onboarding")
+                    let _ = log("🎯 RootView: Anonymous user completed onboarding")
 
                     // ✅ Anonymous user - questions finished, rating ask not
                     //    yet seen → show RatingPromptView. Gated on
                     //    `!hasCompletedPaywallFlow` for parity with the
                     //    authenticated flow.
                     if !authManager.hasCompletedPaywallFlow && !authManager.hasSeenRatingPrompt {
-                        let _ = print("🎯 RootView: Anonymous user - showing RatingPromptView")
+                        let _ = log("🎯 RootView: Anonymous user - showing RatingPromptView")
                         NavigationStack {
                             RatingPromptView()
                         }
 
                     // ✅ Anonymous user - questions + rating ack'd → show Paywall
                     } else if !authManager.hasCompletedPaywallFlow {
-                        let _ = print("🎯 RootView: Anonymous user - showing PaywallView")
+                        let _ = log("🎯 RootView: Anonymous user - showing PaywallView")
                         NavigationStack {
                             PaywallView(authManager: authManager)
                         }
 
                     // ✅ Anonymous user - paywall finished → require account creation
                     } else {
-                        let _ = print("🎯 RootView: Anonymous user - requiring account creation")
+                        let _ = log("🎯 RootView: Anonymous user - requiring account creation")
                         NavigationStack {
                             AuthView(mode: .signup)
                         }
@@ -144,13 +144,13 @@ struct RootView: View {
 
                 // MARK: - Unauthenticated User Flow
                 } else if authManager.hasCompletedOnboarding {
-                    let _ = print("🎯 RootView: User NOT authenticated, but HAS seen onboarding")
+                    let _ = log("🎯 RootView: User NOT authenticated, but HAS seen onboarding")
                     NavigationStack {
                         AuthView(mode: .login)
                     }
 
                 } else {
-                    let _ = print("🎯 RootView: User NOT authenticated, showing Landing")
+                    let _ = log("🎯 RootView: User NOT authenticated, showing Landing")
                     LandingView()
                 }
             }
@@ -180,10 +180,10 @@ struct RootView: View {
             NotificationManager.shared.setupNotificationsOnLaunch()
         }
         .onChange(of: authManager.isAuthenticated) { newValue in
-            print("\n🔔 RootView detected isAuthenticated change: \(newValue)")
-            print("   - hasCompletedQuestions: \(authManager.hasCompletedQuestions)")
-            print("   - hasCompletedPaywallFlow: \(authManager.hasCompletedPaywallFlow)")
-            print("   - hasCompletedOnboarding: \(authManager.hasCompletedOnboarding)")
+            log("\n🔔 RootView detected isAuthenticated change: \(newValue)")
+            log("   - hasCompletedQuestions: \(authManager.hasCompletedQuestions)")
+            log("   - hasCompletedPaywallFlow: \(authManager.hasCompletedPaywallFlow)")
+            log("   - hasCompletedOnboarding: \(authManager.hasCompletedOnboarding)")
             
             // Set RevenueCat user ID when user authenticates
             if newValue, let userId = SupabaseManager.shared.currentUserId {
@@ -193,17 +193,17 @@ struct RootView: View {
             }
         }
         .onChange(of: authManager.hasActiveSubscription) { newValue in
-            print("\n🔔 RootView detected hasActiveSubscription change: \(newValue)")
-            print("   - Expiry date: \(authManager.subscriptionExpiryDate?.formatted() ?? "nil")")
+            log("\n🔔 RootView detected hasActiveSubscription change: \(newValue)")
+            log("   - Expiry date: \(authManager.subscriptionExpiryDate?.formatted() ?? "nil")")
         }
         .onChange(of: authManager.hasCompletedQuestions) { newValue in
-            print("\n🔔 RootView detected hasCompletedQuestions change: \(newValue)")
+            log("\n🔔 RootView detected hasCompletedQuestions change: \(newValue)")
         }
         .onChange(of: authManager.hasCompletedPaywallFlow) { newValue in
-            print("\n🔔 RootView detected hasCompletedPaywallFlow change: \(newValue)")
+            log("\n🔔 RootView detected hasCompletedPaywallFlow change: \(newValue)")
         }
         .onChange(of: authManager.hasSeenRatingPrompt) { newValue in
-            print("\n🔔 RootView detected hasSeenRatingPrompt change: \(newValue)")
+            log("\n🔔 RootView detected hasSeenRatingPrompt change: \(newValue)")
         }
     }
 }

@@ -9,22 +9,22 @@ class NotificationManager: ObservableObject {
     
     // MARK: - Permission Request
     func requestPermission() async -> Bool {
-        print("🔔 Requesting notification permission...")
+        log("🔔 Requesting notification permission...")
         let center = UNUserNotificationCenter.current()
         
         do {
             let granted = try await center.requestAuthorization(options: [.alert, .sound, .badge])
-            print(granted ? "✅ Notification permission granted" : "❌ Notification permission denied")
+            log(granted ? "✅ Notification permission granted" : "❌ Notification permission denied")
             return granted
         } catch {
-            print("❌ Error requesting notification permission: \(error)")
+            log("❌ Error requesting notification permission: \(error)")
             return false
         }
     }
     
     // MARK: - Schedule Daily Reading Goal Notification
     func scheduleDailyReadingGoalNotification(goalMinutes: Int) async {
-        print("🔔 Scheduling daily reading goal notification for \(goalMinutes) minutes")
+        log("🔔 Scheduling daily reading goal notification for \(goalMinutes) minutes")
         
         let center = UNUserNotificationCenter.current()
         
@@ -52,18 +52,18 @@ class NotificationManager: ObservableObject {
         // Schedule notification
         do {
             try await center.add(request)
-            print("✅ Daily reading goal notification scheduled for 9:00 AM")
+            log("✅ Daily reading goal notification scheduled for 9:00 AM")
         } catch {
-            print("❌ Error scheduling notification: \(error)")
+            log("❌ Error scheduling notification: \(error)")
         }
     }
     
     // MARK: - Cancel Daily Reading Goal Notification
     func cancelDailyReadingGoalNotification() {
-        print("🔔 Canceling daily reading goal notification")
+        log("🔔 Canceling daily reading goal notification")
         let center = UNUserNotificationCenter.current()
         center.removePendingNotificationRequests(withIdentifiers: ["daily_reading_goal"])
-        print("✅ Daily reading goal notification canceled")
+        log("✅ Daily reading goal notification canceled")
     }
     
     // MARK: - Update Notification Based on Settings
@@ -80,21 +80,21 @@ class NotificationManager: ObservableObject {
     
     // MARK: - Clear Notification Badge and Delivered Notifications
     func clearNotificationBadgeAndDelivered() {
-        print("🔔 Clearing notification badge and delivered notifications")
+        log("🔔 Clearing notification badge and delivered notifications")
         let center = UNUserNotificationCenter.current()
         
         // Clear the app icon badge count
         center.setBadgeCount(0) { error in
             if let error = error {
-                print("❌ Failed to clear badge count: \(error.localizedDescription)")
+                log("❌ Failed to clear badge count: \(error.localizedDescription)")
             } else {
-                print("✅ Badge count cleared successfully")
+                log("✅ Badge count cleared successfully")
             }
         }
         
         // Remove all delivered notifications from notification center
         center.removeAllDeliveredNotifications()
-        print("✅ All delivered notifications removed")
+        log("✅ All delivered notifications removed")
     }
 
     // MARK: - Setup Notifications on App Launch

@@ -27,7 +27,7 @@ struct ReferralView: View {
 
                 // ✅ NEXT → COMPLETE PAYWALL FLOW → DASHBOARD
                 Button {
-                    print("➡️ Referral submitted:", referralCode)
+                    log("➡️ Referral submitted:", referralCode)
                     authManager.completePaywallFlow()
                 } label: {
                     Text("Next")
@@ -43,7 +43,7 @@ struct ReferralView: View {
                 HStack {
                     Spacer()
                     Button {
-                        print("⏭️ Referral skipped")
+                        log("⏭️ Referral skipped")
                         authManager.completePaywallFlow()
                     } label: {
                         Text("Skip")

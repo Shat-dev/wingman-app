@@ -58,10 +58,10 @@ struct QuestionsCompleteView: View {
                 // MARK: - Continue Button
                 Button(action: {
                     HapticManager.shared.mediumImpact()
-                    print("🎯 Continue button tapped - navigating to HomeView")
+                    log("🎯 Continue button tapped - navigating to HomeView")
                     
                     // 1. Show tab bar immediately
-                    print("📱 Explicitly showing tab bar before navigation")
+                    log("📱 Explicitly showing tab bar before navigation")
                     tabBarVisibility.showTabBar()
                     
                     // 2. Hide this completion view
@@ -69,7 +69,7 @@ struct QuestionsCompleteView: View {
                     
                     // 3. Navigate to Home tab via notification with slight delay
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        print("📡 Posting NavigateToHomeView notification")
+                        log("📡 Posting NavigateToHomeView notification")
                         NotificationCenter.default.post(
                             name: NSNotification.Name("NavigateToHomeView"),
                             object: nil
@@ -78,7 +78,7 @@ struct QuestionsCompleteView: View {
                     
                     // 4. Dismiss this view with slight delay to ensure proper tab bar visibility
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                        print("🏠 Dismissing daily practice to return to HomeView")
+                        log("🏠 Dismissing daily practice to return to HomeView")
                         dismissDailyPractice()
                     }
                 }) {
@@ -97,11 +97,11 @@ struct QuestionsCompleteView: View {
         .navigationBarHidden(true)
         .toolbar(.hidden, for: .tabBar)
         .onAppear {
-            print("🎯 QuestionsCompleteView appeared - hiding tab bar")
+            log("🎯 QuestionsCompleteView appeared - hiding tab bar")
             tabBarVisibility.hideTabBar()
         }
         .onDisappear {
-            print("🎯 QuestionsCompleteView disappeared - ensuring tab bar is shown")
+            log("🎯 QuestionsCompleteView disappeared - ensuring tab bar is shown")
             tabBarVisibility.showTabBar()
         }
     }

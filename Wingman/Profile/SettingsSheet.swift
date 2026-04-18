@@ -320,49 +320,49 @@ struct SettingsSheet: View {
                     successMessage = "Purchases restored successfully!"
                     showingSuccessAlert = true
                 }
-                print("✅ SettingsSheet: Purchases restored")
+                log("✅ SettingsSheet: Purchases restored")
             } else {
                 await MainActor.run {
                     errorMessage = "No active subscriptions found to restore"
                     showingErrorAlert = true
                 }
-                print("⚠️ SettingsSheet: No purchases to restore")
+                log("⚠️ SettingsSheet: No purchases to restore")
             }
         } catch {
             await MainActor.run {
                 errorMessage = "Failed to restore purchases. Please try again."
                 showingErrorAlert = true
             }
-            print("❌ SettingsSheet: Restore failed: \(error)")
+            log("❌ SettingsSheet: Restore failed: \(error)")
         }
         
         isRestoringPurchases = false
     }
     
     private func manageSubscriptions() {
-        print("Manage Subscriptions tapped")
+        log("Manage Subscriptions tapped")
         if let url = URL(string: "https://apps.apple.com/account/subscriptions") {
             UIApplication.shared.open(url)
         }
     }
     
     private func deleteAccount() {
-        print("🗑️ Delete account confirmation received")
+        log("🗑️ Delete account confirmation received")
         
         Task {
             do {
                 // Start loading state
                 await MainActor.run {
                     isDeleting = true
-                    print("🗑️ Showing deletion loading state...")
+                    log("🗑️ Showing deletion loading state...")
                 }
                 
-                print("🗑️ Initiating account deletion process...")
+                log("🗑️ Initiating account deletion process...")
                 
                 // Call AuthManager's secure deletion method
                 try await authManager.deleteAccount()
                 
-                print("✅ Account deletion successful")
+                log("✅ Account deletion successful")
                 
                 // Account deletion was successful - AuthManager has already:
                 // 1. Deleted all user data from database
@@ -379,45 +379,45 @@ struct SettingsSheet: View {
                     
                     // The app will automatically navigate to login/onboarding screen
                     // because AuthManager has set isAuthenticated = false
-                    print("✅ Account deletion completed - returning to auth flow")
+                    log("✅ Account deletion completed - returning to auth flow")
                 }
                 
             } catch AccountDeletionError.notAuthenticated {
                 await MainActor.run {
                     isDeleting = false
-                    print("❌ User not authenticated")
+                    log("❌ User not authenticated")
                     // Handle error - maybe show an alert
                 }
             } catch AccountDeletionError.invalidSession {
                 await MainActor.run {
                     isDeleting = false
-                    print("❌ Invalid session")
+                    log("❌ Invalid session")
                     // Handle error - session might have expired
                 }
             } catch AccountDeletionError.networkError(let message) {
                 await MainActor.run {
                     isDeleting = false
-                    print("❌ Network error during deletion: \(message)")
+                    log("❌ Network error during deletion: \(message)")
                     // Show network error to user
                     showDeletionError("Network error: Please check your connection and try again.")
                 }
             } catch AccountDeletionError.deletionFailed(let message) {
                 await MainActor.run {
                     isDeleting = false
-                    print("❌ Account deletion failed: \(message)")
+                    log("❌ Account deletion failed: \(message)")
                     // Show server error to user
                     showDeletionError("Deletion failed: \(message)")
                 }
             } catch AccountDeletionError.invalidResponse {
                 await MainActor.run {
                     isDeleting = false
-                    print("❌ Invalid response from server")
+                    log("❌ Invalid response from server")
                     showDeletionError("Server error: Please try again later.")
                 }
             } catch {
                 await MainActor.run {
                     isDeleting = false
-                    print("❌ Unexpected error during account deletion: \(error.localizedDescription)")
+                    log("❌ Unexpected error during account deletion: \(error.localizedDescription)")
                     showDeletionError("An unexpected error occurred. Please try again.")
                 }
             }
@@ -427,7 +427,7 @@ struct SettingsSheet: View {
     private func showDeletionError(_ message: String) {
         errorMessage = message
         showingErrorAlert = true
-        print("🚨 Deletion Error: \(message)")
+        log("🚨 Deletion Error: \(message)")
     }
     
     private func logOut() {
@@ -438,10 +438,10 @@ struct SettingsSheet: View {
                 
                 await MainActor.run {
                     dismiss()
-                    print("Logged out successfully")
+                    log("Logged out successfully")
                 }
             } catch {
-                print("Error logging out: \(error.localizedDescription)")
+                log("Error logging out: \(error.localizedDescription)")
             }
         }
     }

@@ -160,7 +160,7 @@ struct CourseDetailSheet: View {
 
         // Debug: Print course summary
         if let firstLesson = lessons.first {
-            print("📋 Course Summary: \(firstLesson.courseSummary ?? "No summary")")
+            log("📋 Course Summary: \(firstLesson.courseSummary ?? "No summary")")
         }
     }
 }

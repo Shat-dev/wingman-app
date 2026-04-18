@@ -46,7 +46,7 @@ final class SubscriptionManager: NSObject, ObservableObject {
     deinit {
         // Safely stop timer from non-main-actor context
         if periodicCheckTimer != nil {
-            print("⏹️ SubscriptionManager: Stopping periodic subscription checks (deinit)")
+            log("⏹️ SubscriptionManager: Stopping periodic subscription checks (deinit)")
             periodicCheckTimer?.invalidate()
             periodicCheckTimer = nil
         }
@@ -57,17 +57,17 @@ final class SubscriptionManager: NSObject, ObservableObject {
     /// Initialize subscription monitoring - call this AFTER RevenueCat is configured
     func initializeMonitoring() {
         guard !isInitialized else {
-            print("ℹ️ SubscriptionManager: Already initialized")
+            log("ℹ️ SubscriptionManager: Already initialized")
             return
         }
         
-        print("📱 SubscriptionManager: Initializing subscription monitoring")
+        log("📱 SubscriptionManager: Initializing subscription monitoring")
         
         if RevenueCatConfig.useStoreKitTestingMode {
-            print("🧪 SubscriptionManager: Using NATIVE STOREKIT (Testing Mode)")
+            log("🧪 SubscriptionManager: Using NATIVE STOREKIT (Testing Mode)")
             initializeStoreKitMonitoring()
         } else {
-            print("🔗 SubscriptionManager: Using REVENUCAT")
+            log("🔗 SubscriptionManager: Using REVENUCAT")
             initializeRevenueCatMonitoring()
         }
         
@@ -81,12 +81,12 @@ final class SubscriptionManager: NSObject, ObservableObject {
     
     /// Initialize with native StoreKit (for local testing)
     private func initializeStoreKitMonitoring() {
-        print("📲 SubscriptionManager: Setting up StoreKit transaction listener")
+        log("📲 SubscriptionManager: Setting up StoreKit transaction listener")
         
         Task {
             for await result in StoreKit.Transaction.updates {
                 if case .verified(let transaction) = result {
-                    print("💳 SubscriptionManager: Transaction verified - \(transaction.productID)")
+                    log("💳 SubscriptionManager: Transaction verified - \(transaction.productID)")
                     await handleStoreKitTransaction(transaction)
                     await transaction.finish()
                 }
@@ -99,7 +99,7 @@ final class SubscriptionManager: NSObject, ObservableObject {
     
     /// Initialize with RevenueCat
     private func initializeRevenueCatMonitoring() {
-        print("🔗 SubscriptionManager: Setting up RevenueCat listener")
+        log("🔗 SubscriptionManager: Setting up RevenueCat listener")
         
         // Listen for RevenueCat customer info updates
         Purchases.shared.getCustomerInfo { [weak self] customerInfo, error in
@@ -114,13 +114,13 @@ final class SubscriptionManager: NSObject, ObservableObject {
     
     private func setupSubscriptionMonitoring() {
         // This method is no longer needed but keeping signature for reference
-        print("⚠️ SubscriptionManager: setupSubscriptionMonitoring() called - use initializeMonitoring() instead")
+        log("⚠️ SubscriptionManager: setupSubscriptionMonitoring() called - use initializeMonitoring() instead")
     }
     
     // MARK: - Subscription Status Checks
     /// Check current subscription status from RevenueCat or StoreKit
     func checkSubscriptionStatus() async {
-        print("🔍 SubscriptionManager: Checking subscription status...")
+        log("🔍 SubscriptionManager: Checking subscription status...")
         isCheckingSubscription = true
         
         if RevenueCatConfig.useStoreKitTestingMode {
@@ -140,14 +140,14 @@ final class SubscriptionManager: NSObject, ObservableObject {
             handleCustomerInfoUpdate(customerInfo, error: nil)
             hasCheckedAtLeastOnce = true
         } catch {
-            print("❌ SubscriptionManager: Failed to check RevenueCat subscription: \(error.localizedDescription)")
+            log("❌ SubscriptionManager: Failed to check RevenueCat subscription: \(error.localizedDescription)")
             hasCheckedAtLeastOnce = true
         }
     }
     
     /// Check subscription status via StoreKit
     private func checkStoreKitSubscriptionStatus() async {
-        print("🛍️ SubscriptionManager: Checking StoreKit subscription status...")
+        log("🛍️ SubscriptionManager: Checking StoreKit subscription status...")
         
         var hasActiveSubscription = false
         var latestExpiryDate: Date? = nil
@@ -155,7 +155,7 @@ final class SubscriptionManager: NSObject, ObservableObject {
         // Check all subscription transactions
         for await result in StoreKit.Transaction.currentEntitlements {
             if case .verified(let transaction) = result {
-                print("   - Found transaction: \(transaction.productID)")
+                log("   - Found transaction: \(transaction.productID)")
                 if transaction.productID == Constants.YEARLY_PRODUCT_ID ||
                    transaction.productID == Constants.MONTHLY_PRODUCT_ID {
                     hasActiveSubscription = true
@@ -168,16 +168,16 @@ final class SubscriptionManager: NSObject, ObservableObject {
             }
         }
         
-        print("🛍️ SubscriptionManager: StoreKit check - Active: \(hasActiveSubscription), Expiry: \(latestExpiryDate?.formatted() ?? "None")")
+        log("🛍️ SubscriptionManager: StoreKit check - Active: \(hasActiveSubscription), Expiry: \(latestExpiryDate?.formatted() ?? "None")")
         updateSubscriptionStatus(isActive: hasActiveSubscription, expiryDate: latestExpiryDate)
         hasCheckedAtLeastOnce = true
     }
     
     /// Handle StoreKit transaction updates
     private func handleStoreKitTransaction(_ transaction: StoreKit.Transaction) async {
-        print("💳 SubscriptionManager: Handling StoreKit transaction")
-        print("   - Product ID: \(transaction.productID)")
-        print("   - Expiration Date: \(transaction.expirationDate?.formatted() ?? "No expiry")")
+        log("💳 SubscriptionManager: Handling StoreKit transaction")
+        log("   - Product ID: \(transaction.productID)")
+        log("   - Expiration Date: \(transaction.expirationDate?.formatted() ?? "No expiry")")
         
         // Re-check subscription status after transaction
         await checkStoreKitSubscriptionStatus()
@@ -187,7 +187,7 @@ final class SubscriptionManager: NSObject, ObservableObject {
     /// Handle customer info updates from RevisionCat
     private func handleCustomerInfoUpdate(_ customerInfo: CustomerInfo?, error: Error?) {
         guard let customerInfo = customerInfo else {
-            print("❌ SubscriptionManager: No customer info received")
+            log("❌ SubscriptionManager: No customer info received")
             updateSubscriptionStatus(isActive: false, expiryDate: nil)
             return
         }
@@ -196,22 +196,22 @@ final class SubscriptionManager: NSObject, ObservableObject {
         let wasActive = lastSubscriptionState
         let isNowActive = entitlement?.isActive == true
         
-        print("📊 SubscriptionManager: Entitlement status update")
-        print("   - Entitlement ID: \(entitlementID)")
-        print("   - Is Active: \(isNowActive)")
-        print("   - Expiry Date: \(entitlement?.expirationDate?.formatted() ?? "No expiry")")
-        print("   - Is Sandbox: \(entitlement?.isSandbox ?? false)")
-        print("   - Previous State: \(wasActive)")
+        log("📊 SubscriptionManager: Entitlement status update")
+        log("   - Entitlement ID: \(entitlementID)")
+        log("   - Is Active: \(isNowActive)")
+        log("   - Expiry Date: \(entitlement?.expirationDate?.formatted() ?? "No expiry")")
+        log("   - Is Sandbox: \(entitlement?.isSandbox ?? false)")
+        log("   - Previous State: \(wasActive)")
         
         let expiryDate = entitlement?.expirationDate
         updateSubscriptionStatus(isActive: isNowActive, expiryDate: expiryDate)
         
         // Detect state changes
         if wasActive && !isNowActive {
-            print("⚠️ SubscriptionManager: Subscription EXPIRED!")
+            log("⚠️ SubscriptionManager: Subscription EXPIRED!")
             NotificationCenter.default.post(name: Self.subscriptionExpiredNotification, object: nil)
         } else if !wasActive && isNowActive {
-            print("✅ SubscriptionManager: Subscription ACTIVATED!")
+            log("✅ SubscriptionManager: Subscription ACTIVATED!")
             NotificationCenter.default.post(name: Self.subscriptionRestoredNotification, object: nil)
         }
         
@@ -226,7 +226,7 @@ final class SubscriptionManager: NSObject, ObservableObject {
         self.subscriptionExpiryDate = expiryDate
         
         if statusChanged {
-            print("🔔 SubscriptionManager: Posting subscription status changed notification")
+            log("🔔 SubscriptionManager: Posting subscription status changed notification")
             NotificationCenter.default.post(name: Self.subscriptionStatusChangedNotification, object: nil)
         }
     }
@@ -234,7 +234,7 @@ final class SubscriptionManager: NSObject, ObservableObject {
     // MARK: - Periodic Checks
     /// Start periodic subscription checks
     func startPeriodicChecks() {
-        print("⏰ SubscriptionManager: Starting periodic subscription checks (every 5 minutes)")
+        log("⏰ SubscriptionManager: Starting periodic subscription checks (every 5 minutes)")
         
         // Stop existing timer if any
         stopPeriodicChecks()
@@ -255,7 +255,7 @@ final class SubscriptionManager: NSObject, ObservableObject {
     /// Stop periodic subscription checks
     func stopPeriodicChecks() {
         if periodicCheckTimer != nil {
-            print("⏹️ SubscriptionManager: Stopping periodic subscription checks")
+            log("⏹️ SubscriptionManager: Stopping periodic subscription checks")
             periodicCheckTimer?.invalidate()
             periodicCheckTimer = nil
         }
@@ -264,7 +264,7 @@ final class SubscriptionManager: NSObject, ObservableObject {
     // MARK: - Refresh Methods
     /// Force refresh subscription status immediately
     func refreshSubscriptionStatus() async {
-        print("🔄 SubscriptionManager: Force refreshing subscription status")
+        log("🔄 SubscriptionManager: Force refreshing subscription status")
         
         if !RevenueCatConfig.useStoreKitTestingMode {
             Purchases.shared.invalidateCustomerInfoCache()

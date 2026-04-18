@@ -48,7 +48,7 @@ final class NetworkMonitor: ObservableObject {
                 self?.isConnected = path.status == .satisfied
                 self?.connectionType = self?.getConnectionType(from: path) ?? .unknown
                 
-                print("📶 Network status: \(path.status == .satisfied ? "Connected" : "Disconnected")")
+                log("📶 Network status: \(path.status == .satisfied ? "Connected" : "Disconnected")")
             }
         }
         monitor.start(queue: queue)

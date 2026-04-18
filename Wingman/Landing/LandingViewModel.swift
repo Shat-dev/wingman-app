@@ -42,6 +42,6 @@ class LandingViewModel: ObservableObject {
     
     func skip() {
         // For now print — later navigate to LoginView
-        print("Skipped onboarding")
+        log("Skipped onboarding")
     }
 }

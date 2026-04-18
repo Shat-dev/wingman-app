@@ -43,7 +43,7 @@ class AnonymousUserManager {
         get { defaults.string(forKey: Keys.revenueCatCustomerId) }
         set {
             defaults.set(newValue, forKey: Keys.revenueCatCustomerId)
-            print("💰 AnonymousUserManager: RevenueCat customer ID stored: \(newValue ?? "nil")")
+            log("💰 AnonymousUserManager: RevenueCat customer ID stored: \(newValue ?? "nil")")
         }
     }
     
@@ -51,7 +51,7 @@ class AnonymousUserManager {
         get { defaults.bool(forKey: Keys.hasActivePurchase) }
         set {
             defaults.set(newValue, forKey: Keys.hasActivePurchase)
-            print("💰 AnonymousUserManager: Active purchase status: \(newValue)")
+            log("💰 AnonymousUserManager: Active purchase status: \(newValue)")
         }
     }
     
@@ -88,7 +88,7 @@ class AnonymousUserManager {
     func storeRevenueCatPurchase(customerInfo: CustomerInfo) {
         revenueCatCustomerId = customerInfo.originalAppUserId
         hasActivePurchase = customerInfo.entitlements[Constants.ENTITLEMENT_ID]?.isActive == true
-        print("💰 AnonymousUserManager: Stored purchase info for customer: \(customerInfo.originalAppUserId)")
+        log("💰 AnonymousUserManager: Stored purchase info for customer: \(customerInfo.originalAppUserId)")
     }
     
     /// Check if anonymous user has a purchase that needs to be linked
@@ -107,20 +107,20 @@ class AnonymousUserManager {
         defaults.removeObject(forKey: Keys.hasCompletedOnboarding)
         defaults.removeObject(forKey: Keys.revenueCatCustomerId)
         defaults.removeObject(forKey: Keys.hasActivePurchase)
-        print("🗑️ Cleared all anonymous user data including RevenueCat info")
+        log("🗑️ Cleared all anonymous user data including RevenueCat info")
     }
     
     // MARK: - Debug
     
     func printCurrentData() {
-        print("📱 Anonymous User Data:")
-        print("   - ID: \(anonymousUserId)")
-        print("   - Name: \(userName ?? "nil")")
-        print("   - Age: \(userAge ?? "nil")")
-        print("   - Goals: \(userGoals ?? "nil")")
-        print("   - Referral: \(referralCode ?? "nil")")
-        print("   - Completed: \(hasCompletedOnboarding)")
-        print("   - RevenueCat Customer: \(revenueCatCustomerId ?? "nil")")
-        print("   - Has Purchase: \(hasActivePurchase)")
+        log("📱 Anonymous User Data:")
+        log("   - ID: \(anonymousUserId)")
+        log("   - Name: \(userName ?? "nil")")
+        log("   - Age: \(userAge ?? "nil")")
+        log("   - Goals: \(userGoals ?? "nil")")
+        log("   - Referral: \(referralCode ?? "nil")")
+        log("   - Completed: \(hasCompletedOnboarding)")
+        log("   - RevenueCat Customer: \(revenueCatCustomerId ?? "nil")")
+        log("   - Has Purchase: \(hasActivePurchase)")
     }
 }

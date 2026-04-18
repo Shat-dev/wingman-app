@@ -132,7 +132,7 @@ class DailyPracticeService: DailyPracticeServiceProtocol {
             // Get today's date in user's timezone
             let todayDate = getCurrentLocalDate()
             
-            print("🔄 Fetching daily questions for user: \(userIdString), date: \(todayDate)")
+            log("🔄 Fetching daily questions for user: \(userIdString), date: \(todayDate)")
             
             // Call the database function that handles all the daily generation logic
             let params = GetDailyQuestionsParams(p_user_id: userIdString, p_date: todayDate)
@@ -157,11 +157,11 @@ class DailyPracticeService: DailyPracticeServiceProtocol {
                 )
             }
             
-            print("✅ Loaded \(questions.count) questions from Supabase for date: \(todayDate)")
+            log("✅ Loaded \(questions.count) questions from Supabase for date: \(todayDate)")
             return questions
             
         } catch {
-            print("❌ Failed to load questions from Supabase: \(error)")
+            log("❌ Failed to load questions from Supabase: \(error)")
             throw DailyPracticeError.failedToFetchQuestions(error.localizedDescription)
         }
     }
@@ -173,7 +173,7 @@ class DailyPracticeService: DailyPracticeServiceProtocol {
                 throw DailyPracticeError.notAuthenticated
             }
             
-            print("🔄 Submitting completion for question: \(questionId), user: \(userIdString)")
+            log("🔄 Submitting completion for question: \(questionId), user: \(userIdString)")
             
             // Create completion record
             let completion = UserQuestionCompletion(
@@ -190,7 +190,7 @@ class DailyPracticeService: DailyPracticeServiceProtocol {
                 .insert(completion)
                 .execute()
             
-            print("✅ Completion submitted to Supabase for question: \(questionId)")
+            log("✅ Completion submitted to Supabase for question: \(questionId)")
             
             return CompletionResponse(
                 success: true,
@@ -199,7 +199,7 @@ class DailyPracticeService: DailyPracticeServiceProtocol {
             )
             
         } catch {
-            print("❌ Failed to submit completion to Supabase: \(error)")
+            log("❌ Failed to submit completion to Supabase: \(error)")
             throw DailyPracticeError.failedToSubmitCompletion(error.localizedDescription)
         }
     }
@@ -216,12 +216,18 @@ class DailyPracticeService: DailyPracticeServiceProtocol {
                 throw DailyPracticeError.notAuthenticated
             }
             
-            print("🔄 Checking if today's practice is completed for user: \(userIdString)")
-            
-            // Get today's start and end times
+            log("🔄 Checking if today's practice is completed for user: \(userIdString)")
+
+            // Get today's start and end times. Calendar math practically never
+            // fails for a valid startOfDay, but on exotic locales or corrupted
+            // calendar state the result is Optional — fail safe to "not completed"
+            // rather than crashing. Mirrors the guard pattern at line 314.
             let startOfDay = Calendar.current.startOfDay(for: Date())
-            let endOfDay = Calendar.current.date(byAdding: .day, value: 1, to: startOfDay)!
-            
+            guard let endOfDay = Calendar.current.date(byAdding: .day, value: 1, to: startOfDay) else {
+                log("⚠️ isTodaysPracticeCompleted: failed to compute end of day — returning false")
+                return false
+            }
+
             let formatter = ISO8601DateFormatter()
             let startOfDayString = formatter.string(from: startOfDay)
             let endOfDayString = formatter.string(from: endOfDay)
@@ -240,11 +246,11 @@ class DailyPracticeService: DailyPracticeServiceProtocol {
             // Check if the count matches the expected number of questions (5)
             let isCompleted = (count >= 5)
             
-            print("✅ Today's practice completion status for user \(userIdString): \(isCompleted) (completed \(count)/5 questions)")
+            log("✅ Today's practice completion status for user \(userIdString): \(isCompleted) (completed \(count)/5 questions)")
             return isCompleted
             
         } catch {
-            print("❌ Failed to check today's practice completion status: \(error)")
+            log("❌ Failed to check today's practice completion status: \(error)")
             throw DailyPracticeError.failedToCheckCompletionStatus(error.localizedDescription)
         }
     }
@@ -261,7 +267,7 @@ class DailyPracticeService: DailyPracticeServiceProtocol {
                 throw DailyPracticeError.notAuthenticated
             }
             
-            print("🔄 Fetching daily practice status for user: \(userIdString)")
+            log("🔄 Fetching daily practice status for user: \(userIdString)")
             
             // Get today's date in user's timezone
             let todayDate = getCurrentLocalDate()
@@ -276,7 +282,7 @@ class DailyPracticeService: DailyPracticeServiceProtocol {
             // Extract the first (and should be only) result from the array
             guard let status = statusArray.first else {
                 // If no status returned, return default values
-                print("⚠️ No status data returned from database, using defaults")
+                log("⚠️ No status data returned from database, using defaults")
                 return DailyPracticeStatus(
                     currentStreak: 0,
                     totalCompleted: 0,
@@ -289,11 +295,11 @@ class DailyPracticeService: DailyPracticeServiceProtocol {
             // (since get_daily_practice_status checks daily_question_sets which is created at start, not completion)
             let actuallyCompleted = try await checkTodayCompletionFromQuestions()
             
-            print("✅ Loaded daily practice status from Supabase for user: \(userIdString)")
-            print("   - Current streak: \(status.streak)")
-            print("   - DB says completed today: \(status.completedToday)")
-            print("   - Actually completed (5 questions): \(actuallyCompleted)")
-            print("   - Can resume: \(!actuallyCompleted)")
+            log("✅ Loaded daily practice status from Supabase for user: \(userIdString)")
+            log("   - Current streak: \(status.streak)")
+            log("   - DB says completed today: \(status.completedToday)")
+            log("   - Actually completed (5 questions): \(actuallyCompleted)")
+            log("   - Can resume: \(!actuallyCompleted)")
             
             // Override with actual completion check
             return DailyPracticeStatus(
@@ -304,7 +310,7 @@ class DailyPracticeService: DailyPracticeServiceProtocol {
             )
             
         } catch {
-            print("❌ Failed to load daily practice status from Supabase: \(error)")
+            log("❌ Failed to load daily practice status from Supabase: \(error)")
             throw DailyPracticeError.failedToFetchStatus(error.localizedDescription)
         }
     }
@@ -314,11 +320,15 @@ class DailyPracticeService: DailyPracticeServiceProtocol {
         guard let userIdString = SupabaseManager.shared.currentUserId else {
             return false
         }
-        
-        // Get today's start and end times
+
+        // Get today's start and end times. Fail safe to "not completed"
+        // if calendar math fails in the unlikely edge case.
         let startOfDay = Calendar.current.startOfDay(for: Date())
-        let endOfDay = Calendar.current.date(byAdding: .day, value: 1, to: startOfDay)!
-        
+        guard let endOfDay = Calendar.current.date(byAdding: .day, value: 1, to: startOfDay) else {
+            log("⚠️ checkTodayCompletionFromQuestions: failed to compute end of day — returning false")
+            return false
+        }
+
         let formatter = ISO8601DateFormatter()
         let startOfDayString = formatter.string(from: startOfDay)
         let endOfDayString = formatter.string(from: endOfDay)
@@ -343,13 +353,13 @@ class DailyPracticeService: DailyPracticeServiceProtocol {
                 throw DailyPracticeError.notAuthenticated
             }
             
-            print("🔄 Updating daily practice streak for user: \(userIdString)")
-            print("   - Questions Answered: \(questionsAnswered)")
-            print("   - Correct Answers: \(correctAnswers)")
+            log("🔄 Updating daily practice streak for user: \(userIdString)")
+            log("   - Questions Answered: \(questionsAnswered)")
+            log("   - Correct Answers: \(correctAnswers)")
             
             // Get today's date in user's timezone
             let todayDate = getCurrentLocalDate()
-            print("   - Date: \(todayDate)")
+            log("   - Date: \(todayDate)")
             
             // Call the database function that updates the daily practice streak
             let params = UpdateStreakParams(
@@ -359,36 +369,36 @@ class DailyPracticeService: DailyPracticeServiceProtocol {
                 p_correct_answers: correctAnswers
             )
             
-            print("📡 Calling RPC function 'update_daily_practice_streak' with params:")
-            print("   - p_user_id: \(userIdString)")
-            print("   - p_date: \(todayDate)")
-            print("   - p_questions_answered: \(questionsAnswered)")
-            print("   - p_correct_answers: \(correctAnswers)")
+            log("📡 Calling RPC function 'update_daily_practice_streak' with params:")
+            log("   - p_user_id: \(userIdString)")
+            log("   - p_date: \(todayDate)")
+            log("   - p_questions_answered: \(questionsAnswered)")
+            log("   - p_correct_answers: \(correctAnswers)")
             
             let resultArray: [StreakUpdateResult] = try await supabaseClient
                 .rpc("update_daily_practice_streak", params: params)
                 .execute()
                 .value
             
-            print("📥 Received response from database:")
-            print("   - Result array count: \(resultArray.count)")
+            log("📥 Received response from database:")
+            log("   - Result array count: \(resultArray.count)")
             
             // Extract the first (and should be only) result from the array
             guard let result = resultArray.first else {
-                print("❌ ERROR: No streak data returned from database (empty array)")
+                log("❌ ERROR: No streak data returned from database (empty array)")
                 throw DailyPracticeError.failedToUpdateStreak("No streak data returned from database")
             }
             
-            print("✅ Updated daily practice streak in Supabase for user: \(userIdString)")
-            print("   - Current streak: \(result.streak)")
-            print("   - Total completed: \(result.completed)")
+            log("✅ Updated daily practice streak in Supabase for user: \(userIdString)")
+            log("   - Current streak: \(result.streak)")
+            log("   - Total completed: \(result.completed)")
             return result
             
         } catch {
-            print("❌ Failed to update daily practice streak in Supabase:")
-            print("   - Error type: \(type(of: error))")
-            print("   - Error description: \(error.localizedDescription)")
-            print("   - Full error: \(error)")
+            log("❌ Failed to update daily practice streak in Supabase:")
+            log("   - Error type: \(type(of: error))")
+            log("   - Error description: \(error.localizedDescription)")
+            log("   - Full error: \(error)")
             throw DailyPracticeError.failedToUpdateStreak(error.localizedDescription)
         }
     }

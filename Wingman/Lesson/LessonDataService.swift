@@ -72,21 +72,21 @@ final class LessonDataService {
     func loadLessonsForCourse(courseId: String) -> [Lesson] {
         // Check cache first
         if let cached = lessonsCache[courseId] {
-            print("📚 Returning cached lessons for course: \(courseId)")
+            log("📚 Returning cached lessons for course: \(courseId)")
             return cached
         }
         
         // Get JSON filename for this course
         guard let jsonFilename = courseJsonMapping[courseId] else {
-            print("⚠️ No JSON mapping found for course: \(courseId)")
-            print("💡 Add '\(courseId)' to courseJsonMapping in LessonDataService")
+            log("⚠️ No JSON mapping found for course: \(courseId)")
+            log("💡 Add '\(courseId)' to courseJsonMapping in LessonDataService")
             return []
         }
         
         // Load from JSON file
         guard let url = Bundle.main.url(forResource: jsonFilename, withExtension: "json") else {
-            print("❌ Could not find \(jsonFilename).json in bundle")
-            print("💡 Make sure \(jsonFilename).json exists and is added to the project")
+            log("❌ Could not find \(jsonFilename).json in bundle")
+            log("💡 Make sure \(jsonFilename).json exists and is added to the project")
             return []
         }
         
@@ -112,13 +112,13 @@ final class LessonDataService {
             // Cache the results
             lessonsCache[courseId] = lessons
             
-            print("✅ Loaded \(lessons.count) lessons for course: \(courseId) from \(jsonFilename).json")
+            log("✅ Loaded \(lessons.count) lessons for course: \(courseId) from \(jsonFilename).json")
             return lessons
             
         } catch {
-            print("❌ Error loading lessons from \(jsonFilename).json: \(error)")
+            log("❌ Error loading lessons from \(jsonFilename).json: \(error)")
             if let decodingError = error as? DecodingError {
-                print("📋 Decoding error details: \(decodingError)")
+                log("📋 Decoding error details: \(decodingError)")
             }
             return []
         }
@@ -174,9 +174,9 @@ final class LessonDataService {
             // such as course-level unlock may need to refresh.
             NotificationCenter.default.post(name: .lessonCompleted, object: nil)
 
-            print("✅ Marked lesson \(lessonId) as completed")
+            log("✅ Marked lesson \(lessonId) as completed")
             if nextIndex < lessons.count {
-                print("🔓 Unlocked next lesson: \(lessons[nextIndex].id)")
+                log("🔓 Unlocked next lesson: \(lessons[nextIndex].id)")
             }
         }
     }
@@ -282,9 +282,9 @@ final class LessonDataService {
                         "lesson_progress": payload
                     ])
                 )
-                print("☁️ Lesson progress synced to cloud (\(progress.keys.count) courses)")
+                log("☁️ Lesson progress synced to cloud (\(progress.keys.count) courses)")
             } catch {
-                print("⚠️ Lesson progress sync failed (will retry on next completion): \(error.localizedDescription)")
+                log("⚠️ Lesson progress sync failed (will retry on next completion): \(error.localizedDescription)")
             }
         }
     }
@@ -295,7 +295,7 @@ final class LessonDataService {
     /// Called from AuthManager after `.signedIn` and `.initialSession`.
     func hydrateLessonProgressFromCloud() async {
         guard let user = SupabaseManager.shared.client.auth.currentUser else {
-            print("ℹ️ hydrateLessonProgressFromCloud: no current user — skipping")
+            log("ℹ️ hydrateLessonProgressFromCloud: no current user — skipping")
             return
         }
 
@@ -313,9 +313,9 @@ final class LessonDataService {
                 }
                 cloudProgress[courseId] = lists
             }
-            print("☁️ Cloud lesson progress found: \(cloudProgress.keys.count) courses")
+            log("☁️ Cloud lesson progress found: \(cloudProgress.keys.count) courses")
         } else {
-            print("ℹ️ No cloud lesson progress yet — may be first sync for this user")
+            log("ℹ️ No cloud lesson progress yet — may be first sync for this user")
         }
 
         // Merge cloud into local (union of sets).
@@ -338,7 +338,7 @@ final class LessonDataService {
         // Invalidate the lesson cache so the next loadLessonsForCourse picks
         // up the freshly-merged UserDefaults state.
         lessonsCache.removeAll()
-        print("🔄 Lesson cache invalidated after hydration")
+        log("🔄 Lesson cache invalidated after hydration")
 
         // Push merged state back to cloud (captures any local-only offline progress).
         syncLessonProgressToCloud()
@@ -353,7 +353,7 @@ final class LessonDataService {
     // MARK: - Clear Cache
     func clearCache() {
         lessonsCache.removeAll()
-        print("🗑️ Cleared all lessons cache")
+        log("🗑️ Cleared all lessons cache")
     }
 
     // MARK: - Reset Progress (for testing)
@@ -361,7 +361,7 @@ final class LessonDataService {
         UserDefaults.standard.removeObject(forKey: completedKey(courseId: courseId))
         UserDefaults.standard.removeObject(forKey: unlockedKey(courseId: courseId))
         lessonsCache.removeValue(forKey: courseId)
-        print("🔄 Reset progress for course: \(courseId)")
+        log("🔄 Reset progress for course: \(courseId)")
     }
 
     // MARK: - Reset All Progress (for testing)
@@ -369,6 +369,6 @@ final class LessonDataService {
         for courseId in courseJsonMapping.keys {
             resetProgress(courseId: courseId)
         }
-        print("🔄 Reset all course progress")
+        log("🔄 Reset all course progress")
     }
 }

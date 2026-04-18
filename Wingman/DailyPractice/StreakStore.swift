@@ -53,7 +53,7 @@ final class StreakStore: ObservableObject {
         if let arr = d.array(forKey: Self.completedDatesKey) as? [String] {
             completedDates = Set(arr)
         }
-        print("📦 StreakStore: seeded from cache — current=\(currentStreak.map(String.init) ?? "nil") total=\(totalCompleted.map(String.init) ?? "nil") dates=\(completedDates.count)")
+        log("📦 StreakStore: seeded from cache — current=\(currentStreak.map(String.init) ?? "nil") total=\(totalCompleted.map(String.init) ?? "nil") dates=\(completedDates.count)")
     }
 
     private func saveToCache() {
@@ -82,10 +82,10 @@ final class StreakStore: ObservableObject {
             }
 
             saveToCache()
-            print("✅ StreakStore: refresh ok — current=\(status.streak) total=\(status.completed) dates=\(completedDates.count)")
+            log("✅ StreakStore: refresh ok — current=\(status.streak) total=\(status.completed) dates=\(completedDates.count)")
         } catch {
             // Preserve last-known values. Do not overwrite to 0.
-            print("❌ StreakStore: refresh failed, keeping cached values — \(error.localizedDescription)")
+            log("❌ StreakStore: refresh failed, keeping cached values — \(error.localizedDescription)")
         }
     }
 

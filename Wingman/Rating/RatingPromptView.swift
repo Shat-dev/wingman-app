@@ -146,11 +146,7 @@ struct RatingPromptView: View {
             reviewWorkItem = item
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: item)
 
-            // Enable the Continue button at 700ms — 200ms after the popup
-            // request fires (popup becomes visible ~600-700ms), so the modal
-            // has captured focus by the time the button is tappable. Fade-in
-            // matches the onboarding animation system (0.25s easeInOut).
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.55) {
                 withAnimation(.easeInOut(duration: 0.25)) {
                     isContinueEnabled = true
                 }

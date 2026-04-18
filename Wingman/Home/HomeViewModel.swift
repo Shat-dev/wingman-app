@@ -5,6 +5,7 @@
 
 import Foundation
 import Combine
+import UIKit
 
 // MARK: - Notification Names
 extension Notification.Name {
@@ -42,6 +43,9 @@ final class HomeViewModel: ObservableObject {
     
     // MARK: - UserDefaults Keys
     private static let lastAccessedCourseKey = "last_accessed_course_id"
+    private static let dailyQuoteIndexKey = "daily_quote_current_index"
+    private static let dailyQuoteDayKey = "daily_quote_last_day"
+    private static let dailyQuoteShownKey = "daily_quote_shown_indices"
     
     // MARK: - Services
     private let client = SupabaseManager.shared.client
@@ -61,19 +65,31 @@ final class HomeViewModel: ObservableObject {
         // Listen for daily practice completion notification
         NotificationCenter.default.publisher(for: .dailyPracticeCompleted)
             .sink { [weak self] _ in
-                print("📡 ========== NOTIFICATION RECEIVED ==========")
-                print("📡 Daily practice completion notification received in HomeViewModel")
-                print("📡 About to refresh daily practice status...")
+                log("📡 ========== NOTIFICATION RECEIVED ==========")
+                log("📡 Daily practice completion notification received in HomeViewModel")
+                log("📡 About to refresh daily practice status...")
                 self?.refreshDailyPracticeStatus()
-                print("📡 ==========================================")
+                log("📡 ==========================================")
             }
             .store(in: &cancellables)
-        print("✅ Notification listener setup complete in HomeViewModel")
+
+        // Re-evaluate the daily quote on app foreground. Without this, a user
+        // who backgrounds the app overnight keeps the previous day's cached
+        // quote until cold launch, since the VM lives for the app session.
+        // `loadMotivationalQuote()` is cheap and no-ops when the day hasn't
+        // changed (cache hit on `dailyQuoteDayKey`).
+        NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)
+            .sink { [weak self] _ in
+                self?.loadMotivationalQuote()
+            }
+            .store(in: &cancellables)
+
+        log("✅ Notification listener setup complete in HomeViewModel")
     }
     
     // MARK: - Load User Data
     func loadUserData() {
-        print("📊 Loading user data...")
+        log("📊 Loading user data...")
 
         // Previously read a UserDefaults key ("onboarding_name") that is never
         // written anywhere in the codebase — that branch always fell through
@@ -93,23 +109,23 @@ final class HomeViewModel: ObservableObject {
             await checkDailyPracticeCompletion()
         }
         
-        print("✅ User data loaded:")
-        print("   - Name: \(userName)")
-        print("   - Practiced today: \(hasPracticeToday)")
+        log("✅ User data loaded:")
+        log("   - Name: \(userName)")
+        log("   - Practiced today: \(hasPracticeToday)")
     }
     
     // MARK: - Load Continue Course (Last course user was working on)
     func loadContinueCourse() {
-        print("📚 Loading continue course...")
+        log("📚 Loading continue course...")
         
         // Get the last accessed course ID from UserDefaults
         guard let lastCourseId = UserDefaults.standard.string(forKey: HomeViewModel.lastAccessedCourseKey) else {
-            print("⚠️ No last accessed course found")
+            log("⚠️ No last accessed course found")
             continueCourse = nil
             return
         }
         
-        print("📖 Last accessed course ID: \(lastCourseId)")
+        log("📖 Last accessed course ID: \(lastCourseId)")
         
         // Find the course from CourseCategory.dummyCategories
         var foundCourse: Course?
@@ -124,7 +140,7 @@ final class HomeViewModel: ObservableObject {
         }
         
         guard let course = foundCourse, let categoryName = foundCategoryName else {
-            print("⚠️ Course not found for ID: \(lastCourseId)")
+            log("⚠️ Course not found for ID: \(lastCourseId)")
             continueCourse = nil
             return
         }
@@ -134,7 +150,7 @@ final class HomeViewModel: ObservableObject {
         // as the Continue card. Under normal flow CourseDetailSheet already
         // gates the save, so this is defensive.
         if isCourseLocked(course) {
-            print("🔒 Last accessed course is locked — hiding Continue card")
+            log("🔒 Last accessed course is locked — hiding Continue card")
             continueCourse = nil
             return
         }
@@ -160,10 +176,10 @@ final class HomeViewModel: ObservableObject {
             totalLessons: totalCount
         )
         
-        print("✅ Continue course loaded:")
-        print("   - Category: \(categoryName)")
-        print("   - Course: \(course.title)")
-        print("   - Progress: \(Int(progressValue * 100))% (\(completedCount)/\(totalCount) lessons)")
+        log("✅ Continue course loaded:")
+        log("   - Category: \(categoryName)")
+        log("   - Course: \(course.title)")
+        log("   - Progress: \(Int(progressValue * 100))% (\(completedCount)/\(totalCount) lessons)")
     }
     
     // MARK: - Course Lock Check (matches CoursesViewModel derivation)
@@ -229,20 +245,62 @@ final class HomeViewModel: ObservableObject {
     static func saveLastAccessedCourse(courseId: String) {
         UserDefaults.standard.set(courseId, forKey: lastAccessedCourseKey)
         UserDefaults.standard.synchronize()
-        print("💾 Saved last accessed course: \(courseId)")
+        log("💾 Saved last accessed course: \(courseId)")
     }
     
     // MARK: - Load Motivational Quote
+    //
+    // Daily quote selection: one quote per calendar day, held constant across
+    // relaunches within that day. Draws from an unseen pool stored in
+    // UserDefaults — every quote is shown exactly once before any repeat, and
+    // when the pool empties it resets to the full 120. Uses `yyyy-MM-dd` in the
+    // device's current timezone as the day key (matching the rest of the app's
+    // daily-boundary model).
     private func loadMotivationalQuote() {
-        let quotes = [
-            "Each small approach restores your confidence.",
-            "Confidence is built one conversation at a time.",
-            "Every approach is a step toward growth.",
-            "The regret of inaction outweighs the fear of rejection.",
-            "Your future self will thank you for today's courage."
-        ]
-        
-        motivationalQuote = quotes.randomElement() ?? quotes[0]
+        let quotes = Quotes.all
+        guard !quotes.isEmpty else { return }
+
+        let defaults = UserDefaults.standard
+        let today = Self.currentDayKey()
+
+        if defaults.string(forKey: Self.dailyQuoteDayKey) == today,
+           let cachedIndex = defaults.object(forKey: Self.dailyQuoteIndexKey) as? Int,
+           quotes.indices.contains(cachedIndex) {
+            motivationalQuote = quotes[cachedIndex]
+            return
+        }
+
+        var shown = Set(defaults.array(forKey: Self.dailyQuoteShownKey) as? [Int] ?? [])
+        let allIndices = Set(quotes.indices)
+        var pool = allIndices.subtracting(shown)
+        if pool.isEmpty {
+            // Cycle complete. Reset the shown set, but seed it with the most
+            // recent index so we can't pick it again back-to-back across the
+            // cycle boundary. It'll become eligible on the next cycle reset.
+            shown.removeAll()
+            if let recent = defaults.object(forKey: Self.dailyQuoteIndexKey) as? Int,
+               quotes.indices.contains(recent) {
+                shown.insert(recent)
+            }
+            pool = allIndices.subtracting(shown)
+        }
+
+        let nextIndex = pool.randomElement() ?? 0
+        shown.insert(nextIndex)
+
+        defaults.set(Array(shown), forKey: Self.dailyQuoteShownKey)
+        defaults.set(nextIndex, forKey: Self.dailyQuoteIndexKey)
+        defaults.set(today, forKey: Self.dailyQuoteDayKey)
+
+        motivationalQuote = quotes[nextIndex]
+    }
+
+    private static func currentDayKey() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = .current
+        return formatter.string(from: Date())
     }
     
     // MARK: - Check Daily Practice Completion
@@ -250,7 +308,7 @@ final class HomeViewModel: ObservableObject {
     private func checkDailyPracticeCompletion() async {
         defer { isLoading = false }
         do {
-            print("🔄 Checking daily practice completion status...")
+            log("🔄 Checking daily practice completion status...")
             let status = try await dailyPracticeService.getDailyPracticeStatus()
 
             // Update UI state based on status from database (using computed properties with defaults)
@@ -266,13 +324,13 @@ final class HomeViewModel: ObservableObject {
             // on-disk cache) reflects this fetch without a second RPC call.
             StreakStore.shared.apply(status: status)
 
-            print("✅ Daily practice status: \(status.completedToday ? "Completed" : "Not completed")")
-            print("✅ Current streak UPDATED: \(oldStreak) → \(status.streak)")
-            print("   - Button text: \(dailyPracticeButtonText)")
-            print("   - Button enabled: \(isDailyPracticeButtonEnabled)")
+            log("✅ Daily practice status: \(status.completedToday ? "Completed" : "Not completed")")
+            log("✅ Current streak UPDATED: \(oldStreak) → \(status.streak)")
+            log("   - Button text: \(dailyPracticeButtonText)")
+            log("   - Button enabled: \(isDailyPracticeButtonEnabled)")
 
         } catch {
-            print("❌ Failed to check daily practice completion: \(error)")
+            log("❌ Failed to check daily practice completion: \(error)")
             // On error, default to allowing start and use cached streak
             isDailyPracticeCompleted = false
             dailyPracticeButtonText = "Start"
@@ -287,22 +345,22 @@ final class HomeViewModel: ObservableObject {
     
     // MARK: - Refresh Daily Practice Status (call this when returning from daily practice)
     func refreshDailyPracticeStatus() {
-        print("🔄 refreshDailyPracticeStatus() called")
+        log("🔄 refreshDailyPracticeStatus() called")
         Task {
-            print("🔄 Starting async task to check daily practice completion...")
+            log("🔄 Starting async task to check daily practice completion...")
             await checkDailyPracticeCompletion()
-            print("🔄 Async task completed")
+            log("🔄 Async task completed")
         }
     }
     
     // MARK: - Actions
     func startPractice() {
-        print("🏃 Starting daily practice...")
+        log("🏃 Starting daily practice...")
         // Navigation handled by view
     }
     
     func logApproach() {
-        print("📝 Logging today's approach...")
+        log("📝 Logging today's approach...")
         // Navigation handled by view
     }
     

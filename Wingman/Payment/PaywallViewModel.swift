@@ -25,6 +25,13 @@ final class PaywallViewModel: ObservableObject {
     @Published var error: String?
     @Published var showAlert = false
 
+    /// Per-product intro-offer eligibility from RevenueCat. Populated after
+    /// offerings load and after a failed restore. Empty dictionary means
+    /// "not yet known" — computed properties below treat that as eligible
+    /// (optimistic default) so the 95% first-time-user path is unaffected by
+    /// a pending or failed eligibility check.
+    @Published var introEligibility: [String: IntroEligibility] = [:]
+
     // MARK: - Carousel
     @Published var currentPage: Int = 0
 
@@ -93,7 +100,40 @@ final class PaywallViewModel: ObservableObject {
     var currentPackage: Package? {
         return selectedPlan == .yearly ? yearlyPackage : monthlyPackage
     }
-    
+
+    // MARK: - Trial Eligibility
+    //
+    // `.eligible` and `.unknown` both map to "show trial UI" — `.unknown` is
+    // what RevenueCat returns for a fresh install with no App Store receipt,
+    // and Apple will grant the trial in that case. Only an authoritative
+    // `.ineligible` or `.noIntroOfferExists` hides the trial badge, matching
+    // Apple's Guideline 3.1.2 requirement that trial claims be accurate.
+
+    var isYearlyTrialEligible: Bool {
+        guard let id = yearlyPackage?.storeProduct.productIdentifier else { return true }
+        return isEligibleStatus(introEligibility[id]?.status)
+    }
+
+    var isMonthlyTrialEligible: Bool {
+        guard let id = monthlyPackage?.storeProduct.productIdentifier else { return true }
+        return isEligibleStatus(introEligibility[id]?.status)
+    }
+
+    func isTrialEligible(for plan: SubscriptionPlan) -> Bool {
+        return plan == .yearly ? isYearlyTrialEligible : isMonthlyTrialEligible
+    }
+
+    /// Nil (not-yet-checked) → eligible (optimistic). `.unknown` (fresh install,
+    /// no receipt) → eligible per RevenueCat's own recommendation.
+    private func isEligibleStatus(_ status: IntroEligibilityStatus?) -> Bool {
+        guard let status else { return true }
+        switch status {
+        case .eligible, .unknown: return true
+        case .ineligible, .noIntroOfferExists: return false
+        @unknown default: return true
+        }
+    }
+
     init() {
         loadOfferings()
     }
@@ -101,7 +141,7 @@ final class PaywallViewModel: ObservableObject {
     func selectPlan(_ plan: SubscriptionPlan) {
         selectedPlan = plan
         selectedPackage = plan == .yearly ? yearlyPackage : monthlyPackage
-        print("🧾 Selected plan: \(plan.rawValue)")
+        log("🧾 Selected plan: \(plan.rawValue)")
     }
 
     // MARK: - RevenueCat Methods
@@ -116,11 +156,17 @@ final class PaywallViewModel: ObservableObject {
                 // Auto-select yearly package by default
                 self.selectedPackage = yearlyPackage
 
-                print("📦 PaywallViewModel: Loaded offerings")
+                log("📦 PaywallViewModel: Loaded offerings")
+
+                // Fetch intro-offer eligibility for both packages. Non-throwing
+                // API — failures resolve to `.unknown`, which our optimistic
+                // default treats as eligible, so this call cannot regress the
+                // existing first-time-user UX.
+                await loadIntroEligibility()
             } catch {
                 self.error = "Failed to load subscription options. Please try again."
                 self.showAlert = true
-                print("❌ PaywallViewModel: Failed to load offerings: \(error)")
+                log("❌ PaywallViewModel: Failed to load offerings: \(error)")
             }
 
             isLoading = false
@@ -132,6 +178,22 @@ final class PaywallViewModel: ObservableObject {
                 await captureStoreContextIfNeeded()
             }
         }
+    }
+
+    /// Fetches per-product intro-offer eligibility from RevenueCat and stores
+    /// it on `introEligibility`. Safe to call repeatedly (RC caches receipts
+    /// locally). Non-throwing; failures leave unresolved products at
+    /// `.unknown`, which the eligibility computed properties treat as eligible.
+    private func loadIntroEligibility() async {
+        guard let yearlyID = yearlyPackage?.storeProduct.productIdentifier,
+              let monthlyID = monthlyPackage?.storeProduct.productIdentifier else {
+            return
+        }
+        let result = await Purchases.shared.checkTrialOrIntroDiscountEligibility(
+            productIdentifiers: [yearlyID, monthlyID]
+        )
+        self.introEligibility = result
+        log("🎫 PaywallViewModel: Eligibility — yearly=\(result[yearlyID]?.status.rawValue ?? -1), monthly=\(result[monthlyID]?.status.rawValue ?? -1)")
     }
 
     /// Reads App Store storefront country (StoreKit 2) and currency
@@ -172,18 +234,18 @@ final class PaywallViewModel: ObservableObject {
             let hasEntitlement = customerInfo.entitlements[Constants.ENTITLEMENT_ID]?.isActive == true
             
             if hasEntitlement {
-                print("✅ PaywallViewModel: Purchase successful")
-                print("   - Entitlement active: \(hasEntitlement)")
-                print("   - Expiry date: \(customerInfo.entitlements[Constants.ENTITLEMENT_ID]?.expirationDate?.formatted() ?? "No expiry")")
+                log("✅ PaywallViewModel: Purchase successful")
+                log("   - Entitlement active: \(hasEntitlement)")
+                log("   - Expiry date: \(customerInfo.entitlements[Constants.ENTITLEMENT_ID]?.expirationDate?.formatted() ?? "No expiry")")
                 
                 // If user is anonymous, store purchase info for later linking
                 if authManager?.isAnonymousUser == true {
                     AnonymousUserManager.shared.storeRevenueCatPurchase(customerInfo: customerInfo)
-                    print("💰 PaywallViewModel: Stored anonymous purchase for linking")
+                    log("💰 PaywallViewModel: Stored anonymous purchase for linking")
                 }
                 
                 // 🔄 Refresh subscription status immediately after purchase
-                print("🔄 PaywallViewModel: Refreshing subscription status after purchase...")
+                log("🔄 PaywallViewModel: Refreshing subscription status after purchase...")
                 await SubscriptionManager.shared.refreshSubscriptionStatus()
                 
                 isPurchasing = false
@@ -200,7 +262,7 @@ final class PaywallViewModel: ObservableObject {
             if let nsError = error as NSError? {
                 switch nsError.code {
                 case 1: // User cancelled
-                    print("🚫 PaywallViewModel: User cancelled purchase")
+                    log("🚫 PaywallViewModel: User cancelled purchase")
                 case 2: // Store problem
                     self.error = "Store is currently unavailable. Please try again later."
                     self.showAlert = true
@@ -219,7 +281,7 @@ final class PaywallViewModel: ObservableObject {
                 self.showAlert = true
             }
             
-            print("❌ PaywallViewModel: Purchase failed: \(error.localizedDescription)")
+            log("❌ PaywallViewModel: Purchase failed: \(error.localizedDescription)")
             isPurchasing = false
             return false
         }
@@ -242,20 +304,27 @@ final class PaywallViewModel: ObservableObject {
             if hasEntitlement {
                 self.error = "Purchases restored successfully!"
                 self.showAlert = true
-                print("✅ PaywallViewModel: Purchases restored")
+                log("✅ PaywallViewModel: Purchases restored")
                 
                 // 🔄 Refresh subscription status after restore
-                print("🔄 PaywallViewModel: Refreshing subscription status after restore...")
+                log("🔄 PaywallViewModel: Refreshing subscription status after restore...")
                 await SubscriptionManager.shared.refreshSubscriptionStatus()
             } else {
                 self.error = "No active subscriptions found to restore"
                 self.showAlert = true
-                print("⚠️ PaywallViewModel: No purchases to restore")
+                log("⚠️ PaywallViewModel: No purchases to restore")
+
+                // Re-run eligibility after a restore that didn't grant access.
+                // The restore writes the App Store receipt to disk, which lets
+                // RevenueCat give an authoritative `.ineligible` for a user
+                // who's already used their trial on this Apple ID — updating
+                // the paywall copy correctly.
+                await loadIntroEligibility()
             }
         } catch {
             self.error = "Failed to restore purchases. Please try again."
             self.showAlert = true
-            print("❌ PaywallViewModel: Restore failed: \(error)")
+            log("❌ PaywallViewModel: Restore failed: \(error)")
         }
         
         isLoading = false

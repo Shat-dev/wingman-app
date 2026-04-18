@@ -79,14 +79,14 @@ final class PracticeDetailViewModel: ObservableObject {
             hasUnlockedNewPractices = newlyUnlocked.count > 0
             
             if hasUnlockedNewPractices {
-                print("🔓 \(newlyUnlocked.count) new practice(s) unlocked!")
+                log("🔓 \(newlyUnlocked.count) new practice(s) unlocked!")
                 for practice in newlyUnlocked {
-                    print("   - \(practice.title) (required: \(practice.requiredDailyPractices))")
+                    log("   - \(practice.title) (required: \(practice.requiredDailyPractices))")
                 }
             }
             
         } catch {
-            print("❌ Failed to check for newly unlocked practices: \(error)")
+            log("❌ Failed to check for newly unlocked practices: \(error)")
             // Don't set error message as this is not critical for user experience
         }
     }
@@ -101,7 +101,7 @@ final class PracticeDetailViewModel: ObservableObject {
             
             return try await practiceService.getTotalDailyPractices(userId: userId)
         } catch {
-            print("❌ Failed to get daily practice count: \(error)")
+            log("❌ Failed to get daily practice count: \(error)")
             return 0
         }
     }

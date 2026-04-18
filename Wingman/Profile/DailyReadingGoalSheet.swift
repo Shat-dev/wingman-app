@@ -172,6 +172,6 @@ struct DailyReadingGoalSheet: View {
 
 #Preview {
     DailyReadingGoalSheet(currentGoal: 10) { newGoal in
-        print("New goal: \(newGoal) min/day")
+        log("New goal: \(newGoal) min/day")
     }
 }

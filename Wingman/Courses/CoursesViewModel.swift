@@ -43,7 +43,7 @@ final class CoursesViewModel: ObservableObject {
     
     // MARK: - Init
     init() {
-        print("📚 CoursesViewModel initialized")
+        log("📚 CoursesViewModel initialized")
         loadCourses()
 
         // Observe lesson completions so derived course-lock state re-renders.
@@ -64,7 +64,7 @@ final class CoursesViewModel: ObservableObject {
     
     // MARK: - Load Courses
     func loadCourses() {
-        print("🔄 Loading courses...")
+        log("🔄 Loading courses...")
 
         // Synchronous load from static dummy data. No network, no delay.
         // TODO: Replace with Supabase fetch in future (see fetchCoursesFromSupabase below)
@@ -75,13 +75,13 @@ final class CoursesViewModel: ObservableObject {
             self.selectedCategoryId = firstCategory.id
         }
 
-        print("✅ Loaded \(self.categories.count) categories")
-        print("✅ Total courses: \(self.categories.reduce(0) { $0 + $1.courses.count })")
+        log("✅ Loaded \(self.categories.count) categories")
+        log("✅ Total courses: \(self.categories.reduce(0) { $0 + $1.courses.count })")
     }
     
     // MARK: - Future: Fetch from Supabase
     func fetchCoursesFromSupabase() async throws {
-        print("🌐 Fetching courses from Supabase...")
+        log("🌐 Fetching courses from Supabase...")
         
         // TODO: Implement when backend is ready
         // Example structure:
@@ -158,28 +158,28 @@ final class CoursesViewModel: ObservableObject {
     
     // MARK: - Actions
     func selectCategory(_ categoryId: String) {
-        print("📂 Selected category: \(categoryId)")
+        log("📂 Selected category: \(categoryId)")
         selectedCategoryId = categoryId
         
         if let category = categories.first(where: { $0.id == categoryId }) {
-            print("   - Category name: \(category.name)")
-            print("   - Courses count: \(category.courses.count)")
+            log("   - Category name: \(category.name)")
+            log("   - Courses count: \(category.courses.count)")
         }
     }
     
     func selectCourse(_ course: Course) {
-        print("📖 Selected course: \(course.title)")
-        print("   - ID: \(course.id)")
-        print("   - Category: \(course.categoryId)")
-        print("   - Lessons: \(course.lessonsCount)")
-        print("   - Duration: \(course.duration ?? 0) minutes")
-        print("   - Locked: \(course.isLocked)")
+        log("📖 Selected course: \(course.title)")
+        log("   - ID: \(course.id)")
+        log("   - Category: \(course.categoryId)")
+        log("   - Lessons: \(course.lessonsCount)")
+        log("   - Duration: \(course.duration ?? 0) minutes")
+        log("   - Locked: \(course.isLocked)")
         
         if course.isLocked {
-            print("🔒 Course is locked - Show upgrade prompt")
+            log("🔒 Course is locked - Show upgrade prompt")
             // TODO: Show paywall or unlock prompt
         } else {
-            print("✅ Course is unlocked - Navigate to course detail")
+            log("✅ Course is unlocked - Navigate to course detail")
             // TODO: Navigate to course detail screen
         }
     }

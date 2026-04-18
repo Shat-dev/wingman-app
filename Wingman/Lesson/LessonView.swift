@@ -180,7 +180,7 @@ struct LessonView: View {
         if currentContentIndex > 0 {
             // Remove last paragraph within current screen
             currentContentIndex -= 1
-            print("⬅️ Back to content index: \(currentContentIndex) on screen \(currentScreenIndex)")
+            log("⬅️ Back to content index: \(currentContentIndex) on screen \(currentScreenIndex)")
         } else if currentContentIndex == 0 {
             // At first paragraph of current screen
             if currentScreenIndex > 0 {
@@ -190,14 +190,14 @@ struct LessonView: View {
                     let prevScreenContentCount = sortedScreens[currentScreenIndex].content.count
                     currentContentIndex = prevScreenContentCount - 1
                 }
-                print("⬅️ Previous screen (\(currentScreenIndex)), showing all content")
+                log("⬅️ Previous screen (\(currentScreenIndex)), showing all content")
             } else {
                 // At first screen, first content - go to intro
                 withAnimation(.easeInOut(duration: 0.3)) {
                     currentScreenIndex = -1
                     currentContentIndex = -1
                 }
-                print("⬅️ Back to intro")
+                log("⬅️ Back to intro")
             }
         } else {
             // currentContentIndex == -1, at start of a screen with no content shown yet
@@ -207,13 +207,13 @@ struct LessonView: View {
                     let prevScreenContentCount = sortedScreens[currentScreenIndex].content.count
                     currentContentIndex = prevScreenContentCount - 1
                 }
-                print("⬅️ Previous screen (\(currentScreenIndex))")
+                log("⬅️ Previous screen (\(currentScreenIndex))")
             } else {
                 withAnimation(.easeInOut(duration: 0.3)) {
                     currentScreenIndex = -1
                     currentContentIndex = -1
                 }
-                print("⬅️ Back to intro")
+                log("⬅️ Back to intro")
             }
         }
     }
@@ -227,7 +227,7 @@ struct LessonView: View {
                 currentScreenIndex = 0
                 currentContentIndex = 0
             }
-            print("➡️ Started lesson - Screen 0, Content 0")
+            log("➡️ Started lesson - Screen 0, Content 0")
             return
         }
         
@@ -236,7 +236,7 @@ struct LessonView: View {
         if currentContentIndex < screenContentCount - 1 {
             // Show next paragraph within current screen
             currentContentIndex += 1
-            print("➡️ Forward to content index: \(currentContentIndex) on screen \(currentScreenIndex)")
+            log("➡️ Forward to content index: \(currentContentIndex) on screen \(currentScreenIndex)")
         } else {
             // All paragraphs shown on current screen, move to next screen
             if currentScreenIndex < sortedScreens.count - 1 {
@@ -244,10 +244,10 @@ struct LessonView: View {
                     currentScreenIndex += 1
                     currentContentIndex = 0
                 }
-                print("➡️ Next screen (\(currentScreenIndex)), Content 0")
+                log("➡️ Next screen (\(currentScreenIndex)), Content 0")
             } else {
                 // Last screen, last content - lesson complete
-                print("✅ Lesson complete!")
+                log("✅ Lesson complete!")
                 HapticManager.shared.success()
                 showLessonComplete = true
             }
@@ -492,10 +492,10 @@ struct ScrollableContentView: UIViewRepresentable {
             let midPoint = screenWidth / 2
             
             if location.x < midPoint {
-                print("🔵 LEFT TAP at x: \(location.x)")
+                log("🔵 LEFT TAP at x: \(location.x)")
                 onLeftTap()
             } else {
-                print("🟢 RIGHT TAP at x: \(location.x)")
+                log("🟢 RIGHT TAP at x: \(location.x)")
                 onRightTap()
             }
         }

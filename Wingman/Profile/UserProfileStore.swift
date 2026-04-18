@@ -48,7 +48,7 @@ final class UserProfileStore: ObservableObject {
             // flash-to-empty on the first launch after this ships.
             displayName = legacy
         }
-        print("📦 UserProfileStore: seeded from cache — displayName=\(displayName ?? "nil")")
+        log("📦 UserProfileStore: seeded from cache — displayName=\(displayName ?? "nil")")
     }
 
     private func saveToCache(_ name: String) {
@@ -71,15 +71,15 @@ final class UserProfileStore: ObservableObject {
             if let name = user.userMetadata["display_name"]?.stringValue, !name.isEmpty {
                 displayName = name
                 saveToCache(name)
-                print("✅ UserProfileStore: refreshed from Supabase — \(name)")
+                log("✅ UserProfileStore: refreshed from Supabase — \(name)")
             } else {
                 // Metadata has no display_name. Leave the cached value as-is
                 // rather than overwriting to nil — the cache is still the best
                 // thing we have for display.
-                print("ℹ️ UserProfileStore: Supabase metadata has no display_name; keeping cached value")
+                log("ℹ️ UserProfileStore: Supabase metadata has no display_name; keeping cached value")
             }
         } catch {
-            print("❌ UserProfileStore: refresh failed, keeping cached value — \(error.localizedDescription)")
+            log("❌ UserProfileStore: refresh failed, keeping cached value — \(error.localizedDescription)")
         }
     }
 

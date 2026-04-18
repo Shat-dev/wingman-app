@@ -72,7 +72,7 @@ struct RevenueCatConfig {
     // MARK: - Configuration Info
     /// Prints configuration info for debugging
     static func logConfiguration() {
-        print("""
+        log("""
         ╔═══════════════════════════════════════════════════════╗
         ║          RevenueCat Configuration                     ║
         ╠═══════════════════════════════════════════════════════╣

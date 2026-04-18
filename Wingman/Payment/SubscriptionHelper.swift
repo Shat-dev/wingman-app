@@ -43,7 +43,7 @@ final class SubscriptionHelper: ObservableObject {
         hasActiveSubscription = manager.isSubscribed
         subscriptionProduct = manager.activeSubscription
         
-        print("🔄 SubscriptionHelper: Status updated - hasActive: \(hasActiveSubscription), product: \(subscriptionProduct ?? "none")")
+        log("🔄 SubscriptionHelper: Status updated - hasActive: \(hasActiveSubscription), product: \(subscriptionProduct ?? "none")")
     }
     
     /// Check if user has access to premium features
