@@ -105,6 +105,7 @@ struct AuthView: View {
             Spacer()
         }
         .navigationBarBackButtonHidden(true)
+        .enableInteractivePopGesture()
         .onAppear {
             log("👁️ AuthView appeared")
         }

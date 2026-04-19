@@ -151,7 +151,7 @@ struct DailyPracticeView: View {
                     Text("Oops!")
                         .font(.manropeSemiBold(size: 24))
                         .foregroundColor(.wingmanBlack)
-                    Text("Somthing went wrong")
+                    Text("Something went wrong")
                         .font(.manropeSemiBold(size: 16))
                         .foregroundColor(.wingmanBlack)
                         .padding(.top,2)

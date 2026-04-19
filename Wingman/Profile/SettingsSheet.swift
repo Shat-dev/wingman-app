@@ -70,17 +70,27 @@ struct SettingsSheet: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
                         HStack(spacing: 8) {
-                            Image("apple_icon")
-                                .resizable()
-                                .renderingMode(.template)
-                                .scaledToFit()
-                                .frame(width: 16, height: 16)
-                                .foregroundColor(.wingmanBlack)
-                            
+                            // Provider icon reflects how the user actually signed in.
+                            // Apple fallback covers the unauthenticated-at-render and
+                            // email/unknown-provider cases — matches prior behaviour.
+                            if isGoogleSignIn {
+                                Image("auth_google_logo")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 16, height: 16)
+                            } else {
+                                Image("apple_icon")
+                                    .resizable()
+                                    .renderingMode(.template)
+                                    .scaledToFit()
+                                    .frame(width: 16, height: 16)
+                                    .foregroundColor(.wingmanBlack)
+                            }
+
                             Text(getUserEmail())
                                 .font(.manropeRegular(size: 16))
                                 .foregroundColor(.wingmanBlack)
-                            
+
                             Spacer()
                         }
                     }
@@ -305,7 +315,19 @@ struct SettingsSheet: View {
     }
     
     private func getUserEmail() -> String {
-        return UserDefaults.standard.string(forKey: "user_email") ?? "shat.myapantsx10@gmail.com"
+        return UserDefaults.standard.string(forKey: "user_email") ?? ""
+    }
+
+    /// True when the currently-authenticated user signed in with Google.
+    /// Reads Supabase's `app_metadata.provider` field set by the auth layer at
+    /// sign-in time. Any other value (apple / email / nil / no user) falls
+    /// back to the Apple icon so Settings never renders a broken state.
+    private var isGoogleSignIn: Bool {
+        guard let user = SupabaseManager.shared.client.auth.currentUser else {
+            return false
+        }
+        let provider = user.appMetadata["provider"]?.stringValue?.lowercased() ?? ""
+        return provider == "google"
     }
     
     private func restorePurchase() async {
@@ -313,7 +335,7 @@ struct SettingsSheet: View {
         
         do {
             let customerInfo = try await Purchases.shared.restorePurchases()
-            let hasEntitlement = customerInfo.entitlements["Wingman Pro"]?.isActive == true
+            let hasEntitlement = customerInfo.entitlements[Constants.ENTITLEMENT_ID]?.isActive == true
             
             if hasEntitlement {
                 await MainActor.run {
