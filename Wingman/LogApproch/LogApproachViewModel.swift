@@ -45,11 +45,11 @@ final class LogApproachViewModel: ObservableObject {
     }
     
     var saveButtonTitle: String {
-        return isEditMode ? "Update Encounter" : "Log Encounter"
+        return isEditMode ? "Update Approach" : "Log Approach"
     }
     
     var headerTitle: String {
-        return isEditMode ? "Edit Encounter" : "Log Encounter"
+        return isEditMode ? "Edit Approach" : "Log Approach"
     }
 
     var anxietyLevelText: String {
@@ -112,7 +112,7 @@ final class LogApproachViewModel: ObservableObject {
     func saveApproach() {
         guard canSave else {
             log("❌ Cannot save - validation failed")
-            errorMessage = "Please provide a title for your encounter"
+            errorMessage = "Please provide a title for your approach"
             return
         }
         
