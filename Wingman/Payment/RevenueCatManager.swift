@@ -149,13 +149,7 @@ final class RevenueCatManager: NSObject, ObservableObject {
             let info = try await Purchases.shared.customerInfo()
             customerInfo = info
             error = nil
-            
-            // Post notification for SubscriptionHelper
-            NotificationCenter.default.post(
-                name: NSNotification.Name("RevenueCatCustomerInfoUpdated"),
-                object: nil
-            )
-            
+
             log("ℹ️ RevenueCat: Customer info refreshed")
         } catch {
             self.error = RevenueCatError.customerInfoFailed(error.localizedDescription)
@@ -256,13 +250,6 @@ extension RevenueCatManager: PurchasesDelegate {
     func purchases(_ purchases: Purchases, receivedUpdated customerInfo: CustomerInfo) {
         Task { @MainActor in
             self.customerInfo = customerInfo
-            
-            // Post notification for SubscriptionHelper
-            NotificationCenter.default.post(
-                name: NSNotification.Name("RevenueCatCustomerInfoUpdated"),
-                object: nil
-            )
-            
             log("🔄 RevenueCat: Customer info updated via delegate")
         }
     }

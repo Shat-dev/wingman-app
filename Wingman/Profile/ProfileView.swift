@@ -158,7 +158,7 @@ struct ProfileView: View {
             // Keep sheets
             .sheet(isPresented: $showSettings) {
                 SettingsSheet(userName: userProfileStore.displayName ?? "")
-                    .presentationDetents([.height(630)])
+                    .presentationDetents([.height(720)])
                     .presentationDragIndicator(.hidden)
                     .presentationCornerRadius(20)
             }

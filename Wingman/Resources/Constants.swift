@@ -20,6 +20,6 @@ struct Constants {
     static let WINGMAN_YEARLY_PRODUCT_ID = RevenueCatConfig.ProductIds.yearly
     
     // MARK: - URLs
-    static let PRIVACY_POLICY_URL = "https://www.getwingman.app/privacy-policy"
-    static let TERMS_CONDITIONS_URL = "https://www.getwingman.app/terms-and-conditions"
+    static let PRIVACY_POLICY_URL = "https://www.getwingman.app/privacy"
+    static let TERMS_CONDITIONS_URL = "https://www.getwingman.app/terms"
 }
