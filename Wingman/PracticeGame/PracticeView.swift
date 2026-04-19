@@ -69,16 +69,14 @@ struct PracticeView: View {
     }
 
     // MARK: - Derived user display name
+    // Read from `display_name` only; never derive from email. Falls back to
+    // "You" (generic dialogue label fits the practice-game context better
+    // than "User" here).
     private var userDisplayName: String {
-        if let user = SupabaseManager.shared.client.auth.currentUser {
-            if let name = user.userMetadata["display_name"]?.stringValue,
-               !name.trimmingCharacters(in: .whitespaces).isEmpty {
-                return name
-            }
-            if let email = user.email,
-               let local = email.split(separator: "@").first, !local.isEmpty {
-                return String(local)
-            }
+        if let user = SupabaseManager.shared.client.auth.currentUser,
+           let name = user.userMetadata["display_name"]?.stringValue,
+           !name.trimmingCharacters(in: .whitespaces).isEmpty {
+            return name
         }
         return "You"
     }
@@ -98,18 +96,27 @@ struct PracticeView: View {
 
     // MARK: - Practice List View
     private var practiceListView: some View {
-        ScrollView(showsIndicators: false) {
-            LazyVStack(spacing: 12) {
-                ForEach(viewModel.practices) { practice in
-                    PracticeCardView(practice: practice) {
-                        Task {
-                            await loadAndNavigate(practice: practice)
+        ScrollViewReader { proxy in
+            ScrollView(showsIndicators: false) {
+                LazyVStack(spacing: 12) {
+                    Color.clear.frame(height: 0).id("top")
+                    ForEach(viewModel.practices) { practice in
+                        PracticeCardView(practice: practice) {
+                            Task {
+                                await loadAndNavigate(practice: practice)
+                            }
                         }
                     }
                 }
+                .padding(.horizontal, 20)
+                .padding(.bottom, 100)
             }
-            .padding(.horizontal, 20)
-            .padding(.bottom, 100)
+            .onReceive(NotificationCenter.default.publisher(for: .scrollToTopTab)) { note in
+                guard (note.object as? Int) == 2 else { return }
+                withAnimation(.easeOut(duration: 0.3)) {
+                    proxy.scrollTo("top", anchor: .top)
+                }
+            }
         }
     }
 

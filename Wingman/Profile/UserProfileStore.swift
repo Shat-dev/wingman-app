@@ -47,6 +47,19 @@ final class UserProfileStore: ObservableObject {
             // doesn't, seed from the legacy key so existing users don't
             // flash-to-empty on the first launch after this ships.
             displayName = legacy
+        } else if let metadataName = SupabaseManager.shared.client.auth
+                    .currentUser?.userMetadata["display_name"]?.stringValue,
+                  !metadataName.isEmpty {
+            // Both UserDefaults caches empty (e.g. email sign-in on a new
+            // device, or fresh install of an existing account — neither path
+            // calls apply(name:)). Fall back to the Supabase SDK's restored
+            // session metadata, which is already in-memory by the time this
+            // runs since the singleton is first instantiated after
+            // MainTabView renders (post `restoreSessionGracefully`).
+            // Without this, ProfileView flashes empty until refresh() lands.
+            // Persist to cache so next cold start hits the fast path above.
+            displayName = metadataName
+            saveToCache(metadataName)
         }
         log("📦 UserProfileStore: seeded from cache — displayName=\(displayName ?? "nil")")
     }

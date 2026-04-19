@@ -46,23 +46,16 @@ struct HomeView: View {
                                 .font(.manropeMedium(size: 24))
                                 .foregroundColor(.wingmanBlack)
                             
-                            // Show user name like Dashboard (from Supabase userMetadata["display_name"])
-                            if let user = SupabaseManager.shared.client.auth.currentUser {
-                                let name = user.userMetadata["display_name"]?.stringValue
-                                
-                                if let name = name, !name.isEmpty {
-                                    Text(name)
-                                        .font(.manropeMedium(size: 24))
-                                        .foregroundColor(Color(hex: "1A1A1A").opacity(0.7))
-                                } else if let email = user.email, !email.isEmpty {
-                                    Text(email)
-                                        .font(.manropeMedium(size: 24))
-                                        .foregroundColor(Color(hex: "1A1A1A").opacity(0.7))
-                                } else {
-                                    Text("User")
-                                        .font(.manropeMedium(size: 24))
-                                        .foregroundColor(Color(hex: "1A1A1A").opacity(0.7))
-                                }
+                            // Show user name from Supabase userMetadata["display_name"].
+                            // Falls back to "User" if unset — we never surface the
+                            // email here, since a long email prefix would overflow
+                            // this 24pt greeting and bypass the 10-char name cap.
+                            if let user = SupabaseManager.shared.client.auth.currentUser,
+                               let name = user.userMetadata["display_name"]?.stringValue,
+                               !name.isEmpty {
+                                Text(name)
+                                    .font(.manropeMedium(size: 24))
+                                    .foregroundColor(Color(hex: "1A1A1A").opacity(0.7))
                             } else {
                                 Text("User")
                                     .font(.manropeMedium(size: 24))
@@ -105,9 +98,11 @@ struct HomeView: View {
                     .padding(.top, 12)
                     .padding(.bottom, 20)
                     
+                    ScrollViewReader { proxy in
                     ScrollView(showsIndicators: false) {
                         VStack(spacing: 24) {
-                            
+                            Color.clear.frame(height: 0).id("top")
+
                             // MARK: - Daily Practice Card
                             VStack(spacing: 0) {
                                 VStack(spacing: 0) {
@@ -183,7 +178,7 @@ struct HomeView: View {
                                         .frame(width: 22, height: 22)
                                         .foregroundColor(.wingmanBlack)
 
-                                    Text("Log Encounter")
+                                    Text("Log Approach")
                                         .font(.manropeSemiBold(size: 16))
                                         .foregroundColor(.wingmanBlack)
                                 }
@@ -264,6 +259,13 @@ struct HomeView: View {
                             Spacer().frame(height: 100)
                         }
                         .padding(.top, 8)
+                    }
+                    .onReceive(NotificationCenter.default.publisher(for: .scrollToTopTab)) { note in
+                        guard (note.object as? Int) == 0 else { return }
+                        withAnimation(.easeOut(duration: 0.3)) {
+                            proxy.scrollTo("top", anchor: .top)
+                        }
+                    }
                     }
                 }
             }

@@ -24,6 +24,7 @@ class AnonymousUserManager {
         static let hasCompletedOnboarding = "anonymous_has_completed_onboarding"
         static let revenueCatCustomerId = "anonymous_revenueCat_customer_id"
         static let hasActivePurchase = "anonymous_has_active_purchase"
+        static let hasCompletedPaywallFlow = "anonymous_has_completed_paywall_flow"
     }
     
     // MARK: - Anonymous User ID
@@ -52,6 +53,27 @@ class AnonymousUserManager {
         set {
             defaults.set(newValue, forKey: Keys.hasActivePurchase)
             log("💰 AnonymousUserManager: Active purchase status: \(newValue)")
+        }
+    }
+
+    /// Durable marker that the anonymous user reached an end state on the
+    /// paywall (either by purchasing or by dismissing). Written by
+    /// `AuthManager.completePaywallFlow()` when no userId exists, and read by
+    /// `syncAnonymousDataToBackend` at signup to transfer the state to the
+    /// per-user `hasCompletedPaywallFlow_<userId>` key.
+    ///
+    /// This exists because the in-memory `AuthManager.hasCompletedPaywallFlow`
+    /// flag is fragile — any Supabase auth event that runs
+    /// `checkUserPaywallFlowStatus` before the sync completes overwrites it
+    /// with the (still-unset) per-user value, silently losing the dismissal
+    /// signal and bouncing the user back to the paywall after account
+    /// creation. Persisting here instead is immune to that race and also
+    /// survives app-quit between dismissal and signup.
+    var hasCompletedPaywallFlow: Bool {
+        get { defaults.bool(forKey: Keys.hasCompletedPaywallFlow) }
+        set {
+            defaults.set(newValue, forKey: Keys.hasCompletedPaywallFlow)
+            log("💳 AnonymousUserManager: Paywall flow completed status: \(newValue)")
         }
     }
     
@@ -107,6 +129,7 @@ class AnonymousUserManager {
         defaults.removeObject(forKey: Keys.hasCompletedOnboarding)
         defaults.removeObject(forKey: Keys.revenueCatCustomerId)
         defaults.removeObject(forKey: Keys.hasActivePurchase)
+        defaults.removeObject(forKey: Keys.hasCompletedPaywallFlow)
         log("🗑️ Cleared all anonymous user data including RevenueCat info")
     }
     
@@ -122,5 +145,6 @@ class AnonymousUserManager {
         log("   - Completed: \(hasCompletedOnboarding)")
         log("   - RevenueCat Customer: \(revenueCatCustomerId ?? "nil")")
         log("   - Has Purchase: \(hasActivePurchase)")
+        log("   - Paywall Flow Completed: \(hasCompletedPaywallFlow)")
     }
 }

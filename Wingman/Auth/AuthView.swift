@@ -10,30 +10,55 @@ import SwiftUI
 struct AuthView: View {
     let mode: AuthMode
 
+    /// Controls whether the top-leading back chevron is rendered.
+    ///
+    /// Default `true` preserves the original behavior for AuthView pushed from
+    /// LandingView (Create Account / Sign In) and for the unauthenticated /
+    /// login routing branch — in those contexts the user legitimately needs a
+    /// way to back out.
+    ///
+    /// Pass `false` for the forced post-paywall AuthView in RootView. Without
+    /// this guard, a user who already purchased (RevenueCat entitlement
+    /// attached to their anonymous ID) could tap back, land on LandingView,
+    /// and end up re-seeing the paywall on the next anonymous pass — a
+    /// confusing "I paid, why are you asking again?" loop. Hiding the
+    /// chevron in that context enforces the "must create an account" rule.
+    let canGoBack: Bool
+
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var authManager: AuthManager
 
-    init(mode: AuthMode) {
+    init(mode: AuthMode, canGoBack: Bool = true) {
         self.mode = mode
-        log("🎬 AuthView initialized with mode: \(mode == .signup ? "SIGNUP" : "LOGIN")")
+        self.canGoBack = canGoBack
+        log("🎬 AuthView initialized with mode: \(mode == .signup ? "SIGNUP" : "LOGIN"), canGoBack: \(canGoBack)")
     }
 
     var body: some View {
         VStack(spacing: 0) {
 
             // MARK: - Top Row: Back Chevron
+            //
+            // The chevron is suppressed when `canGoBack` is false (forced
+            // post-paywall AuthView). A clear placeholder of the same size
+            // takes its place so the title/subtitle below sit at the same
+            // vertical position regardless of which mode this AuthView is in.
             HStack(spacing: 12) {
-                Button {
-                    handleBackButton()
-                } label: {
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 22))
-                        .foregroundColor(.wingmanBlack)
-                        .frame(width: 44, height: 44, alignment: .center)
-                        .contentShape(Rectangle())
+                if canGoBack {
+                    Button {
+                        handleBackButton()
+                    } label: {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 22))
+                            .foregroundColor(.wingmanBlack)
+                            .frame(width: 44, height: 44, alignment: .center)
+                            .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(authManager.isGoogleSignInLoading || authManager.isAppleSignInLoading)
+                } else {
+                    Color.clear.frame(width: 44, height: 44)
                 }
-                .buttonStyle(.plain)
-                .disabled(authManager.isGoogleSignInLoading || authManager.isAppleSignInLoading)
 
                 Spacer()
             }

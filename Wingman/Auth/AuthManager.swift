@@ -75,6 +75,21 @@ final class AuthManager: ObservableObject {
         }
     }
 
+    // Tracks whether this user has *ever* held an active subscription on this
+    // install. Set to true the first time `syncSubscriptionStatus` observes
+    // `isSubscriptionActive == true`, then sticky for the user's lifetime on
+    // this device (cleared only on signOut / userDeleted, mirroring the other
+    // per-user flags). Purpose: the routing-level expiry paywall in RootView
+    // must only force-paywall *ex-subscribers*. Without this flag it would
+    // also catch free users who dismissed the initial paywall, sending them
+    // to a non-dismissible paywall on the next subscription check — which
+    // would defeat the dismissible-paywall feature entirely.
+    @Published var hasEverHadSubscription: Bool = false {
+        didSet {
+            log("💎 hasEverHadSubscription changed: \(oldValue) → \(hasEverHadSubscription)")
+        }
+    }
+
     @Published var currentUser: User? {
         didSet {
             log("👤 currentUser changed: \(oldValue?.email ?? "nil") → \(currentUser?.email ?? "nil")")
@@ -128,6 +143,11 @@ final class AuthManager: ObservableObject {
         // Check if user is in anonymous mode
         isAnonymousUser = UserDefaults.standard.bool(forKey: "isAnonymousUser")
         log("👻 Loaded isAnonymousUser: \(isAnonymousUser)")
+
+        // Global default for hasEverHadSubscription — overwritten by the
+        // per-user value once the session restore identifies the userId.
+        hasEverHadSubscription = UserDefaults.standard.bool(forKey: "hasEverHadSubscription")
+        log("💎 Loaded hasEverHadSubscription: \(hasEverHadSubscription)")
 
         // Don't setup subscription monitoring here - will be done after RevenueCat is configured
 
@@ -190,6 +210,21 @@ final class AuthManager: ObservableObject {
         let subscriptionManager = SubscriptionManager.shared
         self.hasActiveSubscription = subscriptionManager.isSubscriptionActive
         self.subscriptionExpiryDate = subscriptionManager.subscriptionExpiryDate
+
+        // Latch hasEverHadSubscription the first time we observe an active
+        // subscription. Sticky thereafter — only signOut / userDeleted clear it.
+        // This is what differentiates "ex-subscriber whose sub lapsed" (should
+        // re-paywall) from "free user who dismissed the paywall" (stays in app).
+        if subscriptionManager.isSubscriptionActive && !hasEverHadSubscription {
+            hasEverHadSubscription = true
+            if let userId = currentUser?.id.uuidString {
+                UserDefaults.standard.set(true, forKey: "hasEverHadSubscription_\(userId)")
+            } else {
+                // Anonymous purchase path — persist under global key, transferred
+                // to per-user key on signup via syncAnonymousDataToBackend.
+                UserDefaults.standard.set(true, forKey: "hasEverHadSubscription")
+            }
+        }
     }
     
     deinit {
@@ -237,6 +272,7 @@ final class AuthManager: ObservableObject {
                     await checkUserQuestionStatus(userId: session.user.id.uuidString)
                     await checkUserPaywallFlowStatus(userId: session.user.id.uuidString)
                     await checkUserRatingPromptStatus(userId: session.user.id.uuidString)
+                    await checkUserEverHadSubscription(userId: session.user.id.uuidString)
 
                     // ✅ Hydrate lesson progress from Supabase user_metadata so
                     // users who reinstall / switch devices don't lose progress.
@@ -254,6 +290,7 @@ final class AuthManager: ObservableObject {
                 self.hasCompletedQuestions = false
                 self.hasCompletedPaywallFlow = false
                 self.hasSeenRatingPrompt = false
+                self.hasEverHadSubscription = false
                 log("🚪 User signed out")
 
             case .initialSession:
@@ -272,6 +309,7 @@ final class AuthManager: ObservableObject {
                     await checkUserQuestionStatus(userId: session.user.id.uuidString)
                     await checkUserPaywallFlowStatus(userId: session.user.id.uuidString)
                     await checkUserRatingPromptStatus(userId: session.user.id.uuidString)
+                    await checkUserEverHadSubscription(userId: session.user.id.uuidString)
 
                     // ✅ Hydrate lesson progress from Supabase user_metadata
                     // after session restoration so returning users (including
@@ -323,6 +361,7 @@ final class AuthManager: ObservableObject {
                 self.hasCompletedQuestions = false
                 self.hasCompletedPaywallFlow = false
                 self.hasSeenRatingPrompt = false
+                self.hasEverHadSubscription = false
                 log("🗑️ User deleted")
 
             @unknown default:
@@ -360,12 +399,53 @@ final class AuthManager: ObservableObject {
         let key = "hasCompletedPaywallFlow_\(userId)"
         hasCompletedPaywallFlow = UserDefaults.standard.bool(forKey: key)
         log("💳 Paywall flow status loaded: \(hasCompletedPaywallFlow) for user: \(userId)")
+
+        // Fallback: if UserDefaults says false (e.g. fresh install where the
+        // Keychain-cached Supabase session restored a prior user), check
+        // user_metadata. Mirrors the onboarding_completed pattern in
+        // checkUserQuestionStatus above. Cache to UserDefaults on hit so
+        // subsequent launches short-circuit on the local read.
+        if !hasCompletedPaywallFlow,
+           let user = currentUser,
+           let paywallFlowCompleted = user.userMetadata["paywall_flow_completed"]?.boolValue,
+           paywallFlowCompleted {
+            log("💳 Found paywall_flow_completed=true in user metadata - marking as completed")
+            hasCompletedPaywallFlow = true
+            UserDefaults.standard.set(true, forKey: key)
+        }
     }
 
     private func checkUserRatingPromptStatus(userId: String) async {
         let key = "hasSeenRatingPrompt_\(userId)"
         hasSeenRatingPrompt = UserDefaults.standard.bool(forKey: key)
         log("⭐ Rating prompt status loaded: \(hasSeenRatingPrompt) for user: \(userId)")
+    }
+
+    private func checkUserEverHadSubscription(userId: String) async {
+        let key = "hasEverHadSubscription_\(userId)"
+
+        // One-time migration for users upgrading from pre-Phase-1 versions
+        // (where the paywall was non-dismissible). Before this change, the
+        // ONLY way `hasCompletedPaywallFlow` got set to true was a successful
+        // purchase — so any user already carrying that flag is, by definition,
+        // a legacy paying user. Backfill `hasEverHadSubscription` for them so
+        // the routing-level expiry paywall continues to fire correctly when
+        // their subscription lapses. The migration flag ensures we don't
+        // re-trigger and incorrectly classify a Phase-1 dismissing user as an
+        // ex-subscriber on later launches.
+        let migrationKey = "hasEverHadSubscription_migrated_v1_\(userId)"
+        if !UserDefaults.standard.bool(forKey: migrationKey) {
+            let paywallKey = "hasCompletedPaywallFlow_\(userId)"
+            let alreadyHadEverFlag = UserDefaults.standard.bool(forKey: key)
+            if UserDefaults.standard.bool(forKey: paywallKey) && !alreadyHadEverFlag {
+                UserDefaults.standard.set(true, forKey: key)
+                log("🔄 Migrated hasEverHadSubscription=true for legacy user: \(userId)")
+            }
+            UserDefaults.standard.set(true, forKey: migrationKey)
+        }
+
+        hasEverHadSubscription = UserDefaults.standard.bool(forKey: key)
+        log("💎 Ever-had-subscription status loaded: \(hasEverHadSubscription) for user: \(userId)")
     }
     
     // MARK: - Graceful Session Restoration (Offline-First)
@@ -391,6 +471,7 @@ final class AuthManager: ObservableObject {
             await checkUserQuestionStatus(userId: session.user.id.uuidString)
             await checkUserPaywallFlowStatus(userId: session.user.id.uuidString)
             await checkUserRatingPromptStatus(userId: session.user.id.uuidString)
+            await checkUserEverHadSubscription(userId: session.user.id.uuidString)
 
             // Mark session check complete - UI can now render
             self.isCheckingSession = false
@@ -526,12 +607,29 @@ final class AuthManager: ObservableObject {
         hasSeenRatingPrompt = false
         UserDefaults.standard.removeObject(forKey: "hasSeenRatingPrompt")
 
+        // Also reset the paywall-flow flag for this fresh anonymous pass.
+        // Otherwise, if an earlier anonymous user dismissed the paywall and
+        // their in-memory flag somehow leaked (or a future code path persists
+        // it globally), the new pass would skip the paywall. Defensive — the
+        // current Phase-1 implementation only sets this flag in-memory for
+        // anonymous users, but resetting here makes the per-pass invariant
+        // explicit and robust to future changes.
+        hasCompletedPaywallFlow = false
+
         log("✅ Anonymous onboarding started - user will proceed without account")
     }
     
     func completeAnonymousOnboarding() {
         log("👻 completeAnonymousOnboarding() called")
         hasCompletedOnboarding = true
+        // Mirror into hasCompletedQuestions so the in-memory flag is already
+        // true at the moment `.signedIn` fires. AuthManager is session-scoped,
+        // so this value survives the anonymous → signup transition and keeps
+        // RootView's line-97 check (`!hasCompletedQuestions`) from briefly
+        // routing to OnboardingView while `syncAnonymousDataToBackend` is
+        // still in flight. The per-user UserDefaults key is written by the
+        // sync itself after signup — this flag is in-memory only.
+        hasCompletedQuestions = true
         AnonymousUserManager.shared.hasCompletedOnboarding = true
         log("✅ Anonymous onboarding completed - data stored locally")
         AnonymousUserManager.shared.printCurrentData()
@@ -548,112 +646,147 @@ final class AuthManager: ObservableObject {
         }
         
         log("📤 Syncing anonymous data to backend for user: \(currentUser.id)")
-        
-        // ✅ IMPORTANT: Capture purchase status BEFORE clearing data
-        let hadActivePurchase = anonymousManager.hasActivePurchase
-        let needsLinking = anonymousManager.needsRevenueCatLinking
-        log("💳 Anonymous user had active purchase: \(hadActivePurchase)")
-        
-        do {
-            // Prepare user metadata with anonymous data
-            var updates: [String: AnyJSON] = [:]
 
-            // Pick the best available name, falling back when the anonymous
-            // user skipped the name step. Previously we only wrote display_name
-            // when a typed value existed, which left synced users with no name
-            // in metadata and an empty Profile name indefinitely. Writing a
-            // sensible default here is purely additive.
-            let typedName = anonymousManager.userName?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-            let resolvedName: String
-            if !typedName.isEmpty {
-                resolvedName = typedName
-            } else {
-                let emailPrefix = currentUser.email
-                    .flatMap { $0.split(separator: "@").first.map(String.init) }
-                if let prefix = emailPrefix, !prefix.isEmpty {
-                    resolvedName = prefix
-                } else {
-                    resolvedName = "User"
-                }
-                log("ℹ️ Anonymous user had no name — using fallback display_name: \(resolvedName)")
-            }
+        // Capture ALL anonymous state up-front, BEFORE any await. These locals
+        // drive both the local UserDefaults writes (Phase 1 below) and the
+        // cloud user_metadata write (Phase 2). Capturing first ensures no
+        // interleaved Supabase auth event between awaits can change our
+        // source of truth mid-sync, and ensures we read from the durable
+        // anonymous-scope state rather than the fragile @Published in-memory
+        // flags (which get overwritten by checkUser* calls run by the signedIn
+        // handler after this function returns).
+        let userId = currentUser.id.uuidString
+        let hadActivePurchase = anonymousManager.hasActivePurchase
+        let hadCompletedPaywallFlow = anonymousManager.hasCompletedPaywallFlow
+        let reachedPaywallEndState = hadActivePurchase || hadCompletedPaywallFlow
+        let hadCompletedOnboarding = anonymousManager.hasCompletedOnboarding
+        let hadSeenRatingPrompt = UserDefaults.standard.bool(forKey: "hasSeenRatingPrompt")
+        let userAge = anonymousManager.userAge
+        let userGoals = anonymousManager.userGoals
+        let typedName = anonymousManager.userName?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        // Pick the best available display name. We intentionally do NOT derive
+        // from the user's email address — the email prefix can be long,
+        // unflattering, or unrelated to the user's preferred name, and it
+        // bypasses the 10-char cap enforced on the typed-name path. Users who
+        // skipped the name step get "User" and can change it from Profile.
+        let resolvedName: String = !typedName.isEmpty ? typedName : "User"
+        let needsLinking = anonymousManager.needsRevenueCatLinking
+        let everHadSubscription = self.hasEverHadSubscription
+        log("💳 Anonymous flags — purchase=\(hadActivePurchase) paywallComplete=\(hadCompletedPaywallFlow) onboarding=\(hadCompletedOnboarding) rating=\(hadSeenRatingPrompt)")
+
+        // =====================================================================
+        // PHASE 1: Local state writes (synchronous, no-await)
+        // =====================================================================
+        // These run BEFORE any network await so nothing can interleave and
+        // no network failure can skip them. Local state is the source of
+        // truth for routing (RootView reads @Published flags and UserDefaults),
+        // so it MUST be consistent regardless of cloud outcome.
+
+        if hadCompletedOnboarding {
+            hasCompletedOnboarding = true
+            hasCompletedQuestions = true
+            UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding_\(userId)")
+            UserDefaults.standard.set(true, forKey: "hasCompletedQuestions_\(userId)")
+            log("✅ Marked onboarding and questions as completed for user: \(userId)")
+        }
+
+        if reachedPaywallEndState {
+            hasCompletedPaywallFlow = true
+            UserDefaults.standard.set(true, forKey: "hasCompletedPaywallFlow_\(userId)")
+            log("💳 Anonymous paywall flow transferred — purchase=\(hadActivePurchase) completed=\(hadCompletedPaywallFlow)")
+        }
+
+        // Transfer the anonymous-scope rating-prompt flag to the per-user key.
+        // Without this, dismissing users see RatingPromptView again after
+        // signup because checkUserRatingPromptStatus reads only the per-user
+        // key. Remove the global key after transfer to prevent bleed into a
+        // future anonymous pass on the same device.
+        if hadSeenRatingPrompt {
+            hasSeenRatingPrompt = true
+            UserDefaults.standard.set(true, forKey: "hasSeenRatingPrompt_\(userId)")
+            UserDefaults.standard.removeObject(forKey: "hasSeenRatingPrompt")
+            log("⭐ Transferred anonymous rating-prompt flag to per-user key for user: \(userId)")
+        }
+
+        if everHadSubscription {
+            UserDefaults.standard.set(true, forKey: "hasEverHadSubscription_\(userId)")
+        }
+
+        // Reflect the resolved display name in the local profile store
+        // immediately, so the UI is consistent even if the cloud write fails.
+        UserProfileStore.shared.apply(name: resolvedName)
+
+        // Clear anonymous state now that we've captured everything and
+        // written durable per-user equivalents. This must happen BEFORE the
+        // cloud await so a crash during the network call doesn't leave us
+        // half-migrated (routing would still land on MainTabView because
+        // per-user flags are already set, but isAnonymousUser flag would
+        // linger otherwise).
+        anonymousManager.clearAllData()
+        isAnonymousUser = false
+        UserDefaults.standard.removeObject(forKey: "isAnonymousUser")
+        log("✅ Cleared anonymous user state")
+
+        // =====================================================================
+        // PHASE 2: Cloud metadata write (best-effort, failures don't regress)
+        // =====================================================================
+        // user_metadata is used for cross-device rehydration (signing in on a
+        // new device reads these fields via checkUserQuestionStatus). Failure
+        // here degrades that one narrow case but does not affect this device's
+        // state — the user proceeds normally.
+        do {
+            var updates: [String: AnyJSON] = [:]
             updates["display_name"] = AnyJSON.string(resolvedName)
-            UserProfileStore.shared.apply(name: resolvedName)
             log("   - Syncing name: \(resolvedName)")
-            
-            if let age = anonymousManager.userAge {
+
+            if let age = userAge {
                 updates["age"] = AnyJSON.string(age)
                 log("   - Syncing age: \(age)")
             }
 
-            if let goals = anonymousManager.userGoals {
+            if let goals = userGoals {
                 updates["goals"] = AnyJSON.string(goals)
                 log("   - Syncing goals: \(goals)")
             }
 
-            // Mark onboarding as completed if user completed anonymous onboarding
-            if anonymousManager.hasCompletedOnboarding {
+            if hadCompletedOnboarding {
                 updates["onboarding_completed"] = AnyJSON.bool(true)
                 log("   - Marking onboarding as completed")
             }
 
+            if reachedPaywallEndState {
+                updates["paywall_flow_completed"] = AnyJSON.bool(true)
+                log("   - Marking paywall flow as completed")
+            }
+
             updates["updated_at"] = AnyJSON.string(ISO8601DateFormatter().string(from: Date()))
 
-            // Update user metadata in Supabase
             let attributes = UserAttributes(data: updates)
             try await client.auth.update(user: attributes)
-
             log("✅ Successfully synced anonymous data to backend")
-
-            // Now that the user has an auth record, capture App Store
-            // storefront + currency. We couldn't do this while they were
-            // anonymous (no user_metadata row to write to). This closes
-            // the gap for users who went through anonymous → signup —
-            // otherwise their country/currency would only get captured
-            // if they later re-visited the paywall.
-            await captureStoreContextFromStoreKit()
-            
-            // Mark local completion flags for the authenticated user
-            let userId = currentUser.id.uuidString
-            
-            if anonymousManager.hasCompletedOnboarding {
-                hasCompletedOnboarding = true
-                hasCompletedQuestions = true
-                
-                // Save per-user completion flags
-                UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding_\(userId)")
-                UserDefaults.standard.set(true, forKey: "hasCompletedQuestions_\(userId)")
-                log("✅ Marked onboarding and questions as completed for user: \(userId)")
-            }
-            
-            // ✅ NEW: If anonymous user had already paid, mark paywall flow as complete
-            if hadActivePurchase {
-                log("💳 User already paid during anonymous flow - marking paywall flow as complete")
-                hasCompletedPaywallFlow = true
-                let paywallKey = "hasCompletedPaywallFlow_\(userId)"
-                UserDefaults.standard.set(true, forKey: paywallKey)
-                log("✅ Paywall flow marked complete for user: \(userId)")
-            }
-            
-            // Clear anonymous data after successful sync
-            anonymousManager.clearAllData()
-            isAnonymousUser = false
-            UserDefaults.standard.removeObject(forKey: "isAnonymousUser")
-            log("✅ Cleared anonymous user state")
-            
-            // Link RevenueCat purchases if anonymous user made purchases (using captured value)
-            if needsLinking {
-                log("🔗 Starting RevenueCat customer linking...")
-                let linkSuccess = await RevenueCatManager.shared.linkAnonymousUserPurchases(userId)
-                if linkSuccess {
-                    log("✅ RevenueCat purchases successfully linked")
-                } else {
-                    log("⚠️ RevenueCat purchase linking may have failed")
-                }
-            }
-            
         } catch {
-            log("❌ Failed to sync anonymous data: \(error.localizedDescription)")
+            log("⚠️ Failed to sync anonymous data to backend: \(error.localizedDescription) — local state already written, user can continue")
+        }
+
+        // =====================================================================
+        // PHASE 3: Independent best-effort follow-ups
+        // =====================================================================
+        // These are each wrapped in their own internal error handling (both
+        // are non-throwing async functions) so they run even if Phase 2 failed.
+
+        // Capture App Store storefront + currency now that we have a user
+        // record to write to. We couldn't do this while anonymous.
+        await captureStoreContextFromStoreKit()
+
+        // Link RevenueCat purchases made while anonymous to the new userId.
+        if needsLinking {
+            log("🔗 Starting RevenueCat customer linking...")
+            let linkSuccess = await RevenueCatManager.shared.linkAnonymousUserPurchases(userId)
+            if linkSuccess {
+                log("✅ RevenueCat purchases successfully linked")
+            } else {
+                log("⚠️ RevenueCat purchase linking may have failed")
+            }
         }
     }
 
@@ -786,6 +919,22 @@ final class AuthManager: ObservableObject {
     }
 
     // MARK: - Paywall Flow (Paywall + Referral)
+    /// Marks the paywall flow as complete. Called from two paths:
+    ///   1. After a successful purchase (existing behavior).
+    ///   2. After the user dismisses a dismissible paywall (Phase 1).
+    /// In both cases the semantics are the same: "user reached an end state on
+    /// the routing-level paywall." Whether they actually paid is answered by
+    /// `hasActiveSubscription`, not by this flag.
+    ///
+    /// For an anonymous caller, also persists the state to
+    /// `AnonymousUserManager` as a durable signal. Previously we only set the
+    /// in-memory flag, which was fragile: any Supabase auth event that ran
+    /// `checkUserPaywallFlowStatus` between dismissal and the sync would
+    /// overwrite the flag with the (still-false) per-user value, silently
+    /// losing the dismissal and bouncing the user back to the paywall after
+    /// account creation. The durable AM flag is immune to that race and also
+    /// survives app-quit. Cleared by `AnonymousUserManager.clearAllData()`
+    /// at the end of sync, so no cross-user contamination on shared devices.
     func completePaywallFlow() {
         log("✅ completePaywallFlow() called")
         hasCompletedPaywallFlow = true
@@ -794,6 +943,28 @@ final class AuthManager: ObservableObject {
             let key = "hasCompletedPaywallFlow_\(userId)"
             UserDefaults.standard.set(true, forKey: key)
             log("✅ Paywall flow completed for user: \(userId)")
+
+            // Mirror to user_metadata so this survives uninstall+reinstall.
+            // The Supabase session persists in iOS Keychain across app deletes,
+            // but per-user UserDefaults keys do not — without this write, a
+            // reinstalling user gets re-routed through RatingPromptView and
+            // PaywallView. Best-effort: UserDefaults remains the source of
+            // truth on this device, so a network failure here only delays
+            // cross-install rehydration to the next successful write.
+            Task {
+                do {
+                    let attributes = UserAttributes(data: [
+                        "paywall_flow_completed": AnyJSON.bool(true)
+                    ])
+                    try await client.auth.update(user: attributes)
+                    log("✅ Mirrored paywall_flow_completed=true to user_metadata")
+                } catch {
+                    log("⚠️ Failed to mirror paywall_flow_completed to user_metadata: \(error.localizedDescription)")
+                }
+            }
+        } else {
+            AnonymousUserManager.shared.hasCompletedPaywallFlow = true
+            log("✅ Paywall flow completed (anonymous) — persisted to AnonymousUserManager until signup")
         }
     }
 
@@ -1070,6 +1241,7 @@ final class AuthManager: ObservableObject {
             hasCompletedQuestions = false
             hasCompletedPaywallFlow = false
             hasSeenRatingPrompt = false
+            hasEverHadSubscription = false
 
             if let userId = userIdForCleanup {
                 UserDefaults.standard.removeObject(forKey: "hasSeenRatingPrompt_\(userId)")
@@ -1169,8 +1341,9 @@ final class AuthManager: ObservableObject {
                     hasCompletedQuestions = false
                     hasCompletedPaywallFlow = false
                     hasSeenRatingPrompt = false
+                    hasEverHadSubscription = false
                     isCheckingSession = false
-                    
+
                     log("✅ Account deletion completed successfully")
                     
                 } else {
@@ -1207,6 +1380,8 @@ final class AuthManager: ObservableObject {
         userDefaults.removeObject(forKey: "hasCompletedQuestions_\(userId)")
         userDefaults.removeObject(forKey: "hasCompletedPaywallFlow_\(userId)")
         userDefaults.removeObject(forKey: "hasSeenRatingPrompt_\(userId)")
+        userDefaults.removeObject(forKey: "hasEverHadSubscription_\(userId)")
+        userDefaults.removeObject(forKey: "hasEverHadSubscription_migrated_v1_\(userId)")
         userDefaults.removeObject(forKey: "current_user_id")
         userDefaults.removeObject(forKey: "user_email")
         userDefaults.removeObject(forKey: "user_name")

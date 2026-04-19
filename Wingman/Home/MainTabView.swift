@@ -12,6 +12,10 @@
 import SwiftUI
 import UIKit
 
+extension Notification.Name {
+    static let scrollToTopTab = Notification.Name("ScrollToTopTab")
+}
+
 struct MainTabView: View {
     @State private var selectedTab = 0
     @StateObject private var coursesRouter = CoursesRouter()
@@ -67,25 +71,25 @@ struct CustomTabBar: View {
                 icon: "home",
                 title: "Home",
                 isSelected: selectedTab == 0
-            ) { HapticManager.shared.lightImpact(); selectedTab = 0 }
+            ) { handleTap(0) }
 
             TabBarButton(
                 icon: "map",
                 title: "Courses",
                 isSelected: selectedTab == 1
-            ) { HapticManager.shared.lightImpact(); selectedTab = 1 }
+            ) { handleTap(1) }
 
             TabBarButton(
                 icon: "calendar",
                 title: "Scenarios",
                 isSelected: selectedTab == 2
-            ) { HapticManager.shared.lightImpact(); selectedTab = 2 }
+            ) { handleTap(2) }
 
             TabBarButton(
                 icon: "user",
                 title: "Profile",
                 isSelected: selectedTab == 3
-            ) { HapticManager.shared.lightImpact(); selectedTab = 3 }
+            ) { handleTap(3) }
         }
         .padding(.horizontal, 0)
         .padding(.top, 17) // Reduced from 17 to 12
@@ -119,6 +123,15 @@ struct CustomTabBar: View {
                     .frame(height: 15) // Just enough to capture the rounded corners
                     .frame(maxHeight: .infinity, alignment: .top)
             )
+        }
+    }
+
+    private func handleTap(_ tab: Int) {
+        HapticManager.shared.lightImpact()
+        if selectedTab == tab {
+            NotificationCenter.default.post(name: .scrollToTopTab, object: tab)
+        } else {
+            selectedTab = tab
         }
     }
 

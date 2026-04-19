@@ -49,9 +49,11 @@ struct ProfileView: View {
                     // Divider().background(Color.gray.opacity(0.2))
                     
                     // MARK: - Scrollable Content
+                    ScrollViewReader { proxy in
                     ScrollView(showsIndicators: false) {
                         VStack(spacing: 0) {
-                            
+                            Color.clear.frame(height: 0).id("top")
+
                             // MARK: - User Profile Card
                             Button(action: {
                                 showEditProfile = true
@@ -140,6 +142,13 @@ struct ProfileView: View {
                             Spacer().frame(height: 100)
                         }
                         .padding(.top, 2)
+                    }
+                    .onReceive(NotificationCenter.default.publisher(for: .scrollToTopTab)) { note in
+                        guard (note.object as? Int) == 3 else { return }
+                        withAnimation(.easeOut(duration: 0.3)) {
+                            proxy.scrollTo("top", anchor: .top)
+                        }
+                    }
                     }
                 }
             }

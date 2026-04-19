@@ -79,6 +79,7 @@ struct CoursesView: View {
                         ScrollViewReader { proxy in
                             ScrollView(showsIndicators: false) {
                                 LazyVStack(alignment: .leading, spacing: 20, pinnedViews: [.sectionHeaders]) {
+                                    Color.clear.frame(height: 0).id("top")
                                     ForEach(viewModel.availableCategories) { category in
                                         Section(header: CategoryHeader(title: category.name)) {
                                             CoursesGrid(courses: category.courses, viewModel: viewModel)
@@ -103,11 +104,20 @@ struct CoursesView: View {
                             .padding(.horizontal, 20)
                             .onAppear {
                                 scrollProxy = proxy
-                                
+
                                 // Apply initial deep-linking after data is ready (once)
                                 if !didApplyInitialScroll {
                                     didApplyInitialScroll = true
                                     applyDeepLinkIfNeeded()
+                                }
+                            }
+                            .onReceive(NotificationCenter.default.publisher(for: .scrollToTopTab)) { note in
+                                guard (note.object as? Int) == 1 else { return }
+                                withAnimation(.easeOut(duration: 0.3)) {
+                                    proxy.scrollTo("top", anchor: .top)
+                                    if let firstId = viewModel.availableCategories.first?.id {
+                                        categoryScrollProxy?.scrollTo("pill_\(firstId)", anchor: .leading)
+                                    }
                                 }
                             }
                         }

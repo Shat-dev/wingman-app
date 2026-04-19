@@ -788,23 +788,18 @@ struct OnboardingView: View {
     // MARK: - Save to Supabase (Auth User Metadata)
     private func saveUserName() {
         // Pick the best available name, falling back when the user skipped
-        // the name step. Previously this returned early on an empty name,
-        // which left `display_name` unset in metadata and caused Home to
-        // fall back to email / "User" and Profile to show an empty name
-        // indefinitely. Populating a sensible default is purely additive.
+        // the name step. We intentionally do NOT derive a name from the
+        // user's email — the email prefix can be long, unflattering, or
+        // unrelated to their preferred name, and it bypasses the 10-char
+        // cap enforced on the typed-name path. Skippers get "User" and can
+        // change it from Profile.
         let typed = answers["name"]?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         let name: String
         if !typed.isEmpty {
             name = typed
         } else {
-            let emailPrefix = SupabaseManager.shared.client.auth.currentUser?.email
-                .flatMap { $0.split(separator: "@").first.map(String.init) }
-            if let prefix = emailPrefix, !prefix.isEmpty {
-                name = prefix
-            } else {
-                name = "User"
-            }
-            log("ℹ️ Name step skipped — using fallback display_name: \(name)")
+            name = "User"
+            log("ℹ️ Name step skipped — using fallback display_name: User")
         }
 
         let updatedAt = ISO8601DateFormatter().string(from: Date())
@@ -1204,7 +1199,7 @@ let extendedOnboardingSteps: [OnboardingStep] = [
         type: .question,
         title: "Do you often want to talk to women but don’t?",
         subtitle: nil,
-        options: ["Yes, almost every time", "Sometimes", "Rarely", "No, I usually go for it"],
+        options: ["Every time", "Most times", "Sometimes", "Rarely", "No, I usually go for it"],
         chartImage: nil,
         progress: 0.5,
         questionKey: "approach_frequency"

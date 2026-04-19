@@ -68,10 +68,21 @@ struct RootView: View {
                     
                 // MARK: - Subscription Expiry Check (Highest Priority)
                 // If authenticated and paywall completed, but subscription expired → force paywall
-                // Only check if we've confirmed the subscription status at least once
-                } else if authManager.isAuthenticated && 
-                          authManager.hasCompletedPaywallFlow && 
+                // Only check if we've confirmed the subscription status at least once.
+                //
+                // ⚠️ Phase 1 dismissible paywall: this branch must ALSO require
+                // `hasEverHadSubscription`. Without that gate it would catch
+                // free users who reached MainTabView by *dismissing* the
+                // initial paywall (hasCompletedPaywallFlow=true,
+                // hasActiveSubscription=false), and would force them into a
+                // non-dismissible paywall on the next subscription check —
+                // defeating the dismissible-paywall feature. The gate keeps
+                // the original intent: only ex-subscribers whose sub lapsed
+                // get force-re-paywalled here.
+                } else if authManager.isAuthenticated &&
+                          authManager.hasCompletedPaywallFlow &&
                           !authManager.hasActiveSubscription &&
+                          authManager.hasEverHadSubscription &&
                           SubscriptionManager.shared.hasCheckedAtLeastOnce {
                     let _ = log("🎯 RootView: Subscription expired (confirmed) - forcing PaywallView")
                     NavigationStack {
@@ -104,7 +115,7 @@ struct RootView: View {
                     } else if !authManager.hasCompletedPaywallFlow {
                         let _ = log("🎯 RootView: Showing PaywallView (paywall flow NOT completed)")
                         NavigationStack {
-                            PaywallView(authManager: authManager)
+                            PaywallView(authManager: authManager, isDismissible: true)
                         }
 
                     // ✅ 4) Paywall + Referral finished → MainTabView (Home)
@@ -131,14 +142,25 @@ struct RootView: View {
                     } else if !authManager.hasCompletedPaywallFlow {
                         let _ = log("🎯 RootView: Anonymous user - showing PaywallView")
                         NavigationStack {
-                            PaywallView(authManager: authManager)
+                            PaywallView(authManager: authManager, isDismissible: true)
                         }
 
                     // ✅ Anonymous user - paywall finished → require account creation
+                    //
+                    // canGoBack: false — this is the *forced* account-creation
+                    // step. Allowing back here would let a user who already
+                    // purchased (RC entitlement attached to anonymous ID)
+                    // bail to LandingView and end up looping through the
+                    // paywall again on the next anonymous pass. The same
+                    // applies to the dismissal path: the user opted out of
+                    // paying and must now create an account before reaching
+                    // MainTabView. The other AuthView call sites (LandingView
+                    // Create Account / Sign In, and the unauthenticated/login
+                    // routing branch) keep the default `canGoBack: true`.
                     } else {
                         let _ = log("🎯 RootView: Anonymous user - requiring account creation")
                         NavigationStack {
-                            AuthView(mode: .signup)
+                            AuthView(mode: .signup, canGoBack: false)
                         }
                     }
 

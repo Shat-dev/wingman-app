@@ -59,28 +59,17 @@ struct QuestionsCompleteView: View {
                 Button(action: {
                     HapticManager.shared.mediumImpact()
                     log("🎯 Continue button tapped - navigating to HomeView")
-                    
-                    // 1. Show tab bar immediately
-                    log("📱 Explicitly showing tab bar before navigation")
+
                     tabBarVisibility.showTabBar()
-                    
-                    // 2. Hide this completion view
-                    showCompletionView = false
-                    
-                    // 3. Navigate to Home tab via notification with slight delay
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        log("📡 Posting NavigateToHomeView notification")
-                        NotificationCenter.default.post(
-                            name: NSNotification.Name("NavigateToHomeView"),
-                            object: nil
-                        )
-                    }
-                    
-                    // 4. Dismiss this view with slight delay to ensure proper tab bar visibility
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                        log("🏠 Dismissing daily practice to return to HomeView")
-                        dismissDailyPractice()
-                    }
+
+                    log("📡 Posting NavigateToHomeView notification")
+                    NotificationCenter.default.post(
+                        name: NSNotification.Name("NavigateToHomeView"),
+                        object: nil
+                    )
+
+                    log("🏠 Dismissing daily practice to return to HomeView")
+                    dismissDailyPractice()
                 }) {
                     Text("Continue")
                         .font(.manropeSemiBold(size: 16))

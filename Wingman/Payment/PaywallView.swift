@@ -16,9 +16,18 @@ struct PaywallView: View {
     
     // Optional AuthManager for anonymous user purchase tracking
     let authManager_init: AuthManager?
-    
-    init(authManager: AuthManager? = nil) {
+
+    /// When true, renders an X close button in the top-trailing corner that
+    /// calls `authManager.completePaywallFlow()` and lets the routing in
+    /// RootView advance the user (authenticated → MainTabView, anonymous →
+    /// AuthView signup). Default false preserves the original non-dismissible
+    /// behavior — required for the subscription-expiry paywall path which
+    /// must stay forced.
+    let isDismissible: Bool
+
+    init(authManager: AuthManager? = nil, isDismissible: Bool = false) {
         self.authManager_init = authManager
+        self.isDismissible = isDismissible
     }
 
     var body: some View {
@@ -335,6 +344,35 @@ struct PaywallView: View {
                     }
                 }
                 .background(Color.white)
+            }
+            .overlay(alignment: .topTrailing) {
+                // Dismiss affordance for the dismissible paywall paths
+                // (initial paywall for free users). Hidden for the
+                // subscription-expiry paywall path, which is non-dismissible
+                // by design — RootView decides which mode to use.
+                //
+                // Available on every state (loading / error / content) so a
+                // user is never trapped if RevenueCat is slow or offline.
+                if isDismissible {
+                    Button {
+                        HapticManager.shared.lightImpact()
+                        authManager.completePaywallFlow()
+                    } label: {
+                        // Mirrors the AuthView back-chevron treatment: naked
+                        // SF Symbol, wingmanBlack, 44×44 tap target. `xmark` is
+                        // the chevron-family X (two crossed strokes), and a
+                        // smaller point size keeps it visually lighter than
+                        // the back chevron — this is an escape hatch, not a CTA.
+                        Image(systemName: "xmark")
+                            .font(.system(size: 16))
+                            .foregroundColor(.wingmanBlack)
+                            .frame(width: 44, height: 44, alignment: .center)
+                            .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    .padding(.trailing, 6)
+                    .accessibilityLabel("Close paywall")
+                }
             }
         }
         .navigationDestination(isPresented: $navigateToReferral) {
