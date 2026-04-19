@@ -21,6 +21,7 @@ struct SettingsSheet: View {
     @State private var errorMessage = ""
     @State private var showingSuccessAlert = false
     @State private var successMessage = ""
+    @State private var safariLink: IdentifiableURL?
     let userName: String
     
     var body: some View {
@@ -193,7 +194,37 @@ struct SettingsSheet: View {
                     }
                     .padding(.horizontal, 24)
                     .padding(.bottom, 16)
-                    
+
+                    // MARK: - Terms of Service
+                    Button(action: {
+                        if let url = URL(string: Constants.TERMS_CONDITIONS_URL) {
+                            safariLink = IdentifiableURL(url: url)
+                        }
+                    }) {
+                        Text("Terms of Service")
+                            .font(.manropeMedium(size: 14))
+                            .foregroundColor(.wingmanBlack)
+                            .underline()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .padding(.horizontal, 24)
+                    .padding(.bottom, 16)
+
+                    // MARK: - Privacy Policy
+                    Button(action: {
+                        if let url = URL(string: Constants.PRIVACY_POLICY_URL) {
+                            safariLink = IdentifiableURL(url: url)
+                        }
+                    }) {
+                        Text("Privacy Policy")
+                            .font(.manropeMedium(size: 14))
+                            .foregroundColor(.wingmanBlack)
+                            .underline()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .padding(.horizontal, 24)
+                    .padding(.bottom, 16)
+
                     // MARK: - Delete Account
                     Button(action: {
                         HapticManager.shared.warning()
@@ -285,6 +316,10 @@ struct SettingsSheet: View {
             .presentationDetents([.medium])
             .presentationDragIndicator(.hidden)
             .presentationCornerRadius(20)
+        }
+        .sheet(item: $safariLink) { link in
+            SafariView(url: link.url)
+                .ignoresSafeArea()
         }
         .onAppear {
             loadSettings()
