@@ -260,7 +260,7 @@ struct CourseCardContent: View {
                         .scaledToFit()
                         .padding(0)
                 }
-                .opacity(isLocked ? 0.5 : 1.0)
+                .opacity(isLocked ? 0.3 : 1.0)
 
                 if isLocked {
                     Image("lock_icon")
@@ -278,7 +278,7 @@ struct CourseCardContent: View {
             // Title section with fixed 2-line height
             Text(course.title)
                 .font(.manropeMedium(size: 14))
-                .foregroundColor(isLocked ? Color.wingmanBlack.opacity(0.5) : .wingmanBlack)
+                .foregroundColor(isLocked ? Color.wingmanBlack.opacity(0.3) : .wingmanBlack)
                 .lineSpacing(1)
                 .multilineTextAlignment(.leading)
                 .lineLimit(2)
