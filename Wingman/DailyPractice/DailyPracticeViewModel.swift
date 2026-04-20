@@ -26,6 +26,10 @@ final class DailyPracticeViewModel: ObservableObject {
     // MARK: - Streak Tracking
     private var totalQuestionsAnswered: Int = 0
     private var totalCorrectAnswers: Int = 0
+    // First-answer-wins dedup set keyed by question id. Without this,
+    // previousQuestion() lets a user re-answer a prior question and double-
+    // count it into the streak-update RPC. Reset per session in loadTodayQuestions.
+    private var countedQuestionIds: Set<UUID> = []
 
     // MARK: - Dependencies
     private let practiceService: DailyPracticeServiceProtocol
@@ -88,6 +92,7 @@ final class DailyPracticeViewModel: ObservableObject {
             // Reset tracking for new session
             totalQuestionsAnswered = 0
             totalCorrectAnswers = 0
+            countedQuestionIds = []
             
             do {
                 let fetchedQuestions = try await practiceService.getTodayQuestions()
@@ -155,17 +160,30 @@ final class DailyPracticeViewModel: ObservableObject {
             log("   - Selected: \(currentQuestion.options[selected])")
             log("   - Result: \(isAnswerCorrect ? "CORRECT ✅" : "INCORRECT ❌")")
 
-            // Update streak tracking
-            totalQuestionsAnswered += 1
-            if isAnswerCorrect {
-                totalCorrectAnswers += 1
+            // Update streak tracking — first-answer-wins per question so
+            // back-nav + re-answer can't inflate the counts we send to the
+            // streak RPC.
+            let questionId = currentQuestion.id
+            if countedQuestionIds.insert(questionId).inserted {
+                totalQuestionsAnswered += 1
+                if isAnswerCorrect {
+                    totalCorrectAnswers += 1
+                }
             }
-            
-            // Submit completion to backend
+
+            // Submit completion to backend. Capture questionId/isCorrect
+            // synchronously here — `currentQuestion` is a computed property
+            // over `currentQuestionIndex`, so reading it inside the Task
+            // after a rapid Next-tap would resolve to the wrong question.
+            let wasCorrect = isAnswerCorrect
             Task { @MainActor in
-                await submitCompletion(selectedAnswers: SelectedAnswers(singleSelect: selected))
+                await submitCompletion(
+                    questionId: questionId,
+                    isCorrect: wasCorrect,
+                    selectedAnswers: SelectedAnswers(singleSelect: selected)
+                )
             }
-            
+
         } else {
             guard !selectedOptionIndices.isEmpty else {
                 log("❌ No options selected")
@@ -187,16 +205,30 @@ final class DailyPracticeViewModel: ObservableObject {
             log("   - Selected indices: \(selectedOptionIndices)")
             log("   - Correct indices: \(correctSet)")
             log("   - Result: \(isAnswerCorrect ? "CORRECT ✅" : "INCORRECT ❌")")
-            
-            // Update streak tracking
-            totalQuestionsAnswered += 1
-            if isAnswerCorrect {
-                totalCorrectAnswers += 1
+
+            // Update streak tracking — first-answer-wins per question so
+            // back-nav + re-answer can't inflate the counts we send to the
+            // streak RPC.
+            let questionId = currentQuestion.id
+            if countedQuestionIds.insert(questionId).inserted {
+                totalQuestionsAnswered += 1
+                if isAnswerCorrect {
+                    totalCorrectAnswers += 1
+                }
             }
-            
-            // Submit completion to backend
+
+            // Submit completion to backend. Capture questionId/isCorrect
+            // synchronously here — `currentQuestion` is a computed property
+            // over `currentQuestionIndex`, so reading it inside the Task
+            // after a rapid Next-tap would resolve to the wrong question.
+            let wasCorrect = isAnswerCorrect
+            let selectedMulti = Array(selectedOptionIndices)
             Task { @MainActor in
-                await submitCompletion(selectedAnswers: SelectedAnswers(multipleSelect: Array(selectedOptionIndices)))
+                await submitCompletion(
+                    questionId: questionId,
+                    isCorrect: wasCorrect,
+                    selectedAnswers: SelectedAnswers(multipleSelect: selectedMulti)
+                )
             }
         }
     }
@@ -314,16 +346,16 @@ final class DailyPracticeViewModel: ObservableObject {
         log("🔄 Question state reset")
     }
     
-    private func submitCompletion(selectedAnswers: SelectedAnswers) async {
+    private func submitCompletion(questionId: UUID, isCorrect: Bool, selectedAnswers: SelectedAnswers) async {
         do {
             let response = try await practiceService.submitCompletion(
-                questionId: currentQuestion.id,
+                questionId: questionId,
                 selectedAnswers: selectedAnswers,
-                isCorrect: isAnswerCorrect
+                isCorrect: isCorrect
             )
-            
+
             log("✅ Completion submitted: \(response.message)")
-            
+
         } catch {
             log("❌ Failed to submit completion: \(error.localizedDescription)")
             // Note: We don't show this error to the user as it doesn't affect their experience

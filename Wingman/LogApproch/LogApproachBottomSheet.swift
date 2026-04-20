@@ -17,6 +17,11 @@ struct LogApproachBottomSheet: View {
     // the ability to revise their own historical data.
     @State private var showPaywall = false
 
+    // Guards the post-success auto-dismiss against multi-fires. Set the first
+    // time `viewModel.showSuccess` flips true for this sheet instance; stays
+    // true for the rest of the instance's lifetime.
+    @State private var hasScheduledDismiss = false
+
     // Optional approach for editing
     let approachToEdit: ApproachLog?
 
@@ -260,13 +265,11 @@ struct LogApproachBottomSheet: View {
                             }
 
                             viewModel.saveApproach()
-
-                            // Dismiss after successful save
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-                                withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
-                                    isPresented = false
-                                }
-                            }
+                            // Auto-dismiss is scheduled in `.onChange(of:
+                            // viewModel.showSuccess)` below so that a failed
+                            // save leaves the sheet open with the error
+                            // message visible, instead of the unconditional
+                            // 2.5s dismiss that used to hide it.
                         }) {
                             HStack {
                                 if viewModel.isSaving {
@@ -350,6 +353,19 @@ struct LogApproachBottomSheet: View {
             } else {
                 // Setup for new approach entry
                 viewModel.setupForNewEntry()
+            }
+        }
+        .onChange(of: viewModel.showSuccess) { isSuccess in
+            // Only dismiss on successful save. The VM toggles `showSuccess`
+            // false again ~2s after it flips true, so gate on the true
+            // transition. `hasScheduledDismiss` guards against the false→true
+            // transition ever firing twice (e.g. future multi-save flows).
+            guard isSuccess, !hasScheduledDismiss else { return }
+            hasScheduledDismiss = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
+                    isPresented = false
+                }
             }
         }
         .transition(.move(edge: .bottom))
