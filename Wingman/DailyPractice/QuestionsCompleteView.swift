@@ -61,6 +61,7 @@ struct QuestionsCompleteView: View {
                     log("🎯 Continue button tapped - navigating to HomeView")
 
                     tabBarVisibility.showTabBar()
+                    showCompletionView = false
 
                     log("📡 Posting NavigateToHomeView notification")
                     NotificationCenter.default.post(
