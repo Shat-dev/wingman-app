@@ -179,11 +179,12 @@ struct RootView: View {
             
             // Step 4: Restore session gracefully on app launch
             await authManager.restoreSessionGracefully()
-            
-            // Step 5: Start periodic subscription checks
-            SubscriptionManager.shared.startPeriodicChecks()
-            
-            // Step 6: Setup notifications on app launch
+
+            // Step 5: Setup notifications on app launch
+            // (Periodic subscription checks are already started inside
+            // initializeMonitoring() above — calling startPeriodicChecks()
+            // here invalidated and recreated the timer and fired a third
+            // redundant initial check on every cold launch.)
             NotificationManager.shared.setupNotificationsOnLaunch()
         }
         .onChange(of: authManager.isAuthenticated) { newValue in

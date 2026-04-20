@@ -53,7 +53,11 @@ struct HomeView: View {
                             // Falls back to "User" if unset — we never surface the
                             // email here, since a long email prefix would overflow
                             // this 24pt greeting and bypass the 10-char name cap.
-                            if let user = SupabaseManager.shared.client.auth.currentUser,
+                            // Read via the already-observed @Published currentUser
+                            // so edits to display_name reactively re-render this
+                            // header, and so body doesn't do a singleton dereference
+                            // on every render.
+                            if let user = authManager.currentUser,
                                let name = user.userMetadata["display_name"]?.stringValue,
                                !name.isEmpty {
                                 Text(name)
@@ -300,7 +304,9 @@ struct HomeView: View {
                 log("👁️ HomeView appeared - refreshing continue course and daily practice status")
                 viewModel.loadUserData()
                 viewModel.loadContinueCourse()
-                viewModel.refreshDailyPracticeStatus()
+                // refreshDailyPracticeStatus() intentionally omitted: loadUserData()
+                // already spawns checkDailyPracticeCompletion(), so calling both
+                // fires the same RPC twice.
             }
         }
     }

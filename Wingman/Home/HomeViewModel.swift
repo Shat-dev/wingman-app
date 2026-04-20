@@ -54,7 +54,9 @@ final class HomeViewModel: ObservableObject {
     
     // MARK: - Init
     init() {
-        loadUserData()
+        // loadUserData() intentionally deferred to HomeView.onAppear, which
+        // already calls it. Running it here too caused checkDailyPracticeCompletion()
+        // to fire twice on cold start (once from init, once from onAppear).
         loadMotivationalQuote()
         loadContinueCourse()
         setupNotifications()

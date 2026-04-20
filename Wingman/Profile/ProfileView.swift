@@ -17,6 +17,12 @@ struct ProfileView: View {
     @StateObject private var approachService = ApproachService.shared
     @StateObject private var streakStore = StreakStore.shared
     @StateObject private var userProfileStore = UserProfileStore.shared
+
+    // Rate-limits the onAppear refresh so rapid tab-thrashing (Home→Profile→
+    // Home→Profile) doesn't fire 3 RPCs per round-trip. A 5s window is short
+    // enough that a user who navigates away and performs a real action before
+    // returning still sees a refresh on arrival.
+    @State private var lastRefreshedAt: Date?
     
     var body: some View {
         NavigationStack {
@@ -182,6 +188,11 @@ struct ProfileView: View {
             // directly from the shared stores, so any write elsewhere (log,
             // edit, delete, daily-practice completion, name change) is already
             // reflected when we arrive.
+            if let last = lastRefreshedAt, Date().timeIntervalSince(last) < 5 {
+                return
+            }
+            lastRefreshedAt = Date()
+
             Task { await loadApproachData() }
             Task { await streakStore.refresh() }
             Task { await userProfileStore.refresh() }

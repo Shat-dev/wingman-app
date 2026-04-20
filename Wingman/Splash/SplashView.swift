@@ -50,19 +50,13 @@ struct SplashView: View {
             .onAppear {
                 // Wait for session check to complete, then transition if needed
                 Task {
-                    // Give some time for session restoration
-                    try? await Task.sleep(nanoseconds: 500_000_000) // 0.5 second minimum
-                    
                     // Wait for session check to finish
                     while authManager.isCheckingSession {
                         try? await Task.sleep(nanoseconds: 100_000_000) // Check every 0.1 second
                     }
-                    
+
                     // Only show landing if not authenticated
                     if !authManager.isAuthenticated {
-                        // Small delay for smooth transition
-                        try? await Task.sleep(nanoseconds: 300_000_000) // 0.3 second
-                        
                         await MainActor.run {
                             withAnimation(.easeInOut(duration: 0.3)) {
                                 showLanding = true

@@ -77,9 +77,11 @@ struct PracticeView: View {
     // MARK: - Derived user display name
     // Read from `display_name` only; never derive from email. Falls back to
     // "You" (generic dialogue label fits the practice-game context better
-    // than "User" here).
+    // than "User" here). Read via the already-observed @Published currentUser
+    // on AuthManager so this view reactively updates on display_name edits
+    // and avoids a singleton dereference on every body render.
     private var userDisplayName: String {
-        if let user = SupabaseManager.shared.client.auth.currentUser,
+        if let user = authManager.currentUser,
            let name = user.userMetadata["display_name"]?.stringValue,
            !name.trimmingCharacters(in: .whitespaces).isEmpty {
             return name

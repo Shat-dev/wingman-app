@@ -91,10 +91,10 @@ final class SubscriptionManager: NSObject, ObservableObject {
 
         isInitialized = true
 
-        // Initial check — refines / corrects the cache-loaded state.
-        Task {
-            await checkSubscriptionStatus()
-        }
+        // Initial check is performed inside startPeriodicChecks() (called by
+        // initializeStoreKitMonitoring / initializeRevenueCatMonitoring above),
+        // so we don't fire another one here — doing both sent two identical
+        // RevenueCat/StoreKit round-trips on every cold start.
     }
     
     /// Initialize with native StoreKit (for local testing)
