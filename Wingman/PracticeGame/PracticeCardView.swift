@@ -24,7 +24,7 @@ struct PracticeCardView: View {
                         .lineLimit(2)
                         .multilineTextAlignment(.leading)
 
-                    // Daily Practice Count
+                    // Lessons-required threshold
                     HStack(spacing: 4) {
                         Image("flame_fill")
                             .resizable()
@@ -32,7 +32,7 @@ struct PracticeCardView: View {
                             .opacity(practice.isLocked ? 0.3 : 1.0)
                             .frame(width: 8, height: 12)
 
-                        Text("\(practice.dailyPracticeCount) Daily Practice")
+                        Text("\(practice.requiredLessonsCompleted) Lessons")
                             .font(.manropeMedium(size: 12))
                             .foregroundColor(Color.wingmanBlack.opacity(practice.isLocked ? 0.3 : 1.0))
                     }

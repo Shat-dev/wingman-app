@@ -11,7 +11,7 @@ struct Practice: Identifiable, nonisolated Codable, Hashable, Sendable {
     let title: String
     let summary: String
     let coverImageUrl: String?
-    let requiredDailyPractices: Int   // unlock threshold (cumulative)
+    let requiredLessonsCompleted: Int // unlock threshold: total lessons completed across all courses
     let womanName: String?
     let orderIndex: Int
     let isPublished: Bool
@@ -24,7 +24,6 @@ struct Practice: Identifiable, nonisolated Codable, Hashable, Sendable {
     var currentScreenId: UUID? = nil
 
     // Convenience alias used by existing UI
-    var dailyPracticeCount: Int { requiredDailyPractices }
     var imageUrl: String { coverImageUrl ?? "" }
 
     enum CodingKeys: String, CodingKey {
@@ -32,7 +31,7 @@ struct Practice: Identifiable, nonisolated Codable, Hashable, Sendable {
         case title
         case summary
         case coverImageUrl          = "cover_image_url"
-        case requiredDailyPractices = "required_daily_practices"
+        case requiredLessonsCompleted = "required_lessons_completed"
         case womanName              = "woman_name"
         case orderIndex             = "order_index"
         case isPublished            = "is_published"
@@ -138,33 +137,6 @@ struct ScreenOptionRow: nonisolated Codable, Sendable {
         case nextScreenId   = "next_screen_id"
         case isCorrect      = "is_correct"
         case orderIndex     = "order_index"
-    }
-}
-
-// MARK: - Unlocked Scenario Row (from get_unlocked_scenarios RPC)
-struct UnlockedScenarioRow: nonisolated Codable, Sendable {
-    let scenarioId: UUID
-    let title: String
-    let summary: String?
-    let coverImageUrl: String?
-    let requiredDailyPractices: Int
-    let womanName: String?
-    let orderIndex: Int
-    let isCompleted: Bool
-    let currentScreenId: UUID?
-    let totalDailyCompletions: Int
-
-    enum CodingKeys: String, CodingKey {
-        case scenarioId             = "scenario_id"
-        case title
-        case summary
-        case coverImageUrl          = "cover_image_url"
-        case requiredDailyPractices = "required_daily_practices"
-        case womanName              = "woman_name"
-        case orderIndex             = "order_index"
-        case isCompleted            = "is_completed"
-        case currentScreenId        = "current_screen_id"
-        case totalDailyCompletions  = "total_daily_completions"
     }
 }
 

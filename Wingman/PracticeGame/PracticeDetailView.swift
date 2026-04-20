@@ -110,12 +110,12 @@ struct PracticeDetailView: View {
                 .font(.manropeBold(size: 24))
                 .foregroundColor(Color(hex: "#1A1A1A"))
             
-            // Daily Practice Count
+            // Lessons-required threshold
             HStack(spacing: 6) {
                 Text("🔥")
                     .font(.system(size: 14))
-                
-                Text("\(viewModel.practice.dailyPracticeCount) Daily Practice")
+
+                Text("\(viewModel.practice.requiredLessonsCompleted) Lessons")
                     .font(.manropeMedium(size: 14))
                     .foregroundColor(Color(hex: "#666666"))
             }

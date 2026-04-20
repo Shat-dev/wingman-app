@@ -190,7 +190,17 @@ final class LessonDataService {
         guard !lessons.isEmpty else { return false }
         return lessons.allSatisfy { $0.isCompleted }
     }
-    
+
+    // MARK: - Total lessons completed (across all courses)
+    /// Sum of completed lesson counts across every known course. Used by
+    /// PracticeService.fetchPractices to gate scenario unlocks on cumulative
+    /// lesson progress.
+    func totalLessonsCompleted() -> Int {
+        courseJsonMapping.keys.reduce(0) { total, courseId in
+            total + loadLessonProgress(courseId: courseId).completed.count
+        }
+    }
+
     // MARK: - Persistence (UserDefaults, namespaced per-user)
     //
     // Keys are namespaced by the current Supabase user ID so different users

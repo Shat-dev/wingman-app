@@ -65,10 +65,6 @@ struct PracticeView: View {
             .subscriptionGate(isPresented: $showPaywall)
         }
         .task {
-            // Refresh the practice list and prefetch game data on every appearance.
-            // fetchPractices picks up any newly-unlocked practices (so the previous
-            // onAppear → checkForNewlyUnlockedPractices chain is unnecessary and
-            // duplicated the network call).
             await viewModel.fetchPractices()
             await viewModel.prefetchGameData()
         }

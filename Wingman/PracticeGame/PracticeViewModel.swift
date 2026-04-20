@@ -14,7 +14,6 @@ final class PracticeViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     @Published var selectedPractice: Practice?
-    @Published var newlyUnlockedPractices: [Practice] = [] // Track newly unlocked practices
 
     /// Session-scoped cache of fetched PracticeGameData keyed by practice ID.
     /// PracticeGameData is immutable scenario content (scenes, text, options),
@@ -23,10 +22,29 @@ final class PracticeViewModel: ObservableObject {
 
     // MARK: - Dependencies
     private let practiceService: PracticeServiceProtocol
+    private var lessonCompletedObserver: NSObjectProtocol?
 
     // MARK: - Init
     init(practiceService: PracticeServiceProtocol = PracticeService()) {
         self.practiceService = practiceService
+
+        // Refresh practices when a lesson is completed so scenario unlock state
+        // reflects the new total immediately, without waiting for a tab switch.
+        lessonCompletedObserver = NotificationCenter.default.addObserver(
+            forName: .lessonCompleted,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { [weak self] in
+                await self?.fetchPractices()
+            }
+        }
+    }
+
+    deinit {
+        if let observer = lessonCompletedObserver {
+            NotificationCenter.default.removeObserver(observer)
+        }
     }
 
     // MARK: - Fetch Practices from DB
@@ -103,51 +121,6 @@ final class PracticeViewModel: ObservableObject {
         }
     }
     
-    // MARK: - Check for Newly Unlocked Practices (called when returning from daily practice)
-    func checkForNewlyUnlockedPractices() async {
-        guard SupabaseManager.shared.currentUserId != nil else {
-            return
-        }
-
-        // Store previous state
-        let previouslyLockedPractices = practices.filter { $0.isLocked }
-
-        // Refresh practices to get updated lock status
-        await fetchPractices()
-
-        // Find practices that were locked before but are now unlocked
-        let currentlyUnlocked = practices.filter { !$0.isLocked }
-        newlyUnlockedPractices = currentlyUnlocked.filter { currentPractice in
-            previouslyLockedPractices.contains { $0.id == currentPractice.id }
-        }
-
-        if !newlyUnlockedPractices.isEmpty {
-            log("🎉 \(newlyUnlockedPractices.count) new practice(s) unlocked!")
-            for practice in newlyUnlockedPractices {
-                log("   - \(practice.title)")
-            }
-        }
-    }
-    
-    // MARK: - Clear Newly Unlocked Practices
-    func clearNewlyUnlockedPractices() {
-        newlyUnlockedPractices.removeAll()
-    }
-    
-    // MARK: - Get Current User's Daily Practice Count
-    func getCurrentDailyPracticeCount() async -> Int {
-        do {
-            guard let userIdString = SupabaseManager.shared.currentUserId,
-                  let userId = UUID(uuidString: userIdString) else {
-                return 0
-            }
-            
-            return try await practiceService.getTotalDailyPractices(userId: userId)
-        } catch {
-            log("❌ Failed to get daily practice count: \(error)")
-            return 0
-        }
-    }
 }
 
 // MARK: - Preview Helper

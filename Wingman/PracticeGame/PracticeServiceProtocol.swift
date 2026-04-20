@@ -18,7 +18,6 @@ protocol PracticeServiceProtocol: Sendable {
     func fetchGameData(scenarioId: UUID, womanName: String?) async throws -> PracticeGameData
     func saveScenarioProgress(userId: UUID, scenarioId: UUID, currentScreenId: UUID) async throws
     func completeScenario(userId: UUID, scenarioId: UUID) async throws
-    func getTotalDailyPractices(userId: UUID) async throws -> Int
 }
 
 // MARK: - RPC / Request param structs
@@ -26,10 +25,6 @@ protocol PracticeServiceProtocol: Sendable {
 
 private struct GetScenarioScreensParams: nonisolated Encodable, Sendable {
     let p_scenario_id: String
-}
-
-private struct GetTotalDailyPracticesParams: nonisolated Encodable, Sendable {
-    let p_user_id: String
 }
 
 private struct ProgressUpsert: nonisolated Encodable, Sendable {
@@ -109,13 +104,12 @@ final class PracticeService: PracticeServiceProtocol {
             throw PracticeServiceError.networkError
         }
         
-        guard let userIdString = SupabaseManager.shared.currentUserId,
-              let userId = UUID(uuidString: userIdString) else {
+        guard let userIdString = SupabaseManager.shared.currentUserId else {
             throw PracticeServiceError.notAuthenticated
         }
 
-        let totalCompleted = try await getTotalDailyPractices(userId: userId)
-        log("🎮 Fetching practices - Total daily practices completed: \(totalCompleted)")
+        let totalLessons = LessonDataService.shared.totalLessonsCompleted()
+        log("🎮 Fetching practices - Total lessons completed: \(totalLessons)")
 
         let rows: [Practice] = try await client
             .from("scenarios")
@@ -138,11 +132,10 @@ final class PracticeService: PracticeServiceProtocol {
 
         return rows.map { practice in
             var p = practice
-            // Normal locking logic - unlock if totalCompleted >= requiredDailyPractices
-            p.isLocked = totalCompleted < practice.requiredDailyPractices
-            
-            log("   📋 \(practice.title): required=\(practice.requiredDailyPractices), total=\(totalCompleted), locked=\(p.isLocked)")
-            
+            p.isLocked = totalLessons < practice.requiredLessonsCompleted
+
+            log("   📋 \(practice.title): required=\(practice.requiredLessonsCompleted), total=\(totalLessons), locked=\(p.isLocked)")
+
             if let prog = progressMap[practice.id] {
                 p.isCompleted = prog.isCompleted
                 p.currentScreenId = prog.currentScreenId
@@ -300,14 +293,6 @@ final class PracticeService: PracticeServiceProtocol {
             .execute()
     }
 
-    // MARK: Get Total Daily Practices
-    nonisolated func getTotalDailyPractices(userId: UUID) async throws -> Int {
-        let count: Int = try await client
-            .rpc("get_total_daily_practices", params: GetTotalDailyPracticesParams(p_user_id: userId.uuidString))
-            .execute()
-            .value
-        return count
-    }
 }
 
 // MARK: - Service Errors
@@ -355,7 +340,6 @@ final class MockPracticeService: PracticeServiceProtocol {
     }
     nonisolated func saveScenarioProgress(userId: UUID, scenarioId: UUID, currentScreenId: UUID) async throws {}
     nonisolated func completeScenario(userId: UUID, scenarioId: UUID) async throws {}
-    nonisolated func getTotalDailyPractices(userId: UUID) async throws -> Int { 3 }
 }
 
 // MARK: - Mock Data
@@ -365,7 +349,7 @@ extension Practice {
         Practice(
             id: UUID(), title: "Bar Window",
             summary: "Loud music, crowded space, short attention spans. You notice her. Do you lead or wait?",
-            coverImageUrl: "c_girl", requiredDailyPractices: 1,
+            coverImageUrl: "c_girl", requiredLessonsCompleted: 1,
             womanName: "Sophie", orderIndex: 1, isPublished: true,
             createdAt: Date(), updatedAt: Date(),
             isLocked: false, isCompleted: false, currentScreenId: nil
@@ -373,7 +357,7 @@ extension Practice {
         Practice(
             id: UUID(), title: "Coffee Connections",
             summary: "Bad weather, warm coffee, shared space. A simple moment turns into an opportunity.",
-            coverImageUrl: "c_girl", requiredDailyPractices: 2,
+            coverImageUrl: "c_girl", requiredLessonsCompleted: 2,
             womanName: "Lily", orderIndex: 2, isPublished: true,
             createdAt: Date(), updatedAt: Date(),
             isLocked: false, isCompleted: false, currentScreenId: nil
@@ -381,7 +365,7 @@ extension Practice {
         Practice(
             id: UUID(), title: "Fetch & Flirt",
             summary: "Laughter, eye contact, and two dogs chasing each other. Timing matters here.",
-            coverImageUrl: "c_girl", requiredDailyPractices: 3,
+            coverImageUrl: "c_girl", requiredLessonsCompleted: 3,
             womanName: "Maya", orderIndex: 3, isPublished: true,
             createdAt: Date(), updatedAt: Date(),
             isLocked: false, isCompleted: false, currentScreenId: nil
