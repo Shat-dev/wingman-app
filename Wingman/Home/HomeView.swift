@@ -12,6 +12,7 @@ struct HomeView: View {
     @Binding var selectedTab: Int
     @EnvironmentObject private var coursesRouter: CoursesRouter
     @EnvironmentObject private var tabBarVisibility: TabBarVisibilityManager
+    @EnvironmentObject private var authManager: AuthManager
 
     @StateObject private var viewModel = HomeViewModel()
     @StateObject private var networkMonitor = NetworkMonitor.shared
@@ -19,6 +20,8 @@ struct HomeView: View {
     @State private var showLogApproachSheet = false
     @State private var selectedCourse: Course? = nil
     @State private var currentModulePage: Int = 0
+    // Feature-gate paywall for Daily Practice Start (free users).
+    @State private var showDailyPracticePaywall = false
     
     // Module data for carousel
     private var modules: [(category: CourseCategory, title: String, subtitle: String, imageName: String)] {
@@ -127,7 +130,11 @@ struct HomeView: View {
                                     Button(action: {
                                         if canStart {
                                             HapticManager.shared.mediumImpact()
-                                            navigateToPractice = true
+                                            if authManager.hasActiveSubscription {
+                                                navigateToPractice = true
+                                            } else {
+                                                showDailyPracticePaywall = true
+                                            }
                                         }
                                     }) {
                                         Text(buttonText)
@@ -288,6 +295,7 @@ struct HomeView: View {
                     .presentationDragIndicator(.hidden)
                     .presentationCornerRadius(20)
             }
+            .subscriptionGate(isPresented: $showDailyPracticePaywall)
             .onAppear {
                 log("👁️ HomeView appeared - refreshing continue course and daily practice status")
                 viewModel.loadUserData()

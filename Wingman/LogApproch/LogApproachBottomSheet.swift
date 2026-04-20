@@ -7,13 +7,19 @@ import SwiftUI
 
 struct LogApproachBottomSheet: View {
     @Binding var isPresented: Bool
+    @EnvironmentObject private var authManager: AuthManager
     @StateObject private var viewModel = LogApproachViewModel()
     @State private var dragOffset: CGFloat = 0
     @State private var showApproachGuide = false
-    
+
+    // Feature-gate paywall for NEW log creation only.
+    // Edits of existing approach logs are NOT gated — ex-subscribers retain
+    // the ability to revise their own historical data.
+    @State private var showPaywall = false
+
     // Optional approach for editing
     let approachToEdit: ApproachLog?
-    
+
     init(isPresented: Binding<Bool>, approachToEdit: ApproachLog? = nil) {
         self._isPresented = isPresented
         self.approachToEdit = approachToEdit
@@ -244,6 +250,15 @@ struct LogApproachBottomSheet: View {
                         // MARK: - Save Button
                         Button(action: {
                             HapticManager.shared.mediumImpact()
+
+                            // Gate NEW log creation on subscription. Edits
+                            // of existing logs bypass the gate so users keep
+                            // control of their historical data.
+                            if !viewModel.isEditMode && !authManager.hasActiveSubscription {
+                                showPaywall = true
+                                return
+                            }
+
                             viewModel.saveApproach()
 
                             // Dismiss after successful save
@@ -344,6 +359,7 @@ struct LogApproachBottomSheet: View {
                 .presentationDragIndicator(.hidden)
                 .presentationCornerRadius(20)
         }
+        .subscriptionGate(isPresented: $showPaywall)
     }
 }
 

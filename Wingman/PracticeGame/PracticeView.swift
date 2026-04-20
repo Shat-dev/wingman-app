@@ -15,6 +15,11 @@ struct PracticeView: View {
     @State private var isLoadingGame: Bool = false
     @EnvironmentObject var authManager: AuthManager
 
+    // Feature-gate paywall for scenario taps (free users).
+    // Progression-locked scenarios are disabled at the card level and never
+    // reach the loadAndNavigate path — only unlocked scenarios hit the gate.
+    @State private var showPaywall: Bool = false
+
     // MARK: - Body
     var body: some View {
         NavigationStack {
@@ -57,6 +62,7 @@ struct PracticeView: View {
                     )
                 }
             }
+            .subscriptionGate(isPresented: $showPaywall)
         }
         .task {
             // Refresh the practice list and prefetch game data on every appearance.
@@ -123,6 +129,16 @@ struct PracticeView: View {
     // MARK: - Load game data then navigate
     private func loadAndNavigate(practice: Practice) async {
         guard !practice.isLocked else { return }
+
+        // Subscription gate — free users see the paywall instead of
+        // navigating into the scenario. Placed after the progression-lock
+        // guard so locked scenarios continue to no-op silently (matches
+        // the "reduce paywall spam" requirement for progression locks).
+        guard authManager.hasActiveSubscription else {
+            showPaywall = true
+            return
+        }
+
         viewModel.selectPractice(practice)
 
         // Fast path: prefetched data available, navigate instantly with no spinner.

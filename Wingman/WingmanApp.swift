@@ -65,31 +65,16 @@ struct RootView: View {
                 if authManager.isCheckingSession {
                     let _ = log("🎯 RootView: Checking session...")
                     SplashView()
-                    
-                // MARK: - Subscription Expiry Check (Highest Priority)
-                // If authenticated and paywall completed, but subscription expired → force paywall
-                // Only check if we've confirmed the subscription status at least once.
-                //
-                // ⚠️ Phase 1 dismissible paywall: this branch must ALSO require
-                // `hasEverHadSubscription`. Without that gate it would catch
-                // free users who reached MainTabView by *dismissing* the
-                // initial paywall (hasCompletedPaywallFlow=true,
-                // hasActiveSubscription=false), and would force them into a
-                // non-dismissible paywall on the next subscription check —
-                // defeating the dismissible-paywall feature. The gate keeps
-                // the original intent: only ex-subscribers whose sub lapsed
-                // get force-re-paywalled here.
-                } else if authManager.isAuthenticated &&
-                          authManager.hasCompletedPaywallFlow &&
-                          !authManager.hasActiveSubscription &&
-                          authManager.hasEverHadSubscription &&
-                          SubscriptionManager.shared.hasCheckedAtLeastOnce {
-                    let _ = log("🎯 RootView: Subscription expired (confirmed) - forcing PaywallView")
-                    NavigationStack {
-                        PaywallView(authManager: authManager)
-                    }
-                    
+
                 // MARK: - Authenticated User Flow
+                //
+                // Ex-subscribers (whose subscription has lapsed) flow through
+                // this branch to MainTabView — the same as free users who
+                // dismissed the paywall. Per-feature subscription gating inside
+                // MainTabView presents the paywall on specific tap → enter
+                // transitions (Daily Practice, Log Encounter, lesson entry,
+                // scenario tap). Completed progress remains visible; it's read
+                // from local/cloud storage and is not gated on subscription.
                 } else if authManager.isAuthenticated {
                     let _ = log("🎯 RootView: User IS authenticated")
 

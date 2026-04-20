@@ -13,7 +13,22 @@ struct CourseDetailSheet: View {
     var lockReason: CourseLockReason = .unlocked
 
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var authManager: AuthManager
     @State private var lessons: [Lesson] = []
+
+    // State-driven navigation for lesson entry (replaces the NavigationLink
+    // previously inside LessonCard). This is required to subscription-gate
+    // the tap BEFORE the push happens — NavigationLink doesn't offer an
+    // onTap hook, and gating inside LessonView.onAppear would briefly flash
+    // the lesson content before the paywall appears and leave a polluted
+    // navigation back-stack.
+    @State private var lessonToPresent: Lesson?
+    @State private var isPresentingLesson = false
+
+    // Feature-gate paywall for unlocked-lesson taps (free users).
+    // Progression-locked lessons are disabled at the Button level and never
+    // reach the gate — matches the "reduce paywall spam" requirement.
+    @State private var showPaywall = false
 
     private var isLocked: Bool { lockReason.isLocked }
 
@@ -99,14 +114,20 @@ struct CourseDetailSheet: View {
                         // MARK: - Lessons List
                         VStack(spacing: 12) {
                             ForEach(lessons) { lesson in
-                                LessonCard(
-                                    lesson: lesson,
-                                    allLessons: lessons,
-                                    onLessonComplete: {
-                                        // Refresh lessons when returning
-                                        loadLessons()
+                                LessonCard(lesson: lesson) {
+                                    // Progression-locked: Button is disabled,
+                                    // this closure won't fire. Explicit guard
+                                    // kept as belt-and-suspenders against
+                                    // future refactors.
+                                    guard !lesson.isLocked else { return }
+
+                                    if authManager.hasActiveSubscription {
+                                        lessonToPresent = lesson
+                                        isPresentingLesson = true
+                                    } else {
+                                        showPaywall = true
                                     }
-                                )
+                                }
                             }
                         }
                         .padding(.horizontal, 20)
@@ -120,6 +141,18 @@ struct CourseDetailSheet: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true) // ensure iOS back button is hidden
         .enableInteractivePopGesture()
+        .navigationDestination(isPresented: $isPresentingLesson) {
+            if let lesson = lessonToPresent {
+                LessonView(lesson: lesson, allLessons: lessons)
+                    .onDisappear {
+                        // Refresh lesson progress (completion state, next-lesson
+                        // unlocks) when returning from the lesson. Matches the
+                        // prior NavigationLink's onDisappear behavior exactly.
+                        loadLessons()
+                    }
+            }
+        }
+        .subscriptionGate(isPresented: $showPaywall)
         .onAppear {
             // Only record last-accessed for unlocked courses so the Home
             // "Continue" card never points at a locked preview.
@@ -166,22 +199,20 @@ struct CourseDetailSheet: View {
 }
 
 // MARK: - Lesson Card
+//
+// The card no longer manages its own navigation. It delegates the tap to
+// a closure provided by the parent (CourseDetailSheet), which decides
+// whether to present the lesson, show a paywall, or no-op for
+// progression-locked lessons. This separation is what lets the parent
+// subscription-gate the tap BEFORE any navigation animation.
 struct LessonCard: View {
     let lesson: Lesson
-    let allLessons: [Lesson]
-    var onLessonComplete: (() -> Void)?
-    
+    let onTap: () -> Void
+
     var body: some View {
-        // Use NavigationLink to get right-to-left push transition
-        NavigationLink {
-            LessonView(lesson: lesson, allLessons: allLessons)
-                .onDisappear {
-                    // Refresh when returning from lesson
-                    onLessonComplete?()
-                }
-        } label: {
+        Button(action: onTap) {
             VStack(alignment: .leading, spacing: 0) {
-                
+
                 // MARK: - Title Row
                 HStack(alignment: .top, spacing: 12) {
                     Text(lesson.title)
@@ -189,22 +220,22 @@ struct LessonCard: View {
                         .foregroundColor(lesson.isLocked ? Color(hex: "CCCCCC") : .wingmanBlack)
                         .multilineTextAlignment(.leading)
                         .fixedSize(horizontal: false, vertical: true)
-                    
+
                     Spacer()
-                    
+
                     if lesson.isLocked {
                         Image("lock_icon")
                             .foregroundColor(.wingmanBlack)
                             .padding(.top, -10)
                     }
                 }
-                
+
                 // MARK: - Duration
                 Text("\(lesson.duration) min")
                     .font(.manropeMedium(size: 12))
                     .foregroundColor(lesson.isLocked ? Color(hex: "CCCCCC") : Color(hex: "888888"))
                     .padding(.top, 6)
-                
+
                 // MARK: - Summary
                 Text(lesson.summary)
                     .font(.manropeMedium(size: 14))

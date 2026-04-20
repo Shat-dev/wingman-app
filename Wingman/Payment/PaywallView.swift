@@ -17,17 +17,33 @@ struct PaywallView: View {
     // Optional AuthManager for anonymous user purchase tracking
     let authManager_init: AuthManager?
 
-    /// When true, renders an X close button in the top-trailing corner that
-    /// calls `authManager.completePaywallFlow()` and lets the routing in
-    /// RootView advance the user (authenticated → MainTabView, anonymous →
-    /// AuthView signup). Default false preserves the original non-dismissible
-    /// behavior — required for the subscription-expiry paywall path which
-    /// must stay forced.
+    /// When true, renders an X close button in the top-trailing corner.
+    /// Default false preserves the non-dismissible behavior used by legacy
+    /// call sites.
     let isDismissible: Bool
 
-    init(authManager: AuthManager? = nil, isDismissible: Bool = false) {
+    /// Optional override for the X button's dismiss behavior.
+    ///
+    /// - When `nil` (default): X calls `authManager.completePaywallFlow()`,
+    ///   which is the correct behavior for the **routing-level paywall** in
+    ///   RootView — it advances the user past the paywall flow so the next
+    ///   screen (MainTabView or AuthView signup) can render.
+    /// - When provided: X calls the closure instead. This is the correct
+    ///   behavior for **feature-gate paywalls** (presented via
+    ///   `.subscriptionGate(isPresented:)`), where the user is already past
+    ///   the paywall flow (`hasCompletedPaywallFlow` is already true) and
+    ///   dismissing just needs to close the sheet — setting the paywall-flow
+    ///   flag again would be semantically wrong.
+    let onDismiss: (() -> Void)?
+
+    init(
+        authManager: AuthManager? = nil,
+        isDismissible: Bool = false,
+        onDismiss: (() -> Void)? = nil
+    ) {
         self.authManager_init = authManager
         self.isDismissible = isDismissible
+        self.onDismiss = onDismiss
     }
 
     var body: some View {
@@ -356,7 +372,11 @@ struct PaywallView: View {
                 if isDismissible {
                     Button {
                         HapticManager.shared.lightImpact()
-                        authManager.completePaywallFlow()
+                        if let onDismiss = onDismiss {
+                            onDismiss()
+                        } else {
+                            authManager.completePaywallFlow()
+                        }
                     } label: {
                         // Mirrors the AuthView back-chevron treatment: naked
                         // SF Symbol, wingmanBlack, 44×44 tap target. `xmark` is

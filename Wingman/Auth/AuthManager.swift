@@ -75,21 +75,6 @@ final class AuthManager: ObservableObject {
         }
     }
 
-    // Tracks whether this user has *ever* held an active subscription on this
-    // install. Set to true the first time `syncSubscriptionStatus` observes
-    // `isSubscriptionActive == true`, then sticky for the user's lifetime on
-    // this device (cleared only on signOut / userDeleted, mirroring the other
-    // per-user flags). Purpose: the routing-level expiry paywall in RootView
-    // must only force-paywall *ex-subscribers*. Without this flag it would
-    // also catch free users who dismissed the initial paywall, sending them
-    // to a non-dismissible paywall on the next subscription check — which
-    // would defeat the dismissible-paywall feature entirely.
-    @Published var hasEverHadSubscription: Bool = false {
-        didSet {
-            log("💎 hasEverHadSubscription changed: \(oldValue) → \(hasEverHadSubscription)")
-        }
-    }
-
     @Published var currentUser: User? {
         didSet {
             log("👤 currentUser changed: \(oldValue?.email ?? "nil") → \(currentUser?.email ?? "nil")")
@@ -143,11 +128,6 @@ final class AuthManager: ObservableObject {
         // Check if user is in anonymous mode
         isAnonymousUser = UserDefaults.standard.bool(forKey: "isAnonymousUser")
         log("👻 Loaded isAnonymousUser: \(isAnonymousUser)")
-
-        // Global default for hasEverHadSubscription — overwritten by the
-        // per-user value once the session restore identifies the userId.
-        hasEverHadSubscription = UserDefaults.standard.bool(forKey: "hasEverHadSubscription")
-        log("💎 Loaded hasEverHadSubscription: \(hasEverHadSubscription)")
 
         // Don't setup subscription monitoring here - will be done after RevenueCat is configured
 
@@ -210,21 +190,6 @@ final class AuthManager: ObservableObject {
         let subscriptionManager = SubscriptionManager.shared
         self.hasActiveSubscription = subscriptionManager.isSubscriptionActive
         self.subscriptionExpiryDate = subscriptionManager.subscriptionExpiryDate
-
-        // Latch hasEverHadSubscription the first time we observe an active
-        // subscription. Sticky thereafter — only signOut / userDeleted clear it.
-        // This is what differentiates "ex-subscriber whose sub lapsed" (should
-        // re-paywall) from "free user who dismissed the paywall" (stays in app).
-        if subscriptionManager.isSubscriptionActive && !hasEverHadSubscription {
-            hasEverHadSubscription = true
-            if let userId = currentUser?.id.uuidString {
-                UserDefaults.standard.set(true, forKey: "hasEverHadSubscription_\(userId)")
-            } else {
-                // Anonymous purchase path — persist under global key, transferred
-                // to per-user key on signup via syncAnonymousDataToBackend.
-                UserDefaults.standard.set(true, forKey: "hasEverHadSubscription")
-            }
-        }
     }
     
     deinit {
@@ -272,7 +237,6 @@ final class AuthManager: ObservableObject {
                     await checkUserQuestionStatus(userId: session.user.id.uuidString)
                     await checkUserPaywallFlowStatus(userId: session.user.id.uuidString)
                     await checkUserRatingPromptStatus(userId: session.user.id.uuidString)
-                    await checkUserEverHadSubscription(userId: session.user.id.uuidString)
 
                     // ✅ Hydrate lesson progress from Supabase user_metadata so
                     // users who reinstall / switch devices don't lose progress.
@@ -290,7 +254,6 @@ final class AuthManager: ObservableObject {
                 self.hasCompletedQuestions = false
                 self.hasCompletedPaywallFlow = false
                 self.hasSeenRatingPrompt = false
-                self.hasEverHadSubscription = false
                 log("🚪 User signed out")
 
             case .initialSession:
@@ -309,7 +272,6 @@ final class AuthManager: ObservableObject {
                     await checkUserQuestionStatus(userId: session.user.id.uuidString)
                     await checkUserPaywallFlowStatus(userId: session.user.id.uuidString)
                     await checkUserRatingPromptStatus(userId: session.user.id.uuidString)
-                    await checkUserEverHadSubscription(userId: session.user.id.uuidString)
 
                     // ✅ Hydrate lesson progress from Supabase user_metadata
                     // after session restoration so returning users (including
@@ -361,7 +323,6 @@ final class AuthManager: ObservableObject {
                 self.hasCompletedQuestions = false
                 self.hasCompletedPaywallFlow = false
                 self.hasSeenRatingPrompt = false
-                self.hasEverHadSubscription = false
                 log("🗑️ User deleted")
 
             @unknown default:
@@ -421,33 +382,6 @@ final class AuthManager: ObservableObject {
         log("⭐ Rating prompt status loaded: \(hasSeenRatingPrompt) for user: \(userId)")
     }
 
-    private func checkUserEverHadSubscription(userId: String) async {
-        let key = "hasEverHadSubscription_\(userId)"
-
-        // One-time migration for users upgrading from pre-Phase-1 versions
-        // (where the paywall was non-dismissible). Before this change, the
-        // ONLY way `hasCompletedPaywallFlow` got set to true was a successful
-        // purchase — so any user already carrying that flag is, by definition,
-        // a legacy paying user. Backfill `hasEverHadSubscription` for them so
-        // the routing-level expiry paywall continues to fire correctly when
-        // their subscription lapses. The migration flag ensures we don't
-        // re-trigger and incorrectly classify a Phase-1 dismissing user as an
-        // ex-subscriber on later launches.
-        let migrationKey = "hasEverHadSubscription_migrated_v1_\(userId)"
-        if !UserDefaults.standard.bool(forKey: migrationKey) {
-            let paywallKey = "hasCompletedPaywallFlow_\(userId)"
-            let alreadyHadEverFlag = UserDefaults.standard.bool(forKey: key)
-            if UserDefaults.standard.bool(forKey: paywallKey) && !alreadyHadEverFlag {
-                UserDefaults.standard.set(true, forKey: key)
-                log("🔄 Migrated hasEverHadSubscription=true for legacy user: \(userId)")
-            }
-            UserDefaults.standard.set(true, forKey: migrationKey)
-        }
-
-        hasEverHadSubscription = UserDefaults.standard.bool(forKey: key)
-        log("💎 Ever-had-subscription status loaded: \(hasEverHadSubscription) for user: \(userId)")
-    }
-    
     // MARK: - Graceful Session Restoration (Offline-First)
     
     /// Restores session from local cache instantly, then validates with server in background
@@ -471,7 +405,6 @@ final class AuthManager: ObservableObject {
             await checkUserQuestionStatus(userId: session.user.id.uuidString)
             await checkUserPaywallFlowStatus(userId: session.user.id.uuidString)
             await checkUserRatingPromptStatus(userId: session.user.id.uuidString)
-            await checkUserEverHadSubscription(userId: session.user.id.uuidString)
 
             // Mark session check complete - UI can now render
             self.isCheckingSession = false
@@ -671,7 +604,6 @@ final class AuthManager: ObservableObject {
         // skipped the name step get "User" and can change it from Profile.
         let resolvedName: String = !typedName.isEmpty ? typedName : "User"
         let needsLinking = anonymousManager.needsRevenueCatLinking
-        let everHadSubscription = self.hasEverHadSubscription
         log("💳 Anonymous flags — purchase=\(hadActivePurchase) paywallComplete=\(hadCompletedPaywallFlow) onboarding=\(hadCompletedOnboarding) rating=\(hadSeenRatingPrompt)")
 
         // =====================================================================
@@ -706,10 +638,6 @@ final class AuthManager: ObservableObject {
             UserDefaults.standard.set(true, forKey: "hasSeenRatingPrompt_\(userId)")
             UserDefaults.standard.removeObject(forKey: "hasSeenRatingPrompt")
             log("⭐ Transferred anonymous rating-prompt flag to per-user key for user: \(userId)")
-        }
-
-        if everHadSubscription {
-            UserDefaults.standard.set(true, forKey: "hasEverHadSubscription_\(userId)")
         }
 
         // Reflect the resolved display name in the local profile store
@@ -1241,7 +1169,6 @@ final class AuthManager: ObservableObject {
             hasCompletedQuestions = false
             hasCompletedPaywallFlow = false
             hasSeenRatingPrompt = false
-            hasEverHadSubscription = false
 
             if let userId = userIdForCleanup {
                 UserDefaults.standard.removeObject(forKey: "hasSeenRatingPrompt_\(userId)")
@@ -1341,7 +1268,6 @@ final class AuthManager: ObservableObject {
                     hasCompletedQuestions = false
                     hasCompletedPaywallFlow = false
                     hasSeenRatingPrompt = false
-                    hasEverHadSubscription = false
                     isCheckingSession = false
 
                     log("✅ Account deletion completed successfully")
@@ -1380,6 +1306,10 @@ final class AuthManager: ObservableObject {
         userDefaults.removeObject(forKey: "hasCompletedQuestions_\(userId)")
         userDefaults.removeObject(forKey: "hasCompletedPaywallFlow_\(userId)")
         userDefaults.removeObject(forKey: "hasSeenRatingPrompt_\(userId)")
+        // Leftover keys from the pre-gating hasEverHadSubscription flag. The
+        // flag was removed when feature gates were added — these removes
+        // clean up stale values on upgraded installs. Harmless no-op on
+        // fresh installs.
         userDefaults.removeObject(forKey: "hasEverHadSubscription_\(userId)")
         userDefaults.removeObject(forKey: "hasEverHadSubscription_migrated_v1_\(userId)")
         userDefaults.removeObject(forKey: "current_user_id")
