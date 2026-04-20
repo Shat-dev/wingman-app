@@ -47,14 +47,21 @@ struct LandingView: View {
                             Image(page.imageName)
                                 .resizable()
                                 .scaledToFit()
-                                .frame(height: 320)
+                                // SE-only: shrink the hero image so the
+                                // carousel can fit in the reduced frame
+                                // height below. Standard / Max phones keep
+                                // the original 320pt image.
+                                .frame(height: UIScreen.isSmallPhone ? 200 : 320)
                                 .padding(.top, 10)
                         }
                         .tag(index)
                     }
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
-                .frame(height: 520)
+                // SE-only: reduce carousel height so that the CTA buttons
+                // below remain visible on ~667pt-tall screens. Standard /
+                // Max phones are untouched at 520pt.
+                .frame(height: UIScreen.isSmallPhone ? 400 : 520)
 
 
 

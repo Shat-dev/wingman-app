@@ -290,12 +290,16 @@ struct HomeView: View {
                 }
             }
             .navigationDestination(isPresented: $navigateToPractice) {
-                DailyPracticeView()
+                DailyPracticeView(onCompletionDismiss: { navigateToPractice = false })
                     .environmentObject(tabBarVisibility)
             }
             .sheet(isPresented: $showLogApproachSheet) {
                 LogApproachBottomSheet(isPresented: $showLogApproachSheet, approachToEdit: nil)
-                    .presentationDetents([.large])
+                    // SE-only: offer a resizable fractional detent alongside
+                    // `.large` so users can drag the sheet shorter if the
+                    // TextEditor/Slider stack feels cramped. Standard / Max
+                    // phones retain the original `.large`-only behavior.
+                    .presentationDetents(UIScreen.isSmallPhone ? [.fraction(0.9), .large] : [.large])
                     .presentationDragIndicator(.hidden)
                     .presentationCornerRadius(20)
             }

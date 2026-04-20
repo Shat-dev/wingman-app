@@ -13,13 +13,22 @@ struct DailyPracticeView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var tabBarVisibility: TabBarVisibilityManager
 
+    // Closure owned by the outer NavigationStack (HomeView) that flips its
+    // `navigateToPractice` binding to false. Used from QuestionsCompleteView's
+    // Continue button — DailyPracticeView's own @Environment(\.dismiss) is a
+    // no-op once QuestionsCompleteView is pushed on top, so we bypass it and
+    // let the outermost binding unwind the whole stack in one shot.
+    private let onCompletionDismiss: () -> Void
+
     // Default initializer for production use
-    init() {
+    init(onCompletionDismiss: @escaping () -> Void = {}) {
+        self.onCompletionDismiss = onCompletionDismiss
         self._viewModel = StateObject(wrappedValue: DailyPracticeViewModel())
     }
 
     // Preview initializer for Canvas testing
     init(previewViewModel: DailyPracticeViewModel) {
+        self.onCompletionDismiss = {}
         self._viewModel = StateObject(wrappedValue: previewViewModel)
     }
 
@@ -77,10 +86,7 @@ struct DailyPracticeView: View {
         .navigationDestination(isPresented: $viewModel.showCompletionView) {
             QuestionsCompleteView(
                 currentStreak: viewModel.currentStreak,
-                showCompletionView: $viewModel.showCompletionView,
-                dismissDailyPractice: {
-                    dismiss()
-                }
+                dismissDailyPractice: onCompletionDismiss
             )
             .environmentObject(tabBarVisibility)
         }

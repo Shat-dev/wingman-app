@@ -178,7 +178,10 @@ struct ApproachesLoggedListView: View {
                     isPresented: $showLogApproach,
                     approachToEdit: selectedApproach
                 )
-                .presentationDetents([.large])
+                // SE-only: matches the HomeView presentation — fractional
+                // detent lets users shrink the sheet if the editor feels
+                // cramped. Standard / Max phones unchanged.
+                .presentationDetents(UIScreen.isSmallPhone ? [.fraction(0.9), .large] : [.large])
                 .presentationDragIndicator(.hidden)
                 .presentationCornerRadius(20)
             }

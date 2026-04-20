@@ -31,6 +31,17 @@ final class DailyPracticeViewModel: ObservableObject {
     // count it into the streak-update RPC. Reset per session in loadTodayQuestions.
     private var countedQuestionIds: Set<UUID> = []
 
+    // MARK: - Per-question State Persistence
+    // Preserves answer state across back/forward navigation so users can
+    // review a prior question without being able to re-answer it.
+    private struct SavedQuestionState {
+        let selectedOptionIndex: Int?
+        let selectedOptionIndices: Set<Int>
+        let hasCheckedAnswer: Bool
+        let isAnswerCorrect: Bool
+    }
+    private var questionStates: [UUID: SavedQuestionState] = [:]
+
     // MARK: - Dependencies
     private let practiceService: DailyPracticeServiceProtocol
     private var cancellables = Set<AnyCancellable>()
@@ -93,6 +104,7 @@ final class DailyPracticeViewModel: ObservableObject {
             totalQuestionsAnswered = 0
             totalCorrectAnswers = 0
             countedQuestionIds = []
+            questionStates = [:]
             
             do {
                 let fetchedQuestions = try await practiceService.getTodayQuestions()
@@ -238,11 +250,12 @@ final class DailyPracticeViewModel: ObservableObject {
             log("⚠️ Must check answer before proceeding")
             return
         }
-        
+
         if currentQuestionIndex < questions.count - 1 {
             log("\n➡️ Moving to next question (\(currentQuestionIndex + 2)/\(questions.count))")
+            saveCurrentQuestionState()
             currentQuestionIndex += 1
-            resetQuestion()
+            loadQuestionState(for: questions[currentQuestionIndex].id)
         } else {
             log("\n🎉 All questions completed!")
             log("   - Total questions: \(questions.count)")
@@ -332,11 +345,12 @@ final class DailyPracticeViewModel: ObservableObject {
     func previousQuestion() {
         if currentQuestionIndex > 0 {
             log("\n⬅️ Moving to previous question (\(currentQuestionIndex)/\(questions.count))")
+            saveCurrentQuestionState()
             currentQuestionIndex -= 1
-            resetQuestion()
+            loadQuestionState(for: questions[currentQuestionIndex].id)
         }
     }
-    
+
     // MARK: - Helper Functions
     private func resetQuestion() {
         selectedOptionIndex = nil
@@ -344,6 +358,29 @@ final class DailyPracticeViewModel: ObservableObject {
         hasCheckedAnswer = false
         isAnswerCorrect = false
         log("🔄 Question state reset")
+    }
+
+    private func saveCurrentQuestionState() {
+        guard currentQuestionIndex < questions.count else { return }
+        let id = questions[currentQuestionIndex].id
+        questionStates[id] = SavedQuestionState(
+            selectedOptionIndex: selectedOptionIndex,
+            selectedOptionIndices: selectedOptionIndices,
+            hasCheckedAnswer: hasCheckedAnswer,
+            isAnswerCorrect: isAnswerCorrect
+        )
+    }
+
+    private func loadQuestionState(for id: UUID) {
+        if let saved = questionStates[id] {
+            selectedOptionIndex = saved.selectedOptionIndex
+            selectedOptionIndices = saved.selectedOptionIndices
+            hasCheckedAnswer = saved.hasCheckedAnswer
+            isAnswerCorrect = saved.isAnswerCorrect
+            log("🔁 Restored saved state for question \(id)")
+        } else {
+            resetQuestion()
+        }
     }
     
     private func submitCompletion(questionId: UUID, isCorrect: Bool, selectedAnswers: SelectedAnswers) async {
@@ -365,6 +402,7 @@ final class DailyPracticeViewModel: ObservableObject {
     func reset() {
         log("🔄 Resetting entire practice session")
         currentQuestionIndex = 0
+        questionStates = [:]
         resetQuestion()
     }
     

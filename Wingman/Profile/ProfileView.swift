@@ -164,7 +164,11 @@ struct ProfileView: View {
             // Keep sheets
             .sheet(isPresented: $showSettings) {
                 SettingsSheet(userName: userProfileStore.displayName ?? "")
-                    .presentationDetents([.height(720)])
+                    // SE-class phones (~667pt tall) can't fit a 720pt detent —
+                    // fall back to `.large` so the sheet maxes out at the
+                    // available screen height. Standard / Max phones keep the
+                    // original fixed detent unchanged.
+                    .presentationDetents(UIScreen.isSmallPhone ? [.large] : [.height(720)])
                     .presentationDragIndicator(.hidden)
                     .presentationCornerRadius(20)
             }

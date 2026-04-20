@@ -11,6 +11,14 @@ struct PracticeCardView: View {
     let practice: Practice
     let onTap: () -> Void
 
+    // MARK: - Derived copy
+    private var lessonCountLabel: String {
+        let n = practice.requiredLessonsCompleted
+        let noun = n == 1 ? "lesson" : "lessons"
+        let suffix = practice.isLocked ? " required" : ""
+        return "\(n) \(noun)\(suffix)"
+    }
+
     // MARK: - Body
     var body: some View {
         Button(action: onTap) {
@@ -26,13 +34,14 @@ struct PracticeCardView: View {
 
                     // Lessons-required threshold
                     HStack(spacing: 4) {
-                        Image("flame_fill")
+                        Image("map")
+                            .renderingMode(.template)
                             .resizable()
                             .scaledToFit()
-                            .opacity(practice.isLocked ? 0.3 : 1.0)
-                            .frame(width: 8, height: 12)
+                            .frame(width: 12, height: 12)
+                            .foregroundColor(Color.wingmanBlack.opacity(practice.isLocked ? 0.3 : 1.0))
 
-                        Text("\(practice.requiredLessonsCompleted) Lessons")
+                        Text(lessonCountLabel)
                             .font(.manropeMedium(size: 12))
                             .foregroundColor(Color.wingmanBlack.opacity(practice.isLocked ? 0.3 : 1.0))
                     }

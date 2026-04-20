@@ -17,6 +17,14 @@ struct PracticeDetailView: View {
     init(practice: Practice) {
         _viewModel = StateObject(wrappedValue: PracticeDetailViewModel(practice: practice))
     }
+
+    // MARK: - Derived copy
+    private var lessonCountLabel: String {
+        let n = viewModel.practice.requiredLessonsCompleted
+        let noun = n == 1 ? "lesson" : "lessons"
+        let suffix = viewModel.practice.isLocked ? " required" : ""
+        return "\(n) \(noun)\(suffix)"
+    }
     
     // MARK: - Body
     var body: some View {
@@ -112,10 +120,14 @@ struct PracticeDetailView: View {
             
             // Lessons-required threshold
             HStack(spacing: 6) {
-                Text("🔥")
-                    .font(.system(size: 14))
+                Image("map")
+                    .renderingMode(.template)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 14, height: 14)
+                    .foregroundColor(Color(hex: "#666666"))
 
-                Text("\(viewModel.practice.requiredLessonsCompleted) Lessons")
+                Text(lessonCountLabel)
                     .font(.manropeMedium(size: 14))
                     .foregroundColor(Color(hex: "#666666"))
             }
