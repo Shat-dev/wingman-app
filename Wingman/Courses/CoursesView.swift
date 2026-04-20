@@ -263,11 +263,13 @@ struct CourseCardContent: View {
                 .opacity(isLocked ? 0.3 : 1.0)
 
                 if isLocked {
+                    // Match the scenario-card lock styling exactly: natural
+                    // asset size (20×22 SVG) + opacity(0.7). Resizing to 18×18
+                    // made the 2px strokes anti-alias to gray, which read as a
+                    // faded icon even though the opacity was effectively 1.0.
                     Image("lock_icon")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 18, height: 18)
                         .foregroundColor(.wingmanBlack)
+                        .opacity(0.7)
                         .padding(10)
                 }
             }
