@@ -355,20 +355,4 @@ final class LessonDataService {
         lessonsCache.removeAll()
         log("🗑️ Cleared all lessons cache")
     }
-
-    // MARK: - Reset Progress (for testing)
-    func resetProgress(courseId: String) {
-        UserDefaults.standard.removeObject(forKey: completedKey(courseId: courseId))
-        UserDefaults.standard.removeObject(forKey: unlockedKey(courseId: courseId))
-        lessonsCache.removeValue(forKey: courseId)
-        log("🔄 Reset progress for course: \(courseId)")
-    }
-
-    // MARK: - Reset All Progress (for testing)
-    func resetAllProgress() {
-        for courseId in courseJsonMapping.keys {
-            resetProgress(courseId: courseId)
-        }
-        log("🔄 Reset all course progress")
-    }
 }

@@ -48,7 +48,13 @@ final class RevenueCatManager: NSObject, ObservableObject {
         }
         
         log("🔧 RevenueCat: Configuring with API Key")
+        // Verbose RevenueCat logs in Debug only — Release ships with .error
+        // so production console noise is limited to real failures.
+        #if DEBUG
         Purchases.logLevel = .debug
+        #else
+        Purchases.logLevel = .error
+        #endif
         Purchases.configure(withAPIKey: apiKey)
         Purchases.shared.delegate = self
         
