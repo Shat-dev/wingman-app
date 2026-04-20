@@ -142,9 +142,7 @@ final class AuthManager: ObservableObject {
     /// Setup subscription monitoring - call this AFTER RevenueCat is configured
     func setupSubscriptionMonitoring() {
         log("🔐 AuthManager: Setting up subscription monitoring (RevenueCat ready)")
-        
-        let subscriptionManager = SubscriptionManager.shared
-        
+
         // Listen for subscription status changes
         NotificationCenter.default.addObserver(
             self,
@@ -324,6 +322,13 @@ final class AuthManager: ObservableObject {
                 self.hasCompletedPaywallFlow = false
                 self.hasSeenRatingPrompt = false
                 log("🗑️ User deleted")
+
+            case .mfaChallengeVerified:
+                // Emitted by Supabase when an MFA challenge is successfully
+                // verified. The app does not use MFA flows today; no state
+                // change is needed — the subsequent signedIn event (if any)
+                // will drive routing. Logged for future observability.
+                log("🔐 Event type: MFA_CHALLENGE_VERIFIED (no-op for current flows)")
 
             @unknown default:
                 log("⚠️ Event type: UNKNOWN")
@@ -1117,6 +1122,26 @@ final class AuthManager: ObservableObject {
             case .unknown:
                 log("❌ Apple Sign-In unknown error")
                 appleSignInError = "An unknown error occurred. Please try again."
+            case .matchedExcludedCredential:
+                // Passkey-registration path; not produced by the Sign-In-with-
+                // Apple flow this app uses. Treat as a generic failure so the
+                // user can retry.
+                log("❌ Apple Sign-In: matchedExcludedCredential")
+                appleSignInError = "Sign-in failed. Please try again."
+            case .credentialImport, .credentialExport:
+                // Passkey import/export errors; not reachable from SIWA here.
+                log("❌ Apple Sign-In: credential import/export error")
+                appleSignInError = "Sign-in failed. Please try again."
+            case .preferSignInWithApple:
+                // User opted to continue with an existing SIWA account. Since
+                // this flow IS SIWA, treat as a generic cancel/retry prompt.
+                log("ℹ️ Apple Sign-In: preferSignInWithApple")
+                appleSignInError = nil
+            case .deviceNotConfiguredForPasskeyCreation:
+                // Passkey-specific; not reachable from SIWA. Log and surface a
+                // retry-friendly message.
+                log("❌ Apple Sign-In: deviceNotConfiguredForPasskeyCreation")
+                appleSignInError = "Sign-in failed. Please try again."
             @unknown default:
                 log("❌ Apple Sign-In unknown error code")
                 appleSignInError = error.localizedDescription
