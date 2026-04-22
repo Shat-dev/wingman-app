@@ -228,9 +228,9 @@ struct PaywallView: View {
                                     // Yearly Plan
                                     PlanRow(
                                         title: "Yearly Plan",
-                                        price: viewModel.yearlyPrice.isEmpty ? "" : "\(viewModel.yearlyPrice) per year",
-                                        weekly: calculateWeeklyPrice(viewModel.yearlyPackage),
-                                        weeklySubtitle: "per week",
+                                        price: viewModel.yearlyPackage.map { "\(calculateWeeklyPrice($0)) per week" } ?? "",
+                                        weekly: viewModel.yearlyPrice,
+                                        weeklySubtitle: "per year",
                                         isSelected: viewModel.selectedPlan == .yearly,
                                         badgeText: (viewModel.selectedPlan == .yearly && viewModel.isYearlyTrialEligible) ? "3-day Free Trial" : nil
                                     ) {
@@ -243,9 +243,9 @@ struct PaywallView: View {
                                     // Monthly Plan
                                     PlanRow(
                                         title: "Monthly Plan",
-                                        price: viewModel.monthlyPrice.isEmpty ? "" : "\(viewModel.monthlyPrice) per month",
-                                        weekly: calculateWeeklyPrice(viewModel.monthlyPackage),
-                                            weeklySubtitle: "per week",
+                                        price: viewModel.monthlyPackage.map { "\(calculateWeeklyPrice($0)) per week" } ?? "",
+                                        weekly: viewModel.monthlyPrice,
+                                            weeklySubtitle: "per month",
                                             isSelected: viewModel.selectedPlan == .monthly,
                                             badgeText: (viewModel.selectedPlan == .monthly && viewModel.isMonthlyTrialEligible) ? "3-day Free Trial" : nil
                                     ) {

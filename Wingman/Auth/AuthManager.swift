@@ -602,12 +602,13 @@ final class AuthManager: ObservableObject {
         let userAge = anonymousManager.userAge
         let userGoals = anonymousManager.userGoals
         let typedName = anonymousManager.userName?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        // Pick the best available display name. We intentionally do NOT derive
-        // from the user's email address — the email prefix can be long,
-        // unflattering, or unrelated to the user's preferred name, and it
-        // bypasses the 10-char cap enforced on the typed-name path. Users who
-        // skipped the name step get "User" and can change it from Profile.
-        let resolvedName: String = !typedName.isEmpty ? typedName : "User"
+        // Only carry forward a display name we actually captured. Anonymous
+        // onboarding no longer collects a name, so `typedName` will normally
+        // be empty — in that case we intentionally leave display_name alone,
+        // because SIWA/Google populate it on sign-in and writing "User" here
+        // would clobber the provider-supplied name. The `typedName` path is
+        // preserved for legacy data still in AnonymousUserManager from
+        // previous app versions.
         let needsLinking = anonymousManager.needsRevenueCatLinking
         log("💳 Anonymous flags — purchase=\(hadActivePurchase) paywallComplete=\(hadCompletedPaywallFlow) onboarding=\(hadCompletedOnboarding) rating=\(hadSeenRatingPrompt)")
 
@@ -645,9 +646,13 @@ final class AuthManager: ObservableObject {
             log("⭐ Transferred anonymous rating-prompt flag to per-user key for user: \(userId)")
         }
 
-        // Reflect the resolved display name in the local profile store
-        // immediately, so the UI is consistent even if the cloud write fails.
-        UserProfileStore.shared.apply(name: resolvedName)
+        // Reflect a typed display name in the local profile store immediately,
+        // so the UI is consistent even if the cloud write fails. Skipped when
+        // no name was captured during anonymous onboarding — the provider
+        // (SIWA/Google) already populated UserProfileStore on sign-in.
+        if !typedName.isEmpty {
+            UserProfileStore.shared.apply(name: typedName)
+        }
 
         // Clear anonymous state now that we've captured everything and
         // written durable per-user equivalents. This must happen BEFORE the
@@ -669,8 +674,10 @@ final class AuthManager: ObservableObject {
         // state — the user proceeds normally.
         do {
             var updates: [String: AnyJSON] = [:]
-            updates["display_name"] = AnyJSON.string(resolvedName)
-            log("   - Syncing name: \(resolvedName)")
+            if !typedName.isEmpty {
+                updates["display_name"] = AnyJSON.string(typedName)
+                log("   - Syncing name: \(typedName)")
+            }
 
             if let age = userAge {
                 updates["age"] = AnyJSON.string(age)

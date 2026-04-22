@@ -76,9 +76,7 @@ struct OnboardingView: View {
                 // Use ForEach with a single item to enable proper transition
                 ForEach([stepIndex], id: \.self) { index in
                     Group {
-                        if steps[index].type == .name {
-                            nameInputContentView(step: steps[index])
-                        } else if steps[index].type == .question {
+                        if steps[index].type == .question {
                             questionContentView(step: steps[index])
                         } else if steps[index].type == .loading {
                             loadingContentView(step: steps[index])
@@ -202,33 +200,6 @@ struct OnboardingView: View {
                 }
         )
     }
-
-    // MARK: - Name Input Content View (without top bar)
-    // Delegates to `NameInputView` — extracted as its own struct so that
-    // typing in the TextField only re-evaluates NameInputView, not the
-    // entire OnboardingView body (which otherwise runs per keystroke
-    // including the safeAreaInset HStack, progress-bar computation, and
-    // simultaneousGesture closure re-capture).
-    private func nameInputContentView(step: OnboardingStep) -> some View {
-        NameInputView(
-            title: step.title,
-            onNext: { trimmedName in
-                answers["name"] = trimmedName
-
-                // Save to AnonymousUserManager if in anonymous mode
-                if authManager.isAnonymousUser {
-                    AnonymousUserManager.shared.userName = trimmedName
-                    log("👻 Saved name to anonymous storage: \(trimmedName)")
-                }
-
-                moveToNext()
-            },
-            onSkip: {
-                moveToNext()
-            }
-        )
-    }
-
 
     // MARK: - Question Content View (without top bar)
     private func questionContentView(step: OnboardingStep) -> some View {
@@ -787,31 +758,14 @@ struct OnboardingView: View {
 
     // MARK: - Save to Supabase (Auth User Metadata)
     private func saveUserName() {
-        // Pick the best available name, falling back when the user skipped
-        // the name step. We intentionally do NOT derive a name from the
-        // user's email — the email prefix can be long, unflattering, or
-        // unrelated to their preferred name, and it bypasses the 10-char
-        // cap enforced on the typed-name path. Skippers get "User" and can
-        // change it from Profile.
-        let typed = answers["name"]?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        let name: String
-        if !typed.isEmpty {
-            name = typed
-        } else {
-            name = "User"
-            log("ℹ️ Name step skipped — using fallback display_name: User")
-        }
-
+        // Name is no longer collected during onboarding (SIWA/Google already
+        // supply it; email-signup users can set one from Profile). This call
+        // only stamps onboarding_completed — it must not write display_name,
+        // because doing so would overwrite the SIWA/Google-provided name
+        // already stored in user_metadata.
         let updatedAt = ISO8601DateFormatter().string(from: Date())
 
-        log("📤 Saving user metadata to Supabase")
-        log("   • name:", name)
-        log("   • onboardingCompleted: true")
-        log("   • updatedAt:", updatedAt)
-
-        // Push into the shared store immediately so Home/Profile can render
-        // the new name without waiting for the next metadata fetch round-trip.
-        UserProfileStore.shared.apply(name: name)
+        log("📤 Marking onboarding complete in Supabase")
 
         Task {
             do {
@@ -820,7 +774,6 @@ struct OnboardingView: View {
                 try await client.auth.update(
                     user: UserAttributes(
                         data: [
-                            "display_name": AnyJSON.string(name),
                             "onboarding_completed": AnyJSON.bool(true),
                             "updated_at": AnyJSON.string(updatedAt)
                         ]
@@ -846,7 +799,7 @@ struct OnboardingView: View {
             return
         }
 
-        // If on first step (name input) and showLanding is bound, navigate back to Landing
+        // If on first step (age question) and showLanding is bound, navigate back to Landing
         if stepIndex == 0 {
             if let binding = showLanding {
                 log("🔙 On first step with showLanding binding - navigating back to Landing")
@@ -1013,99 +966,6 @@ struct OnboardingView: View {
     }
 }
 
-// MARK: - Name Input View
-// Extracted from `OnboardingView.nameInputContentView` so state owned by the
-// TextField (`name`, `focused`) stays local. Typing no longer re-evaluates
-// the parent body, the safeAreaInset HStack, or the global swipe gesture —
-// SwiftUI diff scope is limited to this struct.
-//
-// Haptics, trimming, 10-char limit, focus-on-appear, and the Skip affordance
-// are preserved exactly; the only change is where the state lives.
-struct NameInputView: View {
-    let title: String
-    let onNext: (String) -> Void  // receives trimmed name
-    let onSkip: () -> Void
-
-    @State private var name: String = ""
-    @FocusState private var focused: Bool
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            Text(title)
-                .font(.manropeSemiBold(size: 24))
-                .lineLimit(2)
-                .multilineTextAlignment(.leading)
-
-            // Name TextField with character limit
-            VStack(alignment: .trailing, spacing: 4) {
-                TextField("", text: $name)
-                    .placeholder(when: name.isEmpty) {
-                        Text("Enter your name")
-                            .foregroundColor(.wingmanBlack.opacity(0.3))
-                    }
-                    .font(.manropeRegular(size: 18))
-                    .padding(16)
-                    .background(Color.wingmanBlack.opacity(0.10))
-                    .cornerRadius(5)
-                    .focused($focused)
-                    .onChange(of: name) { newValue in
-                        // Limit username to 10 characters
-                        if newValue.count > 10 {
-                            name = String(newValue.prefix(10))
-                        }
-                    }
-                    .padding(.top, 10)
-
-                // Character counter
-                Text("\(name.count)/10")
-                    .font(.caption)
-                    .foregroundColor(name.count > 8 ? .red : .gray)
-                    .padding(.trailing, 4)
-            }
-
-            // Buttons (moved closer to text field)
-            VStack(spacing: 12) {
-                // Full-area tappable Next button
-                let isNameEmpty = name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-
-                Button(action: {
-                    HapticManager.shared.lightImpact()
-                    focused = false
-                    onNext(name.trimmingCharacters(in: .whitespacesAndNewlines))
-                }) {
-                    Text("Next")
-                        .frame(maxWidth: .infinity)
-                        .font(.manropeSemiBold(size: 16))
-                        .padding()
-                        .background(isNameEmpty ? Color.wingmanBlack.opacity(0.5) : Color.wingmanBlack)
-                        .foregroundColor(.white)
-                        .cornerRadius(5)
-                }
-                .buttonStyle(PressableButtonStyle())
-                .contentShape(Rectangle())
-                .disabled(isNameEmpty)
-
-                Button("Skip") {
-                    HapticManager.shared.lightImpact()
-                    focused = false
-                    onSkip()
-                }
-                .font(.manropeSemiBold(size: 16))
-                .foregroundColor(.wingmanBlack)
-                .underline()
-                .buttonStyle(PressableButtonStyle())
-            }
-
-            Spacer()
-        }
-        .padding(.horizontal, 24)
-        .padding(.bottom, 16)
-        .onAppear {
-            focused = true
-        }
-    }
-}
-
 // MARK: - Pressable Button Style
 // iOS-native press feedback: scale + dim on touch-down, snap back on release.
 // Resting state is identical to the underlying view (scale 1.0, opacity 1.0)
@@ -1159,19 +1019,8 @@ struct StatisticContent {
     let fact: String
 }
 
-// MARK: - Extended Steps with Name and Loading
+// MARK: - Extended Steps with Loading
 let extendedOnboardingSteps: [OnboardingStep] = [
-    // Name Input
-    OnboardingStep(
-        type: .name,
-        title: "What's your name?",
-        subtitle: nil,
-        options: nil,
-        chartImage: nil,
-        progress: 0.1,
-        questionKey: "name"
-    ),
-
     //1 Age Question
     OnboardingStep(
         type: .question,

@@ -8,7 +8,6 @@
 import SwiftUI
 
 enum StepType {
-    case name
     case question
     case statistic
     case loading
