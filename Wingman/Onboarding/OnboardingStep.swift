@@ -14,7 +14,11 @@ enum StepType {
 }
 
 struct OnboardingStep: Identifiable {
-    let id = UUID()
+    // Deterministic id derived from `questionKey` so the same logical step
+    // has the same identity across reconstructions. The loading step has a
+    // nil `questionKey`; there's only one loading step in the flow, so the
+    // "loading" fallback is unique.
+    var id: String { questionKey ?? "loading" }
     let type: StepType
 
     let title: String

@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 import Supabase
 import Auth
-import UIKit  // for UIImage.preparingForDisplay() asset decode warmup
+import UIKit  // for UIScreen in the swipe-back gesture threshold
 
 struct OnboardingView: View {
     // Optional binding to control navigation back to Landing
@@ -613,23 +613,19 @@ struct OnboardingView: View {
             return false
         }
 
-        // Resolve the answer the same way `moveToNext` does — multi-select
-        // joins chosen options, single-select uses `selectedOption`. For
-        // `barriers` and `goals` (the only multi-select questions), the
-        // returned `StatisticContent` in `getStatistic` is independent of
-        // the answer content, so the joined string is accepted.
-        let answer: String
+        // Guard: don't show a statistic until the user has actually answered.
+        // Multi-select requires at least one selection, single-select requires
+        // a non-nil `selectedOption`. The statistic content itself depends only
+        // on (questionKey, ageGroup), not on the answer value.
         if step.isMultiSelect {
             guard !selectedOptions.isEmpty else { return false }
-            answer = selectedOptions.joined(separator: ", ")
         } else {
-            guard let single = selectedOption else { return false }
-            answer = single
+            guard selectedOption != nil else { return false }
         }
 
         let ageGroup = answers["age"] ?? ""
 
-        if let stat = getStatistic(ageGroup: ageGroup, questionKey: key, answer: answer) {
+        if let stat = StatisticContent.for(questionKey: key, ageGroup: ageGroup) {
             currentStatistic = stat
             // Warm the image cache BEFORE the slide animation starts. The
             // statistic images are large PNGs whose decode would otherwise
@@ -638,75 +634,11 @@ struct OnboardingView: View {
             // `preparingForDisplay()` does the decode on the provided queue
             // and caches the bitmap; the subsequent `Image(named:)` in
             // SwiftUI picks up the already-decoded version.
-            Self.warmStatisticImage(stat.imageName)
+            StatisticContent.warmImage(named: stat.imageName)
             return true
         }
 
         return false
-    }
-
-    /// Force-decode a named asset off the main thread so the bitmap is ready
-    /// by the time SwiftUI constructs the `Image`. Idempotent — UIKit caches
-    /// the prepared image. No-op on failure (the `Image` will still resolve,
-    /// just without the pre-warm benefit).
-    private static func warmStatisticImage(_ name: String) {
-        Task.detached(priority: .userInitiated) {
-            _ = UIImage(named: name)?.preparingForDisplay()
-        }
-    }
-
-    private func getStatistic(ageGroup: String, questionKey: String, answer: String) -> StatisticContent? {
-
-        // After "last_approach" question
-        if questionKey == "last_approach" {
-            if ageGroup == "18-24" {
-                return StatisticContent(
-                    heading: "Almost half of men your age have never approached a women",
-                    subheading: "You are not alone. Millions of men struggle with approaching.",
-                    imageName: "stat_never_approached",
-                    fact: "45% of men aged 18-24 have never approached a woman"
-                )
-            } else {
-                return StatisticContent(
-                    heading: "Almost half of men your age haven't approached in the past year",
-                    subheading: "You are not alone. Millions of men struggle with approaching.",
-                    imageName: "stat_never_approached",
-                    fact: "48% of men aged 26-40 haven't approached in the past year"
-                )
-            }
-        }
-
-        // After "frequency" question
-        if questionKey == "approach_frequency" {
-            return StatisticContent(
-                heading: "Most woman want to be talked to more",
-                subheading: "They're just waiting for you to make the first move",
-                imageName: "stat_frequency",
-                fact: "77% of women aged between 18 and 30 want to be approached more"
-            )
-        }
-
-        // After "barriers" question
-        if questionKey == "barriers" {
-            return StatisticContent(
-                heading: "Most men regret the chances they didn't make",
-                subheading: "Don't join that statistic. Your future self is counting on you.",
-                imageName: "stat_regret",
-                fact: "63% of single men regret not approaching women when they were younger"
-            )
-        }
-
-        // After "goals" question
-        if questionKey == "goals" {
-            return StatisticContent(
-                heading: "Half of men don't approach. Most who do, succeed.",
-                    subheading: "Which side do you want to be on?",
-                    imageName: "stat_success",
-                    fact: "58% of men who consistently approach get a number, date, or relationship"
-                )
-        }
-
-        return nil
     }
 
     // MARK: - Save to Supabase
@@ -860,7 +792,7 @@ struct OnboardingView: View {
                             // work around a SwiftUI ordering bug, but cuts
                             // 67ms of perceived lag before the animation fires.
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.033) {
-                                let newStatistic = self.getStatistic(ageGroup: ageGroup, questionKey: questionKey, answer: answer)
+                                let newStatistic = StatisticContent.for(questionKey: questionKey, ageGroup: ageGroup)
                                 self.currentStatistic = newStatistic
                                 log("🔙 Step 5: Set new statistic: \(newStatistic?.heading ?? "nil")")
 
@@ -892,13 +824,13 @@ struct OnboardingView: View {
                                     
                                     let sourceStep = self.steps[statSourceIndex]
                                     if let questionKey = sourceStep.questionKey,
-                                       let answer = self.answers[questionKey] {
+                                       self.answers[questionKey] != nil {
                                         let ageGroup = self.answers["age"] ?? ""
                                         
                                         // Same 0.1s→0.033s reduction as above —
                                         // two-tick settle preserved, 67ms saved.
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.033) {
-                                            self.currentStatistic = self.getStatistic(ageGroup: ageGroup, questionKey: questionKey, answer: answer)
+                                            self.currentStatistic = StatisticContent.for(questionKey: questionKey, ageGroup: ageGroup)
                                             self.animateStatisticFromBack()
                                         }
                                     }
@@ -961,194 +893,6 @@ struct OnboardingView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                 log("✅ Back navigation statistic animation completed")
                 log("✅ Final state - shown: \(self.showStatistic), isGoingBack: \(self.isGoingBack)")
-            }
-        }
-    }
-}
-
-// MARK: - Pressable Button Style
-// iOS-native press feedback: scale + dim on touch-down, snap back on release.
-// Resting state is identical to the underlying view (scale 1.0, opacity 1.0)
-// so this is purely additive — no layout or color change at rest. The 0.15s
-// spring matches Apple's standard touch-down feel.
-struct PressableButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .scaleEffect(configuration.isPressed ? 0.97 : 1.0)
-            .opacity(configuration.isPressed ? 0.85 : 1.0)
-            .animation(.spring(response: 0.18, dampingFraction: 0.9), value: configuration.isPressed)
-    }
-}
-
-// MARK: - Onboarding Progress Bar
-// Extracted from a private method on `OnboardingView` so SwiftUI can give it
-// stable identity. As a method it was being re-evaluated on every
-// `OnboardingView.body` invocation — including every keystroke in the name
-// field — and its `GeometryReader` was re-measuring on each one. As its own
-// `View` struct, SwiftUI will skip body evaluation when `progress` hasn't
-// changed.
-private struct OnboardingProgressBar: View {
-    let progress: CGFloat
-
-    var body: some View {
-        GeometryReader { geo in
-            ZStack(alignment: .leading) {
-                Capsule()
-                    .fill(Color.gray.opacity(0.2))
-                    .frame(height: 10)
-
-                Capsule()
-                    .fill(Color.wingmanBlack)
-                    .frame(width: geo.size.width * max(0, min(1, progress)), height: 10)
-                    // Heavily-damped spring (0.95) — visually a smooth ramp
-                    // with no perceptible overshoot, but feels more native than
-                    // an easeInOut sigmoid because the velocity comes off the
-                    // user's tap, not from a fixed timing curve.
-                    .animation(.spring(response: 0.5, dampingFraction: 0.95), value: progress)
-            }
-        }
-        .frame(height: 10)
-    }
-}
-
-// MARK: - Statistic Content
-struct StatisticContent {
-    let heading: String
-    let subheading: String
-    let imageName: String
-    let fact: String
-}
-
-// MARK: - Extended Steps with Loading
-let extendedOnboardingSteps: [OnboardingStep] = [
-    //1 Age Question
-    OnboardingStep(
-        type: .question,
-        title: "How old are you?",
-        subtitle: nil,
-        options: ["18-24", "25-34", "35-44", "45+"],
-        chartImage: nil,
-        progress: 0.2,
-        questionKey: "age"
-    ),
-
-    //2 Last Approach Question
-    OnboardingStep(
-        type: .question,
-        title: "When was the last time you spoke to a woman in public?",
-        subtitle: nil,
-        options: ["Within the past week", "Within the past month", "More than a year ago", "Never approached before"],
-        chartImage: nil,
-        progress: 0.35,
-        questionKey: "last_approach"
-    ),
-
-    //3 Frequency Question
-    OnboardingStep(
-        type: .question,
-        title: "Do you often want to talk to women but don’t?",
-        subtitle: nil,
-        options: ["Every time", "Most times", "Sometimes", "Rarely", "No, I usually go for it"],
-        chartImage: nil,
-        progress: 0.5,
-        questionKey: "approach_frequency"
-    ),
-
-    //4 Barriers Question
-    OnboardingStep(
-        type: .question,
-        title: "What usually stops you from doing so?",
-        subtitle: nil,
-        options: [
-            "Fear of rejection or being embarrased",
-            "Fear of social consequences",
-            "Not knowing what to say or how to start",
-            "Worrying about coming across wrong",
-            "Other"
-        ],
-        chartImage: nil,
-        progress: 0.65,
-        questionKey: "barriers"
-    ),
-
-    //5 Goals Question
-    OnboardingStep(
-        type: .question,
-        title: "What are you mainly hoping to improve?",
-        subtitle: nil,
-        options: [
-            "Better mindset & confidence",
-            "Learning how to approach",
-            "Keeping conversations going",
-            "Creating attraction and romantic interest",
-            "Other"
-        ],
-        chartImage: nil,
-        progress: 0.8,
-        questionKey: "goals"
-    ),
-
-    // Loading Screen
-    OnboardingStep(
-        type: .loading,
-        title: "Preparing your experience",
-        subtitle: nil,
-        options: nil,
-        chartImage: nil,
-        progress: 1.0,
-        questionKey: nil
-    )
-]
-
-// MARK: - Tap to Continue Button
-struct TapToContinueButton: View {
-    let action: () -> Void
-    @State private var isVisible = false
-
-    var body: some View {
-        Button(action: {
-            HapticManager.shared.lightImpact()
-            action()
-        }) {
-            Text("Tap to continue")
-                .font(.manropeRegular(size: 16))
-                .foregroundColor(.gray)
-                .opacity(isVisible ? 1 : 0)
-                .animation(.easeIn(duration: 0.5), value: isVisible)
-        }
-        .onAppear {
-            // Reduced from 1.5s to 0.6s. The right-side tap zone in the
-            // statistic view already accepts taps independent of this
-            // button's visibility, so the user can always advance — this
-            // delay is purely the visual hint reveal.
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                isVisible = true
-            }
-        }
-    }
-}
-
-// MARK: - Loading Dots View (small carousel-like black/gray dots)
-// Uses `TimelineView(.periodic)` so the cadence is anchored to a clean
-// reference time (computed from `context.date`) rather than depending on
-// when `Timer.publish` happened to fire. This eliminates the multi-ms drift
-// that the old `Timer.publish` + `@State + onReceive` pattern introduced
-// against the display refresh.
-struct LoadingDotsView: View {
-    private let dotSize: CGFloat = 8
-
-    var body: some View {
-        TimelineView(.periodic(from: .now, by: 0.5)) { context in
-            // Phase derived from elapsed time — no @State, no Timer.
-            let phase = Int(context.date.timeIntervalSinceReferenceDate / 0.5) % 3
-
-            HStack(spacing: 8) {
-                ForEach(0..<3) { idx in
-                    Circle()
-                        .fill(idx == phase ? Color.wingmanBlack : Color.gray.opacity(0.45))
-                        .frame(width: dotSize, height: dotSize)
-                        .animation(.easeInOut(duration: 0.25), value: phase)
-                }
             }
         }
     }
