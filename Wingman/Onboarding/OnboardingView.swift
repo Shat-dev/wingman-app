@@ -48,8 +48,11 @@ struct OnboardingView: View {
         log("🎬 OnboardingView initialized (anonymous flow with showLanding binding)")
     }
 
-    // Store answers for statistics logic
-    @State private var answers: [String: String] = [:]
+    // Store answers for statistics logic. Owns its own persistence (see
+    // `OnboardingAnswerStore`), which dispatches UserDefaults writes off
+    // the main thread so the disk I/O doesn't land inside the slide
+    // animation.
+    @StateObject private var answerStore = OnboardingAnswerStore()
 
     var body: some View {
         let step = steps[stepIndex]
@@ -444,24 +447,22 @@ struct OnboardingView: View {
                 : selectedOption
 
             if let answer = answer {
-                answers[key] = answer
+                // In-memory dict updated synchronously (so read-after-write in
+                // the current runloop tick sees the new value); UserDefaults
+                // persistence is dispatched to a background queue inside the
+                // store so the disk write doesn't overlap the slide animation.
+                answerStore.setAnswer(answer, forKey: key)
                 log("Question \(stepIndex + 1): \(answer)")
 
-                // Save to UserDefaults — deferred to the next runloop tick so the
-                // disk-touching synchronous write does not happen between the tap
-                // and the start of the slide animation. `restoreSelectionForCurrentStep`
-                // reads from the in-memory `answers` dict above, not from
-                // UserDefaults, so the deferred write is invisible to navigation.
+                // AuthManager-specific side effects stay deferred to the next
+                // runloop tick (same as the pre-refactor behavior): the
+                // `isAnonymousUser` read touches main-actor state, so we keep
+                // this block on main. The in-memory `answerStore.answers`
+                // dict already holds the value for any subsequent SwiftUI read.
+                // For authenticated users, we additionally push `age` to
+                // user_metadata via Supabase so it's available server-side
+                // for all users, not just anonymous-synced ones.
                 DispatchQueue.main.async {
-                    UserDefaults.standard.set(answer, forKey: "onboarding_\(key)")
-                    log("✅ Saved answer:", key, answer)
-
-                    // Save to AnonymousUserManager if in anonymous mode (also
-                    // deferred — same rationale, and the in-memory `answers`
-                    // already holds the value for any subsequent SwiftUI read).
-                    // For authenticated users, we additionally push `age` to
-                    // the user_profiles.age_range column so it's available
-                    // server-side for all users, not just anonymous-synced ones.
                     if self.authManager.isAnonymousUser {
                         switch key {
                         case "age":
@@ -481,7 +482,7 @@ struct OnboardingView: View {
                     } else if key == "age" {
                         // Authenticated (non-anonymous) user — sync age_range
                         // straight to Supabase. Fire-and-forget; local answer
-                        // is already persisted in UserDefaults above.
+                        // is already persisted in UserDefaults via the store.
                         Task {
                             await self.authManager.syncAgeRangeToBackend(answer)
                         }
@@ -535,7 +536,7 @@ struct OnboardingView: View {
             // Single-select state is cleared so there's no stale carry-over
             // if the user navigates from a single- into a multi-select step.
             selectedOption = nil
-            if let stored = answers[key], !stored.isEmpty {
+            if let stored = answerStore.answers[key], !stored.isEmpty {
                 selectedOptions = stored.components(separatedBy: ", ")
             } else {
                 selectedOptions = []
@@ -543,7 +544,7 @@ struct OnboardingView: View {
             log("🔁 Restored multi-selection for \(key):", selectedOptions)
         } else {
             selectedOptions = []
-            selectedOption = answers[key]
+            selectedOption = answerStore.answers[key]
             log("🔁 Restored selection for \(key):", selectedOption ?? "none")
         }
     }
@@ -623,7 +624,7 @@ struct OnboardingView: View {
             guard selectedOption != nil else { return false }
         }
 
-        let ageGroup = answers["age"] ?? ""
+        let ageGroup = answerStore.answers["age"] ?? ""
 
         if let stat = StatisticContent.for(questionKey: key, ageGroup: ageGroup) {
             currentStatistic = stat
@@ -643,7 +644,7 @@ struct OnboardingView: View {
 
     // MARK: - Save to Supabase
     private func saveUserName1() {
-        guard let name = answers["name"], !name.isEmpty else { return }
+        guard let name = answerStore.answers["name"], !name.isEmpty else { return }
         // Route through SupabaseManager (single source of truth, backed by the
         // Supabase SDK session) instead of the UserDefaults cache which could
         // lag behind the SDK after `.initialSession` restoration.
@@ -781,8 +782,8 @@ struct OnboardingView: View {
                         // Step 4: Determine which statistic to show
                         let sourceStep = self.steps[sourceIndex]
                         if let questionKey = sourceStep.questionKey,
-                           let answer = self.answers[questionKey] {
-                            let ageGroup = self.answers["age"] ?? ""
+                           let answer = self.answerStore.answers[questionKey] {
+                            let ageGroup = self.answerStore.answers["age"] ?? ""
                             
                             log("🔙 Step 4: Preparing statistic for \(questionKey) = \(answer)")
                             
@@ -824,8 +825,8 @@ struct OnboardingView: View {
                                     
                                     let sourceStep = self.steps[statSourceIndex]
                                     if let questionKey = sourceStep.questionKey,
-                                       self.answers[questionKey] != nil {
-                                        let ageGroup = self.answers["age"] ?? ""
+                                       self.answerStore.answers[questionKey] != nil {
+                                        let ageGroup = self.answerStore.answers["age"] ?? ""
                                         
                                         // Same 0.1s→0.033s reduction as above —
                                         // two-tick settle preserved, 67ms saved.
