@@ -18,6 +18,7 @@
 		184A381B2F8420B700357010 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 184A381A2F8420B700357010 /* RevenueCat */; };
 		184A381D2F8420B700357010 /* RevenueCatUI in Frameworks */ = {isa = PBXBuildFile; productRef = 184A381C2F8420B700357010 /* RevenueCatUI */; };
 		184A38242F842FBF00357010 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 184A38232F842FBF00357010 /* StoreKit.framework */; };
+		21AF411C2F9C9F1A0029EB52 /* PostHog in Frameworks */ = {isa = PBXBuildFile; productRef = 21AF411B2F9C9F1A0029EB52 /* PostHog */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 				183522382EEE088400868066 /* PostgREST in Frameworks */,
 				183522362EEE088400868066 /* Functions in Frameworks */,
 				1835223E2EEE088400868066 /* Supabase in Frameworks */,
+				21AF411C2F9C9F1A0029EB52 /* PostHog in Frameworks */,
 				181BF4902F4CD02800D78816 /* GoogleSignInSwift in Frameworks */,
 				183522342EEE088400868066 /* Auth in Frameworks */,
 				184A381B2F8420B700357010 /* RevenueCat in Frameworks */,
@@ -123,6 +125,7 @@
 				181BF48F2F4CD02800D78816 /* GoogleSignInSwift */,
 				184A381A2F8420B700357010 /* RevenueCat */,
 				184A381C2F8420B700357010 /* RevenueCatUI */,
+				21AF411B2F9C9F1A0029EB52 /* PostHog */,
 			);
 			productName = Wingman;
 			productReference = 18CACE352EDB2650002B0AF9 /* Wingman.app */;
@@ -156,6 +159,7 @@
 				183522322EEE088400868066 /* XCRemoteSwiftPackageReference "supabase-swift" */,
 				181BF48C2F4CD02800D78816 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				184A38192F8420B700357010 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */,
+				21AF411A2F9C9F1A0029EB52 /* XCRemoteSwiftPackageReference "posthog-ios" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 18CACE362EDB2650002B0AF9 /* Products */;
@@ -435,6 +439,14 @@
 				minimumVersion = 5.67.1;
 			};
 		};
+		21AF411A2F9C9F1A0029EB52 /* XCRemoteSwiftPackageReference "posthog-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/PostHog/posthog-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.57.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -487,6 +499,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 184A38192F8420B700357010 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
 			productName = RevenueCatUI;
+		};
+		21AF411B2F9C9F1A0029EB52 /* PostHog */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 21AF411A2F9C9F1A0029EB52 /* XCRemoteSwiftPackageReference "posthog-ios" */;
+			productName = PostHog;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
