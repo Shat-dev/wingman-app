@@ -10,6 +10,7 @@ import Combine
 import Supabase
 import Auth
 import UIKit  // for UIScreen in the swipe-back gesture threshold
+import PostHog
 
 struct OnboardingView: View {
     // Optional binding to control navigation back to Landing (anonymous flow)
@@ -30,6 +31,10 @@ struct OnboardingView: View {
     @State private var screen: OnboardingScreen = .question(index: 0)
     @State private var history: [OnboardingScreen] = []
     @State private var isGoingBack: Bool = false
+    // PostHog: fire `onboarding_started` + step 0's `step_viewed` once per
+    // mount. SwiftUI's `.onAppear` can re-fire on navigation transitions, so
+    // this guard ensures the initial events are emitted exactly once.
+    @State private var didLogOnboardingStart = false
 
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var authManager: AuthManager
@@ -93,6 +98,21 @@ struct OnboardingView: View {
         // invokes the same back path as the chevron. Non-interactive
         // (the page doesn't follow the finger).
         .simultaneousGesture(swipeBackGesture)
+        .onAppear {
+            // PostHog: emit `onboarding_started` and step 0's `step_viewed`
+            // exactly once per mount. The guard handles SwiftUI re-firing
+            // `.onAppear` on incidental view re-mounts.
+            guard !didLogOnboardingStart else { return }
+            didLogOnboardingStart = true
+            PostHogSDK.shared.capture("onboarding_started")
+            if case .question(let index) = screen,
+               let key = steps[index].questionKey {
+                PostHogSDK.shared.capture("onboarding_step_viewed", properties: [
+                    "step_index": index,
+                    "question_key": key
+                ])
+            }
+        }
     }
 
     @ViewBuilder
@@ -177,6 +197,17 @@ struct OnboardingView: View {
         isGoingBack = false
         withAnimation(.spring(response: 0.35, dampingFraction: 0.86)) {
             screen = newScreen
+        }
+        // PostHog: emit `onboarding_step_viewed` only on forward advance into
+        // a question screen. Statistic and loading screens are intentionally
+        // excluded — `onboarding_completed` covers the loading transition,
+        // and statistic interstitials are derivable from question advances.
+        if case .question(let index) = newScreen,
+           let key = steps[index].questionKey {
+            PostHogSDK.shared.capture("onboarding_step_viewed", properties: [
+                "step_index": index,
+                "question_key": key
+            ])
         }
     }
 
@@ -321,6 +352,10 @@ struct OnboardingView: View {
     // MARK: - LoadingScreen.onComplete
 
     private func handleLoadingComplete() {
+        // PostHog: completion is the single most important onboarding event.
+        // Fires once per user reaching the end of the question flow.
+        PostHogSDK.shared.capture("onboarding_completed")
+
         if authManager.isAnonymousUser {
             authManager.completeAnonymousOnboarding()
         } else {

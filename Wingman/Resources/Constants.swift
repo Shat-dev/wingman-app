@@ -22,4 +22,10 @@ struct Constants {
     // MARK: - URLs
     static let PRIVACY_POLICY_URL = "https://www.getwingman.app/privacy"
     static let TERMS_CONDITIONS_URL = "https://www.getwingman.app/terms"
+
+    // MARK: - PostHog Analytics
+    // Project token is public-safe (designed to be bundled in client apps).
+    // DEBUG vs Release is tagged via the `environment` super-property at setup.
+    static let POSTHOG_PROJECT_TOKEN = "phc_nHqVpjSQBTE4UBm2poiehcb4de92uJirKRMed8nhdurH"
+    static let POSTHOG_HOST = "https://us.i.posthog.com"
 }

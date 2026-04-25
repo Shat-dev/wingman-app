@@ -14,6 +14,7 @@ import AuthenticationServices
 import CryptoKit
 import RevenueCat
 import StoreKit
+import PostHog
 
 @MainActor
 final class AuthManager: ObservableObject {
@@ -243,10 +244,36 @@ final class AuthManager: ObservableObject {
 
                     log("✅ User signed in: \(session.user.email ?? "unknown")")
                     log("🎯 Auth state updated - RootView should now react")
+
+                    // PostHog: identify by Supabase UUID (no PII). If a prior
+                    // anonymous identify was set at launch, PostHog merges
+                    // events automatically via $anon_distinct_id.
+                    let userId = session.user.id.uuidString
+                    PostHogSDK.shared.identify(userId)
+
+                    // Distinguish signup from login by createdAt freshness
+                    // (60-second window). The provider field comes from
+                    // Supabase appMetadata; falls back to "unknown".
+                    let isNewUser = Date().timeIntervalSince(session.user.createdAt) < 60
+                    let authMethod = session.user.appMetadata["provider"]?.stringValue ?? "unknown"
+                    if isNewUser {
+                        PostHogSDK.shared.capture("user_signed_up", properties: [
+                            "method": authMethod
+                        ])
+                    } else {
+                        PostHogSDK.shared.capture("user_logged_in", properties: [
+                            "method": authMethod
+                        ])
+                    }
                 }
 
             case .signedOut:
                 log("🚪 Event type: SIGNED_OUT")
+                // PostHog: capture before reset so the event is still
+                // attached to the outgoing distinct_id. reset() afterwards
+                // clears the distinct_id and re-generates an anonymous one.
+                PostHogSDK.shared.capture("user_logged_out")
+                PostHogSDK.shared.reset()
                 self.isAuthenticated = false
                 self.currentUser = nil
                 self.hasCompletedQuestions = false
@@ -286,6 +313,10 @@ final class AuthManager: ObservableObject {
                     }
 
                     log("✅ Initial session found: \(session.user.email ?? "unknown")")
+
+                    // PostHog: re-identify on session restore so events from
+                    // returning users tie to their Supabase UUID. No PII.
+                    PostHogSDK.shared.identify(session.user.id.uuidString)
                 } else {
                     self.isAuthenticated = false
                     log("❌ No initial session")

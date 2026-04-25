@@ -7,6 +7,16 @@
 
 import SwiftUI
 import RevenueCat
+import PostHog
+
+/// Where the paywall was opened from. Distinguishes the routing-level paywall
+/// (post-onboarding mandatory step) from a feature-gate paywall (user tapped
+/// a locked feature). Carried as the `source` property on every paywall event
+/// so funnels segment cleanly.
+enum PaywallSource: String {
+    case onboarding
+    case featureGate
+}
 
 struct PaywallView: View {
 
@@ -35,14 +45,26 @@ struct PaywallView: View {
     ///   flag again would be semantically wrong.
     let onDismiss: (() -> Void)?
 
+    /// Origin of this paywall presentation. Tagged onto every PostHog
+    /// paywall_* event so funnels can separate the post-onboarding paywall
+    /// from feature-gate paywalls. Required by the compiler at every call
+    /// site to make this an explicit decision.
+    let source: PaywallSource
+
+    // PostHog: emit `paywall_viewed` exactly once per mount, even if SwiftUI
+    // re-fires `.onAppear` on incidental view re-mounts.
+    @State private var didLogPaywallView = false
+
     init(
         authManager: AuthManager? = nil,
         isDismissible: Bool = false,
-        onDismiss: (() -> Void)? = nil
+        onDismiss: (() -> Void)? = nil,
+        source: PaywallSource
     ) {
         self.authManager_init = authManager
         self.isDismissible = isDismissible
         self.onDismiss = onDismiss
+        self.source = source
     }
 
     var body: some View {
@@ -241,6 +263,10 @@ struct PaywallView: View {
                                         withAnimation(.easeInOut(duration: 0.2)) {
                                             viewModel.selectPlan(.yearly)
                                         }
+                                        PostHogSDK.shared.capture("paywall_plan_selected", properties: [
+                                            "plan": "yearly",
+                                            "source": source.rawValue
+                                        ])
                                     }
                                     .padding(.bottom,10)
 
@@ -256,6 +282,10 @@ struct PaywallView: View {
                                         withAnimation(.easeInOut(duration: 0.2)) {
                                             viewModel.selectPlan(.monthly)
                                         }
+                                        PostHogSDK.shared.capture("paywall_plan_selected", properties: [
+                                            "plan": "monthly",
+                                            "source": source.rawValue
+                                        ])
                                     }
 
                                     // Trial conversion disclosure — copy flips based on eligibility
@@ -283,6 +313,14 @@ struct PaywallView: View {
                             Task {
                                 let success = await viewModel.continueTapped()
                                 if success {
+                                    // PostHog: paywall ended with a
+                                    // purchase. Captured here (not from a
+                                    // shared dismiss handler) so source +
+                                    // outcome are explicit per call site.
+                                    PostHogSDK.shared.capture("paywall_dismissed", properties: [
+                                        "source": source.rawValue,
+                                        "outcome": "purchased"
+                                    ])
                                     // Referral screen removed from flow — complete paywall directly.
                                     // ReferralView.swift is intentionally kept intact for possible future use.
                                     authManager.completePaywallFlow()
@@ -376,6 +414,14 @@ struct PaywallView: View {
                 if isDismissible {
                     Button {
                         HapticManager.shared.lightImpact()
+                        // PostHog: user actively dismissed the paywall
+                        // without purchasing. Captured at the action site
+                        // so both the routing and feature-gate dismissal
+                        // paths emit the same event with explicit source.
+                        PostHogSDK.shared.capture("paywall_dismissed", properties: [
+                            "source": source.rawValue,
+                            "outcome": "dismissed_without_purchase"
+                        ])
                         if let onDismiss = onDismiss {
                             onDismiss()
                         } else {
@@ -416,13 +462,26 @@ struct PaywallView: View {
             // Set AuthManager reference for anonymous user purchase tracking
             let authMgr = authManager_init ?? authManager
             viewModel.authManager = authMgr
-            
+            // Pass source through to the view model so purchase events can
+            // tag it without re-deriving.
+            viewModel.source = source
+
             // If user is returning to paywall due to subscription expiry,
             // refresh offerings and reset UI state
             log("📱 PaywallView appeared")
             viewModel.loadOfferings()
             viewModel.currentPage = 0
             viewModel.selectPlan(.yearly)
+
+            // PostHog: paywall_viewed — the top of the conversion funnel.
+            // Guarded against SwiftUI's incidental re-mounts.
+            if !didLogPaywallView {
+                didLogPaywallView = true
+                PostHogSDK.shared.capture("paywall_viewed", properties: [
+                    "source": source.rawValue,
+                    "is_dismissible": isDismissible
+                ])
+            }
         }
         .onDisappear {
             log("📱 PaywallView disappeared")
@@ -457,5 +516,5 @@ struct PaywallView: View {
 }
 
 #Preview {
-    PaywallView()
+    PaywallView(source: .onboarding)
 }

@@ -11,6 +11,7 @@ import UserNotifications
 import RevenueCat
 import RevenueCatUI
 import BackgroundTasks
+import PostHog
 
 @main
 struct WingmanApp: App {
@@ -100,7 +101,7 @@ struct RootView: View {
                     } else if !authManager.hasCompletedPaywallFlow {
                         let _ = log("🎯 RootView: Showing PaywallView (paywall flow NOT completed)")
                         NavigationStack {
-                            PaywallView(authManager: authManager, isDismissible: true)
+                            PaywallView(authManager: authManager, isDismissible: true, source: .onboarding)
                         }
 
                     // ✅ 4) Paywall + Referral finished → MainTabView (Home)
@@ -127,7 +128,7 @@ struct RootView: View {
                     } else if !authManager.hasCompletedPaywallFlow {
                         let _ = log("🎯 RootView: Anonymous user - showing PaywallView")
                         NavigationStack {
-                            PaywallView(authManager: authManager, isDismissible: true)
+                            PaywallView(authManager: authManager, isDismissible: true, source: .onboarding)
                         }
 
                     // ✅ Anonymous user - paywall finished → require account creation
@@ -169,7 +170,43 @@ struct RootView: View {
         .task {
             // Step 1: Configure RevenueCat on app launch (MUST be first)
             RevenueCatManager.shared.configure()
-            
+
+            // Step 1b: PostHog analytics. Runs on a detached background task
+            // so SDK setup and /decide response processing don't compete with
+            // the main thread during OnboardingView's first render — this is
+            // the fix for the launch-time onboarding lag we previously
+            // diagnosed. Every event carries an `environment` super-property
+            // so dashboards can filter dev/simulator traffic out of prod
+            // metrics (filter `environment = "prod"` on all insights).
+            //
+            // For anonymous users, identify with the persisted anonymous ID
+            // up-front so onboarding events have a stable distinct_id. The
+            // `isAuthed` snapshot is captured here on main; if the user is
+            // authed, AuthManager.observeAuthState() handles identify(uuid)
+            // separately when .initialSession / .signedIn fires.
+            let isAuthedAtLaunch = authManager.isAuthenticated
+            let anonymousId = AnonymousUserManager.shared.anonymousUserId
+            Task.detached(priority: .utility) {
+                let config = PostHogConfig(
+                    apiKey: Constants.POSTHOG_PROJECT_TOKEN,
+                    host: Constants.POSTHOG_HOST
+                )
+                config.captureApplicationLifecycleEvents = false
+                config.captureScreenViews = false
+                config.sessionReplay = false
+                PostHogSDK.shared.setup(config)
+
+                #if DEBUG
+                PostHogSDK.shared.register(["environment": "dev"])
+                #else
+                PostHogSDK.shared.register(["environment": "prod"])
+                #endif
+
+                if !isAuthedAtLaunch {
+                    PostHogSDK.shared.identify(anonymousId)
+                }
+            }
+
             // Step 2: Initialize subscription monitoring (after RevenueCat is ready)
             SubscriptionManager.shared.initializeMonitoring()
             authManager.setupSubscriptionMonitoring()

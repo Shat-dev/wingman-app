@@ -10,6 +10,7 @@ import SwiftUI
 import Combine
 import RevenueCat
 import StoreKit
+import PostHog
 
 /// Thrown by `loadOfferings()` when the RevenueCat offerings fetch doesn't
 /// resolve within its deadline. Caught by the same block that handles
@@ -22,6 +23,12 @@ final class PaywallViewModel: ObservableObject {
     
     // MARK: - Dependencies
     weak var authManager: AuthManager?
+    /// Origin tag for PostHog paywall_purchase_* events. Set by the
+    /// presenting `PaywallView` in its `.onAppear`. Defaults to `.onboarding`
+    /// so events are still attributable if a code path forgets to set it,
+    /// but the compiler-required `source` on `PaywallView.init` makes that
+    /// path effectively unreachable.
+    var source: PaywallSource = .onboarding
     
     // MARK: - RevenueCat
     @Published var isLoading = false
@@ -254,7 +261,22 @@ final class PaywallViewModel: ObservableObject {
     
     func purchase(_ package: Package) async -> Bool {
         isPurchasing = true
-        
+
+        // Plan label derived from the package's product identifier.
+        let plan: String = {
+            if package.storeProduct.productIdentifier == Constants.YEARLY_PRODUCT_ID { return "yearly" }
+            if package.storeProduct.productIdentifier == Constants.MONTHLY_PRODUCT_ID { return "monthly" }
+            return "unknown"
+        }()
+        // PostHog: purchase initiated. Captured before the StoreKit call so
+        // we have a denominator even when network or sheet errors prevent
+        // the success / failure branches from running.
+        PostHogSDK.shared.capture("paywall_purchase_started", properties: [
+            "plan": plan,
+            "product_id": package.storeProduct.productIdentifier,
+            "source": source.rawValue
+        ])
+
         do {
             let (_, customerInfo, userCancelled) = try await Purchases.shared.purchase(package: package)
 
@@ -269,23 +291,39 @@ final class PaywallViewModel: ObservableObject {
             }
 
             // Check if user has the Wingman Pro entitlement
-            let hasEntitlement = customerInfo.entitlements[Constants.ENTITLEMENT_ID]?.isActive == true
-            
+            let entitlement = customerInfo.entitlements[Constants.ENTITLEMENT_ID]
+            let hasEntitlement = entitlement?.isActive == true
+
             if hasEntitlement {
                 log("✅ PaywallViewModel: Purchase successful")
                 log("   - Entitlement active: \(hasEntitlement)")
-                log("   - Expiry date: \(customerInfo.entitlements[Constants.ENTITLEMENT_ID]?.expirationDate?.formatted() ?? "No expiry")")
-                
+                log("   - Expiry date: \(entitlement?.expirationDate?.formatted() ?? "No expiry")")
+
+                // PostHog: purchase confirmed by RevenueCat entitlement. Read
+                // `customerInfo.entitlements` directly here — do NOT read
+                // `authManager.hasActiveSubscription`; that flag is updated
+                // asynchronously via NotificationCenter and may not have
+                // flipped yet at this point in the call stack.
+                let isTrial = entitlement?.periodType == .trial
+                let isAnon = authManager?.isAnonymousUser == true
+                PostHogSDK.shared.capture("paywall_purchase_succeeded", properties: [
+                    "plan": plan,
+                    "product_id": package.storeProduct.productIdentifier,
+                    "source": source.rawValue,
+                    "is_trial": isTrial,
+                    "is_anonymous": isAnon
+                ])
+
                 // If user is anonymous, store purchase info for later linking
-                if authManager?.isAnonymousUser == true {
+                if isAnon {
                     AnonymousUserManager.shared.storeRevenueCatPurchase(customerInfo: customerInfo)
                     log("💰 PaywallViewModel: Stored anonymous purchase for linking")
                 }
-                
+
                 // 🔄 Refresh subscription status immediately after purchase
                 log("🔄 PaywallViewModel: Refreshing subscription status after purchase...")
                 await SubscriptionManager.shared.refreshSubscriptionStatus()
-                
+
                 isPurchasing = false
                 return true
             } else {
@@ -294,13 +332,16 @@ final class PaywallViewModel: ObservableObject {
                 isPurchasing = false
                 return false
             }
-            
+
         } catch {
             // Handle RevenueCat specific errors using the error directly
-            if let nsError = error as NSError? {
+            let nsError = error as NSError
+            if nsError.code == 1 {
+                // User cancelled — don't surface error UI, don't fire
+                // PostHog failure event (cancellation is not a failure).
+                log("🚫 PaywallViewModel: User cancelled purchase")
+            } else {
                 switch nsError.code {
-                case 1: // User cancelled
-                    log("🚫 PaywallViewModel: User cancelled purchase")
                 case 2: // Store problem
                     self.error = "Store is currently unavailable. Please try again later."
                     self.showAlert = true
@@ -314,12 +355,17 @@ final class PaywallViewModel: ObservableObject {
                     self.error = "Purchase failed. Please try again."
                     self.showAlert = true
                 }
-            } else {
-                self.error = "Purchase failed. Please try again."
-                self.showAlert = true
+                log("❌ PaywallViewModel: Purchase failed: \(error.localizedDescription)")
+                // PostHog: purchase failure (excluding user cancellation).
+                // `error_code` is the RevenueCat NSError code; no PII.
+                PostHogSDK.shared.capture("paywall_purchase_failed", properties: [
+                    "plan": plan,
+                    "product_id": package.storeProduct.productIdentifier,
+                    "source": source.rawValue,
+                    "error_code": nsError.code
+                ])
             }
-            
-            log("❌ PaywallViewModel: Purchase failed: \(error.localizedDescription)")
+
             isPurchasing = false
             return false
         }

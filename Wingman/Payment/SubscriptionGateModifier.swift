@@ -41,7 +41,8 @@ private struct SubscriptionGate: ViewModifier {
                     PaywallView(
                         authManager: authManager,
                         isDismissible: true,
-                        onDismiss: { isPresented = false }
+                        onDismiss: { isPresented = false },
+                        source: .featureGate
                     )
                 }
             }
