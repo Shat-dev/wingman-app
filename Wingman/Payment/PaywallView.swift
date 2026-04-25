@@ -11,7 +11,6 @@ import RevenueCat
 struct PaywallView: View {
 
     @StateObject private var viewModel = PaywallViewModel()
-    @State private var navigateToReferral = false
     @EnvironmentObject var authManager: AuthManager
     
     // Optional AuthManager for anonymous user purchase tracking
@@ -47,8 +46,13 @@ struct PaywallView: View {
     }
 
     var body: some View {
-        NavigationStack {
-            ZStack {
+        // NOTE: no inner NavigationStack here — both presentation paths
+        // wrap PaywallView in a NavigationStack at the call site (RootView
+        // for the full-screen post-onboarding paywall, SubscriptionGateModifier
+        // for the slide-up sheet). The previously-nested NavigationStack
+        // was redundant and only hosted a now-dead `.navigationDestination`
+        // to a removed ReferralView flow.
+        ZStack {
                 VStack(spacing: 0) {
                     if viewModel.isLoading && viewModel.offerings == nil {
                         // MARK: - Loading State
@@ -394,10 +398,6 @@ struct PaywallView: View {
                     .accessibilityLabel("Close paywall")
                 }
             }
-        }
-        .navigationDestination(isPresented: $navigateToReferral) {
-            ReferralView()
-        }
         .alert("Error", isPresented: $viewModel.showAlert) {
             Button("OK") {
                 viewModel.error = nil

@@ -11,6 +11,12 @@ import Combine
 import RevenueCat
 import StoreKit
 
+/// Thrown by `loadOfferings()` when the RevenueCat offerings fetch doesn't
+/// resolve within its deadline. Caught by the same block that handles
+/// network errors, so the UI surfaces the existing "Can't load pricing"
+/// error state with its Try Again button.
+private struct PaywallTimeoutError: Error {}
+
 @MainActor
 final class PaywallViewModel: ObservableObject {
     
@@ -150,7 +156,29 @@ final class PaywallViewModel: ObservableObject {
             isLoading = true
 
             do {
-                let fetchedOfferings = try await Purchases.shared.offerings()
+                // Race the RevenueCat offerings fetch against a 15s timeout so
+                // a hanging StoreKit call (cached sandbox account from prior
+                // TestFlight use, captive WiFi, Apple server stall, etc.)
+                // doesn't leave the user on an infinite spinner. On timeout
+                // we throw PaywallTimeoutError into the shared catch block
+                // below, which surfaces the existing "Can't load pricing"
+                // error state with its Try Again button. 15s is generous
+                // enough not to false-positive on slow cellular (typical
+                // offerings response is <2s on healthy networks, 3-5s on
+                // slow mobile) while still short enough that users don't
+                // give up and kill the app before we recover.
+                let fetchedOfferings = try await withThrowingTaskGroup(of: Offerings.self) { group in
+                    group.addTask {
+                        try await Purchases.shared.offerings()
+                    }
+                    group.addTask {
+                        try await Task.sleep(nanoseconds: 15_000_000_000)
+                        throw PaywallTimeoutError()
+                    }
+                    let result = try await group.next()!
+                    group.cancelAll()
+                    return result
+                }
                 self.offerings = fetchedOfferings
 
                 // Auto-select yearly package by default
@@ -228,8 +256,18 @@ final class PaywallViewModel: ObservableObject {
         isPurchasing = true
         
         do {
-            let (_, customerInfo, _) = try await Purchases.shared.purchase(package: package)
-            
+            let (_, customerInfo, userCancelled) = try await Purchases.shared.purchase(package: package)
+
+            // RevenueCat does not throw on user cancellation of the Apple payment
+            // sheet — it returns with userCancelled = true. Bail before the
+            // entitlement check so we don't misreport a dismissed sheet as a
+            // completed-but-missing-entitlement error.
+            if userCancelled {
+                log("🚫 PaywallViewModel: User cancelled purchase")
+                isPurchasing = false
+                return false
+            }
+
             // Check if user has the Wingman Pro entitlement
             let hasEntitlement = customerInfo.entitlements[Constants.ENTITLEMENT_ID]?.isActive == true
             

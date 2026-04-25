@@ -25,7 +25,6 @@ struct OnboardingStep: Identifiable {
     let subtitle: String?
 
     let options: [String]?        // for questions
-    let chartImage: String?       // for statistics
 
     let progress: Double          // 0.0–1.0
     let questionKey: String?      // for saving answers

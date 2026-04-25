@@ -6,7 +6,7 @@
 import SwiftUI
 import UIKit  // for UIImage.preparingForDisplay() asset decode warmup
 
-struct StatisticContent {
+struct StatisticContent: Hashable {
     let heading: String
     let subheading: String
     let imageName: String

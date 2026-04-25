@@ -11,6 +11,16 @@
 
 import Foundation
 
+/// The three screen categories the coordinator can display, with the
+/// contextual data each needs baked into the associated values. Hashable
+/// conformance is required so `.id(screen)` can force SwiftUI to run the
+/// enter/exit transitions on every navigation.
+enum OnboardingScreen: Hashable {
+    case question(index: Int)
+    case statistic(sourceIndex: Int, content: StatisticContent)
+    case loading(index: Int)
+}
+
 let extendedOnboardingSteps: [OnboardingStep] = [
     //1 Age Question
     OnboardingStep(
@@ -18,7 +28,6 @@ let extendedOnboardingSteps: [OnboardingStep] = [
         title: "How old are you?",
         subtitle: nil,
         options: ["18-24", "25-34", "35-44", "45+"],
-        chartImage: nil,
         progress: 0.2,
         questionKey: "age"
     ),
@@ -29,7 +38,6 @@ let extendedOnboardingSteps: [OnboardingStep] = [
         title: "When was the last time you spoke to a woman in public?",
         subtitle: nil,
         options: ["Within the past week", "Within the past month", "More than a year ago", "Never approached before"],
-        chartImage: nil,
         progress: 0.35,
         questionKey: "last_approach"
     ),
@@ -40,7 +48,6 @@ let extendedOnboardingSteps: [OnboardingStep] = [
         title: "Do you often want to talk to women but don’t?",
         subtitle: nil,
         options: ["Every time", "Most times", "Sometimes", "Rarely", "No, I usually go for it"],
-        chartImage: nil,
         progress: 0.5,
         questionKey: "approach_frequency"
     ),
@@ -57,7 +64,6 @@ let extendedOnboardingSteps: [OnboardingStep] = [
             "Worrying about coming across wrong",
             "Other"
         ],
-        chartImage: nil,
         progress: 0.65,
         questionKey: "barriers"
     ),
@@ -74,7 +80,6 @@ let extendedOnboardingSteps: [OnboardingStep] = [
             "Creating attraction and romantic interest",
             "Other"
         ],
-        chartImage: nil,
         progress: 0.8,
         questionKey: "goals"
     ),
@@ -85,7 +90,6 @@ let extendedOnboardingSteps: [OnboardingStep] = [
         title: "Preparing your experience",
         subtitle: nil,
         options: nil,
-        chartImage: nil,
         progress: 1.0,
         questionKey: nil
     )
