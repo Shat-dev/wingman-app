@@ -257,6 +257,15 @@ extension RevenueCatManager: PurchasesDelegate {
         Task { @MainActor in
             self.customerInfo = customerInfo
             log("🔄 RevenueCat: Customer info updated via delegate")
+
+            // Forward to SubscriptionManager so authManager.hasActiveSubscription
+            // stays in sync without waiting for the 5-min periodic timer or a
+            // foreground transition. RC pushes this delegate on logIn/logOut,
+            // post-purchase, restore, and any server-side change — exactly the
+            // events that previously left SubscriptionManager stale (e.g. after
+            // setUserID() during sign-in on a new device, or account-switch on
+            // a shared device). handleCustomerInfoUpdate is idempotent.
+            SubscriptionManager.shared.handleCustomerInfoUpdate(customerInfo, error: nil)
         }
     }
 }

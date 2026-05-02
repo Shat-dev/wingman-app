@@ -320,6 +320,17 @@ final class PaywallViewModel: ObservableObject {
                     log("💰 PaywallViewModel: Stored anonymous purchase for linking")
                 }
 
+                // Apply the authoritative customerInfo from the purchase
+                // result synchronously BEFORE the network refresh. This is
+                // RC's own definitive answer — using it here means the
+                // SubscriptionGateModifier auto-dismiss (which keys off
+                // authManager.hasActiveSubscription) fires reliably even if
+                // the follow-up network refresh below fails (e.g. connection
+                // drops immediately after the StoreKit transaction). The
+                // refresh still runs to invalidate the RC cache for any
+                // subsequent reads.
+                SubscriptionManager.shared.handleCustomerInfoUpdate(customerInfo, error: nil)
+
                 // 🔄 Refresh subscription status immediately after purchase
                 log("🔄 PaywallViewModel: Refreshing subscription status after purchase...")
                 await SubscriptionManager.shared.refreshSubscriptionStatus()

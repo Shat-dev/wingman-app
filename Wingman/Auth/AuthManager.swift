@@ -189,6 +189,29 @@ final class AuthManager: ObservableObject {
         let subscriptionManager = SubscriptionManager.shared
         self.hasActiveSubscription = subscriptionManager.isSubscriptionActive
         self.subscriptionExpiryDate = subscriptionManager.subscriptionExpiryDate
+
+        // Self-heal the routing flag. A paying user is, by definition, past
+        // the paywall — but `hasCompletedPaywallFlow` can be stale-false on a
+        // reinstall (per-user UserDefaults wiped) or new device when the
+        // best-effort `paywall_flow_completed` user_metadata mirror failed at
+        // a prior `completePaywallFlow()` call. Without this, RootView would
+        // route a paying user back to PaywallView. `completePaywallFlow()` is
+        // idempotent, so calling it when the flag is already true is a no-op.
+        if self.hasActiveSubscription && !self.hasCompletedPaywallFlow {
+            log("🩹 AuthManager: Self-healing hasCompletedPaywallFlow — paying user with stale flag")
+            completePaywallFlow()
+        }
+    }
+
+    /// Routing-level "paywall flow done" check. `hasActiveSubscription` is
+    /// included so that paying users whose `hasCompletedPaywallFlow` flag is
+    /// transiently false (reinstall before the heal in `syncSubscriptionStatus`
+    /// runs, or first render before the cache loads) are routed to MainTabView
+    /// instead of looping back through RatingPromptView/PaywallView. Cannot
+    /// over-permit: `hasActiveSubscription` is sourced from RC/StoreKit data
+    /// only, never user-controllable.
+    var effectivePaywallFlowCompleted: Bool {
+        hasCompletedPaywallFlow || hasActiveSubscription
     }
     
     deinit {

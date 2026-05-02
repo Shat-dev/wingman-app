@@ -87,18 +87,22 @@ struct RootView: View {
                         }
 
                     // ✅ 2) Questions finished, rating ask not yet seen →
-                    //    show RatingPromptView. Gated on `!hasCompletedPaywallFlow`
+                    //    show RatingPromptView. Gated on `!effectivePaywallFlowCompleted`
                     //    so existing paying users (who already passed the
                     //    paywall) never route back here after the update —
-                    //    they go straight to MainTabView below.
-                    } else if !authManager.hasCompletedPaywallFlow && !authManager.hasSeenRatingPrompt {
+                    //    they go straight to MainTabView below. The
+                    //    "effective" form treats an active RC entitlement as
+                    //    equivalent to having completed the flow, which
+                    //    self-heals reinstall / new-device cases where the
+                    //    flag was wiped but the entitlement is still valid.
+                    } else if !authManager.effectivePaywallFlowCompleted && !authManager.hasSeenRatingPrompt {
                         let _ = log("🎯 RootView: Showing RatingPromptView (rating prompt NOT seen)")
                         NavigationStack {
                             RatingPromptView()
                         }
 
                     // ✅ 3) Questions + rating ack'd → show Paywall (and Referral flow)
-                    } else if !authManager.hasCompletedPaywallFlow {
+                    } else if !authManager.effectivePaywallFlowCompleted {
                         let _ = log("🎯 RootView: Showing PaywallView (paywall flow NOT completed)")
                         NavigationStack {
                             PaywallView(authManager: authManager, isDismissible: true, source: .onboarding)
@@ -116,16 +120,18 @@ struct RootView: View {
 
                     // ✅ Anonymous user - questions finished, rating ask not
                     //    yet seen → show RatingPromptView. Gated on
-                    //    `!hasCompletedPaywallFlow` for parity with the
-                    //    authenticated flow.
-                    if !authManager.hasCompletedPaywallFlow && !authManager.hasSeenRatingPrompt {
+                    //    `!effectivePaywallFlowCompleted` for parity with the
+                    //    authenticated flow — anonymous-paid users (who
+                    //    completed an in-app purchase before signup) skip
+                    //    straight to the forced account-creation step.
+                    if !authManager.effectivePaywallFlowCompleted && !authManager.hasSeenRatingPrompt {
                         let _ = log("🎯 RootView: Anonymous user - showing RatingPromptView")
                         NavigationStack {
                             RatingPromptView()
                         }
 
                     // ✅ Anonymous user - questions + rating ack'd → show Paywall
-                    } else if !authManager.hasCompletedPaywallFlow {
+                    } else if !authManager.effectivePaywallFlowCompleted {
                         let _ = log("🎯 RootView: Anonymous user - showing PaywallView")
                         NavigationStack {
                             PaywallView(authManager: authManager, isDismissible: true, source: .onboarding)

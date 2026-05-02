@@ -203,7 +203,7 @@ final class SubscriptionManager: NSObject, ObservableObject {
 
     
     /// Handle customer info updates from RevisionCat
-    private func handleCustomerInfoUpdate(_ customerInfo: CustomerInfo?, error: Error?) {
+    func handleCustomerInfoUpdate(_ customerInfo: CustomerInfo?, error: Error?) {
         guard let customerInfo = customerInfo else {
             log("❌ SubscriptionManager: No customer info received")
             updateSubscriptionStatus(isActive: false, expiryDate: nil)
@@ -238,8 +238,6 @@ final class SubscriptionManager: NSObject, ObservableObject {
     
     /// Update the subscription status
     private func updateSubscriptionStatus(isActive: Bool, expiryDate: Date?) {
-        let statusChanged = isActive != isSubscriptionActive
-
         self.isSubscriptionActive = isActive
         self.subscriptionExpiryDate = expiryDate
 
@@ -247,10 +245,17 @@ final class SubscriptionManager: NSObject, ObservableObject {
         // synchronously during init (see loadSubscriptionCache below).
         writeSubscriptionCache(isActive: isActive, expiryDate: expiryDate)
 
-        if statusChanged {
-            log("🔔 SubscriptionManager: Posting subscription status changed notification")
-            NotificationCenter.default.post(name: Self.subscriptionStatusChangedNotification, object: nil)
-        }
+        // Always post — not just on transitions. The previous transition-only
+        // gate (`isActive != isSubscriptionActive`) silently dropped the
+        // notification when SubscriptionManager already had the right value
+        // but a downstream observer (AuthManager.hasActiveSubscription, which
+        // defaults to false at init) hadn't yet been seeded. The result was a
+        // paying user whose RC entitlement was confirmed active but whose
+        // AuthManager flag stayed false until the next real transition. The
+        // sole observer (AuthManager.subscriptionStatusChanged → syncSubscriptionStatus)
+        // is idempotent — copying two properties — so firing on every update
+        // costs nothing and closes the seeding gap.
+        NotificationCenter.default.post(name: Self.subscriptionStatusChangedNotification, object: nil)
     }
 
     // MARK: - Subscription Cache (offline-safe cold start)
