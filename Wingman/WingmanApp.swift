@@ -187,8 +187,11 @@ struct RootView: View {
             let isAuthedAtLaunch = authManager.isAuthenticated
             let anonymousId = AnonymousUserManager.shared.anonymousUserId
             Task.detached(priority: .utility) {
-                let config = PostHogConfig(
-                    apiKey: Constants.POSTHOG_PROJECT_TOKEN,
+                // The new init(projectToken:host:) is async (replaces the
+                // deprecated init(apiKey:host:)), so it must be awaited. The
+                // SDK's setup/register/identify themselves remain synchronous.
+                let config = await PostHogConfig(
+                    projectToken: Constants.POSTHOG_PROJECT_TOKEN,
                     host: Constants.POSTHOG_HOST
                 )
                 config.captureApplicationLifecycleEvents = false

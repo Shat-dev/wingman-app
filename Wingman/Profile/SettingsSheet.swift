@@ -378,6 +378,9 @@ struct SettingsSheet: View {
                     showingSuccessAlert = true
                 }
                 log("✅ SettingsSheet: Purchases restored")
+
+                log("🔄 SettingsSheet: Refreshing subscription status after restore...")
+                await SubscriptionManager.shared.refreshSubscriptionStatus()
             } else {
                 await MainActor.run {
                     errorMessage = "No active subscriptions found to restore"
