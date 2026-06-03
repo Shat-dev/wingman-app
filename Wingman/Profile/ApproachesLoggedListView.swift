@@ -214,12 +214,12 @@ struct ApproachLogRow: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             // Top row: Title + dots menu
-            HStack(alignment: .center, spacing: 12) {
+            HStack(alignment: .top, spacing: 12) {
                 Text(approach.title)
-                    .font(.manropeRegular(size: 16))
+                    .font(.manropeSemiBold(size: 16))
                     .foregroundColor(.wingmanBlack)
-                    .lineLimit(1)
-                    .truncationMode(.tail)
+                    .lineLimit(3)
+                    .fixedSize(horizontal: false, vertical: true)
                 
                 Spacer()
                 
@@ -251,7 +251,7 @@ struct ApproachLogRow: View {
                 .truncationMode(.tail)
                 .fixedSize(horizontal: false, vertical: true)
             
-            // Info Row: Date • Level • Anxiety (right-aligned)
+            // Info Row: Date • Level • Confidence (right-aligned)
             HStack(spacing: 6) {
                 HStack(spacing: 6) {
                     Text(formatDate(approach.date))
@@ -267,7 +267,7 @@ struct ApproachLogRow: View {
                 
                 Spacer()
                 
-                Text("Anxiety: \(approach.anxietyLevel)/10")
+                Text("Confidence: \(approach.anxietyLevel)/10")
                     .font(.manropeMedium(size: 12))
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.trailing)
