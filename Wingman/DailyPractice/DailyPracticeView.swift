@@ -227,12 +227,20 @@ struct DailyPracticeView: View {
                 VStack(alignment: .leading, spacing: 20) {
                     
                     // MARK: - Question Number and Text
-                    Text("\(viewModel.currentQuestion.number). \(viewModel.currentQuestion.question)")
-                        .font(.manropeMedium(size: 20))
-                        .foregroundColor(.wingmanBlack)
-                        .lineSpacing(1)
-                        .fixedSize(horizontal: false, vertical: true)
-                    
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("\(viewModel.currentQuestion.number). \(viewModel.currentQuestion.question)")
+                            .font(.manropeMedium(size: 20))
+                            .foregroundColor(.wingmanBlack)
+                            .lineSpacing(1)
+                            .fixedSize(horizontal: false, vertical: true)
+
+                        if viewModel.currentQuestion.questionType == .multipleSelect {
+                            Text("Select all that apply")
+                                .font(.manropeRegular(size: 13))
+                                .foregroundColor(.wingmanBlack.opacity(0.45))
+                        }
+                    }
+
                     // MARK: - Options
                     VStack(spacing: 12) {
                         ForEach(Array(viewModel.currentQuestion.options.enumerated()), id: \.offset) { index, option in
