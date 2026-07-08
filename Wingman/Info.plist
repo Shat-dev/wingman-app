@@ -29,8 +29,6 @@
 	<string>bf765fa51972b13876b8161ee5c19e5e</string>
 	<key>FacebookDisplayName</key>
 	<string>Wingman</string>
-	<key>NSUserTrackingUsageDescription</key>
-	<string>This identifier will be used to deliver personalized ads to you and measure their effectiveness.</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
