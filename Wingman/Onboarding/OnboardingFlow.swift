@@ -37,7 +37,7 @@ let extendedOnboardingSteps: [OnboardingStep] = [
         type: .question,
         title: "When was the last time you spoke to a woman in public?",
         subtitle: nil,
-        options: ["Within the past week", "Within the past month", "More than a year ago", "Never approached before"],
+        options: ["Within the past week", "Within the past month", "A few months ago", "More than a year ago", "Never approached before"],
         progress: 0.35,
         questionKey: "last_approach"
     ),

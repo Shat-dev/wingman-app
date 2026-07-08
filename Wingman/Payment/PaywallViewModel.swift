@@ -11,6 +11,7 @@ import Combine
 import RevenueCat
 import StoreKit
 import PostHog
+import FacebookCore
 
 /// Thrown by `loadOfferings()` when the RevenueCat offerings fetch doesn't
 /// resolve within its deadline. Caught by the same block that handles
@@ -313,6 +314,26 @@ final class PaywallViewModel: ObservableObject {
                     "is_trial": isTrial,
                     "is_anonymous": isAnon
                 ])
+
+                // Meta: subscription conversion, so ad campaigns can optimize
+                // for/report trial-starts and paid-subscribes rather than just
+                // installs. Standard events (not generic Purchase) are what
+                // Meta's docs recommend for subscription apps.
+                let priceAmount = NSDecimalNumber(decimal: package.storeProduct.price).doubleValue
+                let currency = package.storeProduct.currencyCode ?? "USD"
+                if isTrial {
+                    AppEvents.shared.logEvent(
+                        .startTrial,
+                        valueToSum: priceAmount,
+                        parameters: [.currency: currency, .contentID: package.storeProduct.productIdentifier]
+                    )
+                } else {
+                    AppEvents.shared.logEvent(
+                        .subscribe,
+                        valueToSum: priceAmount,
+                        parameters: [.currency: currency, .contentID: package.storeProduct.productIdentifier]
+                    )
+                }
 
                 // If user is anonymous, store purchase info for later linking
                 if isAnon {

@@ -47,7 +47,7 @@ struct PracticeGameData: Identifiable, nonisolated Codable, Sendable {
     let startingScreenId: String
     var scenes: [GameScene]
 
-    init(id: String, title: String, startingScreenId: String = "", scenes: [GameScene]) {
+    nonisolated init(id: String, title: String, startingScreenId: String = "", scenes: [GameScene]) {
         self.id = id
         self.title = title
         self.startingScreenId = startingScreenId.isEmpty

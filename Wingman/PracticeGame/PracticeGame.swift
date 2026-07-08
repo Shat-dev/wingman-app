@@ -568,7 +568,7 @@ struct GameCompleteView: View {
 
 // MARK: - Mock Data
 struct MockData {
-    static let barWindow = PracticeGameData(
+    nonisolated static let barWindow = PracticeGameData(
         id: "a0000001-0000-0000-0000-000000000001",
         title: "Bar Window",
         startingScreenId: "screen_001",

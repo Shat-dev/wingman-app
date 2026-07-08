@@ -9,31 +9,33 @@ import Supabase
 // MARK: - Supabase Manager
 final class SupabaseManager {
     
-    static let shared = SupabaseManager()
-    
+    nonisolated static let shared = SupabaseManager()
+
     // MARK: - Configuration
     // Replace these with your actual Supabase credentials
-    private let supabaseURL: URL = {
+    private static let supabaseURL: URL = {
         guard let url = URL(string: "https://bnckmgnysfliiypvxxii.supabase.co") else {
             preconditionFailure("Invalid Supabase URL — configuration error")
         }
         return url
     }()
-    private let supabaseKey = "sb_publishable_B1an-2PeSHETguChW_Xdxg_50UYkPtb"
-    
+    private static let supabaseKey = "sb_publishable_B1an-2PeSHETguChW_Xdxg_50UYkPtb"
+
     // MARK: - Client
-    lazy var client: SupabaseClient = {
-        return SupabaseClient(
-            supabaseURL: supabaseURL,
-            supabaseKey: supabaseKey,
-            options: SupabaseClientOptions(
-                auth: SupabaseClientOptions.AuthOptions(
-                    autoRefreshToken: false  // Disable auto-refresh to prevent hanging when offline
-                )
+    // nonisolated + eagerly-initialized `let` (rather than `lazy var`) so the
+    // client can be read from nonisolated contexts — a mutable stored property
+    // can't be marked `nonisolated` directly. SupabaseClient is itself Sendable
+    // (uses internal locking), so this is safe.
+    nonisolated let client: SupabaseClient = SupabaseClient(
+        supabaseURL: supabaseURL,
+        supabaseKey: supabaseKey,
+        options: SupabaseClientOptions(
+            auth: SupabaseClientOptions.AuthOptions(
+                autoRefreshToken: false  // Disable auto-refresh to prevent hanging when offline
             )
         )
-    }()
-    
+    )
+
     private init() {}
     
     // MARK: - Authentication Helpers

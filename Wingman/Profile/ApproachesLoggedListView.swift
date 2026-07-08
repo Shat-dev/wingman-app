@@ -76,7 +76,7 @@ struct ApproachesLoggedListView: View {
                         .background(Color.gray.opacity(0.2))
                     
                     // Approaches List
-                    if approachService.isLoading {
+                    if approachService.isLoading && filteredApproaches.isEmpty {
                         VStack {
                             Spacer()
                             ProgressView()
@@ -193,11 +193,6 @@ struct ApproachesLoggedListView: View {
             }
         }
         .onAppear {
-            Task {
-                await approachService.fetchApproaches()
-            }
-        }
-        .refreshable {
             Task {
                 await approachService.fetchApproaches()
             }

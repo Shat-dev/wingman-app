@@ -12,9 +12,36 @@
 				<string>com.googleusercontent.apps.915810938432-fh9l3u8icl6vcksn2j841c5nbljfh824</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>Facebook</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb1058420986669254</string>
+			</array>
+		</dict>
 	</array>
 	<key>GIDClientID</key>
 	<string>915810938432-fh9l3u8icl6vcksn2j841c5nbljfh824.apps.googleusercontent.com</string>
+	<key>FacebookAppID</key>
+	<string>1058420986669254</string>
+	<key>FacebookClientToken</key>
+	<string>bf765fa51972b13876b8161ee5c19e5e</string>
+	<key>FacebookDisplayName</key>
+	<string>Wingman</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>This identifier will be used to deliver personalized ads to you and measure their effectiveness.</string>
+	<key>SKAdNetworkItems</key>
+	<array>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>v9wttpbfk9.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>n38lu8286q.skadnetwork</string>
+		</dict>
+	</array>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Manrope-Regular.ttf</string>

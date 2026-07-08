@@ -12,9 +12,38 @@ import RevenueCat
 import RevenueCatUI
 import BackgroundTasks
 import PostHog
+import FacebookCore
+
+// Facebook SDK needs application(_:didFinishLaunchingWithOptions:) and
+// applicationDidBecomeActive(_:) hooks, which SwiftUI's App protocol doesn't
+// expose directly — hence this thin AppDelegate bridged in via
+// @UIApplicationDelegateAdaptor below.
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
+    ) -> Bool {
+        #if DEBUG
+        // Verbose SDK logging so the console shows every event payload and
+        // network round-trip to Meta's Graph API — temporary, for diagnosing
+        // whether events are actually being sent/accepted.
+        Settings.shared.loggingBehaviors = [.appEvents, .networkRequests]
+        #endif
+        ApplicationDelegate.shared.application(
+            application,
+            didFinishLaunchingWithOptions: launchOptions
+        )
+        return true
+    }
+
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        AppEvents.shared.activateApp()
+    }
+}
 
 @main
 struct WingmanApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject private var authManager = AuthManager()
 
     var body: some Scene {
@@ -25,6 +54,13 @@ struct WingmanApp: App {
                 .onOpenURL { url in
                     // Handle Google Sign-In callback URL
                     GIDSignIn.sharedInstance.handle(url)
+                    // Handle Facebook App Links / SDK callback URL
+                    ApplicationDelegate.shared.application(
+                        UIApplication.shared,
+                        open: url,
+                        sourceApplication: nil,
+                        annotation: [UIApplication.OpenURLOptionsKey.annotation: Any?.none as Any]
+                    )
                 }
                 .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
                     // Clear notification badge when app enters foreground

@@ -11,6 +11,7 @@ import Supabase
 import Auth
 import UIKit  // for UIScreen in the swipe-back gesture threshold
 import PostHog
+import AppTrackingTransparency
 
 struct OnboardingView: View {
     // Optional binding to control navigation back to Landing (anonymous flow)
@@ -355,6 +356,15 @@ struct OnboardingView: View {
         // PostHog: completion is the single most important onboarding event.
         // Fires once per user reaching the end of the question flow.
         PostHogSDK.shared.capture("onboarding_completed")
+
+        // ATT prompt: request here, once, right as onboarding hands off to
+        // RatingPromptView/PaywallView. `.notDetermined` guard makes this a
+        // no-op after the first ever call (iOS remembers the answer).
+        // Approving lets Meta use IDFA for tighter ad attribution instead of
+        // falling back to SKAdNetwork-only.
+        if ATTrackingManager.trackingAuthorizationStatus == .notDetermined {
+            ATTrackingManager.requestTrackingAuthorization { _ in }
+        }
 
         if authManager.isAnonymousUser {
             authManager.completeAnonymousOnboarding()

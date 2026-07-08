@@ -15,6 +15,7 @@ import CryptoKit
 import RevenueCat
 import StoreKit
 import PostHog
+import FacebookCore
 
 @MainActor
 final class AuthManager: ObservableObject {
@@ -187,7 +188,11 @@ final class AuthManager: ObservableObject {
     
     private func syncSubscriptionStatus() {
         let subscriptionManager = SubscriptionManager.shared
+        #if DEBUG
+        self.hasActiveSubscription = true
+        #else
         self.hasActiveSubscription = subscriptionManager.isSubscriptionActive
+        #endif
         self.subscriptionExpiryDate = subscriptionManager.subscriptionExpiryDate
 
         // Self-heal the routing flag. A paying user is, by definition, past
@@ -282,6 +287,13 @@ final class AuthManager: ObservableObject {
                     if isNewUser {
                         PostHogSDK.shared.capture("user_signed_up", properties: [
                             "method": authMethod
+                        ])
+                        // Meta: attributes installs/registrations back to the
+                        // ad that drove them. Only fired for genuinely new
+                        // accounts (same isNewUser gate as PostHog above) so
+                        // repeat logins don't inflate the conversion count.
+                        AppEvents.shared.logEvent(.completedRegistration, parameters: [
+                            .registrationMethod: authMethod
                         ])
                     } else {
                         PostHogSDK.shared.capture("user_logged_in", properties: [

@@ -88,30 +88,32 @@ final class PracticeService: PracticeServiceProtocol {
     // MARK: - Testing toggle
     // Set to true to force-unlock all practices locally for testing PracticeView.
     // Remember to set back to false before shipping. Adnan
-    static var forceUnlockForTesting: Bool = false
+    nonisolated(unsafe) static var forceUnlockForTesting: Bool = false
 
     // nonisolated let → can be read from any nonisolated async method
     nonisolated let client: SupabaseClient
 
-    init(client: SupabaseClient = SupabaseManager.shared.client) {
+    nonisolated init(client: SupabaseClient = SupabaseManager.shared.client) {
         self.client = client
     }
 
     // MARK: Fetch All Practices
     nonisolated func fetchPractices() async throws -> [Practice] {
         // Check network connectivity first
-        guard NetworkMonitor.shared.isConnected else {
+        guard await NetworkMonitor.shared.isConnected else {
             throw PracticeServiceError.networkError
         }
-        
-        guard let userIdString = SupabaseManager.shared.currentUserId else {
+
+        guard let userIdString = await SupabaseManager.shared.currentUserId else {
             throw PracticeServiceError.notAuthenticated
         }
 
-        let totalLessons = LessonDataService.shared.totalLessonsCompleted()
+        let totalLessons = await LessonDataService.shared.totalLessonsCompleted()
         log("🎮 Fetching practices - Total lessons completed: \(totalLessons)")
 
-        let rows: [Practice] = try await client
+        // Scenario list and user progress are independent reads — run them
+        // concurrently instead of waiting on one before starting the other.
+        async let scenariosRows: [Practice] = client
             .from("scenarios")
             .select()
             .eq("is_published", value: true)
@@ -119,12 +121,15 @@ final class PracticeService: PracticeServiceProtocol {
             .execute()
             .value
 
-        let progressRows: [UserScenarioProgressRow] = (try? await client
+        async let progressRowsOrNil: [UserScenarioProgressRow]? = try? await client
             .from("user_scenario_progress")
             .select("scenario_id, is_completed, current_screen_id")
             .eq("user_id", value: userIdString)
             .execute()
-            .value) ?? []
+            .value
+
+        let rows = try await scenariosRows
+        let progressRows = await progressRowsOrNil ?? []
 
         let progressMap = Dictionary(
             uniqueKeysWithValues: progressRows.map { ($0.scenarioId, $0) }
@@ -345,7 +350,7 @@ final class MockPracticeService: PracticeServiceProtocol {
 // MARK: - Mock Data
 
 extension Practice {
-    static let mockData: [Practice] = [
+    nonisolated static let mockData: [Practice] = [
         Practice(
             id: UUID(), title: "Bar Window",
             summary: "Loud music, crowded space, short attention spans. You notice her. Do you lead or wait?",
