@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import PostHog
 
 struct LogApproachBottomSheet: View {
     @Binding var isPresented: Bool
@@ -376,6 +377,12 @@ struct LogApproachBottomSheet: View {
                 .presentationCornerRadius(20)
         }
         .subscriptionGate(isPresented: $showPaywall)
+        // Session replay: the most sensitive screen in the app. The title
+        // field and notes editor hold free text about real-world encounters
+        // with identifiable third parties who have no relationship with us.
+        // Global text masking is off, so this mask is what keeps that out of
+        // recordings.
+        .postHogMask()
     }
 }
 

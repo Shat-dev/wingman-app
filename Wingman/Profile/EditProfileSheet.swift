@@ -12,6 +12,7 @@
 
 import SwiftUI
 import Supabase
+import PostHog
 
 struct EditProfileSheet: View {
     @Environment(\.dismiss) private var dismiss
@@ -135,6 +136,8 @@ struct EditProfileSheet: View {
             }
             .navigationBarHidden(true)
         }
+        // Session replay: holds the user's real name.
+        .postHogMask()
     }
     
     private func saveProfile() {

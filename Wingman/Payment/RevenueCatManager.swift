@@ -55,7 +55,24 @@ final class RevenueCatManager: NSObject, ObservableObject {
         #else
         Purchases.logLevel = .error
         #endif
-        Purchases.configure(withAPIKey: apiKey)
+        // Configure with the same id PostHog uses as its distinct_id for
+        // pre-signup users, instead of letting RevenueCat mint its own
+        // $RCAnonymousID.
+        //
+        // Without this the two systems disagree about who an anonymous user
+        // is, and since this app allows purchasing before account creation,
+        // a pre-signup purchase would emit rc_* events against an id PostHog
+        // has never seen — orphaning the purchase from the onboarding and
+        // paywall events that produced it.
+        //
+        // The authenticated side already agreed: on sign-in, setUserID()
+        // calls logIn(supabaseUserId), which is exactly what AuthManager
+        // passes to PostHogSDK.identify(). This closes the anonymous half so
+        // the ids match across the whole lifecycle.
+        Purchases.configure(
+            withAPIKey: apiKey,
+            appUserID: AnonymousUserManager.shared.anonymousUserId
+        )
         Purchases.shared.delegate = self
         
         Task {

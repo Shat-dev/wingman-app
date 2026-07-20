@@ -254,9 +254,34 @@ struct RootView: View {
                 // can't see SwiftUI's internal view tree.
                 config.sessionReplay = true
                 config.sessionReplayConfig.screenshotMode = true
-                // Never record what the user types — emails, passwords,
-                // display names, referral codes, approach notes.
-                config.sessionReplayConfig.maskAllTextInputs = true
+
+                // General UI is recorded unmasked so replays are actually
+                // readable. Note this flag covers static SwiftUI `Text` as
+                // well as editable fields — the SDK treats both as
+                // text-based views — so leaving it on blacks out essentially
+                // the whole app, which is what it was doing before.
+                //
+                // Sensitive screens are masked individually with
+                // `.postHogMask()` instead: AuthView, SettingsSheet,
+                // EditProfileSheet, LogApproachBottomSheet and
+                // ApproachesLoggedListView. Anything new that renders an
+                // email, a real name, or free text about a third party needs
+                // the same treatment — this flag will no longer catch it.
+                config.sessionReplayConfig.maskAllTextInputs = false
+
+                // Every image in the app is a bundled asset (course art,
+                // scenario covers, onboarding statistic illustrations).
+                // There is no camera, photo picker or user upload anywhere,
+                // so nothing user-supplied can surface here.
+                config.sessionReplayConfig.maskAllImages = false
+
+                // Deliberately left at its default of `true`. This masks
+                // views that don't belong to our process — system-rendered
+                // surfaces such as the StoreKit purchase sheet. Turning it
+                // off would gain nothing (the app has no image or contact
+                // pickers, the other things it covers) while removing the
+                // only guard on payment UI.
+                // config.sessionReplayConfig.maskAllSandboxedViews = false
 
                 PostHogSDK.shared.setup(config)
 

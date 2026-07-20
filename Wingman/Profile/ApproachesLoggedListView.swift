@@ -5,6 +5,7 @@
 
 import SwiftUI
 import Combine
+import PostHog
 
 struct ApproachesLoggedListView: View {
     @Environment(\.dismiss) private var dismiss
@@ -197,6 +198,10 @@ struct ApproachesLoggedListView: View {
                 await approachService.fetchApproaches()
             }
         }
+        // Session replay: renders the logged approaches back as text — the
+        // same third-party content masked at the point of entry in
+        // LogApproachBottomSheet, so it gets the same treatment here.
+        .postHogMask()
     }
 }
 
