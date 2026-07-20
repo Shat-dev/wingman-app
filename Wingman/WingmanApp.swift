@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Auth  // for User.id on authManager.currentUser (RevenueCat identity fallback)
 import GoogleSignIn
 import UserNotifications
 import RevenueCat
@@ -319,11 +320,28 @@ struct RootView: View {
             log("   - hasCompletedPaywallFlow: \(authManager.hasCompletedPaywallFlow)")
             log("   - hasCompletedOnboarding: \(authManager.hasCompletedOnboarding)")
             
-            // Set RevenueCat user ID when user authenticates
-            if newValue, let userId = SupabaseManager.shared.currentUserId {
-                RevenueCatManager.shared.setUserID(userId)
-            } else if !newValue {
-                RevenueCatManager.shared.logoutUser()
+            // Set RevenueCat user ID when user authenticates.
+            //
+            // Deliberately NO logout branch here. `isAuthenticated` can flip
+            // false for reasons that are not a sign-out — most notably
+            // restoreSessionGracefully()'s catch racing .initialSession — and
+            // RevenueCat's logOut() abandons the identified customer for a
+            // fresh anonymous one, orphaning any active subscription with it.
+            // Deliberate exits log RevenueCat out at their own call sites:
+            // the .signedOut handler in observeAuthState() (both sign-out
+            // buttons route through client.auth.signOut()) and
+            // deleteAccount().
+            if newValue {
+                // Fallback to AuthManager's user: currentUserId reads the
+                // Supabase client's own state, which can lag the auth event
+                // that set isAuthenticated. Previously a nil here silently
+                // skipped identification and the entitlement never followed
+                // the user.
+                if let userId = SupabaseManager.shared.currentUserId ?? authManager.currentUser?.id.uuidString {
+                    RevenueCatManager.shared.setUserID(userId)
+                } else {
+                    log("🚨 RootView: authenticated but no user id resolvable — RevenueCat identity NOT set")
+                }
             }
         }
         .onChange(of: authManager.hasActiveSubscription) { newValue in

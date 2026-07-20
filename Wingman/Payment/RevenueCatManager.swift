@@ -65,42 +65,31 @@ final class RevenueCatManager: NSObject, ObservableObject {
         Purchases.logLevel = .error
         #endif
 
-        // Configure WITHOUT an explicit appUserID, deliberately.
+        // Configure WITHOUT an appUserID, and do NOT assign one before
+        // sign-in. Both matter, for different reasons:
         //
-        // An id passed here takes precedence over RevenueCat's own cached
-        // one (IdentityManager.configure resolves
-        // `appUserID ?? cachedAppUserID ?? …`). Supplying one would
-        // therefore re-identify a returning subscriber as somebody else on
-        // every cold launch: entitlements would come back empty until
-        // session restore ran, SubscriptionManager would cache that
-        // "not subscribed" answer, and — because our id is not in
-        // $RCAnonymousID form, so RevenueCat treats it as a real identity —
-        // the project's "Transfer to new App User ID" rule could move a live
-        // subscription onto it. Letting RevenueCat restore its own cached
-        // identity is what keeps a paying user paid.
+        // 1. An id passed here takes precedence over RevenueCat's cached one
+        //    (IdentityManager.configure resolves
+        //    `appUserID ?? cachedAppUserID ?? …`), so supplying one would
+        //    re-identify a returning subscriber as somebody else on every
+        //    cold launch and their entitlements would come back empty.
+        //
+        // 2. RevenueCat only transfers purchases automatically when logging
+        //    in *from* an anonymous id ("$RCAnonymousID:…"). Assigning our
+        //    own id pre-signup makes the account an identified one, so the
+        //    later logIn(supabaseUserId) becomes an identified→identified
+        //    switch and a purchase made while anonymous is left stranded on
+        //    the old id. Leaving RevenueCat anonymous until real sign-in is
+        //    what lets that handoff work.
+        //
+        // Consequence, accepted knowingly: pre-signup RevenueCat events are
+        // keyed to $RCAnonymousID while PostHog uses its own anonymous id, so
+        // a purchase made before account creation won't stitch to the
+        // onboarding/paywall events that produced it until the user signs up.
+        // That is an analytics gap; the alternative was a revenue bug.
         Purchases.configure(withAPIKey: apiKey)
         Purchases.shared.delegate = self
-
-        // Claim the pre-signup identity only when RevenueCat has no real one.
-        //
-        // Fresh install: RevenueCat mints an "$RCAnonymousID:…". Logging in
-        // from an anonymous id transfers any purchases onto the id we supply,
-        // so nothing can be stranded. Anyone already identified — every
-        // signed-in user, and anyone who previously purchased under our id —
-        // skips this entirely and keeps the identity they had.
-        //
-        // The point is to hand pre-signup users the same id PostHog uses as
-        // its distinct_id, so a purchase made before account creation
-        // stitches to the onboarding and paywall events that produced it.
-        // On sign-in, setUserID() moves both systems to the Supabase user id
-        // together.
-        if Purchases.shared.isAnonymous {
-            let anonymousId = AnonymousUserManager.shared.anonymousUserId
-            log("🆔 RevenueCat: Claiming pre-signup identity: \(anonymousId)")
-            setUserID(anonymousId)
-        } else {
-            log("🆔 RevenueCat: Existing identity retained: \(Purchases.shared.appUserID)")
-        }
+        log("🆔 RevenueCat: Identity: \(Purchases.shared.appUserID)")
 
         Task {
             await refreshCustomerInfo()
@@ -133,59 +122,61 @@ final class RevenueCatManager: NSObject, ObservableObject {
         }
     }
     
-    /// Link anonymous user purchases to authenticated account
-    func linkAnonymousUserPurchases(_ userID: String) async -> Bool {
-        let anonymousManager = AnonymousUserManager.shared
-        
-        guard anonymousManager.needsRevenueCatLinking else {
-            log("ℹ️ RevenueCat: No anonymous purchases to link")
-            return true
-        }
-        
-        guard let anonymousCustomerID = anonymousManager.revenueCatCustomerId else {
-            log("❌ RevenueCat: No anonymous customer ID found")
-            return false
-        }
-        
-        log("🔗 RevenueCat: Linking anonymous purchases to authenticated user")
+    /// Link a purchase made while anonymous to the authenticated account.
+    ///
+    /// `anonymousCustomerID` is passed in rather than read back from
+    /// `AnonymousUserManager`. The caller (`syncAnonymousDataToBackend`)
+    /// deliberately clears that store before it gets here, so the previous
+    /// version's `guard anonymousManager.needsRevenueCatLinking` always
+    /// failed — and it returned `true`, reporting success for work it had
+    /// silently skipped.
+    ///
+    /// Normally redundant: with RevenueCat left anonymous until sign-in, its
+    /// own alias on `logIn` already moves the purchase across. This is the
+    /// fallback for when that didn't happen — a failed or raced logIn.
+    func linkAnonymousUserPurchases(_ userID: String, anonymousCustomerID: String) async -> Bool {
+        log("🔗 RevenueCat: Verifying anonymous purchase link")
         log("   - Anonymous Customer ID: \(anonymousCustomerID)")
         log("   - Authenticated User ID: \(userID)")
-        
+
         do {
-            // First, switch to the anonymous customer to get their purchases
+            // Fast path: check whether the SDK's alias already did the work.
+            // Worth testing first — the fallback below logs back into the
+            // anonymous customer, which would move the active user *away*
+            // from the account we just signed into if run unnecessarily.
+            let current = try await Purchases.shared.customerInfo()
+            if Purchases.shared.appUserID == userID,
+               current.entitlements[entitlementID]?.isActive == true {
+                log("✅ RevenueCat: Entitlement already on \(userID) — nothing to link")
+                customerInfo = current
+                return true
+            }
+
+            // Fallback: adopt the anonymous customer, then identify as the
+            // authenticated user so RevenueCat transfers the purchase.
             _ = try await Purchases.shared.logIn(anonymousCustomerID)
             let anonymousCustomerInfo = try await Purchases.shared.customerInfo()
-            
-            log("📋 RevenueCat: Anonymous customer info retrieved")
-            log("   - Active entitlements: \(anonymousCustomerInfo.entitlements.active.keys)")
-            
-            // Now login with the authenticated user ID to transfer purchases
+            log("📋 RevenueCat: Anonymous entitlements: \(anonymousCustomerInfo.entitlements.active.keys)")
+
             _ = try await Purchases.shared.logIn(userID)
             let finalCustomerInfo = try await Purchases.shared.customerInfo()
-            
-            log("✅ RevenueCat: Successfully linked to authenticated user")
-            log("   - Final entitlements: \(finalCustomerInfo.entitlements.active.keys)")
-            
-            // Verify the purchase was transferred
+            log("📋 RevenueCat: Final entitlements: \(finalCustomerInfo.entitlements.active.keys)")
+
+            customerInfo = finalCustomerInfo
+            // Push the result straight into SubscriptionManager rather than
+            // waiting on the delegate or the 5-minute poll, so the gates the
+            // user is about to hit see the transferred entitlement.
+            SubscriptionManager.shared.handleCustomerInfoUpdate(finalCustomerInfo, error: nil)
+
             let hasEntitlement = finalCustomerInfo.entitlements[entitlementID]?.isActive == true
             if hasEntitlement {
-                log("✅ RevenueCat: Purchase successfully transferred!")
-                
-                // Clear anonymous purchase data since it's now linked
-                anonymousManager.revenueCatCustomerId = nil
-                anonymousManager.hasActivePurchase = false
-                
-                // Update local customer info
-                await MainActor.run {
-                    self.customerInfo = finalCustomerInfo
-                }
-                
-                return true
+                log("✅ RevenueCat: Purchase transferred to \(userID)")
             } else {
-                log("⚠️ RevenueCat: Purchase transfer may not be complete")
-                return false
+                log("❌ RevenueCat: Transfer ran but \(userID) has no active entitlement")
             }
-            
+            // Only ever report success when an entitlement is actually present.
+            return hasEntitlement
+
         } catch {
             log("❌ RevenueCat: Failed to link anonymous purchases: \(error)")
             return false

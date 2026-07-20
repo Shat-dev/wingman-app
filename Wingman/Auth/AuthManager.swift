@@ -304,6 +304,13 @@ final class AuthManager: ObservableObject {
 
             case .signedOut:
                 log("🚪 Event type: SIGNED_OUT")
+                // RevenueCat logout lives HERE — on the deliberate sign-out
+                // event — not on RootView's isAuthenticated onChange, which
+                // also fires false on transient session-restore failures.
+                // Supabase emits .signedOut only for an actual signOut()
+                // (AuthManager.signOut and SettingsSheet.logOut both route
+                // through it), never for network flakes.
+                RevenueCatManager.shared.logoutUser()
                 // PostHog: capture before reset so the event is still
                 // attached to the outgoing distinct_id. reset() afterwards
                 // clears the distinct_id and re-generates an anonymous one.
@@ -493,12 +500,20 @@ final class AuthManager: ObservableObject {
             
         } catch {
             log("❌ No cached session found: \(error.localizedDescription)")
-            
-            // No session - user needs to log in
-            self.isAuthenticated = false
-            self.currentUser = nil
+
+            // Only mark unauthenticated if observeAuthState() hasn't already
+            // established a session. This runs concurrently with the
+            // .initialSession/.signedIn handlers, and unconditionally writing
+            // false here could clobber a session they just set — RootView
+            // would flip to logged-out (and previously also logged RevenueCat
+            // out, orphaning an active subscription mid-flight).
+            if self.currentUser == nil {
+                self.isAuthenticated = false
+                log("ℹ️ No session - showing login screen")
+            } else {
+                log("ℹ️ Session read failed but auth state already established — keeping it")
+            }
             self.isCheckingSession = false
-            log("ℹ️ No session - showing login screen")
         }
         
         log("================================================\n")
@@ -603,6 +618,10 @@ final class AuthManager: ObservableObject {
         log("👻 startAnonymousOnboarding() called")
         isAnonymousUser = true
         hasCompletedOnboarding = false
+        // Persist the reset too, now that completeAnonymousOnboarding()
+        // writes this key. Leaving it set from a previous pass would route a
+        // relaunch mid-onboarding as if the flow were already finished.
+        UserDefaults.standard.set(false, forKey: "hasCompletedOnboarding")
         UserDefaults.standard.set(true, forKey: "isAnonymousUser")
 
         // Reset the rating prompt so this anonymous onboarding pass shows it
@@ -626,6 +645,14 @@ final class AuthManager: ObservableObject {
     func completeAnonymousOnboarding() {
         log("👻 completeAnonymousOnboarding() called")
         hasCompletedOnboarding = true
+        // Persist to the same global key `completeOnboarding()` and
+        // `skipOnboarding()` write, and that `AuthManager.init` reads back at
+        // launch. Without this the flag lived only in memory, so an anonymous
+        // user who quit before creating an account came back with
+        // `hasCompletedOnboarding == false` — RootView's
+        // `isAnonymousUser && hasCompletedOnboarding` branch could never
+        // match, and they restarted onboarding from the beginning.
+        UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")
         // Mirror into hasCompletedQuestions so the in-memory flag is already
         // true at the moment `.signedIn` fires. AuthManager is session-scoped,
         // so this value survives the anonymous → signup transition and keeps
@@ -676,6 +703,9 @@ final class AuthManager: ObservableObject {
         // preserved for legacy data still in AnonymousUserManager from
         // previous app versions.
         let needsLinking = anonymousManager.needsRevenueCatLinking
+        // Snapshot alongside `needsLinking` — `clearAllData()` below wipes it,
+        // and linkAnonymousUserPurchases can no longer read it back itself.
+        let anonymousCustomerID = anonymousManager.revenueCatCustomerId
         log("💳 Anonymous flags — purchase=\(hadActivePurchase) paywallComplete=\(hadCompletedPaywallFlow) onboarding=\(hadCompletedOnboarding) rating=\(hadSeenRatingPrompt)")
 
         // =====================================================================
@@ -785,14 +815,23 @@ final class AuthManager: ObservableObject {
         await captureStoreContextFromStoreKit()
 
         // Link RevenueCat purchases made while anonymous to the new userId.
-        if needsLinking {
+        if needsLinking, let anonymousCustomerID {
             log("🔗 Starting RevenueCat customer linking...")
-            let linkSuccess = await RevenueCatManager.shared.linkAnonymousUserPurchases(userId)
+            let linkSuccess = await RevenueCatManager.shared.linkAnonymousUserPurchases(
+                userId,
+                anonymousCustomerID: anonymousCustomerID
+            )
             if linkSuccess {
                 log("✅ RevenueCat purchases successfully linked")
             } else {
-                log("⚠️ RevenueCat purchase linking may have failed")
+                // Not fatal: the entitlement still exists in RevenueCat under
+                // the anonymous customer, and Restore Purchases in Settings
+                // recovers it. Logged loudly because it means a paying user
+                // is currently being gated.
+                log("🚨 RevenueCat purchase linking FAILED — paying user may be gated. Anonymous customer: \(anonymousCustomerID)")
             }
+        } else if needsLinking {
+            log("🚨 RevenueCat linking skipped — needsLinking was true but no anonymous customer id was captured")
         }
     }
 
@@ -1358,7 +1397,13 @@ final class AuthManager: ObservableObject {
                     
                     // Clear all local data
                     clearAllLocalData()
-                    
+
+                    // RevenueCat: detach from the deleted account's identity.
+                    // Server-side deletion doesn't reliably emit a Supabase
+                    // .signedOut event (auth state is reset manually below),
+                    // so the .signedOut handler can't be relied on here.
+                    RevenueCatManager.shared.logoutUser()
+
                     // Update auth state
                     isAuthenticated = false
                     self.currentUser = nil
