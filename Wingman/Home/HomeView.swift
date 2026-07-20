@@ -6,6 +6,7 @@
 import SwiftUI
 import Auth
 import Supabase
+import PostHog
 
 struct HomeView: View {
     // Binding added so Home can change the selected tab in MainTabView
@@ -313,6 +314,7 @@ struct HomeView: View {
                 // fires the same RPC twice.
             }
         }
+        .postHogScreenView("Home")
     }
     
     // MARK: - Find Course by ID

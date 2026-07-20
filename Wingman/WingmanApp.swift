@@ -237,8 +237,27 @@ struct RootView: View {
                     host: Constants.POSTHOG_HOST
                 )
                 config.captureApplicationLifecycleEvents = false
+
+                // Deliberately left false. This flag only drives the swizzled
+                // UIViewController.viewDidAppear autocapture, which in a
+                // SwiftUI app resolves to the WindowGroup's root
+                // UIHostingController on every transition — one meaningless
+                // name repeated for every screen. The manual
+                // PostHogSDK.screen() call behind the .postHogScreenView()
+                // modifiers on each screen is NOT gated on this flag, so
+                // screen tracking works with it off and stays free of
+                // hosting-controller noise.
                 config.captureScreenViews = false
-                config.sessionReplay = false
+
+                // Session replay. screenshotMode is required for SwiftUI:
+                // the default renderer walks the UIKit view hierarchy, which
+                // can't see SwiftUI's internal view tree.
+                config.sessionReplay = true
+                config.sessionReplayConfig.screenshotMode = true
+                // Never record what the user types — emails, passwords,
+                // display names, referral codes, approach notes.
+                config.sessionReplayConfig.maskAllTextInputs = true
+
                 PostHogSDK.shared.setup(config)
 
                 #if DEBUG

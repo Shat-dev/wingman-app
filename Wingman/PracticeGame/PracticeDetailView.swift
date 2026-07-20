@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PostHog
 
 struct PracticeDetailView: View {
     
@@ -70,6 +71,7 @@ struct PracticeDetailView: View {
         .task {
             await viewModel.fetchPracticeDetail()
         }
+        .postHogScreenView("Practice Detail")
     }
     
     // MARK: - Navigation Bar

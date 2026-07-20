@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PostHog
 
 struct LandingView: View {
     @StateObject private var viewModel = LandingViewModel()
@@ -140,6 +141,7 @@ struct LandingView: View {
         .onChange(of: navigateToOnboarding) { newValue in
             log("📊 LandingView: navigateToOnboarding changed to: \(newValue)")
         }
+        .postHogScreenView("Landing")
     }
 }
 

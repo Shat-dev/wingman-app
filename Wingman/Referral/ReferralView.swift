@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PostHog
 
 struct ReferralView: View {
 
@@ -60,6 +61,7 @@ struct ReferralView: View {
         }
         .padding(.horizontal, 24)
         .navigationBarBackButtonHidden(true)
+        .postHogScreenView("Referral")
     }
 }
 

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PostHog
 
 struct AuthView: View {
     let mode: AuthMode
@@ -138,6 +139,11 @@ struct AuthView: View {
             log("👋 AuthView disappeared")
         }
         .padding(.top, 8)
+        // Session replay: mask the whole auth screen. maskAllTextInputs
+        // already covers what's typed into the fields, but this also keeps a
+        // signed-in email out of the replay if the screen ever renders one.
+        .postHogMask()
+        .postHogScreenView("Auth")
     }
 
     // MARK: - Handle Back Button

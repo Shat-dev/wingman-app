@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import PostHog
 
 struct CourseDetailSheet: View {
     let course: Course
@@ -161,6 +162,7 @@ struct CourseDetailSheet: View {
             }
             loadLessons()
         }
+        .postHogScreenView("Course Detail")
     }
 
     /// Banner copy. Nil when the course is unlocked (no banner rendered).

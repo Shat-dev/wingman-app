@@ -189,6 +189,19 @@ struct PracticeGame: View {
     @State private var showIntroScreen = true
     @EnvironmentObject private var tabBarVisibility: TabBarVisibilityManager
 
+    // Analytics: stamped on first appearance so `practice_scenario_completed`
+    // can report how long the scenario took, and so `practice_scenario_started`
+    // fires once per entry rather than on every incidental re-mount.
+    @State private var startedAt: Date?
+
+    /// Shared identity properties for the practice scenario events.
+    private var scenarioProperties: [String: Any] {
+        [
+            "scenario_id": viewModel.gameData.id,
+            "scenario_name": viewModel.gameData.title
+        ]
+    }
+
     init(
         gameData: PracticeGameData = MockData.barWindow,
         userName: String = "You",
@@ -280,12 +293,30 @@ struct PracticeGame: View {
         .toolbar(.hidden, for: .tabBar)
         .onAppear {
             tabBarVisibility.hideTabBar()
+
+            // Analytics: entering the scenario. Guarded so re-mounts don't
+            // double-count, and so `startedAt` keeps the original timestamp.
+            if startedAt == nil {
+                startedAt = Date()
+                Analytics.capture(Analytics.Event.practiceScenarioStarted, scenarioProperties)
+            }
         }
         .onDisappear {
             tabBarVisibility.showTabBar()
         }
         .onChange(of: viewModel.gameCompleted) { completed in
-            if completed { showGameComplete = true }
+            guard completed else { return }
+
+            // Analytics: genuine completion only — `gameCompleted` is set by
+            // the view model's `triggerCompletion()`, which only runs on
+            // reaching the final canonical scene. Dismissing never sets it.
+            var properties = scenarioProperties
+            if let startedAt {
+                properties["duration_seconds"] = Analytics.elapsedSeconds(since: startedAt)
+            }
+            Analytics.capture(Analytics.Event.practiceScenarioCompleted, properties)
+
+            showGameComplete = true
         }
         .fullScreenCover(isPresented: $showGameComplete) {
             GameCompleteView {

@@ -19,6 +19,23 @@ enum OnboardingScreen: Hashable {
     case question(index: Int)
     case statistic(sourceIndex: Int, content: StatisticContent)
     case loading(index: Int)
+
+    /// Index into `extendedOnboardingSteps` this screen derives from. For
+    /// `.statistic` that's the question it was shown after, since statistic
+    /// interstitials have no step of their own.
+    var stepIndex: Int {
+        switch self {
+        case let .question(index), let .loading(index):
+            return index
+        case let .statistic(sourceIndex, _):
+            return sourceIndex
+        }
+    }
+
+    var isStatistic: Bool {
+        if case .statistic = self { return true }
+        return false
+    }
 }
 
 let extendedOnboardingSteps: [OnboardingStep] = [

@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import PostHog
 
 struct LessonView: View {
     let lesson: Lesson
@@ -15,7 +16,21 @@ struct LessonView: View {
     @State private var currentContentIndex: Int = -1 // Index within current screen's content
     @State private var showLessonComplete = false
     @State private var screenTransitionDirection: Edge = .trailing
-    
+
+    // Analytics: stamped on first appearance so `lesson_completed` can report
+    // how long the lesson took. Also guards `lesson_started` against SwiftUI
+    // re-firing `.onAppear` on incidental re-mounts.
+    @State private var startedAt: Date?
+
+    /// Shared identity properties for the lesson events.
+    private var lessonProperties: [String: Any] {
+        [
+            "lesson_id": lesson.id,
+            "lesson_name": lesson.title,
+            "category": lesson.courseTitle
+        ]
+    }
+
     // Screens sorted by order
     private var sortedScreens: [LessonScreen] {
         lesson.screens.sorted { $0.order < $1.order }
@@ -148,6 +163,13 @@ struct LessonView: View {
         .toolbar(.hidden, for: .tabBar)
         .onAppear {
             tabBarVisibility.hideTabBar()
+
+            // Analytics: entering the lesson. Guarded so re-mounts don't
+            // double-count, and so `startedAt` keeps the original timestamp.
+            if startedAt == nil {
+                startedAt = Date()
+                Analytics.capture(Analytics.Event.lessonStarted, lessonProperties)
+            }
         }
         .onDisappear {
             tabBarVisibility.showTabBar()
@@ -165,6 +187,7 @@ struct LessonView: View {
                 }
             )
         }
+        .postHogScreenView("Lesson")
     }
     
     // MARK: - Navigation Functions
@@ -249,6 +272,16 @@ struct LessonView: View {
                 // Last screen, last content - lesson complete
                 log("✅ Lesson complete!")
                 HapticManager.shared.success()
+
+                // Analytics: genuine completion only — this branch is reached
+                // solely by advancing past the final paragraph of the final
+                // screen. Backing out or dismissing never lands here.
+                var properties = lessonProperties
+                if let startedAt {
+                    properties["duration_seconds"] = Analytics.elapsedSeconds(since: startedAt)
+                }
+                Analytics.capture(Analytics.Event.lessonCompleted, properties)
+
                 showLessonComplete = true
             }
         }

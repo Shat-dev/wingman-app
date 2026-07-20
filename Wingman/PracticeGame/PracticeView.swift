@@ -5,6 +5,7 @@
 
 import SwiftUI
 import Supabase
+import PostHog
 
 struct PracticeView: View {
 
@@ -68,6 +69,7 @@ struct PracticeView: View {
             await viewModel.fetchPractices()
             await viewModel.prefetchGameData()
         }
+        .postHogScreenView("Practice")
     }
 
     // MARK: - Derived user display name

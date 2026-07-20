@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import PostHog
 
 struct DailyPracticeView: View {
     @StateObject private var viewModel: DailyPracticeViewModel
@@ -19,6 +20,12 @@ struct DailyPracticeView: View {
     // no-op once QuestionsCompleteView is pushed on top, so we bypass it and
     // let the outermost binding unwind the whole stack in one shot.
     private let onCompletionDismiss: () -> Void
+
+    // Analytics: stamped once the day's questions are actually on screen, so
+    // `daily_challenge_completed` can report how long the set took. A failed
+    // or empty load never stamps it, which keeps aborted loads out of the
+    // started/completed funnel entirely.
+    @State private var startedAt: Date?
 
     // Default initializer for production use
     init(onCompletionDismiss: @escaping () -> Void = {}) {
@@ -90,20 +97,56 @@ struct DailyPracticeView: View {
             )
             .environmentObject(tabBarVisibility)
         }
+        .onChange(of: viewModel.questions.isEmpty) { isEmpty in
+            // Analytics: the day's questions have rendered — this is the point
+            // the user genuinely enters the content, as opposed to landing on
+            // a spinner that may yet fail.
+            if !isEmpty { logChallengeStarted() }
+        }
+        .onChange(of: viewModel.showCompletionView) { showing in
+            guard showing else { return }
+
+            // Analytics: genuine completion only. The view model sets this
+            // flag after the final question is answered and the streak write
+            // resolves; backing out with the chevron never sets it.
+            var properties: [String: Any] = ["question_count": viewModel.questions.count]
+            if let startedAt {
+                properties["duration_seconds"] = Analytics.elapsedSeconds(since: startedAt)
+            }
+            Analytics.capture(Analytics.Event.dailyChallengeCompleted, properties)
+        }
         .onAppear {
             tabBarVisibility.hideTabBar()
             log("👁️ PracticeView appeared - Loading questions from Supabase")
-            
+
             // Only load from Supabase if questions are empty (not in preview mode)
             if viewModel.questions.isEmpty {
                 viewModel.loadTodayQuestions()
+            } else {
+                // Preview / already-warm path: `onChange` won't fire because
+                // the value never transitions, so start the run here instead.
+                logChallengeStarted()
             }
         }
         .onDisappear {
             log("👋 PracticeView disappeared")
         }
+        .postHogScreenView("Daily Practice")
     }
     
+    // MARK: - Analytics
+
+    /// Fire `daily_challenge_started` once per run. Guarded on `startedAt` so
+    /// a silent background refresh that repopulates `questions` can't emit a
+    /// second start for the same sitting.
+    private func logChallengeStarted() {
+        guard startedAt == nil else { return }
+        startedAt = Date()
+        Analytics.capture(Analytics.Event.dailyChallengeStarted, [
+            "question_count": viewModel.questions.count
+        ])
+    }
+
     // MARK: - Loading View
     private func loadingView() -> some View {
         VStack(spacing: 20) {

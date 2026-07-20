@@ -6,6 +6,7 @@
 import SwiftUI
 import Combine
 import Supabase
+import PostHog
 
 struct ProfileView: View {
     @State private var showSettings = false
@@ -201,6 +202,7 @@ struct ProfileView: View {
             Task { await streakStore.refresh() }
             Task { await userProfileStore.refresh() }
         }
+        .postHogScreenView("Profile")
     }
 
     private func loadApproachData() async {

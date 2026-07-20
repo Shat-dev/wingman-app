@@ -105,14 +105,9 @@ struct OnboardingView: View {
             guard !didLogOnboardingStart else { return }
             didLogOnboardingStart = true
             PostHogSDK.shared.capture("onboarding_started")
-            if case .question(let index) = screen,
-               let key = steps[index].questionKey {
-                PostHogSDK.shared.capture("onboarding_step_viewed", properties: [
-                    "step_index": index,
-                    "question_key": key
-                ])
-            }
+            logStepViewed(screen)
         }
+        .postHogScreenView("Onboarding")
     }
 
     @ViewBuilder
@@ -198,17 +193,11 @@ struct OnboardingView: View {
         withAnimation(.spring(response: 0.35, dampingFraction: 0.86)) {
             screen = newScreen
         }
-        // PostHog: emit `onboarding_step_viewed` only on forward advance into
-        // a question screen. Statistic and loading screens are intentionally
-        // excluded — `onboarding_completed` covers the loading transition,
-        // and statistic interstitials are derivable from question advances.
-        if case .question(let index) = newScreen,
-           let key = steps[index].questionKey {
-            PostHogSDK.shared.capture("onboarding_step_viewed", properties: [
-                "step_index": index,
-                "question_key": key
-            ])
-        }
+        // PostHog: emit `onboarding_step_viewed` on every forward advance,
+        // whatever the screen type. Only forward navigation fires it —
+        // `goBack` stays silent so the funnel counts arrivals rather than
+        // inflating on back-and-forth.
+        logStepViewed(newScreen)
     }
 
     /// Pop one entry from history and animate back to it. A single
@@ -361,6 +350,63 @@ struct OnboardingView: View {
         } else {
             authManager.completeQuestions()
         }
+    }
+
+    // MARK: - Analytics
+
+    /// Position of `screen` in the full onboarding sequence — question,
+    /// statistic and loading screens all counted, in the order the user
+    /// actually sees them.
+    ///
+    /// Derived by walking `steps` rather than tracked with a running counter,
+    /// so revisiting a screen after `goBack` reports the same index it did
+    /// the first time. Whether a step is followed by a statistic depends only
+    /// on its `questionKey` — the `ageGroup` argument picks *which* statistic,
+    /// never whether one exists — so the walk is stable regardless of answers.
+    private func sequentialIndex(of target: OnboardingScreen) -> Int {
+        let ageGroup = answerStore.answers["age"] ?? ""
+        var position = 0
+
+        for (index, step) in steps.enumerated() {
+            if !target.isStatistic, target.stepIndex == index {
+                return position
+            }
+            position += 1
+
+            guard let key = step.questionKey,
+                  StatisticContent.for(questionKey: key, ageGroup: ageGroup) != nil else {
+                continue
+            }
+            if target.isStatistic, target.stepIndex == index {
+                return position
+            }
+            position += 1
+        }
+
+        return position
+    }
+
+    /// PostHog: `onboarding_step_viewed` for any screen in the flow.
+    ///
+    /// Question screens carry `question_key`; statistic interstitials and the
+    /// loading screen carry `screen_key` instead. Every position between
+    /// `onboarding_started` and `onboarding_completed` is now represented,
+    /// where previously only the five question screens were.
+    private func logStepViewed(_ screen: OnboardingScreen) {
+        var properties: [String: Any] = ["step_index": sequentialIndex(of: screen)]
+
+        switch screen {
+        case let .question(index):
+            guard let key = steps[index].questionKey else { return }
+            properties["question_key"] = key
+        case let .statistic(sourceIndex, _):
+            guard let key = steps[sourceIndex].questionKey else { return }
+            properties["screen_key"] = "statistic_\(key)"
+        case .loading:
+            properties["screen_key"] = "loading"
+        }
+
+        PostHogSDK.shared.capture("onboarding_step_viewed", properties: properties)
     }
 
     // MARK: - QuestionScreen seeding

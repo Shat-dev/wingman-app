@@ -7,6 +7,7 @@ import SwiftUI
 import Auth
 import Supabase
 import RevenueCat
+import PostHog
 
 struct SettingsSheet: View {
     @Environment(\.dismiss) private var dismiss
@@ -324,6 +325,12 @@ struct SettingsSheet: View {
         .onAppear {
             loadSettings()
         }
+        // Session replay: mask the whole sheet. maskAllTextInputs doesn't
+        // cover static labels, and this screen renders the account email as
+        // a Text (see getUserEmail() below) — which would otherwise be
+        // legible in every recording.
+        .postHogMask()
+        .postHogScreenView("Settings")
     }
     
     private func getAppVersion() -> String {

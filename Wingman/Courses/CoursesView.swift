@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import PostHog
 
 struct CoursesView: View {
     // Observe router to receive deep-link open requests
@@ -135,6 +136,7 @@ struct CoursesView: View {
                 applyDeepLinkIfNeeded()
             }
         }
+        .postHogScreenView("Courses")
     }
     
     private func applyDeepLinkIfNeeded() {
