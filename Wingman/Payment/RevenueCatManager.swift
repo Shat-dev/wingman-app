@@ -47,6 +47,15 @@ final class RevenueCatManager: NSObject, ObservableObject {
             return
         }
         
+        // configure() is reached twice on every launch — once from this
+        // singleton's init, once from RootView's startup task. Re-running
+        // identity resolution on the payments SDK gains nothing and only
+        // creates opportunities to get it wrong, so the second call no-ops.
+        guard !Purchases.isConfigured else {
+            log("ℹ️ RevenueCat: Already configured — skipping")
+            return
+        }
+
         log("🔧 RevenueCat: Configuring with API Key")
         // Verbose RevenueCat logs in Debug only — Release ships with .error
         // so production console noise is limited to real failures.
@@ -55,26 +64,44 @@ final class RevenueCatManager: NSObject, ObservableObject {
         #else
         Purchases.logLevel = .error
         #endif
-        // Configure with the same id PostHog uses as its distinct_id for
-        // pre-signup users, instead of letting RevenueCat mint its own
-        // $RCAnonymousID.
+
+        // Configure WITHOUT an explicit appUserID, deliberately.
         //
-        // Without this the two systems disagree about who an anonymous user
-        // is, and since this app allows purchasing before account creation,
-        // a pre-signup purchase would emit rc_* events against an id PostHog
-        // has never seen — orphaning the purchase from the onboarding and
-        // paywall events that produced it.
-        //
-        // The authenticated side already agreed: on sign-in, setUserID()
-        // calls logIn(supabaseUserId), which is exactly what AuthManager
-        // passes to PostHogSDK.identify(). This closes the anonymous half so
-        // the ids match across the whole lifecycle.
-        Purchases.configure(
-            withAPIKey: apiKey,
-            appUserID: AnonymousUserManager.shared.anonymousUserId
-        )
+        // An id passed here takes precedence over RevenueCat's own cached
+        // one (IdentityManager.configure resolves
+        // `appUserID ?? cachedAppUserID ?? …`). Supplying one would
+        // therefore re-identify a returning subscriber as somebody else on
+        // every cold launch: entitlements would come back empty until
+        // session restore ran, SubscriptionManager would cache that
+        // "not subscribed" answer, and — because our id is not in
+        // $RCAnonymousID form, so RevenueCat treats it as a real identity —
+        // the project's "Transfer to new App User ID" rule could move a live
+        // subscription onto it. Letting RevenueCat restore its own cached
+        // identity is what keeps a paying user paid.
+        Purchases.configure(withAPIKey: apiKey)
         Purchases.shared.delegate = self
-        
+
+        // Claim the pre-signup identity only when RevenueCat has no real one.
+        //
+        // Fresh install: RevenueCat mints an "$RCAnonymousID:…". Logging in
+        // from an anonymous id transfers any purchases onto the id we supply,
+        // so nothing can be stranded. Anyone already identified — every
+        // signed-in user, and anyone who previously purchased under our id —
+        // skips this entirely and keeps the identity they had.
+        //
+        // The point is to hand pre-signup users the same id PostHog uses as
+        // its distinct_id, so a purchase made before account creation
+        // stitches to the onboarding and paywall events that produced it.
+        // On sign-in, setUserID() moves both systems to the Supabase user id
+        // together.
+        if Purchases.shared.isAnonymous {
+            let anonymousId = AnonymousUserManager.shared.anonymousUserId
+            log("🆔 RevenueCat: Claiming pre-signup identity: \(anonymousId)")
+            setUserID(anonymousId)
+        } else {
+            log("🆔 RevenueCat: Existing identity retained: \(Purchases.shared.appUserID)")
+        }
+
         Task {
             await refreshCustomerInfo()
             await fetchOfferings()
