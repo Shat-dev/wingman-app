@@ -40,6 +40,18 @@ enum Analytics {
         PostHogSDK.shared.capture(event, properties: properties)
     }
 
+    /// Set person properties on the current PostHog person (a `$set`, so
+    /// last-write-wins). Works for anonymous users too: passing person
+    /// properties opts them into PostHog person processing, so someone who
+    /// onboards without ever creating an account still gets a profile you can
+    /// view in the Persons list. When they later sign in and `identify` runs
+    /// with their real user id, PostHog merges these onto the identified
+    /// person, so nothing set here is lost. The SDK de-dupes identical
+    /// consecutive calls, so setting the same value twice is a no-op.
+    static func setPersonProperties(_ properties: [String: Any]) {
+        PostHogSDK.shared.setPersonProperties(userPropertiesToSet: properties)
+    }
+
     /// Seconds between `start` and now, rounded to milliseconds.
     ///
     /// Used for the `duration_seconds` / `time_on_screen_seconds` properties.

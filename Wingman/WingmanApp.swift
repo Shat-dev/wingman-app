@@ -52,6 +52,20 @@ struct WingmanApp: App {
             RootView()
                 .environmentObject(authManager)
                 .preferredColorScheme(.light) // Force Light Mode
+                // App-wide Dynamic Type ceiling — pins the whole app to the
+                // default text size (`.large`). Our custom fonts opt into
+                // Dynamic Type (Font+Manrope `relativeTo:`), but the UI is
+                // built from fixed-size containers designed at the default
+                // size, so larger system text sizes clip/truncate across the
+                // app (paywall + landing carousels, Courses card titles, the
+                // Home streak badge, …). This is an UPPER BOUND only: users at
+                // or below default are unaffected; only enlarged-text users are
+                // capped back to default — trading a broken layout for a
+                // working one. TEMPORARY: relax per screen as layouts are made
+                // to grow (@ScaledMetric heights, .fixedSize on wrapping text).
+                // The feature-gate paywall keeps its own clamp — it's a sheet,
+                // which doesn't reliably inherit this environment value.
+                .dynamicTypeSize(...DynamicTypeSize.large)
                 .onOpenURL { url in
                     // Handle Google Sign-In callback URL
                     GIDSignIn.sharedInstance.handle(url)

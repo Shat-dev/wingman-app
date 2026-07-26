@@ -137,6 +137,9 @@ struct LandingView: View {
 
                 Spacer().frame(height: 10)
             }
+            // Note: Dynamic Type is clamped app-wide at the root
+            // (WingmanApp → RootView), which covers this screen, so no
+            // per-screen clamp is needed here.
         }
         .onChange(of: navigateToOnboarding) { newValue in
             log("📊 LandingView: navigateToOnboarding changed to: \(newValue)")

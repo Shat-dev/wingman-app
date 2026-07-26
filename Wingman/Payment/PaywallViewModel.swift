@@ -148,7 +148,24 @@ final class PaywallViewModel: ObservableObject {
         }
     }
 
+    // MARK: - Load orchestration
+    /// Handle to the in-flight offerings load. Overlapping triggers (init,
+    /// `PaywallView.onAppear`, the Try Again button, and the connectivity
+    /// observer) coalesce onto this single retry loop instead of stacking
+    /// concurrent fetches.
+    private var loadTask: Task<Void, Never>?
+
+    /// Automatic attempts before the inline retry UI is surfaced. Sized so a
+    /// brief blip — a captive-portal redirect completing, an App Store /
+    /// RevenueCat latency spike, a dead-zone that clears — recovers without
+    /// the user ever seeing an error, while still bounding total wait.
+    private let maxLoadAttempts = 3
+
+    /// Combine store for the connectivity observer.
+    private var cancellables = Set<AnyCancellable>()
+
     init() {
+        observeConnectivity()
         loadOfferings()
     }
 
@@ -159,61 +176,162 @@ final class PaywallViewModel: ObservableObject {
     }
 
     // MARK: - RevenueCat Methods
+    /// Public entry point. Coalesces with any in-flight load, then runs the
+    /// retry loop. Safe to call repeatedly from `.onAppear`, the Try Again
+    /// button, and the connectivity observer — duplicate triggers no-op while
+    /// a load is already running.
     func loadOfferings() {
-        Task {
-            isLoading = true
+        guard loadTask == nil else {
+            log("ℹ️ PaywallViewModel: loadOfferings already running — coalescing duplicate trigger")
+            return
+        }
+        loadTask = Task { [weak self] in
+            await self?.runLoadLoop()
+            self?.loadTask = nil
+        }
+    }
 
+    /// Attempts the offerings fetch with linear backoff, surfacing the failure
+    /// — via analytics and the inline retry UI — only once every automatic
+    /// attempt is exhausted. Keeps `isLoading` true across the whole loop so
+    /// the view shows the loading state (not the error state) mid-retry.
+    private func runLoadLoop() async {
+        isLoading = true
+
+        // Full retry budget only for a cold load (no offerings yet). A refresh
+        // triggered by re-appearing already has prices on screen, so a failure
+        // is invisible to the user and doesn't warrant hammering the network —
+        // this preserves the previous single-attempt behavior for that case.
+        let attemptBudget = (offerings == nil) ? maxLoadAttempts : 1
+        var lastError: Error?
+
+        for attempt in 1...attemptBudget {
             do {
-                // Race the RevenueCat offerings fetch against a 15s timeout so
-                // a hanging StoreKit call (cached sandbox account from prior
-                // TestFlight use, captive WiFi, Apple server stall, etc.)
-                // doesn't leave the user on an infinite spinner. On timeout
-                // we throw PaywallTimeoutError into the shared catch block
-                // below, which surfaces the existing "Can't load pricing"
-                // error state with its Try Again button. 15s is generous
-                // enough not to false-positive on slow cellular (typical
-                // offerings response is <2s on healthy networks, 3-5s on
-                // slow mobile) while still short enough that users don't
-                // give up and kill the app before we recover.
-                let fetchedOfferings = try await withThrowingTaskGroup(of: Offerings.self) { group in
-                    group.addTask {
-                        try await Purchases.shared.offerings()
-                    }
-                    group.addTask {
-                        try await Task.sleep(nanoseconds: 15_000_000_000)
-                        throw PaywallTimeoutError()
-                    }
-                    let result = try await group.next()!
-                    group.cancelAll()
-                    return result
-                }
+                let fetchedOfferings = try await fetchOfferingsWithTimeout()
                 self.offerings = fetchedOfferings
 
                 // Auto-select yearly package by default
                 self.selectedPackage = yearlyPackage
 
-                log("📦 PaywallViewModel: Loaded offerings")
+                log("📦 PaywallViewModel: Loaded offerings (attempt \(attempt)/\(attemptBudget))")
 
                 // Fetch intro-offer eligibility for both packages. Non-throwing
                 // API — failures resolve to `.unknown`, which our optimistic
                 // default treats as eligible, so this call cannot regress the
                 // existing first-time-user UX.
                 await loadIntroEligibility()
+
+                lastError = nil
+                break
             } catch {
-                self.error = "Failed to load subscription options. Please try again."
-                self.showAlert = true
-                log("❌ PaywallViewModel: Failed to load offerings: \(error)")
-            }
+                lastError = error
+                log("❌ PaywallViewModel: Offerings load attempt \(attempt)/\(attemptBudget) failed: \(error)")
 
-            isLoading = false
-
-            // Fire after isLoading flips so the UI unblocks immediately;
-            // the capture itself is a background metadata write that we
-            // don't want to gate paywall rendering on.
-            if self.offerings != nil {
-                await captureStoreContextIfNeeded()
+                // Backoff before the next try (skipped after the final attempt).
+                // Linear 1s, 2s — long enough to let a recovering network or a
+                // clearing captive portal settle, short enough not to feel dead.
+                if attempt < attemptBudget {
+                    try? await Task.sleep(nanoseconds: UInt64(attempt) * 1_000_000_000)
+                }
             }
         }
+
+        isLoading = false
+
+        // Surface the failure only after every automatic attempt is exhausted
+        // AND we still have nothing to show. A failed background refresh that
+        // still has cached offerings on screen stays intentionally silent.
+        if let lastError, self.offerings == nil {
+            reportOfferingsFailure(lastError, attempts: attemptBudget)
+        }
+
+        // Fire after isLoading flips so the UI unblocks immediately;
+        // the capture itself is a background metadata write that we
+        // don't want to gate paywall rendering on.
+        if self.offerings != nil {
+            await captureStoreContextIfNeeded()
+        }
+    }
+
+    /// Races the RevenueCat offerings fetch against a 15s timeout so a hanging
+    /// StoreKit call (cached sandbox account from prior TestFlight use, captive
+    /// WiFi, Apple server stall, etc.) doesn't leave a single attempt spinning
+    /// forever. On timeout we throw `PaywallTimeoutError`, which `runLoadLoop`
+    /// treats as a retryable failure. 15s is generous enough not to
+    /// false-positive on slow cellular (typical offerings response is <2s on
+    /// healthy networks, 3-5s on slow mobile) while still short enough that a
+    /// stalled attempt gives way to the next retry promptly.
+    private func fetchOfferingsWithTimeout() async throws -> Offerings {
+        try await withThrowingTaskGroup(of: Offerings.self) { group in
+            group.addTask {
+                try await Purchases.shared.offerings()
+            }
+            group.addTask {
+                try await Task.sleep(nanoseconds: 15_000_000_000)
+                throw PaywallTimeoutError()
+            }
+            let result = try await group.next()!
+            group.cancelAll()
+            return result
+        }
+    }
+
+    /// Auto-retry the offerings load the moment connectivity is restored, so a
+    /// user who reached the paywall in a dead zone or behind a not-yet-passed
+    /// captive portal gets a populated paywall without tapping Try Again. Only
+    /// acts when we still have no offerings and nothing is already loading, so
+    /// it stays dormant once pricing is on screen.
+    private func observeConnectivity() {
+        NetworkMonitor.shared.$isConnected
+            .removeDuplicates()
+            .sink { [weak self] connected in
+                guard connected else { return }
+                Task { @MainActor [weak self] in
+                    guard let self,
+                          self.offerings == nil,
+                          self.loadTask == nil else { return }
+                    log("📶 PaywallViewModel: Connectivity restored — auto-retrying offerings")
+                    self.loadOfferings()
+                }
+            }
+            .store(in: &cancellables)
+    }
+
+    /// PostHog: the paywall couldn't load pricing after every automatic retry.
+    /// Previously this path emitted no event — a failed load left only a
+    /// `paywall_viewed` with nothing after it, so the cause had to be guessed
+    /// from session replays. `error_type` buckets timeout (captive/slow link)
+    /// vs a thrown network/backend error; `is_connected` is the device's link
+    /// state at give-up time; raw `error_domain`/`error_code` are included so
+    /// buckets can be refined from the data without shipping new code.
+    private func reportOfferingsFailure(_ error: Error, attempts: Int) {
+        let nsError = error as NSError
+        log("🛑 PaywallViewModel: Offerings failed after \(attempts) attempt(s): \(error)")
+        PostHogSDK.shared.capture("paywall_offerings_failed", properties: [
+            "source": source.rawValue,
+            "error_type": classifyOfferingsError(error),
+            "error_domain": nsError.domain,
+            "error_code": nsError.code,
+            "is_connected": NetworkMonitor.shared.isConnected,
+            "attempts": attempts
+        ])
+    }
+
+    /// Coarse bucket for the offerings-load failure. Kept deliberately
+    /// dependency-light — matched on Foundation/RevenueCat error *domains*
+    /// rather than SDK enum symbols that can drift across versions — with the
+    /// raw code carried alongside in the event for exactness.
+    private func classifyOfferingsError(_ error: Error) -> String {
+        if error is PaywallTimeoutError { return "timeout" }
+        let nsError = error as NSError
+        if nsError.domain == NSURLErrorDomain { return "network" }
+        if nsError.domain == "RevenueCat.ErrorCode" {
+            // RevenueCat surfaces connectivity failures as networkError (10)
+            // and offlineConnectionError (35); everything else on this domain
+            // is a backend/config response.
+            return (nsError.code == 10 || nsError.code == 35) ? "network" : "backend"
+        }
+        return "other"
     }
 
     /// Fetches per-product intro-offer eligibility from RevenueCat and stores

@@ -257,6 +257,13 @@ struct OnboardingView: View {
             answerStore.setAnswer(answer, forKey: key)
             log("Question \(index + 1): \(answer)")
 
+            // Mirror every answer to a PostHog person property, namespaced
+            // `onboarding_<key>`, so each user — anonymous ones included — is
+            // viewable in PostHog's Persons list with the onboarding answers
+            // they gave. Set per-answer rather than at completion so users who
+            // drop off partway still record the answers they did give.
+            Analytics.setPersonProperties(["onboarding_\(key)": answer])
+
             // AuthManager-specific side effects stay deferred to the next
             // runloop tick (same as the pre-refactor behavior). The
             // in-memory `answerStore.answers` already holds the value for
