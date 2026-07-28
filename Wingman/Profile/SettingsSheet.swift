@@ -331,6 +331,7 @@ struct SettingsSheet: View {
         // legible in every recording.
         .postHogMask()
         .postHogScreenView("Settings")
+        .appDynamicTypeCeiling()
     }
     
     private func getAppVersion() -> String {

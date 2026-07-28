@@ -137,6 +137,7 @@ struct DailyReadingGoalSheet: View {
             }
             .navigationBarHidden(true)
         }
+        .appDynamicTypeCeiling()
     }
     
     private func saveGoal() {

@@ -372,6 +372,7 @@ struct LogApproachBottomSheet: View {
         .transition(.move(edge: .bottom))
         .sheet(isPresented: $showApproachGuide) {
             ApproachLevelGuideSheet()
+                .appDynamicTypeCeiling()
                 .presentationDetents([.large])
                 .presentationDragIndicator(.hidden)
                 .presentationCornerRadius(20)
@@ -383,6 +384,7 @@ struct LogApproachBottomSheet: View {
         // Global text masking is off, so this mask is what keeps that out of
         // recordings.
         .postHogMask()
+        .appDynamicTypeCeiling()
     }
 }
 

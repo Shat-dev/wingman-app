@@ -323,6 +323,7 @@ struct PracticeGame: View {
                 tabBarVisibility.showTabBar()
                 dismiss()
             }
+            .appDynamicTypeCeiling()
         }
     }
 }

@@ -61,6 +61,13 @@ struct PaywallView: View {
     // than from an incidental re-mount.
     @State private var appearedAt: Date?
 
+    /// Carousel height that scales with Dynamic Type so the bullets (which
+    /// already use `.fixedSize`) get more room as text grows instead of being
+    /// clipped by the fixed-height paging TabView. Equals the original 405 at
+    /// the default text size — no visual change until the app-wide ceiling is
+    /// raised above `.large`.
+    @ScaledMetric(relativeTo: .body) private var carouselHeight: CGFloat = 405
+
     init(
         authManager: AuthManager? = nil,
         isDismissible: Bool = false,
@@ -156,7 +163,7 @@ struct PaywallView: View {
                             }
                         }
                         .tabViewStyle(.page(indexDisplayMode: .never))
-                        .frame(height: 405)
+                        .frame(height: carouselHeight)
 
                         // MARK: - Page Indicator
                         HStack(spacing: 8) {

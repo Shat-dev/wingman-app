@@ -16,6 +16,14 @@ struct LandingView: View {
     @State private var navigateToLogin = false
     @State private var navigateToOnboarding = false
 
+    // Carousel heights that scale with Dynamic Type so the heading/description
+    // (see `.fixedSize` below) get more room as text grows instead of being
+    // truncated by the fixed-height paging TabView. Equal the originals
+    // (520 / 400) at the default text size — no change until the app-wide
+    // ceiling is raised above `.large`.
+    @ScaledMetric(relativeTo: .body) private var carouselHeight: CGFloat = 520
+    @ScaledMetric(relativeTo: .body) private var carouselHeightSmall: CGFloat = 400
+
     var body: some View {
         NavigationStack {
             VStack {
@@ -34,6 +42,7 @@ struct LandingView: View {
                                 .multilineTextAlignment(.leading)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.horizontal, 20)
+                                .fixedSize(horizontal: false, vertical: true)
 
                             // MARK: - Description
                             Text(page.description)
@@ -43,6 +52,7 @@ struct LandingView: View {
                                 .lineSpacing(3)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.horizontal, 20)
+                                .fixedSize(horizontal: false, vertical: true)
 
                             // MARK: - Image
                             Image(page.imageName)
@@ -62,7 +72,7 @@ struct LandingView: View {
                 // SE-only: reduce carousel height so that the CTA buttons
                 // below remain visible on ~667pt-tall screens. Standard /
                 // Max phones are untouched at 520pt.
-                .frame(height: UIScreen.isSmallPhone ? 400 : 520)
+                .frame(height: UIScreen.isSmallPhone ? carouselHeightSmall : carouselHeight)
 
 
 

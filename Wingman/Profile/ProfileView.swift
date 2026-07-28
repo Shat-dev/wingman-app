@@ -186,6 +186,7 @@ struct ProfileView: View {
             }
             .fullScreenCover(isPresented: $showApproachesLogged) {
                 ApproachesLoggedListView()
+                    .appDynamicTypeCeiling()
             }
         }
         .onAppear {

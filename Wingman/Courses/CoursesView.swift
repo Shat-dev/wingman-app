@@ -288,13 +288,13 @@ struct CourseCardContent: View {
                 .lineLimit(2)
                 .truncationMode(.tail)
                 .frame(maxWidth: .infinity, alignment: .topLeading)
-                .frame(height: 44)
+                .frame(minHeight: 44)
                 .padding(.horizontal, 8)
                 .padding(.top, 8)
                 .padding(.bottom, 12)
                 .background(Color.white)
         }
-        .frame(height: 245)
+        .frame(minHeight: 245)
         .background(Color.white)
         .cornerRadius(5)
         .overlay(

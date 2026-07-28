@@ -94,7 +94,7 @@ struct HomeView: View {
                             }
                         }
                         .foregroundColor(.wingmanBlack)
-                        .frame(width: 64, height: 44)
+                        .frame(minWidth: 64, minHeight: 44, maxHeight: 44)
                         .background(Color.white)
                         .overlay(
                             RoundedRectangle(cornerRadius: 5)
@@ -351,6 +351,12 @@ struct PeekCarousel: View {
     // Toggle to enable/disable custom horizontal pan detection overlay for the carousel
     private let useCarouselPan = true
 
+    // Carousel row height, scaled with Dynamic Type so the cards' text gets
+    // more room as text grows instead of being clipped by the fixed row.
+    // Equals 430 at the default text size — no change until the app-wide
+    // ceiling is raised above `.large`.
+    @ScaledMetric(relativeTo: .body) private var moduleCarouselHeight: CGFloat = 430
+
     var body: some View {
         VStack(spacing: 16) {
             // Cards in GeometryReader
@@ -406,7 +412,7 @@ struct PeekCarousel: View {
                     screenWidth = width
                 }
             }
-            .frame(height: 430) // Cards only
+            .frame(height: moduleCarouselHeight) // Cards only
 
             // Page Indicators - OUTSIDE GeometryReader
             HStack(spacing: 8) {
@@ -495,6 +501,11 @@ struct ModuleCarouselCard: View {
 struct ContinueCourseCard: View {
     let course: ContinueCourse
     let onTap: () -> Void
+
+    // Card height, scaled with Dynamic Type so the title/progress get more
+    // room as text grows. Equals 132 at the default text size — no change
+    // until the app-wide ceiling is raised above `.large`.
+    @ScaledMetric(relativeTo: .body) private var continueCardHeight: CGFloat = 132
     
     var body: some View {
         Button(action: onTap) {
@@ -558,7 +569,7 @@ struct ContinueCourseCard: View {
             }
             .padding(20)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .frame(height: 132)
+            .frame(height: continueCardHeight)
             .background(Color.white)
             .cornerRadius(5)
             .overlay(

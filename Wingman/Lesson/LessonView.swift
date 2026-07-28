@@ -186,6 +186,7 @@ struct LessonView: View {
                     dismiss()
                 }
             )
+            .appDynamicTypeCeiling()
         }
         .postHogScreenView("Lesson")
     }

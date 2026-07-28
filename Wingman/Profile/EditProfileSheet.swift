@@ -138,6 +138,7 @@ struct EditProfileSheet: View {
         }
         // Session replay: holds the user's real name.
         .postHogMask()
+        .appDynamicTypeCeiling()
     }
     
     private func saveProfile() {
