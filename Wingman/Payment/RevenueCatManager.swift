@@ -284,6 +284,20 @@ final class RevenueCatManager: NSObject, ObservableObject {
     func getAllPackages() -> [Package] {
         return offerings?.current?.availablePackages ?? []
     }
+
+    // MARK: - Second-Chance Recovery Offer
+    /// The dedicated Offering holding the one-time 50%-off-year-1 recovery
+    /// package. Deliberately reads `offerings?.all[...]`, NOT `.current` —
+    /// this offering is never the app's default/main offering, so it must
+    /// never surface via `getAllPackages()` or any other `.current`-based
+    /// accessor.
+    func getSecondChanceOffering() -> Offering? {
+        return offerings?.all[Constants.SECOND_CHANCE_OFFERING_ID]
+    }
+
+    func getSecondChancePackage() -> Package? {
+        return getSecondChanceOffering()?.package(identifier: Constants.SECOND_CHANCE_PACKAGE_ID)
+    }
 }
 
 // MARK: - PurchasesDelegate

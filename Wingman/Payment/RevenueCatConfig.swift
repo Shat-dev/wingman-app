@@ -36,9 +36,26 @@ struct RevenueCatConfig {
     struct ProductIds {
         /// Annual subscription product ID
         static let yearly = "wingman_yearly"
-        
+
         /// Monthly subscription product ID
         static let monthly = "wingman_monthly"
+
+        /// Discounted annual product ID — carries its own Pay-Up-Front
+        /// introductory offer (50% off year 1, then renews at the standard
+        /// yearly price). Used only by the one-time second-chance recovery
+        /// offer, never by the main paywall.
+        static let yearlyDiscount = "wingman_yearly_discount"
+    }
+
+    // MARK: - Second-Chance Recovery Offer
+    /// RevenueCat identifiers for the one-time 50%-off-year-1 offer shown
+    /// after a user dismisses the feature-gated paywall. Configured as a
+    /// dedicated Offering — deliberately NOT part of `current` — so it can
+    /// never surface in the main onboarding/feature-gate paywall's package
+    /// list.
+    struct SecondChanceOffer {
+        static let offeringId = "second_chance"
+        static let packageId = "yearly_discount"
     }
     
     // MARK: - Environment Detection

@@ -115,6 +115,24 @@ final class PaywallViewModel: ObservableObject {
         return selectedPlan == .yearly ? yearlyPackage : monthlyPackage
     }
 
+    /// A localized, currency-correct zero — "$0.00", "€0,00", "£0.00", "¥0" —
+    /// for the free-trial CTA. Built from the selected StoreKit product's own
+    /// price formatter (the same one behind `localizedPriceString`) so a
+    /// non-US storefront never sees a hardcoded dollar amount, and so the
+    /// fraction-digit convention matches the price rendered on the plan card
+    /// right above the button.
+    ///
+    /// Falls back to "$0.00" only if StoreKit hands us no formatter — which
+    /// can't happen on the path that reads this, since `continueButton` is
+    /// rendered solely when `offerings != nil`.
+    var zeroPriceString: String {
+        guard let formatter = currentPackage?.storeProduct.priceFormatter,
+              let formatted = formatter.string(from: NSNumber(value: 0)) else {
+            return "$0.00"
+        }
+        return formatted
+    }
+
     // MARK: - Trial Eligibility
     //
     // `.eligible` and `.unknown` both map to "show trial UI" — `.unknown` is

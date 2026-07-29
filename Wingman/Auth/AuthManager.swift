@@ -64,6 +64,17 @@ final class AuthManager: ObservableObject {
         }
     }
 
+    // One-time 50%-off-year-1 recovery offer, shown immediately after a user
+    // dismisses the feature-gated paywall (never after onboarding, never to
+    // an already-subscribed user). Persisted per-user, mirroring
+    // hasCompletedPaywallFlow's shape exactly, so "shown once, ever" holds
+    // across reinstall / new device.
+    @Published var hasSeenSecondChanceOffer: Bool = false {
+        didSet {
+            log("🎁 hasSeenSecondChanceOffer changed: \(oldValue) → \(hasSeenSecondChanceOffer)")
+        }
+    }
+
     // MARK: - Subscription Status
     @Published var hasActiveSubscription: Bool = false {
         didSet {
@@ -120,6 +131,10 @@ final class AuthManager: ObservableObject {
         // Same note: actual per-user value loads after session
         hasCompletedPaywallFlow = UserDefaults.standard.bool(forKey: "hasCompletedPaywallFlow")
         log("💳 Loaded hasCompletedPaywallFlow: \(hasCompletedPaywallFlow)")
+
+        // Same note as above: actual per-user value loads after session
+        hasSeenSecondChanceOffer = UserDefaults.standard.bool(forKey: "hasSeenSecondChanceOffer")
+        log("🎁 Loaded hasSeenSecondChanceOffer: \(hasSeenSecondChanceOffer)")
 
         // Load global rating-prompt flag — covers the anonymous case at launch,
         // and also provides a safe default before session restore overwrites
@@ -264,6 +279,7 @@ final class AuthManager: ObservableObject {
                     await checkUserQuestionStatus(userId: session.user.id.uuidString)
                     await checkUserPaywallFlowStatus(userId: session.user.id.uuidString)
                     await checkUserRatingPromptStatus(userId: session.user.id.uuidString)
+                    await checkUserSecondChanceOfferStatus(userId: session.user.id.uuidString)
 
                     // ✅ Hydrate lesson progress from Supabase user_metadata so
                     // users who reinstall / switch devices don't lose progress.
@@ -321,6 +337,7 @@ final class AuthManager: ObservableObject {
                 self.hasCompletedQuestions = false
                 self.hasCompletedPaywallFlow = false
                 self.hasSeenRatingPrompt = false
+                self.hasSeenSecondChanceOffer = false
                 log("🚪 User signed out")
 
             case .initialSession:
@@ -339,6 +356,7 @@ final class AuthManager: ObservableObject {
                     await checkUserQuestionStatus(userId: session.user.id.uuidString)
                     await checkUserPaywallFlowStatus(userId: session.user.id.uuidString)
                     await checkUserRatingPromptStatus(userId: session.user.id.uuidString)
+                    await checkUserSecondChanceOfferStatus(userId: session.user.id.uuidString)
 
                     // ✅ Hydrate lesson progress from Supabase user_metadata
                     // after session restoration so returning users (including
@@ -394,6 +412,7 @@ final class AuthManager: ObservableObject {
                 self.hasCompletedQuestions = false
                 self.hasCompletedPaywallFlow = false
                 self.hasSeenRatingPrompt = false
+                self.hasSeenSecondChanceOffer = false
                 log("🗑️ User deleted")
 
             case .mfaChallengeVerified:
@@ -454,6 +473,25 @@ final class AuthManager: ObservableObject {
         }
     }
 
+    /// Same shape as `checkUserPaywallFlowStatus` above: per-user UserDefaults
+    /// read first (fast, offline-safe), falling back to the `user_metadata`
+    /// mirror on a miss (covers reinstall / new device), backfilling
+    /// UserDefaults on a hit so later launches short-circuit locally.
+    private func checkUserSecondChanceOfferStatus(userId: String) async {
+        let key = "hasSeenSecondChanceOffer_\(userId)"
+        hasSeenSecondChanceOffer = UserDefaults.standard.bool(forKey: key)
+        log("🎁 Second-chance offer status loaded: \(hasSeenSecondChanceOffer) for user: \(userId)")
+
+        if !hasSeenSecondChanceOffer,
+           let user = currentUser,
+           let shown = user.userMetadata["second_chance_offer_shown"]?.boolValue,
+           shown {
+            log("🎁 Found second_chance_offer_shown=true in user metadata - marking as shown")
+            hasSeenSecondChanceOffer = true
+            UserDefaults.standard.set(true, forKey: key)
+        }
+    }
+
     private func checkUserRatingPromptStatus(userId: String) async {
         let key = "hasSeenRatingPrompt_\(userId)"
         hasSeenRatingPrompt = UserDefaults.standard.bool(forKey: key)
@@ -483,6 +521,7 @@ final class AuthManager: ObservableObject {
             await checkUserQuestionStatus(userId: session.user.id.uuidString)
             await checkUserPaywallFlowStatus(userId: session.user.id.uuidString)
             await checkUserRatingPromptStatus(userId: session.user.id.uuidString)
+            await checkUserSecondChanceOfferStatus(userId: session.user.id.uuidString)
 
             // Mark session check complete - UI can now render
             self.isCheckingSession = false
@@ -1013,6 +1052,46 @@ final class AuthManager: ObservableObject {
         }
     }
 
+    // MARK: - Second-Chance Recovery Offer
+    /// Marks the one-time recovery offer as shown, regardless of outcome —
+    /// the guarantee is "never present it again," not "never present it
+    /// again unless they bought." `outcome` is carried into the
+    /// `user_metadata` mirror purely for observability (support/debugging),
+    /// not for gating.
+    ///
+    /// Reachable only for authenticated users: the recovery offer requires
+    /// account creation + MainView first (see SubscriptionGateModifier), so
+    /// unlike `completePaywallFlow()` there is no anonymous-user branch here.
+    func markSecondChanceOfferShown(outcome: String) {
+        log("🎁 markSecondChanceOfferShown(outcome: \(outcome)) called")
+        hasSeenSecondChanceOffer = true
+
+        guard let userId = currentUser?.id.uuidString else {
+            log("⚠️ markSecondChanceOfferShown: no authenticated user — nothing to persist")
+            return
+        }
+
+        let key = "hasSeenSecondChanceOffer_\(userId)"
+        UserDefaults.standard.set(true, forKey: key)
+        log("🎁 Second-chance offer marked shown for user: \(userId)")
+
+        // Mirror to user_metadata so this survives uninstall+reinstall, same
+        // rationale as completePaywallFlow()'s mirror above.
+        Task {
+            do {
+                let attributes = UserAttributes(data: [
+                    "second_chance_offer_shown": AnyJSON.bool(true),
+                    "second_chance_offer_shown_at": AnyJSON.string(ISO8601DateFormatter().string(from: Date())),
+                    "second_chance_offer_outcome": AnyJSON.string(outcome)
+                ])
+                try await client.auth.update(user: attributes)
+                log("✅ Mirrored second_chance_offer_shown=true to user_metadata")
+            } catch {
+                log("⚠️ Failed to mirror second_chance_offer_shown to user_metadata: \(error.localizedDescription)")
+            }
+        }
+    }
+
     // MARK: - Rating Prompt
     /// Called from `RatingPromptView` when the user taps Continue.
     /// Flips the in-memory flag and persists — per-user key for authenticated
@@ -1306,6 +1385,7 @@ final class AuthManager: ObservableObject {
             hasCompletedQuestions = false
             hasCompletedPaywallFlow = false
             hasSeenRatingPrompt = false
+            hasSeenSecondChanceOffer = false
 
             if let userId = userIdForCleanup {
                 UserDefaults.standard.removeObject(forKey: "hasSeenRatingPrompt_\(userId)")
@@ -1411,6 +1491,7 @@ final class AuthManager: ObservableObject {
                     hasCompletedQuestions = false
                     hasCompletedPaywallFlow = false
                     hasSeenRatingPrompt = false
+                    hasSeenSecondChanceOffer = false
                     isCheckingSession = false
 
                     log("✅ Account deletion completed successfully")
@@ -1449,6 +1530,7 @@ final class AuthManager: ObservableObject {
         userDefaults.removeObject(forKey: "hasCompletedQuestions_\(userId)")
         userDefaults.removeObject(forKey: "hasCompletedPaywallFlow_\(userId)")
         userDefaults.removeObject(forKey: "hasSeenRatingPrompt_\(userId)")
+        userDefaults.removeObject(forKey: "hasSeenSecondChanceOffer_\(userId)")
         // Leftover keys from the pre-gating hasEverHadSubscription flag. The
         // flag was removed when feature gates were added — these removes
         // clean up stale values on upgraded installs. Harmless no-op on

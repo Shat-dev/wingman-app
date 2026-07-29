@@ -18,6 +18,11 @@ struct Constants {
     static let MONTHLY_PRODUCT_ID = RevenueCatConfig.ProductIds.monthly
     static let WINGMAN_MONTHLY_PRODUCT_ID = RevenueCatConfig.ProductIds.monthly
     static let WINGMAN_YEARLY_PRODUCT_ID = RevenueCatConfig.ProductIds.yearly
+
+    // MARK: - Second-Chance Recovery Offer
+    static let SECOND_CHANCE_YEARLY_PRODUCT_ID = RevenueCatConfig.ProductIds.yearlyDiscount
+    static let SECOND_CHANCE_OFFERING_ID = RevenueCatConfig.SecondChanceOffer.offeringId
+    static let SECOND_CHANCE_PACKAGE_ID = RevenueCatConfig.SecondChanceOffer.packageId
     
     // MARK: - URLs
     static let PRIVACY_POLICY_URL = "https://www.getwingman.app/privacy"

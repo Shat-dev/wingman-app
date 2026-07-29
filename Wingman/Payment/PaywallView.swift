@@ -417,7 +417,33 @@ struct PaywallView: View {
     }
 
     // MARK: - Pinned Continue Button
-    /// Primary CTA once pricing is available. Unchanged from the original.
+
+    /// Label for the primary CTA.
+    ///
+    /// When the selected plan carries a live free trial, the button states the
+    /// actual ask — zero — instead of "Continue". In a paywall context
+    /// "Continue" is read as "proceed to being charged", so the trial (the
+    /// single strongest objection-killer we have) was being carried only by a
+    /// small badge on the plan card and a 12pt disclosure line, while the
+    /// element the thumb actually lands on implied the opposite.
+    ///
+    /// Trial-ineligible users — returning subscribers, anyone whose trial
+    /// already lapsed on this Apple ID — keep "Continue", because their
+    /// purchase really is billed immediately. Claiming $0 there would be a
+    /// false trial claim under Apple Guideline 3.1.2.
+    ///
+    /// Eligibility is the same `isTrialEligible(for:)` that drives the plan
+    /// card's "3-day Free Trial" badge, so badge and button can never
+    /// disagree — including on the optimistic pre-check default, where both
+    /// treat unknown/not-yet-loaded as eligible.
+    private var continueButtonTitle: String {
+        guard viewModel.isTrialEligible(for: viewModel.selectedPlan) else {
+            return "Continue"
+        }
+        return "Try for \(viewModel.zeroPriceString)"
+    }
+
+    /// Primary CTA once pricing is available.
     private var continueButton: some View {
         Button {
             HapticManager.shared.mediumImpact()
@@ -445,7 +471,7 @@ struct PaywallView: View {
                         .scaleEffect(0.8)
                         .padding(.trailing, 8)
                 }
-                Text(viewModel.isPurchasing ? "Processing..." : "Continue")
+                Text(viewModel.isPurchasing ? "Processing..." : continueButtonTitle)
                     .font(.manropeSemiBold(size: 16))
             }
             .frame(maxWidth: .infinity)

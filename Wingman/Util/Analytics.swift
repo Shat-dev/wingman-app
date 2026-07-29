@@ -32,6 +32,16 @@ enum Analytics {
         // Content engagement — daily practice questions
         static let dailyChallengeStarted = "daily_challenge_started"
         static let dailyChallengeCompleted = "daily_challenge_completed"
+
+        // Second-chance recovery offer (one-time 50%-off-year-1, shown after
+        // a feature-gate paywall dismissal). Mirrors the existing inline
+        // `paywall_*` naming so it segments cleanly alongside it.
+        static let recoveryOfferViewed = "recovery_offer_viewed"
+        static let recoveryOfferDismissed = "recovery_offer_dismissed"
+        static let recoveryOfferPurchaseStarted = "recovery_offer_purchase_started"
+        static let recoveryOfferPurchased = "recovery_offer_purchased"
+        static let recoveryOfferPurchaseFailed = "recovery_offer_purchase_failed"
+        static let recoveryOfferNotEligible = "recovery_offer_not_eligible"
     }
 
     /// Capture an event. Properties are merged with PostHog's automatic ones

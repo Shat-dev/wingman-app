@@ -8,15 +8,9 @@ import PostHog
 
 struct LogApproachBottomSheet: View {
     @Binding var isPresented: Bool
-    @EnvironmentObject private var authManager: AuthManager
     @StateObject private var viewModel = LogApproachViewModel()
     @State private var dragOffset: CGFloat = 0
     @State private var showApproachGuide = false
-
-    // Feature-gate paywall for NEW log creation only.
-    // Edits of existing approach logs are NOT gated — ex-subscribers retain
-    // the ability to revise their own historical data.
-    @State private var showPaywall = false
 
     // Guards the post-success auto-dismiss against multi-fires. Set the first
     // time `viewModel.showSuccess` flips true for this sheet instance; stays
@@ -257,14 +251,20 @@ struct LogApproachBottomSheet: View {
                         Button(action: {
                             HapticManager.shared.mediumImpact()
 
-                            // Gate NEW log creation on subscription. Edits
-                            // of existing logs bypass the gate so users keep
-                            // control of their historical data.
-                            if !viewModel.isEditMode && !authManager.hasActiveSubscription {
-                                showPaywall = true
-                                return
-                            }
-
+                            // Deliberately ungated — free forever, for
+                            // subscribers and non-subscribers alike.
+                            //
+                            // An approach log is the user's own record of
+                            // something they did in the real world, not a
+                            // feature we author or serve: it costs us nothing
+                            // beyond a row, it's the habit loop the rest of
+                            // the app is meant to feed, and it's the only
+                            // thing here that becomes *theirs* over time.
+                            // Charging to record it read the way a running
+                            // app charging to save a run you already went on
+                            // would. The edit path was already exempt on
+                            // exactly this reasoning ("users keep control of
+                            // their historical data"); creation now matches.
                             viewModel.saveApproach()
                             // Auto-dismiss is scheduled in `.onChange(of:
                             // viewModel.showSuccess)` below so that a failed
@@ -377,7 +377,6 @@ struct LogApproachBottomSheet: View {
                 .presentationDragIndicator(.hidden)
                 .presentationCornerRadius(20)
         }
-        .subscriptionGate(isPresented: $showPaywall)
         // Session replay: the most sensitive screen in the app. The title
         // field and notes editor hold free text about real-world encounters
         // with identifiable third parties who have no relationship with us.
