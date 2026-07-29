@@ -84,18 +84,9 @@ struct PracticeCardView: View {
             )
             .shadow(color: Color.wingmanBlack.opacity(0.06), radius: 5, x: 0, y: 2)
         }
-        .buttonStyle(PracticeCardButtonStyle())
+        .buttonStyle(ScalePressStyle())
         .disabled(practice.isLocked)
         .padding(.bottom, 10)
-    }
-}
-
-// MARK: - Custom Button Style
-struct PracticeCardButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .scaleEffect(configuration.isPressed ? 0.98 : 1.0)
-            .animation(.easeInOut(duration: 0.15), value: configuration.isPressed)
     }
 }
 

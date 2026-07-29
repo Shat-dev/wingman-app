@@ -38,6 +38,7 @@ struct ReferralView: View {
                         .background(referralCode.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? Color.wingmanBlack.opacity(0.5) : Color.wingmanBlack)
                         .cornerRadius(6)
                 }
+                .buttonStyle(ScalePressStyle())
                 .disabled(referralCode.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
 
                 // ✅ SKIP → COMPLETE PAYWALL FLOW → DASHBOARD
@@ -52,6 +53,7 @@ struct ReferralView: View {
                             .font(.manropeSemiBold(size: 16))
                             .underline()
                     }
+                    .buttonStyle(ScalePressStyle())
                     Spacer()
                 }
             }

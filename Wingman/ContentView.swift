@@ -87,7 +87,8 @@ struct ContentView: View {
                                 .stroke(Color.gray.opacity(0.6), lineWidth: 1)
                         )
                 }
-                
+                .buttonStyle(ScalePressStyle())
+
                 Button(action: {
                     log("Log In tapped")
                 }) {
@@ -99,6 +100,7 @@ struct ContentView: View {
                         .background(Color.wingmanBlack)
                         .cornerRadius(10)
                 }
+                .buttonStyle(ScalePressStyle())
             }
             .padding(.horizontal, 24)
             
@@ -110,6 +112,7 @@ struct ContentView: View {
                     .foregroundColor(.gray)
                     .font(.system(size: 16))
             }
+            .buttonStyle(ScalePressStyle())
             .padding(.vertical, 20)
         }
         .background(Color.white)

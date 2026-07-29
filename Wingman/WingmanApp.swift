@@ -109,6 +109,20 @@ struct WingmanApp: App {
 struct RootView: View {
     @EnvironmentObject var authManager: AuthManager
     @StateObject private var networkMonitor = NetworkMonitor.shared
+    @StateObject private var featureFlags = FeatureFlags.shared
+
+    /// Offline escape hatch for the post-demo ask, deliberately session-scoped.
+    ///
+    /// A hard wall with no exit bricks the app for anyone whose RevenueCat
+    /// offerings fetch fails — they can't buy (no prices) and can't leave. So
+    /// PaywallView keeps a dismiss affordance when `offerings == nil` even in
+    /// hard mode, and taking it sets this flag rather than the persisted
+    /// `hasDismissedPostDemoWall`. The user gets into the app for this launch;
+    /// the ask returns on the next cold start.
+    ///
+    /// This is also what guarantees an App Reviewer who force-quits sees a
+    /// working app rather than an inescapable paywall.
+    @State private var bypassWallThisSession = false
 
     var body: some View {
         ZStack {
@@ -159,9 +173,56 @@ struct RootView: View {
                             PaywallView(authManager: authManager, isDismissible: true, source: .onboarding)
                         }
 
-                    // ✅ 4) Paywall + Referral finished → MainTabView (Home)
+                    // ✅ 4a) Paying user → straight in, full access.
+                    } else if authManager.hasActiveSubscription {
+                        let _ = log("🎯 RootView: Showing MainTabView (active subscription)")
+                        MainTabView()
+
+                    // ✅ 4b) Demo not yet spent → MainTabView in DEMO MODE.
+                    //    The mascot walkthrough runs here and hands out one
+                    //    scenario + one lesson. Approach logging is free and
+                    //    stays free. Phase 6 adds the walkthrough itself; until
+                    //    then this branch is behaviourally identical to the old
+                    //    MainTabView case, with the existing feature gates
+                    //    still doing the gating.
+                    } else if !authManager.hasCompletedFreeDemo {
+                        let _ = log("🎯 RootView: Showing MainTabView (DEMO MODE — free demo not yet spent)")
+                        MainTabView()
+
+                    // ✅ 4c) Demo spent, ask not yet answered → the post-demo
+                    //    ask, at peak intent. This is a route rather than a
+                    //    sheet on purpose: it makes hard-vs-soft a single
+                    //    `isDismissible` value on a screen that is already in
+                    //    the right place, so flipping the PostHog flag needs no
+                    //    structural change.
+                    //
+                    //    `bypassWallThisSession` is the offline escape hatch —
+                    //    see PaywallView's dismiss overlay. It is deliberately
+                    //    session-scoped and NOT persisted, so the ask re-arms on
+                    //    the next cold start.
+                    } else if !authManager.hasDismissedPostDemoWall && !bypassWallThisSession {
+                        let _ = log("🎯 RootView: Showing PaywallView (POST-DEMO ask — source=postDemo, hard=\(featureFlags.postDemoWallIsHard))")
+                        NavigationStack {
+                            PaywallView(
+                                authManager: authManager,
+                                isDismissible: !featureFlags.postDemoWallIsHard,
+                                onDismiss: {
+                                    // Soft mode only: the hard-mode overlay is
+                                    // the offline hatch, which routes through
+                                    // onOfflineBypass below instead.
+                                    authManager.markPostDemoWallDismissed()
+                                },
+                                onOfflineBypass: {
+                                    log("🚧 RootView: offline escape hatch taken — bypassing wall for this session only")
+                                    bypassWallThisSession = true
+                                },
+                                source: .postDemo
+                            )
+                        }
+
+                    // ✅ 4d) Ask answered (or bypassed) → MainTabView, gated.
                     } else {
-                        let _ = log("🎯 RootView: Showing MainTabView (paywall flow completed)")
+                        let _ = log("🎯 RootView: Showing MainTabView (post-demo, gated)")
                         MainTabView()
                     }
                 
@@ -190,20 +251,27 @@ struct RootView: View {
 
                     // ✅ Anonymous user - paywall finished → require account creation
                     //
-                    // canGoBack: false — this is the *forced* account-creation
-                    // step. Allowing back here would let a user who already
-                    // purchased (RC entitlement attached to anonymous ID)
-                    // bail to LandingView and end up looping through the
-                    // paywall again on the next anonymous pass. The same
-                    // applies to the dismissal path: the user opted out of
+                    // `.requiredAfterPaywall` — this is the *forced*
+                    // account-creation step, and the context does two things.
+                    //
+                    // It suppresses the back chevron. Allowing back here would
+                    // let a user who already purchased (RC entitlement attached
+                    // to anonymous ID) bail to LandingView and end up looping
+                    // through the paywall again on the next anonymous pass. The
+                    // same applies to the dismissal path: the user opted out of
                     // paying and must now create an account before reaching
-                    // MainTabView. The other AuthView call sites (LandingView
+                    // MainTabView.
+                    //
+                    // It also switches the copy. This screen arrives seconds
+                    // after a dismissed paywall with no way back, so its default
+                    // reading is "a second paywall" and users were leaving here.
+                    // See AuthContext. The other AuthView call sites (LandingView
                     // Create Account / Sign In, and the unauthenticated/login
-                    // routing branch) keep the default `canGoBack: true`.
+                    // routing branch) keep the default `.voluntary`.
                     } else {
                         let _ = log("🎯 RootView: Anonymous user - requiring account creation")
                         NavigationStack {
-                            AuthView(mode: .signup, canGoBack: false)
+                            AuthView(mode: .signup, context: .requiredAfterPaywall)
                         }
                     }
 
@@ -223,6 +291,17 @@ struct RootView: View {
             .animation(.easeInOut(duration: 0.3), value: authManager.isCheckingSession)
             .animation(.easeInOut(duration: 0.3), value: authManager.isAnonymousUser)
             .animation(.easeInOut(duration: 0.3), value: authManager.hasActiveSubscription)
+            // Paywall #1 → forced account creation is driven by
+            // `effectivePaywallFlowCompleted`, which was missing from this list.
+            // Without it that branch swap was an un-animated hard cut: the
+            // paywall vanished and AuthView appeared in a single frame, which
+            // reads as a glitch rather than a step. Every other route change in
+            // RootView crossfades; this one now does too.
+            //
+            // Sibling transitions (`hasCompletedQuestions`, `hasSeenRatingPrompt`)
+            // still cut. Left alone deliberately — out of scope here, and worth
+            // its own before/after look rather than a silent change.
+            .animation(.easeInOut(duration: 0.3), value: authManager.effectivePaywallFlowCompleted)
         }
         .task {
             // Step 1: Configure RevenueCat on app launch (MUST be first)
@@ -309,6 +388,13 @@ struct RootView: View {
                 if !isAuthedAtLaunch {
                     PostHogSDK.shared.identify(anonymousId)
                 }
+
+                // Feature flags. `read()` first so a cache warmed by a previous
+                // session applies immediately, then `refresh()` to pull current
+                // values for this distinct_id. Both hop to the main actor
+                // internally; this task is deliberately off the main thread.
+                await FeatureFlags.shared.read()
+                await FeatureFlags.shared.refresh()
             }
 
             // Step 2: Initialize subscription monitoring (after RevenueCat is ready)
@@ -333,6 +419,8 @@ struct RootView: View {
             log("   - hasCompletedQuestions: \(authManager.hasCompletedQuestions)")
             log("   - hasCompletedPaywallFlow: \(authManager.hasCompletedPaywallFlow)")
             log("   - hasCompletedOnboarding: \(authManager.hasCompletedOnboarding)")
+            log("   - hasCompletedFreeDemo: \(authManager.hasCompletedFreeDemo)")
+            log("   - hasDismissedPostDemoWall: \(authManager.hasDismissedPostDemoWall)")
             
             // Set RevenueCat user ID when user authenticates.
             //
@@ -361,6 +449,14 @@ struct RootView: View {
         .onChange(of: authManager.hasActiveSubscription) { newValue in
             log("\n🔔 RootView detected hasActiveSubscription change: \(newValue)")
             log("   - Expiry date: \(authManager.subscriptionExpiryDate?.formatted() ?? "nil")")
+        }
+        .onChange(of: authManager.hasCompletedFreeDemo) { newValue in
+            log("\n🔔 RootView detected hasCompletedFreeDemo change: \(newValue)")
+            log("   - hasDismissedPostDemoWall: \(authManager.hasDismissedPostDemoWall)")
+            log("   - postDemoWallIsHard: \(featureFlags.postDemoWallIsHard)")
+        }
+        .onChange(of: authManager.hasDismissedPostDemoWall) { newValue in
+            log("\n🔔 RootView detected hasDismissedPostDemoWall change: \(newValue)")
         }
         .onChange(of: authManager.hasCompletedQuestions) { newValue in
             log("\n🔔 RootView detected hasCompletedQuestions change: \(newValue)")

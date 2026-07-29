@@ -173,7 +173,7 @@ struct TabBarButton: View {
             .frame(maxWidth: .infinity)
             .contentShape(Rectangle())
         }
-        .buttonStyle(.plain)
+        .buttonStyle(ScalePressStyle())
     }
 }
 

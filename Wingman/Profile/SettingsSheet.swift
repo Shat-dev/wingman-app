@@ -58,7 +58,7 @@ struct SettingsSheet: View {
                                 .padding(.trailing, -2)
                                 .opacity(0.5)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(ScalePressStyle())
                     }
                     .padding(.horizontal, 20)
                     .padding(.top, 12)
@@ -124,7 +124,7 @@ struct SettingsSheet: View {
                         .padding(.horizontal, 20)
                         .padding(.vertical, 16)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(ScalePressStyle())
                     
                     // MARK: - Goal Notifications Toggle
                     HStack {
@@ -178,6 +178,7 @@ struct SettingsSheet: View {
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                     }
+                    .buttonStyle(ScalePressStyle())
                     .disabled(isRestoringPurchases)
                     .padding(.horizontal, 24)
                     .padding(.top,40)
@@ -193,6 +194,7 @@ struct SettingsSheet: View {
                             .underline()
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
+                    .buttonStyle(ScalePressStyle())
                     .padding(.horizontal, 24)
                     .padding(.bottom, 16)
 
@@ -208,6 +210,7 @@ struct SettingsSheet: View {
                             .underline()
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
+                    .buttonStyle(ScalePressStyle())
                     .padding(.horizontal, 24)
                     .padding(.bottom, 16)
 
@@ -223,6 +226,7 @@ struct SettingsSheet: View {
                             .underline()
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
+                    .buttonStyle(ScalePressStyle())
                     .padding(.horizontal, 24)
                     .padding(.bottom, 16)
 
@@ -237,6 +241,7 @@ struct SettingsSheet: View {
                             .underline()
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
+                    .buttonStyle(ScalePressStyle())
                     .disabled(isDeleting)
                     .opacity(isDeleting ? 0.5 : 1.0)
                     .animation(.easeInOut(duration: 0.3), value: isDeleting)
@@ -269,6 +274,7 @@ struct SettingsSheet: View {
                                     .stroke(Color.wingmanBlack, lineWidth: 1)
                             )
                     }
+                    .buttonStyle(ScalePressStyle())
                     .padding(.horizontal, 24)
                     .padding(.bottom, 32)
                     .padding(.top, 40)

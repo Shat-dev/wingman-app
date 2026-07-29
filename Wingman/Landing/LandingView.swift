@@ -105,6 +105,7 @@ struct LandingView: View {
                             )
                             .shadow(color: Color.wingmanBlack.opacity(0.06), radius: 5, x: 0, y: 2)
                     }
+                    .buttonStyle(ScalePressStyle())
                     .navigationDestination(isPresented: $navigateToSignup) {
                         AuthView(mode: .signup)
                     }
@@ -123,6 +124,7 @@ struct LandingView: View {
                             .background(Color.wingmanBlack)
                             .cornerRadius(5)
                     }
+                    .buttonStyle(ScalePressStyle())
                     .navigationDestination(isPresented: $navigateToLogin) {
                         AuthView(mode: .login)
                     }
@@ -139,6 +141,7 @@ struct LandingView: View {
                             .underline()
                             
                     }
+                    .buttonStyle(ScalePressStyle())
                     .navigationDestination(isPresented: $navigateToOnboarding) {
                         OnboardingView(showLanding: $navigateToOnboarding)
                     }

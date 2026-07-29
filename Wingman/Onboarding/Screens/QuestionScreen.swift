@@ -80,7 +80,7 @@ struct QuestionScreen: View {
                                 isSelected: selectedOptions.contains(option)
                             )
                         }
-                        .buttonStyle(PressableButtonStyle())
+                        .buttonStyle(ScalePressStyle())
                     }
                 }
             }
@@ -103,7 +103,7 @@ struct QuestionScreen: View {
                     .foregroundColor(.wingmanWhiteFF)
                     .cornerRadius(5)
             }
-            .buttonStyle(PressableButtonStyle())
+            .buttonStyle(ScalePressStyle())
             .contentShape(Rectangle())
             .opacity(isDisabled ? 0.7 : 1)
             .disabled(isDisabled)

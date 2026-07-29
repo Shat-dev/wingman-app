@@ -65,6 +65,6 @@ struct PlanCard: View {
                     .stroke(isSelected ? Color.wingmanBlack : Color.gray.opacity(0.3), lineWidth: 1)
             )
         }
-        .buttonStyle(.plain)
+        .buttonStyle(ScalePressStyle())
     }
 }

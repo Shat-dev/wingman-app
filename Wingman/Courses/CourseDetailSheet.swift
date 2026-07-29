@@ -49,7 +49,7 @@ struct CourseDetailSheet: View {
                             .frame(width: 44, height: 44, alignment: .center)
                             .contentShape(Rectangle())
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(ScalePressStyle())
                     
                     Spacer()
                 }
@@ -261,7 +261,7 @@ struct LessonCard: View {
             .shadow(color: Color.wingmanBlack.opacity(0.06), radius: 5, x: 0, y: 2) // elevation to match PracticeCardView
             .contentShape(Rectangle())
         }
-        .buttonStyle(.plain)
+        .buttonStyle(ScalePressStyle())
         .disabled(lesson.isLocked)
     }
 }

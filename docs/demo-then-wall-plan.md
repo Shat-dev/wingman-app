@@ -1,6 +1,6 @@
-# Demo-then-Wall — Implementation Plan
+# Demo-then-Ask — Implementation Plan
 
-Target flow:
+Supersedes the earlier hard-wall-first draft. Agreed sequence:
 
 ```
 Onboarding quiz
@@ -8,234 +8,213 @@ Onboarding quiz
   → Paywall #1 (dismissible, unchanged)
   → Account creation (already forced for anonymous users)
   → MainTabView in DEMO MODE
-      → mascot walks user into 1 scenario
-      → mascot walks user into 1 lesson
-  → Hard wall (non-dismissible paywall, RootView route)
+      mascot: welcome / "gym for your confidence"
+      → scenario 1        (order_index = 1, required_lessons_completed = 0)
+      → lesson 1          (first lesson, first course)
+      → profile handoff   ("log approaches, track confidence" — logging is free)
+  → ASK AT PEAK INTENT  ← the money moment
+      dismissible in v1.0; hardness is a remote flag, not a rebuild
+  → dismissed: into the app. Logging free. Three gates remain
+      (lesson / scenario / daily practice), unchanged from today.
 ```
 
-Everything below was verified against the code on branch `Shat`. Line numbers are
-from the state at time of writing.
+The single deliberate design constraint: **the walkthrough ends with the ask.**
+Peak intent is the moment the demo finishes, not whenever the user later happens
+to tap something. Everything else here is plumbing around that.
+
+Verified against branch `Shat`. Line numbers from state at time of writing.
 
 ---
 
-## 0. The two flags, and why the migration is safe
+## 0. Flags
 
-This is the part that has a trap in it, so it goes first.
-
-There are two *different* questions that the current code conflates into one flag:
+Three questions the code must answer separately. Today it conflates the first
+two into one flag, which is where the trap is.
 
 | Question | Flag | Status |
 |---|---|---|
-| Has the user passed paywall #1? | `hasCompletedPaywallFlow` | exists |
-| Has the user spent their free demo? | `hasCompletedFreeDemo` | **new** |
+| Passed paywall #1? | `hasCompletedPaywallFlow` | exists — **leave alone** |
+| Spent the free demo? | `hasCompletedFreeDemo` | new |
+| Declined the post-demo ask? | `hasDismissedPostDemoWall` | new |
 
-Today `effectivePaywallFlowCompleted` (`AuthManager.swift:233`) answers the first
-question and is used to admit the user to `MainTabView`. The four
-`.subscriptionGate` modifiers are what actually stop a non-payer from *using*
-anything once inside.
-
-**The trap:** every existing non-paying user already has
-`hasCompletedPaywallFlow == true` — persisted per-user in UserDefaults
+**The trap, restated because it still applies:** every existing non-paying user
+has `hasCompletedPaywallFlow == true`, persisted per-user
 (`hasCompletedPaywallFlow_<userId>`) *and* mirrored to Supabase `user_metadata`
-as `paywall_flow_completed` (`AuthManager.swift:1022-1053`). The flag never
-expires. If the four gates are deleted and nothing replaces them, every one of
-those users gets the whole app free, permanently, on next launch.
+as `paywall_flow_completed` (`AuthManager.swift:1022-1053`). It never expires.
+It must not be what admits a user to content. Both new flags default `false`, so
+existing users correctly fall into demo mode on first launch after the update.
 
-**The fix:** `hasCompletedFreeDemo` is a *new* key, so it defaults to `false` for
-everyone. Existing non-paying users therefore land in demo mode, play the demo,
-and hit the wall — which is the desired behavior. The migration is safe **by
-construction**, but only because the new flag exists. Do not delete the gates
-before it lands.
+### Spec — `AuthManager.swift`
 
-`effectivePaywallFlowCompleted` keeps its current job (routing paywall #1) and
-must **not** be what admits a user to content.
+Mirror `hasSeenSecondChanceOffer` exactly; it is the cleanest existing example of
+a per-user persisted + cloud-mirrored boolean.
 
-### New flag spec — `AuthManager.swift`
+For each of `hasCompletedFreeDemo` and `hasDismissedPostDemoWall`:
 
-Mirror the exact shape of `hasSeenSecondChanceOffer`, which is the cleanest
-existing example of a per-user persisted + cloud-mirrored boolean:
-
-- `@Published var hasCompletedFreeDemo: Bool = false` — near line 72
-- Global-key load at init (line ~136) for the pre-session default
-- Per-user load `hasCompletedFreeDemo_<userId>` in a
-  `checkUserFreeDemoStatus(userId:)`, alongside `checkUserSecondChanceStatus`
-  (line ~481), including the `user_metadata` rehydrate fallback
-- `func markFreeDemoCompleted()` mirroring `markSecondChanceOfferShown()`
-  (line ~1064): sets the flag, writes the per-user key, best-effort mirror to
-  `user_metadata["free_demo_completed"]`
-- Reset to `false` on `signedOut` (line ~338), `userDeleted` (line ~413), and in
-  the account-deletion cleanup paths (lines ~1386, ~1418, ~1492) and
-  `userDefaults.removeObject` at line ~1531
-
-**Decision needed:** should the demo be re-granted after sign-out? Following
-`hasCompletedPaywallFlow`'s precedent, sign-out resets the in-memory flag but
-the per-user key survives, so the same account does not get a second demo. A
-brand-new account does. That is the right default.
+- `@Published var … = false` near line 72
+- Global-key load at init (~line 136) for the pre-session default
+- Per-user load in a `checkUser…Status(userId:)` alongside
+  `checkUserSecondChanceStatus` (~line 481), including the `user_metadata`
+  rehydrate fallback
+- A `mark…()` setter mirroring `markSecondChanceOfferShown()` (~line 1064):
+  sets flag, writes per-user key, best-effort mirror to `user_metadata`
+- Reset on `signedOut` (~338), `userDeleted` (~413), and the account-deletion
+  cleanup paths (~1386, ~1418, ~1492, ~1531)
 
 ---
 
 ## 1. Routing — `WingmanApp.swift`
 
-Current authenticated branch (lines 130-167) ends with:
+The post-demo ask is a **RootView route, not a sheet.** This matters: it is what
+makes the hard/soft switch in §2 a config change instead of a refactor.
 
-```
-} else {                       // effectivePaywallFlowCompleted
-    MainTabView()
-}
-```
-
-Replace that terminal `else` with a three-way branch:
+Replace the terminal `else { MainTabView() }` in the authenticated branch
+(~line 163) with:
 
 ```
 } else if authManager.hasActiveSubscription {
-    MainTabView()                              // full access
+    MainTabView()                                   // full access
+
 } else if !authManager.hasCompletedFreeDemo {
-    MainTabView()                              // demo mode
+    MainTabView()                                   // demo mode
+
+} else if !authManager.hasDismissedPostDemoWall && !bypassWallThisSession {
+    NavigationStack {
+        PaywallView(authManager: authManager,
+                    isDismissible: !postDemoWallIsHard,
+                    source: .postDemo)
+    }
+
 } else {
-    NavigationStack { PaywallView(..., isDismissible: false, source: .postDemo) }
+    MainTabView()                                   // post-demo, gated
 }
 ```
 
-Because this is a route and not a sheet, flipping `hasCompletedFreeDemo` causes
-RootView to re-render straight into the wall. That is the whole mechanism — no
-gate modifiers involved.
+Walkthrough finishes → `markFreeDemoCompleted()` → RootView re-renders into the
+ask. User dismisses → `markPostDemoWallDismissed()` → re-renders into
+MainTabView. No sheet coordination, no presentation races.
 
-The anonymous branch (lines 168-210) needs **no change**: it already forces
-account creation after paywall #1, which is exactly the sequencing you asked
-for. Once authenticated, those users fall through to the branch above.
+The anonymous branch (lines 168-210) needs **no change** — it already forces
+account creation after paywall #1, which is the sequencing you want. Those users
+fall through to the branch above once authenticated.
 
-Add `hasCompletedFreeDemo` to the `.onChange` logging block at line ~368 and the
-diagnostic dump at line ~334.
+Add both flags to the diagnostic dump (~line 334) and the `.onChange` logging
+(~line 368).
 
 ---
 
-## 2. Demo mode — replacing the four gates
+## 2. Wall hardness — a remote flag, not a rebuild
 
-Delete all four `.subscriptionGate` call sites and the modifier itself:
+PostHog is configured (`WingmanApp.swift:250-301`) but **no feature flags are
+used anywhere in the app yet.** This is the cheapest way to keep the hard-wall
+decision open.
 
-| File | Line | Action |
-|---|---|---|
-| `Home/HomeView.swift` | 307 | remove modifier + `showDailyPracticePaywall` state + the branch at 138 |
-| `PracticeGame/PracticeView.swift` | 66 | remove modifier + `showPaywall` state + the guard at 137 |
-| `Courses/CourseDetailSheet.swift` | 156 | remove modifier + `showPaywall` state + the branch at 125 |
-| `Payment/SubscriptionGateModifier.swift` | — | delete file |
-| `LogApproch/LogApproachBottomSheet.swift` | — | already done |
+- `postDemoWallIsHard` reads `PostHogSDK.shared.isFeatureEnabled("post_demo_wall_hard")`,
+  defaulting `false`
+- Ship v1.0 with the flag off — the ask is dismissible
+- Once there's data on `paywall_viewed → purchased` at `source: post_demo`,
+  flip it server-side. **No App Store release required**, and it can run as a
+  proper A/B test rather than a one-way bet
+- Cache the value at launch alongside the existing `/decide` handling; do not
+  read it mid-render
 
-In their place, demo mode restricts *what is visible as available* rather than
-intercepting taps. The app already has lock rendering for progression locks —
-reuse it rather than inventing a second visual language:
+**Offline escape hatch — required the moment hardness can be true.** The dismiss
+overlay in `PaywallView` currently renders whenever `isDismissible`, and its
+comment notes it is available in every state "so a user is never trapped if
+RevenueCat is slow or offline." Condition it on
+`isDismissible || viewModel.offerings == nil`.
 
-- **Scenarios** — `Practice.isLocked` (`Practice.swift:23`) is already computed
-  by the service after fetch. Extend that computation: in demo mode, everything
-  except the designated demo scenario is locked. `PracticeView`'s
-  `loadAndNavigate` already no-ops on locked practices (line 132).
+The offline dismissal must **not** call `markPostDemoWallDismissed()` — it sets
+the session-scoped `bypassWallThisSession` in RootView, so the ask re-arms on
+next cold start. That is deliberately the Gleam pressure-valve behavior, and it
+also guarantees an App Reviewer who force-quits sees a working app.
+
+`footerLinks` already renders Restore / Terms / Privacy in every state —
+required by Guideline 3.1.2 and non-negotiable on a non-dismissible screen. Do
+not regress it.
+
+---
+
+## 3. Walkthrough — net new
+
+Verified: **no walkthrough, coach-mark, tooltip, or mascot code exists.** Mascot
+asset is `scenario_user`, already in the project.
+
+- `Walkthrough/WalkthroughCoordinator.swift` — `ObservableObject` owning a step
+  enum: `welcome → prompt_scenario → scenario_running → scenario_done →
+  prompt_lesson → lesson_running → lesson_done → profile_handoff → finished`.
+  `@StateObject` in `MainTabView` (`MainTabView.swift:19-23`, beside
+  `coursesRouter` / `tabBarVisibility`), injected via `.environmentObject` into
+  all four tabs so state survives tab switches and navigation pushes.
+- `Walkthrough/MascotOverlayView.swift` — speech bubble, layered into the
+  `ZStack` at `MainTabView.swift:26` above the tab bar.
+- Step advancement hooks existing completion points rather than new ones:
+  `practiceScenarioCompleted` and `lessonCompleted` already fire
+  (`Analytics.swift:25-30`), and `LessonCompleteView` / `QuestionsCompleteView`
+  are natural handoff moments.
+- Coordinator drives tab switching for the "let's go to the course section"
+  beat — `MainTabView` already listens on `NavigateToHomeView`
+  (`MainTabView.swift:58`); same pattern, or bind `selectedTab` through the
+  coordinator.
+- `finished` → `authManager.markFreeDemoCompleted()` → the ask.
+
+**Constraint worth enforcing at review:** the mascot walks the user *into doing*
+the scenario. If it drifts into pointing at tab-bar chrome, it becomes a generic
+coach-mark tour, gets skipped, and the plan loses its point.
+
+---
+
+## 4. Demo mode — restricting, not intercepting
+
+During demo mode the three gates must not fire; instead everything except the
+two demo items renders as *unavailable*. Reuse the existing progression-lock
+visuals rather than inventing a second lock language.
+
+- **Scenarios** — `Practice.isLocked` (`Practice.swift:23`) is computed by the
+  service post-fetch. In demo mode, lock everything except `order_index = 1`.
+  `PracticeView.loadAndNavigate` already no-ops on locked practices (line 132).
 - **Courses / lessons** — `CoursesViewModel.courseLockReason(_:)`
-  (`CoursesViewModel.swift:239`) is the single chokepoint feeding both
+  (`CoursesViewModel.swift:239`) is a single chokepoint feeding both
   `CourseCardContent` and `CourseDetailSheet`. Add a `.demoMode` case to
-  `CourseLockReason` (`CourseLockReason.swift`) so every course except the demo
-  course renders locked with its own banner copy. Within the demo course,
+  `CourseLockReason` with its own banner copy. Inside the demo course,
   `CourseDetailSheet.loadLessons()` (line 178) already force-locks lessons when
-  the course is locked — extend it to lock all but the first lesson.
-- **Daily practice** — `HomeView.swift:138`. Not part of the scripted demo;
-  keep it unavailable during demo mode. Reuse the existing disabled-button
-  treatment (`canStart`, line 133) rather than a paywall.
-- **Approach logging** — free, no change.
+  the course is locked — extend it to lock all but the first.
+- **Daily practice** — `HomeView.swift:138`. Not part of the script; reuse the
+  existing disabled-button treatment (`canStart`, line 133).
+- **Approach logging** — free, no change. Already shipped.
 
-**Decision needed:** which scenario is the demo scenario? The `scenarios` table
-has `order_index` and `required_lessons_completed`. The natural pick is the
-lowest `order_index` published row with `required_lessons_completed == 0`. I
-cannot query your Supabase project from here — confirm such a row exists, or
-add an explicit `is_demo` column, which is more robust than relying on
-ordering.
+### Gates that stay (unchanged from today)
 
-Lessons come from **bundled JSON**, not Supabase
-(`LessonDataService.swift:72-119`, `courseJsonMapping` at line 32), so the demo
-lesson can be selected client-side with no data change.
+| File | Line | Gate |
+|---|---|---|
+| `Home/HomeView.swift` | 307 | daily practice |
+| `PracticeGame/PracticeView.swift` | 66 | scenarios |
+| `Courses/CourseDetailSheet.swift` | 156 | lessons |
+| `Payment/SubscriptionGateModifier.swift` | — | keep |
 
----
-
-## 3. Mascot walkthrough — net new
-
-Verified: **no walkthrough, coach-mark, tooltip, or mascot code exists in the
-project.** This is the largest piece of work and the only one with an external
-dependency (the mascot asset itself).
-
-Suggested shape:
-
-- `Walkthrough/WalkthroughCoordinator.swift` — `ObservableObject` owning a
-  `WalkthroughStep` enum state machine (`welcome → prompt_scenario →
-  scenario_in_progress → scenario_done → prompt_lesson → lesson_in_progress →
-  lesson_done → finished`). Instantiated as `@StateObject` in `MainTabView`
-  (`MainTabView.swift:19-23`, next to `coursesRouter` / `tabBarVisibility`) and
-  injected via `.environmentObject` on all four tabs so state survives tab
-  switches and navigation pushes.
-- `Walkthrough/MascotOverlayView.swift` — the speech-bubble overlay, layered in
-  the `ZStack` at `MainTabView.swift:26` above the tab bar.
-- Step advancement hooks into the existing completion points rather than new
-  ones: scenario completion already emits
-  `Analytics.Event.practiceScenarioCompleted`, lesson completion already emits
-  `lessonCompleted` (`Analytics.swift:25-30`), and `LessonCompleteView` /
-  `QuestionsCompleteView` exist as natural handoff moments.
-- On `finished` → `authManager.markFreeDemoCompleted()` → RootView swaps to the
-  wall.
-
-**Design constraint worth honoring in code review:** the mascot's job is to walk
-the user *into doing* the scenario, not to point at UI chrome. If the
-implementation drifts into a generic coach-mark tour over the tab bar, it will
-be skipped and the whole plan loses its value.
+These become **backstops**, not the conversion mechanism. The post-demo ask is
+the conversion mechanism.
 
 ---
 
-## 4. The hard wall — `PaywallView.swift`
+## 5. Second-chance offer
 
-- Add `case postDemo` to `PaywallSource` (line 16). Remove `case featureGate`
-  once the gates are gone — nothing will emit it.
-- **Offline escape hatch (required).** The dismiss overlay currently renders
-  when `isDismissible` (line ~355 region). Its comment explicitly notes it is
-  available in every state "so a user is never trapped if RevenueCat is slow or
-  offline." A flatly non-dismissible wall destroys that property and bricks the
-  app for anyone whose offerings fetch fails.
+Two open items, both your call — the trigger survives because
+`SubscriptionGateModifier` survives.
 
-  Change the overlay condition to `isDismissible || viewModel.offerings == nil`.
-  The escape-hatch dismissal must **not** call `completePaywallFlow()` — it
-  should set a session-scoped `@State` bypass in RootView that lets the user
-  into `MainTabView` for this launch only, with the wall re-arming on next
-  cold start. This is deliberately the Gleam behavior: a pressure valve that
-  also guarantees an App Reviewer who force-quits sees a working app.
-- `footerLinks` already renders Restore/Terms/Privacy in every state — required
-  by Guideline 3.1.2, and doubly important on a non-dismissible screen. Do not
-  regress it.
-- The `$0.00` CTA (`continueButtonTitle`, line 439) and `zeroPriceString`
-  (`PaywallViewModel.swift:128`) are already in place and need no change.
-- Still outstanding from earlier discussion: the **trial timeline** element
-  (`Today: full access → Day 2: reminder → Day 3: billed`). Apple's 2026
-  guidance explicitly favors transparent trial timelines, and this is the
-  highest-value remaining paywall addition.
-
----
-
-## 5. Second-chance offer — remove the trigger
-
-Two reasons, one strategic (asking pay-up-front from someone who just declined a
-free trial) and one practical (exit offers are being rejected under Guidelines
-5.6 and 3.1.2 as manipulative — a real risk for an app with no approval
-history).
-
-The trigger lives entirely inside `SubscriptionGateModifier.swift`
-(`evaluateSecondChanceOffer`, lines 89-126), which is being deleted in step 2.
-So the trigger disappears for free.
-
-**Recommendation: leave the rest in place, unreferenced.** `SecondChanceOfferView
-.swift`, `SecondChanceOfferViewModel.swift`, the `Constants.SECOND_CHANCE_*`
-entries, `RevenueCatConfig.SecondChanceOffer`, `AuthManager
-.hasSeenSecondChanceOffer` / `markSecondChanceOfferShown`, and the
-`Analytics.Event.recoveryOffer*` names all compile fine unused. Ship v1.0
-without it, get approved, and rewire in v1.1 if you still want it — at which
-point it should offer the **same 3-day trial at a lower post-trial price**, not
-a discount that swaps the trial for an immediate charge.
-
-Leave the `second_chance` offering configured in the RevenueCat dashboard; it is
-not `current`, so it cannot surface on its own.
+1. **Mechanics.** `wingman_yearly_discount` is Pay-Up-Front
+   (`RevenueCatConfig.swift:44`). Playing a free scenario does not consume
+   StoreKit intro eligibility — eligibility is per *subscription group*
+   (see the comment at `SubscriptionGateModifier.swift:86`), so a demo user is
+   still fully eligible for the 3-day trial. Offering pay-up-front withdraws a
+   $0 door and replaces it with a $X door, and taking it permanently burns their
+   trial eligibility. **Recommendation:** reconfigure the discount product to
+   keep the 3-day trial at a lower post-trial price. RevenueCat dashboard
+   change; the existing `checkTrialOrIntroDiscountEligibility` plumbing already
+   supports it.
+2. **Review risk.** Exit offers are currently rejected under Guidelines 5.6 and
+   3.1.2 as manipulative. New app, no approval history. **Recommendation:** ship
+   v1.0 without it, add in v1.1. Flagged, noted, your decision.
 
 ---
 
@@ -244,52 +223,93 @@ not `current`, so it cannot surface on its own.
 Add to `Analytics.Event` (`Analytics.swift:23`):
 
 ```
-walkthrough_started / walkthrough_step_completed / walkthrough_completed
+walkthrough_started / walkthrough_step_completed / walkthrough_abandoned / walkthrough_completed
 demo_scenario_completed
 demo_lesson_completed
-hard_wall_viewed          (or reuse paywall_viewed with source=post_demo)
 ```
 
-The funnel you actually need to watch after this ships:
+Add `case postDemo` to `PaywallSource` (`PaywallView.swift:16`) — keep
+`featureGate`, the gates still emit it.
+
+The funnel to watch:
 
 ```
-install → onboarding_complete → paywall#1_viewed → {purchased | dismissed}
-        → walkthrough_started → demo_scenario_completed → demo_lesson_completed
-        → hard_wall_viewed → purchased
+install → onboarding_complete
+       → paywall#1_viewed → {purchased | dismissed}
+       → walkthrough_started → demo_scenario_completed → demo_lesson_completed
+       → paywall_viewed(source=post_demo) → purchased
 ```
 
-Expect install→activation to look *worse* and revenue per install to look
-better. Judge on the second.
+The number that decides whether to flip `post_demo_wall_hard`: **purchase rate
+at `source=post_demo` vs `source=onboarding`.** If post-demo materially beats
+onboarding, the demo is doing its job and closing the door is worth testing.
+Judge on revenue per install, not on activation rate.
 
 ---
 
 ## Phasing
 
-| Phase | Work | Blocked by |
-|---|---|---|
-| **1** | `hasCompletedFreeDemo` flag + persistence + resets | — |
-| **2** | RootView three-way branch; wall renders when flag true | 1 |
-| **3** | Offline escape hatch + session bypass | 2 |
-| **4** | Demo-mode locking; delete 4 gates + `SubscriptionGateModifier` | 1, 2 |
-| **5** | Trial timeline on paywall | — (independent) |
-| **6** | Mascot coordinator + overlay + step hooks | 4, mascot asset |
-| **7** | Analytics events | 6 |
+| Phase | Work | Blocked by | Status |
+|---|---|---|---|
+| **1** | Both flags + persistence + resets | — | ✅ done |
+| **2** | RootView four-way branch; ask renders after demo | 1 | ✅ done |
+| **3** | `.postDemo` source; PostHog flag; offline escape hatch | 2 | ✅ done |
+| **4** | Demo-mode locking across scenarios / courses / daily practice | 1, 2 | next |
+| **5** | Trial timeline on paywall | — (independent) | |
+| **6** | Walkthrough coordinator + mascot overlay + step hooks | 4 | |
+| **7** | Analytics events | 6 | |
 
-Phases 1-3 are self-contained and testable without the mascot: set the flag
-manually and confirm the wall appears, that Restore works, and that killing the
-network produces the escape hatch rather than a brick. Phase 5 is independent
-and can ship any time.
+### Corrections found while implementing 1-3
+
+- **This plan under-specified the load paths.** There are **three**, not one:
+  `.signedIn`, `.initialSession`, *and* `restoreSessionGracefully()` — the last
+  being the common cold-launch-with-cached-session path. Missing it would have
+  left the new flags holding their global-key defaults on every relaunch, so a
+  returning user would have been handed the demo again and again once phase 6
+  landed. All three now call both new loads.
+- **`PaywallSource.postDemo` uses the implicit raw value `"postDemo"`**, not
+  `"post_demo"`. The `source` property's existing values (`onboarding`,
+  `featureGate`) are camelCase; mixing conventions inside one property makes
+  PostHog filters error-prone. Event *names* stay snake_case as before.
+- **DEBUG-only launch-argument overrides added** so phases 1-3 are testable
+  before the walkthrough exists:
+  - `-forceFreeDemoCompleted YES` — jump straight to the post-demo ask
+  - `-forceDismissedPostDemoWall NO` — re-arm the ask on a repeat run
+  - `-postDemoWallIsHard YES` — hard mode without touching PostHog
+
+### Verification state after 1-3
+
+Nothing calls `markFreeDemoCompleted()`, and nothing writes the
+`free_demo_completed` metadata mirror, so `hasCompletedFreeDemo` is `false` for
+every user. Branches 4c/4d are therefore unreachable in production and every
+user who previously reached MainTabView still reaches it via 4a or 4b. **Phases
+1-3 are behaviourally inert by design** — infrastructure only. The single live
+change is one `$feature_flag_called` event per launch for
+`post_demo_wall_hard`.
+
+Phases 1-3 are self-contained and testable without the mascot: set
+`hasCompletedFreeDemo` by hand, confirm the ask appears, Restore works, the flag
+flips hardness, and killing the network produces the escape hatch rather than a
+brick. Phase 5 is independent and can ship any time.
 
 ---
 
-## Open decisions
+## Open items
 
-1. **Demo scenario selection** — `is_demo` column vs. lowest `order_index` with
-   `required_lessons_completed == 0`. Needs a look at the real `scenarios` data.
-2. **Mascot asset** — design dependency, gates phase 6.
-3. **Daily practice + streaks during demo** — assumed unavailable. Confirm, since
-   `StreakStore` behavior during a locked period may need thought.
-4. **Demo re-grant after sign-out** — assumed no (per-user key survives).
-5. **Paywall #1 stays dismissible** — confirmed intent. It catches high-intent
-   buyers at the post-quiz peak; only two asks now sit between install and the
-   wall, with real value in between.
+1. **Scenario 2's unlock threshold.** `required_lessons_completed` is a
+   threshold against `totalLessonsCompleted()` across *all* courses
+   (`Practice.swift:15`). The demo completes one lesson. **If scenario 2's
+   threshold is 1, the demo silently unlocks it.** Check the `scenarios` table
+   before shipping. (Cannot query it from here — the connected Supabase MCP
+   points at a different project.)
+2. **Walkthrough abandonment.** If the user force-quits mid-walkthrough,
+   `hasCompletedFreeDemo` is still false, so they resume in demo mode. Decide
+   whether the coordinator resumes at the last step or restarts. Restarting is
+   simpler and probably fine.
+3. **Streaks during demo.** `StreakStore` behavior while daily practice is
+   unavailable — confirm nothing breaks or misreports.
+4. **Demo re-grant after sign-out.** Assumed no: the per-user key survives, so
+   the same account gets one demo. A new account gets a fresh one.
+5. **Trial timeline copy** — `Today: full access → Day 2: reminder → Day 3:
+   billed`. Highest-value remaining paywall addition, independent of everything
+   above.

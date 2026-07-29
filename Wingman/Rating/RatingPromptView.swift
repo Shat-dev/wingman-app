@@ -119,7 +119,7 @@ struct RatingPromptView: View {
                     .background(Color.wingmanBlack)
                     .cornerRadius(5)
             }
-            .buttonStyle(.plain)
+            .buttonStyle(ScalePressStyle())
             .contentShape(Rectangle())
             .disabled(!isContinueEnabled)
             .opacity(isContinueEnabled ? 1 : 0.5)

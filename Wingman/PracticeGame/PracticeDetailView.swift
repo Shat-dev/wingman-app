@@ -84,7 +84,8 @@ struct PracticeDetailView: View {
                     .frame(width: 44, height: 44, alignment: .center)
                     .contentShape(Rectangle())
             }
-            
+            .buttonStyle(ScalePressStyle())
+
             Spacer()
             
             Text("Practice")
@@ -220,6 +221,7 @@ struct PracticeDetailView: View {
                 .background(Color(hex: "#1A1A1A"))
                 .cornerRadius(12)
         }
+        .buttonStyle(ScalePressStyle())
         .padding(.top, 16)
     }
     
@@ -261,7 +263,8 @@ struct PracticeDetailView: View {
                     .background(Color(hex: "#1A1A1A"))
                     .cornerRadius(8)
             }
-            
+            .buttonStyle(ScalePressStyle())
+
             Spacer()
         }
         .padding(.horizontal, 20)

@@ -187,7 +187,7 @@ struct PracticeView: View {
                             .frame(width: 44, height: 44, alignment: .center)
                             .contentShape(Rectangle())
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(ScalePressStyle())
                     .hidden() // Hide for now since Scenarios is a tab, not pushed view
                     
                     Spacer()
@@ -226,6 +226,7 @@ struct PracticeView: View {
                         .background(Color.wingmanBlack)
                         .cornerRadius(5)
                 }
+                .buttonStyle(ScalePressStyle())
                 .padding(.horizontal, 20)
                 .padding(.bottom, 40)
             }

@@ -70,6 +70,7 @@ struct LogApproachBottomSheet: View {
                                         .font(.system(size: 15))
                                         .foregroundColor(.gray)
                                 }
+                                .buttonStyle(ScalePressStyle())
                                 .padding(.trailing, 8)
                             }
 
@@ -295,6 +296,7 @@ struct LogApproachBottomSheet: View {
                             .background(viewModel.canSave ? Color.wingmanBlack : Color.gray.opacity(0.3))
                             .cornerRadius(5)
                         }
+                        .buttonStyle(ScalePressStyle())
                         .disabled(!viewModel.canSave || viewModel.isSaving)
 
                         // Error message
@@ -343,6 +345,7 @@ struct LogApproachBottomSheet: View {
                     .frame(width: 20, height: 20)
                     .contentShape(Rectangle())
             }
+            .buttonStyle(ScalePressStyle())
             .padding(.top, 20)
             .padding(.trailing, 20)
             .frame(maxWidth: .infinity, alignment: .topTrailing)
@@ -416,6 +419,7 @@ struct RadioButton: View {
                 Spacer()
             }
         }
+        .buttonStyle(ScalePressStyle())
     }
 }
 

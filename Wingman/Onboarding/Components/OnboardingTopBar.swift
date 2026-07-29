@@ -30,7 +30,7 @@ struct OnboardingTopBar: View {
                         .frame(width: 44, height: 44, alignment: .center)
                         .contentShape(Rectangle())
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(ScalePressStyle())
 
                 OnboardingProgressBar(progress: progress)
                     .frame(height: 10)

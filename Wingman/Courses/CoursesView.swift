@@ -195,7 +195,7 @@ struct CategoryPill: View {
                         )
                 )
         }
-        .buttonStyle(.plain)
+        .buttonStyle(ScalePressStyle())
     }
 }
 
@@ -234,7 +234,7 @@ struct CoursesGrid: View {
                 NavigationLink(destination: CourseDetailSheet(course: course, lockReason: lockReason)) {
                     CourseCardContent(course: course, lockReason: lockReason)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(ScalePressStyle())
             }
         }
     }

@@ -46,7 +46,7 @@ struct ProfileView: View {
                                 .font(.manropeSemiBold(size: 20))
                                 .foregroundColor(.wingmanBlack)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(ScalePressStyle())
                     }
                     .padding(.horizontal, 20)
                     .padding(.top, 16)
@@ -96,6 +96,7 @@ struct ProfileView: View {
                                 .cornerRadius(12)
                                 
                             }
+                            .buttonStyle(ScalePressStyle())
                             .padding(.horizontal, 20)
                             .padding(.vertical, 28)
 
@@ -137,7 +138,7 @@ struct ProfileView: View {
                                     }) {
                                         ApproachesLoggedCard(count: approachService.totalCount, hasReflections: true)
                                     }
-                                    .buttonStyle(.plain)
+                                    .buttonStyle(ScalePressStyle())
                                 } else {
                                     ApproachesLoggedCard(count: approachService.totalCount, hasReflections: false)
                                         .allowsHitTesting(false) // non-interactive when no reflections
@@ -371,6 +372,7 @@ struct InviteFriendsCard: View {
                     .stroke(Color.gray.opacity(0.2), lineWidth: 1)
             )
         }
+        .buttonStyle(ScalePressStyle())
     }
     
     private func shareApp() {

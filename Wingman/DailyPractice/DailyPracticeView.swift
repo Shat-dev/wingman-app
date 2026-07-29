@@ -55,7 +55,7 @@ struct DailyPracticeView: View {
                             .frame(width: 44, height: 44, alignment: .center)
                             .contentShape(Rectangle())
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(ScalePressStyle())
                     
                     if !viewModel.questions.isEmpty {
                         progressBar(progress: CGFloat(viewModel.progress))
@@ -185,7 +185,7 @@ struct DailyPracticeView: View {
                             .frame(width: 44, height: 44, alignment: .center)
                             .contentShape(Rectangle())
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(ScalePressStyle())
 
                     Spacer()
                 }
@@ -232,6 +232,7 @@ struct DailyPracticeView: View {
                         .background(Color.wingmanBlack)
                         .cornerRadius(5)
                 }
+                .buttonStyle(ScalePressStyle())
                 .padding(.horizontal, 20)
                 .padding(.bottom, 40)
             }
@@ -371,6 +372,7 @@ struct DailyPracticeView: View {
             )
             .shadow(color: Color.wingmanBlack.opacity(0.0002), radius: 0.03, x: 0, y: 0.01)
         }
+        .buttonStyle(ScalePressStyle())
         .disabled(viewModel.hasCheckedAnswer)
     }
     
@@ -407,6 +409,7 @@ struct DailyPracticeView: View {
             )
             .shadow(color: .wingmanBlack.opacity(0.1), radius: 8, x: 0, y: 2)
         }
+        .buttonStyle(ScalePressStyle())
         .disabled(viewModel.hasCheckedAnswer)
     }
     
@@ -564,6 +567,7 @@ struct DailyPracticeView: View {
                     .background(viewModel.isAnswerCorrect ? Color.customGreen : Color.customRed)
                     .cornerRadius(5)
             }
+            .buttonStyle(ScalePressStyle())
         }
         .padding(.vertical, 20)
         .padding(.horizontal, 10)
@@ -592,6 +596,7 @@ struct DailyPracticeView: View {
                 .background(viewModel.isCheckAnswerEnabled ? Color.wingmanBlack : Color.wingmanBlack.opacity(0.4))
                 .cornerRadius(5)
         }
+        .buttonStyle(ScalePressStyle())
         .disabled(!viewModel.isCheckAnswerEnabled)
     }
     
@@ -621,21 +626,6 @@ struct DailyPracticeView: View {
             log("Moving to next question")
             viewModel.nextQuestion()
         }
-    }
-}
-
-// MARK: - Custom Button Style
-struct PrimaryButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .font(.manropeSemiBold(size: 16))
-            .foregroundColor(.white)
-            .frame(maxWidth: .infinity)
-            .frame(height: 52)
-            .background(Color.wingmanBlack)
-            .cornerRadius(5)
-            .scaleEffect(configuration.isPressed ? 0.96 : 1.0)
-            .animation(.easeInOut(duration: 0.1), value: configuration.isPressed)
     }
 }
 

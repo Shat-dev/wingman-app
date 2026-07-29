@@ -88,7 +88,7 @@ struct PlanRow: View {
             )
             .animation(.easeInOut(duration: 0.2), value: badgeText != nil)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(ScalePressStyle())
     }
 }
 

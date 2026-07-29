@@ -91,7 +91,7 @@ struct SecondChanceOfferView: View {
                     .frame(width: 44, height: 44, alignment: .center)
                     .contentShape(Rectangle())
             }
-            .buttonStyle(.plain)
+            .buttonStyle(ScalePressStyle())
             .padding(.trailing, 6)
             .accessibilityLabel("Close offer")
         }
@@ -193,6 +193,7 @@ struct SecondChanceOfferView: View {
             .background(Color.wingmanBlack.opacity(viewModel.isPurchasing ? 0.7 : 1.0))
             .cornerRadius(5)
         }
+        .buttonStyle(ScalePressStyle())
         .disabled(viewModel.isPurchasing)
         .padding(.horizontal, 20)
         .padding(.top, 12)
@@ -214,6 +215,7 @@ struct SecondChanceOfferView: View {
                     .frame(minWidth: 44, minHeight: 44)
                     .contentShape(Rectangle())
             }
+            .buttonStyle(ScalePressStyle())
 
             Spacer()
 
@@ -233,6 +235,7 @@ struct SecondChanceOfferView: View {
                     .frame(minWidth: 44, minHeight: 44)
                     .contentShape(Rectangle())
             }
+            .buttonStyle(ScalePressStyle())
 
             Spacer()
 
@@ -248,6 +251,7 @@ struct SecondChanceOfferView: View {
                     .frame(minWidth: 44, minHeight: 44)
                     .contentShape(Rectangle())
             }
+            .buttonStyle(ScalePressStyle())
         }
         .padding(.horizontal, 60)
         .padding(.bottom, 8)

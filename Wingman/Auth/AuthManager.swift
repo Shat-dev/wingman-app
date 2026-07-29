@@ -75,6 +75,40 @@ final class AuthManager: ObservableObject {
         }
     }
 
+    // MARK: - Free Demo (mascot walkthrough)
+    //
+    // These two answer questions that are deliberately separate from
+    // `hasCompletedPaywallFlow`, which only records "passed paywall #1" and
+    // must never be read as an entitlement — every existing non-paying user
+    // already has it set to true, persisted per-user AND mirrored to
+    // user_metadata, and it never expires.
+    //
+    //   hasCompletedFreeDemo     — walkthrough finished (1 scenario + 1
+    //                              lesson spent). Ends demo mode and arms the
+    //                              post-demo ask.
+    //   hasDismissedPostDemoWall — user declined that ask. Lets them into the
+    //                              app with the feature gates doing their
+    //                              normal job.
+    //
+    // Both are new keys, so they default false for the entire existing
+    // install base — those users correctly land in demo mode on first launch
+    // after the update rather than being silently handed the app.
+    //
+    // Persisted per-user and mirrored to user_metadata, mirroring
+    // hasSeenSecondChanceOffer's shape exactly, so both survive
+    // uninstall+reinstall and new devices.
+    @Published var hasCompletedFreeDemo: Bool = false {
+        didSet {
+            log("🎓 hasCompletedFreeDemo changed: \(oldValue) → \(hasCompletedFreeDemo)")
+        }
+    }
+
+    @Published var hasDismissedPostDemoWall: Bool = false {
+        didSet {
+            log("🚧 hasDismissedPostDemoWall changed: \(oldValue) → \(hasDismissedPostDemoWall)")
+        }
+    }
+
     // MARK: - Subscription Status
     @Published var hasActiveSubscription: Bool = false {
         didSet {
@@ -135,6 +169,15 @@ final class AuthManager: ObservableObject {
         // Same note as above: actual per-user value loads after session
         hasSeenSecondChanceOffer = UserDefaults.standard.bool(forKey: "hasSeenSecondChanceOffer")
         log("🎁 Loaded hasSeenSecondChanceOffer: \(hasSeenSecondChanceOffer)")
+
+        // Same note as above: pre-session defaults only. The authoritative
+        // per-user values load in checkUserFreeDemoStatus /
+        // checkUserPostDemoWallStatus once a session exists.
+        hasCompletedFreeDemo = UserDefaults.standard.bool(forKey: "hasCompletedFreeDemo")
+        log("🎓 Loaded hasCompletedFreeDemo: \(hasCompletedFreeDemo)")
+
+        hasDismissedPostDemoWall = UserDefaults.standard.bool(forKey: "hasDismissedPostDemoWall")
+        log("🚧 Loaded hasDismissedPostDemoWall: \(hasDismissedPostDemoWall)")
 
         // Load global rating-prompt flag — covers the anonymous case at launch,
         // and also provides a safe default before session restore overwrites
@@ -204,7 +247,24 @@ final class AuthManager: ObservableObject {
     private func syncSubscriptionStatus() {
         let subscriptionManager = SubscriptionManager.shared
         #if DEBUG
-        self.hasActiveSubscription = true
+        // Debug builds can force the premium entitlement on, but only when
+        // explicitly asked for.
+        //
+        // This used to be an unconditional `#if DEBUG` grant, which meant a
+        // Debug build could never exercise ANY non-subscriber path — the
+        // feature gates, demo mode, and the post-demo wall all sit below
+        // RootView's `hasActiveSubscription` check, so they were unreachable
+        // on the only configuration where the debug overrides for those flags
+        // are even compiled in. Opt-in instead: Debug now behaves like
+        // production unless you ask otherwise.
+        //
+        // Launch argument: -forcePremium YES
+        if UserDefaults.standard.bool(forKey: "forcePremium") {
+            self.hasActiveSubscription = true
+            log("💎 DEBUG: hasActiveSubscription FORCED true via -forcePremium")
+        } else {
+            self.hasActiveSubscription = subscriptionManager.isSubscriptionActive
+        }
         #else
         self.hasActiveSubscription = subscriptionManager.isSubscriptionActive
         #endif
@@ -280,6 +340,8 @@ final class AuthManager: ObservableObject {
                     await checkUserPaywallFlowStatus(userId: session.user.id.uuidString)
                     await checkUserRatingPromptStatus(userId: session.user.id.uuidString)
                     await checkUserSecondChanceOfferStatus(userId: session.user.id.uuidString)
+                    await checkUserFreeDemoStatus(userId: session.user.id.uuidString)
+                    await checkUserPostDemoWallStatus(userId: session.user.id.uuidString)
 
                     // ✅ Hydrate lesson progress from Supabase user_metadata so
                     // users who reinstall / switch devices don't lose progress.
@@ -294,6 +356,11 @@ final class AuthManager: ObservableObject {
                     // events automatically via $anon_distinct_id.
                     let userId = session.user.id.uuidString
                     PostHogSDK.shared.identify(userId)
+
+                    // Flag evaluation is per-distinct-id, so values resolved
+                    // for the pre-signin anonymous id don't necessarily hold
+                    // for this person. Re-pull now that identify() has run.
+                    FeatureFlags.shared.refresh()
 
                     // Distinguish signup from login by createdAt freshness
                     // (60-second window). The provider field comes from
@@ -338,6 +405,8 @@ final class AuthManager: ObservableObject {
                 self.hasCompletedPaywallFlow = false
                 self.hasSeenRatingPrompt = false
                 self.hasSeenSecondChanceOffer = false
+                self.hasCompletedFreeDemo = false
+                self.hasDismissedPostDemoWall = false
                 log("🚪 User signed out")
 
             case .initialSession:
@@ -357,6 +426,8 @@ final class AuthManager: ObservableObject {
                     await checkUserPaywallFlowStatus(userId: session.user.id.uuidString)
                     await checkUserRatingPromptStatus(userId: session.user.id.uuidString)
                     await checkUserSecondChanceOfferStatus(userId: session.user.id.uuidString)
+                    await checkUserFreeDemoStatus(userId: session.user.id.uuidString)
+                    await checkUserPostDemoWallStatus(userId: session.user.id.uuidString)
 
                     // ✅ Hydrate lesson progress from Supabase user_metadata
                     // after session restoration so returning users (including
@@ -413,6 +484,8 @@ final class AuthManager: ObservableObject {
                 self.hasCompletedPaywallFlow = false
                 self.hasSeenRatingPrompt = false
                 self.hasSeenSecondChanceOffer = false
+                self.hasCompletedFreeDemo = false
+                self.hasDismissedPostDemoWall = false
                 log("🗑️ User deleted")
 
             case .mfaChallengeVerified:
@@ -492,6 +565,66 @@ final class AuthManager: ObservableObject {
         }
     }
 
+    /// Same shape as `checkUserSecondChanceOfferStatus`: per-user UserDefaults
+    /// first, `user_metadata` mirror as the reinstall / new-device fallback,
+    /// backfilling UserDefaults on a hit.
+    ///
+    /// A miss on both means "demo not yet spent" — which is the correct
+    /// reading for both a genuinely new user and the entire pre-update install
+    /// base, since this key has never existed before.
+    private func checkUserFreeDemoStatus(userId: String) async {
+        let key = "hasCompletedFreeDemo_\(userId)"
+        hasCompletedFreeDemo = UserDefaults.standard.bool(forKey: key)
+        log("🎓 Free demo status loaded: \(hasCompletedFreeDemo) for user: \(userId)")
+
+        if !hasCompletedFreeDemo,
+           let user = currentUser,
+           let completed = user.userMetadata["free_demo_completed"]?.boolValue,
+           completed {
+            log("🎓 Found free_demo_completed=true in user metadata - marking as completed")
+            hasCompletedFreeDemo = true
+            UserDefaults.standard.set(true, forKey: key)
+        }
+
+        #if DEBUG
+        // Local override so the post-demo routing can be exercised before the
+        // walkthrough (phase 6) exists to flip this for real.
+        // Launch argument: -forceFreeDemoCompleted YES
+        if UserDefaults.standard.object(forKey: "forceFreeDemoCompleted") != nil {
+            hasCompletedFreeDemo = UserDefaults.standard.bool(forKey: "forceFreeDemoCompleted")
+            log("🎓 hasCompletedFreeDemo OVERRIDDEN locally = \(hasCompletedFreeDemo)")
+        }
+        #endif
+    }
+
+    /// Companion to `checkUserFreeDemoStatus`. Only meaningful once the demo
+    /// is spent; loaded unconditionally so RootView never has to wait on a
+    /// second async hop after `hasCompletedFreeDemo` resolves.
+    private func checkUserPostDemoWallStatus(userId: String) async {
+        let key = "hasDismissedPostDemoWall_\(userId)"
+        hasDismissedPostDemoWall = UserDefaults.standard.bool(forKey: key)
+        log("🚧 Post-demo wall status loaded: \(hasDismissedPostDemoWall) for user: \(userId)")
+
+        if !hasDismissedPostDemoWall,
+           let user = currentUser,
+           let dismissed = user.userMetadata["post_demo_wall_dismissed"]?.boolValue,
+           dismissed {
+            log("🚧 Found post_demo_wall_dismissed=true in user metadata - marking as dismissed")
+            hasDismissedPostDemoWall = true
+            UserDefaults.standard.set(true, forKey: key)
+        }
+
+        #if DEBUG
+        // Companion to the override in checkUserFreeDemoStatus — lets a repeat
+        // run re-arm the ask without wiping the app.
+        // Launch argument: -forceDismissedPostDemoWall NO
+        if UserDefaults.standard.object(forKey: "forceDismissedPostDemoWall") != nil {
+            hasDismissedPostDemoWall = UserDefaults.standard.bool(forKey: "forceDismissedPostDemoWall")
+            log("🚧 hasDismissedPostDemoWall OVERRIDDEN locally = \(hasDismissedPostDemoWall)")
+        }
+        #endif
+    }
+
     private func checkUserRatingPromptStatus(userId: String) async {
         let key = "hasSeenRatingPrompt_\(userId)"
         hasSeenRatingPrompt = UserDefaults.standard.bool(forKey: key)
@@ -522,6 +655,8 @@ final class AuthManager: ObservableObject {
             await checkUserPaywallFlowStatus(userId: session.user.id.uuidString)
             await checkUserRatingPromptStatus(userId: session.user.id.uuidString)
             await checkUserSecondChanceOfferStatus(userId: session.user.id.uuidString)
+            await checkUserFreeDemoStatus(userId: session.user.id.uuidString)
+            await checkUserPostDemoWallStatus(userId: session.user.id.uuidString)
 
             // Mark session check complete - UI can now render
             self.isCheckingSession = false
@@ -1092,6 +1227,73 @@ final class AuthManager: ObservableObject {
         }
     }
 
+    // MARK: - Free Demo
+    /// Called when the mascot walkthrough finishes — the user has spent their
+    /// one free scenario and one free lesson. Flipping this ends demo mode and
+    /// routes RootView straight into the post-demo ask, which is the peak-intent
+    /// moment the whole walkthrough exists to set up.
+    ///
+    /// Same persistence shape as `markSecondChanceOfferShown`: per-user
+    /// UserDefaults as the device source of truth, best-effort `user_metadata`
+    /// mirror so a reinstall doesn't hand out a second demo.
+    func markFreeDemoCompleted() {
+        log("🎓 markFreeDemoCompleted() called")
+        hasCompletedFreeDemo = true
+
+        guard let userId = currentUser?.id.uuidString else {
+            log("⚠️ markFreeDemoCompleted: no authenticated user — nothing to persist")
+            return
+        }
+
+        let key = "hasCompletedFreeDemo_\(userId)"
+        UserDefaults.standard.set(true, forKey: key)
+        log("🎓 Free demo marked completed for user: \(userId)")
+
+        Task {
+            do {
+                let attributes = UserAttributes(data: [
+                    "free_demo_completed": AnyJSON.bool(true),
+                    "free_demo_completed_at": AnyJSON.string(ISO8601DateFormatter().string(from: Date()))
+                ])
+                try await client.auth.update(user: attributes)
+                log("✅ Mirrored free_demo_completed=true to user_metadata")
+            } catch {
+                log("⚠️ Failed to mirror free_demo_completed to user_metadata: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    /// Called when the user dismisses the post-demo ask without purchasing.
+    /// Only reachable while the ask is soft (see `postDemoWallIsHard`) — when
+    /// the wall is hard there is no dismiss affordance except the offline
+    /// escape hatch, and that path deliberately does NOT call this, so the ask
+    /// re-arms on the next cold start.
+    func markPostDemoWallDismissed() {
+        log("🚧 markPostDemoWallDismissed() called")
+        hasDismissedPostDemoWall = true
+
+        guard let userId = currentUser?.id.uuidString else {
+            log("⚠️ markPostDemoWallDismissed: no authenticated user — nothing to persist")
+            return
+        }
+
+        let key = "hasDismissedPostDemoWall_\(userId)"
+        UserDefaults.standard.set(true, forKey: key)
+        log("🚧 Post-demo wall marked dismissed for user: \(userId)")
+
+        Task {
+            do {
+                let attributes = UserAttributes(data: [
+                    "post_demo_wall_dismissed": AnyJSON.bool(true)
+                ])
+                try await client.auth.update(user: attributes)
+                log("✅ Mirrored post_demo_wall_dismissed=true to user_metadata")
+            } catch {
+                log("⚠️ Failed to mirror post_demo_wall_dismissed to user_metadata: \(error.localizedDescription)")
+            }
+        }
+    }
+
     // MARK: - Rating Prompt
     /// Called from `RatingPromptView` when the user taps Continue.
     /// Flips the in-memory flag and persists — per-user key for authenticated
@@ -1386,6 +1588,8 @@ final class AuthManager: ObservableObject {
             hasCompletedPaywallFlow = false
             hasSeenRatingPrompt = false
             hasSeenSecondChanceOffer = false
+            hasCompletedFreeDemo = false
+            hasDismissedPostDemoWall = false
 
             if let userId = userIdForCleanup {
                 UserDefaults.standard.removeObject(forKey: "hasSeenRatingPrompt_\(userId)")
@@ -1492,6 +1696,8 @@ final class AuthManager: ObservableObject {
                     hasCompletedPaywallFlow = false
                     hasSeenRatingPrompt = false
                     hasSeenSecondChanceOffer = false
+                    hasCompletedFreeDemo = false
+                    hasDismissedPostDemoWall = false
                     isCheckingSession = false
 
                     log("✅ Account deletion completed successfully")
@@ -1531,6 +1737,8 @@ final class AuthManager: ObservableObject {
         userDefaults.removeObject(forKey: "hasCompletedPaywallFlow_\(userId)")
         userDefaults.removeObject(forKey: "hasSeenRatingPrompt_\(userId)")
         userDefaults.removeObject(forKey: "hasSeenSecondChanceOffer_\(userId)")
+        userDefaults.removeObject(forKey: "hasCompletedFreeDemo_\(userId)")
+        userDefaults.removeObject(forKey: "hasDismissedPostDemoWall_\(userId)")
         // Leftover keys from the pre-gating hasEverHadSubscription flag. The
         // flag was removed when feature gates were added — these removes
         // clean up stale values on upgraded installs. Harmless no-op on

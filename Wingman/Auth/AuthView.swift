@@ -11,29 +11,35 @@ import PostHog
 struct AuthView: View {
     let mode: AuthMode
 
-    /// Controls whether the top-leading back chevron is rendered.
-    ///
-    /// Default `true` preserves the original behavior for AuthView pushed from
-    /// LandingView (Create Account / Sign In) and for the unauthenticated /
-    /// login routing branch — in those contexts the user legitimately needs a
-    /// way to back out.
-    ///
-    /// Pass `false` for the forced post-paywall AuthView in RootView. Without
-    /// this guard, a user who already purchased (RevenueCat entitlement
-    /// attached to their anonymous ID) could tap back, land on LandingView,
-    /// and end up re-seeing the paywall on the next anonymous pass — a
-    /// confusing "I paid, why are you asking again?" loop. Hiding the
-    /// chevron in that context enforces the "must create an account" rule.
-    let canGoBack: Bool
+    /// How the user arrived here. Drives both the copy and whether backing out
+    /// is allowed — see `AuthContext` and `canGoBack`.
+    let context: AuthContext
 
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var authManager: AuthManager
+    @State private var safariLink: IdentifiableURL?
 
-    init(mode: AuthMode, canGoBack: Bool = true) {
+    init(mode: AuthMode, context: AuthContext = .voluntary) {
         self.mode = mode
-        self.canGoBack = canGoBack
-        log("🎬 AuthView initialized with mode: \(mode == .signup ? "SIGNUP" : "LOGIN"), canGoBack: \(canGoBack)")
+        self.context = context
+        log("🎬 AuthView initialized with mode: \(mode == .signup ? "SIGNUP" : "LOGIN"), context: \(context)")
     }
+
+    /// Controls whether the top-leading back chevron is rendered.
+    ///
+    /// `.voluntary` keeps it — AuthView pushed from LandingView (Create Account
+    /// / Sign In) and the unauthenticated login routing branch both put the user
+    /// somewhere they chose to go, so they need a way back out.
+    ///
+    /// `.requiredAfterPaywall` suppresses it. Without this guard, a user who
+    /// already purchased (RevenueCat entitlement attached to their anonymous ID)
+    /// could tap back, land on LandingView, and end up re-seeing the paywall on
+    /// the next anonymous pass — a confusing "I paid, why are you asking again?"
+    /// loop. Hiding the chevron there enforces the "must create an account"
+    /// rule; the copy is what stops that from feeling like a trap.
+    private var canGoBack: Bool { context == .voluntary }
+
+    private var isRequiredStep: Bool { context == .requiredAfterPaywall }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -55,7 +61,7 @@ struct AuthView: View {
                             .frame(width: 44, height: 44, alignment: .center)
                             .contentShape(Rectangle())
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(ScalePressStyle())
                     .disabled(authManager.isGoogleSignInLoading || authManager.isAppleSignInLoading)
                 } else {
                     Color.clear.frame(width: 44, height: 44)
@@ -67,16 +73,26 @@ struct AuthView: View {
             .padding(.leading, 8)
             .padding(.bottom, 12)
 
-            // MARK: - Header (Title + Subtitle) - DYNAMIC BASED ON MODE
+            // On the required screen the content block is optically centred
+            // between the top row and the legal footer instead of being pinned
+            // to the top with half a screen of white below it. Voluntary
+            // presentations keep their original top-aligned layout.
+            if isRequiredStep {
+                Spacer(minLength: 0)
+            }
+
+            // MARK: - Header (Title + Subtitle) - DYNAMIC BASED ON CONTEXT
             VStack(spacing: 16) {
                 VStack(alignment: .leading, spacing: 8) {
                     Text(headerTitle)
                         .font(.manropeSemiBold(size: 32))
                         .foregroundColor(.wingmanBlack)
+                        .fixedSize(horizontal: false, vertical: true)
 
                     Text(headerSubtitle)
                         .font(.manropeRegular(size: 16))
                         .foregroundColor(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 20)
@@ -128,10 +144,41 @@ struct AuthView: View {
                     .padding(.horizontal, 20)
             }
 
+            // MARK: - Destination Reassurance (required step only)
+            //
+            // The third job of this screen's copy: say what is on the other
+            // side. Verified against RootView — a user who reaches this screen
+            // dismissed paywall #1, so `reachedPaywallEndState` is true and
+            // `syncAnonymousDataToBackend()` transfers hasCompletedOnboarding /
+            // hasCompletedQuestions / hasCompletedPaywallFlow / hasSeenRatingPrompt
+            // to the per-user keys before any network await. Signing in here
+            // therefore lands on MainTabView with no further gates. If that
+            // routing ever changes, this line has to change with it.
+            if isRequiredStep {
+                Text("Nothing else to set up — you'll go straight into the app.")
+                    .font(.manropeRegular(size: 14))
+                    .foregroundColor(Color.wingmanBlack.opacity(0.5))
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 20)
+                    .padding(.top, 16)
+            }
+
             Spacer()
+
+            // MARK: - Legal Footer (required step only)
+            //
+            // This is the one screen in the flow the user cannot decline, which
+            // is exactly where explicit consent belongs. It also gives the
+            // bottom of the screen a purpose instead of leaving it blank.
+            if isRequiredStep {
+                legalFooter
+            }
         }
         .navigationBarBackButtonHidden(true)
         .enableInteractivePopGesture()
+        .sheet(item: $safariLink) { SafariView(url: $0.url) }
         .onAppear {
             log("👁️ AuthView appeared")
         }
@@ -143,7 +190,12 @@ struct AuthView: View {
         // already covers what's typed into the fields, but this also keeps a
         // signed-in email out of the replay if the screen ever renders one.
         .postHogMask()
-        .postHogScreenView("Auth")
+        // Split the required screen out from the voluntary one. They had the
+        // same name, which made the post-paywall drop-off impossible to isolate
+        // in a funnel — the whole reason this screen was hard to diagnose.
+        // NOTE: "Auth" therefore means something narrower from this build on;
+        // historical "Auth" series include both screens.
+        .postHogScreenView(isRequiredStep ? "AuthRequired" : "Auth")
     }
 
     // MARK: - Handle Back Button
@@ -154,12 +206,75 @@ struct AuthView: View {
     }
 
     // MARK: - Computed Properties for Dynamic Text
+    //
+    // The required-step copy splits three jobs that the voluntary copy doesn't
+    // have to do, because a voluntary visitor already knows why they're here:
+    //
+    //   headerTitle    — how many more gates? ("One last step")
+    //   headerSubtitle — why does this account exist, and what does it cost?
+    //   the footnote below the buttons — what's on the other side?
+    //
+    // Kept as three separate lines on purpose. Collapsing them into one
+    // sentence is what produced the original "Save your progress, sync across
+    // devices" — true, but it answers a question the user isn't asking while
+    // ignoring the one they are.
     private var headerTitle: String {
-        return mode == .signup ? "Create Account" : "Welcome Back"
+        switch context {
+        case .requiredAfterPaywall:
+            return "One last step"
+        case .voluntary:
+            return mode == .signup ? "Create Account" : "Welcome Back"
+        }
     }
 
     private var headerSubtitle: String {
-        return "Save your progress, sync across devices, and more."
+        switch context {
+        case .requiredAfterPaywall:
+            // "free" is doing real work here: this screen lands seconds after a
+            // dismissed paywall, and the default reading is "another thing to
+            // pay for." It is also literally accurate — the account costs
+            // nothing; the subscription gates content later.
+            return "Create a free account so your answers and progress are saved."
+        case .voluntary:
+            return "Save your progress, sync across devices, and more."
+        }
+    }
+
+    // MARK: - Legal Footer
+    private var legalFooter: some View {
+        HStack(spacing: 4) {
+            Text("By continuing you agree to our")
+                .foregroundColor(Color.wingmanBlack.opacity(0.45))
+
+            Button {
+                if let url = URL(string: Constants.TERMS_CONDITIONS_URL) {
+                    safariLink = IdentifiableURL(url: url)
+                }
+            } label: {
+                Text("Terms")
+                    .foregroundColor(Color.wingmanBlack.opacity(0.7))
+                    .underline()
+            }
+            .buttonStyle(ScalePressStyle())
+
+            Text("and")
+                .foregroundColor(Color.wingmanBlack.opacity(0.45))
+
+            Button {
+                if let url = URL(string: Constants.PRIVACY_POLICY_URL) {
+                    safariLink = IdentifiableURL(url: url)
+                }
+            } label: {
+                Text("Privacy")
+                    .foregroundColor(Color.wingmanBlack.opacity(0.7))
+                    .underline()
+            }
+            .buttonStyle(ScalePressStyle())
+        }
+        .font(.manropeRegular(size: 12))
+        .multilineTextAlignment(.center)
+        .padding(.horizontal, 20)
+        .padding(.bottom, 20)
     }
 
     // MARK: - Outline Button
@@ -189,6 +304,7 @@ struct AuthView: View {
                     .stroke(Color.gray.opacity(0.6), lineWidth: 1)
             )
         }
+        .buttonStyle(ScalePressStyle())
     }
 }
 
@@ -199,5 +315,10 @@ struct AuthView: View {
 
 #Preview("Login") {
     AuthView(mode: .login)
+        .environmentObject(AuthManager())
+}
+
+#Preview("Required after paywall") {
+    AuthView(mode: .signup, context: .requiredAfterPaywall)
         .environmentObject(AuthManager())
 }

@@ -79,6 +79,7 @@ struct LessonCompleteView: View {
                         .background(Color.wingmanBlack)
                         .cornerRadius(5)
                 }
+                .buttonStyle(ScalePressStyle())
                 .padding(.horizontal, 20)
                 .padding(.bottom, 40)
             }

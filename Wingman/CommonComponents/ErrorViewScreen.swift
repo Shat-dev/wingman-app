@@ -57,6 +57,7 @@ struct ErrorViewScreen: View {
                         .background(Color.wingmanBlack)
                         .cornerRadius(10)
                 }
+                .buttonStyle(ScalePressStyle())
                 .padding(.horizontal, 24)
                 .padding(.bottom, 20)
             }

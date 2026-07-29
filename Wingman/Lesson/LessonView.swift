@@ -96,7 +96,7 @@ struct LessonView: View {
                             .frame(width: 44, height: 44, alignment: .center)
                             .contentShape(Rectangle())
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(ScalePressStyle())
                     
                     GeometryReader { geometry in
                         ZStack(alignment: .leading) {

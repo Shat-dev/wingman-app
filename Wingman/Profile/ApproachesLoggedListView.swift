@@ -45,7 +45,7 @@ struct ApproachesLoggedListView: View {
                                 .font(.system(size: 16, weight: .semibold))
                                 .foregroundColor(.wingmanBlack)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(ScalePressStyle())
                     }
                     .padding(.horizontal, 16)
                     .padding(.top, 12)
@@ -150,6 +150,7 @@ struct ApproachesLoggedListView: View {
                                     await approachService.fetchApproaches()
                                 }
                             }
+                            .buttonStyle(ScalePressStyle())
                             .font(.manropeSemiBold(size: 14))
                             .foregroundColor(.blue)
                         }

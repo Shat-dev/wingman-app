@@ -151,7 +151,7 @@ struct HomeView: View {
                                             .cornerRadius(5)
                                             .contentShape(Rectangle())
                                     }
-                                    .buttonStyle(.plain)
+                                    .buttonStyle(ScalePressStyle())
                                     .disabled(!canStart)
                                     .padding(.horizontal, 20)
                                     .padding(.bottom, 20)
@@ -203,8 +203,9 @@ struct HomeView: View {
                                 )
                                 .cornerRadius(5)
                             }
+                            .buttonStyle(ScalePressStyle())
                             .padding(.horizontal, 20)
-                            
+
                             Divider().background(Color.gray.opacity(0.2))
                             
                             
@@ -482,6 +483,7 @@ struct ModuleCarouselCard: View {
                         .background(Color.wingmanBlack)
                         .cornerRadius(5)
                 }
+                .buttonStyle(ScalePressStyle())
                 .padding(.top, 8)
             }
             .padding(.horizontal, 16)
@@ -577,7 +579,7 @@ struct ContinueCourseCard: View {
                     .stroke(Color.wingmanBlack.opacity(0.08), lineWidth: 1)
             )
         }
-        .buttonStyle(.plain)
+        .buttonStyle(ScalePressStyle())
     }
 }
 

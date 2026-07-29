@@ -233,7 +233,7 @@ struct PracticeGame: View {
                             .frame(width: 44, height: 44, alignment: .center)
                             .contentShape(Rectangle())
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(ScalePressStyle())
 
                     GeometryReader { geometry in
                         ZStack(alignment: .leading) {
@@ -549,7 +549,7 @@ struct OptionsContentView: View {
                                 .shadow(color: Color.wingmanBlack.opacity(0.06), radius: 5, x: 0, y: 2)
                         )
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(ScalePressStyle())
             }
 
             Text("Choose an option to continue")
@@ -591,6 +591,7 @@ struct GameCompleteView: View {
                         .background(Color.wingmanBlack)
                         .cornerRadius(5)
                 }
+                .buttonStyle(ScalePressStyle())
                 .padding(.horizontal, 24)
                 .padding(.bottom, 40)
             }

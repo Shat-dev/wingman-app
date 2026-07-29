@@ -42,6 +42,7 @@ struct ApproachLevelGuideSheet: View {
                             .font(.system(size: 14, weight: .semibold))
                             .foregroundColor(.gray)
                     }
+                    .buttonStyle(ScalePressStyle())
                 }
                 .padding(.horizontal, 20)
                 .padding(.bottom, 16)

@@ -16,6 +16,16 @@ import PostHog
 enum PaywallSource: String {
     case onboarding
     case featureGate
+
+    /// The ask at the end of the mascot walkthrough, once the user has spent
+    /// their free scenario and free lesson. This is the peak-intent moment the
+    /// walkthrough exists to set up, and the purchase rate here versus
+    /// `onboarding` is the number that decides whether the wall gets hardened.
+    ///
+    /// Raw value left implicit ("postDemo") to match `featureGate` — the
+    /// `source` property's existing values are camelCase, and mixing
+    /// conventions inside one property makes PostHog filters error-prone.
+    case postDemo
 }
 
 struct PaywallView: View {
@@ -45,6 +55,18 @@ struct PaywallView: View {
     ///   flag again would be semantically wrong.
     let onDismiss: (() -> Void)?
 
+    /// Escape hatch for the non-dismissible post-demo wall when pricing can't
+    /// be loaded.
+    ///
+    /// A wall with no exit is only safe while the user can actually buy. If
+    /// RevenueCat is unreachable there are no prices to show, so the user can
+    /// neither purchase nor leave — the app is bricked. When this closure is
+    /// provided, the dismiss affordance stays available in that failure state
+    /// even with `isDismissible == false`, and taking it calls this instead of
+    /// `onDismiss`, so the caller can distinguish "declined the offer" from
+    /// "couldn't see the offer" and avoid persisting the former.
+    let onOfflineBypass: (() -> Void)?
+
     /// Origin of this paywall presentation. Tagged onto every PostHog
     /// paywall_* event so funnels can separate the post-onboarding paywall
     /// from feature-gate paywalls. Required by the compiler at every call
@@ -72,12 +94,26 @@ struct PaywallView: View {
         authManager: AuthManager? = nil,
         isDismissible: Bool = false,
         onDismiss: (() -> Void)? = nil,
+        onOfflineBypass: (() -> Void)? = nil,
         source: PaywallSource
     ) {
         self.authManager_init = authManager
         self.isDismissible = isDismissible
         self.onDismiss = onDismiss
+        self.onOfflineBypass = onOfflineBypass
         self.source = source
+    }
+
+    /// Whether the pricing area is in its unrecoverable state — offerings
+    /// never arrived. Mirrors the condition `pricingStatusSection` /
+    /// `pricingRetryButton` already render on.
+    private var pricingUnavailable: Bool { viewModel.offerings == nil }
+
+    /// Whether to render the X. Normally just `isDismissible`, but a
+    /// non-dismissible wall must still open when pricing can't load, otherwise
+    /// an offline user is trapped on a screen with nothing to buy.
+    private var showsDismissAffordance: Bool {
+        isDismissible || (onOfflineBypass != nil && pricingUnavailable)
     }
 
     /// Shared property bag for the paywall interaction events: the existing
@@ -241,18 +277,31 @@ struct PaywallView: View {
             //
             // Available on every state (loading / error / content) so a
             // user is never trapped if RevenueCat is slow or offline.
-            if isDismissible {
+            //
+            // For a NON-dismissible wall the same guarantee has to hold, so
+            // `showsDismissAffordance` keeps the X when pricing failed to
+            // load. That path reports a distinct outcome and calls
+            // `onOfflineBypass`, letting the caller grant a session-scoped
+            // bypass instead of recording a decline the user never made.
+            if showsDismissAffordance {
                 Button {
                     HapticManager.shared.lightImpact()
+                    let isOfflineBypass = !isDismissible
                     // PostHog: user actively dismissed the paywall
                     // without purchasing. Captured at the action site
                     // so both the routing and feature-gate dismissal
                     // paths emit the same event with explicit source.
                     PostHogSDK.shared.capture(
                         "paywall_dismissed",
-                        properties: paywallEventProperties(["outcome": "dismissed_without_purchase"])
+                        properties: paywallEventProperties([
+                            "outcome": isOfflineBypass
+                                ? "bypassed_pricing_unavailable"
+                                : "dismissed_without_purchase"
+                        ])
                     )
-                    if let onDismiss = onDismiss {
+                    if isOfflineBypass {
+                        onOfflineBypass?()
+                    } else if let onDismiss = onDismiss {
                         onDismiss()
                     } else {
                         authManager.completePaywallFlow()
@@ -269,7 +318,7 @@ struct PaywallView: View {
                         .frame(width: 44, height: 44, alignment: .center)
                         .contentShape(Rectangle())
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(ScalePressStyle())
                 .padding(.trailing, 6)
                 .accessibilityLabel("Close paywall")
             }
@@ -480,6 +529,7 @@ struct PaywallView: View {
             .background(Color.wingmanBlack.opacity(viewModel.isPurchasing ? 0.7 : 1.0))
             .cornerRadius(5)
         }
+        .buttonStyle(ScalePressStyle())
         .disabled(viewModel.isPurchasing)
         .padding(.horizontal, 20)
         .padding(.top, 12)
@@ -512,6 +562,7 @@ struct PaywallView: View {
             .background(Color.wingmanBlack.opacity(viewModel.isLoading ? 0.7 : 1.0))
             .cornerRadius(5)
         }
+        .buttonStyle(ScalePressStyle())
         .disabled(viewModel.isLoading)
         .padding(.horizontal, 20)
         .padding(.top, 12)
@@ -533,6 +584,7 @@ struct PaywallView: View {
                     .frame(minWidth: 44, minHeight: 44)
                     .contentShape(Rectangle())
             }
+            .buttonStyle(ScalePressStyle())
 
             Spacer()
 
@@ -555,6 +607,7 @@ struct PaywallView: View {
                 .frame(minWidth: 44, minHeight: 44)
                 .contentShape(Rectangle())
             }
+            .buttonStyle(ScalePressStyle())
             .disabled(viewModel.isLoading)
 
             Spacer()
@@ -569,6 +622,7 @@ struct PaywallView: View {
                     .frame(minWidth: 44, minHeight: 44)
                     .contentShape(Rectangle())
             }
+            .buttonStyle(ScalePressStyle())
         }
         .padding(.horizontal, 60)
         .padding(.bottom, 8)

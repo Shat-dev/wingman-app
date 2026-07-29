@@ -58,7 +58,7 @@ struct EditProfileSheet: View {
                                 .font(.system(size: 16, weight: .medium))
                                 .foregroundColor(.wingmanBlack)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(ScalePressStyle())
                     }
                     .padding(.horizontal, 16)
                     .padding(.top, 6) // slightly reduced since we added grabber above
@@ -128,6 +128,7 @@ struct EditProfileSheet: View {
                         .background(Color.wingmanBlack)
                         .cornerRadius(5)
                     }
+                    .buttonStyle(ScalePressStyle())
                     .disabled(name.isEmpty || isSaving)
                     .opacity(name.isEmpty ? 0.5 : 1)
                     .padding(.horizontal, 24)

@@ -61,7 +61,7 @@ struct DailyReadingGoalSheet: View {
                                 .padding(.trailing, -2)
                                 .opacity(0.5)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(ScalePressStyle())
                     }
                     .padding(.horizontal, 16)
                     .padding(.top, 12)
@@ -94,8 +94,7 @@ struct DailyReadingGoalSheet: View {
                                 .padding(.horizontal, 24)
                                 .padding(.bottom, 20)
                             }
-                            
-                          
+                            .buttonStyle(ScalePressStyle())
                         }
                     }
                     .padding(.top, 8)
@@ -130,6 +129,7 @@ struct DailyReadingGoalSheet: View {
                         .background(Color.wingmanBlack)
                         .cornerRadius(8)
                     }
+                    .buttonStyle(ScalePressStyle())
                     .disabled(isSaving)
                     .padding(.horizontal, 24)
                     .padding(.bottom, 32)
