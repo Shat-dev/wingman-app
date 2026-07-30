@@ -124,6 +124,26 @@ struct RootView: View {
     /// working app rather than an inescapable paywall.
     @State private var bypassWallThisSession = false
 
+    /// Whether RootView should be showing `LandingView`.
+    ///
+    /// Kept as one condition so `LandingView` occupies exactly one branch of the
+    /// routing chain — see the comment at its use site for why two branches
+    /// silently destroyed its state mid-tap.
+    ///
+    /// True while the user has not finished onboarding AND either has not
+    /// started an anonymous pass yet (a genuinely new install) or is in the
+    /// middle of one. It stays true across `startAnonymousOnboarding()` flipping
+    /// `isLegacyAnonymousUser` and across the guest session arriving, which is
+    /// exactly the stability the view needs.
+    ///
+    /// Deliberately false for an authenticated user with incomplete onboarding
+    /// (`hasSession`, not legacy): they belong in the main flow's OnboardingView,
+    /// not back on Landing.
+    private var showLanding: Bool {
+        guard !authManager.hasCompletedOnboarding else { return false }
+        return authManager.isLegacyAnonymousUser || !authManager.hasSession
+    }
+
     var body: some View {
         ZStack {
             Group {
@@ -141,6 +161,39 @@ struct RootView: View {
                 // transitions (Daily Practice, Log Encounter, lesson entry,
                 // scenario tap). Completed progress remains visible; it's read
                 // from local/cloud storage and is not gated on subscription.
+                // MARK: - Landing / anonymous onboarding in progress
+                //
+                // ONE branch, deliberately. `LandingView` must appear exactly
+                // once in this chain: SwiftUI gives each branch of an
+                // if/else-if its own identity, so the *same* view in two
+                // branches is destroyed and rebuilt when the condition moves
+                // between them, discarding its `@StateObject` and `@State`.
+                //
+                // That bit us: tapping "Get started" flips
+                // `isLegacyAnonymousUser`, which used to move RootView from the
+                // final `else` into a separate branch here. LandingView was
+                // rebuilt mid-tap — the carousel jumped back to the first slide
+                // (fresh `LandingViewModel`) and `navigateToOnboarding` reset to
+                // false, so the push was swallowed and the button appeared to
+                // need two presses.
+                //
+                // `showLanding` keeps the condition true across that flag change
+                // (and across the guest session arriving), so the branch index
+                // never moves and the view keeps its state.
+                //
+                // Holding it also keeps the OnboardingView that LandingView
+                // pushed mounted for the whole anonymous pass, instead of
+                // letting `hasSession` swap in a second, different instance
+                // once the guest session lands — which on a slow connection
+                // restarted onboarding under the user.
+                //
+                // Ending the pass (`completeAnonymousOnboarding` sets
+                // `hasCompletedOnboarding`) drops this branch and hands over
+                // cleanly, by which point nothing is in flight to lose.
+                } else if showLanding {
+                    let _ = log("🎯 RootView: Showing Landing (anonymous pass: \(authManager.isLegacyAnonymousUser))")
+                    LandingView()
+
                 // Guests route through here too. `hasSession` — not
                 // `isAuthenticated` — is the correct question: a guest holds a
                 // real `auth.users` row, so every per-user table, RLS policy and
@@ -290,15 +343,18 @@ struct RootView: View {
                     }
 
                 // MARK: - Unauthenticated User Flow
-                } else if authManager.hasCompletedOnboarding {
+                //
+                // Terminal branch. Everything that reaches here has no session,
+                // has already seen onboarding, and is not mid-anonymous-pass —
+                // i.e. a returning user who signed out or whose session died.
+                // The Landing case is handled above by `showLanding`; it must
+                // NOT also appear here, or switching between the two would
+                // rebuild it and wipe its state.
+                } else {
                     let _ = log("🎯 RootView: User NOT authenticated, but HAS seen onboarding")
                     NavigationStack {
                         AuthView(mode: .login)
                     }
-
-                } else {
-                    let _ = log("🎯 RootView: User NOT authenticated, showing Landing")
-                    LandingView()
                 }
             }
             .animation(.easeInOut(duration: 0.3), value: authManager.isAuthenticated)

@@ -64,36 +64,57 @@ struct SettingsSheet: View {
                     .padding(.top, 12)
                     .padding(.bottom, 40)
                     
-                    // MARK: - Email Section
+                    // MARK: - Account Section
+                    //
+                    // A guest has no email to show. Rendering the old "Email"
+                    // row for them printed whatever `user_email` happened to be
+                    // left in UserDefaults by the last signed-in account — in
+                    // testing, a *deleted* account's address, beside a provider
+                    // icon derived from the live guest session. The two
+                    // disagreed because they came from different sources.
+                    //
+                    // Guests now get an honest statement of where their data
+                    // lives instead of a fabricated identity.
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Email")
+                        Text("Account")
                             .font(.manropeMedium(size: 14))
                             .foregroundColor(.gray)
                             .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        HStack(spacing: 8) {
-                            // Provider icon reflects how the user actually signed in.
-                            // Apple fallback covers the unauthenticated-at-render and
-                            // email/unknown-provider cases — matches prior behaviour.
-                            if isGoogleSignIn {
-                                Image("auth_google_logo")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 16, height: 16)
-                            } else {
-                                Image("apple_icon")
-                                    .resizable()
-                                    .renderingMode(.template)
-                                    .scaledToFit()
-                                    .frame(width: 16, height: 16)
-                                    .foregroundColor(.wingmanBlack)
-                            }
 
-                            Text(getUserEmail())
+                        if authManager.isGuestSession {
+                            Text("No account")
                                 .font(.manropeRegular(size: 16))
                                 .foregroundColor(.wingmanBlack)
 
-                            Spacer()
+                            Text("Your progress is saved on this device only.")
+                                .font(.manropeRegular(size: 13))
+                                .foregroundColor(Color.wingmanBlack.opacity(0.55))
+                                .fixedSize(horizontal: false, vertical: true)
+                        } else {
+                            HStack(spacing: 8) {
+                                // Provider icon reflects how the user actually signed in.
+                                // Apple fallback covers the email/unknown-provider cases —
+                                // matches prior behaviour.
+                                if isGoogleSignIn {
+                                    Image("auth_google_logo")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 16, height: 16)
+                                } else {
+                                    Image("apple_icon")
+                                        .resizable()
+                                        .renderingMode(.template)
+                                        .scaledToFit()
+                                        .frame(width: 16, height: 16)
+                                        .foregroundColor(.wingmanBlack)
+                                }
+
+                                Text(getUserEmail())
+                                    .font(.manropeRegular(size: 16))
+                                    .foregroundColor(.wingmanBlack)
+
+                                Spacer()
+                            }
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -230,12 +251,18 @@ struct SettingsSheet: View {
                     .padding(.horizontal, 24)
                     .padding(.bottom, 16)
 
-                    // MARK: - Delete Account
+                    // MARK: - Delete Account / Delete My Data
+                    //
+                    // A guest has no account, so "Delete Account" both misnames
+                    // the action and misreports what it destroys — it wipes the
+                    // guest's approach log and progress. Naming it for what it
+                    // actually does is the whole fix; the underlying call is
+                    // unchanged and still correct.
                     Button(action: {
                         HapticManager.shared.warning()
                         showingDeleteAlert = true
                     }) {
-                        Text("Delete Account")
+                        Text(authManager.isGuestSession ? "Delete my data" : "Delete Account")
                             .font(.manropeMedium(size: 14))
                             .foregroundColor(Color(hex: "#E53935"))
                             .underline()
@@ -257,27 +284,45 @@ struct SettingsSheet: View {
                         .padding(.top, 8)
                     
                     
-                    // MARK: - Log Out Button
-                    Button(action: {
-                        HapticManager.shared.mediumImpact()
-                        logOut()
-                    }) {
-                        Text("Log Out")
-                            .font(.manropeSemiBold(size: 16))
-                            .foregroundColor(.wingmanBlack)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 52)
-                            .background(Color.white)
-                            .cornerRadius(8)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.wingmanBlack, lineWidth: 1)
-                            )
+                    // MARK: - Log Out Button (not shown to guests)
+                    //
+                    // Hidden for a guest, and this is the more dangerous of the
+                    // two account controls. There is nothing to "log out" of —
+                    // but the button works: it ends the guest session, and
+                    // because a deliberate sign-out clears `has_ever_had_session`
+                    // the next "Get started" mints a *different* guest. The old
+                    // approach log is then orphaned server-side with no login to
+                    // reach it through. All of that behind a control that reads
+                    // as harmless and reversible.
+                    //
+                    // Deleting data stays available above, correctly named.
+                    if !authManager.isGuestSession {
+                        Button(action: {
+                            HapticManager.shared.mediumImpact()
+                            logOut()
+                        }) {
+                            Text("Log Out")
+                                .font(.manropeSemiBold(size: 16))
+                                .foregroundColor(.wingmanBlack)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 52)
+                                .background(Color.white)
+                                .cornerRadius(8)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .stroke(Color.wingmanBlack, lineWidth: 1)
+                                )
+                        }
+                        .buttonStyle(ScalePressStyle())
+                        .padding(.horizontal, 24)
+                        .padding(.bottom, 32)
+                        .padding(.top, 40)
+                    } else {
+                        // Preserve the trailing spacing the Log Out button used
+                        // to contribute, so the sheet doesn't end flush against
+                        // the version label for guests.
+                        Color.clear.frame(height: 32)
                     }
-                    .buttonStyle(ScalePressStyle())
-                    .padding(.horizontal, 24)
-                    .padding(.bottom, 32)
-                    .padding(.top, 40)
                 }
                 
                 // MARK: - Simple Loader Overlay (inside ZStack to maintain sheet size)
@@ -292,13 +337,19 @@ struct SettingsSheet: View {
             }
             .disabled(isDeleting) // Disable interaction during deletion
         .animation(.easeInOut, value: isDeleting)
-        .alert("Delete Account", isPresented: $showingDeleteAlert) {
+        .alert(authManager.isGuestSession ? "Delete my data" : "Delete Account",
+               isPresented: $showingDeleteAlert) {
             Button("Cancel", role: .cancel) { }
             Button("Delete", role: .destructive) {
                 deleteAccount()
             }
         } message: {
-            Text("Are you sure you want to delete your account? This action cannot be undone.")
+            // Names what actually goes. A guest's data has no account behind it
+            // and no way to recover it — there is no login to come back through
+            // — so the warning has to be blunter, not vaguer.
+            Text(authManager.isGuestSession
+                 ? "This deletes your logged approaches and all progress on this device. There's no account to recover them from. This cannot be undone."
+                 : "Are you sure you want to delete your account? This action cannot be undone.")
         }
         .alert("Error", isPresented: $showingErrorAlert) {
             Button("OK") { }

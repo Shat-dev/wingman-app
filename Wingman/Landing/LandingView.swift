@@ -12,7 +12,6 @@ struct LandingView: View {
     @StateObject private var viewModel = LandingViewModel()
     @EnvironmentObject var authManager: AuthManager
 
-    @State private var navigateToSignup = false
     @State private var navigateToLogin = false
     @State private var navigateToOnboarding = false
 
@@ -89,34 +88,29 @@ struct LandingView: View {
                     }
                     .padding(.bottom, 5)
 
-                    // Create Account
+                    // MARK: - Primary CTA — start without an account
+                    //
+                    // This is the majority path now that guest sessions exist,
+                    // so it gets the primary treatment. It previously sat at the
+                    // bottom as a small underlined "Skip for now" while Log In
+                    // took the filled button — a hierarchy that made the least
+                    // common action (logging in) the most prominent one, and
+                    // buried the route most users should take.
+                    //
+                    // "Get started" rather than "Skip for now" or "Continue as
+                    // guest": "skip" frames the account as a deferred obligation
+                    // and primes the user to expect nagging (and is now simply
+                    // untrue — nothing walls them later), while "guest" implies
+                    // a second-class mode. Naming the destination says what
+                    // happens next and implies nothing about accounts, which is
+                    // right, because accounts are genuinely optional.
                     Button {
                         HapticManager.shared.mediumImpact()
-                        navigateToSignup = true
+                        log("🔘 Get started button tapped")
+                        authManager.startAnonymousOnboarding()
+                        navigateToOnboarding = true
                     } label: {
-                        Text("Create Account")
-                            .font(.manropeSemiBold(size: 16))
-                            .foregroundColor(.wingmanBlack)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 52)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 5)
-                                    .stroke(Color.wingmanBlack.opacity(0.5), lineWidth: 1)
-                            )
-                            .shadow(color: Color.wingmanBlack.opacity(0.06), radius: 5, x: 0, y: 2)
-                    }
-                    .buttonStyle(ScalePressStyle())
-                    .navigationDestination(isPresented: $navigateToSignup) {
-                        AuthView(mode: .signup)
-                    }
-
-                    // Log In
-                    Button {
-                        HapticManager.shared.mediumImpact()
-                        navigateToLogin = true
-                    }
-                    label: {
-                        Text("Log In")
+                        Text("Get started")
                             .font(.manropeSemiBold(size: 16))
                             .foregroundColor(.wingmanWhiteFF)
                             .frame(maxWidth: .infinity)
@@ -125,25 +119,37 @@ struct LandingView: View {
                             .cornerRadius(5)
                     }
                     .buttonStyle(ScalePressStyle())
-                    .navigationDestination(isPresented: $navigateToLogin) {
-                        AuthView(mode: .login)
-                    }
-
-                    // Skip
-                    Button {
-                        log("🔘 Skip for now button tapped")
-                        authManager.startAnonymousOnboarding()
-                        navigateToOnboarding = true
-                    } label: {
-                        Text("Skip for now")
-                            .font(.manropeSemiBold(size: 16))
-                            .foregroundColor(Color.wingmanBlack)
-                            .underline()
-                            
-                    }
-                    .buttonStyle(ScalePressStyle())
                     .navigationDestination(isPresented: $navigateToOnboarding) {
                         OnboardingView(showLanding: $navigateToOnboarding)
+                    }
+
+                    // MARK: - Returning users
+                    //
+                    // Demoted to a text link. "Create Account" is deliberately
+                    // gone from this screen: an account is now offered after
+                    // purchase and from Profile, at moments where it justifies
+                    // itself, rather than being demanded from someone who has
+                    // not seen the product yet. Sign-up is still reachable —
+                    // AuthView(.signup) is presented from both of those places.
+                    Button {
+                        HapticManager.shared.mediumImpact()
+                        navigateToLogin = true
+                    } label: {
+                        HStack(spacing: 4) {
+                            Text("Already have an account?")
+                                .foregroundColor(Color.wingmanBlack.opacity(0.55))
+                            Text("Log in")
+                                .foregroundColor(Color.wingmanBlack)
+                                .underline()
+                        }
+                        .font(.manropeSemiBold(size: 15))
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 44)
+                        .contentShape(Rectangle())
+                    }
+                    .buttonStyle(ScalePressStyle())
+                    .navigationDestination(isPresented: $navigateToLogin) {
+                        AuthView(mode: .login)
                     }
                 }
                 .padding(.horizontal, 20)

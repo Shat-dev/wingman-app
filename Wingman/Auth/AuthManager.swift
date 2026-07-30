@@ -185,6 +185,27 @@ final class AuthManager: ObservableObject {
     /// configured when the session arrived. See `adoptGuestIdentity(_:)`.
     private var pendingGuestRevenueCatIdentity: String?
 
+    /// True only while an app-initiated sign-out or account deletion is running.
+    ///
+    /// **Reporting only — this must not gate identity teardown.**
+    ///
+    /// supabase-swift emits `.signedOut` from two places: the real `signOut()`
+    /// (`AuthClient.swift:972`) and `APIClient.swift:122`, the latter on
+    /// `sessionNotFound / sessionExpired / refreshTokenNotFound /
+    /// refreshTokenAlreadyUsed`. Both mean the session is definitively dead, so
+    /// both warrant the same teardown; they differ only in whether a human
+    /// asked for it, which matters for analytics (voluntary churn vs. an
+    /// expired token) and for reading logs.
+    ///
+    /// An earlier version gated the marker clear and the RevenueCat logout on
+    /// this flag, on the theory that a server-side invalidation should preserve
+    /// the device's identity. That was wrong twice over: the transient case it
+    /// was meant to protect emits no event at all (a `URLError`, not an API
+    /// error), so the marker was never at risk; and preserving the marker left
+    /// a user whose session died server-side permanently unable to obtain a
+    /// guest session — walled at account creation with no route into the app.
+    private var isDeliberateSignOutInFlight = false
+
     /// Whether the post-purchase account ask has already been shown.
     ///
     /// Per-user and persisted, so declining it is remembered rather than
@@ -545,18 +566,42 @@ final class AuthManager: ObservableObject {
 
             case .signedOut:
                 log("🚪 Event type: SIGNED_OUT")
-                // RevenueCat logout lives HERE — on the deliberate sign-out
-                // event — not on RootView's isAuthenticated onChange, which
-                // also fires false on transient session-restore failures.
-                // Supabase emits .signedOut only for an actual signOut()
-                // (AuthManager.signOut and SettingsSheet.logOut both route
-                // through it), never for network flakes.
+
+                // `.signedOut` arrives for TWO different reasons — see
+                // `isDeliberateSignOutInFlight`. Only one of them means the
+                // user asked to leave.
+                let wasDeliberate = self.isDeliberateSignOutInFlight
+                self.isDeliberateSignOutInFlight = false
+                log("🚪 Deliberate: \(wasDeliberate)")
+
+                // Both kinds of `.signedOut` mean the local session is
+                // definitively and unrecoverably gone, so identity teardown is
+                // the same for both. RevenueCat logout lives HERE rather than
+                // on RootView's isAuthenticated onChange, which also fires
+                // false on transient restore failures that are NOT sign-outs.
+                //
+                // Logging RevenueCat out returns it to $RCAnonymousID, which is
+                // what keeps a later guest `logIn` an anonymous→identified
+                // transfer rather than identified→identified (the shape that
+                // strands a purchase). The entitlement itself is never lost —
+                // Restore recovers it from the App Store receipt.
                 RevenueCatManager.shared.logoutUser()
-                // PostHog: capture before reset so the event is still
-                // attached to the outgoing distinct_id. reset() afterwards
-                // clears the distinct_id and re-generates an anonymous one.
-                PostHogSDK.shared.capture("user_logged_out")
+
+                if wasDeliberate {
+                    // PostHog: capture before reset so the event is still
+                    // attached to the outgoing distinct_id. reset() afterwards
+                    // clears the distinct_id and re-generates an anonymous one.
+                    PostHogSDK.shared.capture("user_logged_out")
+                } else {
+                    // NOT a user action — don't report it as one. Firing
+                    // `user_logged_out` here would inflate voluntary churn with
+                    // expired tokens and deleted accounts.
+                    log("⚠️ Session invalidated server-side (session not found / "
+                        + "expired / refresh token consumed). Not a user action.")
+                    PostHogSDK.shared.capture("session_invalidated")
+                }
                 PostHogSDK.shared.reset()
+
                 self.isAuthenticated = false
                 self.currentUser = nil
                 self.hasCompletedQuestions = false
@@ -565,11 +610,42 @@ final class AuthManager: ObservableObject {
                 self.hasSeenSecondChanceOffer = false
                 self.hasCompletedFreeDemo = false
                 self.hasDismissedPostDemoWall = false
-                // Deliberate exit — Supabase emits .signedOut only for a real
-                // signOut(), never for network flakes (see above). Clearing the
-                // marker here is what lets someone who signs out and then taps
-                // "Skip for now" get a fresh guest session.
-                self.clearSessionEverMarker(reason: "signed out")
+                // Cleared for BOTH kinds. `.signedOut` is only ever emitted for
+                // a real `signOut()` or for one of
+                // `sessionNotFound / sessionExpired / refreshTokenNotFound /
+                // refreshTokenAlreadyUsed` (supabase-swift
+                // `APIClient.swift:43-48`) — every one of which is a definitive
+                // server answer that this session is dead. None of them is the
+                // transient case the marker exists to guard.
+                //
+                // The transient case — offline launch, `autoRefreshToken:
+                // false`, an expired token with no network — throws a
+                // `URLError` and emits NO event at all, so the marker survives
+                // untouched and bootstrap is still correctly refused. That is
+                // the protection, and it does not depend on this branch.
+                //
+                // Gating this on `wasDeliberate` was a real bug: a user whose
+                // session died server-side could never obtain a guest session
+                // again on that device and was walled at account creation
+                // forever, with no way back into the app.
+                self.clearSessionEverMarker(reason: wasDeliberate ? "signed out" : "session invalidated")
+
+                // If this device was mid-guest-flow, the session that just died
+                // was the guest's — so immediately obtain a new one rather than
+                // leaving the user sessionless.
+                //
+                // Without this, clearing a zombie guest (fix 3) would drop them
+                // into the legacy no-session flow and wall them at account
+                // creation: `bootstrapGuestSessionIfNeeded()` is only called
+                // from "Get started" and the launch retry, neither of which
+                // fires again mid-session. The marker was just cleared above, so
+                // the bootstrap guard will now allow it.
+                if !wasDeliberate && self.isLegacyAnonymousUser {
+                    log("🎭 Guest session died server-side — re-arming bootstrap")
+                    self.guestBootstrapPending = true
+                    Task { await self.bootstrapGuestSessionIfNeeded() }
+                }
+
                 log("🚪 User signed out")
 
             case .initialSession:
@@ -854,6 +930,24 @@ final class AuthManager: ObservableObject {
                 await self.loadGuestUserState(userId: session.user.id.uuidString)
                 self.isCheckingSession = false
                 log("🎭 Guest session restored from cache: \(session.user.id) — UI ready")
+
+                // Validate in the background, exactly as the permanent path
+                // does below. This branch used to return early and skip it,
+                // which meant a guest whose row had been deleted server-side
+                // kept a zombie session indefinitely: the app looked signed in,
+                // guest bootstrap stayed blocked (a session "exists"), and the
+                // failure only surfaced later as a 401 from some unrelated call.
+                // Validating here turns that into a clean `.signedOut`, which
+                // clears the session and re-arms bootstrap (see
+                // `observeAuthState`'s signedOut case).
+                if NetworkMonitor.shared.isConnected {
+                    Task.detached(priority: .background) { [weak self] in
+                        await self?.validateSessionInBackground()
+                    }
+                } else {
+                    log("📶 Offline - skipping guest session validation")
+                }
+
                 log("================================================\n")
                 return
             }
@@ -1086,6 +1180,27 @@ final class AuthManager: ObservableObject {
     /// creation stitches to the onboarding and paywall events that produced it.
     private func adoptGuestIdentity(_ userId: String) {
         log("🆔 Adopting guest identity: \(userId)")
+
+        // Purge a PREVIOUS user's cached identity before adopting this one.
+        //
+        // `current_user_id`, `user_email`, the display name and the streak
+        // caches all survive a sign-out, and SettingsSheet reads `user_email`
+        // straight out of UserDefaults. Without this, a guest session inherits
+        // whatever the last signed-in account left behind — which in testing
+        // showed a *deleted* account's address on the Settings screen, next to
+        // a provider icon derived from the live guest session. Two sources, one
+        // stale, silently disagreeing.
+        //
+        // Guarded on the id differing so a returning guest keeps its own warm
+        // caches — those are what let Profile render instantly instead of
+        // flashing empty on every launch.
+        let cachedUserId = UserDefaults.standard.string(forKey: "current_user_id")
+        if cachedUserId != userId {
+            log("🧹 Clearing stale cached identity (was: \(cachedUserId ?? "nil"))")
+            SupabaseManager.shared.clearCurrentUser()
+            UserDefaults.standard.set(userId, forKey: "current_user_id")
+        }
+
         PostHogSDK.shared.identify(userId)
         FeatureFlags.shared.refresh()
 
@@ -1611,6 +1726,29 @@ final class AuthManager: ObservableObject {
             let key = "hasCompletedQuestions_\(userId)"
             UserDefaults.standard.set(true, forKey: key)
             log("✅ Questions completed for user: \(userId)")
+
+            // Mirror to user_metadata, for the same reason completePaywallFlow()
+            // does: per-user UserDefaults keys do NOT survive deleting the app,
+            // but the Supabase session in the keychain does. Without this a
+            // reinstalling user restores their session, `checkUserQuestionStatus`
+            // finds neither the local key nor the metadata fallback it checks,
+            // and they are sent back through onboarding they already finished.
+            //
+            // `completePaywallFlow` mirrored `paywall_flow_completed` and
+            // `completeAnonymousOnboarding` mirrors `onboarding_completed`; this
+            // path was the one that never did, which is why reinstall restarted
+            // onboarding. Best-effort — UserDefaults stays the source of truth
+            // on this device.
+            Task {
+                do {
+                    try await client.auth.update(user: UserAttributes(data: [
+                        "onboarding_completed": AnyJSON.bool(true)
+                    ]))
+                    log("✅ Mirrored onboarding_completed=true to user_metadata")
+                } catch {
+                    log("⚠️ Failed to mirror onboarding_completed: \(error.localizedDescription)")
+                }
+            }
         }
     }
 
@@ -2212,6 +2350,10 @@ final class AuthManager: ObservableObject {
     // MARK: - Sign out / Reset
     func signOut() async {
         log("\n🚪 signOut() called")
+        // Marks the `.signedOut` event that follows as user-initiated. See
+        // `isDeliberateSignOutInFlight` — without this the handler cannot tell
+        // this apart from a server-side session invalidation.
+        isDeliberateSignOutInFlight = true
         do {
             try await client.auth.signOut()
 
@@ -2268,6 +2410,12 @@ final class AuthManager: ObservableObject {
 
     // MARK: - Account Deletion
     func deleteAccount() async throws {
+        // Deletion is deliberate. The server-side delete invalidates the
+        // session, which can produce a `.signedOut` via the APIClient path —
+        // this makes sure the handler reads it as intentional rather than as a
+        // session that merely went stale. (The cleanup below is idempotent with
+        // whatever the handler does.)
+        isDeliberateSignOutInFlight = true
         log("\n🗑️ deleteAccount() called")
         
         guard let currentUser = currentUser else {
@@ -2321,10 +2469,32 @@ final class AuthManager: ObservableObject {
                     // Clear all local data
                     clearAllLocalData()
 
+                    // Drop the Supabase session for the account we just
+                    // deleted. Resetting the @Published flags below is NOT
+                    // enough — the SDK keeps its own session in the keychain,
+                    // and leaving a session for a user that no longer exists
+                    // caused two observed failures:
+                    //
+                    //   1. `bootstrapGuestSessionIfNeeded()` skips on
+                    //      `client.auth.currentUser == nil`, so the dead session
+                    //      silently BLOCKED creating a new guest. The user
+                    //      reached MainTabView still riding the corpse.
+                    //   2. Every authenticated call then 401'd — including the
+                    //      next deletion attempt, whose edge function correctly
+                    //      answered "Invalid or expired token" for a user that
+                    //      no longer exists.
+                    //
+                    // `.local` scope on purpose: the account is already gone, so
+                    // a global sign-out would round-trip to the server and fail.
+                    // This only clears the local/keychain copy.
+                    do {
+                        try await client.auth.signOut(scope: .local)
+                        log("🧹 Local Supabase session cleared after deletion")
+                    } catch {
+                        log("⚠️ Local sign-out after deletion failed: \(error.localizedDescription)")
+                    }
+
                     // RevenueCat: detach from the deleted account's identity.
-                    // Server-side deletion doesn't reliably emit a Supabase
-                    // .signedOut event (auth state is reset manually below),
-                    // so the .signedOut handler can't be relied on here.
                     RevenueCatManager.shared.logoutUser()
 
                     // Update auth state
