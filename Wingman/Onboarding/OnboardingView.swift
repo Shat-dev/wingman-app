@@ -271,8 +271,15 @@ struct OnboardingView: View {
             // additionally push `age` to Supabase user_metadata so it's
             // available server-side for all users, not just anonymous
             // ones that get synced at signup.
+            // Keyed on `hasSession`, NOT `isLegacyAnonymousUser`. A guest holds a
+            // real `auth.users` row, so their answers belong in user_metadata
+            // like anyone else's — and unlike the old anonymous flow they never
+            // run `syncAnonymousDataToBackend` (linking preserves the id, so
+            // there is nothing to transfer). Branching on the legacy flag here
+            // would strand every guest's age and goals in local-only storage
+            // that nothing ever uploads.
             DispatchQueue.main.async {
-                if self.authManager.isAnonymousUser {
+                if !self.authManager.hasSession {
                     switch key {
                     case "age":
                         AnonymousUserManager.shared.userAge = answer
@@ -352,7 +359,7 @@ struct OnboardingView: View {
         // Fires once per user reaching the end of the question flow.
         PostHogSDK.shared.capture("onboarding_completed")
 
-        if authManager.isAnonymousUser {
+        if authManager.isLegacyAnonymousUser {
             authManager.completeAnonymousOnboarding()
         } else {
             authManager.completeQuestions()

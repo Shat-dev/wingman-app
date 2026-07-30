@@ -39,8 +39,11 @@ struct LoadingScreen: View {
             Spacer()
         }
         .onAppear {
-            // Save name to Supabase only if not anonymous
-            if !authManager.isAnonymousUser {
+            // Save the name to Supabase whenever there is a user row to save it
+            // against — guests included. Keyed on `hasSession` rather than the
+            // legacy anonymous flag, which is still true for guests and would
+            // otherwise drop their name on the floor.
+            if authManager.hasSession {
                 saveUserName()
             }
 

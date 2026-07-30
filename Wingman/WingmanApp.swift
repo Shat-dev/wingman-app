@@ -141,8 +141,15 @@ struct RootView: View {
                 // transitions (Daily Practice, Log Encounter, lesson entry,
                 // scenario tap). Completed progress remains visible; it's read
                 // from local/cloud storage and is not gated on subscription.
-                } else if authManager.isAuthenticated {
-                    let _ = log("🎯 RootView: User IS authenticated")
+                // Guests route through here too. `hasSession` — not
+                // `isAuthenticated` — is the correct question: a guest holds a
+                // real `auth.users` row, so every per-user table, RLS policy and
+                // `currentUserId` guard works for them, and the whole point of
+                // this plan is that they reach the app without an account.
+                // `isAuthenticated` stays narrower ("has a permanent account")
+                // because that is what the Phase F account ask keys off.
+                } else if authManager.hasSession {
+                    let _ = log("🎯 RootView: User HAS a session (guest: \(authManager.isGuestSession))")
 
                     // ✅ 1) Onboarding questions not finished
                     if !authManager.hasCompletedQuestions {
@@ -171,6 +178,28 @@ struct RootView: View {
                         let _ = log("🎯 RootView: Showing PaywallView (paywall flow NOT completed)")
                         NavigationStack {
                             PaywallView(authManager: authManager, isDismissible: true, source: .onboarding)
+                        }
+
+                    // ✅ 3b) Just purchased, still a guest → ask for an account.
+                    //
+                    // Placed BEFORE 4a on purpose: it therefore catches a
+                    // purchase made on *either* paywall (onboarding or
+                    // post-demo) with one condition instead of two branches.
+                    //
+                    // Skippable by design — see AuthContext.afterPurchase. The
+                    // user has already been charged, so a wall here would brick
+                    // the app for anyone whose OAuth fails. Declining sets the
+                    // persisted flag and falls through to 4a; linking clears
+                    // `isGuestSession` and does the same.
+                    } else if authManager.isGuestSession
+                                && authManager.shouldShowPostPurchaseAccountAsk {
+                        let _ = log("🎯 RootView: Showing post-purchase account ask (guest subscriber)")
+                        NavigationStack {
+                            AuthView(
+                                mode: .signup,
+                                context: .afterPurchase,
+                                onSkip: { authManager.markPostPurchaseAccountAskSeen() }
+                            )
                         }
 
                     // ✅ 4a) Paying user → straight in, full access.
@@ -226,50 +255,35 @@ struct RootView: View {
                         MainTabView()
                     }
                 
-                // MARK: - Anonymous User Flow (Skip for now)
-                } else if authManager.isAnonymousUser && authManager.hasCompletedOnboarding {
-                    let _ = log("🎯 RootView: Anonymous user completed onboarding")
+                // MARK: - Legacy Anonymous Flow (no Supabase session)
+                //
+                // Reachable only when a guest session could not be created —
+                // `guestSessionsEnabled` off, or bootstrap failed and has not
+                // yet retried. Such a user has no `user_id`, so every
+                // progress write and the scenario fetch itself would fail
+                // (PracticeServiceProtocol.swift:107 throws .notAuthenticated).
+                // Onboarding and the paywall are entirely local, so they still
+                // work; the wall at the end is what stops a user reaching an
+                // app that cannot function for them.
+                //
+                // This branch disappears with the legacy flag in Phase H.
+                } else if authManager.isLegacyAnonymousUser && authManager.hasCompletedOnboarding {
+                    let _ = log("🎯 RootView: Legacy anonymous (no session) — completed onboarding")
 
-                    // ✅ Anonymous user - questions finished, rating ask not
-                    //    yet seen → show RatingPromptView. Gated on
-                    //    `!effectivePaywallFlowCompleted` for parity with the
-                    //    authenticated flow — anonymous-paid users (who
-                    //    completed an in-app purchase before signup) skip
-                    //    straight to the forced account-creation step.
                     if !authManager.effectivePaywallFlowCompleted && !authManager.hasSeenRatingPrompt {
-                        let _ = log("🎯 RootView: Anonymous user - showing RatingPromptView")
+                        let _ = log("🎯 RootView: Legacy anonymous - showing RatingPromptView")
                         NavigationStack {
                             RatingPromptView()
                         }
 
-                    // ✅ Anonymous user - questions + rating ack'd → show Paywall
                     } else if !authManager.effectivePaywallFlowCompleted {
-                        let _ = log("🎯 RootView: Anonymous user - showing PaywallView")
+                        let _ = log("🎯 RootView: Legacy anonymous - showing PaywallView")
                         NavigationStack {
                             PaywallView(authManager: authManager, isDismissible: true, source: .onboarding)
                         }
 
-                    // ✅ Anonymous user - paywall finished → require account creation
-                    //
-                    // `.requiredAfterPaywall` — this is the *forced*
-                    // account-creation step, and the context does two things.
-                    //
-                    // It suppresses the back chevron. Allowing back here would
-                    // let a user who already purchased (RC entitlement attached
-                    // to anonymous ID) bail to LandingView and end up looping
-                    // through the paywall again on the next anonymous pass. The
-                    // same applies to the dismissal path: the user opted out of
-                    // paying and must now create an account before reaching
-                    // MainTabView.
-                    //
-                    // It also switches the copy. This screen arrives seconds
-                    // after a dismissed paywall with no way back, so its default
-                    // reading is "a second paywall" and users were leaving here.
-                    // See AuthContext. The other AuthView call sites (LandingView
-                    // Create Account / Sign In, and the unauthenticated/login
-                    // routing branch) keep the default `.voluntary`.
                     } else {
-                        let _ = log("🎯 RootView: Anonymous user - requiring account creation")
+                        let _ = log("🎯 RootView: Legacy anonymous - requiring account creation (no session available)")
                         NavigationStack {
                             AuthView(mode: .signup, context: .requiredAfterPaywall)
                         }
@@ -288,8 +302,9 @@ struct RootView: View {
                 }
             }
             .animation(.easeInOut(duration: 0.3), value: authManager.isAuthenticated)
+            .animation(.easeInOut(duration: 0.3), value: authManager.isGuestSession)
             .animation(.easeInOut(duration: 0.3), value: authManager.isCheckingSession)
-            .animation(.easeInOut(duration: 0.3), value: authManager.isAnonymousUser)
+            .animation(.easeInOut(duration: 0.3), value: authManager.isLegacyAnonymousUser)
             .animation(.easeInOut(duration: 0.3), value: authManager.hasActiveSubscription)
             // Paywall #1 → forced account creation is driven by
             // `effectivePaywallFlowCompleted`, which was missing from this list.
@@ -306,6 +321,10 @@ struct RootView: View {
         .task {
             // Step 1: Configure RevenueCat on app launch (MUST be first)
             RevenueCatManager.shared.configure()
+            // A cached guest session can arrive before this point (AuthManager
+            // observes auth from its own init), in which case its RevenueCat
+            // identity was deferred rather than crashing on an unconfigured SDK.
+            authManager.applyPendingGuestRevenueCatIdentity()
 
             // Step 1b: PostHog analytics. Runs on a detached background task
             // so SDK setup and /decide response processing don't compete with
@@ -406,6 +425,28 @@ struct RootView: View {
             
             // Step 4: Restore session gracefully on app launch
             await authManager.restoreSessionGracefully()
+
+            #if DEBUG
+            // Phase B test hooks. Runs after restore so -forceGuestBootstrap
+            // exercises the same ordering a real bootstrap would see.
+            await authManager.applyDebugGuestOverrides()
+            #endif
+
+            // Step 4b: Retry guest bootstrap for someone who already chose to
+            // continue without an account but ended a previous launch with no
+            // session — bootstrap failed, the device was offline, or they
+            // onboarded before this shipped.
+            //
+            // Gated on `isLegacyAnonymousUser` (set by startAnonymousOnboarding,
+            // i.e. they tapped "Skip for now") on purpose. Without the gate this
+            // fires on the very first launch of a fresh install and mints a
+            // guest session before LandingView is even shown — which silently
+            // removes the Create Account / Log In / Skip choice. LandingView is
+            // deliberately kept, so the session is created by the skip button,
+            // and this only ever repairs a session that should already exist.
+            if authManager.isLegacyAnonymousUser {
+                await authManager.bootstrapGuestSessionIfNeeded()
+            }
 
             // Step 5: Setup notifications on app launch
             // (Periodic subscription checks are already started inside

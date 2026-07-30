@@ -135,11 +135,139 @@ final class AuthManager: ObservableObject {
     @Published var appleSignInError: String?
     
     // MARK: - Anonymous User State
-    @Published var isAnonymousUser: Bool = false {
+    //
+    // Two different things used to share the name "anonymous". They are now
+    // named apart, because conflating them is how `.signedIn` for a guest
+    // session came to trigger the whole anonymous→permanent data transfer:
+    //
+    //   isLegacyAnonymousUser — onboarding with NO Supabase session at all.
+    //                           Local-only: a UserDefaults flag plus
+    //                           AnonymousUserManager. Predates guest sessions.
+    //   isGuestSession        — a real `auth.users` row with
+    //                           `is_anonymous = true`, holding a live session.
+    //
+    // The "legacy" prefix is deliberate: this flag and the whole
+    // AnonymousUserManager mirror are retired in Phase E, once a session exists
+    // from first launch and there is nothing left to transfer. Do not build new
+    // behaviour on it.
+    //
+    // NOTE: the backing UserDefaults key is still the string "isAnonymousUser".
+    // Renaming the key would strand every user currently mid-onboarding — they
+    // would read `false` on next launch and be routed as if they had never
+    // started. The Swift symbol and the storage key are intentionally different.
+    @Published var isLegacyAnonymousUser: Bool = false {
         didSet {
-            log("👻 isAnonymousUser changed: \(oldValue) → \(isAnonymousUser)")
+            log("👻 isLegacyAnonymousUser changed: \(oldValue) → \(isLegacyAnonymousUser)")
         }
     }
+
+    /// True when the live Supabase session belongs to an anonymous (guest) user.
+    ///
+    /// Distinct from `isAuthenticated`, which means "has a **permanent**
+    /// account". Routing keys off `hasSession` (either of the two), not
+    /// `isAuthenticated` — a guest has a real `user_id` and can use the app.
+    /// The two stay separate because Phase F needs to know which users still
+    /// owe an account.
+    @Published private(set) var isGuestSession: Bool = false {
+        didSet {
+            log("🎭 isGuestSession changed: \(oldValue) → \(isGuestSession)")
+        }
+    }
+
+    /// In-flight guard so concurrent callers can't mint two guest users.
+    @Published private(set) var isBootstrappingGuestSession: Bool = false
+
+    /// Armed when a guest bootstrap deferred (offline) or failed, so it can be
+    /// retried on the next network-restored transition.
+    private var guestBootstrapPending = false
+
+    /// Guest user id awaiting a RevenueCat `logIn` because the SDK was not yet
+    /// configured when the session arrived. See `adoptGuestIdentity(_:)`.
+    private var pendingGuestRevenueCatIdentity: String?
+
+    /// Whether the post-purchase account ask has already been shown.
+    ///
+    /// Per-user and persisted, so declining it is remembered rather than
+    /// re-asked on every launch — nagging a paying customer is exactly what the
+    /// skippable design is trying to avoid. Phase G's Profile prompt is the
+    /// durable follow-up for anyone who declines.
+    ///
+    /// Keyed on the guest's own id, which linking preserves, so the flag stays
+    /// meaningful if they later create an account by another route.
+    @Published private(set) var hasSeenPostPurchaseAccountAsk: Bool = false
+
+    #if DEBUG
+    /// Launch argument `-forcePostPurchaseAsk YES` — shows the ask without a
+    /// real purchase, so the screen can be reviewed without buying something.
+    @Published var forcePostPurchaseAsk: Bool = false
+    #endif
+
+    /// Highest prompt threshold this guest has already dismissed. 0 = never.
+    ///
+    /// Published rather than read from UserDefaults at the call site so
+    /// dismissing the Profile prompt re-renders the view that shows it.
+    @Published private(set) var guestPromptDismissedThreshold: Int = 0
+
+    /// Approach counts at which a guest is offered an account from Profile.
+    ///
+    /// Escalating rather than persistent, and it stops after the second. The
+    /// prompt protects the approach log — the one thing in this app that cannot
+    /// be regenerated — so it should appear once there is a log worth
+    /// protecting, ask again when there is materially more at stake, and then
+    /// leave the user alone. A permanently-visible banner is a nag, and a
+    /// user who has declined twice has answered.
+    static let guestAccountPromptThresholds = [5, 25]
+
+    /// Whether Profile should offer this guest an account right now.
+    func shouldShowGuestAccountPrompt(approachCount: Int) -> Bool {
+        guard isGuestSession else { return false }
+        guard let reached = Self.guestAccountPromptThresholds
+            .last(where: { approachCount >= $0 }) else { return false }
+        return reached > guestPromptDismissedThreshold
+    }
+
+    /// Records a dismissal at the highest threshold currently reached, so the
+    /// prompt re-arms only at the *next* tier rather than on the next render.
+    func markGuestAccountPromptDismissed(approachCount: Int) {
+        guard let reached = Self.guestAccountPromptThresholds
+            .last(where: { approachCount >= $0 }) else { return }
+
+        guestPromptDismissedThreshold = reached
+        if let userId = currentUser?.id.uuidString {
+            UserDefaults.standard.set(reached, forKey: Self.guestPromptDismissedKey(userId))
+        }
+        log("⏭️ Guest account prompt dismissed at threshold \(reached)")
+
+        PostHogSDK.shared.capture("account_ask_skipped", properties: [
+            "trigger": "profilePrompt",
+            "approach_count": approachCount
+        ])
+    }
+
+    private static func guestPromptDismissedKey(_ userId: String) -> String {
+        "guestAccountPromptDismissedAt_\(userId)"
+    }
+
+    /// Whether RootView should present the post-purchase account ask.
+    ///
+    /// Guest-ness is checked by the caller; this answers "has this user bought
+    /// something and not yet been asked?".
+    var shouldShowPostPurchaseAccountAsk: Bool {
+        guard !hasSeenPostPurchaseAccountAsk else { return false }
+        #if DEBUG
+        if forcePostPurchaseAsk { return true }
+        #endif
+        return hasActiveSubscription
+    }
+
+    /// Whether a usable Supabase session exists, guest or permanent.
+    ///
+    /// **This is what routing should ask.** `isAuthenticated` answers a narrower
+    /// question — "does this user have a permanent account?" — which is the
+    /// right input for the Phase F account ask, and the wrong input for "may
+    /// this user use the app?". A guest holds a real `auth.users` row, so every
+    /// user-scoped table, RLS policy and `currentUserId` guard works for them.
+    var hasSession: Bool { isAuthenticated || isGuestSession }
     
     // Store the nonce for Apple Sign-In verification
     private var currentNonce: String?
@@ -186,10 +314,13 @@ final class AuthManager: ObservableObject {
         log("⭐ Loaded hasSeenRatingPrompt: \(hasSeenRatingPrompt)")
 
         // Check if user is in anonymous mode
-        isAnonymousUser = UserDefaults.standard.bool(forKey: "isAnonymousUser")
-        log("👻 Loaded isAnonymousUser: \(isAnonymousUser)")
+        isLegacyAnonymousUser = UserDefaults.standard.bool(forKey: "isAnonymousUser")
+        log("👻 Loaded isLegacyAnonymousUser: \(isLegacyAnonymousUser)")
 
         // Don't setup subscription monitoring here - will be done after RevenueCat is configured
+
+        observeNetworkForGuestBootstrap()
+        observeFeatureFlagsForGuestBootstrap()
 
         // Listen to auth state changes
         Task {
@@ -316,8 +447,35 @@ final class AuthManager: ObservableObject {
             switch event {
             case .signedIn:
                 log("✅ Event type: SIGNED_IN")
-                if let session = session {
+
+                // Guest sessions emit .signedIn too — verified in supabase-swift
+                // `AuthClient.swift:452-453`, where signInAnonymously() routes
+                // through the same _signIn() that emits the event.
+                //
+                // They must NOT fall through to the branch below. That branch
+                // calls syncAnonymousDataToBackend() whenever `isLegacyAnonymousUser`
+                // is set, which for a guest would run the whole
+                // anonymous→permanent transfer (including
+                // AnonymousUserManager.clearAllData()) against a user who has
+                // not created an account. It also runs the per-user flag loads,
+                // which would overwrite the in-memory anonymous paywall flag —
+                // precisely the race documented at
+                // AnonymousUserManager.swift:59-71.
+                if let session = session, session.user.isAnonymous {
+                    self.markSessionEstablished(session.user)
+                    self.isGuestSession = true
+                    self.currentUser = session.user
+                    self.adoptGuestIdentity(session.user.id.uuidString)
+                    await self.loadGuestUserState(userId: session.user.id.uuidString)
+                    log("🎭 Guest session signed in: \(session.user.id)")
+
+                } else if let session = session {
+                    self.markSessionEstablished(session.user)
                     self.isAuthenticated = true
+                    // Signing into a real account replaces any guest session
+                    // without emitting .signedOut, so this has to be cleared
+                    // here or it stays true for the rest of the process.
+                    self.isGuestSession = false
                     self.currentUser = session.user
                     UserDefaults.standard.set(session.user.id.uuidString, forKey: "current_user_id")
 
@@ -330,7 +488,7 @@ final class AuthManager: ObservableObject {
                     // ✅ Check if user was anonymous and sync data
                     // NOTE: syncAnonymousDataToBackend() handles setting hasCompletedPaywallFlow
                     // if the user had an active purchase during anonymous mode
-                    if self.isAnonymousUser {
+                    if self.isLegacyAnonymousUser {
                         log("🔄 Detected anonymous user sign-in - syncing data...")
                         await self.syncAnonymousDataToBackend()
                     }
@@ -407,12 +565,30 @@ final class AuthManager: ObservableObject {
                 self.hasSeenSecondChanceOffer = false
                 self.hasCompletedFreeDemo = false
                 self.hasDismissedPostDemoWall = false
+                // Deliberate exit — Supabase emits .signedOut only for a real
+                // signOut(), never for network flakes (see above). Clearing the
+                // marker here is what lets someone who signs out and then taps
+                // "Skip for now" get a fresh guest session.
+                self.clearSessionEverMarker(reason: "signed out")
                 log("🚪 User signed out")
 
             case .initialSession:
                 log("🔵 Event type: INITIAL_SESSION")
-                if let session = session {
+
+                // Same split as .signedIn — a cached guest session restoring at
+                // launch must not run the permanent-account state loads.
+                if let session = session, session.user.isAnonymous {
+                    self.markSessionEstablished(session.user)
+                    self.isGuestSession = true
+                    self.currentUser = session.user
+                    self.adoptGuestIdentity(session.user.id.uuidString)
+                    await self.loadGuestUserState(userId: session.user.id.uuidString)
+                    log("🎭 Guest session restored: \(session.user.id)")
+
+                } else if let session = session {
+                    self.markSessionEstablished(session.user)
                     self.isAuthenticated = true
+                    self.isGuestSession = false
                     self.currentUser = session.user
 
                     // ✅ Persist email on initial session
@@ -436,7 +612,7 @@ final class AuthManager: ObservableObject {
 
                     // ✅ NEW: If user was anonymous and already paid, skip paywall
                     let anonymousManager = AnonymousUserManager.shared
-                    if self.isAnonymousUser && anonymousManager.hasActivePurchase {
+                    if self.isLegacyAnonymousUser && anonymousManager.hasActivePurchase {
                         log("💳 User was anonymous with active purchase - marking paywall flow as complete")
                         self.hasCompletedPaywallFlow = true
                         let key = "hasCompletedPaywallFlow_\(session.user.id.uuidString)"
@@ -469,6 +645,24 @@ final class AuthManager: ObservableObject {
                         UserDefaults.standard.set(email, forKey: "user_email")
                         log("📩 Saved user_email on user update: \(email)")
                     }
+
+                    // GUEST → PERMANENT promotion.
+                    //
+                    // `linkIdentityWithIdToken` emits .userUpdated rather than
+                    // .signedIn (supabase-swift AuthClient.swift:1230-1231), so
+                    // without this a linked user would keep `isGuestSession ==
+                    // true` and `isAuthenticated == false` — the app would still
+                    // treat them as a guest despite having a real account.
+                    //
+                    // The user id is unchanged by linking, so RevenueCat and
+                    // PostHog are already identified correctly and need no
+                    // second call. Only the per-user state loads are owed, since
+                    // the guest branches in .signedIn / .initialSession skip
+                    // them.
+                    if !session.user.isAnonymous {
+                        await self.promoteGuestToPermanent(session: session)
+                    }
+
                     log("👤 User updated")
                 }
 
@@ -486,6 +680,7 @@ final class AuthManager: ObservableObject {
                 self.hasSeenSecondChanceOffer = false
                 self.hasCompletedFreeDemo = false
                 self.hasDismissedPostDemoWall = false
+                self.clearSessionEverMarker(reason: "user deleted")
                 log("🗑️ User deleted")
 
             case .mfaChallengeVerified:
@@ -641,15 +836,33 @@ final class AuthManager: ObservableObject {
             // Step 1: Try to get cached session instantly (no network required)
             // Note: client.auth.session should read from local storage first
             let session = try await client.auth.session
-            
+
             log("✅ Cached session found!")
             log("   - User ID: \(session.user.id)")
             log("   - Email: \(session.user.email ?? "nil")")
-            
+
+            self.markSessionEstablished(session.user)
+
+            // A cached guest session takes the same reduced path as the
+            // .signedIn / .initialSession guest branches: mark, flag, render.
+            // None of the per-user loads below apply to a user with no
+            // permanent account, and Phase B deliberately leaves routing alone.
+            if session.user.isAnonymous {
+                self.currentUser = session.user
+                self.isGuestSession = true
+                self.adoptGuestIdentity(session.user.id.uuidString)
+                await self.loadGuestUserState(userId: session.user.id.uuidString)
+                self.isCheckingSession = false
+                log("🎭 Guest session restored from cache: \(session.user.id) — UI ready")
+                log("================================================\n")
+                return
+            }
+
             // Immediately set authenticated state from cache
             self.currentUser = session.user
             self.isAuthenticated = true
-            
+            self.isGuestSession = false
+
             // Load user-specific states
             await checkUserQuestionStatus(userId: session.user.id.uuidString)
             await checkUserPaywallFlowStatus(userId: session.user.id.uuidString)
@@ -787,10 +1000,247 @@ final class AuthManager: ObservableObject {
         UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")
     }
     
+    // MARK: - Guest Session (Supabase anonymous auth)
+
+    private static let hasEverHadSessionKey = "has_ever_had_session"
+
+    /// Records that a Supabase session has existed on this device.
+    ///
+    /// **This marker is the entire safety mechanism for guest sessions**, and
+    /// the reason bootstrap keys off a persisted flag rather than a live
+    /// session read.
+    ///
+    /// `restoreSessionGracefully()` sets `isAuthenticated = false` whenever the
+    /// session read throws — which covers transient failures, not just genuine
+    /// sign-out. `SupabaseManager` configures the client with
+    /// `autoRefreshToken: false`, so an expired token while offline surfaces
+    /// exactly that way. If bootstrap simply asked "is there a session right
+    /// now?", one such failure would mint a brand new anonymous user for an
+    /// existing paying customer: a new `user_id` (their approach logs and
+    /// progress invisible) plus an identified→identified RevenueCat switch that
+    /// strands the entitlement on the old id. They would open the app to an
+    /// empty account and a dead subscription.
+    ///
+    /// Cleared only on `.signedOut` and `.userDeleted`. Supabase emits those
+    /// solely for a deliberate `signOut()`, never for network flakes (see the
+    /// comment on the `.signedOut` case), so a user who signs out and then taps
+    /// "Skip for now" correctly gets a fresh guest session, while a transient
+    /// read failure never does.
+    private var hasEverHadSession: Bool {
+        get { UserDefaults.standard.bool(forKey: Self.hasEverHadSessionKey) }
+        set { UserDefaults.standard.set(newValue, forKey: Self.hasEverHadSessionKey) }
+    }
+
+    #if DEBUG
+    /// DEBUG-only launch-argument hooks, mirroring the `-forceFreeDemoCompleted`
+    /// pattern established for phases 1-3. Without these, exercising guest
+    /// bootstrap means driving the whole funnel by hand on every run.
+    ///
+    ///   -forceGuestBootstrap YES      run bootstrap at launch
+    ///   -forceHasEverHadSession YES   pre-set the marker, so bootstrap must
+    ///                                 REFUSE — this is the regression test for
+    ///                                 the existing-paying-user guard
+    func applyDebugGuestOverrides() async {
+        if UserDefaults.standard.object(forKey: "forceHasEverHadSession") != nil {
+            let forced = UserDefaults.standard.bool(forKey: "forceHasEverHadSession")
+            hasEverHadSession = forced
+            log("🧪 DEBUG: has_ever_had_session forced to \(forced)")
+        }
+
+        if UserDefaults.standard.bool(forKey: "forceGuestBootstrap") {
+            log("🧪 DEBUG: forcing guest bootstrap at launch")
+            await bootstrapGuestSessionIfNeeded()
+        }
+
+        if UserDefaults.standard.bool(forKey: "forcePostPurchaseAsk") {
+            forcePostPurchaseAsk = true
+            log("🧪 DEBUG: forcing post-purchase account ask")
+        }
+    }
+    #endif
+
+    private func markSessionEstablished(_ user: User) {
+        if !hasEverHadSession {
+            hasEverHadSession = true
+            log("🔐 has_ever_had_session set (user: \(user.id), anonymous: \(user.isAnonymous))")
+        }
+    }
+
+    /// Points RevenueCat and PostHog at the guest's Supabase user id.
+    ///
+    /// This is the whole of Phase D's behaviour change, and it is safe only
+    /// because `authenticate(with:)` links rather than re-signs-in: the id
+    /// established here is the *same* id the account ends up with, so this is
+    /// the one and only `Purchases.logIn` in a user's lifetime.
+    ///
+    /// `Purchases.configure()` still runs **without** an appUserID — the warning
+    /// at `RevenueCatManager.swift:68-75` is about `configure`, not `logIn`, and
+    /// still applies. RevenueCat is anonymous (`$RCAnonymousID`) until this
+    /// call, so this remains the anonymous→identified transition that transfers
+    /// correctly. There is no later identified→identified switch to strand a
+    /// purchase, which is what makes `linkAnonymousPurchase` dead code.
+    ///
+    /// It also closes the analytics gap accepted at
+    /// `RevenueCatManager.swift:85-88`: RevenueCat, PostHog and Supabase now
+    /// share one id from first launch, so a purchase made before account
+    /// creation stitches to the onboarding and paywall events that produced it.
+    private func adoptGuestIdentity(_ userId: String) {
+        log("🆔 Adopting guest identity: \(userId)")
+        PostHogSDK.shared.identify(userId)
+        FeatureFlags.shared.refresh()
+
+        // RevenueCat is configured in RootView's `.task`, but `AuthManager.init`
+        // starts `observeAuthState()` immediately — so a cached guest session
+        // can emit .initialSession before configure() has run. Touching
+        // `Purchases.shared` in that window is a fatalError inside RevenueCat,
+        // not a recoverable nil. Defer instead; RootView applies it right after
+        // configure().
+        guard Purchases.isConfigured else {
+            pendingGuestRevenueCatIdentity = userId
+            log("🆔 RevenueCat not configured yet — guest identity deferred")
+            return
+        }
+
+        guard Purchases.shared.appUserID != userId else { return }
+        RevenueCatManager.shared.setUserID(userId)
+    }
+
+    /// Applies a guest identity that was deferred because RevenueCat had not
+    /// been configured yet. Called by RootView immediately after `configure()`.
+    func applyPendingGuestRevenueCatIdentity() {
+        guard let userId = pendingGuestRevenueCatIdentity, Purchases.isConfigured else { return }
+        pendingGuestRevenueCatIdentity = nil
+        guard Purchases.shared.appUserID != userId else { return }
+        log("🆔 Applying deferred guest identity to RevenueCat: \(userId)")
+        RevenueCatManager.shared.setUserID(userId)
+    }
+
+    private func clearSessionEverMarker(reason: String) {
+        hasEverHadSession = false
+        isGuestSession = false
+        log("🔐 has_ever_had_session cleared — \(reason)")
+    }
+
+    /// Creates a Supabase anonymous session, but only when it is provably safe.
+    ///
+    /// Idempotent and safe to call repeatedly — every precondition is a guard,
+    /// so redundant calls are cheap no-ops. Does not update auth state itself:
+    /// `signInAnonymously()` emits `.signedIn` (verified in supabase-swift
+    /// `AuthClient.swift:452-453`), and the observer handles it.
+    func bootstrapGuestSessionIfNeeded() async {
+        // Guard order matters. The three correctness guards come first and
+        // never arm a retry: if a session exists, or this device has had one,
+        // no later change of circumstances should make bootstrap correct. Only
+        // the two "not right now" guards below them arm `guestBootstrapPending`.
+        guard !isBootstrappingGuestSession else {
+            log("🎭 Guest bootstrap skipped — already in flight")
+            return
+        }
+
+        guard client.auth.currentUser == nil else {
+            log("🎭 Guest bootstrap skipped — a session already exists")
+            return
+        }
+
+        // THE guard. See `hasEverHadSession`. Never relax this to a live
+        // session check, and never let it arm a retry.
+        guard !hasEverHadSession else {
+            guestBootstrapPending = false
+            log("🎭 Guest bootstrap REFUSED — this device has had a session before. "
+                + "Treating the empty session as a restore failure, not a new user.")
+            return
+        }
+
+        // Arms a retry, because "false" here is ambiguous: the flag genuinely
+        // being off is indistinguishable from `/decide` not having answered
+        // yet. PostHog is configured on a detached task, so a user who taps
+        // "Skip for now" quickly can reach this before flags load. Without the
+        // retry armed by `observeFeatureFlagsForGuestBootstrap()`, that user
+        // would silently never get a session.
+        guard FeatureFlags.shared.guestSessionsEnabled else {
+            log("🎭 Guest bootstrap deferred — flag off or not yet loaded (armed for retry)")
+            guestBootstrapPending = true
+            return
+        }
+
+        // Anonymous sign-in requires the network. Deliberately do not invent a
+        // local placeholder identity to paper over this: a placeholder would
+        // diverge from the real row created later, and reconciling two ids is
+        // the exact problem this whole plan removes. Defer instead — this
+        // function is idempotent and gets retried.
+        guard NetworkMonitor.shared.isConnected else {
+            log("🎭 Guest bootstrap deferred — offline (armed for retry on reconnect)")
+            guestBootstrapPending = true
+            return
+        }
+
+        isBootstrappingGuestSession = true
+        defer { isBootstrappingGuestSession = false }
+
+        do {
+            log("🎭 Creating guest session…")
+            let session = try await client.auth.signInAnonymously()
+            guestBootstrapPending = false
+            log("✅ Guest session created: \(session.user.id) (is_anonymous: \(session.user.isAnonymous))")
+        } catch {
+            // Non-fatal by design. The user continues through onboarding, which
+            // is entirely local, so nothing is blocked; stay armed and retry.
+            guestBootstrapPending = true
+            log("❌ Guest bootstrap failed: \(error.localizedDescription) — armed for retry")
+        }
+    }
+
+    /// Retries a bootstrap that was deferred (offline) or failed.
+    ///
+    /// Without this the offline branch above would be a dead end: the user
+    /// would finish onboarding with no session and nothing would ever create
+    /// one. Armed only when a bootstrap actually deferred, so this costs
+    /// nothing in the normal case.
+    /// Retries a bootstrap that deferred because feature flags had not loaded.
+    ///
+    /// Pairs with the flag guard in `bootstrapGuestSessionIfNeeded()`. Also
+    /// covers the operational case of flipping the flag on mid-session.
+    private func observeFeatureFlagsForGuestBootstrap() {
+        FeatureFlags.shared.$guestSessionsEnabled
+            .dropFirst()
+            .removeDuplicates()
+            .filter { $0 }
+            .sink { [weak self] _ in
+                Task { @MainActor [weak self] in
+                    guard let self, self.guestBootstrapPending else { return }
+                    log("🎭 Guest sessions enabled — retrying deferred bootstrap")
+                    await self.bootstrapGuestSessionIfNeeded()
+                }
+            }
+            .store(in: &cancellables)
+    }
+
+    private func observeNetworkForGuestBootstrap() {
+        NetworkMonitor.shared.$isConnected
+            .dropFirst()
+            .removeDuplicates()
+            .filter { $0 }
+            .sink { [weak self] _ in
+                Task { @MainActor [weak self] in
+                    guard let self, self.guestBootstrapPending else { return }
+                    log("🎭 Network restored — retrying deferred guest bootstrap")
+                    await self.bootstrapGuestSessionIfNeeded()
+                }
+            }
+            .store(in: &cancellables)
+    }
+
     // MARK: - Anonymous User Methods
     func startAnonymousOnboarding() {
         log("👻 startAnonymousOnboarding() called")
-        isAnonymousUser = true
+
+        // Kick off the guest session here rather than at launch: users who tap
+        // "Create Account" on LandingView should never get a guest row. Fire and
+        // forget — onboarding is entirely local (UserDefaults + PostHog), so it
+        // does not need the session, and nothing before MainTabView does.
+        Task { await bootstrapGuestSessionIfNeeded() }
+
+        isLegacyAnonymousUser = true
         hasCompletedOnboarding = false
         // Persist the reset too, now that completeAnonymousOnboarding()
         // writes this key. Leaving it set from a previous pass would route a
@@ -824,7 +1274,7 @@ final class AuthManager: ObservableObject {
         // launch. Without this the flag lived only in memory, so an anonymous
         // user who quit before creating an account came back with
         // `hasCompletedOnboarding == false` — RootView's
-        // `isAnonymousUser && hasCompletedOnboarding` branch could never
+        // `isLegacyAnonymousUser && hasCompletedOnboarding` branch could never
         // match, and they restarted onboarding from the beginning.
         UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")
         // Mirror into hasCompletedQuestions so the in-memory flag is already
@@ -836,6 +1286,33 @@ final class AuthManager: ObservableObject {
         // sync itself after signup — this flag is in-memory only.
         hasCompletedQuestions = true
         AnonymousUserManager.shared.hasCompletedOnboarding = true
+
+        // With a guest session the user already has a real `auth.users` row, so
+        // completion has to be written against THEIR id — `checkUserQuestionStatus`
+        // reads `hasCompletedQuestions_<userId>` on every launch. Without this
+        // the in-memory flag is lost on relaunch and the guest is sent back
+        // through onboarding forever. (Permanent accounts get these keys from
+        // syncAnonymousDataToBackend at signup; guests never signed up.)
+        if isGuestSession, let userId = currentUser?.id.uuidString {
+            UserDefaults.standard.set(true, forKey: "hasCompletedQuestions_\(userId)")
+            UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding_\(userId)")
+            log("✅ Onboarding completion persisted for guest: \(userId)")
+
+            // Mirror to user_metadata for the same reason completePaywallFlow()
+            // does: per-user UserDefaults keys don't survive reinstall, the
+            // Supabase session can.
+            Task {
+                do {
+                    try await client.auth.update(user: UserAttributes(data: [
+                        "onboarding_completed": AnyJSON.bool(true)
+                    ]))
+                    log("✅ Mirrored onboarding_completed=true to user_metadata (guest)")
+                } catch {
+                    log("⚠️ Failed to mirror onboarding_completed for guest: \(error.localizedDescription)")
+                }
+            }
+        }
+
         log("✅ Anonymous onboarding completed - data stored locally")
         AnonymousUserManager.shared.printCurrentData()
     }
@@ -928,10 +1405,10 @@ final class AuthManager: ObservableObject {
         // written durable per-user equivalents. This must happen BEFORE the
         // cloud await so a crash during the network call doesn't leave us
         // half-migrated (routing would still land on MainTabView because
-        // per-user flags are already set, but isAnonymousUser flag would
+        // per-user flags are already set, but isLegacyAnonymousUser flag would
         // linger otherwise).
         anonymousManager.clearAllData()
-        isAnonymousUser = false
+        isLegacyAnonymousUser = false
         UserDefaults.standard.removeObject(forKey: "isAnonymousUser")
         log("✅ Cleared anonymous user state")
 
@@ -1314,6 +1791,148 @@ final class AuthManager: ObservableObject {
         }
     }
 
+    // MARK: - Identity Linking
+
+    /// Raised when the chosen Apple/Google identity already belongs to another
+    /// Wingman account. Phase A.4 decided against building a merge flow; the
+    /// only requirement is that this does not dead-end the screen.
+    enum AccountLinkError: LocalizedError {
+        case identityAlreadyExists
+
+        var errorDescription: String? {
+            "That account is already linked to another Wingman login. "
+            + "Log in with it instead — progress from this session won't carry over."
+        }
+    }
+
+    /// Exchanges an OIDC credential for a session, **preserving the current
+    /// user id when the session is a guest one**.
+    ///
+    /// This is the piece that makes the rest of the architecture true.
+    /// `signInWithIdToken` creates a *different* `auth.users` row and abandons
+    /// the guest, which would:
+    ///
+    ///   1. strand every approach log, progress row and metadata value written
+    ///      under the guest id, and
+    ///   2. turn the later `RevenueCatManager.setUserID` into an
+    ///      identified→identified switch, leaving a purchase made as a guest
+    ///      behind on the old id — precisely the stranding documented at
+    ///      `RevenueCatManager.swift:76-84`.
+    ///
+    /// `linkIdentityWithIdToken` attaches the provider to the *existing* row, so
+    /// the id — and every foreign key, RLS row and RevenueCat entitlement keyed
+    /// on it — survives untouched. There is consequently no second
+    /// `Purchases.logIn` at signup and nothing to transfer.
+    ///
+    /// NOTE: linking emits `.userUpdated`, **not** `.signedIn` (verified in
+    /// supabase-swift `AuthClient.swift:1230-1231`). The promotion from guest to
+    /// permanent therefore happens in the `.userUpdated` handler.
+    private func authenticate(with credentials: OpenIDConnectCredentials) async throws -> Session {
+        guard isGuestSession else {
+            return try await client.auth.signInWithIdToken(credentials: credentials)
+        }
+
+        log("🔗 Guest session present — linking identity rather than creating a new user")
+        do {
+            let session = try await client.auth.linkIdentityWithIdToken(credentials: credentials)
+            log("✅ Identity linked — user id preserved: \(session.user.id)")
+
+            // Promote here rather than relying solely on the `.userUpdated`
+            // handler. That handler keys off `session.user.isAnonymous` having
+            // flipped to false, which is server behaviour this project has not
+            // been able to verify end-to-end (linking needs a real Apple/Google
+            // flow). Calling directly means a successful link always promotes,
+            // whatever the flag says. `promoteGuestToPermanent` is idempotent,
+            // so whichever path runs first wins and the other no-ops.
+            await promoteGuestToPermanent(session: session)
+            return session
+        } catch let error as AuthError where error.errorCode == .identityAlreadyExists {
+            log("⚠️ Identity already attached to another account — surfacing to user")
+            throw AccountLinkError.identityAlreadyExists
+        }
+    }
+
+    /// Turns a guest session into a permanent-account session **in place**.
+    ///
+    /// Idempotent: guarded on `isGuestSession`, so the direct call in
+    /// `authenticate(with:)` and the `.userUpdated` handler cannot double-apply.
+    ///
+    /// The user id does not change when an identity is linked, so RevenueCat and
+    /// PostHog are already correct and get no second call — that invariant is
+    /// the whole point of Phase D. What *is* owed are the per-user state loads,
+    /// which the guest branches of `.signedIn` / `.initialSession` skip.
+    /// Loads the per-user flags for a guest session.
+    ///
+    /// Guests hold a real `auth.users` row, so every per-user key
+    /// (`hasCompletedQuestions_<id>`, `hasCompletedPaywallFlow_<id>`, the two
+    /// demo flags, …) is written and read for them exactly as for a permanent
+    /// account. Phase B skipped these because guests could not reach the app;
+    /// from Phase E they route through the main flow and the flags decide where
+    /// they land, so skipping would restart onboarding on every launch.
+    private func loadGuestUserState(userId: String) async {
+        await checkUserQuestionStatus(userId: userId)
+        await checkUserPaywallFlowStatus(userId: userId)
+        await checkUserRatingPromptStatus(userId: userId)
+        await checkUserSecondChanceOfferStatus(userId: userId)
+        await checkUserFreeDemoStatus(userId: userId)
+        await checkUserPostDemoWallStatus(userId: userId)
+
+        hasSeenPostPurchaseAccountAsk = UserDefaults.standard.bool(
+            forKey: Self.postPurchaseAskKey(userId)
+        )
+        guestPromptDismissedThreshold = UserDefaults.standard.integer(
+            forKey: Self.guestPromptDismissedKey(userId)
+        )
+        log("🔑 Guest asks — postPurchaseSeen: \(hasSeenPostPurchaseAccountAsk), "
+            + "promptDismissedAt: \(guestPromptDismissedThreshold) for guest: \(userId)")
+    }
+
+    private static func postPurchaseAskKey(_ userId: String) -> String {
+        "hasSeenPostPurchaseAccountAsk_\(userId)"
+    }
+
+    /// Records that the post-purchase ask was shown and declined.
+    ///
+    /// Called from the "Not now" path only — a successful link clears
+    /// `isGuestSession`, which drops the routing condition on its own.
+    func markPostPurchaseAccountAskSeen() {
+        hasSeenPostPurchaseAccountAsk = true
+        guard let userId = currentUser?.id.uuidString else { return }
+        UserDefaults.standard.set(true, forKey: Self.postPurchaseAskKey(userId))
+        log("⏭️ Post-purchase account ask marked seen for: \(userId)")
+
+        PostHogSDK.shared.capture("account_ask_skipped", properties: ["trigger": "postPurchase"])
+    }
+
+    private func promoteGuestToPermanent(session: Session) async {
+        guard isGuestSession else { return }
+
+        let userId = session.user.id.uuidString
+        log("⬆️ Guest promoted to permanent account — id preserved: \(userId)")
+
+        isGuestSession = false
+        isAuthenticated = true
+        currentUser = session.user
+        UserDefaults.standard.set(userId, forKey: "current_user_id")
+        if let email = session.user.email, !email.isEmpty {
+            UserDefaults.standard.set(email, forKey: "user_email")
+        }
+
+        await checkUserQuestionStatus(userId: userId)
+        await checkUserPaywallFlowStatus(userId: userId)
+        await checkUserRatingPromptStatus(userId: userId)
+        await checkUserSecondChanceOfferStatus(userId: userId)
+        await checkUserFreeDemoStatus(userId: userId)
+        await checkUserPostDemoWallStatus(userId: userId)
+
+        await LessonDataService.shared.hydrateLessonProgressFromCloud()
+
+        PostHogSDK.shared.capture("account_linked", properties: [
+            "method": session.user.appMetadata["provider"]?.stringValue ?? "unknown"
+        ])
+        FeatureFlags.shared.refresh()
+    }
+
     // MARK: - Google Sign-In
     func signInWithGoogle() async {
         log("\n🔵 signInWithGoogle() called")
@@ -1345,9 +1964,10 @@ final class AuthManager: ObservableObject {
             log("   - User: \(result.user.profile?.email ?? "unknown")")
             log("   - ID Token obtained: \(idToken.prefix(20))...")
             
-            // Sign in to Supabase with the Google ID token
-            let session = try await client.auth.signInWithIdToken(
-                credentials: .init(
+            // Links to the existing guest row when there is one, otherwise a
+            // plain sign-in. See `authenticate(with:)`.
+            let session = try await authenticate(
+                with: .init(
                     provider: .google,
                     idToken: idToken,
                     accessToken: accessToken
@@ -1379,7 +1999,15 @@ final class AuthManager: ObservableObject {
             isGoogleSignInLoading = false
             log("❌ Google Sign-In error: \(error.localizedDescription)")
             googleSignInError = error.localizedDescription
-            
+
+        } catch let error as AccountLinkError {
+            // Phase A.4: no merge flow by decision, but the screen must not
+            // dead-end — the user keeps their guest session and can try the
+            // other provider or log in instead.
+            isGoogleSignInLoading = false
+            log("⚠️ Account link conflict: \(error.localizedDescription)")
+            googleSignInError = error.localizedDescription
+
         } catch {
             isGoogleSignInLoading = false
             log("❌ Supabase sign-in error: \(error.localizedDescription)")
@@ -1436,9 +2064,10 @@ final class AuthManager: ObservableObject {
                 throw AppleSignInError.noNonce
             }
             
-            // Sign in to Supabase with the Apple ID token
-            let session = try await client.auth.signInWithIdToken(
-                credentials: .init(
+            // Links to the existing guest row when there is one, otherwise a
+            // plain sign-in. See `authenticate(with:)`.
+            let session = try await authenticate(
+                with: .init(
                     provider: .apple,
                     idToken: idToken,
                     nonce: nonce
@@ -1478,6 +2107,16 @@ final class AuthManager: ObservableObject {
             currentNonce = nil
             appleSignInDelegate = nil
             
+        } catch let error as AccountLinkError {
+            // Phase A.4: no merge flow by decision, but the screen must not
+            // dead-end — the user keeps their guest session and can try the
+            // other provider or log in instead.
+            isAppleSignInLoading = false
+            currentNonce = nil
+            appleSignInDelegate = nil
+            log("⚠️ Account link conflict: \(error.localizedDescription)")
+            appleSignInError = error.localizedDescription
+
         } catch {
             isAppleSignInLoading = false
             currentNonce = nil
@@ -1486,7 +2125,7 @@ final class AuthManager: ObservableObject {
             appleSignInError = "Sign-in failed: \(error.localizedDescription)"
         }
     }
-    
+
     // Called by AppleSignInDelegate when authorization fails
     func handleAppleSignInFailure(error: Error) {
         isAppleSignInLoading = false
@@ -1757,7 +2396,11 @@ final class AuthManager: ObservableObject {
         // Clear anonymous user data
         userDefaults.removeObject(forKey: "isAnonymousUser")
         AnonymousUserManager.shared.clearAllData()
-        
+
+        // Account deletion / full local wipe is a deliberate exit, so the
+        // device is allowed to bootstrap a fresh guest session afterwards.
+        userDefaults.removeObject(forKey: Self.hasEverHadSessionKey)
+
         log("✅ All local data cleared")
     }
 }

@@ -88,7 +88,13 @@ private struct SubscriptionGate: ViewModifier {
     ///      eligibility for the subscription group).
     private func evaluateSecondChanceOffer() {
         let subscribed = authManager.hasActiveSubscription
-        let anonymous = authManager.isAnonymousUser
+        // "No durable identity to attach a purchase to" — which since guest
+        // sessions exist means *no session at all*, not merely "no permanent
+        // account". A guest has a real user id and a RevenueCat identity, so
+        // the offer is safe to show them. Left as the legacy flag this would
+        // have silently suppressed the second-chance offer for every guest,
+        // i.e. the majority path.
+        let anonymous = !authManager.hasSession
         let alreadyShown = authManager.hasSeenSecondChanceOffer
         log("🎁 SubscriptionGate: evaluating second-chance offer — subscribed=\(subscribed) anonymous=\(anonymous) alreadyShown=\(alreadyShown)")
 

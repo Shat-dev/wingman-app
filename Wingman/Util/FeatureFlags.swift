@@ -42,7 +42,34 @@ final class FeatureFlags: ObservableObject {
     /// experience rather than being unexpectedly walled.
     @Published private(set) var postDemoWallIsHard: Bool = false
 
+    /// Whether the app may create Supabase anonymous ("guest") sessions.
+    ///
+    /// **Ships `true` — fail open.** This flipped from `false` in Phase E, as
+    /// planned. While Phase B stood alone the safe default was off (nothing
+    /// routed on a guest session, so creating rows would have been pure
+    /// downside). Now that routing depends on a session existing, a `/decide`
+    /// failure defaulting to `false` would drop users into the legacy
+    /// no-session branch and wall them at account creation — the failure mode
+    /// the whole plan exists to remove.
+    ///
+    /// It remains the rollback lever: if the bootstrap guard misfires in the
+    /// wild, setting `guest_sessions_enabled` to false in PostHog stops guest
+    /// creation server-side with no App Store release. Users who already hold a
+    /// guest session keep it; the flag gates creation, not use.
+    @Published private(set) var guestSessionsEnabled: Bool = true
+
     private static let postDemoWallHardKey = "post_demo_wall_hard"
+
+    /// Deliberately phrased as a **kill switch**, not an enable switch.
+    ///
+    /// `isFeatureEnabled` returns `false` for a flag that does not exist in the
+    /// PostHog project, and for any launch before `/decide` answers. With an
+    /// `enabled`-style key that reads as "off", which would silently defeat the
+    /// fail-open default above and wall every user at account creation. Phrased
+    /// as `disabled`, the absent/unknown case reads as "not disabled" — open —
+    /// and only an explicitly created-and-enabled flag can turn guest sessions
+    /// off.
+    private static let guestSessionsDisabledKey = "guest_sessions_disabled"
 
     private init() {}
 
@@ -81,6 +108,31 @@ final class FeatureFlags: ObservableObject {
         if postDemoWallIsHard != value {
             log("🚩 FeatureFlags: postDemoWallIsHard \(postDemoWallIsHard) → \(value)")
             postDemoWallIsHard = value
+        }
+
+        readGuestSessionsEnabled()
+    }
+
+    private func readGuestSessionsEnabled() {
+        #if DEBUG
+        // Launch argument: -guestSessionsEnabled YES
+        // Required to exercise Phase B at all, since the flag ships false.
+        if UserDefaults.standard.object(forKey: "guestSessionsEnabled") != nil {
+            let forced = UserDefaults.standard.bool(forKey: "guestSessionsEnabled")
+            if guestSessionsEnabled != forced {
+                guestSessionsEnabled = forced
+            }
+            log("🚩 FeatureFlags: guestSessionsEnabled OVERRIDDEN locally = \(forced)")
+            return
+        }
+        #endif
+
+        // Inverted on purpose — see `guestSessionsDisabledKey`. Absent or
+        // not-yet-loaded reads as "not disabled", so the default stays open.
+        let value = !PostHogSDK.shared.isFeatureEnabled(Self.guestSessionsDisabledKey)
+        if guestSessionsEnabled != value {
+            log("🚩 FeatureFlags: guestSessionsEnabled \(guestSessionsEnabled) → \(value)")
+            guestSessionsEnabled = value
         }
     }
 }

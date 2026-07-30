@@ -19,9 +19,14 @@ struct AuthView: View {
     @EnvironmentObject var authManager: AuthManager
     @State private var safariLink: IdentifiableURL?
 
-    init(mode: AuthMode, context: AuthContext = .voluntary) {
+    /// Invoked when the user declines the post-purchase ask. Only meaningful
+    /// for `.afterPurchase`; the caller records the decline and routes on.
+    let onSkip: (() -> Void)?
+
+    init(mode: AuthMode, context: AuthContext = .voluntary, onSkip: (() -> Void)? = nil) {
         self.mode = mode
         self.context = context
+        self.onSkip = onSkip
         log("🎬 AuthView initialized with mode: \(mode == .signup ? "SIGNUP" : "LOGIN"), context: \(context)")
     }
 
@@ -40,6 +45,31 @@ struct AuthView: View {
     private var canGoBack: Bool { context == .voluntary }
 
     private var isRequiredStep: Bool { context == .requiredAfterPaywall }
+
+    private var isPostPurchase: Bool { context == .afterPurchase }
+
+    /// Contexts that offer an account rather than requiring one. Both must be
+    /// declinable — see `AuthContext.afterPurchase`.
+    private var showsDecline: Bool {
+        context == .afterPurchase || context == .saveProgress
+    }
+
+    /// Both non-voluntary contexts arrive unrequested and share the focused
+    /// treatment: content optically centred rather than pinned to the top, plus
+    /// a legal footer. Only `.voluntary` keeps the original top-aligned layout.
+    private var usesFocusedLayout: Bool { context != .voluntary }
+
+    /// Split per context so each ask is its own funnel step. They shared the
+    /// name "Auth" once, which is a large part of why the post-paywall drop-off
+    /// was hard to see. NOTE: historical "Auth" series include every variant.
+    private var screenName: String {
+        switch context {
+        case .requiredAfterPaywall: return "AuthRequired"
+        case .afterPurchase:        return "AuthAfterPurchase"
+        case .saveProgress:         return "AuthSaveProgress"
+        case .voluntary:            return "Auth"
+        }
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -77,8 +107,14 @@ struct AuthView: View {
             // between the top row and the legal footer instead of being pinned
             // to the top with half a screen of white below it. Voluntary
             // presentations keep their original top-aligned layout.
-            if isRequiredStep {
-                Spacer(minLength: 0)
+            // Capped rather than a free Spacer. Two equal flexible spacers put
+            // the content block dead-centre, which on a tall phone leaves a
+            // void above the title larger than the one this screen's redesign
+            // was meant to remove. Capping the top lets the bottom spacer take
+            // the slack, so content sits high-centre and the decline/legal
+            // footer still anchor the bottom.
+            if usesFocusedLayout {
+                Spacer(minLength: 0).frame(maxHeight: 90)
             }
 
             // MARK: - Header (Title + Subtitle) - DYNAMIC BASED ON CONTEXT
@@ -154,8 +190,8 @@ struct AuthView: View {
             // to the per-user keys before any network await. Signing in here
             // therefore lands on MainTabView with no further gates. If that
             // routing ever changes, this line has to change with it.
-            if isRequiredStep {
-                Text("Nothing else to set up — you'll go straight into the app.")
+            if let footnote = destinationFootnote {
+                Text(footnote)
                     .font(.manropeRegular(size: 14))
                     .foregroundColor(Color.wingmanBlack.opacity(0.5))
                     .multilineTextAlignment(.leading)
@@ -167,12 +203,39 @@ struct AuthView: View {
 
             Spacer()
 
-            // MARK: - Legal Footer (required step only)
+            // MARK: - Decline (post-purchase only)
             //
-            // This is the one screen in the flow the user cannot decline, which
-            // is exactly where explicit consent belongs. It also gives the
-            // bottom of the screen a purpose instead of leaving it blank.
-            if isRequiredStep {
+            // The escape hatch that keeps this an ask rather than a wall. See
+            // AuthContext.afterPurchase: the user has already been charged, so
+            // an OAuth failure with no way past would brick the app for someone
+            // who paid. Same reasoning as PaywallView's offline dismiss.
+            if showsDecline {
+                Button {
+                    HapticManager.shared.lightImpact()
+                    log("⏭️ Account ask declined (context: \(context))")
+                    onSkip?()
+                } label: {
+                    Text("Not now")
+                        .font(.manropeSemiBold(size: 16))
+                        .foregroundColor(Color.wingmanBlack.opacity(0.6))
+                        .underline()
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 44)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(ScalePressStyle())
+                .disabled(authManager.isGoogleSignInLoading || authManager.isAppleSignInLoading)
+                .padding(.bottom, 8)
+            }
+
+            // MARK: - Legal Footer
+            //
+            // Shown on both unrequested contexts. The required step is the one
+            // screen the user cannot decline, which is exactly where explicit
+            // consent belongs; the post-purchase ask creates an account too, so
+            // it carries the same terms. It also gives the bottom of the screen
+            // a purpose instead of leaving it blank.
+            if usesFocusedLayout {
                 legalFooter
             }
         }
@@ -195,7 +258,7 @@ struct AuthView: View {
         // in a funnel — the whole reason this screen was hard to diagnose.
         // NOTE: "Auth" therefore means something narrower from this build on;
         // historical "Auth" series include both screens.
-        .postHogScreenView(isRequiredStep ? "AuthRequired" : "Auth")
+        .postHogScreenView(screenName)
     }
 
     // MARK: - Handle Back Button
@@ -222,6 +285,10 @@ struct AuthView: View {
         switch context {
         case .requiredAfterPaywall:
             return "One last step"
+        case .afterPurchase:
+            return "Secure your subscription"
+        case .saveProgress:
+            return "Don't lose your log"
         case .voluntary:
             return mode == .signup ? "Create Account" : "Welcome Back"
         }
@@ -235,8 +302,38 @@ struct AuthView: View {
             // pay for." It is also literally accurate — the account costs
             // nothing; the subscription gates content later.
             return "Create a free account so your answers and progress are saved."
+        case .afterPurchase:
+            // Concrete and true: without an account the subscription and the
+            // progress live on this device's session. Restore recovers the
+            // entitlement via the App Store receipt, but not the logged
+            // approaches — which is the part that cannot be regenerated.
+            return "Right now it's tied to this device. An account keeps your subscription and progress if you switch phones."
+        case .saveProgress:
+            // Names the specific thing at risk. Everything else in the app is
+            // content that can be re-served; the approach log is not.
+            return "Your approaches are saved on this device only. An account keeps them if you lose or change your phone."
         case .voluntary:
             return "Save your progress, sync across devices, and more."
+        }
+    }
+
+    /// Small line under the buttons answering "what happens next?".
+    private var destinationFootnote: String? {
+        switch context {
+        case .requiredAfterPaywall:
+            // Verified against RootView — a user who reaches this screen
+            // dismissed paywall #1, so `reachedPaywallEndState` is true and
+            // `syncAnonymousDataToBackend()` transfers the onboarding, paywall
+            // and rating flags to per-user keys before any network await.
+            // Signing in here lands on MainTabView with no further gates. If
+            // that routing changes, this line changes with it.
+            return "Nothing else to set up — you'll go straight into the app."
+        case .afterPurchase:
+            return "Your subscription is already active either way."
+        case .saveProgress:
+            return "Takes a few seconds. Nothing else changes."
+        case .voluntary:
+            return nil
         }
     }
 

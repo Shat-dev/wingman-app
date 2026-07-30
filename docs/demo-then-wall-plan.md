@@ -1,5 +1,13 @@
 # Demo-then-Ask — Implementation Plan
 
+> **Partially superseded by `anonymous-auth-plan.md`.** That plan replaces the
+> forced post-paywall account wall with a Supabase anonymous session created at
+> "Skip for now". It supersedes §1's claim that the anonymous branch needs no
+> change (that branch is deleted), and corrects §4's "Approach logging — free,
+> no change" (untrue without a session — all three `ApproachService` guards
+> bail). **Phases 1-3 below remain valid and implemented.** Phases 4-7 assume a
+> session exists and should be read after the anonymous-auth plan.
+
 Supersedes the earlier hard-wall-first draft. Agreed sequence:
 
 ```

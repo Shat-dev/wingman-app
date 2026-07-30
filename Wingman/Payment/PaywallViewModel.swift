@@ -442,7 +442,11 @@ final class PaywallViewModel: ObservableObject {
                 // asynchronously via NotificationCenter and may not have
                 // flipped yet at this point in the call stack.
                 let isTrial = entitlement?.periodType == .trial
-                let isAnon = authManager?.isAnonymousUser == true
+                // "Bought without a permanent account" — the number this whole
+                // guest-session change exists to move. The legacy flag would
+                // now read true for guests *and* for the vanishing no-session
+                // case, conflating them.
+                let isAnon = authManager?.isAuthenticated != true
                 PostHogSDK.shared.capture("paywall_purchase_succeeded", properties: [
                     "plan": plan,
                     "product_id": package.storeProduct.productIdentifier,
@@ -471,10 +475,20 @@ final class PaywallViewModel: ObservableObject {
                     )
                 }
 
-                // If user is anonymous, store purchase info for later linking
-                if isAnon {
+                // Store purchase info for later linking ONLY when there is no
+                // Supabase session at all.
+                //
+                // Deliberately not `isAnon` (which means "no permanent
+                // account"): a guest has a real user id, RevenueCat is already
+                // identified as that id, and linking preserves it — so there is
+                // nothing to link later. Worse, stashing it here arms
+                // `needsRevenueCatLinking`, and if that guest ever reached the
+                // legacy `.signedIn` sync path it would trigger an
+                // identified→identified `logIn` and strand the entitlement —
+                // the exact failure Phase D removed.
+                if authManager?.hasSession != true {
                     AnonymousUserManager.shared.storeRevenueCatPurchase(customerInfo: customerInfo)
-                    log("💰 PaywallViewModel: Stored anonymous purchase for linking")
+                    log("💰 PaywallViewModel: Stored no-session purchase for linking")
                 }
 
                 // Apply the authoritative customerInfo from the purchase

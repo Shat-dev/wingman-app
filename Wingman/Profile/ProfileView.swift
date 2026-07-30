@@ -9,9 +9,11 @@ import Supabase
 import PostHog
 
 struct ProfileView: View {
+    @EnvironmentObject var authManager: AuthManager
     @State private var showSettings = false
     @State private var showEditProfile = false
     @State private var showApproachesLogged = false
+    @State private var showSaveProgress = false
     // Bound directly to the shared stores so any mutation elsewhere (logging,
     // editing, deleting an approach, completing daily practice, editing name)
     // re-renders the card instantly without waiting for onAppear/pull-to-refresh.
@@ -101,7 +103,30 @@ struct ProfileView: View {
                             .padding(.vertical, 28)
 
                             Divider().background(Color.gray.opacity(0.2))
-                            
+
+                            // MARK: - Save Your Progress (guest only)
+                            //
+                            // Threshold-triggered, not permanent — see
+                            // AuthContext.saveProgress. Placed here rather than
+                            // in Settings because Settings has no traffic, and
+                            // because the thing it protects (the approach log)
+                            // is visibly sitting further down this same screen.
+                            if authManager.shouldShowGuestAccountPrompt(
+                                approachCount: approachService.totalCount
+                            ) {
+                                SaveProgressBanner(
+                                    approachCount: approachService.totalCount,
+                                    onTap: { showSaveProgress = true },
+                                    onDismiss: {
+                                        authManager.markGuestAccountPromptDismissed(
+                                            approachCount: approachService.totalCount
+                                        )
+                                    }
+                                )
+                                .padding(.horizontal, 20)
+                                .padding(.top, 28)
+                            }
+
                             // MARK: - Week Streak Card
                             // Pulls from StreakStore: cache-seeded on init so the card shows
                             // the last-known-good value immediately on entry, refreshed in background.
@@ -174,6 +199,29 @@ struct ProfileView: View {
                     .presentationDragIndicator(.hidden)
                     .presentationCornerRadius(20)
             }
+            // Presented as a sheet, not a route: this is an offer the user can
+            // walk away from. A successful link clears `isGuestSession`, which
+            // removes the banner on its own; declining records the threshold.
+            .sheet(isPresented: $showSaveProgress) {
+                NavigationStack {
+                    AuthView(
+                        mode: .signup,
+                        context: .saveProgress,
+                        onSkip: {
+                            authManager.markGuestAccountPromptDismissed(
+                                approachCount: approachService.totalCount
+                            )
+                            showSaveProgress = false
+                        }
+                    )
+                }
+                .appDynamicTypeCeiling()
+            }
+            .onChange(of: authManager.isGuestSession) { isGuest in
+                // Linked successfully from the sheet — close it rather than
+                // leaving the user on a screen whose purpose is now satisfied.
+                if !isGuest { showSaveProgress = false }
+            }
             .sheet(isPresented: $showEditProfile) {
                 EditProfileSheet(currentName: userProfileStore.displayName ?? "") { newName in
                     // EditProfileSheet writes Supabase + cache itself; this
@@ -220,6 +268,64 @@ struct ProfileView: View {
         }
     }
     
+}
+
+// MARK: - Save Progress Banner (guest only)
+
+/// Offers a guest an account, naming the specific thing at risk.
+///
+/// Deliberately understated — an outline card in the app's existing language
+/// rather than a coloured alert. It is an offer, not a warning, and the user has
+/// done nothing wrong by not having an account.
+private struct SaveProgressBanner: View {
+    let approachCount: Int
+    let onTap: () -> Void
+    let onDismiss: () -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack(alignment: .top, spacing: 12) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Save your \(approachCount) approaches")
+                        .font(.manropeSemiBold(size: 16))
+                        .foregroundColor(.wingmanBlack)
+                        .fixedSize(horizontal: false, vertical: true)
+
+                    Text("They're on this device only. An account keeps them if you change phones.")
+                        .font(.manropeRegular(size: 13))
+                        .foregroundColor(Color.wingmanBlack.opacity(0.55))
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+
+                Spacer(minLength: 0)
+
+                Button(action: onDismiss) {
+                    Image(systemName: "xmark")
+                        .font(.system(size: 12, weight: .semibold))
+                        .foregroundColor(Color.wingmanBlack.opacity(0.4))
+                        .frame(width: 32, height: 32)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(ScalePressStyle())
+            }
+
+            Button(action: onTap) {
+                Text("Create a free account")
+                    .font(.manropeSemiBold(size: 14))
+                    .foregroundColor(.wingmanWhiteFF)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 40)
+                    .background(Color.wingmanBlack)
+                    .cornerRadius(5)
+            }
+            .buttonStyle(ScalePressStyle())
+        }
+        .padding(16)
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(Color.wingmanBlack.opacity(0.15), lineWidth: 1)
+        )
+    }
 }
 
 // MARK: - Week Streak Card
