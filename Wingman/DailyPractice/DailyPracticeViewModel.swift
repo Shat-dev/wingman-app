@@ -8,39 +8,52 @@
 import Foundation
 import Combine
 
+/// Owns a run of Daily Practice questions.
+///
+/// The question-by-question mechanics (selection, checking, forward/back, saved
+/// per-question state, first-answer-wins counting) now live in `QuizEngine` so
+/// the end-of-lesson quiz shares them rather than reimplementing them. What
+/// stays here is everything that is specifically *daily*: fetching today's set,
+/// posting each answer to `user_question_completions`, the streak RPC, the
+/// completion screen, and the notification Home listens for.
+///
+/// The engine is a value type held in an `@Published` property, so mutating it
+/// republishes and the view re-renders exactly as it did when this class held
+/// the state directly. The properties below forward to it so
+/// `DailyPracticeView`'s call sites are unchanged.
 final class DailyPracticeViewModel: ObservableObject {
-    
-    // MARK: - Published Properties
-    @Published var questions: [DailyPracticeQuestion] = []
-    @Published var currentQuestionIndex: Int = 0
-    @Published var selectedOptionIndex: Int? = nil // For single select
-    @Published var selectedOptionIndices: Set<Int> = [] // For multiple select
-    @Published var hasCheckedAnswer: Bool = false
-    @Published var isAnswerCorrect: Bool = false
+
+    // MARK: - Quiz State (shared engine)
+    @Published private(set) var engine = QuizEngine()
+
+    // MARK: - Daily-specific Published Properties
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     @Published var isDailyPracticeCompleted: Bool = false // Track completion of all questions
     @Published var currentStreak: Int = 0 // Current streak count for completion view
     @Published var showCompletionView: Bool = false // Controls showing the completion view
-    
-    // MARK: - Streak Tracking
-    private var totalQuestionsAnswered: Int = 0
-    private var totalCorrectAnswers: Int = 0
-    // First-answer-wins dedup set keyed by question id. Without this,
-    // previousQuestion() lets a user re-answer a prior question and double-
-    // count it into the streak-update RPC. Reset per session in loadTodayQuestions.
-    private var countedQuestionIds: Set<UUID> = []
 
-    // MARK: - Per-question State Persistence
-    // Preserves answer state across back/forward navigation so users can
-    // review a prior question without being able to re-answer it.
-    private struct SavedQuestionState {
-        let selectedOptionIndex: Int?
-        let selectedOptionIndices: Set<Int>
-        let hasCheckedAnswer: Bool
-        let isAnswerCorrect: Bool
+    // MARK: - Engine Forwarding
+    //
+    // Kept as properties with the original names so the view layer did not have
+    // to change when the state moved into the engine.
+    var questions: [QuizQuestion] { engine.questions }
+    var currentQuestionIndex: Int { engine.currentQuestionIndex }
+    var selectedOptionIndex: Int? { engine.selectedOptionIndex }
+    var selectedOptionIndices: Set<Int> { engine.selectedOptionIndices }
+    var hasCheckedAnswer: Bool { engine.hasCheckedAnswer }
+    var isAnswerCorrect: Bool { engine.isAnswerCorrect }
+    var currentQuestion: QuizQuestion { engine.currentQuestion }
+    var progress: Double { engine.progress }
+    var isCheckAnswerEnabled: Bool { engine.isCheckAnswerEnabled }
+    var isLastQuestion: Bool { engine.isLastQuestion }
+
+    /// Everything `QuizQuestionView` needs to render the current question.
+    var questionState: QuizQuestionState { engine.questionState }
+
+    var buttonTitle: String {
+        hasCheckedAnswer ? "Next" : "Check Answer"
     }
-    private var questionStates: [UUID: SavedQuestionState] = [:]
 
     // MARK: - Dependencies
     private let practiceService: DailyPracticeServiceProtocol
@@ -53,69 +66,23 @@ final class DailyPracticeViewModel: ObservableObject {
     init(practiceService: DailyPracticeServiceProtocol = DailyPracticeService()) {
         self.practiceService = practiceService
     }
-    
-    // MARK: - Computed Properties
-    var currentQuestion: DailyPracticeQuestion {
-        guard currentQuestionIndex < questions.count else {
-            // Return a dummy question to prevent crashes
-            return DailyPracticeQuestion(
-                number: 1,
-                question: "Loading...",
-                options: ["Please wait..."],
-                correctAnswerIndex: 0,
-                explanation: ""
-            )
-        }
-        return questions[currentQuestionIndex]
-    }
-    
-    var progress: Double {
-        guard !questions.isEmpty else { return 0.0 }
-        return Double(currentQuestionIndex + 1) / Double(questions.count)
-    }
-    
-    var isCheckAnswerEnabled: Bool {
-        if currentQuestion.questionType == .singleSelect {
-            return selectedOptionIndex != nil && !hasCheckedAnswer
-        } else {
-            return !selectedOptionIndices.isEmpty && !hasCheckedAnswer
-        }
-    }
-    
-    var buttonTitle: String {
-        if hasCheckedAnswer {
-            return "Next"
-        } else {
-            return "Check Answer"
-        }
-    }
-    
-    var isLastQuestion: Bool {
-        currentQuestionIndex == questions.count - 1
-    }
-    
+
     // MARK: - Lifecycle Methods
     func loadTodayQuestions() {
         Task { @MainActor in
             isLoading = true
             errorMessage = nil
-            
-            // Reset tracking for new session
-            totalQuestionsAnswered = 0
-            totalCorrectAnswers = 0
-            countedQuestionIds = []
-            questionStates = [:]
-            
+
             do {
                 let fetchedQuestions = try await practiceService.getTodayQuestions()
-                
-                self.questions = fetchedQuestions
-                self.currentQuestionIndex = 0
-                self.resetQuestion()
+
+                // Resets index, per-question saved state and the answered /
+                // correct counters for the new session.
+                self.engine.load(questions: fetchedQuestions)
                 self.isLoading = false
-                
+
                 log("✅ Loaded \(fetchedQuestions.count) questions for today")
-                
+
             } catch {
                 self.errorMessage = error.localizedDescription
                 self.isLoading = false
@@ -123,172 +90,98 @@ final class DailyPracticeViewModel: ObservableObject {
             }
         }
     }
-    
+
+    /// Seeds a fixed set without touching the network. Used by the SwiftUI
+    /// preview, which previously assigned to `questions` directly.
+    func loadForPreview(_ questions: [QuizQuestion]) {
+        engine.load(questions: questions)
+        isLoading = false
+        errorMessage = nil
+    }
+
     // MARK: - User Actions
     func selectOption(at index: Int) {
-        guard !hasCheckedAnswer else {
-            log("⚠️ Cannot select option after checking answer")
-            return
-        }
-
-        HapticManager.shared.selection()
-
-        if currentQuestion.questionType == .singleSelect {
-            log("📌 User selected option \(index): \(currentQuestion.options[index])")
-            selectedOptionIndex = index
-        } else {
-            // Multiple select - toggle selection
-            if selectedOptionIndices.contains(index) {
-                selectedOptionIndices.remove(index)
-                log("📌 User deselected option \(index): \(currentQuestion.options[index])")
-            } else {
-                selectedOptionIndices.insert(index)
-                log("📌 User selected option \(index): \(currentQuestion.options[index])")
-            }
-            log("📌 Currently selected indices: \(selectedOptionIndices)")
-        }
+        engine.selectOption(at: index)
     }
-    
+
     func checkAnswer() {
         guard !isLoading else { return }
-        
-        if currentQuestion.questionType == .singleSelect {
-            guard let selected = selectedOptionIndex else {
-                log("❌ No option selected")
-                return
-            }
-            
-            hasCheckedAnswer = true
-            isAnswerCorrect = (selected == currentQuestion.correctAnswerIndex)
 
-            // Haptic feedback for answer result
-            if isAnswerCorrect {
-                HapticManager.shared.success()
-            } else {
-                HapticManager.shared.warning()
-            }
+        // The engine grades the answer and hands back what was answered. It
+        // returns nil when nothing is selected, which is the same no-op the
+        // previous guards produced.
+        guard let answer = engine.checkAnswer() else { return }
 
-            log("\n✅ Answer checked!")
-            log("   - Selected: \(currentQuestion.options[selected])")
-            log("   - Result: \(isAnswerCorrect ? "CORRECT ✅" : "INCORRECT ❌")")
-
-            // Update streak tracking — first-answer-wins per question so
-            // back-nav + re-answer can't inflate the counts we send to the
-            // streak RPC.
-            let questionId = currentQuestion.id
-            if countedQuestionIds.insert(questionId).inserted {
-                totalQuestionsAnswered += 1
-                if isAnswerCorrect {
-                    totalCorrectAnswers += 1
-                }
-            }
-
-            // Submit completion to backend. Capture questionId/isCorrect
-            // synchronously here — `currentQuestion` is a computed property
-            // over `currentQuestionIndex`, so reading it inside the Task
-            // after a rapid Next-tap would resolve to the wrong question.
-            let wasCorrect = isAnswerCorrect
-            Task { @MainActor in
-                await submitCompletion(
-                    questionId: questionId,
-                    isCorrect: wasCorrect,
-                    selectedAnswers: SelectedAnswers(singleSelect: selected)
-                )
-            }
-
+        // Submit completion to the backend. The question and correctness come
+        // from the returned value rather than being re-read from
+        // `currentQuestion`, so a fast Next tap cannot make this resolve to the
+        // wrong question.
+        let selectedAnswers: SelectedAnswers
+        if let singleIndex = answer.selectedIndex {
+            selectedAnswers = SelectedAnswers(singleSelect: singleIndex)
         } else {
-            guard !selectedOptionIndices.isEmpty else {
-                log("❌ No options selected")
-                return
-            }
-            
-            hasCheckedAnswer = true
-            let correctSet = Set(currentQuestion.correctAnswerIndices ?? [])
-            isAnswerCorrect = (selectedOptionIndices == correctSet)
+            selectedAnswers = SelectedAnswers(multipleSelect: answer.selectedIndices ?? [])
+        }
 
-            // Haptic feedback for answer result
-            if isAnswerCorrect {
-                HapticManager.shared.success()
-            } else {
-                HapticManager.shared.warning()
-            }
-
-            log("\n✅ Answer checked!")
-            log("   - Selected indices: \(selectedOptionIndices)")
-            log("   - Correct indices: \(correctSet)")
-            log("   - Result: \(isAnswerCorrect ? "CORRECT ✅" : "INCORRECT ❌")")
-
-            // Update streak tracking — first-answer-wins per question so
-            // back-nav + re-answer can't inflate the counts we send to the
-            // streak RPC.
-            let questionId = currentQuestion.id
-            if countedQuestionIds.insert(questionId).inserted {
-                totalQuestionsAnswered += 1
-                if isAnswerCorrect {
-                    totalCorrectAnswers += 1
-                }
-            }
-
-            // Submit completion to backend. Capture questionId/isCorrect
-            // synchronously here — `currentQuestion` is a computed property
-            // over `currentQuestionIndex`, so reading it inside the Task
-            // after a rapid Next-tap would resolve to the wrong question.
-            let wasCorrect = isAnswerCorrect
-            let selectedMulti = Array(selectedOptionIndices)
-            Task { @MainActor in
-                await submitCompletion(
-                    questionId: questionId,
-                    isCorrect: wasCorrect,
-                    selectedAnswers: SelectedAnswers(multipleSelect: selectedMulti)
-                )
-            }
+        let questionId = answer.question.id
+        let wasCorrect = answer.isCorrect
+        Task { @MainActor in
+            await submitCompletion(
+                questionId: questionId,
+                isCorrect: wasCorrect,
+                selectedAnswers: selectedAnswers
+            )
         }
     }
-    
-    func nextQuestion() {
-        guard hasCheckedAnswer else {
-            log("⚠️ Must check answer before proceeding")
-            return
-        }
 
-        if currentQuestionIndex < questions.count - 1 {
-            log("\n➡️ Moving to next question (\(currentQuestionIndex + 2)/\(questions.count))")
-            saveCurrentQuestionState()
-            currentQuestionIndex += 1
-            loadQuestionState(for: questions[currentQuestionIndex].id)
-        } else {
-            log("\n🎉 All questions completed!")
-            log("   - Total questions: \(questions.count)")
-            log("   - Questions answered: \(totalQuestionsAnswered)")
-            log("   - Correct answers: \(totalCorrectAnswers)")
+    func nextQuestion() {
+        switch engine.advance() {
+        case .blocked, .moved:
+            // Nothing daily-specific to do — the engine already moved, or
+            // refused because the answer hasn't been checked.
+            break
+
+        case .finished:
             isDailyPracticeCompleted = true
             HapticManager.shared.success()
 
-            // Update daily practice streak in the database
+            // Update daily practice streak in the database. Counts are read
+            // here on the main actor and passed in, rather than reaching back
+            // into the engine from inside the task.
             log("📊 About to update daily practice streak...")
+            let answered = engine.answeredCount
+            let correct = engine.correctCount
             Task {
-                await updateDailyPracticeStreak()
+                await updateDailyPracticeStreak(questionsAnswered: answered, correctAnswers: correct)
             }
-            
+
             // Notify that daily practice is completed - this can trigger practice unlocking checks
             onDailyPracticeCompleted?()
-            
+
             // Post notification for HomeView to refresh
             NotificationCenter.default.post(name: .dailyPracticeCompleted, object: nil)
         }
     }
-    
+
+    func previousQuestion() {
+        engine.goBack()
+    }
+
+    func reset() {
+        engine.reset()
+    }
+
     // MARK: - Streak Update
-    private func updateDailyPracticeStreak() async {
+    private func updateDailyPracticeStreak(questionsAnswered: Int, correctAnswers: Int) async {
         log("🔄 Updating daily practice streak...")
-        log("   - Questions answered: \(totalQuestionsAnswered)")
-        log("   - Correct answers: \(totalCorrectAnswers)")
-        
+        log("   - Questions answered: \(questionsAnswered)")
+        log("   - Correct answers: \(correctAnswers)")
+
         // Validate that we have the expected values
-        guard totalQuestionsAnswered > 0 else {
+        guard questionsAnswered > 0 else {
             log("⚠️ WARNING: No questions answered tracked! This shouldn't happen.")
             log("   - This means the tracking isn't working correctly")
-            
+
             // Show completion view with default streak count
             await MainActor.run {
                 currentStreak = 1 // Default if update fails
@@ -296,14 +189,14 @@ final class DailyPracticeViewModel: ObservableObject {
             }
             return
         }
-        
+
         do {
             log("📡 Calling practiceService.updateDailyPracticeStreak...")
             let result = try await practiceService.updateDailyPracticeStreak(
-                questionsAnswered: totalQuestionsAnswered,
-                correctAnswers: totalCorrectAnswers
+                questionsAnswered: questionsAnswered,
+                correctAnswers: correctAnswers
             )
-            
+
             log("✅ Streak updated successfully:")
             log("   - Current streak: \(result.streak)")
             log("   - Total completed: \(result.completed)")
@@ -317,12 +210,12 @@ final class DailyPracticeViewModel: ObservableObject {
                 // immediately, without waiting for another RPC on next view entry.
                 StreakStore.shared.apply(updateResult: result)
             }
-            
+
         } catch let error as DailyPracticeError {
             log("❌ Failed to update streak (DailyPracticeError):")
             log("   - Error: \(error.errorDescription ?? "Unknown error")")
             log("   - Full error: \(error)")
-            
+
             // Show completion view with fallback streak count
             await MainActor.run {
                 currentStreak = 1 // Fallback if update fails
@@ -333,7 +226,7 @@ final class DailyPracticeViewModel: ObservableObject {
             log("   - Error type: \(type(of: error))")
             log("   - Description: \(error.localizedDescription)")
             log("   - Full error: \(error)")
-            
+
             // Show completion view with fallback streak count
             await MainActor.run {
                 currentStreak = 1 // Fallback if update fails
@@ -341,48 +234,8 @@ final class DailyPracticeViewModel: ObservableObject {
             }
         }
     }
-    
-    func previousQuestion() {
-        if currentQuestionIndex > 0 {
-            log("\n⬅️ Moving to previous question (\(currentQuestionIndex)/\(questions.count))")
-            saveCurrentQuestionState()
-            currentQuestionIndex -= 1
-            loadQuestionState(for: questions[currentQuestionIndex].id)
-        }
-    }
 
-    // MARK: - Helper Functions
-    private func resetQuestion() {
-        selectedOptionIndex = nil
-        selectedOptionIndices.removeAll()
-        hasCheckedAnswer = false
-        isAnswerCorrect = false
-        log("🔄 Question state reset")
-    }
-
-    private func saveCurrentQuestionState() {
-        guard currentQuestionIndex < questions.count else { return }
-        let id = questions[currentQuestionIndex].id
-        questionStates[id] = SavedQuestionState(
-            selectedOptionIndex: selectedOptionIndex,
-            selectedOptionIndices: selectedOptionIndices,
-            hasCheckedAnswer: hasCheckedAnswer,
-            isAnswerCorrect: isAnswerCorrect
-        )
-    }
-
-    private func loadQuestionState(for id: UUID) {
-        if let saved = questionStates[id] {
-            selectedOptionIndex = saved.selectedOptionIndex
-            selectedOptionIndices = saved.selectedOptionIndices
-            hasCheckedAnswer = saved.hasCheckedAnswer
-            isAnswerCorrect = saved.isAnswerCorrect
-            log("🔁 Restored saved state for question \(id)")
-        } else {
-            resetQuestion()
-        }
-    }
-    
+    // MARK: - Completion Submission
     private func submitCompletion(questionId: UUID, isCorrect: Bool, selectedAnswers: SelectedAnswers) async {
         do {
             let response = try await practiceService.submitCompletion(
@@ -398,48 +251,10 @@ final class DailyPracticeViewModel: ObservableObject {
             // Note: We don't show this error to the user as it doesn't affect their experience
         }
     }
-    
-    func reset() {
-        log("🔄 Resetting entire practice session")
-        currentQuestionIndex = 0
-        questionStates = [:]
-        resetQuestion()
-    }
-    
+
     // MARK: - Helper functions for UI state
-    func isOptionSelected(_ index: Int) -> Bool {
-        if currentQuestion.questionType == .singleSelect {
-            return selectedOptionIndex == index
-        } else {
-            return selectedOptionIndices.contains(index)
-        }
-    }
-    
-    func isOptionCorrect(_ index: Int) -> Bool {
-        guard hasCheckedAnswer else { return false }
-        
-        if currentQuestion.questionType == .singleSelect {
-            return index == currentQuestion.correctAnswerIndex
-        } else {
-            return currentQuestion.correctAnswerIndices?.contains(index) ?? false
-        }
-    }
-    
-    func isOptionIncorrect(_ index: Int) -> Bool {
-        guard hasCheckedAnswer else { return false }
-        
-        if currentQuestion.questionType == .singleSelect {
-            return selectedOptionIndex == index && !isAnswerCorrect
-        } else {
-            return selectedOptionIndices.contains(index) &&
-                   !(currentQuestion.correctAnswerIndices?.contains(index) ?? false)
-        }
-    }
-    
-    func shouldShowCorrectButNotSelected(_ index: Int) -> Bool {
-        guard hasCheckedAnswer && currentQuestion.questionType == .multipleSelect else { return false }
-        
-        return (currentQuestion.correctAnswerIndices?.contains(index) ?? false) &&
-               !selectedOptionIndices.contains(index)
-    }
+    func isOptionSelected(_ index: Int) -> Bool { engine.isOptionSelected(index) }
+    func isOptionCorrect(_ index: Int) -> Bool { engine.isOptionCorrect(index) }
+    func isOptionIncorrect(_ index: Int) -> Bool { engine.isOptionIncorrect(index) }
+    func shouldShowCorrectButNotSelected(_ index: Int) -> Bool { engine.shouldShowCorrectButNotSelected(index) }
 }

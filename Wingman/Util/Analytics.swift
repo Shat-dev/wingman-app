@@ -25,6 +25,16 @@ enum Analytics {
         static let lessonStarted = "lesson_started"
         static let lessonCompleted = "lesson_completed"
 
+        // End-of-lesson knowledge check. `lesson_quiz_abandoned` is the
+        // friction signal that decides whether the feature flag stays on;
+        // `lesson_quiz_unavailable` surfaces lessons with no authored
+        // questions, and users whose question cache is still cold — without it
+        // the graceful fallthrough is invisible in the funnel.
+        static let lessonQuizStarted = "lesson_quiz_started"
+        static let lessonQuizCompleted = "lesson_quiz_completed"
+        static let lessonQuizAbandoned = "lesson_quiz_abandoned"
+        static let lessonQuizUnavailable = "lesson_quiz_unavailable"
+
         // Content engagement — practice scenarios
         static let practiceScenarioStarted = "practice_scenario_started"
         static let practiceScenarioCompleted = "practice_scenario_completed"

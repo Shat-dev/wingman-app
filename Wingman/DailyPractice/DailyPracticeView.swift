@@ -58,7 +58,7 @@ struct DailyPracticeView: View {
                     .buttonStyle(ScalePressStyle())
                     
                     if !viewModel.questions.isEmpty {
-                        progressBar(progress: CGFloat(viewModel.progress))
+                        QuizProgressBar(progress: viewModel.progress)
                             .frame(height: 10)
                     } else {
                         // Placeholder progress bar while loading
@@ -264,341 +264,30 @@ struct DailyPracticeView: View {
     }
     
     // MARK: - Question Content View
+    //
+    // The question prompt, options, explanation panel and Check/Next button
+    // now live in the shared `QuizQuestionView` so the end-of-lesson quiz can
+    // render the identical UI. Everything visual moved across verbatim; this
+    // view keeps the parts that are specific to Daily Practice — loading,
+    // error and empty states, analytics, streaks, and navigation.
     private func questionContentView() -> some View {
-        VStack(spacing: 0) {
-            // Scrollable Content
-            ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
-                    
-                    // MARK: - Question Number and Text
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("\(viewModel.currentQuestion.number). \(viewModel.currentQuestion.question)")
-                            .font(.manropeMedium(size: 20))
-                            .foregroundColor(.wingmanBlack)
-                            .lineSpacing(1)
-                            .fixedSize(horizontal: false, vertical: true)
-
-                        if viewModel.currentQuestion.questionType == .multipleSelect {
-                            Text("Select all that apply")
-                                .font(.manropeRegular(size: 13))
-                                .foregroundColor(.wingmanBlack.opacity(0.45))
-                        }
-                    }
-
-                    // MARK: - Options
-                    VStack(spacing: 12) {
-                        ForEach(Array(viewModel.currentQuestion.options.enumerated()), id: \.offset) { index, option in
-                            if viewModel.currentQuestion.questionType == .singleSelect {
-                                singleSelectOptionButton(
-                                    text: option,
-                                    index: index,
-                                    isSelected: viewModel.isOptionSelected(index),
-                                    isCorrect: viewModel.isOptionCorrect(index),
-                                    isWrong: viewModel.isOptionIncorrect(index)
-                                )
-                            } else {
-                                multipleSelectOptionButton(
-                                    text: option,
-                                    index: index,
-                                    isSelected: viewModel.isOptionSelected(index),
-                                    isCorrect: viewModel.isOptionCorrect(index),
-                                    isWrong: viewModel.isOptionIncorrect(index),
-                                    shouldShowCorrectButNotSelected: viewModel.shouldShowCorrectButNotSelected(index)
-                                )
-                            }
-                        }
-                    }
-                    .padding(.top, 2)
-                }
-                .padding(.horizontal, 20)
-                .padding(.top, 8)
-                .padding(.bottom, 100) // Extra space for bottom section
-            }
-            
-            Spacer()
-            
-            // MARK: - Bottom Section (Check Answer Button OR Explanation + Next)
-            if viewModel.hasCheckedAnswer {
-                // Explanation with Next Button at Bottom
-                explanationViewWithButton()
-                    .transition(.move(edge: .bottom).combined(with: .opacity))
-            } else {
-                // Check Answer Button
-                actionButton()
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, 30)
-                    .transition(.opacity)
-            }
-        }
-    }
-    
-    // MARK: - Progress Bar
-    private func progressBar(progress: CGFloat) -> some View {
-        GeometryReader { geo in
-            ZStack(alignment: .leading) {
-                Capsule()
-                    .fill(Color.gray.opacity(0.2))
-                    .frame(height: 10)
-
-                Capsule()
-                    .fill(Color.wingmanBlack)
-                    .frame(width: geo.size.width * max(0, min(1, progress)), height: 10)
-                    .animation(.easeInOut(duration: 0.25), value: progress)
-            }
-        }
-        .frame(height: 10)
-    }
-    
-    // MARK: - Single Select Option Button
-    private func singleSelectOptionButton(text: String, index: Int, isSelected: Bool, isCorrect: Bool, isWrong: Bool) -> some View {
-        Button(action: {
-            viewModel.selectOption(at: index)
-        }) {
-            HStack {
-                Text(text)
-                    .font(.manropeSemiBold(size: 16))
-                    .foregroundColor(buttonTextColor(isSelected: isSelected, isCorrect: isCorrect, isWrong: isWrong))
-                    .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .frame(maxWidth: .infinity, alignment: .center)
-            }
-            .padding(20)
-            .frame(maxWidth: .infinity, alignment: .center)
-            .background(buttonBackgroundColor(isSelected: isSelected, isCorrect: isCorrect, isWrong: isWrong))
-            .cornerRadius(5)
-            .overlay(
-                RoundedRectangle(cornerRadius: 5)
-                    .stroke(buttonBorderColor(isSelected: isSelected, isCorrect: isCorrect, isWrong: isWrong), lineWidth: 1)
-            )
-            .shadow(color: Color.wingmanBlack.opacity(0.0002), radius: 0.03, x: 0, y: 0.01)
-        }
-        .buttonStyle(ScalePressStyle())
-        .disabled(viewModel.hasCheckedAnswer)
-    }
-    
-    // MARK: - Multiple Select Option Button with Checkbox
-    private func multipleSelectOptionButton(text: String, index: Int, isSelected: Bool, isCorrect: Bool, isWrong: Bool, shouldShowCorrectButNotSelected: Bool) -> some View {
-        Button(action: {
-            viewModel.selectOption(at: index)
-        }) {
-            HStack(spacing: 12) {
-                // Checkbox
-                checkboxView(
-                    isSelected: isSelected,
-                    isCorrect: isCorrect,
-                    isWrong: isWrong,
-                    shouldShowCorrectButNotSelected: shouldShowCorrectButNotSelected
-                )
-                
-                Text(text)
-                    .font(.manropeSemiBold(size: 16))
-                    .foregroundColor(multipleSelectTextColor(isSelected: isSelected, isCorrect: isCorrect, isWrong: isWrong, shouldShowCorrectButNotSelected: shouldShowCorrectButNotSelected))
-                    .multilineTextAlignment(.leading)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                
-                Spacer()
-            }
-            .padding(20)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(multipleSelectBackgroundColor(isSelected: isSelected, isCorrect: isCorrect, isWrong: isWrong, shouldShowCorrectButNotSelected: shouldShowCorrectButNotSelected))
-            .cornerRadius(5)
-            .overlay(
-                RoundedRectangle(cornerRadius: 5)
-                    .stroke(multipleSelectBorderColor(isSelected: isSelected, isCorrect: isCorrect, isWrong: isWrong, shouldShowCorrectButNotSelected: shouldShowCorrectButNotSelected), lineWidth: 1)
-            )
-            .shadow(color: .wingmanBlack.opacity(0.1), radius: 8, x: 0, y: 2)
-        }
-        .buttonStyle(ScalePressStyle())
-        .disabled(viewModel.hasCheckedAnswer)
-    }
-    
-    // MARK: - Checkbox View
-    private func checkboxView(isSelected: Bool, isCorrect: Bool, isWrong: Bool, shouldShowCorrectButNotSelected: Bool) -> some View {
-        ZStack {
-            // Background rectangle with rounded corners
-            RoundedRectangle(cornerRadius: 4)
-                .fill(checkboxBackgroundColor(isSelected: isSelected, isCorrect: isCorrect, isWrong: isWrong, shouldShowCorrectButNotSelected: shouldShowCorrectButNotSelected))
-                .frame(width: 20, height: 20)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 4)
-                        .stroke(checkboxBorderColor(isSelected: isSelected, isCorrect: isCorrect, isWrong: isWrong, shouldShowCorrectButNotSelected: shouldShowCorrectButNotSelected), lineWidth: 1)
-                )
-            
-            // Checkmark or X
-            if shouldShowCorrectButNotSelected {
-                // Show empty checkbox for correct answers not selected by user
-               
-            } else if isSelected && (isCorrect || (!viewModel.hasCheckedAnswer)) {
-                // White checkmark for selected items (before checking) or correct selected items
-                Image(systemName: "checkmark")
-                    .font(.system(size: 12, weight: .bold))
-                    .foregroundColor(.white)
-            } else if isSelected && isWrong {
-                // Red X for wrong selected items
-                Image(systemName: "checkmark")
-                    .font(.system(size: 12, weight: .bold))
-                    .foregroundColor(Color.white)
-            }
-        }
-    }
-    
-    // MARK: - Color Functions for Single Select
-    private func buttonTextColor(isSelected: Bool, isCorrect: Bool, isWrong: Bool) -> Color {
-        if isCorrect {
-            return Color.customGreen
-        } else if isWrong {
-            return Color.customRed
-        } else if isSelected {
-            return Color.white
-        } else {
-            return Color.customDark
-        }
-    }
-    
-    private func buttonBackgroundColor(isSelected: Bool, isCorrect: Bool, isWrong: Bool) -> Color {
-        if isCorrect {
-            return Color.customLightGreen
-        } else if isWrong {
-            return Color.customLightRed
-        } else if isSelected {
-            return Color.wingmanBlack
-        } else {
-            return Color.white
-        }
-    }
-    
-    private func buttonBorderColor(isSelected: Bool, isCorrect: Bool, isWrong: Bool) -> Color {
-        if isCorrect {
-            return Color.customGreen
-        } else if isWrong {
-            return Color.customRed
-        } else {
-            return Color.customDark.opacity(0.5)
-        }
-    }
-    
-    // MARK: - Color Functions for Multiple Select
-    private func multipleSelectTextColor(isSelected: Bool, isCorrect: Bool, isWrong: Bool, shouldShowCorrectButNotSelected: Bool) -> Color {
-        if isCorrect || shouldShowCorrectButNotSelected {
-            return Color.customGreen
-        } else if isWrong {
-            return Color.customRed
-        } else {
-            return Color.customDark
-        }
-    }
-    
-    private func multipleSelectBackgroundColor(isSelected: Bool, isCorrect: Bool, isWrong: Bool, shouldShowCorrectButNotSelected: Bool) -> Color {
-        if isCorrect || shouldShowCorrectButNotSelected {
-            return Color.customLightGreen
-        } else if isWrong {
-            return Color.customLightRed
-        } else {
-            return Color.white
-        }
-    }
-    
-    private func multipleSelectBorderColor(isSelected: Bool, isCorrect: Bool, isWrong: Bool, shouldShowCorrectButNotSelected: Bool) -> Color {
-        if isCorrect || shouldShowCorrectButNotSelected {
-            return Color.customGreen
-        } else if isWrong {
-            return Color.customRed
-        } else {
-            return Color.customDark.opacity(0.5)
-        }
-    }
-    
-    // MARK: - Checkbox Color Functions
-    private func checkboxBackgroundColor(isSelected: Bool, isCorrect: Bool, isWrong: Bool, shouldShowCorrectButNotSelected: Bool) -> Color {
-        if shouldShowCorrectButNotSelected {
-            return Color.white // White background for correct but unselected (empty checkbox)
-        } else if isSelected && isCorrect {
-            return Color.customGreen // Green background for selected correct items
-        } else if isSelected && isWrong {
-            return Color.customRed
-        } else if isSelected {
-            return Color.wingmanBlack // Black background for selected items before checking
-        } else {
-            return Color.customLightGray
-        }
-    }
-    
-    private func checkboxBorderColor(isSelected: Bool, isCorrect: Bool, isWrong: Bool, shouldShowCorrectButNotSelected: Bool) -> Color {
-        if shouldShowCorrectButNotSelected {
-            return Color.customDark.opacity(0.5) // Black border for correct but unselected
-        } else if isCorrect {
-            return Color.customGreen
-        } else if isWrong {
-            return Color.customRed
-        } else if isSelected {
-            return Color.wingmanBlack
-        } else {
-            return Color.customDark.opacity(0.5)
-        }
-    }
-    
-    // MARK: - Explanation View WITH Next Button at Bottom of Screen
-    private func explanationViewWithButton() -> some View {
-        VStack(alignment: .leading, spacing: 16) {
-            // Header
-            HStack {
-                Text(viewModel.isAnswerCorrect ? "Correct Answer!" : "Incorrect Answer.")
-                    .font(.manropeSemiBold(size: 18))
-                    .foregroundColor(viewModel.isAnswerCorrect ? Color.customCorrectGreen : Color.customIncorrectRed)
-            }
-            
-            // Explanation text
-            Text(viewModel.currentQuestion.explanation)
-                .font(.manropeSemiBold(size: 16))
-                .foregroundColor(Color.customDark.opacity(0.85))
-                .lineSpacing(4)
-                .fixedSize(horizontal: false, vertical: true)
-            
-            // Next Button Inside
-            Button(action: {
+        QuizQuestionView(
+            state: viewModel.questionState,
+            onSelectOption: { index in
+                viewModel.selectOption(at: index)
+            },
+            onCheckAnswer: {
+                // Haptic stays here rather than inside QuizQuestionView: the
+                // shared view renders, the caller owns side effects.
+                HapticManager.shared.mediumImpact()
+                viewModel.checkAnswer()
+            },
+            onNext: {
                 handleNextButton()
-            }) {
-                Text("Next")
-                    .font(.manropeSemiBold(size: 16))
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 52)
-                    .background(viewModel.isAnswerCorrect ? Color.customGreen : Color.customRed)
-                    .cornerRadius(5)
             }
-            .buttonStyle(ScalePressStyle())
-        }
-        .padding(.vertical, 20)
-        .padding(.horizontal, 10)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(
-            viewModel.isAnswerCorrect
-                ? Color.customExplanationGreen
-                : Color.customExplanationRed
         )
-        .cornerRadius(10)
-        .padding(.horizontal, 10)
-        .padding(.bottom,33)
     }
-    
-    // MARK: - Action Button (Check Answer - before checking)
-    private func actionButton() -> some View {
-        Button(action: {
-            HapticManager.shared.mediumImpact()
-            viewModel.checkAnswer()
-        }) {
-            Text("Check Answer")
-                .font(.manropeSemiBold(size: 16))
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-                .frame(height: 52)
-                .background(viewModel.isCheckAnswerEnabled ? Color.wingmanBlack : Color.wingmanBlack.opacity(0.4))
-                .cornerRadius(5)
-        }
-        .buttonStyle(ScalePressStyle())
-        .disabled(!viewModel.isCheckAnswerEnabled)
-    }
+
     
     // MARK: - Navigation Handlers
     private func handleBackButton() {
@@ -639,7 +328,7 @@ struct DailyPracticeView: View {
         // Add dummy questions - 2 multiple choice and 1 single option
         let dummyQuestions = [
             // Question 1: Multiple Select
-            DailyPracticeQuestion(
+            QuizQuestion(
                 number: 1,
                 question: "Which are key for confident body language?",
                 options: [
@@ -653,7 +342,7 @@ struct DailyPracticeView: View {
             ),
             
             // Question 2: Multiple Select
-            DailyPracticeQuestion(
+            QuizQuestion(
                 number: 2,
                 question: "Effective ways to start a conversation?",
                 options: [
@@ -667,7 +356,7 @@ struct DailyPracticeView: View {
             ),
             
             // Question 3: Single Select
-            DailyPracticeQuestion(
+            QuizQuestion(
                 number: 3,
                 question: "Best mindset when approaching someone?",
                 options: [
@@ -682,9 +371,7 @@ struct DailyPracticeView: View {
         ]
         
         // Configure the preview view model with dummy data
-        previewViewModel.questions = dummyQuestions
-        previewViewModel.isLoading = false
-        previewViewModel.errorMessage = nil
+        previewViewModel.loadForPreview(dummyQuestions)
         
         return DailyPracticeView(previewViewModel: previewViewModel)
             .environmentObject(TabBarVisibilityManager())

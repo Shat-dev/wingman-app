@@ -88,7 +88,18 @@ struct PaywallView: View {
     /// clipped by the fixed-height paging TabView. Equals the original 405 at
     /// the default text size — no visual change until the app-wide ceiling is
     /// raised above `.large`.
-    @ScaledMetric(relativeTo: .body) private var carouselHeight: CGFloat = 405
+    // Carousel heights, sized to the space left over once the commitment block
+    // (plan cards + CTA + disclosure + footer, ~350-365pt) is pinned below —
+    // see the layout note in `body`. Reduced from the previous flat 405pt: at
+    // 405 the carousel plus its page dots no longer fit the remaining room on a
+    // 6.1" phone, which pushed the dots off-screen. 350 fits without scrolling
+    // and costs the illustration ~20pt of height.
+    //
+    // Scales with Dynamic Type so the bullets gain room rather than being
+    // truncated by the fixed-height paging TabView, for when the app-wide
+    // `.large` ceiling is eventually raised.
+    @ScaledMetric(relativeTo: .body) private var carouselHeight: CGFloat = 350
+    @ScaledMetric(relativeTo: .body) private var carouselHeightSmall: CGFloat = 250
 
     init(
         authManager: AuthManager? = nil,
@@ -149,10 +160,13 @@ struct PaywallView: View {
                 // keeps the user reading the value proposition while the view
                 // model's automatic retries / reconnect-retry run underneath.
                 //
-                // Placed inside a ScrollView so on small devices (SE / mini)
-                // the user can reach everything even when total content
-                // exceeds the screen height. The primary button and footer
-                // below stay pinned to the bottom regardless.
+                // ONLY the carousel and its page dots live in here. Everything
+                // involved in the actual decision — plan cards, CTA, trial
+                // disclosure, footer — is pinned below and can never scroll
+                // out of view. The ScrollView is retained purely as a safety
+                // valve: if the carousel doesn't fit on a given device the
+                // illustration scrolls a little, which is a far better failure
+                // mode than a paging TabView clipping the bullets.
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 0) {
                         // MARK: - Carousel
@@ -163,10 +177,18 @@ struct PaywallView: View {
                                 VStack(spacing: 0) {
 
                                     // Image
+                                    // maxHeight, not a fixed height: the paging
+                                    // TabView clips rather than grows, so when
+                                    // the carousel is short (small phones) the
+                                    // illustration has to be the thing that
+                                    // gives. A flexible image compresses while
+                                    // the `.fixedSize` bullets below hold their
+                                    // lines; a fixed one would push them out of
+                                    // the frame and truncate the value props.
                                     Image(page.imageName)
                                         .resizable()
                                         .scaledToFit()
-                                        .frame(height: 220)
+                                        .frame(maxHeight: 220)
                                         .padding(.top, 20)
                                         .padding(.bottom, 15)
 
@@ -199,7 +221,7 @@ struct PaywallView: View {
                             }
                         }
                         .tabViewStyle(.page(indexDisplayMode: .never))
-                        .frame(height: carouselHeight)
+                        .frame(height: UIScreen.isSmallPhone ? carouselHeightSmall : carouselHeight)
 
                         // MARK: - Page Indicator
                         HStack(spacing: 8) {
@@ -212,27 +234,41 @@ struct PaywallView: View {
                         .padding(.top, 12)
                         .padding(.bottom, 20)
 
-                        // MARK: - Plans (or pricing loading / retry state)
-                        //
-                        // Gated on offerings alone — NOT on isLoading — so the
-                        // moment a package resolves the real plans replace the
-                        // placeholder, and a background refresh never flickers
-                        // loaded prices back to a spinner.
-                        if viewModel.offerings != nil {
-                            plansSection
-                        } else {
-                            pricingStatusSection
-                        }
                     }
                 }
                 .frame(maxHeight: .infinity)
 
-                // MARK: - Pinned primary action
-                // Continue (purchase) once pricing is available; otherwise a
-                // retry control that doubles as the in-progress indicator.
+                // MARK: - Pinned commitment block
+                //
+                // Prices, trial terms and the button all sit OUTSIDE the
+                // ScrollView above, so everything the user needs in order to
+                // decide is on screen on every device. Previously the plans and
+                // the disclosure were the last children of the ScrollView,
+                // which meant that on shorter phones the monthly card was
+                // clipped by the button bar and the disclosure sat below the
+                // fold entirely.
+                //
+                // Gated on offerings alone — NOT on isLoading — so the moment a
+                // package resolves the real plans replace the placeholder, and
+                // a background refresh never flickers loaded prices back to a
+                // spinner. The retry control doubles as the in-progress
+                // indicator in the not-yet-loaded branch.
                 if viewModel.offerings != nil {
+                    plansSection
                     continueButton
+                    // Deliberately BELOW the CTA. The trial promise is already
+                    // made twice above it (plan-card badge + button title), so
+                    // this line's job is to clear last-second doubt at the
+                    // moment of the tap rather than to inform, and keeping it
+                    // out of the price→button path shortens that path.
+                    //
+                    // Placement is NOT conditional on trial eligibility — only
+                    // the copy swaps — so the billed-immediately variant, the
+                    // one carrying real Guideline 3.1.2 weight, can never be
+                    // the version that goes missing.
+                    trialDisclosure
                 } else {
+                    pricingStatusSection
                     pricingRetryButton
                 }
 
@@ -412,21 +448,34 @@ struct PaywallView: View {
                 )
             }
 
-            // Trial conversion disclosure — copy flips based on eligibility
-            // so returning users who've already used their trial see
-            // accurate "billed immediately" messaging (Apple 3.1.2).
-            Text(viewModel.isTrialEligible(for: viewModel.selectedPlan)
-                 ? "No payment now. Cancel anytime before your trial ends."
-                 : "Billed immediately. Cancel anytime in App Store settings.")
-                .font(.manropeMedium(size: 12))
-                .foregroundColor(Color(hex: "6B7280"))
-                .multilineTextAlignment(.center)
-                .frame(maxWidth: .infinity, alignment: .center)
-                .padding(.top, 8)
-                .padding(.horizontal, 8)
         }
         .padding(.horizontal, 20)
         .padding(.bottom, 8) // Breathing room before the pinned Continue button
+    }
+
+    // MARK: - Trial Disclosure
+    /// Trial conversion disclosure. The copy flips on eligibility so returning
+    /// users who have already burned their trial on this Apple ID see accurate
+    /// "billed immediately" messaging (Apple Guideline 3.1.2).
+    ///
+    /// Rendered by `body` in the pinned block below the CTA, never inside the
+    /// ScrollView. This is the strongest objection-killer on the screen and the
+    /// ineligible variant is the one with real 3.1.2 weight, so neither may
+    /// depend on the user thinking to scroll.
+    ///
+    /// The 28pt horizontal inset reproduces what this text used to inherit as a
+    /// child of `plansSection` (20pt section inset + 8pt of its own), keeping
+    /// the line-wrap identical to what shipped.
+    private var trialDisclosure: some View {
+        Text(viewModel.isTrialEligible(for: viewModel.selectedPlan)
+             ? "No payment now. Cancel anytime before your trial ends."
+             : "Billed immediately. Cancel anytime in App Store settings.")
+            .font(.manropeMedium(size: 12))
+            .foregroundColor(Color(hex: "6B7280"))
+            .multilineTextAlignment(.center)
+            .frame(maxWidth: .infinity, alignment: .center)
+            .padding(.horizontal, 28)
+            .padding(.bottom, 4)
     }
 
     // MARK: - Pricing Status (inline loading / error shown under the carousel)

@@ -4,13 +4,13 @@
 //
 //  Created by Adnan Khan on 18/12/2025.
 //
+//  The question model itself moved to `Wingman/Quiz/QuizQuestion.swift` — it is
+//  shared with the end-of-lesson quiz, which reads the same `public.questions`
+//  rows. `QuestionType` moved with it. What remains here is the Daily
+//  Practice-specific wire format for recording an answer.
+//
 
 import Foundation
-
-enum QuestionType: String, Codable, CaseIterable {
-    case singleSelect = "single_select"
-    case multipleSelect = "multiple_select"
-}
 
 enum QuestionModule: String, CaseIterable, Codable {
     case mindsetFoundations = "mindset_foundations"
@@ -18,7 +18,7 @@ enum QuestionModule: String, CaseIterable, Codable {
     case conversationalSkills = "conversational_skills"
     case flirtingChemistry = "flirting_chemistry"
     case masteryIntegration = "mastery_integration"
-    
+
     var displayName: String {
         switch self {
         case .mindsetFoundations: return "Mindset & Foundations"
@@ -30,68 +30,21 @@ enum QuestionModule: String, CaseIterable, Codable {
     }
 }
 
-struct DailyPracticeQuestion: Identifiable, Codable {
-    let id: UUID
-    let number: Int
-    let question: String
-    let options: [String]
-    let questionType: QuestionType
-    let correctAnswerIndex: Int? // For single select
-    let correctAnswerIndices: [Int]? // For multiple select
-    let explanation: String
-    
-    // Single select initializer
-    init(number: Int, question: String, options: [String], correctAnswerIndex: Int, explanation: String) {
-        self.id = UUID()
-        self.number = number
-        self.question = question
-        self.options = options
-        self.questionType = .singleSelect
-        self.correctAnswerIndex = correctAnswerIndex
-        self.correctAnswerIndices = nil
-        self.explanation = explanation
-    }
-    
-    // Multiple select initializer
-    init(number: Int, question: String, options: [String], correctAnswerIndices: [Int], explanation: String) {
-        self.id = UUID()
-        self.number = number
-        self.question = question
-        self.options = options
-        self.questionType = .multipleSelect
-        self.correctAnswerIndex = nil
-        self.correctAnswerIndices = correctAnswerIndices
-        self.explanation = explanation
-    }
-    
-    // Full initializer for Supabase
-    init(id: UUID, number: Int, question: String, options: [String], questionType: QuestionType, correctAnswerIndex: Int?, correctAnswerIndices: [Int]?, explanation: String) {
-        self.id = id
-        self.number = number
-        self.question = question
-        self.options = options
-        self.questionType = questionType
-        self.correctAnswerIndex = correctAnswerIndex
-        self.correctAnswerIndices = correctAnswerIndices
-        self.explanation = explanation
-    }
-}
-
 // MARK: - Supporting Models
 struct SelectedAnswers: Codable {
     let singleSelect: Int?
     let multipleSelect: [Int]?
-    
+
     enum CodingKeys: String, CodingKey {
         case singleSelect = "single_select"
         case multipleSelect = "multiple_select"
     }
-    
+
     init(singleSelect: Int) {
         self.singleSelect = singleSelect
         self.multipleSelect = nil
     }
-    
+
     init(multipleSelect: [Int]) {
         self.singleSelect = nil
         self.multipleSelect = multipleSelect

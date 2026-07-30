@@ -83,9 +83,25 @@ struct ProfileView: View {
                                             
                                     }
                                     
-                                    Text(userProfileStore.displayName ?? "")
-                                        .font(.manropeMedium(size: 18))
-                                        .foregroundColor(.wingmanBlack)
+                                    // Placeholder rather than an empty row when
+                                    // no name is set — otherwise the card reads
+                                    // as broken (avatar, blank space, chevron)
+                                    // and gives no hint that it's editable.
+                                    // Muted colour marks it as a prompt, not a
+                                    // value. Guests reach Profile without ever
+                                    // being asked for a name, so this is the
+                                    // common state now, not an edge case.
+                                    if let name = userProfileStore.displayName?
+                                        .trimmingCharacters(in: .whitespacesAndNewlines),
+                                       !name.isEmpty {
+                                        Text(name)
+                                            .font(.manropeMedium(size: 18))
+                                            .foregroundColor(.wingmanBlack)
+                                    } else {
+                                        Text("Add your name")
+                                            .font(.manropeMedium(size: 18))
+                                            .foregroundColor(Color.wingmanBlack.opacity(0.4))
+                                    }
                                     
                                     Spacer()
                                     
@@ -286,12 +302,18 @@ private struct SaveProgressBanner: View {
         VStack(alignment: .leading, spacing: 10) {
             HStack(alignment: .top, spacing: 12) {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Save your \(approachCount) approaches")
+                    // Pluralised: the first threshold is 1, so the singular case
+                    // is the common one, not an edge case.
+                    Text(approachCount == 1
+                         ? "Save your first approach"
+                         : "Save your \(approachCount) approaches")
                         .font(.manropeSemiBold(size: 16))
                         .foregroundColor(.wingmanBlack)
                         .fixedSize(horizontal: false, vertical: true)
 
-                    Text("They're on this device only. An account keeps them if you change phones.")
+                    Text(approachCount == 1
+                         ? "It's on this device only. An account keeps it if you change phones."
+                         : "They're on this device only. An account keeps them if you change phones.")
                         .font(.manropeRegular(size: 13))
                         .foregroundColor(Color.wingmanBlack.opacity(0.55))
                         .fixedSize(horizontal: false, vertical: true)

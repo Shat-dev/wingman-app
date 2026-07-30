@@ -56,10 +56,6 @@ struct SecondChanceOfferView: View {
                             offerCard
                                 .padding(.horizontal, 20)
                                 .padding(.top, 8)
-
-                            disclosureText
-                                .padding(.horizontal, 24)
-                                .padding(.top, 4)
                         } else {
                             ProgressView()
                                 .progressViewStyle(CircularProgressViewStyle(tint: .wingmanBlack))
@@ -71,6 +67,18 @@ struct SecondChanceOfferView: View {
 
                 if viewModel.package != nil {
                     continueButton
+
+                    // Pinned below the CTA, never inside the ScrollView above,
+                    // matching PaywallView. This is the longest and most
+                    // legally load-bearing disclosure in the app — discounted
+                    // first year AND a different renewal price (Guideline
+                    // 3.1.2) — so it is the one that could least afford to end
+                    // up below the fold. This screen has room to spare today;
+                    // pinning is preventive, since the copy interpolates two
+                    // localized price strings and can grow.
+                    disclosureText
+                        .padding(.horizontal, 24)
+                        .padding(.bottom, 4)
                 }
 
                 footerLinks

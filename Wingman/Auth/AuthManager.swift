@@ -237,7 +237,13 @@ final class AuthManager: ObservableObject {
     /// protecting, ask again when there is materially more at stake, and then
     /// leave the user alone. A permanently-visible banner is a nag, and a
     /// user who has declined twice has answered.
-    static let guestAccountPromptThresholds = [5, 25]
+    ///
+    /// First threshold is 1, not 5: a single logged approach is already a real
+    /// event the user went out and did, and losing it is the thing this prompt
+    /// exists to prevent. The original 5 was chosen to avoid nagging someone
+    /// with nothing at stake — but at zero logs the banner does not show at all,
+    /// which already covers that.
+    static let guestAccountPromptThresholds = [1, 25]
 
     /// Whether Profile should offer this guest an account right now.
     func shouldShowGuestAccountPrompt(approachCount: Int) -> Bool {
@@ -526,6 +532,11 @@ final class AuthManager: ObservableObject {
                     // users who reinstall / switch devices don't lose progress.
                     // Non-blocking; merges cloud + local and pushes back up.
                     await LessonDataService.shared.hydrateLessonProgressFromCloud()
+                    // Sync the end-of-lesson question set. Hooked here rather than at
+                    // app launch because RLS on `questions` requires the `authenticated`
+                    // role — running it before auth bootstrap would 401 on cold start.
+                    // Cheap: a one-row watermark check unless content actually changed.
+                    await LessonQuestionStore.shared.refresh()
 
                     log("✅ User signed in: \(session.user.email ?? "unknown")")
                     log("🎯 Auth state updated - RootView should now react")
@@ -685,6 +696,11 @@ final class AuthManager: ObservableObject {
                     // after session restoration so returning users (including
                     // post-reinstall) get their course progress back.
                     await LessonDataService.shared.hydrateLessonProgressFromCloud()
+                    // Sync the end-of-lesson question set. Hooked here rather than at
+                    // app launch because RLS on `questions` requires the `authenticated`
+                    // role — running it before auth bootstrap would 401 on cold start.
+                    // Cheap: a one-row watermark check unless content actually changed.
+                    await LessonQuestionStore.shared.refresh()
 
                     // ✅ NEW: If user was anonymous and already paid, skip paywall
                     let anonymousManager = AnonymousUserManager.shared
@@ -2064,6 +2080,11 @@ final class AuthManager: ObservableObject {
         await checkUserPostDemoWallStatus(userId: userId)
 
         await LessonDataService.shared.hydrateLessonProgressFromCloud()
+        // Sync the end-of-lesson question set. Hooked here rather than at
+        // app launch because RLS on `questions` requires the `authenticated`
+        // role — running it before auth bootstrap would 401 on cold start.
+        // Cheap: a one-row watermark check unless content actually changed.
+        await LessonQuestionStore.shared.refresh()
 
         PostHogSDK.shared.capture("account_linked", properties: [
             "method": session.user.appMetadata["provider"]?.stringValue ?? "unknown"

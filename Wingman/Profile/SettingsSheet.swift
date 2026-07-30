@@ -23,6 +23,7 @@ struct SettingsSheet: View {
     @State private var showingSuccessAlert = false
     @State private var successMessage = ""
     @State private var safariLink: IdentifiableURL?
+    @State private var showCreateAccount = false
     let userName: String
     
     var body: some View {
@@ -90,6 +91,29 @@ struct SettingsSheet: View {
                                 .font(.manropeRegular(size: 13))
                                 .foregroundColor(Color.wingmanBlack.opacity(0.55))
                                 .fixedSize(horizontal: false, vertical: true)
+
+                            // The permanent way in.
+                            //
+                            // The Profile banner is threshold-triggered and
+                            // dismissible — once declined it does not return
+                            // until 25 approaches, so a user who changes their
+                            // mind a minute later previously had no route to an
+                            // account at all. Settings is the natural home for
+                            // an always-available, never-nagging entry point.
+                            Button {
+                                HapticManager.shared.mediumImpact()
+                                showCreateAccount = true
+                            } label: {
+                                Text("Create a free account")
+                                    .font(.manropeSemiBold(size: 14))
+                                    .foregroundColor(.wingmanWhiteFF)
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 44)
+                                    .background(Color.wingmanBlack)
+                                    .cornerRadius(5)
+                            }
+                            .buttonStyle(ScalePressStyle())
+                            .padding(.top, 8)
                         } else {
                             HStack(spacing: 8) {
                                 // Provider icon reflects how the user actually signed in.
@@ -337,6 +361,22 @@ struct SettingsSheet: View {
             }
             .disabled(isDeleting) // Disable interaction during deletion
         .animation(.easeInOut, value: isDeleting)
+        .sheet(isPresented: $showCreateAccount) {
+            NavigationStack {
+                AuthView(
+                    mode: .signup,
+                    context: .saveProgress,
+                    onSkip: { showCreateAccount = false }
+                )
+            }
+            .appDynamicTypeCeiling()
+        }
+        .onChange(of: authManager.isGuestSession) { isGuest in
+            // Linked successfully — close the sheet rather than leaving the user
+            // on a screen whose purpose is now satisfied. Settings itself stays
+            // open and re-renders into the signed-in Account section.
+            if !isGuest { showCreateAccount = false }
+        }
         .alert(authManager.isGuestSession ? "Delete my data" : "Delete Account",
                isPresented: $showingDeleteAlert) {
             Button("Cancel", role: .cancel) { }

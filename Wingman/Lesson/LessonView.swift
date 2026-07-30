@@ -12,9 +12,10 @@ struct LessonView: View {
 
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var tabBarVisibility: TabBarVisibilityManager
+    @StateObject private var featureFlags = FeatureFlags.shared
     @State private var currentScreenIndex: Int = -1  // -1 means intro screen
     @State private var currentContentIndex: Int = -1 // Index within current screen's content
-    @State private var showLessonComplete = false
+    @State private var showEndOfLesson = false
     @State private var screenTransitionDirection: Edge = .trailing
 
     // Analytics: stamped on first appearance so `lesson_completed` can report
@@ -174,10 +175,26 @@ struct LessonView: View {
         .onDisappear {
             tabBarVisibility.showTabBar()
         }
-        .fullScreenCover(isPresented: $showLessonComplete) {
-            LessonCompleteView(
+        .fullScreenCover(isPresented: $showEndOfLesson) {
+            LessonQuizFlowView(
+                lesson: lesson,
+                questions: quizQuestions,
                 nextLessonInfo: getNextLessonInfo(),
-                onContinue: {
+                onComplete: {
+                    // Analytics fires here rather than when the reading ends.
+                    // Previously `lesson_completed` was captured ~2s before
+                    // `markLessonCompleted` ran, so a force-quit on the
+                    // completion screen left PostHog and stored progress
+                    // disagreeing. With a quiz in between that window would be
+                    // ~60s and abandonment there is expected, not exceptional —
+                    // so the event and the write now happen together, and
+                    // `lesson_quiz_abandoned` carries the drop-off signal.
+                    var properties = lessonProperties
+                    if let startedAt {
+                        properties["duration_seconds"] = Analytics.elapsedSeconds(since: startedAt)
+                    }
+                    Analytics.capture(Analytics.Event.lessonCompleted, properties)
+
                     LessonDataService.shared.markLessonCompleted(
                         lessonId: lesson.id,
                         courseId: lesson.courseId
@@ -270,24 +287,43 @@ struct LessonView: View {
                 }
                 log("➡️ Next screen (\(currentScreenIndex)), Content 0")
             } else {
-                // Last screen, last content - lesson complete
-                log("✅ Lesson complete!")
+                // Last screen, last content — the reading is done. Whether the
+                // lesson is *complete* now depends on the knowledge check; see
+                // the cover's `onComplete`.
+                log("✅ Lesson reading finished!")
                 HapticManager.shared.success()
 
-                // Analytics: genuine completion only — this branch is reached
-                // solely by advancing past the final paragraph of the final
-                // screen. Backing out or dismissing never lands here.
-                var properties = lessonProperties
-                if let startedAt {
-                    properties["duration_seconds"] = Analytics.elapsedSeconds(since: startedAt)
+                // Surface lessons that have no questions to serve — either
+                // un-authored content or a cache that hasn't synced yet. Without
+                // this the fallthrough is silent and invisible in the funnel.
+                if featureFlags.lessonQuizEnabled && quizQuestions.isEmpty {
+                    var properties = lessonProperties
+                    properties["reason"] = "no_questions"
+                    Analytics.capture(Analytics.Event.lessonQuizUnavailable, properties)
                 }
-                Analytics.capture(Analytics.Event.lessonCompleted, properties)
 
-                showLessonComplete = true
+                showEndOfLesson = true
             }
         }
     }
     
+    // MARK: - Knowledge Check
+    //
+    // Empty means no check: the cover goes straight to `LessonCompleteView` and
+    // the lesson finishes exactly as it did before this feature existed. That
+    // happens when the flag is off, when the lesson has no authored questions,
+    // or when the question cache is still cold on a fresh offline install.
+    private var quizQuestions: [QuizQuestion] {
+        #if DEBUG
+        // Launch argument: -skipLessonQuiz YES — 94 lessons behind a mandatory
+        // check is punishing to QA. Mirrors PracticeService.forceUnlockForTesting.
+        if UserDefaults.standard.bool(forKey: "skipLessonQuiz") { return [] }
+        #endif
+
+        guard featureFlags.lessonQuizEnabled else { return [] }
+        return LessonQuestionStore.shared.questions(forLessonId: lesson.id)
+    }
+
     private func getNextLessonInfo() -> NextLessonInfo? {
         if let nextLesson = LessonDataService.shared.getNextLesson(after: lesson) {
             return NextLessonInfo(

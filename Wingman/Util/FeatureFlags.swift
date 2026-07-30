@@ -58,7 +58,25 @@ final class FeatureFlags: ObservableObject {
     /// guest session keep it; the flag gates creation, not use.
     @Published private(set) var guestSessionsEnabled: Bool = true
 
+    /// Whether a lesson requires passing a short knowledge check before it can
+    /// be marked complete.
+    ///
+    /// **Ships `false`.** This adds mandatory friction to the single path that
+    /// drives next-lesson unlock, next-course unlock, all fifteen scenario
+    /// unlocks, and the Home progress card. If lesson completion rate drops,
+    /// everything downstream slows with it — so it goes out dark and gets
+    /// turned on for a cohort once one course's questions are authored. The
+    /// number that decides the rollout is `lesson_completed` per
+    /// `lesson_started`, against `lesson_quiz_abandoned`.
+    ///
+    /// Phrased as an enable switch rather than a kill switch (unlike
+    /// `guest_sessions_disabled`) because off is the safe default here: an
+    /// absent flag or a `/decide` failure leaves lessons behaving exactly as
+    /// they do today.
+    @Published private(set) var lessonQuizEnabled: Bool = false
+
     private static let postDemoWallHardKey = "post_demo_wall_hard"
+    private static let lessonQuizEnabledKey = "lesson_quiz_enabled"
 
     /// Deliberately phrased as a **kill switch**, not an enable switch.
     ///
@@ -111,6 +129,28 @@ final class FeatureFlags: ObservableObject {
         }
 
         readGuestSessionsEnabled()
+        readLessonQuizEnabled()
+    }
+
+    private func readLessonQuizEnabled() {
+        #if DEBUG
+        // Launch argument: -lessonQuizEnabled YES
+        // Required to exercise the quiz at all before the PostHog flag exists.
+        if UserDefaults.standard.object(forKey: "lessonQuizEnabled") != nil {
+            let forced = UserDefaults.standard.bool(forKey: "lessonQuizEnabled")
+            if lessonQuizEnabled != forced {
+                lessonQuizEnabled = forced
+            }
+            log("🚩 FeatureFlags: lessonQuizEnabled OVERRIDDEN locally = \(forced)")
+            return
+        }
+        #endif
+
+        let value = PostHogSDK.shared.isFeatureEnabled(Self.lessonQuizEnabledKey)
+        if lessonQuizEnabled != value {
+            log("🚩 FeatureFlags: lessonQuizEnabled \(lessonQuizEnabled) → \(value)")
+            lessonQuizEnabled = value
+        }
     }
 
     private func readGuestSessionsEnabled() {

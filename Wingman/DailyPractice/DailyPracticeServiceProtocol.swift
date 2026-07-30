@@ -10,7 +10,7 @@ import Supabase
 
 // MARK: - Service Protocol
 protocol DailyPracticeServiceProtocol {
-    func getTodayQuestions() async throws -> [DailyPracticeQuestion]
+    func getTodayQuestions() async throws -> [QuizQuestion]
     func submitCompletion(questionId: UUID, selectedAnswers: SelectedAnswers, isCorrect: Bool) async throws -> CompletionResponse
     func isTodaysPracticeCompleted() async throws -> Bool
     func getDailyPracticeStatus() async throws -> DailyPracticeStatus
@@ -117,7 +117,7 @@ class DailyPracticeService: DailyPracticeServiceProtocol {
         return SupabaseManager.shared.client
     }
     
-    func getTodayQuestions() async throws -> [DailyPracticeQuestion] {
+    func getTodayQuestions() async throws -> [QuizQuestion] {
         // Check network connectivity first
         guard NetworkMonitor.shared.isConnected else {
             throw DailyPracticeError.networkError
@@ -142,10 +142,10 @@ class DailyPracticeService: DailyPracticeServiceProtocol {
                 .value
             
             // Convert Supabase models to your app models
-            let questions = supabaseQuestions.map { supabaseQ -> DailyPracticeQuestion in
+            let questions = supabaseQuestions.map { supabaseQ -> QuizQuestion in
                 let questionType: QuestionType = supabaseQ.questionType == "single_select" ? .singleSelect : .multipleSelect
                 
-                return DailyPracticeQuestion(
+                return QuizQuestion(
                     id: supabaseQ.questionId,
                     number: supabaseQ.questionNumber,
                     question: supabaseQ.questionText,

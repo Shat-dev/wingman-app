@@ -310,8 +310,10 @@ struct AuthView: View {
             return "Right now it's tied to this device. An account keeps your subscription and progress if you switch phones."
         case .saveProgress:
             // Names the specific thing at risk. Everything else in the app is
-            // content that can be re-served; the approach log is not.
-            return "Your approaches are saved on this device only. An account keeps them if you lose or change your phone."
+            // content that can be re-served; the approach log is not. Phrased
+            // around "log" rather than a count so it reads correctly whether the
+            // user has one approach or fifty.
+            return "Your approach log is saved on this device only. An account keeps it if you lose or change your phone."
         case .voluntary:
             return "Save your progress, sync across devices, and more."
         }
@@ -400,6 +402,13 @@ struct AuthView: View {
                 RoundedRectangle(cornerRadius: 5)
                     .stroke(Color.gray.opacity(0.6), lineWidth: 1)
             )
+            // The label has no fill — just a stroked overlay — so SwiftUI
+            // hit-tests only the opaque content, i.e. the icon and the text
+            // glyphs. Everything inside the border but outside the words was
+            // dead, which reads as "the button only works in the middle".
+            // `.contentShape` makes the whole frame tappable. Same fix the back
+            // chevron above already uses.
+            .contentShape(Rectangle())
         }
         .buttonStyle(ScalePressStyle())
     }
