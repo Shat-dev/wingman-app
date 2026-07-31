@@ -50,6 +50,12 @@
             ReferencedContainer = "container:Wingman.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "-lessonQuizEnabled YES"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <StoreKitConfigurationFileReference
          identifier = "../../Wingman/storekitconfig.storekit">
       </StoreKitConfigurationFileReference>

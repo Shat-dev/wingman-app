@@ -73,10 +73,23 @@ struct LessonView: View {
         return position
     }
     
+    /// Paragraphs plus knowledge-check questions — one continuous scale across
+    /// the whole lesson.
+    ///
+    /// Reading used to be denominated by paragraphs alone, so the bar hit 100%
+    /// on the final paragraph and then appeared to jump *backwards* when the
+    /// quiz opened. Counting the questions as steps means reading now fills to
+    /// `totalContentCount / totalStepCount` and the quiz carries it the rest of
+    /// the way. With no questions the denominator collapses back to the
+    /// paragraph count, so a lesson without a check behaves exactly as before.
+    private var totalStepCount: Int {
+        totalContentCount + quizQuestions.count
+    }
+
     // Progress as a percentage (0.0 to 1.0)
     private var progress: Double {
-        guard totalContentCount > 0 else { return 0 }
-        return Double(currentProgressPosition) / Double(totalContentCount)
+        guard totalStepCount > 0 else { return 0 }
+        return Double(currentProgressPosition) / Double(totalStepCount)
     }
     
     var body: some View {
@@ -179,6 +192,7 @@ struct LessonView: View {
             LessonQuizFlowView(
                 lesson: lesson,
                 questions: quizQuestions,
+                readingStepCount: totalContentCount,
                 nextLessonInfo: getNextLessonInfo(),
                 onComplete: {
                     // Analytics fires here rather than when the reading ends.
@@ -293,6 +307,19 @@ struct LessonView: View {
                 log("✅ Lesson reading finished!")
                 HapticManager.shared.success()
 
+                // One line that answers "why didn't the knowledge check appear?"
+                // without another round trip. Covers all four causes: flag off,
+                // Release build (where the launch-argument override is compiled
+                // out), cache never synced, and lesson with no authored questions.
+                let cached = LessonQuestionStore.shared.questionsByLesson
+                log("""
+                    🧠 End-of-lesson gate — \
+                    quizEnabled=\(featureFlags.lessonQuizEnabled) \
+                    debugOverrideCompiledIn=\(Self.debugOverrideCompiledIn) \
+                    cachedLessons=\(cached.count) \
+                    questionsFor\(lesson.id)=\(cached[lesson.id]?.count ?? 0)
+                    """)
+
                 // Surface lessons that have no questions to serve — either
                 // un-authored content or a cache that hasn't synced yet. Without
                 // this the fallthrough is silent and invisible in the funnel.
@@ -313,12 +340,23 @@ struct LessonView: View {
     // the lesson finishes exactly as it did before this feature existed. That
     // happens when the flag is off, when the lesson has no authored questions,
     // or when the question cache is still cold on a fresh offline install.
-    private var quizQuestions: [QuizQuestion] {
+    /// Whether `-lessonQuizEnabled YES` can work in this build at all. The
+    /// override lives behind `#if DEBUG`, so it is inert in Release — where the
+    /// only way to turn the quiz on is the PostHog flag.
+    private static var debugOverrideCompiledIn: Bool {
         #if DEBUG
-        // Launch argument: -skipLessonQuiz YES — 94 lessons behind a mandatory
-        // check is punishing to QA. Mirrors PracticeService.forceUnlockForTesting.
-        if UserDefaults.standard.bool(forKey: "skipLessonQuiz") { return [] }
+        return true
+        #else
+        return false
         #endif
+    }
+
+    private var quizQuestions: [QuizQuestion] {
+        // Launch argument: -skipLessonQuiz YES — 94 lessons behind a mandatory
+        // check is punishing to QA. Available in Release for the same reason as
+        // the enable flag (see FeatureFlags.readLessonQuizEnabled): the flows
+        // worth testing are behind a paywall, and paywalls need Release.
+        if UserDefaults.standard.bool(forKey: "skipLessonQuiz") { return [] }
 
         guard featureFlags.lessonQuizEnabled else { return [] }
         return LessonQuestionStore.shared.questions(forLessonId: lesson.id)

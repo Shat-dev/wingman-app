@@ -5,8 +5,8 @@
 
 import SwiftUI
 
-/// The end-of-lesson knowledge check: a short intro, the questions, then the
-/// existing `LessonCompleteView`.
+/// The end-of-lesson knowledge check: the questions, then the existing
+/// `LessonCompleteView`.
 ///
 /// Presented from `LessonView` as a `.fullScreenCover`, replacing the cover
 /// that previously showed `LessonCompleteView` directly. A cover rather than a
@@ -24,6 +24,11 @@ struct LessonQuizFlowView: View {
 
     let lesson: Lesson
     let questions: [QuizQuestion]
+
+    /// Paragraphs already read, so the progress bar can continue from where the
+    /// reading left off instead of restarting. See `totalStepCount`.
+    let readingStepCount: Int
+
     let nextLessonInfo: NextLessonInfo?
 
     /// Runs when the user taps Continue on the completion screen — the point at
@@ -37,7 +42,6 @@ struct LessonQuizFlowView: View {
     @State private var startedAt: Date?
 
     private enum Step {
-        case intro
         case questions
         case complete
     }
@@ -45,15 +49,17 @@ struct LessonQuizFlowView: View {
     init(
         lesson: Lesson,
         questions: [QuizQuestion],
+        readingStepCount: Int,
         nextLessonInfo: NextLessonInfo?,
         onComplete: @escaping () -> Void
     ) {
         self.lesson = lesson
         self.questions = questions
+        self.readingStepCount = readingStepCount
         self.nextLessonInfo = nextLessonInfo
         self.onComplete = onComplete
         _engine = State(initialValue: QuizEngine(questions: questions))
-        _step = State(initialValue: questions.isEmpty ? .complete : .intro)
+        _step = State(initialValue: questions.isEmpty ? .complete : .questions)
     }
 
     /// Shared analytics identity, matching `LessonView.lessonProperties`.
@@ -65,14 +71,23 @@ struct LessonQuizFlowView: View {
         ]
     }
 
-    /// The lesson's progress bar continues into the quiz rather than restarting,
-    /// so it stays obvious this is still the same lesson. Reading fills to 80%;
-    /// the check fills the rest.
+    /// Paragraphs + questions, matching `LessonView.totalStepCount` exactly.
+    /// Both views must denominate by the same total or the bar jumps when the
+    /// cover appears.
+    private var totalStepCount: Int {
+        readingStepCount + questions.count
+    }
+
+    /// Picks up precisely where the reading left off: the final paragraph put
+    /// the bar at `readingStepCount / totalStepCount`, and question 1 advances
+    /// it by one step.
     private var overallProgress: Double {
+        guard totalStepCount > 0 else { return 1.0 }
         switch step {
-        case .intro:    return 0.8
-        case .questions: return 0.8 + 0.2 * engine.progress
-        case .complete:  return 1.0
+        case .questions:
+            return Double(readingStepCount + engine.currentQuestionIndex + 1) / Double(totalStepCount)
+        case .complete:
+            return 1.0
         }
     }
 
@@ -81,8 +96,6 @@ struct LessonQuizFlowView: View {
             Color.white.ignoresSafeArea()
 
             switch step {
-            case .intro:
-                introView
             case .questions:
                 questionsView
             case .complete:
@@ -95,107 +108,44 @@ struct LessonQuizFlowView: View {
         .animation(.easeInOut(duration: 0.3), value: engine.hasCheckedAnswer)
         .animation(.easeInOut(duration: 0.2), value: engine.selectedOptionIndex)
         .animation(.easeInOut(duration: 0.2), value: engine.selectedOptionIndices)
-    }
+        .onAppear {
+            // The check begins the moment the cover opens — there is no intro
+            // step to gate it behind. Guarded so a re-appear can't emit a second
+            // start for the same sitting.
+            guard startedAt == nil, !questions.isEmpty else { return }
+            startedAt = Date()
 
-    // MARK: - Top Bar
-
-    /// Same geometry as `LessonView`'s reading bar so the transition into the
-    /// check doesn't shift the chrome.
-    private var topBar: some View {
-        HStack(spacing: 10) {
-            Button {
-                handleBack()
-            } label: {
-                Image(systemName: "chevron.left")
-                    .font(.system(size: 22))
-                    .foregroundColor(.wingmanBlack)
-                    .frame(width: 44, height: 44, alignment: .center)
-                    .contentShape(Rectangle())
-            }
-            .buttonStyle(ScalePressStyle())
-
-            QuizProgressBar(progress: overallProgress)
-        }
-        .padding(.top, 8)
-        .padding(.leading, 5)
-        .padding(.trailing, 59)
-    }
-
-    /// Course above lesson, so it reads as "still inside this lesson".
-    private var lessonHeader: some View {
-        VStack(spacing: 2) {
-            Text(lesson.courseTitle)
-                .font(.manropeMedium(size: 12))
-                .foregroundColor(Color(hex: "1A1A1A"))
-                .opacity(0.5)
-
-            Text(lesson.title)
-                .font(.manropeSemiBold(size: 14))
-                .foregroundColor(.wingmanBlack)
-                .multilineTextAlignment(.center)
-                .lineLimit(2)
-        }
-        .frame(maxWidth: .infinity)
-        .padding(.horizontal, 20)
-    }
-
-    // MARK: - Intro
-    //
-    // One tap, but it earns its place: the reading UI advances on a tap
-    // *anywhere*, the quiz needs a tap on a specific option. Without a beat
-    // between them, the tap that ends the lesson can land on an answer.
-
-    private var introView: some View {
-        VStack(spacing: 0) {
-            topBar
-            lessonHeader
-                .padding(.top, 10)
-
-            Spacer()
-
-            VStack(spacing: 12) {
-                Text("Knowledge Check")
-                    .font(.manropeSemiBold(size: 28))
-                    .foregroundColor(.wingmanBlack)
-                    .kerning(-0.3)
-
-                Text(questions.count == 1
-                     ? "Answer 1 quick question to complete this lesson."
-                     : "Answer \(questions.count) quick questions to complete this lesson.")
-                    .font(.manropeMedium(size: 16))
-                    .foregroundColor(.wingmanBlack.opacity(0.7))
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 40)
-            }
-
-            Spacer()
-
-            Button(action: {
-                HapticManager.shared.mediumImpact()
-                startQuestions()
-            }) {
-                Text("Start")
-                    .font(.manropeSemiBold(size: 16))
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 52)
-                    .background(Color.wingmanBlack)
-                    .cornerRadius(5)
-            }
-            .buttonStyle(ScalePressStyle())
-            .padding(.horizontal, 20)
-            .padding(.bottom, 40)
+            var properties = lessonProperties
+            properties["question_count"] = questions.count
+            Analytics.capture(Analytics.Event.lessonQuizStarted, properties)
         }
     }
 
     // MARK: - Questions
 
+    /// Top bar geometry is identical to `LessonView`'s reading bar — same 44pt
+    /// chevron, same paddings — so the chrome doesn't shift when the cover
+    /// appears over the lesson.
     private var questionsView: some View {
         VStack(spacing: 0) {
-            topBar
-            lessonHeader
-                .padding(.top, 10)
-                .padding(.bottom, 4)
+            HStack(spacing: 10) {
+                Button {
+                    handleBack()
+                } label: {
+                    Image(systemName: "chevron.left")
+                        .font(.system(size: 22))
+                        .foregroundColor(.wingmanBlack)
+                        .frame(width: 44, height: 44, alignment: .center)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(ScalePressStyle())
+
+                QuizProgressBar(progress: overallProgress)
+            }
+            .padding(.top, 8)
+            .padding(.leading, 5)
+            .padding(.trailing, 59)
+            .padding(.bottom, 10)
 
             QuizQuestionView(
                 state: engine.questionState,
@@ -216,15 +166,6 @@ struct LessonQuizFlowView: View {
     }
 
     // MARK: - Flow
-
-    private func startQuestions() {
-        startedAt = Date()
-        step = .questions
-
-        Analytics.capture(Analytics.Event.lessonQuizStarted, lessonProperties.merging([
-            "question_count": questions.count
-        ]) { _, new in new })
-    }
 
     private func handleNext() {
         switch engine.advance() {
@@ -251,14 +192,12 @@ struct LessonQuizFlowView: View {
         case .questions where engine.currentQuestionIndex > 0:
             engine.goBack()
 
-        case .intro, .questions:
+        case .questions:
             // Backing out of the check leaves the lesson incomplete — the user
             // returns to the last screen they were reading and can retry.
-            if step == .questions {
-                var properties = lessonProperties
-                properties["questions_answered"] = engine.answeredCount
-                Analytics.capture(Analytics.Event.lessonQuizAbandoned, properties)
-            }
+            var properties = lessonProperties
+            properties["questions_answered"] = engine.answeredCount
+            Analytics.capture(Analytics.Event.lessonQuizAbandoned, properties)
             dismiss()
 
         case .complete:

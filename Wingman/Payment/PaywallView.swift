@@ -83,23 +83,99 @@ struct PaywallView: View {
     // than from an incidental re-mount.
     @State private var appearedAt: Date?
 
-    /// Carousel height that scales with Dynamic Type so the bullets (which
-    /// already use `.fixedSize`) get more room as text grows instead of being
-    /// clipped by the fixed-height paging TabView. Equals the original 405 at
-    /// the default text size — no visual change until the app-wide ceiling is
-    /// raised above `.large`.
-    // Carousel heights, sized to the space left over once the commitment block
-    // (plan cards + CTA + disclosure + footer, ~350-365pt) is pinned below —
-    // see the layout note in `body`. Reduced from the previous flat 405pt: at
-    // 405 the carousel plus its page dots no longer fit the remaining room on a
-    // 6.1" phone, which pushed the dots off-screen. 350 fits without scrolling
-    // and costs the illustration ~20pt of height.
+    // MARK: - Adaptive carousel sizing
     //
-    // Scales with Dynamic Type so the bullets gain room rather than being
-    // truncated by the fixed-height paging TabView, for when the app-wide
-    // `.large` ceiling is eventually raised.
-    @ScaledMetric(relativeTo: .body) private var carouselHeight: CGFloat = 350
-    @ScaledMetric(relativeTo: .body) private var carouselHeightSmall: CGFloat = 250
+    // The carousel is MEASURED, not constant. Two earlier attempts used
+    // hand-computed heights (a flat 405, then 350/250 split on `isSmallPhone`)
+    // and both clipped, for the same reason: the constants were derived from
+    // page 1's bullet count, while the densest page wraps to six lines on a
+    // 375pt-wide screen. A paging TabView clips rather than grows, so any
+    // constant shorter than the tallest page truncates that page's value props
+    // — and the enclosing ScrollView cannot rescue it, because the TabView's
+    // frame fits inside the scroll content perfectly well.
+    //
+    // `isSmallPhone` was also the wrong axis: it keys on screen HEIGHT, while
+    // what actually drives content height is WIDTH (text wrapping). That is
+    // why the 13 mini (375x812 — tall enough to be classed "not small", narrow
+    // enough to wrap like an SE) clipped as well.
+    //
+    // Measuring removes the guesswork. It also makes the layout
+    // Dynamic-Type-correct for free, since the bullets are measured at the
+    // user's real text size — which is the precondition the `.large` ceiling
+    // further down is waiting on.
+
+    /// Height the ScrollView actually receives — whatever the pinned commitment
+    /// block leaves over. Read from the ScrollView's own geometry rather than
+    /// computed from screen size, so safe areas and the sheet-vs-fullscreen
+    /// presentation difference are accounted for without special-casing.
+    @State private var availableCarouselSpace: CGFloat = 0
+
+    /// Natural height of the tallest page's bullet block. Grows monotonically:
+    /// a paging TabView need not lay out off-screen pages up front, so a
+    /// high-water mark stops the carousel resizing under the user as they swipe
+    /// onto a denser page. The copy is static, so it never needs to shrink.
+    @State private var maxBulletsHeight: CGFloat = 0
+
+    /// Illustration floor. Stops the image absorbing every point of a squeeze
+    /// and collapsing into an unreadable scribble (the SE regression).
+    private let illustrationMinHeight: CGFloat = 100
+
+    /// The original design size, and the ceiling every 390-402pt phone still
+    /// resolves to. Never lowered — see `illustrationMaxHeight`.
+    private let illustrationBaseMaxHeight: CGFloat = 220
+
+    /// Share of the carousel the illustration may claim on screens tall enough
+    /// to have slack. ~0.65 lands the illustration just shy of the space
+    /// available on a Pro Max, leaving the trailing Spacer near zero.
+    private let illustrationHeightFraction: CGFloat = 0.65
+
+    /// Illustration ceiling.
+    ///
+    /// Proportional rather than fixed, because every iPhone in the fleet shares
+    /// essentially one aspect ratio (390x844, 393x852, 402x874 and 440x956 are
+    /// all 0.460-0.462), so a Pro Max is not a different shape — it is the same
+    /// shape ~12% larger. A fixed 220pt ceiling meant the illustration could
+    /// not grow into that extra height, so the slack pooled in the trailing
+    /// Spacer as a ~124pt void between the bullets and the page dots. Scaling
+    /// the ceiling instead reproduces the same composition at a larger size,
+    /// with no width constraint and no side margins.
+    ///
+    /// `max` against the base is the safety property: the ceiling can never
+    /// fall below what shipped, so the illustration can only ever grow, never
+    /// shrink. On 390-402pt phones the image is space-limited far below 220
+    /// anyway, so the ceiling is not the binding constraint there and nothing
+    /// changes — which is why this is a Pro Max-only visual change without
+    /// needing a device check to enforce it.
+    ///
+    /// Note this deliberately does NOT feed `carouselHeight` (which derives
+    /// `needed` from the FLOOR): the carousel's height, the page-dot position,
+    /// scrolling and the pinned block are all unaffected by this value.
+    private var illustrationMaxHeight: CGFloat {
+        max(illustrationBaseMaxHeight, carouselHeight * illustrationHeightFraction)
+    }
+
+    /// The illustration's own 20/15 vertical padding.
+    private let illustrationPadding: CGFloat = 35
+
+    /// The page-indicator row: 8pt dots plus its 12/20 padding.
+    private let pageIndicatorHeight: CGFloat = 40
+
+    /// Height handed to the paging TabView.
+    ///
+    /// The `max` of "space on offer" and "space the tallest page actually
+    /// needs" is the entire fix. The second term makes clipping structurally
+    /// impossible; only once that holds does the surrounding ScrollView become
+    /// a genuine safety valve, because any overflow now lands on the ScrollView
+    /// instead of inside the TabView.
+    private var carouselHeight: CGFloat {
+        // Pre-measurement first pass. A mid-range seed keeps the one-frame
+        // settle imperceptible rather than a collapse-then-expand jump.
+        guard availableCarouselSpace > 0, maxBulletsHeight > 0 else { return 350 }
+
+        let needed = illustrationMinHeight + illustrationPadding + maxBulletsHeight
+        let offered = availableCarouselSpace - pageIndicatorHeight
+        return max(offered, needed)
+    }
 
     init(
         authManager: AuthManager? = nil,
@@ -177,18 +253,24 @@ struct PaywallView: View {
                                 VStack(spacing: 0) {
 
                                     // Image
-                                    // maxHeight, not a fixed height: the paging
-                                    // TabView clips rather than grows, so when
-                                    // the carousel is short (small phones) the
-                                    // illustration has to be the thing that
-                                    // gives. A flexible image compresses while
-                                    // the `.fixedSize` bullets below hold their
-                                    // lines; a fixed one would push them out of
-                                    // the frame and truncate the value props.
+                                    //
+                                    // Ranged, not fixed: the illustration is
+                                    // the element that gives when space is
+                                    // short, since the `.fixedSize` bullets
+                                    // below must keep every line. The floor is
+                                    // load-bearing — without it the image
+                                    // absorbs the entire shortfall and shrinks
+                                    // to ~45pt on an SE. With it, a squeeze
+                                    // that cannot be met becomes a short scroll
+                                    // of the carousel instead, which is the far
+                                    // better failure mode.
                                     Image(page.imageName)
                                         .resizable()
                                         .scaledToFit()
-                                        .frame(maxHeight: 220)
+                                        .frame(
+                                            minHeight: illustrationMinHeight,
+                                            maxHeight: illustrationMaxHeight
+                                        )
                                         .padding(.top, 20)
                                         .padding(.bottom, 15)
 
@@ -214,6 +296,19 @@ struct PaywallView: View {
                                     }
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .padding(.horizontal, 17)
+                                    // Reports this page's bullet height. The
+                                    // key reduces with `max`, so the value
+                                    // arriving at the ScrollView is the tallest
+                                    // page's, whichever page that happens to be
+                                    // and whatever the user's text size.
+                                    .background(
+                                        GeometryReader { geo in
+                                            Color.clear.preference(
+                                                key: BulletsHeightKey.self,
+                                                value: geo.size.height
+                                            )
+                                        }
+                                    )
 
                                     Spacer()
                                 }
@@ -221,7 +316,7 @@ struct PaywallView: View {
                             }
                         }
                         .tabViewStyle(.page(indexDisplayMode: .never))
-                        .frame(height: UIScreen.isSmallPhone ? carouselHeightSmall : carouselHeight)
+                        .frame(height: carouselHeight)
 
                         // MARK: - Page Indicator
                         HStack(spacing: 8) {
@@ -237,6 +332,27 @@ struct PaywallView: View {
                     }
                 }
                 .frame(maxHeight: .infinity)
+                // Reports the height the ScrollView was actually given. A
+                // `.background` reader rather than wrapping the ScrollView in a
+                // GeometryReader: the reader must not influence sizing, only
+                // observe it. Because `carouselHeight` feeds the scroll
+                // CONTENT and never this frame (fixed by `maxHeight: .infinity`
+                // above the pinned block), there is no measurement feedback
+                // loop — the layout settles in one extra pass.
+                .background(
+                    GeometryReader { geo in
+                        Color.clear.preference(
+                            key: AvailableCarouselSpaceKey.self,
+                            value: geo.size.height
+                        )
+                    }
+                )
+                .onPreferenceChange(AvailableCarouselSpaceKey.self) { height in
+                    availableCarouselSpace = height
+                }
+                .onPreferenceChange(BulletsHeightKey.self) { height in
+                    maxBulletsHeight = max(maxBulletsHeight, height)
+                }
 
                 // MARK: - Pinned commitment block
                 //
@@ -701,6 +817,30 @@ struct PaywallView: View {
         formatter.locale = Locale.current
 
         return "only " + (formatter.string(from: weeklyPrice as NSNumber) ?? "$0.00")
+    }
+}
+
+// MARK: - Carousel Measurement Keys
+
+/// Height the carousel's ScrollView was given, i.e. what the pinned commitment
+/// block left over.
+private struct AvailableCarouselSpaceKey: PreferenceKey {
+    static let defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = max(value, nextValue())
+    }
+}
+
+/// Height of a carousel page's bullet block.
+///
+/// Reduces with `max`, so a single reader above the TabView receives the
+/// tallest page's height without needing to know which page that is — the
+/// point being that the densest page, not page 1, is what the carousel has to
+/// be tall enough for.
+private struct BulletsHeightKey: PreferenceKey {
+    static let defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = max(value, nextValue())
     }
 }
 

@@ -496,6 +496,14 @@ final class AuthManager: ObservableObject {
                     await self.loadGuestUserState(userId: session.user.id.uuidString)
                     log("🎭 Guest session signed in: \(session.user.id)")
 
+                    // Lesson quiz questions are global content, not per-user
+                    // state, so guests need them exactly as much as anyone. The
+                    // permanent-account branch's other loads are deliberately
+                    // skipped up here (see the comment above), but none of that
+                    // reasoning applies to a content sync — and a guest holds
+                    // the `authenticated` role that RLS on `questions` requires.
+                    await LessonQuestionStore.shared.refresh()
+
                 } else if let session = session {
                     self.markSessionEstablished(session.user)
                     self.isAuthenticated = true
@@ -671,6 +679,12 @@ final class AuthManager: ObservableObject {
                     self.adoptGuestIdentity(session.user.id.uuidString)
                     await self.loadGuestUserState(userId: session.user.id.uuidString)
                     log("🎭 Guest session restored: \(session.user.id)")
+
+                    // See the .signedIn guest branch — content sync applies to
+                    // guests too. This is the path a returning guest takes on
+                    // every cold launch, so it is the one that actually keeps
+                    // the question cache warm for most users today.
+                    await LessonQuestionStore.shared.refresh()
 
                 } else if let session = session {
                     self.markSessionEstablished(session.user)

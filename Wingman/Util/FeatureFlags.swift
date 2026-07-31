@@ -133,9 +133,18 @@ final class FeatureFlags: ObservableObject {
     }
 
     private func readLessonQuizEnabled() {
-        #if DEBUG
         // Launch argument: -lessonQuizEnabled YES
-        // Required to exercise the quiz at all before the PostHog flag exists.
+        //
+        // Deliberately NOT behind `#if DEBUG`, unlike the two overrides below.
+        // Subscription pricing and purchases only work in a Release build, so
+        // every end-to-end test of a paywalled surface — which a lesson is —
+        // has to happen in Release. A Debug-only override is unusable for
+        // exactly the flows most worth testing.
+        //
+        // Safe to ship: launch arguments populate `NSArgumentDomain` from the
+        // process's argv, and an App Store app launched from the home screen
+        // has no argv beyond its own path. Only a developer running via Xcode
+        // or `simctl` can set this, and the flag still defaults off without it.
         if UserDefaults.standard.object(forKey: "lessonQuizEnabled") != nil {
             let forced = UserDefaults.standard.bool(forKey: "lessonQuizEnabled")
             if lessonQuizEnabled != forced {
@@ -144,7 +153,6 @@ final class FeatureFlags: ObservableObject {
             log("🚩 FeatureFlags: lessonQuizEnabled OVERRIDDEN locally = \(forced)")
             return
         }
-        #endif
 
         let value = PostHogSDK.shared.isFeatureEnabled(Self.lessonQuizEnabledKey)
         if lessonQuizEnabled != value {

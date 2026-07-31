@@ -19,7 +19,7 @@ import Combine
 @MainActor
 final class LessonQuestionStore: ObservableObject {
 
-    static let shared = LessonQuestionStore()
+    static let shared = LessonQuestionStore(service: LessonQuestionService())
 
     // MARK: - State
 
@@ -52,7 +52,18 @@ final class LessonQuestionStore: ObservableObject {
         return dir.appendingPathComponent("lesson_questions.json")
     }
 
-    private init(service: LessonQuestionServiceProtocol = LessonQuestionService()) {
+    /// The service is injected rather than constructed inline so a test can
+    /// drive the store against a stub.
+    ///
+    /// Note it is **not** a defaulted parameter. The project builds with
+    /// `SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor`, so an unannotated type like
+    /// `LessonQuestionService` is implicitly main-actor isolated — and default
+    /// argument expressions are evaluated in a *nonisolated* context, which
+    /// makes `= LessonQuestionService()` a cross-actor call. Passing it from
+    /// `shared` (itself main-actor isolated) keeps the call inside the actor.
+    /// `StreakStore` avoids the same trap by initialising its service as a
+    /// stored property.
+    init(service: LessonQuestionServiceProtocol) {
         self.service = service
         loadFromCache()
     }
