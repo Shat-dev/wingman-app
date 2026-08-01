@@ -14,6 +14,7 @@ struct HomeView: View {
     @EnvironmentObject private var coursesRouter: CoursesRouter
     @EnvironmentObject private var tabBarVisibility: TabBarVisibilityManager
     @EnvironmentObject private var authManager: AuthManager
+    @EnvironmentObject private var walkthrough: WalkthroughCoordinator
 
     @StateObject private var viewModel = HomeViewModel()
     @StateObject private var networkMonitor = NetworkMonitor.shared
@@ -135,7 +136,13 @@ struct HomeView: View {
                                     Button(action: {
                                         if canStart {
                                             HapticManager.shared.mediumImpact()
-                                            if authManager.hasActiveSubscription {
+                                            // Walkthrough interception, ahead
+                                            // of the paywall — daily practice
+                                            // is not part of the script and
+                                            // must not derail it.
+                                            if walkthrough.isIntercepting {
+                                                walkthrough.showNudge(.dailyPractice)
+                                            } else if authManager.hasActiveSubscription {
                                                 navigateToPractice = true
                                             } else {
                                                 showDailyPracticePaywall = true
@@ -598,6 +605,9 @@ extension Course: Hashable {
     // Provide a constant binding for previews
     HomeView(selectedTab: .constant(0))
         .environmentObject(TabBarVisibilityManager())
+        .environmentObject(CoursesRouter())
+        .environmentObject(AuthManager())
+        .environmentObject(WalkthroughCoordinator())
 }
 
 struct HorizontalPanGestureView: UIViewRepresentable {

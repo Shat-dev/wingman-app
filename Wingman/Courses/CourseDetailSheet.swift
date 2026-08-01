@@ -15,6 +15,7 @@ struct CourseDetailSheet: View {
 
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var authManager: AuthManager
+    @EnvironmentObject private var walkthrough: WalkthroughCoordinator
     @State private var lessons: [Lesson] = []
 
     // State-driven navigation for lesson entry (replaces the NavigationLink
@@ -116,18 +117,45 @@ struct CourseDetailSheet: View {
                         VStack(spacing: 12) {
                             ForEach(lessons) { lesson in
                                 LessonCard(lesson: lesson) {
+                                    // Walkthrough interception, ahead of both
+                                    // the progression guard and the paywall.
+                                    // The lessons beat is a look, not a do —
+                                    // the free lesson is collected after the
+                                    // script, not during it.
+                                    if walkthrough.isIntercepting {
+                                        walkthrough.showNudge(.lesson)
+                                        return
+                                    }
+
                                     // Progression-locked: Button is disabled,
                                     // this closure won't fire. Explicit guard
                                     // kept as belt-and-suspenders against
                                     // future refactors.
+                                    //
+                                    // Running FIRST also means the one free
+                                    // lesson can only ever be claimed on a
+                                    // progression-unlocked lesson — a free
+                                    // user cannot spend it on some arbitrary
+                                    // deep lesson they aren't ready for.
                                     guard !lesson.isLocked else { return }
 
-                                    if authManager.hasActiveSubscription {
-                                        lessonToPresent = lesson
-                                        isPresentingLesson = true
-                                    } else {
+                                    guard authManager.canOpenLesson(id: lesson.id) else {
                                         showPaywall = true
+                                        return
                                     }
+
+                                    // Claims the free lesson on OPEN, so
+                                    // backing out and returning is free. No-ops
+                                    // for a subscriber and for re-entry into an
+                                    // already-claimed lesson, so it is safe to
+                                    // call unconditionally here.
+                                    authManager.claimFreeLesson(
+                                        id: lesson.id,
+                                        courseId: lesson.courseId
+                                    )
+
+                                    lessonToPresent = lesson
+                                    isPresentingLesson = true
                                 }
                             }
                         }
@@ -281,4 +309,6 @@ struct LessonCard: View {
             displayOrder: 1
         ))
     }
+    .environmentObject(AuthManager())
+    .environmentObject(WalkthroughCoordinator())
 }

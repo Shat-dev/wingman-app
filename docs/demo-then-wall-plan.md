@@ -1,5 +1,14 @@
 # Demo-then-Ask — Implementation Plan
 
+> **§3, §4, §6 and §7 are superseded by `walkthrough-plan.md`** (2026-08-01).
+> The walkthrough no longer spends a lesson, so "demo mode" stops being a
+> persistent restricted state and becomes a short linear script — which deletes
+> most of §4 (no `.demoMode` lock reason, no `PracticeService` or
+> `CoursesViewModel` changes). §0's flags, §1's routing, §2's wall hardness and
+> §5's second-chance notes remain valid as written. Phase 4 in the phasing table
+> below is **cancelled**, not pending; phases 6-7 are replaced by W0-W7 in the
+> new plan.
+
 > **Partially superseded by `anonymous-auth-plan.md`.** That plan replaces the
 > forced post-paywall account wall with a Supabase anonymous session created at
 > "Skip for now". It supersedes §1's claim that the anonymous branch needs no
@@ -262,10 +271,10 @@ Judge on revenue per install, not on activation rate.
 | **1** | Both flags + persistence + resets | — | ✅ done |
 | **2** | RootView four-way branch; ask renders after demo | 1 | ✅ done |
 | **3** | `.postDemo` source; PostHog flag; offline escape hatch | 2 | ✅ done |
-| **4** | Demo-mode locking across scenarios / courses / daily practice | 1, 2 | next |
+| **4** | Demo-mode locking across scenarios / courses / daily practice | 1, 2 | ❌ cancelled — see `walkthrough-plan.md` §0.1 |
 | **5** | Trial timeline on paywall | — (independent) | |
-| **6** | Walkthrough coordinator + mascot overlay + step hooks | 4 | |
-| **7** | Analytics events | 6 | |
+| **6** | Walkthrough coordinator + mascot overlay + step hooks | 4 | → `walkthrough-plan.md` W4-W6 |
+| **7** | Analytics events | 6 | → `walkthrough-plan.md` W7 |
 
 ### Corrections found while implementing 1-3
 
@@ -304,12 +313,11 @@ brick. Phase 5 is independent and can ship any time.
 
 ## Open items
 
-1. **Scenario 2's unlock threshold.** `required_lessons_completed` is a
-   threshold against `totalLessonsCompleted()` across *all* courses
-   (`Practice.swift:15`). The demo completes one lesson. **If scenario 2's
-   threshold is 1, the demo silently unlocks it.** Check the `scenarios` table
-   before shipping. (Cannot query it from here — the connected Supabase MCP
-   points at a different project.)
+1. ~~**Scenario 2's unlock threshold.**~~ **ANSWERED 2026-08-01** — queried the
+   live `scenarios` table: thresholds run 0, 1, 2, 3, 5, 7, 10 … so scenario 2
+   does require exactly 1 completed lesson. Moot under the revised design: the
+   walkthrough completes **zero** lessons (see `walkthrough-plan.md` §0.3), so
+   nothing is silently unlocked. Tracked there as open item 4.
 2. **Walkthrough abandonment.** If the user force-quits mid-walkthrough,
    `hasCompletedFreeDemo` is still false, so they resume in demo mode. Decide
    whether the coordinator resumes at the last step or restarts. Restarting is

@@ -15,6 +15,11 @@ final class PracticeViewModel: ObservableObject {
     @Published var errorMessage: String?
     @Published var selectedPractice: Practice?
 
+    /// Whether `practices`' completion flags reflect a successful read of
+    /// `user_scenario_progress`. False after a failed fetch, and false while the
+    /// list is being served from the disk cache. See `PracticeFetchResult`.
+    @Published private(set) var progressAvailable = false
+
     /// Session-scoped cache of fetched PracticeGameData keyed by practice ID.
     /// PracticeGameData is immutable scenario content (scenes, text, options),
     /// so caching is always safe. User progress is tracked separately server-side.
@@ -61,10 +66,15 @@ final class PracticeViewModel: ObservableObject {
         isLoading = true
         errorMessage = nil
         do {
-            practices = try await practiceService.fetchPractices()
+            let result = try await practiceService.fetchPractices()
+            practices = result.practices
+            progressAvailable = result.progressAvailable
             Self.saveCachedPractices(practices)
         } catch {
             errorMessage = error.localizedDescription
+            // The list on screen is now either stale cache or empty; either
+            // way its completion flags are not authoritative.
+            progressAvailable = false
         }
         isLoading = false
     }

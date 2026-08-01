@@ -39,6 +39,39 @@ enum Analytics {
         static let practiceScenarioStarted = "practice_scenario_started"
         static let practiceScenarioCompleted = "practice_scenario_completed"
 
+        // First-run walkthrough.
+        //
+        // `walkthrough_suppressed` is the odd one out: it shipped ahead of the
+        // rest because it is the only way to see the suppression decision,
+        // which is otherwise silent and changes the denominator of every
+        // funnel below it. `reason` distinguishes the layers
+        // (`existingProgress`, `scenarioAlreadyComplete`, `freeScenarioUnavailable`,
+        // `scenarioLoadFailed`).
+        //
+        // There is deliberately NO `walkthrough_abandoned`. Abandonment is a
+        // force-quit, which cannot be captured honestly at the moment it
+        // happens; firing something on backgrounding instead would conflate
+        // "took a phone call" with "gave up". `walkthrough_step_viewed` answers
+        // the same question better — it shows exactly which beat loses people,
+        // rather than collapsing all of them into one number.
+        static let walkthroughSuppressed = "walkthrough_suppressed"
+        static let walkthroughStarted = "walkthrough_started"
+        static let walkthroughStepViewed = "walkthrough_step_viewed"
+        static let walkthroughNudgeShown = "walkthrough_nudge_shown"
+        static let walkthroughCompleted = "walkthrough_completed"
+
+        /// Ended without the user finishing it, for a reason the app knows
+        /// about — today, a subscription landing mid-script. Kept apart from
+        /// `walkthrough_completed` so these can never inflate the completion
+        /// rate, which is the one number that says whether the script works.
+        static let walkthroughInterrupted = "walkthrough_interrupted"
+
+        // The one free lesson, released when the walkthrough finishes.
+        // Completion is not a separate event — `lesson_completed` carries an
+        // `is_free_lesson` property instead, so the two never disagree about
+        // what counts as finishing a lesson.
+        static let freeLessonClaimed = "free_lesson_claimed"
+
         // Content engagement — daily practice questions
         static let dailyChallengeStarted = "daily_challenge_started"
         static let dailyChallengeCompleted = "daily_challenge_completed"

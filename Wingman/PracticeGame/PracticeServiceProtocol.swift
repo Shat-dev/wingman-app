@@ -9,7 +9,7 @@ import Supabase
 // MARK: - Protocol
 
 protocol PracticeServiceProtocol: Sendable {
-    func fetchPractices() async throws -> [Practice]
+    func fetchPractices() async throws -> PracticeFetchResult
     func fetchPracticeDetail(practiceId: UUID) async throws -> PracticeDetail?
     func fetchUserProgress(userId: UUID) async throws -> [UserPracticeProgress]
     func updateUserProgress(progress: UserPracticeProgress) async throws
@@ -98,7 +98,7 @@ final class PracticeService: PracticeServiceProtocol {
     }
 
     // MARK: Fetch All Practices
-    nonisolated func fetchPractices() async throws -> [Practice] {
+    nonisolated func fetchPractices() async throws -> PracticeFetchResult {
         // Check network connectivity first
         guard await NetworkMonitor.shared.isConnected else {
             throw PracticeServiceError.networkError
@@ -129,13 +129,23 @@ final class PracticeService: PracticeServiceProtocol {
             .value
 
         let rows = try await scenariosRows
-        let progressRows = await progressRowsOrNil ?? []
+
+        // The progress read is `try?` on purpose — a failure there must not
+        // take the scenario list down with it. But swallowing it also erases
+        // the difference between "this user has completed nothing" and "we
+        // could not find out", and callers that branch on `isCompleted` need
+        // to know which one they are looking at. See `PracticeFetchResult`.
+        let progressRowsOrNilResolved = await progressRowsOrNil
+        if progressRowsOrNilResolved == nil {
+            log("⚠️ Scenario progress read failed — isCompleted will be false for every scenario")
+        }
+        let progressRows = progressRowsOrNilResolved ?? []
 
         let progressMap = Dictionary(
             uniqueKeysWithValues: progressRows.map { ($0.scenarioId, $0) }
         )
 
-        return rows.map { practice in
+        let practices = rows.map { practice in
             var p = practice
             p.isLocked = totalLessons < practice.requiredLessonsCompleted
 
@@ -151,6 +161,11 @@ final class PracticeService: PracticeServiceProtocol {
             }
             return p
         }
+
+        return PracticeFetchResult(
+            practices: practices,
+            progressAvailable: progressRowsOrNilResolved != nil
+        )
     }
 
     // MARK: Fetch Practice Detail
@@ -321,7 +336,9 @@ enum PracticeServiceError: LocalizedError {
 // MARK: - Mock Service (Previews / Unit Tests)
 
 final class MockPracticeService: PracticeServiceProtocol {
-    nonisolated func fetchPractices() async throws -> [Practice] { Practice.mockData }
+    nonisolated func fetchPractices() async throws -> PracticeFetchResult {
+        PracticeFetchResult(practices: Practice.mockData, progressAvailable: true)
+    }
 
     nonisolated func fetchPracticeDetail(practiceId: UUID) async throws -> PracticeDetail? {
         PracticeDetail(

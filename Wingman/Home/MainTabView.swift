@@ -18,8 +18,18 @@ extension Notification.Name {
 
 struct MainTabView: View {
     @State private var selectedTab = 0
+    @EnvironmentObject private var authManager: AuthManager
     @StateObject private var coursesRouter = CoursesRouter()
     @StateObject private var tabBarVisibility = TabBarVisibilityManager()
+
+    /// Owns the first-run walkthrough script. Held here, beside the other two
+    /// shared objects, so it survives tab switches and navigation pushes — the
+    /// script spans all of them.
+    ///
+    /// Dormant until something calls `start(...)`, which nothing does yet: the
+    /// mascot overlay (W5) is what activates it. Injected into all four tabs
+    /// now so the surfaces that feed it are already wired when it wakes up.
+    @StateObject private var walkthrough = WalkthroughCoordinator()
 
     var body: some View {
 
@@ -28,19 +38,23 @@ struct MainTabView: View {
                 HomeView(selectedTab: $selectedTab)
                     .environmentObject(coursesRouter)
                     .environmentObject(tabBarVisibility)
+                    .environmentObject(walkthrough)
                     .tag(0)
 
                 CoursesView()
                     .environmentObject(coursesRouter)
                     .environmentObject(tabBarVisibility)
+                    .environmentObject(walkthrough)
                     .tag(1)
 
                 PracticeView()
                     .environmentObject(tabBarVisibility)
+                    .environmentObject(walkthrough)
                     .tag(2)
 
                 ProfileView()
                     .environmentObject(tabBarVisibility)
+                    .environmentObject(walkthrough)
                     .tag(3)
             }
             .tabViewStyle(.automatic)
@@ -52,11 +66,87 @@ struct MainTabView: View {
             } else {
                 let _ = log("🏠 MainTabView: Tab bar is HIDDEN - CustomTabBar not shown")
             }
+
+            // First-run walkthrough, topmost so it sits over the tab bar too.
+            //
+            // Gated on `tabBarVisibility.isVisible` because PracticeGame and
+            // LessonView are pushed *inside* the TabView and hide the tab bar
+            // on appear — without this the mascot would draw on top of the
+            // scenario the user was just told to play.
+            if walkthrough.isRunning && tabBarVisibility.isVisible {
+                MascotOverlayView()
+                    .environmentObject(walkthrough)
+            }
         }
         .ignoresSafeArea(.keyboard)
+        .onAppear {
+            // The only activator. Both conditions are suppression layer 1: a
+            // user who completed the demo (or was suppressed out of it) carries
+            // `hasCompletedFreeDemo`, and a subscriber never reaches RootView's
+            // demo branch at all. Idempotent — `start` no-ops unless dormant.
+            walkthrough.start(
+                hasCompletedFreeDemo: authManager.hasCompletedFreeDemo,
+                hasActiveSubscription: authManager.hasActiveSubscription
+            )
+
+            // Land on Courses if the walkthrough just handed off there, so the
+            // lesson it promised is where the user was left rather than two
+            // taps away. One-shot — consumed here.
+            if authManager.pendingCoursesHandoff {
+                authManager.pendingCoursesHandoff = false
+                log("🎬 MainTabView: opening on Courses after walkthrough handoff")
+                selectedTab = WalkthroughCoordinator.Tab.courses.rawValue
+            }
+        }
+        // Backstop for a script that ends because the route changed under it —
+        // in practice a subscription resolving mid-walkthrough, which moves
+        // RootView from branch 4b to 4a and takes this view (and the
+        // coordinator) with it.
+        //
+        // `onDisappear` rather than `onChange(of: hasActiveSubscription)`
+        // because that change and RootView's branch swap happen in the same
+        // update: the parent can remove this view before its `onChange` is
+        // ever delivered. Removal, by contrast, is exactly what `onDisappear`
+        // reports.
+        //
+        // No-ops on the normal finish path — `finish()` has already moved the
+        // step to `finished`, so `isRunning` is false by the time this runs.
+        .onDisappear {
+            guard walkthrough.isRunning else { return }
+            walkthrough.interrupt(reason: "routeChanged")
+            authManager.markFreeDemoCompleted(handoffToCourses: false)
+        }
+        // The walkthrough's one lasting side effect, and the whole point of it.
+        //
+        // `finished` is reachable ONLY through `finish()`, i.e. the user tapped
+        // through the last beat — an ineligible user stays `dormant`. That is
+        // what makes this safe to hang off a step change rather than needing a
+        // separate "did they really complete it" signal.
+        //
+        // Flipping the flag re-renders RootView out of branch 4b and into 4c,
+        // the post-demo ask, which is the peak-intent moment the whole script
+        // exists to set up. It also releases the one free lesson.
+        .onChange(of: walkthrough.step) { newStep in
+            guard newStep == .finished else { return }
+            log("🎬 MainTabView: walkthrough finished — marking free demo complete")
+            authManager.markFreeDemoCompleted()
+        }
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("NavigateToHomeView"))) { _ in
             log("📱 MainTabView: Received NavigateToHomeView notification - switching to Home tab")
             selectedTab = 0
+        }
+        // Walkthrough tab driving. A binding rather than a second notification
+        // name on purpose: `NavigateToHomeView` is a one-way "go home" signal
+        // and does not generalise to "go to tab N".
+        //
+        // Inert while the script is dormant — `requestedTab` is nil and never
+        // changes. Cleared after applying so a later beat asking for the same
+        // tab still registers as a change.
+        .onChange(of: walkthrough.requestedTab) { requested in
+            guard let requested else { return }
+            log("🎬 MainTabView: walkthrough requested tab \(requested.rawValue)")
+            selectedTab = requested.rawValue
+            walkthrough.clearTabRequest()
         }
     }
 }

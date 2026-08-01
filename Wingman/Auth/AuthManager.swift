@@ -77,26 +77,32 @@ final class AuthManager: ObservableObject {
 
     // MARK: - Free Demo (mascot walkthrough)
     //
-    // These two answer questions that are deliberately separate from
+    // These answer questions that are deliberately separate from
     // `hasCompletedPaywallFlow`, which only records "passed paywall #1" and
     // must never be read as an entitlement — every existing non-paying user
     // already has it set to true, persisted per-user AND mirrored to
     // user_metadata, and it never expires.
     //
-    //   hasCompletedFreeDemo     — walkthrough finished (1 scenario + 1
-    //                              lesson spent). Ends demo mode and arms the
-    //                              post-demo ask.
+    //   hasCompletedFreeDemo     — walkthrough finished. Arms the post-demo
+    //                              ask, and is what releases the free lesson
+    //                              credit below.
     //   hasDismissedPostDemoWall — user declined that ask. Lets them into the
     //                              app with the feature gates doing their
     //                              normal job.
+    //   freeLessonId             — which lesson spent the one free credit.
     //
-    // Both are new keys, so they default false for the entire existing
-    // install base — those users correctly land in demo mode on first launch
-    // after the update rather than being silently handed the app.
+    // All are new keys, so they default false/nil for the entire existing
+    // install base.
     //
     // Persisted per-user and mirrored to user_metadata, mirroring
-    // hasSeenSecondChanceOffer's shape exactly, so both survive
+    // hasSeenSecondChanceOffer's shape exactly, so all survive
     // uninstall+reinstall and new devices.
+    //
+    // NOTE ON SCOPE: the walkthrough spends **one scenario and no lesson** —
+    // the lesson credit is handed out *after* the walkthrough and the
+    // post-demo ask, not during. See docs/walkthrough-plan.md §0.3. An earlier
+    // draft of this comment said "1 scenario + 1 lesson"; that describes a
+    // design that was never built.
     @Published var hasCompletedFreeDemo: Bool = false {
         didSet {
             log("🎓 hasCompletedFreeDemo changed: \(oldValue) → \(hasCompletedFreeDemo)")
@@ -106,6 +112,55 @@ final class AuthManager: ObservableObject {
     @Published var hasDismissedPostDemoWall: Bool = false {
         didSet {
             log("🚧 hasDismissedPostDemoWall changed: \(oldValue) → \(hasDismissedPostDemoWall)")
+        }
+    }
+
+    /// The lesson that claimed this user's one free lesson. `nil` = unclaimed.
+    ///
+    /// **Claimed by id, not counted.** Recording *which* lesson was spent is
+    /// what lets the user back out of it and return later without having
+    /// burned the credit — a plain "spend on open" counter punishes a
+    /// mis-tap, and "spend on completion" would let them read every lesson in
+    /// the app without ever finishing one.
+    ///
+    /// Deliberately has **no global (non-per-user) pre-session default**,
+    /// unlike the two flags above. Those carry one because the legacy
+    /// anonymous flow had to work with no session at all; a credit is an
+    /// entitlement, and a global key would hand one user's claim to whoever
+    /// launched the app next. No session → `nil` → the lesson gate falls back
+    /// to subscription-only, which is exactly today's behaviour.
+    @Published private(set) var freeLessonId: String? {
+        didSet {
+            log("🎟️ freeLessonId changed: \(oldValue ?? "nil") → \(freeLessonId ?? "nil")")
+        }
+    }
+
+    /// Whether `hasCompletedFreeDemo` was set by *suppression* rather than by
+    /// the user actually finishing the walkthrough.
+    ///
+    /// Exists because those two are not the same thing, and one place cares
+    /// about the difference: the free lesson. Suppression has to set
+    /// `hasCompletedFreeDemo` — that flag is what moves RootView past branch
+    /// 4b — but a user who never saw the walkthrough was never promised the
+    /// lesson it ends on. Without this, flipping the flag for the entire
+    /// pre-update install base would silently hand every one of them a free
+    /// lesson: an unrequested, unmeasured monetisation change shipped as a
+    /// side effect of a cosmetic fix.
+    ///
+    /// Local per-user key only, no `user_metadata` mirror — same reasoning as
+    /// `suppressWalkthrough(userId:reason:)` itself. It must be persisted
+    /// rather than recomputed, because once suppression has run
+    /// `hasCompletedFreeDemo` is true and the check that would recompute it is
+    /// short-circuited on every later launch.
+    /// One-shot, in-memory request to open MainTabView on the Courses tab.
+    ///
+    /// Set when the walkthrough finishes; consumed by the next MainTabView that
+    /// appears. Deliberately not persisted — see `markFreeDemoCompleted()`.
+    var pendingCoursesHandoff: Bool = false
+
+    @Published private(set) var hasSuppressedWalkthrough: Bool = false {
+        didSet {
+            log("🙈 hasSuppressedWalkthrough changed: \(oldValue) → \(hasSuppressedWalkthrough)")
         }
     }
 
@@ -451,7 +506,60 @@ final class AuthManager: ObservableObject {
     var effectivePaywallFlowCompleted: Bool {
         hasCompletedPaywallFlow || hasActiveSubscription
     }
-    
+
+    // MARK: - Content Access
+    //
+    // The three feature gates used to be a bare `hasActiveSubscription` check
+    // at each tap site. These two are what those sites ask instead. They live
+    // here rather than in the view models because `AuthManager` is a single
+    // `@StateObject` injected as an environment object — there is no
+    // `AuthManager.shared`, so `PracticeViewModel` / `CoursesViewModel` cannot
+    // read it. Every gate site already holds `@EnvironmentObject var
+    // authManager`.
+    //
+    // Neither is a *progression* check. `Practice.isLocked` and
+    // `CourseLockReason` still own progression and are untouched; these answer
+    // only "may this user open paid content right now?".
+
+    /// Whether the user may open a scenario.
+    ///
+    /// **Scenario 1 is free for everyone, forever.** Not "free during the
+    /// walkthrough" — that would need a flag plus a resume path for anyone who
+    /// force-quits mid-demo, to protect content that is already readable with
+    /// the publishable key hardcoded at `SupabaseManager.swift:22`
+    /// (`scenarios` / `scenario_screens` / `screen_options` all carry
+    /// `{public}` policies with `qual = true`). The gate is a monetisation
+    /// construct, not a data boundary, so the simple rule wins.
+    ///
+    /// Consequence, accepted: replaying scenario 1 after the walkthrough stays
+    /// free rather than becoming a paywall trigger.
+    ///
+    /// Completing it unlocks nothing downstream — scenario progression keys
+    /// off `totalLessonsCompleted()`, not off other scenarios
+    /// (`PracticeServiceProtocol.swift:140`).
+    func canOpenScenario(orderIndex: Int) -> Bool {
+        hasActiveSubscription || orderIndex == Self.freeScenarioOrderIndex
+    }
+
+    /// Whether the user may open a specific lesson.
+    ///
+    /// The credit is gated on `hasCompletedFreeDemo` on purpose: it is the
+    /// reward for finishing the walkthrough, promised in the closing beat and
+    /// collected on the far side of the post-demo ask. Until the walkthrough
+    /// exists to set that flag (W6), this returns exactly what the old bare
+    /// subscription check returned.
+    func canOpenLesson(id: String) -> Bool {
+        if hasActiveSubscription { return true }
+        guard hasCompletedFreeDemo, !hasSuppressedWalkthrough else { return false }
+        return freeLessonId == nil || freeLessonId == id
+    }
+
+    /// `order_index` of the scenario that is free for everyone. Matches the
+    /// live `scenarios` table, where order 1 ("Bar Window") is also the only
+    /// row with `required_lessons_completed = 0` — i.e. the one scenario that
+    /// is already progression-unlocked for a brand-new user.
+    static let freeScenarioOrderIndex = 1
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -535,6 +643,7 @@ final class AuthManager: ObservableObject {
                     await checkUserSecondChanceOfferStatus(userId: session.user.id.uuidString)
                     await checkUserFreeDemoStatus(userId: session.user.id.uuidString)
                     await checkUserPostDemoWallStatus(userId: session.user.id.uuidString)
+                    await checkUserFreeLessonStatus(userId: session.user.id.uuidString)
 
                     // ✅ Hydrate lesson progress from Supabase user_metadata so
                     // users who reinstall / switch devices don't lose progress.
@@ -628,7 +737,9 @@ final class AuthManager: ObservableObject {
                 self.hasSeenRatingPrompt = false
                 self.hasSeenSecondChanceOffer = false
                 self.hasCompletedFreeDemo = false
+                self.hasSuppressedWalkthrough = false
                 self.hasDismissedPostDemoWall = false
+                self.freeLessonId = nil
                 // Cleared for BOTH kinds. `.signedOut` is only ever emitted for
                 // a real `signOut()` or for one of
                 // `sessionNotFound / sessionExpired / refreshTokenNotFound /
@@ -705,6 +816,7 @@ final class AuthManager: ObservableObject {
                     await checkUserSecondChanceOfferStatus(userId: session.user.id.uuidString)
                     await checkUserFreeDemoStatus(userId: session.user.id.uuidString)
                     await checkUserPostDemoWallStatus(userId: session.user.id.uuidString)
+                    await checkUserFreeLessonStatus(userId: session.user.id.uuidString)
 
                     // ✅ Hydrate lesson progress from Supabase user_metadata
                     // after session restoration so returning users (including
@@ -785,7 +897,9 @@ final class AuthManager: ObservableObject {
                 self.hasSeenRatingPrompt = false
                 self.hasSeenSecondChanceOffer = false
                 self.hasCompletedFreeDemo = false
+                self.hasSuppressedWalkthrough = false
                 self.hasDismissedPostDemoWall = false
+                self.freeLessonId = nil
                 self.clearSessionEverMarker(reason: "user deleted")
                 log("🗑️ User deleted")
 
@@ -876,7 +990,9 @@ final class AuthManager: ObservableObject {
     private func checkUserFreeDemoStatus(userId: String) async {
         let key = "hasCompletedFreeDemo_\(userId)"
         hasCompletedFreeDemo = UserDefaults.standard.bool(forKey: key)
-        log("🎓 Free demo status loaded: \(hasCompletedFreeDemo) for user: \(userId)")
+        hasSuppressedWalkthrough = UserDefaults.standard.bool(forKey: Self.suppressedKey(userId))
+        log("🎓 Free demo status loaded: \(hasCompletedFreeDemo) "
+            + "(suppressed: \(hasSuppressedWalkthrough)) for user: \(userId)")
 
         if !hasCompletedFreeDemo,
            let user = currentUser,
@@ -887,9 +1003,21 @@ final class AuthManager: ObservableObject {
             UserDefaults.standard.set(true, forKey: key)
         }
 
+        // Existing-user suppression. Both new flags default false for the
+        // entire pre-update install base, so without this every existing
+        // non-paying user is dropped into a "welcome to Wingman" tour on first
+        // launch after the update — possibly pointed at a scenario they
+        // finished weeks ago.
+        if !hasCompletedFreeDemo, userHasPreExistingProgress() {
+            suppressWalkthrough(userId: userId, reason: "existingProgress")
+        }
+
         #if DEBUG
         // Local override so the post-demo routing can be exercised before the
-        // walkthrough (phase 6) exists to flip this for real.
+        // walkthrough (phase 6) exists to flip this for real. Deliberately
+        // LAST, so it also overrides the suppression above — otherwise a
+        // developer whose device has lesson progress could never test the
+        // walkthrough without wiping the app.
         // Launch argument: -forceFreeDemoCompleted YES
         if UserDefaults.standard.object(forKey: "forceFreeDemoCompleted") != nil {
             hasCompletedFreeDemo = UserDefaults.standard.bool(forKey: "forceFreeDemoCompleted")
@@ -924,6 +1052,140 @@ final class AuthManager: ObservableObject {
             log("🚧 hasDismissedPostDemoWall OVERRIDDEN locally = \(hasDismissedPostDemoWall)")
         }
         #endif
+    }
+
+    // MARK: - Existing-user walkthrough suppression
+    //
+    // See docs/walkthrough-plan.md §0.4. Deliberately keyed on *progress*, not
+    // on a `createdAt` cutoff: someone who signed up months ago and never
+    // engaged should still get the walkthrough, and a date rule would deny it
+    // to exactly the cohort it helps most.
+
+    /// Whether this user was already using the app before the walkthrough
+    /// existed — i.e. has real content progress to be condescended about.
+    ///
+    /// Checks two synchronous sources, no network:
+    ///
+    ///   1. **Local lesson progress.** Covers the in-place app update, which
+    ///      is the case that actually matters on release day — UserDefaults is
+    ///      intact and `totalLessonsCompleted()` reads the right per-user
+    ///      namespace, because `currentUser` is assigned before this runs at
+    ///      every call site.
+    ///   2. **Cloud lesson progress in `user_metadata`.** Covers reinstall and
+    ///      new-device, where local progress is empty at this moment.
+    ///      `hydrateLessonProgressFromCloud()` restores it — but it runs
+    ///      *after* this on every path that calls it, so source 1 alone would
+    ///      read zero and hand a returning user the tour. Read here from
+    ///      `currentUser`, which is already populated, rather than reordering
+    ///      the session paths.
+    ///
+    /// **Known gap, accepted:** a lapsed ex-subscriber with scenario progress
+    /// but zero completed lessons is not caught, because scenario progress
+    /// lives in `user_scenario_progress` (a network read) rather than in
+    /// metadata. Adding a fetch to the launch path is not worth it — W4's
+    /// coordinator check skips the scenario beat for anyone who has already
+    /// completed scenario 1, which removes the part that actually stings
+    /// (being asked to replay finished content). They still see a short
+    /// welcome, and the post-demo ask that follows is the right screen for a
+    /// lapsed subscriber anyway.
+    private func userHasPreExistingProgress() -> Bool {
+        if LessonDataService.shared.totalLessonsCompleted() > 0 {
+            log("🎓 Suppression: local lesson progress found")
+            return true
+        }
+
+        guard let progressObj = currentUser?.userMetadata["lesson_progress"]?.objectValue else {
+            return false
+        }
+        for (_, courseValue) in progressObj {
+            if let completed = courseValue.objectValue?["completed"]?.arrayValue,
+               !completed.isEmpty {
+                log("🎓 Suppression: cloud lesson progress found in user_metadata")
+                return true
+            }
+        }
+        return false
+    }
+
+    /// Marks the walkthrough as already spent for a user who should never see
+    /// it, and persists that decision.
+    ///
+    /// **Sets BOTH flags, and this is the whole point.** `hasCompletedFreeDemo`
+    /// alone moves RootView out of branch 4b and straight into 4c — the
+    /// post-demo paywall. Suppressing the walkthrough without also dismissing
+    /// the wall would therefore convert a silent, invisible repair into a
+    /// surprise full-screen paywall for every existing user on launch day.
+    ///
+    /// Writes the UserDefaults keys as well as the published values, so the
+    /// `checkUserPostDemoWallStatus` call that runs immediately after this one
+    /// reads `true` back rather than clobbering it to `false`.
+    ///
+    /// No `user_metadata` mirror, unlike `markFreeDemoCompleted()`: this is a
+    /// local repair, not a claim that the account completed anything. It does
+    /// not need to be durable because the signal it derives from
+    /// (`lesson_progress`) already is.
+    private func suppressWalkthrough(userId: String, reason: String) {
+        log("🎓 Walkthrough SUPPRESSED for existing user (\(reason)): \(userId)")
+
+        hasCompletedFreeDemo = true
+        UserDefaults.standard.set(true, forKey: "hasCompletedFreeDemo_\(userId)")
+
+        hasDismissedPostDemoWall = true
+        UserDefaults.standard.set(true, forKey: "hasDismissedPostDemoWall_\(userId)")
+
+        // Records that the two flags above were set by suppression, so the
+        // free lesson is NOT released to a user who never saw the walkthrough.
+        hasSuppressedWalkthrough = true
+        UserDefaults.standard.set(true, forKey: Self.suppressedKey(userId))
+
+        // Best-effort: this runs on the session-restore path, which can beat
+        // PostHog's own (detached) setup at launch. The `🎓 Walkthrough
+        // SUPPRESSED` log line above is the reliable signal; treat this event
+        // as a bonus rather than as the measurement.
+        Analytics.capture(Analytics.Event.walkthroughSuppressed, ["reason": reason])
+    }
+
+    private static func suppressedKey(_ userId: String) -> String {
+        "hasSuppressedWalkthrough_\(userId)"
+    }
+
+    /// Loads which lesson (if any) claimed this user's free credit.
+    ///
+    /// Same shape as the two above — per-user UserDefaults first,
+    /// `user_metadata` as the reinstall / new-device fallback, backfilling
+    /// UserDefaults on a hit — with one difference: the value is a `String?`
+    /// rather than a `Bool`, so "absent" and "false" are the same state and
+    /// the mirror is only consulted when the local key is missing.
+    ///
+    /// A miss on both means "credit unclaimed", which is the correct reading
+    /// for a new user and for the entire pre-update install base.
+    private func checkUserFreeLessonStatus(userId: String) async {
+        let key = Self.freeLessonKey(userId)
+        freeLessonId = UserDefaults.standard.string(forKey: key)
+        log("🎟️ Free lesson status loaded: \(freeLessonId ?? "unclaimed") for user: \(userId)")
+
+        if freeLessonId == nil,
+           let user = currentUser,
+           let claimed = user.userMetadata["free_lesson_id"]?.stringValue,
+           !claimed.isEmpty {
+            log("🎟️ Found free_lesson_id in user metadata - restoring claim: \(claimed)")
+            freeLessonId = claimed
+            UserDefaults.standard.set(claimed, forKey: key)
+        }
+
+        #if DEBUG
+        // Lets a repeat run re-test the claim without wiping the app.
+        // Launch argument: -forceFreeLessonUnclaimed YES
+        if UserDefaults.standard.bool(forKey: "forceFreeLessonUnclaimed") {
+            freeLessonId = nil
+            UserDefaults.standard.removeObject(forKey: key)
+            log("🎟️ freeLessonId OVERRIDDEN locally = unclaimed")
+        }
+        #endif
+    }
+
+    private static func freeLessonKey(_ userId: String) -> String {
+        "freeLessonId_\(userId)"
     }
 
     private func checkUserRatingPromptStatus(userId: String) async {
@@ -994,6 +1256,7 @@ final class AuthManager: ObservableObject {
             await checkUserSecondChanceOfferStatus(userId: session.user.id.uuidString)
             await checkUserFreeDemoStatus(userId: session.user.id.uuidString)
             await checkUserPostDemoWallStatus(userId: session.user.id.uuidString)
+            await checkUserFreeLessonStatus(userId: session.user.id.uuidString)
 
             // Mark session check complete - UI can now render
             self.isCheckingSession = false
@@ -1873,17 +2136,55 @@ final class AuthManager: ObservableObject {
     }
 
     // MARK: - Free Demo
-    /// Called when the mascot walkthrough finishes — the user has spent their
-    /// one free scenario and one free lesson. Flipping this ends demo mode and
-    /// routes RootView straight into the post-demo ask, which is the peak-intent
-    /// moment the whole walkthrough exists to set up.
+    /// Called when the mascot walkthrough finishes — the user has played the
+    /// free scenario and been shown around. Flipping this routes RootView
+    /// straight into the post-demo ask, which is the peak-intent moment the
+    /// whole walkthrough exists to set up.
+    ///
+    /// It also **releases the free lesson credit** (see `canOpenLesson(id:)`),
+    /// which is deliberately collected on the far side of that ask rather than
+    /// spent during the walkthrough. An earlier design spent a lesson inside
+    /// the demo; that is not what this flag means.
+    ///
+    /// Has no callers until W6 — see docs/walkthrough-plan.md. Until then
+    /// `hasCompletedFreeDemo` is `false` for every production user, RootView
+    /// branch 4c is unreachable, and the lesson credit never opens.
     ///
     /// Same persistence shape as `markSecondChanceOfferShown`: per-user
     /// UserDefaults as the device source of truth, best-effort `user_metadata`
     /// mirror so a reinstall doesn't hand out a second demo.
-    func markFreeDemoCompleted() {
-        log("🎓 markFreeDemoCompleted() called")
+    /// - Parameter handoffToCourses: whether to open the next MainTabView on
+    ///   the Courses tab. True for a real completion, where the mascot left the
+    ///   user there and promised them a lesson. False when the script merely
+    ///   ended — an interrupted walkthrough should not change where an
+    ///   otherwise-unaffected user lands.
+    func markFreeDemoCompleted(handoffToCourses: Bool = true) {
+        log("🎓 markFreeDemoCompleted(handoffToCourses: \(handoffToCourses)) called")
         hasCompletedFreeDemo = true
+
+        // The mascot's last beat leaves the user on the Courses tab and
+        // promises them a lesson. RootView then swaps branches twice on the
+        // way out (4b → 4c → 4d), and because those are separate `if/else`
+        // arms SwiftUI rebuilds MainTabView each time — dropping them back on
+        // Home, two taps from the thing they were just promised.
+        //
+        // In-memory and one-shot: it survives the rebuilds because AuthManager
+        // lives at the app root, and it must NOT persist, or every later launch
+        // would open on Courses.
+        pendingCoursesHandoff = handoffToCourses
+
+        // Genuine completion is by definition not suppression, and the two
+        // must not both be set — `canOpenLesson(id:)` reads
+        // `hasSuppressedWalkthrough` as "this user was never promised a
+        // lesson", so a stale true here would deny the credit to someone who
+        // just earned it.
+        //
+        // Unreachable in production (suppression sets `hasCompletedFreeDemo`,
+        // so the walkthrough never runs and this never fires), but very
+        // reachable in DEBUG: `-forceFreeDemoCompleted NO` re-arms the
+        // walkthrough on a device whose per-user suppressed key is already
+        // set, which is exactly how W4-W6 get tested.
+        hasSuppressedWalkthrough = false
 
         guard let userId = currentUser?.id.uuidString else {
             log("⚠️ markFreeDemoCompleted: no authenticated user — nothing to persist")
@@ -1892,6 +2193,7 @@ final class AuthManager: ObservableObject {
 
         let key = "hasCompletedFreeDemo_\(userId)"
         UserDefaults.standard.set(true, forKey: key)
+        UserDefaults.standard.removeObject(forKey: Self.suppressedKey(userId))
         log("🎓 Free demo marked completed for user: \(userId)")
 
         Task {
@@ -1935,6 +2237,61 @@ final class AuthManager: ObservableObject {
                 log("✅ Mirrored post_demo_wall_dismissed=true to user_metadata")
             } catch {
                 log("⚠️ Failed to mirror post_demo_wall_dismissed to user_metadata: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    /// Records that this lesson spent the user's one free lesson.
+    ///
+    /// Called on lesson **open**, not on completion — the credit buys access
+    /// to one lesson, and `canOpenLesson(id:)` keeps returning true for this
+    /// id, so backing out and returning later is free.
+    ///
+    /// First claim wins and is permanent. Guarded rather than overwriting so a
+    /// re-entry into the already-claimed lesson can call this unconditionally
+    /// without the call site having to know whether it is the first time.
+    ///
+    /// **No-ops for a subscriber.** They opened the lesson on their
+    /// subscription, so there is nothing to spend, and burning the credit here
+    /// would silently consume it on the first lesson they ever read — leaving
+    /// them nothing if the subscription later lapses. Enforced here rather than
+    /// at the call site so a second entry point can't reintroduce it.
+    func claimFreeLesson(id: String, courseId: String) {
+        guard !hasActiveSubscription else { return }
+
+        guard freeLessonId == nil else {
+            log("🎟️ claimFreeLesson: already claimed by \(freeLessonId ?? "nil") — ignoring \(id)")
+            return
+        }
+        log("🎟️ claimFreeLesson(id: \(id)) called")
+        freeLessonId = id
+
+        // Emitted here rather than at the tap site so it fires only on a
+        // genuine first claim — the call site calls this unconditionally, and
+        // it no-ops for subscribers and for re-entry.
+        Analytics.capture(Analytics.Event.freeLessonClaimed, [
+            "lesson_id": id,
+            "course_id": courseId
+        ])
+
+        guard let userId = currentUser?.id.uuidString else {
+            log("⚠️ claimFreeLesson: no authenticated user — nothing to persist")
+            return
+        }
+
+        UserDefaults.standard.set(id, forKey: Self.freeLessonKey(userId))
+        log("🎟️ Free lesson claimed for user: \(userId)")
+
+        Task {
+            do {
+                let attributes = UserAttributes(data: [
+                    "free_lesson_id": AnyJSON.string(id),
+                    "free_lesson_claimed_at": AnyJSON.string(ISO8601DateFormatter().string(from: Date()))
+                ])
+                try await client.auth.update(user: attributes)
+                log("✅ Mirrored free_lesson_id to user_metadata")
+            } catch {
+                log("⚠️ Failed to mirror free_lesson_id to user_metadata: \(error.localizedDescription)")
             }
         }
     }
@@ -2044,6 +2401,7 @@ final class AuthManager: ObservableObject {
         await checkUserSecondChanceOfferStatus(userId: userId)
         await checkUserFreeDemoStatus(userId: userId)
         await checkUserPostDemoWallStatus(userId: userId)
+        await checkUserFreeLessonStatus(userId: userId)
 
         hasSeenPostPurchaseAccountAsk = UserDefaults.standard.bool(
             forKey: Self.postPurchaseAskKey(userId)
@@ -2092,6 +2450,7 @@ final class AuthManager: ObservableObject {
         await checkUserSecondChanceOfferStatus(userId: userId)
         await checkUserFreeDemoStatus(userId: userId)
         await checkUserPostDemoWallStatus(userId: userId)
+        await checkUserFreeLessonStatus(userId: userId)
 
         await LessonDataService.shared.hydrateLessonProgressFromCloud()
         // Sync the end-of-lesson question set. Hooked here rather than at
@@ -2405,7 +2764,9 @@ final class AuthManager: ObservableObject {
             hasSeenRatingPrompt = false
             hasSeenSecondChanceOffer = false
             hasCompletedFreeDemo = false
+            hasSuppressedWalkthrough = false
             hasDismissedPostDemoWall = false
+            freeLessonId = nil
 
             if let userId = userIdForCleanup {
                 UserDefaults.standard.removeObject(forKey: "hasSeenRatingPrompt_\(userId)")
@@ -2541,7 +2902,9 @@ final class AuthManager: ObservableObject {
                     hasSeenRatingPrompt = false
                     hasSeenSecondChanceOffer = false
                     hasCompletedFreeDemo = false
+                    hasSuppressedWalkthrough = false
                     hasDismissedPostDemoWall = false
+                    freeLessonId = nil
                     isCheckingSession = false
 
                     log("✅ Account deletion completed successfully")
@@ -2582,7 +2945,9 @@ final class AuthManager: ObservableObject {
         userDefaults.removeObject(forKey: "hasSeenRatingPrompt_\(userId)")
         userDefaults.removeObject(forKey: "hasSeenSecondChanceOffer_\(userId)")
         userDefaults.removeObject(forKey: "hasCompletedFreeDemo_\(userId)")
+        userDefaults.removeObject(forKey: Self.suppressedKey(userId))
         userDefaults.removeObject(forKey: "hasDismissedPostDemoWall_\(userId)")
+        userDefaults.removeObject(forKey: Self.freeLessonKey(userId))
         // Leftover keys from the pre-gating hasEverHadSubscription flag. The
         // flag was removed when feature gates were added — these removes
         // clean up stale values on upgraded installs. Harmless no-op on

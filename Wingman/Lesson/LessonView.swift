@@ -12,6 +12,7 @@ struct LessonView: View {
 
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var tabBarVisibility: TabBarVisibilityManager
+    @EnvironmentObject private var authManager: AuthManager
     @StateObject private var featureFlags = FeatureFlags.shared
     @State private var currentScreenIndex: Int = -1  // -1 means intro screen
     @State private var currentContentIndex: Int = -1 // Index within current screen's content
@@ -207,6 +208,13 @@ struct LessonView: View {
                     if let startedAt {
                         properties["duration_seconds"] = Analytics.elapsedSeconds(since: startedAt)
                     }
+                    // Whether this is the one lesson the walkthrough hands out.
+                    // Carried as a property rather than as a separate
+                    // `free_lesson_completed` event so the two can never
+                    // disagree about what counts as finishing a lesson —
+                    // `lesson_completed` already owns that definition, quiz and
+                    // all.
+                    properties["is_free_lesson"] = (authManager.freeLessonId == lesson.id)
                     Analytics.capture(Analytics.Event.lessonCompleted, properties)
 
                     LessonDataService.shared.markLessonCompleted(
@@ -637,4 +645,6 @@ struct ScrollableContentView: UIViewRepresentable {
         ),
         allLessons: []
     )
+    .environmentObject(TabBarVisibilityManager())
+    .environmentObject(AuthManager())
 }

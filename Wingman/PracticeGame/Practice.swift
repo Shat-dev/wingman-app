@@ -40,6 +40,22 @@ struct Practice: Identifiable, nonisolated Codable, Hashable, Sendable {
     }
 }
 
+// MARK: - PracticeFetchResult
+/// The scenario list plus whether the user's progress could actually be read.
+///
+/// `isCompleted` defaults to `false` on every `Practice` and is only raised by
+/// merging `user_scenario_progress`. That read is deliberately non-fatal — a
+/// failure there must not blank the scenario list — which means a `false`
+/// `isCompleted` has two very different meanings: "not completed" and "we could
+/// not find out". Anything that *branches* on completion has to tell them
+/// apart. The walkthrough's suppression layer 2 is the case that prompted this:
+/// acting on the second meaning tells a user to replay a scenario they already
+/// finished.
+struct PracticeFetchResult: nonisolated Sendable {
+    let practices: [Practice]
+    let progressAvailable: Bool
+}
+
 // MARK: - PracticeGameData (maps to scenario + its screens in one load)
 struct PracticeGameData: Identifiable, nonisolated Codable, Sendable {
     let id: String

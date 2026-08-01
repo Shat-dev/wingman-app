@@ -188,6 +188,7 @@ struct PracticeGame: View {
     @State private var showGameComplete = false
     @State private var showIntroScreen = true
     @EnvironmentObject private var tabBarVisibility: TabBarVisibilityManager
+    @EnvironmentObject private var walkthrough: WalkthroughCoordinator
 
     // Analytics: stamped on first appearance so `practice_scenario_completed`
     // can report how long the scenario took, and so `practice_scenario_started`
@@ -198,7 +199,11 @@ struct PracticeGame: View {
     private var scenarioProperties: [String: Any] {
         [
             "scenario_id": viewModel.gameData.id,
-            "scenario_name": viewModel.gameData.title
+            "scenario_name": viewModel.gameData.title,
+            // Lets one pair of events serve both the scenario funnel and the
+            // walkthrough funnel, instead of emitting a duplicate `demo_*` pair
+            // that would drift from these.
+            "during_walkthrough": walkthrough.isRunning
         ]
     }
 
@@ -300,9 +305,26 @@ struct PracticeGame: View {
                 startedAt = Date()
                 Analytics.capture(Analytics.Event.practiceScenarioStarted, scenarioProperties)
             }
+
+            // The scenario is genuinely on screen — advance the walkthrough
+            // here rather than at the tap site, which fires before the game
+            // data has loaded and can fail after it. Idempotent on re-mount.
+            walkthrough.noteScenarioOpened()
         }
         .onDisappear {
             tabBarVisibility.showTabBar()
+
+            // Left without finishing — hand the script back to the prompt so
+            // the mascot re-appears and asks again. Without this, backing out
+            // strands the walkthrough at `scenarioRunning` for the rest of the
+            // session: nothing else can advance it, and the overlay stays
+            // hidden in that step by design.
+            //
+            // A genuine completion has already moved the step to
+            // `scenarioDone` by the time this runs (the completion handler
+            // fires before `GameCompleteView` is dismissed), so this no-ops on
+            // the happy path.
+            walkthrough.noteScenarioAbandoned()
         }
         .onChange(of: viewModel.gameCompleted) { completed in
             guard completed else { return }
@@ -315,6 +337,11 @@ struct PracticeGame: View {
                 properties["duration_seconds"] = Analytics.elapsedSeconds(since: startedAt)
             }
             Analytics.capture(Analytics.Event.practiceScenarioCompleted, properties)
+
+            // Same signal, same guarantee: `gameCompleted` is only set by the
+            // view model's `triggerCompletion()`, so the walkthrough advances
+            // on a real completion and never on a dismissal.
+            walkthrough.noteScenarioCompleted()
 
             showGameComplete = true
         }
@@ -953,5 +980,6 @@ struct MockData {
         PracticeGame()
             .environmentObject(TabBarVisibilityManager())
             .environmentObject(CoursesRouter())
+            .environmentObject(WalkthroughCoordinator())
     }
 }

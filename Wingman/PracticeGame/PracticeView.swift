@@ -15,6 +15,7 @@ struct PracticeView: View {
     @State private var loadedGameData: PracticeGameData? = nil
     @State private var isLoadingGame: Bool = false
     @EnvironmentObject var authManager: AuthManager
+    @EnvironmentObject private var walkthrough: WalkthroughCoordinator
 
     // Feature-gate paywall for scenario taps (free users).
     // Progression-locked scenarios are disabled at the card level and never
@@ -67,6 +68,22 @@ struct PracticeView: View {
         }
         .task {
             await viewModel.fetchPractices()
+
+            // Feeds suppression layer 2. No-ops unless the script is waiting
+            // on the scenario beat, and the list is already being fetched here
+            // — so this costs nothing and avoids a second round trip just to
+            // ask whether scenario 1 is already complete.
+            //
+            // Gated on `progressAvailable`: when the progress read failed,
+            // every `isCompleted` is false because there was nothing to merge,
+            // not because the user has completed nothing. Acting on that would
+            // tell someone to replay a scenario they already finished. Skipping
+            // the feed leaves the beat in place, which at worst asks for a
+            // replay of a 90-second scenario — the recoverable direction.
+            if viewModel.progressAvailable {
+                walkthrough.noteScenarioList(viewModel.practices)
+            }
+
             await viewModel.prefetchGameData()
         }
         .postHogScreenView("Practice")
@@ -128,17 +145,38 @@ struct PracticeView: View {
 
     // MARK: - Load game data then navigate
     private func loadAndNavigate(practice: Practice) async {
+        // Walkthrough interception, FIRST — ahead of both the progression
+        // guard and the paywall. During the script the only scenario that
+        // opens is the free one; everything else gets a mascot line.
+        //
+        // Ahead of the paywall specifically: an interrupting purchase screen
+        // in the middle of the sell is the worst thing this feature could do.
+        // Ahead of the progression guard because a locked card currently
+        // no-ops in silence, which mid-script reads as the app being broken.
+        if walkthrough.isIntercepting,
+           practice.orderIndex != AuthManager.freeScenarioOrderIndex {
+            walkthrough.showNudge(.lockedScenario)
+            return
+        }
+
         guard !practice.isLocked else { return }
 
-        // Subscription gate — free users see the paywall instead of
-        // navigating into the scenario. Placed after the progression-lock
+        // Access gate — free users see the paywall instead of navigating into
+        // the scenario, EXCEPT for scenario 1, which is free for everyone
+        // (see AuthManager.canOpenScenario). Placed after the progression-lock
         // guard so locked scenarios continue to no-op silently (matches
         // the "reduce paywall spam" requirement for progression locks).
-        guard authManager.hasActiveSubscription else {
+        guard authManager.canOpenScenario(orderIndex: practice.orderIndex) else {
             showPaywall = true
             return
         }
 
+        // NOTE: the walkthrough is deliberately NOT advanced here. Everything
+        // below this line can still fail — `fetchGameData` returns nil on a
+        // network error and this function then simply stops, leaving the user
+        // on this screen. Advancing here would strand the script at
+        // `scenarioRunning` with no game on screen and the mascot hidden.
+        // `PracticeGame.onAppear` is the honest "the scenario is open" signal.
         viewModel.selectPractice(practice)
 
         // Fast path: prefetched data available, navigate instantly with no spinner.
@@ -157,6 +195,13 @@ struct PracticeView: View {
             navigateToPracticeGame = true
         } else {
             isLoadingGame = false
+
+            // The scenario the script just told them to play cannot be
+            // delivered (offline, or the fetch failed). `scenarioPrompt` has no
+            // skip control by design, so without this the user sits there with
+            // lessons and daily practice nudge-blocked behind a script that
+            // cannot advance. No-ops outside the walkthrough.
+            walkthrough.noteScenarioUnavailable()
         }
     }
 
@@ -238,4 +283,5 @@ struct PracticeView: View {
 #Preview {
     PracticeView()
         .environmentObject(AuthManager())
+        .environmentObject(WalkthroughCoordinator())
 }

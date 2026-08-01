@@ -373,6 +373,16 @@ struct RootView: View {
             // still cut. Left alone deliberately — out of scope here, and worth
             // its own before/after look rather than a silent change.
             .animation(.easeInOut(duration: 0.3), value: authManager.effectivePaywallFlowCompleted)
+            // Same reasoning as the line above, for the two transitions the
+            // walkthrough introduces. Both were unreachable in production until
+            // W6 gave `markFreeDemoCompleted()` a caller, so neither had ever
+            // rendered before.
+            //
+            // The first is the money moment — the mascot's last beat hands off
+            // to the post-demo ask — and an un-animated swap there reads as the
+            // app glitching rather than as the next step.
+            .animation(.easeInOut(duration: 0.3), value: authManager.hasCompletedFreeDemo)
+            .animation(.easeInOut(duration: 0.3), value: authManager.hasDismissedPostDemoWall)
         }
         .task {
             // Step 1: Configure RevenueCat on app launch (MUST be first)
@@ -518,7 +528,8 @@ struct RootView: View {
             log("   - hasCompletedOnboarding: \(authManager.hasCompletedOnboarding)")
             log("   - hasCompletedFreeDemo: \(authManager.hasCompletedFreeDemo)")
             log("   - hasDismissedPostDemoWall: \(authManager.hasDismissedPostDemoWall)")
-            
+            log("   - freeLessonId: \(authManager.freeLessonId ?? "unclaimed")")
+
             // Set RevenueCat user ID when user authenticates.
             //
             // Deliberately NO logout branch here. `isAuthenticated` can flip
@@ -551,6 +562,9 @@ struct RootView: View {
             log("\n🔔 RootView detected hasCompletedFreeDemo change: \(newValue)")
             log("   - hasDismissedPostDemoWall: \(authManager.hasDismissedPostDemoWall)")
             log("   - postDemoWallIsHard: \(featureFlags.postDemoWallIsHard)")
+            // Flipping this also releases the free lesson credit, so the
+            // claim state belongs in the same dump.
+            log("   - freeLessonId: \(authManager.freeLessonId ?? "unclaimed")")
         }
         .onChange(of: authManager.hasDismissedPostDemoWall) { newValue in
             log("\n🔔 RootView detected hasDismissedPostDemoWall change: \(newValue)")
