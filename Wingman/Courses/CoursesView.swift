@@ -16,6 +16,32 @@ struct CoursesView: View {
     @State private var isUserScrolling = false  // Track if user manually clicked a pill
     @State private var didApplyInitialScroll = false
 
+    /// Coordinate space for the vertical course list, so each section can report
+    /// where it actually sits relative to the top of the visible area.
+    private let scrollSpace = "coursesScroll"
+
+    /// Vertical spacing the course list's `LazyVStack` puts between a pinned
+    /// section header and its grid.
+    private let listSpacing: CGFloat = 20
+
+    /// Measured height of a `CategoryHeader`. Headers are static, so this
+    /// settles on the first layout pass and then stops changing.
+    @State private var headerHeight: CGFloat = 0
+
+    /// Distance below the top of the viewport at which a section takes over as
+    /// "current". A section's grid begins one pinned `CategoryHeader` plus one
+    /// `LazyVStack` spacing below its own header, so a grid crossing this line
+    /// means that header has just reached the top edge.
+    ///
+    /// Measured rather than hardcoded, and biased a few points high on purpose:
+    /// `scrollTo` parks a header exactly on this boundary, so a threshold even
+    /// slightly *under* the resting value would resolve to the previous section
+    /// and snap the pill backwards after every tap. Erring high only moves the
+    /// switch a few points early, which is invisible against ~800pt sections.
+    private var sectionSwitchOffset: CGFloat {
+        headerHeight + listSpacing + 8
+    }
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -51,18 +77,22 @@ struct CoursesView: View {
                                             title: category.name,
                                             isSelected: viewModel.selectedCategoryId == category.id
                                         ) {
+                                            HapticManager.shared.selection()
+                                            // Set flag to indicate user manually clicked, so the
+                                            // sections the list passes on the way to the target
+                                            // don't steal the selection back.
+                                            isUserScrolling = true
+
                                             withAnimation(.easeInOut(duration: 0.3)) {
-                                                HapticManager.shared.selection()
-                                                // Set flag to indicate user manually clicked
-                                                isUserScrolling = true
                                                 viewModel.selectCategory(category.id)
-                                                // Scroll to the selected category
+                                                // Scroll to the selected category. Centring the
+                                                // pill is handled by the single `onChange` below.
                                                 scrollProxy?.scrollTo(category.id, anchor: .top)
-                                                
-                                                // Reset flag after animation completes
-                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                                    isUserScrolling = false
-                                                }
+                                            }
+
+                                            // Reset flag after animation completes
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                                isUserScrolling = false
                                             }
                                         }
                                         .id("pill_\(category.id)")
@@ -82,19 +112,30 @@ struct CoursesView: View {
                                 LazyVStack(alignment: .leading, spacing: 20, pinnedViews: [.sectionHeaders]) {
                                     Color.clear.frame(height: 0).id("top")
                                     ForEach(viewModel.availableCategories) { category in
-                                        Section(header: CategoryHeader(title: category.name)) {
-                                            CoursesGrid(courses: category.courses, viewModel: viewModel)
-                                        }
-                                        .id(category.id)
-                                        .onAppear {
-                                            // Only auto-select if user is NOT manually scrolling
-                                            if !isUserScrolling {
-                                                withAnimation(.easeInOut(duration: 0.2)) {
-                                                    viewModel.selectCategory(category.id)
-                                                    // Auto-scroll the category pills to keep selected one visible
-                                                    categoryScrollProxy?.scrollTo("pill_\(category.id)", anchor: .center)
+                                        // `.id` sits on the header rather than the Section so
+                                        // `scrollTo(category.id, anchor: .top)` has one
+                                        // unambiguous target — modifiers on a Section are
+                                        // spread across both its header and its content.
+                                        Section(header: CategoryHeader(title: category.name)
+                                            .background(
+                                                GeometryReader { geo in
+                                                    Color.clear.preference(
+                                                        key: CategoryHeaderHeightKey.self,
+                                                        value: geo.size.height
+                                                    )
                                                 }
-                                            }
+                                            )
+                                            .id(category.id)
+                                        ) {
+                                            CoursesGrid(courses: category.courses, viewModel: viewModel)
+                                                .background(
+                                                    GeometryReader { geo in
+                                                        Color.clear.preference(
+                                                            key: SectionOffsetKey.self,
+                                                            value: [category.id: geo.frame(in: .named(scrollSpace)).minY]
+                                                        )
+                                                    }
+                                                )
                                         }
                                     }
 
@@ -102,7 +143,14 @@ struct CoursesView: View {
 
                                 Spacer().frame(height: 100)
                             }
+                            .coordinateSpace(name: scrollSpace)
                             .padding(.horizontal, 20)
+                            .onPreferenceChange(CategoryHeaderHeightKey.self) { height in
+                                headerHeight = height
+                            }
+                            .onPreferenceChange(SectionOffsetKey.self) { offsets in
+                                syncSelectedCategory(with: offsets)
+                            }
                             .onAppear {
                                 scrollProxy = proxy
 
@@ -126,6 +174,17 @@ struct CoursesView: View {
                 }
             }
             .navigationBarHidden(true)
+            // Single owner of the pill bar's horizontal position. Selection now
+            // changes at most once per section boundary, so only one scroll
+            // animation is ever in flight — previously every section the lazy
+            // stack built started its own and they cut each other off mid-flight,
+            // leaving the pill row parked between positions.
+            .onChange(of: viewModel.selectedCategoryId) { newId in
+                guard !newId.isEmpty else { return }
+                withAnimation(.easeInOut(duration: 0.25)) {
+                    categoryScrollProxy?.scrollTo("pill_\(newId)", anchor: .center)
+                }
+            }
             .onAppear {
                 // Try again when view appears (in case data finished after)
                 applyDeepLinkIfNeeded()
@@ -139,6 +198,36 @@ struct CoursesView: View {
         .postHogScreenView("Courses")
     }
     
+    /// Picks the category that currently owns the top of the list and keeps
+    /// `selectedCategoryId` in step with it.
+    ///
+    /// Driven by measured positions, so it fires when a section is actually
+    /// reached. The previous `Section.onAppear` trigger fired when SwiftUI
+    /// *built* the section, which — with `pinnedViews` forcing headers to be
+    /// materialised well ahead of their content — happened while the section
+    /// was still a screen below the fold.
+    private func syncSelectedCategory(with offsets: [String: CGFloat]) {
+        // A pill tap (or deep link) is animating the list to a specific section;
+        // the sections it passes on the way must not steal the selection.
+        guard !isUserScrolling else { return }
+
+        let ordered = viewModel.availableCategories
+
+        // The deepest section whose grid has crossed the pinned-header line —
+        // i.e. the one whose header is sitting at the top edge right now.
+        // Sections the lazy stack hasn't built have no entry and are skipped.
+        let current = ordered.last(where: { category in
+            guard let minY = offsets[category.id] else { return false }
+            return minY <= sectionSwitchOffset
+        }) ?? ordered.first
+
+        guard let current, current.id != viewModel.selectedCategoryId else { return }
+
+        withAnimation(.easeInOut(duration: 0.2)) {
+            viewModel.selectCategory(current.id)
+        }
+    }
+
     private func applyDeepLinkIfNeeded() {
         guard !viewModel.isLoading,
               let categoryId = coursesRouter.initialSelectedCategoryId
@@ -170,6 +259,29 @@ struct CoursesView: View {
                 categoryScrollProxy.scrollTo("pill_\(categoryId)", anchor: .center)
             }
         }
+    }
+}
+
+// MARK: - Section Offset Tracking
+
+/// Each category section's vertical offset inside the course list, keyed by
+/// category id, so the pill bar can follow what's actually on screen rather
+/// than what SwiftUI happens to have built.
+private struct SectionOffsetKey: PreferenceKey {
+    static let defaultValue: [String: CGFloat] = [:]
+    static func reduce(value: inout [String: CGFloat], nextValue: () -> [String: CGFloat]) {
+        value.merge(nextValue()) { _, new in new }
+    }
+}
+
+/// Height of a `CategoryHeader`, used to work out where a section's header sits
+/// relative to the top of the list once it has pinned. Every header is a single
+/// line in the same font, so `max` yields the one value they all share without
+/// a reader needing to know which header it came from.
+private struct CategoryHeaderHeightKey: PreferenceKey {
+    static let defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = max(value, nextValue())
     }
 }
 
