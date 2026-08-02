@@ -9,6 +9,17 @@ import Combine
 @MainActor
 final class PracticeViewModel: ObservableObject {
 
+    /// App-wide instance. Shared rather than owned by `PracticeView` so the
+    /// scenario list can be fetched during the login sequence, before the
+    /// Scenarios tab is ever opened — a view-owned `@StateObject` cannot start
+    /// loading until the tab it lives on appears, which is what made the first
+    /// visit always show a spinner.
+    ///
+    /// Being long-lived also means the list and `gameDataCache` now survive the
+    /// MainTabView rebuilds that RootView performs when it moves between the
+    /// demo, post-demo-ask and gated branches.
+    static let shared = PracticeViewModel()
+
     // MARK: - Published Properties
     @Published var practices: [Practice] = []
     @Published var isLoading: Bool = false
@@ -29,19 +40,36 @@ final class PracticeViewModel: ObservableObject {
     private let practiceService: PracticeServiceProtocol
     private var lessonCompletedObserver: NSObjectProtocol?
 
+    /// The user the in-memory state was last loaded for, or nil if never loaded.
+    ///
+    /// Only meaningful because this object is now a singleton: it used to die
+    /// with `PracticeView`, so a new sign-in always got an empty one. Now it
+    /// outlives sessions, and `isLocked` / `isCompleted` are per-user — without
+    /// this check the next account would briefly see the previous account's
+    /// lock and completion state. `clearCache()` on logout is the primary
+    /// guard; this is the backstop for any path that doesn't route through it.
+    private var loadedUserId: String?
+
     // MARK: - Init
     init(practiceService: PracticeServiceProtocol = PracticeService()) {
         self.practiceService = practiceService
 
         // Refresh practices when a lesson is completed so scenario unlock state
         // reflects the new total immediately, without waiting for a tab switch.
+        //
+        // Silent (`preloadPractices`) because lessons complete in LessonView,
+        // pushed from Courses — the Scenarios tab is never on screen when this
+        // fires. Surfacing an error here would leave `errorMessage` set on a
+        // screen the user is not looking at, and the error view would then flash
+        // on their next visit before `PracticeView.task` cleared it. That visit
+        // re-fetches and reports failures properly.
         lessonCompletedObserver = NotificationCenter.default.addObserver(
             forName: .lessonCompleted,
             object: nil,
             queue: .main
         ) { [weak self] _ in
             Task { [weak self] in
-                await self?.fetchPractices()
+                await self?.preloadPractices()
             }
         }
     }
@@ -53,7 +81,33 @@ final class PracticeViewModel: ObservableObject {
     }
 
     // MARK: - Fetch Practices from DB
+
+    /// Loads the scenario list for display. Surfaces failures via
+    /// `errorMessage` so `PracticeView` can offer Try Again.
     func fetchPractices() async {
+        await load(surfacingErrors: true)
+    }
+
+    /// Warms the scenario list ahead of the Scenarios tab being opened, called
+    /// from the login sequence in `AuthManager`. This is what removes the
+    /// first-visit spinner: by the time the user reaches the tab the list is
+    /// already in memory, so `PracticeView`'s loader — which only shows while
+    /// `practices` is empty — never appears.
+    ///
+    /// Silent on failure, deliberately. A preload runs for a screen the user
+    /// has not asked for, so it must not leave `errorMessage` set: the error
+    /// view would then flash on entry before `fetchPractices()` cleared it.
+    /// A failed preload simply leaves the cold path exactly as it was.
+    ///
+    /// Must run after lesson progress is available — `isLocked` is derived from
+    /// the local lesson-completion count. See the call sites in `AuthManager`.
+    func preloadPractices() async {
+        await load(surfacingErrors: false)
+    }
+
+    private func load(surfacingErrors: Bool) async {
+        dropStateIfUserChanged()
+
         // Seed from the last successful fetch so a fresh app launch renders
         // content immediately instead of a blank spinner; PracticeView only
         // shows its full-screen loader when `practices` is empty, so this
@@ -63,20 +117,54 @@ final class PracticeViewModel: ObservableObject {
             practices = cached
         }
 
+        let userId = SupabaseManager.shared.currentUserId
+
         isLoading = true
-        errorMessage = nil
+        if surfacingErrors { errorMessage = nil }
         do {
             let result = try await practiceService.fetchPractices()
             practices = result.practices
             progressAvailable = result.progressAvailable
+            loadedUserId = userId
             Self.saveCachedPractices(practices)
+            // A successful load clears a stale failure from an earlier attempt
+            // even when this one was a silent preload — leaving it set would
+            // show Try Again over a list that is actually current.
+            errorMessage = nil
         } catch {
-            errorMessage = error.localizedDescription
+            if surfacingErrors {
+                errorMessage = error.localizedDescription
+            }
             // The list on screen is now either stale cache or empty; either
             // way its completion flags are not authoritative.
             progressAvailable = false
         }
         isLoading = false
+    }
+
+    /// Discards in-memory state belonging to a different user. See `loadedUserId`.
+    ///
+    /// Routes through `clearCache()` rather than repeating the field list, so
+    /// the logout path and this backstop cannot drift apart — anything stale
+    /// enough to wipe on logout is stale on an account switch too.
+    private func dropStateIfUserChanged() {
+        guard let loadedUserId,
+              loadedUserId != SupabaseManager.shared.currentUserId else { return }
+        log("🎮 Scenario cache belonged to a previous user — dropping")
+        clearCache()
+    }
+
+    /// Wipes in-memory state on logout. Invoked from
+    /// `SupabaseManager.clearCurrentUser()`, alongside the other per-user
+    /// stores. The disk cache is namespaced per user id and is left alone, so
+    /// a returning account still gets its warm start.
+    func clearCache() {
+        practices = []
+        gameDataCache = [:]
+        selectedPractice = nil
+        progressAvailable = false
+        errorMessage = nil
+        loadedUserId = nil
     }
 
     // MARK: - Disk cache (UserDefaults, namespaced per-user)

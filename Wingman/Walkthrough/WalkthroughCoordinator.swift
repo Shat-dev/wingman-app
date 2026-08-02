@@ -10,7 +10,7 @@
 //  holds the whole script; the surfaces it drives stay ignorant of it.
 //
 //  DORMANT BY DEFAULT. `start(...)` is the only thing that activates it, and
-//  nothing calls that yet — the mascot overlay (W5) is what starts the script,
+//  nothing calls that yet — the overlay (W5) is what starts the script,
 //  because a running script with nothing rendering it would intercept taps and
 //  give the user no feedback. Until then every method here is a no-op and
 //  every published value holds its initial state.
@@ -40,9 +40,9 @@ final class WalkthroughCoordinator: ObservableObject {
         case finished
     }
 
-    /// An off-script tap the mascot answers instead of the app acting on it.
+    /// An off-script tap the script answers instead of the app acting on it.
     ///
-    /// Every case must resolve to a mascot line and nothing else. **A nudge may
+    /// Every case must resolve to a line of copy and nothing else. **A nudge may
     /// never present a paywall** — an interrupting purchase screen during the
     /// sell is the single worst thing this feature could do.
     enum Nudge: String {
@@ -124,7 +124,16 @@ final class WalkthroughCoordinator: ObservableObject {
         step != .dormant && step != .finished
     }
 
-    /// Whether off-script taps should be answered by the mascot rather than
+    /// Whether the script is currently waiting for this specific scenario to be
+    /// opened — i.e. whether its card should be drawing attention to itself.
+    ///
+    /// Asked by the scenario list rather than pushed at it, so the coordinator
+    /// stays ignorant of how the emphasis is drawn.
+    func isAwaitingScenario(orderIndex: Int) -> Bool {
+        step == .scenarioPrompt && orderIndex == AuthManager.freeScenarioOrderIndex
+    }
+
+    /// Whether off-script taps should be answered by the script rather than
     /// acted on.
     ///
     /// False during `scenarioRunning` because the user is inside `PracticeGame`
@@ -186,7 +195,7 @@ final class WalkthroughCoordinator: ObservableObject {
 
     // MARK: - Advancement
 
-    /// The user tapped through a mascot beat.
+    /// The user tapped through a beat.
     ///
     /// Deliberately does nothing at `scenarioPrompt`: that beat ends when the
     /// user actually opens the scenario, which is the one required action in
@@ -242,7 +251,7 @@ final class WalkthroughCoordinator: ObservableObject {
 
     /// The user left the scenario without finishing it.
     ///
-    /// Hands the script back to the prompt so the mascot re-appears and asks
+    /// Hands the script back to the prompt so the card re-appears and asks
     /// again. There is no skip, but there is also no trap: `scenarioRunning`
     /// has no other exit, and the overlay is deliberately hidden in that step,
     /// so without this a back-tap would strand the walkthrough with nothing on

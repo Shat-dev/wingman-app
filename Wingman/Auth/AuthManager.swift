@@ -611,6 +611,7 @@ final class AuthManager: ObservableObject {
                     // reasoning applies to a content sync — and a guest holds
                     // the `authenticated` role that RLS on `questions` requires.
                     await LessonQuestionStore.shared.refresh()
+                    self.warmScenarioList()
 
                 } else if let session = session {
                     self.markSessionEstablished(session.user)
@@ -654,6 +655,7 @@ final class AuthManager: ObservableObject {
                     // role — running it before auth bootstrap would 401 on cold start.
                     // Cheap: a one-row watermark check unless content actually changed.
                     await LessonQuestionStore.shared.refresh()
+                    self.warmScenarioList()
 
                     log("✅ User signed in: \(session.user.email ?? "unknown")")
                     log("🎯 Auth state updated - RootView should now react")
@@ -796,6 +798,7 @@ final class AuthManager: ObservableObject {
                     // every cold launch, so it is the one that actually keeps
                     // the question cache warm for most users today.
                     await LessonQuestionStore.shared.refresh()
+                    self.warmScenarioList()
 
                 } else if let session = session {
                     self.markSessionEstablished(session.user)
@@ -827,6 +830,7 @@ final class AuthManager: ObservableObject {
                     // role — running it before auth bootstrap would 401 on cold start.
                     // Cheap: a one-row watermark check unless content actually changed.
                     await LessonQuestionStore.shared.refresh()
+                    self.warmScenarioList()
 
                     // ✅ NEW: If user was anonymous and already paid, skip paywall
                     let anonymousManager = AnonymousUserManager.shared
@@ -917,6 +921,31 @@ final class AuthManager: ObservableObject {
 
             log("========================================\n")
         }
+    }
+
+    // MARK: - Scenario list warm-up
+
+    /// Starts the scenario-list fetch as soon as a session exists, so the
+    /// Scenarios tab has data before the user ever opens it.
+    ///
+    /// The list used to be fetched by `PracticeView.task`, which cannot run
+    /// until that tab appears — so the first visit always paid for a full round
+    /// trip behind a spinner. `PracticeViewModel` is app-wide now, which is what
+    /// lets the fetch start here instead.
+    ///
+    /// ORDERING: call this only after `hydrateLessonProgressFromCloud()` on the
+    /// paths that run it. Scenario lock state is computed from the local
+    /// lesson-completion count (`PracticeService.fetchPractices`), which is
+    /// empty until that hydrate lands — warming earlier would cache a list with
+    /// everything spuriously locked. Guest paths never hydrate from cloud
+    /// (their lesson progress is local-only), so they have no such dependency.
+    ///
+    /// Fire-and-forget: nothing downstream depends on the result, and awaiting
+    /// it would add a round trip to the launch path — the opposite of the point.
+    /// Failures are swallowed by `preloadPractices()`; `PracticeView.task` still
+    /// re-fetches on appear and is what surfaces errors to the user.
+    private func warmScenarioList() {
+        Task { await PracticeViewModel.shared.preloadPractices() }
     }
 
     // MARK: - Per-user status loads
@@ -2458,6 +2487,7 @@ final class AuthManager: ObservableObject {
         // role — running it before auth bootstrap would 401 on cold start.
         // Cheap: a one-row watermark check unless content actually changed.
         await LessonQuestionStore.shared.refresh()
+        warmScenarioList()
 
         PostHogSDK.shared.capture("account_linked", properties: [
             "method": session.user.appMetadata["provider"]?.stringValue ?? "unknown"

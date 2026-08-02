@@ -1,23 +1,25 @@
 //
-//  MascotOverlayView.swift
+//  WalkthroughOverlayView.swift
 //  Wingman
 //
 //  The visible half of the first-run walkthrough. See docs/walkthrough-plan.md.
 //
+//  One treatment for every beat: a card in the middle of the screen over a
+//  dimmed app. No mascot — the character was tried in two forms (small figure
+//  beside the copy, then large on a white stage) and in both it competed with
+//  the product it was meant to be selling. What actually persuades is the app
+//  behind the card, so the card stays small and the app stays visible.
+//
 //  Layered into MainTabView's ZStack above the tab bar, and rendered only when
 //  `TabBarVisibilityManager.isVisible` — that flag is already the app's signal
 //  for "the user is on a tab surface, not inside content", so it keeps the
-//  mascot off the top of PracticeGame and LessonView, which are pushed inside
+//  overlay off the top of PracticeGame and LessonView, which are pushed inside
 //  the TabView and would otherwise draw underneath it.
-//
-//  The app stays visible behind the scrim on purpose. The point of the
-//  walkthrough is to show someone the thing they are being asked to pay for,
-//  not to cover it up.
 //
 
 import SwiftUI
 
-struct MascotOverlayView: View {
+struct WalkthroughOverlayView: View {
 
     @EnvironmentObject private var walkthrough: WalkthroughCoordinator
 
@@ -26,134 +28,102 @@ struct MascotOverlayView: View {
     /// `/decide` can answer mid-session.
     @StateObject private var featureFlags = FeatureFlags.shared
 
-    /// The welcome is two beats of copy in one step. Kept local because the
-    /// scrim blocks interaction throughout `welcome`, so nothing can hide the
-    /// tab bar and tear this view down mid-read.
-    @State private var welcomePage = 0
-
     var body: some View {
         if let beat {
             ZStack {
                 scrim
-                bubbleLayer(beat)
+                card(beat)
             }
             .transition(.opacity)
             .animation(.easeInOut(duration: 0.25), value: walkthrough.step)
             .animation(.easeInOut(duration: 0.2), value: walkthrough.nudge)
-            // This is the longest single block of copy in the app, and nothing
-            // above MainTabView applies the ceiling. Matches the treatment on
-            // every other full-screen surface (GameCompleteView, the sheets).
+            // The longest copy in the app, and nothing above MainTabView
+            // applies the ceiling. Matches every other full-screen surface.
             .appDynamicTypeCeiling()
         }
     }
 
     // MARK: - Scrim
 
-    /// Dims the app behind the mascot.
-    ///
-    /// Hit-testing is the load-bearing part, not the dimming. Two beats ask the
-    /// user to *do* something in the app — tap the scenario, scroll the courses
-    /// — and a scrim that swallowed those taps would make the instruction
-    /// impossible to follow. Those beats dim less and pass touches straight
-    /// through; the read-only beats block, which is also what stops an
-    /// off-script tap during `welcome` from needing a nudge at all.
+    /// Dims the app without hiding it. The app behind is the argument the
+    /// walkthrough is making, so it stays legible.
     private var scrim: some View {
         Color.black
-            .opacity(blocksInteraction ? 0.55 : 0.15)
+            .opacity(0.45)
             .ignoresSafeArea()
             .allowsHitTesting(blocksInteraction)
     }
 
+    /// Hit-testing, not appearance — every beat looks identical.
+    ///
+    /// Two beats ask the user to *do* something in the app: tap the scenario
+    /// card, scroll the course list. A scrim that swallowed those taps would
+    /// make the instruction impossible to follow, and `scenarioPrompt` has no
+    /// button, so there would be no way forward at all.
     private var blocksInteraction: Bool {
+        // A nudge answers a tap the user just made; blocking until they
+        // acknowledge it keeps the script from being talked over.
         if walkthrough.nudge != nil { return true }
+
         switch walkthrough.step {
         case .scenarioPrompt, .lessonsTour: return false
         default: return true
         }
     }
 
-    // MARK: - Mascot + bubble
+    // MARK: - Card
 
-    private func bubbleLayer(_ beat: Beat) -> some View {
-        VStack(spacing: 0) {
-            Spacer(minLength: 0)
-
-            speechBubble(beat)
-                .padding(.horizontal, 20)
-                // On the two pass-through beats the bubble has no button, and
-                // a bubble that swallows taps would sit between the user and
-                // the thing they were just told to tap. The scrim already
-                // passes touches; this stops the bubble from undoing that.
-                .allowsHitTesting(beat.action != nil)
-
-            mascot
-                .padding(.leading, 12)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                // Decorative, and 148×240pt of it sits over the bottom-left of
-                // the content. An Image is hit-testable across its whole frame
-                // regardless of transparency, so without this it would block
-                // taps there on every beat.
-                .allowsHitTesting(false)
-
-            // Clears the tab bar so the mascot stands on it rather than
-            // behind it.
-            Spacer().frame(height: 92)
-        }
-    }
-
-    /// The asset is a 2048² square whose figure occupies roughly the left 55%
-    /// and runs to the bottom edge — it is not a centred bust. Fitting the
-    /// square to a height and then narrowing the frame crops the empty right
-    /// half away; without that the figure renders small and pushed off-centre.
-    private var mascot: some View {
-        Image("scenario_user")
-            .resizable()
-            .scaledToFit()
-            .frame(height: 240)
-            .frame(width: 148, alignment: .leading)
-            .clipped()
-            .accessibilityHidden(true)
-    }
-
-    private func speechBubble(_ beat: Beat) -> some View {
-        VStack(alignment: .leading, spacing: 18) {
+    private func card(_ beat: Beat) -> some View {
+        VStack(alignment: .leading, spacing: 22) {
             Text(beat.text)
-                .font(.manropeMedium(size: 17))
+                .font(.manropeMedium(size: 18))
                 .foregroundColor(.wingmanBlack)
-                .lineSpacing(4)
+                .lineSpacing(5)
                 .fixedSize(horizontal: false, vertical: true)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
             if let action = beat.action {
-                Button(action: beat.perform) {
-                    Text(action)
-                        .font(.manropeSemiBold(size: 16))
-                        .foregroundColor(.wingmanWhiteFF)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 48)
-                        .background(Color.wingmanBlack)
-                        .cornerRadius(5)
-                        .contentShape(Rectangle())
-                }
-                .buttonStyle(ScalePressStyle())
+                primaryButton(action, perform: beat.perform)
             }
         }
-        .padding(20)
+        .padding(24)
         .background(Color.wingmanWhiteFF)
-        .cornerRadius(5)
+        .cornerRadius(8)
         .overlay(
-            RoundedRectangle(cornerRadius: 5)
-                .stroke(Color.wingmanBlack.opacity(0.12), lineWidth: 1)
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(Color.wingmanBlack.opacity(0.10), lineWidth: 1)
         )
-        .shadow(color: .black.opacity(0.12), radius: 18, y: 6)
+        .shadow(color: .black.opacity(0.25), radius: 24, y: 10)
+        .padding(.horizontal, 28)
+        // On a beat with no button there is nothing here to tap, and swallowing
+        // touches would put the card between the user and what they were just
+        // told to open.
+        .allowsHitTesting(beat.action != nil)
+    }
+
+    private func primaryButton(
+        _ title: String,
+        perform: @escaping () -> Void
+    ) -> some View {
+        Button(action: perform) {
+            Text(title)
+                .font(.manropeSemiBold(size: 16))
+                .foregroundColor(.wingmanWhiteFF)
+                .frame(maxWidth: .infinity)
+                .frame(height: 50)
+                .background(Color.wingmanBlack)
+                .cornerRadius(5)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(ScalePressStyle())
     }
 
     // MARK: - Script
 
     private struct Beat {
         let text: String
-        /// `nil` means there is no way forward from the bubble — the user has
-        /// to act in the app. Only `scenarioPrompt` does this, and that is the
+        /// `nil` means there is no way forward from the card — the user has to
+        /// act in the app. Only `scenarioPrompt` does this, and that is the
         /// plan's one hard constraint: the scenario has no skip.
         let action: String?
         let perform: () -> Void
@@ -170,9 +140,7 @@ struct MascotOverlayView: View {
 
         switch walkthrough.step {
         case .welcome:
-            return welcomePage == 0
-                ? Beat(text: Self.welcomeOne, action: "Go on", perform: { welcomePage = 1 })
-                : Beat(text: Self.welcomeTwo, action: "Show me", perform: walkthrough.advance)
+            return Beat(text: Self.welcome, action: "Show me", perform: walkthrough.advance)
 
         case .scenarioPrompt:
             return Beat(text: Self.scenarioPrompt, action: nil, perform: {})
@@ -198,24 +166,24 @@ struct MascotOverlayView: View {
     // MARK: - Copy
     //
     // Voice follows AppStrings.Onboarding: plain, second person, outcome
-    // first, no jargon. Deliberately kept in the second person rather than
-    // leaning on the mascot's identity — the asset is the player's own avatar
-    // from the scenario game, so "this figure is me" is a reading some users
-    // will have, and copy that fights it would be confusing.
+    // first, no jargon.
 
-    private static let welcomeOne = """
-        Most guys don't freeze because they're bad with women. They freeze \
-        because they've never practised.
-        """
-
-    private static let welcomeTwo = """
-        So that's what this is. Real conversations you can get wrong safely, \
-        until getting them right stops feeling like luck.
+    /// One beat, not three.
+    ///
+    /// The beats that were cut argued that the app is a gym for social skills —
+    /// the same argument paywall #1's carousel already makes, to the same user,
+    /// minutes earlier. This screen only runs for someone who read those twelve
+    /// bullets and said no, so repeating them cannot move anything. The scenario
+    /// is the only new information available, and every tap before it is a tax
+    /// on reaching it.
+    private static let welcome = """
+        Hey — welcome to Wingman. Quickest way to show you what this is: \
+        play one.
         """
 
     private static let scenarioPrompt = """
-        Start here. She's at the bar, you've got an opening. Play it out — \
-        there's no wrong answer you can't take back.
+        Let's dive into a practice scenario. These prepare you for real life, \
+        so you don't have to fumble first in the real world.
         """
 
     private static let congratulations = """

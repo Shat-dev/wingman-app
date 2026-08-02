@@ -32,12 +32,32 @@ final class PaywallViewModel: ObservableObject {
     var source: PaywallSource = .onboarding
     
     // MARK: - RevenueCat
-    @Published var isLoading = false
+    /// True from construction, because `init()` unconditionally starts a load.
+    ///
+    /// Defaulting to `false` was a false statement about the object's state,
+    /// and it had a visible cost: the very first `body` evaluation of
+    /// `PaywallView` saw `offerings == nil` *and* `isLoading == false`, so it
+    /// fell through to the "Can't load pricing" branch. A load that has not
+    /// started yet is not a load that has failed. Starting `true` makes that
+    /// branch unreachable until an attempt has actually run and lost.
+    @Published var isLoading = true
     @Published var offerings: Offerings?
     @Published var selectedPackage: Package?
     @Published var isPurchasing = false
     @Published var error: String?
     @Published var showAlert = false
+
+    /// True when the most recent load loop exhausted every attempt without
+    /// reaching RevenueCat.
+    ///
+    /// Deliberately distinct from `offerings == nil`. Now that offerings are
+    /// seeded from RevenueCat's on-disk cache in `init()`, an offline user can
+    /// have perfectly good-looking prices on screen that they cannot actually
+    /// transact against — StoreKit will fail the purchase. `offerings == nil`
+    /// used to be a reliable proxy for "this user cannot buy"; it no longer is,
+    /// and `PaywallView.pricingUnavailable` (which gates the non-dismissible
+    /// wall's escape hatch) needs the real answer.
+    @Published private(set) var lastLoadFailed = false
 
     /// Per-product intro-offer eligibility from RevenueCat. Populated after
     /// offerings load and after a failed restore. Empty dictionary means
@@ -183,6 +203,26 @@ final class PaywallViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
 
     init() {
+        // Seed from RevenueCat's synchronous cache so the first frame can
+        // render real plans rather than any pre-content state. This is exactly
+        // what `cachedOfferings` exists for — RevenueCat's own documentation on
+        // it says it "allows initializing state to ensure that UI can be loaded
+        // from the very first frame".
+        //
+        // The cache is reliably warm by the time any paywall mounts:
+        // `RevenueCatManager.configure()` fetches offerings during app launch,
+        // and the user crosses the whole of onboarding plus the rating prompt
+        // before paywall #1 appears.
+        //
+        // The `isConfigured` check is load-bearing, not defensive:
+        // `Purchases.shared` calls `fatalError` when the SDK has not been
+        // configured, and `configure()` deliberately returns early in StoreKit
+        // testing mode.
+        if Purchases.isConfigured, let cached = Purchases.shared.cachedOfferings {
+            self.offerings = cached
+            self.selectedPackage = yearlyPackage
+        }
+
         observeConnectivity()
         loadOfferings()
     }
@@ -215,6 +255,21 @@ final class PaywallViewModel: ObservableObject {
     /// the view shows the loading state (not the error state) mid-retry.
     private func runLoadLoop() async {
         isLoading = true
+
+        // Offerings seeded from the cache in `init()` arrive WITHOUT their
+        // eligibility data, and `isEligibleStatus` treats "not yet known" as
+        // eligible by design. For a trial-ineligible user (lapsed trial on this
+        // Apple ID, returning subscriber) that combination would render a
+        // "3-day Free Trial" badge and a "Try for $0.00" CTA until the refresh
+        // below finished — a false trial claim under Apple Guideline 3.1.2,
+        // held for however long the network took.
+        //
+        // Resolving eligibility up front narrows that window to the local
+        // receipt check. Only runs on the seeded path: on a cold load
+        // `offerings` is nil here and there is nothing to be wrong about yet.
+        if offerings != nil && introEligibility.isEmpty {
+            await loadIntroEligibility()
+        }
 
         // Full retry budget only for a cold load (no offerings yet). A refresh
         // triggered by re-appearing already has prices on screen, so a failure
@@ -255,6 +310,7 @@ final class PaywallViewModel: ObservableObject {
         }
 
         isLoading = false
+        lastLoadFailed = (lastError != nil)
 
         // Surface the failure only after every automatic attempt is exhausted
         // AND we still have nothing to show. A failed background refresh that
@@ -305,8 +361,15 @@ final class PaywallViewModel: ObservableObject {
             .sink { [weak self] connected in
                 guard connected else { return }
                 Task { @MainActor [weak self] in
+                    // `lastLoadFailed` is part of the condition, not just
+                    // `offerings == nil`. Cache-seeded offerings mean a user
+                    // who came back online can be holding stale prices with
+                    // `offerings != nil`, which under the old guard would never
+                    // retry for the rest of the session — leaving those prices
+                    // unrefreshed and, on a hard wall, the escape hatch stuck
+                    // open. Retrying clears both.
                     guard let self,
-                          self.offerings == nil,
+                          self.offerings == nil || self.lastLoadFailed,
                           self.loadTask == nil else { return }
                     log("📶 PaywallViewModel: Connectivity restored — auto-retrying offerings")
                     self.loadOfferings()

@@ -191,10 +191,22 @@ struct PaywallView: View {
         self.source = source
     }
 
-    /// Whether the pricing area is in its unrecoverable state — offerings
-    /// never arrived. Mirrors the condition `pricingStatusSection` /
-    /// `pricingRetryButton` already render on.
-    private var pricingUnavailable: Bool { viewModel.offerings == nil }
+    /// Whether the user cannot realistically complete a purchase here.
+    ///
+    /// This is deliberately BROADER than the condition `pricingStatusSection` /
+    /// `pricingRetryButton` render on, and no longer mirrors it. Offerings are
+    /// now seeded from RevenueCat's on-disk cache, so `offerings != nil` no
+    /// longer implies the user can transact: an offline user sees cached prices
+    /// and a working-looking Continue button whose StoreKit purchase will fail.
+    /// Gating the escape hatch on `offerings == nil` alone would therefore trap
+    /// exactly the user it exists to rescue.
+    ///
+    /// `lastLoadFailed` closes that gap. Erring toward showing the hatch is the
+    /// safe direction: the worst case is a hard wall becoming dismissible for
+    /// someone on a flaky connection, versus an inescapable paywall.
+    private var pricingUnavailable: Bool {
+        viewModel.offerings == nil || viewModel.lastLoadFailed
+    }
 
     /// Whether to render the X. Normally just `isDismissible`, but a
     /// non-dismissible wall must still open when pricing can't load, otherwise

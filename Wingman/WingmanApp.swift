@@ -369,10 +369,19 @@ struct RootView: View {
             // reads as a glitch rather than a step. Every other route change in
             // RootView crossfades; this one now does too.
             //
-            // Sibling transitions (`hasCompletedQuestions`, `hasSeenRatingPrompt`)
-            // still cut. Left alone deliberately — out of scope here, and worth
-            // its own before/after look rather than a silent change.
+            // The remaining sibling, `hasCompletedQuestions` (onboarding →
+            // rating prompt), still cuts. Left alone deliberately — out of
+            // scope here, and worth its own before/after look.
             .animation(.easeInOut(duration: 0.3), value: authManager.effectivePaywallFlowCompleted)
+            // Rating prompt → paywall #1, for the same reason as the line
+            // above; this was the before/after that note asked for. The cut
+            // left the paywall's very first frame fully exposed, with nothing
+            // to blend it, so anything the paywall renders before its plans are
+            // ready snapped into view as a flash. PaywallViewModel now seeds
+            // from RevenueCat's cache so that frame usually holds the real
+            // plans, and this crossfade covers the cases where it can't
+            // (cold cache, offline).
+            .animation(.easeInOut(duration: 0.3), value: authManager.hasSeenRatingPrompt)
             // Same reasoning as the line above, for the two transitions the
             // walkthrough introduces. Both were unreachable in production until
             // W6 gave `markFreeDemoCompleted()` a caller, so neither had ever

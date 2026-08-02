@@ -27,7 +27,7 @@ struct MainTabView: View {
     /// script spans all of them.
     ///
     /// Dormant until something calls `start(...)`, which nothing does yet: the
-    /// mascot overlay (W5) is what activates it. Injected into all four tabs
+    /// walkthrough overlay (W5) is what activates it. Injected into all four tabs
     /// now so the surfaces that feed it are already wired when it wakes up.
     @StateObject private var walkthrough = WalkthroughCoordinator()
 
@@ -71,10 +71,10 @@ struct MainTabView: View {
             //
             // Gated on `tabBarVisibility.isVisible` because PracticeGame and
             // LessonView are pushed *inside* the TabView and hide the tab bar
-            // on appear — without this the mascot would draw on top of the
+            // on appear — without this the card would draw on top of the
             // scenario the user was just told to play.
             if walkthrough.isRunning && tabBarVisibility.isVisible {
-                MascotOverlayView()
+                WalkthroughOverlayView()
                     .environmentObject(walkthrough)
             }
         }

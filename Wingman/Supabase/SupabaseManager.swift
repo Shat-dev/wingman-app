@@ -81,6 +81,9 @@ final class SupabaseManager {
         Task { @MainActor in
             StreakStore.shared.clearCache()
             UserProfileStore.shared.clearCache()
+            // Scenario lock/completion state is per-user and the store is now
+            // app-wide (it used to die with PracticeView on logout).
+            PracticeViewModel.shared.clearCache()
         }
     }
 }

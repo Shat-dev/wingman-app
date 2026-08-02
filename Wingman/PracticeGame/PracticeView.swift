@@ -10,7 +10,11 @@ import PostHog
 struct PracticeView: View {
 
     // MARK: - Properties
-    @StateObject private var viewModel = PracticeViewModel()
+    // Shared, not view-owned: the list is preloaded during the login sequence
+    // (see AuthManager.warmScenarioList) so this screen has data before it is
+    // first opened. A per-view instance could not start loading until the tab
+    // appeared, which is what made every first visit show a spinner.
+    @StateObject private var viewModel = PracticeViewModel.shared
     @State private var navigateToPracticeGame: Bool = false
     @State private var loadedGameData: PracticeGameData? = nil
     @State private var isLoadingGame: Bool = false
@@ -129,6 +133,11 @@ struct PracticeView: View {
                                 await loadAndNavigate(practice: practice)
                             }
                         }
+                        // Points at the one card the walkthrough is waiting on.
+                        // Inert outside the script.
+                        .breathingHighlight(
+                            walkthrough.isAwaitingScenario(orderIndex: practice.orderIndex)
+                        )
                     }
                 }
                 .padding(.horizontal, 20)
