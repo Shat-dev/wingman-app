@@ -919,6 +919,18 @@ and `restoreSessionGracefully()` gates MainTabView behind a network round trip,
 so this should not happen in practice. If `walkthrough_started` ever undercounts
 `walkthrough_step_viewed`(`welcome`), that is the cause.
 
+### Content finding, recorded because the code no longer carries it
+
+`Course.lessonsCount` in `CourseCategory.dummyCategories` sums to **171** across
+25 courses. The bundled JSON those same 25 courses actually load contains
+**94** lessons. The declared counts overstate the catalogue by roughly 80%, and
+they are what the Courses UI displays.
+
+This surfaced while deriving a catalogue count for the walkthrough's closing
+beat. That beat has since been cut to a plain sign-off, so the helper that
+counted real lessons was removed with it — but the discrepancy is unrelated to
+the walkthrough and is still there.
+
 **Operational dependency, worth stating.** `freeScenarioOrderIndex = 1` is
 matched against the `scenarios` table's `order_index`, not against "first row in
 the list". If order 1 is ever unpublished or reordered, **no** scenario is free

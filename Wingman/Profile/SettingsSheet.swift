@@ -24,6 +24,9 @@ struct SettingsSheet: View {
     @State private var successMessage = ""
     @State private var safariLink: IdentifiableURL?
     @State private var showCreateAccount = false
+    // Read-only here: decides whether "Create a free account" can honestly
+    // talk about protecting a log, or needs the generic pitch instead.
+    @StateObject private var approachService = ApproachService.shared
     let userName: String
     
     var body: some View {
@@ -365,7 +368,14 @@ struct SettingsSheet: View {
             NavigationStack {
                 AuthView(
                     mode: .signup,
-                    context: .saveProgress,
+                    // Settings is reached directly, not gated behind having
+                    // logged anything — unlike the Profile banner, which only
+                    // ever appears once there's a log to protect. Reusing
+                    // .saveProgress unconditionally here talked about "your
+                    // log" to guests with zero logged approaches. Only make
+                    // that pitch when it's true; otherwise fall back to the
+                    // generic voluntary copy.
+                    context: approachService.totalCount > 0 ? .saveProgress : .voluntary,
                     onSkip: { showCreateAccount = false }
                 )
             }

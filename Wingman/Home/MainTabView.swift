@@ -63,6 +63,20 @@ struct MainTabView: View {
                 let _ = log("🏠 MainTabView: Tab bar is VISIBLE - showing CustomTabBar")
                 CustomTabBar(selectedTab: $selectedTab)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
+                    // Locked for the duration of the script. The scenario beat
+                    // shows no card at all — the pulsing card is the entire
+                    // instruction — so wandering off that screen would leave
+                    // the user with nothing telling them what to do. The
+                    // coordinator drives tabs by writing `selectedTab`
+                    // directly, so it is unaffected by this.
+                    //
+                    // Disabled only, never dimmed. `CustomTabBar` is drawn on
+                    // top of the TabView's OWN tab bar, which is not hidden on
+                    // any of the four tab roots — so any transparency here
+                    // reveals the system bar underneath, selection pill
+                    // included, and the whole navbar appears to change design
+                    // mid-walkthrough.
+                    .disabled(walkthrough.isRunning)
             } else {
                 let _ = log("🏠 MainTabView: Tab bar is HIDDEN - CustomTabBar not shown")
             }
@@ -115,6 +129,9 @@ struct MainTabView: View {
             guard walkthrough.isRunning else { return }
             walkthrough.interrupt(reason: "routeChanged")
             authManager.markFreeDemoCompleted(handoffToCourses: false)
+            // Same reasoning as the finish path: no post-demo ask, so an
+            // interrupted script must not leave one armed for a later launch.
+            authManager.markPostDemoWallDismissed()
         }
         // The walkthrough's one lasting side effect, and the whole point of it.
         //
@@ -130,6 +147,15 @@ struct MainTabView: View {
             guard newStep == .finished else { return }
             log("🎬 MainTabView: walkthrough finished — marking free demo complete")
             authManager.markFreeDemoCompleted()
+
+            // The script now ends straight into the app, with no ask.
+            //
+            // Dismissing the wall rather than deleting RootView's branch 4c:
+            // the branch, the `postDemoWallIsHard` flag and the
+            // `source=postDemo` paywall plumbing all still work, so turning the
+            // ask back on later is one line here rather than a rebuild. Nothing
+            // else sets this flag on this path, so 4c is simply never reached.
+            authManager.markPostDemoWallDismissed()
         }
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("NavigateToHomeView"))) { _ in
             log("📱 MainTabView: Received NavigateToHomeView notification - switching to Home tab")

@@ -93,22 +93,6 @@ final class WalkthroughCoordinator: ObservableObject {
     /// ago reads wrong.
     @Published private(set) var didSkipScenario = false
 
-    /// How many scenarios the catalogue actually contains, learned from the
-    /// list the app already fetches. Nil until then.
-    ///
-    /// The closing beat used to quote a hardcoded "15 scenarios", which is a
-    /// live database table — publish a sixteenth and the pitch is quietly
-    /// wrong. Copy degrades to a numberless phrasing while this is nil.
-    @Published private(set) var scenarioCount: Int?
-
-    /// How many lessons the app actually ships. Nil until counted.
-    ///
-    /// Counted on a hop off the launch frame rather than inline, because it
-    /// parses every bundled course file. The closing beat that quotes it is
-    /// four taps and a scenario away, so it is always ready in practice; the
-    /// copy degrades to a numberless phrasing if it somehow is not.
-    @Published private(set) var lessonCount: Int?
-
     /// Set when the scenario list arrives before the script has reached the
     /// prompt, and says the beat is not worth playing.
     ///
@@ -174,14 +158,6 @@ final class WalkthroughCoordinator: ObservableObject {
         startedAt = Date()
         Analytics.capture(Analytics.Event.walkthroughStarted)
         step = .welcome
-
-        // Off this frame: MainTabView is mid-first-render and this parses every
-        // bundled course file. Only the closing beat needs the answer.
-        Task { [weak self] in
-            let count = LessonDataService.shared.totalLessonCount()
-            self?.lessonCount = count
-            log("🎬 Walkthrough: catalogue has \(count) lessons")
-        }
     }
 
     /// Stamped when the script starts, so `walkthrough_completed` can report
@@ -338,10 +314,6 @@ final class WalkthroughCoordinator: ObservableObject {
     /// is waiting on the scenario.
     func noteScenarioList(_ practices: [Practice]) {
         guard !practices.isEmpty else { return }
-
-        // Recorded regardless of step, because the closing beat quotes it and
-        // that beat comes long after this runs.
-        scenarioCount = practices.count
 
         guard step == .welcome || step == .scenarioPrompt else { return }
 

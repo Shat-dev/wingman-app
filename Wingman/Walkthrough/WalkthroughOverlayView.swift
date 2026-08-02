@@ -23,11 +23,6 @@ struct WalkthroughOverlayView: View {
 
     @EnvironmentObject private var walkthrough: WalkthroughCoordinator
 
-    /// Read so the closing beat can stop promising a free lesson the user
-    /// would not be able to reach. Observed rather than read inline because
-    /// `/decide` can answer mid-session.
-    @StateObject private var featureFlags = FeatureFlags.shared
-
     var body: some View {
         if let beat {
             ZStack {
@@ -75,6 +70,16 @@ struct WalkthroughOverlayView: View {
 
     private func card(_ beat: Beat) -> some View {
         VStack(alignment: .leading, spacing: 22) {
+            // Sized by width like SplashView does (200pt there), not by
+            // height — the wordmark is wide and short, so a height constraint
+            // renders it postage-stamp small.
+            Image("wingman_logo")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 130)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .accessibilityHidden(true)
+
             Text(beat.text)
                 .font(.manropeMedium(size: 18))
                 .foregroundColor(.wingmanBlack)
@@ -140,23 +145,23 @@ struct WalkthroughOverlayView: View {
 
         switch walkthrough.step {
         case .welcome:
-            return Beat(text: Self.welcome, action: "Show me", perform: walkthrough.advance)
+            return Beat(text: Self.welcome, action: "Next", perform: walkthrough.advance)
 
+        // No card at all. The scenario list carries the whole instruction: the
+        // tab bar is locked, every other scenario is progression-locked, and
+        // the one they are meant to open is pulsing. A card here would only
+        // stand between the user and the single thing they can do.
         case .scenarioPrompt:
-            return Beat(text: Self.scenarioPrompt, action: nil, perform: {})
+            return nil
 
         case .scenarioDone:
-            return Beat(text: Self.congratulations, action: "What's next", perform: walkthrough.advance)
+            return Beat(text: Self.congratulations, action: "Next", perform: walkthrough.advance)
 
         case .lessonsTour:
-            return Beat(
-                text: walkthrough.didSkipScenario ? Self.lessonsTourSkipped : Self.lessonsTour,
-                action: "Got it",
-                perform: walkthrough.advance
-            )
+            return Beat(text: Self.coursesTour, action: "Next", perform: walkthrough.advance)
 
         case .benefits:
-            return Beat(text: benefitsText, action: "Let's go", perform: walkthrough.advance)
+            return Beat(text: Self.signOff, action: "Next", perform: walkthrough.advance)
 
         case .dormant, .scenarioRunning, .finished:
             return nil
@@ -168,75 +173,34 @@ struct WalkthroughOverlayView: View {
     // Voice follows AppStrings.Onboarding: plain, second person, outcome
     // first, no jargon.
 
-    /// One beat, not three.
-    ///
-    /// The beats that were cut argued that the app is a gym for social skills —
-    /// the same argument paywall #1's carousel already makes, to the same user,
-    /// minutes earlier. This screen only runs for someone who read those twelve
-    /// bullets and said no, so repeating them cannot move anything. The scenario
-    /// is the only new information available, and every tap before it is a tax
-    /// on reaching it.
-    private static let welcome = """
-        Hey — welcome to Wingman. Quickest way to show you what this is: \
-        play one.
-        """
+    // Verbatim, including punctuation. No em dashes anywhere in walkthrough
+    // copy — commas only.
 
-    private static let scenarioPrompt = """
-        Let's dive into a practice scenario. These prepare you for real life, \
-        so you don't have to fumble first in the real world.
+    private static let welcome = """
+        Hey, welcome to Wingman. Let's dive into a practice scenario.
         """
 
     private static let congratulations = """
-        That's the whole skill — read the moment, pick your line, adjust. You \
-        just did it once. Do it fifteen more times and it's who you are.
+        Nice work. That's the whole skill, read the moment, pick your line, \
+        adjust. It gets easier every time.
         """
 
-    // The tour beats say "have a look", never "have a go". They used to invite
-    // a tap and then refuse it, which spends the user's goodwill at the exact
-    // moment the script is trying to earn it.
-
-    private static let lessonsTour = """
-        The scenarios get easier because of these. Mindset, opening, flirting, \
-        escalation — short lessons, each one feeding the next. Have a look \
-        down the list; you'll pick one in a second.
+    private static let coursesTour = """
+        Over here is Courses, this is where the rest of it comes from. \
+        Mindset, approaching, flirting, follow-up, all in short lessons.
         """
 
-    /// Shown when the scenario beat was skipped, so it can't refer back to a
-    /// scenario the user just played.
-    private static let lessonsTourSkipped = """
-        This is where the rest of it comes from. Mindset, opening, flirting, \
-        escalation — short lessons, each one feeding the next. Have a look \
-        down the list; you'll pick one in a second.
+    private static let signOff = """
+        That's everything. Go put it to use, we're rooting for you.
         """
-
-    /// Counts come from the live catalogue rather than from literals. The
-    /// scenario table is edited without touching this file, and the lesson
-    /// totals live in the bundled course data — a hardcoded "15 scenarios"
-    /// goes quietly wrong the first time either changes.
-    ///
-    /// The closing promise is dropped when the post-demo wall is hard: in that
-    /// mode a non-buyer can never open a lesson, so "on me either way" would
-    /// be false. The flag and this sentence are a pair.
-    private var benefitsText: String {
-        let scenarios = walkthrough.scenarioCount.map { "\($0) scenarios" } ?? "every scenario"
-        let lessons = walkthrough.lessonCount.map { "\($0) lessons" } ?? "the full course library"
-
-        var text = "Here's what's waiting: \(scenarios), \(lessons), "
-            + "daily practice to keep you sharp, and a log of every real "
-            + "approach you make so you can watch yourself get better."
-
-        if !featureFlags.postDemoWallIsHard {
-            text += " Your first lesson is on me either way."
-        }
-        return text
-    }
 
     private static func nudgeText(_ nudge: WalkthroughCoordinator.Nudge) -> String {
         switch nudge {
         case .lesson:
-            // Names what happens next instead of just refusing. The user is one
-            // beat from being handed this exact thing.
-            return "Almost — one more thing, then your first lesson's on me."
+            // Deliberately does not promise the free lesson. The script no
+            // longer mentions it anywhere, and a nudge is the wrong place to
+            // introduce an offer the closing beat won't back up.
+            return "Almost done, you'll be free to explore in a second."
         case .dailyPractice:
             return "One thing at a time. Play the scenario first."
         case .lockedScenario:

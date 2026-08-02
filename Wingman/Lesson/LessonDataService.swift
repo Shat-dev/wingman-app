@@ -195,23 +195,6 @@ final class LessonDataService {
     /// Sum of completed lesson counts across every known course. Used by
     /// PracticeService.fetchPractices to gate scenario unlocks on cumulative
     /// lesson progress.
-    /// How many lessons the app actually ships, counted from the bundled JSON.
-    ///
-    /// Deliberately NOT `sum(Course.lessonsCount)` from `CourseCategory`. Those
-    /// literals currently total 171 against 94 real lessons, so quoting them
-    /// anywhere user-facing would overstate the catalogue by ~80%. This reads
-    /// the same files the app serves, so it cannot disagree with what the user
-    /// can open.
-    ///
-    /// Loads and parses every course, so it is not free — call it off the
-    /// critical render path. It populates `lessonsCache` on the way through,
-    /// which the Courses tab then reuses.
-    func totalLessonCount() -> Int {
-        courseJsonMapping.keys.reduce(0) { total, courseId in
-            total + loadLessonsForCourse(courseId: courseId).count
-        }
-    }
-
     func totalLessonsCompleted() -> Int {
         courseJsonMapping.keys.reduce(0) { total, courseId in
             total + loadLessonProgress(courseId: courseId).completed.count

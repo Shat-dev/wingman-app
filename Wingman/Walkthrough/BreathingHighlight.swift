@@ -18,21 +18,19 @@ struct BreathingHighlight: ViewModifier {
 
     /// A slow pulse is the point of this modifier, so it has to have a
     /// non-animated form rather than simply being switched off. Reduce Motion
-    /// gets the same emphasis held still — a heavier shadow and a slight lift.
+    /// gets the same emphasis held still, at the enlarged scale.
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     @State private var breathing = false
 
     private var animates: Bool { isActive && !reduceMotion }
 
+    /// Scale only. A ring and a drop shadow were tried and both read as the
+    /// card being broken rather than being pointed at — the shadow in
+    /// particular showed as a grey smear against the app's flat white.
     func body(content: Content) -> some View {
         content
-            .scaleEffect(animates && breathing ? 1.025 : 1.0)
-            .shadow(
-                color: Color.wingmanBlack.opacity(shadowOpacity),
-                radius: isActive ? 16 : 0,
-                y: isActive ? 5 : 0
-            )
+            .scaleEffect(scale)
             .animation(
                 animates
                     ? .easeInOut(duration: 1.6).repeatForever(autoreverses: true)
@@ -44,10 +42,13 @@ struct BreathingHighlight: ViewModifier {
             .onChange(of: reduceMotion) { _ in breathing = animates }
     }
 
-    private var shadowOpacity: Double {
-        guard isActive else { return 0 }
-        if reduceMotion { return 0.22 }
-        return breathing ? 0.20 : 0.08
+    private var scale: CGFloat {
+        guard isActive else { return 1 }
+        // Reduce Motion holds the enlarged state instead of pulsing. It cannot
+        // simply drop to nothing: the scenario beat shows no copy at all, so
+        // this card is the entire instruction on that screen.
+        if reduceMotion { return 1.03 }
+        return breathing ? 1.03 : 1.0
     }
 }
 
