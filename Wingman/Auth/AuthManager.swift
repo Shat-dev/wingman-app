@@ -554,6 +554,25 @@ final class AuthManager: ObservableObject {
         return freeLessonId == nil || freeLessonId == id
     }
 
+    /// Whether the walkthrough is behind this user — either they finished it
+    /// or they were never going to be shown it.
+    ///
+    /// Exists so callers stop reaching for `hasCompletedFreeDemo` alone, which
+    /// is only *half* the question. `suppressWalkthrough(reason:)` fires for
+    /// every pre-update user with existing progress (see
+    /// `checkUserFreeDemoStatus(userId:)`), and nothing ever sets
+    /// `hasCompletedFreeDemo` for them — so a bare `hasCompletedFreeDemo` check
+    /// reads as "still mid-demo" for the entire existing install base, forever.
+    ///
+    /// Deliberately NOT the same condition as `canOpenLesson`, which wants the
+    /// opposite pairing (`hasCompletedFreeDemo && !hasSuppressedWalkthrough` —
+    /// a suppressed user was never promised a free lesson, so they don't get
+    /// one). Here the two flags are alternatives, not a conjunction: both mean
+    /// "the walkthrough will not run again."
+    var hasResolvedDemoPath: Bool {
+        hasCompletedFreeDemo || hasSuppressedWalkthrough
+    }
+
     /// `order_index` of the scenario that is free for everyone. Matches the
     /// live `scenarios` table, where order 1 ("Bar Window") is also the only
     /// row with `required_lessons_completed = 0` — i.e. the one scenario that

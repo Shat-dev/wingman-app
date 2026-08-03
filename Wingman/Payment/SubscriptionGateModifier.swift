@@ -74,14 +74,15 @@ private struct SubscriptionGate: ViewModifier {
     }
 
     /// Decides whether to chain the recovery offer in after a no-purchase
-    /// dismissal. Three independent gates, per the plan — none of them
+    /// dismissal. Four independent gates, per the plan — none of them
     /// sufficient alone:
     ///   1. Not already subscribed (and not anonymous — this screen is only
     ///      reachable post-account-creation by construction, but the check
     ///      is defensive against future flow changes).
     ///   2. Not already shown to this user, ever (AuthManager, mirrored to
     ///      Supabase user_metadata).
-    ///   3. StoreKit/RevenueCat confirms live introductory-offer eligibility
+    ///   3. The walkthrough is behind them — see `midWalkthrough` below.
+    ///   4. StoreKit/RevenueCat confirms live introductory-offer eligibility
     ///      for the discounted product — never claim a discount Apple won't
     ///      actually honor (e.g. a user whose earlier free trial lapsed
     ///      unconverted has already consumed their one intro-offer
@@ -96,9 +97,22 @@ private struct SubscriptionGate: ViewModifier {
         // i.e. the majority path.
         let anonymous = !authManager.hasSession
         let alreadyShown = authManager.hasSeenSecondChanceOffer
-        log("🎁 SubscriptionGate: evaluating second-chance offer — subscribed=\(subscribed) anonymous=\(anonymous) alreadyShown=\(alreadyShown)")
+        // The offer is once-ever, so it has to be spent at the moment it is
+        // worth the most: after the free lesson, when the user reaches for the
+        // second one. The walkthrough's scrim passes taps through on two beats
+        // (`scenarioPrompt` / `lessonsTour` — WalkthroughOverlayView.swift:58),
+        // and demo-mode locking was cancelled, so these gates ARE reachable
+        // mid-script. Without this, a stray tap on a locked course during the
+        // course tour burns the offer before the user has completed anything.
+        //
+        // `hasResolvedDemoPath`, not `hasCompletedFreeDemo`: the latter is
+        // never set for pre-update users with existing progress, who are
+        // suppressed out of the walkthrough instead. Gating on it alone would
+        // disable this feature permanently for the whole existing install base.
+        let midWalkthrough = !authManager.hasResolvedDemoPath
+        log("🎁 SubscriptionGate: evaluating second-chance offer — subscribed=\(subscribed) anonymous=\(anonymous) alreadyShown=\(alreadyShown) midWalkthrough=\(midWalkthrough)")
 
-        guard !subscribed, !anonymous, !alreadyShown else {
+        guard !subscribed, !anonymous, !alreadyShown, !midWalkthrough else {
             log("🎁 SubscriptionGate: second-chance offer skipped by sync gate")
             return
         }
@@ -171,6 +185,31 @@ private struct SubscriptionGate: ViewModifier {
 
         guard let package = offering.package(identifier: Constants.SECOND_CHANCE_PACKAGE_ID) else {
             log("🎁 SubscriptionGate: package '\(Constants.SECOND_CHANCE_PACKAGE_ID)' not found in offering '\(Constants.SECOND_CHANCE_OFFERING_ID)' — available packages: \(offering.availablePackages.map { $0.identifier }.joined(separator: ", "))")
+            return nil
+        }
+
+        // The whole screen is an introductory-offer pitch: every price it shows
+        // comes from `introductoryDiscount`, and its CTA reads "Get 50% Off".
+        // If App Store Connect has no such offer on this product — never
+        // configured, misconfigured, or still pending review — that discount
+        // does not exist and StoreKit will charge the standard price.
+        //
+        // The eligibility check below looks like it already covers this, but it
+        // does not: it treats `.unknown` as "show it", and `.unknown` is exactly
+        // what a fresh install with no App Store receipt returns (see
+        // PaywallViewModel.swift:158-162), i.e. most of this feature's target
+        // population. So without this guard the screen renders a blank price
+        // ("Billed  today for your first year"), keeps its "Get 50% Off" button,
+        // and charges full price — a Guideline 3.1.2 violation and a chargeback,
+        // caused by a dashboard state the app cannot otherwise see.
+        //
+        // Fail closed: no offer shown beats the wrong offer shown.
+        guard package.storeProduct.introductoryDiscount != nil else {
+            log("🎁 SubscriptionGate: '\(package.storeProduct.productIdentifier)' carries no introductory offer — skipping (check App Store Connect)")
+            Analytics.capture(Analytics.Event.recoveryOfferNotEligible, [
+                "reason": "no_intro_offer_on_product",
+                "product_id": package.storeProduct.productIdentifier
+            ])
             return nil
         }
 

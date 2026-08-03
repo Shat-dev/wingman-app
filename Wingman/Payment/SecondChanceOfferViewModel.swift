@@ -21,10 +21,59 @@ final class SecondChanceOfferViewModel: ObservableObject {
     @Published var error: String?
     @Published var showAlert = false
 
+    /// Whether the resolved product actually carries the introductory offer this
+    /// entire screen is pitching.
+    ///
+    /// False means App Store Connect has no Pay-Up-Front offer on
+    /// `wingman_yearly_discount` — never configured, misconfigured, or still
+    /// pending review. Every price below would render blank and StoreKit would
+    /// charge the standard price under a "Get 50% Off" button, so the screen
+    /// must not be shown at all. `SubscriptionGateModifier` gates on this before
+    /// presenting; the view re-checks on appear as a second layer.
+    var hasIntroductoryOffer: Bool {
+        package?.storeProduct.introductoryDiscount != nil
+    }
+
     /// Discounted price the user is charged today (the Pay-Up-Front
     /// introductory price on `wingman_yearly_discount`).
+    ///
+    /// Empty when `hasIntroductoryOffer` is false — callers must gate on that
+    /// rather than rendering this, or the user sees "Billed  today".
     var discountedPriceString: String {
         package?.storeProduct.introductoryDiscount?.localizedPriceString ?? ""
+    }
+
+    /// Whole-number percentage saved in year 1, **computed from this
+    /// storefront's actual prices** rather than asserted.
+    ///
+    /// The offer is configured as "50% off" in App Store Connect, but that is a
+    /// choice of *price point*, not a percentage: Apple's price tiers do not
+    /// land on exactly half the base price in every territory, so the real
+    /// saving drifts a point or two across storefronts. Hardcoding "50%" in the
+    /// UI — which is what this screen used to do in four places — is therefore
+    /// a false pricing claim under Guideline 3.1.2 wherever the tiers do not
+    /// line up, and no amount of correct dashboard configuration can fix it.
+    ///
+    /// **Truncated, never rounded up.** Rounding 49.5% to "50%" overstates the
+    /// discount; truncating to "49%" understates it. Understating is always
+    /// safe, and the exact prices are shown alongside anyway.
+    ///
+    /// Nil when the numbers are missing or implausible — callers must then make
+    /// no numeric claim at all rather than falling back to a guess.
+    var savingsPercent: Int? {
+        guard let product = package?.storeProduct,
+              let introPrice = product.introductoryDiscount?.price else { return nil }
+
+        let basePrice = product.price
+        guard basePrice > 0, introPrice < basePrice else { return nil }
+
+        let fraction = (basePrice - introPrice) / basePrice * 100
+        let percent = Int(NSDecimalNumber(decimal: fraction).doubleValue) // truncates
+
+        // A discount outside this band means something is misconfigured
+        // upstream; say nothing rather than something wrong.
+        guard (1...99).contains(percent) else { return nil }
+        return percent
     }
 
     /// The price StoreKit reverts to after year 1 — this is the product's own
