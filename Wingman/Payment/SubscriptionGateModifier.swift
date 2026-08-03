@@ -40,6 +40,19 @@ private struct SubscriptionGate: ViewModifier {
     /// docs/second-chance-paywall-plan.md for the full design.
     @State private var showSecondChanceOffer = false
 
+    /// Set by `PaywallView` when it has already captured `paywall_dismissed`
+    /// for this presentation (X button or purchase). Read by the sheet's
+    /// `onDismiss` so the swipe-away fallback below doesn't double-count them.
+    @State private var paywallReportedDismissal = false
+
+    /// When the sheet was asked to present. `PaywallView` owns its own
+    /// `appearedAt` for the events it captures, but the swipe path never
+    /// reaches that view's code, so the fallback needs its own timestamp —
+    /// otherwise `time_on_screen_seconds` would be systematically absent on
+    /// exactly the dismissals this fix exists to capture, and any average
+    /// over the property would be biased toward the users who tap the X.
+    @State private var presentedAt: Date?
+
     func body(content: Content) -> some View {
         content
             // `onDismiss` here is SwiftUI's own sheet-level callback, which
@@ -51,14 +64,26 @@ private struct SubscriptionGate: ViewModifier {
             // last case is safe to route through the same hook: by the time
             // it fires, `hasActiveSubscription` is already true, so
             // `evaluateSecondChanceOffer()`'s own guard no-ops immediately.
-            .sheet(isPresented: $isPresented, onDismiss: { evaluateSecondChanceOffer() }) {
+            .sheet(isPresented: $isPresented, onDismiss: {
+                reportSwipeDismissalIfNeeded()
+                evaluateSecondChanceOffer()
+            }) {
                 NavigationStack {
                     PaywallView(
                         authManager: authManager,
                         isDismissible: true,
                         onDismiss: { isPresented = false },
-                        source: .featureGate
+                        source: .featureGate,
+                        onDismissReported: { paywallReportedDismissal = true }
                     )
+                }
+            }
+            .onChange(of: isPresented) { presented in
+                // Arm the fallback on the way in, not on the way out: by the
+                // time `onDismiss` runs the presentation is already over.
+                if presented {
+                    paywallReportedDismissal = false
+                    presentedAt = Date()
                 }
             }
             .onChange(of: authManager.hasActiveSubscription) { newValue in
@@ -71,6 +96,47 @@ private struct SubscriptionGate: ViewModifier {
                     SecondChanceOfferView(onDismiss: { showSecondChanceOffer = false })
                 }
             }
+    }
+
+    /// Captures `paywall_dismissed` for the one exit `PaywallView` cannot see.
+    ///
+    /// This paywall is a sheet, so it can be swiped down. That path runs none
+    /// of the view's own controls — the same bypass that was already noted
+    /// above for the recovery-offer trigger — so until now those dismissals
+    /// emitted no event at all, and `source = featureGate` dismissal counts
+    /// were understated by however many users swipe rather than tap the X.
+    ///
+    /// `outcome` stays `dismissed_without_purchase` rather than gaining a new
+    /// value, so existing insights filtering on it simply become correct
+    /// instead of breaking; `dismiss_method` is what separates the two.
+    private func reportSwipeDismissalIfNeeded() {
+        // The subscription check is not redundant with the flag — it closes a
+        // race the flag alone cannot.
+        //
+        // `PaywallViewModel.purchase(_:)` calls
+        // `SubscriptionManager.handleCustomerInfoUpdate` *before* it returns,
+        // so `hasActiveSubscription` can flip — and the `.onChange` below can
+        // set `isPresented = false` — while the button's `await` is still
+        // suspended, i.e. before `PaywallView` reaches its own capture and
+        // sets the flag. Ordering between those two is not guaranteed either
+        // way, and losing that race would file a paying user as a
+        // dismissal-without-purchase: corrupting the exact number this
+        // fallback exists to make correct.
+        //
+        // A purchase-driven auto-dismiss always has an active subscription by
+        // definition, so keying on it is order-independent. It also matches
+        // the first gate `evaluateSecondChanceOffer()` already applies below.
+        guard !paywallReportedDismissal, !authManager.hasActiveSubscription else { return }
+
+        var properties: [String: Any] = [
+            "source": PaywallSource.featureGate.rawValue,
+            "outcome": "dismissed_without_purchase",
+            "dismiss_method": "swipe"
+        ]
+        if let presentedAt {
+            properties["time_on_screen_seconds"] = Analytics.elapsedSeconds(since: presentedAt)
+        }
+        Analytics.capture("paywall_dismissed", properties)
     }
 
     /// Decides whether to chain the recovery offer in after a no-purchase
@@ -114,6 +180,44 @@ private struct SubscriptionGate: ViewModifier {
 
         guard !subscribed, !anonymous, !alreadyShown, !midWalkthrough else {
             log("🎁 SubscriptionGate: second-chance offer skipped by sync gate")
+
+            // Without this the sync gate is a black hole: the offer simply
+            // fails to appear and nothing distinguishes "correctly withheld"
+            // from "the feature is broken".
+            //
+            // Two of the four conditions are deliberately NOT reported:
+            //
+            //   `subscribed` is the normal post-purchase auto-dismiss path. It
+            //   fires on every successful conversion and would swamp the
+            //   genuine skip reasons with the one outcome that is
+            //   unambiguously good.
+            //
+            //   `alreadyShown` is exactly derivable from data already
+            //   collected, so reporting it buys nothing. `hasSeenSecondChanceOffer`
+            //   is set only by `markSecondChanceOfferShown`, called only from
+            //   `SecondChanceOfferView.finish(outcome:)`, which is only
+            //   reachable from inside that view — and its `onAppear` fires
+            //   `recovery_offer_viewed` before any `finish` can run. (The one
+            //   path that dismisses without firing it, package/intro-offer
+            //   unavailable, calls bare `onDismiss()` precisely so it does not
+            //   burn the flag.) So the flag is burned if and only if
+            //   `recovery_offer_viewed` fired, and "already shown" is a cohort
+            //   filter over that once-per-person event. Emitting a repeating
+            //   event on every feature-gate dismissal, forever, to re-derive
+            //   it would be the wrong trade at any volume.
+            //
+            // What remains is the pair that is genuinely not derivable, and
+            // near-zero volume by construction: `mid_walkthrough` only during
+            // the script, and `no_session` which should never fire at all —
+            // which is the entire reason to watch for it.
+            if !subscribed, !alreadyShown {
+                // The guard failed and neither excluded condition holds, so
+                // one of these two must be true; `anonymous` is the remainder.
+                let reason = midWalkthrough ? "mid_walkthrough" : "no_session"
+                Analytics.capture(Analytics.Event.recoveryOfferNotEligible, [
+                    "reason": reason
+                ])
+            }
             return
         }
 
@@ -171,8 +275,18 @@ private struct SubscriptionGate: ViewModifier {
             return first
         }
 
+        // The three exits below were the feature's biggest blind spot. Two of
+        // them are pure *configuration* faults — renaming the offering or the
+        // package in the RevenueCat dashboard turns this whole feature into a
+        // silent no-op with no App Store release and, until now, no signal
+        // anywhere in PostHog. Someone would have had to notice the revenue
+        // was missing.
         guard let offerings else {
             log("🎁 SubscriptionGate: offerings fetch failed or timed out")
+            Analytics.capture(Analytics.Event.recoveryOfferNotEligible, [
+                "reason": "offerings_unavailable",
+                "is_connected": NetworkMonitor.shared.isConnected
+            ])
             return nil
         }
 
@@ -180,11 +294,22 @@ private struct SubscriptionGate: ViewModifier {
 
         guard let offering = offerings.all[Constants.SECOND_CHANCE_OFFERING_ID] else {
             log("🎁 SubscriptionGate: offering '\(Constants.SECOND_CHANCE_OFFERING_ID)' not found — available offerings: \(offerings.all.keys.joined(separator: ", "))")
+            Analytics.capture(Analytics.Event.recoveryOfferNotEligible, [
+                "reason": "offering_not_found",
+                "expected_offering_id": Constants.SECOND_CHANCE_OFFERING_ID,
+                "available_offering_ids": offerings.all.keys.sorted().joined(separator: ",")
+            ])
             return nil
         }
 
         guard let package = offering.package(identifier: Constants.SECOND_CHANCE_PACKAGE_ID) else {
             log("🎁 SubscriptionGate: package '\(Constants.SECOND_CHANCE_PACKAGE_ID)' not found in offering '\(Constants.SECOND_CHANCE_OFFERING_ID)' — available packages: \(offering.availablePackages.map { $0.identifier }.joined(separator: ", "))")
+            Analytics.capture(Analytics.Event.recoveryOfferNotEligible, [
+                "reason": "package_not_found",
+                "expected_package_id": Constants.SECOND_CHANCE_PACKAGE_ID,
+                "available_package_ids": offering.availablePackages
+                    .map { $0.identifier }.sorted().joined(separator: ",")
+            ])
             return nil
         }
 

@@ -474,7 +474,20 @@ final class PaywallViewModel: ObservableObject {
         PostHogSDK.shared.capture("paywall_purchase_started", properties: [
             "plan": plan,
             "product_id": package.storeProduct.productIdentifier,
-            "source": source.rawValue
+            "source": source.rawValue,
+            // Trial eligibility flips both the CTA copy ("Try for £0.00" vs
+            // "Continue") and the plan badge, and the two cohorts convert
+            // very differently. `is_trial` already exists on
+            // `paywall_purchase_succeeded`, but only there — so conversion
+            // could never be compared *between* the cohorts, only measured
+            // after the fact for the ones who bought.
+            //
+            // Read off the package actually being purchased rather than
+            // mapped through `selectedPlan`, so it stays exact even if the
+            // two ever disagree.
+            "is_trial_eligible": isEligibleStatus(
+                introEligibility[package.storeProduct.productIdentifier]?.status
+            )
         ])
 
         do {
@@ -486,6 +499,15 @@ final class PaywallViewModel: ObservableObject {
             // completed-but-missing-entitlement error.
             if userCancelled {
                 log("🚫 PaywallViewModel: User cancelled purchase")
+                // Terminal event for the started-purchase funnel. Mirrors
+                // `paywall_purchase_started`'s property bag exactly so the
+                // two join on plan / product / source without special-casing.
+                Analytics.capture(Analytics.Event.paywallPurchaseCancelled, [
+                    "plan": plan,
+                    "product_id": package.storeProduct.productIdentifier,
+                    "source": source.rawValue,
+                    "detection": "purchase_result"
+                ])
                 isPurchasing = false
                 return false
             }
@@ -574,6 +596,27 @@ final class PaywallViewModel: ObservableObject {
             } else {
                 self.error = "Purchase completed but entitlement not found. Please contact support."
                 self.showAlert = true
+
+                // The worst state in the system: StoreKit took the money and
+                // RevenueCat reports no entitlement, so the user has paid and
+                // has nothing. It previously emitted no event at all — the
+                // only trace was a support email.
+                //
+                // Reported as a purchase *failure* rather than under its own
+                // name so the funnel arithmetic stays exact
+                // (started = succeeded + failed + cancelled);
+                // `failure_reason` is what separates it from a store error.
+                // `error_code: -1` because there is no NSError on this path —
+                // a real RevenueCat code is never negative, so the sentinel
+                // can't collide with one.
+                PostHogSDK.shared.capture("paywall_purchase_failed", properties: [
+                    "plan": plan,
+                    "product_id": package.storeProduct.productIdentifier,
+                    "source": source.rawValue,
+                    "error_code": -1,
+                    "failure_reason": "entitlement_missing"
+                ])
+
                 isPurchasing = false
                 return false
             }
@@ -582,9 +625,18 @@ final class PaywallViewModel: ObservableObject {
             // Handle RevenueCat specific errors using the error directly
             let nsError = error as NSError
             if nsError.code == 1 {
-                // User cancelled — don't surface error UI, don't fire
-                // PostHog failure event (cancellation is not a failure).
+                // User cancelled — don't surface error UI, and still no
+                // `paywall_purchase_failed` here: cancellation is not a
+                // failure and must not inflate that rate. It does get its own
+                // terminal event, so the funnel can count it directly instead
+                // of inferring it by subtraction.
                 log("🚫 PaywallViewModel: User cancelled purchase")
+                Analytics.capture(Analytics.Event.paywallPurchaseCancelled, [
+                    "plan": plan,
+                    "product_id": package.storeProduct.productIdentifier,
+                    "source": source.rawValue,
+                    "detection": "error_code"
+                ])
             } else {
                 switch nsError.code {
                 case 2: // Store problem
@@ -607,7 +659,11 @@ final class PaywallViewModel: ObservableObject {
                     "plan": plan,
                     "product_id": package.storeProduct.productIdentifier,
                     "source": source.rawValue,
-                    "error_code": nsError.code
+                    "error_code": nsError.code,
+                    // Added so this path stays distinguishable from the
+                    // entitlement-missing branch above, which now shares
+                    // this event name.
+                    "failure_reason": "store_error"
                 ])
             }
 
@@ -634,7 +690,20 @@ final class PaywallViewModel: ObservableObject {
                 self.error = "Purchases restored successfully!"
                 self.showAlert = true
                 log("✅ PaywallViewModel: Purchases restored")
-                
+
+                // A restore from *inside* the conversion flow, unlike the one
+                // in Settings: this user reached a paywall, so without this
+                // they look like someone who saw pricing and didn't convert,
+                // when in fact they were already paying.
+                //
+                // `source` keeps the same vocabulary as the Settings restore
+                // (settings / paywall / recovery_offer); `paywall_source`
+                // carries which of the three walls they were standing on.
+                Analytics.capture(Analytics.Event.purchasesRestored, [
+                    "source": "paywall",
+                    "paywall_source": source.rawValue
+                ])
+
                 // 🔄 Refresh subscription status after restore
                 log("🔄 PaywallViewModel: Refreshing subscription status after restore...")
                 await SubscriptionManager.shared.refreshSubscriptionStatus()
@@ -642,6 +711,16 @@ final class PaywallViewModel: ObservableObject {
                 self.error = "No active subscriptions found to restore"
                 self.showAlert = true
                 log("⚠️ PaywallViewModel: No purchases to restore")
+
+                // Not an exception — the call worked and the honest answer was
+                // "nothing to restore". Still worth counting: a subscriber who
+                // taps Restore on a paywall and gets nothing is a support
+                // ticket wearing a churn costume.
+                Analytics.capture(Analytics.Event.purchasesRestoreFailed, [
+                    "reason": "no_active_entitlement",
+                    "source": "paywall",
+                    "paywall_source": source.rawValue
+                ])
 
                 // Re-run eligibility after a restore that didn't grant access.
                 // The restore writes the App Store receipt to disk, which lets
@@ -654,8 +733,18 @@ final class PaywallViewModel: ObservableObject {
             self.error = "Failed to restore purchases. Please try again."
             self.showAlert = true
             log("❌ PaywallViewModel: Restore failed: \(error)")
+
+            Analytics.capture(Analytics.Event.purchasesRestoreFailed, [
+                "reason": "error",
+                "source": "paywall",
+                "paywall_source": source.rawValue,
+                "error_message": error.localizedDescription
+            ])
+            Analytics.captureError(error, context: "purchases_restore", [
+                "source": "paywall"
+            ])
         }
-        
+
         isLoading = false
     }
     

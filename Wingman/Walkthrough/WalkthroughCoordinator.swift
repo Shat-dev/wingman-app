@@ -84,8 +84,8 @@ final class WalkthroughCoordinator: ObservableObject {
     @Published private(set) var nudge: Nudge?
 
     /// Set when the script wants the user moved to another tab. The host clears
-    /// it via `clearTabRequest()` once applied, so a repeat of the same tab
-    /// later in the script still registers as a change.
+    /// it via `tabApplied()` once applied, so a repeat of the same tab later in
+    /// the script still registers as a change.
     @Published private(set) var requestedTab: Tab?
 
     /// True when the scenario beat was skipped rather than played. Copy
@@ -102,6 +102,13 @@ final class WalkthroughCoordinator: ObservableObject {
     /// advances to `benefits` and the tour is never shown. `advance()` reads
     /// this instead, so the skip happens at a beat boundary.
     private var scenarioBeatUnavailable = false
+
+    /// The step to enter once the host confirms it has switched tabs.
+    ///
+    /// Only ever set alongside a `requestedTab`, and cleared by `tabApplied()`,
+    /// `finish()` and `interrupt()` — so it cannot outlive the request that
+    /// created it or strand the script in a half-advanced state.
+    private var pendingStep: Step?
 
     /// Whether the script is currently running.
     var isRunning: Bool {
@@ -184,19 +191,16 @@ final class WalkthroughCoordinator: ObservableObject {
             // keeps every step change on a beat boundary.
             if scenarioBeatUnavailable {
                 didSkipScenario = true
-                step = .lessonsTour
-                requestedTab = .courses
+                requestTab(.courses, then: .lessonsTour)
             } else {
-                step = .scenarioPrompt
-                requestedTab = .scenarios
+                requestTab(.scenarios, then: .scenarioPrompt)
             }
 
         case .scenarioPrompt, .scenarioRunning:
             break
 
         case .scenarioDone:
-            step = .lessonsTour
-            requestedTab = .courses
+            requestTab(.courses, then: .lessonsTour)
 
         case .lessonsTour:
             step = .benefits
@@ -238,8 +242,27 @@ final class WalkthroughCoordinator: ObservableObject {
     func noteScenarioAbandoned() {
         guard step == .scenarioRunning else { return }
         log("🎬 Walkthrough: scenario left unfinished — returning to the prompt")
+
+        // Captured before the step change, so it lands ahead of the
+        // `walkthrough_step_viewed` that returning to the prompt emits and the
+        // ordering in PostHog matches the causal ordering.
+        //
+        // `attempt` counts how many times this user has bailed out of the
+        // scenario within one run of the script: a first bail is a distraction,
+        // a third is the beat not working.
+        scenarioAbandonCount += 1
+        Analytics.capture(Analytics.Event.walkthroughScenarioAbandoned, [
+            "attempt": scenarioAbandonCount
+        ])
+
         step = .scenarioPrompt
     }
+
+    /// Times the user has entered and left the free scenario without finishing
+    /// it, for this run of the script. Not persisted — a force-quit ends the
+    /// run, and carrying the count across launches would conflate two separate
+    /// sittings.
+    private var scenarioAbandonCount = 0
 
     /// Ends the script without the user having finished it.
     ///
@@ -266,6 +289,7 @@ final class WalkthroughCoordinator: ObservableObject {
 
         nudge = nil
         requestedTab = nil
+        pendingStep = nil
         step = .finished
     }
 
@@ -287,6 +311,7 @@ final class WalkthroughCoordinator: ObservableObject {
 
         nudge = nil
         requestedTab = nil
+        pendingStep = nil
         step = .finished
     }
 
@@ -361,8 +386,7 @@ final class WalkthroughCoordinator: ObservableObject {
 
         if step == .scenarioPrompt {
             didSkipScenario = true
-            step = .lessonsTour
-            requestedTab = .courses
+            requestTab(.courses, then: .lessonsTour)
         }
 
         Analytics.capture(Analytics.Event.walkthroughSuppressed, ["reason": reason])
@@ -389,7 +413,29 @@ final class WalkthroughCoordinator: ObservableObject {
 
     // MARK: - Tab request
 
-    func clearTabRequest() {
+    /// Called by the host once it has actually switched tabs.
+    ///
+    /// Applying the pending step here rather than at `advance()` time is what
+    /// removes the flash of the *old* tab with no card on it. `step` takes
+    /// effect during the render; `requestedTab` is applied from an `onChange`,
+    /// which runs *after* the body has been computed. Setting both together
+    /// therefore produced one render showing the previous tab with the card
+    /// already gone — a visible half-second of Home before Scenarios appeared,
+    /// stretched further by the overlay's fade.
+    ///
+    /// Deferring means the tab switch and the card change land in the same
+    /// render instead.
+    func tabApplied() {
         requestedTab = nil
+        guard let pendingStep else { return }
+        self.pendingStep = nil
+        step = pendingStep
+    }
+
+    /// Moves to `step` only once the host has switched to `tab`. See
+    /// `tabApplied()`.
+    private func requestTab(_ tab: Tab, then step: Step) {
+        pendingStep = step
+        requestedTab = tab
     }
 }

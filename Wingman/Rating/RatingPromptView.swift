@@ -50,6 +50,10 @@ struct RatingPromptView: View {
     // `.onDisappear` cancels this so the popup doesn't land on the paywall.
     @State private var reviewWorkItem: DispatchWorkItem?
 
+    /// Set on first appear, for `time_on_screen_seconds`. Matches the
+    /// `appearedAt` pattern PaywallView and SecondChanceOfferView already use.
+    @State private var appearedAt: Date?
+
     // Testimonials from the wireframe, verbatim.
     private let testimonials: [String] = [
         "I used to freeze up walking past a girl. After 3 weeks I had my first real conversation with a stranger. That was the win.",
@@ -109,6 +113,18 @@ struct RatingPromptView: View {
             // guaranteed to reach the user before they can advance.
             Button(action: {
                 HapticManager.shared.mediumImpact()
+
+                // This screen sits between the end of onboarding and the
+                // paywall, so anyone who drops here never sees pricing at
+                // all. Without this event that loss lands in the gap between
+                // `onboarding_completed` and `paywall_viewed` and reads as
+                // paywall drop-off — pointing optimisation at the wrong screen.
+                var properties: [String: Any] = [:]
+                if let appearedAt {
+                    properties["time_on_screen_seconds"] = Analytics.elapsedSeconds(since: appearedAt)
+                }
+                Analytics.capture(Analytics.Event.ratingPromptContinued, properties)
+
                 authManager.completeRatingPrompt()
             }) {
                 Text("Continue")
@@ -135,6 +151,7 @@ struct RatingPromptView: View {
             // is a second line of defense.
             guard !hasRequestedReview else { return }
             hasRequestedReview = true
+            appearedAt = Date()
 
             // Schedule the popup for 500ms after render — gives the slide-in
             // transition time to settle and the user a beat to register the

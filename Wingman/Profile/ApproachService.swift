@@ -92,6 +92,10 @@ class ApproachService: ObservableObject {
         } catch {
             log("❌ Error fetching approaches: \(error.localizedDescription)")
             self.errorMessage = "Failed to load approaches. Please try again."
+            // API boundary behind the Profile screen's main content. A user
+            // whose log won't load sees an empty history of their own work,
+            // which is the most likely single reason to stop trusting it.
+            Analytics.captureError(error, context: "approach_fetch")
         }
         
         self.isLoading = false
@@ -138,13 +142,29 @@ class ApproachService: ObservableObject {
             // Remove from local array
             self.approaches.removeAll { $0.id == approach.id }
             self.totalCount = self.approaches.count
-            
+
             log("✅ Approach deleted successfully")
+
+            // The negative counterpart to `approach_logged`. A rising delete
+            // rate is either a trust problem with the log or regret about
+            // what was written down — both worth catching early, and neither
+            // visible from the logged count alone.
+            let daysSinceLogged = Calendar.current
+                .dateComponents([.day], from: approach.date, to: Date()).day ?? 0
+            Analytics.capture(Analytics.Event.approachDeleted, [
+                "approach_level": approach.level,
+                "days_since_logged": daysSinceLogged,
+                "remaining_total": self.totalCount,
+            ])
+
             return true
-            
+
         } catch {
             log("❌ Error deleting approach: \(error.localizedDescription)")
             self.errorMessage = "Failed to delete approach. Please try again."
+            Analytics.captureError(error, context: "approach_delete", [
+                "approach_level": approach.level,
+            ])
             return false
         }
     }

@@ -145,7 +145,29 @@ final class LogApproachViewModel: ObservableObject {
                     HapticManager.shared.success()
                     let action = self.isEditMode ? "updated" : "saved"
                     log("✅ Approach \(action) successfully!")
-                    
+
+                    // Only a new entry is a logged approach. An edit is a
+                    // correction to one already counted — capturing it here
+                    // too would inflate the app's headline activation metric
+                    // every time someone fixed a typo.
+                    //
+                    // Read before the two asyncAfter blocks below reset the
+                    // form (+2.5s); `total_approaches` was written by
+                    // updateUserStats() during saveToSupabase(), so it is
+                    // already the post-save count.
+                    if !self.isEditMode {
+                        let total = UserDefaults.standard.integer(forKey: "total_approaches")
+                        Analytics.capture(Analytics.Event.approachLogged, [
+                            "approach_level": self.selectedLevel,
+                            "level_name": self.levels[self.selectedLevel - 1].title,
+                            "anxiety_level": Int(self.anxietyLevel),
+                            "has_notes": !self.notes.isEmpty,
+                            "notes_length": self.notes.count,
+                            "total_approaches": total,
+                            "is_first_approach": total == 1,
+                        ])
+                    }
+
                     // Auto-hide success after 2 seconds
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         self.showSuccess = false
@@ -165,6 +187,19 @@ final class LogApproachViewModel: ObservableObject {
                     let action = self.isEditMode ? "update" : "save"
                     self.errorMessage = "Failed to \(action). Please try again."
                     log("❌ Error \(action)ing approach: \(error.localizedDescription)")
+
+                    // The user only ever sees "Failed to save. Please try
+                    // again." A Supabase outage, an expired session and a
+                    // malformed row are indistinguishable from each other —
+                    // and from a user who simply never logged anything.
+                    Analytics.capture(Analytics.Event.approachLogFailed, [
+                        "is_edit": self.isEditMode,
+                        "approach_level": self.selectedLevel,
+                        "error_message": error.localizedDescription,
+                    ])
+                    Analytics.captureError(error, context: "approach_save", [
+                        "is_edit": self.isEditMode,
+                    ])
                 }
             }
         }

@@ -172,7 +172,10 @@ struct MainTabView: View {
             guard let requested else { return }
             log("🎬 MainTabView: walkthrough requested tab \(requested.rawValue)")
             selectedTab = requested.rawValue
-            walkthrough.clearTabRequest()
+            // Both writes land in the same SwiftUI update, so the tab change
+            // and the beat change are rendered together rather than a frame
+            // apart. See `tabApplied()`.
+            walkthrough.tabApplied()
         }
     }
 }

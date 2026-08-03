@@ -176,11 +176,42 @@ assuming.
 `hasActiveSubscription` is already true by then so the guard no-ops. Already
 handled and commented (lines 44-53).
 
-### 3.9 🟢 Local StoreKit testing
+### 3.9 🔴 Local StoreKit config — the reason the offer never appeared
 
-`wingman_yearly_discount` is absent from `storekitconfig.storekit`. Only matters
-if `useStoreKitTestingMode` is flipped to `true`; it is `false`, so sandbox
-testing works today. Add it anyway when convenient.
+**Downgraded to 🟢 in error, then confirmed as the actual blocker 2026-08-03**
+when the offer failed to appear on a real device test.
+
+The original note said this "only matters if `useStoreKitTestingMode` is flipped
+to `true`; it is `false`, so sandbox testing works today." That reasoning was
+wrong. `useStoreKitTestingMode` is an app-level constant controlling whether the
+app bypasses RevenueCat; it has nothing to do with **the Xcode scheme's**
+`StoreKitConfigurationFileReference`, which is set
+(`Wingman.xcscheme:59-61` → `Wingman/storekitconfig.storekit`) and which governs
+StoreKit product resolution for every run launched from Xcode.
+
+That file contained exactly two products — `wingman_monthly` and
+`wingman_yearly`. So RevenueCat returned the `second_chance` offering from its
+servers, tried to hydrate `yearly_discount` against a local StoreKit that had
+never heard of `wingman_yearly_discount`, and dropped the package. The gate then
+failed at the package lookup and skipped silently:
+
+```
+🎁 SubscriptionGate: package 'yearly_discount' not found in offering
+   'second_chance' — available packages:
+```
+
+Nothing was broken in RevenueCat, App Store Connect, or the app logic. The
+product simply did not exist in the store the simulator was talking to.
+
+**Fixed:** `wingman_yearly_discount` added to `storekitconfig.storekit` — base
+`44.99` (matching `wingman_yearly`, so the rendered renewal price is right),
+`groupNumber 1` (level parity with ASC), and a `payUpFront` introductory offer of
+`22.49` over `P1Y`. Verified: `savingsPercent` computes to exactly `50` from
+those two numbers.
+
+**General lesson worth keeping:** a product that exists in RevenueCat and in App
+Store Connect still does not exist for a Debug run unless it is also in the local
+StoreKit config file. Any future product needs adding in three places, not two.
 
 ### 3.10 🔴 Nothing checks that the product actually carries an intro offer
 
@@ -411,10 +442,10 @@ thing you will wish you had if a second trigger is ever added.
 | **3a** | §3.10 intro-offer guard in `resolveSecondChancePackage()` | — | ✅ done |
 | **3b** | §3.11 dashboard: confirm entitlement attachment + offer approved | — | ✅ confirmed |
 | **3c** | §3.12 compute the discount % per storefront instead of hardcoding | — | ✅ done |
-| **4** | Wording + graphics (§5 items 1, 3, 4, 6) | 3a, 3b | |
+| **4** | Wording + graphics (§5 items 1, 3, 4, 6) | 3a, 3b | ✅ done |
 | **5** | Gate context threading (§5 item 2) | 4 | |
 | **6** | `FeatureFlags.secondChanceOfferEnabled` + `source` on events | — | |
-| **7** | Add `wingman_yearly_discount` to `storekitconfig.storekit` | — | |
+| **7** | Add `wingman_yearly_discount` to `storekitconfig.storekit` | — | ✅ done — §3.9, this was the blocker |
 
 Phases 1 and 2 are live bug fixes and were worth doing regardless of how §4 lands.
 

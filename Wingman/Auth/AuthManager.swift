@@ -2887,7 +2887,21 @@ final class AuthManager: ObservableObject {
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.setValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJuY2ttZ255c2ZsaWl5cHZ4eGlpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM1NDc2NjIsImV4cCI6MjA0OTEyMzY2Mn0.IEcnoOKUbEUqXSZfZ4S6VbxZhb9z_YJXvVcgKLOeXXs", forHTTPHeaderField: "apikey")
             request.httpBody = Data() // Empty body as user ID comes from JWT
-            
+
+            // Hand the client's PostHog identity to the edge function so the
+            // deletion outcome it captures lands on this person and session,
+            // not a new one.
+            //
+            // This is not cosmetic. The function only knows the Supabase user
+            // id, which Postgres returns as a *lowercase* UUID, while
+            // `identify()` here passes Swift's `uuidString`, which is
+            // uppercase. Letting the server derive its own distinct_id would
+            // fork a second person for every single deletion, and the churn
+            // event would never join up with the user who caused it.
+            for (field, value) in Analytics.correlationHeaders() {
+                request.setValue(value, forHTTPHeaderField: field)
+            }
+
             log("🔄 Calling edge function at: \(functionURL.absoluteString)")
             
             let (data, response) = try await URLSession.shared.data(for: request)

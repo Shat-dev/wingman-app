@@ -199,7 +199,8 @@ struct SettingsSheet: View {
                                 Task {
                                     await NotificationManager.shared.updateDailyReadingGoalNotification(
                                         enabled: newValue,
-                                        goalMinutes: dailyReadingGoal
+                                        goalMinutes: dailyReadingGoal,
+                                        source: "goal_toggle"
                                     )
                                 }
                             }
@@ -494,6 +495,15 @@ struct SettingsSheet: View {
                 }
                 log("✅ SettingsSheet: Purchases restored")
 
+                // Separates a returning subscriber from a fresh purchase.
+                // Both otherwise surface only as the entitlement becoming
+                // active, which overstates new conversions.
+                var properties: [String: Any] = ["source": "settings"]
+                if let expiry = customerInfo.entitlements[Constants.ENTITLEMENT_ID]?.expirationDate {
+                    properties["entitlement_expiry_date"] = ISO8601DateFormatter().string(from: expiry)
+                }
+                Analytics.capture(Analytics.Event.purchasesRestored, properties)
+
                 log("🔄 SettingsSheet: Refreshing subscription status after restore...")
                 await SubscriptionManager.shared.refreshSubscriptionStatus()
             } else {
@@ -502,6 +512,15 @@ struct SettingsSheet: View {
                     showingErrorAlert = true
                 }
                 log("⚠️ SettingsSheet: No purchases to restore")
+
+                // Not an exception — the call succeeded and the honest answer
+                // was "nothing to restore". Still a product signal: a paying
+                // user who lands here reads as churn in every revenue metric
+                // while actually being a support ticket.
+                Analytics.capture(Analytics.Event.purchasesRestoreFailed, [
+                    "reason": "no_active_entitlement",
+                    "source": "settings",
+                ])
             }
         } catch {
             await MainActor.run {
@@ -509,6 +528,15 @@ struct SettingsSheet: View {
                 showingErrorAlert = true
             }
             log("❌ SettingsSheet: Restore failed: \(error)")
+
+            // This one is both — a defect worth grouping in error tracking,
+            // and the same product signal as the branch above.
+            Analytics.capture(Analytics.Event.purchasesRestoreFailed, [
+                "reason": "error",
+                "source": "settings",
+                "error_message": error.localizedDescription,
+            ])
+            Analytics.captureError(error, context: "purchases_restore")
         }
         
         isRestoringPurchases = false
@@ -523,7 +551,19 @@ struct SettingsSheet: View {
     
     private func deleteAccount() {
         log("🗑️ Delete account confirmation received")
-        
+
+        // Captured here, before the request leaves, for two reasons: the
+        // client's PostHog person is reset moments later as part of teardown,
+        // and started-vs-completed is the only way to see deletions that fail
+        // or die mid-flight. The completion half is captured server-side by
+        // the edge function, which is the only participant still alive at the
+        // end of a successful deletion.
+        Analytics.capture(Analytics.Event.accountDeletionStarted, [
+            "is_guest_session": authManager.isGuestSession,
+            "total_approaches": approachService.totalCount,
+            "is_subscribed": authManager.hasActiveSubscription,
+        ])
+
         Task {
             do {
                 // Start loading state
@@ -575,6 +615,13 @@ struct SettingsSheet: View {
                     log("❌ Network error during deletion: \(message)")
                     // Show network error to user
                     showDeletionError("Network error: Please check your connection and try again.")
+                    // The edge function never ran, or its reply was lost, so
+                    // the server-side half of this flow records nothing. This
+                    // is the only trace such a deletion leaves.
+                    Analytics.captureError(
+                        AccountDeletionError.networkError(message),
+                        context: "account_deletion"
+                    )
                 }
             } catch AccountDeletionError.deletionFailed(let message) {
                 await MainActor.run {
@@ -594,6 +641,7 @@ struct SettingsSheet: View {
                     isDeleting = false
                     log("❌ Unexpected error during account deletion: \(error.localizedDescription)")
                     showDeletionError("An unexpected error occurred. Please try again.")
+                    Analytics.captureError(error, context: "account_deletion")
                 }
             }
         }

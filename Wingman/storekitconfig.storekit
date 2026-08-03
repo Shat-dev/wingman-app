@@ -106,6 +106,40 @@
           "winbackOffers" : [
 
           ]
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "44.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "6758347200",
+          "introductoryOffer" : {
+            "displayPrice" : "22.49",
+            "internalID" : "7A1F9C22",
+            "numberOfPeriods" : 1,
+            "paymentMode" : "payUpFront",
+            "subscriptionPeriod" : "P1Y"
+          },
+          "localizations" : [
+            {
+              "description" : "Unlock access to all features.",
+              "displayName" : "Yearly Discount",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "wingman_yearly_discount",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Wingman Premium Yearly Discount",
+          "subscriptionGroupID" : "21908067",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
         }
       ]
     }

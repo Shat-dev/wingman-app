@@ -61,22 +61,32 @@ final class FeatureFlags: ObservableObject {
     /// Whether a lesson requires passing a short knowledge check before it can
     /// be marked complete.
     ///
-    /// **Ships `false`.** This adds mandatory friction to the single path that
-    /// drives next-lesson unlock, next-course unlock, all fifteen scenario
-    /// unlocks, and the Home progress card. If lesson completion rate drops,
-    /// everything downstream slows with it — so it goes out dark and gets
-    /// turned on for a cohort once one course's questions are authored. The
-    /// number that decides the rollout is `lesson_completed` per
-    /// `lesson_started`, against `lesson_quiz_abandoned`.
+    /// **Ships `true` — fail open.** This flipped from `false`, and the flag
+    /// flipped with it from `lesson_quiz_enabled` to `lesson_quiz_disabled`.
     ///
-    /// Phrased as an enable switch rather than a kill switch (unlike
-    /// `guest_sessions_disabled`) because off is the safe default here: an
-    /// absent flag or a `/decide` failure leaves lessons behaving exactly as
-    /// they do today.
-    @Published private(set) var lessonQuizEnabled: Bool = false
+    /// While the questions were being authored, off was the safe default: the
+    /// check adds friction to the single path that drives next-lesson unlock,
+    /// next-course unlock, all fifteen scenario unlocks, and the Home progress
+    /// card. That reasoning has expired. All 94 lessons now have questions, so
+    /// an absent flag or a `/decide` failure defaulting to `false` no longer
+    /// means "behave as before" — it means the feature is silently off for
+    /// everyone, which is the state it was actually in.
+    ///
+    /// Phrased as a kill switch for the same reason as
+    /// `guest_sessions_disabled`: `isFeatureEnabled` returns `false` both for a
+    /// flag that does not exist and for every launch before `/decide` answers.
+    /// With an `enabled`-style key those cases read as "off" and defeat the
+    /// default. Phrased as `disabled`, they read as "not disabled" — on — and
+    /// only an explicitly created-and-enabled flag can turn the quiz off.
+    ///
+    /// The number that decides whether to pull it is `lesson_completed` per
+    /// `lesson_started`, against `lesson_quiz_abandoned`.
+    @Published private(set) var lessonQuizEnabled: Bool = true
 
     private static let postDemoWallHardKey = "post_demo_wall_hard"
-    private static let lessonQuizEnabledKey = "lesson_quiz_enabled"
+
+    /// Inverted on purpose — see `lessonQuizEnabled`.
+    private static let lessonQuizDisabledKey = "lesson_quiz_disabled"
 
     /// Deliberately phrased as a **kill switch**, not an enable switch.
     ///
@@ -122,7 +132,11 @@ final class FeatureFlags: ObservableObject {
         }
         #endif
 
-        let value = PostHogSDK.shared.isFeatureEnabled(Self.postDemoWallHardKey)
+        // `sendFeatureFlagEvent: false` — see `recordPostDemoWallExposure()`.
+        let value = PostHogSDK.shared.isFeatureEnabled(
+            Self.postDemoWallHardKey,
+            sendFeatureFlagEvent: false
+        )
         if postDemoWallIsHard != value {
             log("🚩 FeatureFlags: postDemoWallIsHard \(postDemoWallIsHard) → \(value)")
             postDemoWallIsHard = value
@@ -132,8 +146,49 @@ final class FeatureFlags: ObservableObject {
         readLessonQuizEnabled()
     }
 
+    /// Records experiment exposure for `post_demo_wall_hard`, at the moment the
+    /// post-demo wall is actually put in front of the user.
+    ///
+    /// PostHog attributes experiment results to `$feature_flag_called`. This
+    /// method exists because `read()` runs on the launch path for **every**
+    /// user, which meant the exposure event fired for the whole install base
+    /// while only the fraction who finish the demo ever see either variant.
+    /// That inflates the denominator with users who could not possibly have
+    /// been affected, shrinking the measured effect toward zero — on precisely
+    /// the number that is supposed to decide whether the wall gets hardened.
+    ///
+    /// So `read()` now reads the value silently and the exposure is recorded
+    /// here instead. Calling `isFeatureEnabled` *with* the event is the SDK's
+    /// own way to do that; the value it returns is ignored because
+    /// `postDemoWallIsHard` already carries it. This is safe to pair with the
+    /// silent read: the SDK's once-per-value de-duplication is populated inside
+    /// `reportFeatureFlagCalled`, which a `sendFeatureFlagEvent: false` read
+    /// never reaches — so suppressing the launch event cannot suppress this one.
+    ///
+    /// The caller is responsible for firing this exactly once per presentation;
+    /// `PaywallView` hangs it off the same one-shot guard as `paywall_viewed`.
+    func recordPostDemoWallExposure() {
+        #if DEBUG
+        // A locally-forced flag makes the app behave one way while PostHog
+        // still reports the server's value. Recording that would file the
+        // developer under a variant they did not actually experience.
+        if UserDefaults.standard.object(forKey: "postDemoWallIsHard") != nil {
+            log("🚩 FeatureFlags: skipping post-demo wall exposure — locally overridden")
+            return
+        }
+        #endif
+
+        _ = PostHogSDK.shared.isFeatureEnabled(Self.postDemoWallHardKey)
+        log("🚩 FeatureFlags: recorded post_demo_wall_hard exposure (\(postDemoWallIsHard))")
+    }
+
     private func readLessonQuizEnabled() {
-        // Launch argument: -lessonQuizEnabled YES
+        // Launch argument: -lessonQuizEnabled NO
+        //
+        // Now that the default is on, the useful direction is forcing it *off*
+        // — walking 94 lessons through a mandatory check is punishing to QA.
+        // (`-skipLessonQuiz YES` in LessonView does the same thing one layer
+        // down, leaving the flag on but serving no questions.)
         //
         // Deliberately NOT behind `#if DEBUG`, unlike the two overrides below.
         // Subscription pricing and purchases only work in a Release build, so
@@ -144,7 +199,9 @@ final class FeatureFlags: ObservableObject {
         // Safe to ship: launch arguments populate `NSArgumentDomain` from the
         // process's argv, and an App Store app launched from the home screen
         // has no argv beyond its own path. Only a developer running via Xcode
-        // or `simctl` can set this, and the flag still defaults off without it.
+        // or `simctl` can set this. Note the corollary — the argument applies
+        // *only* to the process Xcode spawns, so re-opening the app from the
+        // home screen silently drops it and falls back to the flag below.
         if UserDefaults.standard.object(forKey: "lessonQuizEnabled") != nil {
             let forced = UserDefaults.standard.bool(forKey: "lessonQuizEnabled")
             if lessonQuizEnabled != forced {
@@ -154,7 +211,9 @@ final class FeatureFlags: ObservableObject {
             return
         }
 
-        let value = PostHogSDK.shared.isFeatureEnabled(Self.lessonQuizEnabledKey)
+        // Inverted on purpose — see `lessonQuizDisabledKey`. Absent or
+        // not-yet-loaded reads as "not disabled", so the default stays on.
+        let value = !PostHogSDK.shared.isFeatureEnabled(Self.lessonQuizDisabledKey)
         if lessonQuizEnabled != value {
             log("🚩 FeatureFlags: lessonQuizEnabled \(lessonQuizEnabled) → \(value)")
             lessonQuizEnabled = value

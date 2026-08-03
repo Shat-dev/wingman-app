@@ -8,17 +8,59 @@ class NotificationManager: ObservableObject {
     private init() {}
     
     // MARK: - Permission Request
-    func requestPermission() async -> Bool {
+    func requestPermission(source: String = "unknown") async -> Bool {
         log("🔔 Requesting notification permission...")
         let center = UNUserNotificationCenter.current()
-        
+
+        // Read the prior status before asking. `requestAuthorization` only
+        // surfaces the system prompt when status is `.notDetermined`;
+        // afterwards it returns the standing answer without showing anything.
+        // Without this, every toggle-on by an already-granted user would look
+        // like a fresh grant and the prompt's real accept rate would be
+        // unrecoverable.
+        let priorStatus = await center.notificationSettings().authorizationStatus
+        let wasPrompted = priorStatus == .notDetermined
+
         do {
             let granted = try await center.requestAuthorization(options: [.alert, .sound, .badge])
             log(granted ? "✅ Notification permission granted" : "❌ Notification permission denied")
+
+            // The grant rate gates the entire re-engagement channel — if it's
+            // low, daily reminders can't be the retention lever they're
+            // assumed to be.
+            Analytics.capture(Analytics.Event.notificationPermissionResult, [
+                "granted": granted,
+                "was_prompted": wasPrompted,
+                "prior_status": Self.statusName(priorStatus),
+                "source": source,
+                "had_error": false,
+            ])
+
             return granted
         } catch {
             log("❌ Error requesting notification permission: \(error)")
+            Analytics.capture(Analytics.Event.notificationPermissionResult, [
+                "granted": false,
+                "was_prompted": wasPrompted,
+                "prior_status": Self.statusName(priorStatus),
+                "source": source,
+                "had_error": true,
+            ])
+            Analytics.captureError(error, context: "notification_permission", ["source": source])
             return false
+        }
+    }
+
+    /// Stable string for `UNAuthorizationStatus` — the raw Int would make
+    /// PostHog breakdowns unreadable and silently shift if Apple adds a case.
+    private static func statusName(_ status: UNAuthorizationStatus) -> String {
+        switch status {
+        case .notDetermined: return "not_determined"
+        case .denied: return "denied"
+        case .authorized: return "authorized"
+        case .provisional: return "provisional"
+        case .ephemeral: return "ephemeral"
+        @unknown default: return "unknown"
         }
     }
     
@@ -67,9 +109,9 @@ class NotificationManager: ObservableObject {
     }
     
     // MARK: - Update Notification Based on Settings
-    func updateDailyReadingGoalNotification(enabled: Bool, goalMinutes: Int) async {
+    func updateDailyReadingGoalNotification(enabled: Bool, goalMinutes: Int, source: String = "unknown") async {
         if enabled {
-            let permissionGranted = await requestPermission()
+            let permissionGranted = await requestPermission(source: source)
             if permissionGranted {
                 await scheduleDailyReadingGoalNotification(goalMinutes: goalMinutes)
             }

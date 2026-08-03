@@ -316,21 +316,24 @@ struct LessonView: View {
                 HapticManager.shared.success()
 
                 // One line that answers "why didn't the knowledge check appear?"
-                // without another round trip. Covers all four causes: flag off,
-                // Release build (where the launch-argument override is compiled
-                // out), cache never synced, and lesson with no authored questions.
+                // without another round trip. Since the question set ships in
+                // the bundle, a cold cache is no longer a cause; what is left is
+                // the kill switch being on, `-skipLessonQuiz`, a lesson newer
+                // than the seed on a device that has not synced, and a missing
+                // seed resource (which `LessonQuestionStore` logs on its own).
                 let cached = LessonQuestionStore.shared.questionsByLesson
                 log("""
                     🧠 End-of-lesson gate — \
                     quizEnabled=\(featureFlags.lessonQuizEnabled) \
-                    debugOverrideCompiledIn=\(Self.debugOverrideCompiledIn) \
+                    skipLessonQuiz=\(UserDefaults.standard.bool(forKey: "skipLessonQuiz")) \
                     cachedLessons=\(cached.count) \
                     questionsFor\(lesson.id)=\(cached[lesson.id]?.count ?? 0)
                     """)
 
-                // Surface lessons that have no questions to serve — either
-                // un-authored content or a cache that hasn't synced yet. Without
-                // this the fallthrough is silent and invisible in the funnel.
+                // Surface lessons that have no questions to serve. With a
+                // bundled seed this should now be close to zero; if it is not,
+                // the seed was cut without that lesson. Without this the
+                // fallthrough is silent and invisible in the funnel.
                 if featureFlags.lessonQuizEnabled && quizQuestions.isEmpty {
                     var properties = lessonProperties
                     properties["reason"] = "no_questions"
@@ -345,24 +348,14 @@ struct LessonView: View {
     // MARK: - Knowledge Check
     //
     // Empty means no check: the cover goes straight to `LessonCompleteView` and
-    // the lesson finishes exactly as it did before this feature existed. That
-    // happens when the flag is off, when the lesson has no authored questions,
-    // or when the question cache is still cold on a fresh offline install.
-    /// Whether `-lessonQuizEnabled YES` can work in this build at all. The
-    /// override lives behind `#if DEBUG`, so it is inert in Release — where the
-    /// only way to turn the quiz on is the PostHog flag.
-    private static var debugOverrideCompiledIn: Bool {
-        #if DEBUG
-        return true
-        #else
-        return false
-        #endif
-    }
-
+    // the lesson finishes exactly as it did before this feature existed. All 94
+    // lessons have authored questions and those questions ship in the bundle, so
+    // in practice empty now means the `lesson_quiz_disabled` kill switch is on
+    // or `-skipLessonQuiz` is set — not a cold cache, which the seed covers.
     private var quizQuestions: [QuizQuestion] {
         // Launch argument: -skipLessonQuiz YES — 94 lessons behind a mandatory
         // check is punishing to QA. Available in Release for the same reason as
-        // the enable flag (see FeatureFlags.readLessonQuizEnabled): the flows
+        // the kill switch (see FeatureFlags.readLessonQuizEnabled): the flows
         // worth testing are behind a paywall, and paywalls need Release.
         if UserDefaults.standard.bool(forKey: "skipLessonQuiz") { return [] }
 

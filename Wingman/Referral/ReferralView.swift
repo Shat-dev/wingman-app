@@ -29,6 +29,13 @@ struct ReferralView: View {
                 // ✅ NEXT → COMPLETE PAYWALL FLOW → DASHBOARD
                 Button {
                     log("➡️ Referral submitted:", referralCode)
+                    // The code itself is user-entered free text and is
+                    // deliberately not sent — only its length, which is
+                    // enough to tell a real code from a stray keystroke.
+                    Analytics.capture(Analytics.Event.referralStepCompleted, [
+                        "action": "submitted",
+                        "code_length": referralCode.trimmingCharacters(in: .whitespacesAndNewlines).count,
+                    ])
                     authManager.completePaywallFlow()
                 } label: {
                     Text("Next")
@@ -46,6 +53,13 @@ struct ReferralView: View {
                     Spacer()
                     Button {
                         log("⏭️ Referral skipped")
+                        // A near-total skip rate is the case for cutting this
+                        // screen out of the flow entirely. Today that rate is
+                        // simply unknown.
+                        Analytics.capture(Analytics.Event.referralStepCompleted, [
+                            "action": "skipped",
+                            "code_length": 0,
+                        ])
                         authManager.completePaywallFlow()
                     } label: {
                         Text("Skip")

@@ -73,6 +73,21 @@ struct PaywallView: View {
     /// site to make this an explicit decision.
     let source: PaywallSource
 
+    /// Called immediately after this view captures a `paywall_dismissed`.
+    ///
+    /// Exists for the one presentation style this view cannot see the exit of:
+    /// as a sheet (`.subscriptionGate`), the user can swipe down, which closes
+    /// the sheet without running either of the in-view controls below. Those
+    /// dismissals were silently absent from `paywall_dismissed` entirely.
+    ///
+    /// The host therefore reports them from the sheet's own `onDismiss`, and
+    /// uses this callback to know when NOT to — otherwise every X-tap and
+    /// every purchase would be counted twice.
+    ///
+    /// Nil for the routing-level presentations (onboarding, post-demo), which
+    /// are branches in RootView rather than sheets and cannot be swiped away.
+    let onDismissReported: (() -> Void)?
+
     // PostHog: emit `paywall_viewed` exactly once per mount, even if SwiftUI
     // re-fires `.onAppear` on incidental view re-mounts.
     @State private var didLogPaywallView = false
@@ -182,13 +197,15 @@ struct PaywallView: View {
         isDismissible: Bool = false,
         onDismiss: (() -> Void)? = nil,
         onOfflineBypass: (() -> Void)? = nil,
-        source: PaywallSource
+        source: PaywallSource,
+        onDismissReported: (() -> Void)? = nil
     ) {
         self.authManager_init = authManager
         self.isDismissible = isDismissible
         self.onDismiss = onDismiss
         self.onOfflineBypass = onOfflineBypass
         self.source = source
+        self.onDismissReported = onDismissReported
     }
 
     /// Whether the user cannot realistically complete a purchase here.
@@ -460,9 +477,11 @@ struct PaywallView: View {
                         properties: paywallEventProperties([
                             "outcome": isOfflineBypass
                                 ? "bypassed_pricing_unavailable"
-                                : "dismissed_without_purchase"
+                                : "dismissed_without_purchase",
+                            "dismiss_method": "close_button"
                         ])
                     )
+                    onDismissReported?()
                     if isOfflineBypass {
                         onOfflineBypass?()
                     } else if let onDismiss = onDismiss {
@@ -525,6 +544,16 @@ struct PaywallView: View {
                     "source": source.rawValue,
                     "is_dismissible": isDismissible
                 ])
+
+                // Experiment exposure for `post_demo_wall_hard`, recorded
+                // where the variant is actually experienced rather than on
+                // the launch path. Deliberately inside the one-shot guard —
+                // the SDK de-dupes per value per session anyway, but relying
+                // on that would mean re-mounts still depended on SDK
+                // internals to stay correct.
+                if source == .postDemo {
+                    FeatureFlags.shared.recordPostDemoWallExposure()
+                }
             }
         }
         .onDisappear {
@@ -553,7 +582,10 @@ struct PaywallView: View {
                 }
                 PostHogSDK.shared.capture(
                     "paywall_plan_selected",
-                    properties: paywallEventProperties(["plan": "yearly"])
+                    properties: paywallEventProperties([
+                        "plan": "yearly",
+                        "is_trial_eligible": viewModel.isYearlyTrialEligible
+                    ])
                 )
             }
             .padding(.bottom,10)
@@ -572,7 +604,10 @@ struct PaywallView: View {
                 }
                 PostHogSDK.shared.capture(
                     "paywall_plan_selected",
-                    properties: paywallEventProperties(["plan": "monthly"])
+                    properties: paywallEventProperties([
+                        "plan": "monthly",
+                        "is_trial_eligible": viewModel.isMonthlyTrialEligible
+                    ])
                 )
             }
 
@@ -682,8 +717,12 @@ struct PaywallView: View {
                     // outcome are explicit per call site.
                     PostHogSDK.shared.capture(
                         "paywall_dismissed",
-                        properties: paywallEventProperties(["outcome": "purchased"])
+                        properties: paywallEventProperties([
+                            "outcome": "purchased",
+                            "dismiss_method": "purchase"
+                        ])
                     )
+                    onDismissReported?()
                     // Referral screen removed from flow — complete paywall directly.
                     // ReferralView.swift is intentionally kept intact for possible future use.
                     authManager.completePaywallFlow()

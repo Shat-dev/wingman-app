@@ -32,6 +32,9 @@ struct CourseDetailSheet: View {
     // reach the gate — matches the "reduce paywall spam" requirement.
     @State private var showPaywall = false
 
+    /// One-shot guard for `course_locked_encountered` — see `.onAppear`.
+    @State private var hasCapturedLockedEncounter = false
+
     private var isLocked: Bool { lockReason.isLocked }
 
     var body: some View {
@@ -140,6 +143,20 @@ struct CourseDetailSheet: View {
                                     guard !lesson.isLocked else { return }
 
                                     guard authManager.canOpenLesson(id: lesson.id) else {
+                                        // The exact tap that hit the gate.
+                                        // `paywall_viewed` fires downstream
+                                        // but carries no trigger, so it
+                                        // cannot separate this from any
+                                        // other paywall entry point — which
+                                        // is what makes the lesson→purchase
+                                        // funnel unmeasurable today.
+                                        Analytics.capture(Analytics.Event.lessonGateBlocked, [
+                                            "lesson_id": lesson.id,
+                                            "lesson_title": lesson.title,
+                                            "course_id": course.id,
+                                            "course_title": course.title,
+                                            "free_lesson_already_claimed": authManager.freeLessonId != nil,
+                                        ])
                                         showPaywall = true
                                         return
                                     }
@@ -189,6 +206,23 @@ struct CourseDetailSheet: View {
                 HomeViewModel.saveLastAccessedCourse(courseId: course.id)
             }
             loadLessons()
+
+            // The progression gate, which is a different problem from the
+            // paywall: a user stuck here is blocked by content sequencing,
+            // and no pricing change fixes it. One-shot, because `onAppear`
+            // re-fires on view-tree churn and would otherwise count a single
+            // encounter several times (same guard pattern as
+            // RatingPromptView's `hasRequestedReview`).
+            if case .awaitingPrevious(let previousTitle) = lockReason,
+               !hasCapturedLockedEncounter {
+                hasCapturedLockedEncounter = true
+                Analytics.capture(Analytics.Event.courseLockedEncountered, [
+                    "course_id": course.id,
+                    "course_title": course.title,
+                    "category_id": course.categoryId,
+                    "previous_course_title": previousTitle,
+                ])
+            }
         }
         .postHogScreenView("Course Detail")
     }

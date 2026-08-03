@@ -228,6 +228,44 @@ final class SubscriptionManager: NSObject, ObservableObject {
         if wasActive && !isNowActive {
             log("⚠️ SubscriptionManager: Subscription EXPIRED!")
             NotificationCenter.default.post(name: Self.subscriptionExpiredNotification, object: nil)
+
+            // Revenue churn. Purchases were captured on the way in and
+            // nothing on the way out, so no insight could tell a retained
+            // subscriber from a lapsed one.
+            //
+            // Safe to hang off this branch specifically: `loadSubscriptionCache()`
+            // seeds `lastSubscriptionState` from the cache at init precisely
+            // so the first network check can't mistake the cache catching up
+            // for a real transition. A cold start therefore cannot emit this.
+            //
+            // `churn_type` is the split that actually matters — a user who
+            // cancelled and one whose card failed need opposite responses,
+            // and RevenueCat already distinguishes them.
+            let churnType: String
+            if entitlement?.billingIssueDetectedAt != nil {
+                churnType = "billing_issue"
+            } else if entitlement?.unsubscribeDetectedAt != nil {
+                churnType = "voluntary"
+            } else {
+                churnType = "lapsed"
+            }
+
+            var properties: [String: Any] = [
+                "churn_type": churnType,
+                "was_trial": entitlement?.periodType == .trial,
+                "is_sandbox": entitlement?.isSandbox ?? false,
+            ]
+            if let productIdentifier = entitlement?.productIdentifier {
+                properties["product_identifier"] = productIdentifier
+            }
+            if let expiryDate = expiryDate {
+                properties["expiry_date"] = ISO8601DateFormatter().string(from: expiryDate)
+            }
+            if let originalPurchase = entitlement?.originalPurchaseDate {
+                properties["days_subscribed"] = Calendar.current
+                    .dateComponents([.day], from: originalPurchase, to: Date()).day ?? 0
+            }
+            Analytics.capture(Analytics.Event.subscriptionExpired, properties)
         } else if !wasActive && isNowActive {
             log("✅ SubscriptionManager: Subscription ACTIVATED!")
             NotificationCenter.default.post(name: Self.subscriptionRestoredNotification, object: nil)

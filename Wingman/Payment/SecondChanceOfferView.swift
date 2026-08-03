@@ -55,7 +55,12 @@ struct SecondChanceOfferView: View {
                             .foregroundColor(.wingmanBlack)
                             .multilineTextAlignment(.center)
 
-                        Text("A one-time offer, just for you. Get a full year of Wingman Pro at \(discountPhrase).")
+                        // Carries the *value*, not the discount — the card
+                        // below states the saving and `scarcityNote` states the
+                        // one-time framing, so repeating either here would make
+                        // three lines say the same thing before the user has
+                        // seen a single number.
+                        Text("A full year of Wingman Pro — the best price we can offer.")
                             .font(.manropeRegular(size: 16))
                             .foregroundColor(Color(hex: "6B7280"))
                             .multilineTextAlignment(.center)
@@ -65,6 +70,14 @@ struct SecondChanceOfferView: View {
                             offerCard
                                 .padding(.horizontal, 20)
                                 .padding(.top, 8)
+
+                            valueBullets
+                                .padding(.horizontal, 32)
+                                .padding(.top, 4)
+
+                            scarcityNote
+                                .padding(.horizontal, 32)
+                                .padding(.bottom, 8)
                         } else {
                             ProgressView()
                                 .progressViewStyle(CircularProgressViewStyle(tint: .wingmanBlack))
@@ -181,18 +194,115 @@ struct SecondChanceOfferView: View {
     }
 
     // MARK: - Offer Card
+    //
+    // Deliberately NOT `PlanRow`. That component exists to let a user *choose*
+    // between plans — it carries a radio button, which this screen had to
+    // disable with `allowsHitTesting(false)` because there is nothing to pick.
+    // A dead radio button on a one-option screen reads as a broken control.
+    //
+    // More importantly, PlanRow has nowhere to put the comparison. It shows a
+    // price; this screen's entire job is to show a price *against another
+    // price*. The struck-through original is the argument — without it, "50%
+    // off" is a claim the user has to take on faith while looking at a number
+    // that means nothing on its own.
     private var offerCard: some View {
-        PlanRow(
-            title: "Yearly Plan",
-            price: "\(viewModel.discountedPriceString) for your first year",
-            weekly: viewModel.renewalPriceString,
-            weeklySubtitle: "per year after",
-            isSelected: true,
-            badgeText: viewModel.savingsPercent.map { "\($0)% OFF — One Time Only" }
-                ?? "ONE TIME ONLY",
-            onSelect: {}
+        VStack(spacing: 0) {
+
+            // Badge bar — same treatment as PlanRow's (white on wingmanBlack,
+            // full-bleed across the card top) so this reads as the same family
+            // of component even though it is a different one.
+            if let percent = viewModel.savingsPercent {
+                Text("SAVE \(percent)% — ONE TIME ONLY")
+                    .font(.manropeMedium(size: 13))
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 5)
+                    .background(Color.wingmanBlack)
+            }
+
+            VStack(spacing: 6) {
+                HStack(alignment: .firstTextBaseline, spacing: 10) {
+                    // Suppressed rather than rendered blank if the standard
+                    // price is missing: a strikethrough against nothing turns
+                    // the comparison into a bare number, which is worse than
+                    // showing the discounted price alone.
+                    if !viewModel.renewalPriceString.isEmpty {
+                        Text(viewModel.renewalPriceString)
+                            .font(.manropeMedium(size: 20))
+                            .foregroundColor(Color(hex: "9CA3AF"))
+                            .strikethrough(true, color: Color(hex: "9CA3AF"))
+                    }
+
+                    Text(viewModel.discountedPriceString)
+                        .font(.manropeBold(size: 34))
+                        .foregroundColor(.wingmanBlack)
+                }
+                .fixedSize(horizontal: false, vertical: true)
+
+                Text("for your first year")
+                    .font(.manropeMedium(size: 14))
+                    .foregroundColor(Color(hex: "6B7280"))
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 20)
+        }
+        .background(Color.white)
+        .clipShape(RoundedRectangle(cornerRadius: 5))
+        .overlay(
+            RoundedRectangle(cornerRadius: 5)
+                .stroke(Color.wingmanBlack, lineWidth: 1.5)
         )
-        .allowsHitTesting(false) // single option, nothing to pick
+    }
+
+    // MARK: - Value Bullets
+    //
+    // Three, and deliberately not the paywall's copy. The user read those
+    // bullets seconds ago and said no; repeating the pitch reads as not
+    // listening. These name the three things that are actually locked — which
+    // are exactly the three feature gates that can present this screen — so the
+    // list answers "what do I get" rather than re-arguing "why do you want it".
+    private var valueBullets: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            bullet("Every lesson and course")
+            bullet("All practice scenarios")
+            bullet("Daily practice, every day")
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private func bullet(_ text: String) -> some View {
+        HStack(alignment: .center, spacing: 12) {
+            // Same asset the paywall's bullets use, not an SF Symbol.
+            Image("check")
+                .resizable()
+                .renderingMode(.template)
+                .scaledToFit()
+                .foregroundColor(.wingmanBlack)
+                .frame(width: 15, height: 15)
+
+            Text(text)
+                .font(.manropeMedium(size: 15))
+                .foregroundColor(.wingmanBlack)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+    }
+
+    // MARK: - Scarcity
+    //
+    // True, and therefore usable: `hasSeenSecondChanceOffer` is a once-ever
+    // per-user flag mirrored to Supabase, so this screen genuinely does not come
+    // back — not on the next gate, not after a reinstall.
+    //
+    // No countdown timer. A fake deadline is the most common trigger for a
+    // Guideline 5.6 rejection, and here it would also be a lie: nothing about
+    // this offer expires with time. The honest version is stronger anyway,
+    // because it is the one claim on this screen the user can verify later.
+    private var scarcityNote: some View {
+        Text("One-time offer. You won't see this screen again.")
+            .font(.manropeMedium(size: 13))
+            .foregroundColor(Color(hex: "6B7280"))
+            .multilineTextAlignment(.center)
+            .frame(maxWidth: .infinity)
     }
 
     // MARK: - Disclosure (App Store Guideline 3.1.2 — exact pricing/renewal terms)

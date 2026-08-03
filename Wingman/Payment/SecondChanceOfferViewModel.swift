@@ -111,6 +111,10 @@ final class SecondChanceOfferViewModel: ObservableObject {
 
             if userCancelled {
                 log("🚫 SecondChanceOfferViewModel: User cancelled purchase")
+                Analytics.capture(Analytics.Event.recoveryOfferPurchaseCancelled, [
+                    "product_id": package.storeProduct.productIdentifier,
+                    "detection": "purchase_result"
+                ])
                 isPurchasing = false
                 return false
             }
@@ -149,6 +153,18 @@ final class SecondChanceOfferViewModel: ObservableObject {
             } else {
                 self.error = "Purchase completed but entitlement not found. Please contact support."
                 self.showAlert = true
+
+                // Paid, no entitlement — same worst-case as the main paywall,
+                // and worse here because the discount is once-ever: the user
+                // has spent an offer they can never be shown again. Reported
+                // under the existing failure event so the recovery funnel's
+                // arithmetic stays exact.
+                Analytics.capture(Analytics.Event.recoveryOfferPurchaseFailed, [
+                    "product_id": package.storeProduct.productIdentifier,
+                    "error_code": -1,
+                    "failure_reason": "entitlement_missing"
+                ])
+
                 isPurchasing = false
                 return false
             }
@@ -156,13 +172,18 @@ final class SecondChanceOfferViewModel: ObservableObject {
             let nsError = error as NSError
             if nsError.code == 1 {
                 log("🚫 SecondChanceOfferViewModel: User cancelled purchase")
+                Analytics.capture(Analytics.Event.recoveryOfferPurchaseCancelled, [
+                    "product_id": package.storeProduct.productIdentifier,
+                    "detection": "error_code"
+                ])
             } else {
                 self.error = "Purchase failed. Please try again."
                 self.showAlert = true
                 log("❌ SecondChanceOfferViewModel: Purchase failed: \(error.localizedDescription)")
                 Analytics.capture(Analytics.Event.recoveryOfferPurchaseFailed, [
                     "product_id": package.storeProduct.productIdentifier,
-                    "error_code": nsError.code
+                    "error_code": nsError.code,
+                    "failure_reason": "store_error"
                 ])
             }
             isPurchasing = false
@@ -175,12 +196,31 @@ final class SecondChanceOfferViewModel: ObservableObject {
             let customerInfo = try await Purchases.shared.restorePurchases()
             let hasEntitlement = customerInfo.entitlements[Constants.ENTITLEMENT_ID]?.isActive == true
             if hasEntitlement {
+                Analytics.capture(Analytics.Event.purchasesRestored, [
+                    "source": "recovery_offer"
+                ])
                 SubscriptionManager.shared.handleCustomerInfoUpdate(customerInfo, error: nil)
                 await SubscriptionManager.shared.refreshSubscriptionStatus()
+            } else {
+                // Worth separating from the paywall case: reaching Restore on
+                // the recovery offer means the once-ever discount was spent on
+                // someone who already owned a subscription.
+                Analytics.capture(Analytics.Event.purchasesRestoreFailed, [
+                    "reason": "no_active_entitlement",
+                    "source": "recovery_offer"
+                ])
             }
             return hasEntitlement
         } catch {
             log("❌ SecondChanceOfferViewModel: Restore failed: \(error)")
+            Analytics.capture(Analytics.Event.purchasesRestoreFailed, [
+                "reason": "error",
+                "source": "recovery_offer",
+                "error_message": error.localizedDescription
+            ])
+            Analytics.captureError(error, context: "purchases_restore", [
+                "source": "recovery_offer"
+            ])
             return false
         }
     }

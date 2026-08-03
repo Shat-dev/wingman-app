@@ -145,20 +145,35 @@ struct DailyReadingGoalSheet: View {
         
         // Simulate API call
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            // Read before the write below overwrites it — the change itself
+            // is the signal (raising a goal reads very differently from
+            // lowering one), and it's unrecoverable a line later.
+            let previousGoal = UserDefaults.standard.integer(forKey: "daily_reading_goal")
+
             // Save to UserDefaults
             onSave(selectedGoal)
             UserDefaults.standard.set(selectedGoal, forKey: "daily_reading_goal")
-            
+
             // Update notifications if they are enabled
             let goalNotificationsEnabled = UserDefaults.standard.bool(forKey: "goal_notifications")
             if goalNotificationsEnabled {
                 Task {
                     await NotificationManager.shared.updateDailyReadingGoalNotification(
                         enabled: true,
-                        goalMinutes: selectedGoal
+                        goalMinutes: selectedGoal,
+                        source: "goal_sheet"
                     )
                 }
             }
+
+            // A commitment signal worth segmenting retention on, and the only
+            // read on whether the 10-minute default is the right one.
+            Analytics.capture(Analytics.Event.dailyReadingGoalSet, [
+                "goal_minutes": selectedGoal,
+                "previous_goal_minutes": previousGoal,
+                "changed": previousGoal != selectedGoal,
+                "notifications_enabled": goalNotificationsEnabled,
+            ])
             
             isSaving = false
             showSuccess = true
