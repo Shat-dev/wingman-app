@@ -44,7 +44,7 @@ struct QuizQuestionView: View {
                     // MARK: - Question Number and Text
                     VStack(alignment: .leading, spacing: 4) {
                         Text("\(state.number). \(state.text)")
-                            .font(.manropeMedium(size: 20))
+                            .font(.manropeMedium(size: 22))
                             .foregroundColor(.wingmanBlack)
                             .lineSpacing(1)
                             .fixedSize(horizontal: false, vertical: true)

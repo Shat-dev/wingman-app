@@ -409,14 +409,28 @@ struct RootView: View {
             // so dashboards can filter dev/simulator traffic out of prod
             // metrics (filter `environment = "prod"` on all insights).
             //
-            // For anonymous users, identify with the persisted anonymous ID
-            // up-front so onboarding events have a stable distinct_id. The
-            // `isAuthed` snapshot is captured here on main; if the user is
-            // authed, AuthManager.observeAuthState() handles identify(uuid)
-            // separately when .initialSession / .signedIn fires.
-            let isAuthedAtLaunch = authManager.isAuthenticated
-            let anonymousId = AnonymousUserManager.shared.anonymousUserId
-            Task.detached(priority: .utility) {
+            // Identity is deliberately NOT established here. posthog-ios spends
+            // its single anonymous→identified merge on the FIRST identify() and
+            // refuses every later one — `PostHogSDK.swift:576` only merges
+            // `if hasDifferentDistinctId, !isIdentified`, and the else branch
+            // just logs "already identified" without even updating the stored
+            // distinct_id.
+            //
+            // This used to call `identify(AnonymousUserManager.anonymousUserId)`
+            // for unauthenticated users, which burned that one merge on a local
+            // UUID no other system has ever seen. Every subsequent
+            // identify(supabaseUserId) — observeAuthState()'s .signedIn and
+            // .initialSession, and adoptGuestIdentity() — was silently dropped,
+            // so PostHog could never be joined to Supabase or RevenueCat and
+            // each subscriber existed as two persons: one holding the funnel,
+            // one holding the revenue events from the RevenueCat webhook.
+            //
+            // Leaving the SDK on its own anonymous id until sign-in is the same
+            // shape RevenueCat already uses deliberately (RevenueCatManager
+            // configures with no appUserID for exactly this reason) — and it is
+            // what makes the later identify a real anonymous→identified
+            // transfer that carries `$anon_distinct_id`.
+            let posthogSetup = Task.detached(priority: .utility) {
                 // The new init(projectToken:host:) is async (replaces the
                 // deprecated init(apiKey:host:)), so it must be awaited. The
                 // SDK's setup/register/identify themselves remain synchronous.
@@ -479,8 +493,27 @@ struct RootView: View {
                 PostHogSDK.shared.register(["environment": "prod"])
                 #endif
 
-                if !isAuthedAtLaunch {
-                    PostHogSDK.shared.identify(anonymousId)
+                // One-time repair for installs that already ran a build which
+                // identified against the local anonymous UUID. The SDK's
+                // `isIdentified` flag is persisted in its own storage and
+                // survives launches, so simply removing the call above does
+                // nothing for those devices — every later identify() would keep
+                // hitting the "already identified" branch forever.
+                //
+                // reset() clears the flag and the distinct_id, so the next
+                // identify() is a genuine anonymous→identified transfer. Cost is
+                // that the pre-repair anonymous person is orphaned, which is why
+                // this runs exactly once per install, before any identify().
+                //
+                // Declared locally rather than as a file-scope constant: a
+                // global `let` here is main-actor-isolated by inference, and
+                // reading it from this detached task is an error under the
+                // Swift 6 language mode. Versioned so a future repair can be
+                // forced by bumping the suffix.
+                let identityResetKey = "posthog_identity_reset_v2"
+                if !UserDefaults.standard.bool(forKey: identityResetKey) {
+                    UserDefaults.standard.set(true, forKey: identityResetKey)
+                    PostHogSDK.shared.reset()
                 }
 
                 // Feature flags. `read()` first so a cache warmed by a previous
@@ -489,6 +522,26 @@ struct RootView: View {
                 // internally; this task is deliberately off the main thread.
                 await FeatureFlags.shared.read()
                 await FeatureFlags.shared.refresh()
+            }
+
+            // Identify the restored session, but only once the SDK is actually
+            // up. `observeAuthState()` starts from `AuthManager.init()`, so
+            // `.initialSession` can fire before `setup(_:)` has run — and every
+            // PostHog call made before setup is silently dropped
+            // (`isEnabled()` returns false and logs). Without this hop a
+            // returning user's identify is simply lost for the whole launch,
+            // which would leave the seam this change exists to close still open.
+            //
+            // Mirrors the deferred-identity pattern
+            // `applyPendingGuestRevenueCatIdentity()` already uses above for the
+            // same class of ordering problem.
+            //
+            // A session that arrives *after* this point needs nothing here: the
+            // identify calls in `observeAuthState()` and `adoptGuestIdentity()`
+            // now work, because nothing has spent the merge.
+            Task {
+                await posthogSetup.value
+                authManager.applyPendingPostHogIdentity()
             }
 
             // Step 2: Initialize subscription monitoring (after RevenueCat is ready)

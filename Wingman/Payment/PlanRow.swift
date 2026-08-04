@@ -15,6 +15,11 @@ struct PlanRow: View {
     let weeklySubtitle: String
     let isSelected: Bool
     var badgeText: String? = nil
+    /// Pre-discount price, struck through above `weekly`. Only set while the
+    /// second-chance window is running, where a bare "$22.49" states a price
+    /// but not the saving — the comparison is the argument, and dropping it
+    /// leaves the badge's percentage as a claim with nothing behind it.
+    var originalPrice: String? = nil
     let onSelect: () -> Void
 
     var body: some View {
@@ -55,10 +60,19 @@ struct PlanRow: View {
                     // Right side - Weekly price and Radio
                     HStack(alignment: .center, spacing: 14) {
                         VStack(alignment: .trailing, spacing: 2) {
-                            Text(weekly)
-                                .font(.manropeSemiBold(size: 16))
-                                .foregroundColor(Color(hex: "6B7280"))
-                            
+                            HStack(alignment: .firstTextBaseline, spacing: 6) {
+                                if let originalPrice {
+                                    Text(originalPrice)
+                                        .font(.manropeMedium(size: 13))
+                                        .foregroundColor(Color(hex: "9CA3AF"))
+                                        .strikethrough(true, color: Color(hex: "9CA3AF"))
+                                }
+
+                                Text(weekly)
+                                    .font(.manropeSemiBold(size: 16))
+                                    .foregroundColor(originalPrice == nil ? Color(hex: "6B7280") : .wingmanBlack)
+                            }
+
                             Text(weeklySubtitle)
                                 .font(.manropeSemiBold(size: 12))
                                 .foregroundColor(Color(hex: "6B7280"))

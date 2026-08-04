@@ -103,6 +103,14 @@ final class WalkthroughCoordinator: ObservableObject {
     /// this instead, so the skip happens at a beat boundary.
     private var scenarioBeatUnavailable = false
 
+    /// Whether the user has tapped Next on the scenario instruction card.
+    ///
+    /// Separate from `step` because dismissing that card must NOT advance the
+    /// script — the scenario is still the only way forward. Reset by
+    /// `noteScenarioAbandoned()` so someone who backs out of the scenario is
+    /// told what to do again.
+    @Published private(set) var scenarioPromptAcknowledged = false
+
     /// The step to enter once the host confirms it has switched tabs.
     ///
     /// Only ever set alongside a `requestedTab`, and cleared by `tabApplied()`,
@@ -255,7 +263,23 @@ final class WalkthroughCoordinator: ObservableObject {
             "attempt": scenarioAbandonCount
         ])
 
+        // Show the instruction again. They left without playing it, so the
+        // prompt has not done its job yet.
+        scenarioPromptAcknowledged = false
+
         step = .scenarioPrompt
+    }
+
+    /// The user tapped Next on the scenario instruction.
+    ///
+    /// Dismisses the card only. The step deliberately stays at
+    /// `scenarioPrompt`: the scenario itself is still the one required action,
+    /// so this is an acknowledgement, not an advance. `advance()` remains a
+    /// no-op at this step for exactly that reason.
+    func acknowledgeScenarioPrompt() {
+        guard step == .scenarioPrompt else { return }
+        log("🎬 Walkthrough: scenario instruction acknowledged")
+        scenarioPromptAcknowledged = true
     }
 
     /// Times the user has entered and left the free scenario without finishing

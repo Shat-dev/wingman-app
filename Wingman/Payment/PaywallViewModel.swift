@@ -112,18 +112,190 @@ final class PaywallViewModel: ObservableObject {
     // MARK: - Plan
     @Published var selectedPlan: SubscriptionPlan = .yearly
     
+    // MARK: - Second-Chance Discount Window
+    //
+    // For 30 minutes after the recovery offer is shown, THIS paywall — the
+    // feature-gate one only — sells the discounted year in place of the
+    // standard one. The modal itself is still once-ever; what survives it is
+    // the price, and only for as long as the countdown says.
+    //
+    // The window is owned here rather than read ad hoc from AuthManager
+    // because expiry has to *do* something: the moment it passes, the package
+    // behind the button must change back. A view that merely rendered a
+    // deadline would leave a stale discounted package selected and charge the
+    // discounted price after the offer had visibly ended.
+
+    /// Non-nil only while the discounted year is actually being served.
+    /// Everything else keys off this rather than re-deriving eligibility.
+    @Published private(set) var discountDeadline: Date?
+
+    /// Seconds left, refreshed once a second from the absolute deadline (never
+    /// decremented), so backgrounding the app cannot desynchronise the clock
+    /// from the offer it describes.
+    @Published private(set) var discountRemaining: TimeInterval = 0
+
+    private var countdownTask: Task<Void, Never>?
+
+    var isDiscountWindowActive: Bool { discountDeadline != nil }
+
+    /// The discounted package, or nil if the dashboard/App Store Connect state
+    /// can't back it up. Fails closed exactly like `SubscriptionGateModifier`:
+    /// no introductory offer on the product means StoreKit would charge full
+    /// price under a discount label.
+    var discountPackage: Package? {
+        guard let package = offerings?.all[Constants.SECOND_CHANCE_OFFERING_ID]?
+                .package(identifier: Constants.SECOND_CHANCE_PACKAGE_ID),
+              package.storeProduct.introductoryDiscount != nil else { return nil }
+        return package
+    }
+
+    /// Percentage quoted by the countdown banner and the plan badge. Same
+    /// computation the recovery modal used, so the two screens cannot disagree.
+    var discountSavingsPercent: Int? {
+        guard isDiscountWindowActive else { return nil }
+        return yearlyPackage?.storeProduct.introSavingsPercent
+    }
+
+    /// Standard yearly price, struck through beside the discounted one. Nil
+    /// outside the window, where there is nothing to compare against.
+    var yearlyOriginalPrice: String? {
+        guard isDiscountWindowActive,
+              let price = yearlyPackage?.storeProduct.localizedPriceString,
+              !price.isEmpty else { return nil }
+        return price
+    }
+
+    /// Amount actually charged today for the yearly plan — the introductory
+    /// price inside the window, the standard price outside it. Drives the
+    /// "per week" maths, which would otherwise quote the undiscounted rate
+    /// directly underneath the discounted total.
+    var yearlyChargedPrice: Decimal? {
+        guard let product = yearlyPackage?.storeProduct else { return nil }
+        if isDiscountWindowActive, let intro = product.introductoryDiscount?.price {
+            return intro
+        }
+        return product.price
+    }
+
+    /// Opens the window if this user has one running. Idempotent — safe to call
+    /// from every `onAppear`, including re-mounts.
+    ///
+    /// Deliberately gated on `.featureGate`: onboarding and post-demo users
+    /// have not been shown the offer, and serving them a discounted product
+    /// they were never promised would leak the discount into the main funnel.
+    func startDiscountWindowIfEligible() {
+        guard discountDeadline == nil,
+              source == .featureGate,
+              let authManager,
+              authManager.isSecondChanceDiscountWindowOpen(),
+              let deadline = authManager.secondChanceDiscountDeadline,
+              let package = discountPackage else { return }
+
+        // An authoritative `.ineligible` means Apple will not honour the intro
+        // price for this Apple ID (a lapsed trial in the same subscription
+        // group, most often). Unknown/not-yet-loaded stays optimistic, matching
+        // every other eligibility read on this screen.
+        guard isEligibleStatus(introEligibility[package.storeProduct.productIdentifier]?.status) else {
+            log("🎁 PaywallViewModel: discount window open but product is intro-ineligible — serving standard pricing")
+            return
+        }
+
+        discountDeadline = deadline
+        discountRemaining = max(0, deadline.timeIntervalSinceNow)
+        log("🎁 PaywallViewModel: discount window active, \(Int(discountRemaining))s remaining")
+
+        Analytics.capture(Analytics.Event.recoveryOfferWindowOpened, [
+            "product_id": package.storeProduct.productIdentifier,
+            "seconds_remaining": Int(discountRemaining),
+            "savings_percent": package.storeProduct.introSavingsPercent ?? -1
+        ])
+
+        // Re-point the selection: `init()` seeded it with the standard yearly
+        // package from the cache, and nothing re-runs `selectPlan` unless the
+        // user taps a card. Without this a user who never touches the plan
+        // rows buys the undiscounted product from under a discounted label.
+        if selectedPlan == .yearly {
+            selectedPackage = yearlyPackage
+        }
+
+        startCountdown()
+    }
+
+    private func startCountdown() {
+        countdownTask?.cancel()
+        countdownTask = Task { [weak self] in
+            while !Task.isCancelled {
+                try? await Task.sleep(nanoseconds: 1_000_000_000)
+                guard let self, let deadline = self.discountDeadline else { return }
+
+                // Recomputed from the deadline rather than decremented, so a
+                // spell in the background resolves to the correct remaining
+                // time — or straight to expiry — on the first tick after
+                // resume.
+                let remaining = deadline.timeIntervalSinceNow
+                if remaining <= 0 {
+                    self.expireDiscountWindow()
+                    return
+                }
+                self.discountRemaining = remaining
+            }
+        }
+    }
+
+    /// Ends the window and puts the standard year back behind the button.
+    private func expireDiscountWindow() {
+        guard discountDeadline != nil else { return }
+        log("🎁 PaywallViewModel: discount window expired — reverting to standard pricing")
+
+        countdownTask?.cancel()
+        countdownTask = nil
+        discountDeadline = nil
+        discountRemaining = 0
+
+        Analytics.capture(Analytics.Event.recoveryOfferWindowExpired, [
+            "source": source.rawValue,
+            "was_selected": selectedPlan == .yearly
+        ])
+
+        // `yearlyPackage` now resolves to the standard product; the selection
+        // still holds the discounted one until it is re-read.
+        if selectedPlan == .yearly {
+            selectedPackage = yearlyPackage
+        }
+    }
+
+    // No `deinit` cancel: the loop captures `self` weakly and returns on its
+    // first tick after deallocation, and touching a `@MainActor` property from
+    // a nonisolated `deinit` is exactly the kind of thing that becomes an error
+    // under stricter concurrency checking later.
+
     // MARK: - Computed Properties
+    /// The yearly package on offer *right now*. Inside the discount window this
+    /// is the discounted product, so every downstream reader — price strings,
+    /// `currentPackage`, the purchase call, trial eligibility — follows from
+    /// this one substitution instead of each having to know about the offer.
     var yearlyPackage: Package? {
+        if isDiscountWindowActive, let discounted = discountPackage {
+            return discounted
+        }
         return offerings?.current?.package(identifier: "yearly") ??
                offerings?.current?.annual
     }
-    
+
     var monthlyPackage: Package? {
         return offerings?.current?.package(identifier: "monthly") ??
                offerings?.current?.monthly
     }
-    
+
+    /// What the user pays today for the yearly plan. Inside the window this is
+    /// the introductory price, NOT `localizedPriceString` — that property
+    /// returns the discounted product's *standard* price, which is the number
+    /// shown struck through beside it.
     var yearlyPrice: String {
+        if isDiscountWindowActive,
+           let introPrice = yearlyPackage?.storeProduct.introPriceString {
+            return introPrice
+        }
         return yearlyPackage?.storeProduct.localizedPriceString ?? ""
     }
 
@@ -162,6 +334,13 @@ final class PaywallViewModel: ObservableObject {
     // Apple's Guideline 3.1.2 requirement that trial claims be accurate.
 
     var isYearlyTrialEligible: Bool {
+        // The discounted product's introductory offer is Pay-Up-Front, not a
+        // free trial — RevenueCat reports the user "eligible" for it either
+        // way, so without this the badge would read "3-day Free Trial" and the
+        // button "Try for $0.00" over a product that charges $22.49 today.
+        // That is a false trial claim under Guideline 3.1.2, on the one screen
+        // where money actually changes hands.
+        if isDiscountWindowActive { return false }
         guard let id = yearlyPackage?.storeProduct.productIdentifier else { return true }
         return isEligibleStatus(introEligibility[id]?.status)
     }
@@ -294,6 +473,12 @@ final class PaywallViewModel: ObservableObject {
                 // existing first-time-user UX.
                 await loadIntroEligibility()
 
+                // Second attempt at opening the discount window, for the cold
+                // load: the view's `onAppear` runs before this and finds no
+                // `discountPackage` to check. Idempotent — a window opened
+                // there is left alone here.
+                startDiscountWindowIfEligible()
+
                 lastError = nil
                 break
             } catch {
@@ -424,11 +609,19 @@ final class PaywallViewModel: ObservableObject {
               let monthlyID = monthlyPackage?.storeProduct.productIdentifier else {
             return
         }
+        // The discounted product is asked about up front, not once the window
+        // has already opened. `startDiscountWindowIfEligible` reads this
+        // dictionary to decide whether Apple will honour the intro price, and
+        // an absent answer counts as eligible — so leaving it out would make
+        // that check unreachable on exactly the load it is supposed to gate.
+        let discountID = discountPackage?.storeProduct.productIdentifier
+        let ids = [yearlyID, monthlyID] + (discountID.map { [$0] } ?? [])
+
         let result = await Purchases.shared.checkTrialOrIntroDiscountEligibility(
-            productIdentifiers: [yearlyID, monthlyID]
+            productIdentifiers: ids
         )
         self.introEligibility = result
-        log("🎫 PaywallViewModel: Eligibility — yearly=\(result[yearlyID]?.status.rawValue ?? -1), monthly=\(result[monthlyID]?.status.rawValue ?? -1)")
+        log("🎫 PaywallViewModel: Eligibility — yearly=\(result[yearlyID]?.status.rawValue ?? -1), monthly=\(result[monthlyID]?.status.rawValue ?? -1), discount=\(discountID.flatMap { result[$0]?.status.rawValue } ?? -1)")
     }
 
     /// Reads App Store storefront country (StoreKit 2) and currency
@@ -466,6 +659,11 @@ final class PaywallViewModel: ObservableObject {
         let plan: String = {
             if package.storeProduct.productIdentifier == Constants.YEARLY_PRODUCT_ID { return "yearly" }
             if package.storeProduct.productIdentifier == Constants.MONTHLY_PRODUCT_ID { return "monthly" }
+            // Sold by this paywall too, inside the 30-minute discount window.
+            // Left as "unknown" it would file every recovered purchase — the
+            // exact cohort the window exists to create — outside both plan
+            // buckets, so yearly conversion would silently under-report.
+            if package.storeProduct.productIdentifier == Constants.SECOND_CHANCE_YEARLY_PRODUCT_ID { return "yearly_discount" }
             return "unknown"
         }()
         // PostHog: purchase initiated. Captured before the StoreKit call so
@@ -485,9 +683,18 @@ final class PaywallViewModel: ObservableObject {
             // Read off the package actually being purchased rather than
             // mapped through `selectedPlan`, so it stays exact even if the
             // two ever disagree.
-            "is_trial_eligible": isEligibleStatus(
-                introEligibility[package.storeProduct.productIdentifier]?.status
-            )
+            //
+            // Forced false for the discounted product: RevenueCat reports
+            // intro-offer eligibility, and that product's intro offer is
+            // pay-up-front, not a trial. Reporting it as trial-eligible would
+            // file every recovery-window purchase into the trial cohort this
+            // property exists to isolate, while the UI showed no trial at all.
+            "is_trial_eligible": package.storeProduct.productIdentifier != Constants.SECOND_CHANCE_YEARLY_PRODUCT_ID
+                && isEligibleStatus(introEligibility[package.storeProduct.productIdentifier]?.status),
+            // Distinguishes a recovered purchase from a plain feature-gate one
+            // at the moment of intent — `plan` carries it too, but only this
+            // pairs cleanly with the window events.
+            "in_discount_window": isDiscountWindowActive
         ])
 
         do {

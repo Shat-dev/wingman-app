@@ -97,6 +97,19 @@ enum Analytics {
         static let recoveryOfferPurchaseFailed = "recovery_offer_purchase_failed"
         static let recoveryOfferNotEligible = "recovery_offer_not_eligible"
 
+        /// The 30-minute discount window (AuthManager.secondChanceDiscountWindow)
+        /// carrying the offer past the modal itself.
+        ///
+        /// `window_opened` fires when the feature-gate paywall starts serving
+        /// the discounted year, `window_expired` when it stops. Together with
+        /// `recovery_offer_dismissed` they answer the question the window
+        /// exists to answer: how many people come back for the price after
+        /// closing the sheet, and how many let the clock run out. Without the
+        /// pair, a purchase inside the window is indistinguishable from any
+        /// other feature-gate purchase.
+        static let recoveryOfferWindowOpened = "recovery_offer_window_opened"
+        static let recoveryOfferWindowExpired = "recovery_offer_window_expired"
+
         /// Dismissing Apple's payment sheet, on each of the two paywalls.
         ///
         /// Not a failure — nothing broke, the user said no — so these are

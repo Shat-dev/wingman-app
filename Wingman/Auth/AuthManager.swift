@@ -75,6 +75,52 @@ final class AuthManager: ObservableObject {
         }
     }
 
+    /// When the recovery offer was first put on screen, i.e. when the discount
+    /// window below started running. Nil until it has been shown.
+    ///
+    /// Set exactly once, on the first `markSecondChanceOfferShown` call (the
+    /// one from `onAppear`). The later call from `finish(outcome:)` records the
+    /// real outcome but must NOT move this, or every user would silently get a
+    /// window measured from whenever they happened to tap.
+    @Published private(set) var secondChanceOfferShownAt: Date? {
+        didSet {
+            log("🎁 secondChanceOfferShownAt changed: \(oldValue?.description ?? "nil") → \(secondChanceOfferShownAt?.description ?? "nil")")
+        }
+    }
+
+    /// How long the discounted price stays purchasable after the recovery offer
+    /// is shown.
+    ///
+    /// The offer is still once-ever — the modal never returns — but destroying
+    /// the price the instant the sheet closes punished the wrong people: the
+    /// flag is burned on `onAppear`, so a user who reflexively swiped a
+    /// surprise modal away lost a discount they never read. This window is the
+    /// difference between "declined the offer" and "dismissed a popup".
+    ///
+    /// It is a REAL deadline, not a display trick: `PaywallViewModel` stops
+    /// vending the discounted package when it passes, and
+    /// `SecondChanceOfferView` closes itself. That is the whole reason it is
+    /// honest to put a countdown on it — a timer that resets, or that expires
+    /// without anything changing, is the Guideline 5.6 pattern this codebase
+    /// has refused everywhere else.
+    static let secondChanceDiscountWindow: TimeInterval = 30 * 60
+
+    /// The instant the discounted price stops being offered. Nil if the offer
+    /// has never been shown.
+    var secondChanceDiscountDeadline: Date? {
+        secondChanceOfferShownAt?.addingTimeInterval(Self.secondChanceDiscountWindow)
+    }
+
+    /// Whether the discounted year is currently purchasable.
+    ///
+    /// `now` is injectable so callers with their own clock (the paywall's
+    /// countdown) evaluate against the same instant they render, rather than
+    /// racing a second `Date()`.
+    func isSecondChanceDiscountWindowOpen(now: Date = Date()) -> Bool {
+        guard !hasActiveSubscription, let deadline = secondChanceDiscountDeadline else { return false }
+        return now < deadline
+    }
+
     // MARK: - Free Demo (mascot walkthrough)
     //
     // These answer questions that are deliberately separate from
@@ -757,6 +803,7 @@ final class AuthManager: ObservableObject {
                 self.hasCompletedPaywallFlow = false
                 self.hasSeenRatingPrompt = false
                 self.hasSeenSecondChanceOffer = false
+                self.secondChanceOfferShownAt = nil
                 self.hasCompletedFreeDemo = false
                 self.hasSuppressedWalkthrough = false
                 self.hasDismissedPostDemoWall = false
@@ -919,6 +966,7 @@ final class AuthManager: ObservableObject {
                 self.hasCompletedPaywallFlow = false
                 self.hasSeenRatingPrompt = false
                 self.hasSeenSecondChanceOffer = false
+                self.secondChanceOfferShownAt = nil
                 self.hasCompletedFreeDemo = false
                 self.hasSuppressedWalkthrough = false
                 self.hasDismissedPostDemoWall = false
@@ -1026,6 +1074,42 @@ final class AuthManager: ObservableObject {
             hasSeenSecondChanceOffer = true
             UserDefaults.standard.set(true, forKey: key)
         }
+
+        loadSecondChanceShownAt(userId: userId)
+    }
+
+    private static func secondChanceShownAtKey(_ userId: String) -> String {
+        "secondChanceOfferShownAt_\(userId)"
+    }
+
+    /// Restores the discount-window start, UserDefaults first and the
+    /// `user_metadata` mirror second — the same precedence every other flag on
+    /// this screen uses.
+    ///
+    /// A user who was shown the offer on an old install and reinstalls hours
+    /// later restores an already-expired timestamp, which is the correct
+    /// outcome: the window closed while they were away. Restoring it anyway
+    /// (rather than treating a missing local value as "never shown") is what
+    /// stops a reinstall from handing out a fresh 30 minutes.
+    private func loadSecondChanceShownAt(userId: String) {
+        let key = Self.secondChanceShownAtKey(userId)
+
+        let stored = UserDefaults.standard.double(forKey: key)
+        if stored > 0 {
+            secondChanceOfferShownAt = Date(timeIntervalSince1970: stored)
+            log("🎁 Discount window start loaded: \(secondChanceOfferShownAt!) for user: \(userId)")
+            return
+        }
+
+        guard let raw = currentUser?.userMetadata["second_chance_offer_shown_at"]?.stringValue,
+              let mirrored = ISO8601DateFormatter().date(from: raw) else {
+            secondChanceOfferShownAt = nil
+            return
+        }
+
+        secondChanceOfferShownAt = mirrored
+        UserDefaults.standard.set(mirrored.timeIntervalSince1970, forKey: key)
+        log("🎁 Discount window start restored from user metadata: \(mirrored)")
     }
 
     /// Same shape as `checkUserSecondChanceOfferStatus`: per-user UserDefaults
@@ -1559,6 +1643,36 @@ final class AuthManager: ObservableObject {
 
         guard Purchases.shared.appUserID != userId else { return }
         RevenueCatManager.shared.setUserID(userId)
+    }
+
+    /// Identifies the current session to PostHog once the SDK is ready.
+    ///
+    /// Called by RootView as soon as `PostHogSDK.setup(_:)` has completed, for
+    /// the same reason `applyPendingGuestRevenueCatIdentity()` exists one level
+    /// down: `observeAuthState()` runs from `init()`, so `.initialSession` can
+    /// fire before the SDK is configured — and PostHog silently drops every call
+    /// made before setup (`isEnabled()` returns false). A returning user's
+    /// `identify()` would otherwise be lost for the entire launch.
+    ///
+    /// No-ops when there is no session: an anonymous user is deliberately left
+    /// on PostHog's own anonymous id so the first `identify()` — whenever the
+    /// guest session or sign-in lands — is the anonymous→identified transfer
+    /// that carries `$anon_distinct_id`. See RootView's launch task.
+    ///
+    /// Safe to call twice. A repeat identify with the same distinct_id and no
+    /// user properties falls through the SDK's branches without emitting
+    /// anything.
+    func applyPendingPostHogIdentity() {
+        guard let userId = currentUser?.id.uuidString else {
+            log("🆔 PostHog: no session at SDK-ready — staying anonymous until sign-in")
+            return
+        }
+        log("🆔 PostHog: identifying restored session: \(userId)")
+        PostHogSDK.shared.identify(userId)
+
+        // Flag evaluation is per-distinct-id, same rationale as the refresh
+        // after every other identify() call site.
+        FeatureFlags.shared.refresh()
     }
 
     /// Applies a guest identity that was deferred because RevenueCat had not
@@ -2157,6 +2271,17 @@ final class AuthManager: ObservableObject {
         log("🎁 markSecondChanceOfferShown(outcome: \(outcome)) called")
         hasSeenSecondChanceOffer = true
 
+        // First call wins. This runs twice for every user who acts on the
+        // offer — once from `onAppear` and once from `finish(outcome:)` — and
+        // only the first is "when the offer was shown". Taking the later one
+        // would silently extend the window by however long the user deliberated,
+        // making the deadline the countdown displays a lie.
+        let startedAt = secondChanceOfferShownAt ?? {
+            let now = Date()
+            secondChanceOfferShownAt = now
+            return now
+        }()
+
         guard let userId = currentUser?.id.uuidString else {
             log("⚠️ markSecondChanceOfferShown: no authenticated user — nothing to persist")
             return
@@ -2164,7 +2289,8 @@ final class AuthManager: ObservableObject {
 
         let key = "hasSeenSecondChanceOffer_\(userId)"
         UserDefaults.standard.set(true, forKey: key)
-        log("🎁 Second-chance offer marked shown for user: \(userId)")
+        UserDefaults.standard.set(startedAt.timeIntervalSince1970, forKey: Self.secondChanceShownAtKey(userId))
+        log("🎁 Second-chance offer marked shown for user: \(userId), window opened at \(startedAt)")
 
         // Mirror to user_metadata so this survives uninstall+reinstall, same
         // rationale as completePaywallFlow()'s mirror above.
@@ -2172,7 +2298,10 @@ final class AuthManager: ObservableObject {
             do {
                 let attributes = UserAttributes(data: [
                     "second_chance_offer_shown": AnyJSON.bool(true),
-                    "second_chance_offer_shown_at": AnyJSON.string(ISO8601DateFormatter().string(from: Date())),
+                    // `startedAt`, never `Date()`. The second call would
+                    // otherwise overwrite the mirror with a later instant, and
+                    // a reinstall would restore a window that had already run.
+                    "second_chance_offer_shown_at": AnyJSON.string(ISO8601DateFormatter().string(from: startedAt)),
                     "second_chance_offer_outcome": AnyJSON.string(outcome)
                 ])
                 try await client.auth.update(user: attributes)
@@ -2812,6 +2941,7 @@ final class AuthManager: ObservableObject {
             hasCompletedPaywallFlow = false
             hasSeenRatingPrompt = false
             hasSeenSecondChanceOffer = false
+            secondChanceOfferShownAt = nil
             hasCompletedFreeDemo = false
             hasSuppressedWalkthrough = false
             hasDismissedPostDemoWall = false
@@ -2964,6 +3094,7 @@ final class AuthManager: ObservableObject {
                     hasCompletedPaywallFlow = false
                     hasSeenRatingPrompt = false
                     hasSeenSecondChanceOffer = false
+                    secondChanceOfferShownAt = nil
                     hasCompletedFreeDemo = false
                     hasSuppressedWalkthrough = false
                     hasDismissedPostDemoWall = false
@@ -3007,6 +3138,7 @@ final class AuthManager: ObservableObject {
         userDefaults.removeObject(forKey: "hasCompletedPaywallFlow_\(userId)")
         userDefaults.removeObject(forKey: "hasSeenRatingPrompt_\(userId)")
         userDefaults.removeObject(forKey: "hasSeenSecondChanceOffer_\(userId)")
+        userDefaults.removeObject(forKey: Self.secondChanceShownAtKey(userId))
         userDefaults.removeObject(forKey: "hasCompletedFreeDemo_\(userId)")
         userDefaults.removeObject(forKey: Self.suppressedKey(userId))
         userDefaults.removeObject(forKey: "hasDismissedPostDemoWall_\(userId)")

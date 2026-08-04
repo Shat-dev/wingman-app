@@ -53,6 +53,16 @@ private struct SubscriptionGate: ViewModifier {
     /// over the property would be biased toward the users who tap the X.
     @State private var presentedAt: Date?
 
+    /// Set by `SecondChanceOfferView` when it has already captured an outcome
+    /// for this presentation. Read by the recovery sheet's `onDismiss` so the
+    /// swipe fallback below doesn't double-count a tap or a purchase.
+    @State private var secondChanceReportedOutcome = false
+
+    /// When the recovery sheet was asked to present. Its own `appearedAt` is
+    /// inside the view, which the swipe path never reaches — same reasoning as
+    /// `presentedAt` above.
+    @State private var secondChancePresentedAt: Date?
+
     func body(content: Content) -> some View {
         content
             // `onDismiss` here is SwiftUI's own sheet-level callback, which
@@ -91,11 +101,49 @@ private struct SubscriptionGate: ViewModifier {
                     isPresented = false
                 }
             }
-            .sheet(isPresented: $showSecondChanceOffer) {
+            // Same `onDismiss` treatment the paywall sheet above already has,
+            // and for the same reason: a swipe-down bypasses every control
+            // inside the sheet, so without this the recovery offer's only
+            // terminal event (`recovery_offer_dismissed`) never fired for the
+            // most common exit. It had never fired once in the project's
+            // history — everybody swipes, nobody taps the X.
+            .sheet(isPresented: $showSecondChanceOffer, onDismiss: {
+                reportSecondChanceSwipeDismissalIfNeeded()
+            }) {
                 NavigationStack {
-                    SecondChanceOfferView(onDismiss: { showSecondChanceOffer = false })
+                    SecondChanceOfferView(
+                        onDismiss: { showSecondChanceOffer = false },
+                        onOutcomeReported: { secondChanceReportedOutcome = true }
+                    )
                 }
             }
+            .onChange(of: showSecondChanceOffer) { presented in
+                // Armed on the way in, not the way out — by the time `onDismiss`
+                // runs the presentation is already over.
+                if presented {
+                    secondChanceReportedOutcome = false
+                    secondChancePresentedAt = Date()
+                }
+            }
+    }
+
+    /// Captures `recovery_offer_dismissed` for the swipe-down exit, which runs
+    /// none of `SecondChanceOfferView`'s own controls.
+    ///
+    /// Note this is only about *observability*. The "shown once, ever" guarantee
+    /// no longer depends on any exit path: `SecondChanceOfferView` burns
+    /// `markSecondChanceOfferShown` when it appears, precisely because this path
+    /// used to skip it and re-arm the offer indefinitely.
+    private func reportSecondChanceSwipeDismissalIfNeeded() {
+        // `hasActiveSubscription` covers the purchase-driven auto-dismiss for
+        // the same order-independence reason as `reportSwipeDismissalIfNeeded`.
+        guard !secondChanceReportedOutcome, !authManager.hasActiveSubscription else { return }
+
+        var properties: [String: Any] = ["dismiss_method": "swipe"]
+        if let secondChancePresentedAt {
+            properties["time_on_screen_seconds"] = Analytics.elapsedSeconds(since: secondChancePresentedAt)
+        }
+        Analytics.capture(Analytics.Event.recoveryOfferDismissed, properties)
     }
 
     /// Captures `paywall_dismissed` for the one exit `PaywallView` cannot see.

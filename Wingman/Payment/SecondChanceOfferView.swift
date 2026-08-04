@@ -13,6 +13,7 @@
 //
 
 import SwiftUI
+import Combine
 import RevenueCat
 import PostHog
 
@@ -27,6 +28,14 @@ struct SecondChanceOfferView: View {
     /// screen.
     let onDismiss: () -> Void
 
+    /// Called when this view has already captured a dismissal event for the
+    /// current presentation, so the presenter's swipe-away fallback doesn't
+    /// double-count it. Same contract as `PaywallView.onDismissReported`.
+    ///
+    /// Defaulted so call sites that don't run the fallback (previews) are
+    /// unaffected.
+    var onOutcomeReported: () -> Void = {}
+
     @State private var didLogViewed = false
     @State private var appearedAt: Date?
     @State private var safariLink: IdentifiableURL?
@@ -40,50 +49,94 @@ struct SecondChanceOfferView: View {
     /// belongs to one of those paths.
     @State private var isResolving = false
 
+    /// Live countdown on the discount window opened when this screen appeared.
+    /// Seeded with the full window so the first frame never shows a placeholder.
+    @State private var remaining: TimeInterval = AuthManager.secondChanceDiscountWindow
+
+    private let ticker = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+
+    // MARK: - Hero sizing
+    //
+    // A share of the modal's height, clamped at both ends. This replaced a
+    // measure-the-content-and-take-the-leftover scheme (the approach
+    // `PaywallView` uses for its carousel): the preference values never
+    // arrived here, so the hero silently sat on its floor at every screen size
+    // while ~90pt of space went unused above the CTA. A rule that always
+    // produces the number beats a smarter one that quietly falls back.
+    //
+    // The clamps are what make it safe across the range rather than the
+    // fraction: the ceiling stops a 6.9" screen turning the modal into a poster,
+    // and the floor stops an SE shrinking the two figures to the point where
+    // they no longer read as two people.
+
+    private static let heroHeightFraction: CGFloat = 0.185
+    private static let heroMinHeight: CGFloat = 118
+    private static let heroMaxHeight: CGFloat = 168
+
+    /// - Parameter modalHeight: the sheet's own height, from the enclosing
+    ///   `GeometryReader` — not the screen's. Sheets are inset from the top and
+    ///   sit above the home indicator, and sizing off the screen would overstate
+    ///   the space by roughly 100pt on every device.
+    private func heroHeight(in modalHeight: CGFloat) -> CGFloat {
+        min(Self.heroMaxHeight, max(Self.heroMinHeight, modalHeight * Self.heroHeightFraction))
+    }
+
     var body: some View {
-        ZStack {
+        GeometryReader { proxy in
             VStack(spacing: 0) {
                 ScrollView(.vertical, showsIndicators: false) {
-                    VStack(spacing: 16) {
-                        Image(systemName: "tag.fill")
-                            .font(.system(size: 36))
-                            .foregroundColor(.wingmanBlack)
-                            .padding(.top, 36)
+                    VStack(spacing: 0) {
+                        heroImage(height: heroHeight(in: proxy.size.height))
+                            .padding(.top, 4)
+                            .padding(.horizontal, 24)
 
-                        Text("Wait — here's \(discountPhrase)")
-                            .font(.manropeSemiBold(size: 24))
-                            .foregroundColor(.wingmanBlack)
-                            .multilineTextAlignment(.center)
-
-                        // Carries the *value*, not the discount — the card
-                        // below states the saving and `scarcityNote` states the
-                        // one-time framing, so repeating either here would make
-                        // three lines say the same thing before the user has
-                        // seen a single number.
-                        Text("A full year of Wingman Pro — the best price we can offer.")
-                            .font(.manropeRegular(size: 16))
-                            .foregroundColor(Color(hex: "6B7280"))
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal, 32)
-
-                        if let _ = viewModel.package {
-                            offerCard
+                        // The offer itself, grouped: headline through closing
+                        // line. Kept as one block so the paddings that hold it
+                        // together are read and tuned together.
+                        VStack(spacing: 0) {
+                            // Two lines, enforced rather than hoped for. At
+                            // three it pushed the price card under the CTA on
+                            // every phone; `minimumScaleFactor` absorbs the
+                            // difference on narrow screens instead of letting
+                            // the layout below pay for it.
+                            Text("How many more times do you want to walk away wondering ‘what if’?")
+                                .font(.manropeSemiBold(size: 20))
+                                .foregroundColor(.wingmanBlack)
+                                .multilineTextAlignment(.center)
+                                .lineLimit(2)
+                                .minimumScaleFactor(0.75)
+                                .padding(.top, 24)
                                 .padding(.horizontal, 20)
+
+                            Text("Every opportunity you let pass becomes one you replay.")
+                                .font(.manropeRegular(size: 15))
+                                .foregroundColor(Color(hex: "6B7280"))
+                                .multilineTextAlignment(.center)
+                                .fixedSize(horizontal: false, vertical: true)
                                 .padding(.top, 8)
-
-                            valueBullets
                                 .padding(.horizontal, 32)
-                                .padding(.top, 4)
 
-                            scarcityNote
-                                .padding(.horizontal, 32)
-                                .padding(.bottom, 8)
-                        } else {
-                            ProgressView()
-                                .progressViewStyle(CircularProgressViewStyle(tint: .wingmanBlack))
-                                .padding(.top, 40)
+                            if let _ = viewModel.package {
+                                offerCard
+                                    .padding(.horizontal, 20)
+                                    .padding(.top, 20)
+
+                                countdownLine
+                                    .padding(.horizontal, 32)
+                                    .padding(.top, 12)
+
+                                identityLine
+                                    .padding(.horizontal, 32)
+                                    .padding(.top, 16)
+                                    .padding(.bottom, 8)
+                            } else {
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle(tint: .wingmanBlack))
+                                    .padding(.top, 40)
+                            }
                         }
                     }
+                    .frame(maxWidth: .infinity)
                 }
                 .frame(maxHeight: .infinity)
 
@@ -105,6 +158,7 @@ struct SecondChanceOfferView: View {
 
                 footerLinks
             }
+            .frame(width: proxy.size.width, height: proxy.size.height)
             .background(Color.white)
         }
         .dynamicTypeSize(...DynamicTypeSize.large)
@@ -136,6 +190,25 @@ struct SecondChanceOfferView: View {
         }
         .onChange(of: viewModel.showAlert) { showing in
             if showing { HapticManager.shared.error() }
+        }
+        .onReceive(ticker) { _ in
+            // Read off the absolute deadline rather than decremented, so time
+            // spent backgrounded lands on the right number — or straight on
+            // expiry — at the first tick after resume.
+            guard let deadline = authManager.secondChanceDiscountDeadline else { return }
+            let left = deadline.timeIntervalSinceNow
+            remaining = max(0, left)
+
+            guard left <= 0, !didFinish else { return }
+            log("🎁 SecondChanceOfferView: discount window expired while open — closing")
+            Analytics.capture(Analytics.Event.recoveryOfferWindowExpired, [
+                "source": "recovery_offer",
+                "product_id": viewModel.productId
+            ])
+            // Closing is the point. Leaving a "Get 50% off" button live under a
+            // clock reading 0:00 would make the deadline decorative, and this
+            // screen's whole claim to the countdown is that it is not.
+            finish(outcome: "expired")
         }
         .onChange(of: authManager.hasActiveSubscription) { newValue in
             // Safety net ONLY. Purchase and Restore each resolve themselves at
@@ -177,6 +250,30 @@ struct SecondChanceOfferView: View {
             if !didLogViewed {
                 didLogViewed = true
                 appearedAt = Date()
+
+                // Burn the "shown once, ever" flag HERE rather than in
+                // `finish(outcome:)`.
+                //
+                // `finish` is only reachable from this view's own controls, but
+                // the sheet can also be closed by swiping it down — SwiftUI
+                // flips the presentation binding directly, so `finish` never
+                // runs, `markSecondChanceOfferShown` never runs, and the offer
+                // re-arms on the next feature-gate dismissal. Forever. In
+                // production that produced four presentations to one user inside
+                // sixty seconds. `didLogViewed` cannot catch it: it is `@State`,
+                // so each presentation is a fresh view with a fresh guard.
+                //
+                // Marking on appear makes the guarantee structural — the offer
+                // is spent at the moment it is actually on screen, so no exit
+                // path can leak. This sits *after* the package/intro-offer
+                // early return above, which deliberately dismisses without
+                // burning the flag because nothing was shown in that case.
+                //
+                // `finish(outcome:)` still calls this with the real outcome,
+                // which upgrades `second_chance_offer_outcome` in user_metadata
+                // from "viewed" to "purchased"/"dismissed"/etc.
+                authManager.markSecondChanceOfferShown(outcome: "viewed")
+
                 Analytics.capture(Analytics.Event.recoveryOfferViewed, [
                     "product_id": viewModel.productId,
                     "discounted_price": viewModel.discountedPriceString,
@@ -191,6 +288,26 @@ struct SecondChanceOfferView: View {
             }
         }
         .postHogScreenView("SecondChanceOffer")
+    }
+
+    // MARK: - Hero
+    //
+    // The same illustration the practice scenarios use for the walk-away beat,
+    // so the screen opens on a picture of the exact moment the headline names
+    // rather than on a discount symbol.
+    //
+    // `scaledToFit` inside a fixed-height frame, never `scaledToFill` + clip:
+    // the drawing's meaning is the *distance* between the two figures, and any
+    // crop tight enough to fill the frame eats the gap or the second figure.
+    // When the frame is narrower than it is tall (small phones, large text) the
+    // image simply becomes width-limited and centres itself — still uncropped.
+    private func heroImage(height: CGFloat) -> some View {
+        Image("scenario_leave")
+            .resizable()
+            .scaledToFit()
+            .frame(height: height)
+            .frame(maxWidth: .infinity)
+            .accessibilityHidden(true)
     }
 
     // MARK: - Offer Card
@@ -212,7 +329,7 @@ struct SecondChanceOfferView: View {
             // full-bleed across the card top) so this reads as the same family
             // of component even though it is a different one.
             if let percent = viewModel.savingsPercent {
-                Text("SAVE \(percent)% — ONE TIME ONLY")
+                Text("Save \(percent)%, next 30 minutes only")
                     .font(.manropeMedium(size: 13))
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
@@ -254,54 +371,53 @@ struct SecondChanceOfferView: View {
         )
     }
 
-    // MARK: - Value Bullets
+    // MARK: - Countdown
     //
-    // Three, and deliberately not the paywall's copy. The user read those
-    // bullets seconds ago and said no; repeating the pitch reads as not
-    // listening. These name the three things that are actually locked — which
-    // are exactly the three feature gates that can present this screen — so the
-    // list answers "what do I get" rather than re-arguing "why do you want it".
-    private var valueBullets: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            bullet("Every lesson and course")
-            bullet("All practice scenarios")
-            bullet("Daily practice, every day")
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-    }
+    // Honest because it is enforced. `AuthManager.secondChanceDiscountWindow`
+    // really does end: this screen closes itself at zero (below), and
+    // `PaywallViewModel` stops serving the discounted package at the same
+    // instant. Nothing here resets, and nothing survives the deadline it
+    // states — which is the difference between this and the countdown the
+    // original version of this screen deliberately refused to show.
+    private var countdownLine: some View {
+        HStack(spacing: 6) {
+            Image(systemName: "clock")
+                .font(.system(size: 13, weight: .medium))
 
-    private func bullet(_ text: String) -> some View {
-        HStack(alignment: .center, spacing: 12) {
-            // Same asset the paywall's bullets use, not an SF Symbol.
-            Image("check")
-                .resizable()
-                .renderingMode(.template)
-                .scaledToFit()
-                .foregroundColor(.wingmanBlack)
-                .frame(width: 15, height: 15)
-
-            Text(text)
+            Text("Offer ends in \(OfferCountdown.format(remaining))")
                 .font(.manropeMedium(size: 15))
-                .foregroundColor(.wingmanBlack)
-                .fixedSize(horizontal: false, vertical: true)
         }
+        .foregroundColor(.wingmanBlack)
+        .frame(maxWidth: .infinity)
+        // One announcement, in minutes. A per-second VoiceOver update would
+        // talk over everything else on the screen.
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Offer ends in \(Int(remaining / 60)) minutes")
     }
 
-    // MARK: - Scarcity
+    // MARK: - Identity Line
     //
-    // True, and therefore usable: `hasSeenSecondChanceOffer` is a once-ever
-    // per-user flag mirrored to Supabase, so this screen genuinely does not come
-    // back — not on the next gate, not after a reinstall.
+    // The close, and the last thing read before the button. Sits below the card
+    // rather than above it so the price is what the emotional line lands on
+    // top of, not something the user still has to go looking for afterwards.
     //
-    // No countdown timer. A fake deadline is the most common trigger for a
-    // Guideline 5.6 rejection, and here it would also be a lie: nothing about
-    // this offer expires with time. The honest version is stronger anyway,
-    // because it is the one claim on this screen the user can verify later.
-    private var scarcityNote: some View {
-        Text("One-time offer. You won't see this screen again.")
-            .font(.manropeMedium(size: 13))
-            .foregroundColor(Color(hex: "6B7280"))
+    // Smaller than the headline on purpose: it echoes that question rather than
+    // competing with it, and two 22pt lines bracketing the card would leave the
+    // price as the quietest thing on a screen whose job is to show a price.
+    //
+    // This is also where the old "one-time offer, you won't see this again"
+    // line used to sit. That claim is still made — and still true, since
+    // `hasSeenSecondChanceOffer` is a once-ever per-user flag mirrored to
+    // Supabase — but it now lives in the card's banner, which is where a user
+    // scanning only the price will actually see it. Still no countdown timer:
+    // nothing here expires with time, and a fake deadline is a Guideline 5.6
+    // rejection waiting to happen.
+    private var identityLine: some View {
+        Text("Become the man who doesn’t walk away.")
+            .font(.manropeSemiBold(size: 18))
+            .foregroundColor(.wingmanBlack)
             .multilineTextAlignment(.center)
+            .fixedSize(horizontal: false, vertical: true)
             .frame(maxWidth: .infinity)
     }
 
@@ -459,11 +575,24 @@ struct SecondChanceOfferView: View {
         }
         didFinish = true
         authManager.markSecondChanceOfferShown(outcome: outcome)
+
+        // Tell the presenter this presentation was resolved in-view, so its
+        // swipe-away fallback stays quiet. Every path that resolves this screen
+        // funnels through here, which is why the signal lives at this one point
+        // rather than next to each `Analytics.capture` above.
+        onOutcomeReported()
+
         onDismiss()
     }
 
     private func dismissEventProperties() -> [String: Any] {
-        var properties: [String: Any] = ["product_id": viewModel.productId]
+        var properties: [String: Any] = [
+            "product_id": viewModel.productId,
+            // Distinguishes this from the presenter's swipe fallback, which
+            // reports the same event with `dismiss_method = "swipe"`. Without
+            // it the two paths are indistinguishable in the same insight.
+            "dismiss_method": "button"
+        ]
         if let appearedAt {
             properties["time_on_screen_seconds"] = Analytics.elapsedSeconds(since: appearedAt)
         }

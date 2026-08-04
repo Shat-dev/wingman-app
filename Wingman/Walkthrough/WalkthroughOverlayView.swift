@@ -61,7 +61,13 @@ struct WalkthroughOverlayView: View {
         if walkthrough.nudge != nil { return true }
 
         switch walkthrough.step {
-        case .scenarioPrompt, .lessonsTour: return false
+        // The tour beat asks the user to scroll the course list while its card
+        // is up, so it has to let touches through.
+        //
+        // `scenarioPrompt` no longer needs to: its card now has a Next button,
+        // and once that is tapped `beat` is nil so nothing renders at all,
+        // scrim included. The scenario card is fully tappable from that point.
+        case .lessonsTour: return false
         default: return true
         }
     }
@@ -147,12 +153,23 @@ struct WalkthroughOverlayView: View {
         case .welcome:
             return Beat(text: Self.welcome, action: "Next", perform: walkthrough.advance)
 
-        // No card at all. The scenario list carries the whole instruction: the
-        // tab bar is locked, every other scenario is progression-locked, and
-        // the one they are meant to open is pulsing. A card here would only
-        // stand between the user and the single thing they can do.
+        // Next dismisses the card but does NOT advance the script — tapping the
+        // pulsing scenario is still the only way forward, which is the one hard
+        // constraint. `acknowledgeScenarioPrompt()` leaves the step alone for
+        // exactly that reason.
+        //
+        // The card also does a second job. This beat arrives at the same moment
+        // as a tab switch, and `TabView` realises the Scenarios tab for the
+        // first time there, a first layout the previous tab stays visible
+        // through. With nothing rendered on this beat the eye had no anchor
+        // across that switch, so the swap read as a lag.
         case .scenarioPrompt:
-            return nil
+            guard !walkthrough.scenarioPromptAcknowledged else { return nil }
+            return Beat(
+                text: Self.scenarioPrompt,
+                action: "Next",
+                perform: walkthrough.acknowledgeScenarioPrompt
+            )
 
         case .scenarioDone:
             return Beat(text: Self.congratulations, action: "Next", perform: walkthrough.advance)
@@ -178,6 +195,11 @@ struct WalkthroughOverlayView: View {
 
     private static let welcome = """
         Hey, welcome to Wingman. Let's dive into a practice scenario.
+        """
+
+    private static let scenarioPrompt = """
+        This is where you practise. Each scenario drops you into a real \
+        moment and you choose what to say. Start with the first one.
         """
 
     private static let congratulations = """
