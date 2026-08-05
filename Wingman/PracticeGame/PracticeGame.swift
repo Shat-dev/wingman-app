@@ -8,6 +8,17 @@ import Combine
 import Foundation
 import Supabase
 
+// MARK: - Pending option selection
+/// The option the user just tapped and whether it was a good call.
+///
+/// Lives for the length of the feedback beat only — long enough for the option
+/// button to colour itself green or red before the scene swaps out from under
+/// it. See `PracticeGameViewModel.selectOption(_:)`.
+struct PendingOptionSelection: Equatable {
+    let optionId: String
+    let isCorrect: Bool
+}
+
 // MARK: - ViewModel
 @MainActor
 class PracticeGameViewModel: ObservableObject {
@@ -16,6 +27,10 @@ class PracticeGameViewModel: ObservableObject {
     @Published var currentSceneId: String = ""
     @Published var gameCompleted: Bool = false
     @Published var progress: Double = 0.0
+
+    /// Non-nil while right/wrong feedback is on screen. `nil` at every other
+    /// moment, including the instant a scene appears.
+    @Published private(set) var pendingSelection: PendingOptionSelection?
 
     // MARK: - Data
     let gameData: PracticeGameData
@@ -26,9 +41,15 @@ class PracticeGameViewModel: ObservableObject {
     // Scenes keyed by id for O(1) lookup
     private var sceneMap: [String: GameScene] = [:]
 
-    // The ordered "canonical" path (non-fail screens only) used purely for
-    // progress bar calculation so the bar moves forward meaningfully.
+    // The ordered success path — every screen reachable without taking a wrong
+    // option — used for progress bar calculation so the bar moves forward
+    // meaningfully. See `successPath(from:in:)`.
     private let canonicalOrder: [String]
+
+    /// How long the green/red flash holds before the scenario moves on.
+    private static let feedbackHoldNanoseconds: UInt64 = 400_000_000
+
+    private var feedbackTask: Task<Void, Never>?
 
     var currentScene: GameScene? { sceneMap[currentSceneId] }
 
@@ -51,15 +72,48 @@ class PracticeGameViewModel: ObservableObject {
         for scene in gameData.scenes { map[scene.id] = scene }
         self.sceneMap = map
 
-        // Canonical order: scenes that are NOT fail/feedback branches
-        // (i.e. ids not containing "_fail") sorted by their order field
-        let mainPath = gameData.scenes
-            .filter { !$0.id.contains("_fail") }
-            .sorted { $0.order < $1.order }
-        self.canonicalOrder = mainPath.map { $0.id }
+        self.canonicalOrder = Self.successPath(from: gameData.startingScreenId, in: map)
 
         self.currentSceneId = gameData.startingScreenId
         updateProgress()
+    }
+
+    /// Every screen reachable from the start without ever taking an incorrect
+    /// option — the "success path" — ordered by `order`.
+    ///
+    /// Serves as both the position and the denominator for the progress bar.
+    /// This replaces a filter on `id.contains("_fail")`, which only ever
+    /// matched `MockData`: screens loaded from Supabase are keyed by UUID, so
+    /// nothing was filtered and every fail branch counted as forward progress.
+    /// The bar therefore crept *forward* on a wrong answer, and its denominator
+    /// included ~40% of screens a clean run never sees.
+    ///
+    /// Walking the graph rather than pattern-matching ids works for both id
+    /// styles, and handles the screens that legitimately flag more than one
+    /// option correct — both continuations are on the path.
+    private static func successPath(from startId: String, in sceneMap: [String: GameScene]) -> [String] {
+        var reached: Set<String> = []
+        var queue: [String] = [startId]
+
+        while let id = queue.popLast() {
+            // Unknown ids (the "complete" sentinel, dangling references) drop
+            // out here rather than needing a special case.
+            guard let scene = sceneMap[id], reached.insert(id).inserted else { continue }
+
+            if let next = scene.defaultNextScreenId {
+                queue.append(next)
+            }
+            for option in scene.options ?? [] where option.isCorrect {
+                if let next = option.nextSceneId {
+                    queue.append(next)
+                }
+            }
+        }
+
+        return reached
+            .compactMap { sceneMap[$0] }
+            .sorted { $0.order < $1.order }
+            .map(\.id)
     }
 
     // MARK: - Navigate via tap-to-continue
@@ -104,19 +158,60 @@ class PracticeGameViewModel: ObservableObject {
     }
 
     // MARK: - Option selected
+    /// Grades the tap, shows the result for a beat, then navigates.
+    ///
+    /// `isCorrect` already arrives with every option, so the right/wrong
+    /// haptic costs nothing extra. Before this, both outcomes fired the same
+    /// neutral `selection()` and the scene swapped on the same frame: a correct
+    /// pick felt like nothing happened, and a wrong one only surfaced two taps
+    /// later when the fail branch reached "Tap to retry".
+    ///
+    /// Matches how the lesson and Daily Practice questions grade an answer —
+    /// `QuizEngine.checkAnswer()` fires the same two haptics.
     func selectOption(_ option: GameOption) {
-        HapticManager.shared.selection()
-        if let nextId = option.nextSceneId {
-            if nextId == "complete" {
-                triggerCompletion()
-                return
-            }
-            currentSceneId = nextId
-            updateProgress()
-            persistProgress()
+        // A second tap during the feedback beat would queue a second
+        // navigation. This was harmless while the scene swapped instantly;
+        // now the buttons stay on screen long enough to be tapped twice.
+        guard pendingSelection == nil else { return }
+
+        pendingSelection = PendingOptionSelection(optionId: option.id, isCorrect: option.isCorrect)
+
+        if option.isCorrect {
+            HapticManager.shared.success()
         } else {
-            goToNextScene()
+            HapticManager.shared.warning()
         }
+
+        feedbackTask = Task { [weak self] in
+            try? await Task.sleep(nanoseconds: Self.feedbackHoldNanoseconds)
+            guard !Task.isCancelled, let self else { return }
+            self.pendingSelection = nil
+            self.commit(option)
+        }
+    }
+
+    /// The navigation half of `selectOption`, run once the feedback beat ends.
+    private func commit(_ option: GameOption) {
+        guard let nextId = option.nextSceneId else {
+            goToNextScene()
+            return
+        }
+        if nextId == "complete" {
+            triggerCompletion()
+            return
+        }
+        currentSceneId = nextId
+        updateProgress()
+        persistProgress()
+    }
+
+    /// Drops a feedback beat still in flight. Called when the game view goes
+    /// away, so backing out mid-flash can't land a `persistProgress` row for a
+    /// screen the user never actually saw.
+    func cancelPendingFeedback() {
+        feedbackTask?.cancel()
+        feedbackTask = nil
+        pendingSelection = nil
     }
 
     // MARK: - Retry (feedback screen tap)
@@ -133,18 +228,19 @@ class PracticeGameViewModel: ObservableObject {
         updateProgress()
     }
 
-    // MARK: - Progress (based on canonical path position)
+    // MARK: - Progress (position along the success path)
     private func updateProgress() {
         guard !canonicalOrder.isEmpty else { return }
-        if let idx = canonicalOrder.firstIndex(of: currentSceneId) {
-            progress = Double(idx + 1) / Double(canonicalOrder.count)
-        } else {
-            let currentOrder = currentScene?.order ?? 0
-            let closestIdx = canonicalOrder.indices.last(where: {
-                (sceneMap[canonicalOrder[$0]]?.order ?? 0) <= currentOrder
-            }) ?? 0
-            progress = Double(closestIdx + 1) / Double(canonicalOrder.count)
+
+        guard let idx = canonicalOrder.firstIndex(of: currentSceneId) else {
+            // Off the success path, so the user is inside a fail branch. Hold
+            // the bar where it was rather than estimating a position from
+            // `order`, which is what used to nudge it forward on a wrong
+            // answer. Getting it wrong must not look like progress.
+            return
         }
+
+        progress = Double(idx + 1) / Double(canonicalOrder.count)
     }
 
     private func isFinalCanonicalScene(_ id: String) -> Bool {
@@ -276,6 +372,7 @@ struct PracticeGame: View {
                     GameSceneView(
                         scene: scene,
                         userName: viewModel.userName,
+                        pendingSelection: viewModel.pendingSelection,
                         onTapContinue: { viewModel.goToNextScene() },
                         onTapRetry:    { viewModel.retryCurrentScene() },
                         onSelectOption: { option in viewModel.selectOption(option) },
@@ -313,6 +410,10 @@ struct PracticeGame: View {
         }
         .onDisappear {
             tabBarVisibility.showTabBar()
+
+            // Drop any feedback beat still in flight — see
+            // `cancelPendingFeedback()`.
+            viewModel.cancelPendingFeedback()
 
             // Left without finishing — hand the script back to the prompt so
             // the mascot re-appears and asks again. Without this, backing out
@@ -412,6 +513,7 @@ struct GameIntroScreenView: View {
 struct GameSceneView: View {
     let scene: GameScene
     let userName: String
+    let pendingSelection: PendingOptionSelection?
     let onTapContinue: () -> Void
     let onTapRetry: () -> Void
     let onSelectOption: (GameOption) -> Void
@@ -431,6 +533,10 @@ struct GameSceneView: View {
                             .onTapGesture { onTapBack() }
                         Spacer()
                     }
+                    // This back region is invisible. Without gating it, a stray
+                    // tap during the feedback beat navigates backwards while
+                    // the answer is still being shown.
+                    .allowsHitTesting(pendingSelection == nil)
                 }
                 
                 VStack(spacing: 0) {
@@ -447,6 +553,7 @@ struct GameSceneView: View {
                         Spacer(minLength: 0)
                         OptionsContentView(
                             options: scene.options ?? [],
+                            pendingSelection: pendingSelection,
                             onSelectOption: onSelectOption
                         )
                         .padding(.horizontal, 24)
@@ -555,15 +662,62 @@ struct DialogueContentView: View {
 // MARK: - Options Content View
 struct OptionsContentView: View {
     let options: [GameOption]
+    let pendingSelection: PendingOptionSelection?
     let onSelectOption: (GameOption) -> Void
+
+    /// How one button should look given the selection being shown, if any.
+    private enum OptionStyle {
+        case idle       // nothing tapped yet
+        case correct    // this is the tapped option, and it was a good call
+        case wrong      // this is the tapped option, and it was not
+        case dimmed     // a different option was tapped
+    }
+
+    private func style(for option: GameOption) -> OptionStyle {
+        guard let pending = pendingSelection else { return .idle }
+        guard pending.optionId == option.id else { return .dimmed }
+        return pending.isCorrect ? .correct : .wrong
+    }
+
+    // MARK: - Colours
+    //
+    // Deliberately the same palette the lesson and Daily Practice questions use
+    // for a graded answer (`QuizQuestionView`), so getting a scenario option
+    // right or wrong reads as the same app rather than a second visual language.
+
+    private func textColor(_ style: OptionStyle) -> Color {
+        switch style {
+        case .correct:       return .customGreen
+        case .wrong:         return .customRed
+        case .idle, .dimmed: return .wingmanBlack
+        }
+    }
+
+    private func fillColor(_ style: OptionStyle) -> Color {
+        switch style {
+        case .correct:       return .customLightGreen
+        case .wrong:         return .customLightRed
+        case .idle, .dimmed: return .white
+        }
+    }
+
+    private func borderColor(_ style: OptionStyle) -> Color {
+        switch style {
+        case .correct:       return .customGreen
+        case .wrong:         return .customRed
+        case .idle, .dimmed: return .wingmanBlack.opacity(0.1)
+        }
+    }
 
     var body: some View {
         VStack(spacing: 12) {
             ForEach(options.sorted { $0.orderIndex < $1.orderIndex }) { option in
+                let optionStyle = style(for: option)
+
                 Button { onSelectOption(option) } label: {
                     Text(option.text)
                         .font(.manropeSemiBold(size: 16))
-                        .foregroundColor(.wingmanBlack)
+                        .foregroundColor(textColor(optionStyle))
                         .multilineTextAlignment(.center)
                         .lineLimit(2)
                         .frame(maxWidth: .infinity)
@@ -571,12 +725,16 @@ struct OptionsContentView: View {
                         .padding(.vertical, 15)
                         .background(
                             RoundedRectangle(cornerRadius: 5)
-                                .stroke(Color.wingmanBlack.opacity(0.1), lineWidth: 1)
-                                .background(RoundedRectangle(cornerRadius: 5).fill(Color.white))
+                                .stroke(borderColor(optionStyle), lineWidth: 1)
+                                .background(RoundedRectangle(cornerRadius: 5).fill(fillColor(optionStyle)))
                                 .shadow(color: Color.wingmanBlack.opacity(0.06), radius: 5, x: 0, y: 2)
                         )
                 }
                 .buttonStyle(ScalePressStyle())
+                .opacity(optionStyle == .dimmed ? 0.35 : 1.0)
+                // Mirrors `QuizQuestionView`'s `.disabled(state.hasCheckedAnswer)`:
+                // once an answer is graded the options stop being tappable.
+                .disabled(pendingSelection != nil)
             }
 
             Text("Choose an option to continue")
@@ -585,7 +743,9 @@ struct OptionsContentView: View {
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .padding(.top, 1)
                 .padding(.trailing, 8)
+                .opacity(pendingSelection == nil ? 1.0 : 0.35)
         }
+        .animation(.easeOut(duration: 0.15), value: pendingSelection)
     }
 }
 
