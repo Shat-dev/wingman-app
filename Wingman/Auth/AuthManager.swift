@@ -796,6 +796,12 @@ final class AuthManager: ObservableObject {
                     PostHogSDK.shared.capture("session_invalidated")
                 }
                 PostHogSDK.shared.reset()
+                // Logout drops the user back on the Landing screen, and
+                // reset() has just cleared the `environment` super-property
+                // along with the distinct_id — so without this, every event
+                // for the rest of the launch is invisible to dashboards that
+                // filter `environment = "prod"`.
+                Analytics.registerEnvironment()
 
                 self.isAuthenticated = false
                 self.currentUser = nil

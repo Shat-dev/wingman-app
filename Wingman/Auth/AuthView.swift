@@ -258,7 +258,7 @@ struct AuthView: View {
         // in a funnel — the whole reason this screen was hard to diagnose.
         // NOTE: "Auth" therefore means something narrower from this build on;
         // historical "Auth" series include both screens.
-        .postHogScreenView(screenName)
+        .trackScreenView(screenName)
     }
 
     // MARK: - Handle Back Button

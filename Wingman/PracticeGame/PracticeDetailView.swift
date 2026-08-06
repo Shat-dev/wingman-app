@@ -71,7 +71,7 @@ struct PracticeDetailView: View {
         .task {
             await viewModel.fetchPracticeDetail()
         }
-        .postHogScreenView("Practice Detail")
+        .trackScreenView("Practice Detail")
     }
     
     // MARK: - Navigation Bar

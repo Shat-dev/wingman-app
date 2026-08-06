@@ -322,7 +322,7 @@ struct HomeView: View {
                 // fires the same RPC twice.
             }
         }
-        .postHogScreenView("Home")
+        .trackScreenView("Home")
     }
     
     // MARK: - Find Course by ID

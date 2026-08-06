@@ -224,7 +224,7 @@ struct CourseDetailSheet: View {
                 ])
             }
         }
-        .postHogScreenView("Course Detail")
+        .trackScreenView("Course Detail")
     }
 
     /// Banner copy. Nil when the course is unlocked (no banner rendered).

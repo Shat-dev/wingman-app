@@ -252,7 +252,7 @@ struct PaywallView: View {
         // for the full-screen post-onboarding paywall, SubscriptionGateModifier
         // for the slide-up sheet). The previously-nested NavigationStack
         // was redundant and only hosted a now-dead `.navigationDestination`
-        // to a removed ReferralView flow.
+        // to a referral flow that was removed from the app.
         ZStack {
             VStack(spacing: 0) {
                 // MARK: - Scrollable value content (carousel + dots + price area)
@@ -568,7 +568,7 @@ struct PaywallView: View {
         .onDisappear {
             log("📱 PaywallView disappeared")
         }
-        .postHogScreenView("Paywall")
+        .trackScreenView("Paywall")
     }
 
     // MARK: - Discount Countdown
@@ -794,8 +794,7 @@ struct PaywallView: View {
                         ])
                     )
                     onDismissReported?()
-                    // Referral screen removed from flow — complete paywall directly.
-                    // ReferralView.swift is intentionally kept intact for possible future use.
+                    // No referral screen in the flow — complete the paywall directly.
                     authManager.completePaywallFlow()
                 }
             }

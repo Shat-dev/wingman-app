@@ -227,7 +227,7 @@ struct LessonView: View {
             )
             .appDynamicTypeCeiling()
         }
-        .postHogScreenView("Lesson")
+        .trackScreenView("Lesson")
     }
     
     // MARK: - Navigation Functions

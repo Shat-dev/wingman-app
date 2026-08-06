@@ -268,7 +268,7 @@ struct ProfileView: View {
             Task { await streakStore.refresh() }
             Task { await userProfileStore.refresh() }
         }
-        .postHogScreenView("Profile")
+        .trackScreenView("Profile")
     }
 
     private func loadApproachData() async {

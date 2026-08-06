@@ -15,6 +15,7 @@
 
 import Foundation
 import PostHog
+import SwiftUI
 
 enum Analytics {
 
@@ -174,17 +175,118 @@ enum Analytics {
         static let notificationPermissionResult = "notification_permission_result"
         static let dailyReadingGoalSet = "daily_reading_goal_set"
 
-        // The two screens between the end of onboarding and the paywall.
-        // Drop-off here never reaches pricing, so without these it reads as
-        // paywall drop-off and points optimisation at the wrong screen.
+        // The screen between the end of onboarding and the paywall. Drop-off
+        // here never reaches pricing, so without it that loss reads as paywall
+        // drop-off and points optimisation at the wrong screen.
+        //
+        // There was a second event here, `referral_step_completed`. It never
+        // fired once: the referral screen was cut from the flow long ago and
+        // ReferralView was left in the tree unreferenced, so the only thing it
+        // ever did was hold a permanently-zero step in the
+        // "Onboarding → Pricing Drop-off" funnel. View and event are both gone;
+        // if a referral system is built later this comes back with it.
         static let ratingPromptContinued = "rating_prompt_continued"
-        static let referralStepCompleted = "referral_step_completed"
+    }
+
+    // MARK: - Setup gate
+    //
+    // PostHog's `setup(_:)` runs on a detached task at launch so the /decide
+    // round-trip doesn't compete with OnboardingView's first render. The cost
+    // is that anything captured before it lands is *silently dropped* —
+    // `isEnabled()` returns false and the SDK just logs.
+    //
+    // That is not a theoretical window. `LandingView` renders within a few
+    // hundred milliseconds of launch, and it lost the race roughly four times
+    // out of five: over 30 days 243 people fired `onboarding_started` but only
+    // 52 had a Landing screen event, and every new install has to pass through
+    // Landing to reach onboarding. In the traces where it survived, the screen
+    // event beat setup by as little as 76ms.
+    //
+    // So calls made before setup are buffered here and replayed in order once
+    // it completes, rather than thrown away. The flush happens after
+    // `registerEnvironment()`, so replayed events carry `environment` like any
+    // other. They do carry the flush timestamp rather than the moment they were
+    // fired — the SDK stamps at capture time and exposes no override — but the
+    // gap is sub-second and relative order is preserved, so funnels are unaffected.
+    //
+    // `nonisolated(unsafe)` + an explicit lock rather than an actor: the state
+    // is touched from both the main actor (view appearance) and the detached
+    // setup task, and the buffered closures capture `[String: Any]` property
+    // dictionaries, which aren't Sendable. The lock is the whole contract.
+
+    private nonisolated static let gateLock = NSLock()
+    private nonisolated(unsafe) static var isReady = false
+    private nonisolated(unsafe) static var pending: [() -> Void] = []
+
+    /// Called once `PostHogSDK.setup(_:)` and the super-property registration
+    /// have both run. Replays anything captured before that point, in order.
+    nonisolated static func markReady() {
+        gateLock.lock()
+        guard !isReady else {
+            gateLock.unlock()
+            return
+        }
+        isReady = true
+        let buffered = pending
+        pending = []
+        gateLock.unlock()
+
+        buffered.forEach { $0() }
+    }
+
+    /// Run `work` now if the SDK is up, otherwise buffer it until it is.
+    nonisolated static func whenReady(_ work: @escaping () -> Void) {
+        gateLock.lock()
+        if isReady {
+            gateLock.unlock()
+            work()
+            return
+        }
+        pending.append(work)
+        gateLock.unlock()
     }
 
     /// Capture an event. Properties are merged with PostHog's automatic ones
     /// (including the `environment` super-property registered at launch).
     static func capture(_ event: String, _ properties: [String: Any]? = nil) {
-        PostHogSDK.shared.capture(event, properties: properties)
+        whenReady { PostHogSDK.shared.capture(event, properties: properties) }
+    }
+
+    /// Capture a screen view.
+    ///
+    /// Use `.trackScreenView(_:)` rather than posthog-ios's own
+    /// `.postHogScreenView(_:)` — the SDK modifier calls straight through to
+    /// `PostHogSDK.screen()` on appear, which is exactly the call that gets
+    /// dropped when a screen renders before setup finishes.
+    static func screen(_ name: String, _ properties: [String: Any]? = nil) {
+        whenReady { PostHogSDK.shared.screen(name, properties: properties) }
+    }
+
+    /// Register the `environment` super-property, which every dashboard tile
+    /// filters on with an exact `environment = "prod"` match.
+    ///
+    /// Must run after *every* `PostHogSDK.shared.reset()`, not just once at
+    /// launch. reset() deletes the persisted super-properties along with the
+    /// distinct_id — posthog-ios's `PostHogStorage.reset()` removes
+    /// `.registerProperties` outright — so without a re-register everything
+    /// captured for the remainder of that launch carries no `environment` at
+    /// all, and an exact-match filter can never match a missing property.
+    ///
+    /// This was not hypothetical. The one-time identity repair below in
+    /// WingmanApp is keyed on a UserDefaults flag that a *fresh* install
+    /// doesn't have either, so it fired on the first launch of every new
+    /// download and silently unlabelled that entire session — which is the
+    /// only session that ever sees the Landing screen. The landing funnels
+    /// read zero while the events were arriving normally.
+    ///
+    /// `nonisolated` because the launch-time caller is a detached task and
+    /// this target's default actor isolation is MainActor.
+    nonisolated static func registerEnvironment() {
+        #if DEBUG
+        PostHogSDK.shared.register(["environment": "dev"])
+        #else
+        PostHogSDK.shared.register(["environment": "prod"])
+        #endif
     }
 
     /// Report a caught error to PostHog error tracking.
@@ -206,7 +308,7 @@ enum Analytics {
     ) {
         var merged: [String: Any] = ["context": context]
         properties?.forEach { merged[$0.key] = $0.value }
-        PostHogSDK.shared.captureException(error, properties: merged)
+        whenReady { PostHogSDK.shared.captureException(error, properties: merged) }
     }
 
     /// The current distinct ID and session ID, for handing to server-side
@@ -237,7 +339,7 @@ enum Analytics {
     /// person, so nothing set here is lost. The SDK de-dupes identical
     /// consecutive calls, so setting the same value twice is a no-op.
     static func setPersonProperties(_ properties: [String: Any]) {
-        PostHogSDK.shared.setPersonProperties(userPropertiesToSet: properties)
+        whenReady { PostHogSDK.shared.setPersonProperties(userPropertiesToSet: properties) }
     }
 
     /// Seconds between `start` and now, rounded to milliseconds.
@@ -247,5 +349,23 @@ enum Analytics {
     /// meaningful precision — nothing here is measured finer than a frame.
     static func elapsedSeconds(since start: Date) -> Double {
         (Date().timeIntervalSince(start) * 1000).rounded() / 1000
+    }
+}
+
+extension View {
+    /// Capture a `$screen` event when this view appears.
+    ///
+    /// Drop-in replacement for posthog-ios's `.postHogScreenView(_:)`, with the
+    /// same on-appear semantics — the only difference is that it routes through
+    /// `Analytics.screen`, so a screen that renders before `PostHogSDK.setup()`
+    /// finishes is buffered instead of silently dropped. Landing was losing
+    /// roughly four of every five views that way.
+    ///
+    /// Use this everywhere rather than the SDK modifier: which screens can
+    /// render inside the setup window changes with routing, and a screen that
+    /// is safe today (Onboarding for a returning user mid-flow, say) is one
+    /// launch-path change away from not being.
+    func trackScreenView(_ name: String) -> some View {
+        onAppear { Analytics.screen(name) }
     }
 }

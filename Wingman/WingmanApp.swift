@@ -226,7 +226,7 @@ struct RootView: View {
                             RatingPromptView()
                         }
 
-                    // ✅ 3) Questions + rating ack'd → show Paywall (and Referral flow)
+                    // ✅ 3) Questions + rating ack'd → show Paywall
                     } else if !authManager.effectivePaywallFlowCompleted {
                         let _ = log("🎯 RootView: Showing PaywallView (paywall flow NOT completed)")
                         NavigationStack {
@@ -445,7 +445,7 @@ struct RootView: View {
                 // SwiftUI app resolves to the WindowGroup's root
                 // UIHostingController on every transition — one meaningless
                 // name repeated for every screen. The manual
-                // PostHogSDK.screen() call behind the .postHogScreenView()
+                // PostHogSDK.screen() call behind the .trackScreenView()
                 // modifiers on each screen is NOT gated on this flag, so
                 // screen tracking works with it off and stays free of
                 // hosting-controller noise.
@@ -487,11 +487,7 @@ struct RootView: View {
 
                 PostHogSDK.shared.setup(config)
 
-                #if DEBUG
-                PostHogSDK.shared.register(["environment": "dev"])
-                #else
-                PostHogSDK.shared.register(["environment": "prod"])
-                #endif
+                Analytics.registerEnvironment()
 
                 // One-time repair for installs that already ran a build which
                 // identified against the local anonymous UUID. The SDK's
@@ -514,7 +510,19 @@ struct RootView: View {
                 if !UserDefaults.standard.bool(forKey: identityResetKey) {
                     UserDefaults.standard.set(true, forKey: identityResetKey)
                     PostHogSDK.shared.reset()
+                    // reset() also wipes the super-property registered a few
+                    // lines above, so it has to go back on. See
+                    // Analytics.registerEnvironment().
+                    Analytics.registerEnvironment()
                 }
+
+                // The SDK is now up and the environment super-property is on,
+                // so anything captured during the window above can be replayed.
+                // Deliberately before the feature-flag fetch: that's a network
+                // round-trip, and the buffered events — LandingView's screen
+                // view, most of all — have already waited long enough. Nothing
+                // below this point depends on flags being loaded.
+                Analytics.markReady()
 
                 // Feature flags. `read()` first so a cache warmed by a previous
                 // session applies immediately, then `refresh()` to pull current

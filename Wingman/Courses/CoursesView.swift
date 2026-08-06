@@ -195,7 +195,7 @@ struct CoursesView: View {
                 applyDeepLinkIfNeeded()
             }
         }
-        .postHogScreenView("Courses")
+        .trackScreenView("Courses")
     }
     
     /// Picks the category that currently owns the top of the list and keeps

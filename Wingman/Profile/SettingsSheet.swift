@@ -438,7 +438,7 @@ struct SettingsSheet: View {
         // a Text (see getUserEmail() below) — which would otherwise be
         // legible in every recording.
         .postHogMask()
-        .postHogScreenView("Settings")
+        .trackScreenView("Settings")
         .appDynamicTypeCeiling()
     }
     

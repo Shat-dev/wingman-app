@@ -163,7 +163,7 @@ struct LandingView: View {
         .onChange(of: navigateToOnboarding) { newValue in
             log("📊 LandingView: navigateToOnboarding changed to: \(newValue)")
         }
-        .postHogScreenView("Landing")
+        .trackScreenView("Landing")
     }
 }
 

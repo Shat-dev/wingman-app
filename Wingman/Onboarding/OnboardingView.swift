@@ -107,7 +107,7 @@ struct OnboardingView: View {
             PostHogSDK.shared.capture("onboarding_started")
             logStepViewed(screen)
         }
-        .postHogScreenView("Onboarding")
+        .trackScreenView("Onboarding")
     }
 
     @ViewBuilder

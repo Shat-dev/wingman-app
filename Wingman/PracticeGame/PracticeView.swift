@@ -90,7 +90,7 @@ struct PracticeView: View {
 
             await viewModel.prefetchGameData()
         }
-        .postHogScreenView("Practice")
+        .trackScreenView("Practice")
     }
 
     // MARK: - Derived user display name
