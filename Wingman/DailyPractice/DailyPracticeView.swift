@@ -279,7 +279,7 @@ struct DailyPracticeView: View {
             onCheckAnswer: {
                 // Haptic stays here rather than inside QuizQuestionView: the
                 // shared view renders, the caller owns side effects.
-                HapticManager.shared.mediumImpact()
+                HapticManager.shared.tapStrong()
                 viewModel.checkAnswer()
             },
             onNext: {

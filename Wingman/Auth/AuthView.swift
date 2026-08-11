@@ -142,7 +142,7 @@ struct AuthView: View {
                     imageName: "auth_apple_logo",
                     isLoading: authManager.isAppleSignInLoading
                 ) {
-                    HapticManager.shared.mediumImpact()
+                    HapticManager.shared.tapStrong()
                     authManager.signInWithApple()
                 }
                 .disabled(authManager.isAppleSignInLoading || authManager.isGoogleSignInLoading)
@@ -153,7 +153,7 @@ struct AuthView: View {
                     imageName: "auth_google_logo",
                     isLoading: authManager.isGoogleSignInLoading
                 ) {
-                    HapticManager.shared.mediumImpact()
+                    HapticManager.shared.tapStrong()
                     Task {
                         await authManager.signInWithGoogle()
                     }
@@ -186,7 +186,7 @@ struct AuthView: View {
             // side. Verified against RootView — a user who reaches this screen
             // dismissed paywall #1, so `reachedPaywallEndState` is true and
             // `syncAnonymousDataToBackend()` transfers hasCompletedOnboarding /
-            // hasCompletedQuestions / hasCompletedPaywallFlow / hasSeenRatingPrompt
+            // hasCompletedQuestions / hasCompletedPaywallFlow / hasSeenCommitmentPact
             // to the per-user keys before any network await. Signing in here
             // therefore lands on MainTabView with no further gates. If that
             // routing ever changes, this line has to change with it.
@@ -211,7 +211,7 @@ struct AuthView: View {
             // who paid. Same reasoning as PaywallView's offline dismiss.
             if showsDecline {
                 Button {
-                    HapticManager.shared.lightImpact()
+                    HapticManager.shared.tap()
                     log("⏭️ Account ask declined (context: \(context))")
                     onSkip?()
                 } label: {
@@ -326,7 +326,7 @@ struct AuthView: View {
             // Verified against RootView — a user who reaches this screen
             // dismissed paywall #1, so `reachedPaywallEndState` is true and
             // `syncAnonymousDataToBackend()` transfers the onboarding, paywall
-            // and rating flags to per-user keys before any network await.
+            // and commitment-pact flags to per-user keys before any network await.
             // Signing in here lands on MainTabView with no further gates. If
             // that routing changes, this line changes with it.
             return "Nothing else to set up — you'll go straight into the app."

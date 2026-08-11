@@ -153,7 +153,7 @@ struct LessonQuizFlowView: View {
                     engine.selectOption(at: index)
                 },
                 onCheckAnswer: {
-                    HapticManager.shared.mediumImpact()
+                    HapticManager.shared.tapStrong()
                     guard let answer = engine.checkAnswer() else { return }
                     record(answer)
                 },

@@ -83,7 +83,37 @@ final class FeatureFlags: ObservableObject {
     /// `lesson_started`, against `lesson_quiz_abandoned`.
     @Published private(set) var lessonQuizEnabled: Bool = true
 
+    /// The commitment-pact screen between onboarding and paywall #1.
+    ///
+    /// **Ships `true` — fail open.** This flipped from `false`, and the flag
+    /// flipped with it from `commitment_pact_enabled` to
+    /// `commitment_pact_disabled`.
+    ///
+    /// While the 5.6.3 rejection was outstanding, off was the right default:
+    /// the screen went into the same binary that had to clear review, and
+    /// entangling a conversion experiment with getting back on the store was a
+    /// bad trade. That reasoning has expired. An enable-style flag that nobody
+    /// ever created in PostHog does not mean "not launched yet" — it means the
+    /// screen is dark for every live user *and* unreachable on a developer's
+    /// own device without a launch argument. That second half is the real cost:
+    /// an argument makes the device build behave unlike production, which
+    /// defeats the point of testing on device at all.
+    ///
+    /// Phrased as a kill switch for the same reason as `guestSessionsEnabled`
+    /// and `lessonQuizEnabled`: `isFeatureEnabled` returns `false` both for a
+    /// flag that does not exist and for every launch before `/decide` answers.
+    /// With an `enabled`-style key those cases read as "off" and silently
+    /// defeat the default. Phrased as `disabled`, they read as "not disabled" —
+    /// on — and only an explicitly created-and-enabled flag can pull the screen.
+    ///
+    /// Note the consequence for App Review: the pact is part of the flow
+    /// reviewers now see. It is no longer dark by default.
+    @Published private(set) var commitmentPactEnabled: Bool = true
+
     private static let postDemoWallHardKey = "post_demo_wall_hard"
+
+    /// Inverted on purpose — see `commitmentPactEnabled`.
+    private static let commitmentPactDisabledKey = "commitment_pact_disabled"
 
     /// Inverted on purpose — see `lessonQuizEnabled`.
     private static let lessonQuizDisabledKey = "lesson_quiz_disabled"
@@ -144,6 +174,56 @@ final class FeatureFlags: ObservableObject {
 
         readGuestSessionsEnabled()
         readLessonQuizEnabled()
+        readCommitmentPactEnabled()
+    }
+
+    private func readCommitmentPactEnabled() {
+        // Launch argument: -commitmentPactEnabled NO
+        //
+        // Now that the default is on, the useful direction is forcing it
+        // *off* — the same inversion `lessonQuizEnabled` went through. Forcing
+        // it *on* is no longer something anyone needs to do, which is the whole
+        // point of the flip: a device build and a live user now agree with no
+        // argument at all.
+        //
+        // Deliberately NOT behind `#if DEBUG`, for exactly the reason spelled
+        // out in `readLessonQuizEnabled` below. The pact sits immediately in
+        // front of paywall #1, and StoreKit pricing and purchases only work in
+        // a Release build — so every end-to-end test of this screen and the
+        // flow it hands off to has to happen in Release, which is precisely
+        // where a `#if DEBUG` override is compiled out and therefore useless.
+        //
+        // Safe to ship: launch arguments populate `NSArgumentDomain` from the
+        // process's argv, and an App Store app launched from the home screen
+        // has no argv beyond its own path. Only a developer running via Xcode
+        // or `simctl` can set this. Note the corollary — the argument applies
+        // *only* to the process Xcode spawns, so re-opening the app from the
+        // home screen silently drops it and falls back to the flag below.
+        if UserDefaults.standard.object(forKey: "commitmentPactEnabled") != nil {
+            let forced = UserDefaults.standard.bool(forKey: "commitmentPactEnabled")
+            if commitmentPactEnabled != forced {
+                commitmentPactEnabled = forced
+            }
+            log("🚩 FeatureFlags: commitmentPactEnabled OVERRIDDEN locally = \(forced)")
+            return
+        }
+
+        // Inverted on purpose — see `commitmentPactDisabledKey`. Absent or
+        // not-yet-loaded reads as "not disabled", so the default stays on.
+        //
+        // Read with the default exposure event, as the other two kill switches
+        // are. That is fine for a kill switch — "is this pulled for me" — but
+        // would be wrong for a formal PostHog experiment: `read()` runs at
+        // launch for everyone, while only users who finish onboarding reach the
+        // slot, so exposure would be recorded for a much larger population than
+        // can be affected. If the pact ever becomes a real A/B, move the
+        // exposure to the routing branch in `RootView` and follow
+        // `recordPostDemoWallExposure()` below.
+        let value = !PostHogSDK.shared.isFeatureEnabled(Self.commitmentPactDisabledKey)
+        if commitmentPactEnabled != value {
+            log("🚩 FeatureFlags: commitmentPactEnabled \(commitmentPactEnabled) → \(value)")
+            commitmentPactEnabled = value
+        }
     }
 
     /// Records experiment exposure for `post_demo_wall_hard`, at the moment the

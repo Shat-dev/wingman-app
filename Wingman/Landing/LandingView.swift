@@ -105,7 +105,7 @@ struct LandingView: View {
                     // happens next and implies nothing about accounts, which is
                     // right, because accounts are genuinely optional.
                     Button {
-                        HapticManager.shared.mediumImpact()
+                        HapticManager.shared.tapStrong()
                         log("🔘 Get started button tapped")
                         authManager.startAnonymousOnboarding()
                         navigateToOnboarding = true
@@ -132,7 +132,7 @@ struct LandingView: View {
                     // not seen the product yet. Sign-up is still reachable —
                     // AuthView(.signup) is presented from both of those places.
                     Button {
-                        HapticManager.shared.mediumImpact()
+                        HapticManager.shared.tapStrong()
                         navigateToLogin = true
                     } label: {
                         HStack(spacing: 4) {

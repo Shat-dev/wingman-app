@@ -51,16 +51,16 @@ final class AuthManager: ObservableObject {
         }
     }
 
-    // Rating prompt (shown between onboarding questions and paywall).
+    // Commitment pact (shown between onboarding questions and paywall).
     // Per-onboarding-pass gate: flipped to true on Continue so the user can
     // advance to the paywall, then reset on signOut / account deletion /
     // start-of-anonymous-onboarding so the next onboarding pass shows it again.
     // Persisted per-user for authenticated users (mirrors the hasCompletedPaywallFlow
     // pattern), and under a global key for anonymous users (they have no userId
     // at the moment they dismiss the prompt).
-    @Published var hasSeenRatingPrompt: Bool = false {
+    @Published var hasSeenCommitmentPact: Bool = false {
         didSet {
-            log("⭐ hasSeenRatingPrompt changed: \(oldValue) → \(hasSeenRatingPrompt)")
+            log("⭐ hasSeenCommitmentPact changed: \(oldValue) → \(hasSeenCommitmentPact)")
         }
     }
 
@@ -435,11 +435,11 @@ final class AuthManager: ObservableObject {
         hasDismissedPostDemoWall = UserDefaults.standard.bool(forKey: "hasDismissedPostDemoWall")
         log("🚧 Loaded hasDismissedPostDemoWall: \(hasDismissedPostDemoWall)")
 
-        // Load global rating-prompt flag — covers the anonymous case at launch,
+        // Load global commitment-pact flag — covers the anonymous case at launch,
         // and also provides a safe default before session restore overwrites
         // with the per-user value.
-        hasSeenRatingPrompt = UserDefaults.standard.bool(forKey: "hasSeenRatingPrompt")
-        log("⭐ Loaded hasSeenRatingPrompt: \(hasSeenRatingPrompt)")
+        hasSeenCommitmentPact = UserDefaults.standard.bool(forKey: "hasSeenCommitmentPact")
+        log("⭐ Loaded hasSeenCommitmentPact: \(hasSeenCommitmentPact)")
 
         // Check if user is in anonymous mode
         isLegacyAnonymousUser = UserDefaults.standard.bool(forKey: "isAnonymousUser")
@@ -546,7 +546,7 @@ final class AuthManager: ObservableObject {
     /// included so that paying users whose `hasCompletedPaywallFlow` flag is
     /// transiently false (reinstall before the heal in `syncSubscriptionStatus`
     /// runs, or first render before the cache loads) are routed to MainTabView
-    /// instead of looping back through RatingPromptView/PaywallView. Cannot
+    /// instead of looping back through CommitmentPactView/PaywallView. Cannot
     /// over-permit: `hasActiveSubscription` is sourced from RC/StoreKit data
     /// only, never user-controllable.
     var effectivePaywallFlowCompleted: Bool {
@@ -705,7 +705,7 @@ final class AuthManager: ObservableObject {
                     // ✅ Load user state (after sync, so we get the updated paywall flow status)
                     await checkUserQuestionStatus(userId: session.user.id.uuidString)
                     await checkUserPaywallFlowStatus(userId: session.user.id.uuidString)
-                    await checkUserRatingPromptStatus(userId: session.user.id.uuidString)
+                    await checkUserCommitmentPactStatus(userId: session.user.id.uuidString)
                     await checkUserSecondChanceOfferStatus(userId: session.user.id.uuidString)
                     await checkUserFreeDemoStatus(userId: session.user.id.uuidString)
                     await checkUserPostDemoWallStatus(userId: session.user.id.uuidString)
@@ -807,7 +807,7 @@ final class AuthManager: ObservableObject {
                 self.currentUser = nil
                 self.hasCompletedQuestions = false
                 self.hasCompletedPaywallFlow = false
-                self.hasSeenRatingPrompt = false
+                self.hasSeenCommitmentPact = false
                 self.hasSeenSecondChanceOffer = false
                 self.secondChanceOfferShownAt = nil
                 self.hasCompletedFreeDemo = false
@@ -887,7 +887,7 @@ final class AuthManager: ObservableObject {
                     // ✅ Load user state
                     await checkUserQuestionStatus(userId: session.user.id.uuidString)
                     await checkUserPaywallFlowStatus(userId: session.user.id.uuidString)
-                    await checkUserRatingPromptStatus(userId: session.user.id.uuidString)
+                    await checkUserCommitmentPactStatus(userId: session.user.id.uuidString)
                     await checkUserSecondChanceOfferStatus(userId: session.user.id.uuidString)
                     await checkUserFreeDemoStatus(userId: session.user.id.uuidString)
                     await checkUserPostDemoWallStatus(userId: session.user.id.uuidString)
@@ -970,7 +970,7 @@ final class AuthManager: ObservableObject {
                 self.currentUser = nil
                 self.hasCompletedQuestions = false
                 self.hasCompletedPaywallFlow = false
-                self.hasSeenRatingPrompt = false
+                self.hasSeenCommitmentPact = false
                 self.hasSeenSecondChanceOffer = false
                 self.secondChanceOfferShownAt = nil
                 self.hasCompletedFreeDemo = false
@@ -1326,10 +1326,10 @@ final class AuthManager: ObservableObject {
         "freeLessonId_\(userId)"
     }
 
-    private func checkUserRatingPromptStatus(userId: String) async {
-        let key = "hasSeenRatingPrompt_\(userId)"
-        hasSeenRatingPrompt = UserDefaults.standard.bool(forKey: key)
-        log("⭐ Rating prompt status loaded: \(hasSeenRatingPrompt) for user: \(userId)")
+    private func checkUserCommitmentPactStatus(userId: String) async {
+        let key = "hasSeenCommitmentPact_\(userId)"
+        hasSeenCommitmentPact = UserDefaults.standard.bool(forKey: key)
+        log("⭐ Commitment pact status loaded: \(hasSeenCommitmentPact) for user: \(userId)")
     }
 
     // MARK: - Graceful Session Restoration (Offline-First)
@@ -1390,7 +1390,7 @@ final class AuthManager: ObservableObject {
             // Load user-specific states
             await checkUserQuestionStatus(userId: session.user.id.uuidString)
             await checkUserPaywallFlowStatus(userId: session.user.id.uuidString)
-            await checkUserRatingPromptStatus(userId: session.user.id.uuidString)
+            await checkUserCommitmentPactStatus(userId: session.user.id.uuidString)
             await checkUserSecondChanceOfferStatus(userId: session.user.id.uuidString)
             await checkUserFreeDemoStatus(userId: session.user.id.uuidString)
             await checkUserPostDemoWallStatus(userId: session.user.id.uuidString)
@@ -1824,11 +1824,11 @@ final class AuthManager: ObservableObject {
         UserDefaults.standard.set(false, forKey: "hasCompletedOnboarding")
         UserDefaults.standard.set(true, forKey: "isAnonymousUser")
 
-        // Reset the rating prompt so this anonymous onboarding pass shows it
+        // Reset the commitment pact so this anonymous onboarding pass shows it
         // again. Without this, an earlier anonymous session that dismissed the
         // prompt leaves the global key set, causing the new flow to skip it.
-        hasSeenRatingPrompt = false
-        UserDefaults.standard.removeObject(forKey: "hasSeenRatingPrompt")
+        hasSeenCommitmentPact = false
+        UserDefaults.standard.removeObject(forKey: "hasSeenCommitmentPact")
 
         // Also reset the paywall-flow flag for this fresh anonymous pass.
         // Otherwise, if an earlier anonymous user dismissed the paywall and
@@ -1918,7 +1918,7 @@ final class AuthManager: ObservableObject {
         let hadCompletedPaywallFlow = anonymousManager.hasCompletedPaywallFlow
         let reachedPaywallEndState = hadActivePurchase || hadCompletedPaywallFlow
         let hadCompletedOnboarding = anonymousManager.hasCompletedOnboarding
-        let hadSeenRatingPrompt = UserDefaults.standard.bool(forKey: "hasSeenRatingPrompt")
+        let hadSeenCommitmentPact = UserDefaults.standard.bool(forKey: "hasSeenCommitmentPact")
         let userAge = anonymousManager.userAge
         let userGoals = anonymousManager.userGoals
         let typedName = anonymousManager.userName?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
@@ -1933,7 +1933,7 @@ final class AuthManager: ObservableObject {
         // Snapshot alongside `needsLinking` — `clearAllData()` below wipes it,
         // and linkAnonymousUserPurchases can no longer read it back itself.
         let anonymousCustomerID = anonymousManager.revenueCatCustomerId
-        log("💳 Anonymous flags — purchase=\(hadActivePurchase) paywallComplete=\(hadCompletedPaywallFlow) onboarding=\(hadCompletedOnboarding) rating=\(hadSeenRatingPrompt)")
+        log("💳 Anonymous flags — purchase=\(hadActivePurchase) paywallComplete=\(hadCompletedPaywallFlow) onboarding=\(hadCompletedOnboarding) pact=\(hadSeenCommitmentPact)")
 
         // =====================================================================
         // PHASE 1: Local state writes (synchronous, no-await)
@@ -1957,16 +1957,16 @@ final class AuthManager: ObservableObject {
             log("💳 Anonymous paywall flow transferred — purchase=\(hadActivePurchase) completed=\(hadCompletedPaywallFlow)")
         }
 
-        // Transfer the anonymous-scope rating-prompt flag to the per-user key.
-        // Without this, dismissing users see RatingPromptView again after
-        // signup because checkUserRatingPromptStatus reads only the per-user
+        // Transfer the anonymous-scope commitment-pact flag to the per-user key.
+        // Without this, committing users see CommitmentPactView again after
+        // signup because checkUserCommitmentPactStatus reads only the per-user
         // key. Remove the global key after transfer to prevent bleed into a
         // future anonymous pass on the same device.
-        if hadSeenRatingPrompt {
-            hasSeenRatingPrompt = true
-            UserDefaults.standard.set(true, forKey: "hasSeenRatingPrompt_\(userId)")
-            UserDefaults.standard.removeObject(forKey: "hasSeenRatingPrompt")
-            log("⭐ Transferred anonymous rating-prompt flag to per-user key for user: \(userId)")
+        if hadSeenCommitmentPact {
+            hasSeenCommitmentPact = true
+            UserDefaults.standard.set(true, forKey: "hasSeenCommitmentPact_\(userId)")
+            UserDefaults.standard.removeObject(forKey: "hasSeenCommitmentPact")
+            log("⭐ Transferred anonymous commitment-pact flag to per-user key for user: \(userId)")
         }
 
         // Reflect a typed display name in the local profile store immediately,
@@ -2094,6 +2094,47 @@ final class AuthManager: ObservableObject {
             log("✅ syncAgeRangeToBackend: wrote age to user_metadata")
         } catch {
             log("❌ syncAgeRangeToBackend: failed — \(error.localizedDescription)")
+        }
+    }
+
+    // MARK: - Display Name Sync
+    /// Writes a display name to `auth.users.user_metadata.display_name` for
+    /// the current session — guests included, since a guest holds a real
+    /// `auth.users` row. Best-effort in exactly the way
+    /// `syncAgeRangeToBackend` is: failures are logged and swallowed, and
+    /// `UserProfileStore` has already been updated locally by the caller, so
+    /// nothing the user sees depends on this succeeding.
+    ///
+    /// Only ever called with a name the user typed themselves (the optional
+    /// onboarding name screen). Never call it with a placeholder — an empty
+    /// or defaulted value here would overwrite the name Sign in with Apple
+    /// stores, which is the failure mode `LoadingScreen` documents.
+    ///
+    /// The write emits `.userUpdated`, which refreshes `currentUser` — that
+    /// is what makes HomeView's greeting pick the name up without a relaunch.
+    func syncDisplayNameToBackend(_ name: String) async {
+        guard SupabaseManager.shared.currentUserId != nil else {
+            log("⚠️ syncDisplayNameToBackend: no session — skipping")
+            return
+        }
+
+        let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else {
+            log("⚠️ syncDisplayNameToBackend: empty name — skipping")
+            return
+        }
+
+        log("📤 syncDisplayNameToBackend: writing display_name to user_metadata")
+
+        do {
+            let attributes = UserAttributes(data: [
+                "display_name": AnyJSON.string(trimmed),
+                "updated_at": AnyJSON.string(ISO8601DateFormatter().string(from: Date()))
+            ])
+            try await client.auth.update(user: attributes)
+            log("✅ syncDisplayNameToBackend: wrote display_name to user_metadata")
+        } catch {
+            log("❌ syncDisplayNameToBackend: failed — \(error.localizedDescription)")
         }
     }
 
@@ -2242,7 +2283,7 @@ final class AuthManager: ObservableObject {
             // Mirror to user_metadata so this survives uninstall+reinstall.
             // The Supabase session persists in iOS Keychain across app deletes,
             // but per-user UserDefaults keys do not — without this write, a
-            // reinstalling user gets re-routed through RatingPromptView and
+            // reinstalling user gets re-routed through CommitmentPactView and
             // PaywallView. Best-effort: UserDefaults remains the source of
             // truth on this device, so a network failure here only delays
             // cross-install rehydration to the next successful write.
@@ -2479,23 +2520,23 @@ final class AuthManager: ObservableObject {
         }
     }
 
-    // MARK: - Rating Prompt
-    /// Called from `RatingPromptView` when the user taps Continue.
+    // MARK: - Commitment Pact
+    /// Called from `CommitmentPactView` once the hold-to-commit completes.
     /// Flips the in-memory flag and persists — per-user key for authenticated
     /// users, global key for anonymous users (since they have no userId yet).
-    func completeRatingPrompt() {
-        log("⭐ completeRatingPrompt() called")
-        hasSeenRatingPrompt = true
+    func completeCommitmentPact() {
+        log("⭐ completeCommitmentPact() called")
+        hasSeenCommitmentPact = true
 
         if let userId = currentUser?.id.uuidString {
-            let key = "hasSeenRatingPrompt_\(userId)"
+            let key = "hasSeenCommitmentPact_\(userId)"
             UserDefaults.standard.set(true, forKey: key)
-            log("⭐ Rating prompt marked seen for user: \(userId)")
+            log("⭐ Commitment pact marked seen for user: \(userId)")
         } else {
             // Anonymous: persist under the global key so the next init() load
             // picks it up, and so the check during routing finds it.
-            UserDefaults.standard.set(true, forKey: "hasSeenRatingPrompt")
-            log("⭐ Rating prompt marked seen (anonymous)")
+            UserDefaults.standard.set(true, forKey: "hasSeenCommitmentPact")
+            log("⭐ Commitment pact marked seen (anonymous)")
         }
     }
 
@@ -2580,7 +2621,7 @@ final class AuthManager: ObservableObject {
     private func loadGuestUserState(userId: String) async {
         await checkUserQuestionStatus(userId: userId)
         await checkUserPaywallFlowStatus(userId: userId)
-        await checkUserRatingPromptStatus(userId: userId)
+        await checkUserCommitmentPactStatus(userId: userId)
         await checkUserSecondChanceOfferStatus(userId: userId)
         await checkUserFreeDemoStatus(userId: userId)
         await checkUserPostDemoWallStatus(userId: userId)
@@ -2629,7 +2670,7 @@ final class AuthManager: ObservableObject {
 
         await checkUserQuestionStatus(userId: userId)
         await checkUserPaywallFlowStatus(userId: userId)
-        await checkUserRatingPromptStatus(userId: userId)
+        await checkUserCommitmentPactStatus(userId: userId)
         await checkUserSecondChanceOfferStatus(userId: userId)
         await checkUserFreeDemoStatus(userId: userId)
         await checkUserPostDemoWallStatus(userId: userId)
@@ -2799,20 +2840,47 @@ final class AuthManager: ObservableObject {
                 let displayName = [fullName.givenName, fullName.familyName]
                     .compactMap { $0 }
                     .joined(separator: " ")
-                
+
                 if !displayName.isEmpty {
-                    log("📝 Saving display name: \(displayName)")
-                    
-                    // Update user metadata with the name
-                    _ = try await client.auth.update(user: UserAttributes(
-                        data: [
-                            "display_name": .string(displayName),
-                            "full_name": .string(displayName)
-                        ]
-                    ))
-                    
-                    // Also save to UserDefaults for quick access
-                    UserDefaults.standard.set(displayName, forKey: "user_name")
+                    // A name the user typed on the onboarding name screen wins
+                    // over the one Apple supplies. Apple hands back the legal
+                    // name on the account ("Jonathan Smith"); the user asked to
+                    // be called something ("Jon"), on a screen where they could
+                    // have skipped and didn't. Overwriting that would change the
+                    // home greeting out from under them at sign-in, with no
+                    // action of theirs that looks like renaming.
+                    //
+                    // Both sources are checked because the onboarding write to
+                    // Supabase is best-effort: an offline user has the name in
+                    // `OnboardingNameKey` and nothing in `user_metadata` yet.
+                    // Checking only the session would let Apple win that race.
+                    //
+                    // `full_name` is written either way — it is Apple's legal
+                    // name, a different field from the one the UI greets with,
+                    // and only ever arrives on this first sign-in.
+                    let existingName = session.user.userMetadata["display_name"]?.stringValue
+                    let hasOwnName = !(existingName ?? "").isEmpty
+                        || OnboardingNameKey.current != nil
+
+                    if hasOwnName {
+                        log("📝 Keeping the user's own name; storing Apple's as full_name only")
+                        _ = try await client.auth.update(user: UserAttributes(
+                            data: ["full_name": .string(displayName)]
+                        ))
+                    } else {
+                        log("📝 Saving display name: \(displayName)")
+
+                        // Update user metadata with the name
+                        _ = try await client.auth.update(user: UserAttributes(
+                            data: [
+                                "display_name": .string(displayName),
+                                "full_name": .string(displayName)
+                            ]
+                        ))
+
+                        // Also save to UserDefaults for quick access
+                        UserDefaults.standard.set(displayName, forKey: "user_name")
+                    }
                 }
             }
             
@@ -2936,16 +3004,16 @@ final class AuthManager: ObservableObject {
             try await client.auth.signOut()
 
             // Capture userId BEFORE clearing currentUser so we can wipe the
-            // per-user rating-prompt key (otherwise the next onboarding pass
+            // per-user commitment-pact key (otherwise the next onboarding pass
             // for this user would re-load `true` from UserDefaults and skip
-            // the rating screen).
+            // the pact screen).
             let userIdForCleanup = currentUser?.id.uuidString
 
             isAuthenticated = false
             currentUser = nil
             hasCompletedQuestions = false
             hasCompletedPaywallFlow = false
-            hasSeenRatingPrompt = false
+            hasSeenCommitmentPact = false
             hasSeenSecondChanceOffer = false
             secondChanceOfferShownAt = nil
             hasCompletedFreeDemo = false
@@ -2954,7 +3022,7 @@ final class AuthManager: ObservableObject {
             freeLessonId = nil
 
             if let userId = userIdForCleanup {
-                UserDefaults.standard.removeObject(forKey: "hasSeenRatingPrompt_\(userId)")
+                UserDefaults.standard.removeObject(forKey: "hasSeenCommitmentPact_\(userId)")
             }
 
             log("✅ Sign out successful")
@@ -3098,7 +3166,7 @@ final class AuthManager: ObservableObject {
                     hasCompletedOnboarding = false
                     hasCompletedQuestions = false
                     hasCompletedPaywallFlow = false
-                    hasSeenRatingPrompt = false
+                    hasSeenCommitmentPact = false
                     hasSeenSecondChanceOffer = false
                     secondChanceOfferShownAt = nil
                     hasCompletedFreeDemo = false
@@ -3142,7 +3210,7 @@ final class AuthManager: ObservableObject {
         userDefaults.removeObject(forKey: "hasCompletedOnboarding_\(userId)")
         userDefaults.removeObject(forKey: "hasCompletedQuestions_\(userId)")
         userDefaults.removeObject(forKey: "hasCompletedPaywallFlow_\(userId)")
-        userDefaults.removeObject(forKey: "hasSeenRatingPrompt_\(userId)")
+        userDefaults.removeObject(forKey: "hasSeenCommitmentPact_\(userId)")
         userDefaults.removeObject(forKey: "hasSeenSecondChanceOffer_\(userId)")
         userDefaults.removeObject(forKey: Self.secondChanceShownAtKey(userId))
         userDefaults.removeObject(forKey: "hasCompletedFreeDemo_\(userId)")

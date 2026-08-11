@@ -71,7 +71,13 @@ final class SupabaseManager {
             "best_streak",
             "last_practice_date",
             "daily_reading_goal",
-            "goal_notifications"
+            "goal_notifications",
+            // The name typed on the onboarding name screen. It belongs to the
+            // session that produced it: the commitment pact reads it, and
+            // Apple sign-in treats its presence as "this user already told us
+            // what to call them" and declines to overwrite. Left behind, the
+            // next person to sign in on this device would inherit both.
+            OnboardingNameKey.defaultsKey
         ] + StreakStore.cacheKeys + UserProfileStore.cacheKeys
         keys.forEach { UserDefaults.standard.removeObject(forKey: $0) }
 

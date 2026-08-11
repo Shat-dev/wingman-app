@@ -93,7 +93,7 @@ struct QuestionScreen: View {
             let isDisabled = !hasSelection
 
             Button(action: {
-                HapticManager.shared.lightImpact()
+                HapticManager.shared.tap()
                 onNext(selectedOptions)
             }) {
                 Text("Next")

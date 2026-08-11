@@ -469,7 +469,7 @@ struct PaywallView: View {
             // bypass instead of recording a decline the user never made.
             if showsDismissAffordance {
                 Button {
-                    HapticManager.shared.lightImpact()
+                    HapticManager.shared.tap()
                     let isOfflineBypass = !isDismissible
                     // PostHog: user actively dismissed the paywall
                     // without purchasing. Captured at the action site
@@ -778,7 +778,7 @@ struct PaywallView: View {
     /// Primary CTA once pricing is available.
     private var continueButton: some View {
         Button {
-            HapticManager.shared.mediumImpact()
+            HapticManager.shared.tapStrong()
             Task {
                 let success = await viewModel.continueTapped()
                 if success {
@@ -830,7 +830,7 @@ struct PaywallView: View {
     /// with any load already in flight.
     private var pricingRetryButton: some View {
         Button {
-            HapticManager.shared.mediumImpact()
+            HapticManager.shared.tapStrong()
             viewModel.loadOfferings()
         } label: {
             HStack(spacing: 8) {

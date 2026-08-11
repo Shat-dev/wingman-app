@@ -11,7 +11,7 @@ struct TapToContinueButton: View {
 
     var body: some View {
         Button(action: {
-            HapticManager.shared.lightImpact()
+            HapticManager.shared.tap()
             action()
         }) {
             Text("Tap to continue")

@@ -211,22 +211,39 @@ struct RootView: View {
                             OnboardingView()
                         }
 
-                    // ✅ 2) Questions finished, rating ask not yet seen →
-                    //    show RatingPromptView. Gated on `!effectivePaywallFlowCompleted`
-                    //    so existing paying users (who already passed the
-                    //    paywall) never route back here after the update —
-                    //    they go straight to MainTabView below. The
-                    //    "effective" form treats an active RC entitlement as
-                    //    equivalent to having completed the flow, which
-                    //    self-heals reinstall / new-device cases where the
-                    //    flag was wiped but the entitlement is still valid.
-                    } else if !authManager.effectivePaywallFlowCompleted && !authManager.hasSeenRatingPrompt {
-                        let _ = log("🎯 RootView: Showing RatingPromptView (rating prompt NOT seen)")
+                    // ✅ 2) Questions finished → the commitment pact, then the
+                    //    paywall.
+                    //
+                    // A rating-ask screen used to sit in this slot, and it
+                    // fired StoreKit's `requestReview()` on appear. App Review
+                    // rejected 1.07 (27) under guideline 5.6.3 for exactly
+                    // that: asking for a rating during onboarding, before the
+                    // user has had time to judge the app. Both the screen and
+                    // the request are gone — do not reintroduce a review ask
+                    // anywhere in the first-launch path. Any future ask belongs
+                    // behind a real engagement gate (multiple sessions across
+                    // multiple days, plus a completed scenario or lesson).
+                    //
+                    // What replaces it asks the user for a commitment rather
+                    // than for a rating, which is both legal and the thing the
+                    // slot is actually good for — the screen before pricing.
+                    // Off by default; see `commitmentPactEnabled`.
+                    //
+                    // `effectivePaywallFlowCompleted` gates it so existing
+                    // paying users never route back here after the update, and
+                    // treats an active RC entitlement as equivalent to having
+                    // completed the flow — which self-heals reinstall /
+                    // new-device cases where the flag was wiped but the
+                    // entitlement is still valid.
+                    } else if !authManager.effectivePaywallFlowCompleted
+                                && featureFlags.commitmentPactEnabled
+                                && !authManager.hasSeenCommitmentPact {
+                        let _ = log("🎯 RootView: Showing CommitmentPactView (pact NOT yet made)")
                         NavigationStack {
-                            RatingPromptView()
+                            CommitmentPactView()
                         }
 
-                    // ✅ 3) Questions + rating ack'd → show Paywall
+                    // ✅ 3) Pact made (or flag off) → show Paywall
                     } else if !authManager.effectivePaywallFlowCompleted {
                         let _ = log("🎯 RootView: Showing PaywallView (paywall flow NOT completed)")
                         NavigationStack {
@@ -323,10 +340,15 @@ struct RootView: View {
                 } else if authManager.isLegacyAnonymousUser && authManager.hasCompletedOnboarding {
                     let _ = log("🎯 RootView: Legacy anonymous (no session) — completed onboarding")
 
-                    if !authManager.effectivePaywallFlowCompleted && !authManager.hasSeenRatingPrompt {
-                        let _ = log("🎯 RootView: Legacy anonymous - showing RatingPromptView")
+                    // Mirrors the pact → paywall ordering in the session branch
+                    // above, so the two paths don't diverge on what the user
+                    // sees before pricing.
+                    if !authManager.effectivePaywallFlowCompleted
+                        && featureFlags.commitmentPactEnabled
+                        && !authManager.hasSeenCommitmentPact {
+                        let _ = log("🎯 RootView: Legacy anonymous - showing CommitmentPactView")
                         NavigationStack {
-                            RatingPromptView()
+                            CommitmentPactView()
                         }
 
                     } else if !authManager.effectivePaywallFlowCompleted {
@@ -373,15 +395,14 @@ struct RootView: View {
             // rating prompt), still cuts. Left alone deliberately — out of
             // scope here, and worth its own before/after look.
             .animation(.easeInOut(duration: 0.3), value: authManager.effectivePaywallFlowCompleted)
-            // Rating prompt → paywall #1, for the same reason as the line
-            // above; this was the before/after that note asked for. The cut
-            // left the paywall's very first frame fully exposed, with nothing
-            // to blend it, so anything the paywall renders before its plans are
-            // ready snapped into view as a flash. PaywallViewModel now seeds
-            // from RevenueCat's cache so that frame usually holds the real
-            // plans, and this crossfade covers the cases where it can't
+            // Commitment pact → paywall #1, for the same reason as the line
+            // above. The cut left the paywall's very first frame fully exposed,
+            // with nothing to blend it, so anything the paywall renders before
+            // its plans are ready snapped into view as a flash. PaywallViewModel
+            // now seeds from RevenueCat's cache so that frame usually holds the
+            // real plans, and this crossfade covers the cases where it can't
             // (cold cache, offline).
-            .animation(.easeInOut(duration: 0.3), value: authManager.hasSeenRatingPrompt)
+            .animation(.easeInOut(duration: 0.3), value: authManager.hasSeenCommitmentPact)
             // Same reasoning as the line above, for the two transitions the
             // walkthrough introduces. Both were unreachable in production until
             // W6 gave `markFreeDemoCompleted()` a caller, so neither had ever
@@ -644,9 +665,6 @@ struct RootView: View {
         }
         .onChange(of: authManager.hasCompletedPaywallFlow) { newValue in
             log("\n🔔 RootView detected hasCompletedPaywallFlow change: \(newValue)")
-        }
-        .onChange(of: authManager.hasSeenRatingPrompt) { newValue in
-            log("\n🔔 RootView detected hasSeenRatingPrompt change: \(newValue)")
         }
     }
 }

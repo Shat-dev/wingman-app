@@ -210,7 +210,7 @@ struct PracticeDetailView: View {
     // MARK: - Start Button
     private var startButton: some View {
         Button(action: {
-            HapticManager.shared.mediumImpact()
+            HapticManager.shared.tapStrong()
             viewModel.startPractice()
         }) {
             Text("Start Practice")

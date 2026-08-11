@@ -108,7 +108,7 @@ struct StatisticScreen: View {
                     .contentShape(Rectangle())
                     .onTapGesture {
                         log("✅ Right side tapped - continuing")
-                        HapticManager.shared.lightImpact()
+                        HapticManager.shared.tap()
                         onContinue()
                     }
             }

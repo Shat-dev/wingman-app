@@ -104,7 +104,7 @@ struct SettingsSheet: View {
                             // account at all. Settings is the natural home for
                             // an always-available, never-nagging entry point.
                             Button {
-                                HapticManager.shared.mediumImpact()
+                                HapticManager.shared.tapStrong()
                                 showCreateAccount = true
                             } label: {
                                 Text("Create a free account")
@@ -326,7 +326,7 @@ struct SettingsSheet: View {
                     // Deleting data stays available above, correctly named.
                     if !authManager.isGuestSession {
                         Button(action: {
-                            HapticManager.shared.mediumImpact()
+                            HapticManager.shared.tapStrong()
                             logOut()
                         }) {
                             Text("Log Out")

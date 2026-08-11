@@ -18,6 +18,9 @@ struct HomeView: View {
 
     @StateObject private var viewModel = HomeViewModel()
     @StateObject private var networkMonitor = NetworkMonitor.shared
+    // Same singleton ProfileView observes, so a name set in onboarding or
+    // edited in Profile updates the greeting without a round-trip.
+    @StateObject private var userProfileStore = UserProfileStore.shared
     @State private var navigateToPractice = false
     @State private var showLogApproachSheet = false
     @State private var selectedCourse: Course? = nil
@@ -25,6 +28,21 @@ struct HomeView: View {
     // Feature-gate paywall for Daily Practice Start (free users).
     @State private var showDailyPracticePaywall = false
     
+    /// Name shown under "Good Morning,". Session metadata first, local profile
+    /// cache second, "User" last — the same fallback string this header has
+    /// always ended on, so nothing changes for a user who has no name stored.
+    private var greetingName: String {
+        if let metadataName = authManager.currentUser?
+            .userMetadata["display_name"]?.stringValue,
+           !metadataName.isEmpty {
+            return metadataName
+        }
+        if let cached = userProfileStore.displayName, !cached.isEmpty {
+            return cached
+        }
+        return "User"
+    }
+
     // Module data for carousel
     private var modules: [(category: CourseCategory, title: String, subtitle: String, imageName: String)] {
         let categories = CourseCategory.dummyCategories
@@ -51,25 +69,25 @@ struct HomeView: View {
                                 .font(.manropeMedium(size: 24))
                                 .foregroundColor(.wingmanBlack)
                             
-                            // Show user name from Supabase userMetadata["display_name"].
-                            // Falls back to "User" if unset — we never surface the
-                            // email here, since a long email prefix would overflow
-                            // this 24pt greeting and bypass the 10-char name cap.
-                            // Read via the already-observed @Published currentUser
-                            // so edits to display_name reactively re-render this
-                            // header, and so body doesn't do a singleton dereference
-                            // on every render.
-                            if let user = authManager.currentUser,
-                               let name = user.userMetadata["display_name"]?.stringValue,
-                               !name.isEmpty {
-                                Text(name)
-                                    .font(.manropeMedium(size: 24))
-                                    .foregroundColor(Color(hex: "1A1A1A").opacity(0.7))
-                            } else {
-                                Text("User")
-                                    .font(.manropeMedium(size: 24))
-                                    .foregroundColor(Color(hex: "1A1A1A").opacity(0.7))
-                            }
+                            // Show user name from Supabase userMetadata["display_name"],
+                            // then the local profile cache, then "User". We never
+                            // surface the email here, since a long email prefix would
+                            // overflow this 24pt greeting and bypass the 10-char name cap.
+                            // Metadata is read via the already-observed @Published
+                            // currentUser so edits to display_name reactively re-render
+                            // this header, and so body doesn't do a singleton
+                            // dereference on every render.
+                            //
+                            // The cache tier exists for the name captured on the
+                            // optional onboarding screen: `UserProfileStore` is written
+                            // synchronously there while the Supabase write is
+                            // best-effort, so a user who onboarded offline is still
+                            // greeted by name instead of by "User". `userProfileStore`
+                            // is observed, so a later sync or a Profile edit still
+                            // re-renders this.
+                            Text(greetingName)
+                                .font(.manropeMedium(size: 24))
+                                .foregroundColor(Color(hex: "1A1A1A").opacity(0.7))
                         }
                         
                         Spacer()
@@ -135,7 +153,7 @@ struct HomeView: View {
 
                                     Button(action: {
                                         if canStart {
-                                            HapticManager.shared.mediumImpact()
+                                            HapticManager.shared.tapStrong()
                                             // Walkthrough interception, ahead
                                             // of the paywall — daily practice
                                             // is not part of the script and

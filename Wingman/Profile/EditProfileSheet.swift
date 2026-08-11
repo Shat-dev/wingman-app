@@ -102,7 +102,7 @@ struct EditProfileSheet: View {
                     
                     // Save Button
                     Button(action: {
-                        HapticManager.shared.mediumImpact()
+                        HapticManager.shared.tapStrong()
                         saveProfile()
                     }) {
                         HStack {

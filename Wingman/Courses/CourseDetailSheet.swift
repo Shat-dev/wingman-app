@@ -212,7 +212,7 @@ struct CourseDetailSheet: View {
             // and no pricing change fixes it. One-shot, because `onAppear`
             // re-fires on view-tree churn and would otherwise count a single
             // encounter several times (same guard pattern as
-            // RatingPromptView's `hasRequestedReview`).
+            // CommitmentPactView's `hasCommitted`).
             if case .awaitingPrevious(let previousTitle) = lockReason,
                !hasCapturedLockedEncounter {
                 hasCapturedLockedEncounter = true

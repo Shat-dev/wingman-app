@@ -24,11 +24,22 @@ struct OnboardingProgressBar: View {
                 Capsule()
                     .fill(Color.wingmanBlack)
                     .frame(width: geo.size.width * max(0, min(1, progress)), height: 10)
-                    // Heavily-damped spring (0.95) — visually a smooth ramp
-                    // with no perceptible overshoot, but feels more native than
-                    // an easeInOut sigmoid because the velocity comes off the
-                    // user's tap, not from a fixed timing curve.
-                    .animation(.spring(response: 0.5, dampingFraction: 0.95), value: progress)
+                    // Deliberately no `.animation(_:value:)` here.
+                    //
+                    // An explicit `.animation(_:value:)` overrides the ambient
+                    // transaction for its subtree, so the spring that used to
+                    // sit here (response 0.5, damping 0.95) ran on its own
+                    // clock while the page slid on the coordinator's (response
+                    // 0.35, damping 0.86) — a longer settle time off the same
+                    // tap, so the bar was still moving after the page landed.
+                    //
+                    // Without the modifier the fill inherits whatever
+                    // transaction changed `progress` — always the
+                    // `withAnimation` block in `OnboardingView.advanceTo` or
+                    // `goBack`, since `progress` derives from `screen` and
+                    // `screen` is never mutated outside one. Bar and page now
+                    // settle on the same frame, and stay in sync on their own
+                    // if the slide is ever retuned.
             }
         }
         .frame(height: 10)

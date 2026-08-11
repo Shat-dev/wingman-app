@@ -250,7 +250,7 @@ struct LogApproachBottomSheet: View {
 
                         // MARK: - Save Button
                         Button(action: {
-                            HapticManager.shared.mediumImpact()
+                            HapticManager.shared.tapStrong()
 
                             // Deliberately ungated — free forever, for
                             // subscribers and non-subscribers alike.

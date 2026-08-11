@@ -21,7 +21,7 @@ struct OnboardingTopBar: View {
         if showBackButton {
             HStack {
                 Button {
-                    HapticManager.shared.lightImpact()
+                    HapticManager.shared.tap()
                     onBack()
                 } label: {
                     Image(systemName: "chevron.left")

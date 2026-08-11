@@ -165,7 +165,7 @@ struct SecondChanceOfferView: View {
         .overlay(alignment: .topTrailing) {
             Button {
                 guard !didFinish else { return }
-                HapticManager.shared.lightImpact()
+                HapticManager.shared.tap()
                 Analytics.capture(Analytics.Event.recoveryOfferDismissed, dismissEventProperties())
                 finish(outcome: "dismissed")
             } label: {
@@ -433,7 +433,7 @@ struct SecondChanceOfferView: View {
     // MARK: - Continue Button
     private var continueButton: some View {
         Button {
-            HapticManager.shared.mediumImpact()
+            HapticManager.shared.tapStrong()
             Task {
                 // Claimed BEFORE the first suspension point, so it is already
                 // true by the time `purchase()` flips `hasActiveSubscription`.

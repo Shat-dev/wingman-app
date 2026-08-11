@@ -11,6 +11,18 @@ enum StepType {
     case question
     case statistic
     case loading
+    /// Free-text name capture. Rendered by `NameScreen` rather than
+    /// `QuestionScreen`, but still travels the flow as an `.question`
+    /// *screen* so every existing `OnboardingScreen` switch keeps working
+    /// unchanged — see `OnboardingView.screenContent(for:)`.
+    case name
+    /// The animated growth-curve projection. Asks nothing and stores nothing;
+    /// it exists to make the payoff concrete right before the loading step.
+    ///
+    /// Travels as a `.question` screen for the same reason `.name` does — the
+    /// navigation layer (history, progress, swipe-back, analytics) needed no
+    /// new case, only a different body.
+    case growthProjection
 }
 
 struct OnboardingStep: Identifiable {

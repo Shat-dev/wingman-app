@@ -103,7 +103,7 @@ struct DailyReadingGoalSheet: View {
                     
                     // Save Button
                     Button(action: {
-                        HapticManager.shared.mediumImpact()
+                        HapticManager.shared.tapStrong()
                         saveGoal()
                     }) {
                         HStack {

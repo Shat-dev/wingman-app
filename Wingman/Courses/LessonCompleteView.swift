@@ -67,7 +67,7 @@ struct LessonCompleteView: View {
                 
                 // MARK: - Continue Button
                 Button(action: {
-                    HapticManager.shared.mediumImpact()
+                    HapticManager.shared.tapStrong()
                     onContinue()
                     dismiss()
                 }) {

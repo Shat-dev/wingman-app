@@ -246,7 +246,7 @@ struct CustomTabBar: View {
     }
 
     private func handleTap(_ tab: Int) {
-        HapticManager.shared.lightImpact()
+        HapticManager.shared.tap()
         if selectedTab == tab {
             NotificationCenter.default.post(name: .scrollToTopTab, object: tab)
         } else {

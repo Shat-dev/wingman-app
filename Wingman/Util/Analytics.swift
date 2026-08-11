@@ -185,7 +185,30 @@ enum Analytics {
         // ever did was hold a permanently-zero step in the
         // "Onboarding → Pricing Drop-off" funnel. View and event are both gone;
         // if a referral system is built later this comes back with it.
-        static let ratingPromptContinued = "rating_prompt_continued"
+        //
+        // Both pact events carry `headline`, which identifies the goal-derived
+        // variant the user was shown — the two together are what say whether a
+        // given pact wording holds people or loses them.
+        static let commitmentPactViewed = "commitment_pact_viewed"
+        static let commitmentPactCommitted = "commitment_pact_committed"
+
+        // The optional name screen, first in the onboarding flow.
+        //
+        // It rides the normal `onboarding_step_viewed` for arrivals
+        // (`question_key: "name"`), like every other step. This event is the
+        // half that step_viewed cannot express: the screen is the only one a
+        // user can leave *unanswered*, and skip-vs-answer is the number that
+        // decides whether asking for a name is worth a step in the funnel.
+        //
+        // It carries `provided` (Bool) and never the name itself — the same
+        // reason the person property below is a flag rather than a value.
+        // The pact events' `personalized` is the downstream half of the same
+        // question: whether being addressed by name converts any better.
+        static let onboardingNameAnswered = "onboarding_name_answered"
+
+        /// Person property set alongside the event above, so any funnel or
+        /// cohort can be split by whether the user gave a name.
+        static let onboardingNameProvidedProperty = "onboarding_name_provided"
     }
 
     // MARK: - Setup gate
