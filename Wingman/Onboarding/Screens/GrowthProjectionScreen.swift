@@ -35,12 +35,12 @@ struct GrowthProjectionContent {
     }
 
     static let `default` = GrowthProjectionContent(
-        headline: "You can get comfortable approaching in 5 minutes a day",
+        headline: "Build the confidence to take action when it matters",
         bullets: [
             Bullet(
                 systemImage: "figure.run",
                 emphasis: "3x",
-                text: "faster progress than watching dating advice videos"
+                text: "faster progress than watching generic advice videos"
             ),
             Bullet(
                 systemImage: "book.fill",

@@ -7,6 +7,7 @@ import SwiftUI
 
 struct LessonCompleteView: View {
     @Environment(\.dismiss) private var dismiss
+    @ObservedObject private var xpStore = XPStore.shared
     let nextLessonInfo: NextLessonInfo?
     let onContinue: () -> Void
     
@@ -35,7 +36,13 @@ struct LessonCompleteView: View {
                     .foregroundColor(.wingmanBlack)
                     .kerning(-0.3)
                     .padding(.bottom, 20)
-                
+
+                // MARK: - XP Earned
+                // Confirmed awards only — see XPAwardBadge. Occupies no space
+                // while in flight, so the "Up Next" block does not shift.
+                XPAwardBadge(award: xpStore.lastAward)
+                    .padding(.bottom, 20)
+
                 // MARK: - Up Next Section
                 if let nextLesson = nextLessonInfo {
                     VStack(spacing: 8) {

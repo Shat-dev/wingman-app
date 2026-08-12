@@ -131,7 +131,7 @@ let extendedOnboardingSteps: [OnboardingStep] = [
     // analytics label; nothing is ever stored under it.
     OnboardingStep(
         type: .growthProjection,
-        title: "You can get comfortable approaching in 5 minutes a day",
+        title: "Build the confidence to take action when it matters",
         subtitle: nil,
         options: nil,
         progress: 0.91,
@@ -149,5 +149,34 @@ let extendedOnboardingSteps: [OnboardingStep] = [
         options: nil,
         progress: 1.0,
         questionKey: nil
+    ),
+
+    //9 Social proof
+    //
+    // The one step that sits *after* the loading screen, and therefore the
+    // step that ends onboarding: its Continue calls `completeQuestions()`,
+    // which is what the loading screen's `onComplete` used to do directly.
+    //
+    // Placed last deliberately. Everything before it is about the user; this
+    // is the one screen about everyone else, and it lands immediately before
+    // the router shows the pact or the paywall.
+    //
+    // `title` and `subtitle` are unused — `SocialProofScreen` carries its own
+    // copy in `SocialProofContent`, the same split `GrowthProjectionScreen`
+    // uses. Filled in anyway so this entry doesn't read as an omission.
+    //
+    // `progress` matches the loading step's 1.0: the bar is already full by
+    // the time the user gets here, and backing it off would read as the flow
+    // having gained work rather than finished it.
+    //
+    // `questionKey` exists only to give the step a stable `id` and an
+    // analytics label; nothing is ever stored under it.
+    OnboardingStep(
+        type: .socialProof,
+        title: "Join the men taking action",
+        subtitle: nil,
+        options: nil,
+        progress: 1.0,
+        questionKey: "social_proof"
     )
 ]

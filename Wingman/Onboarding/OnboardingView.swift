@@ -222,6 +222,8 @@ struct OnboardingView: View {
                 )
             case .growthProjection:
                 GrowthProjectionScreen(onContinue: proceedToNextStep)
+            case .socialProof:
+                SocialProofScreen(onContinue: handleSocialProofContinue)
             default:
                 QuestionScreen(
                     step: steps[index],
@@ -269,6 +271,13 @@ struct OnboardingView: View {
         // flight and trigger unexpected navigation after the user
         // returned.
         if case .loading = screen { return false }
+        // Social proof is on the far side of that one-way chain: the only
+        // thing behind it is the loading screen, and going back there would
+        // remount it and re-run the Supabase write and the whole ~6.2s
+        // sequence. Suppressing the chevron also disables the swipe — the
+        // gesture is gated on this same value — so both back routes are
+        // closed with one condition.
+        if case .question(let index) = screen, steps[index].type == .socialProof { return false }
         return true
     }
 
@@ -295,10 +304,11 @@ struct OnboardingView: View {
     ///   - `.loading`. Mounting it fires a Supabase write and a ~6.2s
     ///     auto-advance chain from `onAppear` that nothing cancels, so even
     ///     a brief preview would start the flow finishing itself (and start
-    ///     its haptic tick loop). It is
-    ///     never actually in `history` today — it is the terminal step, so
-    ///     `advanceTo` never pushes it — but the guard keeps that from
-    ///     becoming a latent trap if a step is ever added after it.
+    ///     its haptic tick loop). The social-proof screen now sits after it,
+    ///     which is exactly the case this guard was written for — that
+    ///     transition goes through `advanceWithoutHistory`, so the loading
+    ///     screen is still never in `history`, and this stays the second line
+    ///     of defence rather than the only one.
     private var swipeBackPreviewScreen: OnboardingScreen? {
         guard let previous = history.last else { return nil }
         if case .loading = previous { return nil }
@@ -433,6 +443,25 @@ struct OnboardingView: View {
         // whatever the screen type. Only forward navigation fires it —
         // `goBack` stays silent so the funnel counts arrivals rather than
         // inflating on back-and-forth.
+        logStepViewed(newScreen)
+    }
+
+    /// Forward navigation that leaves `history` untouched, so the destination
+    /// has nothing to go back to.
+    ///
+    /// Used for exactly one transition: loading → social proof. `advanceTo`
+    /// would push the loading screen onto history, and returning to it
+    /// remounts it — re-firing its Supabase write and its ~6.2s auto-advance
+    /// chain, which would then complete onboarding a second time from under
+    /// the user. `shouldShowBackButton` already hides both back affordances on
+    /// the social-proof screen; not recording the entry at all means even a
+    /// future back path can't find its way there.
+    private func advanceWithoutHistory(to newScreen: OnboardingScreen) {
+        isGoingBack = false
+        withAnimation(.spring(response: 0.35, dampingFraction: 0.86)) {
+            screen = newScreen
+            displayedProgress = progress(for: newScreen)
+        }
         logStepViewed(newScreen)
     }
 
@@ -685,6 +714,13 @@ struct OnboardingView: View {
     private func handleLoadingComplete() {
         // PostHog: completion is the single most important onboarding event.
         // Fires once per user reaching the end of the question flow.
+        //
+        // Deliberately still fired here rather than moved to the social-proof
+        // screen's Continue, one step later. Every existing dashboard reads
+        // this event as "finished the questions", and re-pointing it at a
+        // screen added afterwards would silently redefine it and put a step
+        // change in the middle of historical series. Drop-off on the new
+        // screen is the gap between this and `social_proof_continued`.
         Analytics.capture("onboarding_completed")
 
         // Before handing off: the answers are final here, so this is where a
@@ -692,6 +728,33 @@ struct OnboardingView: View {
         // anyone who skipped.
         persistDisplayNameIfCaptured()
 
+        // The social-proof screen is the step after this one, and it is the
+        // step that actually ends onboarding. Falling through to
+        // `finishOnboarding()` when it isn't there keeps this correct if the
+        // flow list is ever edited back — the loading screen must never leave
+        // the user on a screen with nothing to advance into.
+        if case .loading(let index) = screen,
+           index + 1 < steps.count,
+           steps[index + 1].type == .socialProof {
+            advanceWithoutHistory(to: .question(index: index + 1))
+            return
+        }
+
+        finishOnboarding()
+    }
+
+    // MARK: - SocialProofScreen.onContinue
+
+    /// Terminal tap of the whole flow. `onboarding_completed` and the display
+    /// name were both handled one screen earlier by `handleLoadingComplete`;
+    /// all that is left is to hand over to the router.
+    private func handleSocialProofContinue() {
+        finishOnboarding()
+    }
+
+    /// Tell the auth manager the question flow is done, which is what moves
+    /// RootView off this view and on to the pact or the paywall.
+    private func finishOnboarding() {
         if authManager.isLegacyAnonymousUser {
             authManager.completeAnonymousOnboarding()
         } else {
@@ -752,11 +815,12 @@ struct OnboardingView: View {
         switch screen {
         case let .question(index):
             guard let key = steps[index].questionKey else { return }
-            // The growth projection asks nothing, so it reports under
-            // `screen_key` alongside the statistic and loading interstitials.
-            // Keeping `question_key` to steps that actually take an answer is
-            // what lets a funnel split on it without filtering.
-            if steps[index].type == .growthProjection {
+            // The growth projection and social-proof screens ask nothing, so
+            // they report under `screen_key` alongside the statistic and
+            // loading interstitials. Keeping `question_key` to steps that
+            // actually take an answer is what lets a funnel split on it
+            // without filtering.
+            if steps[index].type == .growthProjection || steps[index].type == .socialProof {
                 properties["screen_key"] = key
             } else {
                 properties["question_key"] = key

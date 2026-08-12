@@ -86,6 +86,8 @@ struct WingmanApp: App {
                 .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
                     // Clear notification badge when app becomes active
                     clearNotificationBadge()
+                    // Drain any XP awards left queued by a previous session.
+                    drainXPOutbox()
                 }
         }
     }
@@ -101,6 +103,19 @@ struct WingmanApp: App {
         log("🔄 WingmanApp: Refreshing subscription status on foreground")
         Task {
             await SubscriptionManager.shared.refreshSubscriptionStatus()
+        }
+    }
+
+    // MARK: - XP Outbox
+    //
+    // `didBecomeActive` rather than `willEnterForeground` because it also fires
+    // on cold launch, which is the case that matters: an award queued by a
+    // session that was killed offline has nothing else to wake it. XPStore
+    // subscribes to foreground and reconnect itself, but only once it exists —
+    // this is what brings it into existence.
+    private func drainXPOutbox() {
+        Task { @MainActor in
+            await XPStore.shared.flushOutbox()
         }
     }
 }

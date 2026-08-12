@@ -155,6 +155,30 @@ final class DailyPracticeViewModel: ObservableObject {
                 await updateDailyPracticeStreak(questionsAnswered: answered, correctAnswers: correct)
             }
 
+            // XP is recorded ALONGSIDE the streak, never inside it. Ordered
+            // after the streak task and given its own, so nothing here can
+            // delay, reorder or throw into the streak write — that path is the
+            // one users notice, and it already has no retry of its own.
+            //
+            // `source_id` is today's local date, which makes the award
+            // once-per-day at the database level for the same reason the
+            // streak's `UNIQUE (user_id, date)` does.
+            //
+            // The counts are facts, not an amount — the server turns them into
+            // 10 + 3×correct + 5 if all correct. `questions.count` rather than
+            // `answeredCount` is the denominator so the perfect bonus means
+            // "got the whole set right", and `correctCount` is first-answer-wins
+            // (QuizEngine.swift:55-63) so back-navigating cannot inflate it.
+            let questionCount = engine.questions.count
+            Task {
+                await XPStore.shared.award(
+                    .dailyPractice,
+                    sourceId: XPLocalDate.today(),
+                    correctCount: correct,
+                    questionCount: questionCount
+                )
+            }
+
             // Notify that daily practice is completed - this can trigger practice unlocking checks
             onDailyPracticeCompleted?()
 

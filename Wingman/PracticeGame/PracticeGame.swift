@@ -274,6 +274,15 @@ class PracticeGameViewModel: ObservableObject {
         Task { @concurrent in
             try? await practiceService.completeScenario(userId: userId, scenarioId: scenarioId)
         }
+
+        // Reached only from `triggerCompletion()`, so this is a genuine finish
+        // and never a dismissal. Scenarios are replayable and
+        // `user_scenario_completions` has no unique constraint, so a replay
+        // writes another completion row — the XP ledger's
+        // `user_xp_events_once` is what stops it also paying out twice.
+        Task {
+            await XPStore.shared.award(.scenario, sourceId: scenarioId)
+        }
     }
 }
 
@@ -751,6 +760,7 @@ struct OptionsContentView: View {
 
 // MARK: - Game Complete View
 struct GameCompleteView: View {
+    @ObservedObject private var xpStore = XPStore.shared
     let onContinue: () -> Void
 
     var body: some View {
@@ -766,6 +776,12 @@ struct GameCompleteView: View {
                 Text("Game Complete!")
                     .font(.manropeSemiBold(size: 24))
                     .foregroundColor(.wingmanBlack)
+
+                // MARK: - XP Earned
+                // Confirmed awards only — see XPAwardBadge. This was the one
+                // completion screen showing no number at all.
+                XPAwardBadge(award: xpStore.lastAward)
+                    .padding(.top, 20)
 
                 Spacer()
 

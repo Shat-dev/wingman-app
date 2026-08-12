@@ -88,6 +88,39 @@ enum Analytics {
         static let dailyChallengeStarted = "daily_challenge_started"
         static let dailyChallengeCompleted = "daily_challenge_completed"
 
+        // XP ledger — operational only.
+        //
+        // How much XP a completion earned is deliberately NOT a separate event:
+        // it rides `lesson_completed` / `practice_scenario_completed` /
+        // `daily_challenge_completed` as a property, so the two can never
+        // disagree about what counts as finishing. Same reasoning as
+        // `is_free_lesson` above. Those properties land with the completion
+        // screens in Phase 3.
+        //
+        // These two have no such host. The outbox exists because a failed award
+        // must be retried rather than lost the way a failed streak write is, and
+        // without them the whole retry path is invisible: a queue that silently
+        // stops draining would look exactly like users doing less work.
+        // `xp_award_failed` carries `queued` — false means the award was dropped
+        // outright (no session) and is the one to alert on.
+        static let xpAwardFailed = "xp_award_failed"
+        static let xpOutboxFlushed = "xp_outbox_flushed"
+
+        /// A confirmed award, carrying `source_type`, `awarded`, `capped`,
+        /// `amount` and `total_after`.
+        ///
+        /// Deliberately separate from the completion events rather than a
+        /// property on them: those fire when the user finishes, while the award
+        /// resolves afterwards and may sit queued for hours. Hanging the amount
+        /// on `lesson_completed` would mean delaying that event until the
+        /// network answered, and dropping it entirely offline.
+        ///
+        /// `awarded == false` with `capped == false` is a replay; with
+        /// `capped == true` it is the approach daily cap refusing a new award.
+        /// The cap-hit rate is the number that says whether 250/day is set
+        /// anywhere near right.
+        static let xpAwarded = "xp_awarded"
+
         // Second-chance recovery offer (one-time 50%-off-year-1, shown after
         // a feature-gate paywall dismissal). Mirrors the existing inline
         // `paywall_*` naming so it segments cleanly alongside it.
@@ -191,6 +224,18 @@ enum Analytics {
         // given pact wording holds people or loses them.
         static let commitmentPactViewed = "commitment_pact_viewed"
         static let commitmentPactCommitted = "commitment_pact_committed"
+
+        // The testimonial screen that closes onboarding, after the loading
+        // step. Arrivals ride the normal `onboarding_step_viewed`
+        // (`screen_key: "social_proof"`) like every other step in the flow;
+        // this is the other half — the explicit tap that ends onboarding and
+        // hands the user to the pact or the paywall.
+        //
+        // `onboarding_completed` still fires when the loading screen finishes,
+        // one screen earlier, so that event keeps the meaning every existing
+        // dashboard reads it with. The gap between the two is exactly the
+        // drop-off on this screen.
+        static let socialProofContinued = "social_proof_continued"
 
         // The optional name screen, first in the onboarding flow.
         //

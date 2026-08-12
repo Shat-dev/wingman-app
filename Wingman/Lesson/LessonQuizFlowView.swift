@@ -33,7 +33,18 @@ struct LessonQuizFlowView: View {
 
     /// Runs when the user taps Continue on the completion screen — the point at
     /// which the lesson is actually marked complete.
-    let onComplete: () -> Void
+    ///
+    /// Carries `(correctCount, questionCount)`. The score was previously
+    /// computed here for `lesson_quiz_completed` and then dropped, which left
+    /// the XP award with no way to pay the locked 20 + 5×correct + 5-if-perfect
+    /// (docs/xp-system-plan.md §0) — it could only ever pay the flat base.
+    ///
+    /// **Both are 0 when no quiz ran.** A lesson with no authored questions
+    /// enters `.complete` directly (see `init`), and the server reads
+    /// `questionCount == 0` as "no perfect bonus applies". Passing the
+    /// denominator is what keeps "no quiz" distinguishable from "answered
+    /// everything wrong" — without it the two would pay the same.
+    let onComplete: (Int, Int) -> Void
 
     @Environment(\.dismiss) private var dismiss
 
@@ -51,7 +62,7 @@ struct LessonQuizFlowView: View {
         questions: [QuizQuestion],
         readingStepCount: Int,
         nextLessonInfo: NextLessonInfo?,
-        onComplete: @escaping () -> Void
+        onComplete: @escaping (Int, Int) -> Void
     ) {
         self.lesson = lesson
         self.questions = questions
@@ -99,9 +110,19 @@ struct LessonQuizFlowView: View {
             case .questions:
                 questionsView
             case .complete:
+                // `LessonCompleteView.onContinue` stays `() -> Void` — the
+                // score is read here, at the one place that has the engine,
+                // rather than by widening that view's contract. It renders a
+                // title and a button and has no business knowing a score.
+                //
+                // `questions.count`, not `engine.answeredCount`: the perfect
+                // bonus must mean "got the whole set right". The two are equal
+                // at this point anyway — `.finished` is only reachable by
+                // advancing past the last question, and `advance()` is blocked
+                // until the answer is checked.
                 LessonCompleteView(
                     nextLessonInfo: nextLessonInfo,
-                    onContinue: onComplete
+                    onContinue: { onComplete(engine.correctCount, questions.count) }
                 )
             }
         }

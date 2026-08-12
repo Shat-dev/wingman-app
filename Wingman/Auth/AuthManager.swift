@@ -676,6 +676,10 @@ final class AuthManager: ObservableObject {
                     // reasoning applies to a content sync — and a guest holds
                     // the `authenticated` role that RLS on `questions` requires.
                     await LessonQuestionStore.shared.refresh()
+                    // XP total, so Home and Profile render the real number on
+                    // arrival instead of a spinner. Also drains anything the
+                    // outbox is still holding for this user.
+                    await XPStore.shared.refresh()
                     self.warmScenarioList()
 
                 } else if let session = session {
@@ -720,6 +724,10 @@ final class AuthManager: ObservableObject {
                     // role — running it before auth bootstrap would 401 on cold start.
                     // Cheap: a one-row watermark check unless content actually changed.
                     await LessonQuestionStore.shared.refresh()
+                    // XP total, so Home and Profile render the real number on
+                    // arrival instead of a spinner. Also drains anything the
+                    // outbox is still holding for this user.
+                    await XPStore.shared.refresh()
                     self.warmScenarioList()
 
                     log("✅ User signed in: \(session.user.email ?? "unknown")")
@@ -870,6 +878,10 @@ final class AuthManager: ObservableObject {
                     // every cold launch, so it is the one that actually keeps
                     // the question cache warm for most users today.
                     await LessonQuestionStore.shared.refresh()
+                    // XP total, so Home and Profile render the real number on
+                    // arrival instead of a spinner. Also drains anything the
+                    // outbox is still holding for this user.
+                    await XPStore.shared.refresh()
                     self.warmScenarioList()
 
                 } else if let session = session {
@@ -902,6 +914,10 @@ final class AuthManager: ObservableObject {
                     // role — running it before auth bootstrap would 401 on cold start.
                     // Cheap: a one-row watermark check unless content actually changed.
                     await LessonQuestionStore.shared.refresh()
+                    // XP total, so Home and Profile render the real number on
+                    // arrival instead of a spinner. Also drains anything the
+                    // outbox is still holding for this user.
+                    await XPStore.shared.refresh()
                     self.warmScenarioList()
 
                     // ✅ NEW: If user was anonymous and already paid, skip paywall
@@ -2682,6 +2698,10 @@ final class AuthManager: ObservableObject {
         // role — running it before auth bootstrap would 401 on cold start.
         // Cheap: a one-row watermark check unless content actually changed.
         await LessonQuestionStore.shared.refresh()
+        // XP total, so Home and Profile render the real number on
+        // arrival instead of a spinner. Also drains anything the
+        // outbox is still holding for this user.
+        await XPStore.shared.refresh()
         warmScenarioList()
 
         PostHogSDK.shared.capture("account_linked", properties: [

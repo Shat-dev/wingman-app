@@ -78,7 +78,7 @@ final class SupabaseManager {
             // what to call them" and declines to overwrite. Left behind, the
             // next person to sign in on this device would inherit both.
             OnboardingNameKey.defaultsKey
-        ] + StreakStore.cacheKeys + UserProfileStore.cacheKeys
+        ] + StreakStore.cacheKeys + UserProfileStore.cacheKeys + XPStore.cacheKeys
         keys.forEach { UserDefaults.standard.removeObject(forKey: $0) }
 
         // Also wipe in-memory cache on the shared stores so a subsequent
@@ -87,6 +87,10 @@ final class SupabaseManager {
         Task { @MainActor in
             StreakStore.shared.clearCache()
             UserProfileStore.shared.clearCache()
+            // Includes the pending-award queue: those awards belong to the
+            // account that earned them and must never be replayed onto whoever
+            // signs in next.
+            XPStore.shared.clearCache()
             // Scenario lock/completion state is per-user and the store is now
             // app-wide (it used to die with PracticeView on logout).
             PracticeViewModel.shared.clearCache()

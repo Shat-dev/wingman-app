@@ -133,12 +133,17 @@ final class LogApproachViewModel: ObservableObject {
         
         Task {
             do {
+                // The new row's id is generated client-side so it can be used
+                // as the XP `source_id` without a second round trip — the
+                // insert below does not return the row.
+                let newApproachId: UUID?
                 if isEditMode {
                     try await updateInSupabase()
+                    newApproachId = nil
                 } else {
-                    try await saveToSupabase()
+                    newApproachId = try await saveToSupabase()
                 }
-                
+
                 await MainActor.run {
                     self.isSaving = false
                     self.showSuccess = true
@@ -166,6 +171,21 @@ final class LogApproachViewModel: ObservableObject {
                             "total_approaches": total,
                             "is_first_approach": total == 1,
                         ])
+
+                        // XP for the log. Only for a new entry, for the same
+                        // reason the event above is: an edit is a correction to
+                        // one already counted.
+                        //
+                        // `source_id` is the row's own id, so the ledger is
+                        // auditable against `approach_logs` and an outbox retry
+                        // cannot pay twice. Flat 50, but the server refuses it
+                        // past 250 in a local day — the cap lives in `xp_rules`,
+                        // not here.
+                        if let newApproachId {
+                            Task {
+                                await XPStore.shared.award(.approach, sourceId: newApproachId)
+                            }
+                        }
                     }
 
                     // Auto-hide success after 2 seconds
@@ -257,20 +277,28 @@ final class LogApproachViewModel: ObservableObject {
     }
 
     // MARK: - Save to Supabase
-    private func saveToSupabase() async throws {
+    /// Returns the id of the row it created, so the caller can hang the XP
+    /// award off it. The id is generated here rather than read back because the
+    /// insert does not `select()` — `approach_logs.id` has a
+    /// `gen_random_uuid()` default but accepts an explicit value, so supplying
+    /// one costs nothing and avoids a second round trip.
+    @discardableResult
+    private func saveToSupabase() async throws -> UUID {
         guard let userId = getUserId() else {
             throw NSError(domain: "LogApproach", code: 1, userInfo: [NSLocalizedDescriptionKey: "User not logged in"])
         }
-        
+
         struct ApproachLog: Codable {
+            let id: String
             let userId: String
             let title: String
             let approachLevel: Int
             let anxietyLevel: Int
             let notes: String?
             let loggedAt: String
-            
+
             enum CodingKeys: String, CodingKey {
+                case id
                 case userId = "user_id"
                 case title
                 case approachLevel = "approach_level"
@@ -279,8 +307,10 @@ final class LogApproachViewModel: ObservableObject {
                 case loggedAt = "logged_at"
             }
         }
-        
+
+        let newId = UUID()
         let approachLog = ApproachLog(
+            id: newId.uuidString,
             userId: userId,
             title: title,
             approachLevel: selectedLevel,
@@ -301,12 +331,14 @@ final class LogApproachViewModel: ObservableObject {
             .execute()
         
         log("✅ Successfully inserted into database")
-        
+
         // Refresh the shared approach service to update UI
         await ApproachService.shared.fetchApproaches()
-        
+
         // Update streak and stats
         updateUserStats()
+
+        return newId
     }
     
     private func updateUserStats() {

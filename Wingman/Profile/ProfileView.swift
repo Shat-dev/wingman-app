@@ -20,6 +20,7 @@ struct ProfileView: View {
     @StateObject private var approachService = ApproachService.shared
     @StateObject private var streakStore = StreakStore.shared
     @StateObject private var userProfileStore = UserProfileStore.shared
+    @StateObject private var xpStore = XPStore.shared
 
     // Rate-limits the onAppear refresh so rapid tab-thrashing (Home→Profile→
     // Home→Profile) doesn't fire 3 RPCs per round-trip. A 5s window is short
@@ -153,6 +154,16 @@ struct ProfileView: View {
                             )
                                 .padding(.horizontal, 20)
                                 .padding(.top, 40)
+
+                            // MARK: - Level Card
+                            // Level is derived from the total, never stored —
+                            // see XPLevel. Sits beside the streak card because
+                            // the two answer different questions: the streak is
+                            // "did you show up", this is "how much have you
+                            // done".
+                            XPLevelCard(totalXP: xpStore.totalXP)
+                                .padding(.horizontal, 20)
+                                .padding(.top, 40)
                             
                             // MARK: - Invite Friends Card
                             InviteFriendsCard()
@@ -267,6 +278,7 @@ struct ProfileView: View {
             Task { await loadApproachData() }
             Task { await streakStore.refresh() }
             Task { await userProfileStore.refresh() }
+            Task { await xpStore.refresh() }
         }
         .trackScreenView("Profile")
     }

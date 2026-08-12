@@ -32,9 +32,8 @@ enum CommitmentPactCopy {
 
     static let pact = Pact(
         headline: "I am becoming a guy who takes action.",
-        body: "When I see a woman I'm interested in, I won't let fear make the "
-            + "decision for me. I'll approach, take my chance, and learn from "
-            + "what happens."
+        body: "To achieve what I want, I must grow. I won’t let fear make the "
+            + "decision for me. I’ll take my chance, and learn from what happens."
     )
 
     /// The headline as rendered, with the user's own name folded in when they

@@ -195,7 +195,7 @@ struct LessonView: View {
                 questions: quizQuestions,
                 readingStepCount: totalContentCount,
                 nextLessonInfo: getNextLessonInfo(),
-                onComplete: {
+                onComplete: { correctCount, questionCount in
                     // Analytics fires here rather than when the reading ends.
                     // Previously `lesson_completed` was captured ~2s before
                     // `markLessonCompleted` ran, so a force-quit on the
@@ -221,6 +221,27 @@ struct LessonView: View {
                         lessonId: lesson.id,
                         courseId: lesson.courseId
                     )
+
+                    // XP, after the completion is recorded rather than before,
+                    // so the lesson is never paid for without also being marked
+                    // done. The lesson id is read out first so the task holds a
+                    // String rather than capturing the view — it outlives the
+                    // `dismiss()` below.
+                    //
+                    // The counts are facts, not an amount — the server turns
+                    // them into 20 + 5×correct + 5 if all correct. Both arrive
+                    // as 0 when the lesson had no quiz, which the server reads
+                    // as "no perfect bonus" and pays the flat base.
+                    let lessonId = lesson.id
+                    Task {
+                        await XPStore.shared.award(
+                            .lesson,
+                            sourceId: lessonId,
+                            correctCount: correctCount,
+                            questionCount: questionCount
+                        )
+                    }
+
                     tabBarVisibility.showTabBar()
                     dismiss()
                 }

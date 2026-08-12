@@ -21,6 +21,7 @@ struct HomeView: View {
     // Same singleton ProfileView observes, so a name set in onboarding or
     // edited in Profile updates the greeting without a round-trip.
     @StateObject private var userProfileStore = UserProfileStore.shared
+    @StateObject private var xpStore = XPStore.shared
     @State private var navigateToPractice = false
     @State private var showLogApproachSheet = false
     @State private var selectedCourse: Course? = nil
@@ -92,6 +93,36 @@ struct HomeView: View {
                         
                         Spacer()
                         
+                        // MARK: - XP Badge
+                        // Same shell as the streak badge beside it. Shows the
+                        // spinner while `totalXP` is nil ("never loaded")
+                        // rather than a misleading 0 — the same distinction
+                        // StreakStore's optional exists to preserve.
+                        HStack(spacing: 4) {
+                            if let total = xpStore.totalXP {
+                                Text("\(total)")
+                                    .font(.manropeMedium(size: 20))
+                                Text("XP")
+                                    .font(.manropeMedium(size: 12))
+                                    .opacity(0.5)
+                            } else {
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle(tint: .wingmanBlack))
+                                    .scaleEffect(0.7)
+                                    .frame(width: 20, height: 20)
+                            }
+                        }
+                        .foregroundColor(.wingmanBlack)
+                        .padding(.horizontal, 14)
+                        .frame(minWidth: 64, minHeight: 44, maxHeight: 44)
+                        .background(Color.white)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(Color.wingmanBlack.opacity(0.15), lineWidth: 1)
+                        )
+                        .cornerRadius(5)
+                        .padding(.trailing, 8)
+
                         // MARK: - Streak Badge
                         HStack(spacing: 2) {
                             Image("flame_fill")
@@ -338,6 +369,10 @@ struct HomeView: View {
                 // refreshDailyPracticeStatus() intentionally omitted: loadUserData()
                 // already spawns checkDailyPracticeCompletion(), so calling both
                 // fires the same RPC twice.
+
+                // XP total for the badge. Cheap (one aggregate) and it also
+                // drains anything the outbox is still holding.
+                Task { await xpStore.refresh() }
             }
         }
         .trackScreenView("Home")

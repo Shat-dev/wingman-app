@@ -23,6 +23,13 @@ enum StepType {
     /// navigation layer (history, progress, swipe-back, analytics) needed no
     /// new case, only a different body.
     case growthProjection
+    /// Testimonials + "you're not the only one", shown after the loading
+    /// screen as the last beat before pricing. Asks nothing and stores
+    /// nothing, and travels as a `.question` screen like the two above.
+    ///
+    /// It is the only step that comes *after* `.loading`, which is what makes
+    /// it the step that ends onboarding — see `handleSocialProofContinue`.
+    case socialProof
 }
 
 struct OnboardingStep: Identifiable {

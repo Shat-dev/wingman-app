@@ -10,7 +10,8 @@ import SwiftUI
 struct QuestionsCompleteView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var tabBarVisibility: TabBarVisibilityManager
-    
+    @ObservedObject private var xpStore = XPStore.shared
+
     let currentStreak: Int
     let dismissDailyPractice: () -> Void
     
@@ -51,7 +52,14 @@ struct QuestionsCompleteView: View {
                         .foregroundColor(.wingmanBlack)
                 }
                 .padding(.bottom, 20)
-                
+
+                // MARK: - XP Earned
+                // Renders only once the server confirms the award, so it never
+                // claims XP a replay did not grant. Takes no vertical space
+                // until then.
+                XPAwardBadge(award: xpStore.lastAward)
+                    .padding(.bottom, 20)
+
                 Spacer()
                 
                 // MARK: - Continue Button

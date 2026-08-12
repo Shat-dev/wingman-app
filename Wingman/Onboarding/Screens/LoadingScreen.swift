@@ -280,8 +280,10 @@ struct LoadingScreen: View {
     // Runs the real sequence — bars, checkmarks and haptics all fire — then
     // calls an `onComplete` with no flow to advance into. The Supabase write
     // fails silently in previews (no session).
+    // Looked up by type rather than as `.last` — the loading step stopped
+    // being the last one when the social-proof screen was added after it.
     LoadingScreen(
-        step: extendedOnboardingSteps.last!,
+        step: extendedOnboardingSteps.first { $0.type == .loading }!,
         onComplete: {}
     )
     .environmentObject(AuthManager())
