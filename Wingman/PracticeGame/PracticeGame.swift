@@ -267,6 +267,11 @@ class PracticeGameViewModel: ObservableObject {
         }
     }
 
+    /// The `source_id` this scenario's XP is filed under, so the completion
+    /// screen can recognise its own award. Nil for preview/mock data, which
+    /// never awards anything either.
+    var awardSourceId: String? { scenarioId?.uuidString.lowercased() }
+
     private func markComplete() {
         guard let scenarioId = scenarioId,
               let userIdStr = SupabaseManager.shared.currentUserId,
@@ -456,7 +461,7 @@ struct PracticeGame: View {
             showGameComplete = true
         }
         .fullScreenCover(isPresented: $showGameComplete) {
-            GameCompleteView {
+            GameCompleteView(expectedSourceId: viewModel.awardSourceId ?? "") {
                 tabBarVisibility.showTabBar()
                 dismiss()
             }
@@ -760,7 +765,8 @@ struct OptionsContentView: View {
 
 // MARK: - Game Complete View
 struct GameCompleteView: View {
-    @ObservedObject private var xpStore = XPStore.shared
+    /// Scenario uuid, lowercased to match what the ledger stores.
+    let expectedSourceId: String
     let onContinue: () -> Void
 
     // "Scenario", not "Game": the tab, the table and every other surface call
@@ -768,7 +774,7 @@ struct GameCompleteView: View {
     var body: some View {
         CompletionScreen(
             title: "Scenario complete.",
-            award: xpStore.lastAward,
+            expectedSourceId: expectedSourceId,
             onContinue: onContinue
         )
     }

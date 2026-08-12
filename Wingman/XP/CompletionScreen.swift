@@ -66,9 +66,13 @@ private enum T {
 struct CompletionScreen<Detail: View>: View {
 
     let title: String
-    /// The confirmed award, or nil while in flight / on a replay. Never
-    /// optimistic: the screen must not claim XP the server did not grant.
-    let award: XPStore.Award?
+    /// The `source_id` of the award this screen is waiting for: the lesson id,
+    /// the scenario uuid, or today's date for daily practice.
+    ///
+    /// `XPStore.lastAward` is global — "the most recent award, whatever it was
+    /// for". Matching on this is what stops a screen rendering the previous
+    /// completion's award while its own is still in flight.
+    let expectedSourceId: String
     let continueTitle: String
     let onContinue: () -> Void
     let detail: () -> Detail
@@ -78,19 +82,26 @@ struct CompletionScreen<Detail: View>: View {
     /// been required at every call site.
     init(
         title: String,
-        award: XPStore.Award?,
+        expectedSourceId: String,
         continueTitle: String = "Continue",
         onContinue: @escaping () -> Void,
         @ViewBuilder detail: @escaping () -> Detail
     ) {
         self.title = title
-        self.award = award
+        self.expectedSourceId = expectedSourceId
         self.continueTitle = continueTitle
         self.onContinue = onContinue
         self.detail = detail
     }
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @ObservedObject private var xpStore = XPStore.shared
+
+    /// Only ever this screen's own award.
+    private var award: XPStore.Award? {
+        guard let latest = xpStore.lastAward, latest.sourceId == expectedSourceId else { return nil }
+        return latest
+    }
 
     // MARK: - Reveal state
 
@@ -102,7 +113,13 @@ struct CompletionScreen<Detail: View>: View {
     @State private var displayedAmount: Double = 0
     @State private var revealedItems = 0
     @State private var hasRunIntro = false
-    @State private var hasRunXP = false
+
+    /// Which award has already been revealed.
+    ///
+    /// Was a plain `hasRunXP` bool, which latched on the first non-nil value
+    /// and then blocked every later one — so a screen that revealed a stale
+    /// award stayed frozen on it even once the real one arrived.
+    @State private var revealedAwardId: String?
 
     /// Cleared the moment the user leaves, so scheduled beats stop.
     ///
@@ -147,14 +164,28 @@ struct CompletionScreen<Detail: View>: View {
         UIScreen.isSmallPhone ? 150 : 220
     }
 
+    /// Space held for the XP block before anything is in it: the summed figure
+    /// plus the level row. Keeps the screen from reflowing when the award lands.
+    private var reservedXPHeight: CGFloat { 72 }
+
     // MARK: - Body
 
     var body: some View {
         ZStack {
             Color.white.ignoresSafeArea()
 
+            // Top-anchored, with the only flexible space between the content
+            // and the button.
+            //
+            // This column used to sit between two Spacers, i.e. vertically
+            // centred. `xpBlock` occupies no height until an award lands, so
+            // the instant it appeared the whole column re-centred and the mark
+            // and title visibly jumped upward. That was the "staggers then
+            // shifts" — layout reflow, not animation. With the flexible space
+            // all below, anything that grows grows downward into it and nothing
+            // above ever moves.
             VStack(spacing: 0) {
-                Spacer(minLength: 12)
+                Spacer().frame(height: 12)
 
                 Image("checklist")
                     .resizable()
@@ -174,7 +205,12 @@ struct CompletionScreen<Detail: View>: View {
                     .opacity(showTitle ? 1 : 0)
                     .offset(y: showTitle ? 0 : 8)
 
+                // Reserved height, so a late-arriving award does not shove the
+                // detail slot down after it has already faded in. Sized to the
+                // un-itemised case; an itemised award grows past it at 520ms,
+                // before the detail appears at 980ms.
                 xpBlock
+                    .frame(minHeight: reservedXPHeight, alignment: .top)
                     .padding(.top, 24)
 
                 detail()
@@ -283,9 +319,14 @@ struct CompletionScreen<Detail: View>: View {
             // The rule doubles as the level bar. A horizontal rule is already
             // print vocabulary, so it earns its place twice.
             //
-            // On a level-up it goes full-bleed, breaking the 20pt margin. That
-            // is the one time the layout breaks its own grid, and it is the
-            // whole milestone treatment — no particles, no colour change.
+            // It used to go full-bleed on a level-up, as "the one time the
+            // layout breaks its own grid". On screen that read as missing
+            // padding rather than as an editorial move, and it made the other
+            // problem worse: crossing a threshold leaves the new level's bar
+            // almost empty (102 XP is 1.3% of the way from 100 to 250), so a
+            // full-width bar with nothing in it sat under the word "reached".
+            // Same margin as every other state now; the milestone is carried by
+            // the label, the slower roll and the success haptic.
             GeometryReader { geo in
                 ZStack(alignment: .leading) {
                     Capsule()
@@ -297,7 +338,7 @@ struct CompletionScreen<Detail: View>: View {
                 }
             }
             .frame(height: 4)
-            .padding(.horizontal, didLevelUp ? 0 : 40)
+            .padding(.horizontal, 40)
         }
     }
 
@@ -327,8 +368,13 @@ struct CompletionScreen<Detail: View>: View {
     }
 
     private func runXPReveal() {
-        guard !hasRunXP, let award else { return }
-        hasRunXP = true
+        guard let award, revealedAwardId != award.sourceId else { return }
+        revealedAwardId = award.sourceId
+
+        // Reset, so a reveal that follows an earlier one starts from zero
+        // rather than inheriting its end state.
+        displayedAmount = 0
+        revealedItems = 0
 
         let items = award.components
         let itemised = items.count > 1

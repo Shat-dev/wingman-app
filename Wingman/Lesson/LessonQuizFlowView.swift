@@ -134,6 +134,7 @@ struct LessonQuizFlowView: View {
                 // advancing past the last question, and `advance()` is blocked
                 // until the answer is checked.
                 LessonCompleteView(
+                    lessonId: lesson.id,
                     nextLessonInfo: nextLessonInfo,
                     onContinue: onComplete
                 )

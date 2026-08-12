@@ -33,6 +33,14 @@ final class XPStore: ObservableObject {
     /// completion screens in Phase 3.
     struct Award: Equatable {
         let source: XPSource
+        /// Which completion this award belongs to.
+        ///
+        /// Without it `lastAward` means only "the most recent award, whatever
+        /// it was for", and a completion screen that mounts before its own
+        /// award lands renders the previous one — a scenario's 50 decorating a
+        /// lesson screen 27 seconds later. Screens match on this and show
+        /// nothing until their own award arrives.
+        let sourceId: String
         let amount: Int
         let totalAfter: Int
 
@@ -233,7 +241,7 @@ final class XPStore: ObservableObject {
             // tomorrow, so retrying it would never succeed.
             XPOutbox.remove(id: pending.id)
             // `recordAward: true` — this is the award the user is looking at.
-            apply(result: result, sourceType: pending.sourceType,
+            apply(result: result, sourceType: pending.sourceType, sourceId: pending.sourceId,
                   recordAward: true, correctCount: pending.correctCount)
 
             log("✨ XPStore: \(pending.sourceType)/\(pending.sourceId) "
@@ -263,11 +271,18 @@ final class XPStore: ObservableObject {
     ///
     ///   The total is always applied either way — every response carries the
     ///   server's recomputed sum, so the last one to land is the truthful one.
-    private func apply(result: XPAwardResult, sourceType: String, recordAward: Bool, correctCount: Int) {
+    private func apply(
+        result: XPAwardResult,
+        sourceType: String,
+        sourceId: String,
+        recordAward: Bool,
+        correctCount: Int
+    ) {
         totalXP = result.totalXP
         if recordAward, result.awarded, let source = XPSource(rawValue: sourceType) {
             lastAward = Award(
                 source: source,
+                sourceId: sourceId,
                 amount: result.amountAwarded,
                 totalAfter: result.totalXP,
                 base: result.baseAwarded,
@@ -331,7 +346,7 @@ final class XPStore: ObservableObject {
                 XPOutbox.remove(id: entry.id)
                 // `recordAward: false` — a drained backlog entry updates the
                 // total but must never claim the completion screen's badge.
-                apply(result: result, sourceType: entry.sourceType,
+                apply(result: result, sourceType: entry.sourceType, sourceId: entry.sourceId,
                       recordAward: false, correctCount: entry.correctCount)
                 flushed += 1
             } catch {

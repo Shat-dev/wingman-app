@@ -7,14 +7,16 @@ import SwiftUI
 
 struct LessonCompleteView: View {
     @Environment(\.dismiss) private var dismiss
-    @ObservedObject private var xpStore = XPStore.shared
+    /// The lesson whose award this screen should display. Without it the
+    /// screen would render whatever the previous completion earned.
+    let lessonId: String
     let nextLessonInfo: NextLessonInfo?
     let onContinue: () -> Void
 
     var body: some View {
         CompletionScreen(
             title: "Lesson complete.",
-            award: xpStore.lastAward,
+            expectedSourceId: lessonId,
             onContinue: {
                 // `onContinue` is what actually marks the lesson complete and
                 // fires `lesson_completed` (LessonView), so it must run before
@@ -49,6 +51,7 @@ struct LessonCompleteView: View {
 
 #Preview {
     LessonCompleteView(
+        lessonId: "lesson_1_1",
         nextLessonInfo: NextLessonInfo(
             title: "Rejection isn't personal",
             subtitle: "Beliefs & Reframes"
@@ -59,6 +62,7 @@ struct LessonCompleteView: View {
 
 #Preview("Course Complete") {
     LessonCompleteView(
+        lessonId: "lesson_1_1",
         nextLessonInfo: nil,
         onContinue: {}
     )

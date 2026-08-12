@@ -10,15 +10,15 @@ import SwiftUI
 struct QuestionsCompleteView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var tabBarVisibility: TabBarVisibilityManager
-    @ObservedObject private var xpStore = XPStore.shared
-
     let currentStreak: Int
     let dismissDailyPractice: () -> Void
 
     var body: some View {
         CompletionScreen(
             title: "Daily practice complete.",
-            award: xpStore.lastAward,
+            // Daily practice is awarded once per local day, so the date is the
+            // id. Same string `DailyPracticeViewModel` passes to `award`.
+            expectedSourceId: XPLocalDate.today(),
             onContinue: {
                 // Unchanged from before the shared component: the tab bar has
                 // to come back and Home has to be told, or the user lands on a
