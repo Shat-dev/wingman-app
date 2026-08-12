@@ -27,6 +27,11 @@ struct ProfileView: View {
     // enough that a user who navigates away and performs a real action before
     // returning still sees a refresh on arrival.
     @State private var lastRefreshedAt: Date?
+
+    /// Read on appear rather than in `body`: `totalLessonsCompleted()` walks
+    /// every course's UserDefaults entry, which is fine once per visit and
+    /// wasteful on every re-render.
+    @State private var lessonsCompleted: Int?
     
     var body: some View {
         NavigationStack {
@@ -64,60 +69,23 @@ struct ProfileView: View {
                         VStack(spacing: 0) {
                             Color.clear.frame(height: 0).id("top")
 
-                            // MARK: - User Profile Card
-                            Button(action: {
-                                showEditProfile = true
-                            }) {
-                                HStack(spacing: 12) {
-                                    // Avatar placeholder
-                                    ZStack {
-                                        
-                                        Image("onboard_img_1")
-                                            .resizable()
-                                            .frame(width: 50, height: 50)
-                                            .foregroundColor(.gray.opacity(0.4))
-                                            .clipShape(Circle())
-                                            .overlay(
-                                                Circle()
-                                                    .stroke(Color.gray.opacity(0.2), lineWidth: 1)
-                                            )
-                                            
-                                    }
-                                    
-                                    // Placeholder rather than an empty row when
-                                    // no name is set — otherwise the card reads
-                                    // as broken (avatar, blank space, chevron)
-                                    // and gives no hint that it's editable.
-                                    // Muted colour marks it as a prompt, not a
-                                    // value. Guests reach Profile without ever
-                                    // being asked for a name, so this is the
-                                    // common state now, not an edge case.
-                                    if let name = userProfileStore.displayName?
-                                        .trimmingCharacters(in: .whitespacesAndNewlines),
-                                       !name.isEmpty {
-                                        Text(name)
-                                            .font(.manropeMedium(size: 18))
-                                            .foregroundColor(.wingmanBlack)
-                                    } else {
-                                        Text("Add your name")
-                                            .font(.manropeMedium(size: 18))
-                                            .foregroundColor(Color.wingmanBlack.opacity(0.4))
-                                    }
-                                    
-                                    Spacer()
-                                    
-                                    Image(systemName: "chevron.right")
-                                        .font(.system(size: 14, weight: .medium))
-                                        .foregroundColor(.gray)
-                                }
-                                .padding(0)
-                                .background(Color.white)
-                                .cornerRadius(12)
-                                
+                            // MARK: - Identity, level, and the three stats
+                            VStack(spacing: 20) {
+                                ProfileIdentityCard(
+                                    displayName: userProfileStore.displayName,
+                                    totalXP: xpStore.totalXP,
+                                    onTap: { showEditProfile = true }
+                                )
+
+                                ProfileStatTiles(
+                                    topStreak: streakStore.longestStreak,
+                                    totalXP: xpStore.totalXP,
+                                    lessonsCompleted: lessonsCompleted
+                                )
                             }
-                            .buttonStyle(ScalePressStyle())
                             .padding(.horizontal, 20)
-                            .padding(.vertical, 28)
+                            .padding(.top, 24)
+                            .padding(.bottom, 28)
 
                             Divider().background(Color.gray.opacity(0.2))
 
@@ -144,27 +112,6 @@ struct ProfileView: View {
                                 .padding(.top, 28)
                             }
 
-                            // MARK: - Week Streak Card
-                            // Pulls from StreakStore: cache-seeded on init so the card shows
-                            // the last-known-good value immediately on entry, refreshed in background.
-                            WeekStreakCard(
-                                currentStreak: streakStore.currentStreak ?? 0,
-                                totalStreak: streakStore.totalCompleted ?? 0,
-                                completedDates: streakStore.completedDates
-                            )
-                                .padding(.horizontal, 20)
-                                .padding(.top, 40)
-
-                            // MARK: - Level Card
-                            // Level is derived from the total, never stored —
-                            // see XPLevel. Sits beside the streak card because
-                            // the two answer different questions: the streak is
-                            // "did you show up", this is "how much have you
-                            // done".
-                            XPLevelCard(totalXP: xpStore.totalXP)
-                                .padding(.horizontal, 20)
-                                .padding(.top, 40)
-                            
                             // MARK: - Invite Friends Card
                             InviteFriendsCard()
                                 .padding(.horizontal, 20)
@@ -279,6 +226,7 @@ struct ProfileView: View {
             Task { await streakStore.refresh() }
             Task { await userProfileStore.refresh() }
             Task { await xpStore.refresh() }
+            lessonsCompleted = LessonDataService.shared.totalLessonsCompleted()
         }
         .trackScreenView("Profile")
     }
@@ -363,115 +311,6 @@ private struct SaveProgressBanner: View {
 }
 
 // MARK: - Week Streak Card
-struct WeekStreakCard: View {
-    let currentStreak: Int
-    let totalStreak: Int
-    let completedDates: Set<String>
-    
-    // Get the days of the current week dynamically
-    private var weekDays: [(String, String, Bool)] {
-        let calendar = Calendar.current
-        let today = Date()
-        
-        // Find the start of the week (Sunday)
-        let weekday = calendar.component(.weekday, from: today)
-        let daysFromSunday = weekday - 1
-        guard let startOfWeek = calendar.date(byAdding: .day, value: -daysFromSunday, to: today) else {
-            return []
-        }
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        
-        let dayLetters = ["S", "M", "T", "W", "T", "F", "S"]
-        
-        var result: [(String, String, Bool)] = []
-        for i in 0..<7 {
-            guard let date = calendar.date(byAdding: .day, value: i, to: startOfWeek) else { continue }
-            let dateString = dateFormatter.string(from: date)
-            let isCompleted = completedDates.contains(dateString)
-            result.append((dayLetters[i], dateString, isCompleted))
-        }
-        
-        return result
-    }
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            // Week days with flames
-            HStack(spacing: 0) {
-                ForEach(weekDays, id: \.1) { day in
-                    VStack(spacing: 4) {
-                        Image(day.2 ? "flame_fill_p" : "flame")
-                            .resizable()
-                            .scaledToFit()
-                            .foregroundColor(day.2 ? .wingmanBlack : .gray.opacity(0.3))
-                            .frame(width: 17, height: 24)
-                        
-                        Text(day.0)
-                            .font(.manropeMedium(size: 12))
-                            .foregroundColor(.gray)
-                    }
-                    .frame(maxWidth: .infinity)
-                }
-            }
-            
-            Divider().background(Color.gray.opacity(0.2))
-                .padding(.horizontal, 20)
-            
-            // Current and Total
-            HStack {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("current")
-                        .font(.manropeMedium(size: 12))
-                        .foregroundColor(.gray)
-                    
-                    HStack(spacing: 4) {
-                        Image("flame_fill_p_s")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 14, height: 14)
-                            .foregroundColor(.wingmanBlack)
-
-                        Text("\(currentStreak) days")
-                            .font(.manropeMedium(size: 14))
-                            .foregroundColor(.wingmanBlack)
-                    }
-                }
-                
-                Spacer()
-                
-                VStack(alignment: .trailing, spacing: 2) {
-                    Text("total")
-                        .font(.manropeMedium(size: 12))
-                        .foregroundColor(.gray)
-                    
-                    HStack(spacing: 4) {
-                        Image("flame_fill_p_s")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 14, height: 14)
-                            .foregroundColor(.wingmanBlack)
-                        Text("\(totalStreak) days")
-                            .font(.manropeMedium(size: 14))
-                            .foregroundColor(.wingmanBlack)
-                    }
-                }
-            }
-            .padding(.leading,20)
-            .padding(.trailing,20)
-        }
-        .padding(.vertical,20)
-        .background(Color.white)
-        .cornerRadius(5)
-        .overlay(
-            RoundedRectangle(cornerRadius: 5)
-                .stroke(Color.gray.opacity(0.2), lineWidth: 1)
-        )
-        .shadow(color: Color.wingmanBlack.opacity(0.05), radius: 8, x: 0, y: 2)
-    }
-}
-
 // MARK: - Invite Friends Card
 struct InviteFriendsCard: View {
     var body: some View {

@@ -48,8 +48,9 @@ import SwiftUI
 /// its detail slot and Swift does not allow static stored properties inside a
 /// generic type.
 ///
-/// Itemised, the sequence lands at ~1.54s (~1.84s on a level-up). A
-/// single-component award lands at ~1.12s. All inside the 2s budget.
+/// Itemised, the sequence lands at ~1.54s, or ~1.90s when it also has to walk
+/// a level-up. A single-component award lands at ~1.12s (~1.48s with a
+/// level-up). All inside the 2s budget.
 private enum T {
     static let markIn = 0.26
     static let titleAt = 0.12,  titleIn = 0.22
@@ -59,8 +60,18 @@ private enum T {
     /// Gap between itemised lines. Three taps at this spacing is a rhythm; any
     /// tighter and it becomes a ticker.
     static let itemStagger = 0.14, itemIn = 0.18
-    static let roll = 0.60, rollMilestone = 0.90
+    static let roll = 0.60
     static let levelDelay = 0.22, levelIn = 0.32
+
+    // Level-up, offsets from the moment the summed figure starts rolling.
+    // Lands at ~1.90s itemised, ~1.48s not. The flip coincides with the counter
+    // settling, so the number landing and the level changing read as one beat.
+    static let luRowAt = 0.10       // row fades in showing where they WERE
+    static let luFillAt = 0.16      // then the deliberate part
+    static let luFill = 0.42        // slowest motion on the screen, by design
+    static let luFlipAt = 0.58      // = luFillAt + luFill
+    static let luRefillAt = 0.66
+    static let luRefill = 0.30
 }
 
 struct CompletionScreen<Detail: View>: View {
@@ -118,6 +129,15 @@ struct CompletionScreen<Detail: View>: View {
     @State private var showDetail = false
     @State private var displayedAmount: Double = 0
     @State private var revealedItems = 0
+
+    /// Bar fill, 0…1. Driven through phases on a level-up rather than derived
+    /// straight from `levelAfter.fraction`, which is what made the screen jump
+    /// to the end state and announce a level it never showed you reaching.
+    @State private var barFraction: Double = 0
+    /// The level the label is currently naming. Starts at the old one during a
+    /// level-up so there is something to transition *from*.
+    @State private var shownLevel: Int?
+    @State private var didFlipLevel = false
     @State private var hasRunIntro = false
 
     /// Which award has already been revealed.
@@ -160,8 +180,15 @@ struct CompletionScreen<Detail: View>: View {
         return levelAfter.level > XPLevel.progress(for: previousTotal).level
     }
 
-    private var rollDuration: Double {
-        didLevelUp ? T.rollMilestone : T.roll
+    /// One duration for both cases now. The level-up's extra weight is carried
+    /// by the bar sequence rather than by a slower counter, so the two are not
+    /// competing for the same "this one is special" signal.
+    private var rollDuration: Double { T.roll }
+
+    /// Where they stood before this award. Exact, because `Award` carries the
+    /// delta as well as the new total.
+    private var levelBefore: XPLevel.Progress {
+        XPLevel.progress(for: previousTotal)
     }
 
     /// The mark dominates the layout, and the XP block and level bar are new
@@ -322,9 +349,12 @@ struct CompletionScreen<Detail: View>: View {
     @ViewBuilder
     private var levelRow: some View {
         VStack(spacing: 8) {
-            Text(didLevelUp ? "Level \(levelAfter.level) reached." : "Level \(levelAfter.level)")
-                .font(didLevelUp ? .manropeSemiBold(size: 14) : .manropeMedium(size: 13))
-                .foregroundColor(didLevelUp ? .wingmanBlack : .gray)
+            Text(didFlipLevel
+                 ? "Level \(levelAfter.level) reached."
+                 : "Level \(shownLevel ?? levelAfter.level)")
+                .font(didFlipLevel ? .manropeSemiBold(size: 14) : .manropeMedium(size: 13))
+                .foregroundColor(didFlipLevel ? .wingmanBlack : .gray)
+                .contentTransition(.opacity)
 
             // The rule doubles as the level bar. A horizontal rule is already
             // print vocabulary, so it earns its place twice.
@@ -344,7 +374,7 @@ struct CompletionScreen<Detail: View>: View {
                         .frame(height: 4)
                     Capsule()
                         .fill(Color.wingmanBlack)
-                        .frame(width: geo.size.width * (showLevel ? levelAfter.fraction : 0), height: 4)
+                        .frame(width: geo.size.width * barFraction, height: 4)
                 }
             }
             .frame(height: 4)
@@ -394,6 +424,12 @@ struct CompletionScreen<Detail: View>: View {
             showXP = true
             showLevel = true
             displayedAmount = Double(award.amount)
+            // Straight to the end state: the level they landed on and the bar
+            // where it actually sits. No phases, but the milestone haptic still
+            // distinguishes a level-up from an ordinary completion.
+            shownLevel = levelAfter.level
+            didFlipLevel = didLevelUp
+            barFraction = levelAfter.fraction
             HapticManager.shared.tap()
             after(0.20) { settleHaptic() }
             return
@@ -422,17 +458,62 @@ struct CompletionScreen<Detail: View>: View {
             }
         }
 
-        after(cursor + T.levelDelay) {
-            withAnimation(.easeInOut(duration: T.levelIn)) { showLevel = true }
-        }
+        if didLevelUp {
+            // Four phases, so the user watches the old level finish rather than
+            // being told about a new one they never saw arrive.
+            //
+            // 1. The row appears showing where they WERE — old level, old fill.
+            after(cursor + T.luRowAt) {
+                shownLevel = levelBefore.level
+                barFraction = levelBefore.fraction
+                withAnimation(.easeInOut(duration: T.levelIn)) { showLevel = true }
+            }
+            // 2. The old level completes. Slowest motion on the screen, and
+            //    easeInOut because it is a journey rather than a landing.
+            after(cursor + T.luFillAt) {
+                withAnimation(.easeInOut(duration: T.luFill)) { barFraction = 1 }
+            }
+            // 3. The flip. Lands within 20ms of the counter settling, so the
+            //    number arriving and the level changing read as one beat — which
+            //    is why this is the only haptic here and `settleHaptic` is
+            //    skipped below.
+            after(cursor + T.luFlipAt) {
+                withAnimation(.easeInOut(duration: 0.18)) {
+                    didFlipLevel = true
+                    barFraction = 0
+                }
+                HapticManager.shared.success()
+            }
+            // 4. Their position in the new level. Faster, easeOut: a landing.
+            //    Usually a sliver, which is honest and now legible, because the
+            //    bar was just seen full.
+            after(cursor + T.luRefillAt) {
+                withAnimation(.easeOut(duration: T.luRefill)) {
+                    barFraction = levelAfter.fraction
+                }
+            }
+        } else {
+            after(cursor + T.levelDelay) {
+                shownLevel = levelAfter.level
+                withAnimation(.easeInOut(duration: T.levelIn)) {
+                    showLevel = true
+                    barFraction = levelAfter.fraction
+                }
+            }
 
-        // Scheduled rather than detected: animation-completion callbacks are
-        // less reliable than the duration we just asked for.
-        after(cursor + rollDuration) { settleHaptic() }
+            // Scheduled rather than detected: animation-completion callbacks are
+            // less reliable than the duration we just asked for.
+            after(cursor + rollDuration) { settleHaptic() }
+        }
     }
 
     /// The payoff beat. Deliberately one haptic at the landing, never one per
     /// digit — a haptic ladder tracking the counter is exactly the slot machine.
+    ///
+    /// On a level-up the animated path skips this entirely and fires
+    /// `success()` at the flip instead: two notification-weight haptics 20ms
+    /// apart would muddy the one beat meant to feel different. Reduce Motion
+    /// still routes through here, hence the branch.
     private func settleHaptic() {
         if didLevelUp {
             HapticManager.shared.success()

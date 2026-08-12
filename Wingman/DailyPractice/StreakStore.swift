@@ -22,6 +22,15 @@ final class StreakStore: ObservableObject {
     // Optional so the UI can distinguish "never loaded" (nil) from "loaded and zero".
     @Published private(set) var currentStreak: Int?
     @Published private(set) var totalCompleted: Int?
+    /// All-time best run, for Profile's "Top streak" tile.
+    ///
+    /// `user_daily_practice_streaks.longest_streak` has been maintained by
+    /// `update_daily_practice_streak` since the beginning but nothing ever read
+    /// it — the streak RPC does not return it. Read directly off the table
+    /// rather than by widening `get_daily_practice_status`, which would mean a
+    /// DROP and CREATE of a function Home depends on for a value only Profile
+    /// wants. RLS on that table already scopes it to `auth.uid() = user_id`.
+    @Published private(set) var longestStreak: Int?
     @Published private(set) var completedDates: Set<String> = []
     @Published private(set) var isRefreshing: Bool = false
 
@@ -34,7 +43,8 @@ final class StreakStore: ObservableObject {
     static let currentStreakKey  = "streak_cache_current"
     static let totalCompletedKey = "streak_cache_total_completed"
     static let completedDatesKey = "streak_cache_completed_dates"
-    static let cacheKeys = [currentStreakKey, totalCompletedKey, completedDatesKey]
+    static let longestStreakKey  = "streak_cache_longest"
+    static let cacheKeys = [currentStreakKey, totalCompletedKey, completedDatesKey, longestStreakKey]
 
     private init() {
         loadFromCache()
@@ -53,6 +63,9 @@ final class StreakStore: ObservableObject {
         if let arr = d.array(forKey: Self.completedDatesKey) as? [String] {
             completedDates = Set(arr)
         }
+        if d.object(forKey: Self.longestStreakKey) != nil {
+            longestStreak = d.integer(forKey: Self.longestStreakKey)
+        }
         log("📦 StreakStore: seeded from cache — current=\(currentStreak.map(String.init) ?? "nil") total=\(totalCompleted.map(String.init) ?? "nil") dates=\(completedDates.count)")
     }
 
@@ -60,6 +73,7 @@ final class StreakStore: ObservableObject {
         let d = UserDefaults.standard
         if let c = currentStreak { d.set(c, forKey: Self.currentStreakKey) }
         if let t = totalCompleted { d.set(t, forKey: Self.totalCompletedKey) }
+        if let l = longestStreak { d.set(l, forKey: Self.longestStreakKey) }
         d.set(Array(completedDates), forKey: Self.completedDatesKey)
     }
 
@@ -79,6 +93,14 @@ final class StreakStore: ObservableObject {
             // Weekly dates are a best-effort fetch; partial success is allowed.
             if let dates = try? await fetchCompletedDatesForCurrentWeek() {
                 completedDates = dates
+            }
+
+            // Same contract: best-effort, never clobbers a good value with nil.
+            // `update_daily_practice_streak` does not return `longest_streak`,
+            // so this is the only path that refreshes it — which is fine,
+            // Profile calls `refresh()` on every appearance.
+            if let longest = try? await fetchLongestStreak() {
+                longestStreak = longest
             }
 
             saveToCache()
@@ -122,9 +144,23 @@ final class StreakStore: ObservableObject {
         currentStreak = nil
         totalCompleted = nil
         completedDates = []
+        longestStreak = nil
     }
 
     // MARK: - Private helpers
+
+    private func fetchLongestStreak() async throws -> Int? {
+        guard let userId = SupabaseManager.shared.currentUserId else { return nil }
+
+        let rows: [LongestStreakRow] = try await client
+            .from("user_daily_practice_streaks")
+            .select("longest_streak")
+            .eq("user_id", value: userId)
+            .execute()
+            .value
+
+        return rows.first?.longestStreak
+    }
 
     private func fetchCompletedDatesForCurrentWeek() async throws -> Set<String> {
         guard let userId = SupabaseManager.shared.currentUserId else {
@@ -161,4 +197,12 @@ final class StreakStore: ObservableObject {
 
 private struct StreakSessionRow: Decodable {
     let date: String
+}
+
+private struct LongestStreakRow: Decodable {
+    let longestStreak: Int
+
+    enum CodingKeys: String, CodingKey {
+        case longestStreak = "longest_streak"
+    }
 }

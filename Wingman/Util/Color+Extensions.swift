@@ -48,6 +48,20 @@ extension Color {
     // MARK: - Custom Theme Colors
     static let customGreen = Color(red: 0.243, green: 0.561, blue: 0.416) // #3E8F6A
     static let customRed = Color(red: 0.788, green: 0.349, blue: 0.298) // #C9594C
+
+    // MARK: - Stat accents
+    //
+    // Lifted verbatim from the onboarding growth chart
+    // (GrowthChartView.swift:178-180), so this is not a new palette — it is the
+    // one the app already ships, reused somewhere it can do more work.
+    //
+    // Used ONLY to distinguish the three Profile stat categories from each
+    // other. Progress itself stays `wingmanBlack` everywhere, on Profile and on
+    // the completion screen alike, so a filling bar always means the same thing
+    // and colour never competes with it.
+    static let accentGreen  = Color(hex: "#2FA96B")
+    static let accentClay   = Color(hex: "#D9673F")
+    static let accentIndigo = Color(hex: "#5B6CF0")
     static let customDark = Color(red: 0.102, green: 0.102, blue: 0.102) // #1A1A1A
     static let customLightGreen = Color(red: 0.855, green: 0.941, blue: 0.902) // #DAF0E6
     static let customLightRed = Color(red: 0.957, green: 0.871, blue: 0.859) // #F4DEDB
