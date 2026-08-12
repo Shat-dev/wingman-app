@@ -10,87 +10,40 @@ struct LessonCompleteView: View {
     @ObservedObject private var xpStore = XPStore.shared
     let nextLessonInfo: NextLessonInfo?
     let onContinue: () -> Void
-    
+
     var body: some View {
-        ZStack {
-            Color.white.ignoresSafeArea()
-            
-            VStack(spacing: 0) {
-                Spacer()
-                
-                // MARK: - Checkmark Icon
-                ZStack {
-                    // Checkmark
-                    Image("checklist")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 291, height: 291)
-                        .clipped()
-                        .allowsHitTesting(false)
-                }
-                .padding(.bottom, 5)
-                
-                // MARK: - Title
-                Text("Lesson Complete!")
-                    .font(.manropeSemiBold(size: 28))
-                    .foregroundColor(.wingmanBlack)
-                    .kerning(-0.3)
-                    .padding(.bottom, 20)
-
-                // MARK: - XP Earned
-                // Confirmed awards only — see XPAwardBadge. Occupies no space
-                // while in flight, so the "Up Next" block does not shift.
-                XPAwardBadge(award: xpStore.lastAward)
-                    .padding(.bottom, 20)
-
-                // MARK: - Up Next Section
+        CompletionScreen(
+            title: "Lesson complete.",
+            award: xpStore.lastAward,
+            onContinue: {
+                // `onContinue` is what actually marks the lesson complete and
+                // fires `lesson_completed` (LessonView), so it must run before
+                // the dismiss, exactly as it did before.
+                onContinue()
+                dismiss()
+            },
+            detail: {
                 if let nextLesson = nextLessonInfo {
                     VStack(spacing: 8) {
                         Text("Up Next")
                             .font(.manropeMedium(size: 14))
                             .foregroundColor(Color.wingmanBlack.opacity(0.7))
-                        
+
                         Text(nextLesson.title)
                             .font(.manropeMedium(size: 14))
                             .foregroundColor(.wingmanBlack)
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 40)
                     }
-                    .padding(.bottom, 50)
                 } else {
-                    VStack(spacing: 10) {
-                        Text("")
-                            .font(.system(size: 32))
-                        
-                        Text("Course Complete!")
-                            .font(.manropeMedium(size: 14))
-                            .foregroundColor(.wingmanBlack)
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal, 40)
-                    }
+                    Text("Course complete.")
+                        .font(.manropeMedium(size: 14))
+                        .foregroundColor(.wingmanBlack)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 40)
                 }
-                
-                Spacer()
-                
-                // MARK: - Continue Button
-                Button(action: {
-                    HapticManager.shared.tapStrong()
-                    onContinue()
-                    dismiss()
-                }) {
-                    Text("Continue")
-                        .font(.manropeSemiBold(size: 16))
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 52)
-                        .background(Color.wingmanBlack)
-                        .cornerRadius(5)
-                }
-                .buttonStyle(ScalePressStyle())
-                .padding(.horizontal, 20)
-                .padding(.bottom, 40)
             }
-        }
+        )
     }
 }
 

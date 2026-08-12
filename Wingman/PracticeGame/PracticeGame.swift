@@ -763,42 +763,14 @@ struct GameCompleteView: View {
     @ObservedObject private var xpStore = XPStore.shared
     let onContinue: () -> Void
 
+    // "Scenario", not "Game": the tab, the table and every other surface call
+    // these scenarios. This screen was the only place using the other word.
     var body: some View {
-        ZStack {
-            Color.white.ignoresSafeArea()
-            VStack(spacing: 0) {
-                Image("checklist")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 290, height: 290)
-                    .padding(.top, 50)
-
-                Text("Game Complete!")
-                    .font(.manropeSemiBold(size: 24))
-                    .foregroundColor(.wingmanBlack)
-
-                // MARK: - XP Earned
-                // Confirmed awards only — see XPAwardBadge. This was the one
-                // completion screen showing no number at all.
-                XPAwardBadge(award: xpStore.lastAward)
-                    .padding(.top, 20)
-
-                Spacer()
-
-                Button { onContinue() } label: {
-                    Text("Continue")
-                        .font(.system(size: 17, weight: .semibold))
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 16)
-                        .background(Color.wingmanBlack)
-                        .cornerRadius(5)
-                }
-                .buttonStyle(ScalePressStyle())
-                .padding(.horizontal, 24)
-                .padding(.bottom, 40)
-            }
-        }
+        CompletionScreen(
+            title: "Scenario complete.",
+            award: xpStore.lastAward,
+            onContinue: onContinue
+        )
     }
 }
 
