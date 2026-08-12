@@ -27,11 +27,22 @@ struct XPAwardResult: Codable {
     /// capped award can explain itself.
     let capped: Bool
 
+    /// The parts `amount_awarded` is made of, so the completion screen can
+    /// itemise them. They always sum to `amountAwarded`, and are all 0 whenever
+    /// `awarded` is false — a replay or a capped attempt can never render line
+    /// items for an award that did not happen.
+    let baseAwarded: Int
+    let correctAwarded: Int
+    let bonusAwarded: Int
+
     enum CodingKeys: String, CodingKey {
         case awarded
-        case amountAwarded = "amount_awarded"
-        case totalXP       = "total_xp"
+        case amountAwarded  = "amount_awarded"
+        case totalXP        = "total_xp"
         case capped
+        case baseAwarded    = "base_awarded"
+        case correctAwarded = "correct_awarded"
+        case bonusAwarded   = "bonus_awarded"
     }
 }
 
@@ -175,7 +186,10 @@ enum XPServiceError: LocalizedError {
 // MARK: - Mock (previews / tests)
 
 final class MockXPService: XPServiceProtocol {
-    var awardResult: XPAwardResult = XPAwardResult(awarded: true, amountAwarded: 30, totalXP: 30, capped: false)
+    var awardResult: XPAwardResult = XPAwardResult(
+        awarded: true, amountAwarded: 30, totalXP: 30, capped: false,
+        baseAwarded: 20, correctAwarded: 10, bonusAwarded: 0
+    )
     var summaryResult: XPSummary = XPSummary(totalXP: 30, eventCount: 1, lastAwardedAt: nil)
     var shouldThrow: Error?
 

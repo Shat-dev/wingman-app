@@ -35,6 +35,28 @@ final class XPStore: ObservableObject {
         let source: XPSource
         let amount: Int
         let totalAfter: Int
+
+        /// The parts, straight from the server. They always sum to `amount`.
+        let base: Int
+        let fromCorrect: Int
+        let bonus: Int
+        /// Needed only to label the per-correct line ("3 correct"). The server
+        /// returns amounts, not counts, so this comes from what was sent.
+        let correctCount: Int
+
+        /// The line items worth showing, largest concept first.
+        ///
+        /// Zero-value parts are dropped, so a flat award (scenario, approach,
+        /// or a lesson answered entirely wrong) yields a single item and the
+        /// screen falls back to showing just the figure.
+        var components: [(amount: Int, label: String)] {
+            var out: [(Int, String)] = [(base, "Completed")]
+            if fromCorrect > 0 {
+                out.append((fromCorrect, correctCount == 1 ? "1 correct" : "\(correctCount) correct"))
+            }
+            if bonus > 0 { out.append((bonus, "All correct")) }
+            return out
+        }
     }
 
     // MARK: - Published state
@@ -211,7 +233,8 @@ final class XPStore: ObservableObject {
             // tomorrow, so retrying it would never succeed.
             XPOutbox.remove(id: pending.id)
             // `recordAward: true` — this is the award the user is looking at.
-            apply(result: result, sourceType: pending.sourceType, recordAward: true)
+            apply(result: result, sourceType: pending.sourceType,
+                  recordAward: true, correctCount: pending.correctCount)
 
             log("✨ XPStore: \(pending.sourceType)/\(pending.sourceId) "
                 + "awarded=\(result.awarded) +\(result.amountAwarded) total=\(result.totalXP)"
@@ -240,10 +263,18 @@ final class XPStore: ObservableObject {
     ///
     ///   The total is always applied either way — every response carries the
     ///   server's recomputed sum, so the last one to land is the truthful one.
-    private func apply(result: XPAwardResult, sourceType: String, recordAward: Bool) {
+    private func apply(result: XPAwardResult, sourceType: String, recordAward: Bool, correctCount: Int) {
         totalXP = result.totalXP
         if recordAward, result.awarded, let source = XPSource(rawValue: sourceType) {
-            lastAward = Award(source: source, amount: result.amountAwarded, totalAfter: result.totalXP)
+            lastAward = Award(
+                source: source,
+                amount: result.amountAwarded,
+                totalAfter: result.totalXP,
+                base: result.baseAwarded,
+                fromCorrect: result.correctAwarded,
+                bonus: result.bonusAwarded,
+                correctCount: correctCount
+            )
         }
         saveToCache()
 
@@ -300,7 +331,8 @@ final class XPStore: ObservableObject {
                 XPOutbox.remove(id: entry.id)
                 // `recordAward: false` — a drained backlog entry updates the
                 // total but must never claim the completion screen's badge.
-                apply(result: result, sourceType: entry.sourceType, recordAward: false)
+                apply(result: result, sourceType: entry.sourceType,
+                      recordAward: false, correctCount: entry.correctCount)
                 flushed += 1
             } catch {
                 // Almost certainly still offline. Stop rather than hammering the

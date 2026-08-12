@@ -31,22 +31,34 @@ struct LessonQuizFlowView: View {
 
     let nextLessonInfo: NextLessonInfo?
 
-    /// Runs when the user taps Continue on the completion screen — the point at
-    /// which the lesson is actually marked complete.
+    /// Fires the instant the completion screen is reached, carrying
+    /// `(correctCount, questionCount)`.
     ///
-    /// Carries `(correctCount, questionCount)`. The score was previously
-    /// computed here for `lesson_quiz_completed` and then dropped, which left
-    /// the XP award with no way to pay the locked 20 + 5×correct + 5-if-perfect
-    /// (docs/xp-system-plan.md §0) — it could only ever pay the flat base.
+    /// **This is where XP is awarded, not `onComplete`.** The award used to hang
+    /// off the Continue button, which meant the lesson was paid for as the user
+    /// left — so the reward screen could never display its own award and instead
+    /// showed whatever was left over from the previous completion. A scenario
+    /// finished 29 seconds earlier would decorate the lesson screen with its 50.
+    ///
+    /// Firing here also gives the round trip the whole intro animation as
+    /// runway, which is the difference between the XP landing before the user
+    /// taps through and missing the moment entirely.
     ///
     /// **Both are 0 when no quiz ran.** A lesson with no authored questions
     /// enters `.complete` directly (see `init`), and the server reads
     /// `questionCount == 0` as "no perfect bonus applies". Passing the
     /// denominator is what keeps "no quiz" distinguishable from "answered
     /// everything wrong" — without it the two would pay the same.
-    let onComplete: (Int, Int) -> Void
+    let onReachedCompletion: (Int, Int) -> Void
+
+    /// Runs when the user taps Continue — the point at which the lesson is
+    /// actually marked complete and `lesson_completed` fires.
+    let onComplete: () -> Void
 
     @Environment(\.dismiss) private var dismiss
+
+    /// One-shot latch for `onReachedCompletion`.
+    @State private var hasReportedCompletion = false
 
     @State private var step: Step
     @State private var engine: QuizEngine
@@ -62,8 +74,10 @@ struct LessonQuizFlowView: View {
         questions: [QuizQuestion],
         readingStepCount: Int,
         nextLessonInfo: NextLessonInfo?,
-        onComplete: @escaping (Int, Int) -> Void
+        onReachedCompletion: @escaping (Int, Int) -> Void,
+        onComplete: @escaping () -> Void
     ) {
+        self.onReachedCompletion = onReachedCompletion
         self.lesson = lesson
         self.questions = questions
         self.readingStepCount = readingStepCount
@@ -110,10 +124,9 @@ struct LessonQuizFlowView: View {
             case .questions:
                 questionsView
             case .complete:
-                // `LessonCompleteView.onContinue` stays `() -> Void` — the
-                // score is read here, at the one place that has the engine,
-                // rather than by widening that view's contract. It renders a
-                // title and a button and has no business knowing a score.
+                // `LessonCompleteView.onContinue` stays `() -> Void` — it
+                // renders a title and a button and has no business knowing a
+                // score.
                 //
                 // `questions.count`, not `engine.answeredCount`: the perfect
                 // bonus must mean "got the whole set right". The two are equal
@@ -122,8 +135,16 @@ struct LessonQuizFlowView: View {
                 // until the answer is checked.
                 LessonCompleteView(
                     nextLessonInfo: nextLessonInfo,
-                    onContinue: { onComplete(engine.correctCount, questions.count) }
+                    onContinue: onComplete
                 )
+                .onAppear {
+                    // Guarded: `.complete` can re-render, and awarding twice
+                    // would be a wasted round trip (the ledger would reject the
+                    // second, but the screen would flicker through a reveal).
+                    guard !hasReportedCompletion else { return }
+                    hasReportedCompletion = true
+                    onReachedCompletion(engine.correctCount, questions.count)
+                }
             }
         }
         .animation(.easeInOut(duration: 0.3), value: engine.hasCheckedAnswer)

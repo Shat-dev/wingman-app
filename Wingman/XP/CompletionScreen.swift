@@ -7,10 +7,20 @@
 //
 //  DESIGN NOTES (the reasoning, so the next edit does not undo it)
 //
-//  Animate the total, state the delta. Rolling 0→35 is 35 units of travel and
-//  reads fussy; rolling 300→335 gives real motion and reframes the reward as
-//  "your body of work grew" rather than "you got points". That is the Strava
-//  move, not the Duolingo one, and it is what suits an anti-hype brand.
+//  The award is itemised, then summed. Line items name what earned each part
+//  ("Completed", "3 correct", "All correct") and the green figure counts up as
+//  though adding them together. Learning apps itemise because the breakdown
+//  teaches the scoring; the restraint is in presenting it as a statement rather
+//  than a celebration.
+//
+//  Items are grey and small so they read as one texture block, not three
+//  elements competing with the sum. Awards with a single component fall through
+//  to the figure alone — one line item above a figure saying the same number is
+//  silly.
+//
+//  The lifetime total was deliberately cut from this screen. With line items
+//  above and a level bar below it was a third way of saying "where you stand",
+//  and the weakest of the three.
 //
 //  No particles, no sound, no bounce. Confetti is borrowed celebration with no
 //  relationship to the content, and on an off-white field it is the loudest
@@ -38,16 +48,18 @@ import SwiftUI
 /// its detail slot and Swift does not allow static stored properties inside a
 /// generic type.
 ///
-/// The whole sequence lands at ~1.26s, or ~1.56s on a level-up. Both sit inside
-/// the 2s budget with room to spare.
+/// Itemised, the sequence lands at ~1.54s (~1.84s on a level-up). A
+/// single-component award lands at ~1.12s. All inside the 2s budget.
 private enum T {
     static let markIn = 0.26
     static let titleAt = 0.12,  titleIn = 0.22
     static let detailAt = 0.98, detailIn = 0.22
     static let xpAt = 0.52
     static let deltaIn = 0.20
-    static let rollDelay = 0.04
-    static let roll = 0.70, rollMilestone = 1.00
+    /// Gap between itemised lines. Three taps at this spacing is a rhythm; any
+    /// tighter and it becomes a ticker.
+    static let itemStagger = 0.14, itemIn = 0.18
+    static let roll = 0.60, rollMilestone = 0.90
     static let levelDelay = 0.22, levelIn = 0.32
 }
 
@@ -87,7 +99,8 @@ struct CompletionScreen<Detail: View>: View {
     @State private var showXP = false
     @State private var showLevel = false
     @State private var showDetail = false
-    @State private var displayedTotal: Double = 0
+    @State private var displayedAmount: Double = 0
+    @State private var revealedItems = 0
     @State private var hasRunIntro = false
     @State private var hasRunXP = false
 
@@ -204,10 +217,35 @@ struct CompletionScreen<Detail: View>: View {
         // in-flight request leaves the layout exactly as it was.
         if let award {
             VStack(spacing: 10) {
+                // Itemised only when the award actually has parts. A scenario,
+                // an approach, or a lesson answered entirely wrong is a single
+                // component, and one line item above a figure saying the same
+                // number is silly — those fall through to the figure alone.
+                if components.count > 1 {
+                    VStack(spacing: 4) {
+                        ForEach(Array(components.enumerated()), id: \.offset) { index, item in
+                            HStack(spacing: 10) {
+                                Text("+\(item.amount)")
+                                    .font(.manropeMedium(size: 13))
+                                    .monospacedDigit()
+                                    .frame(width: 34, alignment: .trailing)
+                                Text(item.label)
+                                    .font(.manropeMedium(size: 13))
+                                    .frame(width: 96, alignment: .leading)
+                            }
+                            // Grey and small on purpose. The items are the
+                            // working, not the answer — they should read as one
+                            // texture block rather than three elements
+                            // competing with the sum below them.
+                            .foregroundColor(.gray)
+                            .opacity(revealedItems > index ? 1 : 0)
+                        }
+                    }
+                    .padding(.bottom, 4)
+                }
+
                 HStack(alignment: .firstTextBaseline, spacing: 6) {
-                    Text("+\(award.amount)")
-                        .font(.manropeSemiBold(size: 20))
-                        .monospacedDigit()
+                    RollingAmount(value: displayedAmount)
                     Text("XP")
                         .font(.manropeMedium(size: 13))
                         .opacity(0.7)
@@ -220,14 +258,19 @@ struct CompletionScreen<Detail: View>: View {
                 .opacity(showXP ? 1 : 0)
                 .offset(y: showXP ? 0 : 6)
 
-                RollingTotal(value: displayedTotal)
-                    .opacity(showXP ? 1 : 0)
+                // The lifetime total that used to sit here is gone. With line
+                // items above and a level bar below it was a third way of
+                // saying "where you stand", and the weakest of the three.
 
                 levelRow
                     .padding(.top, 6)
                     .opacity(showLevel ? 1 : 0)
             }
         }
+    }
+
+    private var components: [(amount: Int, label: String)] {
+        award?.components ?? []
     }
 
     @ViewBuilder
@@ -287,33 +330,49 @@ struct CompletionScreen<Detail: View>: View {
         guard !hasRunXP, let award else { return }
         hasRunXP = true
 
-        displayedTotal = Double(previousTotal)
+        let items = award.components
+        let itemised = items.count > 1
 
         guard !reduceMotion else {
+            revealedItems = items.count
             showXP = true
             showLevel = true
-            displayedTotal = Double(award.totalAfter)
+            displayedAmount = Double(award.amount)
             HapticManager.shared.tap()
             after(0.20) { settleHaptic() }
             return
         }
 
-        withAnimation(.easeOut(duration: T.deltaIn)) { showXP = true }
-        HapticManager.shared.tap()
-
-        after(T.rollDelay) {
-            withAnimation(rollCurve(rollDuration)) {
-                displayedTotal = Double(award.totalAfter)
+        // Line items first, one per beat. Three taps 140ms apart is a rhythm,
+        // and it is one event per line rather than one per digit — the latter
+        // is the slot machine this design refuses.
+        var cursor = 0.0
+        if itemised {
+            for index in items.indices {
+                after(cursor) {
+                    withAnimation(.easeOut(duration: T.itemIn)) { revealedItems = index + 1 }
+                    HapticManager.shared.tap()
+                }
+                cursor += T.itemStagger
             }
         }
 
-        after(T.rollDelay + T.levelDelay) {
+        // Then the sum, counting up as though it is adding the lines together.
+        after(cursor) {
+            withAnimation(.easeOut(duration: T.deltaIn)) { showXP = true }
+            if !itemised { HapticManager.shared.tap() }
+            withAnimation(rollCurve(rollDuration)) {
+                displayedAmount = Double(award.amount)
+            }
+        }
+
+        after(cursor + T.levelDelay) {
             withAnimation(.easeInOut(duration: T.levelIn)) { showLevel = true }
         }
 
         // Scheduled rather than detected: animation-completion callbacks are
         // less reliable than the duration we just asked for.
-        after(T.rollDelay + rollDuration) { settleHaptic() }
+        after(cursor + rollDuration) { settleHaptic() }
     }
 
     /// The payoff beat. Deliberately one haptic at the landing, never one per
@@ -341,7 +400,12 @@ struct CompletionScreen<Detail: View>: View {
 ///
 /// `monospacedDigit` matters: without it the text re-centres on every digit
 /// change and the number visibly jitters while rolling.
-private struct RollingTotal: View, Animatable {
+///
+/// This rolls the award itself rather than the lifetime total, because the
+/// lifetime total was cut from this screen. Coming straight after the line
+/// items, a sum counting up reads as those items adding together, which is
+/// exactly the statement metaphor the breakdown is going for.
+private struct RollingAmount: View, Animatable {
     var value: Double
 
     var animatableData: Double {
@@ -350,10 +414,9 @@ private struct RollingTotal: View, Animatable {
     }
 
     var body: some View {
-        Text("\(Int(value.rounded())) XP")
-            .font(.manropeMedium(size: 14))
+        Text("+\(Int(value.rounded()))")
+            .font(.manropeSemiBold(size: 20))
             .monospacedDigit()
-            .foregroundColor(.gray)
     }
 }
 
@@ -376,10 +439,20 @@ extension CompletionScreen where Detail == EmptyView {
     }
 }
 
-#Preview("Normal award") {
+#Preview("Itemised — perfect 3-question lesson") {
     CompletionScreen(
         title: "Lesson complete.",
-        award: XPStore.Award(source: .lesson, amount: 35, totalAfter: 335),
+        award: XPStore.Award(source: .lesson, amount: 40, totalAfter: 335,
+                             base: 20, fromCorrect: 15, bonus: 5, correctCount: 3),
+        onContinue: {}
+    )
+}
+
+#Preview("Single component — falls back to the figure") {
+    CompletionScreen(
+        title: "Scenario complete.",
+        award: XPStore.Award(source: .scenario, amount: 50, totalAfter: 385,
+                             base: 50, fromCorrect: 0, bonus: 0, correctCount: 0),
         onContinue: {}
     )
 }
@@ -387,7 +460,8 @@ extension CompletionScreen where Detail == EmptyView {
 #Preview("Level up") {
     CompletionScreen(
         title: "Lesson complete.",
-        award: XPStore.Award(source: .lesson, amount: 40, totalAfter: 260),
+        award: XPStore.Award(source: .lesson, amount: 40, totalAfter: 260,
+                             base: 20, fromCorrect: 15, bonus: 5, correctCount: 3),
         onContinue: {}
     )
 }
