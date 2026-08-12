@@ -288,6 +288,11 @@ class PracticeGameViewModel: ObservableObject {
         Task {
             await XPStore.shared.award(.scenario, sourceId: scenarioId)
         }
+        // Separate task from the award: replaying a finished scenario earns no
+        // XP but still counts as showing up today.
+        Task {
+            await StreakStore.shared.noteActivity(sourceId: scenarioId.uuidString.lowercased())
+        }
     }
 }
 

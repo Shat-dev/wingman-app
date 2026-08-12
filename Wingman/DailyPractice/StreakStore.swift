@@ -34,6 +34,21 @@ final class StreakStore: ObservableObject {
     @Published private(set) var completedDates: Set<String> = []
     @Published private(set) var isRefreshing: Bool = false
 
+    /// The streak advance produced by one specific completion.
+    ///
+    /// Carries `sourceId` for the same reason `XPStore.Award` does: a
+    /// completion screen must be able to tell its own result from the previous
+    /// one, or a lesson finished minutes ago decorates the next screen.
+    @Published private(set) var lastAdvance: Advance?
+
+    struct Advance: Equatable {
+        let sourceId: String
+        let streak: Int
+        /// False when the day was already counted, so the screen can say "5 day
+        /// streak" without implying this completion is what earned it.
+        let didExtend: Bool
+    }
+
     // MARK: - Dependencies
     private let practiceService: DailyPracticeServiceProtocol = DailyPracticeService()
     private let client = SupabaseManager.shared.client
@@ -145,6 +160,69 @@ final class StreakStore: ObservableObject {
         totalCompleted = nil
         completedDates = []
         longestStreak = nil
+        lastAdvance = nil
+    }
+
+    // MARK: - Activity (lessons and scenarios)
+
+    /// Records that the user did something today that counts toward the streak.
+    ///
+    /// Separate from `update_daily_practice_streak`, which also writes a
+    /// `user_daily_practice_sessions` row — that table is Home's "practised
+    /// today" flag, and a lesson writing to it would disable the Daily Practice
+    /// button. `mark_streak_activity` moves only the streak.
+    ///
+    /// Never throws. A lesson must not fail because its streak write did.
+    func noteActivity(sourceId: String) async {
+        guard SupabaseManager.shared.currentUserId != nil else {
+            log("⚠️ StreakStore: no session, skipping streak activity for \(sourceId)")
+            return
+        }
+
+        // Drop any advance left over from an earlier completion, so a screen
+        // waiting on its own result never renders someone else's.
+        lastAdvance = nil
+
+        do {
+            let rows: [StreakActivityRow] = try await client
+                .rpc("mark_streak_activity", params: MarkStreakParams(p_local_date: Self.streakDateToday()))
+                .execute()
+                .value
+
+            guard let row = rows.first else {
+                log("⚠️ StreakStore: mark_streak_activity returned no rows")
+                return
+            }
+
+            currentStreak = row.currentStreak
+            longestStreak = row.longestStreak
+            lastAdvance = Advance(sourceId: sourceId, streak: row.currentStreak, didExtend: row.didExtend)
+            saveToCache()
+
+            log("🔥 StreakStore: activity \(sourceId) — streak=\(row.currentStreak) extended=\(row.didExtend)")
+        } catch {
+            // Fire and forget. There is no retry queue for the streak, the same
+            // as the daily-practice path, so an offline lesson does not count.
+            log("❌ StreakStore: streak activity failed for \(sourceId) — \(error.localizedDescription)")
+        }
+    }
+
+    /// Today, formatted exactly as `DailyPracticeService.getCurrentLocalDate()`
+    /// formats it.
+    ///
+    /// **Deliberately does NOT pin the locale**, unlike `XPLocalDate`. Both
+    /// writers stamp `last_completed_date`, and the streak arithmetic compares
+    /// those stamps to each other — so they have to agree. On a device set to a
+    /// non-Gregorian calendar the existing writer produces e.g. `2569-08-13`;
+    /// pinning Gregorian here would write `2026-08-13`, and the two would read
+    /// as a 500-year gap and reset the user's streak on every alternate
+    /// completion. Matching the existing behaviour beats being right alone.
+    /// Fixing both together is a separate change.
+    private static func streakDateToday() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.timeZone = .current
+        return formatter.string(from: Date())
     }
 
     // MARK: - Private helpers
@@ -197,6 +275,22 @@ final class StreakStore: ObservableObject {
 
 private struct StreakSessionRow: Decodable {
     let date: String
+}
+
+private struct MarkStreakParams: nonisolated Encodable, Sendable {
+    let p_local_date: String
+}
+
+private struct StreakActivityRow: Decodable {
+    let currentStreak: Int
+    let longestStreak: Int
+    let didExtend: Bool
+
+    enum CodingKeys: String, CodingKey {
+        case currentStreak = "current_streak"
+        case longestStreak = "longest_streak"
+        case didExtend     = "did_extend"
+    }
 }
 
 private struct LongestStreakRow: Decodable {

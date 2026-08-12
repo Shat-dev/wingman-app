@@ -112,11 +112,21 @@ struct CompletionScreen<Detail: View>: View {
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @ObservedObject private var xpStore = XPStore.shared
+    @ObservedObject private var streakStore = StreakStore.shared
 
     /// Only ever this screen's own award.
     private var award: XPStore.Award? {
         if let previewAward { return previewAward }
         guard let latest = xpStore.lastAward, latest.sourceId == expectedSourceId else { return nil }
+        return latest
+    }
+
+    /// This screen's own streak advance, matched the same way the award is.
+    ///
+    /// Independent of `award`: a replayed lesson earns no XP but still counts
+    /// as showing up, so the streak can move while the XP block stays hidden.
+    private var streakAdvance: StreakStore.Advance? {
+        guard let latest = streakStore.lastAdvance, latest.sourceId == expectedSourceId else { return nil }
         return latest
     }
 
@@ -197,9 +207,10 @@ struct CompletionScreen<Detail: View>: View {
         UIScreen.isSmallPhone ? 150 : 220
     }
 
-    /// Space held for the XP block before anything is in it: the summed figure
-    /// plus the level row. Keeps the screen from reflowing when the award lands.
-    private var reservedXPHeight: CGFloat { 72 }
+    /// Space held for the reward block before anything is in it: the summed
+    /// figure, the level row, and the streak line. Keeps the screen from
+    /// reflowing when either result lands.
+    private var reservedRewardHeight: CGFloat { 96 }
 
     // MARK: - Body
 
@@ -242,9 +253,12 @@ struct CompletionScreen<Detail: View>: View {
                 // detail slot down after it has already faded in. Sized to the
                 // un-itemised case; an itemised award grows past it at 520ms,
                 // before the detail appears at 980ms.
-                xpBlock
-                    .frame(minHeight: reservedXPHeight, alignment: .top)
-                    .padding(.top, 24)
+                VStack(spacing: 12) {
+                    xpBlock
+                    streakRow
+                }
+                .frame(minHeight: reservedRewardHeight, alignment: .top)
+                .padding(.top, 24)
 
                 detail()
                     .padding(.top, 20)
@@ -270,6 +284,7 @@ struct CompletionScreen<Detail: View>: View {
                 .padding(.bottom, 24)
             }
         }
+        .animation(.easeOut(duration: 0.25), value: streakAdvance)
         .onAppear(perform: runIntro)
         .onDisappear { isActive = false }
         .onChange(of: award) { newValue in
@@ -346,7 +361,26 @@ struct CompletionScreen<Detail: View>: View {
         award?.components ?? []
     }
 
+    /// Sits outside `xpBlock` on purpose: a replay advances the streak while
+    /// awarding no XP, so this has to be able to appear on its own.
+    ///
+    /// No haptic. The XP sequence already spends four, and a fifth for a line
+    /// that fades in quietly would be noise.
     @ViewBuilder
+    private var streakRow: some View {
+        if let advance = streakAdvance {
+            HStack(spacing: 6) {
+                Image(systemName: "flame.fill")
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundColor(.accentClay)
+                Text(advance.streak == 1 ? "1 day streak" : "\(advance.streak) day streak")
+                    .font(.manropeMedium(size: 13))
+                    .foregroundColor(.wingmanBlack)
+            }
+            .transition(.opacity)
+        }
+    }
+
     private var levelRow: some View {
         VStack(spacing: 8) {
             Text(didFlipLevel

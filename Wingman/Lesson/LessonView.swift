@@ -216,6 +216,11 @@ struct LessonView: View {
                             questionCount: questionCount
                         )
                     }
+                    // Separate task from the award: finishing a lesson counts as
+                    // showing up today even when it is a replay that earns no XP.
+                    Task {
+                        await StreakStore.shared.noteActivity(sourceId: lessonId)
+                    }
                 },
                 onComplete: {
                     // Analytics fires here rather than when the reading ends.
