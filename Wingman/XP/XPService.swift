@@ -118,11 +118,11 @@ class XPService: XPServiceProtocol {
         // throw, so being offline costs the award nothing — it is retried on
         // reconnect. The streak's write path has no such guard and simply loses
         // the day (audit §A.6).
-        guard await NetworkMonitor.shared.isConnected else {
+        guard NetworkMonitor.shared.isConnected else {
             throw XPServiceError.offline
         }
 
-        guard await SupabaseManager.shared.currentUserId != nil else {
+        guard SupabaseManager.shared.currentUserId != nil else {
             throw XPServiceError.notAuthenticated
         }
 
@@ -148,10 +148,10 @@ class XPService: XPServiceProtocol {
     }
 
     func summary() async throws -> XPSummary {
-        guard await NetworkMonitor.shared.isConnected else {
+        guard NetworkMonitor.shared.isConnected else {
             throw XPServiceError.offline
         }
-        guard await SupabaseManager.shared.currentUserId != nil else {
+        guard SupabaseManager.shared.currentUserId != nil else {
             throw XPServiceError.notAuthenticated
         }
 

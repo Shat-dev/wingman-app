@@ -88,8 +88,14 @@ final class XPStore: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     private var isFlushing = false
 
-    init(service: XPServiceProtocol = XPService()) {
-        self.service = service
+    /// `service` is optional rather than defaulting to `XPService()` because a
+    /// default argument is evaluated at the *call site*, and the call site here
+    /// is `static let shared = XPStore()` — a nonisolated context. Constructing
+    /// a MainActor-isolated service from there is what produced "call to main
+    /// actor-isolated initializer in a synchronous nonisolated context".
+    /// Building it inside the body keeps it on the actor.
+    init(service: XPServiceProtocol? = nil) {
+        self.service = service ?? XPService()
         loadFromCache()
         observeFlushTriggers()
     }

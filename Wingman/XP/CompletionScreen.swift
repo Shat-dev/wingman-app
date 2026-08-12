@@ -77,6 +77,9 @@ struct CompletionScreen<Detail: View>: View {
     let onContinue: () -> Void
     let detail: () -> Detail
 
+    /// Preview and testing only. Production always reads `XPStore`.
+    var previewAward: XPStore.Award?
+
     /// Explicit rather than memberwise: a `let` with a default value is omitted
     /// from the synthesised initialiser entirely, so `continueTitle` would have
     /// been required at every call site.
@@ -84,12 +87,14 @@ struct CompletionScreen<Detail: View>: View {
         title: String,
         expectedSourceId: String,
         continueTitle: String = "Continue",
+        previewAward: XPStore.Award? = nil,
         onContinue: @escaping () -> Void,
         @ViewBuilder detail: @escaping () -> Detail
     ) {
         self.title = title
         self.expectedSourceId = expectedSourceId
         self.continueTitle = continueTitle
+        self.previewAward = previewAward
         self.onContinue = onContinue
         self.detail = detail
     }
@@ -99,6 +104,7 @@ struct CompletionScreen<Detail: View>: View {
 
     /// Only ever this screen's own award.
     private var award: XPStore.Award? {
+        if let previewAward { return previewAward }
         guard let latest = xpStore.lastAward, latest.sourceId == expectedSourceId else { return nil }
         return latest
     }
@@ -249,9 +255,13 @@ struct CompletionScreen<Detail: View>: View {
 
     @ViewBuilder
     private var xpBlock: some View {
-        // Reserves no space until there is a confirmed award, so a replay or an
-        // in-flight request leaves the layout exactly as it was.
-        if let award {
+        // Renders only once this screen's own award has landed, so a replay or
+        // an in-flight request shows nothing. The reserved height above keeps
+        // the layout still either way.
+        //
+        // A presence test rather than `if let`: everything below reads the
+        // `components` helper and the derived level, not the bound value.
+        if award != nil {
             VStack(spacing: 10) {
                 // Itemised only when the award actually has parts. A scenario,
                 // an approach, or a lesson answered entirely wrong is a single
@@ -471,14 +481,16 @@ private struct RollingAmount: View, Animatable {
 extension CompletionScreen where Detail == EmptyView {
     init(
         title: String,
-        award: XPStore.Award?,
+        expectedSourceId: String,
         continueTitle: String = "Continue",
+        previewAward: XPStore.Award? = nil,
         onContinue: @escaping () -> Void
     ) {
         self.init(
             title: title,
-            award: award,
+            expectedSourceId: expectedSourceId,
             continueTitle: continueTitle,
+            previewAward: previewAward,
             onContinue: onContinue,
             detail: { EmptyView() }
         )
@@ -488,8 +500,10 @@ extension CompletionScreen where Detail == EmptyView {
 #Preview("Itemised — perfect 3-question lesson") {
     CompletionScreen(
         title: "Lesson complete.",
-        award: XPStore.Award(source: .lesson, amount: 40, totalAfter: 335,
-                             base: 20, fromCorrect: 15, bonus: 5, correctCount: 3),
+        expectedSourceId: "lesson_1_1",
+        previewAward: XPStore.Award(source: .lesson, sourceId: "lesson_1_1",
+                                    amount: 40, totalAfter: 335,
+                                    base: 20, fromCorrect: 15, bonus: 5, correctCount: 3),
         onContinue: {}
     )
 }
@@ -497,8 +511,10 @@ extension CompletionScreen where Detail == EmptyView {
 #Preview("Single component — falls back to the figure") {
     CompletionScreen(
         title: "Scenario complete.",
-        award: XPStore.Award(source: .scenario, amount: 50, totalAfter: 385,
-                             base: 50, fromCorrect: 0, bonus: 0, correctCount: 0),
+        expectedSourceId: "scenario-1",
+        previewAward: XPStore.Award(source: .scenario, sourceId: "scenario-1",
+                                    amount: 50, totalAfter: 385,
+                                    base: 50, fromCorrect: 0, bonus: 0, correctCount: 0),
         onContinue: {}
     )
 }
@@ -506,8 +522,10 @@ extension CompletionScreen where Detail == EmptyView {
 #Preview("Level up") {
     CompletionScreen(
         title: "Lesson complete.",
-        award: XPStore.Award(source: .lesson, amount: 40, totalAfter: 260,
-                             base: 20, fromCorrect: 15, bonus: 5, correctCount: 3),
+        expectedSourceId: "lesson_1_2",
+        previewAward: XPStore.Award(source: .lesson, sourceId: "lesson_1_2",
+                                    amount: 40, totalAfter: 260,
+                                    base: 20, fromCorrect: 15, bonus: 5, correctCount: 3),
         onContinue: {}
     )
 }
@@ -515,7 +533,7 @@ extension CompletionScreen where Detail == EmptyView {
 #Preview("No award yet (offline or replay)") {
     CompletionScreen(
         title: "Scenario complete.",
-        award: nil,
+        expectedSourceId: "scenario-1",
         onContinue: {}
     )
 }
