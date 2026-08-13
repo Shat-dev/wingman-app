@@ -128,7 +128,10 @@ struct PracticeView: View {
                 LazyVStack(spacing: 12) {
                     Color.clear.frame(height: 0).id("top")
                     ForEach(viewModel.practices) { practice in
-                        PracticeCardView(practice: practice) {
+                        PracticeCardView(
+                            practice: practice,
+                            showsCompletion: viewModel.showsCompletion(for: practice)
+                        ) {
                             Task {
                                 await loadAndNavigate(practice: practice)
                             }

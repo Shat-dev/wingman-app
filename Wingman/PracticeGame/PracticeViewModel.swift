@@ -31,6 +31,20 @@ final class PracticeViewModel: ObservableObject {
     /// list is being served from the disk cache. See `PracticeFetchResult`.
     @Published private(set) var progressAvailable = false
 
+    /// Scenarios this session watched the user finish, by id.
+    ///
+    /// First-hand knowledge, and strictly better evidence than the network read
+    /// `progressAvailable` describes — which is the point. Completing a
+    /// scenario while the progress read is failing (or with the completion
+    /// write itself failing) must still mark the card, and a refetch that comes
+    /// back without the flag must not un-mark it. Mirrors how lesson progress
+    /// treats the local record as the source of truth and the cloud as
+    /// best-effort.
+    ///
+    /// In-memory only. Durability across launches comes from the disk cache,
+    /// which already round-trips `isCompleted`.
+    @Published private(set) var locallyCompletedIds: Set<UUID> = []
+
     /// Session-scoped cache of fetched PracticeGameData keyed by practice ID.
     /// PracticeGameData is immutable scenario content (scenes, text, options),
     /// so caching is always safe. User progress is tracked separately server-side.
@@ -39,6 +53,7 @@ final class PracticeViewModel: ObservableObject {
     // MARK: - Dependencies
     private let practiceService: PracticeServiceProtocol
     private var lessonCompletedObserver: NSObjectProtocol?
+    private var scenarioCompletedObserver: NSObjectProtocol?
 
     /// The user the in-memory state was last loaded for, or nil if never loaded.
     ///
@@ -72,10 +87,30 @@ final class PracticeViewModel: ObservableObject {
                 await self?.preloadPractices()
             }
         }
+
+        // Marks the finished card complete straight away. `PracticeView`'s
+        // `.task` sits on its `NavigationStack`, which the push into the game
+        // never tears down, so returning from a scenario re-runs nothing — the
+        // card would otherwise stay unmarked until the user left the tab and
+        // came back.
+        scenarioCompletedObserver = NotificationCenter.default.addObserver(
+            forName: .scenarioCompleted,
+            object: nil,
+            queue: .main
+        ) { [weak self] note in
+            guard let scenarioId = note.object as? UUID else { return }
+            Task { @MainActor [weak self] in
+                self?.noteScenarioCompleted(scenarioId)
+                await self?.preloadPractices()
+            }
+        }
     }
 
     deinit {
         if let observer = lessonCompletedObserver {
+            NotificationCenter.default.removeObserver(observer)
+        }
+        if let observer = scenarioCompletedObserver {
             NotificationCenter.default.removeObserver(observer)
         }
     }
@@ -126,6 +161,10 @@ final class PracticeViewModel: ObservableObject {
             practices = result.practices
             progressAvailable = result.progressAvailable
             loadedUserId = userId
+            // Before the cache write, so a completion this session survives a
+            // refetch that raced the (fire-and-forget) completion write and
+            // came back without the flag. See `locallyCompletedIds`.
+            reapplyLocalCompletions()
             Self.saveCachedPractices(practices)
             // A successful load clears a stale failure from an earlier attempt
             // even when this one was a silent preload — leaving it set would
@@ -140,6 +179,45 @@ final class PracticeViewModel: ObservableObject {
             progressAvailable = false
         }
         isLoading = false
+    }
+
+    // MARK: - Scenario completion
+
+    /// Records a scenario the user just finished and marks its card complete
+    /// without waiting on the server.
+    ///
+    /// Driven by `.scenarioCompleted`, posted from `PracticeGameViewModel`
+    /// the moment a genuine finish is reached. The reconciling refetch is the
+    /// caller's job; this is only the immediate half.
+    func noteScenarioCompleted(_ scenarioId: UUID) {
+        locallyCompletedIds.insert(scenarioId)
+
+        guard let index = practices.firstIndex(where: { $0.id == scenarioId }) else { return }
+        guard !practices[index].isCompleted else { return }
+        practices[index].isCompleted = true
+        Self.saveCachedPractices(practices)
+    }
+
+    /// Re-marks scenarios finished this session that a fetch came back without.
+    private func reapplyLocalCompletions() {
+        guard !locallyCompletedIds.isEmpty else { return }
+        for index in practices.indices where locallyCompletedIds.contains(practices[index].id) {
+            practices[index].isCompleted = true
+        }
+    }
+
+    /// Whether `practice`'s card should render its completed treatment.
+    ///
+    /// Completion is only shown when the flag is trustworthy. A `false`
+    /// `progressAvailable` means every `isCompleted` is false because the
+    /// progress read failed or the list is stale disk cache — not because
+    /// nothing is finished — so the flag alone would silently unmark finished
+    /// scenarios. Suppressing until a good read lands errs toward showing no
+    /// completion rather than a wrong one, and a scenario finished this session
+    /// is exempt because that is first-hand knowledge. See `PracticeFetchResult`.
+    func showsCompletion(for practice: Practice) -> Bool {
+        guard practice.isCompleted else { return false }
+        return progressAvailable || locallyCompletedIds.contains(practice.id)
     }
 
     /// Discards in-memory state belonging to a different user. See `loadedUserId`.
@@ -163,6 +241,9 @@ final class PracticeViewModel: ObservableObject {
         gameDataCache = [:]
         selectedPractice = nil
         progressAvailable = false
+        // Per-user, like the lock and completion flags it backs — leaving it
+        // would carry one account's finished scenarios onto the next.
+        locallyCompletedIds = []
         errorMessage = nil
         loadedUserId = nil
     }

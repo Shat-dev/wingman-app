@@ -5,6 +5,20 @@
 
 import Foundation
 
+extension Notification.Name {
+    /// Posted when a scenario is genuinely finished, carrying the scenario's
+    /// `UUID` as the notification object. The scenario counterpart to
+    /// `.lessonCompleted`.
+    ///
+    /// Exists because scenario completion is written server-side from a
+    /// detached task, so nothing else tells the in-memory scenario list that a
+    /// card's state just changed. `PracticeView` is never torn down by the push
+    /// into the game — its `.task` lives on the `NavigationStack` — so popping
+    /// back does not re-fetch, and without this the finished card would keep
+    /// rendering as unfinished until the next tab re-entry.
+    static let scenarioCompleted = Notification.Name("scenarioCompleted")
+}
+
 // MARK: - Practice (maps to `scenarios` table)
 struct Practice: Identifiable, nonisolated Codable, Hashable, Sendable {
     let id: UUID

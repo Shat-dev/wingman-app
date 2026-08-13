@@ -280,6 +280,13 @@ class PracticeGameViewModel: ObservableObject {
             try? await practiceService.completeScenario(userId: userId, scenarioId: scenarioId)
         }
 
+        // Posted here rather than inside the task above, on purpose: the write
+        // is fire-and-forget and can be slow or fail outright, but the finish
+        // itself is first-hand knowledge the moment we reach this line. The
+        // list marks the card complete off this, then reconciles with the
+        // server on the refetch it triggers.
+        NotificationCenter.default.post(name: .scenarioCompleted, object: scenarioId)
+
         // Reached only from `triggerCompletion()`, so this is a genuine finish
         // and never a dismissal. Scenarios are replayable and
         // `user_scenario_completions` has no unique constraint, so a replay

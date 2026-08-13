@@ -9,6 +9,14 @@ struct PracticeCardView: View {
 
     // MARK: - Properties
     let practice: Practice
+
+    /// Whether to render the completed treatment. Resolved by the parent rather
+    /// than read off `practice.isCompleted` here, because the flag on its own
+    /// is not evidence — it is false both for "not finished" and for "the
+    /// progress read failed". `PracticeViewModel.showsCompletion(for:)` owns
+    /// that distinction; this view just draws what it is told.
+    let showsCompletion: Bool
+
     let onTap: () -> Void
 
     // MARK: - Derived copy
@@ -80,7 +88,13 @@ struct PracticeCardView: View {
             .cornerRadius(5)
             .overlay(
                 RoundedRectangle(cornerRadius: 5)
-                    .stroke(Color(hex: "#E5E5E5"), lineWidth: 1)
+                    .stroke(
+                        // Matches the completed lesson card in CourseDetailSheet
+                        // — same radius, same 1px width, same black. The
+                        // unfinished colour is left exactly as it was.
+                        showsCompletion ? Color.wingmanBlack : Color(hex: "#E5E5E5"),
+                        lineWidth: 1
+                    )
             )
             .shadow(color: Color.wingmanBlack.opacity(0.06), radius: 5, x: 0, y: 2)
         }
@@ -93,8 +107,8 @@ struct PracticeCardView: View {
 // MARK: - Preview
 #Preview {
     VStack(spacing: 12) {
-        PracticeCardView(practice: Practice.mockData[0], onTap: {})
-        PracticeCardView(practice: Practice.mockData[2], onTap: {})
+        PracticeCardView(practice: Practice.mockData[0], showsCompletion: true, onTap: {})
+        PracticeCardView(practice: Practice.mockData[2], showsCompletion: false, onTap: {})
     }
     .padding(20)
     .background(Color.white)

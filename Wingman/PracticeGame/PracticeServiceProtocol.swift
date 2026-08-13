@@ -34,9 +34,16 @@ private struct ProgressUpsert: nonisolated Encodable, Sendable {
     let last_played_at: String
 }
 
-private struct ScenarioCompletionUpdate: nonisolated Encodable, Sendable {
+private struct ScenarioCompletionUpsert: nonisolated Encodable, Sendable {
+    let user_id: String
+    let scenario_id: String
     let is_completed: Bool
     let completed_at: String
+    /// Carried so the insert path supplies every column `ProgressUpsert` does
+    /// except the nullable `current_screen_id`, rather than relying on this
+    /// column having a default. Finishing a scenario is playing it, so
+    /// stamping it here is also just correct.
+    let last_played_at: String
 }
 
 private struct ScenarioCompletionLog: nonisolated Encodable, Sendable {
@@ -292,15 +299,28 @@ final class PracticeService: PracticeServiceProtocol {
 
     // MARK: Complete Scenario
     nonisolated func completeScenario(userId: UUID, scenarioId: UUID) async throws {
-        let update = ScenarioCompletionUpdate(
+        // Upsert, not update. `saveScenarioProgress` is the only thing that
+        // creates this row and it runs on scene *transitions* only — never on
+        // the transition into completion. A scenario finished before any
+        // intermediate transition therefore had no row for an UPDATE to match,
+        // so it silently affected zero rows while the completions insert below
+        // still succeeded and XP still paid out: completed everywhere except
+        // the flag the scenario list actually reads.
+        //
+        // Same conflict target as `saveScenarioProgress`. PostgREST's
+        // merge-duplicates only assigns the columns present in the payload, so
+        // an existing row keeps the `current_screen_id` it was last left on.
+        let now = ISO8601DateFormatter().string(from: Date())
+        let completion = ScenarioCompletionUpsert(
+            user_id: userId.uuidString,
+            scenario_id: scenarioId.uuidString,
             is_completed: true,
-            completed_at: ISO8601DateFormatter().string(from: Date())
+            completed_at: now,
+            last_played_at: now
         )
         try await client
             .from("user_scenario_progress")
-            .update(update)
-            .eq("user_id", value: userId.uuidString)
-            .eq("scenario_id", value: scenarioId.uuidString)
+            .upsert(completion, onConflict: "user_id,scenario_id")
             .execute()
 
         let log = ScenarioCompletionLog(
