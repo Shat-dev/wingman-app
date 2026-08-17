@@ -37,17 +37,23 @@ struct QuestionsCompleteView: View {
                 dismissDailyPractice()
             },
             detail: {
-                // The streak stays. Daily practice is the only surface where it
-                // is meaningful today — lessons and scenarios do not touch it,
-                // so showing it there would imply a link that does not exist.
-                HStack(spacing: 8) {
-                    Image("flame_fill_p")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 16, height: 22)
+                // Daily practice shows the streak as a figure rather than as
+                // the "N day streak" line lessons and scenarios get, because
+                // this is the surface the streak belongs to — it is the payoff,
+                // not a footnote. Same mark and same colour as those screens
+                // though: `StreakMark` exists so the glyph cannot drift again.
+                //
+                // Note this does not come through `CompletionScreen`'s own
+                // streak row. That row reads `StreakStore.lastAdvance`, which
+                // only `noteActivity` writes, and daily practice moves the
+                // streak through `update_daily_practice_streak` instead — so
+                // `currentStreak` is passed in and rendered here. One streak on
+                // the screen either way.
+                HStack(spacing: 10) {
+                    StreakMark(size: 29)
 
                     Text("\(currentStreak)")
-                        .font(.manropeMedium(size: 24))
+                        .font(.manropeMedium(size: 31))
                         .foregroundColor(.wingmanBlack)
                 }
             }

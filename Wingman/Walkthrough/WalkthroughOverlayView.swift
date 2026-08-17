@@ -4,11 +4,18 @@
 //
 //  The visible half of the first-run walkthrough. See docs/walkthrough-plan.md.
 //
-//  One treatment for every beat: a card in the middle of the screen over a
+//  One treatment for every beat: a card pinned just above the tab bar over a
 //  dimmed app. No mascot — the character was tried in two forms (small figure
 //  beside the copy, then large on a white stage) and in both it competed with
 //  the product it was meant to be selling. What actually persuades is the app
 //  behind the card, so the card stays small and the app stays visible.
+//
+//  That reasoning is also why the card sits at the bottom rather than the
+//  middle, and why it borrows its shape from `DialogueContentView` — the box a
+//  scenario's dialogue is read in. Centred, with a wordmark and a full-width
+//  Next button, it covered the very list the copy was pointing at; at the
+//  bottom the first scenario card stays on screen while the instruction is
+//  read, and the treatment is one the user meets again inside the scenario.
 //
 //  Layered into MainTabView's ZStack above the tab bar, and rendered only when
 //  `TabBarVisibilityManager.isVisible` — that flag is already the app's signal
@@ -21,13 +28,24 @@ import SwiftUI
 
 struct WalkthroughOverlayView: View {
 
+    /// Measured height of `CustomTabBar`, supplied by MainTabView.
+    ///
+    /// Measured rather than assumed because the bar's own height is device
+    /// dependent — `CustomTabBar.bottomPadding()` tucks it into the home
+    /// indicator on phones that have one and pads it outward on phones that
+    /// don't, so any constant here would clear the bar on one device and
+    /// overlap it on another.
+    let tabBarHeight: CGFloat
+
     @EnvironmentObject private var walkthrough: WalkthroughCoordinator
 
     var body: some View {
         if let beat {
-            ZStack {
+            ZStack(alignment: .bottom) {
                 scrim
                 card(beat)
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, tabBarHeight + 14)
             }
             .transition(.opacity)
             .animation(.easeInOut(duration: 0.25), value: walkthrough.step)
@@ -64,9 +82,9 @@ struct WalkthroughOverlayView: View {
         // The tour beat asks the user to scroll the course list while its card
         // is up, so it has to let touches through.
         //
-        // `scenarioPrompt` no longer needs to: its card now has a Next button,
-        // and once that is tapped `beat` is nil so nothing renders at all,
-        // scrim included. The scenario card is fully tappable from that point.
+        // `scenarioPrompt` no longer needs to: its card can be tapped through,
+        // and once that happens `beat` is nil so nothing renders at all, scrim
+        // included. The scenario card is fully tappable from that point.
         case .lessonsTour: return false
         default: return true
         }
@@ -75,58 +93,43 @@ struct WalkthroughOverlayView: View {
     // MARK: - Card
 
     private func card(_ beat: Beat) -> some View {
-        VStack(alignment: .leading, spacing: 22) {
-            // Sized by width like SplashView does (200pt there), not by
-            // height — the wordmark is wide and short, so a height constraint
-            // renders it postage-stamp small.
-            Image("wingman_logo")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 130)
-                .frame(maxWidth: .infinity, alignment: .center)
-                .accessibilityHidden(true)
+        Button {
+            HapticManager.shared.tap()
+            beat.advance?()
+        } label: {
+            VStack(spacing: 10) {
+                Text(beat.text)
+                    .font(.manropeMedium(size: 16))
+                    .foregroundColor(.wingmanBlack)
+                    .multilineTextAlignment(.center)
+                    .lineSpacing(4)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: .infinity)
 
-            Text(beat.text)
-                .font(.manropeMedium(size: 18))
-                .foregroundColor(.wingmanBlack)
-                .lineSpacing(5)
-                .fixedSize(horizontal: false, vertical: true)
-                .frame(maxWidth: .infinity, alignment: .leading)
-
-            if let action = beat.action {
-                primaryButton(action, perform: beat.perform)
+                if beat.advance != nil {
+                    Text(Self.continueHint)
+                        .font(.manropeMedium(size: 13))
+                        .foregroundColor(.wingmanBlack.opacity(0.5))
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                }
             }
+            .padding(.horizontal, 20)
+            .padding(.top, 20)
+            .padding(.bottom, 14)
+            .background(Color.wingmanWhiteFF)
+            .cornerRadius(5)
+            .overlay(
+                RoundedRectangle(cornerRadius: 5)
+                    .stroke(Color.wingmanBlack.opacity(0.10), lineWidth: 1)
+            )
+            .shadow(color: .black.opacity(0.18), radius: 12, y: 4)
+            .contentShape(Rectangle())
         }
-        .padding(24)
-        .background(Color.wingmanWhiteFF)
-        .cornerRadius(8)
-        .overlay(
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(Color.wingmanBlack.opacity(0.10), lineWidth: 1)
-        )
-        .shadow(color: .black.opacity(0.25), radius: 24, y: 10)
-        .padding(.horizontal, 28)
-        // On a beat with no button there is nothing here to tap, and swallowing
-        // touches would put the card between the user and what they were just
-        // told to open.
-        .allowsHitTesting(beat.action != nil)
-    }
-
-    private func primaryButton(
-        _ title: String,
-        perform: @escaping () -> Void
-    ) -> some View {
-        Button(action: perform) {
-            Text(title)
-                .font(.manropeSemiBold(size: 16))
-                .foregroundColor(.wingmanWhiteFF)
-                .frame(maxWidth: .infinity)
-                .frame(height: 50)
-                .background(Color.wingmanBlack)
-                .cornerRadius(5)
-                .contentShape(Rectangle())
-        }
-        .buttonStyle(ScalePressStyle())
+        .buttonStyle(ScalePressStyle(pressedScale: 0.98))
+        // On a beat with no way forward there is nothing here to tap, and
+        // swallowing touches would put the card between the user and what they
+        // were just told to open.
+        .allowsHitTesting(beat.advance != nil)
     }
 
     // MARK: - Script
@@ -134,29 +137,28 @@ struct WalkthroughOverlayView: View {
     private struct Beat {
         let text: String
         /// `nil` means there is no way forward from the card — the user has to
-        /// act in the app. Only `scenarioPrompt` does this, and that is the
-        /// plan's one hard constraint: the scenario has no skip.
-        let action: String?
-        let perform: () -> Void
+        /// act in the app. Nothing uses it today, and the card drops its
+        /// "Tap to continue" hint and its hit testing when it is nil, which is
+        /// what keeps that a real option rather than a dead branch.
+        let advance: (() -> Void)?
     }
 
     private var beat: Beat? {
         if let nudge = walkthrough.nudge {
             return Beat(
                 text: Self.nudgeText(nudge),
-                action: "Got it",
-                perform: { walkthrough.dismissNudge() }
+                advance: { walkthrough.dismissNudge() }
             )
         }
 
         switch walkthrough.step {
         case .welcome:
-            return Beat(text: Self.welcome, action: "Next", perform: walkthrough.advance)
+            return Beat(text: Self.welcome, advance: walkthrough.advance)
 
-        // Next dismisses the card but does NOT advance the script — tapping the
-        // pulsing scenario is still the only way forward, which is the one hard
-        // constraint. `acknowledgeScenarioPrompt()` leaves the step alone for
-        // exactly that reason.
+        // Tapping through dismisses the card but does NOT advance the script —
+        // tapping the pulsing scenario is still the only way forward, which is
+        // the one hard constraint. `acknowledgeScenarioPrompt()` leaves the
+        // step alone for exactly that reason.
         //
         // The card also does a second job. This beat arrives at the same moment
         // as a tab switch, and `TabView` realises the Scenarios tab for the
@@ -167,18 +169,17 @@ struct WalkthroughOverlayView: View {
             guard !walkthrough.scenarioPromptAcknowledged else { return nil }
             return Beat(
                 text: Self.scenarioPrompt,
-                action: "Next",
-                perform: walkthrough.acknowledgeScenarioPrompt
+                advance: walkthrough.acknowledgeScenarioPrompt
             )
 
         case .scenarioDone:
-            return Beat(text: Self.congratulations, action: "Next", perform: walkthrough.advance)
+            return Beat(text: Self.congratulations, advance: walkthrough.advance)
 
         case .lessonsTour:
-            return Beat(text: Self.coursesTour, action: "Next", perform: walkthrough.advance)
+            return Beat(text: Self.coursesTour, advance: walkthrough.advance)
 
         case .benefits:
-            return Beat(text: Self.signOff, action: "Next", perform: walkthrough.advance)
+            return Beat(text: Self.signOff, advance: walkthrough.advance)
 
         case .dormant, .scenarioRunning, .finished:
             return nil
@@ -189,6 +190,10 @@ struct WalkthroughOverlayView: View {
     //
     // Voice follows AppStrings.Onboarding: plain, second person, outcome
     // first, no jargon.
+
+    /// Verbatim the wording a scenario's dialogue box uses, because this card
+    /// now looks like one and is advanced the same way.
+    private static let continueHint = "Tap to continue"
 
     // Verbatim, including punctuation. No em dashes anywhere in walkthrough
     // copy — commas only.
@@ -228,5 +233,16 @@ struct WalkthroughOverlayView: View {
         case .lockedScenario:
             return "That one's further down the line. Start with the first."
         }
+    }
+}
+
+// MARK: - Tab bar measurement
+
+/// Carries `CustomTabBar`'s measured height from MainTabView to the walkthrough
+/// card, which sits directly above it. See `WalkthroughOverlayView.tabBarHeight`.
+struct WalkthroughTabBarHeightKey: PreferenceKey {
+    static let defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = max(value, nextValue())
     }
 }

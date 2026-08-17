@@ -31,6 +31,11 @@ struct MainTabView: View {
     /// now so the surfaces that feed it are already wired when it wakes up.
     @StateObject private var walkthrough = WalkthroughCoordinator()
 
+    /// Measured height of `CustomTabBar`, so the walkthrough card can sit just
+    /// above it. The bar's height differs by device — see its `bottomPadding()`
+    /// — so this is measured rather than assumed.
+    @State private var tabBarHeight: CGFloat = 0
+
     var body: some View {
 
         ZStack(alignment: .bottom) {
@@ -39,22 +44,26 @@ struct MainTabView: View {
                     .environmentObject(coursesRouter)
                     .environmentObject(tabBarVisibility)
                     .environmentObject(walkthrough)
+                    .toolbar(.hidden, for: .tabBar)
                     .tag(0)
 
                 CoursesView()
                     .environmentObject(coursesRouter)
                     .environmentObject(tabBarVisibility)
                     .environmentObject(walkthrough)
+                    .toolbar(.hidden, for: .tabBar)
                     .tag(1)
 
                 PracticeView()
                     .environmentObject(tabBarVisibility)
                     .environmentObject(walkthrough)
+                    .toolbar(.hidden, for: .tabBar)
                     .tag(2)
 
                 ProfileView()
                     .environmentObject(tabBarVisibility)
                     .environmentObject(walkthrough)
+                    .toolbar(.hidden, for: .tabBar)
                     .tag(3)
             }
             .tabViewStyle(.automatic)
@@ -71,12 +80,28 @@ struct MainTabView: View {
                     // directly, so it is unaffected by this.
                     //
                     // Disabled only, never dimmed. `CustomTabBar` is drawn on
-                    // top of the TabView's OWN tab bar, which is not hidden on
-                    // any of the four tab roots — so any transparency here
-                    // reveals the system bar underneath, selection pill
-                    // included, and the whole navbar appears to change design
-                    // mid-walkthrough.
+                    // top of the TabView's OWN tab bar and its background is
+                    // `.systemUltraThinMaterial`, so any transparency here
+                    // reveals whatever is behind it and the navbar appears to
+                    // change design mid-walkthrough.
+                    //
+                    // The system bar used to be that "whatever": it was not
+                    // hidden on any of the four tab roots, and on a device
+                    // with no bottom safe area (iPhone SE) its iOS 26 glass
+                    // container and selection pill showed straight through —
+                    // reported as "weird buttons on top of the navigation".
+                    // The `.toolbar(.hidden, for: .tabBar)` on each root above
+                    // is what removes it. This stays `.disabled` regardless:
+                    // the reasoning about the script does not depend on it.
                     .disabled(walkthrough.isRunning)
+                    .background(
+                        GeometryReader { proxy in
+                            Color.clear.preference(
+                                key: WalkthroughTabBarHeightKey.self,
+                                value: proxy.size.height
+                            )
+                        }
+                    )
             } else {
                 let _ = log("🏠 MainTabView: Tab bar is HIDDEN - CustomTabBar not shown")
             }
@@ -88,9 +113,15 @@ struct MainTabView: View {
             // on appear — without this the card would draw on top of the
             // scenario the user was just told to play.
             if walkthrough.isRunning && tabBarVisibility.isVisible {
-                WalkthroughOverlayView()
+                WalkthroughOverlayView(tabBarHeight: tabBarHeight)
                     .environmentObject(walkthrough)
             }
+        }
+        // Written by the tab bar above. Only ever read while the bar is on
+        // screen, because the overlay that consumes it renders under the same
+        // `tabBarVisibility.isVisible` condition.
+        .onPreferenceChange(WalkthroughTabBarHeightKey.self) { height in
+            tabBarHeight = height
         }
         .ignoresSafeArea(.keyboard)
         .onAppear {
@@ -212,7 +243,7 @@ struct CustomTabBar: View {
         }
         .padding(.horizontal, 0)
         .padding(.top, 17) // Reduced from 17 to 12
-        .padding(.bottom, -5)
+        .padding(.bottom, bottomPadding())
         .frame(maxWidth: .infinity)
         .background(
             CompatibleGlassBackground()
@@ -254,15 +285,29 @@ struct CustomTabBar: View {
         }
     }
 
+    /// Bottom padding for the tab bar's content, which has to differ by device.
+    ///
+    /// The `-5` tucks the labels down into the home-indicator area, where
+    /// there are 34pt of safe-area inset below to absorb it — that is where
+    /// the value was tuned and it stays exactly as it was there.
+    ///
+    /// On a home-button phone (iPhone SE) `safeAreaInsets.bottom` is 0, so
+    /// there is nothing underneath to absorb it and the same -5 pushed the
+    /// "Home / Courses / Scenarios / Profile" labels straight off the bottom
+    /// of the screen. Those devices get a small positive inset instead.
+    ///
+    /// This function already existed with a `0 : 2` split and was never
+    /// called — wiring it up as written would have moved the labels 5pt on
+    /// every device that is currently correct, so the safe-area branch
+    /// returns the established -5 rather than 0.
     private func bottomPadding() -> CGFloat {
-        // Keep the tabbar comfortably above the home indicator
         let bottomSafe = UIApplication.shared.connectedScenes
             .compactMap { $0 as? UIWindowScene }
             .flatMap { $0.windows }
             .first { $0.isKeyWindow }?
             .safeAreaInsets.bottom ?? 0
 
-        return bottomSafe > 0 ? 0 : 2
+        return bottomSafe > 0 ? -5 : 2
     }
 }
 

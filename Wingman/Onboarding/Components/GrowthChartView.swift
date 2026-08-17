@@ -240,7 +240,26 @@ struct GrowthChartView: View {
                     .opacity(showEndMarkers ? 1 : 0)
             }
         }
-        .frame(height: 260)
+        // Flexible rather than an exact 260. Everything else on
+        // `GrowthProjectionScreen` is rigid — the headline and all three
+        // bullet rows are `.fixedSize`d vertically and the gaps are exact —
+        // so this chart is the only element that can absorb a short canvas.
+        // With a hard 260 there was nothing to give and the overflow went to
+        // the screen's own edges instead: the progress bar rode up under the
+        // status bar and the Continue button was clipped off the bottom on a
+        // stock iPhone SE (375×667), and worse under Display Zoom, which
+        // renders a 6.1" phone at 320×693 with no API to opt out.
+        //
+        // `idealHeight` is what keeps this at exactly 260 wherever there is
+        // room, so nothing moves on the canvases that already worked. It must
+        // NOT be `maxHeight: 260` alone — the frame would then size to the
+        // chart's own content and shift the copy up on every device.
+        //
+        // The 170 floor keeps the callout bubbles and axis captions from
+        // crowding the curves; everything inside is positioned off
+        // `GeometryReader` proportions, so the chart rescales cleanly down to
+        // it rather than clipping.
+        .frame(minHeight: 170, idealHeight: 260, maxHeight: 260)
         .onAppear(perform: runAnimation)
         // The chart is decorative; the copy underneath carries the meaning.
         .accessibilityHidden(true)

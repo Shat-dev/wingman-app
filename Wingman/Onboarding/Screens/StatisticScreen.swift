@@ -48,7 +48,13 @@ struct StatisticScreen: View {
                         .fixedSize(horizontal: false, vertical: true)
                         .frame(maxWidth: .infinity, alignment: .leading)
 
-                    Spacer().frame(height: 40)
+                    // `maxHeight` rather than an exact height so these two
+                    // gaps are the first thing to give on a short canvas.
+                    // A Spacer has no intrinsic size, so it still takes the
+                    // full 40 wherever there is room — but when there isn't,
+                    // 80pt of pure whitespace collapsing is a far better
+                    // trade than the illustration shrinking to a thumbnail.
+                    Spacer().frame(maxHeight: 40)
 
                     // Image — reduced from 250pt to 220pt to free up
                     // ~30pt of vertical room for the `.fixedSize`-expanded
@@ -56,12 +62,50 @@ struct StatisticScreen: View {
                     // else-branch heading+fact would push the outer view
                     // past its proposed size and trigger center-overflow,
                     // shifting the top bar up by 13pt on statistic screens.
+                    //
+                    // Deliberately a *flexible* frame rather than
+                    // `.frame(height: 220)`. Every other element in this
+                    // stack is rigid — the three `Text`s are `.fixedSize`d
+                    // vertically and the two gaps are exact — so when the
+                    // canvas is too short something has to give, and with a
+                    // hard 220 the only thing that could was the screen's own
+                    // bounds: the chevron and progress bar were pushed off
+                    // the top edge and "Tap to continue" off the bottom.
+                    //
+                    // That is not hypothetical. Display Zoom (Settings →
+                    // Display & Brightness) shrinks the whole UI's *point*
+                    // canvas — a 6.1" iPhone goes from 390×844 to 320×693 —
+                    // and there is no API to opt out of it. A stock iPhone SE
+                    // at 375×667 overflowed here too, with no zoom involved.
+                    //
+                    // idealHeight keeps this at exactly 220 wherever there is
+                    // room, so nothing moves on the canvases that already
+                    // worked. Note `maxHeight: 220` alone would NOT work: the
+                    // frame would then size to the aspect-fitted artwork
+                    // (~157pt here, since these images are wider than they
+                    // are tall) and shift everything below it up on *every*
+                    // device.
+                    //
+                    // The 120 floor stops it collapsing. Left to shrink
+                    // freely it bottomed out near 50pt at 320×693, because a
+                    // VStack splits a shortfall across its flexible children
+                    // and the trailing `Spacer()` was claiming its share —
+                    // legible, but a thumbnail. Floored here and with the two
+                    // gaps above/below now collapsible, the illustration
+                    // keeps a sensible size and the whitespace absorbs the
+                    // difference instead.
                     Image(statistic.imageName)
                         .resizable()
                         .scaledToFit()
-                        .frame(height: 220)
+                        .frame(minHeight: 120, idealHeight: 220, maxHeight: 220)
 
-                    Spacer().frame(height: 40)
+                    // `maxHeight` rather than an exact height so these two
+                    // gaps are the first thing to give on a short canvas.
+                    // A Spacer has no intrinsic size, so it still takes the
+                    // full 40 wherever there is room — but when there isn't,
+                    // 80pt of pure whitespace collapsing is a far better
+                    // trade than the illustration shrinking to a thumbnail.
+                    Spacer().frame(maxHeight: 40)
 
                     // Fact
                     Text(statistic.fact)

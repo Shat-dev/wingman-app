@@ -505,6 +505,14 @@ struct RootView: View {
                 // ApproachesLoggedListView. Anything new that renders an
                 // email, a real name, or free text about a third party needs
                 // the same treatment — this flag will no longer catch it.
+                //
+                // One deliberate exception: NameScreen is NOT masked, even
+                // though it captures a real name. CommitmentPactView renders
+                // that same name back unmasked a few screens later, so masking
+                // the field hid nothing and only cost us replay of the screen
+                // whose value we are actively measuring. See the comment at the
+                // bottom of NameScreen for the full reasoning — and note the
+                // two are coupled: masking the pact means masking that too.
                 config.sessionReplayConfig.maskAllTextInputs = false
 
                 // Every image in the app is a bundled asset (course art,

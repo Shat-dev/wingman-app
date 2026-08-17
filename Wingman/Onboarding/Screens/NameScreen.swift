@@ -19,7 +19,6 @@
 //
 
 import SwiftUI
-import PostHog
 
 struct NameScreen: View {
     let step: OnboardingStep
@@ -105,8 +104,23 @@ struct NameScreen: View {
         }
         .padding(.horizontal, 24)
         .padding(.bottom, 16)
-        // Session replay: the field holds the user's real name.
-        .postHogMask()
+        // Session replay: deliberately NOT masked, unlike the other screens
+        // that touch personal data (AuthView, SettingsSheet, EditProfileSheet,
+        // LogApproachBottomSheet, ApproachesLoggedListView).
+        //
+        // Masking here bought no privacy. `CommitmentPactView` renders the same
+        // name straight back as "I, <name>, am becoming a guy who takes action."
+        // (CommitmentPactCopy.headline) and carries no mask, so the name was
+        // already in replay one screen later — hiding it here only cost us the
+        // ability to watch the screen itself. That screen is the one the
+        // `onboarding_name_answered` / `onboarding_name_provided` instrumentation
+        // exists to evaluate: whether asking for a name is worth a step in the
+        // funnel. The skip-vs-answer number says what people did; the replay is
+        // the only thing that shows why.
+        //
+        // These two are a pair. If the pact is ever masked, mask this with it —
+        // leaving the field visible is only defensible while the name is already
+        // visible downstream.
         .onAppear {
             // Deferred past the page transition. Raising the keyboard while
             // the push is still running re-lays-out the screen mid-slide,

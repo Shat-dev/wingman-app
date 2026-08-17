@@ -58,7 +58,28 @@ struct SettingsSheet: View {
                             Image(systemName: "xmark")
                                 .font(.system(size: 16, weight: .medium))
                                 .foregroundColor(.wingmanBlack)
-                                .padding(.top, -20)
+                                // The -20 lifts the X clear of the title's
+                                // baseline on the fixed `.height(720)` detent
+                                // that Standard/Max phones get, where the
+                                // sheet top sits ~150pt down the screen and
+                                // there is room above it.
+                                //
+                                // SE-class phones fall back to `.large`
+                                // (ProfileView's `isSmallPhone` branch, since
+                                // 720pt does not fit in 667). That puts the
+                                // sheet top just under the status bar, and the
+                                // same -20 lifted the X into the sheet's own
+                                // 20pt `presentationCornerRadius` arc, which
+                                // clips it — the "top is cut off" report.
+                                //
+                                // Conditional rather than removed outright:
+                                // dropping the nudge everywhere would move the
+                                // X on every device that currently renders
+                                // correctly. At 0 it simply centres against
+                                // "Settings" in the HStack. Keyed on the same
+                                // `isSmallPhone` flag that selects the detent,
+                                // so the two cannot drift apart.
+                                .padding(.top, UIScreen.isSmallPhone ? 0 : -20)
                                 .padding(.trailing, -2)
                                 .opacity(0.5)
                         }

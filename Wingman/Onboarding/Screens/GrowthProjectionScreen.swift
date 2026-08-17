@@ -74,7 +74,12 @@ struct GrowthProjectionScreen: View {
                 negativeLabel: content.negativeLabel
             )
 
-            Spacer().frame(height: UIScreen.isSmallPhone ? 16 : 28)
+            // `maxHeight` rather than an exact height, so these two gaps
+            // collapse before the chart above them has to shrink. A Spacer
+            // has no intrinsic size, so each still takes its full value
+            // wherever there is room. See the note on `GrowthChartView`'s
+            // frame for why anything here has to be compressible at all.
+            Spacer().frame(maxHeight: UIScreen.isSmallPhone ? 16 : 28)
 
             Text(content.headline)
                 .font(.manropeSemiBold(size: UIScreen.isSmallPhone ? 21 : 24))
@@ -86,7 +91,7 @@ struct GrowthProjectionScreen: View {
                 .opacity(showCopy ? 1 : 0)
                 .offset(y: showCopy ? 0 : 8)
 
-            Spacer().frame(height: UIScreen.isSmallPhone ? 16 : 24)
+            Spacer().frame(maxHeight: UIScreen.isSmallPhone ? 16 : 24)
 
             VStack(alignment: .leading, spacing: 18) {
                 ForEach(content.bullets) { bullet in

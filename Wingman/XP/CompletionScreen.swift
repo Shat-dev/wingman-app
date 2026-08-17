@@ -366,15 +366,16 @@ struct CompletionScreen<Detail: View>: View {
     ///
     /// No haptic. The XP sequence already spends four, and a fifth for a line
     /// that fades in quietly would be noise.
+    /// Deliberately larger than the line items and the level label around it.
+    /// Those are the working; the streak is the one number a user comes back
+    /// for, so it is allowed to outweigh them.
     @ViewBuilder
     private var streakRow: some View {
         if let advance = streakAdvance {
-            HStack(spacing: 6) {
-                Image(systemName: "flame.fill")
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundColor(.accentClay)
+            HStack(spacing: 8) {
+                StreakMark(size: 17)
                 Text(advance.streak == 1 ? "1 day streak" : "\(advance.streak) day streak")
-                    .font(.manropeMedium(size: 13))
+                    .font(.manropeMedium(size: 16))
                     .foregroundColor(.wingmanBlack)
             }
             .transition(.opacity)
@@ -562,6 +563,33 @@ struct CompletionScreen<Detail: View>: View {
             guard isActive else { return }
             work()
         }
+    }
+}
+
+// MARK: - Streak mark
+
+/// The streak glyph, one definition for every completion surface that shows it.
+///
+/// Daily practice used to draw its own `Image("flame_fill_p")` while lessons and
+/// scenarios drew `flame.fill` — so the same idea had two different marks
+/// depending on which thing you had just finished, and the daily-practice one
+/// came out black. That asset is a black raster, and `Image(_:)` renders in
+/// `.original` mode, so no tint was ever going to reach it without
+/// `.renderingMode(.template)`. The symbol tints by default and scales as
+/// vector, which is what this needs now that the mark is bigger.
+///
+/// `flame.fill` in `.accentClay` is already what Profile's top-streak tile uses,
+/// so this standardises on the mark that was in the majority rather than
+/// inventing a third one.
+struct StreakMark: View {
+    /// Symbol point size. Semibold because clay on white at a lighter weight
+    /// goes muddy once the glyph is small.
+    var size: CGFloat = 17
+
+    var body: some View {
+        Image(systemName: "flame.fill")
+            .font(.system(size: size, weight: .semibold))
+            .foregroundColor(.accentClay)
     }
 }
 
