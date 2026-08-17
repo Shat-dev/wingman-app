@@ -213,9 +213,9 @@ private struct SubscriptionGate: ViewModifier {
         let alreadyShown = authManager.hasSeenSecondChanceOffer
         // The offer is once-ever, so it has to be spent at the moment it is
         // worth the most: after the free lesson, when the user reaches for the
-        // second one. The walkthrough's scrim passes taps through on two beats
-        // (`scenarioPrompt` / `lessonsTour` — WalkthroughOverlayView.swift:58),
-        // and demo-mode locking was cancelled, so these gates ARE reachable
+        // second one. The walkthrough's scrim passes taps through on one beat
+        // (`coursesTour` — see `WalkthroughOverlayView.blocksInteraction`), and
+        // demo-mode locking was cancelled, so these gates ARE reachable
         // mid-script. Without this, a stray tap on a locked course during the
         // course tour burns the offer before the user has completed anything.
         //

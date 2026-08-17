@@ -72,10 +72,10 @@ struct MainTabView: View {
                 let _ = log("🏠 MainTabView: Tab bar is VISIBLE - showing CustomTabBar")
                 CustomTabBar(selectedTab: $selectedTab)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
-                    // Locked for the duration of the script. The scenario beat
-                    // shows no card at all — the pulsing card is the entire
-                    // instruction — so wandering off that screen would leave
-                    // the user with nothing telling them what to do. The
+                    // Locked for the duration of the script, which is four taps
+                    // long and drives its own tab changes. Wandering off a beat
+                    // would desynchronise the card from the tab it is
+                    // describing, and every card names the tab it is on. The
                     // coordinator drives tabs by writing `selectedTab`
                     // directly, so it is unaffected by this.
                     //
@@ -134,13 +134,13 @@ struct MainTabView: View {
                 hasActiveSubscription: authManager.hasActiveSubscription
             )
 
-            // Land on Courses if the walkthrough just handed off there, so the
-            // lesson it promised is where the user was left rather than two
-            // taps away. One-shot — consumed here.
-            if authManager.pendingCoursesHandoff {
-                authManager.pendingCoursesHandoff = false
-                log("🎬 MainTabView: opening on Courses after walkthrough handoff")
-                selectedTab = WalkthroughCoordinator.Tab.courses.rawValue
+            // Land where the walkthrough's last card left the user, rather than
+            // on Home — RootView's branch swaps rebuild this view and reset
+            // `selectedTab`. One-shot — consumed here.
+            if let handoff = authManager.pendingWalkthroughHandoff {
+                authManager.pendingWalkthroughHandoff = nil
+                log("🎬 MainTabView: opening on \(handoff) after walkthrough handoff")
+                selectedTab = handoff.rawValue
             }
         }
         // Backstop for a script that ends because the route changed under it —
@@ -159,7 +159,7 @@ struct MainTabView: View {
         .onDisappear {
             guard walkthrough.isRunning else { return }
             walkthrough.interrupt(reason: "routeChanged")
-            authManager.markFreeDemoCompleted(handoffToCourses: false)
+            authManager.markFreeDemoCompleted(handoffTo: nil)
             // Same reasoning as the finish path: no post-demo ask, so an
             // interrupted script must not leave one armed for a later launch.
             authManager.markPostDemoWallDismissed()
@@ -171,13 +171,18 @@ struct MainTabView: View {
         // what makes this safe to hang off a step change rather than needing a
         // separate "did they really complete it" signal.
         //
-        // Flipping the flag re-renders RootView out of branch 4b and into 4c,
-        // the post-demo ask, which is the peak-intent moment the whole script
-        // exists to set up. It also releases the one free lesson.
+        // Flipping the flag re-renders RootView out of branch 4b and releases
+        // the one free lesson.
+        //
+        // Hands off to Scenarios because that is the tab the closing card was
+        // pointing at, and the free scenario it offered is sitting on it,
+        // unlocked and now tappable. Landing anywhere else would make the offer
+        // read as a bait: the card says "play one whenever you feel like it"
+        // and the user's next frame would be a different screen.
         .onChange(of: walkthrough.step) { newStep in
             guard newStep == .finished else { return }
             log("🎬 MainTabView: walkthrough finished — marking free demo complete")
-            authManager.markFreeDemoCompleted()
+            authManager.markFreeDemoCompleted(handoffTo: .scenarios)
 
             // The script now ends straight into the app, with no ask.
             //

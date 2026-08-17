@@ -45,9 +45,8 @@ enum Analytics {
         // `walkthrough_suppressed` is the odd one out: it shipped ahead of the
         // rest because it is the only way to see the suppression decision,
         // which is otherwise silent and changes the denominator of every
-        // funnel below it. `reason` distinguishes the layers
-        // (`existingProgress`, `scenarioAlreadyComplete`, `freeScenarioUnavailable`,
-        // `scenarioLoadFailed`).
+        // funnel below it. Only `existingProgress` reaches it now — the
+        // scenario-shaped reasons went with the beat that needed them.
         //
         // There is deliberately NO `walkthrough_abandoned`. Abandonment is a
         // force-quit, which cannot be captured honestly at the moment it
@@ -55,22 +54,18 @@ enum Analytics {
         // "took a phone call" with "gave up". `walkthrough_step_viewed` answers
         // the same question better — it shows exactly which beat loses people,
         // rather than collapsing all of them into one number.
+        //
+        // `walkthrough_scenario_abandoned` is gone with the gate that produced
+        // it. Its numbers are worth keeping in mind when reading the new funnel:
+        // on US users, five of the six people who finished the old script had
+        // bailed out of the forced scenario at least once first, and one bailed
+        // six times. `step` values changed wholesale in the same rewrite, so
+        // `walkthrough_completed` is the only metric comparable across it.
         static let walkthroughSuppressed = "walkthrough_suppressed"
         static let walkthroughStarted = "walkthrough_started"
         static let walkthroughStepViewed = "walkthrough_step_viewed"
         static let walkthroughNudgeShown = "walkthrough_nudge_shown"
         static let walkthroughCompleted = "walkthrough_completed"
-
-        /// The user opened the free scenario and left before finishing it.
-        ///
-        /// The one genuinely interactive beat in the script, and the only one
-        /// a user can enter and back out of. It was technically observable —
-        /// returning to the prompt re-fires `walkthrough_step_viewed` with
-        /// `step = scenarioPrompt` — but only as a *repeat* of a beat, which
-        /// is indistinguishable from ordinary re-entry and quietly inflates
-        /// that step's count in the drop-off funnel. Naming it directly keeps
-        /// the step funnel honest and makes the retry loop countable.
-        static let walkthroughScenarioAbandoned = "walkthrough_scenario_abandoned"
 
         /// Ended without the user finishing it, for a reason the app knows
         /// about — today, a subscription landing mid-script. Kept apart from

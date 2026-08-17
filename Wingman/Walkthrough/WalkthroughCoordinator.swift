@@ -9,11 +9,26 @@
 //  app and why `PracticeService` / `CoursesViewModel` are untouched. This type
 //  holds the whole script; the surfaces it drives stay ignorant of it.
 //
-//  DORMANT BY DEFAULT. `start(...)` is the only thing that activates it, and
-//  nothing calls that yet — the overlay (W5) is what starts the script,
-//  because a running script with nothing rendering it would intercept taps and
-//  give the user no feedback. Until then every method here is a no-op and
-//  every published value holds its initial state.
+//  A CARD PER TAB, A SIGN-OFF, AND NOTHING IS REQUIRED.
+//
+//  The script used to gate itself behind the free scenario: `scenarioPrompt`
+//  had no skip by design, so the only way forward was to play a roleplay
+//  through to its final scene. Measured on US App Store users (the AU traffic
+//  in PostHog is developer speed-runs and has to be filtered out first), that
+//  beat cost 11 of the 18 people who reached it, took a median 151 seconds
+//  rather than the ~20 the speed-runs suggested, and five of the six who did
+//  finish had bailed out of it at least once on the way. It also withheld the
+//  free lesson from 14 of 20 starters, because `hasCompletedFreeDemo` — the
+//  flag that releases the credit — only flips when the script completes.
+//
+//  So the scenario is now a tab the tour walks past rather than a toll gate, and
+//  the whole script is five taps of showing the app. Nothing in it can fail to
+//  load, which is why the whole of the old suppression layer 2
+//  (`noteScenarioList`, `noteScenarioUnavailable`, `skipScenarioBeat`) is gone:
+//  there is no longer a beat that can strand a user by pointing at content that
+//  isn't there.
+//
+//  DORMANT BY DEFAULT. `start(...)` is the only thing that activates it.
 //
 
 import Foundation
@@ -29,14 +44,29 @@ final class WalkthroughCoordinator: ObservableObject {
     /// `dormant` and `finished` are both "not running", kept apart so the
     /// difference between *never started* and *just ended* stays legible —
     /// only the second should flip `hasCompletedFreeDemo`.
+    ///
+    /// Tab order is Home, Courses, Scenarios, Profile, and then back to
+    /// Scenarios for the sign-off. Courses comes before Scenarios because the
+    /// lessons are where the rest of the app comes from, and a scenario reads as
+    /// an invitation rather than a chore once the user knows what else is here.
+    /// Profile is last because its copy leans on being empty, which only lands
+    /// once the user has seen what fills it.
+    ///
+    /// The script then returns to Scenarios to close. That is deliberate: the
+    /// tour should end on the thing the user can act on, not on the empty chart
+    /// it just finished describing. `finish()` and `MainTabView`'s handoff both
+    /// agree on that tab.
+    ///
+    /// Raw values are the `step` property on `walkthrough_step_viewed`, so they
+    /// are the funnel's dimension. They changed wholesale with this rewrite;
+    /// `walkthrough_completed` is the metric that stays comparable across it.
     enum Step: String {
         case dormant
-        case welcome
-        case scenarioPrompt
-        case scenarioRunning
-        case scenarioDone
-        case lessonsTour
-        case benefits
+        case welcome        // Home
+        case coursesTour    // Courses
+        case scenarioTour   // Scenarios — walked past, never required
+        case progressTour   // Profile
+        case signOff        // Scenarios again, to close
         case finished
     }
 
@@ -45,6 +75,12 @@ final class WalkthroughCoordinator: ObservableObject {
     /// Every case must resolve to a line of copy and nothing else. **A nudge may
     /// never present a paywall** — an interrupting purchase screen during the
     /// sell is the single worst thing this feature could do.
+    ///
+    /// Only `.lesson` is reachable today: `coursesTour` is the one beat whose
+    /// scrim lets touches through (its copy asks the user to scroll the course
+    /// list), and everywhere else the card is the only thing that can be tapped.
+    /// The other two are kept because they are the correct answer if any future
+    /// beat becomes permeable.
     enum Nudge: String {
         case lesson
         case dailyPractice
@@ -75,8 +111,7 @@ final class WalkthroughCoordinator: ObservableObject {
             // with a duration.
             guard step != .dormant, step != .finished else { return }
             Analytics.capture(Analytics.Event.walkthroughStepViewed, [
-                "step": step.rawValue,
-                "skipped_scenario": didSkipScenario
+                "step": step.rawValue
             ])
         }
     }
@@ -87,29 +122,6 @@ final class WalkthroughCoordinator: ObservableObject {
     /// it via `tabApplied()` once applied, so a repeat of the same tab later in
     /// the script still registers as a change.
     @Published private(set) var requestedTab: Tab?
-
-    /// True when the scenario beat was skipped rather than played. Copy
-    /// branches on this — congratulating someone for something they did weeks
-    /// ago reads wrong.
-    @Published private(set) var didSkipScenario = false
-
-    /// Set when the scenario list arrives before the script has reached the
-    /// prompt, and says the beat is not worth playing.
-    ///
-    /// Recorded rather than acted on, because jumping the step out from under
-    /// a beat the user is currently reading desynchronises their next tap: a
-    /// jump straight to `lessonsTour` during `welcome` means the pending tap
-    /// advances to `benefits` and the tour is never shown. `advance()` reads
-    /// this instead, so the skip happens at a beat boundary.
-    private var scenarioBeatUnavailable = false
-
-    /// Whether the user has tapped Next on the scenario instruction card.
-    ///
-    /// Separate from `step` because dismissing that card must NOT advance the
-    /// script — the scenario is still the only way forward. Reset by
-    /// `noteScenarioAbandoned()` so someone who backs out of the scenario is
-    /// told what to do again.
-    @Published private(set) var scenarioPromptAcknowledged = false
 
     /// The step to enter once the host confirms it has switched tabs.
     ///
@@ -123,23 +135,15 @@ final class WalkthroughCoordinator: ObservableObject {
         step != .dormant && step != .finished
     }
 
-    /// Whether the script is currently waiting for this specific scenario to be
-    /// opened — i.e. whether its card should be drawing attention to itself.
-    ///
-    /// Asked by the scenario list rather than pushed at it, so the coordinator
-    /// stays ignorant of how the emphasis is drawn.
-    func isAwaitingScenario(orderIndex: Int) -> Bool {
-        step == .scenarioPrompt && orderIndex == AuthManager.freeScenarioOrderIndex
-    }
-
     /// Whether off-script taps should be answered by the script rather than
     /// acted on.
     ///
-    /// False during `scenarioRunning` because the user is inside `PracticeGame`
-    /// at that point — the tab surfaces are not visible, and the overlay is
-    /// hidden for the same reason (see `TabBarVisibilityManager`).
+    /// Identical to `isRunning` now that no beat sends the user off the tab
+    /// surfaces — the old `scenarioRunning` exception existed because the user
+    /// was inside `PracticeGame` at that point. Kept as its own name because
+    /// that is what the call sites mean.
     var isIntercepting: Bool {
-        isRunning && step != .scenarioRunning
+        isRunning
     }
 
     // MARK: - Activation
@@ -158,7 +162,7 @@ final class WalkthroughCoordinator: ObservableObject {
 
         guard !hasCompletedFreeDemo, !hasActiveSubscription else {
             // Stays `dormant`. Emphatically NOT `finished` — that state means
-            // "the user completed the script", and W6 hangs
+            // "the user completed the script", and MainTabView hangs
             // `markFreeDemoCompleted()` off reaching it. Sending an ineligible
             // user there would write the demo flag for someone who never saw
             // the walkthrough: harmless for a suppressed user (already set),
@@ -188,105 +192,36 @@ final class WalkthroughCoordinator: ObservableObject {
 
     /// The user tapped through a beat.
     ///
-    /// Deliberately does nothing at `scenarioPrompt`: that beat ends when the
-    /// user actually opens the scenario, which is the one required action in
-    /// the whole script. There is no skip.
+    /// Every beat advances from its own card, and every card is tappable —
+    /// there is no beat that waits on the user doing something in the app. That
+    /// is the whole change: the script can no longer hold anyone anywhere.
     func advance() {
         switch step {
         case .welcome:
-            // The scenario list may already have told us the beat is not worth
-            // playing. Acting on it here rather than the moment we learned it
-            // keeps every step change on a beat boundary.
-            if scenarioBeatUnavailable {
-                didSkipScenario = true
-                requestTab(.courses, then: .lessonsTour)
-            } else {
-                requestTab(.scenarios, then: .scenarioPrompt)
-            }
+            requestTab(.courses, then: .coursesTour)
 
-        case .scenarioPrompt, .scenarioRunning:
-            break
+        case .coursesTour:
+            requestTab(.scenarios, then: .scenarioTour)
 
-        case .scenarioDone:
-            requestTab(.courses, then: .lessonsTour)
+        case .scenarioTour:
+            requestTab(.profile, then: .progressTour)
 
-        case .lessonsTour:
-            step = .benefits
+        case .progressTour:
+            // Back to Scenarios to close. The Profile card is the one that
+            // reads as an ending ("Last one"), so the sign-off lands on the tab
+            // the user is being left on rather than on the empty chart.
+            requestTab(.scenarios, then: .signOff)
 
-        case .benefits:
+        case .signOff:
+            // Ends the script on Scenarios. `MainTabView` hands the rebuilt tab
+            // view back to `.scenarios` so the branch swap does not undo this —
+            // see its `onChange`.
             finish()
 
         case .dormant, .finished:
             break
         }
     }
-
-    /// The user opened the free scenario.
-    func noteScenarioOpened() {
-        guard step == .scenarioPrompt else { return }
-        step = .scenarioRunning
-    }
-
-    /// The free scenario reached its final scene.
-    ///
-    /// Hooks the existing completion signal rather than a new one —
-    /// `PracticeGameViewModel.gameCompleted` is set only by `triggerCompletion()`,
-    /// so dismissing partway through never lands here.
-    func noteScenarioCompleted() {
-        guard step == .scenarioRunning else { return }
-        step = .scenarioDone
-    }
-
-    /// The user left the scenario without finishing it.
-    ///
-    /// Hands the script back to the prompt so the card re-appears and asks
-    /// again. There is no skip, but there is also no trap: `scenarioRunning`
-    /// has no other exit, and the overlay is deliberately hidden in that step,
-    /// so without this a back-tap would strand the walkthrough with nothing on
-    /// screen to advance it.
-    ///
-    /// No-ops after a genuine completion, which has already moved the step to
-    /// `scenarioDone`.
-    func noteScenarioAbandoned() {
-        guard step == .scenarioRunning else { return }
-        log("🎬 Walkthrough: scenario left unfinished — returning to the prompt")
-
-        // Captured before the step change, so it lands ahead of the
-        // `walkthrough_step_viewed` that returning to the prompt emits and the
-        // ordering in PostHog matches the causal ordering.
-        //
-        // `attempt` counts how many times this user has bailed out of the
-        // scenario within one run of the script: a first bail is a distraction,
-        // a third is the beat not working.
-        scenarioAbandonCount += 1
-        Analytics.capture(Analytics.Event.walkthroughScenarioAbandoned, [
-            "attempt": scenarioAbandonCount
-        ])
-
-        // Show the instruction again. They left without playing it, so the
-        // prompt has not done its job yet.
-        scenarioPromptAcknowledged = false
-
-        step = .scenarioPrompt
-    }
-
-    /// The user tapped Next on the scenario instruction.
-    ///
-    /// Dismisses the card only. The step deliberately stays at
-    /// `scenarioPrompt`: the scenario itself is still the one required action,
-    /// so this is an acknowledgement, not an advance. `advance()` remains a
-    /// no-op at this step for exactly that reason.
-    func acknowledgeScenarioPrompt() {
-        guard step == .scenarioPrompt else { return }
-        log("🎬 Walkthrough: scenario instruction acknowledged")
-        scenarioPromptAcknowledged = true
-    }
-
-    /// Times the user has entered and left the free scenario without finishing
-    /// it, for this run of the script. Not persisted — a force-quit ends the
-    /// run, and carrying the count across launches would conflate two separate
-    /// sittings.
-    private var scenarioAbandonCount = 0
 
     /// Ends the script without the user having finished it.
     ///
@@ -318,16 +253,16 @@ final class WalkthroughCoordinator: ObservableObject {
     }
 
     /// Ends the script. The host is responsible for calling
-    /// `AuthManager.markFreeDemoCompleted()` in response (W6), which is what
-    /// routes RootView into the post-demo ask.
+    /// `AuthManager.markFreeDemoCompleted(handoffTo:)` in response, which is
+    /// what releases the free lesson credit and routes RootView out of the demo
+    /// branch.
     func finish() {
         guard isRunning else { return }
-        log("🎬 Walkthrough finished (scenario skipped: \(didSkipScenario))")
+        log("🎬 Walkthrough finished")
 
         // Captured before the step change, so the event ordering in PostHog
-        // matches the causal ordering: completed → (RootView re-renders) →
-        // paywall_viewed(source=postDemo).
-        var properties: [String: Any] = ["skipped_scenario": didSkipScenario]
+        // matches the causal ordering.
+        var properties: [String: Any] = [:]
         if let startedAt {
             properties["duration_seconds"] = Analytics.elapsedSeconds(since: startedAt)
         }
@@ -337,83 +272,6 @@ final class WalkthroughCoordinator: ObservableObject {
         requestedTab = nil
         pendingStep = nil
         step = .finished
-    }
-
-    // MARK: - Suppression layer 2
-
-    /// Feeds the scenario list to the script so it can decide whether the
-    /// scenario beat is worth playing.
-    ///
-    /// Two reasons to skip it, both of which would otherwise strand the user on
-    /// a beat with no way forward:
-    ///
-    ///   1. **Already completed.** Layer 2 of the existing-user suppression.
-    ///      Layer 1 (`AuthManager.userHasPreExistingProgress`) only sees lesson
-    ///      progress, because scenario progress lives in a table rather than in
-    ///      `user_metadata` and is not worth a fetch on the launch path. This
-    ///      catches the cohort layer 1 misses — chiefly a lapsed ex-subscriber
-    ///      with scenario progress and no completed lessons — and doubles as
-    ///      the resume path for anyone who force-quit mid-walkthrough.
-    ///   2. **Not there at all.** The free scenario is identified by
-    ///      `order_index`, so unpublishing or reordering it in the `scenarios`
-    ///      table would leave the script pointing at nothing. Skipping beats
-    ///      trapping the user on an instruction they cannot follow.
-    ///
-    /// Safe to call repeatedly and from any step; it only acts while the script
-    /// is waiting on the scenario.
-    func noteScenarioList(_ practices: [Practice]) {
-        guard !practices.isEmpty else { return }
-
-        guard step == .welcome || step == .scenarioPrompt else { return }
-
-        guard let free = practices.first(where: {
-            $0.orderIndex == AuthManager.freeScenarioOrderIndex
-        }) else {
-            skipScenarioBeat(reason: "freeScenarioUnavailable")
-            return
-        }
-
-        if free.isCompleted {
-            skipScenarioBeat(reason: "scenarioAlreadyComplete")
-        }
-    }
-
-    /// The free scenario could not be opened — its game data failed to load.
-    ///
-    /// Skips the beat. This is the only escape from `scenarioPrompt` that is
-    /// not the user playing the scenario, and it exists because the beat has no
-    /// skip control by design: an offline user who taps the card and gets
-    /// nothing would otherwise sit there permanently, with lessons and daily
-    /// practice nudge-blocked behind a script that cannot advance.
-    ///
-    /// Note this is not a skip *offered* to the user — it fires only when the
-    /// app has already failed to deliver the scenario.
-    func noteScenarioUnavailable() {
-        guard step == .welcome || step == .scenarioPrompt else { return }
-        skipScenarioBeat(reason: "scenarioLoadFailed")
-    }
-
-    /// Marks the scenario beat as not worth playing.
-    ///
-    /// Applied immediately only when the user is already looking at the prompt;
-    /// otherwise it is recorded and `advance()` acts on it at the next beat
-    /// boundary. Jumping the step under a beat the user is mid-read of
-    /// desynchronises their pending tap.
-    ///
-    /// Skips to `lessonsTour` rather than `scenarioDone` — the congratulations
-    /// beat exists to land a scenario the user just played, and firing it for
-    /// someone who played it weeks ago (or not at all) reads as a bug.
-    private func skipScenarioBeat(reason: String) {
-        guard !scenarioBeatUnavailable else { return }
-        log("🎬 Walkthrough skipping scenario beat — \(reason)")
-        scenarioBeatUnavailable = true
-
-        if step == .scenarioPrompt {
-            didSkipScenario = true
-            requestTab(.courses, then: .lessonsTour)
-        }
-
-        Analytics.capture(Analytics.Event.walkthroughSuppressed, ["reason": reason])
     }
 
     // MARK: - Nudges

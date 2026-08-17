@@ -198,11 +198,17 @@ final class AuthManager: ObservableObject {
     /// rather than recomputed, because once suppression has run
     /// `hasCompletedFreeDemo` is true and the check that would recompute it is
     /// short-circuited on every later launch.
-    /// One-shot, in-memory request to open MainTabView on the Courses tab.
+    /// One-shot, in-memory request to open MainTabView on a specific tab.
     ///
     /// Set when the walkthrough finishes; consumed by the next MainTabView that
     /// appears. Deliberately not persisted — see `markFreeDemoCompleted()`.
-    var pendingCoursesHandoff: Bool = false
+    ///
+    /// Carries the tab rather than a `Bool` because the script's closing beat
+    /// moved: it used to end on Courses and now ends on Scenarios, and a
+    /// rebuilt `MainTabView` resets `selectedTab` to Home, so "no handoff" and
+    /// "stay where the last card was" are not the same thing. `nil` means no
+    /// request, which is what an interrupted script wants.
+    var pendingWalkthroughHandoff: WalkthroughCoordinator.Tab?
 
     @Published private(set) var hasSuppressedWalkthrough: Bool = false {
         didSet {
@@ -2376,42 +2382,40 @@ final class AuthManager: ObservableObject {
     }
 
     // MARK: - Free Demo
-    /// Called when the mascot walkthrough finishes — the user has played the
-    /// free scenario and been shown around. Flipping this routes RootView
-    /// straight into the post-demo ask, which is the peak-intent moment the
-    /// whole walkthrough exists to set up.
+    /// Called when the walkthrough finishes — the user has been shown the four
+    /// tabs. It no longer implies they played the free scenario: that is an
+    /// offer on the last card rather than a step of the script.
     ///
-    /// It also **releases the free lesson credit** (see `canOpenLesson(id:)`),
-    /// which is deliberately collected on the far side of that ask rather than
-    /// spent during the walkthrough. An earlier design spent a lesson inside
-    /// the demo; that is not what this flag means.
+    /// It also **releases the free lesson credit** (see `canOpenLesson(id:)`).
+    /// That coupling is the reason the tour must stay finishable by anyone: for
+    /// as long as the scenario gated the script, this flag — and so the credit —
+    /// was withheld from most of the people it was meant for.
     ///
-    /// Has no callers until W6 — see docs/walkthrough-plan.md. Until then
-    /// `hasCompletedFreeDemo` is `false` for every production user, RootView
-    /// branch 4c is unreachable, and the lesson credit never opens.
+    /// Flipping this routes RootView out of the demo branch. It used to route
+    /// into the post-demo ask (4c); `MainTabView` now marks that wall dismissed
+    /// on the same path, so 4c is skipped and the user lands in 4d.
     ///
     /// Same persistence shape as `markSecondChanceOfferShown`: per-user
     /// UserDefaults as the device source of truth, best-effort `user_metadata`
     /// mirror so a reinstall doesn't hand out a second demo.
-    /// - Parameter handoffToCourses: whether to open the next MainTabView on
-    ///   the Courses tab. True for a real completion, where the mascot left the
-    ///   user there and promised them a lesson. False when the script merely
-    ///   ended — an interrupted walkthrough should not change where an
-    ///   otherwise-unaffected user lands.
-    func markFreeDemoCompleted(handoffToCourses: Bool = true) {
-        log("🎓 markFreeDemoCompleted(handoffToCourses: \(handoffToCourses)) called")
+    /// - Parameter handoffTo: the tab to open the next MainTabView on. Set to
+    ///   the tab the script's last card was pointing at for a real completion.
+    ///   `nil` when the script merely ended — an interrupted walkthrough should
+    ///   not change where an otherwise-unaffected user lands.
+    func markFreeDemoCompleted(handoffTo tab: WalkthroughCoordinator.Tab? = .scenarios) {
+        log("🎓 markFreeDemoCompleted(handoffTo: \(tab.map(String.init(describing:)) ?? "nil")) called")
         hasCompletedFreeDemo = true
 
-        // The mascot's last beat leaves the user on the Courses tab and
-        // promises them a lesson. RootView then swaps branches twice on the
-        // way out (4b → 4c → 4d), and because those are separate `if/else`
-        // arms SwiftUI rebuilds MainTabView each time — dropping them back on
-        // Home, two taps from the thing they were just promised.
+        // The last card leaves the user on the Scenarios tab, offering a
+        // scenario they can take or ignore. RootView then swaps branches twice
+        // on the way out (4b → 4c → 4d), and because those are separate
+        // `if/else` arms SwiftUI rebuilds MainTabView each time — dropping them
+        // back on Home, away from the thing they were just shown.
         //
         // In-memory and one-shot: it survives the rebuilds because AuthManager
         // lives at the app root, and it must NOT persist, or every later launch
-        // would open on Courses.
-        pendingCoursesHandoff = handoffToCourses
+        // would open on that tab.
+        pendingWalkthroughHandoff = tab
 
         // Genuine completion is by definition not suppression, and the two
         // must not both be set — `canOpenLesson(id:)` reads

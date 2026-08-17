@@ -14,8 +14,8 @@
 //  middle, and why it borrows its shape from `DialogueContentView` — the box a
 //  scenario's dialogue is read in. Centred, with a wordmark and a full-width
 //  Next button, it covered the very list the copy was pointing at; at the
-//  bottom the first scenario card stays on screen while the instruction is
-//  read, and the treatment is one the user meets again inside the scenario.
+//  bottom the courses and scenarios the copy names stay on screen while it is
+//  read, and the treatment is one the user meets again inside a scenario.
 //
 //  Layered into MainTabView's ZStack above the tab bar, and rendered only when
 //  `TabBarVisibilityManager.isVisible` — that flag is already the app's signal
@@ -69,23 +69,25 @@ struct WalkthroughOverlayView: View {
 
     /// Hit-testing, not appearance — every beat looks identical.
     ///
-    /// Two beats ask the user to *do* something in the app: tap the scenario
-    /// card, scroll the course list. A scrim that swallowed those taps would
-    /// make the instruction impossible to follow, and `scenarioPrompt` has no
-    /// button, so there would be no way forward at all.
+    /// One beat asks the user to *do* something in the app: scroll the course
+    /// list. A scrim that swallowed those taps would make the instruction
+    /// impossible to follow.
+    ///
+    /// Every other beat blocks, the two Scenarios beats included. Their copy
+    /// invites the user to play something, but it invites them to do it *after*
+    /// the tour: opening a scenario mid-script would have to finish the
+    /// walkthrough to get the scrim out of the way, and finishing flips
+    /// `hasCompletedFreeDemo`, which moves RootView from branch 4b to 4d and
+    /// rebuilds `MainTabView` — dismissing the `PracticeGame` the user just
+    /// opened. Blocking costs one extra tap, and the list is fully live a moment
+    /// later on the same tab, which is where the script leaves them.
     private var blocksInteraction: Bool {
         // A nudge answers a tap the user just made; blocking until they
         // acknowledge it keeps the script from being talked over.
         if walkthrough.nudge != nil { return true }
 
         switch walkthrough.step {
-        // The tour beat asks the user to scroll the course list while its card
-        // is up, so it has to let touches through.
-        //
-        // `scenarioPrompt` no longer needs to: its card can be tapped through,
-        // and once that happens `beat` is nil so nothing renders at all, scrim
-        // included. The scenario card is fully tappable from that point.
-        case .lessonsTour: return false
+        case .coursesTour: return false
         default: return true
         }
     }
@@ -107,7 +109,7 @@ struct WalkthroughOverlayView: View {
                     .frame(maxWidth: .infinity)
 
                 if beat.advance != nil {
-                    Text(Self.continueHint)
+                    Text(beat.hint)
                         .font(.manropeMedium(size: 13))
                         .foregroundColor(.wingmanBlack.opacity(0.5))
                         .frame(maxWidth: .infinity, alignment: .trailing)
@@ -138,9 +140,13 @@ struct WalkthroughOverlayView: View {
         let text: String
         /// `nil` means there is no way forward from the card — the user has to
         /// act in the app. Nothing uses it today, and the card drops its
-        /// "Tap to continue" hint and its hit testing when it is nil, which is
-        /// what keeps that a real option rather than a dead branch.
+        /// hint and its hit testing when it is nil, which is what keeps that a
+        /// real option rather than a dead branch.
         let advance: (() -> Void)?
+        /// The trailing affordance. Defaults to the dialogue box's wording,
+        /// which is the point of the treatment; the closing beat overrides it
+        /// because "continue" would promise a card that isn't coming.
+        var hint: String = WalkthroughOverlayView.continueHint
     }
 
     private var beat: Beat? {
@@ -151,37 +157,40 @@ struct WalkthroughOverlayView: View {
             )
         }
 
+        // One card per tab, in script order, then a sign-off. Every one of them
+        // advances from the card itself — see `WalkthroughCoordinator.advance()`.
         switch walkthrough.step {
         case .welcome:
             return Beat(text: Self.welcome, advance: walkthrough.advance)
 
-        // Tapping through dismisses the card but does NOT advance the script —
-        // tapping the pulsing scenario is still the only way forward, which is
-        // the one hard constraint. `acknowledgeScenarioPrompt()` leaves the
-        // step alone for exactly that reason.
-        //
-        // The card also does a second job. This beat arrives at the same moment
-        // as a tab switch, and `TabView` realises the Scenarios tab for the
-        // first time there, a first layout the previous tab stays visible
-        // through. With nothing rendered on this beat the eye had no anchor
-        // across that switch, so the swap read as a lag.
-        case .scenarioPrompt:
-            guard !walkthrough.scenarioPromptAcknowledged else { return nil }
-            return Beat(
-                text: Self.scenarioPrompt,
-                advance: walkthrough.acknowledgeScenarioPrompt
-            )
-
-        case .scenarioDone:
-            return Beat(text: Self.congratulations, advance: walkthrough.advance)
-
-        case .lessonsTour:
+        case .coursesTour:
             return Beat(text: Self.coursesTour, advance: walkthrough.advance)
 
-        case .benefits:
-            return Beat(text: Self.signOff, advance: walkthrough.advance)
+        // The only place the scenario is mentioned, and it is mentioned rather
+        // than demanded: this used to be a gate the user could not pass without
+        // playing a scenario end to end, and that gate was the single worst
+        // step in the funnel.
+        case .scenarioTour:
+            return Beat(text: Self.scenarioTour, advance: walkthrough.advance)
 
-        case .dormant, .scenarioRunning, .finished:
+        // Named as the last card by its own copy, and its hint is a call to
+        // action rather than a navigation word, because what follows is a
+        // sign-off rather than another thing to read.
+        case .progressTour:
+            return Beat(
+                text: Self.progressTour,
+                advance: walkthrough.advance,
+                hint: Self.startFillingHint
+            )
+
+        case .signOff:
+            return Beat(
+                text: Self.signOff,
+                advance: walkthrough.advance,
+                hint: Self.finishHint
+            )
+
+        case .dormant, .finished:
             return nil
         }
     }
@@ -195,30 +204,48 @@ struct WalkthroughOverlayView: View {
     /// now looks like one and is advanced the same way.
     private static let continueHint = "Tap to continue"
 
-    // Verbatim, including punctuation. No em dashes anywhere in walkthrough
-    // copy — commas only.
+    /// The Profile card. A call to action rather than a navigation word, because
+    /// what follows it is a sign-off rather than another card to read.
+    private static let startFillingHint = "Start filling it"
+
+    /// The closing card. "Continue" would point at a card that isn't coming.
+    private static let finishHint = "Tap to finish"
+
+    // Verbatim, including punctuation and line breaks. No em dashes anywhere in
+    // walkthrough copy — commas only.
+    //
+    // One card per tab in the order the script visits them (Home, Courses,
+    // Scenarios, Profile) and then a sign-off back on Scenarios. Each card says
+    // what the tab is for and nothing else; none of them asks the user to do
+    // anything.
+    //
+    // The line break inside each one is intentional: a short line that names the
+    // tab, then the line that says why it matters. Continuations are marked with
+    // a trailing `\` so only the deliberate breaks survive into the string.
 
     private static let welcome = """
-        Hey, welcome to Wingman. Let's dive into a practice scenario.
-        """
-
-    private static let scenarioPrompt = """
-        This is where you practise. Each scenario drops you into a real \
-        moment and you choose what to say. Start with the first one.
-        """
-
-    private static let congratulations = """
-        Nice work. That's the whole skill, read the moment, pick your line, \
-        adjust. It gets easier every time.
+        Welcome to Wingman. This is home.
+        Daily practice keeps you sharp. The log fills with moments you took, \
+        not replayed.
         """
 
     private static let coursesTour = """
-        Over here is Courses, this is where the rest of it comes from. \
-        Mindset, approaching, flirting, follow-up, all in short lessons.
+        Courses. Mindset, approaching, flirting, follow-up.
+        Short lessons that build the man who moves, not the one who freezes.
+        """
+
+    private static let scenarioTour = """
+        And this is where you practise.
+        Bookstore, gym, coffee shop. Choose what to say, see what happens.
+        """
+
+    private static let progressTour = """
+        Last one. This one is you.
+        Empty today. In a month it either tells a story or it doesn't.
         """
 
     private static let signOff = """
-        That's everything. Go put it to use, we're rooting for you.
+        Good luck, we're rooting for you.
         """
 
     private static func nudgeText(_ nudge: WalkthroughCoordinator.Nudge) -> String {

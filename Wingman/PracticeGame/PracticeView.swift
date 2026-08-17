@@ -73,21 +73,10 @@ struct PracticeView: View {
         .task {
             await viewModel.fetchPractices()
 
-            // Feeds suppression layer 2. No-ops unless the script is waiting
-            // on the scenario beat, and the list is already being fetched here
-            // — so this costs nothing and avoids a second round trip just to
-            // ask whether scenario 1 is already complete.
-            //
-            // Gated on `progressAvailable`: when the progress read failed,
-            // every `isCompleted` is false because there was nothing to merge,
-            // not because the user has completed nothing. Acting on that would
-            // tell someone to replay a scenario they already finished. Skipping
-            // the feed leaves the beat in place, which at worst asks for a
-            // replay of a 90-second scenario — the recoverable direction.
-            if viewModel.progressAvailable {
-                walkthrough.noteScenarioList(viewModel.practices)
-            }
-
+            // The walkthrough used to be fed the scenario list here, so it
+            // could tell whether the beat it was about to gate on was worth
+            // playing. No beat gates on a scenario any more, so there is
+            // nothing for it to decide.
             await viewModel.prefetchGameData()
         }
         .trackScreenView("Practice")
@@ -136,11 +125,11 @@ struct PracticeView: View {
                                 await loadAndNavigate(practice: practice)
                             }
                         }
-                        // Points at the one card the walkthrough is waiting on.
-                        // Inert outside the script.
-                        .breathingHighlight(
-                            walkthrough.isAwaitingScenario(orderIndex: practice.orderIndex)
-                        )
+                        // The walkthrough used to pulse this card because it was
+                        // waiting on it. It waits on nothing now, so nothing
+                        // here draws attention to itself — and pulsing a card
+                        // the closing beat's scrim would not let the user tap is
+                        // the exact tease that made the old gate rageclick.
                     }
                 }
                 .padding(.horizontal, 20)
@@ -183,12 +172,10 @@ struct PracticeView: View {
             return
         }
 
-        // NOTE: the walkthrough is deliberately NOT advanced here. Everything
-        // below this line can still fail — `fetchGameData` returns nil on a
-        // network error and this function then simply stops, leaving the user
-        // on this screen. Advancing here would strand the script at
-        // `scenarioRunning` with no game on screen and the mascot hidden.
-        // `PracticeGame.onAppear` is the honest "the scenario is open" signal.
+        // NOTE: the walkthrough is not advanced here, and no longer has a beat
+        // that could be. Opening a scenario is not a step of the script — the
+        // closing card offers one and then ends, so by the time this runs the
+        // walkthrough is already finished.
         viewModel.selectPractice(practice)
 
         // Fast path: prefetched data available, navigate instantly with no spinner.
@@ -207,13 +194,6 @@ struct PracticeView: View {
             navigateToPracticeGame = true
         } else {
             isLoadingGame = false
-
-            // The scenario the script just told them to play cannot be
-            // delivered (offline, or the fetch failed). `scenarioPrompt` has no
-            // skip control by design, so without this the user sits there with
-            // lessons and daily practice nudge-blocked behind a script that
-            // cannot advance. No-ops outside the walkthrough.
-            walkthrough.noteScenarioUnavailable()
         }
     }
 
