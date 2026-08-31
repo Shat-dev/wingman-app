@@ -144,9 +144,22 @@ struct NameScreen: View {
     }
 }
 
+/// The step this screen used to be driven by. Built literally rather than read
+/// out of `extendedOnboardingSteps`, because the name step is no longer in that
+/// array — index 0 is now the age question, and these previews would render the
+/// name field under "How old are you?".
+private let namePreviewStep = OnboardingStep(
+    type: .name,
+    title: "What's your name?",
+    subtitle: "So Wingman can talk to you, not at you.",
+    options: nil,
+    progress: 0.15,
+    questionKey: OnboardingNameKey.answerKey
+)
+
 #Preview("Empty") {
     NameScreen(
-        step: extendedOnboardingSteps[0],
+        step: namePreviewStep,
         initialName: "",
         onContinue: { _ in }
     )
@@ -154,7 +167,7 @@ struct NameScreen: View {
 
 #Preview("Restored") {
     NameScreen(
-        step: extendedOnboardingSteps[0],
+        step: namePreviewStep,
         initialName: "Arthur",
         onContinue: { _ in }
     )

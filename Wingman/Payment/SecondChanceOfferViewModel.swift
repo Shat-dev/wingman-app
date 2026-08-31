@@ -21,6 +21,18 @@ final class SecondChanceOfferViewModel: ObservableObject {
     @Published var error: String?
     @Published var showAlert = false
 
+    /// Presentation style for the `showAlert` alert — see the same pair on
+    /// `PaywallViewModel`. Defaults to `.error`; only a deferred payment
+    /// changes it, and `dismissAlert()` restores it.
+    @Published var alertKind: PurchaseAlertKind = .error
+
+    /// Clears the alert. Routed through one method so the kind can never
+    /// outlive the message it belonged to.
+    func dismissAlert() {
+        error = nil
+        alertKind = .error
+    }
+
     /// Whether the resolved product actually carries the introductory offer this
     /// entire screen is pitching.
     ///
@@ -154,13 +166,19 @@ final class SecondChanceOfferViewModel: ObservableObject {
                     "detection": "error_code"
                 ])
             } else {
-                self.error = "Purchase failed. Please try again."
+                // Shares the paywall's mapping — this screen previously showed
+                // one generic line for every code, which on the recovery offer
+                // is worse than on the paywall: a deferred or already-owned
+                // purchase read as a dead end on a discount shown once ever.
+                let failure = PurchaseFailure(error)
+                self.error = failure.message
+                self.alertKind = failure.alertKind
                 self.showAlert = true
                 log("❌ SecondChanceOfferViewModel: Purchase failed: \(error.localizedDescription)")
                 Analytics.capture(Analytics.Event.recoveryOfferPurchaseFailed, [
                     "product_id": package.storeProduct.productIdentifier,
                     "error_code": nsError.code,
-                    "failure_reason": "store_error"
+                    "failure_reason": failure.reason
                 ])
             }
             isPurchasing = false

@@ -179,8 +179,8 @@ struct SecondChanceOfferView: View {
             .padding(.trailing, 6)
             .accessibilityLabel("Close offer")
         }
-        .alert("Error", isPresented: $viewModel.showAlert) {
-            Button("OK") { viewModel.error = nil }
+        .alert(viewModel.alertKind.title, isPresented: $viewModel.showAlert) {
+            Button("OK") { viewModel.dismissAlert() }
         } message: {
             Text(viewModel.error ?? "An error occurred")
         }
@@ -189,7 +189,7 @@ struct SecondChanceOfferView: View {
                 .ignoresSafeArea()
         }
         .onChange(of: viewModel.showAlert) { showing in
-            if showing { HapticManager.shared.error() }
+            if showing { viewModel.alertKind.playHaptic() }
         }
         .onReceive(ticker) { _ in
             // Read off the absolute deadline rather than decremented, so time
@@ -227,6 +227,13 @@ struct SecondChanceOfferView: View {
             finish(outcome: "subscribed_externally")
         }
         .onAppear {
+            // Same reasoning as PaywallView's call: this screen is a price
+            // ask, so it disqualifies the session from the rating prompt.
+            // Noted before the defensive guard below, deliberately — a user
+            // who reached a broken discount screen is the last person to put
+            // a five-star prompt in front of.
+            ReviewPromptManager.shared.noteFriction(source: "second_chance_offer")
+
             viewModel.load()
 
             guard viewModel.package != nil, viewModel.hasIntroductoryOffer else {

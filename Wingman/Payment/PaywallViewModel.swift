@@ -47,6 +47,19 @@ final class PaywallViewModel: ObservableObject {
     @Published var error: String?
     @Published var showAlert = false
 
+    /// Presentation style for the `showAlert` alert. Every path that raises it
+    /// leaves this at `.error` except the deferred-payment one; `dismissAlert()`
+    /// puts it back, so a `.info` alert can't leak its styling onto whatever
+    /// alert comes next.
+    @Published var alertKind: PurchaseAlertKind = .error
+
+    /// Clears the alert. The only dismissal route — the alert's single OK
+    /// button — goes through here so the kind is always reset with the text.
+    func dismissAlert() {
+        error = nil
+        alertKind = .error
+    }
+
     /// True when the most recent load loop exhausted every attempt without
     /// reaching RevenueCat.
     ///
@@ -739,12 +752,35 @@ final class PaywallViewModel: ObservableObject {
                 // now read true for guests *and* for the vanishing no-session
                 // case, conflating them.
                 let isAnon = authManager?.isAuthenticated != true
+                // StoreKit environment, straight from the entitlement.
+                //
+                // NOT derivable from anything else this event carries. The
+                // `environment` super-property is `#if DEBUG` (see
+                // `Analytics.registerEnvironment()`), so it says "prod" for
+                // every Release build — TestFlight, App Review and App Store
+                // alike — and says nothing about which StoreKit environment
+                // took the transaction.
+                //
+                // That gap cost two weeks in August 2026: RevenueCat's
+                // In-App Purchase Key went invalid, transactions stopped being
+                // recorded (StoreKit 2 requires that key), and the affected
+                // customers surfaced in RevenueCat as sandbox with no
+                // transaction at all — while this event reported healthy
+                // `prod` trials the whole time. There was no way to see the
+                // divergence from PostHog, so it was only found by reading
+                // RevenueCat customer profiles by hand.
+                //
+                // Force-unwrap-free: `hasEntitlement` is true on this branch,
+                // so the `?? false` default is unreachable rather than a
+                // silent misreport.
+                let isSandbox = entitlement?.isSandbox ?? false
                 PostHogSDK.shared.capture("paywall_purchase_succeeded", properties: [
                     "plan": plan,
                     "product_id": package.storeProduct.productIdentifier,
                     "source": source.rawValue,
                     "is_trial": isTrial,
-                    "is_anonymous": isAnon
+                    "is_anonymous": isAnon,
+                    "is_sandbox": isSandbox
                 ])
 
                 // Meta: subscription conversion, so ad campaigns can optimize
@@ -845,23 +881,18 @@ final class PaywallViewModel: ObservableObject {
                     "detection": "error_code"
                 ])
             } else {
-                switch nsError.code {
-                case 2: // Store problem
-                    self.error = "Store is currently unavailable. Please try again later."
-                    self.showAlert = true
-                case 3: // Purchase not allowed
-                    self.error = "Purchases are not allowed on this device"
-                    self.showAlert = true
-                case 4: // Payment pending
-                    self.error = "Payment is pending approval"
-                    self.showAlert = true
-                default:
-                    self.error = "Purchase failed. Please try again."
-                    self.showAlert = true
-                }
+                let failure = PurchaseFailure(error)
+                self.error = failure.message
+                self.alertKind = failure.alertKind
+                self.showAlert = true
                 log("❌ PaywallViewModel: Purchase failed: \(error.localizedDescription)")
                 // PostHog: purchase failure (excluding user cancellation).
                 // `error_code` is the RevenueCat NSError code; no PII.
+                //
+                // A deferred payment (`payment_pending`) is reported here too,
+                // despite not being a failure, so the funnel identity
+                // started = succeeded + failed + cancelled still holds — the
+                // `failure_reason` bucket is what separates it out.
                 PostHogSDK.shared.capture("paywall_purchase_failed", properties: [
                     "plan": plan,
                     "product_id": package.storeProduct.productIdentifier,
@@ -870,7 +901,7 @@ final class PaywallViewModel: ObservableObject {
                     // Added so this path stays distinguishable from the
                     // entitlement-missing branch above, which now shares
                     // this event name.
-                    "failure_reason": "store_error"
+                    "failure_reason": failure.reason
                 ])
             }
 

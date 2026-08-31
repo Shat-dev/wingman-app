@@ -509,9 +509,9 @@ struct PaywallView: View {
                 .accessibilityLabel("Close paywall")
             }
         }
-        .alert("Error", isPresented: $viewModel.showAlert) {
+        .alert(viewModel.alertKind.title, isPresented: $viewModel.showAlert) {
             Button("OK") {
-                viewModel.error = nil
+                viewModel.dismissAlert()
             }
         } message: {
             Text(viewModel.error ?? "An error occurred")
@@ -521,7 +521,7 @@ struct PaywallView: View {
                 .ignoresSafeArea()
         }
         .onChange(of: viewModel.showAlert) { showing in
-            if showing { HapticManager.shared.error() }
+            if showing { viewModel.alertKind.playHaptic() }
         }
         .onAppear {
             // Set AuthManager reference for anonymous user purchase tracking
@@ -534,6 +534,20 @@ struct PaywallView: View {
             // If user is returning to paywall due to subscription expiry,
             // refresh offerings and reset UI state
             log("📱 PaywallView appeared")
+
+            // Disqualifies this session from the App Store rating ask. Every
+            // presentation, not just the first — the guard below is about not
+            // double-counting a funnel event, whereas this is about a fact
+            // ("we showed this person a price today") that a re-mount does not
+            // make less true. See ReviewPromptManager: a five-star prompt
+            // chasing a payment ask is how an app collects one-star reviews.
+            //
+            // Placed on the paywall itself rather than on each of its callers
+            // so the feature gate, the post-demo wall, the expiry re-prompt and
+            // the onboarding paywall are all covered by one line. The
+            // second-chance offer presents its own view and notes itself.
+            ReviewPromptManager.shared.noteFriction(source: "paywall_\(source.rawValue)")
+
             viewModel.loadOfferings()
             viewModel.currentPage = 0
             viewModel.selectPlan(.yearly)

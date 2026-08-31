@@ -186,6 +186,47 @@ enum Analytics {
         /// SubscriptionManager, where a cold cache read must not emit it.
         static let subscriptionExpired = "subscription_expired"
 
+        /// The entitlement going active → **absent**: `customerInfo` came back
+        /// with no `Wingman Pro` entitlement at all, rather than an expired
+        /// one. Split out of `subscription_expired` because it is not churn
+        /// and must never be counted as such.
+        ///
+        /// A real expiry returns an entitlement with `isActive == false` and a
+        /// populated `expirationDate`. Absence means something structural: an
+        /// identity switch, a `logOut`, a transfer to another App User ID, or a
+        /// RevenueCat backend that cannot see the transaction.
+        ///
+        /// This is not hypothetical, and the cost of conflating them was high.
+        /// Every `subscription_expired` recorded between 2026-07-03 and
+        /// 2026-08-31 fired on this path — all of them missing
+        /// `product_identifier`, `expiry_date` and `days_subscribed`, because
+        /// the entitlement was nil each time. The churn metric was 100% false
+        /// positives and read as ordinary `lapsed` churn. The underlying cause
+        /// was an invalid RevenueCat In-App Purchase Key, which under
+        /// StoreKit 2 stops transactions being recorded at all.
+        ///
+        /// `entitlements_total` is the property to read first: 0 means
+        /// RevenueCat holds nothing for this App User ID, which points at the
+        /// credential/ingestion side rather than at anything the app did.
+        static let subscriptionEntitlementLost = "subscription_entitlement_lost"
+
+        // App Store rating ask. iOS reports neither whether the alert
+        // actually appeared nor what the user rated, by design — so
+        // `review_prompt_requested` counts *calls we chose to make*, not
+        // reviews. It is only interpretable against App Store Connect's
+        // ratings graph, and against `review_prompt_skipped`, whose `reason`
+        // is the property that says which eligibility rule is doing the work.
+        // If `reason` is overwhelmingly `charge_too_recent` the gate is fine;
+        // if it is `friction_this_session`, paywall placement is eating the
+        // ask and that is a product problem, not a rating one.
+        //
+        // `review_prompt_skipped` is emitted only for users already inside the
+        // target audience — see `ReviewPromptManager.unreportedReasons`. It is
+        // therefore NOT a denominator for "how many completions happened", and
+        // dividing requests by skips will not give a qualification rate.
+        static let reviewPromptRequested = "review_prompt_requested"
+        static let reviewPromptSkipped = "review_prompt_skipped"
+
         // Account deletion. `account_deletion_started` is client-side and
         // deliberately fires before the request leaves, because the client's
         // PostHog person is reset moments later. The completion half is

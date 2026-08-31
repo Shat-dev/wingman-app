@@ -23,6 +23,36 @@ final class SubscriptionManager: NSObject, ObservableObject {
     @Published var lastCheckDate: Date?
     @Published var isCheckingSubscription: Bool = false
     @Published var hasCheckedAtLeastOnce: Bool = false
+
+    /// True while the active entitlement is a free trial — i.e. the user has
+    /// an entitlement but has paid nothing for it yet.
+    ///
+    /// `isSubscriptionActive` cannot answer this: it is true for a trialist
+    /// and a payer alike, which is correct for feature gating (both get the
+    /// content) and wrong for anything that cares whether money changed hands.
+    /// `ReviewPromptManager` is the first such caller.
+    ///
+    /// Defaults to false, and a false value is only meaningful alongside
+    /// `isSubscriptionActive == true`. Not cached across launches on purpose —
+    /// unlike the active flag, nothing user-facing blocks on it during the
+    /// cold-start window, and a stale "not in trial" would be the one error
+    /// that matters.
+    @Published private(set) var isInTrial: Bool = false
+
+    /// When money last actually left the user's account for this entitlement.
+    ///
+    /// Sourced from RevenueCat's `latestPurchaseDate` while the entitlement is
+    /// in a **paid** period (`periodType == .normal`), so a trial start never
+    /// sets it — only the conversion charge does, and every renewal after that
+    /// moves it forward.
+    ///
+    /// Cached like `isSubscriptionActive`, and for the same reason: it is a
+    /// date the caller needs at cold start, and waiting on a RevenueCat
+    /// round-trip to learn a timestamp we already knew is pure latency. Never
+    /// cleared on expiry — "when were they last charged" stays true after the
+    /// subscription lapses, and clearing it would silently re-arm anything
+    /// gating on elapsed time.
+    @Published private(set) var lastPaidChargeAt: Date?
     
     // MARK: - Notifications
     static let subscriptionExpiredNotification = NSNotification.Name("SubscriptionExpired")
@@ -46,6 +76,7 @@ final class SubscriptionManager: NSObject, ObservableObject {
     // subscription state, which is correct — the entitlement is device-scoped.
     private let cacheKeyActive = "cached_subscription_active"
     private let cacheKeyExpiry = "cached_subscription_expiry"
+    private let cacheKeyLastCharge = "cached_subscription_last_paid_charge"
 
     private override init() {
         super.init()
@@ -169,6 +200,8 @@ final class SubscriptionManager: NSObject, ObservableObject {
         
         var hasActiveSubscription = false
         var latestExpiryDate: Date? = nil
+        var isTrialCharge = false
+        var paidChargeDate: Date? = nil
         
         // Check all subscription transactions
         for await result in StoreKit.Transaction.currentEntitlements {
@@ -182,15 +215,49 @@ final class SubscriptionManager: NSObject, ObservableObject {
                             latestExpiryDate = expiryDate
                         }
                     }
+                    if isIntroductoryOffer(transaction) {
+                        isTrialCharge = true
+                    } else if paidChargeDate == nil || transaction.purchaseDate > paidChargeDate! {
+                        paidChargeDate = transaction.purchaseDate
+                    }
                 }
             }
         }
         
         log("🛍️ SubscriptionManager: StoreKit check - Active: \(hasActiveSubscription), Expiry: \(latestExpiryDate?.formatted() ?? "None")")
         updateSubscriptionStatus(isActive: hasActiveSubscription, expiryDate: latestExpiryDate)
+
+        // Mirror of `updateBillingPeriod` for the local-StoreKit path, so a
+        // developer testing with a StoreKit configuration file gets the same
+        // trial/paid split RevenueCat provides. `paidChargeDate` stays nil for
+        // an introductory (trial) transaction, which is the same rule as
+        // `periodType == .normal` on the RevenueCat side.
+        isInTrial = hasActiveSubscription && isTrialCharge
+        if let paidChargeDate, lastPaidChargeAt == nil || paidChargeDate > lastPaidChargeAt! {
+            lastPaidChargeAt = paidChargeDate
+            UserDefaults.standard.set(paidChargeDate, forKey: cacheKeyLastCharge)
+        }
+
         hasCheckedAtLeastOnce = true
     }
     
+    /// Whether a transaction is currently running on an introductory offer —
+    /// the local-StoreKit equivalent of RevenueCat's `periodType == .trial`.
+    ///
+    /// Two branches because the deployment target is iOS 16.6 while
+    /// `Transaction.offer` only exists from 17.2. The `offerType` fallback is
+    /// deprecated in favour of it, and that deprecation warning is accepted
+    /// deliberately: the alternative is reporting every pre-17.2 tester's
+    /// trial as a paid charge, which is the one answer this whole file exists
+    /// to get right.
+    private func isIntroductoryOffer(_ transaction: StoreKit.Transaction) -> Bool {
+        if #available(iOS 17.2, *) {
+            return transaction.offer?.type == .introductory
+        } else {
+            return transaction.offerType == .introductory
+        }
+    }
+
     /// Handle StoreKit transaction updates
     private func handleStoreKitTransaction(_ transaction: StoreKit.Transaction) async {
         log("💳 SubscriptionManager: Handling StoreKit transaction")
@@ -223,6 +290,7 @@ final class SubscriptionManager: NSObject, ObservableObject {
         
         let expiryDate = entitlement?.expirationDate
         updateSubscriptionStatus(isActive: isNowActive, expiryDate: expiryDate)
+        updateBillingPeriod(from: entitlement)
         
         // Detect state changes
         if wasActive && !isNowActive {
@@ -241,31 +309,66 @@ final class SubscriptionManager: NSObject, ObservableObject {
             // `churn_type` is the split that actually matters — a user who
             // cancelled and one whose card failed need opposite responses,
             // and RevenueCat already distinguishes them.
-            let churnType: String
-            if entitlement?.billingIssueDetectedAt != nil {
-                churnType = "billing_issue"
-            } else if entitlement?.unsubscribeDetectedAt != nil {
-                churnType = "voluntary"
-            } else {
-                churnType = "lapsed"
-            }
+            //
+            // Guarded on the entitlement being *present*. `!isNowActive` is
+            // true both for an entitlement that expired and for one that is
+            // missing from `customerInfo` entirely, and those are different
+            // events with opposite meanings: the first is churn, the second is
+            // an identity switch, a transfer, or a backend that cannot see the
+            // transaction. Without the guard the second is filed as `lapsed`
+            // churn with every distinguishing property silently absent — which
+            // is exactly what happened for every `subscription_expired` this
+            // app has ever emitted. See `Analytics.Event
+            // .subscriptionEntitlementLost` for the full account.
+            if let entitlement {
+                let churnType: String
+                if entitlement.billingIssueDetectedAt != nil {
+                    churnType = "billing_issue"
+                } else if entitlement.unsubscribeDetectedAt != nil {
+                    churnType = "voluntary"
+                } else {
+                    churnType = "lapsed"
+                }
 
-            var properties: [String: Any] = [
-                "churn_type": churnType,
-                "was_trial": entitlement?.periodType == .trial,
-                "is_sandbox": entitlement?.isSandbox ?? false,
-            ]
-            if let productIdentifier = entitlement?.productIdentifier {
-                properties["product_identifier"] = productIdentifier
+                var properties: [String: Any] = [
+                    "churn_type": churnType,
+                    "was_trial": entitlement.periodType == .trial,
+                    "is_sandbox": entitlement.isSandbox,
+                ]
+                properties["product_identifier"] = entitlement.productIdentifier
+                if let expiryDate = expiryDate {
+                    properties["expiry_date"] = ISO8601DateFormatter().string(from: expiryDate)
+                }
+                if let originalPurchase = entitlement.originalPurchaseDate {
+                    properties["days_subscribed"] = Calendar.current
+                        .dateComponents([.day], from: originalPurchase, to: Date()).day ?? 0
+                }
+                Analytics.capture(Analytics.Event.subscriptionExpired, properties)
+            } else {
+                // Access has already been revoked by `updateSubscriptionStatus`
+                // above, and deliberately stays revoked: "customerInfo carries
+                // no entitlement" must not be a route to free Pro, whatever the
+                // cause. Only the telemetry changes here.
+                //
+                // `entitlements_total == 0` says RevenueCat holds nothing at
+                // all for this App User ID — the shape of a credential or
+                // ingestion failure. A non-zero count with our entitlement
+                // absent instead points at the entitlement identifier or the
+                // offering configuration having moved.
+                log("🚨 SubscriptionManager: entitlement '\(entitlementID)' ABSENT from customerInfo — not churn")
+                Analytics.capture(Analytics.Event.subscriptionEntitlementLost, [
+                    "entitlement_id": entitlementID,
+                    "entitlements_total": customerInfo.entitlements.all.count,
+                    "entitlements_active": customerInfo.entitlements.active.count,
+                    // The id to paste into RevenueCat's customer search when
+                    // this fires. PostHog's distinct_id is not always the same
+                    // value — an aliased or transferred customer is precisely
+                    // the case this event exists to catch.
+                    "rc_original_app_user_id": customerInfo.originalAppUserId,
+                    "customer_info_request_date": ISO8601DateFormatter()
+                        .string(from: customerInfo.requestDate),
+                ])
             }
-            if let expiryDate = expiryDate {
-                properties["expiry_date"] = ISO8601DateFormatter().string(from: expiryDate)
-            }
-            if let originalPurchase = entitlement?.originalPurchaseDate {
-                properties["days_subscribed"] = Calendar.current
-                    .dateComponents([.day], from: originalPurchase, to: Date()).day ?? 0
-            }
-            Analytics.capture(Analytics.Event.subscriptionExpired, properties)
         } else if !wasActive && isNowActive {
             log("✅ SubscriptionManager: Subscription ACTIVATED!")
             NotificationCenter.default.post(name: Self.subscriptionRestoredNotification, object: nil)
@@ -294,6 +397,49 @@ final class SubscriptionManager: NSObject, ObservableObject {
         // is idempotent — copying two properties — so firing on every update
         // costs nothing and closes the seeding gap.
         NotificationCenter.default.post(name: Self.subscriptionStatusChangedNotification, object: nil)
+    }
+
+    // MARK: - Billing Period (trial vs paid)
+
+    /// Derives `isInTrial` and `lastPaidChargeAt` from the RevenueCat
+    /// entitlement.
+    ///
+    /// The distinction that matters is `periodType`: `.trial` and `.intro` are
+    /// promotional periods where the user has been charged nothing (or a token
+    /// intro price), `.normal` is a period they paid full freight for. Only
+    /// `.normal` moves `lastPaidChargeAt`, which is what makes a trial start
+    /// invisible to it and a trial *conversion* the first thing it records.
+    ///
+    /// `latestPurchaseDate` is the transaction behind the current period, so
+    /// on conversion it becomes the conversion charge and on each renewal the
+    /// renewal charge — "when money last left the account", exactly.
+    private func updateBillingPeriod(from entitlement: EntitlementInfo?) {
+        guard let entitlement, entitlement.isActive else {
+            // An inactive or missing entitlement is not a trial. Deliberately
+            // leaves `lastPaidChargeAt` alone: an expired subscriber was still
+            // charged, whenever that was, and forgetting it here would be a
+            // silent re-arm for anything measuring elapsed time since.
+            if isInTrial { isInTrial = false }
+            return
+        }
+
+        let nowInTrial = entitlement.periodType == .trial
+        if isInTrial != nowInTrial {
+            log("🧾 SubscriptionManager: periodType \(entitlement.periodType) — isInTrial \(isInTrial) → \(nowInTrial)")
+            isInTrial = nowInTrial
+        }
+
+        guard entitlement.periodType == .normal,
+              let chargedAt = entitlement.latestPurchaseDate else { return }
+
+        // Monotonic. RevenueCat can serve a cached `CustomerInfo` that is
+        // older than one we already processed, and letting the timestamp walk
+        // backwards would re-open a window that had already closed.
+        guard lastPaidChargeAt == nil || chargedAt > lastPaidChargeAt! else { return }
+
+        log("🧾 SubscriptionManager: recorded paid charge at \(chargedAt.formatted())")
+        lastPaidChargeAt = chargedAt
+        UserDefaults.standard.set(chargedAt, forKey: cacheKeyLastCharge)
     }
 
     // MARK: - Subscription Cache (offline-safe cold start)
@@ -350,6 +496,16 @@ final class SubscriptionManager: NSObject, ObservableObject {
         // up to network reality.
         self.lastSubscriptionState = effectiveActive
         self.hasCheckedAtLeastOnce = true
+        self.lastPaidChargeAt = UserDefaults.standard.object(forKey: cacheKeyLastCharge) as? Date
+
+        // `isInTrial` is deliberately left at its `false` default here rather
+        // than cached. Everything that reads it also requires
+        // `isSubscriptionActive`, and the cache can restore that to `true`
+        // before the network says anything — so a cached `false` would, for
+        // the length of the cold-start window, present a trialist as a payer.
+        // Leaving it false is the same value but honestly unknown, and the
+        // callers that care are all on user-driven paths that run long after
+        // the first `handleCustomerInfoUpdate` has landed.
 
         log("💾 SubscriptionManager: Loaded cached subscription — rawActive=\(cachedActive), effectiveActive=\(effectiveActive), expiry=\(cachedExpiry?.formatted() ?? "nil")")
     }

@@ -39,52 +39,69 @@ enum OnboardingScreen: Hashable {
 }
 
 let extendedOnboardingSteps: [OnboardingStep] = [
-    //1 Name (skippable)
+    // The name step was removed here: the flow now opens on the first real
+    // question. It was the only screen asking for typed input, and it stood
+    // between the landing screen and the first tap-to-answer question — the
+    // point in the funnel where intent is cheapest to lose.
     //
-    // Free text, and the only step in the flow the user is allowed to leave
-    // unanswered. Skipping stores nothing, which is what every downstream
-    // reader treats as "no name": the home greeting keeps saying "User" and
-    // the commitment pact keeps its generic headline.
-    OnboardingStep(
-        type: .name,
-        title: "What's your name?",
-        subtitle: "So Wingman can talk to you, not at you.",
-        options: nil,
-        progress: 0.15,
-        questionKey: OnboardingNameKey.answerKey
-    ),
+    // Removing the *step* is the whole change. Everything that reads the name
+    // is deliberately left in place, because it all already handles the
+    // skipped case as a first-class state — skipping was always allowed, so
+    // "no name" is a path that has shipped and been exercised since the screen
+    // existed:
+    //
+    //   - `OnboardingNameKey.current` returns nil, and keeps returning the
+    //     stored value for users who answered the screen before this change.
+    //     Their commitment pact stays personalised; nobody is downgraded.
+    //   - `CommitmentPactCopy.headline(for:)` falls back to the generic
+    //     headline, which is byte-for-byte the pre-name-screen wording.
+    //   - `HomeViewModel.userName` never read this key at all — it reads
+    //     `UserProfileStore.displayName`, so the greeting is untouched.
+    //
+    // `StepType.name`, `NameScreen` and `handleNameContinue` are kept too.
+    // They cost nothing while unreferenced by this array, and putting the
+    // screen back — for an A/B test, or if the drop-off doesn't move — is
+    // re-adding this one entry rather than restoring a deleted screen.
+    //
+    // Note for the funnel: `onboarding_name_answered` stops firing from this
+    // build on, so any insight with that event as a step will read zero and
+    // show a total drop there. The per-screen drop-off funnel needs that step
+    // deleted, not reinterpreted.
 
-    //2 Age Question
+    //1 Age Question
     OnboardingStep(
         type: .question,
         title: "How old are you?",
         subtitle: nil,
         options: ["18-24", "25-34", "35-44", "45+"],
-        progress: 0.3,
+        // Progress rebalanced across the six steps that now precede loading.
+        // Left at the old 0.3 this would open the flow with the bar already a
+        // third full, which reads as progress the user hasn't made yet.
+        progress: 0.14,
         questionKey: "age"
     ),
 
-    //3 Last Approach Question
+    //2 Last Approach Question
     OnboardingStep(
         type: .question,
         title: "When was the last time you spoke to a woman in public?",
         subtitle: nil,
         options: ["Within the past week", "Within the past month", "A few months ago", "More than a year ago", "Never approached before"],
-        progress: 0.42,
+        progress: 0.29,
         questionKey: "last_approach"
     ),
 
-    //4 Frequency Question
+    //3 Frequency Question
     OnboardingStep(
         type: .question,
         title: "Do you often want to talk to women but don’t?",
         subtitle: nil,
         options: ["Every time", "Most times", "Sometimes", "Rarely", "No, I usually go for it"],
-        progress: 0.55,
+        progress: 0.43,
         questionKey: "approach_frequency"
     ),
 
-    //5 Barriers Question
+    //4 Barriers Question
     OnboardingStep(
         type: .question,
         title: "What usually stops you from doing so?",
@@ -96,11 +113,11 @@ let extendedOnboardingSteps: [OnboardingStep] = [
             "Worrying about coming across wrong",
             "Other"
         ],
-        progress: 0.68,
+        progress: 0.57,
         questionKey: "barriers"
     ),
 
-    //6 Goals Question
+    //5 Goals Question
     OnboardingStep(
         type: .question,
         title: "What are you mainly hoping to improve?",
@@ -112,11 +129,11 @@ let extendedOnboardingSteps: [OnboardingStep] = [
             "Creating attraction and romantic interest",
             "Other"
         ],
-        progress: 0.82,
+        progress: 0.71,
         questionKey: "goals"
     ),
 
-    //7 Growth projection
+    //6 Growth projection
     //
     // Placed after `goals` deliberately: the user has just said what they
     // want to improve, so the rising curve reads as an answer to that rather
@@ -134,7 +151,7 @@ let extendedOnboardingSteps: [OnboardingStep] = [
         title: "Build the confidence to take action when it matters",
         subtitle: nil,
         options: nil,
-        progress: 0.91,
+        progress: 0.88,
         questionKey: "growth_projection"
     ),
 
@@ -151,7 +168,7 @@ let extendedOnboardingSteps: [OnboardingStep] = [
         questionKey: nil
     ),
 
-    //9 Social proof
+    //8 Social proof
     //
     // The one step that sits *after* the loading screen, and therefore the
     // step that ends onboarding: its Continue calls `completeQuestions()`,

@@ -574,6 +574,11 @@ struct RootView: View {
                 // internally; this task is deliberately off the main thread.
                 await FeatureFlags.shared.read()
                 await FeatureFlags.shared.refresh()
+
+                // No-op unless `-resetReviewPrompt YES` was passed, which only
+                // Xcode or simctl can do. Lets the rating ask be exercised more
+                // than once on a test device — see ReviewPromptManager.
+                await ReviewPromptManager.shared.resetForTestingIfRequested()
             }
 
             // Identify the restored session, but only once the SDK is actually

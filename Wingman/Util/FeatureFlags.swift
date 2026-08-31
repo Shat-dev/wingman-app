@@ -110,6 +110,27 @@ final class FeatureFlags: ObservableObject {
     /// reviewers now see. It is no longer dark by default.
     @Published private(set) var commitmentPactEnabled: Bool = true
 
+    /// The post-charge App Store rating ask.
+    ///
+    /// **Ships `true` — fail open**, phrased as a kill switch (`..._disabled`)
+    /// for the same reason as the three flags above: `isFeatureEnabled`
+    /// returns `false` both for a flag that was never created in PostHog and
+    /// for every launch before `/decide` answers, so an `enable`-style key
+    /// would leave the ask dark for every live user *and* unreachable on a
+    /// developer's own device.
+    ///
+    /// On App Review: shipping this on does not put a rating prompt in front
+    /// of a reviewer. `ReviewPromptManager` requires a settled non-trial
+    /// charge plus 24 wall-clock hours, and sandbox accelerates subscription
+    /// *periods*, not purchase timestamps — so the gate holds in a review
+    /// build. That distinction is what makes an on-by-default safe here after
+    /// the 5.6.3 rejection, and it is the thing to re-check before moving the
+    /// ask anywhere earlier.
+    ///
+    /// This is the lever to pull if ratings move the wrong way: flipping
+    /// `review_prompt_disabled` on in PostHog stops the ask with no release.
+    @Published private(set) var reviewPromptEnabled: Bool = true
+
     private static let postDemoWallHardKey = "post_demo_wall_hard"
 
     /// Inverted on purpose — see `commitmentPactEnabled`.
@@ -117,6 +138,9 @@ final class FeatureFlags: ObservableObject {
 
     /// Inverted on purpose — see `lessonQuizEnabled`.
     private static let lessonQuizDisabledKey = "lesson_quiz_disabled"
+
+    /// Inverted on purpose — see `reviewPromptEnabled`.
+    private static let reviewPromptDisabledKey = "review_prompt_disabled"
 
     /// Deliberately phrased as a **kill switch**, not an enable switch.
     ///
@@ -175,6 +199,36 @@ final class FeatureFlags: ObservableObject {
         readGuestSessionsEnabled()
         readLessonQuizEnabled()
         readCommitmentPactEnabled()
+        readReviewPromptEnabled()
+    }
+
+    private func readReviewPromptEnabled() {
+        // Launch argument: -reviewPromptEnabled NO
+        //
+        // Deliberately NOT behind `#if DEBUG`, for the reason spelled out in
+        // `readCommitmentPactEnabled` and `readLessonQuizEnabled`. This one has
+        // the strongest version of that argument in the file: the ask is gated
+        // on a real settled StoreKit charge, and StoreKit only works in a
+        // Release build — so every end-to-end test of this feature happens in
+        // exactly the configuration where a `#if DEBUG` override is compiled
+        // out. See also `ReviewPromptManager.resetForTestingIfRequested()`,
+        // which clears the rate limiter the same way.
+        if UserDefaults.standard.object(forKey: "reviewPromptEnabled") != nil {
+            let forced = UserDefaults.standard.bool(forKey: "reviewPromptEnabled")
+            if reviewPromptEnabled != forced {
+                reviewPromptEnabled = forced
+            }
+            log("🚩 FeatureFlags: reviewPromptEnabled OVERRIDDEN locally = \(forced)")
+            return
+        }
+
+        // Inverted on purpose — see `reviewPromptDisabledKey`. Absent or
+        // not-yet-loaded reads as "not disabled", so the default stays on.
+        let value = !PostHogSDK.shared.isFeatureEnabled(Self.reviewPromptDisabledKey)
+        if reviewPromptEnabled != value {
+            log("🚩 FeatureFlags: reviewPromptEnabled \(reviewPromptEnabled) → \(value)")
+            reviewPromptEnabled = value
+        }
     }
 
     private func readCommitmentPactEnabled() {
