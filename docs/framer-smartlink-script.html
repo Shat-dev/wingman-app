@@ -1,0 +1,174 @@
+<script>
+(function () {
+  var APP_STORE = 'https://apps.apple.com/app/apple-store/id6758346525';
+  // Apple campaign tag. 128292811 is the account's provider token (not a secret);
+  // with it, App Store Connect reports page views, downloads and sales per source.
+  var PROVIDER_TOKEN = '128292811';
+  // Public, write-only PostHog project key: the same one the iOS app ships with.
+  var POSTHOG_KEY = 'phc_nHqVpjSQBTE4UBm2poiehcb4de92uJirKRMed8nhdurH';
+  var POSTHOG_URL = 'https://us.i.posthog.com/i/v0/e/';
+  // Only this exact path redirects. Every real page is left alone.
+  var onSmartlink = /^\/dl\/?$/i.test(location.pathname);
+
+  var ua = (navigator.userAgent || '').toLowerCase();
+  var isIOS = /iphone|ipad/.test(ua) ||
+    // iPadOS 13+ reports as Macintosh; a touch-capable "Mac" is really an iPad.
+    (/macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+
+  // Threads before Instagram: Threads user agents can contain both tokens.
+  var escapeKind = null;
+  if (isIOS && /barcelona|instagram/.test(ua)) escapeKind = 'extbrowser';
+  else if (isIOS && /fban|fbav|fb_iab/.test(ua)) escapeKind = 'x-safari';
+
+  // Where the tap came from. An explicit ?s=name wins (creator or campaign links);
+  // otherwise the in-app browser gives it away. Threads first, as above.
+  var inApp = /barcelona/.test(ua) ? 'threads'
+    : /instagram/.test(ua) ? 'instagram'
+    : /fban|fbav|fb_iab/.test(ua) ? 'facebook'
+    : /tiktok|musical_ly|bytedance/.test(ua) ? 'tiktok'
+    : 'none';
+  var SOURCE_BY_APP = { threads: 'threads', instagram: 'ig_bio', facebook: 'fb_page', tiktok: 'tiktok', none: 'other' };
+  var explicit = /[?&]s=([a-z0-9_]{1,30})(?:&|$)/i.exec(location.search);
+  var source = explicit ? explicit[1].toLowerCase() : SOURCE_BY_APP[inApp];
+
+  var STORE_URL = APP_STORE + '?pt=' + PROVIDER_TOKEN + '&ct=' + source + '&mt=8';
+
+  // Count the tap before leaving. sendBeacon is built to outlive the navigation
+  // that follows, and link-preview bots never run scripts, so they are not counted.
+  // No cookie and no stored id: each tap is an anonymous, unlinked event.
+  function reportTap() {
+    try {
+      var body = JSON.stringify({
+        api_key: POSTHOG_KEY,
+        event: 'smartlink_tap',
+        distinct_id: 'smartlink-' + Math.random().toString(36).slice(2) + Date.now().toString(36),
+        properties: {
+          source: source,
+          in_app_browser: inApp,
+          is_ios: isIOS,
+          environment: 'prod',
+          $current_url: location.href,
+          $referrer: document.referrer || null,
+          $process_person_profile: false
+        }
+      });
+      var sent = navigator.sendBeacon &&
+        navigator.sendBeacon(POSTHOG_URL, new Blob([body], { type: 'text/plain' }));
+      if (!sent) {
+        fetch(POSTHOG_URL, {
+          method: 'POST', body: body, keepalive: true, headers: { 'Content-Type': 'text/plain' }
+        }).catch(function () {});
+      }
+    } catch (e) {}
+  }
+  if (onSmartlink) reportTap();
+
+  // Android, desktop, Safari, Chrome, TikTok: apps.apple.com works normally for them,
+  // so on /dl just send them there. replace() keeps this page out of history, so Back
+  // returns to Instagram instead of bouncing them through the redirect again.
+  if (onSmartlink && !escapeKind) {
+    location.replace(STORE_URL);
+    return;
+  }
+  if (!escapeKind) return; // Normal page, normal browser: do nothing at all.
+
+  var STORE_MATCH = /apps\.apple\.com/;
+  var left = false;
+  var timer = null;
+  var overlay = null;
+
+  function markLeft() { left = true; }
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) markLeft();
+  });
+  window.addEventListener('pagehide', markLeft);
+  window.addEventListener('blur', markLeft);
+
+  // Must run synchronously inside the tap handler. iOS drops custom-scheme
+  // navigations that happen after an await or timeout following a user gesture.
+  function attemptEscape(storeUrl) {
+    // Reset per attempt. Latching this once lets a single stray blur (user briefly
+    // backgrounds the app) permanently convince the page the escape worked.
+    left = false;
+    if (timer) clearTimeout(timer);
+    try {
+      if (escapeKind === 'x-safari') window.open('x-safari-' + storeUrl, '_blank');
+      else window.location.href = 'instagram://extbrowser/?url=' + encodeURIComponent(storeUrl);
+    } catch (e) {}
+    timer = setTimeout(function () {
+      if (!left) showFallback(storeUrl);
+    }, 1500);
+  }
+
+  // Delegated: works for App Store links Framer renders now or later.
+  document.addEventListener('click', function (event) {
+    var link = event.target && event.target.closest && event.target.closest('a[href]');
+    if (!link || !STORE_MATCH.test(link.href)) return;
+    event.preventDefault();
+    attemptEscape(link.href);
+  }, true);
+
+  // Meta browser on /dl: fire without waiting for a tap. The short delay lets the
+  // webview settle; firing at parse time gets the navigation dropped.
+  if (onSmartlink) {
+    setTimeout(function () { attemptEscape(STORE_URL); }, 300);
+  }
+
+  function showFallback(storeUrl) {
+    if (overlay) { overlay.style.display = 'flex'; return; }
+    // This script runs in <head>; on a slow page body may not exist yet.
+    if (!document.body) {
+      setTimeout(function () { showFallback(storeUrl); }, 200);
+      return;
+    }
+    overlay = document.createElement('div');
+    overlay.setAttribute('role', 'dialog');
+    overlay.style.cssText =
+      'position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;' +
+      'justify-content:center;padding:1.5rem;background:rgba(0,0,0,.55);' +
+      '-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);' +
+      "font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;";
+    overlay.innerHTML =
+      '<div style="background:#fff;color:#1a1a1a;border-radius:14px;padding:1.75rem 1.5rem;' +
+      'max-width:20rem;width:100%;text-align:left;box-shadow:0 20px 50px rgba(0,0,0,.3)">' +
+      '<div style="font-weight:600;font-size:1.05rem;margin-bottom:.75rem;text-align:center">' +
+      'Instagram is blocking the App&nbsp;Store link</div>' +
+      '<ol style="color:#666;line-height:1.7;margin:0 0 1.25rem;padding-left:1.25rem">' +
+      '<li>Tap <b style="color:#1a1a1a">&#8943;</b> in the top right corner</li>' +
+      '<li>Choose <b style="color:#1a1a1a">Open in external browser</b></li></ol>' +
+      '<button id="wm-copy" style="display:block;width:100%;padding:.8rem;border:1px solid #1a1a1a;' +
+      'border-radius:8px;background:#1a1a1a;color:#fff;font:inherit;font-weight:500;cursor:pointer;' +
+      '-webkit-appearance:none">Copy link instead</button>' +
+      '<button id="wm-close" style="display:block;width:100%;padding:.8rem;margin-top:.5rem;' +
+      'border:0;background:none;color:#888;font:inherit;cursor:pointer">Close</button></div>';
+    document.body.appendChild(overlay);
+
+    var copy = overlay.querySelector('#wm-copy');
+    overlay.querySelector('#wm-close').addEventListener('click', function () {
+      overlay.style.display = 'none';
+    });
+    copy.addEventListener('click', function () {
+      function done() {
+        copy.textContent = 'Link copied';
+        setTimeout(function () { copy.textContent = 'Copy link instead'; }, 2000);
+      }
+      function fallbackCopy() {
+        var field = document.createElement('textarea');
+        field.value = storeUrl;
+        field.setAttribute('readonly', '');
+        field.style.cssText = 'position:fixed;opacity:0';
+        document.body.appendChild(field);
+        field.select();
+        field.setSelectionRange(0, storeUrl.length);
+        try { document.execCommand('copy'); done(); } catch (e) {}
+        document.body.removeChild(field);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(storeUrl).then(done, fallbackCopy);
+      } else {
+        fallbackCopy();
+      }
+    });
+  }
+})();
+</script>

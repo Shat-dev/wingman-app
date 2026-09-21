@@ -2,3 +2,8 @@
 xcuserdata/
 *.xcuserstate
 *.xcbkptlist
+
+# Sibling projects kept in this folder. Each has its own git repo and remote,
+# so adding them here would only record a broken submodule pointer.
+/growth-command-centre/
+/wingman-revenue-receiver/
