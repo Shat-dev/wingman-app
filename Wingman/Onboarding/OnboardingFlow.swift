@@ -6,7 +6,7 @@
 //  Each step's `progress` drives the top progress bar; `questionKey` is the
 //  storage key for the answer (both in-memory and in UserDefaults via
 //  `onboarding_<key>`). The final `.loading` step has no questionKey and
-//  fires the completion handler after its fixed ~6.2s step sequence.
+//  fires the completion handler after its fixed ~4.5s step sequence.
 //
 
 import Foundation
@@ -73,7 +73,15 @@ let extendedOnboardingSteps: [OnboardingStep] = [
         type: .question,
         title: "How old are you?",
         subtitle: nil,
-        options: ["18-24", "25-34", "35-44", "45+"],
+        // "45+" was split into "45-54" and "55+". As one open-ended bracket it
+        // held about 29% of answers and roughly half of the paid conversions,
+        // so it was the one bracket worth being able to see inside.
+        //
+        // Nothing is migrated. Anyone who answered before the split keeps the
+        // stored value "45+": `StatisticContent` handles it explicitly, and
+        // the PostHog age tiles group by the raw string, so it simply stays a
+        // bar of its own next to the two new ones.
+        options: ["18-24", "25-34", "35-44", "45-54", "55+"],
         // Progress rebalanced across the six steps that now precede loading.
         // Left at the old 0.3 this would open the flow with the bar already a
         // third full, which reads as progress the user hasn't made yet.
@@ -107,6 +115,9 @@ let extendedOnboardingSteps: [OnboardingStep] = [
         title: "What usually stops you from doing so?",
         subtitle: nil,
         options: [
+            // Misspelled on purpose — this string is the stored answer value,
+            // not just a label. Users see "embarrassed": the corrected wording
+            // lives in `OnboardingStep.displayLabel(for:)`.
             "Fear of rejection or being embarrased",
             "Fear of social consequences",
             "Not knowing what to say or how to start",

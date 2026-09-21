@@ -112,8 +112,11 @@ struct QuestionScreen: View {
                                 selectedOptions = [option]
                             }
                         }) {
+                            // The label can differ from `option`, which is
+                            // the stored value — selection, storage and
+                            // analytics all stay keyed on `option` itself.
                             OptionButton(
-                                text: option,
+                                text: step.displayLabel(for: option),
                                 isSelected: selectedOptions.contains(option)
                             )
                         }

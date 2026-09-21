@@ -266,14 +266,14 @@ struct OnboardingView: View {
     }
 
     private var shouldShowBackButton: Bool {
-        // The loading screen fires a one-way ~6.2s sequence that transitions
+        // The loading screen fires a one-way ~4.5s sequence that transitions
         // past onboarding; a back affordance would leave that chain in
         // flight and trigger unexpected navigation after the user
         // returned.
         if case .loading = screen { return false }
         // Social proof is on the far side of that one-way chain: the only
         // thing behind it is the loading screen, and going back there would
-        // remount it and re-run the Supabase write and the whole ~6.2s
+        // remount it and re-run the Supabase write and the whole ~4.5s
         // sequence. Suppressing the chevron also disables the swipe — the
         // gesture is gated on this same value — so both back routes are
         // closed with one condition.
@@ -301,7 +301,7 @@ struct OnboardingView: View {
     ///   - `history` is empty. Back then hands off to LandingView (anonymous
     ///     flow) or dismisses — neither is a screen this view can render, so
     ///     the drag reveals the root white instead.
-    ///   - `.loading`. Mounting it fires a Supabase write and a ~6.2s
+    ///   - `.loading`. Mounting it fires a Supabase write and a ~4.5s
     ///     auto-advance chain from `onAppear` that nothing cancels, so even
     ///     a brief preview would start the flow finishing itself (and start
     ///     its haptic tick loop). The social-proof screen now sits after it,
@@ -451,7 +451,7 @@ struct OnboardingView: View {
     ///
     /// Used for exactly one transition: loading → social proof. `advanceTo`
     /// would push the loading screen onto history, and returning to it
-    /// remounts it — re-firing its Supabase write and its ~6.2s auto-advance
+    /// remounts it — re-firing its Supabase write and its ~4.5s auto-advance
     /// chain, which would then complete onboarding a second time from under
     /// the user. `shouldShowBackButton` already hides both back affordances on
     /// the social-proof screen; not recording the entry at all means even a
@@ -855,10 +855,23 @@ struct OnboardingView: View {
               !stored.isEmpty else {
             return []
         }
-        // For single-select this yields a 1-element array; for
-        // multi-select it restores the comma-joined list in tap order.
-        // No option contains ", " so the round-trip is lossless.
-        return stored.components(separatedBy: ", ")
+        // A single-select answer is restored whole. Only multi-select answers
+        // are split: they are stored ", "-joined in tap order, and no
+        // multi-select option contains ", ", so that round-trip is lossless.
+        //
+        // Splitting every answer, as this used to, was wrong for one
+        // single-select option — "No, I usually go for it" came back as two
+        // fragments that matched nothing, so the row lost its highlight when
+        // the user returned to it.
+        //
+        // Filtered to the options the step still offers. An answer stored by
+        // an older build can name an option that has since been removed
+        // ("45+", before it was split in two). Restoring that would enable
+        // Next with nothing highlighted and re-submit a value the user can't
+        // see on screen.
+        let options = step.options ?? []
+        let restored = step.isMultiSelect ? stored.components(separatedBy: ", ") : [stored]
+        return restored.filter(options.contains)
     }
 
 }

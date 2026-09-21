@@ -7,8 +7,9 @@
 //  checkmark, before firing `onComplete`.
 //
 //  The progress is theatre, deliberately. Nothing here is wired to real work
-//  — the durations are fixed constants and the whole run is ~6.2s every time
-//  (`stepCount * (stepDuration + gapBetweenSteps) + finalDwell`) — because the
+//  — the durations are fixed constants and the whole run is ~4.5s every time
+//  (`stepCount * (stepDuration + gapBetweenSteps) + finalDwell`, plus timer
+//  lateness — see the choreography constants) — because the
 //  point is a predictable, satisfying rhythm rather than an honest read on a
 //  network call. If you ever want the bars to reflect real progress, that's a
 //  different screen; don't retrofit it onto this one.
@@ -44,14 +45,31 @@ struct LoadingScreen: View {
 
     // MARK: - Choreography (fixed, not data-driven)
 
+    // The run was ~6.2s (1.8 / 0.1 / 0.5) and was cut to ~4.5s. Over 30 days
+    // 176 people reached this screen and 166 left it — 10 lost, more than on
+    // any question in the flow, on a screen that asks for nothing. Nothing
+    // here can stall (the sequence is timers only, and the Supabase write is
+    // fire-and-forget), so the wait itself was the only thing left to blame.
+    // If loading → `onboarding_completed` does not improve on ~94%, the
+    // length was not the cause and the old values are the ones above.
+    //
+    // ~3s was tried first and felt rushed in the hand: the bars flicked past
+    // before the labels could be read, which undoes the point of the screen.
+    //
+    // The constants sum to 4.21s, not 4.5, on purpose. The sequence is seven
+    // chained `asyncAfter` hops and each one fires a little late (5–10% of
+    // its delay): a nominal 3.0s measured 3.3s on the clock from appear to
+    // `onComplete`, and a nominal 2.74s measured 2.9s.
+
     /// How long one bar takes to fill, linearly.
-    private let stepDuration: TimeInterval = 1.8
+    private let stepDuration: TimeInterval = 1.17
     /// Beat between a step locking in and the next bar starting. Keeps the
     /// success haptic from colliding with the resumption of the tick pattern.
     private let gapBetweenSteps: TimeInterval = 0.1
     /// Beat after the last checkmark, so the user actually sees all three
-    /// filled before the flow moves on.
-    private let finalDwell: TimeInterval = 0.5
+    /// filled before the flow moves on. Must stay above `lockInDuration`, or
+    /// the screen leaves while the last checkmark is still animating in.
+    private let finalDwell: TimeInterval = 0.4
     /// Cadence of the continuous selection ticks underneath everything.
     private let tickInterval: TimeInterval = 0.2
     /// Curve the checkmark + label emphasis lock in on, as one unit.
@@ -219,7 +237,7 @@ struct LoadingScreen: View {
     // and this is the surface they punctuate.
     //
     // Selection feedback rather than an impact on purpose. At five fires a
-    // second over ~6 seconds an impact tick would fatigue; the picker-detent
+    // second over ~4 seconds an impact tick would fatigue; the picker-detent
     // one stays comfortable.
 
     private func startTickLoop() {
