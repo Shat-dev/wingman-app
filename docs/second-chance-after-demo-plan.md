@@ -1,6 +1,8 @@
 # Second-Chance Offer on the Feature-Gate Paywall — Diagnosis + Plan
 
-Status: **Planning only — no code changed.**
+Status: **Removed 2026-09-20 — historical record only.** The second-chance offer and its 30-minute discount window were taken out of the app (26 viewers, 0 purchases, and Guideline 5.6 risk — see the note at the top of `second-chance-paywall-plan.md`). The files and symbols named below no longer exist.
+
+Original status: Planning only — no code changed.
 
 Extends `second-chance-paywall-plan.md` and closes open item §5 of
 `demo-then-wall-plan.md`.

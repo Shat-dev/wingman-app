@@ -8,18 +8,31 @@
 //
 //  Build 1.0.7 (27) was rejected under guideline 5.6.3 for a rating screen in
 //  onboarding that fired `requestReview()` on appear. The screen and the call
-//  were both removed (see the note in `WingmanApp.RootView`), and for several
-//  builds the app asked for a rating exactly zero times.
+//  were both removed (see the note in `WingmanApp.RootView`).
 //
-//  This brings the ask back, behind the gate that rejection implies: the user
-//  must have judged the app with their own money. Concretely, the ask happens
-//  a full day after a **real charge** has settled — not after a purchase, and
-//  not during the trial. Someone still inside the 3-day trial has paid nothing
-//  and is about to be asked to; someone charged 24 hours ago has already made
-//  that decision and kept the app. Those are opposite populations to put a
-//  five-star prompt in front of, which is the whole design.
+//  The first version of this type brought the ask back behind the strictest
+//  gate that rejection could imply: a paying subscriber, a full day after a
+//  real charge had settled. It was safe and it was nearly silent. In its first
+//  two weeks live it asked exactly one person, because only a trial conversion
+//  could ever qualify and there are a handful of those a month. An app with a
+//  steady stream of downloads was collecting no ratings.
 //
-//  WHY THE ELIGIBILITY RULES ARE STRICTER THAN "IS SUBSCRIBED"
+//  So the gate is now *engagement*, not payment: the ask happens when a user
+//  finishes an activity — a lesson, a scenario, or daily practice — whoever
+//  they are. Free users reach that moment too (scenario 1 is free for
+//  everyone, and the walkthrough hands out one free lesson), which is the
+//  point: about a quarter of the people who decline the first paywall still go
+//  on to finish something, and until now none of them could be asked.
+//
+//  What keeps this on the right side of 5.6.3 is the same thing that makes it
+//  a good moment: the user has completed a whole piece of the product, by their
+//  own choice, before anything is asked of them. The rejected screen asked
+//  during onboarding, before the app had been used at all. Do not move the
+//  trigger earlier than a finished activity — in particular not to the end of
+//  the walkthrough, which is a tour rather than use, a minute or two after the
+//  paywall.
+//
+//  WHY THERE ARE STILL RULES
 //
 //  `requestReview` is not a prompt we control. iOS decides whether to show
 //  anything at all, and Apple caps it at three appearances per user per 365
@@ -27,15 +40,30 @@
 //  so the rules below are about spending few asks well, not many asks often.
 //
 //  The single most damaging moment is right after the user has been shown a
-//  price. `noteFriction()` exists for that: any paywall or recovery offer in
-//  this session disqualifies the whole session, because a five-star prompt
-//  chasing a payment ask is how an app collects one-star reviews.
+//  price. `noteFriction()` exists for that. It used to disqualify the whole
+//  session, which cost nothing when the audience was subscribers and would be
+//  fatal now: every new user meets the onboarding paywall minutes before their
+//  first completion, so a session-wide rule would silence exactly the asks
+//  this design exists to make. It is a short cooldown instead — see
+//  `paywallCooldownSeconds`.
 //
-//  This type only *decides*. Presenting is the caller's job — see the
-//  `requestIfEligible(trigger:present:)` contract below.
+//  WHY THIS TYPE PRESENTS THE ALERT ITSELF
+//
+//  The trigger is the Continue tap on the completion screen, because that is
+//  the one thing every finished activity passes through. (An earlier version
+//  asked on a timer while the screen was up, and silently lost everyone who
+//  tapped Continue first.) But Continue is also what tears that screen down,
+//  so the ask has to outlive the view that triggers it — which rules out
+//  SwiftUI's `@Environment(\.requestReview)`, an action that is only good
+//  while its view is installed. `requestAfterContinue(trigger:)` therefore
+//  waits for the transition and presents on the active window scene, which
+//  does not care what is on screen. The rules stay separate from the
+//  presenting, in `requestIfEligible(trigger:present:)`.
 //
 
 import Foundation
+import StoreKit
+import UIKit
 
 @MainActor
 final class ReviewPromptManager {
@@ -44,28 +72,36 @@ final class ReviewPromptManager {
 
     // MARK: - Tuning
 
-    /// How long after the money actually leaves the account before we ask.
+    /// How long after a paywall was last put on screen before we will ask.
     ///
-    /// A day. Long enough that the charge is a settled fact rather than a
-    /// fresh notification the user is still reacting to, short enough that
-    /// they are still inside the stretch where the app is a habit worth
-    /// rating. Wall-clock, deliberately: sandbox accelerates *subscription
-    /// periods*, not purchase timestamps, so this stays 24 real hours in
-    /// review builds too and App Review cannot trip the ask by accident.
-    private static var minimumHoursSinceCharge: Double {
-        // Launch argument: -reviewPromptMinHours 0
+    /// A backstop rather than a filter. By construction a whole activity sits
+    /// between any paywall and a completion screen, and in production nobody
+    /// reaches their first completion within 60 seconds of a paywall — the
+    /// 10th percentile is about 107 seconds, and a three-minute cooldown would
+    /// have deferred more than a third of first completions. So at this value
+    /// the rule costs no reach; what it buys is protection against a future
+    /// flow that puts a price and a completion screen back to back.
+    private static var paywallCooldownSeconds: Double {
+        // Launch argument: -reviewPromptPaywallCooldown 0
         //
-        // Not behind `#if DEBUG`, same as the flag override in FeatureFlags —
-        // and this one is what makes the feature testable at all. Sandbox
-        // compresses the 3-day trial to a couple of minutes, so a tester can
-        // reach a converted, non-trial entitlement quickly; what they cannot
-        // compress is `latestPurchaseDate`, which is real wall-clock. Without
-        // this, verifying the ask end-to-end means waiting a literal day.
-        if UserDefaults.standard.object(forKey: "reviewPromptMinHours") != nil {
-            return UserDefaults.standard.double(forKey: "reviewPromptMinHours")
+        // Not behind `#if DEBUG`, same as the flag override in FeatureFlags.
+        // Safe to ship: launch arguments reach `NSArgumentDomain` from the
+        // process's argv, and an App Store app launched from the home screen
+        // has none.
+        if UserDefaults.standard.object(forKey: "reviewPromptPaywallCooldown") != nil {
+            return UserDefaults.standard.double(forKey: "reviewPromptPaywallCooldown")
         }
-        return 24
+        return 60
     }
+
+    /// How long after the Continue tap before the alert is requested.
+    ///
+    /// Long enough for the completion screen to finish leaving — a
+    /// full-screen cover dismissing, or a navigation pop — so the alert lands
+    /// on a settled screen instead of arriving mid-transition. Short enough
+    /// that it still reads as the consequence of finishing, not as something
+    /// that interrupted whatever the user did next.
+    private static let presentationDelay: Double = 0.8
 
     /// Apple's own ceiling is three appearances per 365 days, after which
     /// `requestReview` silently does nothing. Matching it here means our
@@ -80,20 +116,24 @@ final class ReviewPromptManager {
 
     /// Skip reasons that are NOT worth an event.
     ///
-    /// `requestIfEligible` runs on every completion screen, for every user. If
-    /// each one emitted a skip, the overwhelming majority of the events would
-    /// say "this person is not a paying subscriber" — true, already known from
-    /// subscription data, and billed per event.
+    /// `requestIfEligible` runs on every completion screen, for every user,
+    /// and now that everyone is eligible the rate limits are what answer
+    /// almost every call after a user's first: once someone has been asked,
+    /// each later completion on that version would emit "already asked". That
+    /// is derivable from `review_prompt_requested` itself, grows with
+    /// engagement rather than with anything going wrong, and is billed per
+    /// event.
     ///
-    /// What is actually worth measuring is the near-miss: someone who IS in
-    /// the target audience and still did not get asked. Every reason left
-    /// reportable below describes that case, so the event count stays
-    /// proportional to the population the feature is about.
+    /// The one reason left reportable is the near-miss that cannot be derived
+    /// from anything else: a user who would have been asked, but for a paywall
+    /// shown moments earlier. Its rate is the number that says whether
+    /// `paywallCooldownSeconds` is set anywhere near right — and
+    /// `ineligibilityReason()` checks it LAST so that is all it can mean.
     private static let unreportedReasons: Set<String> = [
         "flag_off",
-        "not_subscribed",
-        "in_trial",
-        "no_charge_recorded",
+        "already_asked_this_version",
+        "lifetime_cap_reached",
+        "asked_too_recently",
     ]
 
     // MARK: - Persisted state
@@ -114,34 +154,63 @@ final class ReviewPromptManager {
 
     // MARK: - Session state
 
-    /// Set by `noteFriction()`, cleared only by a fresh process. Session-scoped
-    /// rather than persisted: seeing a paywall poisons *this* sitting, not the
-    /// user's whole relationship with the app.
-    private var sawFrictionThisSession = false
+    /// Set by `noteFriction()`. In-memory on purpose: by the time a user has
+    /// relaunched the app and finished an activity, a paywall seen before the
+    /// relaunch is comfortably outside any cooldown worth having.
+    private var lastPaywallShownAt: Date?
 
     private init() {}
 
     // MARK: - Friction
 
-    /// Call when the user is shown a price: a paywall, or the second-chance
-    /// recovery offer. Disqualifies the rest of this session.
+    /// Call when the user is shown a price, i.e. a paywall. Restarts the
+    /// cooldown during which we will not ask.
     ///
-    /// Cheap and idempotent, so call it freely — a missed call is a real bug
-    /// (an ask chasing a payment screen) while a redundant one costs nothing.
+    /// Cheap, so call it freely — a missed call is a real bug (an ask chasing
+    /// a payment screen) while a redundant one only moves the clock to where
+    /// it already was.
     func noteFriction(source: String) {
-        guard !sawFrictionThisSession else { return }
-        sawFrictionThisSession = true
-        log("⭐️ ReviewPrompt: session disqualified by friction — \(source)")
+        lastPaywallShownAt = Date()
+        log("⭐️ ReviewPrompt: paywall cooldown started — \(source)")
     }
 
     // MARK: - The ask
 
+    /// The production entry point: call from the Continue tap of a completion
+    /// screen. Waits for that screen to finish leaving, then runs the rules
+    /// and, if they pass, asks iOS to show the rating alert.
+    ///
+    /// Fire-and-forget by design — the caller is a view that is about to stop
+    /// existing, so nothing here may depend on it. If the app is no longer in
+    /// the foreground once the wait is over there is no scene to present on,
+    /// and the rules are deliberately NOT run: nothing is recorded, so the
+    /// user's next completion gets the ask instead of finding it already spent.
+    func requestAfterContinue(trigger: String) {
+        Task { @MainActor in
+            try? await Task.sleep(nanoseconds: UInt64(Self.presentationDelay * 1_000_000_000))
+
+            guard let scene = Self.foregroundScene else {
+                log("⭐️ ReviewPrompt: no foreground scene at trigger=\(trigger) — leaving the ask for the next completion")
+                return
+            }
+            requestIfEligible(trigger: trigger) {
+                AppStore.requestReview(in: scene)
+            }
+        }
+    }
+
+    /// The window scene the user is actually looking at, if any.
+    private static var foregroundScene: UIWindowScene? {
+        UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .first { $0.activationState == .foregroundActive }
+    }
+
     /// Runs the eligibility rules and, if they all pass, calls `present`.
     ///
-    /// The closure exists because the actual request belongs to SwiftUI's
-    /// `@Environment(\.requestReview)` action, which can only be read inside a
-    /// `View`. Splitting it this way keeps every rule in one testable place
-    /// and leaves the view holding nothing but the trigger.
+    /// `present` is injected rather than hard-wired so that every rule, and
+    /// the bookkeeping, can be exercised without StoreKit or a window scene.
+    /// `requestAfterContinue(trigger:)` is what supplies the real one.
     ///
     /// Note what is deliberately *not* measured: whether the alert appeared,
     /// and what the user rated. iOS reports neither, by design. `trigger` is
@@ -173,12 +242,20 @@ final class ReviewPromptManager {
         var properties: [String: Any] = [
             "trigger": trigger,
             "lifetime_request_count": count,
+            // The gate used to imply who was being asked (a paid subscriber).
+            // It no longer does, so the event has to say — it is the only way
+            // to tell later whether the asks are landing on free users,
+            // trialists or subscribers.
+            "subscription_state": Self.subscriptionState,
         ]
         // Built conditionally rather than with `as Any` — a wrapped `nil`
         // reaches PostHog as a null property, which is not the same thing as
         // an absent one and quietly breaks any average taken over it.
         if let hours = Self.hoursSinceCharge() {
             properties["hours_since_charge"] = Int(hours)
+        }
+        if let seconds = secondsSincePaywall() {
+            properties["seconds_since_paywall"] = Int(seconds)
         }
         Analytics.capture(Analytics.Event.reviewPromptRequested, properties)
 
@@ -190,27 +267,19 @@ final class ReviewPromptManager {
     /// Returns `nil` when the user is eligible, otherwise a short snake_case
     /// reason suitable for both the log line and the analytics property.
     ///
-    /// Ordered cheapest-and-most-common first so the usual "not eligible" path
-    /// is a couple of comparisons.
+    /// The rate limits come BEFORE the cooldown, and the order is load-bearing
+    /// for the analytics rather than for the outcome: `paywall_cooldown` is
+    /// the only reason that emits an event, so it must only ever be returned
+    /// for someone who would otherwise have been asked. Checked first, it
+    /// would also swallow every already-asked user who happened to pass a
+    /// paywall — which is how the previous `friction_this_session` reason came
+    /// to be reported 37 times for people who were never in the audience.
     private func ineligibilityReason() -> String? {
         guard FeatureFlags.shared.reviewPromptEnabled else { return "flag_off" }
 
-        if sawFrictionThisSession { return "friction_this_session" }
-
-        let subscriptions = SubscriptionManager.shared
-        guard subscriptions.isSubscriptionActive else { return "not_subscribed" }
-
-        // The rule the whole feature is built around. An active entitlement is
-        // not enough — a trialist has an active entitlement and has paid
-        // nothing, and asking them is asking someone mid-decision.
-        guard !subscriptions.isInTrial else { return "in_trial" }
-
-        guard let hours = Self.hoursSinceCharge() else { return "no_charge_recorded" }
-        guard hours >= Self.minimumHoursSinceCharge else { return "charge_too_recent" }
-
         // Never twice on the same build. A user who was asked and declined
-        // should not meet the same alert again because they opened the app on
-        // a different day.
+        // should not meet the same alert again because they finished another
+        // lesson.
         let lastVersion = UserDefaults.standard.string(forKey: Self.lastRequestedVersionKey)
         if lastVersion == Self.currentVersion { return "already_asked_this_version" }
 
@@ -225,11 +294,32 @@ final class ReviewPromptManager {
             if days < Self.minimumDaysBetweenRequests { return "asked_too_recently" }
         }
 
+        // Same conservative reading of a backwards clock: a negative interval
+        // is below any cooldown, so it blocks.
+        if let seconds = secondsSincePaywall(), seconds < Self.paywallCooldownSeconds {
+            return "paywall_cooldown"
+        }
+
         return nil
     }
 
+    /// Seconds since a paywall was last put on screen in this process, or
+    /// `nil` if none has been.
+    private func secondsSincePaywall() -> Double? {
+        guard let shownAt = lastPaywallShownAt else { return nil }
+        return Date().timeIntervalSince(shownAt)
+    }
+
+    /// "free", "trial" or "paid" — see `subscription_state` above.
+    private static var subscriptionState: String {
+        let subscriptions = SubscriptionManager.shared
+        guard subscriptions.isSubscriptionActive else { return "free" }
+        return subscriptions.isInTrial ? "trial" : "paid"
+    }
+
     /// Hours since the last charge that actually settled, or `nil` if we have
-    /// never observed one.
+    /// never observed one. No longer a gate — kept on the event because for
+    /// subscribers it is still the most useful thing to know about the moment.
     private static func hoursSinceCharge() -> Double? {
         guard let charged = SubscriptionManager.shared.lastPaidChargeAt else { return nil }
         return Date().timeIntervalSince(charged) / 3_600
@@ -249,11 +339,13 @@ final class ReviewPromptManager {
     /// Clears the rate-limiting state so the ask can be exercised more than
     /// once on a device. Launch argument: `-resetReviewPrompt YES`.
     ///
-    /// Deliberately NOT behind `#if DEBUG`, for the same reason
-    /// `FeatureFlags.readCommitmentPactEnabled` is not: this feature cannot be
-    /// tested in a Debug build at all. It requires a real settled charge,
-    /// which means real StoreKit, which means Release — precisely where a
-    /// `#if DEBUG` escape hatch is compiled out and useless.
+    /// The ask itself is now reachable in a Debug build — finish any activity
+    /// and tap Continue — and a development build is the one place iOS always
+    /// shows the alert
+    /// (TestFlight never does; the App Store decides for itself). This stays
+    /// outside `#if DEBUG` anyway, because confirming the *event* from a
+    /// TestFlight or Release build is still worth doing and that is exactly
+    /// where a `#if DEBUG` escape hatch is compiled out.
     ///
     /// Safe to ship: launch arguments reach `NSArgumentDomain` from the
     /// process's argv, and an App Store app launched from the home screen has

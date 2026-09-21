@@ -354,10 +354,19 @@ struct InviteFriendsCard: View {
         .buttonStyle(ScalePressStyle())
     }
     
+    /// The App Store listing for `com.lazul.wingman`.
+    ///
+    /// Country-less on purpose. The link App Store Connect hands you is
+    /// locale-scoped (`/us/app/wingman-dating-confidence/id...`), which pins
+    /// every recipient to the US storefront regardless of where their Apple ID
+    /// lives. The bare `/app/id<id>` form lets Apple route each viewer to their
+    /// own storefront — the only correct behaviour for a link the user is
+    /// about to hand to a friend.
+    private static let appStoreURL = "https://apps.apple.com/app/id6758346525"
+
     private func shareApp() {
-        let appURL = "https://apps.apple.com/app/wingman" // Replace with actual app URL
         let activityVC = UIActivityViewController(
-            activityItems: ["Join me on Wingman! \(appURL)"],
+            activityItems: ["Join me on Wingman! \(Self.appStoreURL)"],
             applicationActivities: nil
         )
         

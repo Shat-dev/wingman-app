@@ -110,7 +110,7 @@ final class FeatureFlags: ObservableObject {
     /// reviewers now see. It is no longer dark by default.
     @Published private(set) var commitmentPactEnabled: Bool = true
 
-    /// The post-charge App Store rating ask.
+    /// The App Store rating ask shown after a completed activity.
     ///
     /// **Ships `true` — fail open**, phrased as a kill switch (`..._disabled`)
     /// for the same reason as the three flags above: `isFeatureEnabled`
@@ -119,13 +119,15 @@ final class FeatureFlags: ObservableObject {
     /// would leave the ask dark for every live user *and* unreachable on a
     /// developer's own device.
     ///
-    /// On App Review: shipping this on does not put a rating prompt in front
-    /// of a reviewer. `ReviewPromptManager` requires a settled non-trial
-    /// charge plus 24 wall-clock hours, and sandbox accelerates subscription
-    /// *periods*, not purchase timestamps — so the gate holds in a review
-    /// build. That distinction is what makes an on-by-default safe here after
-    /// the 5.6.3 rejection, and it is the thing to re-check before moving the
-    /// ask anywhere earlier.
+    /// On App Review: a reviewer who finishes a lesson or a scenario CAN now
+    /// meet the rating prompt. The earlier gate (a settled charge plus 24
+    /// hours) made that impossible in a review build; this one does not, and
+    /// that was a deliberate trade for reach. What it rests on instead is the
+    /// placement itself: the 5.6.3 rejection was for asking during onboarding,
+    /// before the app had been used, and this asks only after the user has
+    /// completed a piece of it — which is the moment Apple's own guidance
+    /// points to. Re-read `ReviewPromptManager`'s header before moving the ask
+    /// anywhere earlier than that.
     ///
     /// This is the lever to pull if ratings move the wrong way: flipping
     /// `review_prompt_disabled` on in PostHog stops the ask with no release.
@@ -206,13 +208,12 @@ final class FeatureFlags: ObservableObject {
         // Launch argument: -reviewPromptEnabled NO
         //
         // Deliberately NOT behind `#if DEBUG`, for the reason spelled out in
-        // `readCommitmentPactEnabled` and `readLessonQuizEnabled`. This one has
-        // the strongest version of that argument in the file: the ask is gated
-        // on a real settled StoreKit charge, and StoreKit only works in a
-        // Release build — so every end-to-end test of this feature happens in
-        // exactly the configuration where a `#if DEBUG` override is compiled
-        // out. See also `ReviewPromptManager.resetForTestingIfRequested()`,
-        // which clears the rate limiter the same way.
+        // `readCommitmentPactEnabled` and `readLessonQuizEnabled`: checking
+        // the ask's analytics from a TestFlight or Release build is still
+        // worth doing, and that is exactly the configuration where a
+        // `#if DEBUG` override is compiled out. See also
+        // `ReviewPromptManager.resetForTestingIfRequested()`, which clears the
+        // rate limiter the same way.
         if UserDefaults.standard.object(forKey: "reviewPromptEnabled") != nil {
             let forced = UserDefaults.standard.bool(forKey: "reviewPromptEnabled")
             if reviewPromptEnabled != forced {

@@ -41,7 +41,6 @@
 //
 
 import SwiftUI
-import StoreKit
 
 /// Beat timings in seconds.
 ///
@@ -73,16 +72,6 @@ private enum T {
     static let luFlipAt = 0.58      // = luFillAt + luFill
     static let luRefillAt = 0.66
     static let luRefill = 0.30
-
-    /// When the App Store rating ask may fire, if the user is eligible.
-    ///
-    /// After the last beat lands — the sequence finishes at ~1.90s in its
-    /// slowest form (itemised award plus a level-up) — with a deliberate
-    /// pause on top. The reward moment has to be allowed to complete and be
-    /// read before anything is asked of the user; an alert that interrupts
-    /// the counter is an alert that arrives during an animation rather than
-    /// after an achievement, which is the distinction the whole gate rests on.
-    static let reviewAskAt = 2.60
 }
 
 struct CompletionScreen<Detail: View>: View {
@@ -122,12 +111,6 @@ struct CompletionScreen<Detail: View>: View {
     }
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-
-    /// SwiftUI's wrapper around `SKStoreReviewController` / `AppStore
-    /// .requestReview`. Read here rather than reaching for a window scene
-    /// because the action is only available inside a `View`, which is also the
-    /// reason `ReviewPromptManager` takes a closure instead of presenting.
-    @Environment(\.requestReview) private var requestReview
     @ObservedObject private var xpStore = XPStore.shared
     @ObservedObject private var streakStore = StreakStore.shared
 
@@ -287,6 +270,23 @@ struct CompletionScreen<Detail: View>: View {
                     isActive = false
                     HapticManager.shared.tapStrong()
                     onContinue()
+
+                    // The App Store rating ask hangs off THIS tap, not off a
+                    // timer on the screen. It used to fire 2.6s after appear,
+                    // behind the `isActive` guard — and Continue is live from
+                    // the first frame, so everyone who tapped through quickly
+                    // (the people most obviously enjoying themselves) was
+                    // never asked at all. Continue is the one thing every
+                    // finished lesson, scenario and daily practice is
+                    // guaranteed to pass through, so it is the only trigger
+                    // that reaches all of them.
+                    //
+                    // After `onContinue()` on purpose: for a lesson that call
+                    // is what records the completion, so the ask should not
+                    // get ahead of it. Every rule about whether to ask, and
+                    // the short wait for this screen to finish leaving, lives
+                    // in `ReviewPromptManager`.
+                    ReviewPromptManager.shared.requestAfterContinue(trigger: "completion_continue")
                 }) {
                     Text(continueTitle)
                         .font(.manropeSemiBold(size: 16))
@@ -440,21 +440,6 @@ struct CompletionScreen<Detail: View>: View {
         guard !hasRunIntro else { return }
         hasRunIntro = true
 
-        // Scheduled before the Reduce Motion branch below so it runs in both
-        // modes. `after(_:_:)` carries the `isActive` guard, so a user who
-        // taps Continue first never sees it.
-        //
-        // `requestReview` is read HERE and captured, rather than read inside
-        // the delayed closure. `.onAppear` runs while the view is installed,
-        // so the environment is valid; the closure body runs 2.6s later,
-        // detached, where touching an `@Environment` wrapper is reading it
-        // outside installation — which SwiftUI warns about and is entitled to
-        // answer with a default. Capturing the resolved action sidesteps that
-        // entirely. (The `@State` reads in the other beats are safe for a
-        // different reason: those go through State's own storage box.)
-        let review = requestReview
-        after(T.reviewAskAt) { askForReviewIfEligible(using: review) }
-
         guard !reduceMotion else {
             // Reduce Motion removes movement, not feedback. Everything is
             // simply present; the haptic ladder still runs, compressed, because
@@ -586,21 +571,6 @@ struct CompletionScreen<Detail: View>: View {
             HapticManager.shared.success()
         } else {
             HapticManager.shared.threshold()
-        }
-    }
-
-    /// The App Store rating ask, if this user is eligible for one.
-    ///
-    /// Hung off this screen rather than a launch or a tab change because
-    /// `requestReview` should follow a moment the user is pleased with, and by
-    /// construction this is the app's: reaching it means they just finished a
-    /// lesson, a scenario, or their daily practice. Every rule about *who*
-    /// gets asked — paid rather than trialling, a full day past the charge,
-    /// no paywall this session, rate limits — lives in `ReviewPromptManager`.
-    /// This call site supplies only the *when*, and should stay that thin.
-    private func askForReviewIfEligible(using review: RequestReviewAction) {
-        ReviewPromptManager.shared.requestIfEligible(trigger: "completion_screen") {
-            review()
         }
     }
 

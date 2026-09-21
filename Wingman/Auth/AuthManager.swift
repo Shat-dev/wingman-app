@@ -64,63 +64,6 @@ final class AuthManager: ObservableObject {
         }
     }
 
-    // One-time 50%-off-year-1 recovery offer, shown immediately after a user
-    // dismisses the feature-gated paywall (never after onboarding, never to
-    // an already-subscribed user). Persisted per-user, mirroring
-    // hasCompletedPaywallFlow's shape exactly, so "shown once, ever" holds
-    // across reinstall / new device.
-    @Published var hasSeenSecondChanceOffer: Bool = false {
-        didSet {
-            log("🎁 hasSeenSecondChanceOffer changed: \(oldValue) → \(hasSeenSecondChanceOffer)")
-        }
-    }
-
-    /// When the recovery offer was first put on screen, i.e. when the discount
-    /// window below started running. Nil until it has been shown.
-    ///
-    /// Set exactly once, on the first `markSecondChanceOfferShown` call (the
-    /// one from `onAppear`). The later call from `finish(outcome:)` records the
-    /// real outcome but must NOT move this, or every user would silently get a
-    /// window measured from whenever they happened to tap.
-    @Published private(set) var secondChanceOfferShownAt: Date? {
-        didSet {
-            log("🎁 secondChanceOfferShownAt changed: \(oldValue?.description ?? "nil") → \(secondChanceOfferShownAt?.description ?? "nil")")
-        }
-    }
-
-    /// How long the discounted price stays purchasable after the recovery offer
-    /// is shown.
-    ///
-    /// The offer is still once-ever — the modal never returns — but destroying
-    /// the price the instant the sheet closes punished the wrong people: the
-    /// flag is burned on `onAppear`, so a user who reflexively swiped a
-    /// surprise modal away lost a discount they never read. This window is the
-    /// difference between "declined the offer" and "dismissed a popup".
-    ///
-    /// It is a REAL deadline, not a display trick: `PaywallViewModel` stops
-    /// vending the discounted package when it passes, and
-    /// `SecondChanceOfferView` closes itself. That is the whole reason it is
-    /// honest to put a countdown on it — a timer that resets, or that expires
-    /// without anything changing, is the Guideline 5.6 pattern this codebase
-    /// has refused everywhere else.
-    static let secondChanceDiscountWindow: TimeInterval = 30 * 60
-
-    /// The instant the discounted price stops being offered. Nil if the offer
-    /// has never been shown.
-    var secondChanceDiscountDeadline: Date? {
-        secondChanceOfferShownAt?.addingTimeInterval(Self.secondChanceDiscountWindow)
-    }
-
-    /// Whether the discounted year is currently purchasable.
-    ///
-    /// `now` is injectable so callers with their own clock (the paywall's
-    /// countdown) evaluate against the same instant they render, rather than
-    /// racing a second `Date()`.
-    func isSecondChanceDiscountWindowOpen(now: Date = Date()) -> Bool {
-        guard !hasActiveSubscription, let deadline = secondChanceDiscountDeadline else { return false }
-        return now < deadline
-    }
-
     // MARK: - Free Demo (mascot walkthrough)
     //
     // These answer questions that are deliberately separate from
@@ -141,7 +84,7 @@ final class AuthManager: ObservableObject {
     // install base.
     //
     // Persisted per-user and mirrored to user_metadata, mirroring
-    // hasSeenSecondChanceOffer's shape exactly, so all survive
+    // hasCompletedPaywallFlow's shape exactly, so all survive
     // uninstall+reinstall and new devices.
     //
     // NOTE ON SCOPE: the walkthrough spends **one scenario and no lesson** —
@@ -428,10 +371,6 @@ final class AuthManager: ObservableObject {
         hasCompletedPaywallFlow = UserDefaults.standard.bool(forKey: "hasCompletedPaywallFlow")
         log("💳 Loaded hasCompletedPaywallFlow: \(hasCompletedPaywallFlow)")
 
-        // Same note as above: actual per-user value loads after session
-        hasSeenSecondChanceOffer = UserDefaults.standard.bool(forKey: "hasSeenSecondChanceOffer")
-        log("🎁 Loaded hasSeenSecondChanceOffer: \(hasSeenSecondChanceOffer)")
-
         // Same note as above: pre-session defaults only. The authoritative
         // per-user values load in checkUserFreeDemoStatus /
         // checkUserPostDemoWallStatus once a session exists.
@@ -716,7 +655,6 @@ final class AuthManager: ObservableObject {
                     await checkUserQuestionStatus(userId: session.user.id.uuidString)
                     await checkUserPaywallFlowStatus(userId: session.user.id.uuidString)
                     await checkUserCommitmentPactStatus(userId: session.user.id.uuidString)
-                    await checkUserSecondChanceOfferStatus(userId: session.user.id.uuidString)
                     await checkUserFreeDemoStatus(userId: session.user.id.uuidString)
                     await checkUserPostDemoWallStatus(userId: session.user.id.uuidString)
                     await checkUserFreeLessonStatus(userId: session.user.id.uuidString)
@@ -822,8 +760,6 @@ final class AuthManager: ObservableObject {
                 self.hasCompletedQuestions = false
                 self.hasCompletedPaywallFlow = false
                 self.hasSeenCommitmentPact = false
-                self.hasSeenSecondChanceOffer = false
-                self.secondChanceOfferShownAt = nil
                 self.hasCompletedFreeDemo = false
                 self.hasSuppressedWalkthrough = false
                 self.hasDismissedPostDemoWall = false
@@ -906,7 +842,6 @@ final class AuthManager: ObservableObject {
                     await checkUserQuestionStatus(userId: session.user.id.uuidString)
                     await checkUserPaywallFlowStatus(userId: session.user.id.uuidString)
                     await checkUserCommitmentPactStatus(userId: session.user.id.uuidString)
-                    await checkUserSecondChanceOfferStatus(userId: session.user.id.uuidString)
                     await checkUserFreeDemoStatus(userId: session.user.id.uuidString)
                     await checkUserPostDemoWallStatus(userId: session.user.id.uuidString)
                     await checkUserFreeLessonStatus(userId: session.user.id.uuidString)
@@ -993,8 +928,6 @@ final class AuthManager: ObservableObject {
                 self.hasCompletedQuestions = false
                 self.hasCompletedPaywallFlow = false
                 self.hasSeenCommitmentPact = false
-                self.hasSeenSecondChanceOffer = false
-                self.secondChanceOfferShownAt = nil
                 self.hasCompletedFreeDemo = false
                 self.hasSuppressedWalkthrough = false
                 self.hasDismissedPostDemoWall = false
@@ -1085,62 +1018,7 @@ final class AuthManager: ObservableObject {
         }
     }
 
-    /// Same shape as `checkUserPaywallFlowStatus` above: per-user UserDefaults
-    /// read first (fast, offline-safe), falling back to the `user_metadata`
-    /// mirror on a miss (covers reinstall / new device), backfilling
-    /// UserDefaults on a hit so later launches short-circuit locally.
-    private func checkUserSecondChanceOfferStatus(userId: String) async {
-        let key = "hasSeenSecondChanceOffer_\(userId)"
-        hasSeenSecondChanceOffer = UserDefaults.standard.bool(forKey: key)
-        log("🎁 Second-chance offer status loaded: \(hasSeenSecondChanceOffer) for user: \(userId)")
-
-        if !hasSeenSecondChanceOffer,
-           let user = currentUser,
-           let shown = user.userMetadata["second_chance_offer_shown"]?.boolValue,
-           shown {
-            log("🎁 Found second_chance_offer_shown=true in user metadata - marking as shown")
-            hasSeenSecondChanceOffer = true
-            UserDefaults.standard.set(true, forKey: key)
-        }
-
-        loadSecondChanceShownAt(userId: userId)
-    }
-
-    private static func secondChanceShownAtKey(_ userId: String) -> String {
-        "secondChanceOfferShownAt_\(userId)"
-    }
-
-    /// Restores the discount-window start, UserDefaults first and the
-    /// `user_metadata` mirror second — the same precedence every other flag on
-    /// this screen uses.
-    ///
-    /// A user who was shown the offer on an old install and reinstalls hours
-    /// later restores an already-expired timestamp, which is the correct
-    /// outcome: the window closed while they were away. Restoring it anyway
-    /// (rather than treating a missing local value as "never shown") is what
-    /// stops a reinstall from handing out a fresh 30 minutes.
-    private func loadSecondChanceShownAt(userId: String) {
-        let key = Self.secondChanceShownAtKey(userId)
-
-        let stored = UserDefaults.standard.double(forKey: key)
-        if stored > 0 {
-            secondChanceOfferShownAt = Date(timeIntervalSince1970: stored)
-            log("🎁 Discount window start loaded: \(secondChanceOfferShownAt!) for user: \(userId)")
-            return
-        }
-
-        guard let raw = currentUser?.userMetadata["second_chance_offer_shown_at"]?.stringValue,
-              let mirrored = ISO8601DateFormatter().date(from: raw) else {
-            secondChanceOfferShownAt = nil
-            return
-        }
-
-        secondChanceOfferShownAt = mirrored
-        UserDefaults.standard.set(mirrored.timeIntervalSince1970, forKey: key)
-        log("🎁 Discount window start restored from user metadata: \(mirrored)")
-    }
-
-    /// Same shape as `checkUserSecondChanceOfferStatus`: per-user UserDefaults
+    /// Same shape as `checkUserPaywallFlowStatus`: per-user UserDefaults
     /// first, `user_metadata` mirror as the reinstall / new-device fallback,
     /// backfilling UserDefaults on a hit.
     ///
@@ -1413,7 +1291,6 @@ final class AuthManager: ObservableObject {
             await checkUserQuestionStatus(userId: session.user.id.uuidString)
             await checkUserPaywallFlowStatus(userId: session.user.id.uuidString)
             await checkUserCommitmentPactStatus(userId: session.user.id.uuidString)
-            await checkUserSecondChanceOfferStatus(userId: session.user.id.uuidString)
             await checkUserFreeDemoStatus(userId: session.user.id.uuidString)
             await checkUserPostDemoWallStatus(userId: session.user.id.uuidString)
             await checkUserFreeLessonStatus(userId: session.user.id.uuidString)
@@ -2326,61 +2203,6 @@ final class AuthManager: ObservableObject {
         }
     }
 
-    // MARK: - Second-Chance Recovery Offer
-    /// Marks the one-time recovery offer as shown, regardless of outcome —
-    /// the guarantee is "never present it again," not "never present it
-    /// again unless they bought." `outcome` is carried into the
-    /// `user_metadata` mirror purely for observability (support/debugging),
-    /// not for gating.
-    ///
-    /// Reachable only for authenticated users: the recovery offer requires
-    /// account creation + MainView first (see SubscriptionGateModifier), so
-    /// unlike `completePaywallFlow()` there is no anonymous-user branch here.
-    func markSecondChanceOfferShown(outcome: String) {
-        log("🎁 markSecondChanceOfferShown(outcome: \(outcome)) called")
-        hasSeenSecondChanceOffer = true
-
-        // First call wins. This runs twice for every user who acts on the
-        // offer — once from `onAppear` and once from `finish(outcome:)` — and
-        // only the first is "when the offer was shown". Taking the later one
-        // would silently extend the window by however long the user deliberated,
-        // making the deadline the countdown displays a lie.
-        let startedAt = secondChanceOfferShownAt ?? {
-            let now = Date()
-            secondChanceOfferShownAt = now
-            return now
-        }()
-
-        guard let userId = currentUser?.id.uuidString else {
-            log("⚠️ markSecondChanceOfferShown: no authenticated user — nothing to persist")
-            return
-        }
-
-        let key = "hasSeenSecondChanceOffer_\(userId)"
-        UserDefaults.standard.set(true, forKey: key)
-        UserDefaults.standard.set(startedAt.timeIntervalSince1970, forKey: Self.secondChanceShownAtKey(userId))
-        log("🎁 Second-chance offer marked shown for user: \(userId), window opened at \(startedAt)")
-
-        // Mirror to user_metadata so this survives uninstall+reinstall, same
-        // rationale as completePaywallFlow()'s mirror above.
-        Task {
-            do {
-                let attributes = UserAttributes(data: [
-                    "second_chance_offer_shown": AnyJSON.bool(true),
-                    // `startedAt`, never `Date()`. The second call would
-                    // otherwise overwrite the mirror with a later instant, and
-                    // a reinstall would restore a window that had already run.
-                    "second_chance_offer_shown_at": AnyJSON.string(ISO8601DateFormatter().string(from: startedAt)),
-                    "second_chance_offer_outcome": AnyJSON.string(outcome)
-                ])
-                try await client.auth.update(user: attributes)
-                log("✅ Mirrored second_chance_offer_shown=true to user_metadata")
-            } catch {
-                log("⚠️ Failed to mirror second_chance_offer_shown to user_metadata: \(error.localizedDescription)")
-            }
-        }
-    }
-
     // MARK: - Free Demo
     /// Called when the walkthrough finishes — the user has been shown the four
     /// tabs. It no longer implies they played the free scenario: that is an
@@ -2395,7 +2217,7 @@ final class AuthManager: ObservableObject {
     /// into the post-demo ask (4c); `MainTabView` now marks that wall dismissed
     /// on the same path, so 4c is skipped and the user lands in 4d.
     ///
-    /// Same persistence shape as `markSecondChanceOfferShown`: per-user
+    /// Same persistence shape as `completePaywallFlow`: per-user
     /// UserDefaults as the device source of truth, best-effort `user_metadata`
     /// mirror so a reinstall doesn't hand out a second demo.
     /// - Parameter handoffTo: the tab to open the next MainTabView on. Set to
@@ -2642,7 +2464,6 @@ final class AuthManager: ObservableObject {
         await checkUserQuestionStatus(userId: userId)
         await checkUserPaywallFlowStatus(userId: userId)
         await checkUserCommitmentPactStatus(userId: userId)
-        await checkUserSecondChanceOfferStatus(userId: userId)
         await checkUserFreeDemoStatus(userId: userId)
         await checkUserPostDemoWallStatus(userId: userId)
         await checkUserFreeLessonStatus(userId: userId)
@@ -2691,7 +2512,6 @@ final class AuthManager: ObservableObject {
         await checkUserQuestionStatus(userId: userId)
         await checkUserPaywallFlowStatus(userId: userId)
         await checkUserCommitmentPactStatus(userId: userId)
-        await checkUserSecondChanceOfferStatus(userId: userId)
         await checkUserFreeDemoStatus(userId: userId)
         await checkUserPostDemoWallStatus(userId: userId)
         await checkUserFreeLessonStatus(userId: userId)
@@ -3038,8 +2858,6 @@ final class AuthManager: ObservableObject {
             hasCompletedQuestions = false
             hasCompletedPaywallFlow = false
             hasSeenCommitmentPact = false
-            hasSeenSecondChanceOffer = false
-            secondChanceOfferShownAt = nil
             hasCompletedFreeDemo = false
             hasSuppressedWalkthrough = false
             hasDismissedPostDemoWall = false
@@ -3191,8 +3009,6 @@ final class AuthManager: ObservableObject {
                     hasCompletedQuestions = false
                     hasCompletedPaywallFlow = false
                     hasSeenCommitmentPact = false
-                    hasSeenSecondChanceOffer = false
-                    secondChanceOfferShownAt = nil
                     hasCompletedFreeDemo = false
                     hasSuppressedWalkthrough = false
                     hasDismissedPostDemoWall = false
@@ -3235,12 +3051,15 @@ final class AuthManager: ObservableObject {
         userDefaults.removeObject(forKey: "hasCompletedQuestions_\(userId)")
         userDefaults.removeObject(forKey: "hasCompletedPaywallFlow_\(userId)")
         userDefaults.removeObject(forKey: "hasSeenCommitmentPact_\(userId)")
-        userDefaults.removeObject(forKey: "hasSeenSecondChanceOffer_\(userId)")
-        userDefaults.removeObject(forKey: Self.secondChanceShownAtKey(userId))
         userDefaults.removeObject(forKey: "hasCompletedFreeDemo_\(userId)")
         userDefaults.removeObject(forKey: Self.suppressedKey(userId))
         userDefaults.removeObject(forKey: "hasDismissedPostDemoWall_\(userId)")
         userDefaults.removeObject(forKey: Self.freeLessonKey(userId))
+        // Leftover keys from the removed second-chance recovery offer. Nothing
+        // reads or writes them any more — these removes clean up stale values
+        // on upgraded installs. Harmless no-op on fresh installs.
+        userDefaults.removeObject(forKey: "hasSeenSecondChanceOffer_\(userId)")
+        userDefaults.removeObject(forKey: "secondChanceOfferShownAt_\(userId)")
         // Leftover keys from the pre-gating hasEverHadSubscription flag. The
         // flag was removed when feature gates were added — these removes
         // clean up stale values on upgraded installs. Harmless no-op on

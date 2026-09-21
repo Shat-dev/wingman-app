@@ -399,9 +399,6 @@ struct PaywallView: View {
                 // spinner. The retry control doubles as the in-progress
                 // indicator in the not-yet-loaded branch.
                 if viewModel.offerings != nil {
-                    if viewModel.isDiscountWindowActive {
-                        discountCountdownBanner
-                    }
                     plansSection
                     continueButton
                     // Deliberately BELOW the CTA. The trial promise is already
@@ -535,28 +532,22 @@ struct PaywallView: View {
             // refresh offerings and reset UI state
             log("📱 PaywallView appeared")
 
-            // Disqualifies this session from the App Store rating ask. Every
-            // presentation, not just the first — the guard below is about not
-            // double-counting a funnel event, whereas this is about a fact
-            // ("we showed this person a price today") that a re-mount does not
-            // make less true. See ReviewPromptManager: a five-star prompt
-            // chasing a payment ask is how an app collects one-star reviews.
+            // Restarts the cooldown during which the App Store rating ask stays
+            // quiet. Every presentation, not just the first — the guard below
+            // is about not double-counting a funnel event, whereas this is
+            // about a fact ("we just showed this person a price") that each
+            // presentation makes true again. See ReviewPromptManager: a
+            // five-star prompt chasing a payment ask is how an app collects
+            // one-star reviews.
             //
             // Placed on the paywall itself rather than on each of its callers
             // so the feature gate, the post-demo wall, the expiry re-prompt and
-            // the onboarding paywall are all covered by one line. The
-            // second-chance offer presents its own view and notes itself.
+            // the onboarding paywall are all covered by one line.
             ReviewPromptManager.shared.noteFriction(source: "paywall_\(source.rawValue)")
 
             viewModel.loadOfferings()
             viewModel.currentPage = 0
             viewModel.selectPlan(.yearly)
-
-            // After `selectPlan`, which would otherwise overwrite the
-            // re-pointed selection with the standard yearly package. Only does
-            // anything on the feature-gate paywall, and only for a user whose
-            // 30-minute recovery window is still running.
-            viewModel.startDiscountWindowIfEligible()
 
             // PostHog: paywall_viewed — the top of the conversion funnel.
             // Guarded against SwiftUI's incidental re-mounts.
@@ -585,36 +576,6 @@ struct PaywallView: View {
         .trackScreenView("Paywall")
     }
 
-    // MARK: - Discount Countdown
-    //
-    // Shown only while `PaywallViewModel` is actually serving the discounted
-    // product, so the clock and the price can never disagree: when it reaches
-    // zero the view model swaps the package back and this disappears in the
-    // same update.
-    //
-    // A real deadline, which is the only reason it is here at all. The
-    // recovery modal deliberately refuses a countdown because nothing about
-    // that screen expires; this one does expire, and hiding that from the user
-    // would be the actual dishonesty.
-    private var discountCountdownBanner: some View {
-        HStack(spacing: 8) {
-            Image(systemName: "clock")
-                .font(.system(size: 13, weight: .medium))
-
-            Text(viewModel.discountSavingsPercent.map { "Your \($0)% discount ends in \(OfferCountdown.format(viewModel.discountRemaining))" }
-                 ?? "Your discount ends in \(OfferCountdown.format(viewModel.discountRemaining))")
-                .font(.manropeSemiBold(size: 14))
-                // Announced on a timer, not on every tick: VoiceOver reading a
-                // new second aloud once a second would make the screen unusable.
-                .accessibilityLabel("Discount ends in \(Int(viewModel.discountRemaining / 60)) minutes")
-        }
-        .foregroundColor(.white)
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 8)
-        .background(Color.wingmanBlack)
-        .padding(.bottom, 12)
-    }
-
     // MARK: - Plans
     /// The real, purchasable plans. Rendered only when offerings have loaded;
     /// unchanged from the original content-state markup.
@@ -624,12 +585,11 @@ struct PaywallView: View {
             // Yearly Plan
             PlanRow(
                 title: "Yearly Plan",
-                price: viewModel.yearlyPackage.map { "\(calculateWeeklyPrice($0, chargedPrice: viewModel.yearlyChargedPrice)) per week" } ?? "",
+                price: viewModel.yearlyPackage.map { "\(calculateWeeklyPrice($0)) per week" } ?? "",
                 weekly: viewModel.yearlyPrice,
-                weeklySubtitle: viewModel.isDiscountWindowActive ? "first year" : "per year",
+                weeklySubtitle: "per year",
                 isSelected: viewModel.selectedPlan == .yearly,
-                badgeText: yearlyBadgeText,
-                originalPrice: viewModel.yearlyOriginalPrice
+                badgeText: (viewModel.selectedPlan == .yearly && viewModel.isYearlyTrialEligible) ? "3-day Free Trial" : nil
             ) {
                 withAnimation(.easeInOut(duration: 0.2)) {
                     viewModel.selectPlan(.yearly)
@@ -670,17 +630,6 @@ struct PaywallView: View {
         .padding(.bottom, 8) // Breathing room before the pinned Continue button
     }
 
-    /// Badge on the yearly card: the discount inside the window, the trial
-    /// outside it, never both. They are mutually exclusive by construction —
-    /// `isYearlyTrialEligible` returns false while the window is open, because
-    /// the discounted product's introductory offer is pay-up-front rather than
-    /// a trial.
-    private var yearlyBadgeText: String? {
-        guard viewModel.selectedPlan == .yearly else { return nil }
-        if let percent = viewModel.discountSavingsPercent { return "Save \(percent)% on your first year" }
-        return viewModel.isYearlyTrialEligible ? "3-day Free Trial" : nil
-    }
-
     // MARK: - Trial Disclosure
     /// Trial conversion disclosure. The copy flips on eligibility so returning
     /// users who have already burned their trial on this Apple ID see accurate
@@ -704,17 +653,8 @@ struct PaywallView: View {
             .padding(.bottom, 4)
     }
 
-    /// Three variants, one line, never optional.
-    ///
-    /// The discounted case is the one with real Guideline 3.1.2 weight: two
-    /// different prices across two billing periods, so it has to state both
-    /// amounts rather than leaning on "billed immediately". It only applies to
-    /// the yearly card — the monthly plan is untouched by the window, so
-    /// selecting it must fall straight back to the standard copy.
+    /// Two variants, one line, never optional.
     private var disclosureCopy: String {
-        if viewModel.isDiscountWindowActive, viewModel.selectedPlan == .yearly {
-            return "Billed \(viewModel.yearlyPrice) today for your first year. Renews automatically at \(viewModel.yearlyOriginalPrice ?? "")/year after. Cancel anytime in App Store settings."
-        }
         return viewModel.isTrialEligible(for: viewModel.selectedPlan)
             ? "No payment now. Cancel anytime before your trial ends."
             : "Billed immediately. Cancel anytime in App Store settings."
@@ -777,12 +717,6 @@ struct PaywallView: View {
     /// disagree — including on the optimistic pre-check default, where both
     /// treat unknown/not-yet-loaded as eligible.
     private var continueButtonTitle: String {
-        // Same words as the button on the recovery modal, for the same offer.
-        // A user who came back for the discount should not have to work out
-        // whether "Continue" still means the price they left for.
-        if viewModel.selectedPlan == .yearly, let percent = viewModel.discountSavingsPercent {
-            return "Get \(percent)% off"
-        }
         guard viewModel.isTrialEligible(for: viewModel.selectedPlan) else {
             return "Continue"
         }
@@ -929,15 +863,10 @@ struct PaywallView: View {
     }
 
     // MARK: - Helper Methods
-    /// - Parameter chargedPrice: what the user is actually billed, when that
-    ///   differs from the product's standard price. Inside the discount window
-    ///   `storeProduct.price` is still the full $44.99 — deriving the weekly
-    ///   rate from it would print the undiscounted per-week figure directly
-    ///   beneath the discounted total.
-    private func calculateWeeklyPrice(_ package: Package?, chargedPrice: Decimal? = nil) -> String {
+    private func calculateWeeklyPrice(_ package: Package?) -> String {
         guard let package = package else { return "N/A" }
 
-        let price = chargedPrice ?? package.storeProduct.price
+        let price = package.storeProduct.price
         let period = package.storeProduct.subscriptionPeriod
 
         // Calculate weekly price based on subscription period

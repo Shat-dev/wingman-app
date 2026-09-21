@@ -13,8 +13,8 @@ import RevenueCat
 /// haptic tells the user something broke when nothing did.
 ///
 /// `.error` is the default everywhere, so every call site that predates this
-/// type — a dozen `error = "…"; showAlert = true` pairs across both purchase
-/// screens — keeps the exact alert it already had.
+/// type — a dozen `error = "…"; showAlert = true` pairs across the purchase
+/// flow — keeps the exact alert it already had.
 enum PurchaseAlertKind {
 
     case error
@@ -43,15 +43,13 @@ enum PurchaseAlertKind {
 /// error: the sentence shown to the user, how that sentence should be
 /// presented, and the `failure_reason` bucket sent to PostHog.
 ///
-/// Extracted because the two purchase paths had drifted into different
-/// answers for the same error. `PaywallViewModel.purchase(_:)` hand-numbered
-/// three codes and got one wrong — its `case 4` was commented "Payment
-/// pending", but RevenueCat's 4 is `purchaseInvalidError` and pending is 20,
-/// so a deferred purchase (Ask to Buy, or a bank approval step) fell through
-/// to "Purchase failed. Please try again." That is the opposite of the truth:
-/// nothing failed, the payment is parked awaiting someone's approval, and
-/// retrying cannot help. `SecondChanceOfferViewModel.purchase(_:)` mapped
-/// nothing at all and showed that same line for every code.
+/// Extracted because `PaywallViewModel.purchase(_:)` hand-numbered three
+/// codes and got one wrong — its `case 4` was commented "Payment pending", but
+/// RevenueCat's 4 is `purchaseInvalidError` and pending is 20, so a deferred
+/// purchase (Ask to Buy, or a bank approval step) fell through to "Purchase
+/// failed. Please try again." That is the opposite of the truth: nothing
+/// failed, the payment is parked awaiting someone's approval, and retrying
+/// cannot help.
 ///
 /// Codes are matched through RevenueCat's own `ErrorCode` enum rather than
 /// integer literals, so this can't silently drift out of numbering again.
@@ -60,10 +58,10 @@ struct PurchaseFailure {
     /// Shown in the purchase alert.
     let message: String
 
-    /// `failure_reason` on `paywall_purchase_failed` /
-    /// `recovery_offer_purchase_failed`. Buckets the raw `error_code` that
-    /// ships alongside it, so a breakdown separates "the store broke" from
-    /// "this needs approval" without needing the numbers memorized.
+    /// `failure_reason` on `paywall_purchase_failed`. Buckets the raw
+    /// `error_code` that ships alongside it, so a breakdown separates "the
+    /// store broke" from "this needs approval" without needing the numbers
+    /// memorized.
     let reason: String
 
     /// How to present `message`. Defaults to `.error` and stays there for

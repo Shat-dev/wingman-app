@@ -116,37 +116,14 @@ enum Analytics {
         /// anywhere near right.
         static let xpAwarded = "xp_awarded"
 
-        // Second-chance recovery offer (one-time 50%-off-year-1, shown after
-        // a feature-gate paywall dismissal). Mirrors the existing inline
-        // `paywall_*` naming so it segments cleanly alongside it.
-        static let recoveryOfferViewed = "recovery_offer_viewed"
-        static let recoveryOfferDismissed = "recovery_offer_dismissed"
-        static let recoveryOfferPurchaseStarted = "recovery_offer_purchase_started"
-        static let recoveryOfferPurchased = "recovery_offer_purchased"
-        static let recoveryOfferPurchaseFailed = "recovery_offer_purchase_failed"
-        static let recoveryOfferNotEligible = "recovery_offer_not_eligible"
-
-        /// The 30-minute discount window (AuthManager.secondChanceDiscountWindow)
-        /// carrying the offer past the modal itself.
+        /// Dismissing Apple's payment sheet.
         ///
-        /// `window_opened` fires when the feature-gate paywall starts serving
-        /// the discounted year, `window_expired` when it stops. Together with
-        /// `recovery_offer_dismissed` they answer the question the window
-        /// exists to answer: how many people come back for the price after
-        /// closing the sheet, and how many let the clock run out. Without the
-        /// pair, a purchase inside the window is indistinguishable from any
-        /// other feature-gate purchase.
-        static let recoveryOfferWindowOpened = "recovery_offer_window_opened"
-        static let recoveryOfferWindowExpired = "recovery_offer_window_expired"
-
-        /// Dismissing Apple's payment sheet, on each of the two paywalls.
-        ///
-        /// Not a failure — nothing broke, the user said no — so these are
-        /// deliberately kept out of `*_purchase_failed`, whose rate is a
-        /// health metric rather than a demand one. But they are the largest
-        /// single drop in the purchase funnel, and without them
-        /// `*_purchase_started` has no terminal event for its most common
-        /// outcome: the only way to count cancellations was
+        /// Not a failure — nothing broke, the user said no — so this is
+        /// deliberately kept out of `paywall_purchase_failed`, whose rate is a
+        /// health metric rather than a demand one. But it is the largest
+        /// single drop in the purchase funnel, and without it
+        /// `paywall_purchase_started` has no terminal event for its most
+        /// common outcome: the only way to count cancellations was
         /// `started − succeeded − failed`, which silently absorbs dropped
         /// events, crashes and app kills, and cannot be broken down.
         ///
@@ -155,7 +132,6 @@ enum Analytics {
         /// throwing path — so both emit this event and distinguish
         /// themselves with `detection` rather than splitting into two names.
         static let paywallPurchaseCancelled = "paywall_purchase_cancelled"
-        static let recoveryOfferPurchaseCancelled = "recovery_offer_purchase_cancelled"
 
         // Approach logging — the app's core value action, and until now the
         // only major loop with no instrumentation at all. Everything else
@@ -214,16 +190,25 @@ enum Analytics {
         // actually appeared nor what the user rated, by design — so
         // `review_prompt_requested` counts *calls we chose to make*, not
         // reviews. It is only interpretable against App Store Connect's
-        // ratings graph, and against `review_prompt_skipped`, whose `reason`
-        // is the property that says which eligibility rule is doing the work.
-        // If `reason` is overwhelmingly `charge_too_recent` the gate is fine;
-        // if it is `friction_this_session`, paywall placement is eating the
-        // ask and that is a product problem, not a rating one.
+        // ratings graph. Its `subscription_state` (free / trial / paid) says
+        // who the asks are landing on, now that finishing an activity — not
+        // paying — is what qualifies someone.
         //
-        // `review_prompt_skipped` is emitted only for users already inside the
-        // target audience — see `ReviewPromptManager.unreportedReasons`. It is
-        // therefore NOT a denominator for "how many completions happened", and
-        // dividing requests by skips will not give a qualification rate.
+        // `review_prompt_skipped` is emitted for exactly one reason,
+        // `paywall_cooldown`: a user who would have been asked, but for a
+        // paywall shown moments earlier. If that count is more than a trickle,
+        // paywall placement is eating the ask. The rate limits (already asked
+        // this version, lifetime cap, too recent) are deliberately silent —
+        // see `ReviewPromptManager.unreportedReasons` — so this event is NOT a
+        // denominator for "how many completions happened".
+        //
+        // History: before the first-completion change these events described a
+        // paid-subscribers-only gate, and `reason` could also be
+        // `friction_this_session` or `charge_too_recent`. Those values stop
+        // at that build; don't compare counts across it. `trigger` changed at
+        // the same point, from `completion_screen` (a timer while the screen
+        // was up, which missed anyone who tapped Continue first) to
+        // `completion_continue` (the Continue tap itself).
         static let reviewPromptRequested = "review_prompt_requested"
         static let reviewPromptSkipped = "review_prompt_skipped"
 

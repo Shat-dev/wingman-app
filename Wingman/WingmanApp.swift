@@ -235,9 +235,10 @@ struct RootView: View {
                     // that: asking for a rating during onboarding, before the
                     // user has had time to judge the app. Both the screen and
                     // the request are gone — do not reintroduce a review ask
-                    // anywhere in the first-launch path. Any future ask belongs
-                    // behind a real engagement gate (multiple sessions across
-                    // multiple days, plus a completed scenario or lesson).
+                    // anywhere in the first-launch path. The ask that exists
+                    // now sits behind a completed lesson, scenario or daily
+                    // practice, well past this router — see
+                    // `ReviewPromptManager`.
                     //
                     // What replaces it asks the user for a commitment rather
                     // than for a rating, which is both legal and the thing the

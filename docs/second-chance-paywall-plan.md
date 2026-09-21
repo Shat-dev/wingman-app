@@ -1,6 +1,8 @@
 # Second-Chance Discounted Paywall — Implementation Plan
 
-Status: **Planning only — no code changed.** This document is the analysis + plan requested before implementation begins.
+Status: **Removed 2026-09-20 — historical record only.** The offer shipped, then was taken out of the app: over 2026-08-29 → 09-20 it reached 26 users, was dismissed after a median 1.5s, and sold nothing, while being the "second purchase flow after the user declines" pattern Apple has rejected under Guideline 5.6. The files and symbols named below no longer exist; see git history for the implementation.
+
+Original status: Planning only — no code changed. This document is the analysis + plan requested before implementation begins.
 
 ---
 
