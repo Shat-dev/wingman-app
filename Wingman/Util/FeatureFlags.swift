@@ -110,7 +110,8 @@ final class FeatureFlags: ObservableObject {
     /// reviewers now see. It is no longer dark by default.
     @Published private(set) var commitmentPactEnabled: Bool = true
 
-    /// The App Store rating ask shown after a completed activity.
+    /// The App Store rating ask shown after a completed activity or a logged
+    /// approach.
     ///
     /// **Ships `true` — fail open**, phrased as a kill switch (`..._disabled`)
     /// for the same reason as the three flags above: `isFeatureEnabled`
@@ -119,14 +120,14 @@ final class FeatureFlags: ObservableObject {
     /// would leave the ask dark for every live user *and* unreachable on a
     /// developer's own device.
     ///
-    /// On App Review: a reviewer who finishes a lesson or a scenario CAN now
-    /// meet the rating prompt. The earlier gate (a settled charge plus 24
-    /// hours) made that impossible in a review build; this one does not, and
-    /// that was a deliberate trade for reach. What it rests on instead is the
-    /// placement itself: the 5.6.3 rejection was for asking during onboarding,
-    /// before the app had been used, and this asks only after the user has
-    /// completed a piece of it — which is the moment Apple's own guidance
-    /// points to. Re-read `ReviewPromptManager`'s header before moving the ask
+    /// On App Review: a reviewer who finishes a lesson or a scenario, or logs
+    /// an approach, CAN now meet the rating prompt. The earlier gate (a settled
+    /// charge plus 24 hours) made that impossible in a review build; this one
+    /// does not, and that was a deliberate trade for reach. What it rests on
+    /// instead is the placement itself: the 5.6.3 rejection was for asking
+    /// during onboarding, before the app had been used, and this asks only
+    /// after the user has completed a piece of it or logged an approach of
+    /// their own — which is the moment Apple's own guidance points to. Re-read `ReviewPromptManager`'s header before moving the ask
     /// anywhere earlier than that.
     ///
     /// This is the lever to pull if ratings move the wrong way: flipping

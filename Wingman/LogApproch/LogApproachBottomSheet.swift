@@ -370,6 +370,27 @@ struct LogApproachBottomSheet: View {
                 withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
                     isPresented = false
                 }
+
+                // The App Store rating ask for a logged approach hangs off
+                // this moment: the sheet starting to close after a save. A
+                // log never reaches a completion screen, so without this the
+                // one thing the app exists to produce could not lead to an
+                // ask at all.
+                //
+                // Keyed on `approachToEdit`, not `viewModel.isEditMode` — the
+                // view model clears its edit state 2.5s after a save, so by
+                // now that would be a race; this is the view's own input and
+                // cannot change. An edit is a correction to an approach
+                // already counted, the same reason it earns no XP and no
+                // `approach_logged`.
+                //
+                // Still fires if the user closed the sheet by hand during the
+                // "Saved!" beat: the manager presents on the window scene and
+                // does not need this view. Every rule about whether to ask
+                // lives in `ReviewPromptManager`.
+                if approachToEdit == nil {
+                    ReviewPromptManager.shared.requestAfterDismissal(trigger: "approach_logged")
+                }
             }
         }
         .transition(.move(edge: .bottom))

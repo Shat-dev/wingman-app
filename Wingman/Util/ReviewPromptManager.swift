@@ -18,8 +18,9 @@
 //  steady stream of downloads was collecting no ratings.
 //
 //  So the gate is now *engagement*, not payment: the ask happens when a user
-//  finishes an activity — a lesson, a scenario, or daily practice — whoever
-//  they are. Free users reach that moment too (scenario 1 is free for
+//  finishes an activity — a lesson, a scenario, or daily practice — or logs an
+//  approach they made in the real world, whoever they are. Free users reach
+//  that moment too (logging is free, scenario 1 is free for
 //  everyone, and the walkthrough hands out one free lesson), which is the
 //  point: about a quarter of the people who decline the first paywall still go
 //  on to finish something, and until now none of them could be asked.
@@ -55,10 +56,18 @@
 //  tapped Continue first.) But Continue is also what tears that screen down,
 //  so the ask has to outlive the view that triggers it — which rules out
 //  SwiftUI's `@Environment(\.requestReview)`, an action that is only good
-//  while its view is installed. `requestAfterContinue(trigger:)` therefore
+//  while its view is installed. `requestAfterDismissal(trigger:)` therefore
 //  waits for the transition and presents on the active window scene, which
 //  does not care what is on screen. The rules stay separate from the
 //  presenting, in `requestIfEligible(trigger:present:)`.
+//
+//  Logging an approach is the one finished thing that never reaches a
+//  completion screen: its sheet shows "Saved!" and closes itself. So that
+//  sheet calls the same entry point as it closes, under its own `trigger`. It
+//  is by far the rarest of these moments — four logs in six weeks, against
+//  roughly a hundred finished scenarios — and the best qualified: the user has
+//  just done, in the real world, the thing the app exists for. Expect it to
+//  add a trickle of asks, not a second stream.
 //
 
 import Foundation
@@ -94,10 +103,10 @@ final class ReviewPromptManager {
         return 60
     }
 
-    /// How long after the Continue tap before the alert is requested.
+    /// How long after a screen starts leaving before the alert is requested.
     ///
-    /// Long enough for the completion screen to finish leaving — a
-    /// full-screen cover dismissing, or a navigation pop — so the alert lands
+    /// Long enough for that screen to finish leaving — a full-screen cover or
+    /// a sheet dismissing, or a navigation pop — so the alert lands
     /// on a settled screen instead of arriving mid-transition. Short enough
     /// that it still reads as the consequence of finishing, not as something
     /// that interrupted whatever the user did next.
@@ -116,8 +125,8 @@ final class ReviewPromptManager {
 
     /// Skip reasons that are NOT worth an event.
     ///
-    /// `requestIfEligible` runs on every completion screen, for every user,
-    /// and now that everyone is eligible the rate limits are what answer
+    /// `requestIfEligible` runs on every completion screen and every logged
+    /// approach, for every user, and now that everyone is eligible the rate limits are what answer
     /// almost every call after a user's first: once someone has been asked,
     /// each later completion on that version would emit "already asked". That
     /// is derivable from `review_prompt_requested` itself, grows with
@@ -176,16 +185,18 @@ final class ReviewPromptManager {
 
     // MARK: - The ask
 
-    /// The production entry point: call from the Continue tap of a completion
-    /// screen. Waits for that screen to finish leaving, then runs the rules
-    /// and, if they pass, asks iOS to show the rating alert.
+    /// The production entry point: call at the moment a screen starts leaving
+    /// because the user finished something — the Continue tap of a completion
+    /// screen, or the log-approach sheet closing itself after a save. Waits
+    /// for that screen to finish leaving, then runs the rules and, if they
+    /// pass, asks iOS to show the rating alert.
     ///
     /// Fire-and-forget by design — the caller is a view that is about to stop
     /// existing, so nothing here may depend on it. If the app is no longer in
     /// the foreground once the wait is over there is no scene to present on,
     /// and the rules are deliberately NOT run: nothing is recorded, so the
     /// user's next completion gets the ask instead of finding it already spent.
-    func requestAfterContinue(trigger: String) {
+    func requestAfterDismissal(trigger: String) {
         Task { @MainActor in
             try? await Task.sleep(nanoseconds: UInt64(Self.presentationDelay * 1_000_000_000))
 
@@ -210,7 +221,7 @@ final class ReviewPromptManager {
     ///
     /// `present` is injected rather than hard-wired so that every rule, and
     /// the bookkeeping, can be exercised without StoreKit or a window scene.
-    /// `requestAfterContinue(trigger:)` is what supplies the real one.
+    /// `requestAfterDismissal(trigger:)` is what supplies the real one.
     ///
     /// Note what is deliberately *not* measured: whether the alert appeared,
     /// and what the user rated. iOS reports neither, by design. `trigger` is
@@ -340,7 +351,8 @@ final class ReviewPromptManager {
     /// once on a device. Launch argument: `-resetReviewPrompt YES`.
     ///
     /// The ask itself is now reachable in a Debug build — finish any activity
-    /// and tap Continue — and a development build is the one place iOS always
+    /// and tap Continue, or log an approach — and a development build is the
+    /// one place iOS always
     /// shows the alert
     /// (TestFlight never does; the App Store decides for itself). This stays
     /// outside `#if DEBUG` anyway, because confirming the *event* from a

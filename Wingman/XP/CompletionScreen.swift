@@ -286,7 +286,7 @@ struct CompletionScreen<Detail: View>: View {
                     // get ahead of it. Every rule about whether to ask, and
                     // the short wait for this screen to finish leaving, lives
                     // in `ReviewPromptManager`.
-                    ReviewPromptManager.shared.requestAfterContinue(trigger: "completion_continue")
+                    ReviewPromptManager.shared.requestAfterDismissal(trigger: "completion_continue")
                 }) {
                     Text(continueTitle)
                         .font(.manropeSemiBold(size: 16))

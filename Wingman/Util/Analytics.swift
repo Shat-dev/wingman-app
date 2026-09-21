@@ -209,6 +209,11 @@ enum Analytics {
         // the same point, from `completion_screen` (a timer while the screen
         // was up, which missed anyone who tapped Continue first) to
         // `completion_continue` (the Continue tap itself).
+        //
+        // From build 32 there is a second `trigger`, `approach_logged`: the
+        // log-approach sheet closing after a new entry is saved, which never
+        // passes a completion screen. Approach logs are rare, so expect it to
+        // be a sliver of the total — a breakdown by `trigger` is how to check.
         static let reviewPromptRequested = "review_prompt_requested"
         static let reviewPromptSkipped = "review_prompt_skipped"
 

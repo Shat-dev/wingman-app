@@ -237,8 +237,8 @@ struct RootView: View {
                     // the request are gone — do not reintroduce a review ask
                     // anywhere in the first-launch path. The ask that exists
                     // now sits behind a completed lesson, scenario or daily
-                    // practice, well past this router — see
-                    // `ReviewPromptManager`.
+                    // practice, or a logged approach, well past this router —
+                    // see `ReviewPromptManager`.
                     //
                     // What replaces it asks the user for a commitment rather
                     // than for a rating, which is both legal and the thing the
