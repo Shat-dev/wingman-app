@@ -268,6 +268,25 @@ struct SettingsSheet: View {
                     .padding(.horizontal, 24)
                     .padding(.bottom, 16)
 
+                    // MARK: - Rate Wingman
+                    //
+                    // The standing way to rate, for people who go looking. Not
+                    // the StoreKit prompt: that one is capped at three per year
+                    // and iOS may not show it, whereas this link always opens
+                    // the review sheet and is not counted against the cap.
+                    Button(action: {
+                        rateApp()
+                    }) {
+                        Text("Rate Wingman")
+                            .font(.manropeMedium(size: 14))
+                            .foregroundColor(.wingmanBlack)
+                            .underline()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .buttonStyle(ScalePressStyle())
+                    .padding(.horizontal, 24)
+                    .padding(.bottom, 16)
+
                     // MARK: - Terms of Service
                     Button(action: {
                         if let url = URL(string: Constants.TERMS_CONDITIONS_URL) {
@@ -570,6 +589,15 @@ struct SettingsSheet: View {
         }
     }
     
+    private func rateApp() {
+        log("Rate Wingman tapped")
+        Analytics.capture(Analytics.Event.rateAppTapped, ["source": "settings"])
+        // No storefront in the path, so Apple opens the viewer's own store.
+        if let url = URL(string: "https://apps.apple.com/app/id6758346525?action=write-review") {
+            UIApplication.shared.open(url)
+        }
+    }
+
     private func deleteAccount() {
         log("🗑️ Delete account confirmation received")
 

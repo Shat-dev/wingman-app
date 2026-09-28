@@ -580,6 +580,10 @@ struct RootView: View {
                 // Xcode or simctl can do. Lets the rating ask be exercised more
                 // than once on a test device — see ReviewPromptManager.
                 await ReviewPromptManager.shared.resetForTestingIfRequested()
+
+                // After the reset, so a reset device is re-seeded from its
+                // caches rather than left at zero.
+                await ReviewPromptManager.shared.seedCompletionCountIfNeeded()
             }
 
             // Identify the restored session, but only once the SDK is actually

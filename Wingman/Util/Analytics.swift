@@ -210,12 +210,23 @@ enum Analytics {
         // was up, which missed anyone who tapped Continue first) to
         // `completion_continue` (the Continue tap itself).
         //
+        // From 1.11 a completion screen asks only on the user's second
+        // finished activity or later (`completion_count` on the event); an
+        // approach log still asks on the first. Asks per week drop by about
+        // half at that build by design — don't read it as a regression.
+        //
         // From build 32 there is a second `trigger`, `approach_logged`: the
         // log-approach sheet closing after a new entry is saved, which never
         // passes a completion screen. Approach logs are rare, so expect it to
         // be a sliver of the total — a breakdown by `trigger` is how to check.
         static let reviewPromptRequested = "review_prompt_requested"
         static let reviewPromptSkipped = "review_prompt_skipped"
+
+        // The "Rate Wingman" row in Settings, which opens the App Store's
+        // write-review sheet directly. Unlike the prompt above it is always
+        // shown and never capped, so a tap is a real visit to the review sheet —
+        // though whether a rating followed is still invisible to us.
+        static let rateAppTapped = "rate_app_tapped"
 
         // Account deletion. `account_deletion_started` is client-side and
         // deliberately fires before the request leaves, because the client's

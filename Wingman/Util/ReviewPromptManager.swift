@@ -18,8 +18,8 @@
 //  steady stream of downloads was collecting no ratings.
 //
 //  So the gate is now *engagement*, not payment: the ask happens when a user
-//  finishes an activity — a lesson, a scenario, or daily practice — or logs an
-//  approach they made in the real world, whoever they are. Free users reach
+//  finishes their SECOND activity — a lesson, a scenario, or daily practice —
+//  or logs an approach they made in the real world, whoever they are. Free users reach
 //  that moment too (logging is free, scenario 1 is free for
 //  everyone, and the walkthrough hands out one free lesson), which is the
 //  point: about a quarter of the people who decline the first paywall still go
@@ -32,6 +32,30 @@
 //  trigger earlier than a finished activity — in particular not to the end of
 //  the walkthrough, which is a tour rather than use, a minute or two after the
 //  paywall.
+//
+//  WHY THE SECOND COMPLETION, NOT THE FIRST (1.11)
+//
+//  1.10 asked on the first completion and it did what it was built to do on
+//  reach — 39 asks in its first week against 3 in the two weeks before. But
+//  it turned into two ratings, one of them three stars. Half of those asks
+//  landed on free users minutes after they had declined the onboarding paywall,
+//  finishing the one thing they would ever finish: the least likely people to
+//  rate, and the most likely to rate it middling. Each ask spends one of only
+//  three a person gets per year, so reaching fewer, happier people is the
+//  better trade. About half of everyone who finishes one activity goes on to
+//  finish a second (105 of 202 at the time of the change) — someone who
+//  chose to do more is someone who likes the app. Waiting for a second *day*
+//  was considered and rejected: only 27 of those 202 ever came back on one.
+//
+//  A logged approach still asks on the first one. It is the rarest and the
+//  best-qualified moment this app has, and making it wait would all but
+//  switch it off.
+//
+//  Completions are counted on the device (`completionCountKey`), because the
+//  ask has to be decided in the 0.8 s after a Continue tap, not after a round
+//  trip. Someone upgrading from 1.10 who had already finished things before
+//  the counter existed is treated as having one — see
+//  `seedCompletionCountIfNeeded()`.
 //
 //  WHY THERE ARE STILL RULES
 //
@@ -123,6 +147,14 @@ final class ReviewPromptManager {
     /// later than weeks later.
     private static let minimumDaysBetweenRequests: Double = 120
 
+    /// Finished activities needed before a completion screen may ask. See
+    /// "WHY THE SECOND COMPLETION" above. Does not apply to `approachLoggedTrigger`.
+    private static let minimumCompletions = 2
+
+    /// The trigger that is exempt from `minimumCompletions`. Must match the
+    /// string `LogApproachBottomSheet` passes.
+    private static let approachLoggedTrigger = "approach_logged"
+
     /// Skip reasons that are NOT worth an event.
     ///
     /// `requestIfEligible` runs on every completion screen and every logged
@@ -143,6 +175,9 @@ final class ReviewPromptManager {
         "already_asked_this_version",
         "lifetime_cap_reached",
         "asked_too_recently",
+        // Every first completion would emit it, and `completion_count` on the
+        // requested event already says how far in the asks land.
+        "too_few_completions",
     ]
 
     // MARK: - Persisted state
@@ -150,6 +185,7 @@ final class ReviewPromptManager {
     private static let lastRequestedVersionKey = "review_prompt_last_version"
     private static let lastRequestedAtKey      = "review_prompt_last_requested_at"
     private static let requestCountKey         = "review_prompt_request_count"
+    private static let completionCountKey      = "review_prompt_completion_count"
 
     /// Deliberately NOT cleared on sign-out.
     ///
@@ -159,7 +195,10 @@ final class ReviewPromptManager {
     /// signing out and back in, which is exactly the abuse Apple's cap exists
     /// to stop — and we would be burning the user's three real chances against
     /// a counter we had reset for ourselves.
-    static let persistedKeys = [lastRequestedVersionKey, lastRequestedAtKey, requestCountKey]
+    ///
+    /// The completion count is kept for the same reason: a user who signs out
+    /// and back in has not stopped being someone who came back for more.
+    static let persistedKeys = [lastRequestedVersionKey, lastRequestedAtKey, requestCountKey, completionCountKey]
 
     // MARK: - Session state
 
@@ -197,6 +236,10 @@ final class ReviewPromptManager {
     /// and the rules are deliberately NOT run: nothing is recorded, so the
     /// user's next completion gets the ask instead of finding it already spent.
     func requestAfterDismissal(trigger: String) {
+        // Counted now, before the wait: the activity was finished whether or
+        // not the app is still in the foreground in 0.8 s.
+        let completions = recordCompletion()
+
         Task { @MainActor in
             try? await Task.sleep(nanoseconds: UInt64(Self.presentationDelay * 1_000_000_000))
 
@@ -204,7 +247,7 @@ final class ReviewPromptManager {
                 log("⭐️ ReviewPrompt: no foreground scene at trigger=\(trigger) — leaving the ask for the next completion")
                 return
             }
-            requestIfEligible(trigger: trigger) {
+            requestIfEligible(trigger: trigger, completions: completions) {
                 AppStore.requestReview(in: scene)
             }
         }
@@ -227,8 +270,8 @@ final class ReviewPromptManager {
     /// and what the user rated. iOS reports neither, by design. `trigger` is
     /// therefore the only lever the analytics can compare, so it should name
     /// the moment, not the screen class.
-    func requestIfEligible(trigger: String, present: () -> Void) {
-        if let reason = ineligibilityReason() {
+    func requestIfEligible(trigger: String, completions: Int, present: () -> Void) {
+        if let reason = ineligibilityReason(trigger: trigger, completions: completions) {
             log("⭐️ ReviewPrompt: skipped (\(reason)) at trigger=\(trigger)")
             if !Self.unreportedReasons.contains(reason) {
                 Analytics.capture(Analytics.Event.reviewPromptSkipped, [
@@ -253,6 +296,9 @@ final class ReviewPromptManager {
         var properties: [String: Any] = [
             "trigger": trigger,
             "lifetime_request_count": count,
+            // How many finished activities the user had reached, this one
+            // included. From 1.11 it is 2 or more, except for approach logs.
+            "completion_count": completions,
             // The gate used to imply who was being asked (a paid subscriber).
             // It no longer does, so the event has to say — it is the only way
             // to tell later whether the asks are landing on free users,
@@ -285,7 +331,7 @@ final class ReviewPromptManager {
     /// would also swallow every already-asked user who happened to pass a
     /// paywall — which is how the previous `friction_this_session` reason came
     /// to be reported 37 times for people who were never in the audience.
-    private func ineligibilityReason() -> String? {
+    private func ineligibilityReason(trigger: String, completions: Int) -> String? {
         guard FeatureFlags.shared.reviewPromptEnabled else { return "flag_off" }
 
         // Never twice on the same build. A user who was asked and declined
@@ -305,6 +351,10 @@ final class ReviewPromptManager {
             if days < Self.minimumDaysBetweenRequests { return "asked_too_recently" }
         }
 
+        if trigger != Self.approachLoggedTrigger, completions < Self.minimumCompletions {
+            return "too_few_completions"
+        }
+
         // Same conservative reading of a backwards clock: a negative interval
         // is below any cooldown, so it blocks.
         if let seconds = secondsSincePaywall(), seconds < Self.paywallCooldownSeconds {
@@ -312,6 +362,39 @@ final class ReviewPromptManager {
         }
 
         return nil
+    }
+
+    /// Adds one to the persisted count of finished activities and returns the
+    /// new total. An absent count reads as zero — see
+    /// `seedCompletionCountIfNeeded()` for how upgraders get credit.
+    private func recordCompletion() -> Int {
+        let count = UserDefaults.standard.integer(forKey: Self.completionCountKey) + 1
+        UserDefaults.standard.set(count, forKey: Self.completionCountKey)
+        return count
+    }
+
+    /// Gives someone upgrading from 1.10 credit for the activities they
+    /// finished before the completion count existed. Call once at launch.
+    ///
+    /// Without it their count would start at zero and they would have to finish
+    /// two MORE things before being asked. Any cached XP or streak means at
+    /// least one earlier completion, because nothing else awards either.
+    ///
+    /// It has to run at launch, before anything can be finished, and never at
+    /// the moment of a completion: a lesson awards its XP before its Continue
+    /// tap, so a brand-new user's first completion would look like history and
+    /// be asked on the spot. A fresh install has no cache at launch, so it is
+    /// written as zero here and never re-seeded.
+    func seedCompletionCountIfNeeded() {
+        let defaults = UserDefaults.standard
+        guard defaults.object(forKey: Self.completionCountKey) == nil else { return }
+
+        let streaks = StreakStore.shared
+        let hasHistory = (XPStore.shared.totalXP ?? 0) > 0
+            || (streaks.currentStreak ?? 0) > 0
+            || (streaks.longestStreak ?? 0) > 0
+        defaults.set(hasHistory ? 1 : 0, forKey: Self.completionCountKey)
+        log("⭐️ ReviewPrompt: completion count seeded at \(hasHistory ? 1 : 0)")
     }
 
     /// Seconds since a paywall was last put on screen in this process, or
