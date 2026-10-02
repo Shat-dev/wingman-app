@@ -27,9 +27,24 @@
     : /fban|fbav|fb_iab/.test(ua) ? 'facebook'
     : /tiktok|musical_ly|bytedance/.test(ua) ? 'tiktok'
     : 'none';
+  // With no in-app browser to go on (desktop, or an app that handed the link to
+  // the system browser), the referrer still names the platform when it survived
+  // the handoff: Meta's link shims are l.facebook.com and l.instagram.com. An
+  // empty referrer (iOS app -> Safari, a pasted link) stays "other". Only the
+  // host is read, anchored at its end, so facebook.com.example cannot pose as it.
+  var refMatch = /^https?:\/\/([^\/?#:]+)/.exec((document.referrer || '').toLowerCase());
+  var refHost = refMatch ? refMatch[1] : '';
+  var fromReferrer = /(^|\.)threads\.(net|com)$/.test(refHost) ? 'threads'
+    : /(^|\.)instagram\.com$/.test(refHost) ? 'instagram'
+    : /(^|\.)(facebook\.com|fb\.com|messenger\.com)$/.test(refHost) ? 'facebook'
+    : /(^|\.)tiktok\.com$/.test(refHost) ? 'tiktok'
+    : 'none';
+  var platform = inApp !== 'none' ? inApp : fromReferrer;
   var SOURCE_BY_APP = { threads: 'threads', instagram: 'ig_bio', facebook: 'fb_page', tiktok: 'tiktok', none: 'other' };
   var explicit = /[?&]s=([a-z0-9_]{1,30})(?:&|$)/i.exec(location.search);
-  var source = explicit ? explicit[1].toLowerCase() : SOURCE_BY_APP[inApp];
+  var source = explicit ? explicit[1].toLowerCase() : SOURCE_BY_APP[platform];
+  // How the source was decided, so a mislabelled tap can be traced in PostHog.
+  var sourceFrom = explicit ? 'link' : inApp !== 'none' ? 'app' : fromReferrer !== 'none' ? 'referrer' : 'none';
 
   var STORE_URL = APP_STORE + '?pt=' + PROVIDER_TOKEN + '&ct=' + source + '&mt=8';
 
@@ -44,6 +59,7 @@
         distinct_id: 'smartlink-' + Math.random().toString(36).slice(2) + Date.now().toString(36),
         properties: {
           source: source,
+          source_from: sourceFrom,
           in_app_browser: inApp,
           is_ios: isIOS,
           environment: 'prod',
