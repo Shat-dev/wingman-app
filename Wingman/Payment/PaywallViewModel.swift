@@ -87,40 +87,14 @@ final class PaywallViewModel: ObservableObject {
     /// SFSafariViewController modal instead of bouncing out to Safari.app.
     @Published var safariLink: IdentifiableURL?
 
-    let pages: [PaywallPage] = [
-        PaywallPage(
-            imageName: "paywall_1",
-            bullets: [
-                "Stop overthinking your next move",
-                "Feel more natural each time you talk",
-                "Learn core social and flirting skills through daily reps"
-            ]
-        ),
-        PaywallPage(
-            imageName: "paywall_2",
-            bullets: [
-                "Develop the skills most men were never taught",
-                "Master mindset, communication, flirting, and approach mechanics step-by-step",
-                "Learn how to create attraction & interest"
-            ]
-        ),
-        PaywallPage(
-            imageName: "paywall_3",
-            bullets: [
-                "Stop guessing what to say next",
-                "Practice real encounters through scenario-based games",
-                "Be ready for any situation before it happens"
-            ]
-        ),
-        PaywallPage(
-            imageName: "paywall_4",
-            bullets: [
-                "See your confidence grow with real data",
-                "Track your approaches, reflections, and progress",
-                "Stay motivated as you watch yourself improve"
-            ]
-        )
-    ]
+    /// One page, personalised from the onboarding answers.
+    ///
+    /// Was a four-page carousel of twelve feature bullets. Swipes were never
+    /// tracked, the carousel does not auto-advance, and the median decline
+    /// came after ~9 s on screen (Sep 2026), so most people only ever saw
+    /// page 1 — the rest was cost without reach. The carousel machinery in
+    /// PaywallView still works with any page count if pages are added back.
+    let pages: [PaywallPage] = [PaywallCopy.mainPage]
 
     // MARK: - Plan
     @Published var selectedPlan: SubscriptionPlan = .yearly
@@ -164,6 +138,27 @@ final class PaywallViewModel: ObservableObject {
             return "$0.00"
         }
         return formatted
+    }
+
+    // MARK: - Trial timeline
+
+    /// Length of the selected plan's free trial in days, read from the
+    /// StoreKit product so the timeline can never disagree with what Apple
+    /// grants. Nil when the product carries no free-trial intro offer.
+    var selectedTrialDays: Int? {
+        guard let intro = currentPackage?.storeProduct.introductoryDiscount,
+              intro.paymentMode == .freeTrial else { return nil }
+        let period = intro.subscriptionPeriod
+        switch period.unit {
+        case .day: return period.value
+        case .week: return period.value * 7
+        default: return nil
+        }
+    }
+
+    /// "$44.99/year" or "$12.99/month" for the selected plan.
+    var selectedPriceWithPeriod: String {
+        selectedPlan == .yearly ? "\(yearlyPrice)/year" : "\(monthlyPrice)/month"
     }
 
     // MARK: - Trial Eligibility

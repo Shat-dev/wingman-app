@@ -172,8 +172,28 @@ struct PaywallView: View {
     /// The illustration's own 20/15 vertical padding.
     private let illustrationPadding: CGFloat = 35
 
-    /// The page-indicator row: 8pt dots plus its 12/20 padding.
-    private let pageIndicatorHeight: CGFloat = 40
+    /// The page-indicator row: 8pt dots plus its 12/20 padding. For a single
+    /// page the dots are replaced by a 16pt gap above the plan cards.
+    private var pageIndicatorHeight: CGFloat {
+        viewModel.pages.count > 1 ? 40 : 16
+    }
+
+    /// Whether the illustration fits alongside the full headline and ticks.
+    ///
+    /// On short phones (SE) the pinned block — plans, trial timeline, button —
+    /// leaves too little room for both, and the floor-height illustration
+    /// pushed the ticks into the scroll area where nobody sees them. The
+    /// words are the pitch; the drawing is the first thing to give.
+    ///
+    /// No feedback loop: `availableCarouselSpace` is the ScrollView's own
+    /// frame, which the content never sizes, and `maxBulletsHeight` only
+    /// grows. Before measurement it defaults to showing the image, which is
+    /// what every phone but the SE ends up with anyway.
+    private var showsIllustration: Bool {
+        guard availableCarouselSpace > 0, maxBulletsHeight > 0 else { return true }
+        let offered = availableCarouselSpace - pageIndicatorHeight
+        return offered >= illustrationMinHeight + illustrationPadding + maxBulletsHeight
+    }
 
     /// Height handed to the paging TabView.
     ///
@@ -187,7 +207,7 @@ struct PaywallView: View {
         // settle imperceptible rather than a collapse-then-expand jump.
         guard availableCarouselSpace > 0, maxBulletsHeight > 0 else { return 350 }
 
-        let needed = illustrationMinHeight + illustrationPadding + maxBulletsHeight
+        let needed = (showsIllustration ? illustrationMinHeight + illustrationPadding : 12) + maxBulletsHeight
         let offered = availableCarouselSpace - pageIndicatorHeight
         return max(offered, needed)
     }
@@ -293,18 +313,31 @@ struct PaywallView: View {
                                     // that cannot be met becomes a short scroll
                                     // of the carousel instead, which is the far
                                     // better failure mode.
-                                    Image(page.imageName)
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(
-                                            minHeight: illustrationMinHeight,
-                                            maxHeight: illustrationMaxHeight
-                                        )
-                                        .padding(.top, 20)
-                                        .padding(.bottom, 15)
+                                    if showsIllustration {
+                                        Image(page.imageName)
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(
+                                                minHeight: illustrationMinHeight,
+                                                maxHeight: illustrationMaxHeight
+                                            )
+                                            .padding(.top, 20)
+                                            .padding(.bottom, 15)
+                                    } else {
+                                        Color.clear.frame(height: 12)
+                                    }
 
-                                    // Bullets
+                                    // Headline + bullets, measured together
+                                    // so the carousel height accounts for
+                                    // both.
                                     VStack(alignment: .leading, spacing: 16) {
+                                        if let headline = page.headline {
+                                            Text(headline)
+                                                .font(.manropeBold(size: 24, relativeTo: .title))
+                                                .foregroundColor(.wingmanBlack)
+                                                .fixedSize(horizontal: false, vertical: true)
+                                                .padding(.bottom, 2)
+                                        }
                                         ForEach(page.bullets, id: \.self) { bullet in
                                             HStack(alignment: .top, spacing: 12) {
                                                 Image("check")
@@ -348,15 +381,21 @@ struct PaywallView: View {
                         .frame(height: carouselHeight)
 
                         // MARK: - Page Indicator
-                        HStack(spacing: 8) {
-                            ForEach(viewModel.pages.indices, id: \.self) { index in
-                                Circle()
-                                    .fill(viewModel.currentPage == index ? Color.wingmanBlack : Color.wingmanBlack.opacity(0.2))
-                                    .frame(width: 8, height: 8)
+                        // Hidden for a single page: one dot reads as a
+                        // carousel with nothing to swipe to.
+                        if viewModel.pages.count > 1 {
+                            HStack(spacing: 8) {
+                                ForEach(viewModel.pages.indices, id: \.self) { index in
+                                    Circle()
+                                        .fill(viewModel.currentPage == index ? Color.wingmanBlack : Color.wingmanBlack.opacity(0.2))
+                                        .frame(width: 8, height: 8)
+                                }
                             }
+                            .padding(.top, 12)
+                            .padding(.bottom, 20)
+                        } else {
+                            Color.clear.frame(height: 16)
                         }
-                        .padding(.top, 12)
-                        .padding(.bottom, 20)
 
                     }
                 }
@@ -400,18 +439,27 @@ struct PaywallView: View {
                 // indicator in the not-yet-loaded branch.
                 if viewModel.offerings != nil {
                     plansSection
+                    // Trial users get the timeline above the button: it says
+                    // what the old "No payment now" line said, plus the day
+                    // and amount of the first charge — the question behind
+                    // the instant cancels on Apple's sheet.
+                    if let trialDays = showsTrialTimeline {
+                        TrialTimeline(
+                            zeroPrice: viewModel.zeroPriceString,
+                            trialDays: trialDays,
+                            priceWithPeriod: viewModel.selectedPriceWithPeriod
+                        )
+                        .padding(.horizontal, 20)
+                        .padding(.top, 4)
+                    }
                     continueButton
-                    // Deliberately BELOW the CTA. The trial promise is already
-                    // made twice above it (plan-card badge + button title), so
-                    // this line's job is to clear last-second doubt at the
-                    // moment of the tap rather than to inform, and keeping it
-                    // out of the price→button path shortens that path.
-                    //
-                    // Placement is NOT conditional on trial eligibility — only
-                    // the copy swaps — so the billed-immediately variant, the
-                    // one carrying real Guideline 3.1.2 weight, can never be
-                    // the version that goes missing.
-                    trialDisclosure
+                    // Everyone without a trial keeps the disclosure below the
+                    // CTA. The billed-immediately variant carries real
+                    // Guideline 3.1.2 weight, so it never depends on the
+                    // timeline rendering.
+                    if showsTrialTimeline == nil {
+                        trialDisclosure
+                    }
                 } else {
                     pricingStatusSection
                     pricingRetryButton
@@ -628,6 +676,14 @@ struct PaywallView: View {
         }
         .padding(.horizontal, 20)
         .padding(.bottom, 8) // Breathing room before the pinned Continue button
+    }
+
+    /// Trial length when the timeline should show, nil otherwise. Requires
+    /// both eligibility (same check as the badge and the "Try for $0.00"
+    /// button) and a free-trial offer actually present on the product.
+    private var showsTrialTimeline: Int? {
+        guard viewModel.isTrialEligible(for: viewModel.selectedPlan) else { return nil }
+        return viewModel.selectedTrialDays
     }
 
     // MARK: - Trial Disclosure

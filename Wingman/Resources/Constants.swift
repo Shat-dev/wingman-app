@@ -19,6 +19,11 @@ struct Constants {
     static let WINGMAN_MONTHLY_PRODUCT_ID = RevenueCatConfig.ProductIds.monthly
     static let WINGMAN_YEARLY_PRODUCT_ID = RevenueCatConfig.ProductIds.yearly
 
+    // MARK: - Post-demo one-time offer
+    static let ONE_TIME_OFFER_PRODUCT_ID = RevenueCatConfig.ProductIds.yearlyDiscount
+    static let ONE_TIME_OFFER_OFFERING_ID = RevenueCatConfig.OneTimeOffer.offeringId
+    static let ONE_TIME_OFFER_PACKAGE_ID = RevenueCatConfig.OneTimeOffer.packageId
+
     // MARK: - URLs
     static let PRIVACY_POLICY_URL = "https://www.getwingman.app/privacy"
     static let TERMS_CONDITIONS_URL = "https://www.getwingman.app/terms"

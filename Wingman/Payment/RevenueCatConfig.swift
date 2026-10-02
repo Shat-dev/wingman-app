@@ -39,6 +39,22 @@ struct RevenueCatConfig {
 
         /// Monthly subscription product ID
         static let monthly = "wingman_monthly"
+
+        /// Discounted annual product ID — carries its own Pay-Up-Front
+        /// introductory offer (50% off year 1, then renews at the standard
+        /// yearly price). Used only by the post-demo one-time offer, never by
+        /// the main paywall.
+        static let yearlyDiscount = "wingman_yearly_discount"
+    }
+
+    // MARK: - One-Time Offer
+    /// RevenueCat identifiers for the post-demo one-time offer. A dedicated
+    /// Offering — deliberately NOT `current` — so the discounted package can
+    /// never surface in the main paywall's package list. The ids predate the
+    /// offer's current placement (it began as the "second chance" offer).
+    struct OneTimeOffer {
+        static let offeringId = "second_chance"
+        static let packageId = "yearly_discount"
     }
 
     // MARK: - Environment Detection

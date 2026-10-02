@@ -184,14 +184,9 @@ struct MainTabView: View {
             log("🎬 MainTabView: walkthrough finished — marking free demo complete")
             authManager.markFreeDemoCompleted(handoffTo: .scenarios)
 
-            // The script now ends straight into the app, with no ask.
-            //
-            // Dismissing the wall rather than deleting RootView's branch 4c:
-            // the branch, the `postDemoWallIsHard` flag and the
-            // `source=postDemo` paywall plumbing all still work, so turning the
-            // ask back on later is one line here rather than a rebuild. Nothing
-            // else sets this flag on this path, so 4c is simply never reached.
-            authManager.markPostDemoWallDismissed()
+            // Marking the demo complete moves RootView to branch 4c, the
+            // post-demo one-time offer. Closing it lands on Scenarios as
+            // above.
         }
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("NavigateToHomeView"))) { _ in
             log("📱 MainTabView: Received NavigateToHomeView notification - switching to Home tab")

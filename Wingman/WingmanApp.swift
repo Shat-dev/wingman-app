@@ -126,19 +126,6 @@ struct RootView: View {
     @StateObject private var networkMonitor = NetworkMonitor.shared
     @StateObject private var featureFlags = FeatureFlags.shared
 
-    /// Offline escape hatch for the post-demo ask, deliberately session-scoped.
-    ///
-    /// A hard wall with no exit bricks the app for anyone whose RevenueCat
-    /// offerings fetch fails — they can't buy (no prices) and can't leave. So
-    /// PaywallView keeps a dismiss affordance when `offerings == nil` even in
-    /// hard mode, and taking it sets this flag rather than the persisted
-    /// `hasDismissedPostDemoWall`. The user gets into the app for this launch;
-    /// the ask returns on the next cold start.
-    ///
-    /// This is also what guarantees an App Reviewer who force-quits sees a
-    /// working app rather than an inescapable paywall.
-    @State private var bypassWallThisSession = false
-
     /// Whether RootView should be showing `LandingView`.
     ///
     /// Kept as one condition so `LandingView` occupies exactly one branch of the
@@ -305,35 +292,18 @@ struct RootView: View {
                         MainTabView()
 
                     // ✅ 4c) Demo spent, ask not yet answered → the post-demo
-                    //    ask, at peak intent. This is a route rather than a
-                    //    sheet on purpose: it makes hard-vs-soft a single
-                    //    `isDismissible` value on a screen that is already in
-                    //    the right place, so flipping the PostHog flag needs no
-                    //    structural change.
-                    //
-                    //    `bypassWallThisSession` is the offline escape hatch —
-                    //    see PaywallView's dismiss overlay. It is deliberately
-                    //    session-scoped and NOT persisted, so the ask re-arms on
-                    //    the next cold start.
-                    } else if !authManager.hasDismissedPostDemoWall && !bypassWallThisSession {
-                        let _ = log("🎯 RootView: Showing PaywallView (POST-DEMO ask — source=postDemo, hard=\(featureFlags.postDemoWallIsHard))")
-                        NavigationStack {
-                            PaywallView(
-                                authManager: authManager,
-                                isDismissible: !featureFlags.postDemoWallIsHard,
-                                onDismiss: {
-                                    // Soft mode only: the hard-mode overlay is
-                                    // the offline hatch, which routes through
-                                    // onOfflineBypass below instead.
-                                    authManager.markPostDemoWallDismissed()
-                                },
-                                onOfflineBypass: {
-                                    log("🚧 RootView: offline escape hatch taken — bypassing wall for this session only")
-                                    bypassWallThisSession = true
-                                },
-                                source: .postDemo
-                            )
-                        }
+                    //    one-time offer (50% off year one). Only users who
+                    //    closed the onboarding paywall get here — subscribers
+                    //    took 4a. The offer spends itself on appear, and
+                    //    closes itself if it can't be honoured (offline, not
+                    //    intro-eligible, product misconfigured), so this
+                    //    branch can never strand anyone and needs no
+                    //    offline escape hatch.
+                    } else if !authManager.hasDismissedPostDemoWall {
+                        let _ = log("🎯 RootView: Showing OneTimeOfferView (POST-DEMO ask)")
+                        OneTimeOfferView(onFinish: {
+                            authManager.markPostDemoWallDismissed()
+                        })
 
                     // ✅ 4d) Ask answered (or bypassed) → MainTabView, gated.
                     } else {

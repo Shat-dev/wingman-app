@@ -2284,9 +2284,26 @@ final class AuthManager: ObservableObject {
     func markPostDemoWallDismissed() {
         log("🚧 markPostDemoWallDismissed() called")
         hasDismissedPostDemoWall = true
+        persistPostDemoWallDismissed()
+    }
 
+    /// Spends the post-demo one-time offer the moment it is shown, without
+    /// moving RootView off it.
+    ///
+    /// The screen tells the user they will only see it once, so that has to be
+    /// true even if they force-quit while it is open: the next cold start reads
+    /// the persisted key and routes straight past branch 4c. The published
+    /// flag is left alone here because flipping it would swap the screen out
+    /// from under the user the instant it appeared — `markPostDemoWallDismissed`
+    /// does that when they actually leave.
+    func markPostDemoOfferSeen() {
+        log("🎁 markPostDemoOfferSeen() called")
+        persistPostDemoWallDismissed()
+    }
+
+    private func persistPostDemoWallDismissed() {
         guard let userId = currentUser?.id.uuidString else {
-            log("⚠️ markPostDemoWallDismissed: no authenticated user — nothing to persist")
+            log("⚠️ persistPostDemoWallDismissed: no authenticated user — nothing to persist")
             return
         }
 

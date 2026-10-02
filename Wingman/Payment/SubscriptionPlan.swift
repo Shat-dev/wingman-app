@@ -15,5 +15,6 @@ enum SubscriptionPlan: String {
 struct PaywallPage: Identifiable {
     let id = UUID()
     let imageName: String
+    var headline: String? = nil
     let bullets: [String]
 }
