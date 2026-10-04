@@ -283,6 +283,7 @@ struct OneTimeOfferView: View {
     private var claimButton: some View {
         Button {
             HapticManager.shared.tapStrong()
+            authManager.markPurchaseStartedBeforeWalkthrough()
             Task {
                 if await viewModel.purchase() {
                     HapticManager.shared.success()

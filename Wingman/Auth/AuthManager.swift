@@ -104,6 +104,17 @@ final class AuthManager: ObservableObject {
         }
     }
 
+    /// This user started a purchase on the onboarding paywall or the one-time
+    /// offer before spending the demo — i.e. they are a *new* subscriber, so
+    /// the walkthrough still runs for them once they are in. Existing
+    /// subscribers never set it (neither screen reaches them), which is what
+    /// keeps the tour away from them. Set at purchase *start*, not success:
+    /// RevenueCat can flip `hasActiveSubscription` and swap RootView into
+    /// MainTabView before `purchase()` returns, and the walkthrough evaluates
+    /// its eligibility once, on that first appear. A cancelled attempt leaves
+    /// it set harmlessly — it only matters to someone who is subscribed.
+    @Published private(set) var startedPurchaseBeforeWalkthrough: Bool = false
+
     /// The lesson that claimed this user's one free lesson. `nil` = unclaimed.
     ///
     /// **Claimed by id, not counted.** Recording *which* lesson was spent is
@@ -762,6 +773,7 @@ final class AuthManager: ObservableObject {
                 self.hasSeenCommitmentPact = false
                 self.hasCompletedFreeDemo = false
                 self.hasSuppressedWalkthrough = false
+                self.startedPurchaseBeforeWalkthrough = false
                 self.hasDismissedPostDemoWall = false
                 self.freeLessonId = nil
                 // Cleared for BOTH kinds. `.signedOut` is only ever emitted for
@@ -930,6 +942,7 @@ final class AuthManager: ObservableObject {
                 self.hasSeenCommitmentPact = false
                 self.hasCompletedFreeDemo = false
                 self.hasSuppressedWalkthrough = false
+                self.startedPurchaseBeforeWalkthrough = false
                 self.hasDismissedPostDemoWall = false
                 self.freeLessonId = nil
                 self.clearSessionEverMarker(reason: "user deleted")
@@ -1029,6 +1042,9 @@ final class AuthManager: ObservableObject {
         let key = "hasCompletedFreeDemo_\(userId)"
         hasCompletedFreeDemo = UserDefaults.standard.bool(forKey: key)
         hasSuppressedWalkthrough = UserDefaults.standard.bool(forKey: Self.suppressedKey(userId))
+        startedPurchaseBeforeWalkthrough = UserDefaults.standard.bool(
+            forKey: Self.purchaseBeforeWalkthroughKey(userId)
+        )
         log("🎓 Free demo status loaded: \(hasCompletedFreeDemo) "
             + "(suppressed: \(hasSuppressedWalkthrough)) for user: \(userId)")
 
@@ -2286,6 +2302,21 @@ final class AuthManager: ObservableObject {
         persistPostDemoWallDismissed()
     }
 
+    /// See `startedPurchaseBeforeWalkthrough`. Called by the onboarding
+    /// paywall and the one-time offer as a purchase starts. No-op once the
+    /// demo is spent, so it can never re-arm a walkthrough.
+    func markPurchaseStartedBeforeWalkthrough() {
+        guard !hasCompletedFreeDemo, !startedPurchaseBeforeWalkthrough,
+              let userId = currentUser?.id.uuidString else { return }
+        startedPurchaseBeforeWalkthrough = true
+        UserDefaults.standard.set(true, forKey: Self.purchaseBeforeWalkthroughKey(userId))
+        log("🎬 Purchase started before the walkthrough — tour stays armed for: \(userId)")
+    }
+
+    private static func purchaseBeforeWalkthroughKey(_ userId: String) -> String {
+        "startedPurchaseBeforeWalkthrough_\(userId)"
+    }
+
     /// Spends the post-demo one-time offer the moment it is shown, without
     /// moving RootView off it.
     ///
@@ -2876,6 +2907,7 @@ final class AuthManager: ObservableObject {
             hasSeenCommitmentPact = false
             hasCompletedFreeDemo = false
             hasSuppressedWalkthrough = false
+            startedPurchaseBeforeWalkthrough = false
             hasDismissedPostDemoWall = false
             freeLessonId = nil
 
@@ -3027,6 +3059,7 @@ final class AuthManager: ObservableObject {
                     hasSeenCommitmentPact = false
                     hasCompletedFreeDemo = false
                     hasSuppressedWalkthrough = false
+                    startedPurchaseBeforeWalkthrough = false
                     hasDismissedPostDemoWall = false
                     freeLessonId = nil
                     isCheckingSession = false

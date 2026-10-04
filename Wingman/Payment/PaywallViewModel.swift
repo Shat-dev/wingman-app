@@ -476,6 +476,13 @@ final class PaywallViewModel: ObservableObject {
             if package.storeProduct.productIdentifier == Constants.MONTHLY_PRODUCT_ID { return "monthly" }
             return "unknown"
         }()
+        // A new subscriber still gets the walkthrough; see
+        // `AuthManager.startedPurchaseBeforeWalkthrough`. Onboarding only —
+        // the feature gate reaches existing (lapsed) users too.
+        if source == .onboarding {
+            authManager?.markPurchaseStartedBeforeWalkthrough()
+        }
+
         // PostHog: purchase initiated. Captured before the StoreKit call so
         // we have a denominator even when network or sheet errors prevent
         // the success / failure branches from running.

@@ -125,13 +125,16 @@ struct MainTabView: View {
         }
         .ignoresSafeArea(.keyboard)
         .onAppear {
-            // The only activator. Both conditions are suppression layer 1: a
-            // user who completed the demo (or was suppressed out of it) carries
-            // `hasCompletedFreeDemo`, and a subscriber never reaches RootView's
-            // demo branch at all. Idempotent — `start` no-ops unless dormant.
+            // The only activator. Suppression layer 1: a user who completed
+            // the demo (or was suppressed out of it) carries
+            // `hasCompletedFreeDemo`, and an existing subscriber is kept out.
+            // A new subscriber — one who started buying on the onboarding
+            // paywall or the one-time offer — still gets the tour.
+            // Idempotent — `start` no-ops unless dormant.
             walkthrough.start(
                 hasCompletedFreeDemo: authManager.hasCompletedFreeDemo,
-                hasActiveSubscription: authManager.hasActiveSubscription
+                hasActiveSubscription: authManager.hasActiveSubscription,
+                isNewSubscriber: authManager.startedPurchaseBeforeWalkthrough
             )
 
             // Land where the walkthrough's last card left the user, rather than

@@ -156,11 +156,17 @@ final class WalkthroughCoordinator: ObservableObject {
     /// completed (or been suppressed out of) the demo carries
     /// `hasCompletedFreeDemo == true`, and a subscriber never reaches the demo
     /// branch of RootView in the first place.
-    func start(hasCompletedFreeDemo: Bool, hasActiveSubscription: Bool) {
+    ///
+    /// `isNewSubscriber` (1.13+) lets someone who just bought on the onboarding
+    /// paywall or the one-time offer through; existing subscribers stay out.
+    /// Finishing it sets `hasCompletedFreeDemo` for them too, which is fine:
+    /// since 1.13 the one-time offer is keyed on `hasDismissedPostDemoWall`,
+    /// not on the demo flag, so a later lapse lands nowhere new.
+    func start(hasCompletedFreeDemo: Bool, hasActiveSubscription: Bool, isNewSubscriber: Bool) {
         guard !hasEvaluated else { return }
         hasEvaluated = true
 
-        guard !hasCompletedFreeDemo, !hasActiveSubscription else {
+        guard !hasCompletedFreeDemo, !hasActiveSubscription || isNewSubscriber else {
             // Stays `dormant`. Emphatically NOT `finished` — that state means
             // "the user completed the script", and MainTabView hangs
             // `markFreeDemoCompleted()` off reaching it. Sending an ineligible
@@ -169,7 +175,7 @@ final class WalkthroughCoordinator: ObservableObject {
             // but for a subscriber it would sit there until their subscription
             // lapsed and then drop them on the post-demo paywall.
             log("🎬 Walkthrough stays dormant — demoSpent: \(hasCompletedFreeDemo), "
-                + "subscribed: \(hasActiveSubscription)")
+                + "subscribed: \(hasActiveSubscription), newSubscriber: \(isNewSubscriber)")
             return
         }
 
