@@ -280,6 +280,21 @@ struct RootView: View {
                         let _ = log("🎯 RootView: Showing MainTabView (active subscription)")
                         MainTabView()
 
+                    // ✅ 4a′) Closed the onboarding paywall, offer not yet
+                    //    shown → the one-time offer (50% off year one), straight
+                    //    away rather than after the walkthrough: 22% of
+                    //    decliners quit mid-walkthrough and never reached it
+                    //    there (Sep 2026). Subscribers took 4a. The offer spends
+                    //    itself on appear and closes itself if it can't be
+                    //    honoured (offline, not intro-eligible, product
+                    //    misconfigured), so this branch can never strand anyone.
+                    //    Closing it lands in the walkthrough (4b).
+                    } else if !authManager.hasDismissedPostDemoWall {
+                        let _ = log("🎯 RootView: Showing OneTimeOfferView (closed onboarding paywall)")
+                        OneTimeOfferView(onFinish: {
+                            authManager.markPostDemoWallDismissed()
+                        })
+
                     // ✅ 4b) Demo not yet spent → MainTabView in DEMO MODE.
                     //    The mascot walkthrough runs here and hands out one
                     //    scenario + one lesson. Approach logging is free and
@@ -291,21 +306,7 @@ struct RootView: View {
                         let _ = log("🎯 RootView: Showing MainTabView (DEMO MODE — free demo not yet spent)")
                         MainTabView()
 
-                    // ✅ 4c) Demo spent, ask not yet answered → the post-demo
-                    //    one-time offer (50% off year one). Only users who
-                    //    closed the onboarding paywall get here — subscribers
-                    //    took 4a. The offer spends itself on appear, and
-                    //    closes itself if it can't be honoured (offline, not
-                    //    intro-eligible, product misconfigured), so this
-                    //    branch can never strand anyone and needs no
-                    //    offline escape hatch.
-                    } else if !authManager.hasDismissedPostDemoWall {
-                        let _ = log("🎯 RootView: Showing OneTimeOfferView (POST-DEMO ask)")
-                        OneTimeOfferView(onFinish: {
-                            authManager.markPostDemoWallDismissed()
-                        })
-
-                    // ✅ 4d) Ask answered (or bypassed) → MainTabView, gated.
+                    // ✅ 4c) Demo spent → MainTabView, gated.
                     } else {
                         let _ = log("🎯 RootView: Showing MainTabView (post-demo, gated)")
                         MainTabView()

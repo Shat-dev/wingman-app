@@ -2,9 +2,9 @@
 //  OneTimeOfferView.swift
 //  Wingman
 //
-//  The post-demo ask: 50% off the first year, shown once, at the end of the
-//  mascot walkthrough. Reached only by users who closed the onboarding
-//  paywall without subscribing (subscribers route to MainTabView first).
+//  The one-time offer: 50% off the first year, shown once, as soon as the
+//  user closes the onboarding paywall without subscribing (subscribers route
+//  to MainTabView first). Closing it starts the walkthrough.
 //
 //  "Only once" is enforced, not just claimed: the offer is spent the moment
 //  it appears (`AuthManager.markPostDemoOfferSeen`), so a force-quit doesn't

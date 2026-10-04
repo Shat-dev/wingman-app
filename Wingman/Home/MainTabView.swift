@@ -184,9 +184,9 @@ struct MainTabView: View {
             log("🎬 MainTabView: walkthrough finished — marking free demo complete")
             authManager.markFreeDemoCompleted(handoffTo: .scenarios)
 
-            // Marking the demo complete moves RootView to branch 4c, the
-            // post-demo one-time offer. Closing it lands on Scenarios as
-            // above.
+            // The one-time offer was already shown when the onboarding
+            // paywall closed (RootView 4a′), so this lands straight on
+            // Scenarios.
         }
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("NavigateToHomeView"))) { _ in
             log("📱 MainTabView: Received NavigateToHomeView notification - switching to Home tab")

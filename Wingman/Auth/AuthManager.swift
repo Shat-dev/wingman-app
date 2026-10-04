@@ -1148,11 +1148,10 @@ final class AuthManager: ObservableObject {
     /// Marks the walkthrough as already spent for a user who should never see
     /// it, and persists that decision.
     ///
-    /// **Sets BOTH flags, and this is the whole point.** `hasCompletedFreeDemo`
-    /// alone moves RootView out of branch 4b and straight into 4c — the
-    /// post-demo paywall. Suppressing the walkthrough without also dismissing
-    /// the wall would therefore convert a silent, invisible repair into a
-    /// surprise full-screen paywall for every existing user on launch day.
+    /// **Sets BOTH flags, and this is the whole point.** Without
+    /// `hasDismissedPostDemoWall`, RootView would route every existing
+    /// non-paying user into the one-time offer (4a′) on launch day, turning a
+    /// silent, invisible repair into a surprise full-screen paywall.
     ///
     /// Writes the UserDefaults keys as well as the published values, so the
     /// `checkUserPostDemoWallStatus` call that runs immediately after this one
@@ -2213,9 +2212,9 @@ final class AuthManager: ObservableObject {
     /// as long as the scenario gated the script, this flag — and so the credit —
     /// was withheld from most of the people it was meant for.
     ///
-    /// Flipping this routes RootView out of the demo branch. It used to route
-    /// into the post-demo ask (4c); `MainTabView` now marks that wall dismissed
-    /// on the same path, so 4c is skipped and the user lands in 4d.
+    /// Flipping this routes RootView out of the demo branch into 4c. Since
+    /// 1.13 the one-time offer is shown before the walkthrough (4a′), not
+    /// after it.
     ///
     /// Same persistence shape as `completePaywallFlow`: per-user
     /// UserDefaults as the device source of truth, best-effort `user_metadata`

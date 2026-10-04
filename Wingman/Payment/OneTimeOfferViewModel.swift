@@ -2,11 +2,12 @@
 //  OneTimeOfferViewModel.swift
 //  Wingman
 //
-//  Drives the post-demo one-time offer: 50% off the first year of the annual
-//  plan, shown once, at the end of the mascot walkthrough, to users who
-//  closed the onboarding paywall without subscribing.
+//  Drives the one-time offer: 50% off the first year of the annual plan,
+//  shown once, as soon as the user closes the onboarding paywall without
+//  subscribing (before the walkthrough; 1.12 showed it after).
 //
-//  Reports through the standard `paywall_*` events with `source=postDemo`, so
+//  Reports through the standard `paywall_*` events with `source=postPaywall`
+//  (1.12 used `postDemo`), so
 //  every existing paywall funnel and the "Payments received" tile count it
 //  without changes. `offer=one_time_50` separates it from the full-price
 //  paywall in the same funnels.
@@ -38,7 +39,7 @@ final class OneTimeOfferViewModel: ObservableObject {
     @Published var showAlert = false
     @Published var alertKind: PurchaseAlertKind = .error
 
-    static let source = PaywallSource.postDemo
+    static let source = PaywallSource.postPaywall
     static let offerName = "one_time_50"
     private static let plan = "yearly_discount"
 

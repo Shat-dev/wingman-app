@@ -26,6 +26,11 @@ enum PaywallSource: String {
     /// `source` property's existing values are camelCase, and mixing
     /// conventions inside one property makes PostHog filters error-prone.
     case postDemo
+
+    /// The one-time offer shown the moment the onboarding paywall is closed
+    /// without buying (1.13+). Replaced `postDemo` as the offer's placement;
+    /// kept separate so the two placements compare cleanly in PostHog.
+    case postPaywall
 }
 
 struct PaywallView: View {
