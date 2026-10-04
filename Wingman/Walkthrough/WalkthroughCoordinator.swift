@@ -161,7 +161,9 @@ final class WalkthroughCoordinator: ObservableObject {
     /// paywall or the one-time offer through; existing subscribers stay out.
     /// Finishing it sets `hasCompletedFreeDemo` for them too, which is fine:
     /// since 1.13 the one-time offer is keyed on `hasDismissedPostDemoWall`,
-    /// not on the demo flag, so a later lapse lands nowhere new.
+    /// not on the demo flag, and `AuthManager.syncSubscriptionStatus` spends
+    /// that for every subscriber — so a later lapse lands in the gated app
+    /// (4c), not on the offer.
     func start(hasCompletedFreeDemo: Bool, hasActiveSubscription: Bool, isNewSubscriber: Bool) {
         guard !hasEvaluated else { return }
         hasEvaluated = true

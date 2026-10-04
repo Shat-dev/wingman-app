@@ -496,6 +496,16 @@ final class AuthManager: ObservableObject {
             log("🩹 AuthManager: Self-healing hasCompletedPaywallFlow — paying user with stale flag")
             completePaywallFlow()
         }
+
+        // A subscriber never needs the one-time offer (4a′). Spend it here so
+        // the cold-start window — cached expiry passed at a trial conversion
+        // or renewal, RC not yet answered — can't route a paying user onto
+        // it, and a later lapse doesn't either (Apple wouldn't honour the
+        // intro price for them anyway). Idempotent after the first launch.
+        if self.hasActiveSubscription && !self.hasDismissedPostDemoWall {
+            log("🩹 AuthManager: Spending the one-time offer for a subscriber")
+            markPostDemoWallDismissed()
+        }
     }
 
     /// Routing-level "paywall flow done" check. `hasActiveSubscription` is
@@ -1095,6 +1105,13 @@ final class AuthManager: ObservableObject {
             log("🚧 Found post_demo_wall_dismissed=true in user metadata - marking as dismissed")
             hasDismissedPostDemoWall = true
             UserDefaults.standard.set(true, forKey: key)
+        }
+
+        // Same rule as in `syncSubscriptionStatus`, which can run before
+        // `currentUser` is set and so before it can persist anything.
+        if !hasDismissedPostDemoWall, hasActiveSubscription {
+            log("🩹 Spending the one-time offer for a subscriber")
+            markPostDemoWallDismissed()
         }
 
         #if DEBUG
