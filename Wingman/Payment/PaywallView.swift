@@ -444,27 +444,8 @@ struct PaywallView: View {
                 // indicator in the not-yet-loaded branch.
                 if viewModel.offerings != nil {
                     plansSection
-                    // Trial users get the timeline above the button: it says
-                    // what the old "No payment now" line said, plus the day
-                    // and amount of the first charge — the question behind
-                    // the instant cancels on Apple's sheet.
-                    if let trialDays = showsTrialTimeline {
-                        TrialTimeline(
-                            zeroPrice: viewModel.zeroPriceString,
-                            trialDays: trialDays,
-                            priceWithPeriod: viewModel.selectedPriceWithPeriod
-                        )
-                        .padding(.horizontal, 20)
-                        .padding(.top, 4)
-                    }
                     continueButton
-                    // Everyone without a trial keeps the disclosure below the
-                    // CTA. The billed-immediately variant carries real
-                    // Guideline 3.1.2 weight, so it never depends on the
-                    // timeline rendering.
-                    if showsTrialTimeline == nil {
-                        trialDisclosure
-                    }
+                    trialDisclosure
                 } else {
                     pricingStatusSection
                     pricingRetryButton
@@ -681,14 +662,6 @@ struct PaywallView: View {
         }
         .padding(.horizontal, 20)
         .padding(.bottom, 8) // Breathing room before the pinned Continue button
-    }
-
-    /// Trial length when the timeline should show, nil otherwise. Requires
-    /// both eligibility (same check as the badge and the "Try for $0.00"
-    /// button) and a free-trial offer actually present on the product.
-    private var showsTrialTimeline: Int? {
-        guard viewModel.isTrialEligible(for: viewModel.selectedPlan) else { return nil }
-        return viewModel.selectedTrialDays
     }
 
     // MARK: - Trial Disclosure

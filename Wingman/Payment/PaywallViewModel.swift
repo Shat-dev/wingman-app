@@ -140,27 +140,6 @@ final class PaywallViewModel: ObservableObject {
         return formatted
     }
 
-    // MARK: - Trial timeline
-
-    /// Length of the selected plan's free trial in days, read from the
-    /// StoreKit product so the timeline can never disagree with what Apple
-    /// grants. Nil when the product carries no free-trial intro offer.
-    var selectedTrialDays: Int? {
-        guard let intro = currentPackage?.storeProduct.introductoryDiscount,
-              intro.paymentMode == .freeTrial else { return nil }
-        let period = intro.subscriptionPeriod
-        switch period.unit {
-        case .day: return period.value
-        case .week: return period.value * 7
-        default: return nil
-        }
-    }
-
-    /// "$44.99/year" or "$12.99/month" for the selected plan.
-    var selectedPriceWithPeriod: String {
-        selectedPlan == .yearly ? "\(yearlyPrice)/year" : "\(monthlyPrice)/month"
-    }
-
     // MARK: - Trial Eligibility
     //
     // `.eligible` and `.unknown` both map to "show trial UI" — `.unknown` is
