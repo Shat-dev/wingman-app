@@ -169,7 +169,12 @@ struct ProfileView: View {
                     // fall back to `.large` so the sheet maxes out at the
                     // available screen height. Standard / Max phones keep the
                     // original fixed detent unchanged.
-                    .presentationDetents(UIScreen.isSmallPhone ? [.large] : [.height(720)])
+                    // Non-subscribers get 80pt more for the "Tips & offers"
+                    // row; the sheet doesn't scroll, so without it the title
+                    // is pushed off the top.
+                    .presentationDetents(UIScreen.isSmallPhone
+                        ? [.large]
+                        : [.height(authManager.hasActiveSubscription ? 720 : 800)])
                     .presentationDragIndicator(.hidden)
                     .presentationCornerRadius(20)
             }

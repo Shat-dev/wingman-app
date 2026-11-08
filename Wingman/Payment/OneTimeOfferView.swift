@@ -27,6 +27,9 @@ struct OneTimeOfferView: View {
     @State private var appearedAt: Date?
     @State private var didFinish = false
     @State private var safariLink: IdentifiableURL?
+    /// The X fades in 3 s after the offer is ready, so the first look is at
+    /// the discount rather than at the way out (40% of closes came within 2 s).
+    @State private var isCloseRevealed = false
 
     /// Secondary text grey, shared with the paywall's disclosure and footer.
     private let secondary = Color(hex: "6B7280")
@@ -50,7 +53,7 @@ struct OneTimeOfferView: View {
         }
         .dynamicTypeSize(...DynamicTypeSize.large)
         .overlay(alignment: .topTrailing) {
-            if viewModel.state == .ready {
+            if viewModel.state == .ready && isCloseRevealed {
                 Button {
                     HapticManager.shared.tap()
                     close()
@@ -64,6 +67,7 @@ struct OneTimeOfferView: View {
                 .buttonStyle(ScalePressStyle())
                 .padding(.trailing, 8)
                 .accessibilityLabel("Close offer")
+                .transition(.opacity)
             }
         }
         .alert(viewModel.alertKind.title, isPresented: $viewModel.showAlert) {
@@ -85,6 +89,10 @@ struct OneTimeOfferView: View {
                 authManager.markPostDemoOfferSeen()
                 ReviewPromptManager.shared.noteFriction(source: "one_time_offer")
                 viewModel.reportViewed()
+                Task {
+                    try? await Task.sleep(nanoseconds: 3_000_000_000)
+                    withAnimation(.easeIn(duration: 0.3)) { isCloseRevealed = true }
+                }
             case .unavailable:
                 finish()
             case .loading:

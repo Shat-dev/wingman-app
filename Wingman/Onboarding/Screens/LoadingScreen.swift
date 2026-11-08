@@ -22,6 +22,7 @@
 import SwiftUI
 import Supabase
 import Auth
+import UserNotifications
 
 struct LoadingScreen: View {
     let step: OnboardingStep
@@ -93,6 +94,24 @@ struct LoadingScreen: View {
     /// one-shot, so they're gated on this rather than on `onAppear` alone.
     @State private var hasStarted = false
 
+    // MARK: - Notification ask
+    //
+    // The one place the app asks for notification permission unprompted.
+    // Started once step 1 has filled, so the alert lands mid-sequence; the
+    // bars keep filling behind it, so a quick answer costs no time. Only for
+    // users whose status is still `.notDetermined` — anyone who already
+    // answered (reinstall, earlier denial) never sees the line or the alert.
+    // `finish()` awaits this before advancing, so onboarding never moves on
+    // underneath the alert.
+
+    @State private var notificationAsk: Task<Void, Never>?
+    /// App Review 4.5.4 consent line for the promotional reminders. Low on the
+    /// screen so the centred system alert doesn't cover it.
+    @State private var showsConsentLine = false
+    /// Set when the last bar locks in, so the tick loop isn't restarted after
+    /// the sequence is over.
+    @State private var sequenceDone = false
+
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
@@ -119,6 +138,17 @@ struct LoadingScreen: View {
                 .padding(.top, 36)
 
             Spacer()
+        }
+        .overlay(alignment: .bottom) {
+            if showsConsentLine {
+                Text("Allow notifications for tips and offers. Turn them off anytime in Settings.")
+                    .font(.manropeRegular(size: 13))
+                    .foregroundColor(.wingmanBlack.opacity(0.6))
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 40)
+                    .padding(.bottom, 32)
+                    .transition(.opacity)
+            }
         }
         .onAppear(perform: start)
         .onDisappear(perform: stopTickLoop)
@@ -214,6 +244,10 @@ struct LoadingScreen: View {
             // instead of a coincidence.
             HapticManager.shared.success()
 
+            if index == 0 {
+                notificationAsk = Task { await askForNotifications() }
+            }
+
             DispatchQueue.main.asyncAfter(deadline: .now() + gapBetweenSteps) {
                 runStep(index + 1)
             }
@@ -221,12 +255,35 @@ struct LoadingScreen: View {
     }
 
     private func finish() {
+        sequenceDone = true
         stopTickLoop()
 
         DispatchQueue.main.asyncAfter(deadline: .now() + finalDwell) {
             log("✅ Finished all questions")
-            onComplete()
+            // Waits only while the permission alert is still up; returns at
+            // once if no ask was needed or it was already answered.
+            Task {
+                await notificationAsk?.value
+                onComplete()
+            }
         }
+    }
+
+    private func askForNotifications() async {
+        let status = await UNUserNotificationCenter.current().notificationSettings().authorizationStatus
+        guard status == .notDetermined else { return }
+
+        withAnimation(.easeIn(duration: 0.3)) { showsConsentLine = true }
+        // Long enough to read the line before the alert appears over the screen.
+        try? await Task.sleep(nanoseconds: 700_000_000)
+
+        stopTickLoop()
+        _ = await NotificationManager.shared.requestPermission(
+            source: "onboarding_loading",
+            options: [.alert, .sound]
+        )
+        if !sequenceDone { startTickLoop() }
+        withAnimation(.easeOut(duration: 0.3)) { showsConsentLine = false }
     }
 
     // MARK: - Tick loop

@@ -188,6 +188,18 @@ struct MainTabView: View {
             // paywall closed (RootView 4a′), so this lands straight on
             // Scenarios.
         }
+        // A tapped reminder (MarketingNotifications) opens Scenarios. The
+        // publisher replays its current value on subscribe, so a tap that
+        // cold-launched the app is applied once this view first appears, after
+        // splash and routing. Non-subscribers then hit the normal feature gate.
+        // Left to the walkthrough while it runs: it drives the tabs itself.
+        .onReceive(NotificationRouter.shared.$openScenarios) { open in
+            guard open else { return }
+            NotificationRouter.shared.openScenarios = false
+            guard !walkthrough.isRunning else { return }
+            log("🔔 MainTabView: reminder tapped — opening Scenarios")
+            selectedTab = WalkthroughCoordinator.Tab.scenarios.rawValue
+        }
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("NavigateToHomeView"))) { _ in
             log("📱 MainTabView: Received NavigateToHomeView notification - switching to Home tab")
             selectedTab = 0

@@ -237,6 +237,10 @@ enum Analytics {
         // can be a retention lever at all.
         static let notificationPermissionResult = "notification_permission_result"
         static let dailyReadingGoalSet = "daily_reading_goal_set"
+        // Reminders for people who closed the onboarding paywall unpaid
+        // (MarketingNotifications). `id` is day1 / day3 / day7.
+        static let marketingNotificationOpened = "marketing_notification_opened"
+        static let marketingNotificationsToggled = "marketing_notifications_toggled"
 
         // The screen between the end of onboarding and the paywall. Drop-off
         // here never reaches pricing, so without it that loss reads as paywall

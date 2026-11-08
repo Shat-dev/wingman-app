@@ -102,6 +102,11 @@ struct PaywallView: View {
     // than from an incidental re-mount.
     @State private var appearedAt: Date?
 
+    /// The X fades in 3 s after the paywall appears, so the first look is at
+    /// the offer rather than at the way out. Still on every state (loading,
+    /// error, content), so nobody is trapped; they just wait 3 s.
+    @State private var isCloseRevealed = false
+
     // MARK: - Adaptive carousel sizing
     //
     // The carousel is MEASURED, not constant. Two earlier attempts used
@@ -497,7 +502,7 @@ struct PaywallView: View {
             // load. That path reports a distinct outcome and calls
             // `onOfflineBypass`, letting the caller grant a session-scoped
             // bypass instead of recording a decline the user never made.
-            if showsDismissAffordance {
+            if showsDismissAffordance && isCloseRevealed {
                 Button {
                     HapticManager.shared.tap()
                     let isOfflineBypass = !isDismissible
@@ -520,6 +525,10 @@ struct PaywallView: View {
                     } else if let onDismiss = onDismiss {
                         onDismiss()
                     } else {
+                        // Onboarding paywall closed unpaid: schedule the
+                        // +1/+3/+7 day reminders (no-op unless eligible).
+                        let isPremium = authManager.hasActiveSubscription
+                        Task { await MarketingNotifications.armIfEligible(isPremium: isPremium) }
                         authManager.completePaywallFlow()
                     }
                 } label: {
@@ -537,7 +546,12 @@ struct PaywallView: View {
                 .buttonStyle(ScalePressStyle())
                 .padding(.trailing, 6)
                 .accessibilityLabel("Close paywall")
+                .transition(.opacity)
             }
+        }
+        .task {
+            try? await Task.sleep(nanoseconds: 3_000_000_000)
+            withAnimation(.easeIn(duration: 0.3)) { isCloseRevealed = true }
         }
         .alert(viewModel.alertKind.title, isPresented: $viewModel.showAlert) {
             Button("OK") {

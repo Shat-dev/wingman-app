@@ -8,7 +8,12 @@ class NotificationManager: ObservableObject {
     private init() {}
     
     // MARK: - Permission Request
-    func requestPermission(source: String = "unknown") async -> Bool {
+    /// `options` defaults to what the daily reading reminder needs (it sets a
+    /// badge). The onboarding ask passes `[.alert, .sound]`.
+    func requestPermission(
+        source: String = "unknown",
+        options: UNAuthorizationOptions = [.alert, .sound, .badge]
+    ) async -> Bool {
         log("🔔 Requesting notification permission...")
         let center = UNUserNotificationCenter.current()
 
@@ -22,7 +27,7 @@ class NotificationManager: ObservableObject {
         let wasPrompted = priorStatus == .notDetermined
 
         do {
-            let granted = try await center.requestAuthorization(options: [.alert, .sound, .badge])
+            let granted = try await center.requestAuthorization(options: options)
             log(granted ? "✅ Notification permission granted" : "❌ Notification permission denied")
 
             // The grant rate gates the entire re-engagement channel — if it's

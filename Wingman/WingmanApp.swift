@@ -34,6 +34,21 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             application,
             didFinishLaunchingWithOptions: launchOptions
         )
+        // Before launch finishes, so a tap that cold-launched the app is
+        // still delivered to it.
+        UNUserNotificationCenter.current().delegate = AppNotificationDelegate.shared
+        #if DEBUG
+        // Launch argument: -rearmMarketing YES — forgets the one-time "armed"
+        // flag and any opt-out, then arms as a non-subscriber would, so the
+        // cancel paths can be exercised without replaying onboarding.
+        if UserDefaults.standard.bool(forKey: "rearmMarketing") {
+            UserDefaults.standard.removeObject(forKey: "marketing.armed")
+            MarketingNotifications.isOptedOut = false
+            Task { await MarketingNotifications.armIfEligible(isPremium: false) }
+        } else {
+            Task { await MarketingNotifications.debugLogPending("launch") }
+        }
+        #endif
         return true
     }
 
@@ -648,7 +663,16 @@ struct RootView: View {
                 }
             }
         }
+        // Non-subscriber reminders: cleared whenever the user is premium, on
+        // appear (a purchase/restore made elsewhere while the app was closed)
+        // and on change (a purchase made anywhere in the app). The app targets
+        // iOS 16.6, so this is onAppear + onChange rather than
+        // `.onChange(of:initial: true)`, which needs iOS 17.
+        .onAppear {
+            if authManager.hasActiveSubscription { MarketingNotifications.cancelAll() }
+        }
         .onChange(of: authManager.hasActiveSubscription) { newValue in
+            if newValue { MarketingNotifications.cancelAll() }
             log("\n🔔 RootView detected hasActiveSubscription change: \(newValue)")
             log("   - Expiry date: \(authManager.subscriptionExpiryDate?.formatted() ?? "nil")")
         }

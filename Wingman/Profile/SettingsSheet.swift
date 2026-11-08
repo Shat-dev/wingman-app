@@ -13,6 +13,8 @@ struct SettingsSheet: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var authManager: AuthManager
     @State private var goalNotifications = true
+    /// Mirrors `MarketingNotifications.isOptedOut` so the toggle redraws.
+    @State private var marketingOptedOut = MarketingNotifications.isOptedOut
     @State private var showingDeleteAlert = false
     @State private var showDailyReadingGoal = false
     @State private var dailyReadingGoal = 10
@@ -228,7 +230,45 @@ struct SettingsSheet: View {
                     }
                     .padding(.horizontal, 20)
                     .padding(.vertical, 16)
-                    
+
+                    // MARK: - Tips & Offers (non-subscribers only)
+                    // The opt-out App Review 4.5.4 requires for the promotional
+                    // reminders (MarketingNotifications). Hidden for
+                    // subscribers, who never get them.
+                    if !authManager.hasActiveSubscription {
+                        HStack(alignment: .top) {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("Tips & offers")
+                                    .font(.manropeMedium(size: 14))
+                                    .foregroundColor(.gray)
+
+                                Text("Reminders to practice approaching, and occasional offers.")
+                                    .font(.manropeRegular(size: 14))
+                                    .foregroundColor(.wingmanBlack)
+                                    .fixedSize(horizontal: false, vertical: true)
+                            }
+
+                            Spacer(minLength: 12)
+
+                            Toggle("", isOn: Binding(
+                                get: { !marketingOptedOut },
+                                set: { isOn in
+                                    HapticManager.shared.selection()
+                                    marketingOptedOut = !isOn
+                                    MarketingNotifications.isOptedOut = !isOn
+                                    Analytics.capture(
+                                        Analytics.Event.marketingNotificationsToggled,
+                                        ["enabled": isOn]
+                                    )
+                                }
+                            ))
+                            .labelsHidden()
+                            .tint(.green)
+                        }
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 16)
+                    }
+
                     // MARK: - Restore Purchase
                     Button(action: {
                         Task {
@@ -495,6 +535,7 @@ struct SettingsSheet: View {
             dailyReadingGoal = 10 // Default value
         }
         goalNotifications = UserDefaults.standard.bool(forKey: "goal_notifications")
+        marketingOptedOut = MarketingNotifications.isOptedOut
         
         // If goal notifications is true but UserDefaults returns false for a first-time user,
         // we should keep the default true value. Only change if explicitly set.
