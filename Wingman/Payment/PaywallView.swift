@@ -107,6 +107,12 @@ struct PaywallView: View {
     /// error, content), so nobody is trapped; they just wait 3 s.
     @State private var isCloseRevealed = false
 
+    /// The one-time offer, slid up over the onboarding paywall when its X is
+    /// tapped. A stock full-screen cover over a matching white screen reads as
+    /// "one more thing" rather than as a new screen loading, which the
+    /// RootView crossfade did.
+    @State private var isShowingOneTimeOffer = false
+
     // MARK: - Adaptive carousel sizing
     //
     // The carousel is MEASURED, not constant. Two earlier attempts used
@@ -235,6 +241,19 @@ struct PaywallView: View {
         self.onOfflineBypass = onOfflineBypass
         self.source = source
         self.onDismissReported = onDismissReported
+    }
+
+    /// The onboarding paywall (routing-level, default X behaviour) for a user
+    /// RootView would show the one-time offer to next — i.e. one in its
+    /// session branch. Keyed on `hasSession`, not `!isLegacyAnonymousUser`:
+    /// guests can still carry the legacy flag, and RootView checks the session
+    /// first. Session-less users go to account creation and never get it.
+    private var offersOneTimeOfferOnClose: Bool {
+        let mgr = authManager_init ?? authManager
+        return source == .onboarding
+            && onDismiss == nil
+            && mgr.hasSession
+            && !mgr.hasDismissedPostDemoWall
     }
 
     /// Whether the user cannot realistically complete a purchase here.
@@ -529,7 +548,16 @@ struct PaywallView: View {
                         // +1/+3/+7 day reminders (no-op unless eligible).
                         let isPremium = authManager.hasActiveSubscription
                         Task { await MarketingNotifications.armIfEligible(isPremium: isPremium) }
-                        authManager.completePaywallFlow()
+                        // Offer ready → slide it up over the paywall, which
+                        // stays put underneath until the offer closes.
+                        // Otherwise move on as before; RootView's offer branch
+                        // waits for the fetch or skips an unavailable offer.
+                        log("🎁 Paywall closed — offer eligible: \(offersOneTimeOfferOnClose), preloaded ready: \(OneTimeOfferViewModel.isPreloadedReady)")
+                        if offersOneTimeOfferOnClose && OneTimeOfferViewModel.isPreloadedReady {
+                            isShowingOneTimeOffer = true
+                        } else {
+                            authManager.completePaywallFlow()
+                        }
                     }
                 } label: {
                     // Mirrors the AuthView back-chevron treatment: naked
@@ -564,6 +592,22 @@ struct PaywallView: View {
             SafariView(url: link.url)
                 .ignoresSafeArea()
         }
+        // On its own host view: SwiftUI is unreliable with several
+        // presentation modifiers on one view.
+        .background(
+            Color.clear.fullScreenCover(isPresented: $isShowingOneTimeOffer) {
+                OneTimeOfferView(onFinish: {
+                    // Both flags in one turn, dismissed-offer first, so RootView
+                    // goes straight to the walkthrough (never its own offer
+                    // branch) while the cover slides down with the paywall.
+                    let mgr = authManager_init ?? authManager
+                    mgr.markPostDemoWallDismissed()
+                    mgr.completePaywallFlow()
+                    isShowingOneTimeOffer = false
+                })
+                .environmentObject(authManager_init ?? authManager)
+            }
+        )
         .onChange(of: viewModel.showAlert) { showing in
             if showing { viewModel.alertKind.playHaptic() }
         }
@@ -593,6 +637,12 @@ struct PaywallView: View {
             ReviewPromptManager.shared.noteFriction(source: "paywall_\(source.rawValue)")
 
             viewModel.loadOfferings()
+            // Warm the one-time offer that follows a close, so the hand-off
+            // lands on the offer rather than on a spinner.
+            log("🎁 PaywallView: offer preload eligible: \(offersOneTimeOfferOnClose) (source \(source.rawValue), session \((authManager_init ?? authManager).hasSession), offer spent \((authManager_init ?? authManager).hasDismissedPostDemoWall))")
+            if offersOneTimeOfferOnClose {
+                OneTimeOfferViewModel.preload()
+            }
             viewModel.currentPage = 0
             viewModel.selectPlan(.yearly)
 

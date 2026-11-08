@@ -6,6 +6,9 @@
 //  user closes the onboarding paywall without subscribing (subscribers route
 //  to MainTabView first). Closing it starts the walkthrough.
 //
+//  Usually slid up over the paywall as a full-screen cover (PaywallView);
+//  RootView's offer branch is the fallback when it wasn't loaded in time.
+//
 //  "Only once" is enforced, not just claimed: the offer is spent the moment
 //  it appears (`AuthManager.markPostDemoOfferSeen`), so a force-quit doesn't
 //  bring it back. The copy promises exactly that and nothing more — there is
@@ -17,7 +20,7 @@ import RevenueCat
 
 struct OneTimeOfferView: View {
 
-    @StateObject private var viewModel = OneTimeOfferViewModel()
+    @StateObject private var viewModel = OneTimeOfferViewModel.takePreloaded()
     @EnvironmentObject var authManager: AuthManager
 
     /// Called once, when the user leaves by any route (purchase, close,
@@ -30,6 +33,7 @@ struct OneTimeOfferView: View {
     /// The X fades in 3 s after the offer is ready, so the first look is at
     /// the discount rather than at the way out (40% of closes came within 2 s).
     @State private var isCloseRevealed = false
+    @State private var isSlowLoad = false
 
     /// Secondary text grey, shared with the paywall's disclosure and footer.
     private let secondary = Color(hex: "6B7280")
@@ -40,17 +44,26 @@ struct OneTimeOfferView: View {
 
             switch viewModel.state {
             case .loading:
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle(tint: .wingmanBlack))
+                // Blank white, not a spinner: the fetch usually started on the
+                // paywall and finishes within the crossfade. A spinner only
+                // appears if it is still going after a second.
+                if isSlowLoad {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .wingmanBlack))
+                        .transition(.opacity)
+                }
             case .ready:
                 // Short screens (SE: ~647pt usable) get a smaller image and number.
                 GeometryReader { geo in
                     content(isCompact: geo.size.height < 700)
                 }
+                .transition(.opacity.combined(with: .offset(y: 12)))
             case .unavailable:
                 Color.clear
             }
         }
+        .animation(.easeOut(duration: 0.35), value: viewModel.state)
+        .animation(.easeIn(duration: 0.2), value: isSlowLoad)
         .dynamicTypeSize(...DynamicTypeSize.large)
         .overlay(alignment: .topTrailing) {
             if viewModel.state == .ready && isCloseRevealed {
@@ -65,7 +78,7 @@ struct OneTimeOfferView: View {
                         .contentShape(Rectangle())
                 }
                 .buttonStyle(ScalePressStyle())
-                .padding(.trailing, 8)
+                .padding(.trailing, 6) // same spot as the paywall's X
                 .accessibilityLabel("Close offer")
                 .transition(.opacity)
             }
@@ -81,31 +94,44 @@ struct OneTimeOfferView: View {
         .sheet(item: $safariLink) { link in
             SafariView(url: link.url).ignoresSafeArea()
         }
-        .onChange(of: viewModel.state) { state in
-            switch state {
-            case .ready:
-                guard appearedAt == nil else { return }
-                appearedAt = Date()
-                authManager.markPostDemoOfferSeen()
-                ReviewPromptManager.shared.noteFriction(source: "one_time_offer")
-                viewModel.reportViewed()
-                Task {
-                    try? await Task.sleep(nanoseconds: 3_000_000_000)
-                    withAnimation(.easeIn(duration: 0.3)) { isCloseRevealed = true }
-                }
-            case .unavailable:
-                finish()
-            case .loading:
-                break
-            }
-        }
+        // A preloaded offer can already be ready (or unavailable) on appear,
+        // when `onChange` won't fire, so both routes go through `handle`.
+        .onAppear { handle(viewModel.state) }
+        .onChange(of: viewModel.state) { handle($0) }
         // An entitlement arriving from elsewhere (a restore, a renewal synced
         // from another device) makes the offer moot.
         .onChange(of: authManager.hasActiveSubscription) { subscribed in
             if subscribed { finish() }
         }
-        .task { await viewModel.load() }
+        .task {
+            // No-op when the preloaded fetch is already running or done.
+            Task {
+                try? await Task.sleep(nanoseconds: 1_000_000_000)
+                if viewModel.state == .loading { isSlowLoad = true }
+            }
+            await viewModel.load()
+        }
         .trackScreenView("OneTimeOffer")
+    }
+
+    private func handle(_ state: OneTimeOfferViewModel.LoadState) {
+        switch state {
+        case .ready:
+            guard appearedAt == nil else { return }
+            appearedAt = Date()
+            authManager.markPostDemoOfferSeen()
+            ReviewPromptManager.shared.noteFriction(source: "one_time_offer")
+            viewModel.reportViewed()
+            Task {
+                try? await Task.sleep(nanoseconds: 3_000_000_000)
+                withAnimation(.easeIn(duration: 0.3)) { isCloseRevealed = true }
+            }
+        case .unavailable:
+            viewModel.reportUnavailable()
+            finish()
+        case .loading:
+            break
+        }
     }
 
     // MARK: - Content

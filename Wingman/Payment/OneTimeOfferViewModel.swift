@@ -111,14 +111,59 @@ final class OneTimeOfferViewModel: ObservableObject {
         ]
     }
 
+    // MARK: - Preload
+    //
+    // The offer used to start fetching only once it was on screen, so closing
+    // the paywall crossfaded into a spinner and the offer then snapped in a
+    // beat later. The onboarding paywall now starts the fetch while it is still
+    // up (`preload()`), and the offer view adopts that instance
+    // (`takePreloaded()`). When it is ready by the time the X is tapped, the
+    // paywall slides the offer up over itself (see PaywallView); otherwise the
+    // X falls back to RootView's offer branch, which waits for this fetch.
+
+    private static var preloaded: OneTimeOfferViewModel?
+
+    /// Starts loading the offer in the background. Safe to call repeatedly.
+    static func preload() {
+        guard preloaded == nil else { return }
+        log("🎁 OneTimeOfferViewModel: preloading offer")
+        let vm = OneTimeOfferViewModel()
+        preloaded = vm
+        Task {
+            await vm.load()
+            log("🎁 OneTimeOfferViewModel: preload finished — \(vm.state)")
+        }
+    }
+
+    /// True once the preloaded offer has its prices and passed every check,
+    /// i.e. presenting it now shows the offer at once rather than a blank
+    /// screen that might close itself.
+    static var isPreloadedReady: Bool { preloaded?.state == .ready }
+
+    /// The preloaded instance if there is one (consumed, so a later
+    /// presentation fetches fresh), otherwise a new one.
+    static func takePreloaded() -> OneTimeOfferViewModel {
+        defer { preloaded = nil }
+        return preloaded ?? OneTimeOfferViewModel()
+    }
+
     // MARK: - Load
 
     /// Fetches offerings fresh (the launch-time cache may predate a dashboard
     /// change), then confirms the intro offer exists and the user can claim
     /// it. Every check fails closed: no offer shown beats the wrong price
     /// shown.
+    private var loadTask: Task<Void, Never>?
+
+    /// Joins the fetch already in flight (e.g. the paywall's preload) rather
+    /// than starting a second one.
     func load() async {
         guard state == .loading else { return }
+        if loadTask == nil { loadTask = Task { await performLoad() } }
+        await loadTask?.value
+    }
+
+    private func performLoad() async {
 
         guard let offerings = await withTimeout({ try? await Purchases.shared.offerings() }) else {
             return fail("offerings_unavailable")
@@ -167,12 +212,19 @@ final class OneTimeOfferViewModel: ObservableObject {
 
     private func fail(_ reason: String) {
         log("🎁 OneTimeOfferViewModel: offer unavailable — \(reason)")
+        state = .unavailable(reason: reason)
+    }
+
+    /// Called by the view when it closes itself. Kept out of `fail` so a
+    /// preload for someone who subscribes on the paywall (and never reaches
+    /// the offer) doesn't count as an unavailable offer.
+    func reportUnavailable() {
+        guard case .unavailable(let reason) = state else { return }
         Analytics.capture("one_time_offer_unavailable", [
             "reason": reason,
             "source": Self.source.rawValue,
             "is_connected": NetworkMonitor.shared.isConnected
         ])
-        state = .unavailable(reason: reason)
     }
 
     /// Races `work` against an 8 s timeout, matching the paywall's offerings

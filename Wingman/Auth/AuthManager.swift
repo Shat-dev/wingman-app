@@ -2158,15 +2158,15 @@ final class AuthManager: ObservableObject {
     ///   the tab the script's last card was pointing at for a real completion.
     ///   `nil` when the script merely ended — an interrupted walkthrough should
     ///   not change where an otherwise-unaffected user lands.
-    func markFreeDemoCompleted(handoffTo tab: WalkthroughCoordinator.Tab? = .scenarios) {
+    func markFreeDemoCompleted(handoffTo tab: WalkthroughCoordinator.Tab? = .home) {
         log("🎓 markFreeDemoCompleted(handoffTo: \(tab.map(String.init(describing:)) ?? "nil")) called")
         hasCompletedFreeDemo = true
 
-        // The last card leaves the user on the Scenarios tab, offering a
-        // scenario they can take or ignore. RootView then swaps branches twice
-        // on the way out (4b → 4c → 4d), and because those are separate
-        // `if/else` arms SwiftUI rebuilds MainTabView each time — dropping them
-        // back on Home, away from the thing they were just shown.
+        // The last card leaves the user on the Home tab. RootView then swaps
+        // branches twice on the way out (4b → 4c → 4d), and because those are
+        // separate `if/else` arms SwiftUI rebuilds MainTabView each time —
+        // resetting the tab. Home is also the default, but the handoff stays so
+        // the landing tab is explicit and easy to move again.
         //
         // In-memory and one-shot: it survives the rebuilds because AuthManager
         // lives at the app root, and it must NOT persist, or every later launch

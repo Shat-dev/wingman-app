@@ -66,7 +66,7 @@ final class WalkthroughCoordinator: ObservableObject {
         case coursesTour    // Courses
         case scenarioTour   // Scenarios — walked past, never required
         case progressTour   // Profile
-        case signOff        // Scenarios again, to close
+        case signOff        // Home, to close
         case finished
     }
 
@@ -215,14 +215,14 @@ final class WalkthroughCoordinator: ObservableObject {
             requestTab(.profile, then: .progressTour)
 
         case .progressTour:
-            // Back to Scenarios to close. The Profile card is the one that
-            // reads as an ending ("Last one"), so the sign-off lands on the tab
-            // the user is being left on rather than on the empty chart.
-            requestTab(.scenarios, then: .signOff)
+            // Home to close. The Profile card is the one that reads as an
+            // ending ("Last one"), so the sign-off lands on the tab the user is
+            // being left on rather than on the empty chart.
+            requestTab(.home, then: .signOff)
 
         case .signOff:
-            // Ends the script on Scenarios. `MainTabView` hands the rebuilt tab
-            // view back to `.scenarios` so the branch swap does not undo this —
+            // Ends the script on Home. `MainTabView` hands the rebuilt tab
+            // view back to `.home` so the branch swap does not undo this —
             // see its `onChange`.
             finish()
 

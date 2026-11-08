@@ -7,7 +7,7 @@
 //  checkmark, before firing `onComplete`.
 //
 //  The progress is theatre, deliberately. Nothing here is wired to real work
-//  — the durations are fixed constants and the whole run is ~4.5s every time
+//  — the durations are fixed constants and the whole run is ~5.4s every time
 //  (`stepCount * (stepDuration + gapBetweenSteps) + finalDwell`, plus timer
 //  lateness — see the choreography constants) — because the
 //  point is a predictable, satisfying rhythm rather than an honest read on a
@@ -57,20 +57,23 @@ struct LoadingScreen: View {
     // ~3s was tried first and felt rushed in the hand: the bars flicked past
     // before the labels could be read, which undoes the point of the screen.
     //
-    // The constants sum to 4.21s, not 4.5, on purpose. The sequence is seven
+    // ~4.5s (1.17 / 0.1 / 0.4) was then stretched 20% to ~5.4s, because 4.5s
+    // still felt a touch quick in the hand.
+    //
+    // The constants sum to 5.04s, not 5.4, on purpose. The sequence is seven
     // chained `asyncAfter` hops and each one fires a little late (5–10% of
     // its delay): a nominal 3.0s measured 3.3s on the clock from appear to
     // `onComplete`, and a nominal 2.74s measured 2.9s.
 
     /// How long one bar takes to fill, linearly.
-    private let stepDuration: TimeInterval = 1.17
+    private let stepDuration: TimeInterval = 1.40
     /// Beat between a step locking in and the next bar starting. Keeps the
     /// success haptic from colliding with the resumption of the tick pattern.
-    private let gapBetweenSteps: TimeInterval = 0.1
+    private let gapBetweenSteps: TimeInterval = 0.12
     /// Beat after the last checkmark, so the user actually sees all three
     /// filled before the flow moves on. Must stay above `lockInDuration`, or
     /// the screen leaves while the last checkmark is still animating in.
-    private let finalDwell: TimeInterval = 0.4
+    private let finalDwell: TimeInterval = 0.48
     /// Cadence of the continuous selection ticks underneath everything.
     private let tickInterval: TimeInterval = 0.2
     /// Curve the checkmark + label emphasis lock in on, as one unit.

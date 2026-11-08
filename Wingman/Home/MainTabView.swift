@@ -176,17 +176,17 @@ struct MainTabView: View {
         //
         // Flipping the flag re-renders RootView out of branch 4b.
         //
-        // Hands off to Scenarios because that is the tab the closing card is
+        // Hands off to Home because that is the tab the closing card is
         // on, so the user's next frame matches the one they just tapped
         // through.
         .onChange(of: walkthrough.step) { newStep in
             guard newStep == .finished else { return }
             log("🎬 MainTabView: walkthrough finished — marking free demo complete")
-            authManager.markFreeDemoCompleted(handoffTo: .scenarios)
+            authManager.markFreeDemoCompleted(handoffTo: .home)
 
             // The one-time offer was already shown when the onboarding
             // paywall closed (RootView 4a′), so this lands straight on
-            // Scenarios.
+            // Home.
         }
         // A tapped reminder (MarketingNotifications) opens Scenarios. The
         // publisher replays its current value on subscribe, so a tap that
