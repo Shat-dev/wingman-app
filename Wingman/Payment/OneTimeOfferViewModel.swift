@@ -33,6 +33,10 @@ final class OneTimeOfferViewModel: ObservableObject {
     }
 
     @Published private(set) var state: LoadState = .loading
+    /// When the offer was first on screen. Kept here rather than in the view
+    /// so a rebuilt view (SwiftUI can recreate a presentation's content)
+    /// never re-spends the offer or re-reports the view.
+    var shownAt: Date?
     @Published private(set) var package: Package?
     @Published var isPurchasing = false
     @Published var error: String?
@@ -126,13 +130,9 @@ final class OneTimeOfferViewModel: ObservableObject {
     /// Starts loading the offer in the background. Safe to call repeatedly.
     static func preload() {
         guard preloaded == nil else { return }
-        log("🎁 OneTimeOfferViewModel: preloading offer")
         let vm = OneTimeOfferViewModel()
         preloaded = vm
-        Task {
-            await vm.load()
-            log("🎁 OneTimeOfferViewModel: preload finished — \(vm.state)")
-        }
+        Task { await vm.load() }
     }
 
     /// True once the preloaded offer has its prices and passed every check,
@@ -365,3 +365,6 @@ final class OneTimeOfferViewModel: ObservableObject {
         }
     }
 }
+
+/// Lets the paywall present a loaded offer with `fullScreenCover(item:)`.
+extension OneTimeOfferViewModel: Identifiable {}

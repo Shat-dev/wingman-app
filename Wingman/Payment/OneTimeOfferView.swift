@@ -20,14 +20,21 @@ import RevenueCat
 
 struct OneTimeOfferView: View {
 
-    @StateObject private var viewModel = OneTimeOfferViewModel.takePreloaded()
+    @StateObject private var viewModel: OneTimeOfferViewModel
     @EnvironmentObject var authManager: AuthManager
 
     /// Called once, when the user leaves by any route (purchase, close,
     /// restore, or the offer turning out to be unavailable).
     let onFinish: () -> Void
 
-    @State private var appearedAt: Date?
+    /// `viewModel` is the paywall's already-loaded offer when it presents
+    /// this as a cover; RootView's fallback branch passes nothing and gets
+    /// the preloaded one (or a fresh load).
+    init(viewModel: OneTimeOfferViewModel? = nil, onFinish: @escaping () -> Void) {
+        _viewModel = StateObject(wrappedValue: viewModel ?? .takePreloaded())
+        self.onFinish = onFinish
+    }
+
     @State private var didFinish = false
     @State private var safariLink: IdentifiableURL?
     /// The X fades in 3 s after the offer is ready, so the first look is at
@@ -117,8 +124,11 @@ struct OneTimeOfferView: View {
     private func handle(_ state: OneTimeOfferViewModel.LoadState) {
         switch state {
         case .ready:
-            guard appearedAt == nil else { return }
-            appearedAt = Date()
+            guard viewModel.shownAt == nil else {
+                isCloseRevealed = true
+                return
+            }
+            viewModel.shownAt = Date()
             authManager.markPostDemoOfferSeen()
             ReviewPromptManager.shared.noteFriction(source: "one_time_offer")
             viewModel.reportViewed()
@@ -324,7 +334,7 @@ struct OneTimeOfferView: View {
 
     private func close() {
         guard !didFinish else { return }
-        viewModel.reportDismissed(timeOnScreen: appearedAt.map { Date().timeIntervalSince($0) })
+        viewModel.reportDismissed(timeOnScreen: viewModel.shownAt.map { Date().timeIntervalSince($0) })
         finish()
     }
 
