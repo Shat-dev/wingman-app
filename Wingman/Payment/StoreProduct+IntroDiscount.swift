@@ -29,18 +29,65 @@ extension StoreProduct {
     /// Nil when the numbers are missing or implausible — callers must then make
     /// no numeric claim at all rather than falling back to a guess.
     var introSavingsPercent: Int? {
-        guard let introPrice = introductoryDiscount?.price else { return nil }
+        guard let introPrice = introductoryDiscount?.price,
+              let introMonths = introDurationMonths,
+              let baseMonths = periodMonths else { return nil }
 
         let basePrice = price
-        guard basePrice > 0, introPrice < basePrice else { return nil }
+        guard basePrice > 0, introPrice > 0 else { return nil }
 
-        let fraction = (basePrice - introPrice) / basePrice * 100
+        // Like for like: the intro may cover a different stretch than one
+        // billing period (six discounted months on a yearly plan, say), so
+        // compare what a month costs under each.
+        let introMonthly = introPrice / Decimal(introMonths)
+        let baseMonthly = basePrice / Decimal(baseMonths)
+        guard introMonthly < baseMonthly else { return nil }
+
+        let fraction = (baseMonthly - introMonthly) / baseMonthly * 100
         let percent = Int(NSDecimalNumber(decimal: fraction).doubleValue) // truncates
 
         // A discount outside this band means something is misconfigured
         // upstream; say nothing rather than something wrong.
         guard (1...99).contains(percent) else { return nil }
         return percent
+    }
+
+    // MARK: - Durations
+    //
+    // Read from StoreKit too, so the copy says "first year" only when the
+    // offer actually covers a year. Day and week periods return nil: nothing
+    // sold here uses them, and the copy has no honest way to phrase them.
+
+    /// Months in one regular billing period ("12" for the yearly plan).
+    var periodMonths: Int? {
+        subscriptionPeriod.flatMap(Self.months)
+    }
+
+    /// Months the introductory price covers, when it is paid up front in a
+    /// single charge. Nil for pay-as-you-go and free-trial intros, whose
+    /// "billed today" wording would be different.
+    var introDurationMonths: Int? {
+        guard let discount = introductoryDiscount,
+              discount.paymentMode == .payUpFront,
+              let months = Self.months(discount.subscriptionPeriod) else { return nil }
+        return months * max(discount.numberOfPeriods, 1)
+    }
+
+    private static func months(_ period: SubscriptionPeriod) -> Int? {
+        switch period.unit {
+        case .month: return period.value
+        case .year: return period.value * 12
+        default: return nil
+        }
+    }
+
+    /// "year", "2 years", "month", "6 months".
+    static func durationPhrase(months: Int) -> String {
+        if months % 12 == 0 {
+            let years = months / 12
+            return years == 1 ? "year" : "\(years) years"
+        }
+        return months == 1 ? "month" : "\(months) months"
     }
 
     /// Localized price actually charged today under the introductory offer.

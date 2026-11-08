@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Header A</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .copy { position: absolute; left: 0; right: 0; top: 130px; text-align: center; }
+  .brand { --s: 96px; justify-content: center; margin-bottom: 48px; }
+  .headline { font-size: 172px; }
+  .sub { font-size: 54px; margin-top: 30px; }
+  .label { font-size: 46px; top: 1470px; }
+</style>
+</head>
+<body class="header">
+  <div class="glow" style="left:1000px; top:500px; width:1840px; height:1700px"></div>
+
+  <div class="copy">
+    <div class="brand"><img src="src/icon.png" alt=""><span>Wingman</span></div>
+    <h1 class="headline">Stop freezing. <em>Start talking.</em></h1>
+    <p class="sub">Calmer nerves, easier conversations, real connection.</p>
+  </div>
+
+  <!-- Before → practice → after -->
+  <img class="art" src="src/art-overthinking.png" alt="" style="left:640px;  top:640px; width:880px">
+  <div class="phone" data-src="src/app-choice.png" style="--w:560px; left:1640px; top:690px"></div>
+  <img class="art" src="src/art-talking.png"      alt="" style="left:2320px; top:640px; width:880px">
+
+  <div class="label" style="left:1080px">In your head</div>
+  <div class="label" style="left:2760px">In the conversation</div>
+
+  <!-- Assumed safe area: centre 80% width × 76% height -->
+  <div class="guide" style="left:10%; top:12%; width:80%; height:76%"></div>
+  <script src="phone.js"></script>
+</body>
+</html>

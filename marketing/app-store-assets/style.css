@@ -1,0 +1,106 @@
+@font-face { font-family: "Manrope"; src: url(src/Manrope-Variable.ttf); font-weight: 200 800; }
+
+:root {
+  --paper: #ffffff;
+  --ink: #141414;
+  --muted: #6e6e6e;
+  --line: #e2e0db;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--paper); }
+body {
+  position: relative;
+  overflow: hidden;
+  font-family: "Manrope", sans-serif;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Canvas sizes */
+.header { width: 3840px; height: 1646px; }
+.search { width: 3840px; height: 2560px; }
+
+/* Soft warm light behind the phones */
+.glow {
+  position: absolute; border-radius: 50%;
+  background: radial-gradient(closest-side, #ffffff 0%, rgba(255,255,255,0) 100%);
+  pointer-events: none;
+}
+
+/* Brand lock-up: icon + name */
+.brand { display: flex; align-items: center; gap: calc(var(--s) * .45); }
+.brand img {
+  width: var(--s); height: var(--s);
+  border-radius: calc(var(--s) * .225);
+  box-shadow: 0 0 0 2px var(--line), 0 10px 30px rgba(0,0,0,.08);
+}
+.brand span { font-weight: 700; font-size: calc(var(--s) * .5); letter-spacing: -.01em; }
+
+/* Headline: Manrope, the app's typeface. Second phrase drops to grey. */
+.headline {
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -.045em;
+}
+.headline em { font-style: normal; color: #9a978f; }
+.sub { color: var(--muted); font-weight: 500; letter-spacing: -.01em; line-height: 1.35; }
+
+/* The app's own line art; multiply drops its white background onto the paper */
+.art { position: absolute; mix-blend-mode: multiply; }
+.label {
+  position: absolute; transform: translateX(-50%);
+  color: var(--muted); font-weight: 600; letter-spacing: .02em; white-space: nowrap;
+}
+
+/* iPhone (17 Pro-style): titanium rim, thin black bezel, Dynamic Island */
+.phone {
+  position: absolute;
+  width: var(--w);
+  aspect-ratio: 433 / 890;
+  padding: calc(var(--w) * .011);
+  border-radius: calc(var(--w) * .175);
+  background: linear-gradient(140deg, #eceef0 0%, #a5a8ad 22%, #dcdee1 48%, #8c8f94 74%, #d6d8db 100%);
+  box-shadow:
+    0 calc(var(--w) * .02) calc(var(--w) * .04) rgba(0,0,0,.10),
+    0 calc(var(--w) * .12) calc(var(--w) * .25) rgba(30,25,15,.18);
+}
+.screen {
+  position: relative; width: 100%; height: 100%;
+  border: calc(var(--w) * .028) solid #0a0a0b;
+  border-radius: calc(var(--w) * .164);
+  overflow: hidden;
+  background: #fdfdfd;
+  display: flex; flex-direction: column;
+}
+.status {
+  flex: none; height: calc(var(--w) * .118);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: calc(var(--w) * .012) calc(var(--w) * .085) 0;
+  font-weight: 650; font-size: calc(var(--w) * .04);
+}
+.status svg { height: calc(var(--w) * .03); width: auto; }
+.status .icons { display: flex; gap: calc(var(--w) * .016); align-items: center; }
+.island {
+  position: absolute; left: 50%; top: calc(var(--w) * .026); transform: translateX(-50%);
+  width: calc(var(--w) * .29); height: calc(var(--w) * .084);
+  border-radius: 999px; background: #000;
+}
+.screen > img { width: 100%; flex: 1; min-height: 0; object-fit: cover; object-position: top; display: block; }
+
+/* Small floating label next to a phone */
+.tag {
+  position: absolute;
+  background: #fff; border: 2px solid var(--line);
+  border-radius: 999px;
+  padding: .55em 1.1em;
+  font-weight: 650;
+  box-shadow: 0 14px 40px rgba(0,0,0,.08);
+  white-space: nowrap;
+}
+.tag::before { content: ""; display: inline-block; width: .5em; height: .5em; border-radius: 50%; background: var(--ink); margin-right: .6em; vertical-align: .12em; }
+
+
+/* Safe-area guide, shown only with ?guides */
+.guide { display: none; position: absolute; border: 6px dashed #e5484d; pointer-events: none; }
+.show-guides .guide { display: block; }

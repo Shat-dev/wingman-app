@@ -2,8 +2,8 @@
 //  PaywallCopy.swift
 //  Wingman
 //
-//  Copy for both paywalls (the onboarding/feature-gate paywall and the
-//  post-demo one-time offer), written from the user's own onboarding answers.
+//  Copy for the onboarding/feature-gate paywall, written from the user's own
+//  onboarding answers. (The one-time offer used these ticks too until Nov 2026.)
 //  It sells who they become, not what they unlock: each tick names the pain
 //  they told us about and states it solved.
 //
@@ -35,10 +35,6 @@ enum PaywallCopy {
 
     /// The one-time offer's ticks. Its subtitle already asks the "what if"
     /// question, so it closes on the identity instead.
-    static var offerTicks: [String] {
-        personalTicks(closing: "Become the guy who goes for it")
-    }
-
     private static func personalTicks(closing: String) -> [String] {
         let defaults = UserDefaults.standard
         return [

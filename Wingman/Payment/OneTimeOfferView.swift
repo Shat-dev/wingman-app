@@ -2,7 +2,7 @@
 //  OneTimeOfferView.swift
 //  Wingman
 //
-//  The one-time offer: 50% off the first year, shown once, as soon as the
+//  The one-time offer: a discounted first year, shown once, as soon as the
 //  user closes the onboarding paywall without subscribing (subscribers route
 //  to MainTabView first). Closing it starts the walkthrough.
 //
@@ -28,10 +28,6 @@ struct OneTimeOfferView: View {
     @State private var didFinish = false
     @State private var safariLink: IdentifiableURL?
 
-    /// Read once per mount: the onboarding answers can't change while the
-    /// offer is on screen.
-    @State private var ticks = PaywallCopy.offerTicks
-
     /// Secondary text grey, shared with the paywall's disclosure and footer.
     private let secondary = Color(hex: "6B7280")
 
@@ -44,9 +40,7 @@ struct OneTimeOfferView: View {
                 ProgressView()
                     .progressViewStyle(CircularProgressViewStyle(tint: .wingmanBlack))
             case .ready:
-                // Short screens (SE: ~647pt usable) can't fit the illustration
-                // and the full pitch above the pinned price block; the words
-                // win, as on the main paywall.
+                // Short screens (SE: ~647pt usable) get a smaller image and number.
                 GeometryReader { geo in
                     content(isCompact: geo.size.height < 700)
                 }
@@ -108,74 +102,61 @@ struct OneTimeOfferView: View {
 
     // MARK: - Content
     //
-    // Built from the paywall's own parts — white ground, `wingmanBlack` type
-    // and controls, Manrope, 5pt corners, the line illustrations and the
-    // `check` glyph — so it reads as the same app making a better offer,
-    // not a different screen bolted on.
+    // One idea per screen: this is a one-time price, and here it is. The
+    // personalised ticks, subtitle and price card were cut (Nov 2026) — 40%
+    // of viewers closed it within 2 s, so the discount has to be readable at a
+    // glance. Built from the paywall's parts (white, `wingmanBlack`, Manrope,
+    // 5pt corners) so it reads as the same app making a better offer.
+    //
+    // Every figure comes from StoreKit via the view model: the percentage is
+    // computed from this storefront's two real prices, and the lengths
+    // ("first year", "/year") from the product's intro and billing periods.
 
     private func content(isCompact: Bool) -> some View {
         VStack(spacing: 0) {
-            ScrollView(.vertical, showsIndicators: false) {
-                VStack(spacing: 0) {
-                    // The "what if" daydream from onboarding's regret stat.
-                    if !isCompact {
-                        Image("stat_regret")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(minHeight: 80, maxHeight: 120)
-                            .padding(.top, 20)
-                            .accessibilityHidden(true)
-                    }
+            // The landing screen's "what if" image, so the offer picks up
+            // the thread from the first screen they saw.
+            Image("landing_what_if")
+                .resizable()
+                .scaledToFit()
+                .frame(maxHeight: isCompact ? 110 : 210)
+                .padding(.horizontal, 8)
+                .padding(.top, isCompact ? 36 : 52)
+                .accessibilityHidden(true)
 
-                    Text("ONE-TIME OFFER")
-                        .font(.manropeSemiBold(size: 12))
-                        .tracking(1.2)
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 4)
-                        .background(Color.wingmanBlack)
-                        .cornerRadius(6)
-                        .padding(.top, isCompact ? 8 : 16)
+            // The question the image asks; the number below answers it.
+            Text("Can you put a price on connection?")
+                .font(.manropeBold(size: isCompact ? 22 : 26, relativeTo: .title))
+                .foregroundColor(.wingmanBlack)
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.horizontal, 24)
+                .padding(.top, isCompact ? 8 : 12)
 
-                    Text("Can you put a price on connection?")
-                        .font(.manropeBold(size: 26, relativeTo: .title))
-                        .foregroundColor(.wingmanBlack)
-                        .multilineTextAlignment(.center)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(.top, 14)
-                        .padding(.horizontal, 24)
+            Spacer(minLength: isCompact ? 12 : 28)
 
-                    Text("How many more times do you want to walk away wondering \u{201C}what if\u{201D}?")
-                        .font(.manropeRegular(size: 16))
-                        .foregroundColor(secondary)
-                        .multilineTextAlignment(.center)
-                        .lineSpacing(2)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(.top, 10)
-                        .padding(.horizontal, 32)
+            Text("ONE-TIME OFFER")
+                .font(.manropeSemiBold(size: 12))
+                .tracking(1.2)
+                .foregroundColor(.white)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 4)
+                .background(Color.wingmanBlack)
+                .cornerRadius(6)
+                .padding(.bottom, isCompact ? 8 : 4)
 
-                    benefits
-                        .padding(.top, 18)
-                        .padding(.horizontal, 20)
-                        .padding(.bottom, 16)
-                }
-                .frame(maxWidth: .infinity)
-            }
+            hero(isCompact: isCompact)
 
-            // Everything involved in the decision is pinned, as on the paywall.
-            priceCard
-                .padding(.horizontal, 20)
-                .padding(.top, 8)
+            Spacer(minLength: 16)
 
             onceNotice
                 .padding(.horizontal, 20)
-                .padding(.top, 10)
 
             claimButton
                 .padding(.horizontal, 20)
                 .padding(.top, 12)
 
-            Text("\(viewModel.introPriceString) billed today for your first year, then \(viewModel.fullPriceString)/year. Cancel anytime in App Store settings.")
+            Text("\(viewModel.introPriceString) billed today for your first \(viewModel.introDurationPhrase), then \(viewModel.fullPriceString)/\(viewModel.renewalPeriodPhrase). Cancel anytime in App Store settings.")
                 .font(.manropeMedium(size: 12))
                 .foregroundColor(secondary)
                 .multilineTextAlignment(.center)
@@ -186,98 +167,57 @@ struct OneTimeOfferView: View {
             footerLinks
                 .padding(.bottom, 8)
         }
+        .frame(maxWidth: .infinity)
     }
 
-    /// Same anatomy as the selected `PlanRow`: black badge bar over a white
-    /// body, 5pt corners, 1.5pt black stroke.
-    private var priceCard: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text(viewModel.savingsPercent.map { "\($0)% off your first year" } ?? "Discounted first year")
-                .font(.manropeMedium(size: 14))
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 20)
-                .padding(.vertical, 3)
-                .background(Color.wingmanBlack)
-
-            HStack(alignment: .center, spacing: 0) {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("Yearly Plan")
-                        .font(.manropeSemiBold(size: 16))
-                        .foregroundColor(.wingmanBlack)
-
-                    HStack(spacing: 6) {
-                        Text(viewModel.fullPriceString)
-                            .strikethrough(true, color: secondary)
-                        Text("\(viewModel.introPriceString) first year")
-                            .foregroundColor(.wingmanBlack)
-                    }
-                    .font(.manropeSemiBold(size: 12))
-                    .foregroundColor(secondary)
-                }
-
-                Spacer()
-
-                if let perMonth = viewModel.introPricePerMonthString {
-                    VStack(alignment: .trailing, spacing: 2) {
-                        Text("only \(perMonth)")
-                            .font(.manropeSemiBold(size: 16))
-                            .foregroundColor(.wingmanBlack)
-                        Text("per month")
-                            .font(.manropeSemiBold(size: 12))
-                            .foregroundColor(secondary)
-                    }
+    /// The discount as the whole screen. With no trustworthy percentage
+    /// (`savingsPercent` nil) the price itself takes the big slot instead —
+    /// never a guessed number.
+    private func hero(isCompact: Bool) -> some View {
+        VStack(spacing: 0) {
+            Group {
+                if let percent = viewModel.savingsPercent {
+                    Text("\(percent)%")
+                } else {
+                    Text(viewModel.introPriceString)
                 }
             }
-            .padding(16)
-        }
-        .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 5))
-        .overlay(
-            RoundedRectangle(cornerRadius: 5)
-                .stroke(Color.wingmanBlack, lineWidth: 1.5)
-        )
-    }
+            .font(.manropeBold(size: isCompact ? 64 : 88, relativeTo: .largeTitle))
+            .foregroundColor(.wingmanBlack)
+            .minimumScaleFactor(0.5)
+            .lineLimit(1)
 
-    private var benefits: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            ForEach(ticks, id: \.self) { benefit($0) }
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-    }
-
-    private func benefit(_ text: String) -> some View {
-        HStack(alignment: .top, spacing: 12) {
-            Image("check")
-                .resizable()
-                .renderingMode(.template)
-                .scaledToFit()
+            Text(viewModel.savingsPercent != nil
+                 ? "off your first \(viewModel.introDurationPhrase)"
+                 : "for your first \(viewModel.introDurationPhrase)")
+                .font(.manropeSemiBold(size: isCompact ? 22 : 26, relativeTo: .title))
                 .foregroundColor(.wingmanBlack)
-                .frame(width: 16, height: 16)
                 .padding(.top, 2)
-            Text(text)
-                .font(.manropeMedium(size: 16))
-                .foregroundColor(.wingmanBlack)
-                .lineSpacing(2)
-                .fixedSize(horizontal: false, vertical: true)
+
+            HStack(spacing: 8) {
+                Text(viewModel.fullPriceString)
+                    .strikethrough(true, color: secondary)
+                    .foregroundColor(secondary)
+                Text(viewModel.introPriceString)
+                    .foregroundColor(.wingmanBlack)
+            }
+            .font(.manropeSemiBold(size: 18))
+            .padding(.top, isCompact ? 10 : 16)
         }
+        .multilineTextAlignment(.center)
+        .padding(.horizontal, 24)
+        .accessibilityElement(children: .combine)
     }
 
     private var onceNotice: some View {
-        HStack(alignment: .center, spacing: 10) {
+        HStack(spacing: 8) {
             Image(systemName: "eye.slash")
-                .font(.system(size: 14, weight: .medium))
-                .foregroundColor(.wingmanBlack)
-            Text("You\u{2019}ll only see this once. Close it and this price is gone for good.")
-                .font(.manropeMedium(size: 13))
-                .foregroundColor(.wingmanBlack)
-                .fixedSize(horizontal: false, vertical: true)
+                .font(.system(size: 13, weight: .medium))
+            Text("Close this and it\u{2019}s gone for good")
+                .font(.manropeMedium(size: 14))
         }
-        .padding(.horizontal, 14)
-        .padding(.vertical, 10)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color.customLightGray)
-        .clipShape(RoundedRectangle(cornerRadius: 5))
+        .foregroundColor(.wingmanBlack)
+        .frame(maxWidth: .infinity)
     }
 
     private var claimButton: some View {

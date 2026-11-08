@@ -61,13 +61,37 @@ final class OneTimeOfferViewModel: ObservableObject {
     /// `StoreProduct.introSavingsPercent`. Nil means make no numeric claim.
     var savingsPercent: Int? { package?.storeProduct.introSavingsPercent }
 
-    /// The discounted year expressed per month, for the "less than X a month"
-    /// line. Nil when the formatter can't produce it, in which case the line
-    /// is omitted rather than guessed.
+    /// How long the discount lasts, e.g. "year" or "6 months", read from the
+    /// intro offer. Only read once `state == .ready`, which guarantees it.
+    var introDurationPhrase: String {
+        StoreProduct.durationPhrase(months: package?.storeProduct.introDurationMonths ?? 12)
+    }
+
+    /// The regular billing period the plan renews into, e.g. "year".
+    var renewalPeriodPhrase: String {
+        StoreProduct.durationPhrase(months: package?.storeProduct.periodMonths ?? 12)
+    }
+
+    /// "Yearly Plan", "Monthly Plan", or "6-month Plan" for anything else.
+    var planTitle: String {
+        switch package?.storeProduct.periodMonths {
+        case 12: return "Yearly Plan"
+        case 1: return "Monthly Plan"
+        case let months?: return "\(months)-month Plan"
+        case nil: return "Plan"
+        }
+    }
+
+    /// The discounted stretch expressed per month, for the "only X per month"
+    /// line. Nil when the discount lasts a single month (the line would just
+    /// repeat the price) or the formatter can't produce it, in which case the
+    /// line is omitted rather than guessed.
     var introPricePerMonthString: String? {
         guard let product = package?.storeProduct,
-              let intro = product.introductoryDiscount else { return nil }
-        let monthly = intro.price / 12
+              let intro = product.introductoryDiscount,
+              let months = product.introDurationMonths,
+              months > 1 else { return nil }
+        let monthly = intro.price / Decimal(months)
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
         formatter.locale = product.priceFormatter?.locale ?? .current
@@ -111,6 +135,13 @@ final class OneTimeOfferViewModel: ObservableObject {
         // price under a "50% off" button.
         guard package.storeProduct.introductoryDiscount != nil else {
             return fail("no_intro_offer_on_product")
+        }
+        // Every length on screen ("first year", "/year", per month) is read
+        // from the product, so an intro or period the copy can't phrase
+        // (pay-as-you-go, free trial, days, weeks) closes the offer instead.
+        guard package.storeProduct.introDurationMonths != nil,
+              package.storeProduct.periodMonths != nil else {
+            return fail("intro_duration_unsupported")
         }
 
         // Intro offers are once per subscription group. Anyone whose earlier
