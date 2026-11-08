@@ -68,7 +68,32 @@ let extendedOnboardingSteps: [OnboardingStep] = [
     // show a total drop there. The per-screen drop-off funnel needs that step
     // deleted, not reinterpreted.
 
-    //1 Age Question
+    //1 Motivation Question
+    //
+    // Opens the flow on *why* they downloaded, before anything form-like.
+    // Options describe a situation rather than a flaw ("Tired of being on my
+    // own", not "I'm lonely") so nobody has to label themselves on the first
+    // screen to answer it.
+    //
+    // Multi-select: stored ", "-joined, so no option may contain ", ".
+    // Stored under `onboarding_motivation` in PostHog like every other answer.
+    OnboardingStep(
+        type: .question,
+        title: "What brought you to Wingman?",
+        subtitle: nil,
+        options: [
+            "Back on the market after a breakup or divorce",
+            "I freeze up around women I find attractive",
+            "Done with dating apps",
+            "Tired of being on my own",
+            "Want more confidence in general",
+            "Other"
+        ],
+        progress: 0.13,
+        questionKey: "motivation"
+    ),
+
+    //2 Age Question
     OnboardingStep(
         type: .question,
         title: "How old are you?",
@@ -82,34 +107,34 @@ let extendedOnboardingSteps: [OnboardingStep] = [
         // the PostHog age tiles group by the raw string, so it simply stays a
         // bar of its own next to the two new ones.
         options: ["18-24", "25-34", "35-44", "45-54", "55+"],
-        // Progress rebalanced across the six steps that now precede loading.
+        // Progress rebalanced across the seven steps that now precede loading.
         // Left at the old 0.3 this would open the flow with the bar already a
         // third full, which reads as progress the user hasn't made yet.
-        progress: 0.14,
+        progress: 0.25,
         questionKey: "age"
     ),
 
-    //2 Last Approach Question
+    //3 Last Approach Question
     OnboardingStep(
         type: .question,
         title: "When was the last time you spoke to a woman in public?",
         subtitle: nil,
         options: ["Within the past week", "Within the past month", "A few months ago", "More than a year ago", "Never approached before"],
-        progress: 0.29,
+        progress: 0.38,
         questionKey: "last_approach"
     ),
 
-    //3 Frequency Question
+    //4 Frequency Question
     OnboardingStep(
         type: .question,
         title: "Do you often want to talk to women but don’t?",
         subtitle: nil,
         options: ["Every time", "Most times", "Sometimes", "Rarely", "No, I usually go for it"],
-        progress: 0.43,
+        progress: 0.50,
         questionKey: "approach_frequency"
     ),
 
-    //4 Barriers Question
+    //5 Barriers Question
     OnboardingStep(
         type: .question,
         title: "What usually stops you from doing so?",
@@ -124,11 +149,11 @@ let extendedOnboardingSteps: [OnboardingStep] = [
             "Worrying about coming across wrong",
             "Other"
         ],
-        progress: 0.57,
+        progress: 0.63,
         questionKey: "barriers"
     ),
 
-    //5 Goals Question
+    //6 Goals Question
     OnboardingStep(
         type: .question,
         title: "What are you mainly hoping to improve?",
@@ -140,11 +165,11 @@ let extendedOnboardingSteps: [OnboardingStep] = [
             "Creating attraction and romantic interest",
             "Other"
         ],
-        progress: 0.71,
+        progress: 0.75,
         questionKey: "goals"
     ),
 
-    //6 Growth projection
+    //7 Growth projection
     //
     // Placed after `goals` deliberately: the user has just said what they
     // want to improve, so the rising curve reads as an answer to that rather
@@ -179,7 +204,7 @@ let extendedOnboardingSteps: [OnboardingStep] = [
         questionKey: nil
     ),
 
-    //8 Social proof
+    //9 Social proof
     //
     // The one step that sits *after* the loading screen, and therefore the
     // step that ends onboarding: its Continue calls `completeQuestions()`,

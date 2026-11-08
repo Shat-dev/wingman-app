@@ -86,7 +86,7 @@ struct QuestionScreen: View {
             }
 
             // "Select all that apply" hint — rendered only for multi-select
-            // questions (barriers, goals). Left-aligned via the parent VStack's
+            // questions (motivation, barriers, goals). Left-aligned via the parent VStack's
             // `alignment: .leading`. Subtle weight/size so it's read as a
             // functional hint rather than a second heading.
             if step.isMultiSelect {

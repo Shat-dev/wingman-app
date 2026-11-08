@@ -55,7 +55,7 @@ struct OnboardingStep: Identifiable {
     /// selection on tap; everything else remains single-select.
     var isMultiSelect: Bool {
         guard let key = questionKey else { return false }
-        return key == "barriers" || key == "goals"
+        return key == "motivation" || key == "barriers" || key == "goals"
     }
 
     /// What an option reads as on screen, where that differs from the value
