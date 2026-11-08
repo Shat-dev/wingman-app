@@ -24,20 +24,12 @@ struct LandingView: View {
                 // the image shows the gap (the life he imagines vs. the woman
                 // walking past) and the copy turns it into a promise, so the
                 // only thing left to do here is tap the button.
-                Spacer(minLength: 0)
-
-                Image("landing_what_if")
-                    .resizable()
-                    .scaledToFit()
-                    .padding(.horizontal, 8)
-                    .accessibilityLabel("A man watches a woman walk past, imagining them together")
-
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Turn \u{201C}what if\u{201D} into \u{201C}hi.\u{201D}")
                         .font(.manropeSemiBold(size: 32))
                         .foregroundColor(.wingmanBlack)
 
-                    Text("From eye contact to her number, one small step a day.")
+                    Text("The step-by-step way to stop freezing up and start the conversation.")
                         .font(.manropeRegular(size: 16))
                         .foregroundColor(Color.wingmanBlack.opacity(0.5))
                         .lineSpacing(3)
@@ -46,9 +38,19 @@ struct LandingView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 20)
-                .padding(.top, 24)
+                .padding(.top, 64)
 
-                Spacer(minLength: 24)
+                // The image sits centred in whatever height is left between
+                // the copy and the buttons.
+                Spacer(minLength: 16)
+
+                Image("landing_what_if")
+                    .resizable()
+                    .scaledToFit()
+                    .padding(.horizontal, 8)
+                    .accessibilityLabel("A man watches a woman walk past, imagining them together")
+
+                Spacer(minLength: 16)
 
                 // MARK: - CTA Buttons
                 VStack(spacing: 20) {
