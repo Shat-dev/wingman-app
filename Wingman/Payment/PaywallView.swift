@@ -17,8 +17,7 @@ enum PaywallSource: String {
     case onboarding
     case featureGate
 
-    /// The ask at the end of the mascot walkthrough, once the user has spent
-    /// their free scenario and free lesson. This is the peak-intent moment the
+    /// The ask at the end of the mascot walkthrough. This is the peak-intent moment the
     /// walkthrough exists to set up, and the purchase rate here versus
     /// `onboarding` is the number that decides whether the wall gets hardened.
     ///

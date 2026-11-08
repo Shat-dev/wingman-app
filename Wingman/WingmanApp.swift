@@ -623,7 +623,6 @@ struct RootView: View {
             log("   - hasCompletedOnboarding: \(authManager.hasCompletedOnboarding)")
             log("   - hasCompletedFreeDemo: \(authManager.hasCompletedFreeDemo)")
             log("   - hasDismissedPostDemoWall: \(authManager.hasDismissedPostDemoWall)")
-            log("   - freeLessonId: \(authManager.freeLessonId ?? "unclaimed")")
 
             // Set RevenueCat user ID when user authenticates.
             //
@@ -657,9 +656,6 @@ struct RootView: View {
             log("\n🔔 RootView detected hasCompletedFreeDemo change: \(newValue)")
             log("   - hasDismissedPostDemoWall: \(authManager.hasDismissedPostDemoWall)")
             log("   - postDemoWallIsHard: \(featureFlags.postDemoWallIsHard)")
-            // Flipping this also releases the free lesson credit, so the
-            // claim state belongs in the same dump.
-            log("   - freeLessonId: \(authManager.freeLessonId ?? "unclaimed")")
         }
         .onChange(of: authManager.hasDismissedPostDemoWall) { newValue in
             log("\n🔔 RootView detected hasDismissedPostDemoWall change: \(newValue)")

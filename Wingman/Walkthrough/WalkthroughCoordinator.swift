@@ -262,8 +262,7 @@ final class WalkthroughCoordinator: ObservableObject {
 
     /// Ends the script. The host is responsible for calling
     /// `AuthManager.markFreeDemoCompleted(handoffTo:)` in response, which is
-    /// what releases the free lesson credit and routes RootView out of the demo
-    /// branch.
+    /// what routes RootView out of the demo branch.
     func finish() {
         guard isRunning else { return }
         log("🎬 Walkthrough finished")

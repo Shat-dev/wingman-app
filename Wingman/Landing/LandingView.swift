@@ -9,84 +9,49 @@ import SwiftUI
 import PostHog
 
 struct LandingView: View {
-    @StateObject private var viewModel = LandingViewModel()
     @EnvironmentObject var authManager: AuthManager
 
     @State private var navigateToLogin = false
     @State private var navigateToOnboarding = false
 
-    // Carousel heights that scale with Dynamic Type so the heading/description
-    // (see `.fixedSize` below) get more room as text grows instead of being
-    // truncated by the fixed-height paging TabView. Equal the originals
-    // (520 / 400) at the default text size — no change until the app-wide
-    // ceiling is raised above `.large`.
-    @ScaledMetric(relativeTo: .body) private var carouselHeight: CGFloat = 520
-    @ScaledMetric(relativeTo: .body) private var carouselHeightSmall: CGFloat = 400
-
     var body: some View {
         NavigationStack {
-            VStack {
+            VStack(spacing: 0) {
 
-                // MARK: - Carousel
-                TabView(selection: $viewModel.currentPage) {
-                    ForEach(viewModel.pages.indices, id: \.self) { index in
-                        let page = viewModel.pages[index]
+                // MARK: - Hero
+                //
+                // One screen instead of the old four-slide feature carousel:
+                // the image shows the gap (the life he imagines vs. the woman
+                // walking past) and the copy turns it into a promise, so the
+                // only thing left to do here is tap the button.
+                Spacer(minLength: 0)
 
-                        VStack(spacing: 14) {
+                Image("landing_what_if")
+                    .resizable()
+                    .scaledToFit()
+                    .padding(.horizontal, 8)
+                    .accessibilityLabel("A man watches a woman walk past, imagining them together")
 
-                            // MARK: - Heading
-                            Text(page.title)
-                                .font(.manropeSemiBold(size: 32))
-                                .foregroundColor(.wingmanBlack)
-                                .multilineTextAlignment(.leading)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.horizontal, 20)
-                                .fixedSize(horizontal: false, vertical: true)
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("Turn \u{201C}what if\u{201D} into \u{201C}hi.\u{201D}")
+                        .font(.manropeSemiBold(size: 32))
+                        .foregroundColor(.wingmanBlack)
 
-                            // MARK: - Description
-                            Text(page.description)
-                                .font(.manropeRegular(size: 16))
-                                .foregroundColor(Color.wingmanBlack.opacity(0.5))
-                                .multilineTextAlignment(.leading)
-                                .lineSpacing(3)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.horizontal, 20)
-                                .fixedSize(horizontal: false, vertical: true)
-
-                            // MARK: - Image
-                            Image(page.imageName)
-                                .resizable()
-                                .scaledToFit()
-                                // SE-only: shrink the hero image so the
-                                // carousel can fit in the reduced frame
-                                // height below. Standard / Max phones keep
-                                // the original 320pt image.
-                                .frame(height: UIScreen.isSmallPhone ? 200 : 320)
-                                .padding(.top, 10)
-                        }
-                        .tag(index)
-                    }
+                    Text("From eye contact to her number, one small step a day.")
+                        .font(.manropeRegular(size: 16))
+                        .foregroundColor(Color.wingmanBlack.opacity(0.5))
+                        .lineSpacing(3)
                 }
-                .tabViewStyle(.page(indexDisplayMode: .never))
-                // SE-only: reduce carousel height so that the CTA buttons
-                // below remain visible on ~667pt-tall screens. Standard /
-                // Max phones are untouched at 520pt.
-                .frame(height: UIScreen.isSmallPhone ? carouselHeightSmall : carouselHeight)
+                .multilineTextAlignment(.leading)
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 20)
+                .padding(.top, 24)
 
-
+                Spacer(minLength: 24)
 
                 // MARK: - CTA Buttons
                 VStack(spacing: 20) {
-
-                    // MARK: - Page Indicator
-                    HStack(spacing: 6) {
-                        ForEach(viewModel.pages.indices, id: \.self) { index in
-                            Circle()
-                                .fill(viewModel.currentPage == index ? Color.wingmanBlack : Color.wingmanBlack.opacity(0.25))
-                                .frame(width: 6, height: 6)
-                        }
-                    }
-                    .padding(.bottom, 5)
 
                     // MARK: - Primary CTA — start without an account
                     //

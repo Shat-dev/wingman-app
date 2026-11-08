@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "landing_what_if.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

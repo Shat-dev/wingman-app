@@ -73,12 +73,6 @@ enum Analytics {
         /// rate, which is the one number that says whether the script works.
         static let walkthroughInterrupted = "walkthrough_interrupted"
 
-        // The one free lesson, released when the walkthrough finishes.
-        // Completion is not a separate event — `lesson_completed` carries an
-        // `is_free_lesson` property instead, so the two never disagree about
-        // what counts as finishing a lesson.
-        static let freeLessonClaimed = "free_lesson_claimed"
-
         // Content engagement — daily practice questions
         static let dailyChallengeStarted = "daily_challenge_started"
         static let dailyChallengeCompleted = "daily_challenge_completed"
@@ -88,8 +82,7 @@ enum Analytics {
         // How much XP a completion earned is deliberately NOT a separate event:
         // it rides `lesson_completed` / `practice_scenario_completed` /
         // `daily_challenge_completed` as a property, so the two can never
-        // disagree about what counts as finishing. Same reasoning as
-        // `is_free_lesson` above. Those properties land with the completion
+        // disagree about what counts as finishing. Those properties land with the completion
         // screens in Phase 3.
         //
         // These two have no such host. The outbox exists because a failed award

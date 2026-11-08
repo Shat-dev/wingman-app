@@ -235,13 +235,6 @@ struct LessonView: View {
                     if let startedAt {
                         properties["duration_seconds"] = Analytics.elapsedSeconds(since: startedAt)
                     }
-                    // Whether this is the one lesson the walkthrough hands out.
-                    // Carried as a property rather than as a separate
-                    // `free_lesson_completed` event so the two can never
-                    // disagree about what counts as finishing a lesson —
-                    // `lesson_completed` already owns that definition, quiz and
-                    // all.
-                    properties["is_free_lesson"] = (authManager.freeLessonId == lesson.id)
                     Analytics.capture(Analytics.Event.lessonCompleted, properties)
 
                     LessonDataService.shared.markLessonCompleted(

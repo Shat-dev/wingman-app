@@ -174,14 +174,11 @@ struct MainTabView: View {
         // what makes this safe to hang off a step change rather than needing a
         // separate "did they really complete it" signal.
         //
-        // Flipping the flag re-renders RootView out of branch 4b and releases
-        // the one free lesson.
+        // Flipping the flag re-renders RootView out of branch 4b.
         //
-        // Hands off to Scenarios because that is the tab the closing card was
-        // pointing at, and the free scenario it offered is sitting on it,
-        // unlocked and now tappable. Landing anywhere else would make the offer
-        // read as a bait: the card says "play one whenever you feel like it"
-        // and the user's next frame would be a different screen.
+        // Hands off to Scenarios because that is the tab the closing card is
+        // on, so the user's next frame matches the one they just tapped
+        // through.
         .onChange(of: walkthrough.step) { newStep in
             guard newStep == .finished else { return }
             log("🎬 MainTabView: walkthrough finished — marking free demo complete")

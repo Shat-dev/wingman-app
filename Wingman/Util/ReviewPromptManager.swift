@@ -20,9 +20,8 @@
 //  So the gate is now *engagement*, not payment: the ask happens when a user
 //  finishes their SECOND activity — a lesson, a scenario, or daily practice —
 //  or logs an approach they made in the real world, whoever they are. Free users reach
-//  that moment too (logging is free, scenario 1 is free for
-//  everyone, and the walkthrough hands out one free lesson), which is the
-//  point: about a quarter of the people who decline the first paywall still go
+//  that moment too (logging an approach and daily practice are free), which
+//  is the point: about a quarter of the people who decline the first paywall still go
 //  on to finish something, and until now none of them could be asked.
 //
 //  What keeps this on the right side of 5.6.3 is the same thing that makes it

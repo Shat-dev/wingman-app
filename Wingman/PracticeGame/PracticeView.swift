@@ -147,15 +147,15 @@ struct PracticeView: View {
     // MARK: - Load game data then navigate
     private func loadAndNavigate(practice: Practice) async {
         // Walkthrough interception, FIRST — ahead of both the progression
-        // guard and the paywall. During the script the only scenario that
-        // opens is the free one; everything else gets a mascot line.
+        // guard and the paywall. During the script the only scenario a tap
+        // gets through to is the first one; everything else gets a mascot line.
         //
         // Ahead of the paywall specifically: an interrupting purchase screen
         // in the middle of the sell is the worst thing this feature could do.
         // Ahead of the progression guard because a locked card currently
         // no-ops in silence, which mid-script reads as the app being broken.
         if walkthrough.isIntercepting,
-           practice.orderIndex != AuthManager.freeScenarioOrderIndex {
+           practice.orderIndex != AuthManager.firstScenarioOrderIndex {
             walkthrough.showNudge(.lockedScenario)
             return
         }
@@ -163,11 +163,11 @@ struct PracticeView: View {
         guard !practice.isLocked else { return }
 
         // Access gate — free users see the paywall instead of navigating into
-        // the scenario, EXCEPT for scenario 1, which is free for everyone
-        // (see AuthManager.canOpenScenario). Placed after the progression-lock
-        // guard so locked scenarios continue to no-op silently (matches
-        // the "reduce paywall spam" requirement for progression locks).
-        guard authManager.canOpenScenario(orderIndex: practice.orderIndex) else {
+        // any scenario (see AuthManager.canOpenScenario). Placed after the
+        // progression-lock guard so locked scenarios continue to no-op
+        // silently (matches the "reduce paywall spam" requirement for
+        // progression locks).
+        guard authManager.canOpenScenario else {
             showPaywall = true
             return
         }

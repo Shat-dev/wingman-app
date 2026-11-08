@@ -251,9 +251,6 @@ struct WalkthroughOverlayView: View {
     private static func nudgeText(_ nudge: WalkthroughCoordinator.Nudge) -> String {
         switch nudge {
         case .lesson:
-            // Deliberately does not promise the free lesson. The script no
-            // longer mentions it anywhere, and a nudge is the wrong place to
-            // introduce an offer the closing beat won't back up.
             return "Almost done, you'll be free to explore in a second."
         case .dailyPractice:
             return "One thing at a time. Play the scenario first."
