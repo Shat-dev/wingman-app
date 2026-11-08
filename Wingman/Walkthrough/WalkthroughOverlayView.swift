@@ -42,7 +42,7 @@ struct WalkthroughOverlayView: View {
     var body: some View {
         if let beat {
             ZStack(alignment: .bottom) {
-                scrim
+                scrim(beat)
                 card(beat)
                     .padding(.horizontal, 16)
                     .padding(.bottom, tabBarHeight + 14)
@@ -60,36 +60,22 @@ struct WalkthroughOverlayView: View {
 
     /// Dims the app without hiding it. The app behind is the argument the
     /// walkthrough is making, so it stays legible.
-    private var scrim: some View {
+    ///
+    /// A tap anywhere on it advances the script, same as tapping the card —
+    /// people tap wherever their thumb is, not on the card. That also means
+    /// the app behind is never live mid-script: opening a scenario or lesson
+    /// would have to finish the walkthrough to get the scrim out of the way,
+    /// and finishing rebuilds `MainTabView`, dismissing what they just opened.
+    private func scrim(_ beat: Beat) -> some View {
         Color.black
             .opacity(0.45)
             .ignoresSafeArea()
-            .allowsHitTesting(blocksInteraction)
-    }
-
-    /// Hit-testing, not appearance — every beat looks identical.
-    ///
-    /// One beat asks the user to *do* something in the app: scroll the course
-    /// list. A scrim that swallowed those taps would make the instruction
-    /// impossible to follow.
-    ///
-    /// Every other beat blocks, the two Scenarios beats included. Their copy
-    /// invites the user to play something, but it invites them to do it *after*
-    /// the tour: opening a scenario mid-script would have to finish the
-    /// walkthrough to get the scrim out of the way, and finishing flips
-    /// `hasCompletedFreeDemo`, which moves RootView from branch 4b to 4d and
-    /// rebuilds `MainTabView` — dismissing the `PracticeGame` the user just
-    /// opened. Blocking costs one extra tap, and the list is fully live a moment
-    /// later on the same tab, which is where the script leaves them.
-    private var blocksInteraction: Bool {
-        // A nudge answers a tap the user just made; blocking until they
-        // acknowledge it keeps the script from being talked over.
-        if walkthrough.nudge != nil { return true }
-
-        switch walkthrough.step {
-        case .coursesTour: return false
-        default: return true
-        }
+            .contentShape(Rectangle())
+            .onTapGesture {
+                HapticManager.shared.tap()
+                beat.advance?()
+            }
+            .allowsHitTesting(beat.advance != nil)
     }
 
     // MARK: - Card
