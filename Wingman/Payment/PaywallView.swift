@@ -255,6 +255,10 @@ struct PaywallView: View {
     /// own offer branch.
     private func finishAfterOneTimeOffer() {
         let mgr = authManager_init ?? authManager
+        // Deliberately not wrapped in `withAnimation`: a crossfade here showed
+        // the paywall ghosting through behind the walkthrough (the white
+        // blank isn't in the outgoing frame). From blank white, a cut to the
+        // walkthrough reads cleanly.
         mgr.markPostDemoWallDismissed()
         mgr.completePaywallFlow()
     }
