@@ -142,12 +142,10 @@ struct CourseDetailSheet: View {
                                         // other paywall entry point — which
                                         // is what makes the lesson→purchase
                                         // funnel unmeasurable today.
-                                        Analytics.capture(Analytics.Event.lessonGateBlocked, [
-                                            "lesson_id": lesson.id,
-                                            "lesson_title": lesson.title,
-                                            "course_id": course.id,
-                                            "course_title": course.title,
-                                        ])
+                                        Analytics.capture(
+                                            Analytics.Event.lessonGateBlocked,
+                                            CourseAnalytics.lessonGateBlocked(lesson: lesson, course: course)
+                                        )
                                         showPaywall = true
                                         return
                                     }
@@ -194,15 +192,17 @@ struct CourseDetailSheet: View {
             // re-fires on view-tree churn and would otherwise count a single
             // encounter several times (same guard pattern as
             // CommitmentPactView's `hasCommitted`).
-            if case .awaitingPrevious(let previousTitle) = lockReason,
+            if case .awaitingPrevious(_, let previousID, let previousCanonicalTitle) = lockReason,
                !hasCapturedLockedEncounter {
                 hasCapturedLockedEncounter = true
-                Analytics.capture(Analytics.Event.courseLockedEncountered, [
-                    "course_id": course.id,
-                    "course_title": course.title,
-                    "category_id": course.categoryId,
-                    "previous_course_title": previousTitle,
-                ])
+                Analytics.capture(
+                    Analytics.Event.courseLockedEncountered,
+                    CourseAnalytics.courseLockedEncountered(
+                        course: course,
+                        previousCourseID: previousID,
+                        previousCourseCanonicalTitle: previousCanonicalTitle
+                    )
+                )
             }
         }
         .trackScreenView("Course Detail")
@@ -213,7 +213,7 @@ struct CourseDetailSheet: View {
         switch lockReason {
         case .unlocked:
             return nil
-        case .awaitingPrevious(let previousTitle):
+        case .awaitingPrevious(let previousTitle, _, _):
             return "Complete all lessons in \(previousTitle) to unlock this course."
         }
     }

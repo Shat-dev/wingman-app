@@ -240,10 +240,9 @@ Events: `lesson_started`, `lesson_completed`, `lesson_quiz_started`, `lesson_qui
 
 | Value | Events |
 |---|---|
-| I am becoming a guy who takes action. | 1,106 |
-| Personalised variant, "I, {first name}, am becoming a guy who takes action." | 171 |
+| I am becoming a guy who takes action. | 1,277 |
 
-Personalised values contain users' first names and are deliberately not listed here.
+This is the only value. 171 of those events have `personalized = true`, where the screen shows "I, {first name}, …", but the property still carries the generic sentence: the name is never sent. (An earlier version of this file assumed otherwise without checking; corrected 2026-11-10 against PostHog and the code.)
 
 ## 6. Screen names (`$screen_name`)
 

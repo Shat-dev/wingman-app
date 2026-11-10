@@ -89,11 +89,7 @@ struct LessonQuizFlowView: View {
 
     /// Shared analytics identity, matching `LessonView.lessonProperties`.
     private var lessonProperties: [String: Any] {
-        [
-            "lesson_id": lesson.id,
-            "lesson_name": lesson.title,
-            "category": lesson.courseTitle
-        ]
+        lesson.analyticsProperties
     }
 
     /// Paragraphs + questions, matching `LessonView.totalStepCount` exactly.

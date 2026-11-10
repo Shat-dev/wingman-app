@@ -114,7 +114,7 @@ struct CommitmentPactView: View {
             // `CommitmentPactCopy.headline(for:)`. `personalized` is the flag
             // to segment on instead.
             Analytics.capture(Analytics.Event.commitmentPactViewed, [
-                "headline": pact.headline,
+                "headline": CommitmentPactCopy.analyticsHeadline,
                 "personalized": name != nil
             ])
         }
@@ -220,7 +220,7 @@ struct CommitmentPactView: View {
         }
 
         var properties: [String: Any] = [
-            "headline": pact.headline,
+            "headline": CommitmentPactCopy.analyticsHeadline,
             "personalized": name != nil
         ]
         if let appearedAt {

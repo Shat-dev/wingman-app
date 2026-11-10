@@ -319,16 +319,12 @@ struct PracticeGame: View {
 
     /// Shared identity properties for the practice scenario events.
     private var scenarioProperties: [String: Any] {
-        [
-            "scenario_id": viewModel.gameData.id,
-            "scenario_name": viewModel.gameData.title,
-            // False for every play now that no beat opens a scenario — the
-            // closing card offers one and the script ends before it can be
-            // taken. Kept because it is the honest answer to "was this played
-            // inside the tour", and because it is the flag that would show a
-            // regression if some future beat started opening scenarios again.
-            "during_walkthrough": walkthrough.isRunning
-        ]
+        // `during_walkthrough` is false for every play now that no beat opens
+        // a scenario — the closing card offers one and the script ends before
+        // it can be taken. Kept because it is the honest answer to "was this
+        // played inside the tour", and because it is the flag that would show
+        // a regression if some future beat started opening scenarios again.
+        viewModel.gameData.analyticsProperties(duringWalkthrough: walkthrough.isRunning)
     }
 
     init(

@@ -105,7 +105,9 @@ About 130 capture/screen call sites were read. Full table in section 3.
 `PracticeGame/PracticeGame.swift:321-331`. Value is the scenario title from Supabase. `scenario_id` is sent alongside.
 
 **B-5 · `headline` on commitment pact events · BLOCKER · Req 5**
-`Commitment/CommitmentPactView.swift:114,223`. Value is the full headline sentence from `Commitment/CommitmentPactCopy.swift:34,57`. The personalised variant also embeds the user's first name in the property value. One saved insight references `headline`.
+`Commitment/CommitmentPactView.swift:114,223`. Value is the generic headline sentence from `Commitment/CommitmentPactCopy.swift:34`. One saved insight references `headline`.
+
+*Correction, 2026-11-10:* an earlier version of this finding said the personalised variant puts the user's first name in the property. It does not. The code sends `pact.headline`, never the rendered headline, and PostHog shows a single value for both personalised and generic events (1,277 events over 90 days). The finding stands as a display-text value, without the name concern.
 
 **B-6 · `level_name` on `approach_logged` · BLOCKER · Req 5**
 `LogApproch/LogApproachViewModel.swift:167`. Value is the level title from `:27-30`. `approach_level` (integer) is sent alongside.
@@ -411,7 +413,7 @@ Only properties whose value is, or derives from, display or locale-dependent tex
 | `lesson_gate_blocked` | `lesson_title`, `course_title` | Lesson JSON / Swift catalog | BLOCKER | `lesson_id`, `course_id` (already sent) |
 | `course_locked_encountered` | `course_title`, `previous_course_title` | Swift catalog | BLOCKER | `course_id` (sent); add `previous_course_id` |
 | `practice_scenario_started`, `_completed` | `scenario_name` | Supabase `scenarios.title` | BLOCKER | `scenario_id` (already sent) |
-| `commitment_pact_viewed`, `_committed` | `headline` | Full sentence, may include the user's name | BLOCKER. 1 insight | Variant key (`generic` / `named`); `personalized` boolean already sent |
+| `commitment_pact_viewed`, `_committed` | `headline` | Fixed generic sentence (never includes the name) | BLOCKER. 1 insight | Variant key; `personalized` boolean already sent |
 | `approach_logged` | `level_name` | Level title, `LogApproachViewModel.swift:27-30` | BLOCKER | `approach_level` integer (already sent) |
 | `paywall_viewed` (one-time offer) | `intro_price`, `full_price` | StoreKit formatted strings | MEDIUM (varies by storefront today) | Numeric amount + ISO currency code |
 | `paywall_purchase_*`, `purchases_restore_failed`, `approach_log_failed` | `error_message` | `error.localizedDescription` | MEDIUM | Error domain + code (already sent on some events) |

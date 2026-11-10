@@ -389,6 +389,45 @@ enum Analytics {
         #else
         PostHogSDK.shared.register(["environment": "prod"])
         #endif
+        // Registered together with `environment` so they are restored by the
+        // same call after every reset().
+        PostHogSDK.shared.register(languageSuperProperties())
+        if let storefront = UserDefaults.standard.string(forKey: storefrontDefaultsKey) {
+            PostHogSDK.shared.register(["storefront": storefront])
+        }
+    }
+
+    // MARK: - Language and storefront super-properties
+
+    /// `app_language`: the language the app is actually running in — the
+    /// localization iOS picked from the ones the bundle ships. "en" for
+    /// everyone until another language is added. This, not PostHog's
+    /// automatic `$locale`, is the property to segment by.
+    ///
+    /// `device_language`: the user's first preferred language whether or not
+    /// the app supports it (e.g. "de-DE"). It is what shows demand for a
+    /// language the app does not have yet.
+    nonisolated static func languageSuperProperties(
+        bundle: Bundle = .main,
+        preferredLanguages: [String] = Locale.preferredLanguages
+    ) -> [String: Any] {
+        [
+            "app_language": bundle.preferredLocalizations.first ?? "en",
+            "device_language": preferredLanguages.first ?? "unknown"
+        ]
+    }
+
+    private nonisolated static let storefrontDefaultsKey = "analytics.storefront"
+
+    /// Records the App Store storefront country (e.g. "DEU") as the
+    /// `storefront` super-property. Called where StoreKit is already being
+    /// asked for it, so this adds no StoreKit work of its own; the value is
+    /// kept in UserDefaults so later launches and resets can re-register it
+    /// without asking again.
+    nonisolated static func registerStorefront(_ countryCode: String?) {
+        guard let countryCode, !countryCode.isEmpty else { return }
+        UserDefaults.standard.set(countryCode, forKey: storefrontDefaultsKey)
+        whenReady { PostHogSDK.shared.register(["storefront": countryCode]) }
     }
 
     /// Report a caught error to PostHog error tracking.

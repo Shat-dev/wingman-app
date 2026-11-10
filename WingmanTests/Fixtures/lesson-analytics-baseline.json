@@ -1,0 +1,472 @@
+[
+ {
+  "lesson_id": "lesson_1_1",
+  "lesson_name": "You are not your thoughts",
+  "category": "Beliefs & Reframes"
+ },
+ {
+  "lesson_id": "lesson_1_2",
+  "lesson_name": "Rejection isn't personal",
+  "category": "Beliefs & Reframes"
+ },
+ {
+  "lesson_id": "lesson_1_3",
+  "lesson_name": "Rewrite the Story",
+  "category": "Beliefs & Reframes"
+ },
+ {
+  "lesson_id": "lesson_1_4",
+  "lesson_name": "Confidence Comes from Evidence",
+  "category": "Beliefs & Reframes"
+ },
+ {
+  "lesson_id": "lesson_1_5",
+  "lesson_name": "Growth mindset vs Fixed mindset",
+  "category": "Beliefs & Reframes"
+ },
+ {
+  "lesson_id": "lesson_2_1",
+  "lesson_name": "Fear Shrinks When You Chase it",
+  "category": "Fear & Exposure"
+ },
+ {
+  "lesson_id": "lesson_2_2",
+  "lesson_name": "Own Your Presence in Public",
+  "category": "Fear & Exposure"
+ },
+ {
+  "lesson_id": "lesson_2_3",
+  "lesson_name": "Using Breath to Reduce Fear",
+  "category": "Fear & Exposure"
+ },
+ {
+  "lesson_id": "lesson_2_4",
+  "lesson_name": "Anchor Points: Staying Grounded",
+  "category": "Fear & Exposure"
+ },
+ {
+  "lesson_id": "lesson_3_1",
+  "lesson_name": "Your body speaks first",
+  "category": "Presence & Expressions"
+ },
+ {
+  "lesson_id": "lesson_3_2",
+  "lesson_name": "The Power of a Calm Voice",
+  "category": "Presence & Expressions"
+ },
+ {
+  "lesson_id": "lesson_3_3",
+  "lesson_name": "Energy Is Contagious",
+  "category": "Presence & Expressions"
+ },
+ {
+  "lesson_id": "lesson_3_4",
+  "lesson_name": "Smile First, Speak Second",
+  "category": "Presence & Expressions"
+ },
+ {
+  "lesson_id": "lesson_4_1",
+  "lesson_name": "Nothing to Prove",
+  "category": "Inner Stability"
+ },
+ {
+  "lesson_id": "lesson_4_2",
+  "lesson_name": "Own Your Pace",
+  "category": "Inner Stability"
+ },
+ {
+  "lesson_id": "lesson_4_3",
+  "lesson_name": "Outcome Independence",
+  "category": "Inner Stability"
+ },
+ {
+  "lesson_id": "lesson_4_4",
+  "lesson_name": "Handling Positive Responses",
+  "category": "Inner Stability"
+ },
+ {
+  "lesson_id": "lesson_5_1",
+  "lesson_name": "Build the Body, Build the Belief",
+  "category": "Non-negotiables"
+ },
+ {
+  "lesson_id": "lesson_5_2",
+  "lesson_name": "Grooming Is Essential",
+  "category": "Non-negotiables"
+ },
+ {
+  "lesson_id": "lesson_5_3",
+  "lesson_name": "Hygiene Goes a Long Way",
+  "category": "Non-negotiables"
+ },
+ {
+  "lesson_id": "lesson_5_4",
+  "lesson_name": "Fashion and Style",
+  "category": "Non-negotiables"
+ },
+ {
+  "lesson_id": "lesson_6_1",
+  "lesson_name": "Hesitation Guarantees the Loss",
+  "category": "Approach Readiness"
+ },
+ {
+  "lesson_id": "lesson_6_2",
+  "lesson_name": "Life's Fun If You Open Your Mouth",
+  "category": "Approach Readiness"
+ },
+ {
+  "lesson_id": "lesson_6_3",
+  "lesson_name": "Curiosity Beats Agenda",
+  "category": "Approach Readiness"
+ },
+ {
+  "lesson_id": "lesson_6_4",
+  "lesson_name": "You're Always in the Field",
+  "category": "Approach Readiness"
+ },
+ {
+  "lesson_id": "lesson_7_1",
+  "lesson_name": "The 3-Second Rule",
+  "category": "The Physical Approach"
+ },
+ {
+  "lesson_id": "lesson_7_2",
+  "lesson_name": "Approach Angle & Distance",
+  "category": "The Physical Approach"
+ },
+ {
+  "lesson_id": "lesson_7_3",
+  "lesson_name": "Your Body in Motion",
+  "category": "The Physical Approach"
+ },
+ {
+  "lesson_id": "lesson_7_4",
+  "lesson_name": "Eye Contact & First Impression",
+  "category": "The Physical Approach"
+ },
+ {
+  "lesson_id": "lesson_8_1",
+  "lesson_name": "Indirect Openers",
+  "category": "The Opener"
+ },
+ {
+  "lesson_id": "lesson_8_2",
+  "lesson_name": "Direct Intent Openers",
+  "category": "The Opener"
+ },
+ {
+  "lesson_id": "lesson_8_3",
+  "lesson_name": "Frame Control",
+  "category": "The Opener"
+ },
+ {
+  "lesson_id": "lesson_8_4",
+  "lesson_name": "Voice Mechanics",
+  "category": "The Opener"
+ },
+ {
+  "lesson_id": "lesson_9_1",
+  "lesson_name": "Reading Her Response",
+  "category": "Reading & Responding"
+ },
+ {
+  "lesson_id": "lesson_9_2",
+  "lesson_name": "Responding to Neutral Signals",
+  "category": "Reading & Responding"
+ },
+ {
+  "lesson_id": "lesson_9_3",
+  "lesson_name": "Recognizing Signals: A Guide",
+  "category": "Reading & Responding"
+ },
+ {
+  "lesson_id": "lesson_10_1",
+  "lesson_name": "Daytime Approaches",
+  "category": "Situational Specific Approaches"
+ },
+ {
+  "lesson_id": "lesson_10_2",
+  "lesson_name": "Nighttime Approaches",
+  "category": "Situational Specific Approaches"
+ },
+ {
+  "lesson_id": "lesson_10_3",
+  "lesson_name": "Approaching Women in Groups",
+  "category": "Situational Specific Approaches"
+ },
+ {
+  "lesson_id": "lesson_11_1",
+  "lesson_name": "Curiosity Based Openers",
+  "category": "Advanced Opening Techniques"
+ },
+ {
+  "lesson_id": "lesson_11_2",
+  "lesson_name": "Assumption Based Openers",
+  "category": "Advanced Opening Techniques"
+ },
+ {
+  "lesson_id": "lesson_11_3",
+  "lesson_name": "Opinion Openers",
+  "category": "Advanced Opening Techniques"
+ },
+ {
+  "lesson_id": "lesson_11_4",
+  "lesson_name": "Setting Time Constraints",
+  "category": "Advanced Opening Techniques"
+ },
+ {
+  "lesson_id": "lesson_11_5",
+  "lesson_name": "Nighttime technique: False Exits",
+  "category": "Advanced Opening Techniques"
+ },
+ {
+  "lesson_id": "lesson_12_1",
+  "lesson_name": "Never Run Out of Things to Say",
+  "category": "Small Talk & Momentum"
+ },
+ {
+  "lesson_id": "lesson_12_2",
+  "lesson_name": "Use Observations and Statements",
+  "category": "Small Talk & Momentum"
+ },
+ {
+  "lesson_id": "lesson_12_3",
+  "lesson_name": "Maintain Momentum",
+  "category": "Small Talk & Momentum"
+ },
+ {
+  "lesson_id": "lesson_12_4",
+  "lesson_name": "When Silence Works",
+  "category": "Small Talk & Momentum"
+ },
+ {
+  "lesson_id": "lesson_13_1",
+  "lesson_name": "Listen for Subtext, Not Just Words",
+  "category": "Listening & Attunement"
+ },
+ {
+  "lesson_id": "lesson_13_2",
+  "lesson_name": "Listen to understand, not to reply",
+  "category": "Listening & Attunement"
+ },
+ {
+  "lesson_id": "lesson_13_3",
+  "lesson_name": "Validating Her Response First",
+  "category": "Listening & Attunement"
+ },
+ {
+  "lesson_id": "lesson_13_4",
+  "lesson_name": "Non-Verbal Listening Cues",
+  "category": "Listening & Attunement"
+ },
+ {
+  "lesson_id": "lesson_14_1",
+  "lesson_name": "Match First, Then Lead",
+  "category": "Sharing & Vulnerability"
+ },
+ {
+  "lesson_id": "lesson_14_2",
+  "lesson_name": "What to Share, What Not to Share",
+  "category": "Sharing & Vulnerability"
+ },
+ {
+  "lesson_id": "lesson_14_3",
+  "lesson_name": "Tell Stories That Connect",
+  "category": "Sharing & Vulnerability"
+ },
+ {
+  "lesson_id": "lesson_14_4",
+  "lesson_name": "Link the Stories Back to Her World",
+  "category": "Sharing & Vulnerability"
+ },
+ {
+  "lesson_id": "lesson_15_1",
+  "lesson_name": "Know When the Moment Is Ready",
+  "category": "Closing"
+ },
+ {
+  "lesson_id": "lesson_15_2",
+  "lesson_name": "End on Connection, Not Luck",
+  "category": "Closing"
+ },
+ {
+  "lesson_id": "lesson_15_3",
+  "lesson_name": "Make It Easy to Say Yes",
+  "category": "Closing"
+ },
+ {
+  "lesson_id": "lesson_15_4",
+  "lesson_name": "Assume she is interested",
+  "category": "Closing"
+ },
+ {
+  "lesson_id": "lesson_16_1",
+  "lesson_name": "Resetting After Energy Drops",
+  "category": "Advanced Conversation Skills"
+ },
+ {
+  "lesson_id": "lesson_16_2",
+  "lesson_name": "Disagree Without Disconnecting",
+  "category": "Advanced Conversation Skills"
+ },
+ {
+  "lesson_id": "lesson_16_3",
+  "lesson_name": "Make Being With You Fun",
+  "category": "Advanced Conversation Skills"
+ },
+ {
+  "lesson_id": "lesson_17_1",
+  "lesson_name": "The Goal of Flirting",
+  "category": "Flirting Prerequisites"
+ },
+ {
+  "lesson_id": "lesson_17_2",
+  "lesson_name": "Identifying the Signals",
+  "category": "Flirting Prerequisites"
+ },
+ {
+  "lesson_id": "lesson_17_3",
+  "lesson_name": "Respect",
+  "category": "Flirting Prerequisites"
+ },
+ {
+  "lesson_id": "lesson_17_4",
+  "lesson_name": "Energy",
+  "category": "Flirting Prerequisites"
+ },
+ {
+  "lesson_id": "lesson_18_1",
+  "lesson_name": "Humour: Banter and Teasing",
+  "category": "Playfulness & Spark"
+ },
+ {
+  "lesson_id": "lesson_18_2",
+  "lesson_name": "Light, Playful Challenges",
+  "category": "Playfulness & Spark"
+ },
+ {
+  "lesson_id": "lesson_18_3",
+  "lesson_name": "Add a Little Bit of Cheek",
+  "category": "Playfulness & Spark"
+ },
+ {
+  "lesson_id": "lesson_19_1",
+  "lesson_name": "Compliments That Actually Land",
+  "category": "Compliments & Verbal Chemistry"
+ },
+ {
+  "lesson_id": "lesson_19_2",
+  "lesson_name": "Being Nice Is Not Desire",
+  "category": "Compliments & Verbal Chemistry"
+ },
+ {
+  "lesson_id": "lesson_19_3",
+  "lesson_name": "One Line to Change the Dynamic",
+  "category": "Compliments & Verbal Chemistry"
+ },
+ {
+  "lesson_id": "lesson_20_1",
+  "lesson_name": "Eye Contact That Creates Tension",
+  "category": "Physical Presence"
+ },
+ {
+  "lesson_id": "lesson_20_2",
+  "lesson_name": "Using Proximity to Build Attraction",
+  "category": "Physical Presence"
+ },
+ {
+  "lesson_id": "lesson_20_3",
+  "lesson_name": "Using Mirroring to Build Rapport",
+  "category": "Physical Presence"
+ },
+ {
+  "lesson_id": "lesson_20_4",
+  "lesson_name": "When and How to Use Touch",
+  "category": "Physical Presence"
+ },
+ {
+  "lesson_id": "lesson_21_1",
+  "lesson_name": "Disqualification Techniques",
+  "category": "Advanced Flirting Skills"
+ },
+ {
+  "lesson_id": "lesson_21_2",
+  "lesson_name": "Flirt by Creating Sexual Tension",
+  "category": "Advanced Flirting Skills"
+ },
+ {
+  "lesson_id": "lesson_21_3",
+  "lesson_name": "Callbacks & Inside Jokes",
+  "category": "Advanced Flirting Skills"
+ },
+ {
+  "lesson_id": "lesson_22_1",
+  "lesson_name": "The Effect of Social Status",
+  "category": "Upgrading Your Lifestyle"
+ },
+ {
+  "lesson_id": "lesson_22_2",
+  "lesson_name": "The Interesting Man Advantage",
+  "category": "Upgrading Your Lifestyle"
+ },
+ {
+  "lesson_id": "lesson_22_3",
+  "lesson_name": "The Power of Mystery",
+  "category": "Upgrading Your Lifestyle"
+ },
+ {
+  "lesson_id": "lesson_22_4",
+  "lesson_name": "The Average of Your Social Circle",
+  "category": "Upgrading Your Lifestyle"
+ },
+ {
+  "lesson_id": "lesson_23_1",
+  "lesson_name": "Create More Chances to Connect",
+  "category": "Creating Opportunities"
+ },
+ {
+  "lesson_id": "lesson_23_2",
+  "lesson_name": "Train Where You Live",
+  "category": "Creating Opportunities"
+ },
+ {
+  "lesson_id": "lesson_23_3",
+  "lesson_name": "Home Court Advantage",
+  "category": "Creating Opportunities"
+ },
+ {
+  "lesson_id": "lesson_24_1",
+  "lesson_name": "Volume Creates Familiarity",
+  "category": "Mastery & Identity"
+ },
+ {
+  "lesson_id": "lesson_24_2",
+  "lesson_name": "Stay Consistent",
+  "category": "Mastery & Identity"
+ },
+ {
+  "lesson_id": "lesson_24_3",
+  "lesson_name": "From Technique to Intuition",
+  "category": "Mastery & Identity"
+ },
+ {
+  "lesson_id": "lesson_25_1",
+  "lesson_name": "The Experimental Mindset",
+  "category": "Learning & Self Discovery"
+ },
+ {
+  "lesson_id": "lesson_25_2",
+  "lesson_name": "Your Authentic Style",
+  "category": "Learning & Self Discovery"
+ },
+ {
+  "lesson_id": "lesson_25_3",
+  "lesson_name": "Identify Your Sticking Point",
+  "category": "Learning & Self Discovery"
+ },
+ {
+  "lesson_id": "lesson_25_4",
+  "lesson_name": "The Growth Plateau",
+  "category": "Learning & Self Discovery"
+ }
+]

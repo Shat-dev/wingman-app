@@ -12,8 +12,11 @@ enum CourseLockReason: Equatable {
     case unlocked
 
     /// The previous course in the category has not been fully completed.
-    /// `previousCourseTitle` is used by the banner copy.
-    case awaitingPrevious(previousCourseTitle: String)
+    /// `previousCourseTitle` is what the banner shows. The id and the
+    /// canonical (English) title are for analytics only, so that what is sent
+    /// does not depend on what the banner reads; the id is nil when the
+    /// previous course could not be resolved.
+    case awaitingPrevious(previousCourseTitle: String, previousCourseID: String?, previousCourseCanonicalTitle: String)
 
     var isLocked: Bool {
         switch self {

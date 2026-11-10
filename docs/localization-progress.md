@@ -8,8 +8,8 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 |---|---|---|
 | Prerequisites P1, P2, P5 | Done | Commit `6acc258` |
 | Prerequisite P3 | Partly done | Priced paywall, screens past the paywall and time-to-paywall still to capture |
-| WP1 Onboarding answer IDs | **Done** (see slice 1) | Supabase `age`/`goals` writes verified unchanged by reading the code path, not by a live write |
-| WP2 Analytics values pinned to English | Next | |
+| WP1 Onboarding answer IDs | **Done** (slice 1, `fa213f2`) | Supabase `age`/`goals` writes verified unchanged by reading the code path, not by a live write |
+| WP2 Analytics values pinned to English | **In progress** (slice 2 done) | Left: numeric price and currency on paywall events, error domain and code, screen-name guard |
 | WP3 Error classification | Not started | Plan wants a few days of production logging first; cannot be done inside this loop |
 | WP4 Paywall prices and disclosure | Not started | Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
 | WP5 String Catalog and extraction | Not started | |
@@ -41,9 +41,32 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 - No on-device run of the onboarding flow after the change (UI sweep not re-run in this slice; it is limited to once per work package).
 - The Supabase `user_metadata` write was checked by reading the code path only.
 
+### Slice 2 — WP2 part 1: analytics values read canonical fields (2026-11-10)
+
+**What changed**
+
+- New `Wingman/Util/AnalyticsProperties.swift`. `lesson_name`, `category`, `lesson_title`, `course_title`, `previous_course_title`, `scenario_name` and `level_name` are now built from `canonical…` accessors in one place, not read off whatever the view shows.
+- Rule adopted for models (documented in that file): the existing `title` / `name` field stays the English source text; analytics reads `canonicalTitle`; translated text shown on screen must come from a separate display accessor added later, never by changing what `title` holds.
+- `headline` on the commitment events now reads `CommitmentPactCopy.analyticsHeadline`, a literal separate from the on-screen headline.
+- `CourseLockReason.awaitingPrevious` carries the previous course's id and canonical title alongside the banner title.
+- New properties (additive): `course_id` on lesson and lesson-quiz events; `previous_course_id` on `course_locked_encountered`.
+- New super properties (additive), registered with `environment` and restored after every reset: `app_language`, `device_language`. `storefront` is registered when the paywall already asks StoreKit for it and is cached in UserDefaults; no new StoreKit call was added.
+
+**Behaviour for English users:** every pre-existing property keeps its value.
+
+**Tests:** new `AnalyticsPropertiesTests` (11). `testLessonNamesAndCategoriesMatchProductionBaseline` loads all 94 bundled lessons and checks `lesson_name` and `category` against the PostHog baseline (fixture `WingmanTests/Fixtures/lesson-analytics-baseline.json`). Course titles are checked against the 16 locked-course rows seen in production, including the "Small talk" / "Small Talk" difference between the two sources. 44 tests pass.
+
+**Corrections to earlier docs:** the audit (B-5) and the analytics baseline said the personalised commitment headline sends the user's first name. It does not; both are corrected.
+
+**Not verified**
+
+- The new super properties have not been observed arriving in PostHog (no app run in this slice).
+- `storefront` only appears after a paywall has loaded offerings once on that install; a Debug build cannot load offerings, so it cannot be checked without a Release run.
+- Nothing yet proves the canonical accessors ignore a translation, because no translation mechanism exists. **WP5 must add a test with a fake translation table** showing that `canonicalTitle`, `analyticsHeadline` and the option `canonicalValue`s do not change when display strings do.
+
 ## Next
 
-WP2: add `canonicalTitle` fields and point `lesson_name`, `category`, `lesson_title`, `course_title`, `previous_course_title`, `scenario_name`, `headline` and `level_name` at them; add `course_id` / `previous_course_id`; register `app_language`, `device_language` and `storefront` super properties. Start with an in-memory analytics recorder for tests so the values can be asserted (plan section 9).
+WP2 part 2: add numeric `price_amount` and `currency` to the paywall view and purchase events; add `error_domain` / `error_code` beside the four `error_message` properties; add a test that the screen names passed to `.trackScreenView` are the fixed set in the baseline. Then WP5 (String Catalog), starting with the `Content` lookup helper and its fake-table test.
 
 ## Open questions for Arthur
 

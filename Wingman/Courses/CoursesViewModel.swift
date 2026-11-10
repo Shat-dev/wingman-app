@@ -240,9 +240,12 @@ final class CoursesViewModel: ObservableObject {
         if isCourseProgressionUnlocked(course) {
             return .unlocked
         }
-        let previousTitle = category(for: course)
-            .flatMap { previousCourse(in: $0.courses, relativeTo: course) }?.title
-            ?? "the previous course"
-        return .awaitingPrevious(previousCourseTitle: previousTitle)
+        let previous = category(for: course)
+            .flatMap { previousCourse(in: $0.courses, relativeTo: course) }
+        return .awaitingPrevious(
+            previousCourseTitle: previous?.title ?? "the previous course",
+            previousCourseID: previous?.id,
+            previousCourseCanonicalTitle: previous?.canonicalTitle ?? CourseAnalytics.unknownPreviousCourseTitle
+        )
     }
 }

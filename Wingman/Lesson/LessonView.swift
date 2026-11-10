@@ -26,11 +26,7 @@ struct LessonView: View {
 
     /// Shared identity properties for the lesson events.
     private var lessonProperties: [String: Any] {
-        [
-            "lesson_id": lesson.id,
-            "lesson_name": lesson.title,
-            "category": lesson.courseTitle
-        ]
+        lesson.analyticsProperties
     }
 
     // Screens sorted by order

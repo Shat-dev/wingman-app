@@ -164,7 +164,7 @@ final class LogApproachViewModel: ObservableObject {
                         let total = UserDefaults.standard.integer(forKey: "total_approaches")
                         Analytics.capture(Analytics.Event.approachLogged, [
                             "approach_level": self.selectedLevel,
-                            "level_name": self.levels[self.selectedLevel - 1].title,
+                            "level_name": self.levels[self.selectedLevel - 1].canonicalTitle,
                             "anxiety_level": Int(self.anxietyLevel),
                             "has_notes": !self.notes.isEmpty,
                             "notes_length": self.notes.count,

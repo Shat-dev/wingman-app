@@ -60,6 +60,13 @@ enum CommitmentPactCopy {
     /// Instruction under the logo. Names the gesture explicitly — a hold with
     /// no affordance reads as a dead button, and users who tap and release get
     /// nothing without being told why.
+    /// What the `headline` property of the commitment pact events carries.
+    /// It has always been this fixed English sentence — never the rendered
+    /// headline, so never the user's name — and it stays this sentence when
+    /// `pact.headline` is translated. Deliberately a separate literal from
+    /// the one shown on screen: one is data, the other is copy.
+    static let analyticsHeadline = "I am becoming a guy who takes action."
+
     static let holdInstruction = "Tap and hold to commit."
 
     /// Replaces the instruction once the hold completes, for the beat before

@@ -428,6 +428,7 @@ final class PaywallViewModel: ObservableObject {
         if let storefront = await Storefront.current {
             country = storefront.countryCode
         }
+        Analytics.registerStorefront(country)
 
         // Currency from a loaded StoreProduct — yearly preferred, monthly fallback.
         let currency = yearlyPackage?.storeProduct.currencyCode
