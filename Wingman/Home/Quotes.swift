@@ -133,4 +133,15 @@ enum Quotes {
         "We may encounter many defeats but we must not be defeated.",
         "Any problem is a chance for you to do your best."
     ]
+
+    /// The quote at `index` as shown on screen: the English text above in the
+    /// language the app is running in, falling back to English.
+    ///
+    /// The app remembers which quote is today's, and which have been shown,
+    /// by index — never by text — so translating a quote cannot disturb the
+    /// rotation. `all` stays English; it is the lookup key for `L10n.content`
+    /// and each entry needs a matching one in `Content.xcstrings`.
+    static func display(at index: Int) -> String {
+        L10n.content(all[index])
+    }
 }

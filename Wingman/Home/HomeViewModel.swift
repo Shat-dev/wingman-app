@@ -32,7 +32,7 @@ final class HomeViewModel: ObservableObject {
     @Published var motivationalQuote: String = ""
     @Published var continueCourse: ContinueCourse? = nil
     @Published var isDailyPracticeCompleted: Bool = false
-    @Published var dailyPracticeButtonText: String = "Start"
+    @Published var dailyPracticeButtonText: String = String(localized: "Start")
     @Published var isDailyPracticeButtonEnabled: Bool = true
     /// True while the initial daily-practice fetch is in flight. HomeView uses
     /// this to show a subtle indicator on the streak badge until the network
@@ -99,7 +99,7 @@ final class HomeViewModel: ObservableObject {
         // Supabase auth session, so this property is only a fallback; we keep
         // the fallback value identical to the prior behavior ("User") to
         // guarantee no visible regression for anything reading viewModel.userName.
-        userName = UserProfileStore.shared.displayName ?? "User"
+        userName = UserProfileStore.shared.displayName ?? String(localized: "User")
 
         // Check if practiced today (legacy check for hasPracticeToday)
         if let lastPracticeDate = UserDefaults.standard.object(forKey: "last_practice_date") as? Date {
@@ -268,7 +268,7 @@ final class HomeViewModel: ObservableObject {
         if defaults.string(forKey: Self.dailyQuoteDayKey) == today,
            let cachedIndex = defaults.object(forKey: Self.dailyQuoteIndexKey) as? Int,
            quotes.indices.contains(cachedIndex) {
-            motivationalQuote = quotes[cachedIndex]
+            motivationalQuote = Quotes.display(at: cachedIndex)
             return
         }
 
@@ -294,7 +294,7 @@ final class HomeViewModel: ObservableObject {
         defaults.set(nextIndex, forKey: Self.dailyQuoteIndexKey)
         defaults.set(today, forKey: Self.dailyQuoteDayKey)
 
-        motivationalQuote = quotes[nextIndex]
+        motivationalQuote = Quotes.display(at: nextIndex)
     }
 
     private static func currentDayKey() -> String {
@@ -315,7 +315,7 @@ final class HomeViewModel: ObservableObject {
 
             // Update UI state based on status from database (using computed properties with defaults)
             isDailyPracticeCompleted = status.completedToday
-            dailyPracticeButtonText = status.completedToday ? "Completed" : "Start"
+            dailyPracticeButtonText = status.completedToday ? String(localized: "Completed") : String(localized: "Start")
             isDailyPracticeButtonEnabled = status.canContinue
 
             // Update streak from database (using computed property with default)
@@ -335,7 +335,7 @@ final class HomeViewModel: ObservableObject {
             log("❌ Failed to check daily practice completion: \(error)")
             // On error, default to allowing start and use cached streak
             isDailyPracticeCompleted = false
-            dailyPracticeButtonText = "Start"
+            dailyPracticeButtonText = String(localized: "Start")
             isDailyPracticeButtonEnabled = true
 
             // Fall back to the shared store's cached value (seeded from UserDefaults

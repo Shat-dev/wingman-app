@@ -231,25 +231,25 @@ struct CustomTabBar: View {
         HStack(spacing: 0) {
             TabBarButton(
                 icon: "home",
-                title: "Home",
+                title: String(localized: "Home"),
                 isSelected: selectedTab == 0
             ) { handleTap(0) }
 
             TabBarButton(
                 icon: "map",
-                title: "Courses",
+                title: String(localized: "Courses"),
                 isSelected: selectedTab == 1
             ) { handleTap(1) }
 
             TabBarButton(
                 icon: "calendar",
-                title: "Scenarios",
+                title: String(localized: "Scenarios"),
                 isSelected: selectedTab == 2
             ) { handleTap(2) }
 
             TabBarButton(
                 icon: "user",
-                title: "Profile",
+                title: String(localized: "Profile"),
                 isSelected: selectedTab == 3
             ) { handleTap(3) }
         }

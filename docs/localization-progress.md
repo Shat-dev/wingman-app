@@ -12,7 +12,7 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP2 Analytics values pinned to English | **Done** (slices 2–3, `9a853f0`, `38f4330`) | New properties not yet observed arriving in PostHog |
 | WP3 Error classification | Not started | Plan wants a few days of production logging first; cannot be done inside this loop |
 | WP4 Paywall prices and disclosure | Not started | Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
-| WP5 String Catalog and extraction | **In progress** (slices 4–8) | Catalog holds 257 strings. Onboarding, commitment, non-disclosure paywall copy and notifications done. Still to move: home and quotes, courses catalog, approach logging, profile and settings, practice, auth and error messages, walkthrough, XP |
+| WP5 String Catalog and extraction | **In progress** (slices 4–9) | `Localizable` holds 262 strings, `Content` 149. Onboarding, commitment, non-disclosure paywall copy, notifications, home and quotes done. Still to move: courses catalog, approach logging, profile and settings, practice, auth and error messages, walkthrough, XP, daily practice and quiz |
 | WP6 Layout and legal links | Not started | |
 | WP7 Content translation plumbing | Not started | Migration files only; nothing applied to the live database |
 | WP8 Tooling and tests | Started | Unit and UI test targets exist; parity recorder, validator and fallback tests still to build |
@@ -190,9 +190,27 @@ This closes the gap noted in slice 2 (nothing proved the canonical accessors ign
 - No notification was actually delivered. Delivery-time localization is the documented behaviour of the API, but it has not been observed on a device, in English or in another language. Worth one manual check in Release B.
 - English keeps "Your goal is 1 minutes today." for a goal of 1, as before; no English plural variant was added, to keep English output identical. If a goal of 1 minute is selectable, that is a small existing grammar bug to fix on purpose later.
 
+### Slice 9 — WP5 part 6: home screen and quotes (2026-11-10)
+
+**What changed**
+
+- The 120 daily quotes are shown through `Quotes.display(at:)`, which passes the English quote to `L10n.content`. `Quotes.all` stays English and is the lookup key. All 120 quotes were added to `Content.xcstrings` (149 entries now).
+- The quote rotation was already tracked by index in UserDefaults, not by text, so nothing about which quote is shown, or when, changes.
+- Home strings that were plain `String` values are now `String(localized:)`: the daily practice button states ("Start", "Completed", "No Connection"), the "User" name fallback (two places), and the four tab bar titles ("Home", "Courses", "Scenarios", "Profile").
+- Left as they are: the five category names in `HomeView` (brand terms, decision D2).
+
+**Behaviour for English users:** unchanged.
+
+**Tests:** new `QuotesTests` (5): the pool is 120 unique quotes; every quote is shown as written in English; the one quote with a literal percent sign is shown literally, in English and when translated; every quote has a `Content` entry; a fake translation changes what is displayed for that quote only and never the pool. 100 unit tests pass.
+
+**Not verified**
+
+- The home screen was not opened on a simulator (it sits behind the paywall and is not in the sweep).
+- The tab titles and button states have no direct unit test; they rely on the general `String(localized:)` checks in `StringCatalogTests`.
+
 ## Next
 
-WP5 part 6: home and quotes. The 120 quotes in `Home/Quotes.swift` are data-like (picked by index and shown), so they go through `L10n.content` with `Content.xcstrings` entries; home screen strings held in the view model become `String(localized:)`. Then the course catalog (`CourseCategory.dummyCategories`: course titles, descriptions and summaries through `L10n.content` via display accessors, category names left untranslated per decision D2).
+WP5 part 7: the course catalog. `CourseCategory.dummyCategories` holds 25 course titles, descriptions and summaries as plain Swift strings, and `title` must stay English because analytics reads it (`canonicalTitle`). Add display accessors (`displayTitle`, `displayDescription`, `displaySummary`) that go through `L10n.content`, switch the views to them, add the strings to `Content.xcstrings`, and leave category names untranslated (decision D2). The lesson list also shows lesson titles and summaries from the bundled JSON; those belong to WP7 (content overlay) and are not part of this slice. Then approach logging and profile.
 
 ## Open questions for Arthur
 

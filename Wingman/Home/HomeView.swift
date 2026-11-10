@@ -40,7 +40,7 @@ struct HomeView: View {
         if let cached = userProfileStore.displayName, !cached.isEmpty {
             return cached
         }
-        return "User"
+        return String(localized: "User")
     }
 
     // Module data for carousel
@@ -124,7 +124,7 @@ struct HomeView: View {
                                     // existing isDailyPracticeButtonEnabled gate (which handles
                                     // "already completed today"). Both must be true to start.
                                     let canStart = networkMonitor.isConnected && viewModel.isDailyPracticeButtonEnabled
-                                    let buttonText = networkMonitor.isConnected ? viewModel.dailyPracticeButtonText : "No Connection"
+                                    let buttonText = networkMonitor.isConnected ? viewModel.dailyPracticeButtonText : String(localized: "No Connection")
 
                                     Button(action: {
                                         if canStart {
