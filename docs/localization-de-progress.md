@@ -7,7 +7,7 @@ Branch `localization-release-b`. Rules and glossary: [localization-de-brief.md](
 | Part | State |
 |---|---|
 | UI catalogs (G2) | 574 of 574 strings drafted (2026-11-10) |
-| Lesson overlays (G3) | 10 of 25 courses (630 of 1,531 items): 1, 2, 6, 7, 12, 13, 17, 18, 22, 23 |
+| Lesson overlays (G3) | 10 of 25 courses (628 of 1,531 items): 1, 2, 6, 7, 12, 13, 17, 18, 22, 23 |
 | Database content (G4) | Not started |
 | German sweep (G7) | Onboarding and tabs on SE, 2026-11-11: no clipping. Lessons not yet seen in German |
 
@@ -25,7 +25,7 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **2026-11-11. Course 7, The Physical Approach** (4 lessons, 67 items, 1,492 English words). The check passes. Its lessons cover the 3-second rule, angle and distance, posture while walking up, and eye contact, so the course title in `Content.xcstrings` is changed from *Der körperliche Ansatz* to ***Die Annäherung***. Distances are metric: 18 inches became 45 cm, three feet became one metre. "Approach" as a movement is *Annäherung* here; as the act of talking to someone it stays *Ansprechen*.
 - **2026-11-11. Course 13, Listening & Attunement** (4 lessons, 63 items, 1,383 English words). The check passes. For the reviewer: "validating" became *würdigen* (*Würdigung*); "attunement" became *Einfühlen*. The sister now lives in Hamburg rather than Portland.
 - **2026-11-11. Course 18, Playfulness & Spark** (3 lessons, 49 items, 1,167 English words). The check passes. For the reviewer: "banter" became *Schlagabtausch*; "teasing" became *Necken / aufziehen*; "cheek / cheeky" became *Frechheit / frech*. The café line "it's a big decision, isn't it?" became *Ja, das ist echt eine Lebensentscheidung, oder?* so the irony still reads.
-- **2026-11-11. Course 23, Creating Opportunities** (3 lessons, 51 items, 1,180 English words). The check passes. For the reviewer: "home court advantage" became *Heimvorteil*; "regular" became *Stammgast*; "foam rolling near the turf" became *neben der Kunstrasenfläche mit der Faszienrolle ausrollen*; "running club" became *Lauftreff*.
+- **2026-11-11. Course 23, Creating Opportunities** (3 lessons, 49 items, 1,180 English words). The check passes. For the reviewer: "home court advantage" became *Heimvorteil*; "regular" became *Stammgast*; "foam rolling near the turf" became *neben der Kunstrasenfläche mit der Faszienrolle ausrollen*; "running club" became *Lauftreff*.
 
 ## Questions for Arthur
 
