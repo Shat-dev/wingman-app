@@ -99,8 +99,8 @@ nonisolated enum MarketingNotifications {
         let bodies = personalisedBodies()
         for reminder in schedule {
             let content = UNMutableNotificationContent()
-            content.title = "Wingman"
-            content.body = bodies[reminder.id] ?? ""
+            content.title = brandTitle
+            content.body = bodies[reminder.id].map(deliveryLocalized) ?? ""
             content.sound = .default
             content.userInfo = ["kind": kindValue, "id": reminder.id]
 
@@ -159,20 +159,42 @@ nonisolated enum MarketingNotifications {
 
     // MARK: - Copy
 
-    private static func personalisedBodies() -> [String: String] {
+    /// The notification title. The app's name: a brand term, shown as is in
+    /// every language.
+    static let brandTitle = "Wingman"
+
+    /// A reminder body that the system localizes when the notification is
+    /// *delivered*, not when it is scheduled.
+    ///
+    /// These reminders are scheduled once, up to a week ahead, and never
+    /// rescheduled. Resolving the text at scheduling time would freeze it in
+    /// whatever language the app was running in on that day. Handing the
+    /// system the string's key instead lets it look the text up at delivery,
+    /// in the app's `Localizable` table, and it falls back to the key — the
+    /// English sentence — when there is no translation.
+    static func deliveryLocalized(_ resource: LocalizedStringResource) -> String {
+        NSString.localizedUserNotificationString(forKey: resource.key, arguments: nil)
+    }
+
+    /// The three reminder bodies for this user, by reminder id.
+    static func personalisedBodies() -> [String: LocalizedStringResource] {
         let defaults = UserDefaults.standard
         func firstPick(_ key: String) -> String? {
             OnboardingAnswerCoding.firstPick(ofStoredValue: defaults.string(forKey: "onboarding_\(key)"))
         }
         return [
-            "day1": motivationLine(firstPick("motivation")),
-            "day3": barrierLine(firstPick("barriers")),
-            "day7": goalLine(firstPick("goals")),
+            "day1": motivationResource(firstPick("motivation")),
+            "day3": barrierResource(firstPick("barriers")),
+            "day7": goalResource(firstPick("goals")),
         ]
     }
 
     /// Day 1, from "What brought you to Wingman?"
     static func motivationLine(_ answer: String?) -> String {
+        String(localized: motivationResource(answer))
+    }
+
+    static func motivationResource(_ answer: String?) -> LocalizedStringResource {
         switch MotivationOption(storedValue: answer) {
         case .breakup:
             return "What would your first conversation back out there sound like?"
@@ -191,6 +213,10 @@ nonisolated enum MarketingNotifications {
 
     /// Day 3, from "What usually stops you from doing so?"
     static func barrierLine(_ answer: String?) -> String {
+        String(localized: barrierResource(answer))
+    }
+
+    static func barrierResource(_ answer: String?) -> LocalizedStringResource {
         switch BarrierOption(storedValue: answer) {
         case .fearOfRejection:
             return "What\u{2019}s the worst a polite \u{201C}no\u{201D} could actually cost you?"
@@ -207,6 +233,10 @@ nonisolated enum MarketingNotifications {
 
     /// Day 7, from "What are you mainly hoping to improve?"
     static func goalLine(_ answer: String?) -> String {
+        String(localized: goalResource(answer))
+    }
+
+    static func goalResource(_ answer: String?) -> LocalizedStringResource {
         switch GoalOption(storedValue: answer) {
         case .mindsetAndConfidence:
             return "What would feeling sure of yourself change this week?"

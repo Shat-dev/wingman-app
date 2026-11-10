@@ -69,6 +69,23 @@ class NotificationManager: ObservableObject {
         }
     }
     
+    // MARK: - Daily Reading Goal copy
+
+    /// Title and body of the daily reading reminder.
+    ///
+    /// Resolved when the reminder is scheduled, unlike the one-off marketing
+    /// reminders: this one is rescheduled on every launch
+    /// (`setupNotificationsOnLaunch`) and whenever the goal changes, and iOS
+    /// relaunches the app when its language changes, so the text cannot go
+    /// stale. Resolving it here is also what lets the body use plural rules
+    /// for the number of minutes in languages that need them.
+    nonisolated static func dailyReadingText(goalMinutes: Int) -> (title: String, body: String) {
+        (
+            title: String(localized: "Daily Reading Reminder"),
+            body: String(localized: "Time for your daily reading! Your goal is \(goalMinutes) minutes today.")
+        )
+    }
+
     // MARK: - Schedule Daily Reading Goal Notification
     func scheduleDailyReadingGoalNotification(goalMinutes: Int) async {
         log("🔔 Scheduling daily reading goal notification for \(goalMinutes) minutes")
@@ -77,8 +94,9 @@ class NotificationManager: ObservableObject {
         
         // Create notification content
         let content = UNMutableNotificationContent()
-        content.title = "Daily Reading Reminder"
-        content.body = "Time for your daily reading! Your goal is \(goalMinutes) minutes today."
+        let text = Self.dailyReadingText(goalMinutes: goalMinutes)
+        content.title = text.title
+        content.body = text.body
         content.sound = .default
         content.badge = 1
         

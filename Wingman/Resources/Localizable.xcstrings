@@ -242,6 +242,9 @@
     "Daily Reading Goal" : {
 
     },
+    "Daily Reading Reminder" : {
+
+    },
     "Day 1 of becoming the guy who goes for it" : {
 
     },
@@ -648,6 +651,9 @@
     "This purchase needs approval before it can go through — usually from the account holder or your bank. You'll get access automatically once it's approved." : {
 
     },
+    "Time for your daily reading! Your goal is %lld minutes today." : {
+
+    },
     "Tips & offers" : {
 
     },
@@ -697,16 +703,61 @@
     "What brought you to Wingman?" : {
 
     },
+    "What happens in the second before you freeze?" : {
+
+    },
+    "What if a little nervousness just reads as genuine?" : {
+
+    },
+    "What if your opener didn’t need to be clever?" : {
+
+    },
     "What type of Interaction ?" : {
 
     },
     "What usually stops you from doing so?" : {
 
     },
+    "What would feeling sure of yourself change this week?" : {
+
+    },
+    "What would your first conversation back out there sound like?" : {
+
+    },
+    "What’s one question you could ask that isn’t small talk?" : {
+
+    },
+    "What’s the one thing that stops you from saying hi?" : {
+
+    },
+    "What’s the worst a polite “no” could actually cost you?" : {
+
+    },
+    "When did a conversation last feel like more than small talk?" : {
+
+    },
+    "When did you last meet someone without a screen in between?" : {
+
+    },
+    "When did you last start a conversation with a stranger?" : {
+
+    },
     "When was the last time you spoke to a woman in public?" : {
 
     },
+    "Where in your day could you say one more hello?" : {
+
+    },
     "Which side do you want to be on?" : {
+
+    },
+    "Who did you notice today that you didn’t talk to?" : {
+
+    },
+    "Who would you talk to this week if nerves weren’t a factor?" : {
+
+    },
+    "Would anyone around you really remember you saying hi?" : {
 
     },
     "XP" : {
