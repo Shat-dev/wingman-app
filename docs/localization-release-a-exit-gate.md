@@ -6,7 +6,7 @@ Release A is the English-only release: it reshapes the app so that languages can
 
 ## The short version
 
-**The code for Release A is written and tested as far as it can be without real products, a real purchase or the live database.** It is not ready to submit: three of the four exit-gate conditions need something only you can do, and one paywall item is waiting for your wording.
+**The code for Release A is written and tested as far as it can be without real products, a real purchase or the live database.** It is not ready to submit: three of the four exit-gate conditions need something only you can do.
 
 - 296 unit tests (291 pass; 5 are pseudo-language probes that skip in a normal run).
 - English is unchanged on the 17 baseline screens (16 pixel-identical, 1 an animation frame) and on every English output that has a test, most of them compared against a copy of the old code.
@@ -18,7 +18,7 @@ Release A is the English-only release: it reshapes the app so that languages can
 | # | Condition | State | How it was checked, or what is missing |
 |---|---|---|---|
 | 1 | Parity test green in English and pseudo-language | **Partly** | A scripted run of 19 analytics calls records identically in English and as a translated app with German content laid over (slice 37). 40-odd further tests pin stored values and analytics properties. **Missing:** the plan's full run through the real screens with a sandbox purchase, and the comparison with build 37. Needs UI automation through a purchase |
-| 2 | English screenshots match P3 except for agreed changes | **Met for what exists; D4 not built** | WP6 sweep: 16 of 17 pixel-identical below the status bar, the 17th differs only in an animation frame (slice 21). Before/after renders are identical for the statistic screens, growth projection, plan rows, buttons, footers and tab bar. **Missing:** the priced paywall and the one-time offer have never been rendered (Debug builds load no products), and the D4 sentence does not exist yet |
+| 2 | English screenshots match P3 except for agreed changes | **Met for what can be rendered** | WP6 sweep: 16 of 17 pixel-identical below the status bar, the 17th differs only in an animation frame (slice 21). Before/after renders are identical for the statistic screens, growth projection, plan rows, buttons, footers and tab bar. **Missing:** the priced paywall and the one-time offer have never been rendered (Debug builds load no products). D4 was declined, so there is no agreed change |
 | 3 | English launch and paywall timings within noise of P3 | **Launch met; paywall timing not measured** | Cold launch 0.752 s and 0.739 s against 0.858 s (slice 38). Time-to-paywall cannot be read from the sweep, whose duration is test waits |
 | 4 | A sandbox purchase on each product fires `paywall_purchase_succeeded`, Meta Start Trial or Subscribe, and grants the entitlement | **Not done** | Needs a Release build, a sandbox Apple ID and your RevenueCat and Meta dashboards |
 
@@ -27,7 +27,7 @@ Release A is the English-only release: it reshapes the app so that languages can
 | # | Requirement | State |
 |---|---|---|
 | 1 | No performance change for English users | Launch time unchanged. English makes no new request and reads no new file: tested for every content fetch |
-| 2 | No UI breakage from longer text | Doubled-text run on an iPhone SE done; its overflow findings fixed. Line caps, fixed-height buttons, footers, the legal line and long plan names all have a translated-app layout. **Not seen in the running app since the fixes** (no sweep left) |
+| 2 | No UI breakage from longer text | Doubled-text run on an iPhone SE done; its overflow findings fixed. Line caps, fixed-height buttons, footers, the legal line and long plan names all have a translated-app layout. Confirmed in the running app by a second doubled-text run after the fixes |
 | 3 | Grammatical translations, no fragments | Every sentence that was assembled from pieces is now a whole catalog entry: legal line, weekly price, trial badge, one-time offer, notifications |
 | 4 | More languages do not slow the app | Only the running language is ever fetched or cached; one file and one fingerprint per language. **Not measured with two languages**, since none exists |
 | 5 | PostHog names and values identical | Stored answers and analytics values are pinned and read from English fields; display text is separate. Recorder parity test green. **Not observed in PostHog** |
@@ -38,23 +38,32 @@ Release A is the English-only release: it reshapes the app so that languages can
 | 10 | Plurals and placeholders locale-safe | Catalog plurals in use; the validator checks placeholders and plural forms of every translation |
 | 11 | Prices, dates, numbers by locale; prices from StoreKit | Weekly price formatted by the product; trial length read from the product. Dates stay US-format for English users (open question below) |
 | 12 | Privacy and Terms keep working | Same two URLs and the same in-app browser from all four places. A translation that breaks a link falls back to English. **Links not tapped in the running app on the sign-in screens** |
-| 13 | Paywall disclosure complete and accurate | Checklist written: 17 of 18 rows present. **The open row is D4** |
+| 13 | Paywall disclosure complete and accurate | Checklist written: 17 of 18 rows present. The 18th (a renewal sentence) is left out by your decision |
 | 14 | Brand names not translated | Marked do-not-translate; the validator checks brand terms survive |
 
-## What I need from you
+## Answers received 2026-11-10
 
-**Decisions**
+- **D4 (renewal sentence): leave the paywall as it is.** Nothing built; WP4 has no open item left. Requirement 13's one open row stays as it is by decision.
+- **One more sweep run: approved and done.** The doubled-text run on the iPhone SE simulator, clean install (one more guest user in production). All 26 screens captured. The slice 23 fixes hold in the running app: the four statistic screens keep their top bar and "Tap to continue" and still advance on a tap, the growth projection keeps its Continue button, and the commitment line wraps to two lines. One residual, already known: on the growth chart, a label that wraps to four lines is clipped at the top.
 
-1. **D4, the paywall's renewal sentence.** A: keep today's line under the button and add "Then $69.99 per year. Renews automatically until you cancel." (my recommendation). B: replace today's line with a fuller one. C: leave the paywall as it is. Exact wording for trial and no-trial variants: [localization-disclosure-checklist.md](localization-disclosure-checklist.md).
-2. **How to see the paywall with real prices.** One Release-build run (one test user in production analytics), or a launch flag that tags automated runs as dev. Everything in WP4 (weekly price, trial badge, plan rows, the one-time offer) is tested with stand-in values and has never been seen with a real product.
-3. **One more sweep run**, to confirm the layout fixes from slice 23 in the running app. Each run creates a guest user in production; both allowances are spent.
+## What I still need from you
 
-**Things only you can do**
+1. **How to see the paywall with real prices** (explained in the chat on 2026-11-10; my recommendation is the launch flag). Everything in WP4 is tested with stand-in values and has never been seen with a real product.
+2. **A sandbox purchase on each product** (gate condition 4).
+3. **The migration dry run, when you want it.** Not needed to ship Release A: English never touches the translation tables. It is needed before a language is added. One command, which leaves nothing behind:
 
-4. **Apply the migration on a Supabase branch or local stack** and run the checks at the bottom of the file: `supabase/migrations/20261110000000_content_translations.sql`. It has been parsed, never executed. None of the content-translation code has run against real tables.
-5. **A sandbox purchase on each product** (gate condition 4).
-6. **Production logging of session-refresh errors** for a few days, if you want the last piece of English word-matching removed from the sign-out decision.
-7. **The 7-day soak** after shipping, as the plan describes.
+   ```bash
+   supabase link --project-ref bnckmgnysfliiypvxxii
+   ```
+
+   ```bash
+   supabase db query --linked -f supabase/scripts/content_translations_dry_run.sql
+   ```
+
+   It runs the migration and its checks against the live database inside one transaction and rolls back. A pass ends with a row reading `OK: …` and `translation_tables_left_behind = 0`. If the CLI will not take a multi-statement file, paste the file into the dashboard's SQL editor instead.
+4. **Production logging of session-refresh errors**, if you want the last English word-matching removed from the sign-out decision.
+5. **An English sweep, if you want one more.** The English screenshots were last compared at slice 21. The screens changed after that (statistic, growth projection, pact) are identical in before/after test renders, but have not been re-photographed in the running app in English.
+6. **The 7-day soak** after shipping.
 
 **Smaller questions, none blocking**
 
@@ -66,8 +75,7 @@ Release A is the English-only release: it reshapes the app so that languages can
 ## Not verified, in one place
 
 - The priced paywall, the trial badge, plan rows and the one-time offer on screen.
-- The sign-in legal line and its links inside the running app; the commitment pact's scroll fix.
-- The layout fixes for the statistic and growth screens in the running app (rendered in a test window only).
+- The sign-in legal line and its links inside the running app.
 - Any analytics event arriving in PostHog, including the 17 call sites that now pass through a recording seam.
 - The profile-language write, and whether a sign-in provider sets its own `locale` (the reason the field is `app_language`).
 - Database translations against real tables; a real lesson overlay file in the app.

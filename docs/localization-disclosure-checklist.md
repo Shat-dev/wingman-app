@@ -20,7 +20,7 @@ Plan reference: WP4 item 7 in [localization-implementation-plan.md](localization
 | 4 | Price per week (a convenience, not a requirement) | Plan row: "only $1.35 per week" | Product price ÷ 52 or 4.33, formatted by the product's formatter (slice 25) | Present |
 | 5 | Free trial length | Badge on the selected plan: "3-day Free Trial" | The product's introductory offer (slice 26) | Present |
 | 6 | Nothing is charged at the start of a trial | Under the button: "No payment now. Cancel anytime before your trial ends." | Catalog text, shown only to a user who gets the trial | Present |
-| 7 | **What is charged when the trial ends, and that it renews until cancelled** | **Not stated as a sentence.** The price and period are in the plan row; nothing says the plan renews | — | **Missing: decision D4, see below** |
+| 7 | **What is charged when the trial ends, and that it renews until cancelled** | **Not stated as a sentence.** The price and period are in the plan row; nothing says the plan renews | — | **Not stated; left as is by decision (D4: option C, 2026-11-10)** |
 | 8 | A user with no trial is charged straight away | Under the button: "Billed immediately. Cancel anytime in App Store settings." | Catalog text, shown only to a user without the trial | Present |
 | 9 | How to cancel | "Cancel anytime in App Store settings." (no-trial variant). The trial variant says "before your trial ends" but not where | Catalog text | Present for no-trial; partial for trial |
 | 10 | Privacy Policy link | Footer: "Privacy" | `Constants.PRIVACY_POLICY_URL`, in-app browser | Present |
@@ -44,9 +44,11 @@ Copy this table for each language when it is added.
 
 | Language | Storefront checked | Main paywall rows 1–12 | Offer rows 1–6 | Currency matches storefront | Checked by | Date |
 |---|---|---|---|---|---|---|
-| English | United States | Row 7 open (D4) | Not yet seen with real products | Not yet seen with real products | | |
+| English | United States | Row 7 left as is by decision (D4: option C) | Not yet seen with real products | Not yet seen with real products | | |
 
 ## Decision D4: the missing sentence (row 7)
+
+> **Decided 2026-11-10: option C. The paywall stays as it is.** Row 7 remains as it stands: the price and period are shown in the plan row, and no sentence states the renewal. Nothing was built for D4. The options below are kept for the record, in case the question comes back (for example from App Review).
 
 The plan approved adding "one full sentence under the button, per trial / no-trial variant, built from StoreKit values". Two things were not decided, and both change what English users read on the screen that earns the money, so they are yours:
 
