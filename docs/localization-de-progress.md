@@ -7,7 +7,7 @@ Branch `localization-release-b`. Rules and glossary: [localization-de-brief.md](
 | Part | State |
 |---|---|
 | UI catalogs (G2) | 574 of 574 strings drafted (2026-11-10) |
-| Lesson overlays (G3) | 5 of 25 courses (339 of 1,531 items): 1, 6, 12, 17, 22 |
+| Lesson overlays (G3) | 6 of 25 courses (400 of 1,531 items): 1, 2, 6, 12, 17, 22 |
 | Database content (G4) | Not started |
 | German sweep (G7) | Onboarding and tabs on SE, 2026-11-11: no clipping. Lessons not yet seen in German |
 
@@ -21,6 +21,7 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **2026-11-11. Course 12, Small Talk & Momentum** (4 lessons, 67 items, 1,396 English words). The check passes. For the reviewer: "threading" became *Anknüpfen* (with *Fäden* for "threads"); "momentum" became *Schwung*.
 - **2026-11-11. Course 17, Flirting Prerequisites** (4 lessons, 63 items, 1,369 English words). The check passes. For the reviewer: the Respect lesson (17_3) carries consent wording ("Never touch without clear signs she's comfortable…"). It's kept as strict as the English: *Fass sie niemals an ohne klare Zeichen, dass es für sie in Ordnung ist*. "Outcome independence" became *nicht vom Ergebnis abhängig sein*; "calibration" became *Kalibrieren*.
 - **2026-11-11. Course 22, Upgrading Your Lifestyle** (4 lessons, 61 items, 1,447 English words). The check passes. The first course of every category is now done. For the reviewer: "social proof" became *sozialer Beweis (Social Proof)*; "social circle" became *Freundeskreis*; "playing games" became *zocken*.
+- **2026-11-11. Course 2, Fear & Exposure** (4 lessons, 61 items, 1,344 English words). The check passes. For the reviewer: "screw it" became *Scheiß drauf*. That matches the English register, but it's the coarsest word in the lessons so far, so soften it to *Egal* if the app should stay clean. "Grounding" became *Erdung*; "bottom-up regulation" became *Bottom-up-Regulation*.
 
 ## Questions for Arthur
 
