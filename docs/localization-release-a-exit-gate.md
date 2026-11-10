@@ -6,7 +6,7 @@ Release A is the English-only release: it reshapes the app so that languages can
 
 ## The short version
 
-**The code for Release A is written and tested as far as it can be without real products, a real purchase or the live database.** It is not ready to submit: three of the four exit-gate conditions need something only you can do.
+**The code for Release A is written and tested as far as it can be without real products, a real purchase or the live database.** It is not ready to submit: a sandbox purchase on each product is still to do, and the full analytics parity run is not possible from here.
 
 - 296 unit tests (291 pass; 5 are pseudo-language probes that skip in a normal run).
 - English is unchanged on the 17 baseline screens (16 pixel-identical, 1 an animation frame) and on every English output that has a test, most of them compared against a copy of the old code.
@@ -18,7 +18,7 @@ Release A is the English-only release: it reshapes the app so that languages can
 | # | Condition | State | How it was checked, or what is missing |
 |---|---|---|---|
 | 1 | Parity test green in English and pseudo-language | **Partly** | A scripted run of 19 analytics calls records identically in English and as a translated app with German content laid over (slice 37). 40-odd further tests pin stored values and analytics properties. **Missing:** the plan's full run through the real screens with a sandbox purchase, and the comparison with build 37. Needs UI automation through a purchase |
-| 2 | English screenshots match P3 except for agreed changes | **Met for what can be rendered** | WP6 sweep: 16 of 17 pixel-identical below the status bar, the 17th differs only in an animation frame (slice 21). Before/after renders are identical for the statistic screens, growth projection, plan rows, buttons, footers and tab bar. **Missing:** the priced paywall and the one-time offer have never been rendered (Debug builds load no products). D4 was declined, so there is no agreed change |
+| 2 | English screenshots match P3 except for agreed changes | **Met** | Release run (slice 41): screens 1–16 match the baseline (15 identical, the loading frame differs only in its animation). Earlier WP6 sweep: the same result (slice 21). Before/after renders are identical for the statistic screens, growth projection, plan rows, buttons, footers and tab bar. The priced paywall and the one-time offer were rendered for the first time in the Release run and look right; there is no earlier picture of them to compare with. D4 was declined, so there is no agreed change |
 | 3 | English launch and paywall timings within noise of P3 | **Launch met; paywall timing not measured** | Cold launch 0.752 s and 0.739 s against 0.858 s (slice 38). Time-to-paywall cannot be read from the sweep, whose duration is test waits |
 | 4 | A sandbox purchase on each product fires `paywall_purchase_succeeded`, Meta Start Trial or Subscribe, and grants the entitlement | **Not done** | Needs a Release build, a sandbox Apple ID and your RevenueCat and Meta dashboards |
 
@@ -30,7 +30,7 @@ Release A is the English-only release: it reshapes the app so that languages can
 | 2 | No UI breakage from longer text | Doubled-text run on an iPhone SE done; its overflow findings fixed. Line caps, fixed-height buttons, footers, the legal line and long plan names all have a translated-app layout. Confirmed in the running app by a second doubled-text run after the fixes |
 | 3 | Grammatical translations, no fragments | Every sentence that was assembled from pieces is now a whole catalog entry: legal line, weekly price, trial badge, one-time offer, notifications |
 | 4 | More languages do not slow the app | Only the running language is ever fetched or cached; one file and one fingerprint per language. **Not measured with two languages**, since none exists |
-| 5 | PostHog names and values identical | Stored answers and analytics values are pinned and read from English fields; display text is separate. Recorder parity test green. **Not observed in PostHog** |
+| 5 | PostHog names and values identical | Stored answers and analytics values are pinned and read from English fields; display text is separate. Recorder parity test green. The sweep's events were seen arriving in PostHog with their usual names and values |
 | 6 | Supabase English canonical; IDs, keys, branching unchanged | Translation tables are additive and keyed by the English IDs; the overlay only ever replaces text. **Migration not applied** |
 | 7 | No logic depends on displayed text | Onboarding branching goes by option ID; the sign-out decision goes by error type. The old word search survives only as an English fallback until production logs exist |
 | 8 | RevenueCat and Meta IDs and events unchanged | Not touched. **Not exercised:** no purchase was made |
@@ -46,15 +46,20 @@ Release A is the English-only release: it reshapes the app so that languages can
 - **D4 (renewal sentence): leave the paywall as it is.** Nothing built; WP4 has no open item left. Requirement 13's one open row stays as it is by decision.
 - **One more sweep run: approved and done.** The doubled-text run on the iPhone SE simulator, clean install (one more guest user in production). All 26 screens captured. The slice 23 fixes hold in the running app: the four statistic screens keep their top bar and "Tap to continue" and still advance on a tap, the growth projection keeps its Continue button, and the commitment line wraps to two lines. One residual, already known: on the growth chart, a label that wraps to four lines is clipped at the top.
 
+- **One Release run: approved and done.** English sweep in a Release build on the 17 Pro simulator. The paywall and the one-time offer rendered correctly with real prices (pictures in `docs/localization-baseline/iphone-17-pro-priced/`), English screens 1–16 still match the baseline, and the run's events arrived in PostHog with the new properties. One flaw in a new property was found and fixed (a $49.99 price sent as 49.989999999999995).
+
+## Two things that run showed about the live paywall
+
+Neither comes from this branch; both are how the App Store products behave today.
+
+1. **No free trial was offered** to a fresh user, on either plan: "Continue", "Billed immediately…", no badge. Production shows the same since about 9 November (yearly was mostly trial-eligible through the 8th; the last trial start recorded is the 8th). Expected if you removed the trial; worth checking in App Store Connect if you did not.
+2. **The one-time offer reads 40%** ($29.99 against $49.99), while its internal name is `one_time_50`. The app computes the percentage from the store's prices on purpose.
+
 ## What I still need from you
 
-1. **How to see the paywall with real prices.** A Debug build cannot load products, so the paywall only ever shows "Can't load pricing" here. Seeing real prices needs a Release build, and a Release build tags its analytics as production. Two ways:
-   - **One Release run (my recommendation for now).** No code change. Cost: one fake user in your production PostHog numbers for that day, and one guest user in Supabase.
-   - **A launch flag** that makes an automated Release run tag itself as dev. Keeps production numbers clean, at the price of a small change to the code that decides the analytics environment. Worth it if this will be done repeatedly, which Release B's per-language paywall checks would be.
-
-   Either way it lifts the "no Release-build runs" rule for that run, so it needs your yes. Everything in WP4 is tested with stand-in values and has never been seen with a real product.
-2. **A sandbox purchase on each product** (gate condition 4).
-3. **The migration dry run, when you want it.** Not needed to ship Release A: English never touches the translation tables. It is needed before a language is added. One command, which leaves nothing behind:
+1. **A sandbox purchase on each product** (gate condition 4). The Release run looked at the paywall and bought nothing.
+2. **The trial badge with a real trial.** It could not be seen, because no trial was offered. If the trial is meant to exist, one look at the paywall once it is back settles it.
+3. **The migration dry run, when you want it.** Not needed to ship Release A; needed before a language is added.
 
    ```bash
    supabase link --project-ref bnckmgnysfliiypvxxii
@@ -64,10 +69,9 @@ Release A is the English-only release: it reshapes the app so that languages can
    supabase db query --linked -f supabase/scripts/content_translations_dry_run.sql
    ```
 
-   It runs the migration and its checks against the live database inside one transaction and rolls back. A pass ends with a row reading `OK: …` and `translation_tables_left_behind = 0`. If the CLI will not take a multi-statement file, paste the file into the dashboard's SQL editor instead.
+   A pass ends with a row reading `OK: …` and `translation_tables_left_behind = 0`. If the CLI will not take a multi-statement file, paste the file into the dashboard's SQL editor.
 4. **Production logging of session-refresh errors**, if you want the last English word-matching removed from the sign-out decision.
-5. **An English sweep, if you want one more.** The English screenshots were last compared at slice 21. The screens changed after that (statistic, growth projection, pact) are identical in before/after test renders, but have not been re-photographed in the running app in English.
-6. **The 7-day soak** after shipping.
+5. **The 7-day soak** after shipping.
 
 **Smaller questions, none blocking**
 
@@ -78,9 +82,9 @@ Release A is the English-only release: it reshapes the app so that languages can
 
 ## Not verified, in one place
 
-- The priced paywall, the trial badge, plan rows and the one-time offer on screen.
+- The trial badge with a real product (no trial was offered on the Release run).
 - The sign-in legal line and its links inside the running app.
-- Any analytics event arriving in PostHog, including the 17 call sites that now pass through a recording seam.
+- Analytics events from screens the sweep does not reach (sign-in, purchase, lessons, scenarios in play). Those the sweep fires were seen arriving in PostHog.
 - The profile-language write, and whether a sign-in provider sets its own `locale` (the reason the field is `app_language`).
 - Database translations against real tables; a real lesson overlay file in the app.
 - Lessons, quizzes, scenarios in play, the approach sheet and settings with doubled text.

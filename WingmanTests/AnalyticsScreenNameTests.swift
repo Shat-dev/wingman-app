@@ -119,4 +119,24 @@ final class AnalyticsScreenNameTests: XCTestCase {
         XCTAssertEqual(merged["source"] as? String, "onboarding")
         XCTAssertEqual(merged.count, 5)
     }
+
+    // MARK: - Price amounts are the exact price
+
+    /// The first run with real products sent a $49.99 price as
+    /// 49.989999999999995. The amount must be the number that prints as the
+    /// price, for every price point in use.
+    func testPriceAmountsPrintAsThePrice() {
+        for text in ["49.99", "69.99", "14.99", "29.99", "79.99", "34.99", "0.99", "9.99", "129.99", "1299.99", "999", "3.5"] {
+            let price = Decimal(string: text)!
+            let amount = PaywallAnalytics.amount(price)
+            XCTAssertEqual(amount, Double(text), text)
+            XCTAssertEqual("\(amount)", Double(text).map { "\($0)" }, text)
+            XCTAssertEqual(PaywallAnalytics.priceProperties(price: price, currencyCode: "USD")["price_amount"] as? Double, Double(text), text)
+            XCTAssertEqual(PaywallAnalytics.introPriceProperties(introPrice: price)["intro_price_amount"] as? Double, Double(text), text)
+        }
+    }
+
+    func testFortyNineNinetyNineIsNotOneStepOff() {
+        XCTAssertEqual("\(PaywallAnalytics.amount(Decimal(string: "49.99")!))", "49.99")
+    }
 }

@@ -44,7 +44,7 @@ Copy this table for each language when it is added.
 
 | Language | Storefront checked | Main paywall rows 1–12 | Offer rows 1–6 | Currency matches storefront | Checked by | Date |
 |---|---|---|---|---|---|---|
-| English | United States | Row 7 left as is by decision (D4: option C) | Not yet seen with real products | Not yet seen with real products | | |
+| English | United States | Rows 1–4 and 8–12 seen with real products, 2026-11-10. Rows 5–6 (trial) not seen: no trial was offered on that run. Row 7 left as is by decision (D4: option C) | Rows 1–6 seen with real products, 2026-11-10 | Yes: USD throughout | Claude, Release run on the simulator | 2026-11-10 |
 
 ## Decision D4: the missing sentence (row 7)
 

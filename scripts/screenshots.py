@@ -8,7 +8,8 @@ the reference set in docs/localization-baseline/.
 
     python3 scripts/screenshots.py export run.xcresult out/
         Writes every attachment whose name starts with two digits
-        ("01-landing", "17-paywall", …) to out/<name>.png.
+        ("01-landing", "17-paywall", "17b-paywall-monthly-selected", …) to
+        out/<name>.png.
 
     python3 scripts/screenshots.py compare docs/localization-baseline/iphone-17-pro out/
         Compares each PNG in the baseline folder with the one of the same
@@ -48,7 +49,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-NUMBERED = re.compile(r"^(\d{2})-")
+NUMBERED = re.compile(r"^(\d{2})[a-z]?-")
 
 
 def export(result_bundle, out_dir):

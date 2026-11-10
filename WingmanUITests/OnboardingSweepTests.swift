@@ -133,8 +133,27 @@ final class OnboardingSweepTests: XCTestCase {
         //     needs a Release build.
         let close = button("Close paywall")
         XCTAssertTrue(close.waitForExistence(timeout: 25), "Paywall did not appear")
+
+        // In a build that loads products the plan rows arrive a moment
+        // after the paywall; give them a few seconds before the picture.
+        let monthlyRow = buttonContaining("Monthly Plan")
+        let hasPrices = monthlyRow.waitForExistence(timeout: 8)
         settle(2.0)
         snap("paywall")
+
+        // With prices: the same paywall with the monthly plan selected (the
+        // trial badge moves to it), then back to yearly. Named 17b so the
+        // numbering of the screens after it is the same in every build.
+        if hasPrices, monthlyRow.isHittable {
+            monthlyRow.tap()
+            settle(1.0)
+            snapExtra("17b-paywall-monthly-selected")
+            let yearlyRow = buttonContaining("Yearly Plan")
+            if yearlyRow.exists, yearlyRow.isHittable {
+                yearlyRow.tap()
+                settle(0.6)
+            }
+        }
 
         walkPastThePaywall(close: close)
     }
@@ -147,10 +166,11 @@ final class OnboardingSweepTests: XCTestCase {
         // 12. One-time offer. It closes itself when it cannot be honoured,
         //     which is always the case in a Debug build (no products), so
         //     this is normally skipped.
+        //     Its close button appears three seconds after the offer does.
         let closeOffer = button("Close offer")
-        if closeOffer.waitForExistence(timeout: 6) {
+        if closeOffer.waitForExistence(timeout: 15) {
             settle(1.0)
-            snap("one-time-offer")
+            snapExtra("17c-one-time-offer")
             closeOffer.tap()
         }
 
@@ -235,6 +255,12 @@ final class OnboardingSweepTests: XCTestCase {
         app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", text)).firstMatch
     }
 
+    /// The first button whose label contains `text` anywhere. A plan row's
+    /// label starts with its trial badge when it has one.
+    private func buttonContaining(_ text: String) -> XCUIElement {
+        app.buttons.matching(NSPredicate(format: "label CONTAINS %@", text)).firstMatch
+    }
+
     /// The first element of any kind whose label contains `text`.
     private func anything(containing text: String) -> XCUIElement {
         app.descendants(matching: .any).matching(NSPredicate(format: "label CONTAINS %@", text)).firstMatch
@@ -242,6 +268,15 @@ final class OnboardingSweepTests: XCTestCase {
 
     private func settle(_ seconds: TimeInterval) {
         Thread.sleep(forTimeInterval: seconds)
+    }
+
+    /// A screenshot outside the numbered sequence: one that only exists in
+    /// some builds, so it must not shift the numbers of the ones after it.
+    private func snapExtra(_ name: String) {
+        let attachment = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
+        attachment.name = name
+        attachment.lifetime = .keepAlways
+        add(attachment)
     }
 
     private func snap(_ name: String) {

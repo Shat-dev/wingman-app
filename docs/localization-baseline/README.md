@@ -50,6 +50,22 @@ These were captured **after** the WP5 and WP6 changes, so they are a reference f
 
 `pseudo-language-se-2026-11-10/` holds the five screens from the first such run (iPhone SE, 2026-11-10) that showed cut or overflowing text, before any fix. Placeholders and plurals look broken in every pseudo-language screenshot ("lld", "@", "#@value@"); that is how the system doubles format strings, not an app bug.
 
+## The paywall with real prices (Release build)
+
+`iphone-17-pro-priced/`, captured 2026-11-10 from branch `localization-release-a` in the one Release-build run Arthur approved: the paywall with the yearly plan selected, with the monthly plan selected, and the one-time offer. US storefront, fresh install, so a user with no purchase history.
+
+These are the first pictures of these screens with products loaded; there is no earlier picture to compare them with. On that run the paywall offered no free trial for either plan (button "Continue", line "Billed immediately…", no badge), and the offer read 40% ($29.99 against $49.99).
+
+To repeat it (it creates a guest user and sends production-tagged analytics, so only with Arthur's say-so):
+
+```bash
+xcodebuild build-for-testing -project Wingman.xcodeproj -scheme Wingman -configuration Release -destination 'platform=iOS Simulator,name=Wingman L10n 17 Pro' -skipMacroValidation -skipPackagePluginValidation ENABLE_TESTABILITY=YES
+```
+
+```bash
+xcodebuild test-without-building -project Wingman.xcodeproj -scheme Wingman -configuration Release -destination 'platform=iOS Simulator,name=Wingman L10n 17 Pro' -only-testing:WingmanUITests/OnboardingSweepTests/testOnboardingToPaywall -resultBundlePath /tmp/wingman-release-sweep.xcresult ENABLE_TESTABILITY=YES
+```
+
 ## Comparing a new run with these screenshots
 
 `scripts/screenshots.py` pulls the numbered screenshots out of a test result and compares them with a folder here, pixel for pixel below the status bar:
