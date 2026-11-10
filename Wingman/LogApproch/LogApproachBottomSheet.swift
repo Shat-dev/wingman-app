@@ -77,25 +77,25 @@ struct LogApproachBottomSheet: View {
                             // Radio buttons for levels
                             VStack(alignment: .leading, spacing: 12) {
                                 RadioButton(
-                                    title: "Level 1: Social Warm-up",
+                                    title: String(localized: "Level 1: Social Warm-up"),
                                     isSelected: viewModel.selectedLevel == 1,
                                     action: { viewModel.selectLevel(1) }
                                 )
 
                                 RadioButton(
-                                    title: "Level 2: Extended Conversation",
+                                    title: String(localized: "Level 2: Extended Conversation"),
                                     isSelected: viewModel.selectedLevel == 2,
                                     action: { viewModel.selectLevel(2) }
                                 )
 
                                 RadioButton(
-                                    title: "Level 3: Indirect Approach",
+                                    title: String(localized: "Level 3: Indirect Approach"),
                                     isSelected: viewModel.selectedLevel == 3,
                                     action: { viewModel.selectLevel(3) }
                                 )
 
                                 RadioButton(
-                                    title: "Level 4: Direct Approach",
+                                    title: String(localized: "Level 4: Direct Approach"),
                                     isSelected: viewModel.selectedLevel == 4,
                                     action: { viewModel.selectLevel(4) }
                                 )

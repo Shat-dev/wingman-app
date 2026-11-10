@@ -62,6 +62,14 @@ nonisolated enum L10n {
 
     static var source: Source { sourceOverrideForTesting ?? appSource }
 
+    /// True while the app is showing its source language (English). For the
+    /// few places that must keep an English-only behaviour exactly as it was
+    /// and do the locale-aware thing only in a translated app.
+    static var isSourceLanguage: Bool {
+        if case .sourceLanguage = source { return true }
+        return false
+    }
+
     /// What to show for an English data string. See the file header.
     static func content(_ english: String) -> String {
         guard !english.isEmpty else { return english }

@@ -62,7 +62,7 @@ class ApproachService: ObservableObject {
     // MARK: - Fetch Approaches
     func fetchApproaches() async {
         guard let userId = SupabaseManager.shared.currentUserId else {
-            errorMessage = "User not authenticated"
+            errorMessage = String(localized: "User not authenticated")
             return
         }
         
@@ -91,7 +91,7 @@ class ApproachService: ObservableObject {
             
         } catch {
             log("❌ Error fetching approaches: \(error.localizedDescription)")
-            self.errorMessage = "Failed to load approaches. Please try again."
+            self.errorMessage = String(localized: "Failed to load approaches. Please try again.")
             // API boundary behind the Profile screen's main content. A user
             // whose log won't load sees an empty history of their own work,
             // which is the most likely single reason to stop trusting it.
@@ -125,7 +125,7 @@ class ApproachService: ObservableObject {
     // MARK: - Delete Approach
     func deleteApproach(_ approach: ApproachLog) async -> Bool {
         guard let userId = SupabaseManager.shared.currentUserId else {
-            errorMessage = "User not authenticated"
+            errorMessage = String(localized: "User not authenticated")
             return false
         }
         
@@ -161,7 +161,7 @@ class ApproachService: ObservableObject {
 
         } catch {
             log("❌ Error deleting approach: \(error.localizedDescription)")
-            self.errorMessage = "Failed to delete approach. Please try again."
+            self.errorMessage = String(localized: "Failed to delete approach. Please try again.")
             Analytics.captureError(error, context: "approach_delete", [
                 "approach_level": approach.level,
             ])
@@ -189,16 +189,16 @@ class ApproachService: ObservableObject {
         let maxCount = levelCounts.values.max() ?? 1
         
         let levelNames = [
-            1: "Level 1: Social warm-up",
-            2: "Level 2: Extended conversation", 
-            3: "Level 3: Indirect approach",
-            4: "Level 4: Direct approach"
+            1: String(localized: "Level 1: Social warm-up"),
+            2: String(localized: "Level 2: Extended conversation"), 
+            3: String(localized: "Level 3: Indirect approach"),
+            4: String(localized: "Level 4: Direct approach")
         ]
         
         return (1...4).map { level in
             let count = levelCounts[level] ?? 0
             let progress = Double(count) / Double(maxCount)
-            return (levelNames[level] ?? "Level \(level)", count, progress)
+            return (levelNames[level] ?? String(localized: "Level \(level)"), count, progress)
         }
     }
     

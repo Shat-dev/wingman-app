@@ -371,7 +371,7 @@ struct InviteFriendsCard: View {
 
     private func shareApp() {
         let activityVC = UIActivityViewController(
-            activityItems: ["Join me on Wingman! \(Self.appStoreURL)"],
+            activityItems: [String(localized: "Join me on Wingman! \(Self.appStoreURL)")],
             applicationActivities: nil
         )
         

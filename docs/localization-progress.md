@@ -12,7 +12,7 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP2 Analytics values pinned to English | **Done** (slices 2–3, `9a853f0`, `38f4330`) | New properties not yet observed arriving in PostHog |
 | WP3 Error classification | Not started | Plan wants a few days of production logging first; cannot be done inside this loop |
 | WP4 Paywall prices and disclosure | Not started | Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
-| WP5 String Catalog and extraction | **In progress** (slices 4–10) | `Localizable` holds 264 strings, `Content` 174. Onboarding, commitment, non-disclosure paywall copy, notifications, home, quotes and course catalog done. Still to move: approach logging, profile and settings, practice, auth and error messages, walkthrough, XP, daily practice and quiz |
+| WP5 String Catalog and extraction | **In progress** (slices 4–11) | `Localizable` holds 321 strings, `Content` 174. Done: onboarding, commitment, non-disclosure paywall copy, notifications, home, quotes, course catalog, approach logging, profile header. Still to move: settings and edit profile, practice (scenarios), auth and error messages, walkthrough, XP and completion screen, daily practice and quiz, shared error screen |
 | WP6 Layout and legal links | Not started | |
 | WP7 Content translation plumbing | Not started | Migration files only; nothing applied to the live database |
 | WP8 Tooling and tests | Started | Unit and UI test targets exist; parity recorder, validator and fallback tests still to build |
@@ -228,10 +228,35 @@ This closes the gap noted in slice 2 (nothing proved the canonical accessors ign
 - The courses screen was not opened on a simulator.
 - The lesson list inside a course still shows lesson titles, summaries and the course summary straight from the bundled English JSON. That is expected until WP7.
 
+### Slice 11 — WP5 part 8: approach logging and profile (2026-11-10)
+
+**What changed** (`String(localized:)` unless noted; catalog now 321 entries)
+
+- `LogApproachViewModel`: notes placeholder, button and header titles, the ten confidence descriptions and the fallback, the title validation message.
+- The save failure message is now two whole sentences (`saveFailureMessage(isEdit:)`: "Failed to save. Please try again." / "Failed to update. Please try again.") where a verb used to be inserted into one sentence. Same English text. (Audit D-3.)
+- `ApproachLevelGuideSheet`: the four level titles, descriptions and twelve examples. `LogApproachBottomSheet`: the four level card titles. `ApproachService`: the four breakdown names, the "Level n" fallback and three error messages.
+- `ProfileStatsHeader`: the level line (three variants) and the three tile labels. `ProfileView`: the share text.
+- The approach list's date text moved to `ApproachDateText`. "Today", "1 day ago" and "n days ago" are localizable. For entries a week or more old, English keeps the fixed "MMM d, yyyy" form exactly as before; a translated app uses a locale-aware date (day, month, year in the order that language expects). (Audit E-6.)
+- New `L10n.isSourceLanguage`, used for that one English-only branch.
+- Approach level titles on the view model were left as plain English: they are only used for analytics (`level_name`) and logs, never shown.
+
+**Left as found, on purpose:** the four places that name the approach levels use slightly different English ("Social Warm-up", "Social warm-up", and "Social Practice" for level 1 in the guide). Each keeps its current wording as its own catalog entry; unifying them would be a visible English change.
+
+**Behaviour for English users:** unchanged.
+
+**Tests:** new `ApproachCopyTests` (7): confidence descriptions for all ten levels and the fallback; form titles and placeholder; both failure sentences; analytics level names unchanged; relative day text; older dates keep the English format regardless of device region; in a translated app a German locale gives a day-first date with a German month. 114 unit tests pass.
+
+**Not verified**
+
+- None of these screens were opened on a simulator.
+- The level line, tile labels, share text and guide sheet strings have no direct unit test.
+- "n days ago" has no plural variants in English (it never shows 1, which has its own string). Languages with more plural forms will need them added to that catalog entry in Release B.
+
 ## Next
 
-WP5 part 8: approach logging and profile. `LogApproachViewModel` (level titles shown via a display accessor with `Content` entries, confidence descriptions, button and title text, validation and failure messages, placeholder), `ApproachLevelGuideSheet` (level descriptions and examples), `ApproachService` level names, `ApproachesLoggedListView` relative dates ("Today", "1 day ago", "n days ago") and the fixed "MMM d, yyyy" format, `ProfileView` and `ProfileStatsHeader` count sentences. This slice includes the plural and date items from plan WP5 items 4 and 6 for these files.
+WP5 part 9: settings, edit profile, daily reading goal sheet, and the shared error screen. Mostly direct SwiftUI literals already in the catalog; the work is the indirect ones (alert messages built in code, success and error strings in `SettingsSheet`, account deletion messages in `AccountDeletionModels` and `AuthManager`) and mapping the Edge Function's English error text to app-owned localized sentences (plan WP5 item 8). Then practice (scenarios) and XP.
 
 ## Open questions for Arthur
 
+- **Dates for English users outside the US:** the approach list shows "Nov 3, 2026" to every English user, including Australian and British ones (your second and fourth largest markets), because the format is fixed. I kept that unchanged, since Release A must not change what English users see. Switching English to a locale-aware date would show "3 Nov 2026" in those regions. Say if you want that; it is a one-line change.
 - **Priced paywall baseline:** one Release-build run (one test user in production analytics), or add a launch flag that tags automated runs as dev? Needed before WP4 can be signed off.

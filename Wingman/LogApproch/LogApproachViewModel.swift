@@ -30,7 +30,7 @@ final class LogApproachViewModel: ObservableObject {
         ApproachLevel(number: 4, title: "Direct Approach")
     ]
     
-    let placeholderText = "Congratulations! How did you feel? What was the situation? How did it go for you?"
+    let placeholderText = String(localized: "Congratulations! How did you feel? What was the situation? How did it go for you?")
     
     // MARK: - Services
     private let client = SupabaseManager.shared.client
@@ -45,29 +45,37 @@ final class LogApproachViewModel: ObservableObject {
     }
     
     var saveButtonTitle: String {
-        return isEditMode ? "Update Approach" : "Log Approach"
+        return isEditMode ? String(localized: "Update Approach") : String(localized: "Log Approach")
     }
     
     var headerTitle: String {
-        return isEditMode ? "Edit Approach" : "Log Approach"
+        return isEditMode ? String(localized: "Edit Approach") : String(localized: "Log Approach")
+    }
+
+    /// Shown when saving fails. Two whole sentences rather than one with the
+    /// verb dropped in, so each can be translated as a sentence.
+    static func saveFailureMessage(isEdit: Bool) -> String {
+        isEdit
+            ? String(localized: "Failed to update. Please try again.")
+            : String(localized: "Failed to save. Please try again.")
     }
 
     var anxietyLevelText: String {
         let descriptions = [
-            1: "Very anxious",
-            2: "Anxious",
-            3: "Slightly nervous",
-            4: "Moderate anxiety",
-            5: "Neutral",
-            6: "Somewhat confident",
-            7: "Confident",
-            8: "Very confident",
-            9: "Extremely confident",
-            10: "Very confident"
+            1: String(localized: "Very anxious"),
+            2: String(localized: "Anxious"),
+            3: String(localized: "Slightly nervous"),
+            4: String(localized: "Moderate anxiety"),
+            5: String(localized: "Neutral"),
+            6: String(localized: "Somewhat confident"),
+            7: String(localized: "Confident"),
+            8: String(localized: "Very confident"),
+            9: String(localized: "Extremely confident"),
+            10: String(localized: "Very confident")
         ]
         
         let level = Int(anxietyLevel.rounded())
-        return descriptions[level] ?? "Moderate"
+        return descriptions[level] ?? String(localized: "Moderate")
     }
     
     // MARK: - Setup for Editing
@@ -112,7 +120,7 @@ final class LogApproachViewModel: ObservableObject {
     func saveApproach() {
         guard canSave else {
             log("❌ Cannot save - validation failed")
-            errorMessage = "Please provide a title for your approach"
+            errorMessage = String(localized: "Please provide a title for your approach")
             return
         }
         
@@ -205,7 +213,7 @@ final class LogApproachViewModel: ObservableObject {
                     self.isSaving = false
                     HapticManager.shared.error()
                     let action = self.isEditMode ? "update" : "save"
-                    self.errorMessage = "Failed to \(action). Please try again."
+                    self.errorMessage = Self.saveFailureMessage(isEdit: self.isEditMode)
                     log("❌ Error \(action)ing approach: \(error.localizedDescription)")
 
                     // The user only ever sees "Failed to save. Please try

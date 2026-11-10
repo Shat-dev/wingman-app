@@ -56,12 +56,12 @@ struct ApproachLevelGuideSheet: View {
                         // Level 1
                         LevelSection(
                             number: 1,
-                            title: "Social Practice",
-                            description: "Developing comfort by engaging in everyday exchanges without minimal stakes.",
+                            title: String(localized: "Social Practice"),
+                            description: String(localized: "Developing comfort by engaging in everyday exchanges without minimal stakes."),
                             examples: [
-                                "Ask employee for recommendation",
-                                "Greet neighbors with small talk",
-                                "Making a light comment in a waiting line"
+                                String(localized: "Ask employee for recommendation"),
+                                String(localized: "Greet neighbors with small talk"),
+                                String(localized: "Making a light comment in a waiting line")
                             ]
                         )
 
@@ -72,12 +72,12 @@ struct ApproachLevelGuideSheet: View {
                         // Level 2
                         LevelSection(
                             number: 2,
-                            title: "Extended Conversation",
-                            description: "Keeping a conversation going past small talk without any romantic incentive.",
+                            title: String(localized: "Extended Conversation"),
+                            description: String(localized: "Keeping a conversation going past small talk without any romantic incentive."),
                             examples: [
-                                "Chat with gym regular about workout routines",
-                                "Talk to dog owner about their dog",
-                                "Casual chat talk with fellow passenger on train"
+                                String(localized: "Chat with gym regular about workout routines"),
+                                String(localized: "Talk to dog owner about their dog"),
+                                String(localized: "Casual chat talk with fellow passenger on train")
                             ]
                         )
                         
@@ -88,12 +88,12 @@ struct ApproachLevelGuideSheet: View {
                         // Level 3
                         LevelSection(
                             number: 3,
-                            title: "Indirect Approach",
-                            description: "Creating openings for connection while keeping it casual.",
+                            title: String(localized: "Indirect Approach"),
+                            description: String(localized: "Creating openings for connection while keeping it casual."),
                             examples: [
-                                "Talking to someone you may be interested in",
-                                "Asking the person for something",
-                                "Subtle compliment/ Playful banter"
+                                String(localized: "Talking to someone you may be interested in"),
+                                String(localized: "Asking the person for something"),
+                                String(localized: "Subtle compliment/ Playful banter")
                             ]
                         )
 
@@ -104,12 +104,12 @@ struct ApproachLevelGuideSheet: View {
                         // Level 4
                         LevelSection(
                             number: 4,
-                            title: "Direct Approach",
-                            description: "Making your attraction clear right away in the opener. No ambiguity.",
+                            title: String(localized: "Direct Approach"),
+                            description: String(localized: "Making your attraction clear right away in the opener. No ambiguity."),
                             examples: [
-                                "Approach someone you are interested straight away",
-                                "Direct compliment on personality or appearance",
-                                "Asking for her number (If no time to build rapport)"
+                                String(localized: "Approach someone you are interested straight away"),
+                                String(localized: "Direct compliment on personality or appearance"),
+                                String(localized: "Asking for her number (If no time to build rapport)")
                             ]
                         )
                     }

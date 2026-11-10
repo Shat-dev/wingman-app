@@ -281,31 +281,7 @@ struct ApproachLogRow: View {
     
     // Format date based on how recent it is
     private func formatDate(_ date: Date) -> String {
-        let calendar = Calendar.current
-        let now = Date()
-        
-        // Calculate days difference
-        let components = calendar.dateComponents([.day], from: calendar.startOfDay(for: date), to: calendar.startOfDay(for: now))
-        
-        if let days = components.day {
-            if days == 0 {
-                return "Today"
-            } else if days == 1 {
-                return "1 day ago"
-            } else if days < 7 {
-                return "\(days) days ago"
-            } else {
-                // For older dates, show actual date
-                let formatter = DateFormatter()
-                formatter.dateFormat = "MMM d, yyyy"
-                return formatter.string(from: date)
-            }
-        }
-        
-        // Fallback
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM d, yyyy"
-        return formatter.string(from: date)
+        ApproachDateText.string(for: date)
     }
 }
 
@@ -321,4 +297,54 @@ struct ApproachLog: Identifiable, Codable {
 
 #Preview {
     ApproachesLoggedListView()
+}
+
+// MARK: - Approach date text
+
+/// "Today", "1 day ago", "3 days ago", then a calendar date for anything a
+/// week or more old.
+nonisolated enum ApproachDateText {
+
+    static func string(
+        for date: Date,
+        now: Date = Date(),
+        calendar: Calendar = .current,
+        isSourceLanguage: Bool = L10n.isSourceLanguage,
+        locale: Locale = .current
+    ) -> String {
+        let days = calendar.dateComponents(
+            [.day],
+            from: calendar.startOfDay(for: date),
+            to: calendar.startOfDay(for: now)
+        ).day
+
+        if let days {
+            if days == 0 {
+                return String(localized: "Today")
+            } else if days == 1 {
+                return String(localized: "1 day ago")
+            } else if days < 7 {
+                return String(localized: "\(days) days ago")
+            }
+        }
+        return calendarDate(date, isSourceLanguage: isSourceLanguage, locale: locale)
+    }
+
+    /// The calendar date for an older entry.
+    ///
+    /// In English this is the fixed "MMM d, yyyy" the list has always shown
+    /// ("Nov 3, 2026"), for every region — unchanged on purpose while the app
+    /// is English-only. In a translated app it follows the user's locale
+    /// instead, so the day, month and year come in the order and with the
+    /// punctuation that language expects.
+    static func calendarDate(_ date: Date, isSourceLanguage: Bool, locale: Locale) -> String {
+        if isSourceLanguage {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MMM d, yyyy"
+            return formatter.string(from: date)
+        }
+        return date.formatted(
+            .dateTime.day().month(.abbreviated).year().locale(locale)
+        )
+    }
 }

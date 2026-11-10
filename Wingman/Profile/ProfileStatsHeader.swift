@@ -46,11 +46,11 @@ struct ProfileIdentityCard: View {
     /// Under 15 words, and specific about what is left rather than vague about
     /// what has been achieved.
     private var levelLine: String {
-        guard totalXP != nil else { return "Level 1" }
+        guard totalXP != nil else { return String(localized: "Level 1") }
         guard let toNext = progress.xpToNextLevel else {
-            return "Level \(progress.level) · Max level reached"
+            return String(localized: "Level \(progress.level) · Max level reached")
         }
-        return "Level \(progress.level) · \(toNext) XP to Level \(progress.level + 1)"
+        return String(localized: "Level \(progress.level) · \(toNext) XP to Level \(progress.level + 1)")
     }
 
     var body: some View {
@@ -166,11 +166,11 @@ struct ProfileStatTiles: View {
     var body: some View {
         HStack(spacing: 12) {
             ProfileStatTile(icon: "flame.fill", tint: .accentClay,
-                            value: topStreak, label: "Top streak")
+                            value: topStreak, label: String(localized: "Top streak"))
             ProfileStatTile(icon: "bolt.fill", tint: .accentIndigo,
-                            value: totalXP, label: "XP points")
+                            value: totalXP, label: String(localized: "XP points"))
             ProfileStatTile(icon: "book.closed.fill", tint: .accentGreen,
-                            value: lessonsCompleted, label: "Lessons")
+                            value: lessonsCompleted, label: String(localized: "Lessons"))
         }
     }
 }

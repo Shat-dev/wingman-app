@@ -32,6 +32,9 @@
     "%lld day streak" : {
 
     },
+    "%lld days ago" : {
+
+    },
     "%lld min" : {
 
     },
@@ -66,6 +69,9 @@
       "shouldTranslate" : false
     },
     "1 - very anxious" : {
+
+    },
+    "1 day ago" : {
 
     },
     "1 day streak" : {
@@ -122,7 +128,13 @@
     "Analyzing your answers" : {
 
     },
+    "Anxious" : {
+
+    },
     "Approach Level Guide" : {
+
+    },
+    "Approach someone you are interested straight away" : {
 
     },
     "Approaches Breakdown" : {
@@ -141,6 +153,15 @@
 
     },
     "Are you sure you want to delete your account? This action cannot be undone." : {
+
+    },
+    "Ask employee for recommendation" : {
+
+    },
+    "Asking for her number (If no time to build rapport)" : {
+
+    },
+    "Asking the person for something" : {
 
     },
     "Back" : {
@@ -165,6 +186,12 @@
 
     },
     "Cancel" : {
+
+    },
+    "Casual chat talk with fellow passenger on train" : {
+
+    },
+    "Chat with gym regular about workout routines" : {
 
     },
     "Check Answer" : {
@@ -227,6 +254,12 @@
     "Confidence: %lld/10" : {
 
     },
+    "Confident" : {
+
+    },
+    "Congratulations! How did you feel? What was the situation? How did it go for you?" : {
+
+    },
     "Continue" : {
 
     },
@@ -243,6 +276,9 @@
 
     },
     "Create a free account" : {
+
+    },
+    "Creating openings for connection while keeping it casual." : {
 
     },
     "Daily Practice" : {
@@ -269,6 +305,15 @@
     "Delete my data" : {
 
     },
+    "Developing comfort by engaging in everyday exchanges without minimal stakes." : {
+
+    },
+    "Direct Approach" : {
+
+    },
+    "Direct compliment on personality or appearance" : {
+
+    },
     "Do you often want to talk to women but don’t?" : {
 
     },
@@ -284,6 +329,9 @@
     "Edit" : {
 
     },
+    "Edit Approach" : {
+
+    },
     "Edit Profile" : {
 
     },
@@ -296,7 +344,25 @@
     "Examples" : {
 
     },
+    "Extended Conversation" : {
+
+    },
+    "Extremely confident" : {
+
+    },
+    "Failed to delete approach. Please try again." : {
+
+    },
+    "Failed to load approaches. Please try again." : {
+
+    },
     "Failed to restore purchases. Please try again." : {
+
+    },
+    "Failed to save. Please try again." : {
+
+    },
+    "Failed to update. Please try again." : {
 
     },
     "Feel confident, not anxious" : {
@@ -315,6 +381,9 @@
 
     },
     "Good Morning," : {
+
+    },
+    "Greet neighbors with small talk" : {
 
     },
     "Half of men don't approach. Most who do, succeed." : {
@@ -350,6 +419,9 @@
     "Incorrect Answer." : {
 
     },
+    "Indirect Approach" : {
+
+    },
     "Invite Friends" : {
 
     },
@@ -359,19 +431,41 @@
     "It's on this device only. An account keeps it if you change phones." : {
 
     },
+    "Join me on Wingman! %@" : {
+
+    },
     "Join the men taking action" : {
 
     },
     "Keep it flowing, no awkward silences" : {
 
     },
+    "Keeping a conversation going past small talk without any romantic incentive." : {
+
+    },
     "Know exactly how to start talking" : {
+
+    },
+    "Lessons" : {
 
     },
     "Level %lld" : {
 
     },
     "Level %lld reached." : {
+
+    },
+    "Level %lld · %lld XP to Level %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Level %1$lld · %2$lld XP to Level %3$lld"
+          }
+        }
+      }
+    },
+    "Level %lld · Max level reached" : {
 
     },
     "Level %lld: %@" : {
@@ -383,6 +477,33 @@
           }
         }
       }
+    },
+    "Level 1" : {
+
+    },
+    "Level 1: Social Warm-up" : {
+
+    },
+    "Level 1: Social warm-up" : {
+
+    },
+    "Level 2: Extended Conversation" : {
+
+    },
+    "Level 2: Extended conversation" : {
+
+    },
+    "Level 3: Indirect Approach" : {
+
+    },
+    "Level 3: Indirect approach" : {
+
+    },
+    "Level 4: Direct Approach" : {
+
+    },
+    "Level 4: Direct approach" : {
+
     },
     "Loading approaches..." : {
 
@@ -408,10 +529,22 @@
     "Log in" : {
 
     },
+    "Making a light comment in a waiting line" : {
+
+    },
+    "Making your attraction clear right away in the opener. No ambiguity." : {
+
+    },
     "Manage Subscriptions" : {
 
     },
     "Maximum characters reached" : {
+
+    },
+    "Moderate" : {
+
+    },
+    "Moderate anxiety" : {
 
     },
     "Monthly Plan" : {
@@ -424,6 +557,9 @@
 
     },
     "Name" : {
+
+    },
+    "Neutral" : {
 
     },
     "Next" : {
@@ -496,6 +632,9 @@
 
     },
     "Please Try again!" : {
+
+    },
+    "Please provide a title for your approach" : {
 
     },
     "Please select a subscription plan" : {
@@ -591,10 +730,19 @@
     "Skip for now" : {
 
     },
+    "Slightly nervous" : {
+
+    },
+    "Social Practice" : {
+
+    },
     "Something went wrong" : {
 
     },
     "Something went wrong on our end. Please try again." : {
+
+    },
+    "Somewhat confident" : {
 
     },
     "Start" : {
@@ -621,6 +769,9 @@
     "Stop talking yourself out of it" : {
 
     },
+    "Subtle compliment/ Playful banter" : {
+
+    },
     "Success" : {
 
     },
@@ -628,6 +779,12 @@
 
     },
     "TODAY" : {
+
+    },
+    "Talk to dog owner about their dog" : {
+
+    },
+    "Talking to someone you may be interested in" : {
 
     },
     "Tap and hold to commit." : {
@@ -681,6 +838,12 @@
     "To achieve what I want, I must grow. I won’t let fear make the decision for me. I’ll take my chance, and learn from what happens." : {
 
     },
+    "Today" : {
+
+    },
+    "Top streak" : {
+
+    },
     "Try Again" : {
 
     },
@@ -696,10 +859,16 @@
     "Up Next" : {
 
     },
+    "Update Approach" : {
+
+    },
     "Updated!" : {
 
     },
     "User" : {
+
+    },
+    "User not authenticated" : {
 
     },
     "Using Wingman every day" : {
@@ -708,6 +877,12 @@
     "V %@" : {
       "comment" : "App version label.",
       "shouldTranslate" : false
+    },
+    "Very anxious" : {
+
+    },
+    "Very confident" : {
+
     },
     "Waiting for approval" : {
 
@@ -784,6 +959,9 @@
     "XP" : {
       "comment" : "Brand term. Not translated.",
       "shouldTranslate" : false
+    },
+    "XP points" : {
+
     },
     "Yearly Plan" : {
 
