@@ -7,7 +7,7 @@ Branch `localization-release-b`. Rules and glossary: [localization-de-brief.md](
 | Part | State |
 |---|---|
 | UI catalogs (G2) | 574 of 574 strings drafted (2026-11-10) |
-| Lesson overlays (G3) | 1 of 25 courses (80 of 1,531 items) |
+| Lesson overlays (G3) | 2 of 25 courses (148 of 1,531 items): 1, 6 |
 | Database content (G4) | Not started |
 | German sweep (G7) | Onboarding and tabs on SE, 2026-11-11: no clipping. Lessons not yet seen in German |
 
@@ -17,6 +17,7 @@ Lesson order followed: the first course of each category before the second (1, 6
 
 - **2026-11-11. UI catalogs, German sweep.** Committed `8f86f07`. Sweep on the SE in German: 26 screens, no clipped or overlapping text.
 - **2026-11-11. Course 1, Beliefs & Reframes** (5 lessons, 80 items, 1,782 English words). `lesson_overlay_course_1_de.json`. The check passes. Test change: `testTheAppBundleShipsNoOverlays` was a Release A guard ("no overlay files at all"). It now allows German, rejects other languages and checks every bundled German file loads. 298 tests pass. For the reviewer: "growth mindset / fixed mindset" became *Wachstumsdenken / starres Denken*, with the English terms in brackets on first use; "competence confidence loop" became *Kompetenz-Selbstvertrauen-Kreislauf*.
+- **2026-11-11. Course 6, Approach Readiness** (4 lessons, 68 items, 1,503 English words). The check passes. For the reviewer: "You're always in the field" became *Du bist immer im Spiel*; "got a rep" / "volume" became *ein weiterer Versuch* / *viele Versuche*. The man in the grocery store is there on a Saturday morning rather than Sunday, since German supermarkets are closed on Sundays.
 
 ## Questions for Arthur
 
