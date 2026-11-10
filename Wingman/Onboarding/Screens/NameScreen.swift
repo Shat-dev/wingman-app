@@ -152,7 +152,7 @@ private let namePreviewStep = OnboardingStep(
     type: .name,
     title: "What's your name?",
     subtitle: "So Wingman can talk to you, not at you.",
-    options: nil,
+    choices: nil,
     progress: 0.15,
     questionKey: OnboardingNameKey.answerKey
 )

@@ -43,7 +43,14 @@ struct OnboardingStep: Identifiable {
     let title: String
     let subtitle: String?
 
-    let options: [String]?        // for questions
+    /// The answers a question offers, each with its id, its stored value and
+    /// its label — see `OnboardingOption`. Nil for steps that ask nothing.
+    let choices: [OnboardingOption]?
+
+    /// The stored / analytics values of `choices`, in display order. These
+    /// are the frozen English strings (`OnboardingOption.canonicalValue`),
+    /// not labels: nothing on screen should read from this.
+    var options: [String]? { choices?.map(\.canonicalValue) }
 
     let progress: Double          // 0.0–1.0
     let questionKey: String?      // for saving answers
@@ -56,24 +63,5 @@ struct OnboardingStep: Identifiable {
     var isMultiSelect: Bool {
         guard let key = questionKey else { return false }
         return key == "motivation" || key == "barriers" || key == "goals"
-    }
-
-    /// What an option reads as on screen, where that differs from the value
-    /// stored for it. Keyed by the stored value; anything not listed displays
-    /// as itself.
-    ///
-    /// An option string is two things at once: the label on the button, and
-    /// the value written to the answer store, to Supabase and to the
-    /// `onboarding_<key>` PostHog person property. Correcting a typo in the
-    /// string itself would start a second value in every breakdown of that
-    /// answer, split from its own history by one letter. Listing the corrected
-    /// wording here fixes what the user reads and leaves the stored value
-    /// byte-for-byte what it has always been.
-    private static let displayLabels: [String: String] = [
-        "Fear of rejection or being embarrased": "Fear of rejection or being embarrassed"
-    ]
-
-    func displayLabel(for option: String) -> String {
-        Self.displayLabels[option] ?? option
     }
 }

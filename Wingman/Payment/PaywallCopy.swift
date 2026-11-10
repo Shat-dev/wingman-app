@@ -7,12 +7,14 @@
 //  It sells who they become, not what they unlock: each tick names the pain
 //  they told us about and states it solved.
 //
-//  Keys are the stored answer values (`onboarding_<questionKey>`), which are
-//  the raw option strings in OnboardingFlow — including the deliberate
-//  "embarrased" misspelling. Anything unrecognised, skipped, or from an older
-//  build falls back to a line that fits everyone, so the list is always three
-//  long. Multi-select answers are stored ", "-joined in tap order; the first
-//  pick is treated as the one that matters most.
+//  Inputs are the stored answer values (`onboarding_<questionKey>`). Each is
+//  resolved to its option (`BarrierOption`, `GoalOption`) before anything is
+//  decided, so the choice of line depends on which answer was given, never on
+//  how that answer is worded or what language it was shown in. Anything
+//  unrecognised, skipped, or from an older build falls back to a line that
+//  fits everyone, so the list is always three long. Multi-select answers are
+//  stored ", "-joined in tap order; the first pick is treated as the one that
+//  matters most.
 //
 //  Each tick is kept to 36 characters or fewer so it sits on one line at
 //  16pt on a 375pt-wide phone (SE, 13 mini). Longer lines wrap there and push
@@ -45,37 +47,37 @@ enum PaywallCopy {
     }
 
     private static func firstPick(_ stored: String?) -> String? {
-        stored?.components(separatedBy: ", ").first
+        OnboardingAnswerCoding.firstPick(ofStoredValue: stored)
     }
 
     /// Answer to "What usually stops you from doing so?"
     static func barrierLine(_ answer: String?) -> String {
-        switch answer {
-        case "Fear of rejection or being embarrased":
+        switch BarrierOption(storedValue: answer) {
+        case .fearOfRejection:
             return "Stop letting fear of rejection win"
-        case "Fear of social consequences":
+        case .socialConsequences:
             return "Stop caring what others think"
-        case "Not knowing what to say or how to start":
+        case .whatToSay:
             return "Know exactly how to start talking"
-        case "Worrying about coming across wrong":
+        case .comingAcrossWrong:
             return "Come across natural, not nervous"
-        default:
+        case .other, nil:
             return "Stop talking yourself out of it"
         }
     }
 
     /// Answer to "What are you mainly hoping to improve?"
     static func goalLine(_ answer: String?) -> String {
-        switch answer {
-        case "Better mindset & confidence":
+        switch GoalOption(storedValue: answer) {
+        case .mindsetAndConfidence:
             return "Feel confident, not anxious"
-        case "Learning how to approach":
+        case .howToApproach:
             return "Walk up to her without hesitating"
-        case "Keeping conversations going":
+        case .conversationsGoing:
             return "Keep it flowing, no awkward silences"
-        case "Creating attraction and romantic interest":
+        case .attraction:
             return "Turn small talk into real chemistry"
-        default:
+        case .other, nil:
             return "Go first without overthinking it"
         }
     }

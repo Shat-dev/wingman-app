@@ -11,10 +11,10 @@
 //  every navigation transition.
 //
 //  Single- and multi-select questions are handled uniformly: the view
-//  always hands the parent a `[String]` via `onNext`, length-1 for
-//  single-select and N-long (in tap order) for multi-select. The parent
-//  serializes with `", "` for storage — the same scheme used before
-//  extraction.
+//  always hands the parent a `[String]` of option ids via `onNext`, length-1
+//  for single-select and N-long (in tap order) for multi-select. The parent
+//  turns the ids into the stored value (`OnboardingAnswerCoding`) — the view
+//  never sees what is stored, only ids and labels.
 //
 
 import SwiftUI
@@ -23,6 +23,7 @@ struct QuestionScreen: View {
     let step: OnboardingStep
     let onNext: ([String]) -> Void
 
+    /// Ids of the selected options (`OnboardingOption.id`), in tap order.
     @State private var selectedOptions: [String]
 
     init(step: OnboardingStep, initialSelection: [String], onNext: @escaping ([String]) -> Void) {
@@ -96,28 +97,28 @@ struct QuestionScreen: View {
             }
 
             // Options
-            if let options = step.options {
+            if let choices = step.choices {
                 VStack(spacing: 10) {
-                    ForEach(options, id: \.self) { option in
+                    ForEach(choices) { choice in
                         Button(action: {
                             HapticManager.shared.selection()
                             if step.isMultiSelect {
                                 // Toggle: tap again to deselect
-                                if let idx = selectedOptions.firstIndex(of: option) {
+                                if let idx = selectedOptions.firstIndex(of: choice.id) {
                                     selectedOptions.remove(at: idx)
                                 } else {
-                                    selectedOptions.append(option)
+                                    selectedOptions.append(choice.id)
                                 }
                             } else {
-                                selectedOptions = [option]
+                                selectedOptions = [choice.id]
                             }
                         }) {
-                            // The label can differ from `option`, which is
-                            // the stored value — selection, storage and
-                            // analytics all stay keyed on `option` itself.
+                            // Selection is keyed on the option's id. The
+                            // label is only what is read; the stored value
+                            // is a third thing — see `OnboardingOption`.
                             OptionButton(
-                                text: step.displayLabel(for: option),
-                                isSelected: selectedOptions.contains(option)
+                                text: choice.label,
+                                isSelected: selectedOptions.contains(choice.id)
                             )
                         }
                         .buttonStyle(ScalePressStyle())
@@ -166,7 +167,7 @@ struct QuestionScreen: View {
 #Preview("Single-select restored") {
     QuestionScreen(
         step: extendedOnboardingSteps[0],
-        initialSelection: ["25-34"],
+        initialSelection: [AgeOption.age25to34.rawValue],
         onNext: { _ in }
     )
 }
@@ -182,7 +183,7 @@ struct QuestionScreen: View {
 #Preview("Multi-select restored") {
     QuestionScreen(
         step: extendedOnboardingSteps[3],
-        initialSelection: ["Fear of rejection or being embarrased", "Other"],
+        initialSelection: [BarrierOption.fearOfRejection.rawValue, BarrierOption.other.rawValue],
         onNext: { _ in }
     )
 }

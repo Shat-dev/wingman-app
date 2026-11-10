@@ -75,20 +75,14 @@ let extendedOnboardingSteps: [OnboardingStep] = [
     // own", not "I'm lonely") so nobody has to label themselves on the first
     // screen to answer it.
     //
-    // Multi-select: stored ", "-joined, so no option may contain ", ".
+    // Multi-select: stored ", "-joined, so no option's stored value may
+    // contain ", ". The answers themselves are defined in `OnboardingOption.swift`.
     // Stored under `onboarding_motivation` in PostHog like every other answer.
     OnboardingStep(
         type: .question,
         title: "What brought you to Wingman?",
         subtitle: nil,
-        options: [
-            "Back on the market after a breakup or divorce",
-            "I freeze up around women I find attractive",
-            "Done with dating apps",
-            "Tired of being on my own",
-            "Want more confidence in general",
-            "Other"
-        ],
+        choices: MotivationOption.options,
         progress: 0.13,
         questionKey: "motivation"
     ),
@@ -106,7 +100,7 @@ let extendedOnboardingSteps: [OnboardingStep] = [
         // stored value "45+": `StatisticContent` handles it explicitly, and
         // the PostHog age tiles group by the raw string, so it simply stays a
         // bar of its own next to the two new ones.
-        options: ["18-24", "25-34", "35-44", "45-54", "55+"],
+        choices: AgeOption.options,
         // Progress rebalanced across the seven steps that now precede loading.
         // Left at the old 0.3 this would open the flow with the bar already a
         // third full, which reads as progress the user hasn't made yet.
@@ -119,7 +113,7 @@ let extendedOnboardingSteps: [OnboardingStep] = [
         type: .question,
         title: "When was the last time you spoke to a woman in public?",
         subtitle: nil,
-        options: ["Within the past week", "Within the past month", "A few months ago", "More than a year ago", "Never approached before"],
+        choices: LastApproachOption.options,
         progress: 0.38,
         questionKey: "last_approach"
     ),
@@ -129,7 +123,7 @@ let extendedOnboardingSteps: [OnboardingStep] = [
         type: .question,
         title: "Do you often want to talk to women but don’t?",
         subtitle: nil,
-        options: ["Every time", "Most times", "Sometimes", "Rarely", "No, I usually go for it"],
+        choices: ApproachFrequencyOption.options,
         progress: 0.50,
         questionKey: "approach_frequency"
     ),
@@ -139,16 +133,10 @@ let extendedOnboardingSteps: [OnboardingStep] = [
         type: .question,
         title: "What usually stops you from doing so?",
         subtitle: nil,
-        options: [
-            // Misspelled on purpose — this string is the stored answer value,
-            // not just a label. Users see "embarrassed": the corrected wording
-            // lives in `OnboardingStep.displayLabel(for:)`.
-            "Fear of rejection or being embarrased",
-            "Fear of social consequences",
-            "Not knowing what to say or how to start",
-            "Worrying about coming across wrong",
-            "Other"
-        ],
+        // The stored value of the first option is misspelled on purpose
+        // ("embarrased"); users read the corrected label. Both live in
+        // `BarrierOption`.
+        choices: BarrierOption.options,
         progress: 0.63,
         questionKey: "barriers"
     ),
@@ -158,13 +146,7 @@ let extendedOnboardingSteps: [OnboardingStep] = [
         type: .question,
         title: "What are you mainly hoping to improve?",
         subtitle: nil,
-        options: [
-            "Better mindset & confidence",
-            "Learning how to approach",
-            "Keeping conversations going",
-            "Creating attraction and romantic interest",
-            "Other"
-        ],
+        choices: GoalOption.options,
         progress: 0.75,
         questionKey: "goals"
     ),
@@ -186,7 +168,7 @@ let extendedOnboardingSteps: [OnboardingStep] = [
         type: .growthProjection,
         title: "Build the confidence to take action when it matters",
         subtitle: nil,
-        options: nil,
+        choices: nil,
         progress: 0.88,
         questionKey: "growth_projection"
     ),
@@ -199,7 +181,7 @@ let extendedOnboardingSteps: [OnboardingStep] = [
         type: .loading,
         title: "Optimizing your experience",
         subtitle: "Confidence is a skill. Skills are built.",
-        options: nil,
+        choices: nil,
         progress: 1.0,
         questionKey: nil
     ),
@@ -228,7 +210,7 @@ let extendedOnboardingSteps: [OnboardingStep] = [
         type: .socialProof,
         title: "Join the men taking action",
         subtitle: nil,
-        options: nil,
+        choices: nil,
         progress: 1.0,
         questionKey: "social_proof"
     )

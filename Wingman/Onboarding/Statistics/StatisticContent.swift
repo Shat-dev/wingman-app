@@ -34,15 +34,15 @@ extension StatisticContent {
         // The default branch must keep returning a statistic rather than nil:
         // `sequentialIndex` relies on a step having one whatever the age is.
         if questionKey == "last_approach" {
-            switch ageGroup {
-            case "18-24":
+            switch AgeOption(storedValue: ageGroup) {
+            case .age18to24:
                 return StatisticContent(
                     heading: "Almost half of men your age have never approached a woman",
                     subheading: "You are not alone. Millions of men struggle with approaching.",
                     imageName: "stat_never_approached",
                     fact: "45% of men aged 18-24 have never approached a woman"
                 )
-            case "25-34", "35-44":
+            case .age25to34, .age35to44:
                 return StatisticContent(
                     heading: "Almost half of men your age haven't approached in the past year",
                     subheading: "You are not alone. Millions of men struggle with approaching.",

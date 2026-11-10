@@ -162,9 +162,7 @@ nonisolated enum MarketingNotifications {
     private static func personalisedBodies() -> [String: String] {
         let defaults = UserDefaults.standard
         func firstPick(_ key: String) -> String? {
-            defaults.string(forKey: "onboarding_\(key)")?
-                .components(separatedBy: ", ")
-                .first
+            OnboardingAnswerCoding.firstPick(ofStoredValue: defaults.string(forKey: "onboarding_\(key)"))
         }
         return [
             "day1": motivationLine(firstPick("motivation")),
@@ -175,49 +173,48 @@ nonisolated enum MarketingNotifications {
 
     /// Day 1, from "What brought you to Wingman?"
     static func motivationLine(_ answer: String?) -> String {
-        switch answer {
-        case "Back on the market after a breakup or divorce":
+        switch MotivationOption(storedValue: answer) {
+        case .breakup:
             return "What would your first conversation back out there sound like?"
-        case "I freeze up around women I find attractive":
+        case .freeze:
             return "What happens in the second before you freeze?"
-        case "Done with dating apps":
+        case .doneWithApps:
             return "When did you last meet someone without a screen in between?"
-        case "Tired of being on my own":
+        case .onMyOwn:
             return "Who did you notice today that you didn\u{2019}t talk to?"
-        case "Want more confidence in general":
+        case .moreConfidence:
             return "Where in your day could you say one more hello?"
-        default:
+        case .other, nil:
             return "When did you last start a conversation with a stranger?"
         }
     }
 
     /// Day 3, from "What usually stops you from doing so?"
-    /// ("embarrased" matches the stored option text, misspelling included.)
     static func barrierLine(_ answer: String?) -> String {
-        switch answer {
-        case "Fear of rejection or being embarrased":
+        switch BarrierOption(storedValue: answer) {
+        case .fearOfRejection:
             return "What\u{2019}s the worst a polite \u{201C}no\u{201D} could actually cost you?"
-        case "Fear of social consequences":
+        case .socialConsequences:
             return "Would anyone around you really remember you saying hi?"
-        case "Not knowing what to say or how to start":
+        case .whatToSay:
             return "What if your opener didn\u{2019}t need to be clever?"
-        case "Worrying about coming across wrong":
+        case .comingAcrossWrong:
             return "What if a little nervousness just reads as genuine?"
-        default:
+        case .other, nil:
             return "What\u{2019}s the one thing that stops you from saying hi?"
         }
     }
 
     /// Day 7, from "What are you mainly hoping to improve?"
     static func goalLine(_ answer: String?) -> String {
-        switch answer {
-        case "Better mindset & confidence":
+        switch GoalOption(storedValue: answer) {
+        case .mindsetAndConfidence:
             return "What would feeling sure of yourself change this week?"
-        case "Keeping conversations going":
+        case .conversationsGoing:
             return "What\u{2019}s one question you could ask that isn\u{2019}t small talk?"
-        case "Creating attraction and romantic interest":
+        case .attraction:
             return "When did a conversation last feel like more than small talk?"
-        default: // includes "Learning how to approach"
+        case .howToApproach, .other, nil: // "Learning how to approach" shares the default on purpose
             return "Who would you talk to this week if nerves weren\u{2019}t a factor?"
         }
     }

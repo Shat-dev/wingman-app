@@ -527,12 +527,14 @@ struct OnboardingView: View {
         }
         let step = steps[index]
 
-        if let key = step.questionKey, !selection.isEmpty {
-            // Multi-select: ", "-joined in tap order. Single-select:
-            // 1-element array joins to just the chosen option. No option
-            // contains ", " so this round-trips losslessly via
-            // `components(separatedBy: ", ")` in `initialSelection(for:)`.
-            let answer = selection.joined(separator: ", ")
+        // `selection` holds option ids. What is stored and sent is each
+        // option's frozen English `canonicalValue` — never its label — so the
+        // value is the same whatever language the question was shown in.
+        // Multi-select: ", "-joined in tap order. Single-select: the one
+        // value. `initialSelection(for:)` reverses this.
+        let answer = OnboardingAnswerCoding.storedValue(forSelectedIDs: selection, in: step.choices ?? [])
+
+        if let key = step.questionKey, !answer.isEmpty {
 
             // In-memory dict updated synchronously (so read-after-write
             // in the current runloop tick sees the new value); the
@@ -869,9 +871,13 @@ struct OnboardingView: View {
         // ("45+", before it was split in two). Restoring that would enable
         // Next with nothing highlighted and re-submit a value the user can't
         // see on screen.
-        let options = step.options ?? []
-        let restored = step.isMultiSelect ? stored.components(separatedBy: ", ") : [stored]
-        return restored.filter(options.contains)
+        //
+        // Returns option ids, which is what `QuestionScreen` selects by.
+        return OnboardingAnswerCoding.selectedIDs(
+            fromStoredValue: stored,
+            in: step.choices ?? [],
+            isMultiSelect: step.isMultiSelect
+        )
     }
 
 }
