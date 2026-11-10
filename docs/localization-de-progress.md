@@ -7,7 +7,7 @@ Branch `localization-release-b`. Rules and glossary: [localization-de-brief.md](
 | Part | State |
 |---|---|
 | UI catalogs (G2) | 574 of 574 strings drafted (2026-11-10) |
-| Lesson overlays (G3) | 19 of 25 courses (1,155 of 1,531 items): 1, 2, 3, 4, 6, 7, 8, 9, 12, 13, 14, 15, 17, 18, 19, 20, 22, 23, 24 |
+| Lesson overlays (G3) | 20 of 25 courses (1,227 of 1,531 items): 1, 2, 3, 4, 6, 7, 8, 9, 12, 13, 14, 15, 17, 18, 19, 20, 22, 23, 24, 25 |
 | Database content (G4) | Not started |
 | German sweep (G7) | Onboarding and tabs on SE, 2026-11-11: no clipping. Lessons not yet seen in German |
 
@@ -35,6 +35,7 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **2026-11-11. Course 9, Reading & Responding** (3 lessons, 39 items, 855 English words). The check passes. For the reviewer: the three signal types became *offen / höflich / kühl*; "seeing someone" became *gerade jemanden daten*; the example close "Nice talking to you" became *Schön, dich kennengelernt zu haben*.
 - **2026-11-11. Course 15, Closing** (4 lessons, 62 items, 1,558 English words). The check passes. For the reviewer: "close / closing" has no neat German equivalent. It's rendered as *nach mehr fragen* (asking for more: a number, a next step), and the course title stays *Der Abschluss*. "Choice architecture" became *Entscheidungsarchitektur*.
 - **2026-11-11. Course 20, Physical Presence** (4 lessons, 63 items, 1,450 English words). The check passes. Distances are metric: four feet became *gut ein Meter*, two to four feet *60 Zentimeter bis ein Meter*, under two feet *unter 60 Zentimeter*. The English typo in `content_20_3_4_2` ("Now there are more physically mirrored") is rendered by meaning: *auf Augenhöhe und spiegeln einander*. "Chameleon effect" became *Chamäleon-Effekt*.
+- **2026-11-11. Course 25, Learning & Self Discovery** (4 lessons, 72 items, 1,569 English words). The check passes. For the reviewer: "sticking point" became *Knackpunkt*; "growth plateau" became *Plateau*; "calibration" became *Gespür* here (*Kalibrieren* in 17_4). The English "flat and friendless" (25_3_6_2), probably meant as "flat and friendly", became *flach und rein freundschaftlich*.
 
 ## Questions for Arthur
 
@@ -44,3 +45,5 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **Lesson 15_4, "Assume she is interested".** The English frames her saying yes as "compliance" and "the path of least resistance", and says a question "can talk her out of what her emotional mind already decided". The German follows the meaning but softens "compliance" to *zustimmen*. The lesson only works after the signal-reading in 15_1 and course 9, and as written it can read as pressuring her past her own hesitation. Worth one look in both languages, alongside the respect lesson (17_3).
 - **Lesson 20_4, "When and How to Use Touch".** The German is faithful, but two things are worth a decision in both languages. (1) "keep a hand on the lower back for guidance" is noticeably more intimate than an arm or shoulder tap. (2) Unlike the respect lesson (17_3: "never touch without clear signs she's comfortable, and stop immediately if she pulls away"), this lesson never says to stop if she pulls back. One sentence would close that gap, e.g. *Wenn sie zurückweicht oder sich verspannt, hör sofort auf.* Not added, since content changes are yours to make.
 - **English typo, `content_20_3_4_2`**: "Now there are more physically mirrored" should probably read "Now they are more physically mirrored".
+- **Lesson 25_3, sticking point "escalation".** `content_25_3_7_2` tells the reader to bring in "physical escalation earlier than feels comfortable". The German is faithful, but the sentence reads as *his* comfort, and it sits badly with the respect lesson (17_3) and with lesson 20_4 having no stop rule. Suggest adding in both languages: "…earlier than feels comfortable for you, and only while she is clearly reciprocating."
+- **English typo, `content_25_3_6_2`**: "flat and friendless" is probably "flat and friendly".
