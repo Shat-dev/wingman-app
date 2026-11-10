@@ -712,9 +712,9 @@ struct PaywallView: View {
             // Yearly Plan
             PlanRow(
                 title: String(localized: "Yearly Plan"),
-                price: viewModel.yearlyPackage.map { "\(calculateWeeklyPrice($0)) per week" } ?? "",
+                price: viewModel.yearlyPackage.flatMap(PaywallPricing.weeklyPriceLine(for:)) ?? "",
                 weekly: viewModel.yearlyPrice,
-                weeklySubtitle: "per year",
+                weeklySubtitle: PaywallPricing.perYear,
                 isSelected: viewModel.selectedPlan == .yearly,
                 badgeText: (viewModel.selectedPlan == .yearly && viewModel.isYearlyTrialEligible) ? "3-day Free Trial" : nil
             ) {
@@ -734,9 +734,9 @@ struct PaywallView: View {
             // Monthly Plan
             PlanRow(
                 title: String(localized: "Monthly Plan"),
-                price: viewModel.monthlyPackage.map { "\(calculateWeeklyPrice($0)) per week" } ?? "",
+                price: viewModel.monthlyPackage.flatMap(PaywallPricing.weeklyPriceLine(for:)) ?? "",
                 weekly: viewModel.monthlyPrice,
-                    weeklySubtitle: "per month",
+                    weeklySubtitle: PaywallPricing.perMonth,
                     isSelected: viewModel.selectedPlan == .monthly,
                     badgeText: (viewModel.selectedPlan == .monthly && viewModel.isMonthlyTrialEligible) ? "3-day Free Trial" : nil
             ) {
@@ -982,32 +982,6 @@ struct PaywallView: View {
             .buttonStyle(ScalePressStyle())
         }
         .padding(.bottom, 8)
-    }
-
-    // MARK: - Helper Methods
-    private func calculateWeeklyPrice(_ package: Package?) -> String {
-        guard let package = package else { return "N/A" }
-
-        let price = package.storeProduct.price
-        let period = package.storeProduct.subscriptionPeriod
-
-        // Calculate weekly price based on subscription period
-        let weeklyPrice: Decimal
-        if period?.unit == .year {
-            weeklyPrice = price / 52 // 52 weeks in a year
-        } else if period?.unit == .month {
-            weeklyPrice = price / 4.33 // ~4.33 weeks in a month
-        } else {
-            weeklyPrice = price
-        }
-
-        // Use the same formatter configuration as the original price string
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.maximumFractionDigits = 2
-        formatter.locale = Locale.current
-
-        return "only " + (formatter.string(from: weeklyPrice as NSNumber) ?? "$0.00")
     }
 }
 

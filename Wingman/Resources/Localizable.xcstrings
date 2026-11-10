@@ -138,44 +138,114 @@
     "3x" : {
       "comment" : "Bold lead-in on the growth screen. It is immediately followed by a space and the entry 'faster progress than watching generic advice videos', forming one sentence."
     },
-    "45% of men aged 18-24 have never approached a woman" : {},
-    "48% of men aged 26-40 haven't approached in the past year" : {},
-    "58% of men who consistently approach get a number, date, or relationship" : {},
-    "63% of single men regret not approaching women when they were younger" : {},
-    "77% of women aged between 18 and 30 want to be approached more" : {},
-    "A man watches a woman walk past, imagining them together" : {},
-    "Account" : {},
-    "Add your name" : {},
-    "All correct" : {},
-    "Allow notifications for tips and offers. Turn them off anytime in Settings." : {},
-    "Almost done, you'll be free to explore in a second." : {},
-    "Almost half of men haven't approached in the past year" : {},
-    "Almost half of men your age have never approached a woman" : {},
-    "Almost half of men your age haven't approached in the past year" : {},
-    "Already have an account?" : {},
-    "An error occurred" : {},
-    "An unexpected error occurred. Please try again." : {},
-    "An unknown error occurred. Please try again." : {},
-    "Analyzing your answers" : {},
-    "And this is where you practise.\nBookstore, gym, coffee shop. Choose what to say, see what happens." : {},
-    "Anxious" : {},
-    "Approach Level Guide" : {},
-    "Approach someone you are interested straight away" : {},
-    "Approaches Breakdown" : {},
-    "Approaches Logged" : {},
-    "Approaches logged" : {},
-    "Approaching character limit" : {},
-    "Are you sure you want to delete this approach log?" : {},
-    "Are you sure you want to delete your account? This action cannot be undone." : {},
-    "Ask employee for recommendation" : {},
-    "Asking for her number (If no time to build rapport)" : {},
-    "Asking the person for something" : {},
+    "45% of men aged 18-24 have never approached a woman" : {
+
+    },
+    "48% of men aged 26-40 haven't approached in the past year" : {
+
+    },
+    "58% of men who consistently approach get a number, date, or relationship" : {
+
+    },
+    "63% of single men regret not approaching women when they were younger" : {
+
+    },
+    "77% of women aged between 18 and 30 want to be approached more" : {
+
+    },
+    "A man watches a woman walk past, imagining them together" : {
+
+    },
+    "Account" : {
+
+    },
+    "Add your name" : {
+
+    },
+    "All correct" : {
+
+    },
+    "Allow notifications for tips and offers. Turn them off anytime in Settings." : {
+
+    },
+    "Almost done, you'll be free to explore in a second." : {
+
+    },
+    "Almost half of men haven't approached in the past year" : {
+
+    },
+    "Almost half of men your age have never approached a woman" : {
+
+    },
+    "Almost half of men your age haven't approached in the past year" : {
+
+    },
+    "Already have an account?" : {
+
+    },
+    "An error occurred" : {
+
+    },
+    "An unexpected error occurred. Please try again." : {
+
+    },
+    "An unknown error occurred. Please try again." : {
+
+    },
+    "Analyzing your answers" : {
+
+    },
+    "And this is where you practise.\nBookstore, gym, coffee shop. Choose what to say, see what happens." : {
+
+    },
+    "Anxious" : {
+
+    },
+    "Approach Level Guide" : {
+
+    },
+    "Approach someone you are interested straight away" : {
+
+    },
+    "Approaches Breakdown" : {
+
+    },
+    "Approaches Logged" : {
+
+    },
+    "Approaches logged" : {
+
+    },
+    "Approaching character limit" : {
+
+    },
+    "Are you sure you want to delete this approach log?" : {
+
+    },
+    "Are you sure you want to delete your account? This action cannot be undone." : {
+
+    },
+    "Ask employee for recommendation" : {
+
+    },
+    "Asking for her number (If no time to build rapport)" : {
+
+    },
+    "Asking the person for something" : {
+
+    },
     "Back" : {
       "comment" : "Scenario player: go to the previous line."
     },
-    "Bite-sized lessons you can do on your commute or lunch break" : {},
-    "Build the confidence to take action when it matters" : {},
-    "Building your practice plan" : {},
+    "Bite-sized lessons you can do on your commute or lunch break" : {
+
+    },
+    "Build the confidence to take action when it matters" : {
+
+    },
+    "Building your practice plan" : {
+
+    },
     "By continuing you agree to our" : {
       "comment" : "Start of the sign-in legal line in the English layout only. Translated apps show the whole sentence \"By continuing you agree to our [Terms](terms) and [Privacy](privacy)\" instead, so this piece is never translated.",
       "shouldTranslate" : false
@@ -183,24 +253,54 @@
     "By continuing you agree to our [Terms](terms) and [Privacy](privacy)" : {
       "comment" : "Sign-in legal line, one whole sentence with two links. Translate the words in [square brackets] and move the links wherever the sentence needs them. Keep (terms) and (privacy) exactly as they are."
     },
-    "Can you put a price on connection?" : {},
-    "Can't load pricing" : {},
-    "Cancel" : {},
-    "Casual chat talk with fellow passenger on train" : {},
-    "Chat with gym regular about workout routines" : {},
-    "Check Answer" : {},
-    "Check back later for new practice questions." : {},
-    "Check your connection and try again." : {},
-    "Check your reflections to see insights" : {},
-    "Choose an option to continue" : {},
+    "Can you put a price on connection?" : {
+
+    },
+    "Can't load pricing" : {
+
+    },
+    "Cancel" : {
+
+    },
+    "Casual chat talk with fellow passenger on train" : {
+
+    },
+    "Chat with gym regular about workout routines" : {
+
+    },
+    "Check Answer" : {
+
+    },
+    "Check back later for new practice questions." : {
+
+    },
+    "Check your connection and try again." : {
+
+    },
+    "Check your reflections to see insights" : {
+
+    },
+    "Choose an option to continue" : {
+
+    },
     "Claim %lld%% off" : {
       "comment" : "One-time offer button. The number is the discount percentage."
     },
-    "Claim my discount" : {},
-    "Close offer" : {},
-    "Close paywall" : {},
-    "Close this and it’s gone for good" : {},
-    "Come across natural, not nervous" : {},
+    "Claim my discount" : {
+
+    },
+    "Close offer" : {
+
+    },
+    "Close paywall" : {
+
+    },
+    "Close this and it’s gone for good" : {
+
+    },
+    "Come across natural, not nervous" : {
+
+    },
     "Commit" : {
       "comment" : "Accessibility label of the press-and-hold commitment button."
     },
@@ -210,130 +310,288 @@
     "Complete all lessons in %@ to unlock this course." : {
       "comment" : "Banner on a locked course. The placeholder is the title of the course that must be finished first."
     },
-    "Complete all lessons in the previous course to unlock this course." : {},
+    "Complete all lessons in the previous course to unlock this course." : {
+
+    },
     "Completed" : {
       "comment" : "Either the daily practice button once today's questions are done, or the XP breakdown row for finishing an activity."
     },
-    "Confidence Level" : {},
-    "Confidence Over Time" : {},
-    "Confidence is a skill. Skills are built." : {},
+    "Confidence Level" : {
+
+    },
+    "Confidence Over Time" : {
+
+    },
+    "Confidence is a skill. Skills are built." : {
+
+    },
     "Confidence: %lld/10" : {
       "comment" : "Approach list: the confidence rating the user gave, out of 10."
     },
-    "Confident" : {},
-    "Congratulations! How did you feel? What was the situation? How did it go for you?" : {},
-    "Continue" : {},
-    "Continue with Apple" : {},
-    "Continue with Google" : {},
-    "Correct Answer!" : {},
-    "Correct answer!" : {},
-    "Couldn't load subscription options. Please try again." : {},
-    "Couldn't load today's questions. Please try again." : {},
-    "Couldn't load your daily practice. Please try again." : {},
-    "Couldn't load your subscription. Please try again." : {},
-    "Couldn't save your answer. Please try again." : {},
-    "Couldn't start sign-in. Please try again." : {},
-    "Couldn't update your streak. Please try again." : {},
-    "Course complete." : {},
+    "Confident" : {
+
+    },
+    "Congratulations! How did you feel? What was the situation? How did it go for you?" : {
+
+    },
+    "Continue" : {
+
+    },
+    "Continue with Apple" : {
+
+    },
+    "Continue with Google" : {
+
+    },
+    "Correct Answer!" : {
+
+    },
+    "Correct answer!" : {
+
+    },
+    "Couldn't load subscription options. Please try again." : {
+
+    },
+    "Couldn't load today's questions. Please try again." : {
+
+    },
+    "Couldn't load your daily practice. Please try again." : {
+
+    },
+    "Couldn't load your subscription. Please try again." : {
+
+    },
+    "Couldn't save your answer. Please try again." : {
+
+    },
+    "Couldn't start sign-in. Please try again." : {
+
+    },
+    "Couldn't update your streak. Please try again." : {
+
+    },
+    "Course complete." : {
+
+    },
     "Courses" : {
       "comment" : "Tab bar title and screen title."
     },
-    "Courses. Mindset, approaching, flirting, follow-up.\nShort lessons that build the man who moves, not the one who freezes." : {},
-    "Create Account" : {},
-    "Create a free account" : {},
-    "Create a free account so your answers and progress are saved." : {},
-    "Creating openings for connection while keeping it casual." : {},
-    "Daily Practice" : {},
-    "Daily Reading Goal" : {},
-    "Daily Reading Reminder" : {},
-    "Daily practice complete." : {},
+    "Courses. Mindset, approaching, flirting, follow-up.\nShort lessons that build the man who moves, not the one who freezes." : {
+
+    },
+    "Create Account" : {
+
+    },
+    "Create a free account" : {
+
+    },
+    "Create a free account so your answers and progress are saved." : {
+
+    },
+    "Creating openings for connection while keeping it casual." : {
+
+    },
+    "Daily Practice" : {
+
+    },
+    "Daily Reading Goal" : {
+
+    },
+    "Daily Reading Reminder" : {
+
+    },
+    "Daily practice complete." : {
+
+    },
     "Data error: %@" : {
       "comment" : "The placeholder is a technical detail in English."
     },
-    "Day 1 of becoming the guy who goes for it" : {},
-    "Delete" : {},
-    "Delete Account" : {},
-    "Delete Approach" : {},
-    "Delete my data" : {},
-    "Deletion failed. Please try again later." : {},
-    "Developing comfort by engaging in everyday exchanges without minimal stakes." : {},
+    "Day 1 of becoming the guy who goes for it" : {
+
+    },
+    "Delete" : {
+
+    },
+    "Delete Account" : {
+
+    },
+    "Delete Approach" : {
+
+    },
+    "Delete my data" : {
+
+    },
+    "Deletion failed. Please try again later." : {
+
+    },
+    "Developing comfort by engaging in everyday exchanges without minimal stakes." : {
+
+    },
     "Direct Approach" : {
       "comment" : "Name of approach level 4."
     },
-    "Direct compliment on personality or appearance" : {},
-    "Do you often want to talk to women but don’t?" : {},
+    "Direct compliment on personality or appearance" : {
+
+    },
+    "Do you often want to talk to women but don’t?" : {
+
+    },
     "Doing nothing" : {
       "comment" : "Label on the falling line of the growth chart."
     },
-    "Don't join that statistic. Your future self is counting on you." : {},
-    "Don't lose your log" : {},
-    "E.g. Approached at Cafe" : {},
-    "Edit" : {},
-    "Edit Approach" : {},
-    "Edit Profile" : {},
-    "Enter your name" : {},
-    "Error" : {},
+    "Don't join that statistic. Your future self is counting on you." : {
+
+    },
+    "Don't lose your log" : {
+
+    },
+    "E.g. Approached at Cafe" : {
+
+    },
+    "Edit" : {
+
+    },
+    "Edit Approach" : {
+
+    },
+    "Edit Profile" : {
+
+    },
+    "Enter your name" : {
+
+    },
+    "Error" : {
+
+    },
     "Examples" : {
       "comment" : "Heading above example situations in the approach level guide."
     },
-    "Extended Conversation" : {},
-    "Extremely confident" : {},
-    "Failed to delete approach. Please try again." : {},
-    "Failed to load approaches. Please try again." : {},
-    "Failed to restore purchases. Please try again." : {},
-    "Failed to save. Please try again." : {},
-    "Failed to update. Please try again." : {},
+    "Extended Conversation" : {
+
+    },
+    "Extremely confident" : {
+
+    },
+    "Failed to delete approach. Please try again." : {
+
+    },
+    "Failed to load approaches. Please try again." : {
+
+    },
+    "Failed to restore purchases. Please try again." : {
+
+    },
+    "Failed to save. Please try again." : {
+
+    },
+    "Failed to update. Please try again." : {
+
+    },
     "Feedback" : {
       "comment" : "Speaker label for a feedback card in a scenario."
     },
-    "Feel confident, not anxious" : {},
+    "Feel confident, not anxious" : {
+
+    },
     "Forward" : {
       "comment" : "Scenario player: go to the next line."
     },
-    "Get started" : {},
-    "Go first without overthinking it" : {},
-    "Goal Notifications" : {},
+    "Get started" : {
+
+    },
+    "Go first without overthinking it" : {
+
+    },
+    "Goal Notifications" : {
+
+    },
     "Good Morning," : {
       "comment" : "Home greeting, followed on the next line by the user's name."
     },
-    "Good luck, we're rooting for you." : {},
-    "Greet neighbors with small talk" : {},
-    "Half of men don't approach. Most who do, succeed." : {},
+    "Good luck, we're rooting for you." : {
+
+    },
+    "Greet neighbors with small talk" : {
+
+    },
+    "Half of men don't approach. Most who do, succeed." : {
+
+    },
     "Her" : {
       "comment" : "Speaker label in a scenario when the woman's name is unknown."
     },
     "Home" : {
       "comment" : "Tab bar title."
     },
-    "How did you feel? What happened? Anything you noticed or learned" : {},
-    "How old are you?" : {},
-    "I am becoming a guy who takes action." : {},
-    "I stopped dreading social situations entirely. That's worth more than any date." : {},
-    "I used to freeze up walking past a girl. After 3 weeks I had my first real conversation with a stranger. That was the win." : {},
-    "I've read every book on this — none of them made me actually do anything. The daily structure changed that." : {},
+    "How did you feel? What happened? Anything you noticed or learned" : {
+
+    },
+    "How old are you?" : {
+
+    },
+    "I am becoming a guy who takes action." : {
+
+    },
+    "I stopped dreading social situations entirely. That's worth more than any date." : {
+
+    },
+    "I used to freeze up walking past a girl. After 3 weeks I had my first real conversation with a stranger. That was the win." : {
+
+    },
+    "I've read every book on this — none of them made me actually do anything. The daily structure changed that." : {
+
+    },
     "I, %@, am becoming a guy who takes action." : {
       "comment" : "Commitment pledge with the user's first name."
     },
     "IN 1 MONTH" : {
       "comment" : "Right axis caption on the growth chart. Upper case in English."
     },
-    "Incorrect Answer." : {},
-    "Incorrect answer." : {},
-    "Indirect Approach" : {},
-    "Invalid question data received" : {},
-    "Invalid response from Apple. Please try again." : {},
-    "Invite Friends" : {},
-    "Invite your friends to the community and learn together" : {},
-    "It's on this device only. An account keeps it if you change phones." : {},
+    "Incorrect Answer." : {
+
+    },
+    "Incorrect answer." : {
+
+    },
+    "Indirect Approach" : {
+
+    },
+    "Invalid question data received" : {
+
+    },
+    "Invalid response from Apple. Please try again." : {
+
+    },
+    "Invite Friends" : {
+
+    },
+    "Invite your friends to the community and learn together" : {
+
+    },
+    "It's on this device only. An account keeps it if you change phones." : {
+
+    },
     "Join me on Wingman! %@" : {
       "comment" : "Text shared from the Invite Friends button. The placeholder is the App Store link."
     },
-    "Join the men taking action" : {},
-    "Keep it flowing, no awkward silences" : {},
-    "Keeping a conversation going past small talk without any romantic incentive." : {},
-    "Know exactly how to start talking" : {},
-    "Last one. This one is you.\nEmpty today. In a month it either tells a story or it doesn't." : {},
-    "Lesson complete." : {},
+    "Join the men taking action" : {
+
+    },
+    "Keep it flowing, no awkward silences" : {
+
+    },
+    "Keeping a conversation going past small talk without any romantic incentive." : {
+
+    },
+    "Know exactly how to start talking" : {
+
+    },
+    "Last one. This one is you.\nEmpty today. In a month it either tells a story or it doesn't." : {
+
+    },
+    "Lesson complete." : {
+
+    },
     "Lessons" : {
       "comment" : "Profile tile: number of lessons completed."
     },
@@ -368,221 +626,477 @@
         }
       }
     },
-    "Level 1" : {},
-    "Level 1: Social Warm-up" : {},
-    "Level 1: Social warm-up" : {},
-    "Level 2: Extended Conversation" : {},
-    "Level 2: Extended conversation" : {},
-    "Level 3: Indirect Approach" : {},
-    "Level 3: Indirect approach" : {},
-    "Level 4: Direct Approach" : {},
-    "Level 4: Direct approach" : {},
-    "Loading approaches..." : {},
-    "Loading subscription options..." : {},
-    "Loading today's practice questions..." : {},
-    "Loading..." : {},
-    "Log Approach" : {},
-    "Log In" : {},
-    "Log Out" : {},
-    "Log in" : {},
-    "Making a light comment in a waiting line" : {},
-    "Making your attraction clear right away in the opener. No ambiguity." : {},
-    "Manage Subscriptions" : {},
-    "Maximum characters reached" : {},
+    "Level 1" : {
+
+    },
+    "Level 1: Social Warm-up" : {
+
+    },
+    "Level 1: Social warm-up" : {
+
+    },
+    "Level 2: Extended Conversation" : {
+
+    },
+    "Level 2: Extended conversation" : {
+
+    },
+    "Level 3: Indirect Approach" : {
+
+    },
+    "Level 3: Indirect approach" : {
+
+    },
+    "Level 4: Direct Approach" : {
+
+    },
+    "Level 4: Direct approach" : {
+
+    },
+    "Loading approaches..." : {
+
+    },
+    "Loading subscription options..." : {
+
+    },
+    "Loading today's practice questions..." : {
+
+    },
+    "Loading..." : {
+
+    },
+    "Log Approach" : {
+
+    },
+    "Log In" : {
+
+    },
+    "Log Out" : {
+
+    },
+    "Log in" : {
+
+    },
+    "Making a light comment in a waiting line" : {
+
+    },
+    "Making your attraction clear right away in the opener. No ambiguity." : {
+
+    },
+    "Manage Subscriptions" : {
+
+    },
+    "Maximum characters reached" : {
+
+    },
     "Moderate" : {
       "comment" : "Fallback confidence description."
     },
-    "Moderate anxiety" : {},
-    "Monthly Plan" : {},
-    "Most men regret the chances they didn't make" : {},
-    "Most women want to be talked to more" : {},
+    "Moderate anxiety" : {
+
+    },
+    "Monthly Plan" : {
+
+    },
+    "Most men regret the chances they didn't make" : {
+
+    },
+    "Most women want to be talked to more" : {
+
+    },
     "Name" : {
       "comment" : "Label of the user's name field."
     },
-    "Network error: Please check your connection and try again." : {},
-    "Neutral" : {},
+    "Network error: Please check your connection and try again." : {
+
+    },
+    "Neutral" : {
+
+    },
     "Next" : {
       "comment" : "Button: go to the next question or step."
     },
-    "No Connection" : {},
-    "No account" : {},
-    "No active subscriptions found to restore" : {},
-    "No approach data yet" : {},
-    "No approaches found" : {},
-    "No approaches logged yet" : {},
-    "No corny lines. Just calm, practical stuff about being present. My social anxiety is half what it was." : {},
-    "No internet connection" : {},
-    "No internet connection. Please check your network and try again." : {},
-    "No more “what if” moments" : {},
-    "No questions available" : {},
-    "No reflections yet. Start logging approaches with notes to see your insights" : {},
-    "Not now" : {},
+    "No Connection" : {
+
+    },
+    "No account" : {
+
+    },
+    "No active subscriptions found to restore" : {
+
+    },
+    "No approach data yet" : {
+
+    },
+    "No approaches found" : {
+
+    },
+    "No approaches logged yet" : {
+
+    },
+    "No corny lines. Just calm, practical stuff about being present. My social anxiety is half what it was." : {
+
+    },
+    "No internet connection" : {
+
+    },
+    "No internet connection. Please check your network and try again." : {
+
+    },
+    "No more “what if” moments" : {
+
+    },
+    "No questions available" : {
+
+    },
+    "No reflections yet. Start logging approaches with notes to see your insights" : {
+
+    },
+    "Not now" : {
+
+    },
     "Notes" : {
       "comment" : "Label of the free-text notes field when logging an approach."
     },
-    "Nothing else to set up — you'll go straight into the app." : {},
+    "Nothing else to set up — you'll go straight into the app." : {
+
+    },
     "OFF" : {
       "comment" : "State of the daily reading reminder toggle."
     },
-    "OK" : {},
+    "OK" : {
+
+    },
     "ON" : {
       "comment" : "State of the daily reading reminder toggle."
     },
     "ONE-TIME OFFER" : {
       "comment" : "Small upper-case label above the one-time offer price."
     },
-    "One last step" : {},
-    "One thing at a time. Play the scenario first." : {},
-    "Oops!" : {},
+    "One last step" : {
+
+    },
+    "One thing at a time. Play the scenario first." : {
+
+    },
+    "Oops!" : {
+
+    },
     "Open" : {
       "comment" : "Button that opens the course the user was last in."
     },
-    "Optimizing your experience" : {},
-    "Personalizing your lessons" : {},
+    "Optimizing your experience" : {
+
+    },
+    "Personalizing your lessons" : {
+
+    },
     "Plan" : {
       "comment" : "Generic subscription plan name when the length is unknown."
     },
-    "Please Try again!" : {},
-    "Please log in to access practices." : {},
-    "Please provide a title for your approach" : {},
-    "Please select a subscription plan" : {},
-    "Please try again!" : {},
-    "Please wait..." : {},
+    "Please Try again!" : {
+
+    },
+    "Please log in to access practices." : {
+
+    },
+    "Please provide a title for your approach" : {
+
+    },
+    "Please select a subscription plan" : {
+
+    },
+    "Please try again!" : {
+
+    },
+    "Please wait..." : {
+
+    },
     "Practice" : {
       "comment" : "Screen title for the scenarios area."
     },
     "Privacy" : {
       "comment" : "Link to the privacy policy (short form, used in footers)."
     },
-    "Privacy Policy" : {},
-    "Processing..." : {},
+    "Privacy Policy" : {
+
+    },
+    "Processing..." : {
+
+    },
     "Profile" : {
       "comment" : "Tab bar title and screen title."
     },
-    "Purchase completed but entitlement not found. Please contact support." : {},
-    "Purchase failed. Please try again." : {},
-    "Purchases are temporarily unavailable. Please try again later." : {},
-    "Purchases aren't allowed on this device. Check Screen Time restrictions and try again." : {},
-    "Purchases restored successfully!" : {},
+    "Purchase completed but entitlement not found. Please contact support." : {
+
+    },
+    "Purchase failed. Please try again." : {
+
+    },
+    "Purchases are temporarily unavailable. Please try again later." : {
+
+    },
+    "Purchases aren't allowed on this device. Check Screen Time restrictions and try again." : {
+
+    },
+    "Purchases restored successfully!" : {
+
+    },
     "Rate Wingman" : {
       "comment" : "Settings link to rate the app. Wingman is the app name."
     },
-    "Reminders to practice approaching, and occasional offers." : {},
+    "Reminders to practice approaching, and occasional offers." : {
+
+    },
     "Restore" : {
       "comment" : "Link that restores a previous purchase (short form, used in footers)."
     },
-    "Restore Purchase" : {},
-    "Restore failed. Please try again." : {},
-    "Restoring..." : {},
-    "Retry" : {},
-    "Right now it's tied to this device. An account keeps your subscription and progress if you switch phones." : {},
-    "Save" : {},
+    "Restore Purchase" : {
+
+    },
+    "Restore failed. Please try again." : {
+
+    },
+    "Restoring..." : {
+
+    },
+    "Retry" : {
+
+    },
+    "Right now it's tied to this device. An account keeps your subscription and progress if you switch phones." : {
+
+    },
+    "Save" : {
+
+    },
     "Save your %lld approaches" : {
       "comment" : "Prompt to create an account. The number is how many approaches the guest has logged; always 2 or more here."
     },
-    "Save your first approach" : {},
-    "Save your progress, sync across devices, and more." : {},
-    "Saved!" : {},
-    "Scenario complete." : {},
-    "Scenario not found." : {},
+    "Save your first approach" : {
+
+    },
+    "Save your progress, sync across devices, and more." : {
+
+    },
+    "Saved!" : {
+
+    },
+    "Scenario complete." : {
+
+    },
+    "Scenario not found." : {
+
+    },
     "Scenarios" : {
       "comment" : "Tab bar title."
     },
-    "Science-based techniques that actually stick" : {},
-    "Search" : {},
-    "Secure your subscription" : {},
-    "Select all that apply" : {},
-    "Server error: Please try again later." : {},
-    "Settings" : {},
-    "Show Approach Guide" : {},
-    "Sign-in failed. Please try again." : {},
+    "Science-based techniques that actually stick" : {
+
+    },
+    "Search" : {
+
+    },
+    "Secure your subscription" : {
+
+    },
+    "Select all that apply" : {
+
+    },
+    "Server error: Please try again later." : {
+
+    },
+    "Settings" : {
+
+    },
+    "Show Approach Guide" : {
+
+    },
+    "Sign-in failed. Please try again." : {
+
+    },
     "Sign-in failed: %@" : {
       "comment" : "The placeholder is an error description supplied by the system."
     },
-    "Sign-in requires user interaction." : {},
-    "Sign-in was not handled. Please try again." : {},
-    "Signing in..." : {},
-    "Skip" : {},
-    "Skip for now" : {},
-    "Slightly nervous" : {},
+    "Sign-in requires user interaction." : {
+
+    },
+    "Sign-in was not handled. Please try again." : {
+
+    },
+    "Signing in..." : {
+
+    },
+    "Skip" : {
+
+    },
+    "Skip for now" : {
+
+    },
+    "Slightly nervous" : {
+
+    },
     "Social Practice" : {
       "comment" : "Name of approach level 1 in the level guide."
     },
-    "Something went wrong" : {},
-    "Something went wrong on our end. Please try again." : {},
-    "Somewhat confident" : {},
+    "Something went wrong" : {
+
+    },
+    "Something went wrong on our end. Please try again." : {
+
+    },
+    "Somewhat confident" : {
+
+    },
     "Start" : {
       "comment" : "Daily practice button: begin today's questions."
     },
-    "Start Practice" : {},
-    "Start filling it" : {},
-    "Start logging approaches to see your breakdown" : {},
-    "Start logging your social interactions to see them here" : {},
+    "Start Practice" : {
+
+    },
+    "Start filling it" : {
+
+    },
+    "Start logging approaches to see your breakdown" : {
+
+    },
+    "Start logging your social interactions to see them here" : {
+
+    },
     "Steps" : {
       "comment" : "Heading above the steps of a practice."
     },
-    "Stop caring what others think" : {},
-    "Stop letting fear of rejection win" : {},
-    "Stop talking yourself out of it" : {},
-    "Subtle compliment/ Playful banter" : {},
-    "Success" : {},
+    "Stop caring what others think" : {
+
+    },
+    "Stop letting fear of rejection win" : {
+
+    },
+    "Stop talking yourself out of it" : {
+
+    },
+    "Subtle compliment/ Playful banter" : {
+
+    },
+    "Success" : {
+
+    },
     "Suggested" : {
       "comment" : "Small badge on the recommended daily practice."
     },
     "TODAY" : {
       "comment" : "Left axis caption on the growth chart. Upper case in English."
     },
-    "Takes a few seconds. Nothing else changes." : {},
-    "Talk to dog owner about their dog" : {},
-    "Talking to someone you may be interested in" : {},
-    "Tap and hold to commit." : {},
-    "Tap to continue" : {},
-    "Tap to finish" : {},
-    "Tap to retry" : {},
+    "Takes a few seconds. Nothing else changes." : {
+
+    },
+    "Talk to dog owner about their dog" : {
+
+    },
+    "Talking to someone you may be interested in" : {
+
+    },
+    "Tap and hold to commit." : {
+
+    },
+    "Tap to continue" : {
+
+    },
+    "Tap to finish" : {
+
+    },
+    "Tap to retry" : {
+
+    },
     "Terms" : {
       "comment" : "Link to the terms of service (short form, used in footers)."
     },
-    "Terms of Service" : {},
-    "That account is already linked to another Wingman login. Log in with it instead — progress from this session won't carry over." : {},
-    "That one's further down the line. Start with the first." : {},
-    "That payment method was declined. Check your payment details in the App Store and try again." : {},
-    "The App Store is having trouble right now. Please try again in a few minutes." : {},
-    "The step-by-step way to stop freezing up and start the conversation." : {},
-    "They're just waiting for you to make the first move" : {},
-    "They're on this device only. An account keeps them if you change phones." : {},
-    "Things Wingman users have said" : {},
-    "This deletes your logged approaches and all progress on this device. There's no account to recover them from. This cannot be undone." : {},
-    "This plan isn't available on your App Store account right now." : {},
-    "This purchase needs approval before it can go through — usually from the account holder or your bank. You'll get access automatically once it's approved." : {},
+    "Terms of Service" : {
+
+    },
+    "That account is already linked to another Wingman login. Log in with it instead — progress from this session won't carry over." : {
+
+    },
+    "That one's further down the line. Start with the first." : {
+
+    },
+    "That payment method was declined. Check your payment details in the App Store and try again." : {
+
+    },
+    "The App Store is having trouble right now. Please try again in a few minutes." : {
+
+    },
+    "The step-by-step way to stop freezing up and start the conversation." : {
+
+    },
+    "They're just waiting for you to make the first move" : {
+
+    },
+    "They're on this device only. An account keeps them if you change phones." : {
+
+    },
+    "Things Wingman users have said" : {
+
+    },
+    "This deletes your logged approaches and all progress on this device. There's no account to recover them from. This cannot be undone." : {
+
+    },
+    "This plan isn't available on your App Store account right now." : {
+
+    },
+    "This purchase needs approval before it can go through — usually from the account holder or your bank. You'll get access automatically once it's approved." : {
+
+    },
     "Time for your daily reading! Your goal is %lld minutes today." : {
       "comment" : "Body of the daily reading reminder notification."
     },
-    "Tips & offers" : {},
+    "Tips & offers" : {
+
+    },
     "Title" : {
       "comment" : "Label of the field where the user names an approach they are logging."
     },
-    "To achieve what I want, I must grow. I won’t let fear make the decision for me. I’ll take my chance, and learn from what happens." : {},
+    "To achieve what I want, I must grow. I won’t let fear make the decision for me. I’ll take my chance, and learn from what happens." : {
+
+    },
     "Today" : {
       "comment" : "Approach list: logged today."
     },
     "Top streak" : {
       "comment" : "Profile tile: the user's longest daily streak."
     },
-    "Try Again" : {},
-    "Try adjusting your search terms" : {},
-    "Turn small talk into real chemistry" : {},
-    "Turn “what if” into “hi.”" : {},
+    "Try Again" : {
+
+    },
+    "Try adjusting your search terms" : {
+
+    },
+    "Turn small talk into real chemistry" : {
+
+    },
+    "Turn “what if” into “hi.”" : {
+
+    },
     "Unknown" : {
       "comment" : "Shown in place of the app version if it cannot be read."
     },
-    "Up Next" : {},
-    "Update Approach" : {},
-    "Updated!" : {},
+    "Up Next" : {
+
+    },
+    "Update Approach" : {
+
+    },
+    "Updated!" : {
+
+    },
     "User" : {
       "comment" : "Greeting name fallback on the Home screen when no name is set."
     },
-    "User not authenticated" : {},
-    "User not authenticated. Please log in to access daily practice questions." : {},
+    "User not authenticated" : {
+
+    },
+    "User not authenticated. Please log in to access daily practice questions." : {
+
+    },
     "Using Wingman every day" : {
       "comment" : "Label on the rising line of the growth chart. Wingman is the app name."
     },
@@ -590,34 +1104,90 @@
       "comment" : "App version label.",
       "shouldTranslate" : false
     },
-    "Very anxious" : {},
-    "Very confident" : {},
-    "Waiting for approval" : {},
-    "Walk up to her without hesitating" : {},
-    "We couldn't find an active subscription for this Apple ID." : {},
-    "Welcome Back" : {},
-    "Welcome to Wingman. This is home.\nDaily practice keeps you sharp. The log fills with moments you took, not replayed." : {},
-    "What are you mainly hoping to improve?" : {},
-    "What brought you to Wingman?" : {},
-    "What happens in the second before you freeze?" : {},
-    "What if a little nervousness just reads as genuine?" : {},
-    "What if your opener didn’t need to be clever?" : {},
-    "What type of Interaction ?" : {},
-    "What usually stops you from doing so?" : {},
-    "What would feeling sure of yourself change this week?" : {},
-    "What would your first conversation back out there sound like?" : {},
-    "What’s one question you could ask that isn’t small talk?" : {},
-    "What’s the one thing that stops you from saying hi?" : {},
-    "What’s the worst a polite “no” could actually cost you?" : {},
-    "When did a conversation last feel like more than small talk?" : {},
-    "When did you last meet someone without a screen in between?" : {},
-    "When did you last start a conversation with a stranger?" : {},
-    "When was the last time you spoke to a woman in public?" : {},
-    "Where in your day could you say one more hello?" : {},
-    "Which side do you want to be on?" : {},
-    "Who did you notice today that you didn’t talk to?" : {},
-    "Who would you talk to this week if nerves weren’t a factor?" : {},
-    "Would anyone around you really remember you saying hi?" : {},
+    "Very anxious" : {
+
+    },
+    "Very confident" : {
+
+    },
+    "Waiting for approval" : {
+
+    },
+    "Walk up to her without hesitating" : {
+
+    },
+    "We couldn't find an active subscription for this Apple ID." : {
+
+    },
+    "Welcome Back" : {
+
+    },
+    "Welcome to Wingman. This is home.\nDaily practice keeps you sharp. The log fills with moments you took, not replayed." : {
+
+    },
+    "What are you mainly hoping to improve?" : {
+
+    },
+    "What brought you to Wingman?" : {
+
+    },
+    "What happens in the second before you freeze?" : {
+
+    },
+    "What if a little nervousness just reads as genuine?" : {
+
+    },
+    "What if your opener didn’t need to be clever?" : {
+
+    },
+    "What type of Interaction ?" : {
+
+    },
+    "What usually stops you from doing so?" : {
+
+    },
+    "What would feeling sure of yourself change this week?" : {
+
+    },
+    "What would your first conversation back out there sound like?" : {
+
+    },
+    "What’s one question you could ask that isn’t small talk?" : {
+
+    },
+    "What’s the one thing that stops you from saying hi?" : {
+
+    },
+    "What’s the worst a polite “no” could actually cost you?" : {
+
+    },
+    "When did a conversation last feel like more than small talk?" : {
+
+    },
+    "When did you last meet someone without a screen in between?" : {
+
+    },
+    "When did you last start a conversation with a stranger?" : {
+
+    },
+    "When was the last time you spoke to a woman in public?" : {
+
+    },
+    "Where in your day could you say one more hello?" : {
+
+    },
+    "Which side do you want to be on?" : {
+
+    },
+    "Who did you notice today that you didn’t talk to?" : {
+
+    },
+    "Who would you talk to this week if nerves weren’t a factor?" : {
+
+    },
+    "Would anyone around you really remember you saying hi?" : {
+
+    },
     "XP" : {
       "comment" : "Brand term. Not translated.",
       "shouldTranslate" : false
@@ -625,21 +1195,39 @@
     "XP points" : {
       "comment" : "Profile tile. XP is a brand term."
     },
-    "Yearly Plan" : {},
+    "Yearly Plan" : {
+
+    },
     "You" : {
       "comment" : "Speaker label for the user's own lines in a scenario, when no name is set."
     },
-    "You already have a subscription on this account. Tap Restore to get access back." : {},
-    "You appear to be offline. Reconnect and try again." : {},
-    "You are not alone. Millions of men struggle with approaching." : {},
-    "You're not the only one who's been stuck here." : {},
+    "You already have a subscription on this account. Tap Restore to get access back." : {
+
+    },
+    "You appear to be offline. Reconnect and try again." : {
+
+    },
+    "You are not alone. Millions of men struggle with approaching." : {
+
+    },
+    "You're not the only one who's been stuck here." : {
+
+    },
     "Your Modules" : {
       "comment" : "Home section heading above the five course categories."
     },
-    "Your approach log is saved on this device only. An account keeps it if you lose or change your phone." : {},
-    "Your name" : {},
-    "Your progress is saved on this device only." : {},
-    "Your subscription is already active either way." : {},
+    "Your approach log is saved on this device only. An account keeps it if you lose or change your phone." : {
+
+    },
+    "Your name" : {
+
+    },
+    "Your progress is saved on this device only." : {
+
+    },
+    "Your subscription is already active either way." : {
+
+    },
     "and" : {
       "comment" : "Joins 'Terms' and 'Privacy' in the sign-in legal line, English layout only. Translated apps show the whole sentence instead, so this piece is never translated.",
       "shouldTranslate" : false
@@ -652,6 +1240,15 @@
     },
     "off your first %@" : {
       "comment" : "One-time offer. Follows the discount percentage. The placeholder is a period such as 'year'. Will be replaced by whole sentences in the paywall work; do not translate yet."
+    },
+    "only %@ per week" : {
+      "comment" : "Paywall plan row, under the plan's name. %@ is a price with its currency, for example $1.35."
+    },
+    "per month" : {
+      "comment" : "Paywall plan row, under the monthly plan's full price ($12.99 per month)."
+    },
+    "per year" : {
+      "comment" : "Paywall plan row, under the yearly plan's full price ($69.99 per year)."
     },
     "“%@”" : {
       "comment" : "A user testimonial in quotation marks. Use your language's quotation marks."

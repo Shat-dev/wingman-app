@@ -11,11 +11,11 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP1 Onboarding answer IDs | **Done** (slice 1, `fa213f2`) | Verified on device by the slice 3 sweep. Supabase `age`/`goals` writes checked by reading the code path, not by a live write |
 | WP2 Analytics values pinned to English | **Done** (slices 2–3, `9a853f0`, `38f4330`) | New properties not yet observed arriving in PostHog |
 | WP3 Error classification | Not started | Plan wants a few days of production logging first; cannot be done inside this loop |
-| WP4 Paywall prices and disclosure | Not started | Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
-| WP5 String Catalog and extraction | **Done except what WP4 owns** (slices 4–17) | `Localizable` 386 strings, `Content` 174. Left on purpose: paywall price and disclosure strings (WP4). A translated display title for lessons and scenarios comes with WP7 |
+| WP4 Paywall prices and disclosure | In progress (slice 25) | Done: weekly price formatted by the product, plan-row sentences. Still to do: trial badge from StoreKit, one-time-offer sentences, D4 renewal sentence, plan-row and tick layout (from WP6), disclosure checklist. Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
+| WP5 String Catalog and extraction | **Done except what WP4 owns** (slices 4–17) | `Localizable` 389 strings, `Content` 174. Left on purpose: paywall price and disclosure strings (WP4). A translated display title for lessons and scenarios comes with WP7 |
 | WP6 Layout and legal links | In progress (slices 17–21) | Done: sign-in legal line, paywall and offer footer links, line caps, fixed-height buttons. **WP6 sweep spent** (slice 21): English unchanged on all 17 baseline screens. Pseudo-language run done (slice 22); its overflow findings fixed (slice 23). Image check done (slice 24): one image contains a word. Still to do: paywall ticks and plan rows (with WP4, includes finding 5) |
 | WP7 Content translation plumbing | Not started | Migration files only; nothing applied to the live database |
-| WP8 Tooling and tests | In progress (**WP8 sweep spent**, slice 22) | Done: unit and UI test targets (189 unit tests, 5 of them pseudo-language probes that skip in a normal run), whole-screen renders in a test window for before/after checks without a sweep, onboarding sweep (now through the walkthrough and the four tabs, with a double-length pseudo-language mode), sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, performance comparison, analytics parity recorder (section 9 of the plan) |
+| WP8 Tooling and tests | In progress (**WP8 sweep spent**, slice 22) | Done: unit and UI test targets (199 unit tests, 5 of them pseudo-language probes that skip in a normal run), whole-screen renders in a test window for before/after checks without a sweep, onboarding sweep (now through the walkthrough and the four tabs, with a double-length pseudo-language mode), sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, performance comparison, analytics parity recorder (section 9 of the plan) |
 
 ## Slices
 
@@ -598,9 +598,40 @@ Everything else is wordless line art. A few images contain symbols that need no 
 
 - The App Store screenshots and marketing assets are outside the app bundle and were not part of this check (they are listed in the plan under App Store Connect work for Release B).
 
+### Slice 25 — WP4 part 1: the weekly price line (2026-11-10)
+
+**The bug (audit E-1).** "only $1.35 per week" on each plan row was formatted with the device's locale, and the locale decides the currency symbol. A phone set to the United States buying from the German App Store saw the euro amount with a dollar sign, next to the full price that StoreKit had correctly formatted in euros. It also forced two decimals onto every currency, including ones that have none.
+
+**The fix (plan WP4 items 1–2, decision D3).**
+
+- The amount is unchanged: the app's own division by 52 or 4.33, as D3 decided.
+- It is now formatted by the product's own price formatter, the one behind the full price on the same row, so the two always agree.
+- "only … per week" is one catalog sentence with the price as its placeholder. "per year" and "per month" are catalog entries too (they were plain strings that could not be translated).
+- If a product ever has no formatter, the line is left out. The old code fell back to a literal "$0.00".
+
+New file `Wingman/Payment/PaywallPricing.swift`; the old `calculateWeeklyPrice` in `PaywallView` is gone.
+
+**Tests.** 10 new in `PaywallPricingTests` (199 total: 194 pass, 5 probes skipped).
+
+- English lines pinned: "only $1.35 per week" (69.99 yearly), "only $3.00 per week" (12.99 monthly).
+- **Parity:** the new output equals a copy of the old implementation for 7,200 combinations: every price from 0.49 to 199.99 in 50-cent steps, yearly, monthly and other, in the US, UK, Australia, Canada, Germany and Sweden, each with the device region matching the store.
+- The case that was wrong: US device, German storefront. Old: "$1.35". New: "1,35 €".
+- Yen shows no decimals. No formatter gives no line. The product's shared formatter is not modified.
+
+**Behaviour for English users:** identical wherever the device region matches the App Store (the parity test). It changes, on purpose, for a user whose device region and App Store country differ: they now see the correct currency. That is the fix the plan approved, not new copy.
+
+**Catalog:** 389 strings (3 new, each with a translator comment). Validator: no problems.
+
+**Not verified**
+
+- Not seen on a real product. A Debug build loads no products, so the plan rows have never been rendered in this work; the helper is tested with formatters built the way StoreKit builds them, not with StoreKit's own. This is the priced-paywall question below.
+- What locale StoreKit actually puts on the formatter for a mismatched device (for example "en_DE") is not something I can observe here. Whatever it is, the weekly line now uses the same one as the full price beside it.
+
 ## Next
 
-WP4 (paywall prices and disclosure), which also takes WP6 items 3–4 and finding 5 (ticks and plan rows), since they are the same paywall rows. WP4 ends on the priced-paywall question that only you can answer (one Release run, or a dev-tag launch flag).
+WP4 part 2: the trial badge ("3-day Free Trial" is a hard-coded string today): read the trial length from the product's introductory offer, render it through a plural-aware catalog entry, show no badge when the product has no free trial. English must still read "3-day Free Trial". Then the one-time-offer sentences (item 4), the D4 renewal sentence (item 5), the plan-row and tick layout carried over from WP6 (items 3–4 there, finding 5), and the disclosure checklist (item 7).
+
+WP4 ends on the priced-paywall question that only you can answer (one Release run, or a dev-tag launch flag).
 
 After WP4: WP7 (content plumbing), WP3 (error classification), remaining WP8 tooling.
 
