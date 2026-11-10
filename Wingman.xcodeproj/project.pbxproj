@@ -22,9 +22,28 @@
 		7C7DF377CEE87504D10E2A89 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = B37F2E9326094C7755879872 /* FacebookCore */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		7E570007A1B2C3D4E5F60007 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18CACE2D2EDB2650002B0AF9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 18CACE342EDB2650002B0AF9;
+			remoteInfo = Wingman;
+		};
+		7E580007A1B2C3D4E5F60007 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18CACE2D2EDB2650002B0AF9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 18CACE342EDB2650002B0AF9;
+			remoteInfo = Wingman;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		184A38232F842FBF00357010 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		18CACE352EDB2650002B0AF9 /* Wingman.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wingman.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E570002A1B2C3D4E5F60002 /* WingmanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WingmanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E580002A1B2C3D4E5F60002 /* WingmanUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WingmanUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -44,6 +63,16 @@
 				31C6693B2EF079D700057058 /* Exceptions for "Wingman" folder in "Wingman" target */,
 			);
 			path = Wingman;
+			sourceTree = "<group>";
+		};
+		7E570003A1B2C3D4E5F60003 /* WingmanTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = WingmanTests;
+			sourceTree = "<group>";
+		};
+		7E580003A1B2C3D4E5F60003 /* WingmanUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = WingmanUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -69,6 +98,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7E570005A1B2C3D4E5F60005 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7E580005A1B2C3D4E5F60005 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -84,6 +127,8 @@
 			isa = PBXGroup;
 			children = (
 				18CACE372EDB2650002B0AF9 /* Wingman */,
+				7E570003A1B2C3D4E5F60003 /* WingmanTests */,
+				7E580003A1B2C3D4E5F60003 /* WingmanUITests */,
 				184A38222F842FBF00357010 /* Frameworks */,
 				18CACE362EDB2650002B0AF9 /* Products */,
 			);
@@ -93,6 +138,8 @@
 			isa = PBXGroup;
 			children = (
 				18CACE352EDB2650002B0AF9 /* Wingman.app */,
+				7E570002A1B2C3D4E5F60002 /* WingmanTests.xctest */,
+				7E580002A1B2C3D4E5F60002 /* WingmanUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -134,6 +181,52 @@
 			productReference = 18CACE352EDB2650002B0AF9 /* Wingman.app */;
 			productType = "com.apple.product-type.application";
 		};
+		7E570001A1B2C3D4E5F60001 /* WingmanTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7E57000BA1B2C3D4E5F6000B /* Build configuration list for PBXNativeTarget "WingmanTests" */;
+			buildPhases = (
+				7E570004A1B2C3D4E5F60004 /* Sources */,
+				7E570005A1B2C3D4E5F60005 /* Frameworks */,
+				7E570006A1B2C3D4E5F60006 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7E570008A1B2C3D4E5F60008 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				7E570003A1B2C3D4E5F60003 /* WingmanTests */,
+			);
+			name = WingmanTests;
+			packageProductDependencies = (
+			);
+			productName = WingmanTests;
+			productReference = 7E570002A1B2C3D4E5F60002 /* WingmanTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		7E580001A1B2C3D4E5F60001 /* WingmanUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7E58000BA1B2C3D4E5F6000B /* Build configuration list for PBXNativeTarget "WingmanUITests" */;
+			buildPhases = (
+				7E580004A1B2C3D4E5F60004 /* Sources */,
+				7E580005A1B2C3D4E5F60005 /* Frameworks */,
+				7E580006A1B2C3D4E5F60006 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7E580008A1B2C3D4E5F60008 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				7E580003A1B2C3D4E5F60003 /* WingmanUITests */,
+			);
+			name = WingmanUITests;
+			packageProductDependencies = (
+			);
+			productName = WingmanUITests;
+			productReference = 7E580002A1B2C3D4E5F60002 /* WingmanUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -146,6 +239,14 @@
 				TargetAttributes = {
 					18CACE342EDB2650002B0AF9 = {
 						CreatedOnToolsVersion = 26.0.1;
+					};
+					7E580001A1B2C3D4E5F60001 = {
+						CreatedOnToolsVersion = 26.6;
+						TestTargetID = 18CACE342EDB2650002B0AF9;
+					};
+					7E570001A1B2C3D4E5F60001 = {
+						CreatedOnToolsVersion = 26.6;
+						TestTargetID = 18CACE342EDB2650002B0AF9;
 					};
 				};
 			};
@@ -171,12 +272,28 @@
 			projectRoot = "";
 			targets = (
 				18CACE342EDB2650002B0AF9 /* Wingman */,
+				7E570001A1B2C3D4E5F60001 /* WingmanTests */,
+				7E580001A1B2C3D4E5F60001 /* WingmanUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		18CACE332EDB2650002B0AF9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7E570006A1B2C3D4E5F60006 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7E580006A1B2C3D4E5F60006 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -193,7 +310,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7E570004A1B2C3D4E5F60004 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7E580004A1B2C3D4E5F60004 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7E570008A1B2C3D4E5F60008 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 18CACE342EDB2650002B0AF9 /* Wingman */;
+			targetProxy = 7E570007A1B2C3D4E5F60007 /* PBXContainerItemProxy */;
+		};
+		7E580008A1B2C3D4E5F60008 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 18CACE342EDB2650002B0AF9 /* Wingman */;
+			targetProxy = 7E580007A1B2C3D4E5F60007 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		18CACE3E2EDB2651002B0AF9 /* Debug */ = {
@@ -397,6 +541,80 @@
 			};
 			name = Release;
 		};
+		7E570009A1B2C3D4E5F60009 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 37;
+				DEVELOPMENT_TEAM = 634W89TJ2U;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				MARKETING_VERSION = 1.14;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lazul.wingmanTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Wingman.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Wingman";
+			};
+			name = Debug;
+		};
+		7E57000AA1B2C3D4E5F6000A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 37;
+				DEVELOPMENT_TEAM = 634W89TJ2U;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				MARKETING_VERSION = 1.14;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lazul.wingmanTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Wingman.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Wingman";
+			};
+			name = Release;
+		};
+		7E580009A1B2C3D4E5F60009 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 37;
+				DEVELOPMENT_TEAM = 634W89TJ2U;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				MARKETING_VERSION = 1.14;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lazul.wingmanUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = Wingman;
+			};
+			name = Debug;
+		};
+		7E58000AA1B2C3D4E5F6000A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 37;
+				DEVELOPMENT_TEAM = 634W89TJ2U;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				MARKETING_VERSION = 1.14;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lazul.wingmanUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = Wingman;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -414,6 +632,24 @@
 			buildConfigurations = (
 				18CACE412EDB2651002B0AF9 /* Debug */,
 				18CACE422EDB2651002B0AF9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7E57000BA1B2C3D4E5F6000B /* Build configuration list for PBXNativeTarget "WingmanTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7E570009A1B2C3D4E5F60009 /* Debug */,
+				7E57000AA1B2C3D4E5F6000A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7E58000BA1B2C3D4E5F6000B /* Build configuration list for PBXNativeTarget "WingmanUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7E580009A1B2C3D4E5F60009 /* Debug */,
+				7E58000AA1B2C3D4E5F6000A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
