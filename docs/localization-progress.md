@@ -13,9 +13,9 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP3 Error classification | Not started | Plan wants a few days of production logging first; cannot be done inside this loop |
 | WP4 Paywall prices and disclosure | Not started | Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
 | WP5 String Catalog and extraction | **Done except what WP4 owns** (slices 4–17) | `Localizable` 386 strings, `Content` 174. Left on purpose: paywall price and disclosure strings (WP4). A translated display title for lessons and scenarios comes with WP7 |
-| WP6 Layout and legal links | In progress (slices 17–21) | Done: sign-in legal line, paywall and offer footer links, line caps, fixed-height buttons. **WP6 sweep spent** (slice 21): English unchanged on all 17 baseline screens. Still to do: paywall ticks and plan rows (with WP4), image check, fixes from the pseudo-language run |
+| WP6 Layout and legal links | In progress (slices 17–21) | Done: sign-in legal line, paywall and offer footer links, line caps, fixed-height buttons. **WP6 sweep spent** (slice 21): English unchanged on all 17 baseline screens. Pseudo-language run done (slice 22): five findings to fix. Still to do: those fixes, paywall ticks and plan rows (with WP4), image check |
 | WP7 Content translation plumbing | Not started | Migration files only; nothing applied to the live database |
-| WP8 Tooling and tests | In progress | Done: unit and UI test targets (174 unit tests), onboarding sweep (now through the walkthrough and the four tabs, with a double-length pseudo-language mode), sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, performance comparison, analytics parity recorder (section 9 of the plan) |
+| WP8 Tooling and tests | In progress (**WP8 sweep spent**, slice 22) | Done: unit and UI test targets (179 unit tests, 5 of them pseudo-language probes that skip in a normal run), onboarding sweep (now through the walkthrough and the four tabs, with a double-length pseudo-language mode), sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, performance comparison, analytics parity recorder (section 9 of the plan) |
 
 ## Slices
 
@@ -506,11 +506,45 @@ So slices 17–20 changed nothing visible in English on the path from landing to
 - The legal line and its links inside the running app (see the finding above).
 - iPhone SE: the English sweep was run on the 17 Pro only.
 
+### Slice 22 — WP8: the double-length pseudo-language run on an iPhone SE (2026-11-10)
+
+**Probe first.** Before spending a run, `PseudoLanguageProbeTests` (new, 5 tests, skipped in a normal run) checked what the system's pseudo-language does to this app's strings. It is switched on for a simulator with `xcrun simctl spawn <udid> defaults write com.lazul.wingman NSDoubleLocalizedStrings -bool YES` and must be switched off again afterwards. Result:
+
+- nothing crashes;
+- plain strings double cleanly ("Get started Get started");
+- a string with a placeholder shows one garbled copy and one correct one ("lld days ago 15 days ago", "… in @ to unlock … in Beliefs & Reframes to unlock …");
+- plural strings show raw format codes ("#@value@ %#@value@").
+
+The last two are how the system doubles a format string. They are not app bugs and do not happen in a real language; they are noise to ignore in the screenshots.
+
+**The run (WP8's one sweep).** `testOnboardingInDoubleLengthPseudoLanguage` on the "Wingman L10n SE" simulator, clean install, translated-app layouts forced on. All 26 screens captured. One guest user created in production.
+
+**What held up.** Landing, all six question screens (they scroll), loading, the walkthrough cards (they grow), Home, Courses, Scenarios, Profile, the tab bar (labels shrink and stay in their own quarter), profile stat labels, and the paywall footer links (Privacy · Restore · Terms stay on one row). Nothing in slices 17–20 misbehaved.
+
+**Findings: text cut or pushed off screen at double length on an SE**
+
+| # | Screen | What happens | Owner |
+|---|---|---|---|
+| 1 | The four statistic screens after questions 3–6 | The content is taller than the screen and does not scroll: the back button and progress bar are pushed up under the status bar and "Tap to continue" is cut at the bottom | WP6, next slice |
+| 2 | Growth projection | Same overflow: the chart's top label is cut and the Continue button runs off the bottom | WP6, next slice |
+| 3 | Social proof | The third testimonial card runs under the Continue button | WP6, next slice |
+| 4 | Commitment pact | "Tap and hold to commit." is held to one line and cut with "…" | WP6, next slice |
+| 5 | Paywall | The third tick is cut after its first copy (the ticks sit in a fixed-height carousel) | WP6 item 3, with WP4 |
+
+Double length is a deliberately harsh test: German runs about 30% longer than English, not 100%. Findings 1–3 may not occur in German on current phones, but the fix is the same either way (let the screen scroll when its content does not fit), and the plan's exit test for WP6 is this run. The five screenshots are in `docs/localization-baseline/pseudo-language-se-2026-11-10/`.
+
+**Behaviour for English users:** unchanged. No app source changed in this slice. 179 unit tests: 174 pass, 5 skipped (the probes).
+
+**Not verified**
+
+- The pseudo-language run covered the path the sweep walks. Lessons, quizzes, scenarios in play, the approach sheet, settings and the one-time offer were not opened.
+- Both sweep allowances that were open are now spent (WP6: English, slice 21; WP8: pseudo-language, this slice). The fixes for findings 1–4 will be checked by rendering each screen in a test window at SE size with doubled text, not by another run. A final in-app confirmation needs one more sweep, which is yours to allow.
+
 ## Next
 
-The double-length pseudo-language run, on the "Wingman L10n SE" simulator (the plan's exit test for WP6: no clipped, truncated or overlapping text on an SE). This is a second sweep run and a second guest user. I am counting it as WP8's one run, since the pseudo-language sweep is a WP8 deliverable and WP8 has not used a run; WP6's run was the English one in slice 21. Then fix what it shows.
+Fix findings 1–4 from slice 22 for translated apps only: statistic screens, growth projection and social proof scroll when their content does not fit (as the question screens already do); the commitment hint may wrap. English must stay pixel-identical on the 17 baseline screens, checked by rendering in tests since no sweep run is left.
 
-After that, the WP6 leftovers: paywall ticks and plan rows (plan items 3–4, done together with WP4 since both touch the same paywall rows) and the image check (item 8).
+After that, the WP6 leftovers: paywall ticks and plan rows (plan items 3–4 and finding 5, done together with WP4 since both touch the same paywall rows) and the image check (item 8).
 
 After WP6: WP4 (paywall prices and disclosure), WP7 (content plumbing), WP3 (error classification), remaining WP8 tooling.
 

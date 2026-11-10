@@ -39,6 +39,8 @@ These were captured **after** the WP5 and WP6 changes, so they are a reference f
 
 `OnboardingSweepTests.testOnboardingInDoubleLengthPseudoLanguage` walks the same path with every localized string doubled and the translated-app layouts switched on. It needs no translation to exist. Its screenshots are read for cut, clipped or overlapping text; nothing is compared. It creates a guest user like the English run, so run one method per run.
 
+`pseudo-language-se-2026-11-10/` holds the five screens from the first such run (iPhone SE, 2026-11-10) that showed cut or overflowing text, before any fix. Placeholders and plurals look broken in every pseudo-language screenshot ("lld", "@", "#@value@"); that is how the system doubles format strings, not an app bug.
+
 ## How to re-run
 
 ```bash
