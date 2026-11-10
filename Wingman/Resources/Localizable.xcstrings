@@ -334,6 +334,9 @@
     "Back" : {
       "comment" : "Scenario player: go to the previous line."
     },
+    "Billed immediately. Cancel anytime in App Store settings." : {
+      "comment" : "Paywall, under the purchase button, for a user who is not eligible for a free trial and is charged on purchase."
+    },
     "Bite-sized lessons you can do on your commute or lunch break" : {
 
     },
@@ -843,6 +846,9 @@
     "No more “what if” moments" : {
 
     },
+    "No payment now. Cancel anytime before your trial ends." : {
+      "comment" : "Paywall, under the purchase button, for a user who gets the free trial."
+    },
     "No questions available" : {
 
     },
@@ -1166,6 +1172,9 @@
     },
     "Try adjusting your search terms" : {
 
+    },
+    "Try for %@" : {
+      "comment" : "Paywall purchase button when the plan starts with a free trial. %@ is zero in the product's currency, for example $0.00."
     },
     "Turn small talk into real chemistry" : {
 

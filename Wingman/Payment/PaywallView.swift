@@ -782,9 +782,9 @@ struct PaywallView: View {
 
     /// Two variants, one line, never optional.
     private var disclosureCopy: String {
-        return viewModel.isTrialEligible(for: viewModel.selectedPlan)
-            ? "No payment now. Cancel anytime before your trial ends."
-            : "Billed immediately. Cancel anytime in App Store settings."
+        return PaywallCopy.disclosure(
+            startsWithFreeTrial: viewModel.isTrialEligible(for: viewModel.selectedPlan)
+        )
     }
 
     // MARK: - Pricing Status (inline loading / error shown under the carousel)
@@ -847,7 +847,7 @@ struct PaywallView: View {
         guard viewModel.isTrialEligible(for: viewModel.selectedPlan) else {
             return String(localized: "Continue")
         }
-        return "Try for \(viewModel.zeroPriceString)"
+        return PaywallCopy.tryForFree(zeroPrice: viewModel.zeroPriceString)
     }
 
     /// Primary CTA once pricing is available.

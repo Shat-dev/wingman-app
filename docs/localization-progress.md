@@ -11,11 +11,11 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP1 Onboarding answer IDs | **Done** (slice 1, `fa213f2`) | Verified on device by the slice 3 sweep. Supabase `age`/`goals` writes checked by reading the code path, not by a live write |
 | WP2 Analytics values pinned to English | **Done** (slices 2–3, `9a853f0`, `38f4330`) | New properties not yet observed arriving in PostHog |
 | WP3 Error classification | Not started | Plan wants a few days of production logging first; cannot be done inside this loop |
-| WP4 Paywall prices and disclosure | In progress (slices 25–27) | Done: weekly price formatted by the product, plan-row sentences, trial badge from StoreKit, one-time-offer sentences. Still to do: D4 renewal sentence, plan-row and tick layout (from WP6), disclosure checklist. Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
-| WP5 String Catalog and extraction | **Done except what WP4 owns** (slices 4–17) | `Localizable` 406 strings, `Content` 174. Left on purpose: paywall price and disclosure strings (WP4). A translated display title for lessons and scenarios comes with WP7 |
+| WP4 Paywall prices and disclosure | In progress (slices 25–28) | Done: weekly price formatted by the product, plan-row sentences, trial badge from StoreKit, one-time-offer sentences, button and under-button lines in the catalog, disclosure checklist. **Waiting on you: the D4 sentence's wording** (see open questions). Still to do: plan-row and tick layout (from WP6). Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
+| WP5 String Catalog and extraction | **Done except what WP4 owns** (slices 4–17) | `Localizable` 409 strings, `Content` 174. Left on purpose: paywall price and disclosure strings (WP4). A translated display title for lessons and scenarios comes with WP7 |
 | WP6 Layout and legal links | In progress (slices 17–21) | Done: sign-in legal line, paywall and offer footer links, line caps, fixed-height buttons. **WP6 sweep spent** (slice 21): English unchanged on all 17 baseline screens. Pseudo-language run done (slice 22); its overflow findings fixed (slice 23). Image check done (slice 24): one image contains a word. Still to do: paywall ticks and plan rows (with WP4, includes finding 5) |
 | WP7 Content translation plumbing | Not started | Migration files only; nothing applied to the live database |
-| WP8 Tooling and tests | In progress (**WP8 sweep spent**, slice 22) | Done: unit and UI test targets (216 unit tests, 5 of them pseudo-language probes that skip in a normal run), whole-screen renders in a test window for before/after checks without a sweep, onboarding sweep (now through the walkthrough and the four tabs, with a double-length pseudo-language mode), sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, performance comparison, analytics parity recorder (section 9 of the plan) |
+| WP8 Tooling and tests | In progress (**WP8 sweep spent**, slice 22) | Done: unit and UI test targets (218 unit tests, 5 of them pseudo-language probes that skip in a normal run), whole-screen renders in a test window for before/after checks without a sweep, onboarding sweep (now through the walkthrough and the four tabs, with a double-length pseudo-language mode), sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, performance comparison, analytics parity recorder (section 9 of the plan) |
 
 ## Slices
 
@@ -680,16 +680,46 @@ The glued-phrase helper `StoreProduct.durationPhrase` is gone. "%lld-month Plan"
 - The offer on screen. It has never been rendered in this work: a Debug build has no products, so the offer closes itself. Same priced-paywall question as the rest of WP4.
 - The derived per-month price on the offer (`introPricePerMonthString`, plan item 6) is not used anywhere in the current offer screen, so there was nothing to change.
 
+### Slice 28 — WP4 part 4: remaining paywall strings, the disclosure checklist, and the D4 question (2026-11-10)
+
+**Three paywall strings were still untranslatable.** A scan of the payment screens for visible text missing from the catalog found exactly three, all around the purchase button:
+
+- "Try for $0.00" (the button, when the plan starts with a free trial);
+- "No payment now. Cancel anytime before your trial ends.";
+- "Billed immediately. Cancel anytime in App Store settings."
+
+They were plain strings. They are now catalog entries in `PaywallCopy`, each with a translator comment, with the same English text. After this, no visible string on the paywall or the one-time offer is outside the catalog.
+
+**Disclosure checklist written (plan WP4 item 7):** `docs/localization-disclosure-checklist.md`. One page: every fact the user must be told on the main paywall (12 rows) and the one-time offer (6 rows), where it appears today, where its value comes from, and a sign-off table to tick per language. As of today every row is present except one, which is D4.
+
+**D4 is not built: its wording is your decision.** The plan approved "add one full sentence under the button". Two things it did not settle:
+
+1. The audit missed that a line already exists under the button (the two sentences above), so the choice is between changing that line and adding a second one.
+2. The exact English words, on the screen that earns the money.
+
+The checklist page lays out three options with exact wording. My recommendation is option A: keep the existing line untouched and add a smaller second line, "Then $69.99 per year. Renews automatically until you cancel." (without a trial: "$69.99 per year. Renews automatically until you cancel."). Listed under open questions. The loop carries on with work that does not depend on it.
+
+**Tests.** 2 new in `PaywallCopyTests` (218 total: 213 pass, 5 probes skipped): the three strings read exactly as before.
+
+**Behaviour for English users:** unchanged.
+
+**Catalog:** 409 strings (3 new). Validator: no problems.
+
+**Not verified**
+
+- The paywall with real products, as for every WP4 slice.
+
 ## Next
 
-WP4 part 4: the renewal sentence on the main paywall (plan item 5, decision D4). This is the one approved visible English change. The paywall already shows a line under the button ("No payment now. Cancel anytime before your trial ends." / "Billed immediately. Cancel anytime in App Store settings."); neither names the price or the renewal. Add the price and period from StoreKit as whole sentences, trial and no-trial variants. Then the plan-row and tick layout carried over from WP6 (items 3–4 there, finding 5) and the disclosure checklist (item 7).
+WP4 part 5: plan-row and tick layout, carried over from WP6 (plan items 3–4 there, finding 5 of the pseudo-language run). Plan rows: the price must never truncate when the title or the "only … per week" line is long. Ticks: a tick that needs two lines must not be cut. English pixel-identical, checked by rendering the row and the tick list in tests.
+
+D4 waits for your answer. After WP4: WP7 (content plumbing), WP3 (error classification), remaining WP8 tooling.
 
 WP4 ends on the priced-paywall question that only you can answer (one Release run, or a dev-tag launch flag).
 
-After WP4: WP7 (content plumbing), WP3 (error classification), remaining WP8 tooling.
-
 ## Open questions for Arthur
 
+- **D4, the renewal sentence on the main paywall (blocks one WP4 item):** which option, and are you happy with the words? A: keep today's line under the button and add a second one, "Then $69.99 per year. Renews automatically until you cancel." B: replace today's line with a fuller one. C: leave the paywall as it is. Details and exact wording for both trial and no-trial variants are in `docs/localization-disclosure-checklist.md`. I recommend A.
 - **"Hi" in a course thumbnail (Release B, not urgent):** the thumbnail for "The Opener" has the word "Hi" in a speech bubble. Keep it for other languages, or have it redrawn without the word?
 - **Dates for English users outside the US:** the approach list shows "Nov 3, 2026" to every English user, including Australian and British ones (your second and fourth largest markets), because the format is fixed. I kept that unchanged, since Release A must not change what English users see. Switching English to a locale-aware date would show "3 Nov 2026" in those regions. Say if you want that; it is a one-line change.
 - **Unused code:** `CommonComponents/ErrorViewScreen.swift`, `Resources/AppStrings.swift` and the Poppins font styles in `Resources/App.swift` appear to be unused. May I delete them? Otherwise the error screen's three strings stay in the catalog and get translated for nothing.

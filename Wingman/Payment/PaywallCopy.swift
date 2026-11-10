@@ -25,6 +25,33 @@ import Foundation
 
 enum PaywallCopy {
 
+    // MARK: - Around the purchase button
+
+    /// The purchase button when the selected plan starts with a free trial:
+    /// "Try for $0.00". `zeroPrice` is a zero in the product's own currency
+    /// and number format.
+    static func tryForFree(zeroPrice: String) -> String {
+        String(
+            localized: "Try for \(zeroPrice)",
+            comment: "Paywall purchase button when the plan starts with a free trial. %@ is zero in the product's currency, for example $0.00."
+        )
+    }
+
+    /// The line under the purchase button. Two variants, never optional:
+    /// one for a user who gets the free trial, one for a user who is charged
+    /// straight away (Apple Guideline 3.1.2).
+    static func disclosure(startsWithFreeTrial: Bool) -> String {
+        startsWithFreeTrial
+            ? String(
+                localized: "No payment now. Cancel anytime before your trial ends.",
+                comment: "Paywall, under the purchase button, for a user who gets the free trial."
+            )
+            : String(
+                localized: "Billed immediately. Cancel anytime in App Store settings.",
+                comment: "Paywall, under the purchase button, for a user who is not eligible for a free trial and is charged on purchase."
+            )
+    }
+
     /// The main paywall's single page. The headline pairs with the "day 1"
     /// calendar illustration.
     static var mainPage: PaywallPage {

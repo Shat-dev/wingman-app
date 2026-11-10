@@ -130,4 +130,24 @@ final class PaywallCopyTests: XCTestCase {
             XCTAssertTrue(reason.unicodeScalars.allSatisfy(allowed.contains), "\(reason) is not an identifier")
         }
     }
+
+    // MARK: - Around the purchase button (WP4)
+
+    /// These three were plain strings that could not be translated. Now in
+    /// the catalog, with the same English text.
+    func testPurchaseButtonForATrial() {
+        XCTAssertEqual(PaywallCopy.tryForFree(zeroPrice: "$0.00"), "Try for $0.00")
+        XCTAssertEqual(PaywallCopy.tryForFree(zeroPrice: "0,00 \u{20AC}"), "Try for 0,00 \u{20AC}")
+    }
+
+    func testLineUnderThePurchaseButton() {
+        XCTAssertEqual(
+            PaywallCopy.disclosure(startsWithFreeTrial: true),
+            "No payment now. Cancel anytime before your trial ends."
+        )
+        XCTAssertEqual(
+            PaywallCopy.disclosure(startsWithFreeTrial: false),
+            "Billed immediately. Cancel anytime in App Store settings."
+        )
+    }
 }
