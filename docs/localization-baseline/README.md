@@ -25,6 +25,10 @@ Source: `OnboardingSweepTests.testOnboardingToPaywall`. Fixed answers: "Want mor
 
 Screens, in order: landing, six questions, four statistic interstitials, growth projection, loading, notification prompt, social proof, commitment pact, paywall.
 
+## Screenshot: voluntary sign-in
+
+`iphone-17-pro/18-auth-login.png`, added 2026-11-10 during WP6. Source: `AuthScreenTests.testVoluntaryLoginScreen` (landing → "Log in"). Captured after the WP5 changes, and pixel-identical below the status bar to a capture taken the same day before the WP6 change to the sign-in screen. Creates no guest user. This screen has no legal line; that line is only on the sign-in screens past the paywall.
+
 ## How to re-run
 
 ```bash

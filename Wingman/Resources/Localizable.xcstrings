@@ -177,7 +177,11 @@
     "Build the confidence to take action when it matters" : {},
     "Building your practice plan" : {},
     "By continuing you agree to our" : {
-      "comment" : "Start of the sign-in legal line, followed by the Terms and Privacy links. Will be replaced by one whole sentence in the layout work; do not translate yet."
+      "comment" : "Start of the sign-in legal line in the English layout only. Translated apps show the whole sentence \"By continuing you agree to our [Terms](terms) and [Privacy](privacy)\" instead, so this piece is never translated.",
+      "shouldTranslate" : false
+    },
+    "By continuing you agree to our [Terms](terms) and [Privacy](privacy)" : {
+      "comment" : "Sign-in legal line, one whole sentence with two links. Translate the words in [square brackets] and move the links wherever the sentence needs them. Keep (terms) and (privacy) exactly as they are."
     },
     "Can you put a price on connection?" : {},
     "Can't load pricing" : {},
@@ -637,7 +641,8 @@
     "Your progress is saved on this device only." : {},
     "Your subscription is already active either way." : {},
     "and" : {
-      "comment" : "Joins 'Terms' and 'Privacy' in the sign-in legal line. Will be replaced by one whole sentence in the layout work; do not translate yet."
+      "comment" : "Joins 'Terms' and 'Privacy' in the sign-in legal line, English layout only. Translated apps show the whole sentence instead, so this piece is never translated.",
+      "shouldTranslate" : false
     },
     "faster progress than watching generic advice videos" : {
       "comment" : "Continues the sentence that starts with the bold '3x' entry."

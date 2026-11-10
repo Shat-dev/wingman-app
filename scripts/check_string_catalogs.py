@@ -17,6 +17,8 @@ Exits non-zero if anything is wrong. Checks:
     placeholders;
   * no translation is empty or whitespace;
   * entries marked do-not-translate have no translation;
+  * every translation keeps exactly the link targets of its English string
+    ("[Terms](terms)" may become "[AGB](terms)", never "[AGB](agb)");
   * brand terms (Wingman, XP) survive in every translation of a string that
     contains them;
   * Content.xcstrings entries are all marked manual, so Xcode will not remove
@@ -53,6 +55,15 @@ def placeholders(text):
         if kind != "%":
             found[kind] += 1
     return found
+
+
+# Markdown link targets: the "terms" in "[Terms](terms)".
+LINK_TARGET = re.compile(r"\]\(([^)\s]*)\)")
+
+
+def link_targets(text):
+    """Multiset of Markdown link targets in `text`."""
+    return Counter(LINK_TARGET.findall(text))
 
 
 def string_units(localization):
@@ -97,6 +108,7 @@ def check_catalog(name, path, allowed, errors, missing):
             continue
 
         expected = placeholders(key)
+        expected_links = link_targets(key)
         for language, localization in localizations.items():
             plural = localization.get("variations", {}).get("plural")
             if plural is not None and "other" not in plural:
@@ -110,6 +122,11 @@ def check_catalog(name, path, allowed, errors, missing):
                 if placeholders(value) != expected:
                     errors.append(
                         f"{tag}: placeholders {dict(placeholders(value))} do not match the English {dict(expected)}"
+                    )
+                if link_targets(value) != expected_links:
+                    errors.append(
+                        f"{tag}: link targets {sorted(link_targets(value).elements())} do not match "
+                        f"the English {sorted(expected_links.elements())}"
                     )
                 if language != SOURCE_LANGUAGE:
                     for term in BRAND_TERMS:

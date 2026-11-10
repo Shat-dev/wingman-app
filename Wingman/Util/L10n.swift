@@ -70,6 +70,27 @@ nonisolated enum L10n {
         return false
     }
 
+    /// Debug builds only: launching with `-l10nForceTranslatedLayout YES`
+    /// shows the layouts built for translated apps while the text is still
+    /// English, so they can be looked at before any translation exists.
+    /// Always false in a Release build.
+    private static let forcesTranslatedLayout: Bool = {
+        #if DEBUG
+        return UserDefaults.standard.bool(forKey: "l10nForceTranslatedLayout")
+        #else
+        return false
+        #endif
+    }()
+
+    /// True when a screen should use its original English layout.
+    ///
+    /// A few lines are laid out differently for translated apps (one wrapping
+    /// sentence in place of a fixed row of pieces). English keeps the layout
+    /// it has always had; this says which one to use.
+    static var usesSourceLanguageLayout: Bool {
+        isSourceLanguage && !forcesTranslatedLayout
+    }
+
     /// A message that ends in developer-facing detail ("Failed to fetch
     /// daily questions: <SDK error text>").
     ///

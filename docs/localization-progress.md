@@ -12,10 +12,10 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP2 Analytics values pinned to English | **Done** (slices 2–3, `9a853f0`, `38f4330`) | New properties not yet observed arriving in PostHog |
 | WP3 Error classification | Not started | Plan wants a few days of production logging first; cannot be done inside this loop |
 | WP4 Paywall prices and disclosure | Not started | Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
-| WP5 String Catalog and extraction | **Done except what WP4 and WP6 own** (slices 4–16) | `Localizable` 385 strings, `Content` 174. Left on purpose: paywall price and disclosure strings (WP4), the sign-in legal sentence (WP6). A translated display title for lessons and scenarios comes with WP7 |
-| WP6 Layout and legal links | Not started | |
+| WP5 String Catalog and extraction | **Done except what WP4 owns** (slices 4–17) | `Localizable` 386 strings, `Content` 174. Left on purpose: paywall price and disclosure strings (WP4). A translated display title for lessons and scenarios comes with WP7 |
+| WP6 Layout and legal links | In progress (slice 17) | Done: sign-in legal line. Still to do: paywall and offer footer links, answer-button line caps, fixed-height buttons, pseudo-language pass, then the one WP6 sweep |
 | WP7 Content translation plumbing | Not started | Migration files only; nothing applied to the live database |
-| WP8 Tooling and tests | In progress | Done: unit and UI test targets (136 unit tests), onboarding sweep, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, sweep beyond the paywall, performance comparison, analytics parity recorder (section 9 of the plan) |
+| WP8 Tooling and tests | In progress | Done: unit and UI test targets (152 unit tests), onboarding sweep, sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, sweep beyond the paywall, performance comparison, analytics parity recorder (section 9 of the plan) |
 
 ## Slices
 
@@ -362,9 +362,40 @@ It checks: source language; no unexpected language; every translation keeps its 
 - The validator has no length limits yet (paywall ticks, tab labels, buttons). Those belong with the layout work, once WP6 has settled what the limits are.
 - The catalogs have still not been opened in Xcode's editor.
 
+### Slice 17 — WP6 part 1: the sign-in legal line (2026-11-10)
+
+**The problem.** "By continuing you agree to our · Terms · and · Privacy" was four separate pieces in a fixed row. Every language would have been forced into English word order, and a row cannot wrap, so a longer sentence would have been squeezed or cut off.
+
+**What changed.** The line moved out of `AuthView` into its own file, `Wingman/Auth/AuthLegalFooter.swift`, with two layouts:
+
+- **English: the original row,** the same code moved unchanged.
+- **Translated apps: one sentence** — `By continuing you agree to our [Terms](terms) and [Privacy](privacy)` — translated as a whole. The translator can move the two links anywhere in the sentence, and it wraps onto as many lines as it needs.
+
+Both layouts open the same two pages (`getwingman.app/terms`, `/privacy`) in the same in-app browser sheet.
+
+**Safety net for the links (requirement 12).** The sentence carries the short words `terms` and `privacy` as link targets, not web addresses, so a translator cannot damage a URL. If a translation loses a link, adds an unknown one, links the same page twice, or is not valid Markdown, the app shows the English sentence instead. The validator now also fails on any translation whose link targets differ from the English ones (tested with a planted `[AGB](agb)`: reported; a correct reordered German sentence: passes).
+
+**Catalog.** One new entry (the sentence, with a translator comment). The two old pieces, "By continuing you agree to our" and "and", are now marked do-not-translate, since only the English layout uses them. 386 strings, 9 do-not-translate.
+
+**New: `L10n.usesSourceLanguageLayout`,** the single switch for "keep the original English layout". Debug builds can launch with `-l10nForceTranslatedLayout YES` to see the translated-app layouts with English text; a Release build ignores it.
+
+**Tests.** 16 new unit tests in `AuthLegalCopyTests` (152 total, all passing): the two destinations, the English sentence, link order and underlining, a reordered German sentence, six kinds of broken translation falling back to English, which layout each kind of app gets, and two rendering tests (both layouts are one line of the same height at phone width; the sentence grows to two lines at 200 pt). New UI test `AuthScreenTests` captures the voluntary sign-in screen (`18-auth-login.png` added to the 17 Pro baseline) without creating a guest user.
+
+**Behaviour for English users:** unchanged. The row is the same code, and the voluntary sign-in screen is pixel-identical before and after this slice.
+
+**Found along the way.** The legal line is not on the "Log in" screen reached from the landing screen. It only appears on the sign-in screens that follow the paywall or a purchase, which the onboarding sweep does not reach yet.
+
+**Not verified**
+
+- The legal line has not been seen inside the running app in either layout, and its links have not been tapped there: the screens that show it sit past the paywall. Both layouts were rendered and looked at off-screen in the unit tests. Extending the sweep past the paywall (already on the WP8 list) will cover this; it should happen before the WP6 sweep is spent.
+- The `-l10nForceTranslatedLayout` launch flag has not been exercised yet.
+- Link tap targets in the sentence layout are text-height (about 17 pt), the same as the English row's. Not changed here.
+
 ## Next
 
-WP6 (layout and legal links), first slice: the sign-in legal sentence (`AuthView`, four fragments in a row → one localized sentence with two inline links, wrapping allowed, same Safari sheet and URLs) and the paywall and one-time-offer footers (three links in a fixed row → allowed to scale, then wrap). Both must look the same in English. Then answer-button line caps, fixed-height buttons, and a pseudo-language pass. The WP6 sweep is still available and should be spent after these changes.
+WP6, second slice: the paywall and one-time-offer footers (Privacy · Restore · Terms in a fixed row with 60 pt side padding → allowed to shrink slightly, then wrap; German needs roughly 290 pt where an iPhone SE has 200). English must look the same. Then answer-button line caps, fixed-height buttons, and a pseudo-language pass.
+
+Before the WP6 sweep is spent: extend `OnboardingSweepTests` past the paywall (close the paywall, capture the required sign-in screen in both legal-line layouts, tap both links), so one run covers everything WP6 changed.
 
 After WP6: WP4 (paywall prices and disclosure), WP7 (content plumbing), WP3 (error classification), remaining WP8 tooling.
 

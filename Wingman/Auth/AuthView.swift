@@ -341,39 +341,9 @@ struct AuthView: View {
 
     // MARK: - Legal Footer
     private var legalFooter: some View {
-        HStack(spacing: 4) {
-            Text("By continuing you agree to our")
-                .foregroundColor(Color.wingmanBlack.opacity(0.45))
-
-            Button {
-                if let url = URL(string: Constants.TERMS_CONDITIONS_URL) {
-                    safariLink = IdentifiableURL(url: url)
-                }
-            } label: {
-                Text("Terms")
-                    .foregroundColor(Color.wingmanBlack.opacity(0.7))
-                    .underline()
-            }
-            .buttonStyle(ScalePressStyle())
-
-            Text("and")
-                .foregroundColor(Color.wingmanBlack.opacity(0.45))
-
-            Button {
-                if let url = URL(string: Constants.PRIVACY_POLICY_URL) {
-                    safariLink = IdentifiableURL(url: url)
-                }
-            } label: {
-                Text("Privacy")
-                    .foregroundColor(Color.wingmanBlack.opacity(0.7))
-                    .underline()
-            }
-            .buttonStyle(ScalePressStyle())
+        AuthLegalFooter { url in
+            safariLink = IdentifiableURL(url: url)
         }
-        .font(.manropeRegular(size: 12))
-        .multilineTextAlignment(.center)
-        .padding(.horizontal, 20)
-        .padding(.bottom, 20)
     }
 
     // MARK: - Outline Button
