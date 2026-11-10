@@ -11,11 +11,11 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP1 Onboarding answer IDs | **Done** (slice 1, `fa213f2`) | Verified on device by the slice 3 sweep. Supabase `age`/`goals` writes checked by reading the code path, not by a live write |
 | WP2 Analytics values pinned to English | **Done** (slices 2–3, `9a853f0`, `38f4330`) | New properties not yet observed arriving in PostHog |
 | WP3 Error classification | Not started | Plan wants a few days of production logging first; cannot be done inside this loop |
-| WP4 Paywall prices and disclosure | In progress (slice 25) | Done: weekly price formatted by the product, plan-row sentences. Still to do: trial badge from StoreKit, one-time-offer sentences, D4 renewal sentence, plan-row and tick layout (from WP6), disclosure checklist. Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
-| WP5 String Catalog and extraction | **Done except what WP4 owns** (slices 4–17) | `Localizable` 389 strings, `Content` 174. Left on purpose: paywall price and disclosure strings (WP4). A translated display title for lessons and scenarios comes with WP7 |
+| WP4 Paywall prices and disclosure | In progress (slices 25–26) | Done: weekly price formatted by the product, plan-row sentences, trial badge from StoreKit. Still to do: one-time-offer sentences, D4 renewal sentence, plan-row and tick layout (from WP6), disclosure checklist. Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
+| WP5 String Catalog and extraction | **Done except what WP4 owns** (slices 4–17) | `Localizable` 392 strings, `Content` 174. Left on purpose: paywall price and disclosure strings (WP4). A translated display title for lessons and scenarios comes with WP7 |
 | WP6 Layout and legal links | In progress (slices 17–21) | Done: sign-in legal line, paywall and offer footer links, line caps, fixed-height buttons. **WP6 sweep spent** (slice 21): English unchanged on all 17 baseline screens. Pseudo-language run done (slice 22); its overflow findings fixed (slice 23). Image check done (slice 24): one image contains a word. Still to do: paywall ticks and plan rows (with WP4, includes finding 5) |
 | WP7 Content translation plumbing | Not started | Migration files only; nothing applied to the live database |
-| WP8 Tooling and tests | In progress (**WP8 sweep spent**, slice 22) | Done: unit and UI test targets (199 unit tests, 5 of them pseudo-language probes that skip in a normal run), whole-screen renders in a test window for before/after checks without a sweep, onboarding sweep (now through the walkthrough and the four tabs, with a double-length pseudo-language mode), sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, performance comparison, analytics parity recorder (section 9 of the plan) |
+| WP8 Tooling and tests | In progress (**WP8 sweep spent**, slice 22) | Done: unit and UI test targets (208 unit tests, 5 of them pseudo-language probes that skip in a normal run), whole-screen renders in a test window for before/after checks without a sweep, onboarding sweep (now through the walkthrough and the four tabs, with a double-length pseudo-language mode), sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, performance comparison, analytics parity recorder (section 9 of the plan) |
 
 ## Slices
 
@@ -627,9 +627,34 @@ New file `Wingman/Payment/PaywallPricing.swift`; the old `calculateWeeklyPrice` 
 - Not seen on a real product. A Debug build loads no products, so the plan rows have never been rendered in this work; the helper is tested with formatters built the way StoreKit builds them, not with StoreKit's own. This is the priced-paywall question below.
 - What locale StoreKit actually puts on the formatter for a mismatched device (for example "en_DE") is not something I can observe here. Whatever it is, the weekly line now uses the same one as the full price beside it.
 
+### Slice 26 — WP4 part 2: the trial badge (2026-11-10)
+
+**The problem (audit H-4).** The badge on the selected plan was the literal text "3-day Free Trial". The trial length is set per product in App Store Connect and nothing kept the two in step. It also could not be translated.
+
+**What changed (plan WP4 item 3).**
+
+- The length is read from the product's introductory offer, which is what the App Store will actually grant. New file `Wingman/Payment/PaywallTrial.swift`.
+- The badge is one catalog entry per unit with the number as its placeholder ("%lld-day Free Trial", and month and year versions), so a translation can supply its own singular and plural forms.
+- A one-week trial reads "7-day", whichever way the App Store reports it.
+- **No free trial on the product, no badge.** A discounted first period (the one-time offer's kind) is not a free trial.
+- Eligibility is unchanged: the badge still only shows for a user who can get the trial, decided by the same check as before.
+
+**Tests.** 9 new in `PaywallTrialTests` (208 total: 203 pass, 5 probes skipped): a three-day free trial reads "3-day Free Trial", identical to the old literal; 1, 7 and 14 days; weeks counted in days; months and years; repeated periods multiplied; a paid introductory offer and a nonsense length give no badge.
+
+**Behaviour for English users:** unchanged for the current products, which carry a three-day free trial (per your earlier notes; I cannot read the App Store configuration from here).
+
+**One behaviour to know about.** The button ("Try for $0.00") and the line under it ("No payment now…") are still decided by eligibility alone, as before; I did not touch them, because I cannot check them against a real product in a Debug build. If the App Store ever reported no free trial for a product while the user still counted as eligible, the badge would now be absent while the button still said "Try for $0.00". Before this slice all three would have claimed a trial. Once eligibility has loaded this cannot happen (it reports "no intro offer" and hides all three); the gap is only the moment before it loads. Aligning the button and the line with the product data is a one-line change I would rather make after seeing the paywall with real products.
+
+**Catalog:** 392 strings (3 new, each with a translator comment). Validator: no problems.
+
+**Not verified**
+
+- That the real products report their trial as three days (and in which unit). The reading code has no test against a StoreKit product, only against the values an offer carries. Needs the priced paywall.
+- The badge on screen: plan rows have never been rendered in this work.
+
 ## Next
 
-WP4 part 2: the trial badge ("3-day Free Trial" is a hard-coded string today): read the trial length from the product's introductory offer, render it through a plural-aware catalog entry, show no badge when the product has no free trial. English must still read "3-day Free Trial". Then the one-time-offer sentences (item 4), the D4 renewal sentence (item 5), the plan-row and tick layout carried over from WP6 (items 3–4 there, finding 5), and the disclosure checklist (item 7).
+WP4 part 3: the one-time offer's sentences (plan item 4). `StoreProduct.durationPhrase` glues "year" / "2 years" / "month" into "off your first …", "for your first …" and the renewal line; replace with whole catalog sentences chosen by case, plural-aware, with the English output unchanged. Also "%lld-month Plan". Then the D4 renewal sentence (item 5), the plan-row and tick layout carried over from WP6 (items 3–4 there, finding 5), and the disclosure checklist (item 7).
 
 WP4 ends on the priced-paywall question that only you can answer (one Release run, or a dev-tag launch flag).
 

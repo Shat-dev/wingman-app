@@ -98,8 +98,17 @@
     "%lld%%" : {
       "comment" : "A percentage, e.g. course progress or a discount. Use your language's spacing between number and percent sign."
     },
+    "%lld-day Free Trial" : {
+      "comment" : "Badge on a paywall plan. %lld is the number of days in the free trial, for example 3."
+    },
+    "%lld-month Free Trial" : {
+      "comment" : "Badge on a paywall plan. %lld is the number of months in the free trial."
+    },
     "%lld-month Plan" : {
       "comment" : "Subscription plan name for a plan lasting this many months."
+    },
+    "%lld-year Free Trial" : {
+      "comment" : "Badge on a paywall plan. %lld is the number of years in the free trial."
     },
     "%lld. %@" : {
       "comment" : "Quiz question: question number, then the question text.",

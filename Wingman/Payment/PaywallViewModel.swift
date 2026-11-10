@@ -162,6 +162,19 @@ final class PaywallViewModel: ObservableObject {
         return plan == .yearly ? isYearlyTrialEligible : isMonthlyTrialEligible
     }
 
+    /// The trial badge for a plan's row ("3-day Free Trial"), or nil for no
+    /// badge.
+    ///
+    /// Two things have to hold: this user can still get the trial (the same
+    /// eligibility that drives the button and the line under it), and the
+    /// product really has a free trial, whose length is read from the App
+    /// Store rather than assumed. See `PaywallTrial`.
+    func trialBadge(for plan: SubscriptionPlan) -> String? {
+        guard isTrialEligible(for: plan) else { return nil }
+        let package = plan == .yearly ? yearlyPackage : monthlyPackage
+        return package?.storeProduct.freeTrialLength.map(PaywallTrial.badge)
+    }
+
     /// Nil (not-yet-checked) → eligible (optimistic). `.unknown` (fresh install,
     /// no receipt) → eligible per RevenueCat's own recommendation.
     private func isEligibleStatus(_ status: IntroEligibilityStatus?) -> Bool {

@@ -716,7 +716,7 @@ struct PaywallView: View {
                 weekly: viewModel.yearlyPrice,
                 weeklySubtitle: PaywallPricing.perYear,
                 isSelected: viewModel.selectedPlan == .yearly,
-                badgeText: (viewModel.selectedPlan == .yearly && viewModel.isYearlyTrialEligible) ? "3-day Free Trial" : nil
+                badgeText: viewModel.selectedPlan == .yearly ? viewModel.trialBadge(for: .yearly) : nil
             ) {
                 withAnimation(.easeInOut(duration: 0.2)) {
                     viewModel.selectPlan(.yearly)
@@ -738,7 +738,7 @@ struct PaywallView: View {
                 weekly: viewModel.monthlyPrice,
                     weeklySubtitle: PaywallPricing.perMonth,
                     isSelected: viewModel.selectedPlan == .monthly,
-                    badgeText: (viewModel.selectedPlan == .monthly && viewModel.isMonthlyTrialEligible) ? "3-day Free Trial" : nil
+                    badgeText: viewModel.selectedPlan == .monthly ? viewModel.trialBadge(for: .monthly) : nil
             ) {
                 withAnimation(.easeInOut(duration: 0.2)) {
                     viewModel.selectPlan(.monthly)
