@@ -2299,8 +2299,7 @@ final class AuthManager: ObservableObject {
         case identityAlreadyExists
 
         var errorDescription: String? {
-            "That account is already linked to another Wingman login. "
-            + "Log in with it instead — progress from this session won't carry over."
+            String(localized: "That account is already linked to another Wingman login. Log in with it instead — progress from this session won't carry over.")
         }
     }
 
@@ -2505,7 +2504,7 @@ final class AuthManager: ObservableObject {
         } catch let error as GoogleSignInError {
             isGoogleSignInLoading = false
             log("❌ Google Sign-In error: \(error.localizedDescription)")
-            googleSignInError = error.localizedDescription
+            googleSignInError = AuthCopy.internalFailure(error.localizedDescription)
 
         } catch let error as AccountLinkError {
             // Phase A.4: no merge flow by decision, but the screen must not
@@ -2518,7 +2517,7 @@ final class AuthManager: ObservableObject {
         } catch {
             isGoogleSignInLoading = false
             log("❌ Supabase sign-in error: \(error.localizedDescription)")
-            googleSignInError = "Sign-in failed: \(error.localizedDescription)"
+            googleSignInError = String(localized: "Sign-in failed: \(error.localizedDescription)")
         }
     }
     
@@ -2536,7 +2535,7 @@ final class AuthManager: ObservableObject {
         } catch {
             log("❌ Nonce generation failed: \(error.localizedDescription)")
             isAppleSignInLoading = false
-            appleSignInError = "Couldn't start sign-in. Please try again."
+            appleSignInError = String(localized: "Couldn't start sign-in. Please try again.")
             return
         }
         currentNonce = nonce
@@ -2656,7 +2655,7 @@ final class AuthManager: ObservableObject {
             currentNonce = nil
             appleSignInDelegate = nil
             log("❌ Supabase Apple sign-in error: \(error.localizedDescription)")
-            appleSignInError = "Sign-in failed: \(error.localizedDescription)"
+            appleSignInError = String(localized: "Sign-in failed: \(error.localizedDescription)")
         }
     }
 
@@ -2675,29 +2674,29 @@ final class AuthManager: ObservableObject {
                 return
             case .failed:
                 log("❌ Apple Sign-In failed")
-                appleSignInError = "Sign-in failed. Please try again."
+                appleSignInError = String(localized: "Sign-in failed. Please try again.")
             case .invalidResponse:
                 log("❌ Apple Sign-In invalid response")
-                appleSignInError = "Invalid response from Apple. Please try again."
+                appleSignInError = String(localized: "Invalid response from Apple. Please try again.")
             case .notHandled:
                 log("❌ Apple Sign-In not handled")
-                appleSignInError = "Sign-in was not handled. Please try again."
+                appleSignInError = String(localized: "Sign-in was not handled. Please try again.")
             case .notInteractive:
                 log("❌ Apple Sign-In not interactive")
-                appleSignInError = "Sign-in requires user interaction."
+                appleSignInError = String(localized: "Sign-in requires user interaction.")
             case .unknown:
                 log("❌ Apple Sign-In unknown error")
-                appleSignInError = "An unknown error occurred. Please try again."
+                appleSignInError = String(localized: "An unknown error occurred. Please try again.")
             case .matchedExcludedCredential:
                 // Passkey-registration path; not produced by the Sign-In-with-
                 // Apple flow this app uses. Treat as a generic failure so the
                 // user can retry.
                 log("❌ Apple Sign-In: matchedExcludedCredential")
-                appleSignInError = "Sign-in failed. Please try again."
+                appleSignInError = String(localized: "Sign-in failed. Please try again.")
             case .credentialImport, .credentialExport:
                 // Passkey import/export errors; not reachable from SIWA here.
                 log("❌ Apple Sign-In: credential import/export error")
-                appleSignInError = "Sign-in failed. Please try again."
+                appleSignInError = String(localized: "Sign-in failed. Please try again.")
             case .preferSignInWithApple:
                 // User opted to continue with an existing SIWA account. Since
                 // this flow IS SIWA, treat as a generic cancel/retry prompt.
@@ -2707,7 +2706,7 @@ final class AuthManager: ObservableObject {
                 // Passkey-specific; not reachable from SIWA. Log and surface a
                 // retry-friendly message.
                 log("❌ Apple Sign-In: deviceNotConfiguredForPasskeyCreation")
-                appleSignInError = "Sign-in failed. Please try again."
+                appleSignInError = String(localized: "Sign-in failed. Please try again.")
             @unknown default:
                 log("❌ Apple Sign-In unknown error code")
                 appleSignInError = error.localizedDescription

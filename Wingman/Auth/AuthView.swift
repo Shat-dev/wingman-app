@@ -138,7 +138,7 @@ struct AuthView: View {
             // MARK: - Social Sign-In Buttons
             VStack(spacing: 13) {
                 outlineButton(
-                    title: authManager.isAppleSignInLoading ? "Signing in..." : "Continue with Apple",
+                    title: authManager.isAppleSignInLoading ? String(localized: "Signing in...") : String(localized: "Continue with Apple"),
                     imageName: "auth_apple_logo",
                     isLoading: authManager.isAppleSignInLoading
                 ) {
@@ -149,7 +149,7 @@ struct AuthView: View {
                 .shadow(color: Color.wingmanBlack.opacity(0.06), radius: 5, x: 0, y: 2)
 
                 outlineButton(
-                    title: authManager.isGoogleSignInLoading ? "Signing in..." : "Continue with Google",
+                    title: authManager.isGoogleSignInLoading ? String(localized: "Signing in...") : String(localized: "Continue with Google"),
                     imageName: "auth_google_logo",
                     isLoading: authManager.isGoogleSignInLoading
                 ) {
@@ -284,13 +284,13 @@ struct AuthView: View {
     private var headerTitle: String {
         switch context {
         case .requiredAfterPaywall:
-            return "One last step"
+            return String(localized: "One last step")
         case .afterPurchase:
-            return "Secure your subscription"
+            return String(localized: "Secure your subscription")
         case .saveProgress:
-            return "Don't lose your log"
+            return String(localized: "Don't lose your log")
         case .voluntary:
-            return mode == .signup ? "Create Account" : "Welcome Back"
+            return mode == .signup ? String(localized: "Create Account") : String(localized: "Welcome Back")
         }
     }
 
@@ -301,21 +301,21 @@ struct AuthView: View {
             // dismissed paywall, and the default reading is "another thing to
             // pay for." It is also literally accurate — the account costs
             // nothing; the subscription gates content later.
-            return "Create a free account so your answers and progress are saved."
+            return String(localized: "Create a free account so your answers and progress are saved.")
         case .afterPurchase:
             // Concrete and true: without an account the subscription and the
             // progress live on this device's session. Restore recovers the
             // entitlement via the App Store receipt, but not the logged
             // approaches — which is the part that cannot be regenerated.
-            return "Right now it's tied to this device. An account keeps your subscription and progress if you switch phones."
+            return String(localized: "Right now it's tied to this device. An account keeps your subscription and progress if you switch phones.")
         case .saveProgress:
             // Names the specific thing at risk. Everything else in the app is
             // content that can be re-served; the approach log is not. Phrased
             // around "log" rather than a count so it reads correctly whether the
             // user has one approach or fifty.
-            return "Your approach log is saved on this device only. An account keeps it if you lose or change your phone."
+            return String(localized: "Your approach log is saved on this device only. An account keeps it if you lose or change your phone.")
         case .voluntary:
-            return "Save your progress, sync across devices, and more."
+            return String(localized: "Save your progress, sync across devices, and more.")
         }
     }
 
@@ -329,11 +329,11 @@ struct AuthView: View {
             // and commitment-pact flags to per-user keys before any network await.
             // Signing in here lands on MainTabView with no further gates. If
             // that routing changes, this line changes with it.
-            return "Nothing else to set up — you'll go straight into the app."
+            return String(localized: "Nothing else to set up — you'll go straight into the app.")
         case .afterPurchase:
-            return "Your subscription is already active either way."
+            return String(localized: "Your subscription is already active either way.")
         case .saveProgress:
-            return "Takes a few seconds. Nothing else changes."
+            return String(localized: "Takes a few seconds. Nothing else changes.")
         case .voluntary:
             return nil
         }

@@ -12,7 +12,7 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP2 Analytics values pinned to English | **Done** (slices 2–3, `9a853f0`, `38f4330`) | New properties not yet observed arriving in PostHog |
 | WP3 Error classification | Not started | Plan wants a few days of production logging first; cannot be done inside this loop |
 | WP4 Paywall prices and disclosure | Not started | Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
-| WP5 String Catalog and extraction | **In progress** (slices 4–13) | `Localizable` holds 342 strings, `Content` 174. Done: onboarding, commitment, non-disclosure paywall copy, notifications, home, quotes, course catalog, approach logging, profile, settings, practice, XP. Still to move: auth screens and auth error messages, walkthrough, daily practice and quiz, lesson screen chrome, remaining error wrappers (RevenueCat, daily practice) |
+| WP5 String Catalog and extraction | **In progress** (slices 4–14) | `Localizable` holds 364 strings, `Content` 174. Done: onboarding, commitment, non-disclosure paywall copy, notifications, home, quotes, course catalog, approach logging, profile, settings, practice, XP, auth. Still to move: walkthrough, daily practice and quiz, lesson screen chrome, remaining error wrappers (RevenueCat, daily practice), then the fragment and number-format leftovers |
 | WP6 Layout and legal links | Not started | |
 | WP7 Content translation plumbing | Not started | Migration files only; nothing applied to the live database |
 | WP8 Tooling and tests | Started | Unit and UI test targets exist; parity recorder, validator and fallback tests still to build |
@@ -292,9 +292,28 @@ This closes the gap noted in slice 2 (nothing proved the canonical accessors ign
 - Speaker labels, completion titles and the "You" fallback have no direct unit test.
 - `Data error: …` still appends a developer-written detail in English after a translatable prefix. It is rare and was left that way.
 
+### Slice 14 — WP5 part 11: sign-in (2026-11-10)
+
+**What changed**
+
+- `AuthView`: the header title, subtitle and reassurance line for each of the four contexts (11 strings plus "Create Account" / "Welcome Back"), and the two provider buttons with their "Signing in..." state. They were plain `String` values and so were not being extracted.
+- `AuthManager`: the ten Apple sign-in failure messages, the two "Sign-in failed: …" wrappers, and the account-link conflict message (which was two literals joined with `+`; one sentence now, same text).
+- New `Auth/AuthCopy.swift`. `internalFailure(_:)` decides what to show when a failure only has a developer-facing description (`GoogleSignInError`: "Unable to find root view controller"). English shows that description as before; a translated app shows the ordinary retry message. The technical descriptions themselves stay English, since they also go to the log.
+- The legal sentence under the buttons ("By continuing you agree to our Terms and Privacy") is untouched: it is four fragments in a row and is a WP6 item.
+
+**Behaviour for English users:** unchanged.
+
+**Tests:** new `AuthCopyTests` (5). 128 unit tests pass. Catalog: 364 entries.
+
+**Not verified**
+
+- The sign-in screens were not opened on a simulator, and no sign-in failure was provoked.
+- The per-context titles and subtitles in `AuthView` have no direct unit test (they are private to the view).
+- Errors that arrive from the Google or Apple SDKs with their own `localizedDescription` are shown as the SDK gives them. Whether those SDKs translate their messages was not checked.
+
 ## Next
 
-WP5 part 11: auth. `AuthView` (titles, subtitles and button labels per context, the legal sentence is WP6), and the user-facing error strings in `AuthManager` (about 29 literals, including the Google and Apple sign-in failures that wrap `error.localizedDescription`). Then walkthrough copy, daily practice and quiz chrome, the lesson screen, and the remaining error wrappers in `RevenueCatManager` and `DailyPracticeServiceProtocol`. After that WP5 is down to its fragment and number-format leftovers and WP6 (layout) can start.
+WP5 part 12: the remaining screens in one pass, since each has only a few indirect strings left: walkthrough overlay copy (`WalkthroughOverlayView`), daily practice and quiz chrome (`DailyPracticeView`, `DailyPracticeQuestion` category names — brand terms, `QuizQuestionView`), the lesson screen, and the error wrappers in `RevenueCatManager` and `DailyPracticeServiceProtocol`. Then a final WP5 pass over fragments and number formats (percent signs, "min / day", the "3x" bullet, "Level n: title"), after which WP6 (layout and the legal sentence) starts.
 
 ## Open questions for Arthur
 

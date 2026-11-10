@@ -183,6 +183,9 @@
     "An unexpected error occurred. Please try again." : {
 
     },
+    "An unknown error occurred. Please try again." : {
+
+    },
     "Analyzing your answers" : {
 
     },
@@ -321,7 +324,16 @@
     "Continue" : {
 
     },
+    "Continue with Apple" : {
+
+    },
+    "Continue with Google" : {
+
+    },
     "Correct Answer!" : {
+
+    },
+    "Couldn't start sign-in. Please try again." : {
 
     },
     "Course complete." : {
@@ -334,6 +346,9 @@
 
     },
     "Create a free account" : {
+
+    },
+    "Create a free account so your answers and progress are saved." : {
 
     },
     "Creating openings for connection while keeping it casual." : {
@@ -388,6 +403,9 @@
 
     },
     "Don't join that statistic. Your future self is counting on you." : {
+
+    },
+    "Don't lose your log" : {
 
     },
     "E.g. Approached at Cafe" : {
@@ -493,6 +511,9 @@
 
     },
     "Indirect Approach" : {
+
+    },
+    "Invalid response from Apple. Please try again." : {
 
     },
     "Invite Friends" : {
@@ -686,6 +707,9 @@
     "Notes" : {
 
     },
+    "Nothing else to set up — you'll go straight into the app." : {
+
+    },
     "OFF" : {
 
     },
@@ -696,6 +720,9 @@
 
     },
     "ONE-TIME OFFER" : {
+
+    },
+    "One last step" : {
 
     },
     "Oops!" : {
@@ -779,6 +806,9 @@
     "Retry" : {
 
     },
+    "Right now it's tied to this device. An account keeps your subscription and progress if you switch phones." : {
+
+    },
     "Save" : {
 
     },
@@ -786,6 +816,9 @@
 
     },
     "Save your first approach" : {
+
+    },
+    "Save your progress, sync across devices, and more." : {
 
     },
     "Saved!" : {
@@ -806,6 +839,9 @@
     "Search" : {
 
     },
+    "Secure your subscription" : {
+
+    },
     "Select all that apply" : {
 
     },
@@ -816,6 +852,21 @@
 
     },
     "Show Approach Guide" : {
+
+    },
+    "Sign-in failed. Please try again." : {
+
+    },
+    "Sign-in failed: %@" : {
+
+    },
+    "Sign-in requires user interaction." : {
+
+    },
+    "Sign-in was not handled. Please try again." : {
+
+    },
+    "Signing in..." : {
 
     },
     "Skip" : {
@@ -875,6 +926,9 @@
     "TODAY" : {
 
     },
+    "Takes a few seconds. Nothing else changes." : {
+
+    },
     "Talk to dog owner about their dog" : {
 
     },
@@ -894,6 +948,9 @@
 
     },
     "Terms of Service" : {
+
+    },
+    "That account is already linked to another Wingman login. Log in with it instead — progress from this session won't carry over." : {
 
     },
     "That payment method was declined. Check your payment details in the App Store and try again." : {
@@ -993,6 +1050,9 @@
     "We couldn't find an active subscription for this Apple ID." : {
 
     },
+    "Welcome Back" : {
+
+    },
     "What are you mainly hoping to improve?" : {
 
     },
@@ -1084,10 +1144,16 @@
     "Your Modules" : {
 
     },
+    "Your approach log is saved on this device only. An account keeps it if you lose or change your phone." : {
+
+    },
     "Your name" : {
 
     },
     "Your progress is saved on this device only." : {
+
+    },
+    "Your subscription is already active either way." : {
 
     },
     "and" : {
