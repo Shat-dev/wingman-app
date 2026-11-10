@@ -44,6 +44,9 @@
     "%lld%%" : {
 
     },
+    "%lld-month Plan" : {
+
+    },
     "%lld. %@" : {
       "localizations" : {
         "en" : {
@@ -111,6 +114,9 @@
 
     },
     "Already have an account?" : {
+
+    },
+    "An error occurred" : {
 
     },
     "Analyzing your answers" : {
@@ -191,6 +197,9 @@
     "Close this and it’s gone for good" : {
 
     },
+    "Come across natural, not nervous" : {
+
+    },
     "Commit" : {
 
     },
@@ -233,6 +242,9 @@
     "Daily Reading Goal" : {
 
     },
+    "Day 1 of becoming the guy who goes for it" : {
+
+    },
     "Delete" : {
 
     },
@@ -272,10 +284,19 @@
     "Examples" : {
 
     },
+    "Failed to restore purchases. Please try again." : {
+
+    },
+    "Feel confident, not anxious" : {
+
+    },
     "Forward" : {
 
     },
     "Get started" : {
+
+    },
+    "Go first without overthinking it" : {
 
     },
     "Goal Notifications" : {
@@ -326,6 +347,12 @@
     "Join the men taking action" : {
 
     },
+    "Keep it flowing, no awkward silences" : {
+
+    },
+    "Know exactly how to start talking" : {
+
+    },
     "Level %lld" : {
 
     },
@@ -372,6 +399,9 @@
     "Maximum characters reached" : {
 
     },
+    "Monthly Plan" : {
+
+    },
     "Most men regret the chances they didn't make" : {
 
     },
@@ -387,6 +417,9 @@
     "No account" : {
 
     },
+    "No active subscriptions found to restore" : {
+
+    },
     "No approach data yet" : {
 
     },
@@ -400,6 +433,9 @@
 
     },
     "No internet connection" : {
+
+    },
+    "No more “what if” moments" : {
 
     },
     "No questions available" : {
@@ -438,7 +474,13 @@
     "Personalizing your lessons" : {
 
     },
+    "Plan" : {
+
+    },
     "Please Try again!" : {
+
+    },
+    "Please select a subscription plan" : {
 
     },
     "Please try again!" : {
@@ -459,6 +501,21 @@
     "Profile" : {
 
     },
+    "Purchase completed but entitlement not found. Please contact support." : {
+
+    },
+    "Purchase failed. Please try again." : {
+
+    },
+    "Purchases are temporarily unavailable. Please try again later." : {
+
+    },
+    "Purchases aren't allowed on this device. Check Screen Time restrictions and try again." : {
+
+    },
+    "Purchases restored successfully!" : {
+
+    },
     "Rate Wingman" : {
 
     },
@@ -469,6 +526,9 @@
 
     },
     "Restore Purchase" : {
+
+    },
+    "Restore failed. Please try again." : {
 
     },
     "Restoring..." : {
@@ -516,6 +576,9 @@
     "Something went wrong" : {
 
     },
+    "Something went wrong on our end. Please try again." : {
+
+    },
     "Start Practice" : {
 
     },
@@ -526,6 +589,15 @@
 
     },
     "Steps" : {
+
+    },
+    "Stop caring what others think" : {
+
+    },
+    "Stop letting fear of rejection win" : {
+
+    },
+    "Stop talking yourself out of it" : {
 
     },
     "Success" : {
@@ -549,6 +621,12 @@
     "Terms of Service" : {
 
     },
+    "That payment method was declined. Check your payment details in the App Store and try again." : {
+
+    },
+    "The App Store is having trouble right now. Please try again in a few minutes." : {
+
+    },
     "The step-by-step way to stop freezing up and start the conversation." : {
 
     },
@@ -562,6 +640,12 @@
 
     },
     "This deletes your logged approaches and all progress on this device. There's no account to recover them from. This cannot be undone." : {
+
+    },
+    "This plan isn't available on your App Store account right now." : {
+
+    },
+    "This purchase needs approval before it can go through — usually from the account holder or your bank. You'll get access automatically once it's approved." : {
 
     },
     "Tips & offers" : {
@@ -579,6 +663,9 @@
     "Try adjusting your search terms" : {
 
     },
+    "Turn small talk into real chemistry" : {
+
+    },
     "Turn “what if” into “hi.”" : {
 
     },
@@ -594,6 +681,15 @@
     "V %@" : {
       "comment" : "App version label.",
       "shouldTranslate" : false
+    },
+    "Waiting for approval" : {
+
+    },
+    "Walk up to her without hesitating" : {
+
+    },
+    "We couldn't find an active subscription for this Apple ID." : {
+
     },
     "What are you mainly hoping to improve?" : {
 
@@ -616,6 +712,15 @@
     "XP" : {
       "comment" : "Brand term. Not translated.",
       "shouldTranslate" : false
+    },
+    "Yearly Plan" : {
+
+    },
+    "You already have a subscription on this account. Tap Restore to get access back." : {
+
+    },
+    "You appear to be offline. Reconnect and try again." : {
+
     },
     "You are not alone. Millions of men struggle with approaching." : {
 

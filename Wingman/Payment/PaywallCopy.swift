@@ -30,8 +30,8 @@ enum PaywallCopy {
     static var mainPage: PaywallPage {
         PaywallPage(
             imageName: "paywall_1",
-            headline: "Day 1 of becoming the guy who goes for it",
-            bullets: personalTicks(closing: "No more \u{201C}what if\u{201D} moments")
+            headline: String(localized: "Day 1 of becoming the guy who goes for it"),
+            bullets: personalTicks(closing: String(localized: "No more \u{201C}what if\u{201D} moments"))
         )
     }
 
@@ -54,15 +54,15 @@ enum PaywallCopy {
     static func barrierLine(_ answer: String?) -> String {
         switch BarrierOption(storedValue: answer) {
         case .fearOfRejection:
-            return "Stop letting fear of rejection win"
+            return String(localized: "Stop letting fear of rejection win")
         case .socialConsequences:
-            return "Stop caring what others think"
+            return String(localized: "Stop caring what others think")
         case .whatToSay:
-            return "Know exactly how to start talking"
+            return String(localized: "Know exactly how to start talking")
         case .comingAcrossWrong:
-            return "Come across natural, not nervous"
+            return String(localized: "Come across natural, not nervous")
         case .other, nil:
-            return "Stop talking yourself out of it"
+            return String(localized: "Stop talking yourself out of it")
         }
     }
 
@@ -70,15 +70,15 @@ enum PaywallCopy {
     static func goalLine(_ answer: String?) -> String {
         switch GoalOption(storedValue: answer) {
         case .mindsetAndConfidence:
-            return "Feel confident, not anxious"
+            return String(localized: "Feel confident, not anxious")
         case .howToApproach:
-            return "Walk up to her without hesitating"
+            return String(localized: "Walk up to her without hesitating")
         case .conversationsGoing:
-            return "Keep it flowing, no awkward silences"
+            return String(localized: "Keep it flowing, no awkward silences")
         case .attraction:
-            return "Turn small talk into real chemistry"
+            return String(localized: "Turn small talk into real chemistry")
         case .other, nil:
-            return "Go first without overthinking it"
+            return String(localized: "Go first without overthinking it")
         }
     }
 }

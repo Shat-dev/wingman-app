@@ -12,7 +12,7 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP2 Analytics values pinned to English | **Done** (slices 2–3, `9a853f0`, `38f4330`) | New properties not yet observed arriving in PostHog |
 | WP3 Error classification | Not started | Plan wants a few days of production logging first; cannot be done inside this loop |
 | WP4 Paywall prices and disclosure | Not started | Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
-| WP5 String Catalog and extraction | **In progress** (slices 4–6) | Catalog holds 205 strings. Onboarding and commitment copy done. Still to move: paywall and offer, notifications, home and quotes, courses catalog, approach logging, profile and settings, practice, auth and error messages, walkthrough, XP |
+| WP5 String Catalog and extraction | **In progress** (slices 4–7) | Catalog holds 240 strings. Onboarding, commitment and non-disclosure paywall copy done. Still to move: notifications, home and quotes, courses catalog, approach logging, profile and settings, practice, auth and error messages, walkthrough, XP |
 | WP6 Layout and legal links | Not started | |
 | WP7 Content translation plumbing | Not started | Migration files only; nothing applied to the live database |
 | WP8 Tooling and tests | Started | Unit and UI test targets exist; parity recorder, validator and fallback tests still to build |
@@ -151,9 +151,30 @@ This closes the gap noted in slice 2 (nothing proved the canonical accessors ign
 - The WP5 sweep is now used. Later WP5 slices (paywall, home, profile and so on) will rely on unit tests and on the WP6 sweep, and none of those screens are in the sweep yet anyway.
 - iPhone SE was not re-run.
 
+### Slice 7 — WP5 part 4: paywall and offer copy that is not disclosure (2026-11-10)
+
+**What changed** (all `String(localized:)`, extracted into `Localizable.xcstrings`, now 240 entries)
+
+- `PaywallCopy`: the headline, the closing tick and the ten personalised tick lines.
+- Plan titles ("Yearly Plan", "Monthly Plan", "%lld-month Plan", "Plan") and the non-trial CTA "Continue".
+- `PurchaseFailure`: both alert titles, the nine failure messages and the generic one.
+- User-facing error strings set in `PaywallViewModel` (5) and `OneTimeOfferViewModel` (3), and the "An error occurred" fallbacks.
+- The one-time offer's Privacy / Restore / Terms footer labels, which were plain strings passed to a helper and so were not being extracted. (The main paywall's were already literals.)
+
+**Deliberately not touched** (they belong to WP4, prices and disclosure): "per year", "per month", the "only … per week" line, the "3-day Free Trial" badge, "Try for …", both disclosure sentences on the main paywall, and the offer's "billed today … then …" sentence and "off / for your first …" lines.
+
+**Behaviour for English users:** unchanged. `PersonalisationCharacterizationTests` (untouched) still pins every tick line.
+
+**Tests:** new `PaywallCopyTests` (7): the main page headline and ticks with and without stored answers; alert titles; every mapped RevenueCat error code → message and `reason`; and that `reason` (sent to analytics as `failure_reason`) is a plain identifier independent of the message. 87 unit tests pass.
+
+**Not verified**
+
+- No on-device run: the paywall with these strings needs loaded prices (a Release build), and the sweep for WP5 is used.
+- Purchase failure alerts were not triggered for real.
+
 ## Next
 
-WP5 part 4: paywall and one-time-offer copy that is not disclosure (headline, personalised ticks in `PaywallCopy`, plan titles, button titles, error messages in `PurchaseFailure` and the view models). The price and disclosure sentences belong to WP4 and stay untouched until then. `PaywallCopy`'s tick lines are pinned by `PersonalisationCharacterizationTests`, which must keep passing untouched. Then notifications (`MarketingNotifications`, `NotificationManager`), using the notification-specific localized string API.
+WP5 part 5: notifications. `MarketingNotifications` (title and the 15 reminder lines) and `NotificationManager` (daily reading title and body, which has a count in it). Use the notification-specific localized string API so text resolves when the notification is delivered, and a plural-aware entry for the minutes. `PersonalisationCharacterizationTests` pins the reminder lines and must keep passing untouched. Then home and quotes.
 
 ## Open questions for Arthur
 

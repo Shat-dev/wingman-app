@@ -605,7 +605,7 @@ struct PaywallView: View {
                 viewModel.dismissAlert()
             }
         } message: {
-            Text(viewModel.error ?? "An error occurred")
+            Text(viewModel.error ?? String(localized: "An error occurred"))
         }
         .sheet(item: $viewModel.safariLink) { link in
             SafariView(url: link.url)
@@ -711,7 +711,7 @@ struct PaywallView: View {
 
             // Yearly Plan
             PlanRow(
-                title: "Yearly Plan",
+                title: String(localized: "Yearly Plan"),
                 price: viewModel.yearlyPackage.map { "\(calculateWeeklyPrice($0)) per week" } ?? "",
                 weekly: viewModel.yearlyPrice,
                 weeklySubtitle: "per year",
@@ -733,7 +733,7 @@ struct PaywallView: View {
 
             // Monthly Plan
             PlanRow(
-                title: "Monthly Plan",
+                title: String(localized: "Monthly Plan"),
                 price: viewModel.monthlyPackage.map { "\(calculateWeeklyPrice($0)) per week" } ?? "",
                 weekly: viewModel.monthlyPrice,
                     weeklySubtitle: "per month",
@@ -845,7 +845,7 @@ struct PaywallView: View {
     /// treat unknown/not-yet-loaded as eligible.
     private var continueButtonTitle: String {
         guard viewModel.isTrialEligible(for: viewModel.selectedPlan) else {
-            return "Continue"
+            return String(localized: "Continue")
         }
         return "Try for \(viewModel.zeroPriceString)"
     }

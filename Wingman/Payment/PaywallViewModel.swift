@@ -439,7 +439,7 @@ final class PaywallViewModel: ObservableObject {
     
     func continueTapped() async -> Bool {
         guard let package = currentPackage else {
-            self.error = "Please select a subscription plan"
+            self.error = String(localized: "Please select a subscription plan")
             self.showAlert = true
             return false
         }
@@ -618,7 +618,7 @@ final class PaywallViewModel: ObservableObject {
                 isPurchasing = false
                 return true
             } else {
-                self.error = "Purchase completed but entitlement not found. Please contact support."
+                self.error = String(localized: "Purchase completed but entitlement not found. Please contact support.")
                 self.showAlert = true
 
                 // The worst state in the system: StoreKit took the money and
@@ -706,7 +706,7 @@ final class PaywallViewModel: ObservableObject {
             let hasEntitlement = customerInfo.entitlements[Constants.ENTITLEMENT_ID]?.isActive == true
             
             if hasEntitlement {
-                self.error = "Purchases restored successfully!"
+                self.error = String(localized: "Purchases restored successfully!")
                 self.showAlert = true
                 log("✅ PaywallViewModel: Purchases restored")
 
@@ -727,7 +727,7 @@ final class PaywallViewModel: ObservableObject {
                 log("🔄 PaywallViewModel: Refreshing subscription status after restore...")
                 await SubscriptionManager.shared.refreshSubscriptionStatus()
             } else {
-                self.error = "No active subscriptions found to restore"
+                self.error = String(localized: "No active subscriptions found to restore")
                 self.showAlert = true
                 log("⚠️ PaywallViewModel: No purchases to restore")
 
@@ -749,7 +749,7 @@ final class PaywallViewModel: ObservableObject {
                 await loadIntroEligibility()
             }
         } catch {
-            self.error = "Failed to restore purchases. Please try again."
+            self.error = String(localized: "Failed to restore purchases. Please try again.")
             self.showAlert = true
             log("❌ PaywallViewModel: Restore failed: \(error)")
 

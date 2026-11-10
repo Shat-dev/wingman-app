@@ -22,8 +22,8 @@ enum PurchaseAlertKind {
 
     var title: String {
         switch self {
-        case .error: return "Error"
-        case .info: return "Waiting for approval"
+        case .error: return String(localized: "Error")
+        case .info: return String(localized: "Waiting for approval")
         }
     }
 
@@ -90,44 +90,44 @@ struct PurchaseFailure {
             // an SCA step at the bank). RevenueCat's delegate delivers the
             // entitlement whenever approval lands, so the copy promises that
             // rather than sending them back to tap Subscribe again.
-            self.message = "This purchase needs approval before it can go through — usually from the account holder or your bank. You'll get access automatically once it's approved."
+            self.message = String(localized: "This purchase needs approval before it can go through — usually from the account holder or your bank. You'll get access automatically once it's approved.")
             self.reason = "payment_pending"
             self.alertKind = .info
 
         case .storeProblemError:
-            self.message = "The App Store is having trouble right now. Please try again in a few minutes."
+            self.message = String(localized: "The App Store is having trouble right now. Please try again in a few minutes.")
             self.reason = "store_problem"
 
         case .purchaseNotAllowedError:
-            self.message = "Purchases aren't allowed on this device. Check Screen Time restrictions and try again."
+            self.message = String(localized: "Purchases aren't allowed on this device. Check Screen Time restrictions and try again.")
             self.reason = "not_allowed"
 
         case .purchaseInvalidError:
-            self.message = "That payment method was declined. Check your payment details in the App Store and try again."
+            self.message = String(localized: "That payment method was declined. Check your payment details in the App Store and try again.")
             self.reason = "payment_invalid"
 
         case .productNotAvailableForPurchaseError:
-            self.message = "This plan isn't available on your App Store account right now."
+            self.message = String(localized: "This plan isn't available on your App Store account right now.")
             self.reason = "product_unavailable"
 
         case .productAlreadyPurchasedError, .receiptAlreadyInUseError:
             // They own it already — Restore is on both purchase screens, and
             // it's the only action that actually resolves this.
-            self.message = "You already have a subscription on this account. Tap Restore to get access back."
+            self.message = String(localized: "You already have a subscription on this account. Tap Restore to get access back.")
             self.reason = "already_purchased"
 
         case .networkError, .offlineConnectionError:
-            self.message = "You appear to be offline. Reconnect and try again."
+            self.message = String(localized: "You appear to be offline. Reconnect and try again.")
             self.reason = "network"
 
         case .unexpectedBackendResponseError, .unknownBackendError:
-            self.message = "Something went wrong on our end. Please try again."
+            self.message = String(localized: "Something went wrong on our end. Please try again.")
             self.reason = "backend"
 
         case .configurationError, .invalidCredentialsError, .invalidAppleSubscriptionKeyError:
             // Ours to fix, not theirs to retry — the bucket is what makes it
             // visible, since the user-facing wording can only ever be vague.
-            self.message = "Purchases are temporarily unavailable. Please try again later."
+            self.message = String(localized: "Purchases are temporarily unavailable. Please try again later.")
             self.reason = "configuration"
 
         default:
@@ -136,7 +136,7 @@ struct PurchaseFailure {
         }
     }
 
-    private static let genericMessage = "Purchase failed. Please try again."
+    private static let genericMessage = String(localized: "Purchase failed. Please try again.")
 
     /// Kept as the fallback bucket's name so existing breakdowns don't lose
     /// their series — after this change it means "unmapped", not "everything".

@@ -93,7 +93,7 @@ struct OneTimeOfferView: View {
         .alert(viewModel.alertKind.title, isPresented: $viewModel.showAlert) {
             Button("OK") { viewModel.dismissAlert() }
         } message: {
-            Text(viewModel.error ?? "An error occurred")
+            Text(viewModel.error ?? String(localized: "An error occurred"))
         }
         .onChange(of: viewModel.showAlert) { showing in
             if showing { viewModel.alertKind.playHaptic() }
@@ -300,15 +300,15 @@ struct OneTimeOfferView: View {
     /// Matches the paywall's footer: underlined, spread between 60pt insets.
     private var footerLinks: some View {
         HStack(spacing: 0) {
-            footerLink("Privacy") { open(Constants.PRIVACY_POLICY_URL) }
+            footerLink(String(localized: "Privacy")) { open(Constants.PRIVACY_POLICY_URL) }
             Spacer()
-            footerLink("Restore") {
+            footerLink(String(localized: "Restore")) {
                 Task {
                     if await viewModel.restore() { finish() }
                 }
             }
             Spacer()
-            footerLink("Terms") { open(Constants.TERMS_CONDITIONS_URL) }
+            footerLink(String(localized: "Terms")) { open(Constants.TERMS_CONDITIONS_URL) }
         }
         .padding(.horizontal, 60)
     }

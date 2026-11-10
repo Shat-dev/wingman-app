@@ -79,10 +79,10 @@ final class OneTimeOfferViewModel: ObservableObject {
     /// "Yearly Plan", "Monthly Plan", or "6-month Plan" for anything else.
     var planTitle: String {
         switch package?.storeProduct.periodMonths {
-        case 12: return "Yearly Plan"
-        case 1: return "Monthly Plan"
-        case let months?: return "\(months)-month Plan"
-        case nil: return "Plan"
+        case 12: return String(localized: "Yearly Plan")
+        case 1: return String(localized: "Monthly Plan")
+        case let months?: return String(localized: "\(months)-month Plan")
+        case nil: return String(localized: "Plan")
         }
     }
 
@@ -296,7 +296,7 @@ final class OneTimeOfferViewModel: ObservableObject {
 
             let entitlement = customerInfo.entitlements[Constants.ENTITLEMENT_ID]
             guard entitlement?.isActive == true else {
-                self.error = "Purchase completed but entitlement not found. Please contact support."
+                self.error = String(localized: "Purchase completed but entitlement not found. Please contact support.")
                 self.showAlert = true
                 var props = baseProperties
                 props["error_code"] = -1
@@ -361,7 +361,7 @@ final class OneTimeOfferViewModel: ObservableObject {
                     "reason": "no_active_entitlement",
                     "source": Self.source.rawValue
                 ])
-                self.error = "We couldn't find an active subscription for this Apple ID."
+                self.error = String(localized: "We couldn't find an active subscription for this Apple ID.")
                 self.showAlert = true
             }
             return restored
@@ -372,7 +372,7 @@ final class OneTimeOfferViewModel: ObservableObject {
                 "source": Self.source.rawValue,
                 "error_message": error.localizedDescription
             ], adding: Analytics.errorProperties(error)))
-            self.error = "Restore failed. Please try again."
+            self.error = String(localized: "Restore failed. Please try again.")
             self.showAlert = true
             return false
         }
