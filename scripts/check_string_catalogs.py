@@ -26,6 +26,13 @@ Exits non-zero if anything is wrong. Checks:
 
 With --languages it also reports how many strings each language still lacks.
 A missing translation is not an error: the app falls back to English.
+
+Length warnings. A few strings sit where a long translation is hidden rather
+than cut: the paywall's ticks scroll out of sight under the plan cards when
+they wrap on a small phone. Those strings have a maximum length (see
+LENGTH_LIMITS). A translation over the limit is reported as a warning, or as
+a problem with --strict-lengths. The English text itself is always held to
+the limit.
 """
 
 import argparse
@@ -42,6 +49,26 @@ CATALOGS = {
 SOURCE_LANGUAGE = "en"
 BRAND_TERMS = ["Wingman", "XP"]
 NOT_TRANSLATED = "(do-not-translate)"
+
+# Paywall ticks: one line at 16pt on a 375pt-wide phone (iPhone SE, 13 mini).
+# A longer tick wraps there and pushes the last tick below the fold, under the
+# plan cards. See Wingman/Payment/PaywallCopy.swift.
+PAYWALL_TICK_LIMIT = 36
+LENGTH_LIMITS = {
+    "Localizable": {
+        "Stop letting fear of rejection win": PAYWALL_TICK_LIMIT,
+        "Stop caring what others think": PAYWALL_TICK_LIMIT,
+        "Know exactly how to start talking": PAYWALL_TICK_LIMIT,
+        "Come across natural, not nervous": PAYWALL_TICK_LIMIT,
+        "Stop talking yourself out of it": PAYWALL_TICK_LIMIT,
+        "Feel confident, not anxious": PAYWALL_TICK_LIMIT,
+        "Walk up to her without hesitating": PAYWALL_TICK_LIMIT,
+        "Keep it flowing, no awkward silences": PAYWALL_TICK_LIMIT,
+        "Turn small talk into real chemistry": PAYWALL_TICK_LIMIT,
+        "Go first without overthinking it": PAYWALL_TICK_LIMIT,
+        "No more \u201cwhat if\u201d moments": PAYWALL_TICK_LIMIT,
+    },
+}
 
 # printf-style specifiers as Foundation writes them: %@, %lld, %1$@, %2$lld, %d, %f, %%.
 SPECIFIER = re.compile(r"%(?:(\d+)\$)?(?:[-+ 0#]*\d*(?:\.\d+)?)(lld|ld|d|@|f|lf|u|llu|s|%)")
@@ -76,7 +103,30 @@ def string_units(localization):
                 yield f"{kind}.{name}{('.' + label) if label else ''}", value
 
 
-def check_catalog(name, path, allowed, errors, missing):
+def check_lengths(name, strings, errors, warnings):
+    """Hold the strings in LENGTH_LIMITS to their maximum length."""
+    for key, limit in LENGTH_LIMITS.get(name, {}).items():
+        shown = key if len(key) <= 60 else key[:57] + "..."
+        where = f"{name}: \"{shown}\""
+        entry = strings.get(key)
+        if entry is None:
+            errors.append(
+                f"{where}: has a length limit but is not in the catalog "
+                "(was the English text changed? update LENGTH_LIMITS)"
+            )
+            continue
+        if len(key) > limit:
+            errors.append(f"{where}: the English text is {len(key)} characters, limit {limit}")
+        for language, localization in entry.get("localizations", {}).items():
+            if language == SOURCE_LANGUAGE:
+                continue
+            for label, value in string_units(localization):
+                if len(value) > limit:
+                    tag = f"{where} [{language}{(' ' + label) if label else ''}]"
+                    warnings.append(f"{tag}: {len(value)} characters, limit {limit}: \"{value}\"")
+
+
+def check_catalog(name, path, allowed, errors, missing, warnings):
     try:
         catalog = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as problem:
@@ -137,6 +187,7 @@ def check_catalog(name, path, allowed, errors, missing):
             if language not in localizations:
                 missing[language] += 1
 
+    check_lengths(name, strings, errors, warnings)
     return len(strings)
 
 
@@ -147,18 +198,33 @@ def main():
         default="",
         help="comma-separated languages that are allowed to have translations (default: none, English only)",
     )
+    parser.add_argument(
+        "--strict-lengths",
+        action="store_true",
+        help="treat translations over a length limit as problems, not warnings",
+    )
     arguments = parser.parse_args()
     allowed = [language.strip() for language in arguments.languages.split(",") if language.strip()]
 
     errors = []
+    warnings = []
     for name, path in CATALOGS.items():
         missing = Counter()
-        count = check_catalog(name, path, allowed, errors, missing)
+        count = check_catalog(name, path, allowed, errors, missing, warnings)
         fixed = missing[NOT_TRANSLATED]
         print(f"{name}: {count} strings" + (f" ({fixed} marked do-not-translate)" if fixed else ""))
         for language in allowed:
             translated = count - fixed - missing[language]
             print(f"  {language}: {translated} translated, {missing[language]} fall back to English")
+
+    if arguments.strict_lengths:
+        errors.extend(warnings)
+        warnings = []
+
+    if warnings:
+        print(f"\n{len(warnings)} length warning(s) (the text fits, but part of it ends up out of sight):")
+        for warning in warnings:
+            print(f"  - {warning}")
 
     if errors:
         print(f"\n{len(errors)} problem(s):")

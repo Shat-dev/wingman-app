@@ -11,11 +11,11 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP1 Onboarding answer IDs | **Done** (slice 1, `fa213f2`) | Verified on device by the slice 3 sweep. Supabase `age`/`goals` writes checked by reading the code path, not by a live write |
 | WP2 Analytics values pinned to English | **Done** (slices 2–3, `9a853f0`, `38f4330`) | New properties not yet observed arriving in PostHog |
 | WP3 Error classification | Not started | Plan wants a few days of production logging first; cannot be done inside this loop |
-| WP4 Paywall prices and disclosure | In progress (slices 25–28) | Done: weekly price formatted by the product, plan-row sentences, trial badge from StoreKit, one-time-offer sentences, button and under-button lines in the catalog, disclosure checklist. **Waiting on you: the D4 sentence's wording** (see open questions). Still to do: plan-row and tick layout (from WP6). Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
+| WP4 Paywall prices and disclosure | In progress (slices 25–28) | Done: weekly price formatted by the product, plan-row sentences, trial badge from StoreKit, one-time-offer sentences, button and under-button lines in the catalog, disclosure checklist. plan rows and ticks checked (slice 29, no layout change needed). **Waiting on you: the D4 sentence's wording** (see open questions); nothing else is left in WP4 that I can do. Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
 | WP5 String Catalog and extraction | **Done except what WP4 owns** (slices 4–17) | `Localizable` 409 strings, `Content` 174. Left on purpose: paywall price and disclosure strings (WP4). A translated display title for lessons and scenarios comes with WP7 |
-| WP6 Layout and legal links | In progress (slices 17–21) | Done: sign-in legal line, paywall and offer footer links, line caps, fixed-height buttons. **WP6 sweep spent** (slice 21): English unchanged on all 17 baseline screens. Pseudo-language run done (slice 22); its overflow findings fixed (slice 23). Image check done (slice 24): one image contains a word. Still to do: paywall ticks and plan rows (with WP4, includes finding 5) |
+| WP6 Layout and legal links | In progress (slices 17–21) | Done: sign-in legal line, paywall and offer footer links, line caps, fixed-height buttons. **WP6 sweep spent** (slice 21): English unchanged on all 17 baseline screens. Pseudo-language run done (slice 22); its overflow findings fixed (slice 23). Image check done (slice 24): one image contains a word. Paywall ticks and plan rows checked in slice 29. **Done** apart from what could not be seen in the running app |
 | WP7 Content translation plumbing | Not started | Migration files only; nothing applied to the live database |
-| WP8 Tooling and tests | In progress (**WP8 sweep spent**, slice 22) | Done: unit and UI test targets (218 unit tests, 5 of them pseudo-language probes that skip in a normal run), whole-screen renders in a test window for before/after checks without a sweep, onboarding sweep (now through the walkthrough and the four tabs, with a double-length pseudo-language mode), sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, performance comparison, analytics parity recorder (section 9 of the plan) |
+| WP8 Tooling and tests | In progress (**WP8 sweep spent**, slice 22) | Done: unit and UI test targets (221 unit tests, 5 of them pseudo-language probes that skip in a normal run), whole-screen renders in a test window for before/after checks without a sweep, onboarding sweep (now through the walkthrough and the four tabs, with a double-length pseudo-language mode), sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, performance comparison, analytics parity recorder (section 9 of the plan) |
 
 ## Slices
 
@@ -709,11 +709,33 @@ The checklist page lays out three options with exact wording. My recommendation 
 
 - The paywall with real products, as for every WP4 slice.
 
+### Slice 29 — WP4 part 5: plan rows and ticks (2026-11-10)
+
+The last two layout items carried over from WP6 (plan items 3–4 there, finding 5 of the pseudo-language run). Both turned out to need a guard, not a rebuild.
+
+**Plan rows: no change needed.** The plan asked for the row to be hardened so a long plan name can never cut the price. A Debug build never shows the rows (no products), so I drew `PlanRow` directly with the texts a product would give it. With a very long German title and weekly line at iPhone SE width, the left side wraps and the price, period and radio button are drawn in full. `PlanRow` is untouched; `PlanRowRenderTests` (2 tests) keeps it that way and attaches English renders for future before/after checks.
+
+**Ticks: not cut, but they can end up out of sight.** Finding 5 said the third tick was cut. Reading the code, it was not: ticks keep every line, the carousel is sized to its tallest page, and the area scrolls. With doubled text on an SE the third tick was simply below the fold, under the pinned plan cards. That is what the existing 36-character convention exists to prevent, so the guard is on length, not layout:
+
+- the catalog validator now holds the 11 tick strings to 36 characters. The English text is always held to it (and the validator fails if a listed tick is no longer in the catalog, so an edited tick cannot slip out of the check). A translation over the limit is a warning, or a failure with `--strict-lengths`;
+- a unit test holds every English tick to 36 characters.
+
+Tested with planted cases: a 50-character German tick is reported; a tick removed from the catalog fails the run.
+
+**Tests.** 3 new (221 total: 216 pass, 5 probes skipped).
+
+**Behaviour for English users:** unchanged. No app source changed in this slice.
+
+**Not verified**
+
+- The plan rows inside the real paywall with real products. The render draws the row alone, with no limit on its height; in the paywall a taller row takes space from the scrolling area above it.
+- Whether 36 characters is enough for German. It is a limit for one line on a 375 pt phone; a translator may need to shorten a tick, or you may accept that the last one scrolls. The validator will say which ticks are over.
+
 ## Next
 
-WP4 part 5: plan-row and tick layout, carried over from WP6 (plan items 3–4 there, finding 5 of the pseudo-language run). Plan rows: the price must never truncate when the title or the "only … per week" line is long. Ticks: a tick that needs two lines must not be cut. English pixel-identical, checked by rendering the row and the tick list in tests.
+WP7 (content translation plumbing), first slice: translation tables as migration files under `supabase/migrations` (not applied): `question_translations`, `scenario_translations`, `scenario_screen_translations`, `screen_option_translations`, each keyed by the English row's ID plus a locale, additive only (rule R6), with read policies matching the base tables. Then the client: fetch the overlay for the active language and apply it by ID, with English as the fallback; a locale-aware question cache; `locale` in user metadata; bundled lesson overlays; display titles for lessons and scenarios.
 
-D4 waits for your answer. After WP4: WP7 (content plumbing), WP3 (error classification), remaining WP8 tooling.
+WP4 waits on two answers from you: the D4 wording (open questions) and how to see the paywall with real prices. After WP7: WP3 (error classification) and the remaining WP8 tooling.
 
 WP4 ends on the priced-paywall question that only you can answer (one Release run, or a dev-tag launch flag).
 

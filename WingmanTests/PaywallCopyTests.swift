@@ -150,4 +150,34 @@ final class PaywallCopyTests: XCTestCase {
             "Billed immediately. Cancel anytime in App Store settings."
         )
     }
+
+    // MARK: - Tick length
+
+    /// Each tick is one line at 16pt on a 375pt-wide phone. A longer one
+    /// wraps there and pushes the last tick out of sight under the plan
+    /// cards. The catalog validator holds translations to the same limit.
+    func testEveryEnglishTickFitsOnOneLine() {
+        let answers: [String?] = [
+            nil,
+            BarrierOption.fearOfRejection.canonicalValue,
+            BarrierOption.socialConsequences.canonicalValue,
+            BarrierOption.whatToSay.canonicalValue,
+            BarrierOption.comingAcrossWrong.canonicalValue,
+            BarrierOption.other.canonicalValue
+        ]
+        let goals: [String?] = [
+            nil,
+            GoalOption.mindsetAndConfidence.canonicalValue,
+            GoalOption.howToApproach.canonicalValue,
+            GoalOption.conversationsGoing.canonicalValue,
+            GoalOption.attraction.canonicalValue,
+            GoalOption.other.canonicalValue
+        ]
+        var ticks = answers.map(PaywallCopy.barrierLine) + goals.map(PaywallCopy.goalLine)
+        ticks += PaywallCopy.mainPage.bullets
+        XCTAssertGreaterThanOrEqual(Set(ticks).count, 11)
+        for tick in Set(ticks) {
+            XCTAssertLessThanOrEqual(tick.count, 36, tick)
+        }
+    }
 }
