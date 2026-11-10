@@ -549,7 +549,7 @@ struct PaywallView: View {
                     // without purchasing. Captured at the action site
                     // so both the routing and feature-gate dismissal
                     // paths emit the same event with explicit source.
-                    PostHogSDK.shared.capture(
+                    Analytics.captureNow(
                         "paywall_dismissed",
                         properties: paywallEventProperties([
                             "outcome": isOfflineBypass
@@ -681,7 +681,7 @@ struct PaywallView: View {
             if !didLogPaywallView {
                 didLogPaywallView = true
                 appearedAt = Date()
-                PostHogSDK.shared.capture("paywall_viewed", properties: [
+                Analytics.captureNow("paywall_viewed", properties: [
                     "source": source.rawValue,
                     "is_dismissible": isDismissible
                 ])
@@ -721,7 +721,7 @@ struct PaywallView: View {
                 withAnimation(.easeInOut(duration: 0.2)) {
                     viewModel.selectPlan(.yearly)
                 }
-                PostHogSDK.shared.capture(
+                Analytics.captureNow(
                     "paywall_plan_selected",
                     properties: paywallEventProperties([
                         "plan": "yearly",
@@ -743,7 +743,7 @@ struct PaywallView: View {
                 withAnimation(.easeInOut(duration: 0.2)) {
                     viewModel.selectPlan(.monthly)
                 }
-                PostHogSDK.shared.capture(
+                Analytics.captureNow(
                     "paywall_plan_selected",
                     properties: paywallEventProperties([
                         "plan": "monthly",
@@ -861,7 +861,7 @@ struct PaywallView: View {
                     // purchase. Captured here (not from a
                     // shared dismiss handler) so source +
                     // outcome are explicit per call site.
-                    PostHogSDK.shared.capture(
+                    Analytics.captureNow(
                         "paywall_dismissed",
                         properties: paywallEventProperties([
                             "outcome": "purchased",

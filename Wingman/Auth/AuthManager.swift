@@ -297,7 +297,7 @@ final class AuthManager: ObservableObject {
         }
         log("⏭️ Guest account prompt dismissed at threshold \(reached)")
 
-        PostHogSDK.shared.capture("account_ask_skipped", properties: [
+        Analytics.captureNow("account_ask_skipped", properties: [
             "trigger": "profilePrompt",
             "approach_count": approachCount
         ])
@@ -666,7 +666,7 @@ final class AuthManager: ObservableObject {
                     let isNewUser = Date().timeIntervalSince(session.user.createdAt) < 60
                     let authMethod = session.user.appMetadata["provider"]?.stringValue ?? "unknown"
                     if isNewUser {
-                        PostHogSDK.shared.capture("user_signed_up", properties: [
+                        Analytics.captureNow("user_signed_up", properties: [
                             "method": authMethod
                         ])
                         // Meta: attributes installs/registrations back to the
@@ -677,7 +677,7 @@ final class AuthManager: ObservableObject {
                             .registrationMethod: authMethod
                         ])
                     } else {
-                        PostHogSDK.shared.capture("user_logged_in", properties: [
+                        Analytics.captureNow("user_logged_in", properties: [
                             "method": authMethod
                         ])
                     }
@@ -710,14 +710,14 @@ final class AuthManager: ObservableObject {
                     // PostHog: capture before reset so the event is still
                     // attached to the outgoing distinct_id. reset() afterwards
                     // clears the distinct_id and re-generates an anonymous one.
-                    PostHogSDK.shared.capture("user_logged_out")
+                    Analytics.captureNow("user_logged_out")
                 } else {
                     // NOT a user action — don't report it as one. Firing
                     // `user_logged_out` here would inflate voluntary churn with
                     // expired tokens and deleted accounts.
                     log("⚠️ Session invalidated server-side (session not found / "
                         + "expired / refresh token consumed). Not a user action.")
-                    PostHogSDK.shared.capture("session_invalidated")
+                    Analytics.captureNow("session_invalidated")
                 }
                 PostHogSDK.shared.reset()
                 // Logout drops the user back on the Landing screen, and
@@ -2395,7 +2395,7 @@ final class AuthManager: ObservableObject {
         UserDefaults.standard.set(true, forKey: Self.postPurchaseAskKey(userId))
         log("⏭️ Post-purchase account ask marked seen for: \(userId)")
 
-        PostHogSDK.shared.capture("account_ask_skipped", properties: ["trigger": "postPurchase"])
+        Analytics.captureNow("account_ask_skipped", properties: ["trigger": "postPurchase"])
     }
 
     private func promoteGuestToPermanent(session: Session) async {
@@ -2430,7 +2430,7 @@ final class AuthManager: ObservableObject {
         await XPStore.shared.refresh()
         warmScenarioList()
 
-        PostHogSDK.shared.capture("account_linked", properties: [
+        Analytics.captureNow("account_linked", properties: [
             "method": session.user.appMetadata["provider"]?.stringValue ?? "unknown"
         ])
         FeatureFlags.shared.refresh()

@@ -381,10 +381,48 @@ enum Analytics {
         gateLock.unlock()
     }
 
+    // MARK: - Recording (tests only)
+
+    /// One analytics call, as a test sees it.
+    struct RecordedCall {
+        enum Kind: String { case event, screen }
+        let kind: Kind
+        let name: String
+        let properties: [String: Any]?
+    }
+
+    /// Tests set this to receive every event and screen view INSTEAD of it
+    /// being sent, so the names and values the app would send can be
+    /// compared between runs (English against a translated app, one build
+    /// against the next) without anything reaching PostHog.
+    ///
+    /// Always nil in the app, where each function below does exactly what
+    /// it did before this existed.
+    nonisolated(unsafe) static var recorderForTesting: ((RecordedCall) -> Void)?
+
     /// Capture an event. Properties are merged with PostHog's automatic ones
     /// (including the `environment` super-property registered at launch).
     static func capture(_ event: String, _ properties: [String: Any]? = nil) {
+        if let recorder = recorderForTesting {
+            recorder(RecordedCall(kind: .event, name: event, properties: properties))
+            return
+        }
         whenReady { PostHogSDK.shared.capture(event, properties: properties) }
+    }
+
+    /// Capture an event by calling the SDK directly, without waiting for it
+    /// to be ready.
+    ///
+    /// This is what the older call sites (sign-in, the paywall) have always
+    /// done by calling `PostHogSDK.shared.capture` themselves. They go
+    /// through here only so that tests can record them too; in the app the
+    /// call is the same one, made at the same moment.
+    nonisolated static func captureNow(_ event: String, properties: [String: Any]? = nil) {
+        if let recorder = recorderForTesting {
+            recorder(RecordedCall(kind: .event, name: event, properties: properties))
+            return
+        }
+        PostHogSDK.shared.capture(event, properties: properties)
     }
 
     /// Capture a screen view.
@@ -394,6 +432,10 @@ enum Analytics {
     /// `PostHogSDK.screen()` on appear, which is exactly the call that gets
     /// dropped when a screen renders before setup finishes.
     static func screen(_ name: String, _ properties: [String: Any]? = nil) {
+        if let recorder = recorderForTesting {
+            recorder(RecordedCall(kind: .screen, name: name, properties: properties))
+            return
+        }
         whenReady { PostHogSDK.shared.screen(name, properties: properties) }
     }
 

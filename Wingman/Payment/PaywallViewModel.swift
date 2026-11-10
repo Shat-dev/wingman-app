@@ -388,7 +388,7 @@ final class PaywallViewModel: ObservableObject {
     private func reportOfferingsFailure(_ error: Error, attempts: Int) {
         let nsError = error as NSError
         log("🛑 PaywallViewModel: Offerings failed after \(attempts) attempt(s): \(error)")
-        PostHogSDK.shared.capture("paywall_offerings_failed", properties: [
+        Analytics.captureNow("paywall_offerings_failed", properties: [
             "source": source.rawValue,
             "error_type": classifyOfferingsError(error),
             "error_domain": nsError.domain,
@@ -487,7 +487,7 @@ final class PaywallViewModel: ObservableObject {
         // PostHog: purchase initiated. Captured before the StoreKit call so
         // we have a denominator even when network or sheet errors prevent
         // the success / failure branches from running.
-        PostHogSDK.shared.capture("paywall_purchase_started", properties: Analytics.properties([
+        Analytics.captureNow("paywall_purchase_started", properties: Analytics.properties([
             "plan": plan,
             "product_id": package.storeProduct.productIdentifier,
             "source": source.rawValue,
@@ -568,7 +568,7 @@ final class PaywallViewModel: ObservableObject {
                 // so the `?? false` default is unreachable rather than a
                 // silent misreport.
                 let isSandbox = entitlement?.isSandbox ?? false
-                PostHogSDK.shared.capture("paywall_purchase_succeeded", properties: Analytics.properties([
+                Analytics.captureNow("paywall_purchase_succeeded", properties: Analytics.properties([
                     "plan": plan,
                     "product_id": package.storeProduct.productIdentifier,
                     "source": source.rawValue,
@@ -646,7 +646,7 @@ final class PaywallViewModel: ObservableObject {
                 // `error_code: -1` because there is no NSError on this path —
                 // a real RevenueCat code is never negative, so the sentinel
                 // can't collide with one.
-                PostHogSDK.shared.capture("paywall_purchase_failed", properties: Analytics.properties([
+                Analytics.captureNow("paywall_purchase_failed", properties: Analytics.properties([
                     "plan": plan,
                     "product_id": package.storeProduct.productIdentifier,
                     "source": source.rawValue,
@@ -687,7 +687,7 @@ final class PaywallViewModel: ObservableObject {
                 // despite not being a failure, so the funnel identity
                 // started = succeeded + failed + cancelled still holds — the
                 // `failure_reason` bucket is what separates it out.
-                PostHogSDK.shared.capture("paywall_purchase_failed", properties: Analytics.properties([
+                Analytics.captureNow("paywall_purchase_failed", properties: Analytics.properties([
                     "plan": plan,
                     "product_id": package.storeProduct.productIdentifier,
                     "source": source.rawValue,
