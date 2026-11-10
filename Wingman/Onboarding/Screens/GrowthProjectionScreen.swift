@@ -35,26 +35,26 @@ struct GrowthProjectionContent {
     }
 
     static let `default` = GrowthProjectionContent(
-        headline: "Build the confidence to take action when it matters",
+        headline: String(localized: "Build the confidence to take action when it matters"),
         bullets: [
             Bullet(
                 systemImage: "figure.run",
-                emphasis: "3x",
-                text: "faster progress than watching generic advice videos"
+                emphasis: String(localized: "3x"),
+                text: String(localized: "faster progress than watching generic advice videos")
             ),
             Bullet(
                 systemImage: "book.fill",
                 emphasis: nil,
-                text: "Bite-sized lessons you can do on your commute or lunch break"
+                text: String(localized: "Bite-sized lessons you can do on your commute or lunch break")
             ),
             Bullet(
                 systemImage: "brain.head.profile",
                 emphasis: nil,
-                text: "Science-based techniques that actually stick"
+                text: String(localized: "Science-based techniques that actually stick")
             )
         ],
-        positiveLabel: "Using Wingman every day",
-        negativeLabel: "Doing nothing",
+        positiveLabel: String(localized: "Using Wingman every day"),
+        negativeLabel: String(localized: "Doing nothing"),
         footnote: nil
     )
 }

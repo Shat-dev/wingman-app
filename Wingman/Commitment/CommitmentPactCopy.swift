@@ -31,9 +31,8 @@ enum CommitmentPactCopy {
     }
 
     static let pact = Pact(
-        headline: "I am becoming a guy who takes action.",
-        body: "To achieve what I want, I must grow. I won’t let fear make the "
-            + "decision for me. I’ll take my chance, and learn from what happens."
+        headline: String(localized: "I am becoming a guy who takes action."),
+        body: String(localized: "To achieve what I want, I must grow. I won’t let fear make the decision for me. I’ll take my chance, and learn from what happens.")
     )
 
     /// The headline as rendered, with the user's own name folded in when they
@@ -54,7 +53,7 @@ enum CommitmentPactCopy {
     /// sent to analytics.
     static func headline(for name: String?) -> String {
         guard let name, !name.isEmpty else { return pact.headline }
-        return "I, \(name), am becoming a guy who takes action."
+        return String(localized: "I, \(name), am becoming a guy who takes action.")
     }
 
     /// Instruction under the logo. Names the gesture explicitly — a hold with
@@ -67,9 +66,9 @@ enum CommitmentPactCopy {
     /// the one shown on screen: one is data, the other is copy.
     static let analyticsHeadline = "I am becoming a guy who takes action."
 
-    static let holdInstruction = "Tap and hold to commit."
+    static let holdInstruction = String(localized: "Tap and hold to commit.")
 
     /// Replaces the instruction once the hold completes, for the beat before
     /// the screen hands off to the paywall.
-    static let committed = "Committed."
+    static let committed = String(localized: "Committed.")
 }

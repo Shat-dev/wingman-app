@@ -35,15 +35,15 @@ struct SocialProofContent {
     let testimonials: [String]
 
     static let `default` = SocialProofContent(
-        headline: "Join the men taking action",
-        subtitle: "You're not the only one who's been stuck here.",
-        footnote: "Things Wingman users have said",
+        headline: String(localized: "Join the men taking action"),
+        subtitle: String(localized: "You're not the only one who's been stuck here."),
+        footnote: String(localized: "Things Wingman users have said"),
         // Carried over verbatim from the screen this replaces.
         testimonials: [
-            "I used to freeze up walking past a girl. After 3 weeks I had my first real conversation with a stranger. That was the win.",
-            "I've read every book on this — none of them made me actually do anything. The daily structure changed that.",
-            "No corny lines. Just calm, practical stuff about being present. My social anxiety is half what it was.",
-            "I stopped dreading social situations entirely. That's worth more than any date."
+            String(localized: "I used to freeze up walking past a girl. After 3 weeks I had my first real conversation with a stranger. That was the win."),
+            String(localized: "I've read every book on this — none of them made me actually do anything. The daily structure changed that."),
+            String(localized: "No corny lines. Just calm, practical stuff about being present. My social anxiety is half what it was."),
+            String(localized: "I stopped dreading social situations entirely. That's worth more than any date.")
         ]
     )
 }

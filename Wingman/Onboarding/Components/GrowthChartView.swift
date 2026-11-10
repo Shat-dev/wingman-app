@@ -127,8 +127,8 @@ struct GrowthChartView: View {
     /// Callout text on the falling line (e.g. "Doing nothing").
     let negativeLabel: String
     /// Axis captions under the plot.
-    var startCaption: String = "TODAY"
-    var endCaption: String = "IN 1 MONTH"
+    var startCaption: String = String(localized: "TODAY")
+    var endCaption: String = String(localized: "IN 1 MONTH")
 
     // Every visibility toggle is its own `Bool` rather than a comparison
     // against `progress`. `progress` is written inside a `withAnimation`, so a

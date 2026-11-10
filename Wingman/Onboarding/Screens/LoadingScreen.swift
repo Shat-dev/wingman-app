@@ -33,15 +33,15 @@ struct LoadingScreen: View {
     // MARK: - Copy
 
     private static let stepLabels = [
-        "Analyzing your answers",
-        "Building your practice plan",
-        "Personalizing your lessons"
+        String(localized: "Analyzing your answers"),
+        String(localized: "Building your practice plan"),
+        String(localized: "Personalizing your lessons")
     ]
 
     /// Static line under the steps. Comes from the flow when the step supplies
     /// a subtitle, so the copy stays in `OnboardingFlow` with everything else.
     private var quote: String {
-        step.subtitle ?? "Confidence is a skill. Skills are built."
+        step.subtitle ?? String(localized: "Confidence is a skill. Skills are built.")
     }
 
     // MARK: - Choreography (fixed, not data-driven)

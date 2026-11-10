@@ -80,7 +80,7 @@ let extendedOnboardingSteps: [OnboardingStep] = [
     // Stored under `onboarding_motivation` in PostHog like every other answer.
     OnboardingStep(
         type: .question,
-        title: "What brought you to Wingman?",
+        title: String(localized: "What brought you to Wingman?"),
         subtitle: nil,
         choices: MotivationOption.options,
         progress: 0.13,
@@ -90,7 +90,7 @@ let extendedOnboardingSteps: [OnboardingStep] = [
     //2 Age Question
     OnboardingStep(
         type: .question,
-        title: "How old are you?",
+        title: String(localized: "How old are you?"),
         subtitle: nil,
         // "45+" was split into "45-54" and "55+". As one open-ended bracket it
         // held about 29% of answers and roughly half of the paid conversions,
@@ -111,7 +111,7 @@ let extendedOnboardingSteps: [OnboardingStep] = [
     //3 Last Approach Question
     OnboardingStep(
         type: .question,
-        title: "When was the last time you spoke to a woman in public?",
+        title: String(localized: "When was the last time you spoke to a woman in public?"),
         subtitle: nil,
         choices: LastApproachOption.options,
         progress: 0.38,
@@ -121,7 +121,7 @@ let extendedOnboardingSteps: [OnboardingStep] = [
     //4 Frequency Question
     OnboardingStep(
         type: .question,
-        title: "Do you often want to talk to women but don’t?",
+        title: String(localized: "Do you often want to talk to women but don’t?"),
         subtitle: nil,
         choices: ApproachFrequencyOption.options,
         progress: 0.50,
@@ -131,7 +131,7 @@ let extendedOnboardingSteps: [OnboardingStep] = [
     //5 Barriers Question
     OnboardingStep(
         type: .question,
-        title: "What usually stops you from doing so?",
+        title: String(localized: "What usually stops you from doing so?"),
         subtitle: nil,
         // The stored value of the first option is misspelled on purpose
         // ("embarrased"); users read the corrected label. Both live in
@@ -144,7 +144,7 @@ let extendedOnboardingSteps: [OnboardingStep] = [
     //6 Goals Question
     OnboardingStep(
         type: .question,
-        title: "What are you mainly hoping to improve?",
+        title: String(localized: "What are you mainly hoping to improve?"),
         subtitle: nil,
         choices: GoalOption.options,
         progress: 0.75,
@@ -179,8 +179,8 @@ let extendedOnboardingSteps: [OnboardingStep] = [
     // subtitle — see `LoadingScreen`.
     OnboardingStep(
         type: .loading,
-        title: "Optimizing your experience",
-        subtitle: "Confidence is a skill. Skills are built.",
+        title: String(localized: "Optimizing your experience"),
+        subtitle: String(localized: "Confidence is a skill. Skills are built."),
         choices: nil,
         progress: 1.0,
         questionKey: nil

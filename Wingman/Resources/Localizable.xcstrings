@@ -29,11 +29,21 @@
       "comment" : "A bare number.",
       "shouldTranslate" : false
     },
-    "%lld day streak" : {},
-    "%lld min" : {},
-    "%lld min / day" : {},
-    "%lld minutes" : {},
-    "%lld%%" : {},
+    "%lld day streak" : {
+
+    },
+    "%lld min" : {
+
+    },
+    "%lld min / day" : {
+
+    },
+    "%lld minutes" : {
+
+    },
+    "%lld%%" : {
+
+    },
     "%lld. %@" : {
       "localizations" : {
         "en" : {
@@ -52,69 +62,276 @@
       "comment" : "XP amount.",
       "shouldTranslate" : false
     },
-    "1 - very anxious" : {},
-    "1 day streak" : {},
-    "10 - very confident" : {},
-    "A man watches a woman walk past, imagining them together" : {},
-    "Account" : {},
-    "Add your name" : {},
-    "Allow notifications for tips and offers. Turn them off anytime in Settings." : {},
-    "Already have an account?" : {},
-    "Approach Level Guide" : {},
-    "Approaches Breakdown" : {},
-    "Approaches Logged" : {},
-    "Approaches logged" : {},
-    "Approaching character limit" : {},
-    "Are you sure you want to delete this approach log?" : {},
-    "Are you sure you want to delete your account? This action cannot be undone." : {},
-    "Back" : {},
-    "By continuing you agree to our" : {},
-    "Can you put a price on connection?" : {},
-    "Can't load pricing" : {},
-    "Cancel" : {},
-    "Check Answer" : {},
-    "Check back later for new practice questions." : {},
-    "Check your connection and try again." : {},
-    "Check your reflections to see insights" : {},
-    "Choose an option to continue" : {},
-    "Claim %lld%% off" : {},
-    "Claim my discount" : {},
-    "Close offer" : {},
-    "Close paywall" : {},
-    "Close this and it’s gone for good" : {},
-    "Commit" : {},
-    "Confidence Level" : {},
-    "Confidence Over Time" : {},
-    "Confidence: %lld/10" : {},
-    "Continue" : {},
-    "Correct Answer!" : {},
-    "Course complete." : {},
-    "Courses" : {},
-    "Create Account" : {},
-    "Create a free account" : {},
-    "Daily Practice" : {},
-    "Daily Reading Goal" : {},
-    "Delete" : {},
-    "Delete Account" : {},
-    "Delete Approach" : {},
-    "Delete my data" : {},
-    "E.g. Approached at Cafe" : {},
-    "Edit" : {},
-    "Edit Profile" : {},
-    "Enter your name" : {},
-    "Error" : {},
-    "Examples" : {},
-    "Forward" : {},
-    "Get started" : {},
-    "Goal Notifications" : {},
-    "Good Morning," : {},
-    "How did you feel? What happened? Anything you noticed or learned" : {},
-    "Incorrect Answer." : {},
-    "Invite Friends" : {},
-    "Invite your friends to the community and learn together" : {},
-    "It's on this device only. An account keeps it if you change phones." : {},
-    "Level %lld" : {},
-    "Level %lld reached." : {},
+    "1 - very anxious" : {
+
+    },
+    "1 day streak" : {
+
+    },
+    "10 - very confident" : {
+
+    },
+    "3x" : {
+
+    },
+    "45% of men aged 18-24 have never approached a woman" : {
+
+    },
+    "48% of men aged 26-40 haven't approached in the past year" : {
+
+    },
+    "58% of men who consistently approach get a number, date, or relationship" : {
+
+    },
+    "63% of single men regret not approaching women when they were younger" : {
+
+    },
+    "77% of women aged between 18 and 30 want to be approached more" : {
+
+    },
+    "A man watches a woman walk past, imagining them together" : {
+
+    },
+    "Account" : {
+
+    },
+    "Add your name" : {
+
+    },
+    "Allow notifications for tips and offers. Turn them off anytime in Settings." : {
+
+    },
+    "Almost half of men haven't approached in the past year" : {
+
+    },
+    "Almost half of men your age have never approached a woman" : {
+
+    },
+    "Almost half of men your age haven't approached in the past year" : {
+
+    },
+    "Already have an account?" : {
+
+    },
+    "Analyzing your answers" : {
+
+    },
+    "Approach Level Guide" : {
+
+    },
+    "Approaches Breakdown" : {
+
+    },
+    "Approaches Logged" : {
+
+    },
+    "Approaches logged" : {
+
+    },
+    "Approaching character limit" : {
+
+    },
+    "Are you sure you want to delete this approach log?" : {
+
+    },
+    "Are you sure you want to delete your account? This action cannot be undone." : {
+
+    },
+    "Back" : {
+
+    },
+    "Bite-sized lessons you can do on your commute or lunch break" : {
+
+    },
+    "Build the confidence to take action when it matters" : {
+
+    },
+    "Building your practice plan" : {
+
+    },
+    "By continuing you agree to our" : {
+
+    },
+    "Can you put a price on connection?" : {
+
+    },
+    "Can't load pricing" : {
+
+    },
+    "Cancel" : {
+
+    },
+    "Check Answer" : {
+
+    },
+    "Check back later for new practice questions." : {
+
+    },
+    "Check your connection and try again." : {
+
+    },
+    "Check your reflections to see insights" : {
+
+    },
+    "Choose an option to continue" : {
+
+    },
+    "Claim %lld%% off" : {
+
+    },
+    "Claim my discount" : {
+
+    },
+    "Close offer" : {
+
+    },
+    "Close paywall" : {
+
+    },
+    "Close this and it’s gone for good" : {
+
+    },
+    "Commit" : {
+
+    },
+    "Committed." : {
+
+    },
+    "Confidence Level" : {
+
+    },
+    "Confidence Over Time" : {
+
+    },
+    "Confidence is a skill. Skills are built." : {
+
+    },
+    "Confidence: %lld/10" : {
+
+    },
+    "Continue" : {
+
+    },
+    "Correct Answer!" : {
+
+    },
+    "Course complete." : {
+
+    },
+    "Courses" : {
+
+    },
+    "Create Account" : {
+
+    },
+    "Create a free account" : {
+
+    },
+    "Daily Practice" : {
+
+    },
+    "Daily Reading Goal" : {
+
+    },
+    "Delete" : {
+
+    },
+    "Delete Account" : {
+
+    },
+    "Delete Approach" : {
+
+    },
+    "Delete my data" : {
+
+    },
+    "Do you often want to talk to women but don’t?" : {
+
+    },
+    "Doing nothing" : {
+
+    },
+    "Don't join that statistic. Your future self is counting on you." : {
+
+    },
+    "E.g. Approached at Cafe" : {
+
+    },
+    "Edit" : {
+
+    },
+    "Edit Profile" : {
+
+    },
+    "Enter your name" : {
+
+    },
+    "Error" : {
+
+    },
+    "Examples" : {
+
+    },
+    "Forward" : {
+
+    },
+    "Get started" : {
+
+    },
+    "Goal Notifications" : {
+
+    },
+    "Good Morning," : {
+
+    },
+    "Half of men don't approach. Most who do, succeed." : {
+
+    },
+    "How did you feel? What happened? Anything you noticed or learned" : {
+
+    },
+    "How old are you?" : {
+
+    },
+    "I am becoming a guy who takes action." : {
+
+    },
+    "I stopped dreading social situations entirely. That's worth more than any date." : {
+
+    },
+    "I used to freeze up walking past a girl. After 3 weeks I had my first real conversation with a stranger. That was the win." : {
+
+    },
+    "I've read every book on this — none of them made me actually do anything. The daily structure changed that." : {
+
+    },
+    "I, %@, am becoming a guy who takes action." : {
+
+    },
+    "IN 1 MONTH" : {
+
+    },
+    "Incorrect Answer." : {
+
+    },
+    "Invite Friends" : {
+
+    },
+    "Invite your friends to the community and learn together" : {
+
+    },
+    "It's on this device only. An account keeps it if you change phones." : {
+
+    },
+    "Join the men taking action" : {
+
+    },
+    "Level %lld" : {
+
+    },
+    "Level %lld reached." : {
+
+    },
     "Level %lld: %@" : {
       "localizations" : {
         "en" : {
@@ -125,93 +342,311 @@
         }
       }
     },
-    "Loading approaches..." : {},
-    "Loading subscription options..." : {},
-    "Loading today's practice questions..." : {},
-    "Loading..." : {},
-    "Log Approach" : {},
-    "Log In" : {},
-    "Log Out" : {},
-    "Log in" : {},
-    "Manage Subscriptions" : {},
-    "Maximum characters reached" : {},
-    "Name" : {},
-    "Next" : {},
-    "No account" : {},
-    "No approach data yet" : {},
-    "No approaches found" : {},
-    "No approaches logged yet" : {},
-    "No internet connection" : {},
-    "No questions available" : {},
-    "No reflections yet. Start logging approaches with notes to see your insights" : {},
-    "Not now" : {},
-    "Notes" : {},
-    "OFF" : {},
-    "OK" : {},
-    "ON" : {},
-    "ONE-TIME OFFER" : {},
-    "Oops!" : {},
-    "Open" : {},
-    "Please Try again!" : {},
-    "Please try again!" : {},
-    "Practice" : {},
-    "Privacy" : {},
-    "Privacy Policy" : {},
-    "Processing..." : {},
-    "Profile" : {},
-    "Rate Wingman" : {},
-    "Reminders to practice approaching, and occasional offers." : {},
-    "Restore" : {},
-    "Restore Purchase" : {},
-    "Restoring..." : {},
-    "Retry" : {},
-    "Save" : {},
-    "Save your %lld approaches" : {},
-    "Save your first approach" : {},
-    "Saved!" : {},
-    "Scenarios" : {},
-    "Search" : {},
-    "Select all that apply" : {},
-    "Settings" : {},
-    "Show Approach Guide" : {},
-    "Skip" : {},
-    "Skip for now" : {},
-    "Something went wrong" : {},
-    "Start Practice" : {},
-    "Start logging approaches to see your breakdown" : {},
-    "Start logging your social interactions to see them here" : {},
-    "Steps" : {},
-    "Success" : {},
-    "Suggested" : {},
-    "Tap to continue" : {},
-    "Terms" : {},
-    "Terms of Service" : {},
-    "The step-by-step way to stop freezing up and start the conversation." : {},
-    "They're on this device only. An account keeps them if you change phones." : {},
-    "This deletes your logged approaches and all progress on this device. There's no account to recover them from. This cannot be undone." : {},
-    "Tips & offers" : {},
-    "Title" : {},
-    "Try Again" : {},
-    "Try adjusting your search terms" : {},
-    "Turn “what if” into “hi.”" : {},
-    "Up Next" : {},
-    "Updated!" : {},
+    "Loading approaches..." : {
+
+    },
+    "Loading subscription options..." : {
+
+    },
+    "Loading today's practice questions..." : {
+
+    },
+    "Loading..." : {
+
+    },
+    "Log Approach" : {
+
+    },
+    "Log In" : {
+
+    },
+    "Log Out" : {
+
+    },
+    "Log in" : {
+
+    },
+    "Manage Subscriptions" : {
+
+    },
+    "Maximum characters reached" : {
+
+    },
+    "Most men regret the chances they didn't make" : {
+
+    },
+    "Most women want to be talked to more" : {
+
+    },
+    "Name" : {
+
+    },
+    "Next" : {
+
+    },
+    "No account" : {
+
+    },
+    "No approach data yet" : {
+
+    },
+    "No approaches found" : {
+
+    },
+    "No approaches logged yet" : {
+
+    },
+    "No corny lines. Just calm, practical stuff about being present. My social anxiety is half what it was." : {
+
+    },
+    "No internet connection" : {
+
+    },
+    "No questions available" : {
+
+    },
+    "No reflections yet. Start logging approaches with notes to see your insights" : {
+
+    },
+    "Not now" : {
+
+    },
+    "Notes" : {
+
+    },
+    "OFF" : {
+
+    },
+    "OK" : {
+
+    },
+    "ON" : {
+
+    },
+    "ONE-TIME OFFER" : {
+
+    },
+    "Oops!" : {
+
+    },
+    "Open" : {
+
+    },
+    "Optimizing your experience" : {
+
+    },
+    "Personalizing your lessons" : {
+
+    },
+    "Please Try again!" : {
+
+    },
+    "Please try again!" : {
+
+    },
+    "Practice" : {
+
+    },
+    "Privacy" : {
+
+    },
+    "Privacy Policy" : {
+
+    },
+    "Processing..." : {
+
+    },
+    "Profile" : {
+
+    },
+    "Rate Wingman" : {
+
+    },
+    "Reminders to practice approaching, and occasional offers." : {
+
+    },
+    "Restore" : {
+
+    },
+    "Restore Purchase" : {
+
+    },
+    "Restoring..." : {
+
+    },
+    "Retry" : {
+
+    },
+    "Save" : {
+
+    },
+    "Save your %lld approaches" : {
+
+    },
+    "Save your first approach" : {
+
+    },
+    "Saved!" : {
+
+    },
+    "Scenarios" : {
+
+    },
+    "Science-based techniques that actually stick" : {
+
+    },
+    "Search" : {
+
+    },
+    "Select all that apply" : {
+
+    },
+    "Settings" : {
+
+    },
+    "Show Approach Guide" : {
+
+    },
+    "Skip" : {
+
+    },
+    "Skip for now" : {
+
+    },
+    "Something went wrong" : {
+
+    },
+    "Start Practice" : {
+
+    },
+    "Start logging approaches to see your breakdown" : {
+
+    },
+    "Start logging your social interactions to see them here" : {
+
+    },
+    "Steps" : {
+
+    },
+    "Success" : {
+
+    },
+    "Suggested" : {
+
+    },
+    "TODAY" : {
+
+    },
+    "Tap and hold to commit." : {
+
+    },
+    "Tap to continue" : {
+
+    },
+    "Terms" : {
+
+    },
+    "Terms of Service" : {
+
+    },
+    "The step-by-step way to stop freezing up and start the conversation." : {
+
+    },
+    "They're just waiting for you to make the first move" : {
+
+    },
+    "They're on this device only. An account keeps them if you change phones." : {
+
+    },
+    "Things Wingman users have said" : {
+
+    },
+    "This deletes your logged approaches and all progress on this device. There's no account to recover them from. This cannot be undone." : {
+
+    },
+    "Tips & offers" : {
+
+    },
+    "Title" : {
+
+    },
+    "To achieve what I want, I must grow. I won’t let fear make the decision for me. I’ll take my chance, and learn from what happens." : {
+
+    },
+    "Try Again" : {
+
+    },
+    "Try adjusting your search terms" : {
+
+    },
+    "Turn “what if” into “hi.”" : {
+
+    },
+    "Up Next" : {
+
+    },
+    "Updated!" : {
+
+    },
+    "Using Wingman every day" : {
+
+    },
     "V %@" : {
       "comment" : "App version label.",
       "shouldTranslate" : false
     },
-    "What type of Interaction ?" : {},
+    "What are you mainly hoping to improve?" : {
+
+    },
+    "What brought you to Wingman?" : {
+
+    },
+    "What type of Interaction ?" : {
+
+    },
+    "What usually stops you from doing so?" : {
+
+    },
+    "When was the last time you spoke to a woman in public?" : {
+
+    },
+    "Which side do you want to be on?" : {
+
+    },
     "XP" : {
       "comment" : "Brand term. Not translated.",
       "shouldTranslate" : false
     },
-    "Your Modules" : {},
-    "Your name" : {},
-    "Your progress is saved on this device only." : {},
-    "and" : {},
-    "for your first %@" : {},
-    "off your first %@" : {},
-    "“%@”" : {},
+    "You are not alone. Millions of men struggle with approaching." : {
+
+    },
+    "You're not the only one who's been stuck here." : {
+
+    },
+    "Your Modules" : {
+
+    },
+    "Your name" : {
+
+    },
+    "Your progress is saved on this device only." : {
+
+    },
+    "and" : {
+
+    },
+    "faster progress than watching generic advice videos" : {
+
+    },
+    "for your first %@" : {
+
+    },
+    "off your first %@" : {
+
+    },
+    "“%@”" : {
+
+    },
     "•" : {
       "comment" : "Separator dot.",
       "shouldTranslate" : false

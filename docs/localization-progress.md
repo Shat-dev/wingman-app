@@ -12,7 +12,7 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP2 Analytics values pinned to English | **Done** (slices 2–3, `9a853f0`, `38f4330`) | New properties not yet observed arriving in PostHog |
 | WP3 Error classification | Not started | Plan wants a few days of production logging first; cannot be done inside this loop |
 | WP4 Paywall prices and disclosure | Not started | Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
-| WP5 String Catalog and extraction | **In progress** (slices 4–5) | Catalogs exist with the 158 compiler-extracted strings. The ~690 indirect `String` values are still to move, area by area |
+| WP5 String Catalog and extraction | **In progress** (slices 4–6) | Catalog holds 205 strings. Onboarding and commitment copy done. Still to move: paywall and offer, notifications, home and quotes, courses catalog, approach logging, profile and settings, practice, auth and error messages, walkthrough, XP |
 | WP6 Layout and legal links | Not started | |
 | WP7 Content translation plumbing | Not started | Migration files only; nothing applied to the live database |
 | WP8 Tooling and tests | Started | Unit and UI test targets exist; parity recorder, validator and fallback tests still to build |
@@ -129,9 +129,31 @@ This closes the gap noted in slice 2 (nothing proved the canonical accessors ign
 - The catalogs have not been opened in Xcode's catalog editor.
 - No on-device run in this slice (no source change).
 
+### Slice 6 — WP5 part 3: onboarding and commitment copy (2026-11-10)
+
+**What changed**
+
+- 47 strings that lived in models and constants are now `String(localized:)` and extracted into `Localizable.xcstrings` (205 entries): the six question titles; the loading title, subtitle and three step rows; all statistic headings, subheadings and facts; growth projection headline, bullets and chart labels ("TODAY", "IN 1 MONTH"); social proof headline, subtitle, footnote and four testimonials; commitment pact headline, body, named headline, hold instruction and "Committed.".
+- The pact body was two literals joined with `+`; it is one sentence now (same text).
+- The step titles for the growth-projection and social-proof steps were left as plain strings: the code comments say they are never shown.
+- `CommitmentPactCopy.analyticsHeadline` stays a separate plain literal, so the displayed headline being localizable does not touch the analytics value.
+
+**Behaviour for English users:** unchanged, verified three ways. `PersonalisationCharacterizationTests` (untouched) still passes on every statistic string. New `OnboardingCopyTests` (8) pins the rest character for character, including curly apostrophes, the em dash, literal "%" and a name containing format characters. And the on-device sweep below.
+
+**On-device check (the one sweep for WP5):** `OnboardingSweepTests` passed on the iPhone 17 Pro throwaway simulator from a clean install. 15 of 17 screens are pixel-identical to the baseline; the two loading frames differ by about 0.01% of pixels in the animated rows, the same as in slice 3. One more guest user was created in production Supabase.
+
+**Tests:** 80 unit tests pass.
+
+**Known fragment left in place:** the first growth-projection bullet is drawn as a bold "3x" followed by "faster progress than watching generic advice videos" (`GrowthProjectionScreen.swift`, two strings joined so the emphasis stays inline). A translation may need different word order. It is a WP5 item-5 (fragments) fix for later.
+
+**Not verified**
+
+- The WP5 sweep is now used. Later WP5 slices (paywall, home, profile and so on) will rely on unit tests and on the WP6 sweep, and none of those screens are in the sweep yet anyway.
+- iPhone SE was not re-run.
+
 ## Next
 
-WP5 part 3: move the onboarding area's indirect strings so they are localizable, keeping English identical. Question titles, "Select all that apply" is already covered; statistic headings, subheadings and facts; growth projection; social proof and testimonials; loading screen step rows; commitment pact. Data-like ones (shown from stored values) go through `L10n.content` with `Content` entries; fixed UI copy becomes `String(localized:)` and is re-synced into `Localizable`. Add a test per group that English output is unchanged and that a fake translation changes the display but not any stored or sent value. Then run the one WP5 sweep.
+WP5 part 4: paywall and one-time-offer copy that is not disclosure (headline, personalised ticks in `PaywallCopy`, plan titles, button titles, error messages in `PurchaseFailure` and the view models). The price and disclosure sentences belong to WP4 and stay untouched until then. `PaywallCopy`'s tick lines are pinned by `PersonalisationCharacterizationTests`, which must keep passing untouched. Then notifications (`MarketingNotifications`, `NotificationManager`), using the notification-specific localized string API.
 
 ## Open questions for Arthur
 
