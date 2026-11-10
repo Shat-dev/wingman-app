@@ -165,6 +165,9 @@
     "Allow notifications for tips and offers. Turn them off anytime in Settings." : {
 
     },
+    "Almost done, you'll be free to explore in a second." : {
+
+    },
     "Almost half of men haven't approached in the past year" : {
 
     },
@@ -187,6 +190,9 @@
 
     },
     "Analyzing your answers" : {
+
+    },
+    "And this is where you practise.\nBookstore, gym, coffee shop. Choose what to say, see what happens." : {
 
     },
     "Anxious" : {
@@ -333,13 +339,37 @@
     "Correct Answer!" : {
 
     },
+    "Correct answer!" : {
+
+    },
+    "Couldn't load subscription options. Please try again." : {
+
+    },
+    "Couldn't load today's questions. Please try again." : {
+
+    },
+    "Couldn't load your daily practice. Please try again." : {
+
+    },
+    "Couldn't load your subscription. Please try again." : {
+
+    },
+    "Couldn't save your answer. Please try again." : {
+
+    },
     "Couldn't start sign-in. Please try again." : {
+
+    },
+    "Couldn't update your streak. Please try again." : {
 
     },
     "Course complete." : {
 
     },
     "Courses" : {
+
+    },
+    "Courses. Mindset, approaching, flirting, follow-up.\nShort lessons that build the man who moves, not the one who freezes." : {
 
     },
     "Create Account" : {
@@ -471,6 +501,9 @@
     "Good Morning," : {
 
     },
+    "Good luck, we're rooting for you." : {
+
+    },
     "Greet neighbors with small talk" : {
 
     },
@@ -510,7 +543,13 @@
     "Incorrect Answer." : {
 
     },
+    "Incorrect answer." : {
+
+    },
     "Indirect Approach" : {
+
+    },
+    "Invalid question data received" : {
 
     },
     "Invalid response from Apple. Please try again." : {
@@ -538,6 +577,9 @@
 
     },
     "Know exactly how to start talking" : {
+
+    },
+    "Last one. This one is you.\nEmpty today. In a month it either tells a story or it doesn't." : {
 
     },
     "Lesson complete." : {
@@ -725,6 +767,9 @@
     "One last step" : {
 
     },
+    "One thing at a time. Play the scenario first." : {
+
+    },
     "Oops!" : {
 
     },
@@ -753,6 +798,9 @@
 
     },
     "Please try again!" : {
+
+    },
+    "Please wait..." : {
 
     },
     "Practice" : {
@@ -896,6 +944,9 @@
     "Start Practice" : {
 
     },
+    "Start filling it" : {
+
+    },
     "Start logging approaches to see your breakdown" : {
 
     },
@@ -941,6 +992,9 @@
     "Tap to continue" : {
 
     },
+    "Tap to finish" : {
+
+    },
     "Tap to retry" : {
 
     },
@@ -951,6 +1005,9 @@
 
     },
     "That account is already linked to another Wingman login. Log in with it instead — progress from this session won't carry over." : {
+
+    },
+    "That one's further down the line. Start with the first." : {
 
     },
     "That payment method was declined. Check your payment details in the App Store and try again." : {
@@ -1028,6 +1085,9 @@
     "User not authenticated" : {
 
     },
+    "User not authenticated. Please log in to access daily practice questions." : {
+
+    },
     "Using Wingman every day" : {
 
     },
@@ -1051,6 +1111,9 @@
 
     },
     "Welcome Back" : {
+
+    },
+    "Welcome to Wingman. This is home.\nDaily practice keeps you sharp. The log fills with moments you took, not replayed." : {
 
     },
     "What are you mainly hoping to improve?" : {

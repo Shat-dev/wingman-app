@@ -12,7 +12,7 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP2 Analytics values pinned to English | **Done** (slices 2–3, `9a853f0`, `38f4330`) | New properties not yet observed arriving in PostHog |
 | WP3 Error classification | Not started | Plan wants a few days of production logging first; cannot be done inside this loop |
 | WP4 Paywall prices and disclosure | Not started | Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
-| WP5 String Catalog and extraction | **In progress** (slices 4–14) | `Localizable` holds 364 strings, `Content` 174. Done: onboarding, commitment, non-disclosure paywall copy, notifications, home, quotes, course catalog, approach logging, profile, settings, practice, XP, auth. Still to move: walkthrough, daily practice and quiz, lesson screen chrome, remaining error wrappers (RevenueCat, daily practice), then the fragment and number-format leftovers |
+| WP5 String Catalog and extraction | **Nearly done** (slices 4–15) | `Localizable` holds 385 strings, `Content` 174. Every screen has been through. Left: a final pass over fragments and number formats (see slice 15 "Next"), and the price and disclosure strings, which are WP4 |
 | WP6 Layout and legal links | Not started | |
 | WP7 Content translation plumbing | Not started | Migration files only; nothing applied to the live database |
 | WP8 Tooling and tests | Started | Unit and UI test targets exist; parity recorder, validator and fallback tests still to build |
@@ -311,9 +311,36 @@ This closes the gap noted in slice 2 (nothing proved the canonical accessors ign
 - The per-context titles and subtitles in `AuthView` have no direct unit test (they are private to the view).
 - Errors that arrive from the Google or Apple SDKs with their own `localizedDescription` are shown as the SDK gives them. Whether those SDKs translate their messages was not checked.
 
+### Slice 15 — WP5 part 12: walkthrough and remaining error messages (2026-11-10)
+
+**What changed**
+
+- `WalkthroughOverlayView`: the five tour cards (multi-line strings with deliberate line breaks), the three tap hints and the three nudge lines. They were `private`; they are internal now so tests can pin them.
+- `DailyPracticeViewModel`: the "Next" / "Check Answer" button title. `DailyPracticeServiceProtocol`: the "Correct answer!" / "Incorrect answer." result message and the three plain `DailyPracticeError` messages. `QuizEngine`: the "Loading..." / "Please wait..." placeholder question.
+- New `L10n.withTechnicalDetail(english:translated:)` for messages that end in SDK or database text. English users get the existing message unchanged; a translated app gets a complete sentence of its own with no English tail. Used by five `DailyPracticeError` cases and the four `RevenueCatError` cases (audit D-6).
+- Left as they are: the daily-practice category display names (brand terms; note they read "Conversational Skills" and "Mastery & Integration" here but "Conversation Flow" and "Integration & Mastery" in the course catalog, an existing inconsistency), and all preview and mock data.
+- The lesson screen needed nothing: its own text was already direct SwiftUI literals. Lesson content is WP7.
+
+**Behaviour for English users:** unchanged.
+
+**Tests:** new `WalkthroughAndErrorCopyTests` (8): the five cards character for character including line breaks; hints and nudges; English keeps technical detail; a translated app gets the whole sentence and never builds the English one; daily practice and RevenueCat errors in both modes. 136 unit tests pass. Catalog: 385 entries.
+
+**Not verified**
+
+- The walkthrough was not run on a simulator.
+- The nine new "translated app" sentences are only ever shown outside English, so nobody has seen them on screen. They are in the catalog for a translator to review.
+
 ## Next
 
-WP5 part 12: the remaining screens in one pass, since each has only a few indirect strings left: walkthrough overlay copy (`WalkthroughOverlayView`), daily practice and quiz chrome (`DailyPracticeView`, `DailyPracticeQuestion` category names — brand terms, `QuizQuestionView`), the lesson screen, and the error wrappers in `RevenueCatManager` and `DailyPracticeServiceProtocol`. Then a final WP5 pass over fragments and number formats (percent signs, "min / day", the "3x" bullet, "Level n: title"), after which WP6 (layout and the legal sentence) starts.
+WP5 final pass (part 13), fragments and number formats left from the audit:
+
+- `OneTimeOfferView` and `HomeView` percent strings ("%lld%%"), "Confidence: n/10", "n min / day", "n min", "n minutes" (audit E-8, D-4): decide per string whether a format style or a catalog entry is right, without changing English.
+- The "3x" + sentence bullet on the growth projection screen (two strings joined).
+- "Level n: title" and "category: course" joins (`ApproachLevelGuideSheet`, `HomeView`).
+- "Level n reached." / "Level n" and the streak strings already work; just confirm catalog comments are useful to a translator.
+- Add translator comments to the catalog entries that need context (placeholders, short labels).
+
+Then WP6: the sign-in legal sentence, paywall and offer footers, answer-button line caps, fixed-height buttons, and the pseudo-language layout check.
 
 ## Open questions for Arthur
 

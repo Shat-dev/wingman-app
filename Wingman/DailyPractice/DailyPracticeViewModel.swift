@@ -52,7 +52,7 @@ final class DailyPracticeViewModel: ObservableObject {
     var questionState: QuizQuestionState { engine.questionState }
 
     var buttonTitle: String {
-        hasCheckedAnswer ? "Next" : "Check Answer"
+        hasCheckedAnswer ? String(localized: "Next") : String(localized: "Check Answer")
     }
 
     // MARK: - Dependencies

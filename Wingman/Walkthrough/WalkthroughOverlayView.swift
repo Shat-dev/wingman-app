@@ -188,14 +188,14 @@ struct WalkthroughOverlayView: View {
 
     /// Verbatim the wording a scenario's dialogue box uses, because this card
     /// now looks like one and is advanced the same way.
-    private static let continueHint = "Tap to continue"
+    static let continueHint = String(localized: "Tap to continue")
 
     /// The Profile card. A call to action rather than a navigation word, because
     /// what follows it is a sign-off rather than another card to read.
-    private static let startFillingHint = "Start filling it"
+    static let startFillingHint = String(localized: "Start filling it")
 
     /// The closing card. "Continue" would point at a card that isn't coming.
-    private static let finishHint = "Tap to finish"
+    static let finishHint = String(localized: "Tap to finish")
 
     // Verbatim, including punctuation and line breaks. No em dashes anywhere in
     // walkthrough copy — commas only.
@@ -209,39 +209,39 @@ struct WalkthroughOverlayView: View {
     // tab, then the line that says why it matters. Continuations are marked with
     // a trailing `\` so only the deliberate breaks survive into the string.
 
-    private static let welcome = """
+    static let welcome = String(localized: """
         Welcome to Wingman. This is home.
         Daily practice keeps you sharp. The log fills with moments you took, \
         not replayed.
-        """
+        """)
 
-    private static let coursesTour = """
+    static let coursesTour = String(localized: """
         Courses. Mindset, approaching, flirting, follow-up.
         Short lessons that build the man who moves, not the one who freezes.
-        """
+        """)
 
-    private static let scenarioTour = """
+    static let scenarioTour = String(localized: """
         And this is where you practise.
         Bookstore, gym, coffee shop. Choose what to say, see what happens.
-        """
+        """)
 
-    private static let progressTour = """
+    static let progressTour = String(localized: """
         Last one. This one is you.
         Empty today. In a month it either tells a story or it doesn't.
-        """
+        """)
 
-    private static let signOff = """
+    static let signOff = String(localized: """
         Good luck, we're rooting for you.
-        """
+        """)
 
-    private static func nudgeText(_ nudge: WalkthroughCoordinator.Nudge) -> String {
+    static func nudgeText(_ nudge: WalkthroughCoordinator.Nudge) -> String {
         switch nudge {
         case .lesson:
-            return "Almost done, you'll be free to explore in a second."
+            return String(localized: "Almost done, you'll be free to explore in a second.")
         case .dailyPractice:
-            return "One thing at a time. Play the scenario first."
+            return String(localized: "One thing at a time. Play the scenario first.")
         case .lockedScenario:
-            return "That one's further down the line. Start with the first."
+            return String(localized: "That one's further down the line. Start with the first.")
         }
     }
 }

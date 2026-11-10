@@ -70,6 +70,20 @@ nonisolated enum L10n {
         return false
     }
 
+    /// A message that ends in developer-facing detail ("Failed to fetch
+    /// daily questions: <SDK error text>").
+    ///
+    /// English users get `english`, exactly as the app has always shown it.
+    /// That detail is English whatever the app's language, so a translated
+    /// app shows `translated` instead: a complete sentence of its own with no
+    /// English tail. Only one of the two is evaluated.
+    static func withTechnicalDetail(
+        english: @autoclosure () -> String,
+        translated: @autoclosure () -> String
+    ) -> String {
+        isSourceLanguage ? english() : translated()
+    }
+
     /// What to show for an English data string. See the file header.
     static func content(_ english: String) -> String {
         guard !english.isEmpty else { return english }

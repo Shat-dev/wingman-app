@@ -84,8 +84,8 @@ struct QuizEngine {
             // Placeholder to prevent crashes before the first load resolves.
             return QuizQuestion(
                 number: 1,
-                question: "Loading...",
-                options: ["Please wait..."],
+                question: String(localized: "Loading..."),
+                options: [String(localized: "Please wait...")],
                 correctAnswerIndex: 0,
                 explanation: ""
             )

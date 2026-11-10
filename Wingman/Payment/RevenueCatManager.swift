@@ -315,13 +315,25 @@ enum RevenueCatError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .customerInfoFailed(let message):
-            return "Failed to get customer info: \(message)"
+            return L10n.withTechnicalDetail(
+                english: "Failed to get customer info: \(message)",
+                translated: String(localized: "Couldn't load your subscription. Please try again.")
+            )
         case .offeringsFailed(let message):
-            return "Failed to fetch products: \(message)"
+            return L10n.withTechnicalDetail(
+                english: "Failed to fetch products: \(message)",
+                translated: String(localized: "Couldn't load subscription options. Please try again.")
+            )
         case .purchaseFailed(let message):
-            return "Purchase failed: \(message)"
+            return L10n.withTechnicalDetail(
+                english: "Purchase failed: \(message)",
+                translated: String(localized: "Purchase failed. Please try again.")
+            )
         case .restoreFailed(let message):
-            return "Restore failed: \(message)"
+            return L10n.withTechnicalDetail(
+                english: "Restore failed: \(message)",
+                translated: String(localized: "Restore failed. Please try again.")
+            )
         }
     }
 }

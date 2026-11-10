@@ -194,7 +194,7 @@ class DailyPracticeService: DailyPracticeServiceProtocol {
             
             return CompletionResponse(
                 success: true,
-                message: isCorrect ? "Correct answer!" : "Incorrect answer.",
+                message: isCorrect ? String(localized: "Correct answer!") : String(localized: "Incorrect answer."),
                 isCorrect: isCorrect
             )
             
@@ -427,21 +427,39 @@ enum DailyPracticeError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .notAuthenticated:
-            return "User not authenticated. Please log in to access daily practice questions."
+            return String(localized: "User not authenticated. Please log in to access daily practice questions.")
+        // The five below end in an SDK or database message. See
+        // `L10n.withTechnicalDetail`: English is unchanged; a translated app
+        // gets a sentence of its own without the English tail.
         case .failedToFetchQuestions(let message):
-            return "Failed to fetch daily questions: \(message)"
+            return L10n.withTechnicalDetail(
+                english: "Failed to fetch daily questions: \(message)",
+                translated: String(localized: "Couldn't load today's questions. Please try again.")
+            )
         case .failedToSubmitCompletion(let message):
-            return "Failed to submit completion: \(message)"
+            return L10n.withTechnicalDetail(
+                english: "Failed to submit completion: \(message)",
+                translated: String(localized: "Couldn't save your answer. Please try again.")
+            )
         case .failedToCheckCompletionStatus(let message):
-            return "Failed to check completion status: \(message)"
+            return L10n.withTechnicalDetail(
+                english: "Failed to check completion status: \(message)",
+                translated: String(localized: "Couldn't load your daily practice. Please try again.")
+            )
         case .failedToFetchStatus(let message):
-            return "Failed to fetch daily practice status: \(message)"
+            return L10n.withTechnicalDetail(
+                english: "Failed to fetch daily practice status: \(message)",
+                translated: String(localized: "Couldn't load your daily practice. Please try again.")
+            )
         case .failedToUpdateStreak(let message):
-            return "Failed to update daily practice streak: \(message)"
+            return L10n.withTechnicalDetail(
+                english: "Failed to update daily practice streak: \(message)",
+                translated: String(localized: "Couldn't update your streak. Please try again.")
+            )
         case .invalidQuestionData:
-            return "Invalid question data received"
+            return String(localized: "Invalid question data received")
         case .networkError:
-            return "No internet connection. Please check your network and try again."
+            return String(localized: "No internet connection. Please check your network and try again.")
         }
     }
 }
