@@ -14,8 +14,8 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP4 Paywall prices and disclosure | In progress (slices 25–28) | Done: weekly price formatted by the product, plan-row sentences, trial badge from StoreKit, one-time-offer sentences, button and under-button lines in the catalog, disclosure checklist. plan rows and ticks checked (slice 29, no layout change needed). **Waiting on you: the D4 sentence's wording** (see open questions); nothing else is left in WP4 that I can do. Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
 | WP5 String Catalog and extraction | **Done except what WP4 owns** (slices 4–17) | `Localizable` 409 strings, `Content` 174. Left on purpose: paywall price and disclosure strings (WP4). A translated display title for lessons and scenarios comes with WP7 |
 | WP6 Layout and legal links | In progress (slices 17–21) | Done: sign-in legal line, paywall and offer footer links, line caps, fixed-height buttons. **WP6 sweep spent** (slice 21): English unchanged on all 17 baseline screens. Pseudo-language run done (slice 22); its overflow findings fixed (slice 23). Image check done (slice 24): one image contains a word. Paywall ticks and plan rows checked in slice 29. **Done** apart from what could not be seen in the running app |
-| WP7 Content translation plumbing | In progress (slices 30–32) | Migration file written, **not applied**. Overlay wired into daily questions, the scenario list and scenario screens; English makes no extra request. Still to do: lesson quiz questions with their locale-aware cache, `locale` in user metadata, bundled lesson overlays |
-| WP8 Tooling and tests | In progress (**WP8 sweep spent**, slice 22) | Done: unit and UI test targets (249 unit tests, 5 of them pseudo-language probes that skip in a normal run), whole-screen renders in a test window for before/after checks without a sweep, onboarding sweep (now through the walkthrough and the four tabs, with a double-length pseudo-language mode), sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, performance comparison, analytics parity recorder (section 9 of the plan) |
+| WP7 Content translation plumbing | In progress (slices 30–33) | Migration file written, **not applied**. Overlay wired into daily questions, the scenario list, scenario screens and lesson quizzes (with a per-language cache); English makes no extra request. Still to do: `locale` in user metadata, bundled lesson overlays |
+| WP8 Tooling and tests | In progress (**WP8 sweep spent**, slice 22) | Done: unit and UI test targets (261 unit tests, 5 of them pseudo-language probes that skip in a normal run), whole-screen renders in a test window for before/after checks without a sweep, onboarding sweep (now through the walkthrough and the four tabs, with a double-length pseudo-language mode), sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, performance comparison, analytics parity recorder (section 9 of the plan) |
 
 ## Slices
 
@@ -798,9 +798,31 @@ The logic that lays translated database content over the English rows, as pure f
 
 **A note on the simulator.** `OnboardingScreenRenderTests` draws screens in a temporary window on top of whatever the "Wingman L10n 17 Pro" simulator is showing, so during a test run onboarding screens flash over the app for about a minute. It is the tests, not the app.
 
+### Slice 33 — WP7 part 4: lesson-quiz questions and their per-language cache (2026-11-10)
+
+**The problem (audit G-3).** Lesson quizzes do not fetch on demand: they read an on-device snapshot of the English questions (`LessonQuestionStore`), with a sync fingerprint. A translated app needs translated quiz questions offline too, without disturbing that snapshot.
+
+**What changed.** New `Wingman/Content/QuestionTranslationCache.swift`: a second, separate file beside the English snapshot, holding the translation rows for the app's language keyed by question ID. A quiz is the English questions with those rows laid over by `ContentOverlay`.
+
+- **English is untouched:** the snapshot file (`lesson_questions.json`), its fingerprint key and its sync are the code they were; the sync body was only renamed. In English the new cache reads no file, makes no request and passes questions through.
+- **One file and one fingerprint per language** (`question_translations.de.json`); only the running language is ever downloaded.
+- **The fingerprint** is the row count and newest change for that language. When it matches, a refresh is one small request and no download.
+- **Downloads are paged**, because the API caps a single response at 1,000 rows and a silently cut-off answer would leave some questions in English for no visible reason.
+- **A failed refresh keeps the cache.** Offline, a translated app shows the translations it last synced, or English.
+
+**Tests.** 12 new in `QuestionTranslationCacheTests` (261 total: 256 pass, 5 probes skipped), with a sync that counts requests and can fail, a temporary folder and its own settings store: English reads nothing, requests nothing and writes nothing; first sync downloads, stores and applies; a matching fingerprint costs one request; a changed one downloads again; an unconfirmed fingerprint is not trusted; translations survive a relaunch; a failed refresh keeps them; a failed first refresh shows English; an unreadable file is discarded and fetched again; German and Swedish never share a file or a fingerprint.
+
+**Behaviour for English users:** unchanged.
+
+**Not verified**
+
+- Against the real table, as for the rest of WP7 (migration not applied).
+- `LessonQuestionStore` itself has no test of its own; its change is three lines that hand its questions to the cache.
+- Daily-practice questions still ask for their translations on each fetch (slice 32) and do not use this cache. It could serve them too and save that request; left as a possible follow-up.
+
 ## Next
 
-WP7 part 4: lesson quiz questions and their cache (plan "Question cache", audit G-3). English keeps today's cache file and fingerprint untouched. Another language gets its own overlay cache and a fingerprint that includes the language and the translation table's latest change; only the active language is ever downloaded. Then `locale` in user metadata and the bundled lesson overlays.
+WP7 part 5: bundled lesson overlays (the 25 English lesson JSON files stay the structural source; a per-language file per course maps existing text IDs to translated text, loaded only when the app is not in English, English for any missing ID) and a display title for lessons, with `canonicalTitle` still feeding analytics. Then `locale` in user metadata (additive), which finishes WP7's code.
 
 WP4 waits on two answers from you: the D4 wording (open questions) and how to see the paywall with real prices. After WP7: WP3 (error classification) and the remaining WP8 tooling.
 

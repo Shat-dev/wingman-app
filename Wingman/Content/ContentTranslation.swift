@@ -36,7 +36,7 @@ import Foundation
 // MARK: - Rows
 
 /// One row of `question_translations`.
-struct QuestionTranslation: nonisolated Decodable, Sendable, Equatable {
+struct QuestionTranslation: nonisolated Codable, Sendable, Equatable {
     let questionId: UUID
     let questionText: String?
     let options: [String]?

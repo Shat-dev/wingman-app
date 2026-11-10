@@ -96,8 +96,13 @@ final class LessonQuestionStore: ObservableObject {
     /// `shared` (itself main-actor isolated) keeps the call inside the actor.
     /// `StreakStore` avoids the same trap by initialising its service as a
     /// stored property.
-    init(service: LessonQuestionServiceProtocol) {
+    /// Translated question text for the app's language, kept in its own
+    /// file. Empty and never fetched while the app runs in English.
+    private let translations: QuestionTranslationCache
+
+    init(service: LessonQuestionServiceProtocol, translations: QuestionTranslationCache = .shared) {
         self.service = service
+        self.translations = translations
         loadQuestions()
     }
 
@@ -109,7 +114,10 @@ final class LessonQuestionStore: ObservableObject {
     /// not synced yet. Callers must treat empty as "no quiz" and let the lesson
     /// complete as it always has.
     func questions(forLessonId lessonId: String) -> [QuizQuestion] {
-        questionsByLesson[lessonId] ?? []
+        // English: the snapshot's questions as they are. Another language:
+        // the same questions with that language's cached translations laid
+        // over by ID, English wherever one is missing.
+        translations.apply(to: questionsByLesson[lessonId] ?? [])
     }
 
     // MARK: - Refresh
@@ -121,6 +129,18 @@ final class LessonQuestionStore: ObservableObject {
     /// cold start. It is hooked alongside `hydrateLessonProgressFromCloud()` in
     /// AuthManager for exactly that reason.
     func refresh() async {
+        await refreshEnglishQuestions()
+
+        // English: returns at once with no request. The English sync above
+        // is not affected by this in any language.
+        guard SupabaseManager.shared.currentUserId != nil else { return }
+        if await translations.refresh() {
+            objectWillChange.send()
+        }
+    }
+
+    /// The English snapshot's sync, unchanged.
+    private func refreshEnglishQuestions() async {
         guard SupabaseManager.shared.currentUserId != nil else {
             log("ℹ️ LessonQuestionStore: no session yet — skipping refresh")
             return
