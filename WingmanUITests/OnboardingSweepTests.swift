@@ -49,6 +49,10 @@ final class OnboardingSweepTests: XCTestCase {
     private var app: XCUIApplication!
     private var shot = 0
 
+    /// Set to true, for one run, to also photograph the paywall with the
+    /// monthly plan selected. See the note where it is used before doing so.
+    private static let selectsPlansOnThePaywall = false
+
     override func setUp() {
         continueAfterFailure = false
         app = XCUIApplication()
@@ -144,7 +148,13 @@ final class OnboardingSweepTests: XCTestCase {
         // With prices: the same paywall with the monthly plan selected (the
         // trial badge moves to it), then back to yearly. Named 17b so the
         // numbering of the screens after it is the same in every build.
-        if hasPrices, monthlyRow.isHittable {
+        //
+        // OFF unless `selectsPlansOnThePaywall` is set. Tapping a plan sends
+        // `paywall_plan_selected`, and prices only load in a Release build,
+        // whose events are tagged production: two taps here are two
+        // selections in the plan-mix numbers. The run of 2026-11-10 did this
+        // once before the switch existed (filter: `$is_emulator = true`).
+        if Self.selectsPlansOnThePaywall, hasPrices, monthlyRow.isHittable {
             monthlyRow.tap()
             settle(1.0)
             snapExtra("17b-paywall-monthly-selected")
