@@ -12,7 +12,7 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP2 Analytics values pinned to English | **Done** (slices 2–3, `9a853f0`, `38f4330`) | New properties not yet observed arriving in PostHog |
 | WP3 Error classification | Not started | Plan wants a few days of production logging first; cannot be done inside this loop |
 | WP4 Paywall prices and disclosure | Not started | Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
-| WP5 String Catalog and extraction | **In progress** (slices 4–12) | `Localizable` holds 326 strings, `Content` 174. Done: onboarding, commitment, non-disclosure paywall copy, notifications, home, quotes, course catalog, approach logging, profile, settings. Still to move: practice (scenarios), auth screens and auth error messages, walkthrough, XP and completion screen, daily practice and quiz, remaining error wrappers |
+| WP5 String Catalog and extraction | **In progress** (slices 4–13) | `Localizable` holds 342 strings, `Content` 174. Done: onboarding, commitment, non-disclosure paywall copy, notifications, home, quotes, course catalog, approach logging, profile, settings, practice, XP. Still to move: auth screens and auth error messages, walkthrough, daily practice and quiz, lesson screen chrome, remaining error wrappers (RevenueCat, daily practice) |
 | WP6 Layout and legal links | Not started | |
 | WP7 Content translation plumbing | Not started | Migration files only; nothing applied to the live database |
 | WP8 Tooling and tests | Started | Unit and UI test targets exist; parity recorder, validator and fallback tests still to build |
@@ -271,9 +271,30 @@ This closes the gap noted in slice 2 (nothing proved the canonical accessors ign
 
 - The Settings alerts were not triggered on a simulator. Restore and delete-account failures are hard to provoke on demand.
 
+### Slice 13 — WP5 part 10: practice (scenarios) and XP (2026-11-10)
+
+**What changed**
+
+- The scenario lesson-count label ("3 lessons", "3 lessons required") moved to `PracticeCopy.lessonCountLabel(count:isLocked:)` and is the **first catalog plural** in the app: the code passes the count, and the singular ("1 lesson", "1 lesson required") comes from English plural variants in `Localizable.xcstrings`. Before, the noun was picked in code and " required" was appended (audit D-1). The built app now contains `en.lproj/Localizable.stringsdict`.
+- Scenario player: the "You" name fallback (three places), the "Her" and "Feedback" speaker labels, and "Tap to retry" / "Tap to continue".
+- Completion screens: "Scenario complete.", "Lesson complete.", "Daily practice complete." and the default "Continue" button title.
+- XP breakdown labels in `XPStore`: "Completed", "1 correct" / "n correct", "All correct".
+- `PracticeServiceError` messages, which reach the user through the practice screens' error state.
+- Left as plain English: `XPError` descriptions (logs and analytics only) and the mock scenario and mock practice data.
+
+**Behaviour for English users:** unchanged. The plural path is the one place where English now depends on the catalog, so it is pinned for counts 0, 1, 2, 5, 12 and 21, locked and unlocked.
+
+**Tests:** new `PracticeCopyTests` (4). 123 unit tests pass. Catalog: 342 entries; `xcstringstool sync` preserved the hand-written plural variants.
+
+**Not verified**
+
+- The scenario list, player and completion screens were not opened on a simulator.
+- Speaker labels, completion titles and the "You" fallback have no direct unit test.
+- `Data error: …` still appends a developer-written detail in English after a translatable prefix. It is rare and was left that way.
+
 ## Next
 
-WP5 part 10: practice (scenarios) and XP. `PracticeView`, `PracticeDetailView`, `PracticeCardView` (including the manual "lesson"/"lessons" plural, audit D-1), `PracticeGame` scene labels ("Feedback", "Tap to retry", "Tap to continue"), `CompletionScreen` and `XPStore` breakdown labels ("Completed", "n correct", "All correct"), `XPLevel`. Scenario text itself comes from Supabase and belongs to WP7. Then auth screens and auth error messages, walkthrough, daily practice and quiz.
+WP5 part 11: auth. `AuthView` (titles, subtitles and button labels per context, the legal sentence is WP6), and the user-facing error strings in `AuthManager` (about 29 literals, including the Google and Apple sign-in failures that wrap `error.localizedDescription`). Then walkthrough copy, daily practice and quiz chrome, the lesson screen, and the remaining error wrappers in `RevenueCatManager` and `DailyPracticeServiceProtocol`. After that WP5 is down to its fragment and number-format leftovers and WP6 (layout) can start.
 
 ## Open questions for Arthur
 

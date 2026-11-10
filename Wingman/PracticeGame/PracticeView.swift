@@ -94,7 +94,7 @@ struct PracticeView: View {
            !name.trimmingCharacters(in: .whitespaces).isEmpty {
             return name
         }
-        return "You"
+        return String(localized: "You")
     }
 
     // MARK: - Header View

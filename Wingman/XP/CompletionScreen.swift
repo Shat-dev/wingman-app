@@ -97,7 +97,7 @@ struct CompletionScreen<Detail: View>: View {
     init(
         title: String,
         expectedSourceId: String,
-        continueTitle: String = "Continue",
+        continueTitle: String = String(localized: "Continue"),
         previewAward: XPStore.Award? = nil,
         onContinue: @escaping () -> Void,
         @ViewBuilder detail: @escaping () -> Detail
@@ -642,7 +642,7 @@ extension CompletionScreen where Detail == EmptyView {
     init(
         title: String,
         expectedSourceId: String,
-        continueTitle: String = "Continue",
+        continueTitle: String = String(localized: "Continue"),
         previewAward: XPStore.Award? = nil,
         onContinue: @escaping () -> Void
     ) {

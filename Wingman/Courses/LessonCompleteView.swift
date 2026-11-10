@@ -15,7 +15,7 @@ struct LessonCompleteView: View {
 
     var body: some View {
         CompletionScreen(
-            title: "Lesson complete.",
+            title: String(localized: "Lesson complete."),
             expectedSourceId: lessonId,
             onContinue: {
                 // `onContinue` is what actually marks the lesson complete and

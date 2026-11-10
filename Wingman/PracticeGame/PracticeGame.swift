@@ -58,7 +58,7 @@ class PracticeGameViewModel: ObservableObject {
     // MARK: - Init
     init(
         gameData: PracticeGameData,
-        userName: String = "You",
+        userName: String = String(localized: "You"),
         scenarioId: UUID? = nil,
         practiceService: PracticeServiceProtocol = PracticeService()
     ) {
@@ -329,7 +329,7 @@ struct PracticeGame: View {
 
     init(
         gameData: PracticeGameData = MockData.barWindow,
-        userName: String = "You",
+        userName: String = String(localized: "You"),
         scenarioId: UUID? = nil
     ) {
         _viewModel = StateObject(
@@ -606,14 +606,14 @@ struct DialogueContentView: View {
     private var displayName: String {
         switch scene.type {
         case .userDialogue:  return userName
-        case .womanDialogue: return scene.characterName ?? "Her"
-        case .feedback:      return "Feedback"
+        case .womanDialogue: return scene.characterName ?? String(localized: "Her")
+        case .feedback:      return String(localized: "Feedback")
         default:             return ""
         }
     }
 
     private var actionText: String {
-        scene.type == .feedback ? "Tap to retry" : "Tap to continue"
+        scene.type == .feedback ? String(localized: "Tap to retry") : String(localized: "Tap to continue")
     }
 
     var body: some View {
@@ -761,7 +761,7 @@ struct GameCompleteView: View {
     // these scenarios. This screen was the only place using the other word.
     var body: some View {
         CompletionScreen(
-            title: "Scenario complete.",
+            title: String(localized: "Scenario complete."),
             expectedSourceId: expectedSourceId,
             onContinue: onContinue
         )

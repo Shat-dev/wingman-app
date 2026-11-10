@@ -58,11 +58,11 @@ final class XPStore: ObservableObject {
         /// or a lesson answered entirely wrong) yields a single item and the
         /// screen falls back to showing just the figure.
         var components: [(amount: Int, label: String)] {
-            var out: [(Int, String)] = [(base, "Completed")]
+            var out: [(Int, String)] = [(base, String(localized: "Completed"))]
             if fromCorrect > 0 {
-                out.append((fromCorrect, correctCount == 1 ? "1 correct" : "\(correctCount) correct"))
+                out.append((fromCorrect, correctCount == 1 ? String(localized: "1 correct") : String(localized: "\(correctCount) correct")))
             }
-            if bonus > 0 { out.append((bonus, "All correct")) }
+            if bonus > 0 { out.append((bonus, String(localized: "All correct"))) }
             return out
         }
     }

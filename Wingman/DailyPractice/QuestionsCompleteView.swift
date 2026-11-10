@@ -15,7 +15,7 @@ struct QuestionsCompleteView: View {
 
     var body: some View {
         CompletionScreen(
-            title: "Daily practice complete.",
+            title: String(localized: "Daily practice complete."),
             // Daily practice is awarded once per local day, so the date is the
             // id. Same string `DailyPracticeViewModel` passes to `award`.
             expectedSourceId: XPLocalDate.today(),

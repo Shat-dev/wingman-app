@@ -29,11 +29,60 @@
       "comment" : "A bare number.",
       "shouldTranslate" : false
     },
+    "%lld correct" : {
+
+    },
     "%lld day streak" : {
 
     },
     "%lld days ago" : {
 
+    },
+    "%lld lessons" : {
+      "comment" : "How many lessons a scenario needs. The number is the count of lessons.",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld lesson"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld lessons"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld lessons required" : {
+      "comment" : "Shown on a locked scenario: how many completed lessons unlock it.",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld lesson required"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld lessons required"
+                }
+              }
+            }
+          }
+        }
+      }
     },
     "%lld min" : {
 
@@ -71,6 +120,9 @@
     "1 - very anxious" : {
 
     },
+    "1 correct" : {
+
+    },
     "1 day ago" : {
 
     },
@@ -105,6 +157,9 @@
 
     },
     "Add your name" : {
+
+    },
+    "All correct" : {
 
     },
     "Allow notifications for tips and offers. Turn them off anytime in Settings." : {
@@ -293,6 +348,12 @@
     "Daily Reading Reminder" : {
 
     },
+    "Daily practice complete." : {
+
+    },
+    "Data error: %@" : {
+
+    },
     "Day 1 of becoming the guy who goes for it" : {
 
     },
@@ -371,6 +432,9 @@
     "Failed to update. Please try again." : {
 
     },
+    "Feedback" : {
+
+    },
     "Feel confident, not anxious" : {
 
     },
@@ -393,6 +457,9 @@
 
     },
     "Half of men don't approach. Most who do, succeed." : {
+
+    },
+    "Her" : {
 
     },
     "Home" : {
@@ -450,6 +517,9 @@
 
     },
     "Know exactly how to start talking" : {
+
+    },
+    "Lesson complete." : {
 
     },
     "Lessons" : {
@@ -598,6 +668,9 @@
     "No internet connection" : {
 
     },
+    "No internet connection. Please check your network and try again." : {
+
+    },
     "No more “what if” moments" : {
 
     },
@@ -641,6 +714,9 @@
 
     },
     "Please Try again!" : {
+
+    },
+    "Please log in to access practices." : {
 
     },
     "Please provide a title for your approach" : {
@@ -713,6 +789,12 @@
 
     },
     "Saved!" : {
+
+    },
+    "Scenario complete." : {
+
+    },
+    "Scenario not found." : {
 
     },
     "Scenarios" : {
@@ -803,6 +885,9 @@
 
     },
     "Tap to continue" : {
+
+    },
+    "Tap to retry" : {
 
     },
     "Terms" : {
@@ -979,6 +1064,9 @@
 
     },
     "Yearly Plan" : {
+
+    },
+    "You" : {
 
     },
     "You already have a subscription on this account. Tap Restore to get access back." : {

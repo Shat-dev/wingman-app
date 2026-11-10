@@ -21,10 +21,10 @@ struct PracticeCardView: View {
 
     // MARK: - Derived copy
     private var lessonCountLabel: String {
-        let n = practice.requiredLessonsCompleted
-        let noun = n == 1 ? "lesson" : "lessons"
-        let suffix = practice.isLocked ? " required" : ""
-        return "\(n) \(noun)\(suffix)"
+        PracticeCopy.lessonCountLabel(
+            count: practice.requiredLessonsCompleted,
+            isLocked: practice.isLocked
+        )
     }
 
     // MARK: - Body

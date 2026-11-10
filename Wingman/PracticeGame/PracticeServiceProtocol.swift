@@ -345,10 +345,10 @@ enum PracticeServiceError: LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case .notAuthenticated:     return "Please log in to access practices."
-        case .scenarioNotFound:     return "Scenario not found."
-        case .invalidData(let msg): return "Data error: \(msg)"
-        case .networkError:         return "No internet connection. Please check your network and try again."
+        case .notAuthenticated:     return String(localized: "Please log in to access practices.")
+        case .scenarioNotFound:     return String(localized: "Scenario not found.")
+        case .invalidData(let msg): return String(localized: "Data error: \(msg)")
+        case .networkError:         return String(localized: "No internet connection. Please check your network and try again.")
         }
     }
 }
