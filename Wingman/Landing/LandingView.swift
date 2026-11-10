@@ -81,7 +81,7 @@ struct LandingView: View {
                             .font(.manropeSemiBold(size: 16))
                             .foregroundColor(.wingmanWhiteFF)
                             .frame(maxWidth: .infinity)
-                            .frame(height: 52)
+                            .labelHeight(52)
                             .background(Color.wingmanBlack)
                             .cornerRadius(5)
                     }
@@ -111,7 +111,7 @@ struct LandingView: View {
                         }
                         .font(.manropeSemiBold(size: 15))
                         .frame(maxWidth: .infinity)
-                        .frame(height: 44)
+                        .labelHeight(44)
                         .contentShape(Rectangle())
                     }
                     .buttonStyle(ScalePressStyle())

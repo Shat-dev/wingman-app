@@ -885,7 +885,7 @@ struct PaywallView: View {
                     .font(.manropeSemiBold(size: 16))
             }
             .frame(maxWidth: .infinity)
-            .frame(height: 52)
+            .labelHeight(52)
             .foregroundColor(.white)
             .background(Color.wingmanBlack.opacity(viewModel.isPurchasing ? 0.7 : 1.0))
             .cornerRadius(5)
@@ -919,7 +919,7 @@ struct PaywallView: View {
             }
             .foregroundColor(.white)
             .frame(maxWidth: .infinity)
-            .frame(height: 52)
+            .labelHeight(52)
             .background(Color.wingmanBlack.opacity(viewModel.isLoading ? 0.7 : 1.0))
             .cornerRadius(5)
         }

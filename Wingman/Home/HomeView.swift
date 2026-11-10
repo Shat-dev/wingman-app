@@ -146,7 +146,7 @@ struct HomeView: View {
                                             .font(.manropeSemiBold(size: 16))
                                             .foregroundColor(.wingmanWhiteFF)
                                             .frame(maxWidth: .infinity)
-                                            .frame(height: 52)
+                                            .labelHeight(52)
                                             .background(canStart ? Color.wingmanBlack : Color.wingmanBlack.opacity(0.5))
                                             .cornerRadius(5)
                                             .contentShape(Rectangle())
@@ -195,7 +195,7 @@ struct HomeView: View {
                                         .foregroundColor(.wingmanBlack)
                                 }
                                 .frame(maxWidth: .infinity)
-                                .frame(height: 56)
+                                .labelHeight(56)
                                 .background(Color.white)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 5)
@@ -480,7 +480,7 @@ struct ModuleCarouselCard: View {
                         .font(.manropeSemiBold(size: 16))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
-                        .frame(height: 50)
+                        .labelHeight(50)
                         .background(Color.wingmanBlack)
                         .cornerRadius(5)
                 }

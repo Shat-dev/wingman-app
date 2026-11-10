@@ -311,7 +311,7 @@ struct QuizQuestionView: View {
                     .font(.manropeSemiBold(size: 16))
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
-                    .frame(height: 52)
+                    .labelHeight(52)
                     .background(state.isAnswerCorrect ? Color.customGreen : Color.customRed)
                     .cornerRadius(5)
             }
@@ -339,7 +339,7 @@ struct QuizQuestionView: View {
                 .font(.manropeSemiBold(size: 16))
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
-                .frame(height: 52)
+                .labelHeight(52)
                 .background(state.isCheckAnswerEnabled ? Color.wingmanBlack : Color.wingmanBlack.opacity(0.4))
                 .cornerRadius(5)
         }

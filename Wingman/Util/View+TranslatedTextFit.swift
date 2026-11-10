@@ -17,6 +17,11 @@
 //  to the same `.lineLimit(n)` the call site had before and a scale factor
 //  of 1, which is SwiftUI's default.
 //
+//  Button labels have the same problem in the other direction: a fixed
+//  height. `labelHeight(_:)` keeps that height for English and turns it into
+//  a minimum for a translated app, so a label that needs a second line makes
+//  its button taller instead of being clipped.
+//
 
 import SwiftUI
 
@@ -51,4 +56,38 @@ extension View {
             .lineLimit(fit.lineLimit)
             .minimumScaleFactor(fit.minimumScaleFactor)
     }
+
+    /// The height of a button label.
+    ///
+    /// English: `.frame(height: height)`, unchanged. In a translated app
+    /// `height` is the least the label may be: a long label first shrinks a
+    /// little, then wraps centred, and the button grows around it with some
+    /// padding on every side. A label that fits on one line is exactly
+    /// `height` tall and looks as it does in English.
+    @ViewBuilder
+    func labelHeight(
+        _ height: CGFloat,
+        usesSourceLanguageLayout: Bool = L10n.usesSourceLanguageLayout
+    ) -> some View {
+        if usesSourceLanguageLayout {
+            self.frame(height: height)
+        } else {
+            self
+                .minimumScaleFactor(TranslatedLabel.minimumScaleFactor)
+                .multilineTextAlignment(.center)
+                .padding(.vertical, TranslatedLabel.verticalPadding)
+                .padding(.horizontal, TranslatedLabel.horizontalPadding)
+                .frame(minHeight: height)
+        }
+    }
+}
+
+/// Numbers used by `labelHeight(_:)` in a translated app.
+nonisolated enum TranslatedLabel {
+    /// How far a long label shrinks before it wraps or is cut.
+    static let minimumScaleFactor: CGFloat = 0.85
+    /// Space kept above and below a label that has grown past its usual height.
+    static let verticalPadding: CGFloat = 6
+    /// Space kept between a wrapped label and the sides of its button.
+    static let horizontalPadding: CGFloat = 12
 }

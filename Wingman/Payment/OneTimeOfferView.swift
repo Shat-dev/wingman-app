@@ -288,7 +288,7 @@ struct OneTimeOfferView: View {
                     .font(.manropeSemiBold(size: 16))
             }
             .frame(maxWidth: .infinity)
-            .frame(height: 52)
+            .labelHeight(52)
             .foregroundColor(.white)
             .background(Color.wingmanBlack.opacity(viewModel.isPurchasing ? 0.7 : 1.0))
             .cornerRadius(5)

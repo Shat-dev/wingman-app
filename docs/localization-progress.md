@@ -13,9 +13,9 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP3 Error classification | Not started | Plan wants a few days of production logging first; cannot be done inside this loop |
 | WP4 Paywall prices and disclosure | Not started | Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
 | WP5 String Catalog and extraction | **Done except what WP4 owns** (slices 4–17) | `Localizable` 386 strings, `Content` 174. Left on purpose: paywall price and disclosure strings (WP4). A translated display title for lessons and scenarios comes with WP7 |
-| WP6 Layout and legal links | In progress (slices 17–19) | Done: sign-in legal line, paywall and offer footer links, line caps (answer buttons, tab labels, cards, titles). Still to do: fixed-height buttons, paywall ticks and plan rows, pseudo-language pass, image check, then the one WP6 sweep |
+| WP6 Layout and legal links | In progress (slices 17–20) | Done: sign-in legal line, paywall and offer footer links, line caps, fixed-height buttons. Still to do: paywall ticks and plan rows (with WP4), image check, sweep extended past the paywall, then the one WP6 sweep with a pseudo-language pass |
 | WP7 Content translation plumbing | Not started | Migration files only; nothing applied to the live database |
-| WP8 Tooling and tests | In progress | Done: unit and UI test targets (169 unit tests), onboarding sweep, sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, sweep beyond the paywall, performance comparison, analytics parity recorder (section 9 of the plan) |
+| WP8 Tooling and tests | In progress | Done: unit and UI test targets (174 unit tests), onboarding sweep, sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, sweep beyond the paywall, performance comparison, analytics parity recorder (section 9 of the plan) |
 
 ## Slices
 
@@ -450,9 +450,40 @@ Left alone: onboarding answer buttons (they already grow, inside a scroll view),
 - Course tile, lesson title and question subtitle have no test of their own beyond the shared modifier's.
 - A course tile that grows to three lines is taller than its neighbour in the same grid row. I have not looked at how that row lines up.
 
+### Slice 20 — WP6 part 4: fixed-height buttons (2026-11-10)
+
+**Inventory.** 74 fixed-height frames in the app. 22 of them are button labels holding translated text, at 40, 44, 50, 52 or 56 pt. The rest are images, progress bars, spacers and icon tap targets. A label that wraps to a third line inside a fixed 52 pt was cut with "…".
+
+**What changed.** New modifier `labelHeight(_:)` (same file as the line-cap rule), applied to all 22 by replacing `.frame(height: N)` with `.labelHeight(N)`:
+
+- **English:** `.frame(height: N)`, the same call as before.
+- **Translated apps:** N is a minimum. A long label shrinks to 85%, then wraps centred, and the button grows around it with 6 pt above and below and 12 pt at the sides. A label that fits on one line gives a button of exactly N, as in English.
+
+The 22: landing "Get started" and "Log in"; home daily practice, "Log Approach" and course card "Open"; daily practice and scenario "Try Again"; "Start Practice"; sign-in "Not now"; paywall purchase and retry buttons; one-time offer claim button; approach sheet save; quiz "Next" and "Check Answer"; edit profile and reading goal "Save"; both "Create a free account" buttons; "Log Out"; name screen "Skip"; completion screen continue.
+
+Left alone: the onboarding "Next" button (sized by padding, already grows), the scenario speaker-name row (a name, 25 pt), `ErrorViewScreen` (unused code).
+
+**Tests.** 5 new unit tests in `LabelHeightTests` (174 total, all passing):
+
+- English labels are pixel-identical to the original markup at every height in use (40, 44, 50, 52, 56) and at SE and 17 Pro widths;
+- the default is the English layout while the app runs in English;
+- a short translated label gives a button of the same size (see note below);
+- a long translated label grows the button where the fixed height cut it; a two-line label keeps its padding.
+
+**Found while looking at the renders.** The first version wrapped a long label left-aligned and edge to edge. Fixed before commit (centred, side padding). Centring makes the system space a few letter pairs a fraction of a point differently, so a short translated label is the same size and position as the English one but not byte-identical; that test checks size and under 1% differing pixels. English does not take this path.
+
+**Behaviour for English users:** unchanged, by the pixel comparison above. No string changed.
+
+**Not verified**
+
+- None of the 22 buttons has been looked at in the running app since the change; the shared modifier is tested, the call sites are a mechanical one-line replacement each. The landing "Get started" button and the paywall button are in the sweep.
+- A grown button pushes its neighbours. On screens without scrolling (paywall, one-time offer, completion) I have not checked where the extra height comes from. It only happens when a label needs a second line.
+
 ## Next
 
-WP6, fourth slice: fixed-height buttons (plan item 6, about 20 sites with `frame(height: 52)` or similar holding a text label): English keeps the fixed height; a translated label may shrink slightly, then the button grows. After that: paywall ticks and plan rows (items 3–4, alongside WP4), the image check (item 8), and a pseudo-language pass.
+WP8 tooling next, because it is what lets WP6 be checked: extend `OnboardingSweepTests` past the paywall (close the paywall, capture the screens behind it, including the required sign-in screen in both legal-line layouts) and add a way to run it with the translated layouts forced on (`-l10nForceTranslatedLayout YES`) plus a pseudo-language. Writing and compiling the test does not run the sweep.
+
+Then the WP6 leftovers: paywall ticks and plan rows (plan items 3–4, done together with WP4 since both touch the same paywall rows) and the image check (item 8).
 
 Before the WP6 sweep is spent: extend `OnboardingSweepTests` past the paywall (close the paywall, capture the required sign-in screen in both legal-line layouts, tap both links), so one run covers everything WP6 changed.
 

@@ -259,7 +259,7 @@ struct PracticeView: View {
                         .font(.manropeSemiBold(size: 16))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
-                        .frame(height: 52)
+                        .labelHeight(52)
                         .background(Color.wingmanBlack)
                         .cornerRadius(5)
                 }

@@ -301,7 +301,7 @@ private struct SaveProgressBanner: View {
                     .font(.manropeSemiBold(size: 14))
                     .foregroundColor(.wingmanWhiteFF)
                     .frame(maxWidth: .infinity)
-                    .frame(height: 40)
+                    .labelHeight(40)
                     .background(Color.wingmanBlack)
                     .cornerRadius(5)
             }

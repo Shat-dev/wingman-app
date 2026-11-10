@@ -220,7 +220,7 @@ struct AuthView: View {
                         .foregroundColor(Color.wingmanBlack.opacity(0.6))
                         .underline()
                         .frame(maxWidth: .infinity)
-                        .frame(height: 44)
+                        .labelHeight(44)
                         .contentShape(Rectangle())
                 }
                 .buttonStyle(ScalePressStyle())

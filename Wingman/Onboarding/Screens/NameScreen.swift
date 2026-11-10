@@ -97,7 +97,7 @@ struct NameScreen: View {
                     .font(.manropeMedium(size: 15))
                     .foregroundColor(.wingmanBlack.opacity(0.55))
                     .frame(maxWidth: .infinity)
-                    .frame(height: 44)
+                    .labelHeight(44)
                     .contentShape(Rectangle())
             }
             .buttonStyle(ScalePressStyle())

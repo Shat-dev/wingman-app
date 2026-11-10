@@ -292,7 +292,7 @@ struct LogApproachBottomSheet: View {
                                 }
                             }
                             .frame(maxWidth: .infinity)
-                            .frame(height: 52)
+                            .labelHeight(52)
                             .background(viewModel.canSave ? Color.wingmanBlack : Color.gray.opacity(0.3))
                             .cornerRadius(5)
                         }
