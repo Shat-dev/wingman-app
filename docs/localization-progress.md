@@ -11,11 +11,11 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP1 Onboarding answer IDs | **Done** (slice 1, `fa213f2`) | Verified on device by the slice 3 sweep. Supabase `age`/`goals` writes checked by reading the code path, not by a live write |
 | WP2 Analytics values pinned to English | **Done** (slices 2–3, `9a853f0`, `38f4330`) | New properties not yet observed arriving in PostHog |
 | WP3 Error classification | Not started | Plan wants a few days of production logging first; cannot be done inside this loop |
-| WP4 Paywall prices and disclosure | In progress (slices 25–26) | Done: weekly price formatted by the product, plan-row sentences, trial badge from StoreKit. Still to do: one-time-offer sentences, D4 renewal sentence, plan-row and tick layout (from WP6), disclosure checklist. Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
-| WP5 String Catalog and extraction | **Done except what WP4 owns** (slices 4–17) | `Localizable` 392 strings, `Content` 174. Left on purpose: paywall price and disclosure strings (WP4). A translated display title for lessons and scenarios comes with WP7 |
+| WP4 Paywall prices and disclosure | In progress (slices 25–27) | Done: weekly price formatted by the product, plan-row sentences, trial badge from StoreKit, one-time-offer sentences. Still to do: D4 renewal sentence, plan-row and tick layout (from WP6), disclosure checklist. Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
+| WP5 String Catalog and extraction | **Done except what WP4 owns** (slices 4–17) | `Localizable` 406 strings, `Content` 174. Left on purpose: paywall price and disclosure strings (WP4). A translated display title for lessons and scenarios comes with WP7 |
 | WP6 Layout and legal links | In progress (slices 17–21) | Done: sign-in legal line, paywall and offer footer links, line caps, fixed-height buttons. **WP6 sweep spent** (slice 21): English unchanged on all 17 baseline screens. Pseudo-language run done (slice 22); its overflow findings fixed (slice 23). Image check done (slice 24): one image contains a word. Still to do: paywall ticks and plan rows (with WP4, includes finding 5) |
 | WP7 Content translation plumbing | Not started | Migration files only; nothing applied to the live database |
-| WP8 Tooling and tests | In progress (**WP8 sweep spent**, slice 22) | Done: unit and UI test targets (208 unit tests, 5 of them pseudo-language probes that skip in a normal run), whole-screen renders in a test window for before/after checks without a sweep, onboarding sweep (now through the walkthrough and the four tabs, with a double-length pseudo-language mode), sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, performance comparison, analytics parity recorder (section 9 of the plan) |
+| WP8 Tooling and tests | In progress (**WP8 sweep spent**, slice 22) | Done: unit and UI test targets (216 unit tests, 5 of them pseudo-language probes that skip in a normal run), whole-screen renders in a test window for before/after checks without a sweep, onboarding sweep (now through the walkthrough and the four tabs, with a double-length pseudo-language mode), sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, performance comparison, analytics parity recorder (section 9 of the plan) |
 
 ## Slices
 
@@ -652,9 +652,37 @@ New file `Wingman/Payment/PaywallPricing.swift`; the old `calculateWeeklyPrice` 
 - That the real products report their trial as three days (and in which unit). The reading code has no test against a StoreKit product, only against the values an offer carries. Needs the priced paywall.
 - The badge on screen: plan rows have never been rendered in this work.
 
+### Slice 27 — WP4 part 3: the one-time offer's sentences (2026-11-10)
+
+**The problem (audit E-3).** Three lines on the one-time offer were assembled from a word. A helper returned "year", "2 years", "month" or "6 months", and that word was dropped into "off your first …", "for your first …" and "… billed today for your first …, then …/…". A lone "year" cannot be translated (its form depends on the sentence around it), and the surrounding sentence fixed English word order.
+
+**What changed (plan WP4 item 4).** New file `Wingman/Payment/OneTimeOfferCopy.swift`. Each case is a whole catalog sentence with only prices and numbers as placeholders:
+
+- under the big number: "off your first year / %lld years / month / %lld months", and the same four for "for your first …";
+- the disclosure under the button: one sentence per discount length (year, several years, month, several months) for a plan that renews yearly, and the same four for one that renews monthly.
+
+For a renewal period this app does not sell (every six months, say), English keeps the wording the old assembly produced, and a translated app shows a complete sentence with both prices and no lengths ("… billed today, then … at each renewal. …"), so no English word is ever dropped into a translation.
+
+The glued-phrase helper `StoreProduct.durationPhrase` is gone. "%lld-month Plan" was already a single catalog entry and needed nothing.
+
+**Tests.** 8 new in `OneTimeOfferCopyTests` (216 total: 211 pass, 5 probes skipped).
+
+- Today's offer pinned: "off your first year", and "$34.99 billed today for your first year, then $69.99/year. Cancel anytime in App Store settings."
+- **Parity with a copy of the old assembly:** both lines under the big number for every discount length from 1 to 48 months; the disclosure for all 1,728 combinations of discount length (1–48 months) and renewal period (1–36 months).
+- A translated app reads sold periods from the catalog and gets the whole-sentence fallback for an unsold one.
+
+**Behaviour for English users:** unchanged in every case, by the parity tests.
+
+**Catalog:** 406 strings. 17 new sentences, each with a translator comment saying what every placeholder is; the 3 fragment entries they replace are gone. Validator: no problems.
+
+**Not verified**
+
+- The offer on screen. It has never been rendered in this work: a Debug build has no products, so the offer closes itself. Same priced-paywall question as the rest of WP4.
+- The derived per-month price on the offer (`introPricePerMonthString`, plan item 6) is not used anywhere in the current offer screen, so there was nothing to change.
+
 ## Next
 
-WP4 part 3: the one-time offer's sentences (plan item 4). `StoreProduct.durationPhrase` glues "year" / "2 years" / "month" into "off your first …", "for your first …" and the renewal line; replace with whole catalog sentences chosen by case, plural-aware, with the English output unchanged. Also "%lld-month Plan". Then the D4 renewal sentence (item 5), the plan-row and tick layout carried over from WP6 (items 3–4 there, finding 5), and the disclosure checklist (item 7).
+WP4 part 4: the renewal sentence on the main paywall (plan item 5, decision D4). This is the one approved visible English change. The paywall already shows a line under the button ("No payment now. Cancel anytime before your trial ends." / "Billed immediately. Cancel anytime in App Store settings."); neither names the price or the renewal. Add the price and period from StoreKit as whole sentences, trial and no-trial variants. Then the plan-row and tick layout carried over from WP6 (items 3–4 there, finding 5) and the disclosure checklist (item 7).
 
 WP4 ends on the priced-paywall question that only you can answer (one Release run, or a dev-tag launch flag).
 

@@ -65,15 +65,33 @@ final class OneTimeOfferViewModel: ObservableObject {
     /// `StoreProduct.introSavingsPercent`. Nil means make no numeric claim.
     var savingsPercent: Int? { package?.storeProduct.introSavingsPercent }
 
-    /// How long the discount lasts, e.g. "year" or "6 months", read from the
-    /// intro offer. Only read once `state == .ready`, which guarantees it.
-    var introDurationPhrase: String {
-        StoreProduct.durationPhrase(months: package?.storeProduct.introDurationMonths ?? 12)
+    /// How long the discount lasts, read from the intro offer. Only read
+    /// once `state == .ready`, which guarantees it.
+    var introDuration: OneTimeOfferCopy.Duration {
+        OneTimeOfferCopy.Duration(months: package?.storeProduct.introDurationMonths ?? 12)
     }
 
-    /// The regular billing period the plan renews into, e.g. "year".
-    var renewalPeriodPhrase: String {
-        StoreProduct.durationPhrase(months: package?.storeProduct.periodMonths ?? 12)
+    /// The regular billing period the plan renews into.
+    var renewalDuration: OneTimeOfferCopy.Duration {
+        OneTimeOfferCopy.Duration(months: package?.storeProduct.periodMonths ?? 12)
+    }
+
+    /// The line under the big number: "off your first year" under a
+    /// percentage, "for your first year" under a price.
+    var heroLine: String {
+        savingsPercent != nil
+            ? OneTimeOfferCopy.discountLine(first: introDuration)
+            : OneTimeOfferCopy.priceLine(first: introDuration)
+    }
+
+    /// The disclosure under the button. See `OneTimeOfferCopy.disclosure`.
+    var disclosure: String {
+        OneTimeOfferCopy.disclosure(
+            introPrice: introPriceString,
+            first: introDuration,
+            fullPrice: fullPriceString,
+            renewal: renewalDuration
+        )
     }
 
     /// "Yearly Plan", "Monthly Plan", or "6-month Plan" for anything else.

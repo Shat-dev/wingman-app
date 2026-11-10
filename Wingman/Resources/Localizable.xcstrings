@@ -5,13 +5,101 @@
       "comment" : "Empty placeholder text.",
       "shouldTranslate" : false
     },
-    "%@ billed today for your first %@, then %@/%@. Cancel anytime in App Store settings." : {
-      "comment" : "One-time offer legal line. 1: price charged today. 2: length of the discounted period. 3: regular price. 4: renewal period. Will be replaced by whole sentences in the paywall work; do not translate yet.",
+    "%@ billed today for your first %lld months, then %@/month. Cancel anytime in App Store settings." : {
+      "comment" : "One-time offer, under the button. First %@: the discounted price charged today. %lld: months the discount lasts, 2 or more. Second %@: the regular monthly price.",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "%1$@ billed today for your first %2$@, then %3$@/%4$@. Cancel anytime in App Store settings."
+            "value" : "%1$@ billed today for your first %2$lld months, then %3$@/month. Cancel anytime in App Store settings."
+          }
+        }
+      }
+    },
+    "%@ billed today for your first %lld months, then %@/year. Cancel anytime in App Store settings." : {
+      "comment" : "One-time offer, under the button. First %@: the discounted price charged today. %lld: months the discount lasts, 2 or more. Second %@: the regular yearly price.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ billed today for your first %2$lld months, then %3$@/year. Cancel anytime in App Store settings."
+          }
+        }
+      }
+    },
+    "%@ billed today for your first %lld years, then %@/month. Cancel anytime in App Store settings." : {
+      "comment" : "One-time offer, under the button. First %@: the discounted price charged today. %lld: years the discount lasts, 2 or more. Second %@: the regular monthly price.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ billed today for your first %2$lld years, then %3$@/month. Cancel anytime in App Store settings."
+          }
+        }
+      }
+    },
+    "%@ billed today for your first %lld years, then %@/year. Cancel anytime in App Store settings." : {
+      "comment" : "One-time offer, under the button. First %@: the discounted price charged today. %lld: years the discount lasts, 2 or more. Second %@: the regular yearly price.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ billed today for your first %2$lld years, then %3$@/year. Cancel anytime in App Store settings."
+          }
+        }
+      }
+    },
+    "%@ billed today for your first month, then %@/month. Cancel anytime in App Store settings." : {
+      "comment" : "One-time offer, under the button. First %@: the discounted price charged today. Second %@: the regular monthly price.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ billed today for your first month, then %2$@/month. Cancel anytime in App Store settings."
+          }
+        }
+      }
+    },
+    "%@ billed today for your first month, then %@/year. Cancel anytime in App Store settings." : {
+      "comment" : "One-time offer, under the button. First %@: the discounted price charged today. Second %@: the regular yearly price.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ billed today for your first month, then %2$@/year. Cancel anytime in App Store settings."
+          }
+        }
+      }
+    },
+    "%@ billed today for your first year, then %@/month. Cancel anytime in App Store settings." : {
+      "comment" : "One-time offer, under the button. First %@: the discounted price charged today. Second %@: the regular monthly price.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ billed today for your first year, then %2$@/month. Cancel anytime in App Store settings."
+          }
+        }
+      }
+    },
+    "%@ billed today for your first year, then %@/year. Cancel anytime in App Store settings." : {
+      "comment" : "One-time offer, under the button. First %@: the discounted price charged today. Second %@: the regular yearly price.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ billed today for your first year, then %2$@/year. Cancel anytime in App Store settings."
+          }
+        }
+      }
+    },
+    "%@ billed today, then %@ at each renewal. Cancel anytime in App Store settings." : {
+      "comment" : "One-time offer, under the button, for an unusual billing period. First %@: the discounted price charged today. Second %@: the regular price charged at each renewal.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ billed today, then %2$@ at each renewal. Cancel anytime in App Store settings."
           }
         }
       }
@@ -1244,11 +1332,29 @@
     "faster progress than watching generic advice videos" : {
       "comment" : "Continues the sentence that starts with the bold '3x' entry."
     },
-    "for your first %@" : {
-      "comment" : "One-time offer. Follows the price. The placeholder is a period such as 'year'. Will be replaced by whole sentences in the paywall work; do not translate yet."
+    "for your first %lld months" : {
+      "comment" : "One-time offer, under the discounted price. %lld is a number of months, 2 or more."
     },
-    "off your first %@" : {
-      "comment" : "One-time offer. Follows the discount percentage. The placeholder is a period such as 'year'. Will be replaced by whole sentences in the paywall work; do not translate yet."
+    "for your first %lld years" : {
+      "comment" : "One-time offer, under the discounted price. %lld is a number of years, 2 or more."
+    },
+    "for your first month" : {
+      "comment" : "One-time offer, under the discounted price (\"$34.99\")."
+    },
+    "for your first year" : {
+      "comment" : "One-time offer, under the discounted price (\"$34.99\")."
+    },
+    "off your first %lld months" : {
+      "comment" : "One-time offer, under the big percentage. %lld is a number of months, 2 or more."
+    },
+    "off your first %lld years" : {
+      "comment" : "One-time offer, under the big percentage. %lld is a number of years, 2 or more."
+    },
+    "off your first month" : {
+      "comment" : "One-time offer, under the big percentage (\"50%\")."
+    },
+    "off your first year" : {
+      "comment" : "One-time offer, under the big percentage (\"50%\")."
     },
     "only %@ per week" : {
       "comment" : "Paywall plan row, under the plan's name. %@ is a price with its currency, for example $1.35."

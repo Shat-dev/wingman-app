@@ -81,15 +81,6 @@ extension StoreProduct {
         }
     }
 
-    /// "year", "2 years", "month", "6 months".
-    static func durationPhrase(months: Int) -> String {
-        if months % 12 == 0 {
-            let years = months / 12
-            return years == 1 ? "year" : "\(years) years"
-        }
-        return months == 1 ? "month" : "\(months) months"
-    }
-
     /// Localized price actually charged today under the introductory offer.
     /// Nil when the product carries no such offer, which callers must treat as
     /// "do not pitch a discount" rather than rendering an empty string.

@@ -200,7 +200,7 @@ struct OneTimeOfferView: View {
                 .padding(.horizontal, 20)
                 .padding(.top, 12)
 
-            Text("\(viewModel.introPriceString) billed today for your first \(viewModel.introDurationPhrase), then \(viewModel.fullPriceString)/\(viewModel.renewalPeriodPhrase). Cancel anytime in App Store settings.")
+            Text(viewModel.disclosure)
                 .font(.manropeMedium(size: 12))
                 .foregroundColor(secondary)
                 .multilineTextAlignment(.center)
@@ -231,9 +231,7 @@ struct OneTimeOfferView: View {
             .minimumScaleFactor(0.5)
             .lineLimit(1)
 
-            Text(viewModel.savingsPercent != nil
-                 ? "off your first \(viewModel.introDurationPhrase)"
-                 : "for your first \(viewModel.introDurationPhrase)")
+            Text(viewModel.heroLine)
                 .font(.manropeSemiBold(size: isCompact ? 22 : 26, relativeTo: .title))
                 .foregroundColor(.wingmanBlack)
                 .padding(.top, 2)
