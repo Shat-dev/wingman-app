@@ -73,7 +73,7 @@ struct CourseDetailSheet: View {
                             
                             // Course Summary from lessons data (gray text)
                             if let firstLesson = lessons.first,
-                               let courseSummary = firstLesson.courseSummary {
+                               let courseSummary = firstLesson.displayCourseSummary {
                                 Text(courseSummary)
                                     .font(.manropeMedium(size: 14))
                                     .foregroundColor(Color(hex: "1A1A1A"))
@@ -255,7 +255,7 @@ struct LessonCard: View {
 
                 // MARK: - Title Row
                 HStack(alignment: .top, spacing: 12) {
-                    Text(lesson.title)
+                    Text(lesson.displayTitle)
                         .font(.manropeMedium(size: 18))
                         .foregroundColor(lesson.isLocked ? Color(hex: "CCCCCC") : .wingmanBlack)
                         .multilineTextAlignment(.leading)
@@ -277,7 +277,7 @@ struct LessonCard: View {
                     .padding(.top, 6)
 
                 // MARK: - Summary
-                Text(lesson.summary)
+                Text(lesson.displaySummary)
                     .font(.manropeMedium(size: 14))
                     .foregroundColor(lesson.isLocked ? Color(hex: "CCCCCC") : Color(hex: "666666"))
                     .lineSpacing(2)

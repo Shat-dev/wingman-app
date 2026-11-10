@@ -97,6 +97,14 @@ final class LessonDataService {
             
             // Sort by lesson number
             lessons.sort { $0.lessonNumber < $1.lessonNumber }
+
+            // English: nothing more is read. Another language: lay that
+            // language's text for this course over the English lessons by
+            // ID; English stays wherever the overlay has nothing.
+            if let language = L10n.contentLanguage,
+               let overlay = LessonOverlay.load(courseId: courseId, language: language) {
+                lessons = LessonOverlay.apply(overlay, to: lessons)
+            }
             
             // Apply saved progress
             let progress = loadLessonProgress(courseId: courseId)

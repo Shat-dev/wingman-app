@@ -18,6 +18,21 @@ struct Lesson: Identifiable, Codable {
     var isCompleted: Bool
     var isLocked: Bool
     let screens: [LessonScreen]  // Changed from content to screens
+
+    /// Translated text, when the app runs in another language and the
+    /// bundle has an overlay for this course. Never decoded or stored:
+    /// `title` stays English and is what analytics records. See
+    /// `LessonOverlay`.
+    var translatedTitle: String? = nil
+    var translatedSummary: String? = nil
+    var translatedCourseSummary: String? = nil
+
+    /// What to show. English unless a translation was laid over.
+    var displayTitle: String { translatedTitle ?? title }
+    var displaySummary: String { translatedSummary ?? summary }
+    var displayCourseSummary: String? { translatedCourseSummary ?? courseSummary }
+    /// Course titles are translated through the `Content` catalog.
+    var displayCourseTitle: String { L10n.content(courseTitle) }
     
     enum CodingKeys: String, CodingKey {
         case id

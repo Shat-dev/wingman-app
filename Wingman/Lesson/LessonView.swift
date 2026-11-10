@@ -158,7 +158,7 @@ struct LessonView: View {
                 
                 // MARK: - Bottom Bar (Lesson Title)
                 VStack(spacing: 0) {
-                    Text(lesson.title)
+                    Text(lesson.displayTitle)
                         .font(.manropeSemiBold(size: 12))
                         .foregroundColor(Color(hex: "1A1A1A"))
                         .opacity(0.5)
@@ -383,8 +383,8 @@ struct LessonView: View {
     private func getNextLessonInfo() -> NextLessonInfo? {
         if let nextLesson = LessonDataService.shared.getNextLesson(after: lesson) {
             return NextLessonInfo(
-                title: nextLesson.title,
-                subtitle: nextLesson.courseTitle
+                title: nextLesson.displayTitle,
+                subtitle: nextLesson.displayCourseTitle
             )
         }
         return nil
