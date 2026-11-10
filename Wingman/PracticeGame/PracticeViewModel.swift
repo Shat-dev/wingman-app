@@ -270,6 +270,13 @@ final class PracticeViewModel: ObservableObject {
         let isCompleted: Bool
         let currentScreenId: UUID?
 
+        // Translated display text and the language it was fetched in. All
+        // three are nil in English and are then left out of the stored
+        // JSON, so an English cache is byte-for-byte what it always was.
+        let translatedTitle: String?
+        let translatedSummary: String?
+        let contentLanguage: String?
+
         init(_ practice: Practice) {
             id = practice.id
             title = practice.title
@@ -284,6 +291,11 @@ final class PracticeViewModel: ObservableObject {
             isLocked = practice.isLocked
             isCompleted = practice.isCompleted
             currentScreenId = practice.currentScreenId
+            translatedTitle = practice.translatedTitle
+            translatedSummary = practice.translatedSummary
+            contentLanguage = (practice.translatedTitle != nil || practice.translatedSummary != nil)
+                ? L10n.contentLanguage
+                : nil
         }
 
         var asPractice: Practice {
@@ -291,8 +303,16 @@ final class PracticeViewModel: ObservableObject {
                 id: id, title: title, summary: summary, coverImageUrl: coverImageUrl,
                 requiredLessonsCompleted: requiredLessonsCompleted, womanName: womanName,
                 orderIndex: orderIndex, isPublished: isPublished, createdAt: createdAt, updatedAt: updatedAt,
-                isLocked: isLocked, isCompleted: isCompleted, currentScreenId: currentScreenId
+                isLocked: isLocked, isCompleted: isCompleted, currentScreenId: currentScreenId,
+                // Cached translations are only shown in the language they
+                // were fetched in.
+                translatedTitle: usesCachedTranslation ? translatedTitle : nil,
+                translatedSummary: usesCachedTranslation ? translatedSummary : nil
             )
+        }
+
+        private var usesCachedTranslation: Bool {
+            contentLanguage != nil && contentLanguage == L10n.contentLanguage
         }
     }
 

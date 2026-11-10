@@ -158,7 +158,10 @@ class DailyPracticeService: DailyPracticeServiceProtocol {
             }
             
             log("✅ Loaded \(questions.count) questions from Supabase for date: \(todayDate)")
-            return questions
+            // English: returned as loaded, no extra request. Another
+            // language: translated text laid over by question ID, English
+            // kept wherever a translation is missing or cannot be fetched.
+            return await ContentLocalizer().localized(questions)
             
         } catch {
             log("❌ Failed to load questions from Supabase: \(error)")

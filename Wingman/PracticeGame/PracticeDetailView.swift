@@ -117,7 +117,7 @@ struct PracticeDetailView: View {
     private var practiceInfoView: some View {
         VStack(alignment: .leading, spacing: 12) {
             // Title
-            Text(viewModel.practice.title)
+            Text(viewModel.practice.displayTitle)
                 .font(.manropeBold(size: 24))
                 .foregroundColor(Color(hex: "#1A1A1A"))
             
@@ -136,7 +136,7 @@ struct PracticeDetailView: View {
             }
             
             // Summary
-            Text(viewModel.practice.summary)
+            Text(viewModel.practice.displaySummary)
                 .font(.manropeRegular(size: 15))
                 .foregroundColor(Color(hex: "#666666"))
                 .lineSpacing(4)

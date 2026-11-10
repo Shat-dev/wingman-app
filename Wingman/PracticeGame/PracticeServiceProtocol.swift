@@ -169,8 +169,11 @@ final class PracticeService: PracticeServiceProtocol {
             return p
         }
 
+        // English: the list as loaded, no extra request. Another language:
+        // display titles and summaries added by scenario ID; `title` itself
+        // stays English for analytics. See `ContentLocalizer`.
         return PracticeFetchResult(
-            practices: practices,
+            practices: await ContentLocalizer().localized(practices),
             progressAvailable: progressRowsOrNilResolved != nil
         )
     }
@@ -275,11 +278,15 @@ final class PracticeService: PracticeServiceProtocol {
             .value
 
         let startId = scenes.min(by: { $0.order < $1.order })?.id ?? ""
+        // `title` stays the English title: it is what analytics records.
+        // Screen and option text is display only, so it is translated in
+        // place (no extra request in English). Branching and scoring come
+        // from the English rows either way.
         return PracticeGameData(
             id: scenarioId.uuidString,
             title: scenario?.title ?? "Practice Scenario",
             startingScreenId: startId,
-            scenes: scenes
+            scenes: await ContentLocalizer().localized(scenes)
         )
     }
 

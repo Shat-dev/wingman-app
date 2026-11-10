@@ -14,8 +14,8 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP4 Paywall prices and disclosure | In progress (slices 25–28) | Done: weekly price formatted by the product, plan-row sentences, trial badge from StoreKit, one-time-offer sentences, button and under-button lines in the catalog, disclosure checklist. plan rows and ticks checked (slice 29, no layout change needed). **Waiting on you: the D4 sentence's wording** (see open questions); nothing else is left in WP4 that I can do. Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
 | WP5 String Catalog and extraction | **Done except what WP4 owns** (slices 4–17) | `Localizable` 409 strings, `Content` 174. Left on purpose: paywall price and disclosure strings (WP4). A translated display title for lessons and scenarios comes with WP7 |
 | WP6 Layout and legal links | In progress (slices 17–21) | Done: sign-in legal line, paywall and offer footer links, line caps, fixed-height buttons. **WP6 sweep spent** (slice 21): English unchanged on all 17 baseline screens. Pseudo-language run done (slice 22); its overflow findings fixed (slice 23). Image check done (slice 24): one image contains a word. Paywall ticks and plan rows checked in slice 29. **Done** apart from what could not be seen in the running app |
-| WP7 Content translation plumbing | In progress (slices 30–31) | Migration file written, **not applied**. Overlay rules built and tested, not yet wired into any fetch. Still to do: fetch translation rows and apply them, show `displayTitle` in the UI, locale-aware question cache, `locale` in user metadata, lesson overlays |
-| WP8 Tooling and tests | In progress (**WP8 sweep spent**, slice 22) | Done: unit and UI test targets (238 unit tests, 5 of them pseudo-language probes that skip in a normal run), whole-screen renders in a test window for before/after checks without a sweep, onboarding sweep (now through the walkthrough and the four tabs, with a double-length pseudo-language mode), sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, performance comparison, analytics parity recorder (section 9 of the plan) |
+| WP7 Content translation plumbing | In progress (slices 30–32) | Migration file written, **not applied**. Overlay wired into daily questions, the scenario list and scenario screens; English makes no extra request. Still to do: lesson quiz questions with their locale-aware cache, `locale` in user metadata, bundled lesson overlays |
+| WP8 Tooling and tests | In progress (**WP8 sweep spent**, slice 22) | Done: unit and UI test targets (249 unit tests, 5 of them pseudo-language probes that skip in a normal run), whole-screen renders in a test window for before/after checks without a sweep, onboarding sweep (now through the walkthrough and the four tabs, with a double-length pseudo-language mode), sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, performance comparison, analytics parity recorder (section 9 of the plan) |
 
 ## Slices
 
@@ -768,9 +768,39 @@ The logic that lays translated database content over the English rows, as pure f
 
 - Against real translation rows: the tables do not exist (the migration is not applied).
 
+### Slice 32 — WP7 part 3: the overlay wired into the fetches (2026-11-10)
+
+**New: `Wingman/Content/ContentLocalizer.swift`.** After an English fetch it asks for the translation rows of the IDs just received and applies `ContentOverlay`. Three promises, each tested:
+
+1. **English makes no request.** `L10n.contentLanguage` is nil in English and every method returns its input at once.
+2. **One extra request per content fetch in another language** (two, run together, for a scenario's screens: screen texts and option texts). Only the IDs just received, only the active language.
+3. **A failure costs only the translation.** Offline, tables missing, a timeout: the English content is returned as it was. Screens and options fail independently.
+
+**Wired into:**
+
+- daily practice questions (`DailyPracticeService.getTodayQuestions`);
+- the scenario list (`PracticeService.fetchPractices`), which gains display titles and summaries while `title` stays English;
+- a scenario's screens and answer options (`PracticeService.fetchGameData`); the scenario's own `title` there stays English because analytics records it.
+
+**Shown in the UI:** the scenario card and the scenario detail screen read `displayTitle` and `displaySummary`, which equal the English text when nothing is translated.
+
+**Scenario list cache.** The on-disk copy of the list now keeps the display text together with the language it was fetched in, and only shows it in that language. In English all three new fields are nil and are left out of the stored JSON, so an English cache is what it always was.
+
+**Tests.** 11 new in `ContentLocalizerTests` (249 total: 244 pass, 5 probes skipped), using a fetcher that counts its requests and can be told to fail: English makes zero requests for questions, scenarios and screens; German makes exactly one (two for screens) for exactly the IDs loaded; empty content makes none; a failed request returns the English content untouched, tried once with no retry; a failed option request still translates the screens.
+
+**Behaviour for English users:** unchanged: no new request, same text on screen.
+
+**Not verified**
+
+- Against the real tables: they do not exist yet. In a translated app today every one of these requests would fail and fall back to English, which is the behaviour the tests cover, but I have not watched it happen on a device.
+- The Supabase queries themselves (table and column names, the `in` filter) are only checked against the migration file by reading. They cannot run until the migration is applied.
+- Lesson quiz questions are not translated yet: they go through an on-device cache that needs its own per-language handling (next slice).
+
+**A note on the simulator.** `OnboardingScreenRenderTests` draws screens in a temporary window on top of whatever the "Wingman L10n 17 Pro" simulator is showing, so during a test run onboarding screens flash over the app for about a minute. It is the tests, not the app.
+
 ## Next
 
-WP7 part 3: wire it in. When `L10n.contentLanguage` is not nil, after each English fetch (daily questions, lesson questions, the scenario list, a scenario's screens) make one extra query for the translation rows of the IDs just received and apply `ContentOverlay`; a failed translation fetch must leave the English content in place. English must make exactly the requests it makes today. Show `displayTitle` / `displaySummary` where scenario titles are displayed. Then the locale-aware question cache, `locale` in user metadata and the bundled lesson overlays.
+WP7 part 4: lesson quiz questions and their cache (plan "Question cache", audit G-3). English keeps today's cache file and fingerprint untouched. Another language gets its own overlay cache and a fingerprint that includes the language and the translation table's latest change; only the active language is ever downloaded. Then `locale` in user metadata and the bundled lesson overlays.
 
 WP4 waits on two answers from you: the D4 wording (open questions) and how to see the paywall with real prices. After WP7: WP3 (error classification) and the remaining WP8 tooling.
 

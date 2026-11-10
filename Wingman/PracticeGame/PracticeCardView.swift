@@ -34,7 +34,7 @@ struct PracticeCardView: View {
                 // Left Content
                 VStack(alignment: .leading, spacing: 6) {
                     // Title
-                    Text(practice.title)
+                    Text(practice.displayTitle)
                         .font(.manropeMedium(size: 18))
                         .foregroundColor(Color.wingmanBlack.opacity(practice.isLocked ? 0.3 : 1.0))
                         .lineLimit(2, whenTranslated: nil)
@@ -55,7 +55,7 @@ struct PracticeCardView: View {
                     }
 
                     // Summary
-                    Text(practice.summary)
+                    Text(practice.displaySummary)
                         .font(.manropeMedium(size: 14))
                         .foregroundColor(Color.wingmanBlack.opacity(practice.isLocked ? 0.3 : 1.0))
                         .lineLimit(3, whenTranslated: nil)
