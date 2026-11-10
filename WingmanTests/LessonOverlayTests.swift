@@ -211,12 +211,21 @@ final class LessonOverlayTests: XCTestCase {
 
     // MARK: - The app's own lessons
 
-    /// The app ships no overlay files in Release A.
-    func testTheAppBundleShipsNoOverlays() {
+    /// Overlay files ship only for the languages the app ships (German from
+    /// Release B), and every bundled German file actually loads.
+    func testTheAppBundleShipsOverlaysOnlyForShippedLanguages() {
         for index in 1...25 {
-            for language in ["de", "sv", "fr", "es", "nl"] {
+            for language in ["sv", "fr", "es", "nl"] {
                 XCTAssertNil(LessonOverlay.load(courseId: "course_\(index)", language: language))
             }
+        }
+        let germanFiles = (Bundle.main.urls(forResourcesWithExtension: "json", subdirectory: nil) ?? [])
+            .map(\.lastPathComponent)
+            .filter { $0.hasPrefix("lesson_overlay_") && $0.hasSuffix("_de.json") }
+        XCTAssertFalse(germanFiles.isEmpty, "No German lesson overlay is bundled")
+        for file in germanFiles {
+            let courseId = String(file.dropFirst("lesson_overlay_".count).dropLast("_de.json".count))
+            XCTAssertNotNil(LessonOverlay.load(courseId: courseId, language: "de"), "\(file) does not load")
         }
     }
 
