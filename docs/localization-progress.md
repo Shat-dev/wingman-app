@@ -14,7 +14,7 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP4 Paywall prices and disclosure | In progress (slices 25–28) | Done: weekly price formatted by the product, plan-row sentences, trial badge from StoreKit, one-time-offer sentences, button and under-button lines in the catalog, disclosure checklist. plan rows and ticks checked (slice 29, no layout change needed). **Waiting on you: the D4 sentence's wording** (see open questions); nothing else is left in WP4 that I can do. Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
 | WP5 String Catalog and extraction | **Done except what WP4 owns** (slices 4–17) | `Localizable` 409 strings, `Content` 174. Left on purpose: paywall price and disclosure strings (WP4). A translated display title for lessons and scenarios comes with WP7 |
 | WP6 Layout and legal links | In progress (slices 17–21) | Done: sign-in legal line, paywall and offer footer links, line caps, fixed-height buttons. **WP6 sweep spent** (slice 21): English unchanged on all 17 baseline screens. Pseudo-language run done (slice 22); its overflow findings fixed (slice 23). Image check done (slice 24): one image contains a word. Paywall ticks and plan rows checked in slice 29. **Done** apart from what could not be seen in the running app |
-| WP7 Content translation plumbing | Not started | Migration files only; nothing applied to the live database |
+| WP7 Content translation plumbing | In progress (slice 30) | Migration file written, **not applied**. Still to do: client overlay by ID, locale-aware question cache, `locale` in user metadata, lesson overlays, display titles |
 | WP8 Tooling and tests | In progress (**WP8 sweep spent**, slice 22) | Done: unit and UI test targets (221 unit tests, 5 of them pseudo-language probes that skip in a normal run), whole-screen renders in a test window for before/after checks without a sweep, onboarding sweep (now through the walkthrough and the four tabs, with a double-length pseudo-language mode), sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, performance comparison, analytics parity recorder (section 9 of the plan) |
 
 ## Slices
@@ -731,9 +731,24 @@ Tested with planted cases: a 50-character German tick is reported; a tick remove
 - The plan rows inside the real paywall with real products. The render draws the row alone, with no limit on its height; in the paywall a taller row takes space from the scrolling area above it.
 - Whether 36 characters is enough for German. It is a limit for one line on a 375 pt phone; a translator may need to shorten a tick, or you may accept that the last one scrolls. The validator will say which ticks are over.
 
+### Slice 30 — WP7 part 1: translation tables as a migration file (2026-11-10)
+
+`supabase/migrations/20261110000000_content_translations.sql`, **not applied** and not executed anywhere. Four tables keyed by the English row's ID plus a locale (`question_translations`, `scenario_translations`, `scenario_screen_translations`, `screen_option_translations`), additive only: no existing table, function, policy or ID changes, and no RPC changes.
+
+- Text columns are nullable (NULL = show the English) and may not be blank.
+- A trigger rejects translated answer options whose count differs from the English ones, because the correct answer is an index into that list.
+- Read access mirrors the base tables (read from the live policies today, read-only): questions for signed-in users only, scenario content for everyone, scenario translations only for published scenarios. No write policy; grants cut back to SELECT.
+- The file ends with the checks to run after applying and a rollback.
+
+**Checked without a database:** parsed with the PostgreSQL 17 grammar (pglast), including both function bodies, and every statement confirmed to create or alter only the four new tables. There is no local Postgres or Docker on this Mac, so it has **not been run**; it needs a Supabase branch or local stack first.
+
+**No app code changed; the unit tests were not re-run for this slice** (last run: 221, all passing, slice 29).
+
+**Stopped here because the usage limit was reached.**
+
 ## Next
 
-WP7 (content translation plumbing), first slice: translation tables as migration files under `supabase/migrations` (not applied): `question_translations`, `scenario_translations`, `scenario_screen_translations`, `screen_option_translations`, each keyed by the English row's ID plus a locale, additive only (rule R6), with read policies matching the base tables. Then the client: fetch the overlay for the active language and apply it by ID, with English as the fallback; a locale-aware question cache; `locale` in user metadata; bundled lesson overlays; display titles for lessons and scenarios.
+WP7 part 2, the client: when the app language is not English, fetch translation rows for the IDs just received and overlay them by ID with per-field English fallback (questions, scenarios, screens, options), refusing translated options whose count differs. English makes no extra request. Then the locale-aware question cache, `locale` in user metadata, bundled lesson overlays and display titles.
 
 WP4 waits on two answers from you: the D4 wording (open questions) and how to see the paywall with real prices. After WP7: WP3 (error classification) and the remaining WP8 tooling.
 
