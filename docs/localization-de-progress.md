@@ -7,7 +7,7 @@ Branch `localization-release-b`. Rules and glossary: [localization-de-brief.md](
 | Part | State |
 |---|---|
 | UI catalogs (G2) | 574 of 574 strings drafted (2026-11-10) |
-| Lesson overlays (G3) | 18 of 25 courses (1,092 of 1,531 items): 1, 2, 3, 4, 6, 7, 8, 9, 12, 13, 14, 15, 17, 18, 19, 22, 23, 24 |
+| Lesson overlays (G3) | 19 of 25 courses (1,155 of 1,531 items): 1, 2, 3, 4, 6, 7, 8, 9, 12, 13, 14, 15, 17, 18, 19, 20, 22, 23, 24 |
 | Database content (G4) | Not started |
 | German sweep (G7) | Onboarding and tabs on SE, 2026-11-11: no clipping. Lessons not yet seen in German |
 
@@ -34,6 +34,7 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **2026-11-11. Course 4, Inner Stability** (4 lessons, 74 items, 1,572 English words). The check passes. For the reviewer: "approval-seeking" became *Anerkennung suchen*; "outcome independence" became *unabhängig vom Ergebnis*, consistent with course 17; "highlight reel vs behind-the-scenes" became *Highlights vs. Blick hinter die Kulissen*; "scarcity mindset" became *Mangeldenken*.
 - **2026-11-11. Course 9, Reading & Responding** (3 lessons, 39 items, 855 English words). The check passes. For the reviewer: the three signal types became *offen / höflich / kühl*; "seeing someone" became *gerade jemanden daten*; the example close "Nice talking to you" became *Schön, dich kennengelernt zu haben*.
 - **2026-11-11. Course 15, Closing** (4 lessons, 62 items, 1,558 English words). The check passes. For the reviewer: "close / closing" has no neat German equivalent. It's rendered as *nach mehr fragen* (asking for more: a number, a next step), and the course title stays *Der Abschluss*. "Choice architecture" became *Entscheidungsarchitektur*.
+- **2026-11-11. Course 20, Physical Presence** (4 lessons, 63 items, 1,450 English words). The check passes. Distances are metric: four feet became *gut ein Meter*, two to four feet *60 Zentimeter bis ein Meter*, under two feet *unter 60 Zentimeter*. The English typo in `content_20_3_4_2` ("Now there are more physically mirrored") is rendered by meaning: *auf Augenhöhe und spiegeln einander*. "Chameleon effect" became *Chamäleon-Effekt*.
 
 ## Questions for Arthur
 
@@ -41,3 +42,5 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **English source error, lesson 12_3 ("Maintain Momentum").** Its summary reads "Learn why inaction guarantees regret while action always creates possibility", a copy of lesson 6_1's summary that doesn't match the lesson. The German follows the English for now. Suggested fix in both languages: "Learn to keep a conversation balanced: neither silence nor monologue" / *Lerne, ein Gespräch im Gleichgewicht zu halten – ohne Schweigen und ohne Monolog.* Fixing the English is a content change for you to make.
 - **English source duplicate, lesson 13_1.** `content_13_1_5_2` ends with "Your job is to listen for all of that, not just the content." and `content_13_1_5_3` is that same sentence again, so the reader sees it twice in a row. The German repeats it for parity. Suggest deleting the last sentence of 13_1_5_2 in English, then in German.
 - **Lesson 15_4, "Assume she is interested".** The English frames her saying yes as "compliance" and "the path of least resistance", and says a question "can talk her out of what her emotional mind already decided". The German follows the meaning but softens "compliance" to *zustimmen*. The lesson only works after the signal-reading in 15_1 and course 9, and as written it can read as pressuring her past her own hesitation. Worth one look in both languages, alongside the respect lesson (17_3).
+- **Lesson 20_4, "When and How to Use Touch".** The German is faithful, but two things are worth a decision in both languages. (1) "keep a hand on the lower back for guidance" is noticeably more intimate than an arm or shoulder tap. (2) Unlike the respect lesson (17_3: "never touch without clear signs she's comfortable, and stop immediately if she pulls away"), this lesson never says to stop if she pulls back. One sentence would close that gap, e.g. *Wenn sie zurückweicht oder sich verspannt, hör sofort auf.* Not added, since content changes are yours to make.
+- **English typo, `content_20_3_4_2`**: "Now there are more physically mirrored" should probably read "Now they are more physically mirrored".
