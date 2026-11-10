@@ -13,9 +13,9 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP3 Error classification | Not started | Plan wants a few days of production logging first; cannot be done inside this loop |
 | WP4 Paywall prices and disclosure | Not started | Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
 | WP5 String Catalog and extraction | **Done except what WP4 owns** (slices 4–17) | `Localizable` 386 strings, `Content` 174. Left on purpose: paywall price and disclosure strings (WP4). A translated display title for lessons and scenarios comes with WP7 |
-| WP6 Layout and legal links | In progress (slices 17–21) | Done: sign-in legal line, paywall and offer footer links, line caps, fixed-height buttons. **WP6 sweep spent** (slice 21): English unchanged on all 17 baseline screens. Pseudo-language run done (slice 22): five findings to fix. Still to do: those fixes, paywall ticks and plan rows (with WP4), image check |
+| WP6 Layout and legal links | In progress (slices 17–21) | Done: sign-in legal line, paywall and offer footer links, line caps, fixed-height buttons. **WP6 sweep spent** (slice 21): English unchanged on all 17 baseline screens. Pseudo-language run done (slice 22); its overflow findings fixed (slice 23). Still to do: paywall ticks and plan rows (with WP4, includes finding 5), image check |
 | WP7 Content translation plumbing | Not started | Migration files only; nothing applied to the live database |
-| WP8 Tooling and tests | In progress (**WP8 sweep spent**, slice 22) | Done: unit and UI test targets (179 unit tests, 5 of them pseudo-language probes that skip in a normal run), onboarding sweep (now through the walkthrough and the four tabs, with a double-length pseudo-language mode), sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, performance comparison, analytics parity recorder (section 9 of the plan) |
+| WP8 Tooling and tests | In progress (**WP8 sweep spent**, slice 22) | Done: unit and UI test targets (189 unit tests, 5 of them pseudo-language probes that skip in a normal run), whole-screen renders in a test window for before/after checks without a sweep, onboarding sweep (now through the walkthrough and the four tabs, with a double-length pseudo-language mode), sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, performance comparison, analytics parity recorder (section 9 of the plan) |
 
 ## Slices
 
@@ -540,13 +540,49 @@ Double length is a deliberately harsh test: German runs about 30% longer than En
 - The pseudo-language run covered the path the sweep walks. Lessons, quizzes, scenarios in play, the approach sheet, settings and the one-time offer were not opened.
 - Both sweep allowances that were open are now spent (WP6: English, slice 21; WP8: pseudo-language, this slice). The fixes for findings 1–4 will be checked by rendering each screen in a test window at SE size with doubled text, not by another run. A final in-app confirmation needs one more sweep, which is yours to allow.
 
+### Slice 23 — WP6 part 5: screens that overflowed with long text (2026-11-10)
+
+Fixes for the findings of slice 22, for translated apps only.
+
+| Finding | Outcome |
+|---|---|
+| 1. Statistic screens | **Fixed.** A translated app keeps the original layout whenever its text fits. When it does not, the heading, illustration and fact scroll, and "Tap to continue" stays pinned at the bottom. The right half of the screen still moves on and the left half still does nothing |
+| 2. Growth projection | **Fixed.** Chart, headline and bullets scroll as one block when too tall; Continue stays on screen |
+| 3. Social proof | **Not a bug.** That screen already scrolls; the third testimonial was simply below the fold |
+| 4. Commitment pact | **Fixed in code, not rendered.** The line under the logo was cut because the screen ran out of height. The pact now scrolls when too tall. Drawing this screen in a test would send its "pact viewed" analytics event, so it was not drawn |
+| 5. Paywall third tick | Open; goes with the paywall rows in WP4 |
+
+**How.** New helper `scrollsWhenTooTallIfTranslated()`: English gets the view untouched; a translated app gets it as it is when it fits and in a scroll view when it does not. The statistic screen needed more care, because its two invisible tap zones would have swallowed a scroll: its scrolling variant reads the tap alongside scrolling instead.
+
+**A wrong first version, caught by the renders.** "Does it fit" is decided from each piece's ideal size. My first measurement was more optimistic than the layout the screen really settles into, so one statistic screen kept the fixed layout and its fact ran into "Tap to continue". The measurement now counts the gaps at their full height and the illustration at its minimum, which is what the stack actually does.
+
+**New test tooling: whole-screen renders.** `OnboardingScreenRenderTests` draws real screens in a test window at iPhone SE and 17 Pro sizes, with no sweep and no production user. It gives a true before/after check: the English renders were exported from a run on the unchanged code, confirmed repeatable (two runs, identical), and compared with a run after the change.
+
+**Tests.** 10 new (189 total: 184 pass, 5 probes skipped).
+
+- English, before vs after: all 10 renders (4 statistic screens and the growth projection, at both sizes) pixel-identical.
+- Translated app with text that fits: the 8 statistic renders are byte-identical to English.
+- Translated app with doubled text at SE size: all 4 statistic screens start at the top and keep "Tap to continue" clear; the growth projection keeps its Continue button.
+- The original layout with doubled text loses its hint (the problem, kept on record).
+- The helper: untouched in English, untouched when it fits, scrolls from the top when too tall.
+
+**Behaviour for English users:** unchanged, by the before/after renders. No string changed.
+
+**Not verified**
+
+- None of this has been seen in the running app; no sweep run is left. The renders draw the screen's content area without the onboarding top bar above it.
+- The commitment pact fix (see finding 4).
+- Scrolling by hand and tapping the right half of a scrolling statistic screen. The render shows the layout, not the gesture.
+- Residual: on the growth chart, a label that wraps to four lines pokes out of the top of the chart and is clipped. Seen only with doubled text; "Using Wingman every day" would need to roughly double in length.
+- When a statistic screen scrolls, nothing tells the user there is more below the illustration.
+
 ## Next
 
-Fix findings 1–4 from slice 22 for translated apps only: statistic screens, growth projection and social proof scroll when their content does not fit (as the question screens already do); the commitment hint may wrap. English must stay pixel-identical on the 17 baseline screens, checked by rendering in tests since no sweep run is left.
+WP6 item 8, the image check: look at the 25 course thumbnails, the statistic and onboarding illustrations and the remote scenario images for words baked into the artwork. Read-only; produces a list.
 
-After that, the WP6 leftovers: paywall ticks and plan rows (plan items 3–4 and finding 5, done together with WP4 since both touch the same paywall rows) and the image check (item 8).
+Then WP4 (paywall prices and disclosure), which also takes WP6 items 3–4 and finding 5 (ticks and plan rows), since they are the same paywall rows. WP4 ends on the priced-paywall question that only you can answer (one Release run, or a dev-tag launch flag).
 
-After WP6: WP4 (paywall prices and disclosure), WP7 (content plumbing), WP3 (error classification), remaining WP8 tooling.
+After WP4: WP7 (content plumbing), WP3 (error classification), remaining WP8 tooling.
 
 ## Open questions for Arthur
 

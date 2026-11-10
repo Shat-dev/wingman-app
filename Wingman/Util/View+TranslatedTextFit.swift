@@ -22,6 +22,10 @@
 //  a minimum for a translated app, so a label that needs a second line makes
 //  its button taller instead of being clipped.
 //
+//  And whole screens: `scrollsWhenTooTallIfTranslated()` leaves a screen that
+//  English fits exactly as it is, and lets it scroll in a translated app when
+//  longer text no longer fits.
+//
 
 import SwiftUI
 
@@ -78,6 +82,32 @@ extension View {
                 .padding(.vertical, TranslatedLabel.verticalPadding)
                 .padding(.horizontal, TranslatedLabel.horizontalPadding)
                 .frame(minHeight: height)
+        }
+    }
+}
+
+extension View {
+
+    /// For a block of content that English fits on screen without scrolling.
+    ///
+    /// English: the view itself, untouched. In a translated app the view is
+    /// shown as it is whenever it fits the height it is given; when longer
+    /// text makes it too tall, it is put in a scroll view instead of being
+    /// squeezed or pushed off the screen.
+    @ViewBuilder
+    func scrollsWhenTooTallIfTranslated(
+        usesSourceLanguageLayout: Bool = L10n.usesSourceLanguageLayout
+    ) -> some View {
+        if usesSourceLanguageLayout {
+            self
+        } else {
+            ViewThatFits(in: .vertical) {
+                self
+                ScrollView {
+                    self
+                }
+                .scrollBounceBehavior(.basedOnSize)
+            }
         }
     }
 }

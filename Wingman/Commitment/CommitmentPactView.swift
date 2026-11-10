@@ -104,6 +104,9 @@ struct CommitmentPactView: View {
             }
             .padding(.bottom, 64)
         }
+        // English fits. A longer translated pact used to squeeze the line
+        // under the logo down to one cut-off line; now the screen scrolls.
+        .scrollsWhenTooTallIfTranslated()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.white.ignoresSafeArea())
         .navigationBarBackButtonHidden(true)

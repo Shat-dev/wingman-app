@@ -69,44 +69,17 @@ struct GrowthProjectionScreen: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            GrowthChartView(
-                positiveLabel: content.positiveLabel,
-                negativeLabel: content.negativeLabel
-            )
-
-            // `maxHeight` rather than an exact height, so these two gaps
-            // collapse before the chart above them has to shrink. A Spacer
-            // has no intrinsic size, so each still takes its full value
-            // wherever there is room. See the note on `GrowthChartView`'s
-            // frame for why anything here has to be compressible at all.
-            Spacer().frame(maxHeight: UIScreen.isSmallPhone ? 16 : 28)
-
-            Text(content.headline)
-                .font(.manropeSemiBold(size: UIScreen.isSmallPhone ? 21 : 24))
-                .foregroundColor(.wingmanBlack)
-                .lineSpacing(3)
-                .multilineTextAlignment(.leading)
-                .fixedSize(horizontal: false, vertical: true)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .opacity(showCopy ? 1 : 0)
-                .offset(y: showCopy ? 0 : 8)
-
-            Spacer().frame(maxHeight: UIScreen.isSmallPhone ? 16 : 24)
-
-            VStack(alignment: .leading, spacing: 18) {
-                ForEach(content.bullets) { bullet in
-                    bulletRow(bullet)
+            // English: the chart, headline and bullets sit directly in this
+            // stack, as they always have. In a translated app they are one
+            // block that scrolls when longer text makes it too tall, so the
+            // chart is never pushed off the top and Continue stays on screen.
+            if L10n.usesSourceLanguageLayout {
+                chartAndCopy
+            } else {
+                VStack(alignment: .leading, spacing: 0) {
+                    chartAndCopy
                 }
-            }
-
-            if let footnote = content.footnote {
-                Spacer().frame(height: 20)
-                Text(footnote)
-                    .font(.manropeRegular(size: 11))
-                    .foregroundColor(.gray.opacity(0.8))
-                    .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .frame(maxWidth: .infinity)
+                .scrollsWhenTooTallIfTranslated()
             }
 
             Spacer(minLength: 24)
@@ -132,6 +105,59 @@ struct GrowthProjectionScreen: View {
             withAnimation(.easeOut(duration: 0.45).delay(0.55)) {
                 showCopy = true
             }
+        }
+    }
+
+    /// Nil for English: the gaps stay the plain `.frame(maxHeight:)` they
+    /// have always been. A translated app measures whether this block fits
+    /// from ideal sizes, so there each gap counts at its full height;
+    /// otherwise a block that only fits with its gaps collapsed would be
+    /// kept unscrolled and run into the Continue button.
+    private func gapIdealHeight(_ small: CGFloat, _ regular: CGFloat) -> CGFloat? {
+        L10n.usesSourceLanguageLayout ? nil : (UIScreen.isSmallPhone ? small : regular)
+    }
+
+    /// Everything above the Continue button.
+    @ViewBuilder
+    private var chartAndCopy: some View {
+        GrowthChartView(
+            positiveLabel: content.positiveLabel,
+            negativeLabel: content.negativeLabel
+        )
+
+        // `maxHeight` rather than an exact height, so these two gaps
+        // collapse before the chart above them has to shrink. A Spacer
+        // has no intrinsic size, so each still takes its full value
+        // wherever there is room. See the note on `GrowthChartView`'s
+        // frame for why anything here has to be compressible at all.
+        Spacer().frame(idealHeight: gapIdealHeight(16, 28), maxHeight: UIScreen.isSmallPhone ? 16 : 28)
+
+        Text(content.headline)
+            .font(.manropeSemiBold(size: UIScreen.isSmallPhone ? 21 : 24))
+            .foregroundColor(.wingmanBlack)
+            .lineSpacing(3)
+            .multilineTextAlignment(.leading)
+            .fixedSize(horizontal: false, vertical: true)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .opacity(showCopy ? 1 : 0)
+            .offset(y: showCopy ? 0 : 8)
+
+        Spacer().frame(idealHeight: gapIdealHeight(16, 24), maxHeight: UIScreen.isSmallPhone ? 16 : 24)
+
+        VStack(alignment: .leading, spacing: 18) {
+            ForEach(content.bullets) { bullet in
+                bulletRow(bullet)
+            }
+        }
+
+        if let footnote = content.footnote {
+            Spacer().frame(height: 20)
+            Text(footnote)
+                .font(.manropeRegular(size: 11))
+                .foregroundColor(.gray.opacity(0.8))
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: .infinity)
         }
     }
 
