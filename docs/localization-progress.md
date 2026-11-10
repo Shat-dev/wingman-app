@@ -12,7 +12,7 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP2 Analytics values pinned to English | **Done** (slices 2–3, `9a853f0`, `38f4330`) | New properties not yet observed arriving in PostHog |
 | WP3 Error classification | Not started | Plan wants a few days of production logging first; cannot be done inside this loop |
 | WP4 Paywall prices and disclosure | Not started | Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
-| WP5 String Catalog and extraction | **In progress** (slices 4–7) | Catalog holds 240 strings. Onboarding, commitment and non-disclosure paywall copy done. Still to move: notifications, home and quotes, courses catalog, approach logging, profile and settings, practice, auth and error messages, walkthrough, XP |
+| WP5 String Catalog and extraction | **In progress** (slices 4–8) | Catalog holds 257 strings. Onboarding, commitment, non-disclosure paywall copy and notifications done. Still to move: home and quotes, courses catalog, approach logging, profile and settings, practice, auth and error messages, walkthrough, XP |
 | WP6 Layout and legal links | Not started | |
 | WP7 Content translation plumbing | Not started | Migration files only; nothing applied to the live database |
 | WP8 Tooling and tests | Started | Unit and UI test targets exist; parity recorder, validator and fallback tests still to build |
@@ -172,9 +172,27 @@ This closes the gap noted in slice 2 (nothing proved the canonical accessors ign
 - No on-device run: the paywall with these strings needs loaded prices (a Release build), and the sweep for WP5 is used.
 - Purchase failure alerts were not triggered for real.
 
+### Slice 8 — WP5 part 5: notifications (2026-11-10, `041434f`)
+
+**What changed**
+
+- `MarketingNotifications`: the 16 reminder lines are now `LocalizedStringResource`s (`motivationResource`, `barrierResource`, `goalResource`). The existing `…Line` functions remain and return the same English strings.
+- The reminder body is handed to the system as the string's key (`deliveryLocalized`, using the notification-specific localized string API), so it is localized when the notification is **delivered**. These reminders are scheduled once, up to seven days ahead, and never rescheduled; resolving the text at scheduling time would have frozen the language. The key is the English sentence, so an untranslated reminder is delivered in English.
+- The title stays the literal brand name "Wingman" (`brandTitle`).
+- `NotificationManager`: the daily reading reminder's title and body come from `dailyReadingText(goalMinutes:)`, localized when scheduled. That is safe because this reminder is rescheduled on every launch, and iOS relaunches the app when its language changes. The body's key carries the count, so languages that need plural forms can have them.
+
+**Behaviour for English users:** unchanged. `PersonalisationCharacterizationTests` (untouched) still pins every reminder line.
+
+**Tests:** new `NotificationCopyTests` (8): daily reminder text; brand title; reminder keys are the English sentences; each line matches its resource; no reminder key contains a percent sign (they are passed as format keys with no arguments); the delivery-localized body reads as English today; bodies for a user with and without stored answers. 95 unit tests pass. Catalog: 257 entries.
+
+**Not verified**
+
+- No notification was actually delivered. Delivery-time localization is the documented behaviour of the API, but it has not been observed on a device, in English or in another language. Worth one manual check in Release B.
+- English keeps "Your goal is 1 minutes today." for a goal of 1, as before; no English plural variant was added, to keep English output identical. If a goal of 1 minute is selectable, that is a small existing grammar bug to fix on purpose later.
+
 ## Next
 
-WP5 part 5: notifications. `MarketingNotifications` (title and the 15 reminder lines) and `NotificationManager` (daily reading title and body, which has a count in it). Use the notification-specific localized string API so text resolves when the notification is delivered, and a plural-aware entry for the minutes. `PersonalisationCharacterizationTests` pins the reminder lines and must keep passing untouched. Then home and quotes.
+WP5 part 6: home and quotes. The 120 quotes in `Home/Quotes.swift` are data-like (picked by index and shown), so they go through `L10n.content` with `Content.xcstrings` entries; home screen strings held in the view model become `String(localized:)`. Then the course catalog (`CourseCategory.dummyCategories`: course titles, descriptions and summaries through `L10n.content` via display accessors, category names left untranslated per decision D2).
 
 ## Open questions for Arthur
 
