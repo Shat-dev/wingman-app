@@ -52,7 +52,7 @@ Release A is the English-only release: it reshapes the app so that languages can
 
 Neither comes from this branch; both are how the App Store products behave today.
 
-1. **No free trial was offered on the simulator,** on either plan: "Continue", "Billed immediately…", no badge. I cannot tell whether that is the simulator (no Apple ID) or the products. Production is mixed and thin: real users on yearly were shown the trial on 7–8 November and one of two on the 9th. Worth a glance at the paywall on a real phone; not a finding.
+1. **No free trial was offered,** on either plan: "Continue", "Billed immediately…", no badge. **Arthur confirmed on 2026-11-10 that he has removed the trial,** so this is the intended paywall. The trial badge code stays in place and shows nothing while the products have no free trial.
 2. **The one-time offer reads 40%** ($29.99 against $49.99), while its internal name is `one_time_50`. The app computes the percentage from the store's prices on purpose.
 
 **A mistake in that run:** it tapped the monthly and yearly plan rows to photograph each, which sent two `paywall_plan_selected` events tagged production. They come from a user with `$is_emulator = true`, so that filter removes them from the plan-mix numbers. The sweep no longer does this unless a switch is turned on.
@@ -62,8 +62,7 @@ Neither comes from this branch; both are how the App Store products behave today
 ## What I still need from you
 
 1. **A sandbox purchase on each product** (gate condition 4). The Release run looked at the paywall and bought nothing.
-2. **The trial badge with a real trial.** It could not be seen, because no trial was offered. If the trial is meant to exist, one look at the paywall once it is back settles it.
-3. **The migration dry run, when you want it.** Not needed to ship Release A; needed before a language is added.
+2. **The migration dry run, when you want it.** Not needed to ship Release A; needed before a language is added.
 
    ```bash
    supabase link --project-ref bnckmgnysfliiypvxxii
@@ -74,8 +73,8 @@ Neither comes from this branch; both are how the App Store products behave today
    ```
 
    A pass ends with a row reading `OK: …` and `translation_tables_left_behind = 0`. If the CLI will not take a multi-statement file, paste the file into the dashboard's SQL editor.
-4. **Production logging of session-refresh errors**, if you want the last English word-matching removed from the sign-out decision.
-5. **The 7-day soak** after shipping.
+3. **Production logging of session-refresh errors**, if you want the last English word-matching removed from the sign-out decision.
+4. **The 7-day soak** after shipping.
 
 **Smaller questions, none blocking**
 
@@ -86,7 +85,7 @@ Neither comes from this branch; both are how the App Store products behave today
 
 ## Not verified, in one place
 
-- The trial badge with a real product (no trial was offered on the Release run).
+- The trial badge with a real product. The trial has been removed, so it has nothing to show; its code is tested with stand-in values only.
 - The sign-in legal line and its links inside the running app.
 - Analytics events from screens the sweep does not reach (sign-in, purchase, lessons, scenarios in play). Those the sweep fires were seen arriving in PostHog.
 - The profile-language write, and whether a sign-in provider sets its own `locale` (the reason the field is `app_language`).
