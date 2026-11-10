@@ -524,7 +524,7 @@ struct SettingsSheet: View {
     
     private func getAppVersion() -> String {
         guard let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
-            return "Unknown"
+            return String(localized: "Unknown")
         }
         return version
     }
@@ -571,7 +571,7 @@ struct SettingsSheet: View {
             
             if hasEntitlement {
                 await MainActor.run {
-                    successMessage = "Purchases restored successfully!"
+                    successMessage = SettingsCopy.restoreSucceeded
                     showingSuccessAlert = true
                 }
                 log("✅ SettingsSheet: Purchases restored")
@@ -589,7 +589,7 @@ struct SettingsSheet: View {
                 await SubscriptionManager.shared.refreshSubscriptionStatus()
             } else {
                 await MainActor.run {
-                    errorMessage = "No active subscriptions found to restore"
+                    errorMessage = SettingsCopy.nothingToRestore
                     showingErrorAlert = true
                 }
                 log("⚠️ SettingsSheet: No purchases to restore")
@@ -605,7 +605,7 @@ struct SettingsSheet: View {
             }
         } catch {
             await MainActor.run {
-                errorMessage = "Failed to restore purchases. Please try again."
+                errorMessage = SettingsCopy.restoreFailed
                 showingErrorAlert = true
             }
             log("❌ SettingsSheet: Restore failed: \(error)")
@@ -704,7 +704,7 @@ struct SettingsSheet: View {
                     isDeleting = false
                     log("❌ Network error during deletion: \(message)")
                     // Show network error to user
-                    showDeletionError("Network error: Please check your connection and try again.")
+                    showDeletionError(SettingsCopy.deletionNetworkError)
                     // The edge function never ran, or its reply was lost, so
                     // the server-side half of this flow records nothing. This
                     // is the only trace such a deletion leaves.
@@ -718,19 +718,19 @@ struct SettingsSheet: View {
                     isDeleting = false
                     log("❌ Account deletion failed: \(message)")
                     // Show server error to user
-                    showDeletionError("Deletion failed: \(message)")
+                    showDeletionError(SettingsCopy.deletionFailed(serverMessage: message))
                 }
             } catch AccountDeletionError.invalidResponse {
                 await MainActor.run {
                     isDeleting = false
                     log("❌ Invalid response from server")
-                    showDeletionError("Server error: Please try again later.")
+                    showDeletionError(SettingsCopy.deletionServerError)
                 }
             } catch {
                 await MainActor.run {
                     isDeleting = false
                     log("❌ Unexpected error during account deletion: \(error.localizedDescription)")
-                    showDeletionError("An unexpected error occurred. Please try again.")
+                    showDeletionError(SettingsCopy.deletionUnexpectedError)
                     Analytics.captureError(error, context: "account_deletion")
                 }
             }

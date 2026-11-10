@@ -12,7 +12,7 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP2 Analytics values pinned to English | **Done** (slices 2–3, `9a853f0`, `38f4330`) | New properties not yet observed arriving in PostHog |
 | WP3 Error classification | Not started | Plan wants a few days of production logging first; cannot be done inside this loop |
 | WP4 Paywall prices and disclosure | Not started | Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
-| WP5 String Catalog and extraction | **In progress** (slices 4–11) | `Localizable` holds 321 strings, `Content` 174. Done: onboarding, commitment, non-disclosure paywall copy, notifications, home, quotes, course catalog, approach logging, profile header. Still to move: settings and edit profile, practice (scenarios), auth and error messages, walkthrough, XP and completion screen, daily practice and quiz, shared error screen |
+| WP5 String Catalog and extraction | **In progress** (slices 4–12) | `Localizable` holds 326 strings, `Content` 174. Done: onboarding, commitment, non-disclosure paywall copy, notifications, home, quotes, course catalog, approach logging, profile, settings. Still to move: practice (scenarios), auth screens and auth error messages, walkthrough, XP and completion screen, daily practice and quiz, remaining error wrappers |
 | WP6 Layout and legal links | Not started | |
 | WP7 Content translation plumbing | Not started | Migration files only; nothing applied to the live database |
 | WP8 Tooling and tests | Started | Unit and UI test targets exist; parity recorder, validator and fallback tests still to build |
@@ -252,11 +252,31 @@ This closes the gap noted in slice 2 (nothing proved the canonical accessors ign
 - The level line, tile labels, share text and guide sheet strings have no direct unit test.
 - "n days ago" has no plural variants in English (it never shows 1, which has its own string). Languages with more plural forms will need them added to that catalog entry in Release B.
 
+### Slice 12 — WP5 part 9: settings alerts (2026-11-10)
+
+**What changed**
+
+- New `Wingman/Profile/SettingsCopy.swift` holds the Settings screen's alert messages, which were inline literals assigned inside async handlers (not extractable, not testable): three restore-purchase messages and four account-deletion messages. `SettingsSheet` reads them from there. Also the "Unknown" version fallback.
+- `SettingsCopy.deletionFailed(serverMessage:)`: when the server refuses a deletion, English keeps showing "Deletion failed: " followed by the server's text, exactly as before. In a translated app the alert shows the app's own complete sentence instead, so the Edge Function's English never appears inside a translated alert (plan WP5 item 8, audit G-5).
+- `AccountDeletionError`'s descriptions were left as plain English on purpose: they go to logs and error tracking, never to the user.
+- `EditProfileSheet` and `DailyReadingGoalSheet` needed nothing: all their text was already direct SwiftUI literals in the catalog.
+
+**Behaviour for English users:** unchanged.
+
+**Tests:** new `SettingsCopyTests` (5). 119 unit tests pass. Catalog: 326 entries.
+
+**Apparently unused code, left alone:** `CommonComponents/ErrorViewScreen.swift` has no call sites, and `Resources/AppStrings.swift` and the Poppins styles in `Resources/App.swift` are referenced nowhere. `ErrorViewScreen`'s three strings ("Oops!", "Please try again!", "Try Again") are in the catalog because the compiler extracts them. Removing dead code was in the plan (WP5 item 10) but deleting files is not something to do unasked; see the open question below.
+
+**Not verified**
+
+- The Settings alerts were not triggered on a simulator. Restore and delete-account failures are hard to provoke on demand.
+
 ## Next
 
-WP5 part 9: settings, edit profile, daily reading goal sheet, and the shared error screen. Mostly direct SwiftUI literals already in the catalog; the work is the indirect ones (alert messages built in code, success and error strings in `SettingsSheet`, account deletion messages in `AccountDeletionModels` and `AuthManager`) and mapping the Edge Function's English error text to app-owned localized sentences (plan WP5 item 8). Then practice (scenarios) and XP.
+WP5 part 10: practice (scenarios) and XP. `PracticeView`, `PracticeDetailView`, `PracticeCardView` (including the manual "lesson"/"lessons" plural, audit D-1), `PracticeGame` scene labels ("Feedback", "Tap to retry", "Tap to continue"), `CompletionScreen` and `XPStore` breakdown labels ("Completed", "n correct", "All correct"), `XPLevel`. Scenario text itself comes from Supabase and belongs to WP7. Then auth screens and auth error messages, walkthrough, daily practice and quiz.
 
 ## Open questions for Arthur
 
 - **Dates for English users outside the US:** the approach list shows "Nov 3, 2026" to every English user, including Australian and British ones (your second and fourth largest markets), because the format is fixed. I kept that unchanged, since Release A must not change what English users see. Switching English to a locale-aware date would show "3 Nov 2026" in those regions. Say if you want that; it is a one-line change.
+- **Unused code:** `CommonComponents/ErrorViewScreen.swift`, `Resources/AppStrings.swift` and the Poppins font styles in `Resources/App.swift` appear to be unused. May I delete them? Otherwise the error screen's three strings stay in the catalog and get translated for nothing.
 - **Priced paywall baseline:** one Release-build run (one test user in production analytics), or add a launch flag that tags automated runs as dev? Needed before WP4 can be signed off.

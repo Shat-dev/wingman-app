@@ -125,6 +125,9 @@
     "An error occurred" : {
 
     },
+    "An unexpected error occurred. Please try again." : {
+
+    },
     "Analyzing your answers" : {
 
     },
@@ -303,6 +306,9 @@
 
     },
     "Delete my data" : {
+
+    },
+    "Deletion failed. Please try again later." : {
 
     },
     "Developing comfort by engaging in everyday exchanges without minimal stakes." : {
@@ -559,6 +565,9 @@
     "Name" : {
 
     },
+    "Network error: Please check your connection and try again." : {
+
+    },
     "Neutral" : {
 
     },
@@ -718,6 +727,9 @@
     "Select all that apply" : {
 
     },
+    "Server error: Please try again later." : {
+
+    },
     "Settings" : {
 
     },
@@ -854,6 +866,9 @@
 
     },
     "Turn “what if” into “hi.”" : {
+
+    },
+    "Unknown" : {
 
     },
     "Up Next" : {
