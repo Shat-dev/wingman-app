@@ -14,8 +14,8 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP4 Paywall prices and disclosure | In progress (slices 25–28) | Done: weekly price formatted by the product, plan-row sentences, trial badge from StoreKit, one-time-offer sentences, button and under-button lines in the catalog, disclosure checklist. plan rows and ticks checked (slice 29, no layout change needed). **Waiting on you: the D4 sentence's wording** (see open questions); nothing else is left in WP4 that I can do. Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
 | WP5 String Catalog and extraction | **Done except what WP4 owns** (slices 4–17) | `Localizable` 409 strings, `Content` 174. Left on purpose: paywall price and disclosure strings (WP4). A translated display title for lessons and scenarios comes with WP7 |
 | WP6 Layout and legal links | In progress (slices 17–21) | Done: sign-in legal line, paywall and offer footer links, line caps, fixed-height buttons. **WP6 sweep spent** (slice 21): English unchanged on all 17 baseline screens. Pseudo-language run done (slice 22); its overflow findings fixed (slice 23). Image check done (slice 24): one image contains a word. Paywall ticks and plan rows checked in slice 29. **Done** apart from what could not be seen in the running app |
-| WP7 Content translation plumbing | In progress (slice 30) | Migration file written, **not applied**. Still to do: client overlay by ID, locale-aware question cache, `locale` in user metadata, lesson overlays, display titles |
-| WP8 Tooling and tests | In progress (**WP8 sweep spent**, slice 22) | Done: unit and UI test targets (221 unit tests, 5 of them pseudo-language probes that skip in a normal run), whole-screen renders in a test window for before/after checks without a sweep, onboarding sweep (now through the walkthrough and the four tabs, with a double-length pseudo-language mode), sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, performance comparison, analytics parity recorder (section 9 of the plan) |
+| WP7 Content translation plumbing | In progress (slices 30–31) | Migration file written, **not applied**. Overlay rules built and tested, not yet wired into any fetch. Still to do: fetch translation rows and apply them, show `displayTitle` in the UI, locale-aware question cache, `locale` in user metadata, lesson overlays |
+| WP8 Tooling and tests | In progress (**WP8 sweep spent**, slice 22) | Done: unit and UI test targets (238 unit tests, 5 of them pseudo-language probes that skip in a normal run), whole-screen renders in a test window for before/after checks without a sweep, onboarding sweep (now through the walkthrough and the four tabs, with a double-length pseudo-language mode), sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, performance comparison, analytics parity recorder (section 9 of the plan) |
 
 ## Slices
 
@@ -744,11 +744,33 @@ Tested with planted cases: a 50-character German tick is reported; a tick remove
 
 **No app code changed; the unit tests were not re-run for this slice** (last run: 221, all passing, slice 29).
 
-**Stopped here because the usage limit was reached.**
+### Slice 31 — WP7 part 2: the overlay rules (2026-11-10)
+
+The logic that lays translated database content over the English rows, as pure functions with no network in them. **Nothing calls it yet**; the app's requests and screens are exactly as before.
+
+**New: `Wingman/Content/ContentTranslation.swift`.** Four row types matching the migration's tables, and `ContentOverlay`:
+
+1. No translation rows returns the English input unchanged.
+2. Fallback is per field: a row that translates the question but not the explanation shows the translated question and the English explanation. Blank text counts as missing.
+3. Translated answer options are used only when there are exactly as many as the English ones and none is blank, because the correct answer is an index into that list.
+4. Only text changes. IDs, answer indexes, `isCorrect`, next-screen and retry pointers and order are always copied from the English row.
+5. A scenario's English title stays in `Practice.title`, which is what analytics records; the translation goes into new fields read through `displayTitle` and `displaySummary`.
+
+**New: `L10n.contentLanguage`.** The language to ask the database for, as a lowercase tag ("de", "pt-br"), taken from the language the interface is actually running in. It is nil in English, which is how English will make no extra request.
+
+**Checked first:** no analytics event carries question, screen or option text (they send IDs), so replacing that text for display cannot change an analytics value. Scenario titles are sent, which is why rule 5 exists.
+
+**Tests.** 17 new in `ContentOverlayTests` (238 total: 233 pass, 5 probes skipped): parity with no translations for questions, lesson question rows, scenarios and scenes; per-field fallback; options of the wrong length ignored with the correct answers still pointing at the right entries; unknown IDs ignored; branching and scoring fields unchanged after an overlay; IDs matched whatever their letter case; rows decode from the tables' column names; language tags.
+
+**Behaviour for English users:** unchanged. Nothing uses the new code yet.
+
+**Not verified**
+
+- Against real translation rows: the tables do not exist (the migration is not applied).
 
 ## Next
 
-WP7 part 2, the client: when the app language is not English, fetch translation rows for the IDs just received and overlay them by ID with per-field English fallback (questions, scenarios, screens, options), refusing translated options whose count differs. English makes no extra request. Then the locale-aware question cache, `locale` in user metadata, bundled lesson overlays and display titles.
+WP7 part 3: wire it in. When `L10n.contentLanguage` is not nil, after each English fetch (daily questions, lesson questions, the scenario list, a scenario's screens) make one extra query for the translation rows of the IDs just received and apply `ContentOverlay`; a failed translation fetch must leave the English content in place. English must make exactly the requests it makes today. Show `displayTitle` / `displaySummary` where scenario titles are displayed. Then the locale-aware question cache, `locale` in user metadata and the bundled lesson overlays.
 
 WP4 waits on two answers from you: the D4 wording (open questions) and how to see the paywall with real prices. After WP7: WP3 (error classification) and the remaining WP8 tooling.
 

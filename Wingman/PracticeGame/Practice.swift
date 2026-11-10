@@ -37,6 +37,17 @@ struct Practice: Identifiable, nonisolated Codable, Hashable, Sendable {
     var isCompleted: Bool = false
     var currentScreenId: UUID? = nil
 
+    /// Translated title and summary, when the app runs in another language
+    /// and a translation exists. Never decoded from the scenario row and
+    /// never sent anywhere: `title` and `summary` stay English, and `title`
+    /// is what analytics records. See `ContentOverlay`.
+    var translatedTitle: String? = nil
+    var translatedSummary: String? = nil
+
+    /// What to show. English unless a translation was laid over.
+    var displayTitle: String { translatedTitle ?? title }
+    var displaySummary: String { translatedSummary ?? summary }
+
     // Convenience alias used by existing UI
     var imageUrl: String { coverImageUrl ?? "" }
 

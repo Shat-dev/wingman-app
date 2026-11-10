@@ -70,6 +70,33 @@ nonisolated enum L10n {
         return false
     }
 
+    /// The language to ask the database for translated content in, as a
+    /// lowercase language tag ("de", "pt-br"). Nil while the app runs in
+    /// English: English content is the base tables themselves, so there is
+    /// nothing to ask for and no extra request is made.
+    ///
+    /// It is the language the interface is actually running in (the bundle's
+    /// active localization), not the device's preferred language, so the
+    /// interface and the content can never disagree.
+    static var contentLanguage: String? {
+        if let override = contentLanguageOverrideForTesting { return override.value }
+        guard !isSourceLanguage else { return nil }
+        return languageTag(Bundle.main.preferredLocalizations.first)
+    }
+
+    /// "de" -> "de", "pt-BR" -> "pt-br", "zh_Hans" -> "zh-hans". Nil for nil,
+    /// empty, or the development language.
+    static func languageTag(_ localization: String?) -> String? {
+        guard let localization, !localization.isEmpty else { return nil }
+        let tag = localization.replacingOccurrences(of: "_", with: "-").lowercased()
+        let development = (Bundle.main.developmentLocalization ?? "en").lowercased()
+        return tag == development ? nil : tag
+    }
+
+    /// Tests set this to pin the content language. Always nil in the app.
+    struct ContentLanguageOverride: Sendable { let value: String? }
+    nonisolated(unsafe) static var contentLanguageOverrideForTesting: ContentLanguageOverride?
+
     /// Debug builds only: launching with `-l10nForceTranslatedLayout YES`
     /// shows the layouts built for translated apps while the text is still
     /// English, so they can be looked at before any translation exists.
