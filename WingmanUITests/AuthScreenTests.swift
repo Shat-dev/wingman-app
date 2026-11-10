@@ -43,7 +43,7 @@ final class AuthScreenTests: XCTestCase {
         Thread.sleep(forTimeInterval: 1.0)
 
         let attachment = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
-        attachment.name = "18-auth-login"
+        attachment.name = "auth-login-voluntary"
         attachment.lifetime = .keepAlways
         add(attachment)
 

@@ -25,14 +25,24 @@ Source: `OnboardingSweepTests.testOnboardingToPaywall`. Fixed answers: "Want mor
 
 Screens, in order: landing, six questions, four statistic interstitials, growth projection, loading, notification prompt, social proof, commitment pact, paywall.
 
+## Screenshots: past the paywall (added during WP6)
+
+`iphone-17-pro/18-…` to `26-…`, captured 2026-11-10 by the same sweep after it was extended: the five first-run walkthrough cards (each over a dimmed tab) and the four tabs as a new user who closed the paywall sees them.
+
+These were captured **after** the WP5 and WP6 changes, so they are a reference for later work, not proof that those screens are unchanged from build 37. They also contain content that changes between runs (the greeting, the quote of the day), so compare them by eye, not pixel for pixel. The one-time offer is not among them: it closes itself in a Debug build because no products load.
+
 ## Screenshot: voluntary sign-in
 
-`iphone-17-pro/18-auth-login.png`, added 2026-11-10 during WP6. Source: `AuthScreenTests.testVoluntaryLoginScreen` (landing → "Log in"). Captured after the WP5 changes, and pixel-identical below the status bar to a capture taken the same day before the WP6 change to the sign-in screen. Creates no guest user. This screen has no legal line; that line is only on the sign-in screens past the paywall.
+`iphone-17-pro/auth-login-voluntary.png`, added 2026-11-10 during WP6. Source: `AuthScreenTests.testVoluntaryLoginScreen` (landing → "Log in"). Captured after the WP5 changes, and pixel-identical below the status bar to a capture taken the same day before the WP6 change to the sign-in screen. Creates no guest user. This screen has no legal line; that line is only on the sign-in screens reached after a purchase or from the profile's account prompt.
+
+## Double-length pseudo-language run
+
+`OnboardingSweepTests.testOnboardingInDoubleLengthPseudoLanguage` walks the same path with every localized string doubled and the translated-app layouts switched on. It needs no translation to exist. Its screenshots are read for cut, clipped or overlapping text; nothing is compared. It creates a guest user like the English run, so run one method per run.
 
 ## How to re-run
 
 ```bash
-xcodebuild test -project Wingman.xcodeproj -scheme Wingman -destination 'platform=iOS Simulator,name=Wingman L10n 17 Pro' -skipMacroValidation -skipPackagePluginValidation -only-testing:WingmanUITests -resultBundlePath /tmp/wingman-sweep.xcresult
+xcodebuild test -project Wingman.xcodeproj -scheme Wingman -destination 'platform=iOS Simulator,name=Wingman L10n 17 Pro' -skipMacroValidation -skipPackagePluginValidation -only-testing:WingmanUITests/OnboardingSweepTests/testOnboardingToPaywall -resultBundlePath /tmp/wingman-sweep.xcresult
 ```
 
 ```bash

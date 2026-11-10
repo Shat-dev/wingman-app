@@ -13,9 +13,9 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP3 Error classification | Not started | Plan wants a few days of production logging first; cannot be done inside this loop |
 | WP4 Paywall prices and disclosure | Not started | Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
 | WP5 String Catalog and extraction | **Done except what WP4 owns** (slices 4–17) | `Localizable` 386 strings, `Content` 174. Left on purpose: paywall price and disclosure strings (WP4). A translated display title for lessons and scenarios comes with WP7 |
-| WP6 Layout and legal links | In progress (slices 17–20) | Done: sign-in legal line, paywall and offer footer links, line caps, fixed-height buttons. Still to do: paywall ticks and plan rows (with WP4), image check, sweep extended past the paywall, then the one WP6 sweep with a pseudo-language pass |
+| WP6 Layout and legal links | In progress (slices 17–21) | Done: sign-in legal line, paywall and offer footer links, line caps, fixed-height buttons. **WP6 sweep spent** (slice 21): English unchanged on all 17 baseline screens. Still to do: paywall ticks and plan rows (with WP4), image check, fixes from the pseudo-language run |
 | WP7 Content translation plumbing | Not started | Migration files only; nothing applied to the live database |
-| WP8 Tooling and tests | In progress | Done: unit and UI test targets (174 unit tests), onboarding sweep, sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, sweep beyond the paywall, performance comparison, analytics parity recorder (section 9 of the plan) |
+| WP8 Tooling and tests | In progress | Done: unit and UI test targets (174 unit tests), onboarding sweep (now through the walkthrough and the four tabs, with a double-length pseudo-language mode), sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, performance comparison, analytics parity recorder (section 9 of the plan) |
 
 ## Slices
 
@@ -479,13 +479,38 @@ Left alone: the onboarding "Next" button (sized by padding, already grows), the 
 - None of the 22 buttons has been looked at in the running app since the change; the shared modifier is tested, the call sites are a mechanical one-line replacement each. The landing "Get started" button and the paywall button are in the sweep.
 - A grown button pushes its neighbours. On screens without scrolling (paywall, one-time offer, completion) I have not checked where the extra height comes from. It only happens when a label needs a second line.
 
+### Slice 21 — WP8 tooling: sweep past the paywall, pseudo-language mode, and the WP6 sweep (2026-11-10)
+
+**Sweep extended.** `OnboardingSweepTests` now continues after the paywall: it closes the paywall, captures the one-time offer if it is shown, taps through the five walkthrough cards and then opens each of the four tabs. 26 screenshots in place of 17. Everything up to the paywall is still asserted; the part after it is best effort and never fails the run.
+
+**Pseudo-language mode.** New method `testOnboardingInDoubleLengthPseudoLanguage`: the same walk launched with `-NSDoubleLocalizedStrings YES` (the system doubles every localized string) and `-l10nForceTranslatedLayout YES` (the layouts from slices 17–20). No language has to exist. Element lookups now match the start of a label so they still work when the text is doubled. **Not run yet.**
+
+**The WP6 sweep (the one run for this work package).** English, iPhone 17 Pro throwaway simulator, clean install. One guest user created in production.
+
+| Screens | Result |
+|---|---|
+| 16 of the 17 baseline screens | Pixel-identical below the status bar |
+| 14 loading screen under the notification prompt | 5.6% of pixels differ. Same layout; the progress bars behind the system prompt were caught at a later point of their animation, and the prompt's glass blur spreads that over its whole area |
+| 18–26 (new) | Walkthrough cards over all four tabs, then Home, Courses, Scenarios, Profile. Looked at by eye: nothing cut, overlapping or misplaced |
+
+So slices 17–20 changed nothing visible in English on the path from landing to paywall, including the landing "Get started" and "Log in" buttons, the commitment pact and the paywall footer links. The nine new screens are saved in `docs/localization-baseline/iphone-17-pro/` as a reference for later work (they were captured after the WP6 changes, so they are not a before/after proof for those screens). The voluntary sign-in capture was renamed `auth-login-voluntary.png` to free the number 18.
+
+**Finding: where the legal line actually appears.** As a guest, closing the paywall leads to the one-time offer and then straight into the app. The sign-in screen with the legal line is shown only (a) after a purchase, (b) from the profile's account prompt once the user has logged approaches, or (c) in the fallback path where no guest session could be created. None can be reached by the sweep without a purchase or without writing approach rows to production, so that line stays verified by its unit-test renders only.
+
+**Behaviour for English users:** unchanged. No app source changed in this slice; 174 unit tests pass.
+
+**Not verified**
+
+- The pseudo-language method has compiled but has never run.
+- The one-time offer has still never been captured (Debug builds have no products).
+- The legal line and its links inside the running app (see the finding above).
+- iPhone SE: the English sweep was run on the 17 Pro only.
+
 ## Next
 
-WP8 tooling next, because it is what lets WP6 be checked: extend `OnboardingSweepTests` past the paywall (close the paywall, capture the screens behind it, including the required sign-in screen in both legal-line layouts) and add a way to run it with the translated layouts forced on (`-l10nForceTranslatedLayout YES`) plus a pseudo-language. Writing and compiling the test does not run the sweep.
+The double-length pseudo-language run, on the "Wingman L10n SE" simulator (the plan's exit test for WP6: no clipped, truncated or overlapping text on an SE). This is a second sweep run and a second guest user. I am counting it as WP8's one run, since the pseudo-language sweep is a WP8 deliverable and WP8 has not used a run; WP6's run was the English one in slice 21. Then fix what it shows.
 
-Then the WP6 leftovers: paywall ticks and plan rows (plan items 3–4, done together with WP4 since both touch the same paywall rows) and the image check (item 8).
-
-Before the WP6 sweep is spent: extend `OnboardingSweepTests` past the paywall (close the paywall, capture the required sign-in screen in both legal-line layouts, tap both links), so one run covers everything WP6 changed.
+After that, the WP6 leftovers: paywall ticks and plan rows (plan items 3–4, done together with WP4 since both touch the same paywall rows) and the image check (item 8).
 
 After WP6: WP4 (paywall prices and disclosure), WP7 (content plumbing), WP3 (error classification), remaining WP8 tooling.
 
