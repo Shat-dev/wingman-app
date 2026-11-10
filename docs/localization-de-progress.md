@@ -7,7 +7,7 @@ Branch `localization-release-b`. Rules and glossary: [localization-de-brief.md](
 | Part | State |
 |---|---|
 | UI catalogs (G2) | 574 of 574 strings drafted (2026-11-10) |
-| Lesson overlays (G3) | 23 of 25 courses (1,382 of 1,531 items): 1–10, 12–20, 22–25 (left: 11, 21) |
+| Lesson overlays (G3) | 24 of 25 courses (1,433 of 1,531 items): all but 11 |
 | Database content (G4) | Not started |
 | German sweep (G7) | Onboarding and tabs on SE, 2026-11-11: no clipping. Lessons not yet seen in German |
 
@@ -39,6 +39,7 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **2026-11-11. Course 5, Non-negotiables** (4 lessons, 54 items, 1,302 English words). The check passes. The course covers fitness, grooming, hygiene and style, so its German title in `Content.xcstrings` is changed from the guess *Nicht verhandelbar* to ***Das Pflichtprogramm***. "Cologne" became *Parfum*; "underdressed" stays as is (common in German).
 - **2026-11-11. Course 10, Situational Specific Approaches** (3 lessons, 50 items, 1,249 English words). The check passes. For the reviewer: "venue" became *Location*, the usual German word for a bar or club; "logistics" became *Planung*; "Daytime/Nighttime Approaches" became *Ansprechen am Tag / am Abend*. The bad example in 10_1_3_1 (a tap on the shoulder from behind) is kept as the negative example it is.
 - **2026-11-11. Course 16, Advanced Conversation Skills** (3 lessons, 51 items, 1,133 English words). The check passes. For the reviewer: "energy drop" became *Energieabfall*; "emotional anchoring" became *emotionales Verankern*; "debt and credentials" became *Studienkredite und Abschlüsse* (student debt is less of a German theme, so consider *Kosten*).
+- **2026-11-11. Course 21, Advanced Flirting Skills** (3 lessons, 51 items, 1,183 English words). The check passes. For the reviewer: "Disqualification Techniques" is a pickup-artist term with no neutral German equivalent; the title became *Nicht gleich beeindruckt sein* (not being instantly impressed), which says what the lesson teaches. "Callbacks & Inside Jokes" became *Rückbezüge und Insider*; "sexual tension" became *knisternde / sexuelle Spannung*.
 
 ## Questions for Arthur
 
@@ -50,3 +51,5 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **English typo, `content_20_3_4_2`**: "Now there are more physically mirrored" should probably read "Now they are more physically mirrored".
 - **Lesson 25_3, sticking point "escalation".** `content_25_3_7_2` tells the reader to bring in "physical escalation earlier than feels comfortable". The German is faithful, but the sentence reads as *his* comfort, and it sits badly with the respect lesson (17_3) and with lesson 20_4 having no stop rule. Suggest adding in both languages: "…earlier than feels comfortable for you, and only while she is clearly reciprocating."
 - **English typo, `content_25_3_6_2`**: "flat and friendless" is probably "flat and friendly".
+- **Lesson 21_1, "Disqualification Techniques".** The tone sits apart from the rest of the app. "The goal is a dynamic where she's working for your approval" and the example "Buy me a drink." – "I don't know if you've earned it yet." read as classic pickup tactics. They also contradict course 4 ("Nothing to Prove": don't make anyone the judge of your worth). The German is faithful. Consider rewording it in both languages around playful teasing between equals, which is what the Instagram example actually shows.
+- **Lesson 21_2, touch.** "Let your hand linger when you touch her arm" and standing "close enough that she's aware of your physical presence" carry no reciprocity cue, the same gap as 20_4 and 25_3. If you add a stop-or-reciprocity sentence to 20_4, add the same here.
