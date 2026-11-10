@@ -2,13 +2,30 @@
 
 Branch `localization-release-b`. Rules and glossary: [localization-de-brief.md](localization-de-brief.md). Plan: section 7 of [localization-implementation-plan.md](localization-implementation-plan.md). Everything here is a machine draft (Claude), marked "needs review"; nothing is applied to the live database.
 
+## Where it stands (loop stopped 2026-11-11, about 02:20)
+
+**Done:** the whole interface (574 catalog strings) and all 25 lesson courses (1,531 items, about 34,000 English words) are drafted in German, each passing its checker, with 298 unit tests green and every German lesson file loading in the app. All of it is a machine draft marked "needs review".
+
+**Blocked:** quiz questions and scenarios (G4, about 42,000 words). The Supabase connector reaches **Clera-App** (`rdgtvavltiqmwfzcadcv`), not Wingman-App (`bnckmgnysfliiypvxxii`), so the English rows and their IDs could not be read. Nothing was written to any database. The repo's `Wingman/Lesson/lesson_questions_seed.json` holds only the end-of-lesson questions as a cold-start copy, and may be stale, so it was not used to guess live IDs.
+
+**What needs Arthur, in order:**
+1. **Point the Supabase connector at Wingman-App**, then restart the loop with the same prompt. It will pick up at G4.
+2. **Decide on the content flags below** (touch and escalation wording in 20_4, 21_2 and 25_3; the tone of 21_1, 11_5 and 15_4) and fix the English typos. The same edits then go into the German.
+3. **Native-speaker review** of everything, starting with the paywall, the sign-in legal line and onboarding (see the brief). Then re-import with `--reviewed`.
+4. **Apply the content-translation migration**, on a branch first (the checks are at the bottom of the migration file), and then the German rows once G4 exists.
+5. **App Store listing in German** (G9): name, subtitle, keywords, description, screenshots, subscription display names.
+6. **German auth email templates** (G10) in the Supabase dashboard.
+7. **A German screenshot sweep that also opens lessons** (one prod guest user per run), on the SE.
+
+Until 1 and 4 are done, a German phone shows German interface and lessons, but English quizzes and scenarios. Don't ship this branch in that state.
+
 ## Summary
 
 | Part | State |
 |---|---|
 | UI catalogs (G2) | 574 of 574 strings drafted (2026-11-10) |
 | Lesson overlays (G3) | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-11). All 25 files load in the app (298 unit tests pass) |
-| Database content (G4) | Not started |
+| Database content (G4) | **Blocked**: the connector reaches Clera-App, not Wingman-App (2026-11-11) |
 | German sweep (G7) | Onboarding and tabs on SE, 2026-11-11: no clipping. Lessons not yet seen in German |
 
 Lesson order followed: the first course of each category before the second (1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, …), the order the app's file names give.
@@ -41,6 +58,7 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **2026-11-11. Course 16, Advanced Conversation Skills** (3 lessons, 51 items, 1,133 English words). The check passes. For the reviewer: "energy drop" became *Energieabfall*; "emotional anchoring" became *emotionales Verankern*; "debt and credentials" became *Studienkredite und Abschlüsse* (student debt is less of a German theme, so consider *Kosten*).
 - **2026-11-11. Course 21, Advanced Flirting Skills** (3 lessons, 51 items, 1,183 English words). The check passes. For the reviewer: "Disqualification Techniques" is a pickup-artist term with no neutral German equivalent; the title became *Nicht gleich beeindruckt sein* (not being instantly impressed), which says what the lesson teaches. "Callbacks & Inside Jokes" became *Rückbezüge und Insider*; "sexual tension" became *knisternde / sexuelle Spannung*.
 - **2026-11-11. Course 11, Advanced Opening Techniques** (5 lessons, 98 items, 2,157 English words). The check passes. **All 25 courses are now drafted in German (34,442 English words).** 298 unit tests pass with every German overlay bundled. For the reviewer: "thrifting" became *auf Flohmärkten und in Secondhandläden stöbern*; "False Exits" became *der vorgetäuschte Abgang*; "a woman's opinion" became *eine weibliche Meinung*.
+- **2026-11-11. G4 blocked.** `list_projects` on the Supabase connector returns only Clera-App (`rdgtvavltiqmwfzcadcv`). Per the loop's rules, it stopped here without reading or writing anything. The lesson work (G3) is complete, so the loop is stopped.
 
 ## Questions for Arthur
 
