@@ -7,7 +7,7 @@ Branch `localization-release-b`. Rules and glossary: [localization-de-brief.md](
 | Part | State |
 |---|---|
 | UI catalogs (G2) | 574 of 574 strings drafted (2026-11-10) |
-| Lesson overlays (G3) | 3 of 25 courses (215 of 1,531 items): 1, 6, 12 |
+| Lesson overlays (G3) | 4 of 25 courses (264 of 1,531 items): 1, 6, 12, 17 |
 | Database content (G4) | Not started |
 | German sweep (G7) | Onboarding and tabs on SE, 2026-11-11: no clipping. Lessons not yet seen in German |
 
@@ -19,6 +19,7 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **2026-11-11. Course 1, Beliefs & Reframes** (5 lessons, 80 items, 1,782 English words). `lesson_overlay_course_1_de.json`. The check passes. Test change: `testTheAppBundleShipsNoOverlays` was a Release A guard ("no overlay files at all"). It now allows German, rejects other languages and checks every bundled German file loads. 298 tests pass. For the reviewer: "growth mindset / fixed mindset" became *Wachstumsdenken / starres Denken*, with the English terms in brackets on first use; "competence confidence loop" became *Kompetenz-Selbstvertrauen-Kreislauf*.
 - **2026-11-11. Course 6, Approach Readiness** (4 lessons, 68 items, 1,503 English words). The check passes. For the reviewer: "You're always in the field" became *Du bist immer im Spiel*; "got a rep" / "volume" became *ein weiterer Versuch* / *viele Versuche*. The man in the grocery store is there on a Saturday morning rather than Sunday, since German supermarkets are closed on Sundays.
 - **2026-11-11. Course 12, Small Talk & Momentum** (4 lessons, 67 items, 1,396 English words). The check passes. For the reviewer: "threading" became *Anknüpfen* (with *Fäden* for "threads"); "momentum" became *Schwung*.
+- **2026-11-11. Course 17, Flirting Prerequisites** (4 lessons, 49 items, 1,167 English words). The check passes. For the reviewer: the Respect lesson (17_3) carries consent wording ("Never touch without clear signs she's comfortable…"). It's kept as strict as the English: *Fass sie niemals an ohne klare Zeichen, dass es für sie in Ordnung ist*. "Outcome independence" became *nicht vom Ergebnis abhängig sein*; "calibration" became *Kalibrieren*.
 
 ## Questions for Arthur
 
