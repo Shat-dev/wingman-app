@@ -9,7 +9,7 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | Prerequisites P1, P2, P5 | Done | Commit `6acc258` |
 | Prerequisite P3 | Partly done | Priced paywall, screens past the paywall and time-to-paywall still to capture |
 | WP1 Onboarding answer IDs | **Done** (slice 1, `fa213f2`) | Verified on device by the slice 3 sweep. Supabase `age`/`goals` writes checked by reading the code path, not by a live write |
-| WP2 Analytics values pinned to English | **Done** (slices 2–3, `9a853f0` + slice 3 commit) | New properties not yet observed arriving in PostHog |
+| WP2 Analytics values pinned to English | **Done** (slices 2–3, `9a853f0`, `38f4330`) | New properties not yet observed arriving in PostHog |
 | WP3 Error classification | Not started | Plan wants a few days of production logging first; cannot be done inside this loop |
 | WP4 Paywall prices and disclosure | Not started | Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
 | WP5 String Catalog and extraction | Not started | |
