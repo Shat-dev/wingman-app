@@ -12,7 +12,7 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP2 Analytics values pinned to English | **Done** (slices 2–3, `9a853f0`, `38f4330`) | New properties not yet observed arriving in PostHog |
 | WP3 Error classification | Not started | Plan wants a few days of production logging first; cannot be done inside this loop |
 | WP4 Paywall prices and disclosure | Not started | Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
-| WP5 String Catalog and extraction | Not started | |
+| WP5 String Catalog and extraction | **In progress** (slice 4: lookup layer) | No catalog file yet; no UI strings moved yet |
 | WP6 Layout and legal links | Not started | |
 | WP7 Content translation plumbing | Not started | Migration files only; nothing applied to the live database |
 | WP8 Tooling and tests | Started | Unit and UI test targets exist; parity recorder, validator and fallback tests still to build |
@@ -86,9 +86,27 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 
 **Tooling note:** the screenshot comparison was an inline script. It should become a checked-in tool under WP8.
 
+### Slice 4 — WP5 part 1: the lookup layer (2026-11-10)
+
+**What changed**
+
+- New `Wingman/Util/L10n.swift`. `L10n.content(_:)` takes an English data string and returns what to show for it. In the source language it returns the input untouched with no table lookup. In a translated app it looks the string up in the `Content` table, keyed by the English text, and falls back to English when the entry or the whole table is missing, or the translation is empty.
+- Onboarding option labels now go through it: each option has an `englishLabel`, and `label` is that passed through `L10n.content`. `canonicalValue` is untouched.
+
+**Behaviour for English users:** identical. The app ships only English, so every call takes the pass-through branch (`testAppRunsInItsSourceLanguage` pins this).
+
+**Tests:** new `L10nContentTests` (12). They build a throwaway bundle with a German `Content` table at runtime and point `L10n` at it, which is how Release A can test translation behaviour without shipping a language. Covered: translated text returned; missing entry, empty entry and missing table all fall back to English; option labels translate while canonical values, the stored answer, the restored selection, the paywall tick and the reminder line stay exactly as for an English user; a German label is rejected as a stored value; lesson, course, level, headline and category analytics values ignore translations. 66 tests pass.
+
+This closes the gap noted in slice 2 (nothing proved the canonical accessors ignore a translation).
+
+**Not verified**
+
+- No on-device run in this slice (labels are unchanged in English, and the sweep for WP5 is being saved for after strings are actually moved).
+- Lookup cost in a translated app has not been measured. It only matters once a language ships.
+
 ## Next
 
-WP5 (String Catalog). First slice: the lookup layer and its tests, with no strings moved yet — a `Content` table helper that returns the English canonical string when no translation exists, plus the fake-translation-table test that proves `canonicalValue`, `canonicalTitle` and `analyticsHeadline` do not change when display strings do. Then extraction area by area, onboarding first.
+WP5 part 2: add `Localizable.xcstrings` and `Content.xcstrings`, and populate `Localizable` from the compiler's extracted strings (`xcstringstool sync` over the build's `.stringsdata`) so the catalog reflects what SwiftUI already treats as localizable. Then move the indirect `String` values area by area, onboarding first: question titles, statistics, social proof, growth projection, commitment pact. Each area gets a test that its English output is unchanged.
 
 ## Open questions for Arthur
 

@@ -18,7 +18,8 @@
 //      "embarrased" misspelling. They are data now, not copy: never edit one,
 //      never show one. `OnboardingCanonicalValuesTests` pins them.
 //    - `label` is what the user reads, and the only one of the three that may
-//      be reworded or translated.
+//      be reworded or translated. It is `englishLabel` passed through
+//      `L10n.content`, so it is English until a translation exists.
 //
 //  `nonisolated` because `MarketingNotifications` (a nonisolated enum) reads
 //  these off the main actor when it schedules the reminders.
@@ -44,13 +45,19 @@ nonisolated protocol OnboardingOptionKind: RawRepresentable, CaseIterable, Senda
     static var questionKey: String { get }
     /// See `OnboardingOption.canonicalValue`.
     var canonicalValue: String { get }
-    /// See `OnboardingOption.label`.
-    var label: String { get }
+    /// The English wording shown for the option. Usually the same text as
+    /// `canonicalValue`, but a different thing: this one may be reworded.
+    var englishLabel: String { get }
 }
 
 nonisolated extension OnboardingOptionKind {
-    /// Shown as stored unless a case says otherwise.
-    var label: String { canonicalValue }
+    /// The English wording shown for this option. The stored value, unless a
+    /// case says otherwise.
+    var englishLabel: String { canonicalValue }
+
+    /// `englishLabel` in the language the app is running in, falling back to
+    /// English. Display only — see `L10n.content`.
+    var label: String { L10n.content(englishLabel) }
 
     var option: OnboardingOption {
         OnboardingOption(id: rawValue, canonicalValue: canonicalValue, label: label)
@@ -178,7 +185,7 @@ nonisolated enum BarrierOption: String, OnboardingOptionKind {
     var canonicalValue: String {
         switch self {
         // Misspelled on purpose. This is the value every existing answer was
-        // stored under; users read the corrected `label` below.
+        // stored under; users read the corrected `englishLabel` below.
         case .fearOfRejection:    return "Fear of rejection or being embarrased"
         case .socialConsequences: return "Fear of social consequences"
         case .whatToSay:          return "Not knowing what to say or how to start"
@@ -187,7 +194,7 @@ nonisolated enum BarrierOption: String, OnboardingOptionKind {
         }
     }
 
-    var label: String {
+    var englishLabel: String {
         switch self {
         case .fearOfRejection: return "Fear of rejection or being embarrassed"
         default:               return canonicalValue

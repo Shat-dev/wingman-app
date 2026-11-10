@@ -1,0 +1,76 @@
+//
+//  L10n.swift
+//  Wingman
+//
+//  Display-text lookup for strings that are also data.
+//
+//  Most UI strings need nothing from this file: a literal in `Text("…")` or
+//  `String(localized: "…")` is looked up by the system, keyed by its English
+//  text, and falls back to that English text when no translation exists.
+//
+//  This file is for the other kind — English strings the app holds as values
+//  and passes around: onboarding answers, course titles, quotes, approach
+//  level names. Those are also what gets stored and sent to analytics, so the
+//  English value has to stay exactly what it is. `L10n.content(_:)` takes that
+//  English value and returns what to *show* for it:
+//
+//      let stored = option.canonicalValue          // data: never changes
+//      let shown  = L10n.content(stored)           // copy: may be translated
+//
+//  Three properties the rest of the localization work relies on:
+//
+//    1. English in, English out. While the app is running in its source
+//       language the input is returned untouched, with no table lookup at
+//       all — English users run the same code path they always have.
+//    2. A missing translation is the English text. The English string is both
+//       the lookup key and the fallback value, so nothing can ever render as
+//       a raw key, and an empty translation counts as missing.
+//    3. It only ever produces display text. Never store, compare or send what
+//       it returns.
+//
+//  Translations for these strings live in the `Content` table
+//  (`Content.xcstrings`), separate from the UI strings in `Localizable`.
+//
+
+import Foundation
+
+nonisolated enum L10n {
+
+    /// Where display text is looked up.
+    enum Source: @unchecked Sendable {
+        /// The app is running in its source language: return the English
+        /// input as is.
+        case sourceLanguage
+        /// Look translations up in this bundle's tables.
+        case bundle(Bundle)
+    }
+
+    /// The table holding translations of data-like strings.
+    static let contentTable = "Content"
+
+    /// Decided once per launch. iOS relaunches the app when its language
+    /// changes, so this cannot go stale within a process.
+    private static let appSource: Source = {
+        let development = Bundle.main.developmentLocalization ?? "en"
+        let active = Bundle.main.preferredLocalizations.first ?? development
+        return active == development ? .sourceLanguage : .bundle(.main)
+    }()
+
+    /// Tests set this to exercise a translated app without shipping a
+    /// language. Always nil in the app.
+    nonisolated(unsafe) static var sourceOverrideForTesting: Source?
+
+    static var source: Source { sourceOverrideForTesting ?? appSource }
+
+    /// What to show for an English data string. See the file header.
+    static func content(_ english: String) -> String {
+        guard !english.isEmpty else { return english }
+        switch source {
+        case .sourceLanguage:
+            return english
+        case .bundle(let bundle):
+            let translated = bundle.localizedString(forKey: english, value: english, table: contentTable)
+            return translated.isEmpty ? english : translated
+        }
+    }
+}
