@@ -1293,7 +1293,7 @@ final class AuthManager: ObservableObject {
                 group.addTask {
                     // Timeout after 5 seconds
                     try await Task.sleep(nanoseconds: 5_000_000_000)
-                    throw NSError(domain: "SessionValidation", code: -1, userInfo: [NSLocalizedDescriptionKey: "Timeout"])
+                    throw SessionErrorClassifier.timeoutError()
                 }
                 
                 // Wait for first task to complete (either success or timeout)
@@ -1303,52 +1303,21 @@ final class AuthManager: ObservableObject {
         } catch {
             log("⚠️ Background: Session validation failed: \(error.localizedDescription)")
             
-            // Only sign out if it's a real auth error, not a network error or timeout
-            if isNetworkError(error) || error.localizedDescription.contains("Timeout") {
+            // Only sign out if it's a real auth error, not a network error or
+            // timeout. Decided by the error's type first, never by text in
+            // the app's language. See `SessionErrorClassifier`.
+            switch SessionErrorClassifier.decision(for: error) {
+            case .keepSession(.timeout), .keepSession(.network), .keepSession(.cancelled):
                 log("📶 Background: Network error/timeout - keeping cached session")
                 // Don't sign out, user might just be offline
-            } else if isAuthenticationError(error) {
+            case .signOut:
                 log("🔐 Background: Auth error detected - session is invalid")
                 // Token is truly invalid, sign out gracefully
                 await signOut()
-            } else {
+            case .keepSession(.unrecognised):
                 log("❓ Background: Unknown error - keeping cached session for safety")
             }
         }
-    }
-    
-    // MARK: - Error Detection Helpers
-    
-    /// Checks if an error is a network-related error (offline, timeout, etc.)
-    private func isNetworkError(_ error: Error) -> Bool {
-        let nsError = error as NSError
-        
-        // Check for common network error domains and codes
-        if nsError.domain == NSURLErrorDomain {
-            let networkErrorCodes: [Int] = [
-                NSURLErrorNotConnectedToInternet,
-                NSURLErrorNetworkConnectionLost,
-                NSURLErrorTimedOut,
-                NSURLErrorCannotConnectToHost,
-                NSURLErrorCannotFindHost,
-                NSURLErrorDNSLookupFailed,
-                NSURLErrorDataNotAllowed,
-                NSURLErrorInternationalRoamingOff
-            ]
-            return networkErrorCodes.contains(nsError.code)
-        }
-        
-        // Check error description for network-related keywords
-        let errorDescription = error.localizedDescription.lowercased()
-        let networkKeywords = ["network", "internet", "offline", "connection", "timeout", "unreachable"]
-        return networkKeywords.contains { errorDescription.contains($0) }
-    }
-    
-    /// Checks if an error is an authentication error (invalid token, expired session, etc.)
-    private func isAuthenticationError(_ error: Error) -> Bool {
-        let errorDescription = error.localizedDescription.lowercased()
-        let authKeywords = ["unauthorized", "401", "invalid", "expired", "token", "authentication", "forbidden", "403"]
-        return authKeywords.contains { errorDescription.contains($0) }
     }
 
     // MARK: - Onboarding
