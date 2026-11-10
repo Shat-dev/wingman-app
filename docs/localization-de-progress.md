@@ -7,7 +7,7 @@ Branch `localization-release-b`. Rules and glossary: [localization-de-brief.md](
 | Part | State |
 |---|---|
 | UI catalogs (G2) | 574 of 574 strings drafted (2026-11-10) |
-| Lesson overlays (G3) | 20 of 25 courses (1,227 of 1,531 items): 1, 2, 3, 4, 6, 7, 8, 9, 12, 13, 14, 15, 17, 18, 19, 20, 22, 23, 24, 25 |
+| Lesson overlays (G3) | 21 of 25 courses (1,281 of 1,531 items): 1–9, 12–15, 17–20, 22–25 (left: 10, 11, 16, 21) |
 | Database content (G4) | Not started |
 | German sweep (G7) | Onboarding and tabs on SE, 2026-11-11: no clipping. Lessons not yet seen in German |
 
@@ -36,6 +36,7 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **2026-11-11. Course 15, Closing** (4 lessons, 62 items, 1,558 English words). The check passes. For the reviewer: "close / closing" has no neat German equivalent. It's rendered as *nach mehr fragen* (asking for more: a number, a next step), and the course title stays *Der Abschluss*. "Choice architecture" became *Entscheidungsarchitektur*.
 - **2026-11-11. Course 20, Physical Presence** (4 lessons, 63 items, 1,450 English words). The check passes. Distances are metric: four feet became *gut ein Meter*, two to four feet *60 Zentimeter bis ein Meter*, under two feet *unter 60 Zentimeter*. The English typo in `content_20_3_4_2` ("Now there are more physically mirrored") is rendered by meaning: *auf Augenhöhe und spiegeln einander*. "Chameleon effect" became *Chamäleon-Effekt*.
 - **2026-11-11. Course 25, Learning & Self Discovery** (4 lessons, 72 items, 1,569 English words). The check passes. For the reviewer: "sticking point" became *Knackpunkt*; "growth plateau" became *Plateau*; "calibration" became *Gespür* here (*Kalibrieren* in 17_4). The English "flat and friendless" (25_3_6_2), probably meant as "flat and friendly", became *flach und rein freundschaftlich*.
+- **2026-11-11. Course 5, Non-negotiables** (4 lessons, 54 items, 1,302 English words). The check passes. The course covers fitness, grooming, hygiene and style, so its German title in `Content.xcstrings` is changed from the guess *Nicht verhandelbar* to ***Das Pflichtprogramm***. "Cologne" became *Parfum*; "underdressed" stays as is (common in German).
 
 ## Questions for Arthur
 

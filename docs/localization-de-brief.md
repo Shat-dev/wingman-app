@@ -50,7 +50,7 @@ These carry money, law or first impressions. A native speaker should read every 
 2. **Sign-in legal line**: "Indem du fortfährst, stimmst du unseren [AGB](terms) und der [Datenschutzerklärung](privacy) zu".
 3. **Onboarding**: the questions, answer options, the four statistic screens, the commitment pledge ("Ich, %@, werde zu einem Mann, der handelt.") and the growth chart labels.
 4. **Notifications**: "Zeit für deine tägliche Lektüre! …" and the tips-and-offers permission text.
-5. **Course titles**. Several were guesses without the lesson text in front of the translator: *Der körperliche Ansatz* (The Physical Approach), *Nicht verhandelbar* (Non-negotiables), *Der Abschluss* (Closing), *Bereit zum Ansprechen* (Approach Readiness). Check each against its lessons.
+5. **Course titles**. Several were guesses without the lesson text in front of the translator: *Die Annäherung* (The Physical Approach, changed from *Der körperliche Ansatz*), *Das Pflichtprogramm* (Non-negotiables, changed from *Nicht verhandelbar*), *Der Abschluss* (Closing), *Bereit zum Ansprechen* (Approach Readiness). Check each against its lessons.
 
 ## Known open points in the draft
 
