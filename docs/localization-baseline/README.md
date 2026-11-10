@@ -12,6 +12,15 @@ Everything here was produced by the `WingmanUITests` target, so it can be reprod
 
 Source: `LaunchPerformanceTests.testColdLaunch` (`XCTApplicationLaunchMetric`).
 
+**Re-measured after Release A's changes** (2026-11-10, branch `localization-release-a` at `c258391`, same simulator, clean install, Debug):
+
+| Run | Runs | Average | Spread | Values (s) |
+|---|---|---|---|---|
+| 1 | 5 | **0.752 s** | 1.8% | 0.752, 0.778, 0.747, 0.742, 0.739 |
+| 2 | 5 | **0.739 s** | 0.2% | 0.739, 0.738, 0.740, 0.736, 0.740 |
+
+No slowdown: both runs are below the baseline's 0.858 s. I would not read the difference as a speed-up from this work; the baseline was taken hours earlier in a different state of the same Mac.
+
 These are Debug-on-simulator numbers. They are only meaningful compared with another run on the same Mac and simulator; they say nothing about launch time on a real phone.
 
 ## Screenshots: landing to paywall
@@ -40,6 +49,20 @@ These were captured **after** the WP5 and WP6 changes, so they are a reference f
 `OnboardingSweepTests.testOnboardingInDoubleLengthPseudoLanguage` walks the same path with every localized string doubled and the translated-app layouts switched on. It needs no translation to exist. Its screenshots are read for cut, clipped or overlapping text; nothing is compared. It creates a guest user like the English run, so run one method per run.
 
 `pseudo-language-se-2026-11-10/` holds the five screens from the first such run (iPhone SE, 2026-11-10) that showed cut or overflowing text, before any fix. Placeholders and plurals look broken in every pseudo-language screenshot ("lld", "@", "#@value@"); that is how the system doubles format strings, not an app bug.
+
+## Comparing a new run with these screenshots
+
+`scripts/screenshots.py` pulls the numbered screenshots out of a test result and compares them with a folder here, pixel for pixel below the status bar:
+
+```bash
+python3 scripts/screenshots.py export /tmp/wingman-sweep.xcresult /tmp/wingman-sweep
+```
+
+```bash
+python3 scripts/screenshots.py compare docs/localization-baseline/iphone-17-pro /tmp/wingman-sweep --only-numbered-to 17 --allow 14-loading-notification-prompt
+```
+
+Screen 14 is allowed to differ because the loading animation behind the system prompt is caught at a different frame from run to run. Screens 18 and later show content that changes between runs and are compared by eye.
 
 ## How to re-run
 
