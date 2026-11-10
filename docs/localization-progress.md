@@ -12,7 +12,7 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP2 Analytics values pinned to English | **Done** (slices 2–3, `9a853f0`, `38f4330`) | New properties not yet observed arriving in PostHog |
 | WP3 Error classification | Not started | Plan wants a few days of production logging first; cannot be done inside this loop |
 | WP4 Paywall prices and disclosure | Not started | Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
-| WP5 String Catalog and extraction | **In progress** (slice 4: lookup layer) | No catalog file yet; no UI strings moved yet |
+| WP5 String Catalog and extraction | **In progress** (slices 4–5) | Catalogs exist with the 158 compiler-extracted strings. The ~690 indirect `String` values are still to move, area by area |
 | WP6 Layout and legal links | Not started | |
 | WP7 Content translation plumbing | Not started | Migration files only; nothing applied to the live database |
 | WP8 Tooling and tests | Started | Unit and UI test targets exist; parity recorder, validator and fallback tests still to build |
@@ -104,9 +104,34 @@ This closes the gap noted in slice 2 (nothing proved the canonical accessors ign
 - No on-device run in this slice (labels are unchanged in English, and the sweep for WP5 is being saved for after strings are actually moved).
 - Lookup cost in a translated app has not been measured. It only matters once a language ships.
 
+### Slice 5 — WP5 part 2: the two String Catalogs (2026-11-10)
+
+**What changed**
+
+- New `Wingman/Resources/Localizable.xcstrings`: 158 UI strings, filled from the compiler's own extraction (`xcstringstool sync` over the build's `.stringsdata`), so it is exactly what SwiftUI already treats as localizable. Source language `en`, no other language.
+- Seven non-linguistic keys are marked do-not-translate with a comment: the empty string, `%lld`, `%lld/400`, `+%lld`, `•`, `V %@` and the brand term `XP`.
+- New `Wingman/Resources/Content.xcstrings`: hand-maintained table for strings shown through `L10n.content`. Holds the 29 onboarding option labels so far. Every later slice that routes a string through `L10n.content` must add its entry here.
+- No Swift source changed in this slice.
+
+**Behaviour for English users:** unchanged. The built app gains `en.lproj/Content.strings`, where every entry maps to itself; nothing is emitted for `Localizable` because no entry overrides its English text.
+
+**Tests:** new `StringCatalogTests` (6): the app bundle declares only English (the guard against a language being added by accident); localized lookups, including formatted ones, return the same English text; every onboarding label has a `Content` entry; the stored-only misspelled value is not a catalog key. 72 tests pass.
+
+**Audit Open Question 9 answered:** literal ternaries such as `Text(cond ? "1 day streak" : "\(n) day streak")` and the `.alert(cond ? … : …)` titles are extracted by the compiler ("1 day streak", "%lld day streak", "Delete my data", "Delete Account", "ON", "OFF" are all in the catalog), so they do resolve to the localizable overload.
+
+**Things to know**
+
+- When the project is built in Xcode (not from the command line), Xcode re-syncs `Localizable.xcstrings` itself and may rewrite or reorder the file. That is expected; commit the result.
+- `Content.xcstrings` entries are marked `manual`, so Xcode will not flag or remove them.
+
+**Not verified**
+
+- The catalogs have not been opened in Xcode's catalog editor.
+- No on-device run in this slice (no source change).
+
 ## Next
 
-WP5 part 2: add `Localizable.xcstrings` and `Content.xcstrings`, and populate `Localizable` from the compiler's extracted strings (`xcstringstool sync` over the build's `.stringsdata`) so the catalog reflects what SwiftUI already treats as localizable. Then move the indirect `String` values area by area, onboarding first: question titles, statistics, social proof, growth projection, commitment pact. Each area gets a test that its English output is unchanged.
+WP5 part 3: move the onboarding area's indirect strings so they are localizable, keeping English identical. Question titles, "Select all that apply" is already covered; statistic headings, subheadings and facts; growth projection; social proof and testimonials; loading screen step rows; commitment pact. Data-like ones (shown from stored values) go through `L10n.content` with `Content` entries; fixed UI copy becomes `String(localized:)` and is re-synced into `Localizable`. Add a test per group that English output is unchanged and that a fake translation changes the display but not any stored or sent value. Then run the one WP5 sweep.
 
 ## Open questions for Arthur
 

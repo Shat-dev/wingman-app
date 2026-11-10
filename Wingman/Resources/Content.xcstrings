@@ -1,0 +1,122 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "18-24" : {
+      "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "25-34" : {
+      "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "35-44" : {
+      "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "45-54" : {
+      "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "55+" : {
+      "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "A few months ago" : {
+      "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "Back on the market after a breakup or divorce" : {
+      "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "Better mindset & confidence" : {
+      "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "Creating attraction and romantic interest" : {
+      "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "Done with dating apps" : {
+      "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "Every time" : {
+      "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "Fear of rejection or being embarrassed" : {
+      "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "Fear of social consequences" : {
+      "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "I freeze up around women I find attractive" : {
+      "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "Keeping conversations going" : {
+      "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "Learning how to approach" : {
+      "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "More than a year ago" : {
+      "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "Most times" : {
+      "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "Never approached before" : {
+      "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "No, I usually go for it" : {
+      "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "Not knowing what to say or how to start" : {
+      "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "Other" : {
+      "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "Rarely" : {
+      "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "Sometimes" : {
+      "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "Tired of being on my own" : {
+      "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "Want more confidence in general" : {
+      "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "Within the past month" : {
+      "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "Within the past week" : {
+      "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "Worrying about coming across wrong" : {
+      "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    }
+  },
+  "version" : "1.0"
+}
