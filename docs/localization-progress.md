@@ -820,7 +820,7 @@ The logic that lays translated database content over the English rows, as pure f
 - `LessonQuestionStore` itself has no test of its own; its change is three lines that hand its questions to the cache.
 - Daily-practice questions still ask for their translations on each fetch (slice 32) and do not use this cache. It could serve them too and save that request; left as a possible follow-up.
 
-### Slice 34 — Write the exit-gate summary for section 6 of the plan: each gate condition, whether it is met, how it was verified, and what still needs you. Every Release A work package is now as far as this loop can take it, so that summary is where the loop stops.
+### Slice 34 — Nothing further without input. Start from `docs/localization-release-a-exit-gate.md`, section "What I need from you". The quickest unblockers are the D4 wording (one paywall item left to build) and a way to see the paywall with real prices.
 
 WP4 waits on two answers from you: the D4 wording (open questions) and how to see the paywall with real prices. After WP7: WP3 (error classification) and the remaining WP8 tooling.
 
