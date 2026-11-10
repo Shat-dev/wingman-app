@@ -13,9 +13,9 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP3 Error classification | Not started | Plan wants a few days of production logging first; cannot be done inside this loop |
 | WP4 Paywall prices and disclosure | Not started | Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
 | WP5 String Catalog and extraction | **Done except what WP4 owns** (slices 4–17) | `Localizable` 386 strings, `Content` 174. Left on purpose: paywall price and disclosure strings (WP4). A translated display title for lessons and scenarios comes with WP7 |
-| WP6 Layout and legal links | In progress (slice 17) | Done: sign-in legal line. Still to do: paywall and offer footer links, answer-button line caps, fixed-height buttons, pseudo-language pass, then the one WP6 sweep |
+| WP6 Layout and legal links | In progress (slices 17–18) | Done: sign-in legal line, paywall and offer footer links. Still to do: answer-button line caps, fixed-height buttons, pseudo-language pass, then the one WP6 sweep |
 | WP7 Content translation plumbing | Not started | Migration files only; nothing applied to the live database |
-| WP8 Tooling and tests | In progress | Done: unit and UI test targets (152 unit tests), onboarding sweep, sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, sweep beyond the paywall, performance comparison, analytics parity recorder (section 9 of the plan) |
+| WP8 Tooling and tests | In progress | Done: unit and UI test targets (159 unit tests), onboarding sweep, sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, sweep beyond the paywall, performance comparison, analytics parity recorder (section 9 of the plan) |
 
 ## Slices
 
@@ -391,9 +391,33 @@ Both layouts open the same two pages (`getwingman.app/terms`, `/privacy`) in the
 - The `-l10nForceTranslatedLayout` launch flag has not been exercised yet.
 - Link tap targets in the sentence layout are text-height (about 17 pt), the same as the English row's. Not changed here.
 
+### Slice 18 — WP6 part 2: paywall and offer footer links (2026-11-10)
+
+**The problem.** Privacy · Restore · Terms sit in a row with 60 pt of padding each side, which leaves 255 pt on an iPhone SE. The German labels need about 330 pt. Rendered in the original row they break in the middle of a word ("Wiederherstell / en", "Nutzungsbedi / ngungen").
+
+**What changed.** New `Wingman/Payment/FooterLinksRow.swift`, used by both `PaywallView` and `OneTimeOfferView`. Each screen still passes in its own three buttons, so actions, the restore spinner and disabled states are untouched.
+
+- **English: the original row,** same markup.
+- **Translated apps** take the first of these that fits: the same row with 60 pt padding; the same row with 20 pt padding; the three links stacked and centred.
+
+**Tests.** 7 new unit tests in `FooterLinksRowTests` (159 total, all passing). The row is rendered off-screen and compared pixel for pixel:
+
+- the English row equals a copy of the pre-change markup at 375, 402 and 440 pt wide;
+- the adaptive row with English labels equals the English row (a translated app with short labels looks the same);
+- German labels stay on one 44 pt row at 375, 402 and 440 pt;
+- the German labels are measured to be wider than the original row's inner width on an SE and narrower than the 20 pt-padded row;
+- labels too long for any row stack (132 pt tall).
+
+**Behaviour for English users:** unchanged, by the pixel comparison above. No string changed; the catalog is the same.
+
+**Not verified**
+
+- Neither footer has been looked at in the running app since this change. The paywall is the last screen of the onboarding sweep, so the WP6 sweep will compare it with the baseline. The one-time offer is past the paywall and is not covered until the sweep is extended.
+- The stacked fallback makes the footer 88 pt taller. On the paywall that pushes into a fixed-height layout; no European language I measured needs it on a current phone, so I have not checked what the paywall does with the extra height.
+
 ## Next
 
-WP6, second slice: the paywall and one-time-offer footers (Privacy · Restore · Terms in a fixed row with 60 pt side padding → allowed to shrink slightly, then wrap; German needs roughly 290 pt where an iPhone SE has 200). English must look the same. Then answer-button line caps, fixed-height buttons, and a pseudo-language pass.
+WP6, third slice: answer buttons and other fixed-height controls (onboarding answer buttons with a line cap, 52 pt buttons, tab labels): find every `lineLimit`, fixed `frame(height:)` and `minimumScaleFactor` that holds translated text, and decide per control whether it may grow, shrink or wrap. English must look the same. Then a pseudo-language pass (long strings through the `-l10nForceTranslatedLayout` path).
 
 Before the WP6 sweep is spent: extend `OnboardingSweepTests` past the paywall (close the paywall, capture the required sign-in screen in both legal-line layouts, tap both links), so one run covers everything WP6 changed.
 

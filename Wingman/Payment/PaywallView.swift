@@ -934,7 +934,7 @@ struct PaywallView: View {
     /// Privacy / Restore / Terms. Shown in every state; unchanged from the
     /// original markup (identical in both the former error and content states).
     private var footerLinks: some View {
-        HStack(spacing: 0) {
+        FooterLinksRow {
             Button {
                 viewModel.openPrivacy()
             } label: {
@@ -946,9 +946,7 @@ struct PaywallView: View {
                     .contentShape(Rectangle())
             }
             .buttonStyle(ScalePressStyle())
-
-            Spacer()
-
+        } center: {
             Button {
                 Task {
                     await viewModel.openRestore()
@@ -970,9 +968,7 @@ struct PaywallView: View {
             }
             .buttonStyle(ScalePressStyle())
             .disabled(viewModel.isLoading)
-
-            Spacer()
-
+        } trailing: {
             Button {
                 viewModel.openTerms()
             } label: {
@@ -985,7 +981,6 @@ struct PaywallView: View {
             }
             .buttonStyle(ScalePressStyle())
         }
-        .padding(.horizontal, 60)
         .padding(.bottom, 8)
     }
 

@@ -297,20 +297,20 @@ struct OneTimeOfferView: View {
         .disabled(viewModel.isPurchasing)
     }
 
-    /// Matches the paywall's footer: underlined, spread between 60pt insets.
+    /// Matches the paywall's footer: underlined, spread between 60pt insets
+    /// (see FooterLinksRow for what a translated app does with longer labels).
     private var footerLinks: some View {
-        HStack(spacing: 0) {
+        FooterLinksRow {
             footerLink(String(localized: "Privacy")) { open(Constants.PRIVACY_POLICY_URL) }
-            Spacer()
+        } center: {
             footerLink(String(localized: "Restore")) {
                 Task {
                     if await viewModel.restore() { finish() }
                 }
             }
-            Spacer()
+        } trailing: {
             footerLink(String(localized: "Terms")) { open(Constants.TERMS_CONDITIONS_URL) }
         }
-        .padding(.horizontal, 60)
     }
 
     private func footerLink(_ title: String, action: @escaping () -> Void) -> some View {
