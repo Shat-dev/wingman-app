@@ -13,7 +13,7 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP3 Error classification | Not started | Plan wants a few days of production logging first; cannot be done inside this loop |
 | WP4 Paywall prices and disclosure | Not started | Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
 | WP5 String Catalog and extraction | **Done except what WP4 owns** (slices 4–17) | `Localizable` 386 strings, `Content` 174. Left on purpose: paywall price and disclosure strings (WP4). A translated display title for lessons and scenarios comes with WP7 |
-| WP6 Layout and legal links | In progress (slices 17–21) | Done: sign-in legal line, paywall and offer footer links, line caps, fixed-height buttons. **WP6 sweep spent** (slice 21): English unchanged on all 17 baseline screens. Pseudo-language run done (slice 22); its overflow findings fixed (slice 23). Still to do: paywall ticks and plan rows (with WP4, includes finding 5), image check |
+| WP6 Layout and legal links | In progress (slices 17–21) | Done: sign-in legal line, paywall and offer footer links, line caps, fixed-height buttons. **WP6 sweep spent** (slice 21): English unchanged on all 17 baseline screens. Pseudo-language run done (slice 22); its overflow findings fixed (slice 23). Image check done (slice 24): one image contains a word. Still to do: paywall ticks and plan rows (with WP4, includes finding 5) |
 | WP7 Content translation plumbing | Not started | Migration files only; nothing applied to the live database |
 | WP8 Tooling and tests | In progress (**WP8 sweep spent**, slice 22) | Done: unit and UI test targets (189 unit tests, 5 of them pseudo-language probes that skip in a normal run), whole-screen renders in a test window for before/after checks without a sweep, onboarding sweep (now through the walkthrough and the four tabs, with a double-length pseudo-language mode), sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, performance comparison, analytics parity recorder (section 9 of the plan) |
 
@@ -576,16 +576,37 @@ Fixes for the findings of slice 22, for translated apps only.
 - Residual: on the growth chart, a label that wraps to four lines pokes out of the top of the chart and is clipped. Seen only with doubled text; "Using Wingman every day" would need to roughly double in length.
 - When a statistic screen scrolls, nothing tells the user there is more below the illustration.
 
+### Slice 24 — WP6 item 8: words baked into artwork (2026-11-10)
+
+Read-only check. Every image the app ships was looked at: 99 raster image sets (all course thumbnails, scenario cards and scene images, statistic and onboarding illustrations, paywall carousel images, logos) and 7 vector icons (checked for text elements: none).
+
+**Result: one image contains a word.**
+
+| Image | Where it is shown | What it contains |
+|---|---|---|
+| `theopner` | Thumbnail of the course "The Opener" (Courses tab and the home screen's module card) | A speech bubble with the word **"Hi"** |
+
+Everything else is wordless line art. A few images contain symbols that need no translation: the digit "1" on the paywall calendar, "× + ? ÷ !" in a thought bubble (`readingandresponding`), an exclamation mark (`FlirtingPrerequisites`), and scribbles standing in for writing on a name tag and a passport.
+
+**No image is loaded from the network.** The scenario images the audit listed as "remote" are bundled assets looked up by name, so there is nothing further to check on the server side.
+
+**What to do about "Hi":** nothing for Release A. For Release B it is a small decision for you (recorded under open questions): keep it, since "Hi" is understood and used in German, Swedish and Dutch, or have the thumbnail redrawn without the word. No code is involved either way.
+
+**Behaviour for English users:** unchanged; nothing was modified.
+
+**Not verified**
+
+- The App Store screenshots and marketing assets are outside the app bundle and were not part of this check (they are listed in the plan under App Store Connect work for Release B).
+
 ## Next
 
-WP6 item 8, the image check: look at the 25 course thumbnails, the statistic and onboarding illustrations and the remote scenario images for words baked into the artwork. Read-only; produces a list.
-
-Then WP4 (paywall prices and disclosure), which also takes WP6 items 3–4 and finding 5 (ticks and plan rows), since they are the same paywall rows. WP4 ends on the priced-paywall question that only you can answer (one Release run, or a dev-tag launch flag).
+WP4 (paywall prices and disclosure), which also takes WP6 items 3–4 and finding 5 (ticks and plan rows), since they are the same paywall rows. WP4 ends on the priced-paywall question that only you can answer (one Release run, or a dev-tag launch flag).
 
 After WP4: WP7 (content plumbing), WP3 (error classification), remaining WP8 tooling.
 
 ## Open questions for Arthur
 
+- **"Hi" in a course thumbnail (Release B, not urgent):** the thumbnail for "The Opener" has the word "Hi" in a speech bubble. Keep it for other languages, or have it redrawn without the word?
 - **Dates for English users outside the US:** the approach list shows "Nov 3, 2026" to every English user, including Australian and British ones (your second and fourth largest markets), because the format is fixed. I kept that unchanged, since Release A must not change what English users see. Switching English to a locale-aware date would show "3 Nov 2026" in those regions. Say if you want that; it is a one-line change.
 - **Unused code:** `CommonComponents/ErrorViewScreen.swift`, `Resources/AppStrings.swift` and the Poppins font styles in `Resources/App.swift` appear to be unused. May I delete them? Otherwise the error screen's three strings stay in the catalog and get translated for nothing.
 - **Priced paywall baseline:** one Release-build run (one test user in production analytics), or add a launch flag that tags automated runs as dev? Needed before WP4 can be signed off.
