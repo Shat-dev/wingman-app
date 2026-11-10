@@ -244,7 +244,7 @@ struct LessonView: View {
             )
             .appDynamicTypeCeiling()
         }
-        .trackScreenView("Lesson")
+        .trackScreenView(Analytics.Screen.lesson)
     }
     
     // MARK: - Navigation Functions

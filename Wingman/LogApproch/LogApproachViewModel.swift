@@ -212,11 +212,11 @@ final class LogApproachViewModel: ObservableObject {
                     // again." A Supabase outage, an expired session and a
                     // malformed row are indistinguishable from each other —
                     // and from a user who simply never logged anything.
-                    Analytics.capture(Analytics.Event.approachLogFailed, [
+                    Analytics.capture(Analytics.Event.approachLogFailed, Analytics.properties([
                         "is_edit": self.isEditMode,
                         "approach_level": self.selectedLevel,
                         "error_message": error.localizedDescription,
-                    ])
+                    ], adding: Analytics.errorProperties(error)))
                     Analytics.captureError(error, context: "approach_save", [
                         "is_edit": self.isEditMode,
                     ])

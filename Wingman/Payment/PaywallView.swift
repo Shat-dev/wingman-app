@@ -700,7 +700,7 @@ struct PaywallView: View {
         .onDisappear {
             log("📱 PaywallView disappeared")
         }
-        .trackScreenView("Paywall")
+        .trackScreenView(Analytics.Screen.paywall)
     }
 
     // MARK: - Plans

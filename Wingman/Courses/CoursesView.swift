@@ -195,7 +195,7 @@ struct CoursesView: View {
                 applyDeepLinkIfNeeded()
             }
         }
-        .trackScreenView("Courses")
+        .trackScreenView(Analytics.Screen.courses)
     }
     
     /// Picks the category that currently owns the top of the list and keeps

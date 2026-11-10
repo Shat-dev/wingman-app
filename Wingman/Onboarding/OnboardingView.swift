@@ -181,7 +181,7 @@ struct OnboardingView: View {
             Analytics.capture("onboarding_started")
             logStepViewed(screen)
         }
-        .trackScreenView("Onboarding")
+        .trackScreenView(Analytics.Screen.onboarding)
     }
 
     /// One onboarding page plus the opaque fill that makes two pages

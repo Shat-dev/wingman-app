@@ -8,8 +8,8 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 |---|---|---|
 | Prerequisites P1, P2, P5 | Done | Commit `6acc258` |
 | Prerequisite P3 | Partly done | Priced paywall, screens past the paywall and time-to-paywall still to capture |
-| WP1 Onboarding answer IDs | **Done** (slice 1, `fa213f2`) | Supabase `age`/`goals` writes verified unchanged by reading the code path, not by a live write |
-| WP2 Analytics values pinned to English | **In progress** (slice 2 done) | Left: numeric price and currency on paywall events, error domain and code, screen-name guard |
+| WP1 Onboarding answer IDs | **Done** (slice 1, `fa213f2`) | Verified on device by the slice 3 sweep. Supabase `age`/`goals` writes checked by reading the code path, not by a live write |
+| WP2 Analytics values pinned to English | **Done** (slices 2–3, `9a853f0` + slice 3 commit) | New properties not yet observed arriving in PostHog |
 | WP3 Error classification | Not started | Plan wants a few days of production logging first; cannot be done inside this loop |
 | WP4 Paywall prices and disclosure | Not started | Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
 | WP5 String Catalog and extraction | Not started | |
@@ -64,9 +64,31 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 - `storefront` only appears after a paywall has loaded offerings once on that install; a Debug build cannot load offerings, so it cannot be checked without a Release run.
 - Nothing yet proves the canonical accessors ignore a translation, because no translation mechanism exists. **WP5 must add a test with a fake translation table** showing that `canonicalTitle`, `analyticsHeadline` and the option `canonicalValue`s do not change when display strings do.
 
+### Slice 3 — WP2 part 2: prices, error identity, screen names (2026-11-10)
+
+**What changed**
+
+- `Analytics.Screen`: the 17 screen names are now constants in one place, documented as identifiers that must never be localized. All `.trackScreenView` call sites and `AuthView` use them. Values unchanged.
+- `price_amount` (number) and `currency` (ISO code) added to the six purchase events on the main paywall (`paywall_purchase_started` / `_succeeded` / `_failed` ×2 / `_cancelled` ×2) and to every one-time-offer event; the offer also gets `intro_price_amount`. `price_amount` is always the product's regular price per period.
+- `error_domain` and `error_code` added beside `error_message` on the four events that send it (`purchases_restore_failed` ×3, `approach_log_failed`). `error_message` itself is left as it is.
+- `Analytics.properties(_:adding:)` does the merging; an existing key always keeps its value, so adding properties cannot change one an event already sends.
+
+**Behaviour for English users:** every pre-existing property keeps its value. Additions only.
+
+**Tests:** new `AnalyticsScreenNameTests` (10). 54 unit tests pass.
+
+**On-device check (the one sweep for WP1 + WP2):** `OnboardingSweepTests` passed on the iPhone 17 Pro throwaway simulator from a clean install. Compared with the baseline screenshots, ignoring the status bar: 15 of 17 screens are pixel-identical, including the paywall with its two personalised ticks. The two loading-screen frames differ by under 0.03% of pixels, in the animated step rows (capture timing). This run created one guest user in production Supabase.
+
+**Not verified**
+
+- The new properties (`price_amount`, `currency`, `intro_price_amount`, `error_domain`, `error_code`, `course_id`, `previous_course_id`, `app_language`, `device_language`, `storefront`) have not been looked up in PostHog. The purchase ones cannot fire in a Debug build.
+- The iPhone SE sweep was not re-run.
+
+**Tooling note:** the screenshot comparison was an inline script. It should become a checked-in tool under WP8.
+
 ## Next
 
-WP2 part 2: add numeric `price_amount` and `currency` to the paywall view and purchase events; add `error_domain` / `error_code` beside the four `error_message` properties; add a test that the screen names passed to `.trackScreenView` are the fixed set in the baseline. Then WP5 (String Catalog), starting with the `Content` lookup helper and its fake-table test.
+WP5 (String Catalog). First slice: the lookup layer and its tests, with no strings moved yet — a `Content` table helper that returns the English canonical string when no translation exists, plus the fake-translation-table test that proves `canonicalValue`, `canonicalTitle` and `analyticsHeadline` do not change when display strings do. Then extraction area by area, onboarding first.
 
 ## Open questions for Arthur
 

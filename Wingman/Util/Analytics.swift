@@ -19,6 +19,39 @@ import SwiftUI
 
 enum Analytics {
 
+    /// Screen names sent with `$screen` events.
+    ///
+    /// These are identifiers, not copy. Several saved insights filter on them
+    /// by exact match, so they must stay these exact plain strings in every
+    /// language: never wrap one in a localized string, and never derive one
+    /// from a screen's visible title. `AnalyticsScreenNameTests` pins the set.
+    enum Screen {
+        static let landing = "Landing"
+        static let onboarding = "Onboarding"
+        static let paywall = "Paywall"
+        static let oneTimeOffer = "OneTimeOffer"
+        static let home = "Home"
+        static let courses = "Courses"
+        static let courseDetail = "Course Detail"
+        static let lesson = "Lesson"
+        static let dailyPractice = "Daily Practice"
+        static let practice = "Practice"
+        static let practiceDetail = "Practice Detail"
+        static let profile = "Profile"
+        static let settings = "Settings"
+        static let auth = "Auth"
+        static let authRequired = "AuthRequired"
+        static let authAfterPurchase = "AuthAfterPurchase"
+        static let authSaveProgress = "AuthSaveProgress"
+
+        static let all: [String] = [
+            landing, onboarding, paywall, oneTimeOffer, home, courses,
+            courseDetail, lesson, dailyPractice, practice, practiceDetail,
+            profile, settings, auth, authRequired, authAfterPurchase,
+            authSaveProgress
+        ]
+    }
+
     /// Canonical event names. snake_case, matching the existing convention
     /// (`paywall_viewed`, `onboarding_step_viewed`, …).
     enum Event {
@@ -442,6 +475,22 @@ enum Analytics {
     /// call site produced it. Pair it with a domain event where the failure
     /// is also a product signal and not just a defect — a restore that finds
     /// no entitlement isn't an error, but a restore that throws is both.
+    /// `base` with `extra` added. A key already in `base` keeps its value, so
+    /// adding properties to an existing event can never change one it
+    /// already sends.
+    nonisolated static func properties(_ base: [String: Any], adding extra: [String: Any]) -> [String: Any] {
+        base.merging(extra) { existing, _ in existing }
+    }
+
+    /// `error_domain` and `error_code` for an event that also sends
+    /// `error_message`. The message is `localizedDescription`, which iOS
+    /// translates for system errors once the app supports the device's
+    /// language; domain and code identify the same error in every language.
+    nonisolated static func errorProperties(_ error: Error) -> [String: Any] {
+        let nsError = error as NSError
+        return ["error_domain": nsError.domain, "error_code": nsError.code]
+    }
+
     static func captureError(
         _ error: Error,
         context: String,

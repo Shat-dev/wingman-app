@@ -316,7 +316,7 @@ struct HomeView: View {
 
             }
         }
-        .trackScreenView("Home")
+        .trackScreenView(Analytics.Screen.home)
     }
     
     // MARK: - Find Course by ID

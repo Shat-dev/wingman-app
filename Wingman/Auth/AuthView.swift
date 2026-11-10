@@ -64,10 +64,10 @@ struct AuthView: View {
     /// was hard to see. NOTE: historical "Auth" series include every variant.
     private var screenName: String {
         switch context {
-        case .requiredAfterPaywall: return "AuthRequired"
-        case .afterPurchase:        return "AuthAfterPurchase"
-        case .saveProgress:         return "AuthSaveProgress"
-        case .voluntary:            return "Auth"
+        case .requiredAfterPaywall: return Analytics.Screen.authRequired
+        case .afterPurchase:        return Analytics.Screen.authAfterPurchase
+        case .saveProgress:         return Analytics.Screen.authSaveProgress
+        case .voluntary:            return Analytics.Screen.auth
         }
     }
 

@@ -518,7 +518,7 @@ struct SettingsSheet: View {
         // a Text (see getUserEmail() below) — which would otherwise be
         // legible in every recording.
         .postHogMask()
-        .trackScreenView("Settings")
+        .trackScreenView(Analytics.Screen.settings)
         .appDynamicTypeCeiling()
     }
     
@@ -612,11 +612,11 @@ struct SettingsSheet: View {
 
             // This one is both — a defect worth grouping in error tracking,
             // and the same product signal as the branch above.
-            Analytics.capture(Analytics.Event.purchasesRestoreFailed, [
+            Analytics.capture(Analytics.Event.purchasesRestoreFailed, Analytics.properties([
                 "reason": "error",
                 "source": "settings",
                 "error_message": error.localizedDescription,
-            ])
+            ], adding: Analytics.errorProperties(error)))
             Analytics.captureError(error, context: "purchases_restore")
         }
         

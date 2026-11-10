@@ -71,7 +71,7 @@ struct PracticeDetailView: View {
         .task {
             await viewModel.fetchPracticeDetail()
         }
-        .trackScreenView("Practice Detail")
+        .trackScreenView(Analytics.Screen.practiceDetail)
     }
     
     // MARK: - Navigation Bar

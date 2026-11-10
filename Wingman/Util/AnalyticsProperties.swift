@@ -103,6 +103,30 @@ enum CourseAnalytics {
     }
 }
 
+// MARK: - Paywall prices
+
+enum PaywallAnalytics {
+    /// `price_amount` and `currency` for paywall events: the product's
+    /// regular price per billing period as a number, and its ISO 4217 code.
+    /// Numbers, because the formatted strings some events also carry
+    /// ("$49.99", "59,99 €") cannot be summed or compared across storefronts.
+    /// `currency` is omitted when StoreKit does not report one.
+    nonisolated static func priceProperties(price: Decimal, currencyCode: String?) -> [String: Any] {
+        var properties: [String: Any] = ["price_amount": NSDecimalNumber(decimal: price).doubleValue]
+        if let currencyCode, !currencyCode.isEmpty {
+            properties["currency"] = currencyCode
+        }
+        return properties
+    }
+
+    /// `intro_price_amount`: what is charged today under an introductory
+    /// offer that is paid up front. Empty when there is no such offer.
+    nonisolated static func introPriceProperties(introPrice: Decimal?) -> [String: Any] {
+        guard let introPrice else { return [:] }
+        return ["intro_price_amount": NSDecimalNumber(decimal: introPrice).doubleValue]
+    }
+}
+
 // MARK: - Scenarios
 
 extension PracticeGameData {

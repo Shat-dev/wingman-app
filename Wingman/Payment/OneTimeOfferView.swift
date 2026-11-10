@@ -118,7 +118,7 @@ struct OneTimeOfferView: View {
             }
             await viewModel.load()
         }
-        .trackScreenView("OneTimeOffer")
+        .trackScreenView(Analytics.Screen.oneTimeOffer)
     }
 
     private func handle(_ state: OneTimeOfferViewModel.LoadState) {

@@ -233,7 +233,7 @@ struct ProfileView: View {
             Task { await xpStore.refresh() }
             lessonsCompleted = LessonDataService.shared.totalLessonsCompleted()
         }
-        .trackScreenView("Profile")
+        .trackScreenView(Analytics.Screen.profile)
     }
 
     private func loadApproachData() async {

@@ -456,6 +456,14 @@ final class PaywallViewModel: ObservableObject {
             if package.storeProduct.productIdentifier == Constants.MONTHLY_PRODUCT_ID { return "monthly" }
             return "unknown"
         }()
+
+        // Numeric list price and ISO currency, added to every purchase event
+        // below so revenue can be read by storefront. Additive: no existing
+        // property changes.
+        let priceProperties = PaywallAnalytics.priceProperties(
+            price: package.storeProduct.price,
+            currencyCode: package.storeProduct.currencyCode
+        )
         // A new subscriber still gets the walkthrough; see
         // `AuthManager.startedPurchaseBeforeWalkthrough`. Onboarding only —
         // the feature gate reaches existing (lapsed) users too.
@@ -466,7 +474,7 @@ final class PaywallViewModel: ObservableObject {
         // PostHog: purchase initiated. Captured before the StoreKit call so
         // we have a denominator even when network or sheet errors prevent
         // the success / failure branches from running.
-        PostHogSDK.shared.capture("paywall_purchase_started", properties: [
+        PostHogSDK.shared.capture("paywall_purchase_started", properties: Analytics.properties([
             "plan": plan,
             "product_id": package.storeProduct.productIdentifier,
             "source": source.rawValue,
@@ -481,7 +489,7 @@ final class PaywallViewModel: ObservableObject {
             // mapped through `selectedPlan`, so it stays exact even if the
             // two ever disagree.
             "is_trial_eligible": isEligibleStatus(introEligibility[package.storeProduct.productIdentifier]?.status)
-        ])
+        ], adding: priceProperties))
 
         do {
             let (_, customerInfo, userCancelled) = try await Purchases.shared.purchase(package: package)
@@ -495,12 +503,12 @@ final class PaywallViewModel: ObservableObject {
                 // Terminal event for the started-purchase funnel. Mirrors
                 // `paywall_purchase_started`'s property bag exactly so the
                 // two join on plan / product / source without special-casing.
-                Analytics.capture(Analytics.Event.paywallPurchaseCancelled, [
+                Analytics.capture(Analytics.Event.paywallPurchaseCancelled, Analytics.properties([
                     "plan": plan,
                     "product_id": package.storeProduct.productIdentifier,
                     "source": source.rawValue,
                     "detection": "purchase_result"
-                ])
+                ], adding: priceProperties))
                 isPurchasing = false
                 return false
             }
@@ -547,14 +555,14 @@ final class PaywallViewModel: ObservableObject {
                 // so the `?? false` default is unreachable rather than a
                 // silent misreport.
                 let isSandbox = entitlement?.isSandbox ?? false
-                PostHogSDK.shared.capture("paywall_purchase_succeeded", properties: [
+                PostHogSDK.shared.capture("paywall_purchase_succeeded", properties: Analytics.properties([
                     "plan": plan,
                     "product_id": package.storeProduct.productIdentifier,
                     "source": source.rawValue,
                     "is_trial": isTrial,
                     "is_anonymous": isAnon,
                     "is_sandbox": isSandbox
-                ])
+                ], adding: priceProperties))
 
                 // Meta: subscription conversion, so ad campaigns can optimize
                 // for/report trial-starts and paid-subscribes rather than just
@@ -625,13 +633,13 @@ final class PaywallViewModel: ObservableObject {
                 // `error_code: -1` because there is no NSError on this path —
                 // a real RevenueCat code is never negative, so the sentinel
                 // can't collide with one.
-                PostHogSDK.shared.capture("paywall_purchase_failed", properties: [
+                PostHogSDK.shared.capture("paywall_purchase_failed", properties: Analytics.properties([
                     "plan": plan,
                     "product_id": package.storeProduct.productIdentifier,
                     "source": source.rawValue,
                     "error_code": -1,
                     "failure_reason": "entitlement_missing"
-                ])
+                ], adding: priceProperties))
 
                 isPurchasing = false
                 return false
@@ -647,12 +655,12 @@ final class PaywallViewModel: ObservableObject {
                 // terminal event, so the funnel can count it directly instead
                 // of inferring it by subtraction.
                 log("🚫 PaywallViewModel: User cancelled purchase")
-                Analytics.capture(Analytics.Event.paywallPurchaseCancelled, [
+                Analytics.capture(Analytics.Event.paywallPurchaseCancelled, Analytics.properties([
                     "plan": plan,
                     "product_id": package.storeProduct.productIdentifier,
                     "source": source.rawValue,
                     "detection": "error_code"
-                ])
+                ], adding: priceProperties))
             } else {
                 let failure = PurchaseFailure(error)
                 self.error = failure.message
@@ -666,7 +674,7 @@ final class PaywallViewModel: ObservableObject {
                 // despite not being a failure, so the funnel identity
                 // started = succeeded + failed + cancelled still holds — the
                 // `failure_reason` bucket is what separates it out.
-                PostHogSDK.shared.capture("paywall_purchase_failed", properties: [
+                PostHogSDK.shared.capture("paywall_purchase_failed", properties: Analytics.properties([
                     "plan": plan,
                     "product_id": package.storeProduct.productIdentifier,
                     "source": source.rawValue,
@@ -675,7 +683,7 @@ final class PaywallViewModel: ObservableObject {
                     // entitlement-missing branch above, which now shares
                     // this event name.
                     "failure_reason": failure.reason
-                ])
+                ], adding: priceProperties))
             }
 
             isPurchasing = false
@@ -745,12 +753,12 @@ final class PaywallViewModel: ObservableObject {
             self.showAlert = true
             log("❌ PaywallViewModel: Restore failed: \(error)")
 
-            Analytics.capture(Analytics.Event.purchasesRestoreFailed, [
+            Analytics.capture(Analytics.Event.purchasesRestoreFailed, Analytics.properties([
                 "reason": "error",
                 "source": "paywall",
                 "paywall_source": source.rawValue,
                 "error_message": error.localizedDescription
-            ])
+            ], adding: Analytics.errorProperties(error)))
             Analytics.captureError(error, context: "purchases_restore", [
                 "source": "paywall"
             ])

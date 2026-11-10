@@ -79,7 +79,7 @@ struct PracticeView: View {
             // nothing for it to decide.
             await viewModel.prefetchGameData()
         }
-        .trackScreenView("Practice")
+        .trackScreenView(Analytics.Screen.practice)
     }
 
     // MARK: - Derived user display name

@@ -107,12 +107,25 @@ final class OneTimeOfferViewModel: ObservableObject {
     }
 
     private var baseProperties: [String: Any] {
-        [
+        var properties: [String: Any] = [
             "plan": Self.plan,
             "product_id": productId,
             "source": Self.source.rawValue,
             "offer": Self.offerName
         ]
+        // Numeric prices, once the product has loaded. Added beside the
+        // formatted `intro_price` / `full_price` strings on `paywall_viewed`,
+        // which vary by storefront and cannot be aggregated.
+        if let product = package?.storeProduct {
+            properties = Analytics.properties(properties, adding: PaywallAnalytics.priceProperties(
+                price: product.price,
+                currencyCode: product.currencyCode
+            ))
+            properties = Analytics.properties(properties, adding: PaywallAnalytics.introPriceProperties(
+                introPrice: product.introDurationMonths != nil ? product.introductoryDiscount?.price : nil
+            ))
+        }
+        return properties
     }
 
     // MARK: - Preload
@@ -354,11 +367,11 @@ final class OneTimeOfferViewModel: ObservableObject {
             return restored
         } catch {
             log("❌ OneTimeOfferViewModel: Restore failed: \(error)")
-            Analytics.capture(Analytics.Event.purchasesRestoreFailed, [
+            Analytics.capture(Analytics.Event.purchasesRestoreFailed, Analytics.properties([
                 "reason": "error",
                 "source": Self.source.rawValue,
                 "error_message": error.localizedDescription
-            ])
+            ], adding: Analytics.errorProperties(error)))
             self.error = "Restore failed. Please try again."
             self.showAlert = true
             return false

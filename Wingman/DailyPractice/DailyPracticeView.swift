@@ -131,7 +131,7 @@ struct DailyPracticeView: View {
         .onDisappear {
             log("👋 PracticeView disappeared")
         }
-        .trackScreenView("Daily Practice")
+        .trackScreenView(Analytics.Screen.dailyPractice)
     }
     
     // MARK: - Analytics

@@ -205,7 +205,7 @@ struct CourseDetailSheet: View {
                 )
             }
         }
-        .trackScreenView("Course Detail")
+        .trackScreenView(Analytics.Screen.courseDetail)
     }
 
     /// Banner copy. Nil when the course is unlocked (no banner rendered).
