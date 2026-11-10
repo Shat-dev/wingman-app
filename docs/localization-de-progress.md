@@ -7,7 +7,7 @@ Branch `localization-release-b`. Rules and glossary: [localization-de-brief.md](
 | Part | State |
 |---|---|
 | UI catalogs (G2) | 574 of 574 strings drafted (2026-11-10) |
-| Lesson overlays (G3) | 12 of 25 courses (758 of 1,531 items): 1, 2, 3, 6, 7, 8, 12, 13, 17, 18, 22, 23 |
+| Lesson overlays (G3) | 13 of 25 courses (820 of 1,531 items): 1, 2, 3, 6, 7, 8, 12, 13, 14, 17, 18, 22, 23 |
 | Database content (G4) | Not started |
 | German sweep (G7) | Onboarding and tabs on SE, 2026-11-11: no clipping. Lessons not yet seen in German |
 
@@ -28,6 +28,7 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **2026-11-11. Course 23, Creating Opportunities** (3 lessons, 49 items, 1,180 English words). The check passes. For the reviewer: "home court advantage" became *Heimvorteil*; "regular" became *Stammgast*; "foam rolling near the turf" became *neben der Kunstrasenfläche mit der Faszienrolle ausrollen*; "running club" became *Lauftreff*.
 - **2026-11-11. Course 3, Presence & Expressions** (4 lessons, 68 items, 1,378 English words). The check passes. For the reviewer: "emotional contagion" became *emotionale Ansteckung*; "positive affirmations" became *ein paar positive Sätze vorsagen* (*Affirmationen* reads clinical). The research claims ("neurologically impossible…", dopamine and serotonin) are kept as strong as the English. Consider softening them in both languages.
 - **2026-11-11. Course 8, The Opener** (4 lessons, 62 items, 1,444 English words). The check passes. For the reviewer: "frame control" became *den Rahmen setzen*; "voice mechanics" became simply *Deine Stimme*. The example openers are rewritten as natural spoken German rather than translated ("This line's brutal today" became *Die Schlange ist heute echt brutal*).
+- **2026-11-11. Course 14, Sharing & Vulnerability** (4 lessons, 62 items, 1,432 English words). The check passes. For the reviewer: "reciprocity rhythm" became *Rhythmus der Gegenseitigkeit*; "processed / unprocessed sharing" became *Verarbeitetes / Unverarbeitetes teilen*; "Share the lesson, not the wound" became *Erzähl die Lektion, nicht die Wunde*.
 
 ## Questions for Arthur
 
