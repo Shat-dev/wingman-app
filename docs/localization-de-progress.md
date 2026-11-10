@@ -7,7 +7,7 @@ Branch `localization-release-b`. Rules and glossary: [localization-de-brief.md](
 | Part | State |
 |---|---|
 | UI catalogs (G2) | 574 of 574 strings drafted (2026-11-10) |
-| Lesson overlays (G3) | 24 of 25 courses (1,433 of 1,531 items): all but 11 |
+| Lesson overlays (G3) | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-11). All 25 files load in the app (298 unit tests pass) |
 | Database content (G4) | Not started |
 | German sweep (G7) | Onboarding and tabs on SE, 2026-11-11: no clipping. Lessons not yet seen in German |
 
@@ -40,6 +40,7 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **2026-11-11. Course 10, Situational Specific Approaches** (3 lessons, 50 items, 1,249 English words). The check passes. For the reviewer: "venue" became *Location*, the usual German word for a bar or club; "logistics" became *Planung*; "Daytime/Nighttime Approaches" became *Ansprechen am Tag / am Abend*. The bad example in 10_1_3_1 (a tap on the shoulder from behind) is kept as the negative example it is.
 - **2026-11-11. Course 16, Advanced Conversation Skills** (3 lessons, 51 items, 1,133 English words). The check passes. For the reviewer: "energy drop" became *Energieabfall*; "emotional anchoring" became *emotionales Verankern*; "debt and credentials" became *Studienkredite und Abschlüsse* (student debt is less of a German theme, so consider *Kosten*).
 - **2026-11-11. Course 21, Advanced Flirting Skills** (3 lessons, 51 items, 1,183 English words). The check passes. For the reviewer: "Disqualification Techniques" is a pickup-artist term with no neutral German equivalent; the title became *Nicht gleich beeindruckt sein* (not being instantly impressed), which says what the lesson teaches. "Callbacks & Inside Jokes" became *Rückbezüge und Insider*; "sexual tension" became *knisternde / sexuelle Spannung*.
+- **2026-11-11. Course 11, Advanced Opening Techniques** (5 lessons, 98 items, 2,157 English words). The check passes. **All 25 courses are now drafted in German (34,442 English words).** 298 unit tests pass with every German overlay bundled. For the reviewer: "thrifting" became *auf Flohmärkten und in Secondhandläden stöbern*; "False Exits" became *der vorgetäuschte Abgang*; "a woman's opinion" became *eine weibliche Meinung*.
 
 ## Questions for Arthur
 
@@ -53,3 +54,5 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **English typo, `content_25_3_6_2`**: "flat and friendless" is probably "flat and friendly".
 - **Lesson 21_1, "Disqualification Techniques".** The tone sits apart from the rest of the app. "The goal is a dynamic where she's working for your approval" and the example "Buy me a drink." – "I don't know if you've earned it yet." read as classic pickup tactics. They also contradict course 4 ("Nothing to Prove": don't make anyone the judge of your worth). The German is faithful. Consider rewording it in both languages around playful teasing between equals, which is what the Instagram example actually shows.
 - **Lesson 21_2, touch.** "Let your hand linger when you touch her arm" and standing "close enough that she's aware of your physical presence" carry no reciprocity cue, the same gap as 20_4 and 25_3. If you add a stop-or-reciprocity sentence to 20_4, add the same here.
+- **English typo, `content_11_2_7_2`**: "for a women in work attire" should be "for a woman in work attire".
+- **Lesson 11_5, "False Exits"**: this is the same pickup register as 21_1 ("communicates abundance", "a man who has options"). It's milder, but worth reading together with 21_1.
