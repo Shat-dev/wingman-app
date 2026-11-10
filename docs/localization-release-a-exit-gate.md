@@ -48,7 +48,11 @@ Release A is the English-only release: it reshapes the app so that languages can
 
 ## What I still need from you
 
-1. **How to see the paywall with real prices** (explained in the chat on 2026-11-10; my recommendation is the launch flag). Everything in WP4 is tested with stand-in values and has never been seen with a real product.
+1. **How to see the paywall with real prices.** A Debug build cannot load products, so the paywall only ever shows "Can't load pricing" here. Seeing real prices needs a Release build, and a Release build tags its analytics as production. Two ways:
+   - **One Release run (my recommendation for now).** No code change. Cost: one fake user in your production PostHog numbers for that day, and one guest user in Supabase.
+   - **A launch flag** that makes an automated Release run tag itself as dev. Keeps production numbers clean, at the price of a small change to the code that decides the analytics environment. Worth it if this will be done repeatedly, which Release B's per-language paywall checks would be.
+
+   Either way it lifts the "no Release-build runs" rule for that run, so it needs your yes. Everything in WP4 is tested with stand-in values and has never been seen with a real product.
 2. **A sandbox purchase on each product** (gate condition 4).
 3. **The migration dry run, when you want it.** Not needed to ship Release A: English never touches the translation tables. It is needed before a language is added. One command, which leaves nothing behind:
 
