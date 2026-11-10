@@ -820,7 +820,209 @@ The logic that lays translated database content over the English rows, as pure f
 - `LessonQuestionStore` itself has no test of its own; its change is three lines that hand its questions to the cache.
 - Daily-practice questions still ask for their translations on each fetch (slice 32) and do not use this cache. It could serve them too and save that request; left as a possible follow-up.
 
-### Slice 34 — Nothing further without input. See `docs/localization-release-a-exit-gate.md`, section "What I still need from you": a way to see the paywall with real prices, a sandbox purchase on each product, and (before any language) the migration dry run.
+### Slice 34 — WP7 part 5: bundled lesson overlays and lesson display titles (2026-11-10)
+
+**The problem (audit G-1).** The 94 lessons (about 36,800 words) ship inside the app as 25 English JSON files, one per course. They are the largest block of text in the app and had no way to be translated.
+
+**What changed.** New `Wingman/Content/LessonOverlay.swift`. The English files stay where they are and remain the source of structure (which lessons exist, order, IDs, durations, lock state). A translation is one small file per course per language, `lesson_overlay_<courseId>_<language>.json`, mapping existing IDs to translated text: `lesson_14_1.title`, `lesson_14_1.summary`, `course_14.summary`, and each paragraph by its own ID (`content_14_1_1_1`).
+
+- **English never looks for an overlay.** `LessonDataService` loads as before.
+- No file for a course, or an unreadable one: that course is shown in English.
+- Any ID missing or blank in the overlay keeps its English text; IDs the lessons do not have are ignored.
+- **The lesson's `title` stays English** and keeps feeding analytics (`canonicalTitle`, `lesson_name`). The translation is read through new `displayTitle`, `displaySummary` and `displayCourseSummary`; `displayCourseTitle` goes through the `Content` catalog like the course list does. Paragraph text is display only and is replaced in place.
+
+**Shown in the UI:** the course sheet (lesson titles, summaries, course summary), the lesson screen's title, and the "next lesson" card now read the display accessors. All equal the English text when nothing is translated.
+
+**Tests.** 14 new in `LessonOverlayTests` (275 total: 270 pass, 5 probes skipped): an empty overlay leaves the lessons byte-identical when re-encoded; a full overlay shows translated text and keeps every English field; analytics properties are equal before and after; structure (IDs, order, numbers, durations, lock and completion state) never changes; missing and blank entries stay English; unknown IDs are ignored; a file is loaded from a bundle by course and language; a missing or unreadable file gives no overlay; the app ships no overlay files; and across the real 25 courses all 94 lessons load, every lesson and paragraph ID is unique (which overlay keys depend on), and English shows English.
+
+**Behaviour for English users:** unchanged.
+
+**Not verified**
+
+- With a real overlay file in the running app. None exists (no language is added in Release A); the loader was tested against a temporary bundle.
+- There is no tool yet to produce the file a translator fills in, or to check a returned file against the English IDs. That is the next slice.
+
+### Slice 35 — WP7 part 6: app language on the profile, and the lesson script (2026-11-10)
+
+**App language on the user's profile.** The plan asks for the language to be stored in `user_metadata` beside the existing `country` and `currency`, so that server-sent things (sign-in emails first) can match the language the user runs the app in.
+
+- It rides along in the **same write** that already stores country and currency (`captureStoreContext`), so a new profile gets it with no extra request.
+- A separate write happens only when the language differs from what this install last stored. An existing English user whose profile has no value is left alone: a missing value means English. So English gains no request.
+- **One deviation from the plan, on purpose:** the field is `app_language`, not `locale`. Sign-in providers write their own claims into the same metadata and `locale` is a standard one (Google's is the account's language, not the app's), so a provider sign-in could overwrite ours. `app_language` is also what analytics already calls the same value. New file `Wingman/Auth/ProfileLanguage.swift`.
+
+This is a new stored field on new profiles (value "en" for English users). No existing field changes.
+
+**New tool: `scripts/lesson_overlays.py`.**
+
+- `export de out/` writes one file per course, already named and shaped as the app expects, with the English text as each value, in reading order. A translator replaces the values.
+- `check de [folder]` checks returned files against the English lessons. Problems (non-zero exit): an ID the English lessons do not have, a blank translation, a file that is not a flat object of text, an overlay for a course that does not exist. Notes: IDs not translated, text still identical to English (the app shows English for both).
+- `stats` gives items and words per course.
+
+Run against the real lessons: 25 courses, 1,531 translatable items, 34,442 words. A check of a fresh export passes; four planted mistakes (a misspelled ID, a blank value, a non-object file, a course that does not exist) were all reported.
+
+**Tests.** 8 new in `ProfileLanguageTests` (283 total: 278 pass, 5 probes skipped): the field name, language tags, and when a separate write happens (never for an English user with nothing stored; on any change of language, including back to English).
+
+**Behaviour for English users:** same screens, same requests. New profiles carry one more metadata field.
+
+**Not verified**
+
+- The metadata write itself: it happens after products load on a signed-in user, which a Debug build never reaches. The decision logic is tested; the two lines in `AuthManager` that send it are not.
+- Whether your Google or Apple sign-in actually writes a `locale` claim into user metadata. I chose the safer name without checking a real account's metadata.
+
+### Slice 36 — WP3: the sign-out decision no longer reads localized text (2026-11-10)
+
+**The problem (audit C-6).** When the session refresh fails at launch, the app decides whether to keep the cached session or sign the user out. It decided by searching `error.localizedDescription` for English words ("network", "timeout", "invalid", "expired", "token"…). For system errors that text is written in the app's language, so a German app would read the same failure differently and could decide differently.
+
+**What changed.** New `Wingman/Auth/SessionErrorClassifier.swift`; the two helper functions in `AuthManager` are gone. The decision is now made in this order:
+
+1. **By type, in any language:** the app's own five-second timeout (its error domain and code, where it used to be recognised by the word "Timeout"), network failures by URL-loading and socket error code, and a cancelled task. All keep the session.
+2. **A Supabase auth error is judged by the server's message.** That text comes from the auth server or the SDK and is English in every language, so it is not localized text. The same words are looked for as before.
+3. **Anything else:** an English app uses the original word search, unchanged. A translated app keeps the session: an unrecognised error in an unknown language is never a reason to sign someone out.
+
+**Tests.** 9 new in `SessionErrorClassifierTests` (292 total: 287 pass, 5 probes skipped). A copy of the original logic is the reference.
+
+- English: 41 cases (16 kinds of auth error by their server message, the timeout, a cancelled task, 8 URL network codes, 4 socket errors, 11 other errors) all give the original decision.
+- Translated app: every auth and typed case gives the same decision as English, which is the plan's test for this package.
+- Network failures described in German are still recognised, by code.
+- A translated app never signs out on an unrecognised error, whatever words it contains.
+- A real `AuthError` value carries the server message into the decision.
+
+**Behaviour for English users:** unchanged, by the 41-case comparison.
+
+**What I did not do: the production logging.** The plan wanted a few days of logging which error types actually reach this code before removing the word search. That needs a shipped build and your dashboards. So the search is not deleted: it remains as step 3's English fallback. Once logs show nothing but typed and auth errors arriving, it can be removed in one edit.
+
+**Observed while pinning the decisions (existing behaviour, not changed).** Two auth failures keep the session today because their messages contain none of the searched words: "Session from session_id claim in JWT does not exist" and "User from sub claim in JWT does not exist" (a deleted account). A user in either state stays signed in locally until something else fails. I preserved this, since the rule for this package was "same decisions as today". Say if you want those two to sign out.
+
+**Not verified**
+
+- Against real failures from the live auth server. The server messages in the tests are the ones I know the auth server to send; I did not provoke each one.
+
+### Slice 37 — WP8: analytics recorder and a scripted parity test (2026-11-10)
+
+**The seam.** `Analytics.recorderForTesting`: when a test sets it, every event and screen view is handed to the test **instead of being sent**. It is nil in the app, where each function does what it did before.
+
+Seventeen older call sites (sign-in and the paywall) called the PostHog SDK directly and so could not be recorded. They now call `Analytics.captureNow`, which makes the same SDK call at the same moment; the only difference is that a test can see it. Their event names, properties and timing are unchanged.
+
+**The parity test (`AnalyticsParityTests`, 4 tests; 296 total: 291 pass, 5 probes skipped).** A script of 19 calls is recorded once in English and once as a translated app, and the two recordings must be identical. In the translated run the content really is German: a German `Content` table is loaded, a lesson has a German title laid over it, a scenario has a German display title and German screen text.
+
+The script covers what can be driven with no screen, network or purchase:
+
+- the whole walkthrough (start, each step, a nudge, completion), run on the real `WalkthroughCoordinator`;
+- onboarding answers, as stored and sent for a tapped option, for four questions;
+- lesson started and completed, from a real bundled lesson;
+- scenario started and completed;
+- the commitment pact's headline;
+- one directly-sent event and one screen view.
+
+The English recording is also pinned line by line, so a value that changed in both languages at once would still be caught (including the stored misspelling "embarrased", which must not be corrected).
+
+**What this is not.** Section 9 of the plan describes a run through the real screens (onboarding, paywall, a sandbox purchase, a lesson with quiz, a scenario, an approach log, a pact commit), three times: build 37, the new build in English, and a translated build. That needs UI automation through a purchase and a build-37 reference, neither of which a unit test or this loop can produce. The recorder is the piece that run would need; the run itself is still to do.
+
+**Behaviour for English users:** unchanged.
+
+**Not verified**
+
+- That the 17 moved call sites still deliver to PostHog. The change is a one-token replacement to a function that makes the identical call, and it compiles and the app's tests pass, but no event from them was observed arriving.
+- Events fired from inside screens (most of the 64 others) are not in the script.
+
+### Slice 38 — WP8: screenshot script and the launch-time check (2026-11-10)
+
+**New tool: `scripts/screenshots.py`.** The comparison I had been doing by hand after each sweep, checked in:
+
+- `export run.xcresult out/` writes a test run's numbered screenshots to a folder;
+- `compare baseline/ out/` compares them pixel for pixel below the status bar and exits non-zero on any unexpected difference. `--allow` names a screen expected to differ (an animation frame), `--only-numbered-to 17` limits it to the fixed onboarding path.
+
+Run against the WP6 sweep's saved result it reproduces the hand comparison exactly: 16 of 17 identical, screen 14 at 5.580%. The baseline compared with itself is 27 of 27 identical.
+
+**Cold launch (requirement 1: no performance change for English users).** `LaunchPerformanceTests` on the same simulator, clean install as the baseline was. It only launches the app, so it creates no user.
+
+| | Average | Runs |
+|---|---|---|
+| P3 baseline (commit `09b4700`, before any change) | 0.858 s | 5 |
+| Now, run 1 | 0.752 s | 5 |
+| Now, run 2 | 0.739 s | 5 |
+
+No slowdown. I would not call it a speed-up from this work: the baseline was taken hours earlier in a different state of the same Mac. What it rules out is a launch-time cost from the String Catalog, the new helpers or the content code, none of which does anything at launch in English.
+
+**Tests:** 296 unit tests, unchanged (291 pass, 5 probes skipped). No app source changed in this slice.
+
+**Not verified**
+
+- Time to reach the paywall, which the plan's P3 also wanted. The sweep's run time (about 102 s both before and after) is dominated by deliberate waits in the test, so it says nothing.
+- Launch time on a real phone, and in a Release build.
+
+### Slice 39 — Exit-gate summary; the loop stops here (2026-11-10)
+
+`docs/localization-release-a-exit-gate.md`: each condition of the plan's exit gate and each of the 14 requirements, with its state and how it was checked, what needs a decision, what only Arthur can do, everything not verified in one list, and the places where the work departed from the plan on purpose.
+
+Every Release A work package is as far as this loop can take it. The gate itself is not passed: three of its four conditions need a real purchase, real products or a build-37 comparison.
+
+### Slice 40 — Arthur's answers: D4 declined, a second pseudo-language run, the migration dry run (2026-11-10)
+
+**D4: the paywall stays as it is.** Arthur chose option C. Nothing was built; the checklist and the exit-gate page record the decision. WP4 has no open item.
+
+**Second doubled-text run, approved by Arthur.** `testOnboardingInDoubleLengthPseudoLanguage` on the "Wingman L10n SE" simulator, clean install, one more guest user in production. 26 screens. Against the findings of slice 22:
+
+| Finding | In the running app now |
+|---|---|
+| 1. Statistic screens | Fixed. Top bar in place, heading from the top, "Tap to continue" visible and pinned. The run tapped through all four, so the right-half tap works in the scrolling layout |
+| 2. Growth projection | Fixed. Top bar in place, Continue fully visible. Residual: the chart's four-line label is clipped at its top edge |
+| 4. Commitment pact | Fixed. The line under the logo wraps to two lines; the hold-to-commit still worked |
+
+**Migration dry run prepared, not run.** `supabase/scripts/content_translations_dry_run.sql`, generated from the migration by `supabase/scripts/make_content_translations_dry_run.py`: the migration in one transaction, then checks (RLS and grants, the options guard, blank text, language tags, duplicates, the updated_at trigger, inserts against real parent rows, a missing parent), then ROLLBACK, then one row saying it passed and that no table was left. Parsed with the PostgreSQL 17 grammar: BEGIN … ROLLBACK and no COMMIT anywhere.
+
+It is one command for Arthur (`supabase db query --linked -f …`). The Supabase connector in this session no longer has permission to run queries, and the rule was that I do not touch the live database, so I did not run it. It is not needed for Release A; it is needed before a language is added.
+
+**Not verified**
+
+- The dry run itself has never been executed.
+- Whether `supabase db query` accepts a multi-statement file with its own transaction. If not, the dashboard SQL editor does.
+- English in the running app after slices 23–38: the last English sweep was slice 21.
+
+### Slice 41 — The approved Release run: the paywall with real prices (2026-11-10)
+
+Arthur approved one Release-build run. English sweep, "Wingman L10n 17 Pro" simulator, clean install. One guest user in production Supabase and one user's worth of production-tagged analytics.
+
+The sweep was first extended to photograph the paywall with each plan selected and the one-time offer (extra screenshots named 17b and 17c, so the numbering of later screens is the same in every build). The Release configuration was built before the run, so a build problem could not waste it.
+
+**What the run showed**
+
+| Checked | Result |
+|---|---|
+| Plan rows with real products | Yearly $69.99 with "only $1.35 per week"; monthly $14.99 with "only $3.46 per week". Both are the product's price divided by 52 and by 4.33, in the product's currency. Layout correct, nothing cut |
+| "per year" / "per month", footer links, ticks | As designed |
+| One-time offer | "40% off your first year", $49.99 struck through beside $29.99, button "Claim 40% off", and the whole-sentence disclosure: "$29.99 billed today for your first year, then $49.99/year. Cancel anytime in App Store settings." |
+| English screens 1–16 against the baseline | 15 identical; the loading frame differs by its animation (2.8%). So slices 23–38 changed nothing visible in English on this path, which had not been re-checked in the running app since slice 21 |
+| Events in PostHog | Arrived. `paywall_viewed`, `paywall_plan_selected` and `paywall_dismissed` (three of the 17 call sites moved in slice 37) are there with their usual properties; the new `app_language` ("en"), `device_language` ("en-AU"), `storefront` ("USA"), `price_amount`, `currency` and `intro_price_amount` are there too |
+
+**Found and fixed: a price sent one step off.** The offer's `price_amount` arrived as 49.989999999999995, not 49.99. Converting a decimal price directly to a floating-point number can land one step from the nearest value. `price_amount` and `intro_price_amount` are properties this branch introduced, so the fix changes no existing value: they now go through the decimal's own text and print as the price. 2 new tests (298 total: 293 pass, 5 probes skipped) cover twelve price points exactly. The two older conversions that feed Meta's purchase value were left alone, as existing behaviour.
+
+**Two observations for Arthur (live behaviour, not from this branch)**
+
+1. **No free trial was offered on the simulator.** For this fresh user both plans read as not trial-eligible: the button said "Continue", the line under it "Billed immediately. Cancel anytime in App Store settings.", and there was no badge. That is decided by the eligibility check this work did not change, and the event confirms it (`is_trial_eligible: false` for both plans). **I cannot tell whether that is the simulator (no Apple ID signed in) or the products.** Production, with simulator users excluded, is mixed and thin: on yearly, real users were shown the trial on 7–8 November (8 people) and one of two on the 9th; one person on the 10th was not. Ineligible real users are normal (anyone who already used a trial). So this is something to glance at on a real phone, not a finding.
+
+   *Correction:* my first reading of the production numbers counted this run's own user among the ineligible ones.
+2. **The offer reads 40%, its internal name says 50.** The percentage is computed from the storefront's two prices ($29.99 against $49.99), rounded down, by design. The event's `offer` is still `one_time_50`.
+
+**A mistake in this run: it selected plans.** To photograph the paywall with the monthly plan selected, the sweep tapped the monthly row and then the yearly row. Each tap sends `paywall_plan_selected`, tagged production, and those events feed the plan-mix numbers. An existing note for this project says not to select plans in a Release run, and I had not re-read it. The cost is two events (one monthly, one yearly) from one user with `$is_emulator = true`; filtering on that property removes them. The sweep now leaves the plan rows alone unless a switch in the test is turned on (`selectsPlansOnThePaywall`).
+
+Everything else the run sent is the one fake user that was agreed: 17 kinds of event, all with `$is_emulator = true`.
+
+**Not verified**
+
+- The trial badge with a real product: it could not appear on a run with no trial. Its code is tested only with stand-in values.
+- A purchase. Nothing was bought.
+- Other storefronts and currencies: this was the US store.
+
+### Slice 42 — Repair of this log (2026-11-10)
+
+From slice 34 to slice 41 this log was silently damaged. One of my edits to the "Next" section matched text in the slice 34 heading it had just inserted, and removed the slice 34 entry together with the "## Next" heading. Every later entry was then meant to be inserted before "## Next", found no such heading, and was never written. The status table kept being updated, so the damage did not show.
+
+Nothing else was affected: the code, the tests, the commits and the other documents are as described. Entries 34 to 41 above were restored word for word from the session's own record of the commands that should have written them, with two corrections to slice 41 that are marked there.
+
+## Next
+
+Nothing further without input. See `docs/localization-release-a-exit-gate.md`, section "What I still need from you": a sandbox purchase on each product, a look at the trial badge once a trial is on offer, and (before any language) the migration dry run.
 
 ## Open questions for Arthur
 
@@ -828,4 +1030,3 @@ The logic that lays translated database content over the English rows, as pure f
 - **"Hi" in a course thumbnail (Release B, not urgent):** the thumbnail for "The Opener" has the word "Hi" in a speech bubble. Keep it for other languages, or have it redrawn without the word?
 - **Dates for English users outside the US:** the approach list shows "Nov 3, 2026" to every English user, including Australian and British ones (your second and fourth largest markets), because the format is fixed. I kept that unchanged, since Release A must not change what English users see. Switching English to a locale-aware date would show "3 Nov 2026" in those regions. Say if you want that; it is a one-line change.
 - **Unused code:** `CommonComponents/ErrorViewScreen.swift`, `Resources/AppStrings.swift` and the Poppins font styles in `Resources/App.swift` appear to be unused. May I delete them? Otherwise the error screen's three strings stay in the catalog and get translated for nothing.
-- **Priced paywall baseline:** one Release-build run (one test user in production analytics), or add a launch flag that tags automated runs as dev? Needed before WP4 can be signed off.

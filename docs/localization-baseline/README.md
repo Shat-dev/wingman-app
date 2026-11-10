@@ -54,7 +54,9 @@ These were captured **after** the WP5 and WP6 changes, so they are a reference f
 
 `iphone-17-pro-priced/`, captured 2026-11-10 from branch `localization-release-a` in the one Release-build run Arthur approved: the paywall with the yearly plan selected, with the monthly plan selected, and the one-time offer. US storefront, fresh install, so a user with no purchase history.
 
-These are the first pictures of these screens with products loaded; there is no earlier picture to compare them with. On that run the paywall offered no free trial for either plan (button "Continue", line "Billed immediately…", no badge), and the offer read 40% ($29.99 against $49.99).
+These are the first pictures of these screens with products loaded; there is no earlier picture to compare them with. On that run the paywall offered no free trial for either plan (button "Continue", line "Billed immediately…", no badge), which may just be the simulator having no Apple ID, and the offer read 40% ($29.99 against $49.99).
+
+The monthly-selected picture exists because that run tapped the plan rows, which sends `paywall_plan_selected` to production. The sweep no longer does that by default; see `selectsPlansOnThePaywall` in `OnboardingSweepTests.swift`.
 
 To repeat it (it creates a guest user and sends production-tagged analytics, so only with Arthur's say-so):
 

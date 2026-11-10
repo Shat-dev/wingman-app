@@ -52,8 +52,12 @@ Release A is the English-only release: it reshapes the app so that languages can
 
 Neither comes from this branch; both are how the App Store products behave today.
 
-1. **No free trial was offered** to a fresh user, on either plan: "Continue", "Billed immediately…", no badge. Production shows the same since about 9 November (yearly was mostly trial-eligible through the 8th; the last trial start recorded is the 8th). Expected if you removed the trial; worth checking in App Store Connect if you did not.
+1. **No free trial was offered on the simulator,** on either plan: "Continue", "Billed immediately…", no badge. I cannot tell whether that is the simulator (no Apple ID) or the products. Production is mixed and thin: real users on yearly were shown the trial on 7–8 November and one of two on the 9th. Worth a glance at the paywall on a real phone; not a finding.
 2. **The one-time offer reads 40%** ($29.99 against $49.99), while its internal name is `one_time_50`. The app computes the percentage from the store's prices on purpose.
+
+**A mistake in that run:** it tapped the monthly and yearly plan rows to photograph each, which sent two `paywall_plan_selected` events tagged production. They come from a user with `$is_emulator = true`, so that filter removes them from the plan-mix numbers. The sweep no longer does this unless a switch is turned on.
+
+**A mistake in the working log:** entries for slices 34 to 41 were not being written to `localization-progress.md` (an edit of mine removed the heading they are inserted before). They are restored; see slice 42 there.
 
 ## What I still need from you
 
