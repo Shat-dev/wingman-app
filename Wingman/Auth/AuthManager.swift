@@ -2025,7 +2025,10 @@ final class AuthManager: ObservableObject {
 
         let flagKey = "hasCapturedStoreContext_\(userId)"
         if UserDefaults.standard.bool(forKey: flagKey) {
-            // Already captured for this user on this install — no-op.
+            // Already captured for this user on this install. The only thing
+            // that can still change is the app's language; in English, with
+            // nothing stored, this returns without a request.
+            await captureProfileLanguageIfChanged(userId: userId)
             return
         }
 
@@ -2045,15 +2048,40 @@ final class AuthManager: ObservableObject {
             updates["currency"] = AnyJSON.string(currency)
         }
         updates["store_context_captured_at"] = AnyJSON.string(ISO8601DateFormatter().string(from: Date()))
+        // The app's language rides along in this same write, so recording it
+        // costs no extra request. See `ProfileLanguage`.
+        let language = ProfileLanguage.current
+        updates[ProfileLanguage.metadataKey] = AnyJSON.string(language)
 
         do {
             let attributes = UserAttributes(data: updates)
             try await client.auth.update(user: attributes)
             UserDefaults.standard.set(true, forKey: flagKey)
+            UserDefaults.standard.set(language, forKey: ProfileLanguage.storedKey(userId: userId))
             log("✅ captureStoreContext: wrote to user_metadata")
         } catch {
             // Best-effort — don't flip the flag, so next paywall open retries.
             log("❌ captureStoreContext: failed — \(error.localizedDescription)")
+        }
+    }
+
+    /// Updates `app_language` in `user_metadata` when the app's language is not
+    /// the one last stored for this user. Best-effort; a failure is retried
+    /// the next time this runs. Makes no request in English unless a
+    /// different language was stored before.
+    private func captureProfileLanguageIfChanged(userId: String) async {
+        let key = ProfileLanguage.storedKey(userId: userId)
+        guard let language = ProfileLanguage.languageNeedingAWrite(
+            current: ProfileLanguage.current,
+            lastStored: UserDefaults.standard.string(forKey: key)
+        ) else { return }
+
+        do {
+            try await client.auth.update(user: UserAttributes(data: [ProfileLanguage.metadataKey: AnyJSON.string(language)]))
+            UserDefaults.standard.set(language, forKey: key)
+            log("✅ captureProfileLanguage: \(ProfileLanguage.metadataKey)=\(language)")
+        } catch {
+            log("❌ captureProfileLanguage: failed — \(error.localizedDescription)")
         }
     }
 
