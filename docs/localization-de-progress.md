@@ -7,7 +7,7 @@ Branch `localization-release-b`. Rules and glossary: [localization-de-brief.md](
 | Part | State |
 |---|---|
 | UI catalogs (G2) | 574 of 574 strings drafted (2026-11-10) |
-| Lesson overlays (G3) | 22 of 25 courses (1,331 of 1,531 items): 1–10, 12–15, 17–20, 22–25 (left: 11, 16, 21) |
+| Lesson overlays (G3) | 23 of 25 courses (1,382 of 1,531 items): 1–10, 12–20, 22–25 (left: 11, 21) |
 | Database content (G4) | Not started |
 | German sweep (G7) | Onboarding and tabs on SE, 2026-11-11: no clipping. Lessons not yet seen in German |
 
@@ -38,6 +38,7 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **2026-11-11. Course 25, Learning & Self Discovery** (4 lessons, 72 items, 1,569 English words). The check passes. For the reviewer: "sticking point" became *Knackpunkt*; "growth plateau" became *Plateau*; "calibration" became *Gespür* here (*Kalibrieren* in 17_4). The English "flat and friendless" (25_3_6_2), probably meant as "flat and friendly", became *flach und rein freundschaftlich*.
 - **2026-11-11. Course 5, Non-negotiables** (4 lessons, 54 items, 1,302 English words). The check passes. The course covers fitness, grooming, hygiene and style, so its German title in `Content.xcstrings` is changed from the guess *Nicht verhandelbar* to ***Das Pflichtprogramm***. "Cologne" became *Parfum*; "underdressed" stays as is (common in German).
 - **2026-11-11. Course 10, Situational Specific Approaches** (3 lessons, 50 items, 1,249 English words). The check passes. For the reviewer: "venue" became *Location*, the usual German word for a bar or club; "logistics" became *Planung*; "Daytime/Nighttime Approaches" became *Ansprechen am Tag / am Abend*. The bad example in 10_1_3_1 (a tap on the shoulder from behind) is kept as the negative example it is.
+- **2026-11-11. Course 16, Advanced Conversation Skills** (3 lessons, 51 items, 1,133 English words). The check passes. For the reviewer: "energy drop" became *Energieabfall*; "emotional anchoring" became *emotionales Verankern*; "debt and credentials" became *Studienkredite und Abschlüsse* (student debt is less of a German theme, so consider *Kosten*).
 
 ## Questions for Arthur
 
