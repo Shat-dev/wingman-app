@@ -163,7 +163,7 @@ struct LessonView: View {
                         .foregroundColor(Color(hex: "1A1A1A"))
                         .opacity(0.5)
                         .multilineTextAlignment(.center)
-                        .lineLimit(1)
+                        .lineLimit(1, whenTranslated: 1, shrinkingTo: 0.75)
                         .truncationMode(.tail)
                 }
                 .padding(.bottom, -10)

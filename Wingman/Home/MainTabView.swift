@@ -343,8 +343,14 @@ struct TabBarButton: View {
                 Text(title)
                     .font(.manropeMedium(size: 10))
                     .foregroundColor(isSelected ? .primary : .secondary)
-                    .lineLimit(1)
-                    .fixedSize() // Prevents text from taking extra space
+                    // English: one line at its natural size, as before. A
+                    // translated label stays inside its quarter of the bar
+                    // and shrinks rather than running into its neighbours.
+                    .lineLimit(1, whenTranslated: 1, shrinkingTo: 0.7)
+                    .fixedSize(
+                        horizontal: L10n.usesSourceLanguageLayout,
+                        vertical: L10n.usesSourceLanguageLayout
+                    ) // Prevents text from taking extra space
             }
             .frame(maxWidth: .infinity)
             .contentShape(Rectangle())

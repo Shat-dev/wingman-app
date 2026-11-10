@@ -13,9 +13,9 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP3 Error classification | Not started | Plan wants a few days of production logging first; cannot be done inside this loop |
 | WP4 Paywall prices and disclosure | Not started | Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
 | WP5 String Catalog and extraction | **Done except what WP4 owns** (slices 4–17) | `Localizable` 386 strings, `Content` 174. Left on purpose: paywall price and disclosure strings (WP4). A translated display title for lessons and scenarios comes with WP7 |
-| WP6 Layout and legal links | In progress (slices 17–18) | Done: sign-in legal line, paywall and offer footer links. Still to do: answer-button line caps, fixed-height buttons, pseudo-language pass, then the one WP6 sweep |
+| WP6 Layout and legal links | In progress (slices 17–19) | Done: sign-in legal line, paywall and offer footer links, line caps (answer buttons, tab labels, cards, titles). Still to do: fixed-height buttons, paywall ticks and plan rows, pseudo-language pass, image check, then the one WP6 sweep |
 | WP7 Content translation plumbing | Not started | Migration files only; nothing applied to the live database |
-| WP8 Tooling and tests | In progress | Done: unit and UI test targets (159 unit tests), onboarding sweep, sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, sweep beyond the paywall, performance comparison, analytics parity recorder (section 9 of the plan) |
+| WP8 Tooling and tests | In progress | Done: unit and UI test targets (169 unit tests), onboarding sweep, sign-in screen UI test, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, sweep beyond the paywall, performance comparison, analytics parity recorder (section 9 of the plan) |
 
 ## Slices
 
@@ -415,9 +415,44 @@ Both layouts open the same two pages (`getwingman.app/terms`, `/privacy`) in the
 - Neither footer has been looked at in the running app since this change. The paywall is the last screen of the onboarding sweep, so the WP6 sweep will compare it with the baseline. The one-time offer is past the paywall and is not covered until the sweep is extended.
 - The stacked fallback makes the footer 88 pt taller. On the paywall that pushes into a fixed-height layout; no European language I measured needs it on a current phone, so I have not checked what the paywall does with the extra height.
 
+### Slice 19 — WP6 part 3: line caps (2026-11-10)
+
+**Inventory.** The app has 13 `lineLimit` sites. Six hold text that will be translated and would be cut with "…" when the translation is longer. The rest are already safe (no cap, already shrink, or user-written notes).
+
+| Where | English (unchanged) | Translated app |
+|---|---|---|
+| Scenario answer buttons (`OptionsContentView`) | 2 lines | No cap; the button grows; the list scrolls if it no longer fits |
+| Tab bar labels | 1 line at natural size | 1 line inside its quarter of the bar, shrinking to 70% |
+| Scenario card title and summary | 2 and 3 lines | No cap (the card is in a scrolling list and grows) |
+| Course tile title | 2 lines | 3 lines, shrinking to 85% |
+| Lesson title under a lesson | 1 line | 1 line, shrinking to 75% |
+| Onboarding question subtitle | 2 lines | No cap (no question has a subtitle today) |
+
+Left alone: onboarding answer buttons (they already grow, inside a scroll view), the one-time-offer price and profile stat labels (already shrink), approach notes (the user's own text, capped on purpose).
+
+**How.** One new modifier, `lineLimit(_:whenTranslated:shrinkingTo:)` in `Wingman/Util/View+TranslatedTextFit.swift`. In English it resolves to the same `.lineLimit(n)` the call site had and a scale factor of 1, SwiftUI's default.
+
+**Checked against real content.** The longest English scenario answer in the database is 72 characters; it fits in two lines at iPhone SE width, so English answers are not being cut today. A German-length version of the same answer needs four lines and was cut mid-sentence by the two-line cap.
+
+**Tests.** 10 new unit tests in `TranslatedTextFitTests` (169 total, all passing):
+
+- the rule in both modes;
+- English pixel comparisons against copies of the pre-change markup: a capped text at 1, 2 and 3 lines; the tab bar at 375 and 402 pt; the scenario answer list at SE, 17 Pro and Pro Max widths;
+- a translated answer list is taller than the capped one (nothing cut);
+- on a short screen the translated list scrolls (drawn in a real window: first answer shown from the top, list continues past the bottom edge), and with room to spare it does not;
+- long translated tab labels render inside a 320 pt bar.
+
+**Behaviour for English users:** unchanged, by the pixel comparisons above. No string changed.
+
+**Not verified**
+
+- None of these six has been looked at inside the running app since the change. Scenario answers, cards, course tiles and the tab bar are all past the paywall, which the sweep does not reach yet.
+- Course tile, lesson title and question subtitle have no test of their own beyond the shared modifier's.
+- A course tile that grows to three lines is taller than its neighbour in the same grid row. I have not looked at how that row lines up.
+
 ## Next
 
-WP6, third slice: answer buttons and other fixed-height controls (onboarding answer buttons with a line cap, 52 pt buttons, tab labels): find every `lineLimit`, fixed `frame(height:)` and `minimumScaleFactor` that holds translated text, and decide per control whether it may grow, shrink or wrap. English must look the same. Then a pseudo-language pass (long strings through the `-l10nForceTranslatedLayout` path).
+WP6, fourth slice: fixed-height buttons (plan item 6, about 20 sites with `frame(height: 52)` or similar holding a text label): English keeps the fixed height; a translated label may shrink slightly, then the button grows. After that: paywall ticks and plan rows (items 3–4, alongside WP4), the image check (item 8), and a pseudo-language pass.
 
 Before the WP6 sweep is spent: extend `OnboardingSweepTests` past the paywall (close the paywall, capture the required sign-in screen in both legal-line layouts, tap both links), so one run covers everything WP6 changed.
 

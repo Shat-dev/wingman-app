@@ -711,7 +711,27 @@ struct OptionsContentView: View {
         }
     }
 
+    /// English keeps the list exactly as it was: buttons capped at two
+    /// lines, centred in the space it is given.
+    ///
+    /// A translated answer can need a third line. There the cap is lifted,
+    /// each button grows to fit its text, and if the taller list no longer
+    /// fits the screen it scrolls instead of being squeezed.
     var body: some View {
+        if L10n.usesSourceLanguageLayout {
+            optionList
+        } else {
+            ViewThatFits(in: .vertical) {
+                optionList
+                ScrollView {
+                    optionList
+                        .padding(.vertical, 8)
+                }
+            }
+        }
+    }
+
+    private var optionList: some View {
         VStack(spacing: 12) {
             ForEach(options.sorted { $0.orderIndex < $1.orderIndex }) { option in
                 let optionStyle = style(for: option)
@@ -721,7 +741,8 @@ struct OptionsContentView: View {
                         .font(.manropeSemiBold(size: 16))
                         .foregroundColor(textColor(optionStyle))
                         .multilineTextAlignment(.center)
-                        .lineLimit(2)
+                        .lineLimit(2, whenTranslated: nil)
+                        .fixedSize(horizontal: false, vertical: !L10n.usesSourceLanguageLayout)
                         .frame(maxWidth: .infinity)
                         .padding(.horizontal, 20)
                         .padding(.vertical, 15)

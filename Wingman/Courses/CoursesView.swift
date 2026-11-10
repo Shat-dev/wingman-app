@@ -397,7 +397,7 @@ struct CourseCardContent: View {
                 .foregroundColor(isLocked ? Color.wingmanBlack.opacity(0.3) : .wingmanBlack)
                 .lineSpacing(1)
                 .multilineTextAlignment(.leading)
-                .lineLimit(2)
+                .lineLimit(2, whenTranslated: 3, shrinkingTo: 0.85)
                 .truncationMode(.tail)
                 .frame(maxWidth: .infinity, alignment: .topLeading)
                 .frame(minHeight: 44)

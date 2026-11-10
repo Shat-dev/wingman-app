@@ -82,7 +82,7 @@ struct QuestionScreen: View {
                 Text(subtitle)
                     .font(.subheadline)
                     .foregroundColor(.gray)
-                    .lineLimit(2)
+                    .lineLimit(2, whenTranslated: nil)
                     .multilineTextAlignment(.leading)
             }
 
