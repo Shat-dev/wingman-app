@@ -74,7 +74,7 @@ struct CoursesView: View {
                                 HStack(spacing: 8) {
                                     ForEach(viewModel.availableCategories) { category in
                                         CategoryPill(
-                                            title: category.name,
+                                            title: category.displayName,
                                             isSelected: viewModel.selectedCategoryId == category.id
                                         ) {
                                             HapticManager.shared.selection()
@@ -116,7 +116,7 @@ struct CoursesView: View {
                                         // `scrollTo(category.id, anchor: .top)` has one
                                         // unambiguous target — modifiers on a Section are
                                         // spread across both its header and its content.
-                                        Section(header: CategoryHeader(title: category.name)
+                                        Section(header: CategoryHeader(title: category.displayName)
                                             .background(
                                                 GeometryReader { geo in
                                                     Color.clear.preference(
@@ -392,7 +392,7 @@ struct CourseCardContent: View {
                 .background(Color.gray.opacity(0.2))
 
             // Title section with fixed 2-line height
-            Text(course.title)
+            Text(course.displayTitle)
                 .font(.manropeMedium(size: 14))
                 .foregroundColor(isLocked ? Color.wingmanBlack.opacity(0.3) : .wingmanBlack)
                 .lineSpacing(1)

@@ -243,7 +243,7 @@ final class CoursesViewModel: ObservableObject {
         let previous = category(for: course)
             .flatMap { previousCourse(in: $0.courses, relativeTo: course) }
         return .awaitingPrevious(
-            previousCourseTitle: previous?.title ?? "the previous course",
+            previousCourseTitle: previous?.displayTitle,
             previousCourseID: previous?.id,
             previousCourseCanonicalTitle: previous?.canonicalTitle ?? CourseAnalytics.unknownPreviousCourseTitle
         )

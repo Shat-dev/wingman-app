@@ -45,6 +45,18 @@
       "comment" : "Daily quote on the Home screen.",
       "extractionState" : "manual"
     },
+    "Advanced Conversation Skills" : {
+      "comment" : "Course title.",
+      "extractionState" : "manual"
+    },
+    "Advanced Flirting Skills" : {
+      "comment" : "Course title.",
+      "extractionState" : "manual"
+    },
+    "Advanced Opening Techniques" : {
+      "comment" : "Course title.",
+      "extractionState" : "manual"
+    },
     "All our dreams can come true, if we have the courage to pursue them." : {
       "comment" : "Daily quote on the Home screen.",
       "extractionState" : "manual"
@@ -61,12 +73,20 @@
       "comment" : "Daily quote on the Home screen.",
       "extractionState" : "manual"
     },
+    "Approach Readiness" : {
+      "comment" : "Course title.",
+      "extractionState" : "manual"
+    },
     "Back on the market after a breakup or divorce" : {
       "comment" : "Onboarding answer option.",
       "extractionState" : "manual"
     },
     "Be not afraid of growing slowly; be afraid only of standing still." : {
       "comment" : "Daily quote on the Home screen.",
+      "extractionState" : "manual"
+    },
+    "Beliefs & Reframes" : {
+      "comment" : "Course title.",
       "extractionState" : "manual"
     },
     "Believe that what you do makes a difference because it does." : {
@@ -93,8 +113,16 @@
       "comment" : "Daily quote on the Home screen.",
       "extractionState" : "manual"
     },
+    "Closing" : {
+      "comment" : "Course title.",
+      "extractionState" : "manual"
+    },
     "Comfort zones are quiet places where nothing changes." : {
       "comment" : "Daily quote on the Home screen.",
+      "extractionState" : "manual"
+    },
+    "Compliments & Verbal Chemistry" : {
+      "comment" : "Course title.",
       "extractionState" : "manual"
     },
     "Confidence isn’t something you’re born with. It’s something you build" : {
@@ -107,6 +135,10 @@
     },
     "Courage is the birthplace of confidence." : {
       "comment" : "Daily quote on the Home screen.",
+      "extractionState" : "manual"
+    },
+    "Creating Opportunities" : {
+      "comment" : "Course title.",
       "extractionState" : "manual"
     },
     "Creating attraction and romantic interest" : {
@@ -197,6 +229,10 @@
       "comment" : "Daily quote on the Home screen.",
       "extractionState" : "manual"
     },
+    "Fear & Exposure" : {
+      "comment" : "Course title.",
+      "extractionState" : "manual"
+    },
     "Fear loses power when you step toward it." : {
       "comment" : "Daily quote on the Home screen.",
       "extractionState" : "manual"
@@ -207,6 +243,10 @@
     },
     "Fear of social consequences" : {
       "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "Flirting Prerequisites" : {
+      "comment" : "Course title.",
       "extractionState" : "manual"
     },
     "Happiness depends upon ourselves." : {
@@ -269,6 +309,10 @@
       "comment" : "Daily quote on the Home screen.",
       "extractionState" : "manual"
     },
+    "Inner Stability" : {
+      "comment" : "Course title.",
+      "extractionState" : "manual"
+    },
     "It always seems impossible until it’s done." : {
       "comment" : "Daily quote on the Home screen.",
       "extractionState" : "manual"
@@ -297,6 +341,10 @@
       "comment" : "Daily quote on the Home screen.",
       "extractionState" : "manual"
     },
+    "Learning & Self Discovery" : {
+      "comment" : "Course title.",
+      "extractionState" : "manual"
+    },
     "Learning how to approach" : {
       "comment" : "Onboarding answer option.",
       "extractionState" : "manual"
@@ -307,6 +355,14 @@
     },
     "Life shrinks or expands in proportion to one's courage." : {
       "comment" : "Daily quote on the Home screen.",
+      "extractionState" : "manual"
+    },
+    "Listening & Attunement" : {
+      "comment" : "Course title.",
+      "extractionState" : "manual"
+    },
+    "Mastery & Identity" : {
+      "comment" : "Course title.",
       "extractionState" : "manual"
     },
     "More than a year ago" : {
@@ -337,6 +393,10 @@
       "comment" : "Onboarding answer option.",
       "extractionState" : "manual"
     },
+    "Non-negotiables" : {
+      "comment" : "Course title.",
+      "extractionState" : "manual"
+    },
     "Not knowing what to say or how to start" : {
       "comment" : "Onboarding answer option.",
       "extractionState" : "manual"
@@ -361,8 +421,24 @@
       "comment" : "Daily quote on the Home screen.",
       "extractionState" : "manual"
     },
+    "Physical Presence" : {
+      "comment" : "Course title.",
+      "extractionState" : "manual"
+    },
+    "Playfulness & Spark" : {
+      "comment" : "Course title.",
+      "extractionState" : "manual"
+    },
+    "Presence & Expressions" : {
+      "comment" : "Course title.",
+      "extractionState" : "manual"
+    },
     "Rarely" : {
       "comment" : "Onboarding answer option.",
+      "extractionState" : "manual"
+    },
+    "Reading & Responding" : {
+      "comment" : "Course title.",
       "extractionState" : "manual"
     },
     "Recognizing that you are not where you want to be is a starting point to begin changing your life." : {
@@ -377,8 +453,20 @@
       "comment" : "Daily quote on the Home screen.",
       "extractionState" : "manual"
     },
+    "Sharing & Vulnerability" : {
+      "comment" : "Course title.",
+      "extractionState" : "manual"
+    },
+    "Situational Specific Approaches" : {
+      "comment" : "Course title.",
+      "extractionState" : "manual"
+    },
     "Small deeds done are better than great deeds planned." : {
       "comment" : "Daily quote on the Home screen.",
+      "extractionState" : "manual"
+    },
+    "Small talk & Momentum" : {
+      "comment" : "Course title.",
       "extractionState" : "manual"
     },
     "Sometimes" : {
@@ -407,6 +495,14 @@
     },
     "Swing the bat — home runs don't happen from the bench." : {
       "comment" : "Daily quote on the Home screen.",
+      "extractionState" : "manual"
+    },
+    "The Opener" : {
+      "comment" : "Course title.",
+      "extractionState" : "manual"
+    },
+    "The Physical Approach" : {
+      "comment" : "Course title.",
       "extractionState" : "manual"
     },
     "The best way to predict the future is to create it." : {
@@ -499,6 +595,10 @@
     },
     "Trust yourself. You are capable of much more than you think." : {
       "comment" : "Daily quote on the Home screen.",
+      "extractionState" : "manual"
+    },
+    "Upgrading Your Lifestyle" : {
+      "comment" : "Course title.",
       "extractionState" : "manual"
     },
     "Want more confidence in general" : {

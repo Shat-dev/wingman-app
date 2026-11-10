@@ -12,7 +12,7 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP2 Analytics values pinned to English | **Done** (slices 2–3, `9a853f0`, `38f4330`) | New properties not yet observed arriving in PostHog |
 | WP3 Error classification | Not started | Plan wants a few days of production logging first; cannot be done inside this loop |
 | WP4 Paywall prices and disclosure | Not started | Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
-| WP5 String Catalog and extraction | **In progress** (slices 4–9) | `Localizable` holds 262 strings, `Content` 149. Onboarding, commitment, non-disclosure paywall copy, notifications, home and quotes done. Still to move: courses catalog, approach logging, profile and settings, practice, auth and error messages, walkthrough, XP, daily practice and quiz |
+| WP5 String Catalog and extraction | **In progress** (slices 4–10) | `Localizable` holds 264 strings, `Content` 174. Onboarding, commitment, non-disclosure paywall copy, notifications, home, quotes and course catalog done. Still to move: approach logging, profile and settings, practice, auth and error messages, walkthrough, XP, daily practice and quiz |
 | WP6 Layout and legal links | Not started | |
 | WP7 Content translation plumbing | Not started | Migration files only; nothing applied to the live database |
 | WP8 Tooling and tests | Started | Unit and UI test targets exist; parity recorder, validator and fallback tests still to build |
@@ -208,9 +208,29 @@ This closes the gap noted in slice 2 (nothing proved the canonical accessors ign
 - The home screen was not opened on a simulator (it sits behind the paywall and is not in the sweep).
 - The tab titles and button states have no direct unit test; they rely on the general `String(localized:)` checks in `StringCatalogTests`.
 
+### Slice 10 — WP5 part 7: course catalog (2026-11-10)
+
+**What changed**
+
+- `Course.displayTitle` shows the course title through `L10n.content`; `Course.title` stays English and is what `canonicalTitle` (analytics) reads. The course grid, the course detail header and the Home "continue" card now use `displayTitle`.
+- `CourseCategory.displayName` exists for the views but returns the English name on purpose: category names are brand terms (decision D2).
+- The 25 course titles were added to `Content.xcstrings` (174 entries).
+- The lock banner moved to `CourseLockReason.bannerText` and is now two complete, localizable sentences, one for a known previous course and one for an unknown one. Before, the unknown case inserted the English fragment "the previous course" into the sentence. English output is the same in both cases.
+- `CourseLockReason.awaitingPrevious` now carries an optional display title (nil when unknown) next to the id and canonical title added in slice 2.
+- Not touched: `Course.description` and the catalog's own `courseSummary` are never shown (the summary on screen comes from the lesson JSON, which is WP7), so they were not made translatable.
+
+**Behaviour for English users:** unchanged.
+
+**Tests:** new `CourseCatalogDisplayTests` (7): 25 courses in 5 categories; display titles equal the English titles; every title has a `Content` entry; both banner sentences; the view model's lock reason carries display title, id and canonical title; a fake translation changes the displayed title while `title`, `canonicalTitle` and the `course_locked_encountered` properties stay English; category names are not translated even when a translation for the same text exists. 107 unit tests pass.
+
+**Not verified**
+
+- The courses screen was not opened on a simulator.
+- The lesson list inside a course still shows lesson titles, summaries and the course summary straight from the bundled English JSON. That is expected until WP7.
+
 ## Next
 
-WP5 part 7: the course catalog. `CourseCategory.dummyCategories` holds 25 course titles, descriptions and summaries as plain Swift strings, and `title` must stay English because analytics reads it (`canonicalTitle`). Add display accessors (`displayTitle`, `displayDescription`, `displaySummary`) that go through `L10n.content`, switch the views to them, add the strings to `Content.xcstrings`, and leave category names untranslated (decision D2). The lesson list also shows lesson titles and summaries from the bundled JSON; those belong to WP7 (content overlay) and are not part of this slice. Then approach logging and profile.
+WP5 part 8: approach logging and profile. `LogApproachViewModel` (level titles shown via a display accessor with `Content` entries, confidence descriptions, button and title text, validation and failure messages, placeholder), `ApproachLevelGuideSheet` (level descriptions and examples), `ApproachService` level names, `ApproachesLoggedListView` relative dates ("Today", "1 day ago", "n days ago") and the fixed "MMM d, yyyy" format, `ProfileView` and `ProfileStatsHeader` count sentences. This slice includes the plural and date items from plan WP5 items 4 and 6 for these files.
 
 ## Open questions for Arthur
 

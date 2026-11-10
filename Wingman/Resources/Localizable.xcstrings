@@ -206,6 +206,12 @@
     "Committed." : {
 
     },
+    "Complete all lessons in %@ to unlock this course." : {
+
+    },
+    "Complete all lessons in the previous course to unlock this course." : {
+
+    },
     "Completed" : {
 
     },

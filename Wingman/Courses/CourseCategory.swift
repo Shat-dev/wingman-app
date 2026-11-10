@@ -56,6 +56,26 @@ struct Course: Identifiable, Codable {
 }
 
 // MARK: - Dummy Data (Future: Replace with Supabase fetch)
+// MARK: - Display text
+//
+// `Course.title` and `CourseCategory.name` are the English source text, and
+// what analytics reads (`canonicalTitle`, `canonicalName`). Views show the
+// accessors below instead, so a translated course title never reaches
+// PostHog and an English one never leaks into a translated screen.
+
+extension Course {
+    /// The course title in the language the app is running in, falling back
+    /// to English. Display only.
+    var displayTitle: String { L10n.content(title) }
+}
+
+extension CourseCategory {
+    /// The category name as shown. Category names are brand terms and are
+    /// deliberately not translated (localization plan, decision D2), so this
+    /// is the English name in every language.
+    var displayName: String { name }
+}
+
 extension CourseCategory {
     static let dummyCategories: [CourseCategory] = [
         CourseCategory(

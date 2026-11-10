@@ -66,7 +66,7 @@ struct CourseDetailSheet: View {
                         
                         // MARK: - Course Title and Description
                         VStack(alignment: .leading, spacing: 8) {
-                            Text(course.title)
+                            Text(course.displayTitle)
                                 .font(.manropeSemiBold(size: 20))
                                 .foregroundColor(.wingmanBlack)
                                 .kerning(-0.3)
@@ -210,12 +210,7 @@ struct CourseDetailSheet: View {
 
     /// Banner copy. Nil when the course is unlocked (no banner rendered).
     private var lockBannerText: String? {
-        switch lockReason {
-        case .unlocked:
-            return nil
-        case .awaitingPrevious(let previousTitle, _, _):
-            return "Complete all lessons in \(previousTitle) to unlock this course."
-        }
+        lockReason.bannerText
     }
 
     private func loadLessons() {

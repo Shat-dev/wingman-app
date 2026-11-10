@@ -136,7 +136,7 @@ final class HomeViewModel: ObservableObject {
         for category in CourseCategory.dummyCategories {
             if let course = category.courses.first(where: { $0.id == lastCourseId }) {
                 foundCourse = course
-                foundCategoryName = category.name
+                foundCategoryName = category.displayName
                 break
             }
         }
@@ -171,7 +171,7 @@ final class HomeViewModel: ObservableObject {
         continueCourse = ContinueCourse(
             courseId: lastCourseId,
             categoryName: categoryName,
-            courseName: course.title,
+            courseName: course.displayTitle,
             thumbnailName: thumbnailImageName,
             progress: progressValue,
             completedLessons: completedCount,
