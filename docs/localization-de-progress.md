@@ -7,7 +7,7 @@ Branch `localization-release-b`. Rules and glossary: [localization-de-brief.md](
 | Part | State |
 |---|---|
 | UI catalogs (G2) | 574 of 574 strings drafted (2026-11-10) |
-| Lesson overlays (G3) | 15 of 25 courses (917 of 1,531 items): 1, 2, 3, 6, 7, 8, 12, 13, 14, 17, 18, 19, 22, 23, 24 |
+| Lesson overlays (G3) | 16 of 25 courses (991 of 1,531 items): 1, 2, 3, 4, 6, 7, 8, 12, 13, 14, 17, 18, 19, 22, 23, 24 |
 | Database content (G4) | Not started |
 | German sweep (G7) | Onboarding and tabs on SE, 2026-11-11: no clipping. Lessons not yet seen in German |
 
@@ -31,6 +31,7 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **2026-11-11. Course 14, Sharing & Vulnerability** (4 lessons, 62 items, 1,432 English words). The check passes. For the reviewer: "reciprocity rhythm" became *Rhythmus der Gegenseitigkeit*; "processed / unprocessed sharing" became *Verarbeitetes / Unverarbeitetes teilen*; "Share the lesson, not the wound" became *Erzähl die Lektion, nicht die Wunde*.
 - **2026-11-11. Course 19, Compliments & Verbal Chemistry** (3 lessons, 46 items, 1,020 English words). The check passes. For the reviewer: "Being Nice Is Not Desire" became *Nett sein ist kein Begehren*; "flirtatious" alternates between *flirtend* and *flirty* (the catalog's tick already uses *flirty*), so pick one; "charged" became *knisternd*.
 - **2026-11-11. Course 24, Mastery & Identity** (3 lessons, 51 items, 1,077 English words). The check passes. For the reviewer: "volume" became *Menge*; "reps" became *Versuche*; "habituation" became *Gewöhnung*; "automaticity" became *Automatisierung*. The four learning stages use the usual German terms (*unbewusste Inkompetenz* … *unbewusste Kompetenz*).
+- **2026-11-11. Course 4, Inner Stability** (4 lessons, 74 items, 1,572 English words). The check passes. For the reviewer: "approval-seeking" became *Anerkennung suchen*; "outcome independence" became *unabhängig vom Ergebnis*, consistent with course 17; "highlight reel vs behind-the-scenes" became *Highlights vs. Blick hinter die Kulissen*; "scarcity mindset" became *Mangeldenken*.
 
 ## Questions for Arthur
 
