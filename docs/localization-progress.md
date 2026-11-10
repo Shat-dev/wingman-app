@@ -12,10 +12,10 @@ Working log for Release A of [localization-implementation-plan.md](localization-
 | WP2 Analytics values pinned to English | **Done** (slices 2–3, `9a853f0`, `38f4330`) | New properties not yet observed arriving in PostHog |
 | WP3 Error classification | Not started | Plan wants a few days of production logging first; cannot be done inside this loop |
 | WP4 Paywall prices and disclosure | Not started | Blocked at the end on the priced-paywall capture decision (Release run vs dev-tag launch flag) |
-| WP5 String Catalog and extraction | **Nearly done** (slices 4–15) | `Localizable` holds 385 strings, `Content` 174. Every screen has been through. Left: a final pass over fragments and number formats (see slice 15 "Next"), and the price and disclosure strings, which are WP4 |
+| WP5 String Catalog and extraction | **Done except what WP4 and WP6 own** (slices 4–16) | `Localizable` 385 strings, `Content` 174. Left on purpose: paywall price and disclosure strings (WP4), the sign-in legal sentence (WP6). A translated display title for lessons and scenarios comes with WP7 |
 | WP6 Layout and legal links | Not started | |
 | WP7 Content translation plumbing | Not started | Migration files only; nothing applied to the live database |
-| WP8 Tooling and tests | Started | Unit and UI test targets exist; parity recorder, validator and fallback tests still to build |
+| WP8 Tooling and tests | In progress | Done: unit and UI test targets (136 unit tests), onboarding sweep, catalog validator (`scripts/check_string_catalogs.py`). Still to build: checked-in screenshot comparison, sweep beyond the paywall, performance comparison, analytics parity recorder (section 9 of the plan) |
 
 ## Slices
 
@@ -330,17 +330,43 @@ This closes the gap noted in slice 2 (nothing proved the canonical accessors ign
 - The walkthrough was not run on a simulator.
 - The nine new "translated app" sentences are only ever shown outside English, so nobody has seen them on screen. They are in the catalog for a translator to review.
 
+### Slice 16 — WP5 final pass and catalog validator (2026-11-10)
+
+**Final scan.** A scan of every Swift file for string literals that look like prose and are not localizable came back with nothing left to move. What remains is intentional:
+
+- data looked up through `L10n.content` (quotes, course titles, option labels);
+- analytics constants and canonical values;
+- developer-facing error descriptions (sign-in internals, account deletion, XP, Supabase);
+- brand terms (category names);
+- the paywall price and disclosure strings, which WP4 owns;
+- unused code (`ErrorViewScreen`, `AppStrings`, the two never-shown onboarding step titles, preview and mock data).
+
+**Fragments and number formats.** No code change was needed:
+
+- Percent values, "n/10", "n min", "n min / day", "Level n: title" and "category: course" are all single catalog entries with placeholders, so a translator can already reorder or re-space them.
+- The bold "3x" + sentence bullet stays as two entries. Turning it into one styled sentence would mean re-rendering that line, with a real chance of a visible English difference, for little gain in European languages. Both entries now carry a comment explaining that they are joined.
+
+**Translator comments.** 82 comments added to `Localizable.xcstrings` (91 entries have one now) for short labels, placeholders and anything ambiguous out of context: what each placeholder is, which strings are joined to others, which are brand terms, and which strings are about to be replaced by WP4 or WP6 and should not be translated yet. Comments written in the catalog survive `xcstringstool sync`.
+
+**New tool: `scripts/check_string_catalogs.py`** (plan WP8, translation validator). Run from the repo root:
+
+- `python3 scripts/check_string_catalogs.py` — Release A mode. Fails if any language other than English is present.
+- `python3 scripts/check_string_catalogs.py --languages de` — once German exists. Also reports how many strings still fall back to English.
+
+It checks: source language; no unexpected language; every translation keeps its English placeholders; plural variants include "other"; no empty translations; do-not-translate entries are untranslated; brand terms (Wingman, XP) survive; `Content` entries are marked manual. It was tested against six deliberately broken translations and reported all six. Current result: no problems, English only.
+
+**Behaviour for English users:** unchanged (no Swift source changed in this slice). 136 unit tests pass.
+
+**Not verified**
+
+- The validator has no length limits yet (paywall ticks, tab labels, buttons). Those belong with the layout work, once WP6 has settled what the limits are.
+- The catalogs have still not been opened in Xcode's editor.
+
 ## Next
 
-WP5 final pass (part 13), fragments and number formats left from the audit:
+WP6 (layout and legal links), first slice: the sign-in legal sentence (`AuthView`, four fragments in a row → one localized sentence with two inline links, wrapping allowed, same Safari sheet and URLs) and the paywall and one-time-offer footers (three links in a fixed row → allowed to scale, then wrap). Both must look the same in English. Then answer-button line caps, fixed-height buttons, and a pseudo-language pass. The WP6 sweep is still available and should be spent after these changes.
 
-- `OneTimeOfferView` and `HomeView` percent strings ("%lld%%"), "Confidence: n/10", "n min / day", "n min", "n minutes" (audit E-8, D-4): decide per string whether a format style or a catalog entry is right, without changing English.
-- The "3x" + sentence bullet on the growth projection screen (two strings joined).
-- "Level n: title" and "category: course" joins (`ApproachLevelGuideSheet`, `HomeView`).
-- "Level n reached." / "Level n" and the streak strings already work; just confirm catalog comments are useful to a translator.
-- Add translator comments to the catalog entries that need context (placeholders, short labels).
-
-Then WP6: the sign-in legal sentence, paywall and offer footers, answer-button line caps, fixed-height buttons, and the pseudo-language layout check.
+After WP6: WP4 (paywall prices and disclosure), WP7 (content plumbing), WP3 (error classification), remaining WP8 tooling.
 
 ## Open questions for Arthur
 
