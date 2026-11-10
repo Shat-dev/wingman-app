@@ -59,7 +59,7 @@ final class L10nContentTests: XCTestCase {
 
     func testAppRunsInItsSourceLanguage() {
         guard case .sourceLanguage = L10n.source else {
-            return XCTFail("The app ships English only and must take the pass-through path")
+            return XCTFail("An English device must take the pass-through path")
         }
     }
 

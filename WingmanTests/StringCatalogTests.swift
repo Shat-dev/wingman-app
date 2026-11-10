@@ -8,8 +8,9 @@
 //    - `Content.xcstrings` holds data-like strings looked up through
 //      `L10n.content`, maintained by hand (the compiler cannot see them).
 //
-//  These tests guard Release A's rules: the app still ships English only,
-//  English text is unchanged by the catalogs existing, and every string that
+//  These tests guard the rules: the app ships exactly the languages listed
+//  in `shippedLanguages` (English, and German from Release B), English text
+//  is unchanged by the catalogs existing, and every string that
 //  is routed through `L10n.content` has a catalog entry for a translator to
 //  fill in.
 //
@@ -20,11 +21,15 @@ import XCTest
 @MainActor
 final class StringCatalogTests: XCTestCase {
 
-    // MARK: - Release A ships English only
+    // MARK: - Exactly the intended languages ship
 
-    func testAppBundleDeclaresOnlyEnglish() {
+    /// Adding a language is a deliberate act: change this set, `knownRegions`
+    /// and the validator's `--languages` together.
+    private let shippedLanguages: Set<String> = ["en", "de"]
+
+    func testAppBundleDeclaresExactlyTheShippedLanguages() {
         let localizations = Set(Bundle.main.localizations).subtracting(["Base"])
-        XCTAssertEqual(localizations, ["en"], "A language was added. Release A must stay English-only.")
+        XCTAssertEqual(localizations, shippedLanguages, "The bundle's languages differ from the ones meant to ship.")
         XCTAssertEqual(Bundle.main.developmentLocalization, "en")
         XCTAssertEqual(Bundle.main.preferredLocalizations.first, "en")
     }

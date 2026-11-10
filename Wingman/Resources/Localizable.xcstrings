@@ -8,6 +8,12 @@
     "%@ billed today for your first %lld months, then %@/month. Cancel anytime in App Store settings." : {
       "comment" : "One-time offer, under the button. First %@: the discounted price charged today. %lld: months the discount lasts, 2 or more. Second %@: the regular monthly price.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Heute werden %1$@ für deine ersten %2$lld Monate berechnet, danach %3$@/Monat. Jederzeit in den App-Store-Einstellungen kündbar."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -19,6 +25,12 @@
     "%@ billed today for your first %lld months, then %@/year. Cancel anytime in App Store settings." : {
       "comment" : "One-time offer, under the button. First %@: the discounted price charged today. %lld: months the discount lasts, 2 or more. Second %@: the regular yearly price.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Heute werden %1$@ für deine ersten %2$lld Monate berechnet, danach %3$@/Jahr. Jederzeit in den App-Store-Einstellungen kündbar."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -30,6 +42,12 @@
     "%@ billed today for your first %lld years, then %@/month. Cancel anytime in App Store settings." : {
       "comment" : "One-time offer, under the button. First %@: the discounted price charged today. %lld: years the discount lasts, 2 or more. Second %@: the regular monthly price.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Heute werden %1$@ für deine ersten %2$lld Jahre berechnet, danach %3$@/Monat. Jederzeit in den App-Store-Einstellungen kündbar."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -41,6 +59,12 @@
     "%@ billed today for your first %lld years, then %@/year. Cancel anytime in App Store settings." : {
       "comment" : "One-time offer, under the button. First %@: the discounted price charged today. %lld: years the discount lasts, 2 or more. Second %@: the regular yearly price.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Heute werden %1$@ für deine ersten %2$lld Jahre berechnet, danach %3$@/Jahr. Jederzeit in den App-Store-Einstellungen kündbar."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -52,6 +76,12 @@
     "%@ billed today for your first month, then %@/month. Cancel anytime in App Store settings." : {
       "comment" : "One-time offer, under the button. First %@: the discounted price charged today. Second %@: the regular monthly price.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Heute werden %1$@ für deinen ersten Monat berechnet, danach %2$@/Monat. Jederzeit in den App-Store-Einstellungen kündbar."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -63,6 +93,12 @@
     "%@ billed today for your first month, then %@/year. Cancel anytime in App Store settings." : {
       "comment" : "One-time offer, under the button. First %@: the discounted price charged today. Second %@: the regular yearly price.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Heute werden %1$@ für deinen ersten Monat berechnet, danach %2$@/Jahr. Jederzeit in den App-Store-Einstellungen kündbar."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -74,6 +110,12 @@
     "%@ billed today for your first year, then %@/month. Cancel anytime in App Store settings." : {
       "comment" : "One-time offer, under the button. First %@: the discounted price charged today. Second %@: the regular monthly price.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Heute werden %1$@ für dein erstes Jahr berechnet, danach %2$@/Monat. Jederzeit in den App-Store-Einstellungen kündbar."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -85,6 +127,12 @@
     "%@ billed today for your first year, then %@/year. Cancel anytime in App Store settings." : {
       "comment" : "One-time offer, under the button. First %@: the discounted price charged today. Second %@: the regular yearly price.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Heute werden %1$@ für dein erstes Jahr berechnet, danach %2$@/Jahr. Jederzeit in den App-Store-Einstellungen kündbar."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -96,6 +144,12 @@
     "%@ billed today, then %@ at each renewal. Cancel anytime in App Store settings." : {
       "comment" : "One-time offer, under the button, for an unusual billing period. First %@: the discounted price charged today. Second %@: the regular price charged at each renewal.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Heute werden %1$@ berechnet, danach %2$@ bei jeder Verlängerung. Jederzeit in den App-Store-Einstellungen kündbar."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -107,6 +161,12 @@
     "%@: %@" : {
       "comment" : "Home 'continue' card. 1: category name (not translated). 2: course title.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%1$@: %2$@"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -120,17 +180,59 @@
       "shouldTranslate" : false
     },
     "%lld correct" : {
-      "comment" : "XP breakdown row: number of quiz answers that were right. Used for 2 or more; '1 correct' is a separate entry."
+      "comment" : "XP breakdown row: number of quiz answers that were right. Used for 2 or more; '1 correct' is a separate entry.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld richtig"
+          }
+        }
+      }
     },
     "%lld day streak" : {
-      "comment" : "Completion screen: length of the daily streak in days. Used for 2 or more; '1 day streak' is a separate entry."
+      "comment" : "Completion screen: length of the daily streak in days. Used for 2 or more; '1 day streak' is a separate entry.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld Tage in Folge"
+          }
+        }
+      }
     },
     "%lld days ago" : {
-      "comment" : "Approach list: how long ago an approach was logged. Only used for 2 to 6 days."
+      "comment" : "Approach list: how long ago an approach was logged. Only used for 2 to 6 days.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "vor %lld Tagen"
+          }
+        }
+      }
     },
     "%lld lessons" : {
       "comment" : "How many lessons a scenario needs. The number is the count of lessons.",
       "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "needs_review",
+                  "value" : "%lld Lektion"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "needs_review",
+                  "value" : "%lld Lektionen"
+                }
+              }
+            }
+          }
+        },
         "en" : {
           "variations" : {
             "plural" : {
@@ -154,6 +256,24 @@
     "%lld lessons required" : {
       "comment" : "Shown on a locked scenario: how many completed lessons unlock it.",
       "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "needs_review",
+                  "value" : "%lld Lektion erforderlich"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "needs_review",
+                  "value" : "%lld Lektionen erforderlich"
+                }
+              }
+            }
+          }
+        },
         "en" : {
           "variations" : {
             "plural" : {
@@ -175,32 +295,102 @@
       }
     },
     "%lld min" : {
-      "comment" : "Lesson length in minutes, abbreviated."
+      "comment" : "Lesson length in minutes, abbreviated.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld Min."
+          }
+        }
+      }
     },
     "%lld min / day" : {
-      "comment" : "Daily reading goal: minutes per day, abbreviated."
+      "comment" : "Daily reading goal: minutes per day, abbreviated.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld Min./Tag"
+          }
+        }
+      }
     },
     "%lld minutes" : {
-      "comment" : "Scenario length in minutes."
+      "comment" : "Scenario length in minutes.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld Minuten"
+          }
+        }
+      }
     },
     "%lld%%" : {
-      "comment" : "A percentage, e.g. course progress or a discount. Use your language's spacing between number and percent sign."
+      "comment" : "A percentage, e.g. course progress or a discount. Use your language's spacing between number and percent sign.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld %%"
+          }
+        }
+      }
     },
     "%lld-day Free Trial" : {
-      "comment" : "Badge on a paywall plan. %lld is the number of days in the free trial, for example 3."
+      "comment" : "Badge on a paywall plan. %lld is the number of days in the free trial, for example 3.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld Tage gratis"
+          }
+        }
+      }
     },
     "%lld-month Free Trial" : {
-      "comment" : "Badge on a paywall plan. %lld is the number of months in the free trial."
+      "comment" : "Badge on a paywall plan. %lld is the number of months in the free trial.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld Monate gratis"
+          }
+        }
+      }
     },
     "%lld-month Plan" : {
-      "comment" : "Subscription plan name for a plan lasting this many months."
+      "comment" : "Subscription plan name for a plan lasting this many months.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld-Monats-Abo"
+          }
+        }
+      }
     },
     "%lld-year Free Trial" : {
-      "comment" : "Badge on a paywall plan. %lld is the number of years in the free trial."
+      "comment" : "Badge on a paywall plan. %lld is the number of years in the free trial.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld Jahre gratis"
+          }
+        }
+      }
     },
     "%lld. %@" : {
       "comment" : "Quiz question: question number, then the question text.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%1$lld. %2$@"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -218,492 +408,1649 @@
       "shouldTranslate" : false
     },
     "1 - very anxious" : {
-      "comment" : "Left end of the confidence slider (scale 1 to 10)."
+      "comment" : "Left end of the confidence slider (scale 1 to 10).",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "1 – sehr nervös"
+          }
+        }
+      }
     },
     "1 correct" : {
-      "comment" : "XP breakdown row for exactly one right answer."
+      "comment" : "XP breakdown row for exactly one right answer.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "1 richtig"
+          }
+        }
+      }
     },
     "1 day ago" : {
-      "comment" : "Approach list: logged yesterday."
+      "comment" : "Approach list: logged yesterday.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "vor 1 Tag"
+          }
+        }
+      }
     },
     "1 day streak" : {
-      "comment" : "Completion screen: a streak of exactly one day."
+      "comment" : "Completion screen: a streak of exactly one day.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "1 Tag in Folge"
+          }
+        }
+      }
     },
     "10 - very confident" : {
-      "comment" : "Right end of the confidence slider (scale 1 to 10)."
+      "comment" : "Right end of the confidence slider (scale 1 to 10).",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "10 – sehr selbstbewusst"
+          }
+        }
+      }
     },
     "3x" : {
-      "comment" : "Bold lead-in on the growth screen. It is immediately followed by a space and the entry 'faster progress than watching generic advice videos', forming one sentence."
+      "comment" : "Bold lead-in on the growth screen. It is immediately followed by a space and the entry 'faster progress than watching generic advice videos', forming one sentence.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "3x"
+          }
+        }
+      }
     },
     "45% of men aged 18-24 have never approached a woman" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "45 % aller Männer zwischen 18 und 24 haben noch nie eine Frau angesprochen"
+          }
+        }
+      }
     },
     "48% of men aged 26-40 haven't approached in the past year" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "48 % aller Männer zwischen 26 und 40 haben im letzten Jahr niemanden angesprochen"
+          }
+        }
+      }
     },
     "58% of men who consistently approach get a number, date, or relationship" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "58 % aller Männer, die regelmäßig ansprechen, bekommen eine Nummer, ein Date oder eine Beziehung"
+          }
+        }
+      }
     },
     "63% of single men regret not approaching women when they were younger" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "63 % aller Single-Männer bereuen, dass sie in jüngeren Jahren keine Frauen angesprochen haben"
+          }
+        }
+      }
     },
     "77% of women aged between 18 and 30 want to be approached more" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "77 % aller Frauen zwischen 18 und 30 wünschen sich, öfter angesprochen zu werden"
+          }
+        }
+      }
     },
     "A man watches a woman walk past, imagining them together" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ein Mann sieht einer Frau nach und stellt sich vor, wie sie zusammen wären"
+          }
+        }
+      }
     },
     "Account" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Konto"
+          }
+        }
+      }
     },
     "Add your name" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Namen hinzufügen"
+          }
+        }
+      }
     },
     "All correct" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Alles richtig"
+          }
+        }
+      }
     },
     "Allow notifications for tips and offers. Turn them off anytime in Settings." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Erlaube Mitteilungen für Tipps und Angebote. Du kannst sie jederzeit in den Einstellungen ausschalten."
+          }
+        }
+      }
     },
     "Almost done, you'll be free to explore in a second." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fast geschafft, gleich kannst du loslegen."
+          }
+        }
+      }
     },
     "Almost half of men haven't approached in the past year" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fast die Hälfte der Männer hat im letzten Jahr niemanden angesprochen"
+          }
+        }
+      }
     },
     "Almost half of men your age have never approached a woman" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fast die Hälfte der Männer in deinem Alter hat noch nie eine Frau angesprochen"
+          }
+        }
+      }
     },
     "Almost half of men your age haven't approached in the past year" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fast die Hälfte der Männer in deinem Alter hat im letzten Jahr niemanden angesprochen"
+          }
+        }
+      }
     },
     "Already have an account?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Du hast schon ein Konto?"
+          }
+        }
+      }
     },
     "An error occurred" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ein Fehler ist aufgetreten"
+          }
+        }
+      }
     },
     "An unexpected error occurred. Please try again." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ein unerwarteter Fehler ist aufgetreten. Bitte versuch es noch einmal."
+          }
+        }
+      }
     },
     "An unknown error occurred. Please try again." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ein unbekannter Fehler ist aufgetreten. Bitte versuch es noch einmal."
+          }
+        }
+      }
     },
     "Analyzing your answers" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Deine Antworten werden ausgewertet"
+          }
+        }
+      }
     },
     "And this is where you practise.\nBookstore, gym, coffee shop. Choose what to say, see what happens." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Und hier übst du.\nBuchladen, Fitnessstudio, Café. Wähl, was du sagst, und sieh, was passiert."
+          }
+        }
+      }
     },
     "Anxious" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nervös"
+          }
+        }
+      }
     },
     "Approach Level Guide" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Leitfaden zu den Levels"
+          }
+        }
+      }
     },
     "Approach someone you are interested straight away" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sprich jemanden, der dich interessiert, direkt an"
+          }
+        }
+      }
     },
     "Approaches Breakdown" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ansprechen nach Level"
+          }
+        }
+      }
     },
     "Approaches Logged" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Erfasste Ansprachen"
+          }
+        }
+      }
     },
     "Approaches logged" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Erfasste Ansprachen"
+          }
+        }
+      }
     },
     "Approaching character limit" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Zeichenlimit fast erreicht"
+          }
+        }
+      }
     },
     "Are you sure you want to delete this approach log?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Möchtest du diesen Eintrag wirklich löschen?"
+          }
+        }
+      }
     },
     "Are you sure you want to delete your account? This action cannot be undone." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Möchtest du dein Konto wirklich löschen? Das kann nicht rückgängig gemacht werden."
+          }
+        }
+      }
     },
     "Ask employee for recommendation" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Einen Mitarbeiter um eine Empfehlung bitten"
+          }
+        }
+      }
     },
     "Asking for her number (If no time to build rapport)" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nach ihrer Nummer fragen (wenn keine Zeit für mehr bleibt)"
+          }
+        }
+      }
     },
     "Asking the person for something" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Jemanden um etwas bitten"
+          }
+        }
+      }
     },
     "Back" : {
-      "comment" : "Scenario player: go to the previous line."
+      "comment" : "Scenario player: go to the previous line.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Zurück"
+          }
+        }
+      }
     },
     "Billed immediately. Cancel anytime in App Store settings." : {
-      "comment" : "Paywall, under the purchase button, for a user who is not eligible for a free trial and is charged on purchase."
+      "comment" : "Paywall, under the purchase button, for a user who is not eligible for a free trial and is charged on purchase.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sofortige Abrechnung. Jederzeit in den App-Store-Einstellungen kündbar."
+          }
+        }
+      }
     },
     "Bite-sized lessons you can do on your commute or lunch break" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kurze Lektionen für den Arbeitsweg oder die Mittagspause"
+          }
+        }
+      }
     },
     "Build the confidence to take action when it matters" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bau das Selbstvertrauen auf, zu handeln, wenn es darauf ankommt"
+          }
+        }
+      }
     },
     "Building your practice plan" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Dein Übungsplan wird erstellt"
+          }
+        }
+      }
     },
     "By continuing you agree to our" : {
       "comment" : "Start of the sign-in legal line in the English layout only. Translated apps show the whole sentence \"By continuing you agree to our [Terms](terms) and [Privacy](privacy)\" instead, so this piece is never translated.",
       "shouldTranslate" : false
     },
     "By continuing you agree to our [Terms](terms) and [Privacy](privacy)" : {
-      "comment" : "Sign-in legal line, one whole sentence with two links. Translate the words in [square brackets] and move the links wherever the sentence needs them. Keep (terms) and (privacy) exactly as they are."
+      "comment" : "Sign-in legal line, one whole sentence with two links. Translate the words in [square brackets] and move the links wherever the sentence needs them. Keep (terms) and (privacy) exactly as they are.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Indem du fortfährst, stimmst du unseren [AGB](terms) und der [Datenschutzerklärung](privacy) zu"
+          }
+        }
+      }
     },
     "Can you put a price on connection?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kann man Verbindung mit Geld aufwiegen?"
+          }
+        }
+      }
     },
     "Can't load pricing" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Preise können nicht geladen werden"
+          }
+        }
+      }
     },
     "Cancel" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Abbrechen"
+          }
+        }
+      }
     },
     "Casual chat talk with fellow passenger on train" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lockerer Plausch mit einer Mitreisenden im Zug"
+          }
+        }
+      }
     },
     "Chat with gym regular about workout routines" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mit einer Stammkundin im Fitnessstudio über Trainingspläne reden"
+          }
+        }
+      }
     },
     "Check Answer" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Antwort prüfen"
+          }
+        }
+      }
     },
     "Check back later for new practice questions." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Schau später wieder vorbei, dann gibt es neue Übungsfragen."
+          }
+        }
+      }
     },
     "Check your connection and try again." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Prüf deine Verbindung und versuch es noch einmal."
+          }
+        }
+      }
     },
     "Check your reflections to see insights" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sieh dir deine Reflexionen an, um Erkenntnisse zu gewinnen"
+          }
+        }
+      }
     },
     "Choose an option to continue" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wähl eine Option, um fortzufahren"
+          }
+        }
+      }
     },
     "Claim %lld%% off" : {
-      "comment" : "One-time offer button. The number is the discount percentage."
+      "comment" : "One-time offer button. The number is the discount percentage.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld %% sichern"
+          }
+        }
+      }
     },
     "Claim my discount" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Rabatt sichern"
+          }
+        }
+      }
     },
     "Close offer" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Angebot schließen"
+          }
+        }
+      }
     },
     "Close paywall" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Paywall schließen"
+          }
+        }
+      }
     },
     "Close this and it’s gone for good" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Schließt du das, ist es für immer weg"
+          }
+        }
+      }
     },
     "Come across natural, not nervous" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wirke natürlich, nicht nervös"
+          }
+        }
+      }
     },
     "Commit" : {
-      "comment" : "Accessibility label of the press-and-hold commitment button."
+      "comment" : "Accessibility label of the press-and-hold commitment button.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Verpflichten"
+          }
+        }
+      }
     },
     "Committed." : {
-      "comment" : "Shown once the user has held the commitment button long enough."
+      "comment" : "Shown once the user has held the commitment button long enough.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Abgemacht."
+          }
+        }
+      }
     },
     "Complete all lessons in %@ to unlock this course." : {
-      "comment" : "Banner on a locked course. The placeholder is the title of the course that must be finished first."
+      "comment" : "Banner on a locked course. The placeholder is the title of the course that must be finished first.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Schließ alle Lektionen in „%@“ ab, um diesen Kurs freizuschalten."
+          }
+        }
+      }
     },
     "Complete all lessons in the previous course to unlock this course." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Schließ alle Lektionen im vorherigen Kurs ab, um diesen Kurs freizuschalten."
+          }
+        }
+      }
     },
     "Completed" : {
-      "comment" : "Either the daily practice button once today's questions are done, or the XP breakdown row for finishing an activity."
+      "comment" : "Either the daily practice button once today's questions are done, or the XP breakdown row for finishing an activity.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Erledigt"
+          }
+        }
+      }
     },
     "Confidence Level" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Selbstvertrauen"
+          }
+        }
+      }
     },
     "Confidence Over Time" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Selbstvertrauen im Verlauf"
+          }
+        }
+      }
     },
     "Confidence is a skill. Skills are built." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Selbstvertrauen ist eine Fähigkeit. Und Fähigkeiten kann man aufbauen."
+          }
+        }
+      }
     },
     "Confidence: %lld/10" : {
-      "comment" : "Approach list: the confidence rating the user gave, out of 10."
+      "comment" : "Approach list: the confidence rating the user gave, out of 10.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Selbstvertrauen: %lld/10"
+          }
+        }
+      }
     },
     "Confident" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Selbstbewusst"
+          }
+        }
+      }
     },
     "Congratulations! How did you feel? What was the situation? How did it go for you?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Glückwunsch! Wie hast du dich gefühlt? Wie war die Situation? Wie ist es gelaufen?"
+          }
+        }
+      }
     },
     "Continue" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Weiter"
+          }
+        }
+      }
     },
     "Continue with Apple" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mit Apple fortfahren"
+          }
+        }
+      }
     },
     "Continue with Google" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mit Google fortfahren"
+          }
+        }
+      }
     },
     "Correct Answer!" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Richtige Antwort!"
+          }
+        }
+      }
     },
     "Correct answer!" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Richtige Antwort!"
+          }
+        }
+      }
     },
     "Couldn't load subscription options. Please try again." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Abo-Optionen konnten nicht geladen werden. Bitte versuch es noch einmal."
+          }
+        }
+      }
     },
     "Couldn't load today's questions. Please try again." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Die heutigen Fragen konnten nicht geladen werden. Bitte versuch es noch einmal."
+          }
+        }
+      }
     },
     "Couldn't load your daily practice. Please try again." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Deine tägliche Übung konnte nicht geladen werden. Bitte versuch es noch einmal."
+          }
+        }
+      }
     },
     "Couldn't load your subscription. Please try again." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Dein Abo konnte nicht geladen werden. Bitte versuch es noch einmal."
+          }
+        }
+      }
     },
     "Couldn't save your answer. Please try again." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Deine Antwort konnte nicht gespeichert werden. Bitte versuch es noch einmal."
+          }
+        }
+      }
     },
     "Couldn't start sign-in. Please try again." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Die Anmeldung konnte nicht gestartet werden. Bitte versuch es noch einmal."
+          }
+        }
+      }
     },
     "Couldn't update your streak. Please try again." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Deine Serie konnte nicht aktualisiert werden. Bitte versuch es noch einmal."
+          }
+        }
+      }
     },
     "Course complete." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kurs abgeschlossen."
+          }
+        }
+      }
     },
     "Courses" : {
-      "comment" : "Tab bar title and screen title."
+      "comment" : "Tab bar title and screen title.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kurse"
+          }
+        }
+      }
     },
     "Courses. Mindset, approaching, flirting, follow-up.\nShort lessons that build the man who moves, not the one who freezes." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kurse. Mindset, Ansprechen, Flirten, Dranbleiben.\nKurze Lektionen für den Mann, der handelt – nicht den, der erstarrt."
+          }
+        }
+      }
     },
     "Create Account" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Konto erstellen"
+          }
+        }
+      }
     },
     "Create a free account" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kostenloses Konto erstellen"
+          }
+        }
+      }
     },
     "Create a free account so your answers and progress are saved." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Erstell ein kostenloses Konto, damit deine Antworten und dein Fortschritt gespeichert werden."
+          }
+        }
+      }
     },
     "Creating openings for connection while keeping it casual." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gelegenheiten für echten Kontakt schaffen und dabei locker bleiben."
+          }
+        }
+      }
     },
     "Daily Practice" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tägliche Übung"
+          }
+        }
+      }
     },
     "Daily Reading Goal" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tägliches Leseziel"
+          }
+        }
+      }
     },
     "Daily Reading Reminder" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tägliche Lese-Erinnerung"
+          }
+        }
+      }
     },
     "Daily practice complete." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tägliche Übung abgeschlossen."
+          }
+        }
+      }
     },
     "Data error: %@" : {
-      "comment" : "The placeholder is a technical detail in English."
+      "comment" : "The placeholder is a technical detail in English.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Datenfehler: %@"
+          }
+        }
+      }
     },
     "Day 1 of becoming the guy who goes for it" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tag 1 auf dem Weg zum Typen, der es einfach macht"
+          }
+        }
+      }
     },
     "Delete" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Löschen"
+          }
+        }
+      }
     },
     "Delete Account" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Konto löschen"
+          }
+        }
+      }
     },
     "Delete Approach" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Eintrag löschen"
+          }
+        }
+      }
     },
     "Delete my data" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Meine Daten löschen"
+          }
+        }
+      }
     },
     "Deletion failed. Please try again later." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Löschen fehlgeschlagen. Bitte versuch es später noch einmal."
+          }
+        }
+      }
     },
     "Developing comfort by engaging in everyday exchanges without minimal stakes." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sicherheit gewinnen durch alltägliche Begegnungen, bei denen nichts auf dem Spiel steht."
+          }
+        }
+      }
     },
     "Direct Approach" : {
-      "comment" : "Name of approach level 4."
+      "comment" : "Name of approach level 4.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Direktes Ansprechen"
+          }
+        }
+      }
     },
     "Direct compliment on personality or appearance" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Direktes Kompliment zu Persönlichkeit oder Aussehen"
+          }
+        }
+      }
     },
     "Do you often want to talk to women but don’t?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Willst du oft Frauen ansprechen, tust es aber nicht?"
+          }
+        }
+      }
     },
     "Doing nothing" : {
-      "comment" : "Label on the falling line of the growth chart."
+      "comment" : "Label on the falling line of the growth chart.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nichts tun"
+          }
+        }
+      }
     },
     "Don't join that statistic. Your future self is counting on you." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Werd nicht Teil dieser Statistik. Dein zukünftiges Ich zählt auf dich."
+          }
+        }
+      }
     },
     "Don't lose your log" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Verlier dein Logbuch nicht"
+          }
+        }
+      }
     },
     "E.g. Approached at Cafe" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Z. B. Im Café angesprochen"
+          }
+        }
+      }
     },
     "Edit" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bearbeiten"
+          }
+        }
+      }
     },
     "Edit Approach" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Eintrag bearbeiten"
+          }
+        }
+      }
     },
     "Edit Profile" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Profil bearbeiten"
+          }
+        }
+      }
     },
     "Enter your name" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gib deinen Namen ein"
+          }
+        }
+      }
     },
     "Error" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fehler"
+          }
+        }
+      }
     },
     "Examples" : {
-      "comment" : "Heading above example situations in the approach level guide."
+      "comment" : "Heading above example situations in the approach level guide.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Beispiele"
+          }
+        }
+      }
     },
     "Extended Conversation" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Längeres Gespräch"
+          }
+        }
+      }
     },
     "Extremely confident" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Extrem selbstbewusst"
+          }
+        }
+      }
     },
     "Failed to delete approach. Please try again." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Löschen fehlgeschlagen. Bitte versuch es noch einmal."
+          }
+        }
+      }
     },
     "Failed to load approaches. Please try again." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Einträge konnten nicht geladen werden. Bitte versuch es noch einmal."
+          }
+        }
+      }
     },
     "Failed to restore purchases. Please try again." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wiederherstellen fehlgeschlagen. Bitte versuch es noch einmal."
+          }
+        }
+      }
     },
     "Failed to save. Please try again." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Speichern fehlgeschlagen. Bitte versuch es noch einmal."
+          }
+        }
+      }
     },
     "Failed to update. Please try again." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Aktualisieren fehlgeschlagen. Bitte versuch es noch einmal."
+          }
+        }
+      }
     },
     "Feedback" : {
-      "comment" : "Speaker label for a feedback card in a scenario."
+      "comment" : "Speaker label for a feedback card in a scenario.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Feedback"
+          }
+        }
+      }
     },
     "Feel confident, not anxious" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fühl dich sicher statt nervös"
+          }
+        }
+      }
     },
     "Forward" : {
-      "comment" : "Scenario player: go to the next line."
+      "comment" : "Scenario player: go to the next line.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Vor"
+          }
+        }
+      }
     },
     "Get started" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Los geht’s"
+          }
+        }
+      }
     },
     "Go first without overthinking it" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ergreif die Initiative ohne Grübeln"
+          }
+        }
+      }
     },
     "Goal Notifications" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ziel-Mitteilungen"
+          }
+        }
+      }
     },
     "Good Morning," : {
-      "comment" : "Home greeting, followed on the next line by the user's name."
+      "comment" : "Home greeting, followed on the next line by the user's name.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Guten Morgen,"
+          }
+        }
+      }
     },
     "Good luck, we're rooting for you." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Viel Glück, wir drücken dir die Daumen."
+          }
+        }
+      }
     },
     "Greet neighbors with small talk" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mit Nachbarn ein bisschen Smalltalk halten"
+          }
+        }
+      }
     },
     "Half of men don't approach. Most who do, succeed." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Die Hälfte der Männer spricht niemanden an. Die meisten, die es tun, haben Erfolg."
+          }
+        }
+      }
     },
     "Her" : {
-      "comment" : "Speaker label in a scenario when the woman's name is unknown."
+      "comment" : "Speaker label in a scenario when the woman's name is unknown.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sie"
+          }
+        }
+      }
     },
     "Home" : {
-      "comment" : "Tab bar title."
+      "comment" : "Tab bar title.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Start"
+          }
+        }
+      }
     },
     "How did you feel? What happened? Anything you noticed or learned" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wie hast du dich gefühlt? Was ist passiert? Ist dir etwas aufgefallen, hast du etwas gelernt?"
+          }
+        }
+      }
     },
     "How old are you?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wie alt bist du?"
+          }
+        }
+      }
     },
     "I am becoming a guy who takes action." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ich werde zu einem Mann, der handelt."
+          }
+        }
+      }
     },
     "I stopped dreading social situations entirely. That's worth more than any date." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Soziale Situationen machen mir keine Angst mehr. Das ist mehr wert als jedes Date."
+          }
+        }
+      }
     },
     "I used to freeze up walking past a girl. After 3 weeks I had my first real conversation with a stranger. That was the win." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Früher bin ich erstarrt, wenn ich an einer Frau vorbeiging. Nach 3 Wochen hatte ich mein erstes echtes Gespräch mit einer Fremden. Das war der Durchbruch."
+          }
+        }
+      }
     },
     "I've read every book on this — none of them made me actually do anything. The daily structure changed that." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ich habe jedes Buch dazu gelesen – keins hat mich wirklich ins Handeln gebracht. Die tägliche Struktur hat das geändert."
+          }
+        }
+      }
     },
     "I, %@, am becoming a guy who takes action." : {
-      "comment" : "Commitment pledge with the user's first name."
+      "comment" : "Commitment pledge with the user's first name.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ich, %@, werde zu einem Mann, der handelt."
+          }
+        }
+      }
     },
     "IN 1 MONTH" : {
-      "comment" : "Right axis caption on the growth chart. Upper case in English."
+      "comment" : "Right axis caption on the growth chart. Upper case in English.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "IN 1 MONAT"
+          }
+        }
+      }
     },
     "Incorrect Answer." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Falsche Antwort."
+          }
+        }
+      }
     },
     "Incorrect answer." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Falsche Antwort."
+          }
+        }
+      }
     },
     "Indirect Approach" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Indirektes Ansprechen"
+          }
+        }
+      }
     },
     "Invalid question data received" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ungültige Fragedaten empfangen"
+          }
+        }
+      }
     },
     "Invalid response from Apple. Please try again." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ungültige Antwort von Apple. Bitte versuch es noch einmal."
+          }
+        }
+      }
     },
     "Invite Friends" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Freunde einladen"
+          }
+        }
+      }
     },
     "Invite your friends to the community and learn together" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lade deine Freunde in die Community ein und lernt zusammen"
+          }
+        }
+      }
     },
     "It's on this device only. An account keeps it if you change phones." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Es ist nur auf diesem Gerät gespeichert. Mit einem Konto bleibt es erhalten, wenn du das Handy wechselst."
+          }
+        }
+      }
     },
     "Join me on Wingman! %@" : {
-      "comment" : "Text shared from the Invite Friends button. The placeholder is the App Store link."
+      "comment" : "Text shared from the Invite Friends button. The placeholder is the App Store link.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Komm mit zu Wingman! %@"
+          }
+        }
+      }
     },
     "Join the men taking action" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Schließ dich den Männern an, die handeln"
+          }
+        }
+      }
     },
     "Keep it flowing, no awkward silences" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kein peinliches Schweigen mehr"
+          }
+        }
+      }
     },
     "Keeping a conversation going past small talk without any romantic incentive." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ein Gespräch über den Smalltalk hinaus führen, ganz ohne romantische Absicht."
+          }
+        }
+      }
     },
     "Know exactly how to start talking" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wisse genau, wie du sie ansprichst"
+          }
+        }
+      }
     },
     "Last one. This one is you.\nEmpty today. In a month it either tells a story or it doesn't." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Der Letzte. Das bist du.\nHeute noch leer. In einem Monat erzählt er eine Geschichte – oder eben nicht."
+          }
+        }
+      }
     },
     "Lesson complete." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lektion abgeschlossen."
+          }
+        }
+      }
     },
     "Lessons" : {
-      "comment" : "Profile tile: number of lessons completed."
+      "comment" : "Profile tile: number of lessons completed.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lektionen"
+          }
+        }
+      }
     },
     "Level %lld" : {
-      "comment" : "The user's XP level number."
+      "comment" : "The user's XP level number.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Level %lld"
+          }
+        }
+      }
     },
     "Level %lld reached." : {
-      "comment" : "Shown when the user has just reached a new XP level."
+      "comment" : "Shown when the user has just reached a new XP level.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Level %lld erreicht."
+          }
+        }
+      }
     },
     "Level %lld · %lld XP to Level %lld" : {
       "comment" : "Profile header. 1: current level. 2: XP still needed. 3: next level. XP is a brand term.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Level %1$lld · noch %2$lld XP bis Level %3$lld"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -713,11 +2060,25 @@
       }
     },
     "Level %lld · Max level reached" : {
-      "comment" : "Profile header when the user is at the highest level."
+      "comment" : "Profile header when the user is at the highest level.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Level %lld · Höchstes Level erreicht"
+          }
+        }
+      }
     },
     "Level %lld: %@" : {
       "comment" : "Approach level guide heading. 1: level number. 2: level name.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Level %1$lld: %2$@"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -727,655 +2088,2194 @@
       }
     },
     "Level 1" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Level 1"
+          }
+        }
+      }
     },
     "Level 1: Social Warm-up" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Level 1: Soziales Aufwärmen"
+          }
+        }
+      }
     },
     "Level 1: Social warm-up" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Level 1: Soziales Aufwärmen"
+          }
+        }
+      }
     },
     "Level 2: Extended Conversation" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Level 2: Längeres Gespräch"
+          }
+        }
+      }
     },
     "Level 2: Extended conversation" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Level 2: Längeres Gespräch"
+          }
+        }
+      }
     },
     "Level 3: Indirect Approach" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Level 3: Indirektes Ansprechen"
+          }
+        }
+      }
     },
     "Level 3: Indirect approach" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Level 3: Indirektes Ansprechen"
+          }
+        }
+      }
     },
     "Level 4: Direct Approach" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Level 4: Direktes Ansprechen"
+          }
+        }
+      }
     },
     "Level 4: Direct approach" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Level 4: Direktes Ansprechen"
+          }
+        }
+      }
     },
     "Loading approaches..." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Einträge werden geladen …"
+          }
+        }
+      }
     },
     "Loading subscription options..." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Abo-Optionen werden geladen …"
+          }
+        }
+      }
     },
     "Loading today's practice questions..." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Die heutigen Übungsfragen werden geladen …"
+          }
+        }
+      }
     },
     "Loading..." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wird geladen …"
+          }
+        }
+      }
     },
     "Log Approach" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ansprechen erfassen"
+          }
+        }
+      }
     },
     "Log In" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Anmelden"
+          }
+        }
+      }
     },
     "Log Out" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Abmelden"
+          }
+        }
+      }
     },
     "Log in" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Anmelden"
+          }
+        }
+      }
     },
     "Making a light comment in a waiting line" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Eine lockere Bemerkung in der Warteschlange machen"
+          }
+        }
+      }
     },
     "Making your attraction clear right away in the opener. No ambiguity." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gleich beim Opener klar zeigen, dass sie dir gefällt. Ohne Umschweife."
+          }
+        }
+      }
     },
     "Manage Subscriptions" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Abos verwalten"
+          }
+        }
+      }
     },
     "Maximum characters reached" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Maximale Zeichenzahl erreicht"
+          }
+        }
+      }
     },
     "Moderate" : {
-      "comment" : "Fallback confidence description."
+      "comment" : "Fallback confidence description.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mittel"
+          }
+        }
+      }
     },
     "Moderate anxiety" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Etwas nervös"
+          }
+        }
+      }
     },
     "Monthly Plan" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Monatsabo"
+          }
+        }
+      }
     },
     "Most men regret the chances they didn't make" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Die meisten Männer bereuen die Chancen, die sie nicht genutzt haben"
+          }
+        }
+      }
     },
     "Most women want to be talked to more" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Die meisten Frauen möchten öfter angesprochen werden"
+          }
+        }
+      }
     },
     "Name" : {
-      "comment" : "Label of the user's name field."
+      "comment" : "Label of the user's name field.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Name"
+          }
+        }
+      }
     },
     "Network error: Please check your connection and try again." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Netzwerkfehler: Bitte prüf deine Verbindung und versuch es noch einmal."
+          }
+        }
+      }
     },
     "Neutral" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Neutral"
+          }
+        }
+      }
     },
     "Next" : {
-      "comment" : "Button: go to the next question or step."
+      "comment" : "Button: go to the next question or step.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Weiter"
+          }
+        }
+      }
     },
     "No Connection" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Keine Verbindung"
+          }
+        }
+      }
     },
     "No account" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kein Konto"
+          }
+        }
+      }
     },
     "No active subscriptions found to restore" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Keine aktiven Abos zum Wiederherstellen gefunden"
+          }
+        }
+      }
     },
     "No approach data yet" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Noch keine Daten"
+          }
+        }
+      }
     },
     "No approaches found" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Keine Einträge gefunden"
+          }
+        }
+      }
     },
     "No approaches logged yet" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Noch keine Ansprachen erfasst"
+          }
+        }
+      }
     },
     "No corny lines. Just calm, practical stuff about being present. My social anxiety is half what it was." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Keine billigen Sprüche. Einfach ruhige, praktische Tipps, wie man präsent ist. Meine soziale Angst ist nur noch halb so groß."
+          }
+        }
+      }
     },
     "No internet connection" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Keine Internetverbindung"
+          }
+        }
+      }
     },
     "No internet connection. Please check your network and try again." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Keine Internetverbindung. Bitte prüf dein Netzwerk und versuch es noch einmal."
+          }
+        }
+      }
     },
     "No more “what if” moments" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nie mehr „Was wäre, wenn …“"
+          }
+        }
+      }
     },
     "No payment now. Cancel anytime before your trial ends." : {
-      "comment" : "Paywall, under the purchase button, for a user who gets the free trial."
+      "comment" : "Paywall, under the purchase button, for a user who gets the free trial.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Jetzt keine Zahlung. Jederzeit vor Ende des Testzeitraums kündbar."
+          }
+        }
+      }
     },
     "No questions available" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Keine Fragen verfügbar"
+          }
+        }
+      }
     },
     "No reflections yet. Start logging approaches with notes to see your insights" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Noch keine Reflexionen. Erfasse Ansprachen mit Notizen, um Erkenntnisse zu sehen"
+          }
+        }
+      }
     },
     "Not now" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nicht jetzt"
+          }
+        }
+      }
     },
     "Notes" : {
-      "comment" : "Label of the free-text notes field when logging an approach."
+      "comment" : "Label of the free-text notes field when logging an approach.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Notizen"
+          }
+        }
+      }
     },
     "Nothing else to set up — you'll go straight into the app." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sonst ist nichts einzurichten – du landest direkt in der App."
+          }
+        }
+      }
     },
     "OFF" : {
-      "comment" : "State of the daily reading reminder toggle."
+      "comment" : "State of the daily reading reminder toggle.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "AUS"
+          }
+        }
+      }
     },
     "OK" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "OK"
+          }
+        }
+      }
     },
     "ON" : {
-      "comment" : "State of the daily reading reminder toggle."
+      "comment" : "State of the daily reading reminder toggle.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "AN"
+          }
+        }
+      }
     },
     "ONE-TIME OFFER" : {
-      "comment" : "Small upper-case label above the one-time offer price."
+      "comment" : "Small upper-case label above the one-time offer price.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "EINMALIGES ANGEBOT"
+          }
+        }
+      }
     },
     "One last step" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ein letzter Schritt"
+          }
+        }
+      }
     },
     "One thing at a time. Play the scenario first." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Eins nach dem anderen. Spiel zuerst das Szenario."
+          }
+        }
+      }
     },
     "Oops!" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hoppla!"
+          }
+        }
+      }
     },
     "Open" : {
-      "comment" : "Button that opens the course the user was last in."
+      "comment" : "Button that opens the course the user was last in.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Öffnen"
+          }
+        }
+      }
     },
     "Optimizing your experience" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Dein Erlebnis wird optimiert"
+          }
+        }
+      }
     },
     "Personalizing your lessons" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Deine Lektionen werden angepasst"
+          }
+        }
+      }
     },
     "Plan" : {
-      "comment" : "Generic subscription plan name when the length is unknown."
+      "comment" : "Generic subscription plan name when the length is unknown.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Abo"
+          }
+        }
+      }
     },
     "Please Try again!" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bitte versuch es noch einmal!"
+          }
+        }
+      }
     },
     "Please log in to access practices." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bitte melde dich an, um auf die Übungen zuzugreifen."
+          }
+        }
+      }
     },
     "Please provide a title for your approach" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bitte gib deinem Eintrag einen Titel"
+          }
+        }
+      }
     },
     "Please select a subscription plan" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bitte wähl ein Abo aus"
+          }
+        }
+      }
     },
     "Please try again!" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bitte versuch es noch einmal!"
+          }
+        }
+      }
     },
     "Please wait..." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bitte warten …"
+          }
+        }
+      }
     },
     "Practice" : {
-      "comment" : "Screen title for the scenarios area."
+      "comment" : "Screen title for the scenarios area.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Üben"
+          }
+        }
+      }
     },
     "Privacy" : {
-      "comment" : "Link to the privacy policy (short form, used in footers)."
+      "comment" : "Link to the privacy policy (short form, used in footers).",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Datenschutz"
+          }
+        }
+      }
     },
     "Privacy Policy" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Datenschutzerklärung"
+          }
+        }
+      }
     },
     "Processing..." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wird verarbeitet …"
+          }
+        }
+      }
     },
     "Profile" : {
-      "comment" : "Tab bar title and screen title."
+      "comment" : "Tab bar title and screen title.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Profil"
+          }
+        }
+      }
     },
     "Purchase completed but entitlement not found. Please contact support." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kauf abgeschlossen, aber keine Berechtigung gefunden. Bitte wende dich an den Support."
+          }
+        }
+      }
     },
     "Purchase failed. Please try again." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kauf fehlgeschlagen. Bitte versuch es noch einmal."
+          }
+        }
+      }
     },
     "Purchases are temporarily unavailable. Please try again later." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Käufe sind vorübergehend nicht möglich. Bitte versuch es später noch einmal."
+          }
+        }
+      }
     },
     "Purchases aren't allowed on this device. Check Screen Time restrictions and try again." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Käufe sind auf diesem Gerät nicht erlaubt. Prüf die Bildschirmzeit-Beschränkungen und versuch es noch einmal."
+          }
+        }
+      }
     },
     "Purchases restored successfully!" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Käufe erfolgreich wiederhergestellt!"
+          }
+        }
+      }
     },
     "Rate Wingman" : {
-      "comment" : "Settings link to rate the app. Wingman is the app name."
+      "comment" : "Settings link to rate the app. Wingman is the app name.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wingman bewerten"
+          }
+        }
+      }
     },
     "Reminders to practice approaching, and occasional offers." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Erinnerungen ans Ansprechen-Üben und gelegentliche Angebote."
+          }
+        }
+      }
     },
     "Restore" : {
-      "comment" : "Link that restores a previous purchase (short form, used in footers)."
+      "comment" : "Link that restores a previous purchase (short form, used in footers).",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wiederherstellen"
+          }
+        }
+      }
     },
     "Restore Purchase" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kauf wiederherstellen"
+          }
+        }
+      }
     },
     "Restore failed. Please try again." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wiederherstellen fehlgeschlagen. Bitte versuch es noch einmal."
+          }
+        }
+      }
     },
     "Restoring..." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wird wiederhergestellt …"
+          }
+        }
+      }
     },
     "Retry" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Erneut versuchen"
+          }
+        }
+      }
     },
     "Right now it's tied to this device. An account keeps your subscription and progress if you switch phones." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Im Moment ist es an dieses Gerät gebunden. Mit einem Konto bleiben dein Abo und dein Fortschritt erhalten, wenn du das Handy wechselst."
+          }
+        }
+      }
     },
     "Save" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Speichern"
+          }
+        }
+      }
     },
     "Save your %lld approaches" : {
-      "comment" : "Prompt to create an account. The number is how many approaches the guest has logged; always 2 or more here."
+      "comment" : "Prompt to create an account. The number is how many approaches the guest has logged; always 2 or more here.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sichere deine %lld Ansprachen"
+          }
+        }
+      }
     },
     "Save your first approach" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sichere deine erste Ansprache"
+          }
+        }
+      }
     },
     "Save your progress, sync across devices, and more." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fortschritt speichern, auf allen Geräten synchronisieren und mehr."
+          }
+        }
+      }
     },
     "Saved!" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gespeichert!"
+          }
+        }
+      }
     },
     "Scenario complete." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Szenario abgeschlossen."
+          }
+        }
+      }
     },
     "Scenario not found." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Szenario nicht gefunden."
+          }
+        }
+      }
     },
     "Scenarios" : {
-      "comment" : "Tab bar title."
+      "comment" : "Tab bar title.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Szenarien"
+          }
+        }
+      }
     },
     "Science-based techniques that actually stick" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wissenschaftlich fundierte Techniken, die wirklich hängen bleiben"
+          }
+        }
+      }
     },
     "Search" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Suchen"
+          }
+        }
+      }
     },
     "Secure your subscription" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sichere dir dein Abo"
+          }
+        }
+      }
     },
     "Select all that apply" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wähl alles Zutreffende aus"
+          }
+        }
+      }
     },
     "Server error: Please try again later." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Serverfehler: Bitte versuch es später noch einmal."
+          }
+        }
+      }
     },
     "Settings" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Einstellungen"
+          }
+        }
+      }
     },
     "Show Approach Guide" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Leitfaden anzeigen"
+          }
+        }
+      }
     },
     "Sign-in failed. Please try again." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Anmeldung fehlgeschlagen. Bitte versuch es noch einmal."
+          }
+        }
+      }
     },
     "Sign-in failed: %@" : {
-      "comment" : "The placeholder is an error description supplied by the system."
+      "comment" : "The placeholder is an error description supplied by the system.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Anmeldung fehlgeschlagen: %@"
+          }
+        }
+      }
     },
     "Sign-in requires user interaction." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Für die Anmeldung ist eine Eingabe nötig."
+          }
+        }
+      }
     },
     "Sign-in was not handled. Please try again." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Die Anmeldung wurde nicht verarbeitet. Bitte versuch es noch einmal."
+          }
+        }
+      }
     },
     "Signing in..." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Anmeldung läuft …"
+          }
+        }
+      }
     },
     "Skip" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Überspringen"
+          }
+        }
+      }
     },
     "Skip for now" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Erst mal überspringen"
+          }
+        }
+      }
     },
     "Slightly nervous" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Leicht nervös"
+          }
+        }
+      }
     },
     "Social Practice" : {
-      "comment" : "Name of approach level 1 in the level guide."
+      "comment" : "Name of approach level 1 in the level guide.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Soziales Üben"
+          }
+        }
+      }
     },
     "Something went wrong" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Etwas ist schiefgelaufen"
+          }
+        }
+      }
     },
     "Something went wrong on our end. Please try again." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bei uns ist etwas schiefgelaufen. Bitte versuch es noch einmal."
+          }
+        }
+      }
     },
     "Somewhat confident" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ziemlich selbstbewusst"
+          }
+        }
+      }
     },
     "Start" : {
-      "comment" : "Daily practice button: begin today's questions."
+      "comment" : "Daily practice button: begin today's questions.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Start"
+          }
+        }
+      }
     },
     "Start Practice" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Übung starten"
+          }
+        }
+      }
     },
     "Start filling it" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fang an, ihn zu füllen"
+          }
+        }
+      }
     },
     "Start logging approaches to see your breakdown" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Erfasse Ansprachen, um deine Aufschlüsselung zu sehen"
+          }
+        }
+      }
     },
     "Start logging your social interactions to see them here" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Erfasse deine sozialen Begegnungen, um sie hier zu sehen"
+          }
+        }
+      }
     },
     "Steps" : {
-      "comment" : "Heading above the steps of a practice."
+      "comment" : "Heading above the steps of a practice.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Schritte"
+          }
+        }
+      }
     },
     "Stop caring what others think" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Egal, was andere denken"
+          }
+        }
+      }
     },
     "Stop letting fear of rejection win" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Keine Angst mehr vor Zurückweisung"
+          }
+        }
+      }
     },
     "Stop talking yourself out of it" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Red es dir nicht mehr aus"
+          }
+        }
+      }
     },
     "Subtle compliment/ Playful banter" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Dezentes Kompliment / verspieltes Necken"
+          }
+        }
+      }
     },
     "Success" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Erfolg"
+          }
+        }
+      }
     },
     "Suggested" : {
-      "comment" : "Small badge on the recommended daily practice."
+      "comment" : "Small badge on the recommended daily practice.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Empfohlen"
+          }
+        }
+      }
     },
     "TODAY" : {
-      "comment" : "Left axis caption on the growth chart. Upper case in English."
+      "comment" : "Left axis caption on the growth chart. Upper case in English.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "HEUTE"
+          }
+        }
+      }
     },
     "Takes a few seconds. Nothing else changes." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Dauert nur ein paar Sekunden. Sonst ändert sich nichts."
+          }
+        }
+      }
     },
     "Talk to dog owner about their dog" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Einen Hundebesitzer auf seinen Hund ansprechen"
+          }
+        }
+      }
     },
     "Talking to someone you may be interested in" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mit jemandem reden, der dich interessieren könnte"
+          }
+        }
+      }
     },
     "Tap and hold to commit." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tippen und halten, um dich zu verpflichten."
+          }
+        }
+      }
     },
     "Tap to continue" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tippen zum Fortfahren"
+          }
+        }
+      }
     },
     "Tap to finish" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tippen zum Beenden"
+          }
+        }
+      }
     },
     "Tap to retry" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tippen zum Wiederholen"
+          }
+        }
+      }
     },
     "Terms" : {
-      "comment" : "Link to the terms of service (short form, used in footers)."
+      "comment" : "Link to the terms of service (short form, used in footers).",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "AGB"
+          }
+        }
+      }
     },
     "Terms of Service" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nutzungsbedingungen"
+          }
+        }
+      }
     },
     "That account is already linked to another Wingman login. Log in with it instead — progress from this session won't carry over." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Dieses Konto ist bereits mit einem anderen Wingman-Login verknüpft. Melde dich stattdessen damit an – der Fortschritt aus dieser Sitzung wird nicht übernommen."
+          }
+        }
+      }
     },
     "That one's further down the line. Start with the first." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Der kommt erst später dran. Fang mit dem ersten an."
+          }
+        }
+      }
     },
     "That payment method was declined. Check your payment details in the App Store and try again." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Diese Zahlungsmethode wurde abgelehnt. Prüf deine Zahlungsdaten im App Store und versuch es noch einmal."
+          }
+        }
+      }
     },
     "The App Store is having trouble right now. Please try again in a few minutes." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Der App Store hat gerade Probleme. Bitte versuch es in ein paar Minuten noch einmal."
+          }
+        }
+      }
     },
     "The step-by-step way to stop freezing up and start the conversation." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Schritt für Schritt raus aus der Starre und rein ins Gespräch."
+          }
+        }
+      }
     },
     "They're just waiting for you to make the first move" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sie warten nur darauf, dass du den ersten Schritt machst"
+          }
+        }
+      }
     },
     "They're on this device only. An account keeps them if you change phones." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sie sind nur auf diesem Gerät gespeichert. Mit einem Konto bleiben sie erhalten, wenn du das Handy wechselst."
+          }
+        }
+      }
     },
     "Things Wingman users have said" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Das sagen Wingman-Nutzer"
+          }
+        }
+      }
     },
     "This deletes your logged approaches and all progress on this device. There's no account to recover them from. This cannot be undone." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Damit werden deine erfassten Ansprachen und dein gesamter Fortschritt auf diesem Gerät gelöscht. Es gibt kein Konto, aus dem sie wiederhergestellt werden könnten. Das kann nicht rückgängig gemacht werden."
+          }
+        }
+      }
     },
     "This plan isn't available on your App Store account right now." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Dieses Abo ist für deinen App-Store-Account gerade nicht verfügbar."
+          }
+        }
+      }
     },
     "This purchase needs approval before it can go through — usually from the account holder or your bank. You'll get access automatically once it's approved." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Dieser Kauf muss erst genehmigt werden – meist vom Kontoinhaber oder deiner Bank. Sobald er genehmigt ist, bekommst du automatisch Zugriff."
+          }
+        }
+      }
     },
     "Time for your daily reading! Your goal is %lld minutes today." : {
-      "comment" : "Body of the daily reading reminder notification."
+      "comment" : "Body of the daily reading reminder notification.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Zeit für deine tägliche Lektüre! Dein Ziel heute: %lld Minuten."
+          }
+        }
+      }
     },
     "Tips & offers" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tipps & Angebote"
+          }
+        }
+      }
     },
     "Title" : {
-      "comment" : "Label of the field where the user names an approach they are logging."
+      "comment" : "Label of the field where the user names an approach they are logging.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Titel"
+          }
+        }
+      }
     },
     "To achieve what I want, I must grow. I won’t let fear make the decision for me. I’ll take my chance, and learn from what happens." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Um zu erreichen, was ich will, muss ich wachsen. Ich lasse nicht die Angst für mich entscheiden. Ich nutze meine Chance und lerne aus dem, was passiert."
+          }
+        }
+      }
     },
     "Today" : {
-      "comment" : "Approach list: logged today."
+      "comment" : "Approach list: logged today.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Heute"
+          }
+        }
+      }
     },
     "Top streak" : {
-      "comment" : "Profile tile: the user's longest daily streak."
+      "comment" : "Profile tile: the user's longest daily streak.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Längste Serie"
+          }
+        }
+      }
     },
     "Try Again" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Erneut versuchen"
+          }
+        }
+      }
     },
     "Try adjusting your search terms" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Versuch es mit anderen Suchbegriffen"
+          }
+        }
+      }
     },
     "Try for %@" : {
-      "comment" : "Paywall purchase button when the plan starts with a free trial. %@ is zero in the product's currency, for example $0.00."
+      "comment" : "Paywall purchase button when the plan starts with a free trial. %@ is zero in the product's currency, for example $0.00.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Für %@ testen"
+          }
+        }
+      }
     },
     "Turn small talk into real chemistry" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Vom Smalltalk zu echter Chemie"
+          }
+        }
+      }
     },
     "Turn “what if” into “hi.”" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Aus „Was wäre, wenn“ wird „Hallo“."
+          }
+        }
+      }
     },
     "Unknown" : {
-      "comment" : "Shown in place of the app version if it cannot be read."
+      "comment" : "Shown in place of the app version if it cannot be read.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Unbekannt"
+          }
+        }
+      }
     },
     "Up Next" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Als Nächstes"
+          }
+        }
+      }
     },
     "Update Approach" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Eintrag aktualisieren"
+          }
+        }
+      }
     },
     "Updated!" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Aktualisiert!"
+          }
+        }
+      }
     },
     "User" : {
-      "comment" : "Greeting name fallback on the Home screen when no name is set."
+      "comment" : "Greeting name fallback on the Home screen when no name is set.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nutzer"
+          }
+        }
+      }
     },
     "User not authenticated" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nutzer nicht angemeldet"
+          }
+        }
+      }
     },
     "User not authenticated. Please log in to access daily practice questions." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nicht angemeldet. Bitte melde dich an, um die täglichen Übungsfragen zu sehen."
+          }
+        }
+      }
     },
     "Using Wingman every day" : {
-      "comment" : "Label on the rising line of the growth chart. Wingman is the app name."
+      "comment" : "Label on the rising line of the growth chart. Wingman is the app name.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wingman jeden Tag nutzen"
+          }
+        }
+      }
     },
     "V %@" : {
       "comment" : "App version label.",
       "shouldTranslate" : false
     },
     "Very anxious" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sehr nervös"
+          }
+        }
+      }
     },
     "Very confident" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sehr selbstbewusst"
+          }
+        }
+      }
     },
     "Waiting for approval" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Warte auf Genehmigung"
+          }
+        }
+      }
     },
     "Walk up to her without hesitating" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Geh ohne Zögern auf sie zu"
+          }
+        }
+      }
     },
     "We couldn't find an active subscription for this Apple ID." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Für diese Apple-ID wurde kein aktives Abo gefunden."
+          }
+        }
+      }
     },
     "Welcome Back" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Willkommen zurück"
+          }
+        }
+      }
     },
     "Welcome to Wingman. This is home.\nDaily practice keeps you sharp. The log fills with moments you took, not replayed." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Willkommen bei Wingman. Hier bist du zu Hause.\nDie tägliche Übung hält dich in Form. Dein Logbuch füllt sich mit Momenten, die du genutzt hast – nicht mit solchen, die du im Kopf durchspielst."
+          }
+        }
+      }
     },
     "What are you mainly hoping to improve?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Was möchtest du vor allem verbessern?"
+          }
+        }
+      }
     },
     "What brought you to Wingman?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Was hat dich zu Wingman gebracht?"
+          }
+        }
+      }
     },
     "What happens in the second before you freeze?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Was passiert in der Sekunde, bevor du erstarrst?"
+          }
+        }
+      }
     },
     "What if a little nervousness just reads as genuine?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Was, wenn ein bisschen Nervosität einfach echt wirkt?"
+          }
+        }
+      }
     },
     "What if your opener didn’t need to be clever?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Was, wenn dein Opener gar nicht clever sein muss?"
+          }
+        }
+      }
     },
     "What type of Interaction ?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Welche Art von Begegnung?"
+          }
+        }
+      }
     },
     "What usually stops you from doing so?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Was hält dich normalerweise davon ab?"
+          }
+        }
+      }
     },
     "What would feeling sure of yourself change this week?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Was würde sich diese Woche ändern, wenn du dir deiner selbst sicher wärst?"
+          }
+        }
+      }
     },
     "What would your first conversation back out there sound like?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wie würde sich dein erstes Gespräch nach der Pause anhören?"
+          }
+        }
+      }
     },
     "What’s one question you could ask that isn’t small talk?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Welche Frage könntest du stellen, die kein Smalltalk ist?"
+          }
+        }
+      }
     },
     "What’s the one thing that stops you from saying hi?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Was ist das eine, das dich davon abhält, Hallo zu sagen?"
+          }
+        }
+      }
     },
     "What’s the worst a polite “no” could actually cost you?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Was würde dich ein höfliches „Nein“ wirklich kosten?"
+          }
+        }
+      }
     },
     "When did a conversation last feel like more than small talk?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wann hat sich ein Gespräch zuletzt nach mehr als Smalltalk angefühlt?"
+          }
+        }
+      }
     },
     "When did you last meet someone without a screen in between?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wann hast du zuletzt jemanden ohne Bildschirm dazwischen kennengelernt?"
+          }
+        }
+      }
     },
     "When did you last start a conversation with a stranger?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wann hast du zuletzt ein Gespräch mit einer Fremden angefangen?"
+          }
+        }
+      }
     },
     "When was the last time you spoke to a woman in public?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wann hast du zuletzt in der Öffentlichkeit eine Frau angesprochen?"
+          }
+        }
+      }
     },
     "Where in your day could you say one more hello?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wo in deinem Alltag könntest du einmal mehr Hallo sagen?"
+          }
+        }
+      }
     },
     "Which side do you want to be on?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Auf welcher Seite willst du stehen?"
+          }
+        }
+      }
     },
     "Who did you notice today that you didn’t talk to?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wen hast du heute bemerkt, aber nicht angesprochen?"
+          }
+        }
+      }
     },
     "Who would you talk to this week if nerves weren’t a factor?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wen würdest du diese Woche ansprechen, wenn Nervosität keine Rolle spielte?"
+          }
+        }
+      }
     },
     "Would anyone around you really remember you saying hi?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Würde sich überhaupt jemand daran erinnern, dass du Hallo gesagt hast?"
+          }
+        }
+      }
     },
     "XP" : {
       "comment" : "Brand term. Not translated.",
       "shouldTranslate" : false
     },
     "XP points" : {
-      "comment" : "Profile tile. XP is a brand term."
+      "comment" : "Profile tile. XP is a brand term.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "XP-Punkte"
+          }
+        }
+      }
     },
     "Yearly Plan" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Jahresabo"
+          }
+        }
+      }
     },
     "You" : {
-      "comment" : "Speaker label for the user's own lines in a scenario, when no name is set."
+      "comment" : "Speaker label for the user's own lines in a scenario, when no name is set.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Du"
+          }
+        }
+      }
     },
     "You already have a subscription on this account. Tap Restore to get access back." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Du hast auf diesem Konto bereits ein Abo. Tippe auf „Wiederherstellen“, um wieder Zugriff zu bekommen."
+          }
+        }
+      }
     },
     "You appear to be offline. Reconnect and try again." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Du scheinst offline zu sein. Stell die Verbindung wieder her und versuch es noch einmal."
+          }
+        }
+      }
     },
     "You are not alone. Millions of men struggle with approaching." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Du bist nicht allein. Millionen Männer tun sich schwer damit, Frauen anzusprechen."
+          }
+        }
+      }
     },
     "You're not the only one who's been stuck here." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Du bist nicht der Einzige, der hier festhängt."
+          }
+        }
+      }
     },
     "Your Modules" : {
-      "comment" : "Home section heading above the five course categories."
+      "comment" : "Home section heading above the five course categories.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Deine Module"
+          }
+        }
+      }
     },
     "Your approach log is saved on this device only. An account keeps it if you lose or change your phone." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Dein Logbuch ist nur auf diesem Gerät gespeichert. Mit einem Konto bleibt es erhalten, wenn du dein Handy verlierst oder wechselst."
+          }
+        }
+      }
     },
     "Your name" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Dein Name"
+          }
+        }
+      }
     },
     "Your progress is saved on this device only." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Dein Fortschritt ist nur auf diesem Gerät gespeichert."
+          }
+        }
+      }
     },
     "Your subscription is already active either way." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Dein Abo ist so oder so bereits aktiv."
+          }
+        }
+      }
     },
     "and" : {
       "comment" : "Joins 'Terms' and 'Privacy' in the sign-in legal line, English layout only. Translated apps show the whole sentence instead, so this piece is never translated.",
       "shouldTranslate" : false
     },
     "faster progress than watching generic advice videos" : {
-      "comment" : "Continues the sentence that starts with the bold '3x' entry."
+      "comment" : "Continues the sentence that starts with the bold '3x' entry.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "schnellere Fortschritte als mit allgemeinen Ratgeber-Videos"
+          }
+        }
+      }
     },
     "for your first %lld months" : {
-      "comment" : "One-time offer, under the discounted price. %lld is a number of months, 2 or more."
+      "comment" : "One-time offer, under the discounted price. %lld is a number of months, 2 or more.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "für deine ersten %lld Monate"
+          }
+        }
+      }
     },
     "for your first %lld years" : {
-      "comment" : "One-time offer, under the discounted price. %lld is a number of years, 2 or more."
+      "comment" : "One-time offer, under the discounted price. %lld is a number of years, 2 or more.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "für deine ersten %lld Jahre"
+          }
+        }
+      }
     },
     "for your first month" : {
-      "comment" : "One-time offer, under the discounted price (\"$34.99\")."
+      "comment" : "One-time offer, under the discounted price (\"$34.99\").",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "für deinen ersten Monat"
+          }
+        }
+      }
     },
     "for your first year" : {
-      "comment" : "One-time offer, under the discounted price (\"$34.99\")."
+      "comment" : "One-time offer, under the discounted price (\"$34.99\").",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "für dein erstes Jahr"
+          }
+        }
+      }
     },
     "off your first %lld months" : {
-      "comment" : "One-time offer, under the big percentage. %lld is a number of months, 2 or more."
+      "comment" : "One-time offer, under the big percentage. %lld is a number of months, 2 or more.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Rabatt auf deine ersten %lld Monate"
+          }
+        }
+      }
     },
     "off your first %lld years" : {
-      "comment" : "One-time offer, under the big percentage. %lld is a number of years, 2 or more."
+      "comment" : "One-time offer, under the big percentage. %lld is a number of years, 2 or more.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Rabatt auf deine ersten %lld Jahre"
+          }
+        }
+      }
     },
     "off your first month" : {
-      "comment" : "One-time offer, under the big percentage (\"50%\")."
+      "comment" : "One-time offer, under the big percentage (\"50%\").",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Rabatt auf deinen ersten Monat"
+          }
+        }
+      }
     },
     "off your first year" : {
-      "comment" : "One-time offer, under the big percentage (\"50%\")."
+      "comment" : "One-time offer, under the big percentage (\"50%\").",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Rabatt auf dein erstes Jahr"
+          }
+        }
+      }
     },
     "only %@ per week" : {
-      "comment" : "Paywall plan row, under the plan's name. %@ is a price with its currency, for example $1.35."
+      "comment" : "Paywall plan row, under the plan's name. %@ is a price with its currency, for example $1.35.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "nur %@ pro Woche"
+          }
+        }
+      }
     },
     "per month" : {
-      "comment" : "Paywall plan row, under the monthly plan's full price ($12.99 per month)."
+      "comment" : "Paywall plan row, under the monthly plan's full price ($12.99 per month).",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "pro Monat"
+          }
+        }
+      }
     },
     "per year" : {
-      "comment" : "Paywall plan row, under the yearly plan's full price ($69.99 per year)."
+      "comment" : "Paywall plan row, under the yearly plan's full price ($69.99 per year).",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "pro Jahr"
+          }
+        }
+      }
     },
     "“%@”" : {
-      "comment" : "A user testimonial in quotation marks. Use your language's quotation marks."
+      "comment" : "A user testimonial in quotation marks. Use your language's quotation marks.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "„%@“"
+          }
+        }
+      }
     },
     "•" : {
       "comment" : "Separator dot.",

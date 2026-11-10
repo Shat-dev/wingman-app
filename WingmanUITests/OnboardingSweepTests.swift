@@ -31,10 +31,15 @@
 //  Each method is one such user. Run it on a throwaway simulator and not in
 //  a loop.
 //
-//  Elements are found by the start of their visible English text because the
-//  app has no accessibility identifiers yet (the start, so that a doubled
-//  string still matches). Once real languages exist this needs identifiers,
-//  or it will only run in English.
+//    testOnboardingInGerman
+//        The same walk with the app launched in German (`-AppleLanguages (de)`).
+//        Nothing is compared; the screenshots are read for German layout
+//        problems (Release B, G7).
+//
+//  Elements are found by the start of their visible text because the app has
+//  no accessibility identifiers yet (the start, so that a doubled string
+//  still matches). The walk names them in English; in the German run `t()`
+//  turns each into its German text from localization/de/catalogs.de.json.
 //
 //  Everything up to the paywall is asserted. What follows the paywall is
 //  walked as far as it goes and never fails the run: those screens depend on
@@ -49,6 +54,40 @@ final class OnboardingSweepTests: XCTestCase {
     private var app: XCUIApplication!
     private var shot = 0
 
+    /// English text -> German, for the German run only. Empty otherwise.
+    private var german: [String: String] = [:]
+
+    /// The start of a longer string the walk looks for by its beginning.
+    /// The catalog has only the whole sentence, so these are listed by hand.
+    private static let germanPrefixes: [String: String] = [
+        "Welcome to Wingman": "Willkommen bei Wingman",
+        "Courses. Mindset": "Kurse. Mindset",
+        "And this is where you practise": "Und hier übst du",
+        "Last one. This one is you": "Der Letzte. Das bist du",
+        "Good luck": "Viel Glück",
+        "Commit": "Verpflichten"
+    ]
+
+    private static func loadGerman() -> [String: String] {
+        let url = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent().deletingLastPathComponent()
+            .appendingPathComponent("localization/de/catalogs.de.json")
+        guard let data = try? Data(contentsOf: url),
+              let catalogs = try? JSONSerialization.jsonObject(with: data) as? [String: [String: Any]] else { return [:] }
+        var table: [String: String] = [:]
+        for strings in catalogs.values {
+            for (english, value) in strings {
+                if let text = value as? String { table[english] = text }
+            }
+        }
+        return table.merging(germanPrefixes) { _, prefix in prefix }
+    }
+
+    /// The text the running app shows for `english`.
+    private func t(_ english: String) -> String {
+        german.isEmpty ? english : (german[english] ?? english)
+    }
+
     /// Set to true, for one run, to also photograph the paywall with the
     /// monthly plan selected. See the note where it is used before doing so.
     private static let selectsPlansOnThePaywall = false
@@ -59,6 +98,14 @@ final class OnboardingSweepTests: XCTestCase {
     }
 
     func testOnboardingToPaywall() {
+        app.launch()
+        walkFromLandingThroughTheApp()
+    }
+
+    func testOnboardingInGerman() {
+        german = Self.loadGerman()
+        XCTAssertFalse(german.isEmpty, "Could not read localization/de/catalogs.de.json")
+        app.launchArguments += ["-AppleLanguages", "(de)", "-AppleLocale", "de_DE"]
         app.launch()
         walkFromLandingThroughTheApp()
     }
@@ -124,7 +171,7 @@ final class OnboardingSweepTests: XCTestCase {
 
         // 10. Commitment pact (press and hold). Skipped by the app if the
         //     pact is switched off, so its absence is not a failure.
-        let commit = app.descendants(matching: .any).matching(NSPredicate(format: "label BEGINSWITH %@", "Commit")).firstMatch
+        let commit = app.descendants(matching: .any).matching(NSPredicate(format: "label BEGINSWITH %@", t("Commit"))).firstMatch
         if commit.waitForExistence(timeout: 8) {
             settle(0.8)
             snap("commitment-pact")
@@ -234,7 +281,7 @@ final class OnboardingSweepTests: XCTestCase {
 
     private func continuePastStatistic(name: String) {
         let hint = button("Tap to continue")
-        let hintText = app.staticTexts.matching(NSPredicate(format: "label BEGINSWITH %@", "Tap to continue")).firstMatch
+        let hintText = app.staticTexts.matching(NSPredicate(format: "label BEGINSWITH %@", t("Tap to continue"))).firstMatch
         let appeared = hint.waitForExistence(timeout: 10) || hintText.waitForExistence(timeout: 2)
         XCTAssertTrue(appeared, "Statistic screen \(name) did not appear")
         settle(1.0)
@@ -250,8 +297,9 @@ final class OnboardingSweepTests: XCTestCase {
 
     private func dismissNotificationPromptIfShown() {
         let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
-        let deny = springboard.buttons["Don\u{2019}t Allow"]
-        if deny.waitForExistence(timeout: 12) {
+        let english = springboard.buttons["Don\u{2019}t Allow"]
+        let deny = english.waitForExistence(timeout: 12) ? english : springboard.buttons["Nicht erlauben"]
+        if deny.exists || deny.waitForExistence(timeout: 2) {
             snap("loading-notification-prompt")
             deny.tap()
         }
@@ -262,18 +310,18 @@ final class OnboardingSweepTests: XCTestCase {
     /// The first button whose label starts with `text`. The start, not the
     /// whole label, so that a doubled pseudo-language string still matches.
     private func button(_ text: String) -> XCUIElement {
-        app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", text)).firstMatch
+        app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", t(text))).firstMatch
     }
 
     /// The first button whose label contains `text` anywhere. A plan row's
     /// label starts with its trial badge when it has one.
     private func buttonContaining(_ text: String) -> XCUIElement {
-        app.buttons.matching(NSPredicate(format: "label CONTAINS %@", text)).firstMatch
+        app.buttons.matching(NSPredicate(format: "label CONTAINS %@", t(text))).firstMatch
     }
 
     /// The first element of any kind whose label contains `text`.
     private func anything(containing text: String) -> XCUIElement {
-        app.descendants(matching: .any).matching(NSPredicate(format: "label CONTAINS %@", text)).firstMatch
+        app.descendants(matching: .any).matching(NSPredicate(format: "label CONTAINS %@", t(text))).firstMatch
     }
 
     private func settle(_ seconds: TimeInterval) {

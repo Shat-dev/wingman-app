@@ -192,8 +192,9 @@ final class AnalyticsPropertiesTests: XCTestCase {
     func testLanguageSuperPropertiesForTheShippingApp() {
         let properties = Analytics.languageSuperProperties(preferredLanguages: ["de-DE", "en-AU"])
         XCTAssertEqual(Set(properties.keys), ["app_language", "device_language"])
-        // The app ships English only, so it runs in English whatever the
-        // device prefers. This flips only when a language is added on purpose.
+        // app_language is the language the app actually runs in, read from
+        // the bundle, not from the list passed here. The test simulator runs
+        // in English, so it stays "en" while device_language reports German.
         XCTAssertEqual(properties["app_language"] as? String, "en")
         XCTAssertEqual(properties["device_language"] as? String, "de-DE")
     }

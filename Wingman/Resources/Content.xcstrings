@@ -3,699 +3,2091 @@
   "strings" : {
     "18-24" : {
       "comment" : "Onboarding answer option.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "18–24"
+          }
+        }
+      }
     },
     "25-34" : {
       "comment" : "Onboarding answer option.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "25–34"
+          }
+        }
+      }
     },
     "35-44" : {
       "comment" : "Onboarding answer option.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "35–44"
+          }
+        }
+      }
     },
     "45-54" : {
       "comment" : "Onboarding answer option.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "45–54"
+          }
+        }
+      }
     },
     "55+" : {
       "comment" : "Onboarding answer option.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "55+"
+          }
+        }
+      }
     },
     "A few months ago" : {
       "comment" : "Onboarding answer option.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Vor ein paar Monaten"
+          }
+        }
+      }
     },
     "A man who fears pain more than failure will taste both" : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wer den Schmerz mehr fürchtet als das Scheitern, wird beides kosten"
+          }
+        }
+      }
     },
     "A person who never made a mistake never tried anything new." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wer nie einen Fehler gemacht hat, hat nie etwas Neues ausprobiert."
+          }
+        }
+      }
     },
     "A ship in the harbour is safe, but that’s not what it was made for." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ein Schiff im Hafen ist sicher, aber dafür wurde es nicht gebaut."
+          }
+        }
+      }
     },
     "Above all, be the heroine of your life, not the victim." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sei vor allem der Held deines Lebens, nicht das Opfer."
+          }
+        }
+      }
     },
     "Accept responsibility for your life. Know that it is you who will get you where you want to go, no one else." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Übernimm Verantwortung für dein Leben. Du selbst bringst dich dahin, wo du hinwillst – niemand sonst."
+          }
+        }
+      }
     },
     "Advanced Conversation Skills" : {
       "comment" : "Course title.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gespräche für Fortgeschrittene"
+          }
+        }
+      }
     },
     "Advanced Flirting Skills" : {
       "comment" : "Course title.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Flirten für Fortgeschrittene"
+          }
+        }
+      }
     },
     "Advanced Opening Techniques" : {
       "comment" : "Course title.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Opener für Fortgeschrittene"
+          }
+        }
+      }
     },
     "All our dreams can come true, if we have the courage to pursue them." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Alle unsere Träume können wahr werden, wenn wir den Mut haben, ihnen zu folgen."
+          }
+        }
+      }
     },
     "Any change, even a change for the better, is always accompanied by drawbacks and discomforts." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Jede Veränderung, selbst eine zum Besseren, bringt Nachteile und Unbehagen mit sich."
+          }
+        }
+      }
     },
     "Any problem is a chance for you to do your best." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Jedes Problem ist eine Chance, dein Bestes zu geben."
+          }
+        }
+      }
     },
     "Anything that happens beats nothing happening at all." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Alles, was passiert, ist besser, als wenn gar nichts passiert."
+          }
+        }
+      }
     },
     "Approach Readiness" : {
       "comment" : "Course title.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bereit zum Ansprechen"
+          }
+        }
+      }
     },
     "Back on the market after a breakup or divorce" : {
       "comment" : "Onboarding answer option.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nach einer Trennung oder Scheidung wieder auf dem Markt"
+          }
+        }
+      }
     },
     "Be not afraid of growing slowly; be afraid only of standing still." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fürchte nicht, langsam zu wachsen. Fürchte nur, stillzustehen."
+          }
+        }
+      }
     },
     "Beliefs & Reframes" : {
       "comment" : "Course title.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Überzeugungen & neue Perspektiven"
+          }
+        }
+      }
     },
     "Believe that what you do makes a difference because it does." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Glaub daran, dass dein Handeln etwas bewirkt – denn das tut es."
+          }
+        }
+      }
     },
     "Believe you can and you're halfway there." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Glaub, dass du es kannst, und du hast schon die Hälfte geschafft."
+          }
+        }
+      }
     },
     "Better mindset & confidence" : {
       "comment" : "Onboarding answer option.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Besseres Mindset & mehr Selbstvertrauen"
+          }
+        }
+      }
     },
     "Brave men may not live forever, but cautious men do not live at all." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mutige Männer leben vielleicht nicht ewig, aber vorsichtige leben überhaupt nicht."
+          }
+        }
+      }
     },
     "Change equals self-improvement. Push yourself to places you haven’t been before." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Veränderung heißt, an sich zu arbeiten. Geh an Orte, an denen du noch nie warst."
+          }
+        }
+      }
     },
     "Change is hard at first, messy in the middle, and gorgeous at the end." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Veränderung ist am Anfang schwer, in der Mitte chaotisch und am Ende wunderschön."
+          }
+        }
+      }
     },
     "Closing" : {
       "comment" : "Course title.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Der Abschluss"
+          }
+        }
+      }
     },
     "Comfort zones are quiet places where nothing changes." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Komfortzonen sind stille Orte, an denen sich nichts ändert."
+          }
+        }
+      }
     },
     "Compliments & Verbal Chemistry" : {
       "comment" : "Course title.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Komplimente & verbale Chemie"
+          }
+        }
+      }
     },
     "Confidence isn’t something you’re born with. It’s something you build" : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Selbstvertrauen ist nicht angeboren. Du baust es dir auf"
+          }
+        }
+      }
     },
     "Courage is being scared to death, but moving forward anyway." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mut heißt, Todesangst zu haben und trotzdem weiterzugehen."
+          }
+        }
+      }
     },
     "Courage is the birthplace of confidence." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mut ist der Ursprung von Selbstvertrauen."
+          }
+        }
+      }
     },
     "Creating Opportunities" : {
       "comment" : "Course title.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gelegenheiten schaffen"
+          }
+        }
+      }
     },
     "Creating attraction and romantic interest" : {
       "comment" : "Onboarding answer option.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Anziehung und romantisches Interesse wecken"
+          }
+        }
+      }
     },
     "Defeat is not the worst of failures. Not to have tried is the true failure." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Eine Niederlage ist nicht das schlimmste Scheitern. Es nicht versucht zu haben, ist das wahre Scheitern."
+          }
+        }
+      }
     },
     "Do not let what you cannot do interfere with what you can do." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lass nicht zu, dass das, was du nicht kannst, dem im Weg steht, was du kannst."
+          }
+        }
+      }
     },
     "Do today what others won't and achieve tomorrow what others can't." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tu heute, was andere nicht tun, und erreiche morgen, was andere nicht erreichen."
+          }
+        }
+      }
     },
     "Don't let the fear of losing be greater than the excitement of winning." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lass die Angst vor dem Verlieren nicht größer sein als die Freude am Gewinnen."
+          }
+        }
+      }
     },
     "Don't wait for the opportunities to come. Get up and create them." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Warte nicht auf Gelegenheiten. Steh auf und schaff sie dir."
+          }
+        }
+      }
     },
     "Don't wait. The time will never be just right." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Warte nicht. Der richtige Zeitpunkt kommt nie."
+          }
+        }
+      }
     },
     "Don't worry about failure; you only have to succeed once." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mach dir keine Sorgen ums Scheitern – du musst nur einmal Erfolg haben."
+          }
+        }
+      }
     },
     "Done with dating apps" : {
       "comment" : "Onboarding answer option.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Keine Lust mehr auf Dating-Apps"
+          }
+        }
+      }
     },
     "Doubt kills more dreams than failure ever will." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Zweifel zerstören mehr Träume, als Scheitern es je könnte."
+          }
+        }
+      }
     },
     "Dream big and dare to fail." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Träum groß und trau dich zu scheitern."
+          }
+        }
+      }
     },
     "Energy and persistence conquer all things." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Energie und Ausdauer besiegen alles."
+          }
+        }
+      }
     },
     "Every \"no\" gets you one step closer to \"yes.\"" : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Jedes „Nein“ bringt dich einen Schritt näher an ein „Ja“."
+          }
+        }
+      }
     },
     "Every approach is practice for the one that works." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Jedes Ansprechen ist Übung für das eine, das klappt."
+          }
+        }
+      }
     },
     "Every master was once a beginner who refused to quit." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Jeder Meister war einmal ein Anfänger, der nicht aufgegeben hat."
+          }
+        }
+      }
     },
     "Every successful person has faced rejection. The difference is they didn't let it stop them from trying again." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Jeder erfolgreiche Mensch wurde schon zurückgewiesen. Der Unterschied: Er hat sich davon nicht abhalten lassen, es wieder zu versuchen."
+          }
+        }
+      }
     },
     "Every time" : {
       "comment" : "Onboarding answer option.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Jedes Mal"
+          }
+        }
+      }
     },
     "Everything you’ve ever wanted is on the other side of fear." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Alles, was du dir je gewünscht hast, liegt auf der anderen Seite der Angst."
+          }
+        }
+      }
     },
     "Failure and rejection are the first steps to succeeding." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Scheitern und Zurückweisung sind die ersten Schritte zum Erfolg."
+          }
+        }
+      }
     },
     "Failure is success in progress." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Scheitern ist Erfolg, der noch unterwegs ist."
+          }
+        }
+      }
     },
     "Failure is the condiment that gives success its flavor." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Scheitern ist das Gewürz, das dem Erfolg seinen Geschmack gibt."
+          }
+        }
+      }
     },
     "Fall seven times and stand up eight." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fall siebenmal hin und steh achtmal auf."
+          }
+        }
+      }
     },
     "Fear & Exposure" : {
       "comment" : "Course title.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Angst & Konfrontation"
+          }
+        }
+      }
     },
     "Fear loses power when you step toward it." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Angst verliert an Macht, wenn du auf sie zugehst."
+          }
+        }
+      }
     },
     "Fear of rejection or being embarrassed" : {
       "comment" : "Onboarding answer option.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Angst vor Zurückweisung oder Blamage"
+          }
+        }
+      }
     },
     "Fear of social consequences" : {
       "comment" : "Onboarding answer option.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Angst vor den sozialen Folgen"
+          }
+        }
+      }
     },
     "Flirting Prerequisites" : {
       "comment" : "Course title.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Flirt-Grundlagen"
+          }
+        }
+      }
     },
     "Happiness depends upon ourselves." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Glück hängt von uns selbst ab."
+          }
+        }
+      }
     },
     "Happiness is not something ready made. It comes from your own actions." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Glück gibt es nicht fertig. Es entsteht aus deinem eigenen Handeln."
+          }
+        }
+      }
     },
     "He who is not courageous enough to take risks will accomplish nothing in life." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wer nicht mutig genug ist, Risiken einzugehen, wird im Leben nichts erreichen."
+          }
+        }
+      }
     },
     "I freeze up around women I find attractive" : {
       "comment" : "Onboarding answer option.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bei Frauen, die ich attraktiv finde, erstarre ich"
+          }
+        }
+      }
     },
     "If nothing ever changed, there’d be no butterflies." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wenn sich nie etwas ändern würde, gäbe es keine Schmetterlinge."
+          }
+        }
+      }
     },
     "If there is no struggle, there is no progress." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ohne Kampf kein Fortschritt."
+          }
+        }
+      }
     },
     "If you are not willing to risk the unusual, you will have to settle for the ordinary." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wer das Ungewöhnliche nicht wagt, muss sich mit dem Gewöhnlichen zufriedengeben."
+          }
+        }
+      }
     },
     "If you don't try, you'll never know what could of been." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wenn du es nicht versuchst, wirst du nie wissen, was hätte sein können."
+          }
+        }
+      }
     },
     "If you don’t like something, change it. If you can’t change it, change your attitude." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wenn dir etwas nicht gefällt, ändere es. Wenn du es nicht ändern kannst, ändere deine Einstellung."
+          }
+        }
+      }
     },
     "If you don’t risk anything, you risk everything." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wer nichts riskiert, riskiert alles."
+          }
+        }
+      }
     },
     "If you don’t swing you’ll never hit a home run." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wer nicht schießt, kann kein Tor schießen."
+          }
+        }
+      }
     },
     "If you face towards the sunshine, you’ll notice the shadows will fall behind you." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wenn du dich der Sonne zuwendest, fallen die Schatten hinter dich."
+          }
+        }
+      }
     },
     "If you wait to feel ready, you will wait forever." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wenn du wartest, bis du dich bereit fühlst, wartest du ewig."
+          }
+        }
+      }
     },
     "In order to succeed, your desire for success should be greater than your fear of failure." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Um erfolgreich zu sein, muss dein Wunsch nach Erfolg größer sein als deine Angst vor dem Scheitern."
+          }
+        }
+      }
     },
     "Inaction guarantees nothing happens. Action is the only path that creates possibility." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nichtstun garantiert, dass nichts passiert. Nur Handeln schafft Möglichkeiten."
+          }
+        }
+      }
     },
     "Inner Stability" : {
       "comment" : "Course title.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Innere Stabilität"
+          }
+        }
+      }
     },
     "It always seems impossible until it’s done." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Es scheint immer unmöglich, bis es getan ist."
+          }
+        }
+      }
     },
     "It does not matter how slowly you go as long as you do not stop." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Es ist egal, wie langsam du gehst, solange du nicht stehen bleibst."
+          }
+        }
+      }
     },
     "It is necessary to put yourself out for rejection and accept that you will be rejected." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Man muss sich der Zurückweisung aussetzen und akzeptieren, dass man zurückgewiesen wird."
+          }
+        }
+      }
     },
     "It's not because things are difficult that we dare not venture. It's because we dare not venture that they are difficult." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nicht weil es schwer ist, wagen wir es nicht, sondern weil wir es nicht wagen, ist es schwer."
+          }
+        }
+      }
     },
     "It’s better to know and be disappointed than to never know and always wonder." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lieber wissen und enttäuscht sein, als nie wissen und sich immer fragen."
+          }
+        }
+      }
     },
     "Keeping conversations going" : {
       "comment" : "Onboarding answer option.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gespräche am Laufen halten"
+          }
+        }
+      }
     },
     "Leap before you're ready; growth happens in mid-air." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Spring, bevor du bereit bist – gewachsen wird in der Luft."
+          }
+        }
+      }
     },
     "Learning & Self Discovery" : {
       "comment" : "Course title.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lernen & Selbsterkenntnis"
+          }
+        }
+      }
     },
     "Learning how to approach" : {
       "comment" : "Onboarding answer option.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lernen, wie man jemanden anspricht"
+          }
+        }
+      }
     },
     "Life is not about living the safer option. Life is about living a life worth living." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Im Leben geht es nicht um die sichere Option. Es geht darum, ein Leben zu führen, das sich lohnt."
+          }
+        }
+      }
     },
     "Life shrinks or expands in proportion to one's courage." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Das Leben schrumpft oder wächst im Verhältnis zum eigenen Mut."
+          }
+        }
+      }
     },
     "Listening & Attunement" : {
       "comment" : "Course title.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Zuhören & Einfühlen"
+          }
+        }
+      }
     },
     "Mastery & Identity" : {
       "comment" : "Course title.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Meisterschaft & Identität"
+          }
+        }
+      }
     },
     "More than a year ago" : {
       "comment" : "Onboarding answer option.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Vor mehr als einem Jahr"
+          }
+        }
+      }
     },
     "Most times" : {
       "comment" : "Onboarding answer option.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Meistens"
+          }
+        }
+      }
     },
     "Never approached before" : {
       "comment" : "Onboarding answer option.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Noch nie jemanden angesprochen"
+          }
+        }
+      }
     },
     "Never fear rejection, fear a life of regretting." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fürchte nie die Zurückweisung, fürchte ein Leben voller Reue."
+          }
+        }
+      }
     },
     "No approach is wasted; it either works or reveals what to change." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kein Ansprechen ist verschwendet: Entweder es klappt, oder du siehst, was du ändern musst."
+          }
+        }
+      }
     },
     "No one can make you feel inferior without your consent." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Niemand kann dir ohne deine Zustimmung das Gefühl geben, minderwertig zu sein."
+          }
+        }
+      }
     },
     "No, I usually go for it" : {
       "comment" : "Onboarding answer option.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nein, ich mache es meistens"
+          }
+        }
+      }
     },
     "Non-negotiables" : {
       "comment" : "Course title.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nicht verhandelbar"
+          }
+        }
+      }
     },
     "Not knowing what to say or how to start" : {
       "comment" : "Onboarding answer option.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nicht zu wissen, was ich sagen oder wie ich anfangen soll"
+          }
+        }
+      }
     },
     "One bold move beats a lifetime of \"what ifs.\"" : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ein mutiger Schritt schlägt ein Leben voller „Was wäre, wenn“."
+          }
+        }
+      }
     },
     "One can choose to go back toward safety or forward toward growth." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Man kann zurück in die Sicherheit gehen oder nach vorn ins Wachstum."
+          }
+        }
+      }
     },
     "Other" : {
       "comment" : "Onboarding answer option.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Anderes"
+          }
+        }
+      }
     },
     "Our greatest glory is not in never falling, but in rising every time we fall." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Unser größter Ruhm liegt nicht darin, nie zu fallen, sondern jedes Mal wieder aufzustehen."
+          }
+        }
+      }
     },
     "Patience, persistence and perspiration make an unbeatable combination for success." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Geduld, Ausdauer und Schweiß sind eine unschlagbare Kombination für Erfolg."
+          }
+        }
+      }
     },
     "Physical Presence" : {
       "comment" : "Course title.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Körperliche Präsenz"
+          }
+        }
+      }
     },
     "Playfulness & Spark" : {
       "comment" : "Course title.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Verspieltheit & Funke"
+          }
+        }
+      }
     },
     "Presence & Expressions" : {
       "comment" : "Course title.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Präsenz & Ausdruck"
+          }
+        }
+      }
     },
     "Rarely" : {
       "comment" : "Onboarding answer option.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Selten"
+          }
+        }
+      }
     },
     "Reading & Responding" : {
       "comment" : "Course title.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Signale lesen & reagieren"
+          }
+        }
+      }
     },
     "Recognizing that you are not where you want to be is a starting point to begin changing your life." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Zu erkennen, dass du noch nicht da bist, wo du sein willst, ist der Ausgangspunkt, um dein Leben zu verändern."
+          }
+        }
+      }
     },
     "Rejection is not the end. Just a step on the right path." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Zurückweisung ist nicht das Ende. Nur ein Schritt auf dem richtigen Weg."
+          }
+        }
+      }
     },
     "Replace fear of the unknown with curiosity." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ersetze die Angst vor dem Unbekannten durch Neugier."
+          }
+        }
+      }
     },
     "Sharing & Vulnerability" : {
       "comment" : "Course title.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Offenheit & Verletzlichkeit"
+          }
+        }
+      }
     },
     "Situational Specific Approaches" : {
       "comment" : "Course title.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ansprechen je nach Situation"
+          }
+        }
+      }
     },
     "Small deeds done are better than great deeds planned." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kleine Taten, die man ausführt, sind besser als große, die man plant."
+          }
+        }
+      }
     },
     "Small talk & Momentum" : {
       "comment" : "Course title.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Smalltalk & Momentum"
+          }
+        }
+      }
     },
     "Sometimes" : {
       "comment" : "Onboarding answer option.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Manchmal"
+          }
+        }
+      }
     },
     "Start where you are. Use what you have. Do what you can." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fang da an, wo du bist. Nutze, was du hast. Tu, was du kannst."
+          }
+        }
+      }
     },
     "Success is not final, failure is not fatal: It is the courage to continue that counts." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Erfolg ist nicht endgültig, Scheitern ist nicht tödlich: Was zählt, ist der Mut weiterzumachen."
+          }
+        }
+      }
     },
     "Success is the sum of small efforts repeated day in and day out." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Erfolg ist die Summe kleiner Anstrengungen, Tag für Tag wiederholt."
+          }
+        }
+      }
     },
     "Success is walking from failure to failure with no loss of enthusiasm." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Erfolg heißt, von Misserfolg zu Misserfolg zu gehen, ohne die Begeisterung zu verlieren."
+          }
+        }
+      }
     },
     "Successful people willingly do what unsuccessful people are unwilling to do." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Erfolgreiche Menschen tun bereitwillig, was erfolglose nicht tun wollen."
+          }
+        }
+      }
     },
     "Swing the bat — home runs don't happen from the bench." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ran an den Ball – von der Ersatzbank aus schießt niemand Tore."
+          }
+        }
+      }
     },
     "The Opener" : {
       "comment" : "Course title.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Der Opener"
+          }
+        }
+      }
     },
     "The Physical Approach" : {
       "comment" : "Course title.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Der körperliche Ansatz"
+          }
+        }
+      }
     },
     "The best way to predict the future is to create it." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Der beste Weg, die Zukunft vorherzusagen, ist, sie zu gestalten."
+          }
+        }
+      }
     },
     "The biggest risk is not taking any risk." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Das größte Risiko ist, kein Risiko einzugehen."
+          }
+        }
+      }
     },
     "The cave you fear to enter holds the treasure you seek." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Die Höhle, die du zu betreten fürchtest, birgt den Schatz, den du suchst."
+          }
+        }
+      }
     },
     "The door stays closed until you turn the handle. She can’t say yes to the version of you that never shows up." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Die Tür bleibt zu, bis du die Klinke drückst. Sie kann nicht Ja sagen zu der Version von dir, die nie auftaucht."
+          }
+        }
+      }
     },
     "The game doesn't start until you step on the field." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Das Spiel beginnt erst, wenn du den Platz betrittst."
+          }
+        }
+      }
     },
     "The greatest glory in living lies not in never falling, but in rising every time we fall." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Der größte Ruhm im Leben liegt nicht darin, nie zu fallen, sondern jedes Mal wieder aufzustehen."
+          }
+        }
+      }
     },
     "The guy who is awkward still beats the guy who never acts." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Der Typ, der unbeholfen ist, schlägt immer noch den, der nie etwas tut."
+          }
+        }
+      }
     },
     "The journey of a thousand miles begins with one step." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Auch eine Reise von tausend Meilen beginnt mit einem Schritt."
+          }
+        }
+      }
     },
     "The man who moves a mountain begins by carrying away small stones." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wer einen Berg versetzen will, fängt damit an, kleine Steine wegzutragen."
+          }
+        }
+      }
     },
     "The man you want to be is built one decision at a time." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Der Mann, der du sein willst, entsteht Entscheidung für Entscheidung."
+          }
+        }
+      }
     },
     "The master has failed more times than the beginner has even tried." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Der Meister ist öfter gescheitert, als der Anfänger es überhaupt versucht hat."
+          }
+        }
+      }
     },
     "The most certain way to succeed is always to try just one more time." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Der sicherste Weg zum Erfolg ist, es immer noch ein weiteres Mal zu versuchen."
+          }
+        }
+      }
     },
     "The only bad approach is the one you didn't make." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Das einzige schlechte Ansprechen ist das, das du nicht gewagt hast."
+          }
+        }
+      }
     },
     "The only failure is the one where you stop trying." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Das einzige Scheitern ist, wenn du aufhörst, es zu versuchen."
+          }
+        }
+      }
     },
     "The only impossible journey is the one you never begin." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Die einzige unmögliche Reise ist die, die du nie beginnst."
+          }
+        }
+      }
     },
     "The only limit to our realization of tomorrow will be our doubts of today." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Die einzige Grenze für unser Morgen sind unsere Zweifel von heute."
+          }
+        }
+      }
     },
     "The only place where success comes before work is in the dictionary." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Der einzige Ort, an dem Erfolg vor Arbeit kommt, ist das Wörterbuch."
+          }
+        }
+      }
     },
     "The secret of getting ahead is getting started." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Das Geheimnis des Vorankommens ist, anzufangen."
+          }
+        }
+      }
     },
     "The successful warrior is the average man, with laser-like focus." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Der erfolgreiche Krieger ist ein ganz normaler Mann mit messerscharfem Fokus."
+          }
+        }
+      }
     },
     "There is only one way to avoid criticism: do nothing, say nothing, and be nothing." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Es gibt nur einen Weg, Kritik zu vermeiden: nichts tun, nichts sagen und nichts sein."
+          }
+        }
+      }
     },
     "There will be times when you succeed and there will be times when you fail, and both are equally important." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Es wird Zeiten geben, in denen du Erfolg hast, und Zeiten, in denen du scheiterst – und beide sind gleich wichtig."
+          }
+        }
+      }
     },
     "Tired of being on my own" : {
       "comment" : "Onboarding answer option.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Keine Lust mehr, allein zu sein"
+          }
+        }
+      }
     },
     "Trust yourself. You are capable of much more than you think." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Vertrau dir selbst. Du kannst viel mehr, als du denkst."
+          }
+        }
+      }
     },
     "Upgrading Your Lifestyle" : {
       "comment" : "Course title.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Dein Lifestyle-Upgrade"
+          }
+        }
+      }
     },
     "Want more confidence in general" : {
       "comment" : "Onboarding answer option.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Allgemein mehr Selbstvertrauen"
+          }
+        }
+      }
     },
     "We don't grow when things are easy. We grow when we face challenges." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wir wachsen nicht, wenn es leicht ist. Wir wachsen, wenn wir uns Herausforderungen stellen."
+          }
+        }
+      }
     },
     "We may encounter many defeats but we must not be defeated." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wir mögen viele Niederlagen erleben, aber wir dürfen uns nicht besiegen lassen."
+          }
+        }
+      }
     },
     "What you’re not changing, you’re choosing." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Was du nicht änderst, wählst du."
+          }
+        }
+      }
     },
     "Whatever the mind of man can conceive and believe, it can achieve." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Was der menschliche Geist sich vorstellen und glauben kann, kann er auch erreichen."
+          }
+        }
+      }
     },
     "When it feels scary to jump, that is exactly when you jump." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wenn sich der Sprung beängstigend anfühlt, genau dann springst du."
+          }
+        }
+      }
     },
     "Whether you think you can or think you can't, you are right." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ob du denkst, du kannst es, oder du kannst es nicht – du hast recht."
+          }
+        }
+      }
     },
     "Within the past month" : {
       "comment" : "Onboarding answer option.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Im letzten Monat"
+          }
+        }
+      }
     },
     "Within the past week" : {
       "comment" : "Onboarding answer option.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "In der letzten Woche"
+          }
+        }
+      }
     },
     "Worrying about coming across wrong" : {
       "comment" : "Onboarding answer option.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Die Sorge, falsch rüberzukommen"
+          }
+        }
+      }
     },
     "You can be the ripest, juiciest peach in the world, and there's still going to be somebody who hates peaches." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Du kannst der reifste, saftigste Pfirsich der Welt sein, und trotzdem wird es jemanden geben, der Pfirsiche hasst."
+          }
+        }
+      }
     },
     "You can choose courage, or you can choose comfort, but you cannot choose both." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Du kannst Mut wählen oder Bequemlichkeit, aber nicht beides."
+          }
+        }
+      }
     },
     "You can waste your lives drawing lines. Or you can live your life crossing them." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Du kannst dein Leben damit verschwenden, Grenzen zu ziehen. Oder du lebst es, indem du sie überschreitest."
+          }
+        }
+      }
     },
     "You can, you should, and if you’re brave enough to start, you will." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Du kannst es, du solltest es, und wenn du mutig genug bist anzufangen, wirst du es."
+          }
+        }
+      }
     },
     "You cannot change what you refuse to confront." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Was du nicht angehst, kannst du nicht ändern."
+          }
+        }
+      }
     },
     "You cannot swim for new horizons until you have the courage to lose sight of the shore." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Du kannst nicht zu neuen Horizonten schwimmen, solange du nicht den Mut hast, die Küste aus den Augen zu verlieren."
+          }
+        }
+      }
     },
     "You cannot win a game you never play." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ein Spiel, das du nie spielst, kannst du nicht gewinnen."
+          }
+        }
+      }
     },
     "You can’t control peoples actions, but you can control your reaction to them." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Du kannst nicht kontrollieren, was andere tun, aber wie du darauf reagierst."
+          }
+        }
+      }
     },
     "You can’t fall if you don’t climb. But there’s no joy in living your whole life on the ground." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wer nicht klettert, kann nicht fallen. Aber es macht keine Freude, sein ganzes Leben am Boden zu verbringen."
+          }
+        }
+      }
     },
     "You don’t have to be great to start, but you have to start to be great." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Du musst nicht großartig sein, um anzufangen, aber du musst anfangen, um großartig zu werden."
+          }
+        }
+      }
     },
     "You don’t have to see the whole staircase, just take the first step." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Du musst nicht die ganze Treppe sehen, nimm einfach die erste Stufe."
+          }
+        }
+      }
     },
     "You don’t lose by trying. You lose by never finding out." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Du verlierst nicht, weil du es versuchst. Du verlierst, weil du es nie herausfindest."
+          }
+        }
+      }
     },
     "You miss 100% of the shots you don’t take" : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Du verfehlst 100 % aller Schüsse, die du nicht abgibst"
+          }
+        }
+      }
     },
     "You will never plough a field if you only turn it over in your mind." : {
       "comment" : "Daily quote on the Home screen.",
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kein Feld wird gepflügt, wenn du es nur im Kopf umgräbst."
+          }
+        }
+      }
     }
   },
   "version" : "1.0"
