@@ -1713,8 +1713,30 @@
         }
       }
     },
+    "Good Afternoon," : {
+      "comment" : "Home greeting from 12:00 to 17:59, followed on the next line by the user's name.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Guten Tag,"
+          }
+        }
+      }
+    },
+    "Good Evening," : {
+      "comment" : "Home greeting from 18:00 to 04:59, followed on the next line by the user's name.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Guten Abend,"
+          }
+        }
+      }
+    },
     "Good Morning," : {
-      "comment" : "Home greeting, followed on the next line by the user's name.",
+      "comment" : "Home greeting from 05:00 to 11:59, followed on the next line by the user's name.",
       "localizations" : {
         "de" : {
           "stringUnit" : {

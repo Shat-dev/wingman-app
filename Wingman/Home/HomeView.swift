@@ -28,7 +28,22 @@ struct HomeView: View {
     // Feature-gate paywall for Daily Practice Start (free users).
     @State private var showDailyPracticePaywall = false
     
-    /// Name shown under "Good Morning,". Session metadata first, local profile
+    /// First line of the Home header, by the device's local hour: morning
+    /// 05:00–11:59, afternoon 12:00–17:59, evening otherwise (late night
+    /// included, where "Good Morning" at 2 a.m. would read as a bug). It used
+    /// to say "Good Morning," at every hour.
+    static func greeting(at date: Date, calendar: Calendar = .current) -> String {
+        switch calendar.component(.hour, from: date) {
+        case 5..<12:
+            return String(localized: "Good Morning,", comment: "Home greeting from 05:00 to 11:59, followed on the next line by the user's name.")
+        case 12..<18:
+            return String(localized: "Good Afternoon,", comment: "Home greeting from 12:00 to 17:59, followed on the next line by the user's name.")
+        default:
+            return String(localized: "Good Evening,", comment: "Home greeting from 18:00 to 04:59, followed on the next line by the user's name.")
+        }
+    }
+
+    /// Name shown under the greeting. Session metadata first, local profile
     /// cache second, "User" last — the same fallback string this header has
     /// always ended on, so nothing changes for a user who has no name stored.
     private var greetingName: String {
@@ -65,9 +80,13 @@ struct HomeView: View {
                     // MARK: - Header
                     HStack(alignment: .top) {
                         VStack(alignment: .leading, spacing: 2) {
-                            Text("Good Morning," )
-                                .font(.manropeMedium(size: 24))
-                                .foregroundColor(.wingmanBlack)
+                            // Re-evaluated every minute so a Home left open
+                            // across 12:00 or 18:00 moves on by itself.
+                            TimelineView(.everyMinute) { context in
+                                Text(Self.greeting(at: context.date))
+                                    .font(.manropeMedium(size: 24))
+                                    .foregroundColor(.wingmanBlack)
+                            }
                             
                             // Show user name from Supabase userMetadata["display_name"],
                             // then the local profile cache, then "User". We never
