@@ -25,7 +25,7 @@ Until 1 and 4 are done, a German phone shows German interface and lessons, but E
 |---|---|
 | UI catalogs (G2) | 574 of 574 strings drafted (2026-11-10) |
 | Lesson overlays (G3) | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-11). All 25 files load in the app (298 unit tests pass) |
-| Database content (G4) | 8 of 15 scenarios (1–8); 0 of 765 questions |
+| Database content (G4) | 9 of 15 scenarios (1–9); 0 of 765 questions |
 | German sweep (G7) | Onboarding and tabs on SE, 2026-11-11: no clipping. Lessons not yet seen in German |
 
 Lesson order followed: the first course of each category before the second (1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, …), the order the app's file names give.
@@ -68,6 +68,7 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **2026-11-11. Scenario 6, Delayed Together** (52 text screens, 17 options, about 550 words; 70 upserts, not run). For the reviewer: the title became *Gemeinsam verspätet*; "interstate" became *in einer anderen Stadt*; "every cloud has a silver lining" became *alles hat wohl sein Gutes*. "I'm... by the way" is shown as written (checked: the app substitutes no name into scenario text), so the German keeps the pause: *Ich bin übrigens …*.
 - **2026-11-11. Scenario 7, Catch the Drift** (51 text screens, 17 options, about 530 words; 69 upserts, not run). For the reviewer: the title became *Am Strand*, because the English idiom has no German equivalent; "swimsuit" became *Bikini*, which fits the beach and keeps the wrong option clearly wrong; "dwarf or king" coconut became *Zwerg- oder Königskokosnuss*. Two English typos are logged below.
 - **2026-11-11. Scenario 8, Picture This** (53 text screens, 18 options, about 590 words; 72 upserts, not run). For the reviewer: the title became *Ein Foto bitte*; "film camera" became *analoge Kamera*; "high aperture" became *große Blende*; "the brewery up 3rd street" became *oben an der Hauptstraße*, since German streets aren't numbered; "the old railway district" became *das alte Bahnhofsviertel*; "mansplaining" stays as it is, since it's used in German. "Asking about her work status feels qualifying" became *als würdest du sie abchecken*.
+- **2026-11-11. Scenario 9, Carton Collision** (55 text screens, 18 options, about 565 words; 74 upserts, not run). For the reviewer: the title became *Das letzte Eierpaket*; "Scissors paper rock" became *Schere, Stein, Papier*; "best of three" became *wer zuerst zwei gewinnt*. "Produce section" was dropped from the first screen, since eggs aren't in the produce section. Two English issues are logged below.
 
 ## Questions for Arthur
 
@@ -84,3 +85,4 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **English typo, `content_11_2_7_2`**: "for a women in work attire" should be "for a woman in work attire".
 - **Lesson 11_5, "False Exits"**: this is the same pickup register as 21_1 ("communicates abundance", "a man who has options"). It's milder, but worth reading together with 21_1.
 - **English typos, scenario 7 (Catch the Drift)**: screen `b1000054…` says "inasive" (should be "invasive"); screen `b1000081…` says "than?" (should be "then?").
+- **English issues, scenario 9 (Carton Collision)**: screen `b1000009…` says "Your serious?" (should be "You're serious?"); screen `b1000001…` puts the eggs in the "Produce section" (eggs are usually in dairy/chilled).
