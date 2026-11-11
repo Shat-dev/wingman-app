@@ -25,7 +25,7 @@ Until 1 and 4 are done, a German phone shows German interface and lessons, but E
 |---|---|
 | UI catalogs (G2) | 574 of 574 strings drafted (2026-11-10) |
 | Lesson overlays (G3) | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-11). All 25 files load in the app (298 unit tests pass) |
-| Database content (G4) | 13 of 15 scenarios (1–13); 0 of 765 questions |
+| Database content (G4) | 14 of 15 scenarios (1–14); 0 of 765 questions |
 | German sweep (G7) | Onboarding and tabs on SE, 2026-11-11: no clipping. Lessons not yet seen in German |
 
 Lesson order followed: the first course of each category before the second (1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, …), the order the app's file names give.
@@ -73,6 +73,7 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **2026-11-11. Scenario 11, Trail Talk** (56 text screens, 21 options, about 610 words; 78 upserts, not run). For the reviewer: the title became *Gipfelgespräch*; "local guide" became *Ortskundige / Wanderführerin*, using the feminine form since it refers to her; "trial session / trial run" became *Probetour*; "Flirty energy established" became *Es knistert*. The English typo "This views definitely" (`b1000007…`, should be "This view's") was translated by meaning.
 - **2026-11-11. Scenario 12, Performance Review** (56 text screens, 21 options, about 620 words; 78 upserts, not run). For the reviewer: the title became *Networking-Abend*, since the English pun on "performance review" (a work appraisal) doesn't carry over and *Mitarbeitergespräch* would mislead; "the break / work holidays" became *die Feiertage*; "approached it with logic instead of theory" became *ganz praktisch angegangen statt theoretisch*, which matches her own reply about theory versus execution. She does the road trip with *Freundinnen*.
 - **2026-11-11. Scenario 13, House Wine** (52 text screens, 21 options, about 530 words; 74 upserts, not run). For the reviewer: the title became *Hauswein*; "partner in crime" became *Komplizin*; "crime scene" became *Tatort*; "Maintain dominant frame" became *Behalt die Führung*. Content flags are logged below.
+- **2026-11-11. Scenario 14, Dressed to Impress** (55 text screens, 20 options, about 560 words; 76 upserts, not run). For the reviewer: the title became *Gut angezogen* (the English idiom has no tight German equivalent); "frame" became *Einstieg … nicht besonders stark*; "socials" became *Social Media*. Two English slips are logged below.
 
 ## Questions for Arthur
 
@@ -92,3 +93,4 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **English issues, scenario 9 (Carton Collision)**: screen `b1000009…` says "Your serious?" (should be "You're serious?"); screen `b1000001…` puts the eggs in the "Produce section" (eggs are usually in dairy/chilled).
 - **English inconsistency, scenario 10 (Progressive Overload)**: she says she's training for "a marathon next month" (screen `b1000022…`), then names "The City Half" (`b1000025…`), a half marathon. The German keeps both as written. Pick one in both languages.
 - **Scenario 13, House Wine: consent framing.** Three feedback screens teach against checking in: "Asking about her comfort level is too formal. Suggest it confidently." (`b1000234…`), the "No touch and just walk forward" path is marked as a missed chance to "use physical contact" (`b1000274…`), and "Maintain dominant frame" (`b1000084…`). The rewarded path puts a hand on her lower back, the same issue as lesson 20_4. The German is faithful. Worth a decision in both languages together with the lesson flags above. Also, the restroom option (`b1000053…`) has no feedback screen after it, unlike the other wrong options. Check the branching.
+- **Scenario 14, Dressed to Impress: English slips.** "Haha pressures on." should be "pressure's on" (`b1000012…`). "I have to let you know if the blue shirt works" (`b1000032…`) reads as if he already knows. It probably means "I'll have to let you know". The German follows the likely intent (*ich muss dir ja noch sagen, wie das blaue Hemd ankommt*). No content concerns in this one.
