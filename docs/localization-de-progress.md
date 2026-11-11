@@ -25,7 +25,7 @@ Until 1 and 4 are done, a German phone shows German interface and lessons, but E
 |---|---|
 | UI catalogs (G2) | 574 of 574 strings drafted (2026-11-10) |
 | Lesson overlays (G3) | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-11). All 25 files load in the app (298 unit tests pass) |
-| Database content (G4) | 3 of 15 scenarios (1–3); 0 of 765 questions |
+| Database content (G4) | 4 of 15 scenarios (1–4); 0 of 765 questions |
 | German sweep (G7) | Onboarding and tabs on SE, 2026-11-11: no clipping. Lessons not yet seen in German |
 
 Lesson order followed: the first course of each category before the second (1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, …), the order the app's file names give.
@@ -63,6 +63,7 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **2026-11-11. Scenario 1, Bar Window** (46 text screens, 16 options, about 480 words). Format: `localization/de/db/scenario_01_bar_window.json` holds English and German side by side, as the reviewer's sheet. `scripts/db_translations_sql.py de` checks it (UUIDs, no blanks, nothing left in English, option counts for questions) and writes `supabase/seed/content_translations_de/scenario_01_bar_window.sql`, 63 upserts, **not run**. Screens of type `options` have empty English text and get no row. For the reviewer: the title "Bar Window" became *Die Bar*; "vodka lemonade" became *Wodka Lemon*; "add my Instagram" became *Folg mir doch auf Instagram*; the woman's name (Sophie) is unchanged, since names are stored once and not translated.
 - **2026-11-11. Scenario 2, Coffee Connections** (51 text screens, 18 options, about 510 words; 70 upserts, not run). For the reviewer: the title became *Kaffee und Regen* (the English is a pun with no German equivalent); "Hey good looking, let me sit here." became *Hey, Hübsche, ich setz mich mal hierhin.* (deliberately the wrong option); "Is anyone sitting here?" became *Ist hier noch frei?*. "No go for it" is the reply to "is anyone sitting here?", so the German answers *Ja, setz dich ruhig*, which is the natural reply to *Ist hier noch frei?*.
 - **2026-11-11. Scenario 3, Fetch & Flirt** (44 text screens, 14 options, about 420 words; 59 upserts, not run). For the reviewer: the title became *Hund & Flirt*; the deliberately suggestive wrong option "We should recreate what our dogs are doing later" stays suggestive (*Was die zwei da machen, sollten wir später nachspielen*); "fountain" became *Trinkbrunnen*. Her dog is female (*meine… sie*), so his dog "made a new friend" became *eine neue Freundin*.
+- **2026-11-11. Scenario 4, Read Between Lines** (51 text screens, 20 options, about 540 words; 72 upserts, not run). For the reviewer: the title became *Zwischen den Zeilen*; "rom coms" became *Liebesromane*, since it's a bookstore; "magic fiction" became *Fantasyroman*. The English line "I have to tell you how my sister finds your recommendation" reads as intended ("I'll have to tell you…"), and the German follows that meaning: *ich muss dir unbedingt erzählen, wie meiner Schwester dein Tipp gefällt*.
 
 ## Questions for Arthur
 
