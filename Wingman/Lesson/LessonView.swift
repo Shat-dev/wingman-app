@@ -603,21 +603,52 @@ struct ScrollableContentView: UIViewRepresentable {
             last.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -bottomPadding).isActive = true
         }
         
-        // Only auto-scroll when content exceeds bounds and there are multiple paragraphs
+        // Bring the newest paragraph into view, scrolling as little as possible.
+        //
+        // This used to scroll to the very bottom of the content, which
+        // includes the 120pt bottom padding: the newest paragraph ended up
+        // ~120pt above the bottom edge and that much more of the page's start
+        // scrolled out of sight. On a small phone (iPhone SE), and with longer
+        // German text, that hid most of the first paragraph on most pages.
+        // Now the page stops as soon as the newest paragraph is fully shown.
+        let newestLabel = lastLabel
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            let needsScroll = scrollView.contentSize.height > scrollView.bounds.height + 1
-            let hasMultiple = content.count > 1
-            if needsScroll && hasMultiple {
-                let bottomOffset = CGPoint(
-                    x: 0,
-                    y: max(0, scrollView.contentSize.height - scrollView.bounds.height + scrollView.contentInset.bottom)
-                )
-                scrollView.setContentOffset(bottomOffset, animated: true)
-            } else {
-                // Keep first paragraph pinned to top
-                scrollView.setContentOffset(.zero, animated: false)
-            }
+            scrollView.layoutIfNeeded()
+            guard let newest = newestLabel else { return }
+            let target = Self.offsetShowing(
+                paragraph: newest.frame,
+                viewportHeight: scrollView.bounds.height,
+                currentOffset: scrollView.contentOffset.y
+            )
+            guard abs(target - scrollView.contentOffset.y) > 0.5 else { return }
+            let scrollsDown = target > scrollView.contentOffset.y
+            scrollView.setContentOffset(CGPoint(x: 0, y: target), animated: scrollsDown)
+            // Earlier text is now above the fold: show that the page scrolls.
+            if scrollsDown { scrollView.flashScrollIndicators() }
         }
+    }
+
+    /// Vertical offset that shows `paragraph` (in content coordinates) with
+    /// the least movement from `currentOffset`.
+    ///
+    /// - Already fully visible: stays where it is.
+    /// - Otherwise: its bottom sits `bottomMargin` above the viewport's bottom
+    ///   edge, unless that would push its own first line off the top (a
+    ///   paragraph taller than the screen), in which case its top is aligned
+    ///   with the top. Never negative, so a page that fits stays pinned to the top.
+    static func offsetShowing(
+        paragraph: CGRect,
+        viewportHeight: CGFloat,
+        currentOffset: CGFloat,
+        bottomMargin: CGFloat = 16
+    ) -> CGFloat {
+        let visibleTop = currentOffset
+        let visibleBottom = currentOffset + viewportHeight - bottomMargin
+        if paragraph.minY >= visibleTop && paragraph.maxY <= visibleBottom {
+            return max(0, currentOffset)
+        }
+        let bottomAligned = paragraph.maxY + bottomMargin - viewportHeight
+        return max(0, min(bottomAligned, paragraph.minY))
     }
     
     class Coordinator: NSObject {
