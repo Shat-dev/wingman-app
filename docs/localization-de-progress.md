@@ -25,7 +25,7 @@ Until 1 and 4 are done, a German phone shows German interface and lessons, but E
 |---|---|
 | UI catalogs (G2) | 574 of 574 strings drafted (2026-11-10) |
 | Lesson overlays (G3) | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-11). All 25 files load in the app (298 unit tests pass) |
-| Database content (G4) | 10 of 15 scenarios (1–10); 0 of 765 questions |
+| Database content (G4) | 11 of 15 scenarios (1–11); 0 of 765 questions |
 | German sweep (G7) | Onboarding and tabs on SE, 2026-11-11: no clipping. Lessons not yet seen in German |
 
 Lesson order followed: the first course of each category before the second (1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, …), the order the app's file names give.
@@ -70,6 +70,7 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **2026-11-11. Scenario 8, Picture This** (53 text screens, 18 options, about 590 words; 72 upserts, not run). For the reviewer: the title became *Ein Foto bitte*; "film camera" became *analoge Kamera*; "high aperture" became *große Blende*; "the brewery up 3rd street" became *oben an der Hauptstraße*, since German streets aren't numbered; "the old railway district" became *das alte Bahnhofsviertel*; "mansplaining" stays as it is, since it's used in German. "Asking about her work status feels qualifying" became *als würdest du sie abchecken*.
 - **2026-11-11. Scenario 9, Carton Collision** (55 text screens, 18 options, about 565 words; 74 upserts, not run). For the reviewer: the title became *Das letzte Eierpaket*; "Scissors paper rock" became *Schere, Stein, Papier*; "best of three" became *wer zuerst zwei gewinnt*. "Produce section" was dropped from the first screen, since eggs aren't in the produce section. Two English issues are logged below.
 - **2026-11-11. Scenario 10, Progressive Overload** (56 text screens, 20 options, about 590 words; 77 upserts, not run). For the reviewer: the title became *Steigerung*; "cable machine" became *Kabelzug*; "work in" became *sich abwechseln*; "push day" stays *Push-Day*, which is common gym slang in German. One English inconsistency is logged below.
+- **2026-11-11. Scenario 11, Trail Talk** (56 text screens, 21 options, about 610 words; 78 upserts, not run). For the reviewer: the title became *Gipfelgespräch*; "local guide" became *Ortskundige / Wanderführerin*, using the feminine form since it refers to her; "trial session / trial run" became *Probetour*; "Flirty energy established" became *Es knistert*. The English typo "This views definitely" (`b1000007…`, should be "This view's") was translated by meaning.
 
 ## Questions for Arthur
 
