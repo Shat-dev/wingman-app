@@ -25,7 +25,7 @@ Until 1 and 4 are done, a German phone shows German interface and lessons, but E
 |---|---|
 | UI catalogs (G2) | 574 of 574 strings drafted (2026-11-10) |
 | Lesson overlays (G3) | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-11). All 25 files load in the app (298 unit tests pass) |
-| Database content (G4) | 14 of 15 scenarios (1–14); 0 of 765 questions |
+| Database content (G4) | 15 of 15 scenarios; 0 of 765 questions |
 | German sweep (G7) | Onboarding and tabs on SE, 2026-11-11: no clipping. Lessons not yet seen in German |
 
 Lesson order followed: the first course of each category before the second (1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, …), the order the app's file names give.
@@ -74,6 +74,7 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **2026-11-11. Scenario 12, Performance Review** (56 text screens, 21 options, about 620 words; 78 upserts, not run). For the reviewer: the title became *Networking-Abend*, since the English pun on "performance review" (a work appraisal) doesn't carry over and *Mitarbeitergespräch* would mislead; "the break / work holidays" became *die Feiertage*; "approached it with logic instead of theory" became *ganz praktisch angegangen statt theoretisch*, which matches her own reply about theory versus execution. She does the road trip with *Freundinnen*.
 - **2026-11-11. Scenario 13, House Wine** (52 text screens, 21 options, about 530 words; 74 upserts, not run). For the reviewer: the title became *Hauswein*; "partner in crime" became *Komplizin*; "crime scene" became *Tatort*; "Maintain dominant frame" became *Behalt die Führung*. Content flags are logged below.
 - **2026-11-11. Scenario 14, Dressed to Impress** (55 text screens, 20 options, about 560 words; 76 upserts, not run). For the reviewer: the title became *Gut angezogen* (the English idiom has no tight German equivalent); "frame" became *Einstieg … nicht besonders stark*; "socials" became *Social Media*. Two English slips are logged below.
+- **2026-11-11. Scenario 15, Study Buddy** (48 text screens, 18 options, about 470 words; 67 upserts, not run). All 15 scenarios are now written; the quiz questions are next. For the reviewer: "paper" became *Hausarbeit* (university register; *Paper* would also work); "A girl" became *Eine junge Frau* (*Mädchen* reads as a child in German); the chemistry pun holds because *Chemie* carries both senses. "Working hard or hardly working?" was adapted as *Fleißig am Arbeiten oder fleißig am Prokrastinieren?*. No content flags.
 
 ## Questions for Arthur
 
