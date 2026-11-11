@@ -25,7 +25,7 @@ Until 1 and 4 are done, a German phone shows German interface and lessons, but E
 |---|---|
 | UI catalogs (G2) | 574 of 574 strings drafted (2026-11-10) |
 | Lesson overlays (G3) | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-11). All 25 files load in the app (298 unit tests pass) |
-| Database content (G4) | **Blocked**: the connector reaches Clera-App, not Wingman-App (2026-11-11) |
+| Database content (G4) | 1 of 15 scenarios (Bar Window: 1 title/summary, 46 screens, 16 options); 0 of 765 questions. Connector reaches Wingman-App again |
 | German sweep (G7) | Onboarding and tabs on SE, 2026-11-11: no clipping. Lessons not yet seen in German |
 
 Lesson order followed: the first course of each category before the second (1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, …), the order the app's file names give.
@@ -59,6 +59,8 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **2026-11-11. Course 21, Advanced Flirting Skills** (3 lessons, 51 items, 1,183 English words). The check passes. For the reviewer: "Disqualification Techniques" is a pickup-artist term with no neutral German equivalent; the title became *Nicht gleich beeindruckt sein* (not being instantly impressed), which says what the lesson teaches. "Callbacks & Inside Jokes" became *Rückbezüge und Insider*; "sexual tension" became *knisternde / sexuelle Spannung*.
 - **2026-11-11. Course 11, Advanced Opening Techniques** (5 lessons, 98 items, 2,157 English words). The check passes. **All 25 courses are now drafted in German (34,442 English words).** 298 unit tests pass with every German overlay bundled. For the reviewer: "thrifting" became *auf Flohmärkten und in Secondhandläden stöbern*; "False Exits" became *der vorgetäuschte Abgang*; "a woman's opinion" became *eine weibliche Meinung*.
 - **2026-11-11. G4 blocked.** `list_projects` on the Supabase connector returns only Clera-App (`rdgtvavltiqmwfzcadcv`). Per the loop's rules, it stopped here without reading or writing anything. The lesson work (G3) is complete, so the loop is stopped.
+- **2026-11-11. G4 resumed.** The connector reaches Wingman-App (`bnckmgnysfliiypvxxii`) again. Live counts match the plan: 765 questions; 15 scenarios with 891 screens and 276 options. Only `SELECT` queries were run.
+- **2026-11-11. Scenario 1, Bar Window** (46 text screens, 16 options, about 480 words). Format: `localization/de/db/scenario_01_bar_window.json` holds English and German side by side, as the reviewer's sheet. `scripts/db_translations_sql.py de` checks it (UUIDs, no blanks, nothing left in English, option counts for questions) and writes `supabase/seed/content_translations_de/scenario_01_bar_window.sql`, 63 upserts, **not run**. Screens of type `options` have empty English text and get no row. For the reviewer: the title "Bar Window" became *Die Bar*; "vodka lemonade" became *Wodka Lemon*; "add my Instagram" became *Folg mir doch auf Instagram*; the woman's name (Sophie) is unchanged, since names are stored once and not translated.
 
 ## Questions for Arthur
 
