@@ -25,7 +25,7 @@ Until 1 and 4 are done, a German phone shows German interface and lessons, but E
 |---|---|
 | UI catalogs (G2) | 574 of 574 strings drafted (2026-11-10) |
 | Lesson overlays (G3) | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-11). All 25 files load in the app (298 unit tests pass) |
-| Database content (G4) | 15 of 15 scenarios; 649 of 765 questions |
+| Database content (G4) | 15 of 15 scenarios; 686 of 765 questions |
 | German sweep (G7) | Onboarding and tabs on SE, 2026-11-11: no clipping. Lessons not yet seen in German |
 
 Lesson order followed: the first course of each category before the second (1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, …), the order the app's file names give.
@@ -92,12 +92,13 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **2026-11-11. Questions 536–573** (flirting_chemistry rows 1–38: lessons 17_1 to 20_3; about 1,700 words). This starts `questions_04_flirting_chemistry_1`, which will hold rows 1–76. Flirting and chemistry has 151 questions, so 2 files of 76 and 75, filled 38 at a time. Terms follow the course 17–21 overlays: "teasing" became *Necken / aufziehen*, "banter" became *Schlagabtausch*, "cheekiness" became *Frechsein*, "tension" became *Spannung*, and *Respekt*. "Plausible deniability" is rendered as *ohne dich festzulegen*. None of these rows were on the English fix list, and there are no new flags.
 - **2026-11-11. Questions 574–611** (flirting_chemistry rows 39–76: lessons 20_4 to 21_3, then 26 module-pool questions; about 1,800 words). `questions_04_flirting_chemistry_1` is complete, with 76 rows. The fix list was applied to `93982613…` (linger / stand closer now conditional). Three more English typos were added to it: `061b4ffe…` "What's you order" became "your"; `4684c791…` "jokes back back" became "back"; `450fc086…` explanation "compliment disguised as compliment" became "a cheeky compliment wrapped in a joke". The fix SQL now has 38 guarded updates. "Sexual tension" became *knisternde Spannung*, matching the 21_2 title, and "disqualification" became *Disqualifizieren*.
 - **2026-11-11. Questions 612–649** (flirting_chemistry rows 77–114, module pool; about 1,900 words). This starts `questions_04_flirting_chemistry_2`, which will hold rows 77–151. Two more items were added to the English fix list. `50183c21…`'s correct answer was the "I don't know if you've earned one yet" line removed from lesson 21_1; it now matches the lesson ("Only if you're getting the next round"), with a matching explanation. `a1c414f9…` "soo" became "so". The fix SQL now has 41 guarded updates. "Protect my queen" (chess pun) works in German as *meine Dame beschützen*.
+- **2026-11-11. Questions 650–686** (flirting_chemistry rows 115–151, module pool; about 1,800 words). `questions_04_flirting_chemistry_2` is complete, with 75 rows, so all 151 flirting_chemistry questions are done. The fix list was applied to `e91466f0…` ("Upper arm"), `f6feba7a…` (touch on her arm) and `f23233f3…` ("…when she's reciprocating"); a check confirmed every fixed id in the batch carries the fixed English. One more grammar fix was added (`a9af130c…` explanation), so the fix SQL now has 42 guarded updates.
 
 ## Questions for Arthur
 
 All earlier items were resolved on 2026-11-11; the decisions are below. Still open, and yours:
 
-1. **Run the English fixes on the database.** `supabase/seed/content_fixes_en/2026-11-11_content_fixes.sql` (41 guarded updates, not run). Each update only applies if the row still has the exact old text; the first 33 old values were checked against the live DB on 2026-11-11; the 8 added later were copied from live reads the same day. Run it on a branch first, then on production, before or together with the German content migration. The German DB files already assume the fixed English.
+1. **Run the English fixes on the database.** `supabase/seed/content_fixes_en/2026-11-11_content_fixes.sql` (42 guarded updates, not run). Each update only applies if the row still has the exact old text; the first 33 old values were checked against the live DB on 2026-11-11; the 9 added later were copied from live reads the same day. Run it on a branch first, then on production, before or together with the German content migration. The German DB files already assume the fixed English.
 2. **Duplicate quiz question.** `4533a8d2…` and `58d8c403…` are the same Japan-trip question, word for word. Deleting one is a destructive DB change (answer history may reference it), so it is left for you.
 3. **Native review** of everything below, as for the rest of Release B.
 

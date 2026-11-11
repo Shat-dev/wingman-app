@@ -43,4 +43,5 @@ update public.questions set explanation = 'A cheeky compliment wrapped in a joke
 update public.questions set explanation = 'A playful challenge instead of automatic agreement keeps it balanced and fun.' where id = '50183c21-27bd-480c-971a-891eac026c00' and explanation = 'Playful challenge withholds automatic approval, shifting the frame.';
 update public.questions set options = jsonb_set(options, '{0}', to_jsonb('"Only if you''re getting the next round."'::text)) where id = '50183c21-27bd-480c-971a-891eac026c00' and options->>0 = '"I don’t know if you’ve earned one yet."';
 update public.questions set options = jsonb_set(options, '{0}', to_jsonb('"Chess is so challenging."'::text)) where id = 'a1c414f9-7ab4-4475-a07e-69d6eb6b1ba4' and options->>0 = '"Chess is soo challenging."';
+update public.questions set explanation = 'A light challenge is shared, harmless play. There are no real stakes.' where id = 'a9af130c-ceeb-430c-817a-3b39ec63ff4b' and explanation = 'A light challenge is about shared play and harmless. There are no real stakes.';
 commit;
