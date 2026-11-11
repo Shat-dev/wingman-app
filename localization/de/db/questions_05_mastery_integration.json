@@ -1,0 +1,204 @@
+{
+  "questions": {
+    "afe9db16-1b83-4292-ba6f-e10ecbe6ac93": {
+      "question_text": {"en": "What is social status in attraction contexts?", "de": "Was ist sozialer Status, wenn es um Anziehung geht?"},
+      "options": {"en": ["Financial success or celebrity", "Physical appearance alone", "Number of friends you arrive with", "Perceived value based on how others respond to you"], "de": ["Finanzieller Erfolg oder Berühmtheit", "Allein das Aussehen", "Wie viele Freunde du mitbringst", "Der Wert, den andere dir zuschreiben, je nachdem, wie sie auf dich reagieren"]},
+      "explanation": {"en": "Status is how the room reacts to you, signalling you are valued socially.", "de": "Status ist, wie der Raum auf dich reagiert. Das zeigt, dass du sozial geschätzt wirst."}
+    },
+    "746b1fe5-9312-4688-8acf-78d313a7752a": {
+      "question_text": {"en": "You enter a venue and introduce yourself around. Later you approach her. What helped?", "de": "Du kommst in eine Location und stellst dich ein paar Leuten vor. Später sprichst du sie an. Was hat geholfen?"},
+      "options": {"en": ["She is more open due to built social proof", "Nothing; status doesn’t affect receptiveness", "You must still overcome low status", "The approach feels forced"], "de": ["Sie ist offener, weil du schon sozialen Beweis aufgebaut hast", "Nichts. Status beeinflusst nicht, wie offen sie ist", "Du musst trotzdem noch niedrigen Status überwinden", "Die Ansprache wirkt erzwungen"]},
+      "explanation": {"en": "Positive interactions raise status, making her more receptive.", "de": "Positive Begegnungen heben deinen Status, und sie ist offener für dich."}
+    },
+    "c790b664-f094-409a-9440-448401e0ec8e": {
+      "question_text": {"en": "How can someone build social status quickly in a new environment?", "de": "Wie kann man in einer neuen Umgebung schnell sozialen Status aufbauen?"},
+      "options": {"en": ["Introduce people to each other", "Engage staff or hosts respectfully", "Focus exclusively on one person", "Contribute positively to group energy"], "de": ["Leute einander vorstellen", "Respektvoll mit Personal oder Gastgebern ins Gespräch kommen", "Sich ausschließlich auf eine Person konzentrieren", "Positiv zur Stimmung der Gruppe beitragen"]},
+      "explanation": {"en": "Adding value to the social fabric raises status faster than pursuing a single target.", "de": "Wer etwas zum sozialen Miteinander beiträgt, gewinnt schneller an Status, als wer nur einer Person nachläuft."}
+    },
+    "9d799275-6cc6-4451-9db7-bfb0e563f9bc": {
+      "question_text": {"en": "What actually makes a man interesting in conversation?", "de": "Was macht einen Mann im Gespräch wirklich interessant?"},
+      "options": {"en": ["Living a life that produces stories and perspective", "Having strong opinions", "Being funny on command", "Talking confidently about himself"], "de": ["Ein Leben, aus dem Geschichten und eigene Sichtweisen entstehen", "Starke Meinungen", "Auf Knopfdruck witzig sein", "Selbstbewusst über sich reden"]},
+      "explanation": {"en": "An interesting life produces real experiences that draw people in naturally.", "de": "Ein interessantes Leben bringt echte Erlebnisse hervor, und die ziehen Menschen ganz natürlich an."}
+    },
+    "d8654d59-aeba-4ca6-b2c9-c6824582ae10": {
+      "question_text": {"en": "Signs someone lives an interesting life?", "de": "Woran erkennst du, dass jemand ein interessantes Leben führt?"},
+      "options": {"en": ["They have stories from real experiences naturally", "They ask better questions from genuine curiosity", "They speak passionately about ongoing projects or interests", "All of the above"], "de": ["Die Person hat ganz natürlich Geschichten aus echten Erlebnissen", "Sie stellt aus echter Neugier bessere Fragen", "Sie spricht leidenschaftlich über laufende Projekte oder Interessen", "Alle oben genannten"]},
+      "explanation": {"en": "An interesting life produces real experiences that draw people in naturally.", "de": "Ein interessantes Leben bringt echte Erlebnisse hervor, und die ziehen Menschen ganz natürlich an."}
+    },
+    "8dd4c710-136c-4930-a752-e6a21ba5f5ac": {
+      "question_text": {"en": "How does an interesting life change conversation dynamics?", "de": "Wie verändert ein interessantes Leben deine Gespräche?"},
+      "options": {"en": ["It turns talking into a performance", "It provides natural topics without digging", "It creates magnetic energy from real experiences"], "de": ["Reden wird zur Vorstellung", "Es liefert ganz natürlich Themen, ohne dass du suchen musst", "Echte Erlebnisse geben dir eine anziehende Energie"]},
+      "explanation": {"en": "An interesting life produces effortless, engaging exchanges.", "de": "Ein interessantes Leben sorgt für mühelose, fesselnde Gespräche."}
+    },
+    "a96beb76-cf2b-44bb-8339-887ee43c1e0e": {
+      "question_text": {"en": "Why does mystery help with attraction?", "de": "Warum hilft etwas Geheimnisvolles bei der Anziehung?"},
+      "options": {"en": ["Uncertainty keeps her mentally engaged and curious", "Brain pays more attention to what it cannot fully map", "Gives her space to discover you vs flooding with information", "All of the above"], "de": ["Ungewissheit hält sie gedanklich dabei und neugierig", "Das Gehirn achtet mehr auf das, was es nicht ganz durchschaut", "Sie hat Raum, dich zu entdecken, statt mit Infos überschüttet zu werden", "Alle oben genannten"]},
+      "explanation": {"en": "Mystery keeps attention engaged by leaving room for curiosity and discovery.", "de": "Etwas Geheimnisvolles hält die Aufmerksamkeit wach, weil es Raum für Neugier und Entdeckung lässt."}
+    },
+    "87f62533-abcc-4fdd-ab12-24b45f5f4be0": {
+      "question_text": {"en": "She asks what you do for work. What response creates the most mystery?", "de": "Sie fragt, was du beruflich machst. Welche Antwort ist am geheimnisvollsten?"},
+      "options": {"en": ["Give a detailed breakdown of your job and projects", "Say \"A bit of this and that—mostly creative stuff\" then ask about her", "List your full career history", "Say \"Nothing interesting\" and change topic"], "de": ["Deinen Job und deine Projekte ausführlich erklären", "„Ein bisschen dies und das, meistens was Kreatives“ sagen und dann nach ihr fragen", "Deinen kompletten Werdegang aufzählen", "„Nichts Spannendes“ sagen und das Thema wechseln"]},
+      "explanation": {"en": "Share just enough to intrigue, leaving space for her curiosity.", "de": "Verrat gerade so viel, dass es neugierig macht, und lass Raum für ihre Neugier."}
+    },
+    "f45fc9f5-e0a3-4d7b-87bc-840a0f414623": {
+      "question_text": {"en": "What happens when you over-explain yourself early in conversation?", "de": "Was passiert, wenn du dich am Anfang des Gesprächs zu sehr erklärst?"},
+      "options": {"en": ["Her imagination stays actively engaged", "Nothing left for her to discover or wonder about", "Curiosity fades as the picture becomes complete"], "de": ["Ihre Fantasie bleibt aktiv", "Es bleibt nichts mehr, was sie entdecken oder sich fragen könnte", "Die Neugier lässt nach, weil das Bild vollständig ist"]},
+      "explanation": {"en": "Full disclosure removes uncertainty, reducing mental engagement.", "de": "Wer alles verrät, nimmt die Ungewissheit raus, und sie ist gedanklich weniger dabei."}
+    },
+    "59011032-6b21-4d79-aaf3-ebe1fcb14211": {
+      "question_text": {"en": "How does your social circle influence your confidence with women?", "de": "Wie beeinflusst dein Freundeskreis dein Selbstbewusstsein bei Frauen?"},
+      "options": {"en": ["Social behavior feels normal or abnormal based on your environment", "Friends directly teach attraction skills", "Confidence is contagious biologically", "Women prefer groups over individuals"], "de": ["Dein Umfeld bestimmt, ob sich ein Verhalten normal oder seltsam anfühlt", "Freunde bringen dir direkt bei, wie Anziehung funktioniert", "Selbstbewusstsein ist biologisch ansteckend", "Frauen ziehen Gruppen Einzelnen vor"]},
+      "explanation": {"en": "Your environment either encourages growth or reinforces hesitation.", "de": "Dein Umfeld fördert entweder deine Entwicklung oder bestärkt dein Zögern."}
+    },
+    "80bb97c5-90cf-434a-a890-08a1daa36c04": {
+      "question_text": {"en": "What happens when your friends avoid going out and meeting new people?", "de": "Was passiert, wenn deine Freunde nicht ausgehen und keine neuen Leute kennenlernen?"},
+      "options": {"en": ["Your desire to approach weakens over time", "The environment pushes you toward inaction", "Approaching starts feeling unusual and unnecessary", "All of the above"], "de": ["Deine Lust, Leute anzusprechen, lässt mit der Zeit nach", "Dein Umfeld drängt dich zum Nichtstun", "Ansprechen fühlt sich irgendwann ungewöhnlich und unnötig an", "Alle oben genannten"]},
+      "explanation": {"en": "Stay around proactive people who support action rather than avoidance.", "de": "Umgib dich mit Menschen, die aktiv sind und dich zum Handeln ermutigen statt zum Ausweichen."}
+    },
+    "3863647b-81d5-4ab3-9b63-30861c071216": {
+      "question_text": {"en": "A growth-oriented social circle typically does what?", "de": "Was macht ein Freundeskreis, der dich wachsen lässt, typischerweise?"},
+      "options": {"en": ["Nudges you forward when you hesitate", "Celebrates effort, not just outcomes", "Keeps you comfortable and content", "Creates opportunities to meet new people"], "de": ["Er gibt dir einen Schubs, wenn du zögerst", "Er feiert die Mühe, nicht nur das Ergebnis", "Er sorgt dafür, dass du bequem und zufrieden bleibst", "Er schafft Gelegenheiten, neue Leute kennenzulernen"]},
+      "explanation": {"en": "Being around proactive people supports initiative rather than avoidance.", "de": "Wer mit aktiven Menschen unterwegs ist, ergreift eher die Initiative, statt auszuweichen."}
+    },
+    "5b78be7b-c378-4416-a5d7-3266ab3c3dfc": {
+      "question_text": {"en": "How do you build social exposure into your routine?", "de": "Wie baust du mehr soziale Kontakte in deinen Alltag ein?"},
+      "options": {"en": ["Say yes to things even when you're tired", "Go to places even when staying home is easier", "Join groups even when you’re unsure you'll like them", "All of the above"], "de": ["Auch mal zusagen, wenn du müde bist", "Losgehen, auch wenn Zuhausebleiben leichter wäre", "Gruppen beitreten, auch wenn du nicht sicher bist, ob sie dir gefallen", "Alle oben genannten"]},
+      "explanation": {"en": "Social exposure grows through repeated small choices to show up.", "de": "Mehr soziale Kontakte entstehen durch viele kleine Entscheidungen, hinzugehen."}
+    },
+    "49c55c64-36bd-4961-9847-6467136116c3": {
+      "question_text": {"en": "You get invited to an event but feel tired. What should you prioritize?", "de": "Du bist zu einem Event eingeladen, bist aber müde. Was hat Vorrang?"},
+      "options": {"en": ["Stay home for comfort every time", "Go anyway to build exposure opportunities", "Wait for perfect energy levels", "Decline to avoid forced interaction"], "de": ["Jedes Mal gemütlich zu Hause bleiben", "Trotzdem hingehen, um Gelegenheiten zu schaffen", "Warten, bis du perfekt in Form bist", "Absagen, um erzwungene Gespräche zu vermeiden"]},
+      "explanation": {"en": "Saying yes despite fatigue increases volume and potential connections.", "de": "Wenn du trotz Müdigkeit zusagst, hast du mehr Begegnungen und mehr mögliche Kontakte."}
+    },
+    "dbe59913-e0d6-4e3f-a500-abe814b9551c": {
+      "question_text": {"en": "How do social connections compound over time?", "de": "Wie vervielfachen sich soziale Kontakte mit der Zeit?"},
+      "options": {"en": ["One person can lead to many others", "Invitations create new environments", "Every interaction converts into something"], "de": ["Eine Person kann zu vielen anderen führen", "Einladungen öffnen neue Umfelder", "Aus jeder Begegnung wird etwas"]},
+      "explanation": {"en": "One connection can unlock dozens of indirect opportunities. Put yourself out there.", "de": "Ein Kontakt kann Dutzende Gelegenheiten über Umwege öffnen. Geh raus unter Leute."}
+    },
+    "a683dd8f-530d-4c64-a862-57d8f10be86b": {
+      "question_text": {"en": "Local training opportunities in daily routine?", "de": "Welche Übungsgelegenheiten gibt es in deinem Alltag vor Ort?"},
+      "options": {"en": ["Quick chat with barista at regular coffee shop", "Small interaction with person at gym you see regularly", "Comment in grocery store checkout line", "All of the above"], "de": ["Kurzer Plausch mit dem Barista in deinem Stammcafé", "Kurzer Kontakt mit jemandem, den du regelmäßig im Fitnessstudio siehst", "Eine Bemerkung in der Schlange an der Supermarktkasse", "Alle oben genannten"]},
+      "explanation": {"en": "Small local interactions reduce pressure and build consistency.", "de": "Kleine Begegnungen vor Ort senken den Druck und machen dich beständiger."}
+    },
+    "bb06d0a0-4845-4ac7-80b4-cca9c98be6a3": {
+      "question_text": {"en": "You see the same barista every morning. What could you do to train?", "de": "Du siehst jeden Morgen denselben Barista. Wie könntest du das zum Üben nutzen?"},
+      "options": {"en": ["Wait for a night venue instead", "Avoid talking to stay comfortable", "Make a small comment or chat briefly"], "de": ["Lieber auf einen Abend in einer Bar warten", "Nichts sagen, damit es bequem bleibt", "Eine kleine Bemerkung machen oder kurz plaudern"]},
+      "explanation": {"en": "Low-pressure daily interactions build comfort and skill naturally.", "de": "Tägliche Begegnungen ohne Druck bauen ganz natürlich Sicherheit und Können auf."}
+    },
+    "219c6ef8-a1ff-4dbe-8af3-fa8686d0e3c1": {
+      "question_text": {"en": "What is the main advantage of local practice over night venues?", "de": "Was ist der größte Vorteil vom Üben im Alltag gegenüber Bars und Clubs?"},
+      "options": {"en": ["It limits interactions to weekends", "It turns routine environments into training grounds", "It requires special outings for every rep", "It keeps stakes high for better results"], "de": ["Es beschränkt Begegnungen aufs Wochenende", "Es macht deine alltägliche Umgebung zum Trainingsplatz", "Es erfordert für jede Übung einen eigenen Ausflug", "Es hält den Einsatz hoch, für bessere Ergebnisse"]},
+      "explanation": {"en": "Everyday places provide endless low-pressure opportunities.", "de": "Alltägliche Orte bieten endlos viele Gelegenheiten ohne Druck."}
+    },
+    "614a2ff0-a42d-4640-8fe2-752885cd8ed4": {
+      "question_text": {"en": "What is \"home court advantage\" in social settings?", "de": "Was ist der „Heimvorteil“ in sozialen Situationen?"},
+      "options": {"en": ["Confidence that comes from being in familiar territory", "Social proof and perceived status gained from being recognized regular", "Advantage of knowing the layout and people in a venue", "Comfort level that makes approaching feel less scary"], "de": ["Selbstbewusstsein, weil du auf vertrautem Terrain bist", "Sozialer Beweis und Status, weil man dich als Stammgast kennt", "Der Vorteil, dass du dich in der Location und mit den Leuten auskennst", "Ein Wohlgefühl, das Ansprechen weniger beängstigend macht"]},
+      "explanation": {"en": "Home court = social proof/status from being recognized regular.", "de": "Heimvorteil heißt: sozialer Beweis und Status, weil man dich als Stammgast kennt."}
+    },
+    "91be9da9-35e2-4ee6-a859-ebc43437dadd": {
+      "question_text": {"en": "What does being a \"recognized regular\" signal to others?", "de": "Was signalisiert es anderen, wenn man dich als Stammgast kennt?"},
+      "options": {"en": ["You clearly belong in this space", "Others have already accepted and vetted you", "You have more money or status than typical visitors", "You're safe to interact with"], "de": ["Du gehörst eindeutig hierher", "Andere haben dich schon akzeptiert und für gut befunden", "Du hast mehr Geld oder Status als normale Gäste", "Man kann gefahrlos mit dir ins Gespräch kommen"]},
+      "explanation": {"en": "Belonging, social vetting, and safety signals = home court advantage.", "de": "Dazugehören, von anderen für gut befunden und als harmlos erlebt: Das ist der Heimvorteil."}
+    },
+    "7755c8f9-1d23-4c93-b84c-9bb4a6f5047f": {
+      "question_text": {"en": "Ways to build home court advantage at a gym?", "de": "Wie baust du dir im Fitnessstudio einen Heimvorteil auf?"},
+      "options": {"en": ["Attend consistently at similar times to become recognized", "Exchange brief friendly moments with staff and regulars", "Only interact with people you're romantically interested in", "Acknowledge familiar faces you've seen before"], "de": ["Regelmäßig zu ähnlichen Zeiten kommen, damit man dich kennt", "Kurze, freundliche Momente mit Personal und Stammgästen", "Nur mit Leuten reden, an denen du romantisch interessiert bist", "Bekannte Gesichter grüßen, die du schon mal gesehen hast"]},
+      "explanation": {"en": "Consistency, friendly staff/regular interactions, acknowledging familiar faces = building home court.", "de": "Regelmäßigkeit, freundliche Kontakte zu Personal und Stammgästen und bekannte Gesichter grüßen: So baust du deinen Heimvorteil auf."}
+    },
+    "4a4122bd-a43e-4662-aef4-08635258b40c": {
+      "question_text": {"en": "What mindset best supports building volume?", "de": "Welche Einstellung hilft am meisten, oft anzusprechen?"},
+      "options": {"en": ["Each rep is teaching your nervous system positively", "Every approach must lead somewhere", "Results matter more than exposure", "Avoid discomfort when possible"], "de": ["Jede Wiederholung bringt deinem Nervensystem etwas Positives bei", "Jedes Ansprechen muss zu etwas führen", "Ergebnisse zählen mehr als die Übung", "Unbehagen vermeiden, wo es geht"]},
+      "explanation": {"en": "Each interaction counts as training, regardless of outcome.", "de": "Jede Begegnung zählt als Training, egal wie sie ausgeht."}
+    },
+    "659f514c-7bf3-425d-9c1e-cf5df2bb69ef": {
+      "question_text": {"en": "An approach feels flat and you get no result. What should you view this as?", "de": "Ein Ansprechen fühlt sich flach an, und es kommt nichts dabei raus. Wie solltest du das sehen?"},
+      "options": {"en": ["A valuable rep toward habituation", "A failure that reinforces anxiety", "Proof you need better lines", "Reason to stop for the day"], "de": ["Als wertvolle Wiederholung, die dich daran gewöhnt", "Als Versagen, das die Angst verstärkt", "Als Beweis, dass du bessere Sprüche brauchst", "Als Grund, für heute aufzuhören"]},
+      "explanation": {"en": "Every interaction, regardless of outcome, contributes to positive learning.", "de": "Jede Begegnung, egal wie sie ausgeht, bringt dich beim Lernen weiter."}
+    },
+    "4e225e86-4aa9-4111-b01c-711e3725c89f": {
+      "question_text": {"en": "Which behaviors increase effective volume?", "de": "Was sorgt dafür, dass du wirklich oft ansprichst?"},
+      "options": {"en": ["One small interaction per day", "Waiting until you feel confident", "Consistent low-pressure reps", "Only approaching when attraction is high"], "de": ["Eine kleine Begegnung pro Tag", "Warten, bis du dich selbstbewusst fühlst", "Regelmäßige Wiederholungen ohne Druck", "Nur ansprechen, wenn die Anziehung groß ist"]},
+      "explanation": {"en": "Consistency and frequency matter more than intensity.", "de": "Regelmäßigkeit und Häufigkeit zählen mehr als Intensität."}
+    },
+    "b9f59424-635d-4624-ad50-aa3dd25f6855": {
+      "question_text": {"en": "What does regular repetition create?", "de": "Was bewirkt regelmäßige Wiederholung?"},
+      "options": {"en": ["Neural pathways strengthen through repeated behavior", "Behavior migrates from \"occasionally do\" to \"things I am\"", "Prevents anxiety rebuilding and avoidance entrenching", "All of the above"], "de": ["Nervenbahnen werden durch wiederholtes Verhalten stärker", "Aus „mach ich manchmal“ wird „so bin ich“", "Angst baut sich nicht wieder auf, und Vermeidung setzt sich nicht fest", "Alle oben genannten"]},
+      "explanation": {"en": "Regular practice protects gains and prevents skill decay. Stay consistent.", "de": "Regelmäßiges Üben sichert deine Fortschritte und verhindert, dass Fähigkeiten verkümmern. Bleib dran."}
+    },
+    "e6b9ff5d-fc7a-4e92-91d3-57411235152b": {
+      "question_text": {"en": "What happens psychologically during long breaks from practice?", "de": "Was passiert psychologisch bei langen Übungspausen?"},
+      "options": {"en": ["Skills strengthen further", "Avoidance and anxiety have time to entrench", "Neural pathways remain efficient", "Progress compounds automatically"], "de": ["Die Fähigkeiten werden noch stärker", "Vermeidung und Angst haben Zeit, sich festzusetzen", "Die Nervenbahnen bleiben effizient", "Der Fortschritt vervielfacht sich von selbst"]},
+      "explanation": {"en": "Breaks give the mind space to generate new reasons not to act.", "de": "Pausen geben dem Kopf Raum, neue Gründe zu finden, nichts zu tun."}
+    },
+    "dd2cece1-3524-4319-bd95-d773079fa01b": {
+      "question_text": {"en": "Which behaviors support sustainable consistency?", "de": "Was hilft dir, auf Dauer dranzubleiben?"},
+      "options": {"en": ["Setting a realistic weekly minimum", "Waiting until you feel confident", "Avoiding long gaps between reps", "Treating small interactions as valid reps"], "de": ["Dir ein realistisches Wochenminimum setzen", "Warten, bis du dich selbstbewusst fühlst", "Lange Pausen zwischen den Wiederholungen vermeiden", "Auch kleine Begegnungen als vollwertige Übung zählen"]},
+      "explanation": {"en": "Momentum matters more than intensity; progress comes from continuity, not bursts.", "de": "Schwung zählt mehr als Intensität. Fortschritt entsteht durch Beständigkeit, nicht durch Kraftakte."}
+    },
+    "3529af51-9b76-41c8-868a-2a04a415dc15": {
+      "question_text": {"en": "What happens during the identity shift from \"practicing a skill\" to \"being someone who does it\"?", "de": "Was passiert, wenn aus „ich übe etwas“ ein „ich bin jemand, der das tut“ wird?"},
+      "options": {"en": ["The behavior becomes inseparable from your self-concept", "You stop needing external validation that you're good at it", "The action moves from \"thing I do\" to \"who I am\"", "Courage is no longer required because there's no gap to bridge"], "de": ["Das Verhalten wird untrennbar Teil deines Selbstbilds", "Du brauchst keine Bestätigung von außen mehr, dass du es kannst", "Aus „etwas, das ich tue“ wird „wer ich bin“", "Du brauchst keinen Mut mehr, weil es keine Lücke mehr zu überwinden gibt"]},
+      "explanation": {"en": "Inseparable from identity, \"thing I do\" → \"who I am,\" no gap requiring courage = identity shift.", "de": "Untrennbar Teil von dir, aus „etwas, das ich tue“ wird „wer ich bin“, keine Lücke mehr, die Mut braucht: Das ist der Wandel deiner Identität."}
+    },
+    "242a1957-a048-451a-9da7-8ab630640b24": {
+      "question_text": {"en": "Why does approaching \"not require courage\" once you've reached automaticity?", "de": "Warum „braucht“ Ansprechen „keinen Mut“ mehr, wenn es dir in Fleisch und Blut übergegangen ist?"},
+      "options": {"en": ["You've done it so many times that fear completely disappears", "There's no gap between who you are and what you're doing", "Confidence from repeated success eliminates any hesitation", "You've become so skilled that outcomes don't matter anymore"], "de": ["Du hast es so oft gemacht, dass die Angst komplett weg ist", "Es gibt keine Lücke mehr zwischen dem, wer du bist, und dem, was du tust", "Das Selbstbewusstsein aus wiederholtem Erfolg beseitigt jedes Zögern", "Du bist so gut geworden, dass das Ergebnis keine Rolle mehr spielt"]},
+      "explanation": {"en": "You're not pushing against your nature—you're simply expressing who you are.", "de": "Du kämpfst nicht gegen deine Natur an. Du zeigst einfach, wer du bist."}
+    },
+    "371a7413-becb-4f2b-a50d-96a6e2786c70": {
+      "question_text": {"en": "What defines the experimental mindset in skill development?", "de": "Was zeichnet die Haltung des Experimentierens beim Lernen aus?"},
+      "options": {"en": ["Treating each interaction as a performance", "Measuring success by outcomes", "Treating interactions as data collection", "Avoiding rejection"], "de": ["Jede Begegnung als Auftritt sehen", "Erfolg am Ergebnis messen", "Begegnungen als Datensammlung sehen", "Abfuhren vermeiden"]},
+      "explanation": {"en": "Each interaction is useful because it teaches you what to adjust next time.", "de": "Jede Begegnung ist nützlich, weil sie dir zeigt, was du nächstes Mal anders machen kannst."}
+    },
+    "8a3d26a9-590a-4af0-95f0-d6c8c35f7896": {
+      "question_text": {"en": "You try humor and it falls flat twice. What does an experimental mindset suggest?", "de": "Du versuchst es mit Humor, und zweimal kommt er nicht an. Was rät dir die Haltung des Experimentierens?"},
+      "options": {"en": ["Humor isn’t for you", "Stop approaching", "Memorize better jokes", "Test a different style of humor or context"], "de": ["Humor ist nichts für dich", "Hör auf, Leute anzusprechen", "Lern bessere Witze auswendig", "Probier eine andere Art von Humor oder eine andere Situation"]},
+      "explanation": {"en": "Each interaction teaches what to adjust next time, even when it doesn’t go well.", "de": "Jede Begegnung zeigt dir, was du nächstes Mal anders machen kannst, auch wenn sie nicht gut läuft."}
+    },
+    "28e0261e-75cb-4bdc-917c-8d6e653f374a": {
+      "question_text": {"en": "How does the experimental mindset reduce the pain of rejection?", "de": "Wie nimmt die Haltung des Experimentierens einer Abfuhr den Schmerz?"},
+      "options": {"en": ["It attaches ego to every outcome", "It treats interactions as data collection", "It views rejection as valuable information"], "de": ["Sie knüpft dein Ego an jedes Ergebnis", "Sie sieht Begegnungen als Datensammlung", "Sie sieht eine Abfuhr als wertvolle Information"]},
+      "explanation": {"en": "Outcomes become learning opportunities, not proof of worth.", "de": "Ergebnisse werden zu Lernchancen statt zu Beweisen für deinen Wert."}
+    },
+    "0d642fd6-f52e-4ce4-95a1-e14b1034c645": {
+      "question_text": {"en": "Why does authenticity improve connection?", "de": "Warum verbessert Echtheit die Verbindung?"},
+      "options": {"en": ["It guarantees attraction", "It lowers anxiety", "It frees mental bandwidth for listening and calibration", "It avoids rejection"], "de": ["Sie garantiert Anziehung", "Sie senkt die Nervosität", "Sie macht im Kopf Platz für Zuhören und Feingefühl", "Sie verhindert Abfuhren"]},
+      "explanation": {"en": "When you stop performing, you can actually engage.", "de": "Wenn du aufhörst zu schauspielern, kannst du dich wirklich einlassen."}
+    },
+    "b8b12ca4-eea8-4651-a0ba-a39ced8e6aef": {
+      "question_text": {"en": "You’re naturally quiet and observant. What flirting style fits you best?", "de": "Du bist von Natur aus ruhig und aufmerksam. Welcher Flirtstil passt am besten zu dir?"},
+      "options": {"en": ["Rapid jokes and banter", "Long explanations", "Pauses and steady eye contact", "Complimenting constantly"], "de": ["Schnelle Witze und Schlagabtausch", "Lange Erklärungen", "Pausen und ruhiger Blickkontakt", "Ständig Komplimente machen"]},
+      "explanation": {"en": "How you create tension should match your temperament.", "de": "Wie du Spannung erzeugst, sollte zu deinem Temperament passen."}
+    },
+    "30871b25-0072-4ec6-a580-9ac5cb667148": {
+      "question_text": {"en": "Why does authentic style outperform borrowed techniques?", "de": "Warum funktioniert dein eigener Stil besser als übernommene Techniken?"},
+      "options": {"en": ["It frees cognitive resources for real connection", "It aligns with your existing personality strengths", "It requires pretending to maintain performance"], "de": ["Er macht im Kopf Platz für echte Verbindung", "Er passt zu den Stärken deiner Persönlichkeit", "Er verlangt, dass du dich verstellst, um die Rolle durchzuhalten"]},
+      "explanation": {"en": "Authenticity reduces effort and leverages what already works for you.", "de": "Echtheit kostet weniger Mühe und nutzt, was bei dir ohnehin schon funktioniert."}
+    },
+    "3d6c847d-5687-4a4a-a269-96782bfa828d": {
+      "question_text": {"en": "Your approaches often end quickly with polite responses. What is your sticking point?", "de": "Deine Ansprachen enden oft schnell mit höflichen Antworten. Wo liegt dein Knackpunkt?"},
+      "options": {"en": ["Opening successfully to hook interest", "Escalating physically", "Maintaining long conversations", "Closing effectively"], "de": ["Gut einsteigen, um Interesse zu wecken", "Körperlich weitergehen", "Lange Gespräche führen", "Gut zum Abschluss kommen"]},
+      "explanation": {"en": "Results change when practice focuses on the weakest link in the interaction.", "de": "Die Ergebnisse ändern sich, wenn du gezielt das schwächste Glied der Begegnung übst."}
+    },
+    "53171673-bc87-47f9-a580-371caf722388": {
+      "question_text": {"en": "You open well and converse easily, but it stays platonic. What is your sticking point?", "de": "Du steigst gut ein und unterhältst dich mühelos, aber es bleibt platonisch. Wo liegt dein Knackpunkt?"},
+      "options": {"en": ["Opening", "Conversation flow", "Introducing flirtatious tension or playfulness", "Closing"], "de": ["Beim Einstieg", "Beim Gesprächsfluss", "Dabei, Flirtspannung oder Verspieltheit reinzubringen", "Beim Abschluss"]},
+      "explanation": {"en": "Results change when practice focuses on the weakest link in the interaction.", "de": "Die Ergebnisse ändern sich, wenn du gezielt das schwächste Glied der Begegnung übst."}
+    },
+    "4195d2ca-e36c-4bd9-bb7e-e178e5d589ca": {
+      "question_text": {"en": "You start conversations well, but they quickly become awkward. What is your sticking point?", "de": "Du fängst Gespräche gut an, aber sie werden schnell peinlich. Wo liegt dein Knackpunkt?"},
+      "options": {"en": ["Maintaining conversation flow and keeping her engaged", "Delivering openers", "Closing and getting numbers", "Escalating physically"], "de": ["Den Gesprächsfluss halten und sie dabeihalten", "Opener rüberbringen", "Zum Abschluss kommen und Nummern bekommen", "Körperlich weitergehen"]},
+      "explanation": {"en": "Results change when practice focuses on the weakest link in the interaction.", "de": "Die Ergebnisse ändern sich, wenn du gezielt das schwächste Glied der Begegnung übst."}
+    },
+    "b31c3930-629e-4aab-974a-035d198918d4": {
+      "question_text": {"en": "How do you accurately identify your weak points?", "de": "Wie findest du deine Schwachstellen zuverlässig heraus?"},
+      "options": {"en": ["Assume it's general confidence", "Observe recurring failure points across interactions", "Review patterns in where things consistently fall apart"], "de": ["Davon ausgehen, dass es am allgemeinen Selbstbewusstsein liegt", "Beobachten, wo es in deinen Begegnungen immer wieder hakt", "Muster anschauen, wo die Dinge regelmäßig auseinanderfallen"]},
+      "explanation": {"en": "Sticking points emerge from specific, repeated breakdown moments.", "de": "Knackpunkte zeigen sich in bestimmten Momenten, in denen es immer wieder hakt."}
+    },
+    "e977c9fd-3fd5-421d-b9c4-259a05b8af45": {
+      "question_text": {"en": "Which strategies can help break through a growth plateau?", "de": "Was kann helfen, ein Plateau zu durchbrechen?"},
+      "options": {"en": ["Increasing difficulty intentionally", "Changing environments", "Taking a long break to recover motivation", "Focusing on one specific micro-skill"], "de": ["Den Schwierigkeitsgrad bewusst erhöhen", "Die Umgebung wechseln", "Eine lange Pause machen, um wieder motiviert zu sein", "Dich auf eine bestimmte kleine Fähigkeit konzentrieren"]},
+      "explanation": {"en": "New challenges force adaptation and progress. Long breaks reinforce avoidance.", "de": "Neue Herausforderungen erzwingen Anpassung und Fortschritt. Lange Pausen verstärken das Vermeiden."}
+    }
+  }
+}
