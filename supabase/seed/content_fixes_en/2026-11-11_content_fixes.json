@@ -215,6 +215,26 @@
     "Cheeky compliment disguised as compliment sparks flirtatious energy.",
     "A cheeky compliment wrapped in a joke sparks flirtatious energy."
    ]
+  },
+  "50183c21-27bd-480c-971a-891eac026c00": {
+   "options": {
+    "0": [
+     "\"I don’t know if you’ve earned one yet.\"",
+     "\"Only if you're getting the next round.\""
+    ]
+   },
+   "explanation": [
+    "Playful challenge withholds automatic approval, shifting the frame.",
+    "A playful challenge instead of automatic agreement keeps it balanced and fun."
+   ]
+  },
+  "a1c414f9-7ab4-4475-a07e-69d6eb6b1ba4": {
+   "options": {
+    "0": [
+     "\"Chess is soo challenging.\"",
+     "\"Chess is so challenging.\""
+    ]
+   }
   }
  }
 }

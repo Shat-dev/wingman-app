@@ -40,4 +40,7 @@ update public.questions set question_text = 'She mentions a career change. You''
 update public.questions set question_text = '"What''s your order" vs. "Bet I can guess your order correctly". Which creates more chemistry?' where id = '061b4ffe-6aea-49da-b29e-1976fc8c62a3' and question_text = '"What''s you order" vs. "Bet I can guess your order correctly". Which creates more chemistry?';
 update public.questions set options = jsonb_set(options, '{2}', to_jsonb('She makes jokes back'::text)) where id = '4684c791-9598-4381-9511-739d9afdfead' and options->>2 = 'She makes jokes back back';
 update public.questions set explanation = 'A cheeky compliment wrapped in a joke sparks flirtatious energy.' where id = '450fc086-463d-40c5-9ce4-77e9a664a8e7' and explanation = 'Cheeky compliment disguised as compliment sparks flirtatious energy.';
+update public.questions set explanation = 'A playful challenge instead of automatic agreement keeps it balanced and fun.' where id = '50183c21-27bd-480c-971a-891eac026c00' and explanation = 'Playful challenge withholds automatic approval, shifting the frame.';
+update public.questions set options = jsonb_set(options, '{0}', to_jsonb('"Only if you''re getting the next round."'::text)) where id = '50183c21-27bd-480c-971a-891eac026c00' and options->>0 = '"I don’t know if you’ve earned one yet."';
+update public.questions set options = jsonb_set(options, '{0}', to_jsonb('"Chess is so challenging."'::text)) where id = 'a1c414f9-7ab4-4475-a07e-69d6eb6b1ba4' and options->>0 = '"Chess is soo challenging."';
 commit;
