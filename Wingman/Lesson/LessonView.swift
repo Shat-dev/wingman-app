@@ -89,6 +89,26 @@ struct LessonView: View {
         return Double(currentProgressPosition) / Double(totalStepCount)
     }
     
+    /// Bottom padding for the lesson title strip, which has to differ by device.
+    ///
+    /// The `-10` tucks the title down into the home-indicator area, where
+    /// 34pt of safe-area inset absorbs it; that is where it was tuned, and it
+    /// stays exactly as it was there.
+    ///
+    /// On a home-button phone (iPhone SE) the bottom inset is 0, so the same
+    /// -10 pushed the title half off the bottom of the screen. Those devices
+    /// get a small positive inset instead. Same approach as the tab bar's
+    /// `bottomPadding()` in MainTabView.
+    private func titleBottomPadding() -> CGFloat {
+        let bottomSafe = UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap { $0.windows }
+            .first { $0.isKeyWindow }?
+            .safeAreaInsets.bottom ?? 0
+
+        return bottomSafe > 0 ? -10 : 6
+    }
+
     var body: some View {
         ZStack {
             Color.white.ignoresSafeArea()
@@ -166,7 +186,7 @@ struct LessonView: View {
                         .lineLimit(1, whenTranslated: 1, shrinkingTo: 0.75)
                         .truncationMode(.tail)
                 }
-                .padding(.bottom, -10)
+                .padding(.bottom, titleBottomPadding())
             }
         }
         .navigationBarHidden(true)
