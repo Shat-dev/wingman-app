@@ -1,0 +1,194 @@
+{
+  "questions": {
+    "11c71b51-0d39-47d4-b733-2c11ea3df4ab": {
+      "question_text": {"en": "What makes flirting successful?", "de": "Was macht einen Flirt erfolgreich?"},
+      "options": {"en": ["Getting her number", "Creating attraction quickly", "Proving confidence", "Creating an enjoyable, energizing moment"], "de": ["Ihre Nummer bekommen", "Schnell Anziehung erzeugen", "Selbstbewusstsein beweisen", "Einen schönen Moment schaffen, der Energie gibt"]},
+      "explanation": {"en": "Flirting succeeds when the moment feels lighter and more alive, regardless of outcome.", "de": "Ein Flirt ist gelungen, wenn sich der Moment leichter und lebendiger anfühlt, egal was dabei herauskommt."}
+    },
+    "a2016c8a-bb00-46b1-8a8d-c78bcb62decf": {
+      "question_text": {"en": "Why does focusing on outcomes often backfire in flirting?", "de": "Warum geht es beim Flirten oft nach hinten los, wenn du aufs Ergebnis fixiert bist?"},
+      "options": {"en": ["It makes conversations shorter", "It slows escalation", "It reduces confidence", "It creates pressure and agenda"], "de": ["Gespräche werden kürzer", "Es bremst den nächsten Schritt", "Es schwächt dein Selbstbewusstsein", "Es erzeugt Druck und Hintergedanken"]},
+      "explanation": {"en": "Focus on making the interaction playful instead of trying to achieve a specific outcome.", "de": "Konzentrier dich darauf, das Gespräch verspielt zu machen, statt ein bestimmtes Ergebnis erreichen zu wollen."}
+    },
+    "37bff0df-2454-418b-b50a-db2845245a4e": {
+      "question_text": {"en": "Why does focusing on enjoyment improve flirting outcomes?", "de": "Warum klappt das Flirten besser, wenn du dich auf den Spaß konzentrierst?"},
+      "options": {"en": ["It removes hidden agendas", "It makes you more present and relaxed", "It creates outcome independence", "It prioritizes proving your worth"], "de": ["Es nimmt die Hintergedanken raus", "Du bist präsenter und entspannter", "Du wirst unabhängig vom Ergebnis", "Es stellt in den Vordergrund, dass du dich beweisen musst"]},
+      "explanation": {"en": "Enjoyment reframes success as the moment itself, not results.", "de": "Wenn du den Moment genießt, ist er selbst schon der Erfolg, nicht das Ergebnis."}
+    },
+    "90e66462-8fdd-4fa4-a574-bda55becad8c": {
+      "question_text": {"en": "How do you know whether to keep flirting?", "de": "Woran erkennst du, ob du weiterflirten solltest?"},
+      "options": {"en": ["Trust your gut feeling about the interaction's vibe", "Watch how she responds, not how you feel", "Look for explicit verbal statements of interest", "Assess if conversation has been going long enough"], "de": ["Deinem Bauchgefühl zur Stimmung vertrauen", "Darauf achten, wie sie reagiert, nicht wie du dich fühlst", "Auf ausdrückliche Worte achten, dass sie Interesse hat", "Einschätzen, ob ihr schon lange genug redet"]},
+      "explanation": {"en": "Watch her responses and investment, not how you feel.", "de": "Achte darauf, wie sie reagiert und wie sehr sie sich einbringt, nicht darauf, wie du dich fühlst."}
+    },
+    "eee49a49-b918-4f25-9827-edc1a9f9bdc0": {
+      "question_text": {"en": "Which signals suggest you should hold back rather than escalate?", "de": "Welche Signale zeigen, dass du dich eher zurückhalten solltest, statt weiterzugehen?"},
+      "options": {"en": ["Neutral tone", "Short answers", "No questions returned", "Genuine laughter"], "de": ["Ein neutraler Ton", "Knappe Antworten", "Keine Gegenfragen", "Echtes Lachen"]},
+      "explanation": {"en": "Lack of reciprocal energy means the interaction hasn’t opened yet.", "de": "Wenn sie deine Energie nicht erwidert, hat sich das Gespräch noch nicht geöffnet."}
+    },
+    "1ae2493f-bf71-457d-8f09-996e6cf2b464": {
+      "question_text": {"en": "What does respect in flirting mean?", "de": "Was bedeutet Respekt beim Flirten?"},
+      "options": {"en": ["Valuing her comfort and boundaries more than your outcome", "Being confident throughout the interaction", "Treating her as equal without being overly aggressive"], "de": ["Ihr Wohlgefühl und ihre Grenzen wichtiger nehmen als dein Ergebnis", "Das ganze Gespräch über selbstbewusst sein", "Sie als ebenbürtig behandeln, ohne zu aggressiv zu sein"]},
+      "explanation": {"en": "Flirting stays respectful when you value her ease more than your success.", "de": "Ein Flirt bleibt respektvoll, wenn dir ihr Wohlgefühl wichtiger ist als dein Erfolg."}
+    },
+    "df3d8e11-15af-468e-ba4a-9cca550456d2": {
+      "question_text": {"en": "What’s the cleanest way to protect both people when interest isn’t mutual?", "de": "Wie schützt du am saubersten euch beide, wenn das Interesse nicht gegenseitig ist?"},
+      "options": {"en": ["Exit early and politely", "Joke to soften the moment", "Push lightly to confirm", "Wait for her to say no directly"], "de": ["Früh und höflich gehen", "Einen Witz machen, um den Moment aufzulockern", "Leicht nachhaken, um sicherzugehen", "Warten, bis sie direkt Nein sagt"]},
+      "explanation": {"en": "Early, respectful exits keep the moment light and prevent discomfort for both sides.", "de": "Ein früher, respektvoller Abschied hält den Moment leicht und erspart euch beiden Unbehagen."}
+    },
+    "fed7fe50-0325-493e-8647-62755e05fab5": {
+      "question_text": {"en": "What are baseline respect behaviors?", "de": "Was gehört zum respektvollen Verhalten als Grundlage?"},
+      "options": {"en": ["Read her signals and honor them", "Accept rejection without guilt trips or attitude", "Never touch without clear comfort signs", "Try one more time if you think she might be shy"], "de": ["Ihre Signale lesen und respektieren", "Eine Abfuhr annehmen, ohne ihr ein schlechtes Gewissen zu machen oder pampig zu werden", "Sie nie ohne klare Zeichen berühren, dass es für sie okay ist", "Es noch mal versuchen, wenn du denkst, sie ist vielleicht schüchtern"]},
+      "explanation": {"en": "Flirting stays respectful when you value her ease more than your success.", "de": "Ein Flirt bleibt respektvoll, wenn dir ihr Wohlgefühl wichtiger ist als dein Erfolg."}
+    },
+    "999e00ac-a18d-4b94-b3a8-e5c97c457f07": {
+      "question_text": {"en": "Why does good energy matter more than lines?", "de": "Warum zählt gute Energie mehr als Sprüche?"},
+      "options": {"en": ["People remember feelings more than content", "Attraction is mostly visual", "Words are overrated in flirting", "Confidence replaces conversation"], "de": ["Menschen erinnern sich eher an Gefühle als an Inhalte", "Anziehung ist hauptsächlich optisch", "Worte werden beim Flirten überschätzt", "Selbstbewusstsein ersetzt das Gespräch"]},
+      "explanation": {"en": "Emotional experience is what sticks. Words are secondary to how the moment feels.", "de": "Was hängen bleibt, ist das Gefühl. Worte sind zweitrangig gegenüber dem, wie sich der Moment anfühlt."}
+    },
+    "a3ec5acd-f47b-4bb8-bf22-81d9b16edd73": {
+      "question_text": {"en": "A relaxed group is chatting calmly. How should your energy show up?", "de": "Eine entspannte Gruppe unterhält sich ruhig. Wie sollte deine Energie sein?"},
+      "options": {"en": ["High-energy to stand out", "Slightly more relaxed than them", "Matching or slightly above their pace", "Quiet and reserved"], "de": ["Voller Energie, um aufzufallen", "Etwas entspannter als sie", "Passend zu ihrem Tempo oder etwas darüber", "Still und zurückhaltend"]},
+      "explanation": {"en": "Matching their tone keeps the vibe comfortable and shared.", "de": "Wenn du dich ihrem Ton anpasst, bleibt die Stimmung angenehm und gemeinsam."}
+    },
+    "50f09b6c-abae-46f2-a825-8acf3d58107e": {
+      "question_text": {"en": "What does good energy create?", "de": "Was schafft gute Energie?"},
+      "options": {"en": ["Makes people feel lighter and more alive", "Invites them to open up and play", "Demonstrates social confidence and charisma", "Creates the setting that makes flirting possible"], "de": ["Menschen fühlen sich leichter und lebendiger", "Sie lädt ein, sich zu öffnen und mitzuspielen", "Sie zeigt soziales Selbstbewusstsein und Charisma", "Sie schafft den Rahmen, in dem Flirten möglich wird"]},
+      "explanation": {"en": "Good energy creates safety and playfulness, which allows flirting to emerge organically.", "de": "Gute Energie schafft Sicherheit und Verspieltheit, und so kann ganz natürlich ein Flirt entstehen."}
+    },
+    "a8695e9b-bb41-43c3-bf69-51511a2d5917": {
+      "question_text": {"en": "She says she's really into yoga and flexible. How can you use humor?", "de": "Sie erzählt, dass sie total auf Yoga steht und sehr beweglich ist. Wie kannst du Humor einsetzen?"},
+      "options": {"en": ["List the health benefits of yoga seriously", "Share your serious yoga routine", "Ask how long she's been practicing", "Playfully ask if she can touch her toes"], "de": ["Ernsthaft die gesundheitlichen Vorteile von Yoga aufzählen", "Von deiner eigenen Yoga-Routine erzählen", "Fragen, wie lange sie schon Yoga macht", "Verspielt fragen, ob sie mit den Fingern an die Zehen kommt"]},
+      "explanation": {"en": "Light teasing creates playful energy and invites banter.", "de": "Leichtes Necken schafft verspielte Energie und lädt zum Schlagabtausch ein."}
+    },
+    "8150d416-c806-4f77-898e-1532d0bc733f": {
+      "question_text": {"en": "What should you avoid when teasing?", "de": "Was solltest du beim Necken vermeiden?"},
+      "options": {"en": ["Exaggerating something she seems proud of", "Light-hearted back-and-forth", "Playful challenges to what she said", "Topics she might be insecure about"], "de": ["Etwas übertreiben, worauf sie stolz zu sein scheint", "Ein lockeres Hin und Her", "Verspielt infrage stellen, was sie gesagt hat", "Themen, bei denen sie vielleicht unsicher ist"]},
+      "explanation": {"en": "Teasing works when it's fun, not potentially hurtful.", "de": "Necken funktioniert, wenn es Spaß macht und nicht verletzen kann."}
+    },
+    "4e5a0bc4-d01b-4f85-9404-749642fa56b6": {
+      "question_text": {"en": "Which are examples of safe teasing topics?", "de": "Bei welchen Themen kannst du sie ohne Risiko necken?"},
+      "options": {"en": ["Physical appearance", "Being competitive", "Being overly organized", "Bad cooking skills"], "de": ["Ihr Aussehen", "Ihr Ehrgeiz", "Dass sie übertrieben ordentlich ist", "Dass sie schlecht kocht"]},
+      "explanation": {"en": "Tease traits that are light, non-threatening, and not tied to insecurity.", "de": "Neck sie mit Eigenschaften, die harmlos sind und nichts mit Unsicherheiten zu tun haben."}
+    },
+    "63acae8c-e04a-4fc9-98cb-693c477cc5f0": {
+      "question_text": {"en": "What makes fun light challenges effective?", "de": "Was macht kleine, lustige Herausforderungen wirksam?"},
+      "options": {"en": ["Gives her permission to be competitive and show personality", "Either outcome creates a reason to continue the interaction", "Moves from answering questions to actually playing", "All of the above"], "de": ["Sie darf ehrgeizig sein und Persönlichkeit zeigen", "Jeder Ausgang gibt euch einen Grund weiterzumachen", "Aus Fragen beantworten wird echtes Spielen", "Alle oben genannten"]},
+      "explanation": {"en": "Light challenges invite play, reveal personality, and keep interaction active.", "de": "Kleine Herausforderungen laden zum Spielen ein, zeigen Persönlichkeit und halten das Gespräch lebendig."}
+    },
+    "9ce27a06-8ab6-4d7f-9ede-e0cfb8108698": {
+      "question_text": {"en": "She asks, “How old are you?”. What could you say next as a fun challenge?", "de": "Sie fragt: „Wie alt bist du?“ Was könntest du als lustige Herausforderung sagen?"},
+      "options": {"en": ["Give your exact age directly", "Say age doesn’t matter", "Ignore the question", "\"How old do I look? guess\""], "de": ["Direkt dein genaues Alter sagen", "Sagen, dass Alter keine Rolle spielt", "Die Frage ignorieren", "„Wie alt sehe ich denn aus? Rate mal.“"]},
+      "explanation": {"en": "Turn it into a playful guess to create shared tension and banter.", "de": "Mach ein verspieltes Ratespiel daraus, das schafft gemeinsame Spannung und Schlagabtausch."}
+    },
+    "9e5d1aff-d472-4ad6-af85-3661a0c5fa0d": {
+      "question_text": {"en": "Good light challenge examples?", "de": "Was sind gute Beispiele für kleine Herausforderungen?"},
+      "options": {"en": ["\"Bet you can't name three capitals faster than me\"", "\"Bet I can guess your go-to drink order\"", "\"How old do I look? Guess\"", "\"Rock paper scissors for next drink\""], "de": ["„Wetten, du kannst keine drei Hauptstädte schneller nennen als ich?“", "„Wetten, ich errate deinen Standard-Drink?“", "„Wie alt sehe ich aus? Rate mal.“", "„Schere, Stein, Papier um den nächsten Drink.“"]},
+      "explanation": {"en": "A light challenge is about shared play, not testing or pressure. There are no real stakes.", "de": "Bei einer kleinen Herausforderung geht es ums gemeinsame Spielen, nicht ums Testen oder um Druck. Es steht nichts Echtes auf dem Spiel."}
+    },
+    "72b1b5eb-51d6-4bae-82e9-d9b516852a92": {
+      "question_text": {"en": "What makes cheekiness work vs. offend?", "de": "Wann funktioniert Frechsein, und wann kränkt es?"},
+      "options": {"en": ["Warmth in delivery—smile makes it clear you're playful", "Tone matters more than actual words being said", "Light unexpected angle, not mean or judgmental", "All of the above"], "de": ["Wärme in der Art: Das Lächeln zeigt, dass du nur spielst", "Der Ton zählt mehr als die Worte", "Ein leichter, überraschender Blickwinkel, nicht gemein oder wertend", "Alle oben genannten"]},
+      "explanation": {"en": "Cheekiness works when warmth, tone, and lightness signal play, not judgment.", "de": "Frechsein funktioniert, wenn Wärme, Ton und Leichtigkeit zeigen, dass es ein Spiel ist und kein Urteil."}
+    },
+    "c04e3fb3-07b8-49cb-9664-d35c6a113928": {
+      "question_text": {"en": "She says, “I’m always late.” What could you say next?", "de": "Sie sagt: „Ich komm immer zu spät.“ Was könntest du darauf sagen?"},
+      "options": {"en": ["\"Good thing I’m always patient\"", "\"That’s fine, no one’s perfect.\"", "\"Why are you late?\"", "\"I’m usually on time.\""], "de": ["„Gut, dass ich immer geduldig bin.“", "„Ist doch okay, keiner ist perfekt.“", "„Warum kommst du zu spät?“", "„Ich bin meistens pünktlich.“"]},
+      "explanation": {"en": "Cheeky response with smile invites her to play along lightly.", "de": "Eine freche Antwort mit einem Lächeln lädt sie ein, locker mitzuspielen."}
+    },
+    "41b88925-4d87-4998-bcfb-64846e12bd89": {
+      "question_text": {"en": "Why does adding cheekiness help flirting?", "de": "Warum hilft etwas Frechheit beim Flirten?"},
+      "options": {"en": ["It breaks overly agreeable patterns", "It shows confidence with warmth", "It creates playful tension and rhythm", "It requires serious disagreement"], "de": ["Sie durchbricht übertrieben zustimmende Muster", "Sie zeigt Selbstbewusstsein mit Wärme", "Sie schafft verspielte Spannung und Rhythmus", "Sie setzt ernsthaften Widerspruch voraus"]},
+      "explanation": {"en": "Light pushback breaks monotony, creates playful tension, and keeps energy dynamic.", "de": "Leichter Widerspruch durchbricht die Eintönigkeit, schafft verspielte Spannung und hält die Energie lebendig."}
+    },
+    "73e2048d-c6ed-4778-ac5a-699f953efb85": {
+      "question_text": {"en": "Which compliment is most likely to create connection?", "de": "Welches Kompliment schafft am ehesten eine Verbindung?"},
+      "options": {"en": ["\"You’re really beautiful.\"", "\"You have amazing eyes.\"", "\"You must get complimented all the time.\"", "\"I like how you explain things.\""], "de": ["„Du bist wirklich wunderschön.“", "„Du hast tolle Augen.“", "„Du bekommst bestimmt ständig Komplimente.“", "„Ich mag, wie du Dinge erklärst.“"]},
+      "explanation": {"en": "Compliments land best when they reflect her choice, not her traits.", "de": "Komplimente kommen am besten an, wenn sie etwas würdigen, das sie selbst gewählt hat, nicht ihre Merkmale."}
+    },
+    "3cb92c32-a188-4032-9345-29df03006c3e": {
+      "question_text": {"en": "She shares an interesting take. What’s a good compliment?", "de": "Sie hat eine interessante Sicht auf etwas. Was ist ein gutes Kompliment?"},
+      "options": {"en": ["\"That’s a unique way to think about it.\"", "\"You’re so smart.\"", "\"You’re different from other girls.\"", "\"I like your accent.\""], "de": ["„So hab ich das noch nie gesehen.“", "„Du bist so klug.“", "„Du bist anders als andere Frauen.“", "„Ich mag deinen Akzent.“"]},
+      "explanation": {"en": "Acknowledging her perspective feels warm and pressure-free.", "de": "Wenn du ihre Sicht anerkennst, wirkt das warm und ohne Druck."}
+    },
+    "30a03b40-5f82-4a6d-9f66-d9ad8a4b99b5": {
+      "question_text": {"en": "Which compliments are more likely to land well?", "de": "Welche Komplimente kommen eher gut an?"},
+      "options": {"en": ["\"You have great energy when you talk about this.\"", "\"You’re hot.\"", "\"I like how curious you are about this topic.\"", "\"You’re out of my league.\""], "de": ["„Du hast eine tolle Energie, wenn du darüber redest.“", "„Du bist heiß.“", "„Ich mag, wie neugierig du bei diesem Thema bist.“", "„Du spielst in einer anderen Liga als ich.“"]},
+      "explanation": {"en": "Compliments that recognize behavior, energy, or character are best.", "de": "Am besten sind Komplimente, die ihr Verhalten, ihre Energie oder ihren Charakter würdigen."}
+    },
+    "1172a812-9aff-4cbd-a84b-c14454c9e1fa": {
+      "question_text": {"en": "What makes a compliment flirtatious instead of just friendly?", "de": "Was macht ein Kompliment flirtend statt nur freundlich?"},
+      "options": {"en": ["Quick delivery and casual tone", "Slow pacing and warmer voice", "Holding eye contact and letting it land", "Specific words about her appearance"], "de": ["Schnell und beiläufig gesagt", "Langsames Tempo und wärmere Stimme", "Blickkontakt halten und es wirken lassen", "Konkrete Worte über ihr Aussehen"]},
+      "explanation": {"en": "Tone, timing, and presence create the romantic signal, not the content alone.", "de": "Ton, Timing und Präsenz machen das romantische Signal aus, nicht der Inhalt allein."}
+    },
+    "9557570b-b2cb-4bd4-bb90-12db51a495fc": {
+      "question_text": {"en": "How can you deliver a compliment to create attraction rather than politeness?", "de": "Wie bringst du ein Kompliment so rüber, dass es Anziehung weckt statt nur höflich zu wirken?"},
+      "options": {"en": ["Hold eye contact with a small smile", "Use a warmer, slower voice", "Let a pause follow the compliment", "All of the above"], "de": ["Blickkontakt halten und leicht lächeln", "Wärmer und langsamer sprechen", "Nach dem Kompliment eine Pause lassen", "Alle oben genannten"]},
+      "explanation": {"en": "Intention through tone and timing signals desire.", "de": "Absicht, gezeigt durch Ton und Timing, signalisiert Begehren."}
+    },
+    "f5fab3d7-5d70-4bb8-82fa-cb750e038f03": {
+      "question_text": {"en": "Which version is more likely to create romantic tension with the same words?", "de": "Welche Variante erzeugt mit denselben Worten eher romantische Spannung?"},
+      "options": {"en": ["“I like your dress” said quickly, walking by", "“I like your dress” said with steady eye contact and a calm pause", "“I like your dress” said from behind her"], "de": ["„Schönes Kleid“, schnell im Vorbeigehen gesagt", "„Schönes Kleid“, mit ruhigem Blickkontakt und einer gelassenen Pause", "„Schönes Kleid“, von hinten gesagt"]},
+      "explanation": {"en": "Warmth plus presence makes it feel intentional rather than throwaway.", "de": "Wärme plus Präsenz lassen es bewusst wirken statt beiläufig."}
+    },
+    "92141af3-4469-4cb2-aeca-c8b66beca062": {
+      "question_text": {"en": "What allows a single line to shift an interaction from polite into flirty?", "de": "Was macht es möglich, dass ein einziger Satz ein Gespräch von höflich zu flirtend kippen lässt?"},
+      "options": {"en": ["Explicitly stating romantic intent so there is no ambiguity", "Subtly implying interest while keeping plausible deniability", "Giving a stronger compliment than before to raise attraction"], "de": ["Romantisches Interesse ausdrücklich sagen, damit nichts unklar bleibt", "Interesse andeuten, ohne dich festzulegen", "Ein stärkeres Kompliment als vorher machen, um die Anziehung zu steigern"]},
+      "explanation": {"en": "A flirty shift works best by implying interest rather than directly declaring it.", "de": "Der Wechsel zum Flirt gelingt am besten, wenn du Interesse andeutest, statt es direkt zu erklären."}
+    },
+    "d81d87c2-562a-4457-9339-626b9b62911d": {
+      "question_text": {"en": "The chat flows easily and she leans in slightly. What subtle line could shift it?", "de": "Das Gespräch läuft leicht, und sie lehnt sich etwas vor. Welcher dezente Satz könnte die Stimmung kippen lassen?"},
+      "options": {"en": ["\"You’re interesting.\"", "\"We talk well.\"", "\"I like how this conversation feels with you.\""], "de": ["„Du bist interessant.“", "„Wir unterhalten uns gut.“", "„Ich mag, wie sich dieses Gespräch mit dir anfühlt.“"]},
+      "explanation": {"en": "Names the existing vibe gently, opening space for flirtation.", "de": "Der Satz benennt sanft die Stimmung, die schon da ist, und öffnet Raum für einen Flirt."}
+    },
+    "de314e72-aecd-48e2-9e7e-904002814fcb": {
+      "question_text": {"en": "Mood-shifting line examples?", "de": "Beispiele für Sätze, die die Stimmung kippen lassen?"},
+      "options": {"en": ["\"Let’s go get coffee sometime\"", "\"I like how this conversation feels with you.\"", "\"I wasn't expecting to meet someone like you today\"", "\"We should do this again sometime\""], "de": ["„Lass uns mal einen Kaffee trinken gehen.“", "„Ich mag, wie sich dieses Gespräch mit dir anfühlt.“", "„Ich hab heute nicht damit gerechnet, jemanden wie dich zu treffen.“", "„Das sollten wir mal wiederholen.“"]},
+      "explanation": {"en": "A flirty shift works best by implying interest rather than directly declaring it.", "de": "Der Wechsel zum Flirt gelingt am besten, wenn du Interesse andeutest, statt es direkt zu erklären."}
+    },
+    "bc3c84b8-fcbd-4347-ba4e-29499525a333": {
+      "question_text": {"en": "Why does breaking eye contact too quickly weaken attraction?", "de": "Warum schwächt es die Anziehung, wenn du den Blickkontakt zu schnell abbrichst?"},
+      "options": {"en": ["It signals nervousness or uncertainty", "It appears rude", "It confuses the conversation", "It reduces verbal clarity"], "de": ["Es zeigt Nervosität oder Unsicherheit", "Es wirkt unhöflich", "Es verwirrt das Gespräch", "Man versteht dich schlechter"]},
+      "explanation": {"en": "Repeatedly looking away breaks tension and stalls escalation.", "de": "Wer immer wieder wegschaut, bricht die Spannung, und es geht nicht weiter."}
+    },
+    "63f473ff-9a6a-4125-9a7b-03d7c4df9882": {
+      "question_text": {"en": "Why can eye contact shift a conversation more effectively than a compliment?", "de": "Warum kann Blickkontakt ein Gespräch wirksamer verändern als ein Kompliment?"},
+      "options": {"en": ["It feels less rehearsed", "It bypasses logic and works on feeling", "It reduces the need for words", "All of the above"], "de": ["Er wirkt weniger einstudiert", "Er umgeht den Verstand und wirkt aufs Gefühl", "Er macht Worte weniger nötig", "Alle oben genannten"]},
+      "explanation": {"en": "Eye contact works emotionally and instinctively, not intellectually.", "de": "Blickkontakt wirkt emotional und instinktiv, nicht über den Verstand."}
+    },
+    "7dd24452-9d73-4619-a644-95a9de2edd1d": {
+      "question_text": {"en": "Which moments are most suitable for sustained eye contact?", "de": "Welche Momente eignen sich am besten für längeren Blickkontakt?"},
+      "options": {"en": ["During natural pauses", "When she is speaking emotionally", "While interrupting her", "When the conversation slows briefly"], "de": ["In natürlichen Pausen", "Wenn sie emotional erzählt", "Während du sie unterbrichst", "Wenn das Gespräch kurz langsamer wird"]},
+      "explanation": {"en": "Eye contact works best in calm, shared moments, not during interruptions.", "de": "Blickkontakt wirkt am besten in ruhigen, gemeinsamen Momenten, nicht beim Unterbrechen."}
+    },
+    "79c89303-fe65-481b-8506-11cd45eaed32": {
+      "question_text": {"en": "The vibe is positive but you stay far apart. What risk do you run?", "de": "Die Stimmung ist gut, aber du hältst viel Abstand. Welches Risiko gehst du ein?"},
+      "options": {"en": ["Appearing too interested", "Making her uncomfortable", "Signalling disengagement despite words", "Moving too fast"], "de": ["Zu interessiert zu wirken", "Ihr Unbehagen zu bereiten", "Trotz deiner Worte Desinteresse zu signalisieren", "Zu schnell vorzugehen"]},
+      "explanation": {"en": "Distance mismatch can undermine verbal interest.", "de": "Ein Abstand, der nicht zur Stimmung passt, kann dein Interesse in Worten untergraben."}
+    },
+    "f7200ef5-2102-4d79-abd9-e518cc3c8af8": {
+      "question_text": {"en": "You take a small step closer and she subtly steps back. What does this mean?", "de": "Du kommst einen kleinen Schritt näher, und sie weicht leicht zurück. Was bedeutet das?"},
+      "options": {"en": ["She needs more space right now", "She wants you to persist confidently", "She is testing you", "She dislikes you entirely"], "de": ["Sie braucht gerade mehr Abstand", "Sie will, dass du selbstbewusst dranbleibst", "Sie testet dich", "Sie kann dich überhaupt nicht leiden"]},
+      "explanation": {"en": "A step back is information, not rejection. Give space and recalibrate.", "de": "Ein Schritt zurück ist eine Information, keine Ablehnung. Lass ihr Raum und stimm dich neu ab."}
+    },
+    "a9930259-a42a-49fb-bdd4-9d319fe4fd04": {
+      "question_text": {"en": "What mistakes create discomfort around proximity?", "de": "Welche Fehler bei der Nähe sorgen für Unbehagen?"},
+      "options": {"en": ["Moving closer before rapport exists", "Ignoring her physical responses", "Adjusting distance gradually", "Staying rigid despite her leaning in"], "de": ["Näher kommen, bevor eine Verbindung da ist", "Ihre körperlichen Reaktionen ignorieren", "Den Abstand nach und nach anpassen", "Starr bleiben, obwohl sie sich vorlehnt"]},
+      "explanation": {"en": "Discomfort comes from ignoring feedback or failing to respond to it.", "de": "Unbehagen entsteht, wenn du ihre Reaktionen ignorierst oder nicht darauf eingehst."}
+    },
+    "c56a1006-a63d-4532-801e-49829be4ccd2": {
+      "question_text": {"en": "What does body mirroring help communicate?", "de": "Was hilft Spiegeln der Körpersprache zu vermitteln?"},
+      "options": {"en": ["Attraction through imitation", "Dominance and control", "Social safety and comfort", "Confidence through posture"], "de": ["Anziehung durch Nachahmung", "Dominanz und Kontrolle", "Soziale Sicherheit und Wohlgefühl", "Selbstbewusstsein durch Haltung"]},
+      "explanation": {"en": "Mirroring signals familiarity and ease at a subconscious level, which supports rapport.", "de": "Spiegeln signalisiert unbewusst Vertrautheit und Leichtigkeit, und das stärkt die Verbindung."}
+    },
+    "9a5612de-f9a6-4bc1-bcbb-29d29d0b1f91": {
+      "question_text": {"en": "She speaks softly and slowly during the conversation. What should you match?", "de": "Sie spricht im Gespräch leise und langsam. Woran solltest du dich anpassen?"},
+      "options": {"en": ["Raise your volume to energize her", "Stay at your original loud tone", "Speak quickly to keep momentum", "Lower your voice and slow your pacing"], "de": ["Lauter werden, um ihr Energie zu geben", "Bei deiner lauten Stimme bleiben", "Schnell sprechen, um den Schwung zu halten", "Leiser und langsamer sprechen"]},
+      "explanation": {"en": "Matching her energy and tone builds rapport subconsciously.", "de": "Wenn du dich ihrer Energie und ihrem Ton anpasst, entsteht unbewusst eine Verbindung."}
+    },
+    "7dc61f4a-f296-4e9b-ae8f-01bd4a923b88": {
+      "question_text": {"en": "Which are signs she may be mirroring you?", "de": "Woran erkennst du, dass sie dich vielleicht spiegelt?"},
+      "options": {"en": ["She adopts a similar posture after you shift", "She matches your speaking pace", "She asks more questions", "She adjusts her body orientation toward you"], "de": ["Sie nimmt eine ähnliche Haltung ein, nachdem du deine geändert hast", "Sie passt sich deinem Sprechtempo an", "Sie stellt mehr Fragen", "Sie dreht ihren Körper zu dir"]},
+      "explanation": {"en": "Physical and energetic alignment often indicate comfort and engagement.", "de": "Wenn ihr euch körperlich und in der Energie angleicht, zeigt das oft Wohlgefühl und Interesse."}
+    }
+  }
+}
