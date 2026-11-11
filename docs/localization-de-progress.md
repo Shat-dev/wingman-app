@@ -8,13 +8,13 @@ Branch `localization-release-b`. Rules and glossary: [localization-de-brief.md](
 
 **What needs Arthur, in order:**
 1. **Native-speaker review** of everything: interface first (paywall, the sign-in legal line, onboarding; see the brief), then lessons, then quiz and scenarios. Then re-import the catalogs with `--reviewed`.
-2. **Apply the content-translation migration** (`supabase/migrations/20261110000000_content_translations.sql`) on a Supabase branch first; the checks are at the bottom of the file. The 42 English fixes (`supabase/seed/content_fixes_en/2026-11-11_content_fixes.sql`) are **already applied to production** (2026-11-11, see the log), so only the 24 German files in `supabase/seed/content_translations_de/` remain, after the migration. Supabase branches start empty, so a branch run only tests the migration, not these data files.
+2. ~~Apply the content-translation migration and the German rows.~~ **Done 2026-11-11** (see the log): the migration, the 42 English fixes and all 24 German files are live on production. Re-run a German file after any wording change from the review; each one is an idempotent upsert.
 3. **App Store listing in German** (G9): name, subtitle, keywords, description, screenshots, subscription display names.
 4. **German auth email templates** (G10) in the Supabase dashboard.
 5. **A German screenshot sweep that also opens lessons, a quiz and a scenario** (one prod guest user per run) on the SE, after step 2, to check layout with real German content.
 6. **Smaller items:** decide whether to delete one of the duplicate Japan quiz questions (`4533a8d2…` / `58d8c403…`). The English lesson fixes (12_3, 13_1, 15_4, 20_4, 21_1, 21_2, 25_3, 11_5, typos) live only on this branch, so English users get them only when Release B ships unless they are cherry-picked earlier.
 
-Until step 2 is done, a German phone shows a German interface and lessons but English quizzes and scenarios. Don't ship this branch in that state.
+The German DB rows are live, but only a build from this branch reads them; the app on the store today ignores the new tables. The German is still an unreviewed machine draft, so finish step 1 before shipping this branch.
 
 ## Summary
 
@@ -128,3 +128,11 @@ All earlier items were resolved on 2026-11-11; the decisions are below. Still op
 - Touch items in flirting and chemistry that are not yet translated: `e91466f0…` "Lower back during movement" became "Upper arm" (still a correct choice); `f6feba7a…` correct answer became "A light touch on her arm to guide her"; `93982613…` and `f23233f3…` "linger / stand close" options now carry the reciprocity condition. In conversational skills, the `d45e9b83…` explanation drops "makes her comply".
 
 **Rule for the remaining quiz batches:** before translating, apply `supabase/seed/content_fixes_en/2026-11-11_content_fixes.json` to the English rows read from the DB (it lists old and new text per id), and translate the fixed English.
+
+- **2026-11-11, about 15:40. Migration and German rows applied to production, at Arthur's request ("Dry run, then apply").** A Supabase branch could not test this (Free plan, and `questions` / `scenarios` / `scenario_screens` / `screen_options` were never created by migrations, so a branch has no base tables). Instead:
+  1. Read-only check on production: all 765 German question ids exist, and every German options array has the same length as the live English one.
+  2. Rolled-back dry run on production: the whole migration, one scenario's sample rows and two questions, then the guards. Result: wrong option count rejected, blank title rejected, `anon` denied on `question_translations` (42501), `authenticated` can read. The transaction then raised on purpose; afterwards none of the new tables or functions existed.
+  3. Applied the migration with `apply_migration`. It is recorded as version **20261111043812** `content_translations`; the repo file keeps its 20261110000000 name (see its header for the `migration repair` note).
+  4. Ran the 24 files in `supabase/seed/content_translations_de/` with the Supabase CLI (`db query --linked`, from a scratch workdir linked to the project, nothing in the repo linked). All 24 committed without error.
+  5. Verified: questions 765/765, scenarios 15/15, text screens 796/796, options 276/276; none missing, no option-count mismatch, no other locales. Security advisors: the new tables only show the same "anonymous sign-ins" notice their English parent tables already have.
+  The store build (`Shat`) has no code that reads these tables. Release A asks only for its interface language, which is never German. So no current user sees the German rows until a Release B build ships.

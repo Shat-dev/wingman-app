@@ -1,14 +1,19 @@
 -- Content translation tables — WP7 of docs/localization-implementation-plan.md
 --
--- NOT APPLIED. Written 2026-11-10 against the live schema as captured in
--- supabase/snapshots/live-schema-2026-11-10.md. Nothing in this file has been
--- run on project bnckmgnysfliiypvxxii. It ships no data: with these tables
--- empty, every user sees exactly the English content they see today.
+-- APPLIED to production (bnckmgnysfliiypvxxii) on 2026-11-11 at Arthur's request,
+-- after a rolled-back dry run on production passed (a Supabase branch could not
+-- host it: the base content tables are not in migration history). Production
+-- recorded it as version 20261111043812, name "content_translations". This file
+-- keeps its 20261110000000 name because the app and scripts refer to it; if the
+-- Supabase CLI is ever used to push migrations, run
+--   supabase migration repair --status applied 20261110000000
+-- (or rename this file to 20261111043812_content_translations.sql) first, so it
+-- is not applied twice. The body below (between begin and commit) is exactly
+-- what ran, minus the begin/commit.
 --
--- Checked without a database: parsed with the PostgreSQL 17 grammar (pglast),
--- including the plpgsql bodies, and every statement confirmed to create or
--- alter only the new objects below. It has NOT been executed anywhere. Run it
--- on a branch or a local stack first, then the checks at the bottom.
+-- Written 2026-11-10 against the live schema as captured in
+-- supabase/snapshots/live-schema-2026-11-10.md. The tables ship no data
+-- themselves: with them empty, every user sees the English content.
 --
 -- ADDITIVE ONLY (rule R6 of the plan)
 --
