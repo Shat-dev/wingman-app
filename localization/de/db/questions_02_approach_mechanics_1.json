@@ -1,0 +1,224 @@
+{
+  "questions": {
+    "16ff4a51-d956-4ee9-bd1d-b820aaad519a": {
+      "question_text": {"en": "What does it mean to be calibrated when approaching in the day?", "de": "Was heißt es, tagsüber beim Ansprechen fein abgestimmt zu sein?"},
+      "options": {"en": ["Matching your energy to hers", "Adjusting based on her comfort signals", "Keeping the interaction respectful", "All of the above"], "de": ["Deine Energie an ihre anpassen", "Dich danach richten, wie wohl sie sich fühlt", "Respektvoll bleiben", "Alle oben genannten"]},
+      "explanation": {"en": "Calibration is awareness in action. It is reading her response and adjusting accordingly.", "de": "Feingefühl ist gelebte Aufmerksamkeit: Du liest ihre Reaktion und passt dich an."}
+    },
+    "17e5ea51-94a8-4084-bfd8-18b8a92f9ae9": {
+      "question_text": {"en": "What are women opposed to during daytime approaches?", "de": "Was lehnen Frauen beim Ansprechen tagsüber ab?"},
+      "options": {"en": ["Being approached by strangers in public spaces", "Men interrupting their errands and daily routines", "Direct romantic intent expressed during daytime", "Approaches that ignore comfort and respect"], "de": ["Dass Fremde sie in der Öffentlichkeit ansprechen", "Dass Männer sie bei Besorgungen und im Alltag unterbrechen", "Dass jemand tagsüber offen romantisches Interesse zeigt", "Eine Ansprache, die Wohlgefühl und Respekt missachtet"]},
+      "explanation": {"en": "Discomfort comes from ignored boundaries, not from being approached itself.", "de": "Unbehagen entsteht, wenn Grenzen missachtet werden, nicht durch das Ansprechen an sich."}
+    },
+    "5c7c4962-c5cf-480e-94ba-1cc03443f821": {
+      "question_text": {"en": "You notice a woman browsing books in a store. What approach creates comfort?", "de": "In einem Laden siehst du eine Frau, die in Büchern stöbert. Welche Ansprache gibt ihr ein gutes Gefühl?"},
+      "options": {"en": ["Walk up behind her and touch her shoulder", "Compliment her appearance immediately", "Wait for her to look at you first", "Enter her line of sight, smile calmly, then say hi"], "de": ["Von hinten herangehen und ihr auf die Schulter tippen", "Sofort ihr Aussehen loben", "Warten, bis sie dich zuerst ansieht", "In ihr Blickfeld treten, ruhig lächeln und dann Hallo sagen"]},
+      "explanation": {"en": "Visible approach with smile signals respect and reduces surprise.", "de": "Wenn sie dich kommen sieht und du lächelst, zeigt das Respekt und vermeidet einen Schreckmoment."}
+    },
+    "4f1937b7-4e35-4007-97d7-0ba51bfa30af": {
+      "question_text": {"en": "Why does nighttime settings punish hesitation?", "de": "Warum wird Zögern abends besonders bestraft?"},
+      "options": {"en": ["Women are approached constantly so they have more options", "Attention shifts fast in chaotic venues; openings disappear quickly", "Alcohol makes people more impatient and less forgiving", "Other men will approach her if you don't act fast"], "de": ["Frauen werden ständig angesprochen und haben mehr Auswahl", "In trubeligen Locations wechselt die Aufmerksamkeit schnell, und Gelegenheiten sind schnell weg", "Alkohol macht Leute ungeduldiger und weniger nachsichtig", "Andere Männer sprechen sie an, wenn du nicht schnell bist"]},
+      "explanation": {"en": "Night environments change quickly, so delays turn signals into missed chances.", "de": "Abends ändert sich die Situation schnell. Wer zögert, macht aus Signalen verpasste Chancen."}
+    },
+    "9c6d0086-b465-4912-9e47-4cec5bc122f2": {
+      "question_text": {"en": "You open calmly but speak softly in a loud venue. What’s the likely result?", "de": "In einer lauten Location steigst du ruhig ein, sprichst aber leise. Was passiert wahrscheinlich?"},
+      "options": {"en": ["She leans in", "Interaction feels grounded", "Momentum drops", "Attraction increases"], "de": ["Sie lehnt sich zu dir", "Das Gespräch wirkt geerdet", "Der Schwung geht verloren", "Die Anziehung steigt"]},
+      "explanation": {"en": "Low energy mismatched to environment causes disengagement.", "de": "Wenig Energie, die nicht zur Umgebung passt, lässt das Interesse abflauen."}
+    },
+    "e4f60ca8-4125-463e-b6ce-3c84259813a8": {
+      "question_text": {"en": "She's at the bar ordering. You position next to her to order. She glances at you. Move?", "de": "Sie bestellt an der Bar. Du stellst dich zum Bestellen neben sie. Sie wirft dir einen Blick zu. Dein Zug?"},
+      "options": {"en": ["Order your drink first, then open after you both have drinks", "Wait to see if she gives another signal", "Say hello and start talking to her"], "de": ["Erst deinen Drink bestellen und sie ansprechen, wenn ihr beide etwas habt", "Abwarten, ob sie noch ein Signal gibt", "Hallo sagen und mit ihr ins Gespräch kommen"]},
+      "explanation": {"en": "Do not wait for more signals; a glance is enough to begin at night.", "de": "Warte nicht auf weitere Signale. Abends reicht ein Blick, um anzufangen."}
+    },
+    "dbc9b59e-d2c5-4cb0-be94-f4bc54ea2bca": {
+      "question_text": {"en": "What's the goal when first engaging a group?", "de": "Was ist das Ziel, wenn du eine Gruppe ansprichst?"},
+      "options": {"en": ["Impress your target to stand out from other guys", "Be accepted by everyone, then shift attention to her", "Identify and befriend the group leader for approval", "Create enough value that group invites you to join them"], "de": ["Die Frau, die dich interessiert, beeindrucken, um dich von anderen abzuheben", "Von allen akzeptiert werden und dich dann ihr zuwenden", "Den Wortführer der Gruppe ausmachen und dich mit ihm anfreunden", "So viel bieten, dass die Gruppe dich einlädt, dazuzukommen"]},
+      "explanation": {"en": "Group awareness creates permission; include everyone before narrowing focus.", "de": "Wenn du die ganze Gruppe beachtest, bekommst du ihr Okay. Bezieh alle ein, bevor du dich auf eine Person konzentrierst."}
+    },
+    "10add83c-809f-43e0-aa9a-31d38bfb3270": {
+      "question_text": {"en": "A group is laughing loudly. You approach with a quiet, serious comment. What happens?", "de": "Eine Gruppe lacht laut. Du kommst mit einer leisen, ernsten Bemerkung dazu. Was passiert?"},
+      "options": {"en": ["Energy mismatch causes disengagement", "They engage deeply with you", "They appreciate your authenticity", "The target woman pulls you aside"], "de": ["Die unpassende Energie lässt das Interesse abflauen", "Sie lassen sich voll auf dich ein", "Sie schätzen deine Echtheit", "Die Frau, die dich interessiert, zieht dich zur Seite"]},
+      "explanation": {"en": "An energy mismatch causes disengagement; mirror their enthusiasm to preserve flow.", "de": "Unpassende Energie lässt das Interesse abflauen. Spiegel ihre Begeisterung, damit der Fluss erhalten bleibt."}
+    },
+    "2efcf135-1220-4266-bbc1-7828bea5592d": {
+      "question_text": {"en": "What key mindset shift helps men approach groups successfully?", "de": "Welche Veränderung in der Einstellung hilft Männern, Gruppen erfolgreich anzusprechen?"},
+      "options": {"en": ["See her friends as potential allies, not obstacles", "Assume groups are always harder than solo women", "Focus only on impressing your target first"], "de": ["Ihre Freundinnen als mögliche Verbündete sehen, nicht als Hindernis", "Davon ausgehen, dass Gruppen immer schwieriger sind als Frauen allein", "Dich erst mal nur darauf konzentrieren, sie zu beeindrucken"]},
+      "explanation": {"en": "When the group feels seen, individual connection becomes easier.", "de": "Wenn sich die Gruppe gesehen fühlt, fällt die Verbindung zu einer Einzelnen leichter."}
+    },
+    "4756728e-4c07-484b-a976-9eeb5814eca7": {
+      "question_text": {"en": "You open with “I have a question for you.” She looks up expectantly. What does this signal?", "de": "Du steigst ein mit: „Ich hab eine Frage an dich.“ Sie schaut erwartungsvoll auf. Was zeigt das?"},
+      "options": {"en": ["Politeness", "Curiosity", "Evaluation", "Rejection"], "de": ["Höflichkeit", "Neugier", "Prüfung", "Ablehnung"]},
+      "explanation": {"en": "Curiosity works because it naturally pulls attention; open with something intriguing.", "de": "Neugier wirkt, weil sie ganz natürlich Aufmerksamkeit anzieht. Steig mit etwas ein, das neugierig macht."}
+    },
+    "28aa155d-35ca-4afd-abcc-bc4cb3e22a6d": {
+      "question_text": {"en": "What makes \"I need a woman's opinion on something\" effective as a frame?", "de": "Warum funktioniert „Ich brauch mal die Meinung einer Frau“ als Einstieg so gut?"},
+      "options": {"en": ["It makes her feel valued and important to the interaction", "It creates curiosity about what the dilemma or question is", "Both of the above"], "de": ["Sie fühlt sich geschätzt und wichtig für das Gespräch", "Es macht neugierig, worum es bei der Frage geht", "Beides"]},
+      "explanation": {"en": "This works because it positions her as relevant; it makes her feel included from the start.", "de": "Das funktioniert, weil sie dadurch wichtig ist. Sie fühlt sich von Anfang an einbezogen."}
+    },
+    "7aa7c045-3cd0-4ffe-aa02-400edd9bc5b7": {
+      "question_text": {"en": "Why do curiosity openers engage better than direct questions?", "de": "Warum ziehen Neugier-Opener besser als direkte Fragen?"},
+      "options": {"en": ["They trigger the brain's drive to close information gaps", "They provide immediate factual answers", "They make her want to know what comes next"], "de": ["Sie wecken den Drang des Gehirns, Wissenslücken zu schließen", "Sie liefern sofort sachliche Antworten", "Sie wecken in ihr den Wunsch zu erfahren, wie es weitergeht"]},
+      "explanation": {"en": "Curiosity creates a psychological pull stronger than default disinterest.", "de": "Neugier erzeugt einen psychologischen Sog, der stärker ist als das übliche Desinteresse."}
+    },
+    "f40037b2-a636-4084-a804-c553ece3de6a": {
+      "question_text": {"en": "What advantage do assumption based openers have early on?", "de": "Welchen Vorteil haben Opener mit einer Vermutung am Anfang?"},
+      "options": {"en": ["They show dominance", "They involve her instantly", "They hide intention", "They reduce risk"], "de": ["Sie zeigen Dominanz", "Sie beziehen sie sofort ein", "Sie verbergen deine Absicht", "Sie senken das Risiko"]},
+      "explanation": {"en": "Assumptions force response and create instant engagement.", "de": "Eine Vermutung verlangt nach einer Antwort und bezieht sie sofort ein."}
+    },
+    "3e974466-6524-42dc-a429-63bb8e831188": {
+      "question_text": {"en": "Why do openers like \"You do pilates, right?\" involve her immediately?", "de": "Warum beziehen Opener wie „Du machst Pilates, oder?“ sie sofort ein?"},
+      "options": {"en": ["They demonstrate you're observant about her physical fitness level", "They create instant engagement—she must correct or confirm", "They show you have knowledge about fitness and health"], "de": ["Sie zeigen, dass du ihre Fitness genau wahrnimmst", "Sie beziehen sie sofort ein: Sie muss korrigieren oder bestätigen", "Sie zeigen, dass du dich mit Fitness und Gesundheit auskennst"]},
+      "explanation": {"en": "Assumptions demand response. She's instantly involved in correcting or confirming.", "de": "Eine Vermutung verlangt nach einer Antwort. Sie ist sofort dabei, zu korrigieren oder zu bestätigen."}
+    },
+    "1874cbce-d4aa-44b1-ab88-ff0c2745d69f": {
+      "question_text": {"en": "Why do assumption openers hook better than generic questions?", "de": "Warum fesseln Opener mit einer Vermutung besser als allgemeine Fragen?"},
+      "options": {"en": ["They create curiosity about your perception", "They can be answered on autopilot", "They require confirmation or correction"], "de": ["Sie machen neugierig, wie du sie wahrnimmst", "Man kann sie auf Autopilot beantworten", "Sie verlangen eine Bestätigung oder Korrektur"]},
+      "explanation": {"en": "Assumptions make her feel seen and spark immediate involvement.", "de": "Eine Vermutung gibt ihr das Gefühl, gesehen zu werden, und bezieht sie sofort ein."}
+    },
+    "9e84223a-e094-4ee6-8da9-79cd89d634c7": {
+      "question_text": {"en": "\"I need a woman's opinion on something\" works because:", "de": "„Ich brauch mal die Meinung einer Frau“ funktioniert, weil:"},
+      "options": {"en": ["It builds curiosity about what you need an opinion on", "It makes her feel her perspective is valued and important", "It positions women as having special insight you need", "All of the above"], "de": ["es neugierig macht, wozu du eine Meinung brauchst", "sie das Gefühl bekommt, dass ihre Sicht geschätzt wird und wichtig ist", "es Frauen als Expertinnen mit einem Blick darstellt, den du brauchst", "Alle oben genannten"]},
+      "explanation": {"en": "Builds curiosity, makes her feel valued, and positions female perspective as valuable.", "de": "Es macht neugierig, gibt ihr das Gefühl, geschätzt zu werden, und macht die weibliche Sicht wertvoll."}
+    },
+    "dc959e07-994f-4a1d-b948-b437f3e6f2b2": {
+      "question_text": {"en": "You open with a dilemma. She gives a detailed answer. What could you do next?", "de": "Du steigst mit einem Dilemma ein. Sie antwortet ausführlich. Was könntest du als Nächstes tun?"},
+      "options": {"en": ["End interaction", "Agree fully", "Switch topics", "Build on her input"], "de": ["Das Gespräch beenden", "Ihr voll zustimmen", "Das Thema wechseln", "Auf ihrer Antwort aufbauen"]},
+      "explanation": {"en": "Building on her response rewards effort and keeps momentum alive.", "de": "Wenn du auf ihrer Antwort aufbaust, würdigst du ihre Mühe und hältst den Schwung."}
+    },
+    "7c800f82-c80b-490c-988f-e66f6100d311": {
+      "question_text": {"en": "Which openers value her perspective?", "de": "Welche Opener zeigen, dass dir ihre Sicht wichtig ist?"},
+      "options": {"en": ["\"I need a woman’s opinion\"", "\"Quick question for you\"", "\"You’re very attractive\"", "\"My friend and I were debating\""], "de": ["„Ich brauch mal die Meinung einer Frau“", "„Kurze Frage an dich“", "„Du bist sehr attraktiv“", "„Mein Kumpel und ich haben gerade diskutiert“"]},
+      "explanation": {"en": "These openers position her as relevant; it makes her feel included from the start.", "de": "Diese Opener machen sie wichtig. Sie fühlt sich von Anfang an einbezogen."}
+    },
+    "43b03548-630d-4716-8d45-71c89fa4a819": {
+      "question_text": {"en": "What is a time constraint in the context of approaching?", "de": "Was ist beim Ansprechen ein Zeitlimit?"},
+      "options": {"en": ["A deadline you give her to respond to your approach", "A technique to create urgency and scarcity in the interaction", "An opening statement signalling you'll be leaving soon"], "de": ["Eine Frist, die du ihr für eine Antwort setzt", "Eine Technik, um im Gespräch Dringlichkeit und Knappheit zu erzeugen", "Ein Satz am Anfang, der zeigt, dass du gleich wieder gehst"]},
+      "explanation": {"en": "Declaring you will not stay long reduces pressure; apply it at the start.", "de": "Wenn du sagst, dass du nicht lange bleibst, nimmt das Druck raus. Setz es gleich am Anfang ein."}
+    },
+    "cfb43838-50ce-4ae4-8c8a-722afd35d73a": {
+      "question_text": {"en": "What's the goal of setting time constraints in the initial approach?", "de": "Was ist das Ziel eines Zeitlimits am Anfang?"},
+      "options": {"en": ["Control the interaction by framing yourself as busy", "Create scarcity so she values your limited time more", "Comfort for her by removing pressure of open-ended commitment"], "de": ["Das Gespräch kontrollieren, indem du dich als beschäftigt darstellst", "Knappheit erzeugen, damit sie deine Zeit mehr schätzt", "Ihr ein gutes Gefühl geben, weil sie sich auf nichts Unabsehbares einlassen muss"]},
+      "explanation": {"en": "Declaring you will not stay long reduces pressure; apply it at the start.", "de": "Wenn du sagst, dass du nicht lange bleibst, nimmt das Druck raus. Setz es gleich am Anfang ein."}
+    },
+    "66801814-05f0-417d-a387-606cb86e6cf9": {
+      "question_text": {"en": "You approach a woman at a coffee shop. What can you say first to reduce pressure?", "de": "Du sprichst eine Frau im Café an. Was kannst du zuerst sagen, um Druck rauszunehmen?"},
+      "options": {"en": ["Compliment her appearance immediately", "State you can only stay for a second", "Ask deep personal questions", "Suggest moving to another location"], "de": ["Sofort ihr Aussehen loben", "Sagen, dass du nur kurz Zeit hast", "Tiefe persönliche Fragen stellen", "Vorschlagen, woandershin zu gehen"]},
+      "explanation": {"en": "A time constraint signals you’ll leave soon, lowering her guard.", "de": "Ein Zeitlimit zeigt, dass du gleich wieder gehst, und sie wird weniger vorsichtig."}
+    },
+    "8993be7c-90eb-4430-96e6-83d657f55add": {
+      "question_text": {"en": "Signs you should execute false exit?", "de": "Woran merkst du, dass es Zeit für einen vorgetäuschten Abgang ist?"},
+      "options": {"en": ["Energy is at peak, she's laughing and highly engaged", "Conversation just started, still building initial rapport", "You sense energy about to plateau or naturally decline", "You've been talking exactly 10 minutes regardless of energy"], "de": ["Die Stimmung ist auf dem Höhepunkt, sie lacht und ist voll dabei", "Das Gespräch hat gerade erst begonnen, ihr baut noch eine Verbindung auf", "Du spürst, dass die Energie gleich stagniert oder nachlässt", "Ihr redet genau 10 Minuten, egal wie die Stimmung ist"]},
+      "explanation": {"en": "Peak energy or sensing plateau = right timing. Not about arbitrary time markers.", "de": "Höhepunkt der Stimmung oder kurz bevor sie abflacht: Das ist das richtige Timing. Eine feste Zeitmarke spielt keine Rolle."}
+    },
+    "c6866bb5-1e8c-4c24-9fa6-7ea784314163": {
+      "question_text": {"en": "What does a false exit accomplish?", "de": "Was bewirkt ein vorgetäuschter Abgang?"},
+      "options": {"en": ["Creates value gap through leaving before conversation naturally ends", "Demonstrates abundance—you don't need to squeeze every second", "Prevents you from slipping into approval-seeking behavior", "Guarantees she'll definitely want to continue later"], "de": ["Er schafft eine Lücke, weil du gehst, bevor das Gespräch von selbst endet", "Er zeigt Fülle: Du musst nicht jede Sekunde ausquetschen", "Er verhindert, dass du anfängst, um Bestätigung zu werben", "Er garantiert, dass sie später auf jeden Fall weiterreden will"]},
+      "explanation": {"en": "Gap creation, abundance signal, prevents approval-seeking = false exit benefits.", "de": "Eine Lücke schaffen, Fülle zeigen, nicht um Bestätigung werben: Das bringt dir der vorgetäuschte Abgang."}
+    },
+    "6d51f94a-3406-49fb-98ed-99beb074d2bf": {
+      "question_text": {"en": "\"This has been fun, I should mingle a bit. I'll find you later.\" Walk away. What did this create?", "de": "„Das war lustig, ich sollte mich mal ein bisschen unter die Leute mischen. Ich find dich später.“ Du gehst. Was hast du damit geschaffen?"},
+      "options": {"en": ["Risk she'll lose interest or meet someone else while you're gone", "Positive unfinished impression with curiosity about your return", "Confusion about whether you're actually interested in her", "Demonstration that you're not fully committed to pursuing her"], "de": ["Das Risiko, dass sie das Interesse verliert oder jemand anderen kennenlernt", "Einen positiven, offenen Eindruck und Neugier, wann du wiederkommst", "Verwirrung, ob du überhaupt Interesse an ihr hast", "Den Eindruck, dass du es mit ihr nicht ganz ernst meinst"]},
+      "explanation": {"en": "Peak exit = positive memory + curiosity gap. She's left wanting more.", "de": "Auf dem Höhepunkt gehen heißt: positive Erinnerung plus Neugier. Sie will mehr."}
+    },
+    "30461b26-dac7-40f7-ae3f-bc7f90b1ebcb": {
+      "question_text": {"en": "What's the difference between not approaching and getting rejected?", "de": "Was ist der Unterschied zwischen nicht ansprechen und eine Abfuhr bekommen?"},
+      "options": {"en": ["Rejection hurts more emotionally in the moment", "Not approaching protects your ego and confidence", "Rejection gives you experience; not approaching gives you nothing"], "de": ["Eine Abfuhr tut im Moment mehr weh", "Nicht ansprechen schützt dein Ego und dein Selbstbewusstsein", "Eine Abfuhr bringt dir Erfahrung, nicht ansprechen bringt dir gar nichts"]},
+      "explanation": {"en": "Both result in no connection, but rejection builds experience for future approaches.", "de": "In beiden Fällen entsteht keine Verbindung, aber eine Abfuhr gibt dir Erfahrung fürs nächste Mal."}
+    },
+    "46975d8e-4143-4ea5-9c92-bde52c3bebad": {
+      "question_text": {"en": "What is the worst outcome in approaching situations?", "de": "Was ist beim Ansprechen das schlimmste Ergebnis?"},
+      "options": {"en": ["Polite rejection", "A short failed conversation", "Regret from inaction", "Awkward silence"], "de": ["Eine höfliche Abfuhr", "Ein kurzes, gescheitertes Gespräch", "Reue, weil du nichts getan hast", "Peinliche Stille"]},
+      "explanation": {"en": "Regret from missed chances lingers longer than brief rejection.", "de": "Reue über verpasste Chancen hält länger an als eine kurze Abfuhr."}
+    },
+    "05af8c26-1d5f-4746-bd8d-93ffa9ceb943": {
+      "question_text": {"en": "Why is rejection better than not approaching?", "de": "Warum ist eine Abfuhr besser, als gar nicht anzusprechen?"},
+      "options": {"en": ["It guarantees lasting regret", "It provides experience and data", "It creates possibility for connection", "It eliminates all uncertainty"], "de": ["Sie garantiert anhaltende Reue", "Sie bringt dir Erfahrung und Erkenntnisse", "Sie schafft die Möglichkeit einer Verbindung", "Sie beseitigt jede Unsicherheit"]},
+      "explanation": {"en": "Action opens doors; inaction closes them with certainty.", "de": "Handeln öffnet Türen. Nichtstun schließt sie mit Sicherheit."}
+    },
+    "3400a772-93ac-48a3-a167-060ae3d525d8": {
+      "question_text": {"en": "What starts almost all connections in life?", "de": "Womit beginnt fast jede Verbindung im Leben?"},
+      "options": {"en": ["Shared interests", "Right timing", "Confidence", "Someone speaking first"], "de": ["Gemeinsame Interessen", "Das richtige Timing", "Selbstbewusstsein", "Jemand sagt als Erstes etwas"]},
+      "explanation": {"en": "All connections begin because someone takes the first step and speaks.", "de": "Jede Verbindung beginnt, weil jemand den ersten Schritt macht und etwas sagt."}
+    },
+    "bf5ff661-2958-4e0d-ab57-b3ef0436b379": {
+      "question_text": {"en": "You’re at a friend’s party and don’t know most guests. What could you do first?", "de": "Du bist auf der Party eines Freundes und kennst kaum jemanden. Was könntest du als Erstes tun?"},
+      "options": {"en": ["Stay quiet in the corner until someone approaches", "Ask someone how they know the host", "Wait for a perfect opening line", "Leave early to avoid awkwardness"], "de": ["Still in der Ecke bleiben, bis dich jemand anspricht", "Jemanden fragen, woher er den Gastgeber kennt", "Auf den perfekten ersten Satz warten", "Früh gehen, um peinliche Momente zu vermeiden"]},
+      "explanation": {"en": "Speaking first creates chances; silence guarantees none.", "de": "Wer zuerst spricht, schafft Chancen. Wer schweigt, hat garantiert keine."}
+    },
+    "833fb7a5-48fa-44ca-bb33-3134723fc718": {
+      "question_text": {"en": "What can opening your mouth lead to?", "de": "Wozu kann es führen, wenn du den Mund aufmachst?"},
+      "options": {"en": ["New Friendships", "New experiences", "Guaranteed success", "Unexpected opportunities"], "de": ["Neue Freundschaften", "Neue Erfahrungen", "Garantierter Erfolg", "Unerwartete Gelegenheiten"]},
+      "explanation": {"en": "Engagement creates access to varied outcomes.", "de": "Wer sich einbringt, öffnet sich für ganz unterschiedliche Möglichkeiten."}
+    },
+    "588b3d53-613d-4e21-bdeb-77f6157427c7": {
+      "question_text": {"en": "Why should you approach with curiosity instead of an agenda?", "de": "Warum solltest du mit Neugier statt mit einer Absicht ansprechen?"},
+      "options": {"en": ["Curiosity is quieter, agenda is more confident", "Curiosity avoids attraction, agenda creates attraction", "Curiosity learns who she is, agenda seeks an outcome"], "de": ["Neugier ist leiser, eine Absicht wirkt selbstbewusster", "Neugier vermeidet Anziehung, eine Absicht erzeugt sie", "Neugier will wissen, wer sie ist, eine Absicht will ein Ergebnis"]},
+      "explanation": {"en": "Curiosity explores the person. An agenda tries to extract a result.", "de": "Neugier will den Menschen kennenlernen. Eine Absicht will ein Ergebnis herausholen."}
+    },
+    "4003461a-b8aa-4eaa-b66f-3d5847986f38": {
+      "question_text": {"en": "You notice her laptop has stickers from Iceland. What opener shows genuine curiosity?", "de": "Du siehst Island-Sticker auf ihrem Laptop. Welcher Opener zeigt echte Neugier?"},
+      "options": {"en": ["\"Hi, I thought you were cute and wanted to meet you.\"", "\"Can I buy you a coffee?\"", "\"You look like you travel a lot.\"", "\"Is that a sticker from Iceland? I was just there last year.\""], "de": ["„Hi, ich fand dich süß und wollte dich kennenlernen.“", "„Darf ich dich auf einen Kaffee einladen?“", "„Du siehst aus, als würdest du viel reisen.“", "„Ist das ein Sticker aus Island? Da war ich letztes Jahr.“"]},
+      "explanation": {"en": "Curiosity about her experiences invites real connection without agenda.", "de": "Neugier auf ihre Erlebnisse lädt zu einer echten Verbindung ein, ohne Hintergedanken."}
+    },
+    "d398047f-31f2-46cb-991f-abb7e05f231d": {
+      "question_text": {"en": "Why does approaching with curiosity create stronger bonds than with an agenda?", "de": "Warum entsteht durch Neugier eine stärkere Verbindung als durch eine Absicht?"},
+      "options": {"en": ["It treats her as a goal to achieve", "It makes her feel interesting and seen", "It removes pressure to extract outcomes", "It allows for more effortless, authentic conversation"], "de": ["Sie behandelt sie wie ein Ziel, das du erreichen willst", "Sie gibt ihr das Gefühl, interessant zu sein und gesehen zu werden", "Sie nimmt den Druck raus, ein Ergebnis herauszuholen", "Sie ermöglicht ein müheloseres, echteres Gespräch"]},
+      "explanation": {"en": "Curiosity focuses on her as a person, fostering natural connection.", "de": "Neugier richtet sich auf sie als Mensch und fördert eine natürliche Verbindung."}
+    },
+    "7265d45c-cbbc-4d5e-8220-2d1c5fe793f2": {
+      "question_text": {"en": "Why does approaching feel harder when done rarely?", "de": "Warum fühlt sich Ansprechen schwerer an, wenn du es selten tust?"},
+      "options": {"en": ["Stakes feel higher", "Less possibility of success", "Timing worsens", "Fear increases"], "de": ["Es fühlt sich an, als stünde mehr auf dem Spiel", "Die Erfolgschancen sinken", "Das Timing wird schlechter", "Die Angst wächst"]},
+      "explanation": {"en": "When approaches are rare, each one carries more weight and feels more intense.", "de": "Wenn du selten ansprichst, hat jedes Mal mehr Gewicht und fühlt sich intensiver an."}
+    },
+    "31e5395b-0177-4703-8182-44c9921a16fc": {
+      "question_text": {"en": "What mistake causes people to approach less than they could?", "de": "Welcher Fehler führt dazu, dass man seltener anspricht, als man könnte?"},
+      "options": {"en": ["Being in poor locations", "Waiting for ideal conditions", "Being on their phones", "Lack of interest"], "de": ["An den falschen Orten sein", "Auf ideale Bedingungen warten", "Am Handy hängen", "Mangelndes Interesse"]},
+      "explanation": {"en": "Waiting for perfect conditions reduces total opportunities. You can approach anytime.", "de": "Wer auf perfekte Bedingungen wartet, hat insgesamt weniger Gelegenheiten. Ansprechen kannst du jederzeit."}
+    },
+    "94b04aa8-e3ca-474a-af0c-4aac0238c9b5": {
+      "question_text": {"en": "What habits maintain regular social exposure?", "de": "Welche Gewohnheiten sorgen dafür, dass du regelmäßig unter Leute kommst?"},
+      "options": {"en": ["Talking to strangers throughout your normal day", "Treating anywhere as a place to practice connection", "Approaching only when you feel fully confident"], "de": ["Im normalen Alltag mit Fremden reden", "Jeden Ort als Gelegenheit sehen, Kontakt zu üben", "Nur ansprechen, wenn du dich voll selbstbewusst fühlst"]},
+      "explanation": {"en": "Regular engagement lowers pressure and makes interactions feel easier.", "de": "Regelmäßiger Kontakt senkt den Druck, und Begegnungen fallen dir leichter."}
+    },
+    "5cd29e03-754c-4a91-8b5a-132fe680704d": {
+      "question_text": {"en": "What is the purpose of the three-second rule?", "de": "Wozu dient die Drei-Sekunden-Regel?"},
+      "options": {"en": ["Creating urgency", "Avoiding rejection", "Perfecting openers", "Acting before resistance builds"], "de": ["Dringlichkeit erzeugen", "Abfuhren vermeiden", "Opener perfektionieren", "Handeln, bevor sich Widerstand aufbaut"]},
+      "explanation": {"en": "Acting quickly stops doubt from building. Move within three seconds of noticing her.", "de": "Schnelles Handeln verhindert, dass Zweifel aufkommen. Geh los, spätestens drei Sekunden nachdem du sie bemerkt hast."}
+    },
+    "71a2b057-c0c3-49ae-a552-62426201f6c9": {
+      "question_text": {"en": "Why does waiting make approaches harder?", "de": "Warum macht Warten das Ansprechen schwerer?"},
+      "options": {"en": ["Fear multiplies", "Energy drops", "Interest fades", "Attention shifts"], "de": ["Die Angst vervielfacht sich", "Die Energie sinkt", "Das Interesse lässt nach", "Die Aufmerksamkeit wandert"]},
+      "explanation": {"en": "Fear increases when the mind has time to imagine outcomes. Move fast.", "de": "Die Angst wächst, wenn dein Kopf Zeit hat, sich Szenarien auszumalen. Sei schnell."}
+    },
+    "a8119be9-b1ef-4a0d-ab94-b3b7fdcf7ef2": {
+      "question_text": {"en": "You spot an attractive woman at a bar and want to approach. What should you do?", "de": "Du siehst eine attraktive Frau in einer Bar und willst sie ansprechen. Was solltest du tun?"},
+      "options": {"en": ["Start planning the perfect opener", "Think about possible rejection risks first", "Move toward her within three seconds", "Stay still until you feel fearless"], "de": ["Anfangen, den perfekten Opener zu planen", "Erst über das Risiko einer Abfuhr nachdenken", "Innerhalb von drei Sekunden auf sie zugehen", "Stehen bleiben, bis du keine Angst mehr hast"]},
+      "explanation": {"en": "Act before analysis builds resistance and hesitation.", "de": "Handle, bevor das Grübeln Widerstand und Zögern aufbaut."}
+    },
+    "50b60dd8-f15e-4fdb-bbb1-8651ce23d2c0": {
+      "question_text": {"en": "Why does blocking her paths and movement create discomfort?", "de": "Warum ist es ihr unangenehm, wenn du ihr den Weg versperrst?"},
+      "options": {"en": ["It triggers automatic threat responses", "It feels rude", "It shows dominance"], "de": ["Es löst automatisch eine Bedrohungsreaktion aus", "Es wirkt unhöflich", "Es zeigt Dominanz"]},
+      "explanation": {"en": "The body reacts to restricted space before conscious thought. Give her space.", "de": "Der Körper reagiert auf eingeengten Raum, bevor der Verstand mitkommt. Lass ihr Platz."}
+    },
+    "eddec612-c258-4098-80cf-80aed2555258": {
+      "question_text": {"en": "You approach and notice she can’t easily move. Best adjustment?", "de": "Du sprichst sie an und merkst, dass sie nicht gut wegkommt. Was passt du am besten an?"},
+      "options": {"en": ["Step back and open space", "Speak faster", "Compliment her"], "de": ["Einen Schritt zurückgehen und Platz machen", "Schneller sprechen", "Ihr ein Kompliment machen"]},
+      "explanation": {"en": "Giving people space keeps their nervous system relaxed and receptive.", "de": "Wenn du anderen Platz lässt, bleibt ihr Nervensystem entspannt und offen."}
+    },
+    "aea4811b-264d-435b-ab0a-4bcab3bc274a": {
+      "question_text": {"en": "Which choices support a comfortable approach?", "de": "Was sorgt dafür, dass sich die Ansprache angenehm anfühlt?"},
+      "options": {"en": ["Staying visible", "Blocking exits", "Standing too close", "Leaving movement space"], "de": ["Sichtbar bleiben", "Ausgänge versperren", "Zu nah stehen", "Ihr Bewegungsfreiraum lassen"]},
+      "explanation": {"en": "Visibility and space keeps their nervous system relaxed and receptive.", "de": "Sichtbarkeit und Platz halten ihr Nervensystem entspannt und offen."}
+    },
+    "2e5b5d64-e126-4877-9449-ad662c2d047e": {
+      "question_text": {"en": "What does relaxed body in motion communicate before speaking?", "de": "Was vermittelt ein entspannter Körper in Bewegung, bevor du etwas sagst?"},
+      "options": {"en": ["Confidence, comfort, and non-threatening intent", "Apologetic or threatening presence", "Need for immediate validation", "Disinterest in the environment"], "de": ["Selbstbewusstsein, Wohlgefühl und eine harmlose Absicht", "Eine entschuldigende oder bedrohliche Ausstrahlung", "Das Bedürfnis nach sofortiger Bestätigung", "Desinteresse an der Umgebung"]},
+      "explanation": {"en": "Smooth, open movement sets positive footing subconsciously.", "de": "Fließende, offene Bewegungen schaffen unbewusst eine positive Grundlage."}
+    },
+    "9e26bd7a-b3cd-4d6e-af6b-4122066f80b5": {
+      "question_text": {"en": "You're walking toward her with jerky, hesitant steps. Best move?", "de": "Du gehst mit ruckartigen, zögerlichen Schritten auf sie zu. Was tust du am besten?"},
+      "options": {"en": ["Slow your pace, relax shoulders, steady yourself before closing distance", "Stop where you are and call out to her instead", "Maintain current movement to show authenticity and honesty"], "de": ["Langsamer gehen, die Schultern lockern und dich sammeln, bevor du näher kommst", "Stehen bleiben und ihr stattdessen etwas zurufen", "So weitergehen, um Echtheit und Ehrlichkeit zu zeigen"]},
+      "explanation": {"en": "Relaxed movement communicates safety, making the interaction feel easier for her.", "de": "Entspannte Bewegungen vermitteln Sicherheit, und das Gespräch fällt ihr leichter."}
+    }
+  }
+}
