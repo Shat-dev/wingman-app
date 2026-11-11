@@ -102,3 +102,9 @@ The sweep needs a clean install. On a simulator that has run it before, boot it,
 - **The status bar clock differs between runs**, so compare images by eye or mask the top strip; an exact pixel diff will always differ there.
 - **Each sweep run creates one anonymous user in the production Supabase project** (tapping "Get started" signs in a guest) and sends PostHog events tagged `environment = dev`. Do not run it in a loop.
 - **The sweep finds elements by English text.** It will need accessibility identifiers before it can run in another language.
+
+## German content run (Release B, G7)
+
+`german-content-se-2026-11-11/`, iPhone SE simulator, branch `localization-release-b`, 2026-11-11, after the German database rows went live. Source: `OnboardingSweepTests.testOnboardingAndContentInGerman`: the German onboarding walk, then a relaunch with the Debug-only `-forcePremium YES` and walks through lesson 1_1 and its quiz, today's Daily Practice and the "Bar Window" scenario played to the end. Screens 23 to 117, plus 20 (the scenario-list walkthrough card, now showing the German titles). Screens 01 to 19 and 21 to 22 are pixel-identical to `german-se-2026-11-11/` and are not repeated. Saved as 128-colour PNGs to keep the folder small; read them for layout, don't diff them.
+
+The run created one guest user in production and recorded the lesson, the Daily Practice set and the scenario as completed for that user.

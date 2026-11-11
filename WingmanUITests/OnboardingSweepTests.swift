@@ -36,6 +36,13 @@
 //        Nothing is compared; the screenshots are read for German layout
 //        problems (Release B, G7).
 //
+//    testOnboardingAndContentInGerman
+//        The German walk, then a relaunch with the Debug-only
+//        `-forcePremium YES` and a walk through the first lesson and its
+//        quiz, today's Daily Practice and the "Bar Window" scenario, to see
+//        the German lesson overlays and database rows on screen. Also
+//        records those completions for its guest user in production.
+//
 //  Elements are found by the start of their visible text because the app has
 //  no accessibility identifiers yet (the start, so that a doubled string
 //  still matches). The walk names them in English; in the German run `t()`
@@ -108,6 +115,52 @@ final class OnboardingSweepTests: XCTestCase {
         app.launchArguments += ["-AppleLanguages", "(de)", "-AppleLocale", "de_DE"]
         app.launch()
         walkFromLandingThroughTheApp()
+    }
+
+    /// The German walk, then the content a subscriber sees: the first lesson
+    /// and its quiz, today's Daily Practice, and the "Bar Window" scenario.
+    ///
+    /// Nothing is free for a guest who closed the paywall, so after the
+    /// onboarding walk the app is relaunched with the Debug-only
+    /// `-forcePremium YES`, which makes this simulator's app treat the user as
+    /// subscribed. Nothing is bought and RevenueCat is not touched. Not passed
+    /// on the first launch: a subscriber never sees the onboarding paywall.
+    ///
+    /// Side effects, beyond the guest user every run creates: the lesson, the
+    /// Daily Practice set and the scenario are recorded as completed for that
+    /// guest in production (progress, streak, XP rows), as any user's would be.
+    func testOnboardingAndContentInGerman() {
+        german = Self.loadGerman()
+        XCTAssertFalse(german.isEmpty, "Could not read localization/de/catalogs.de.json")
+        let language = ["-AppleLanguages", "(de)", "-AppleLocale", "de_DE"]
+        app.launchArguments += language
+        app.launch()
+        walkFromLandingThroughTheApp()
+
+        app.terminate()
+        app = XCUIApplication()
+        app.launchArguments = language + [
+            "-forcePremium", "YES",
+            "-lessonQuizEnabled", "YES",
+            "-reviewPromptEnabled", "NO"
+        ]
+        app.launch()
+
+        // A guest who counts as subscribed is first offered an account.
+        let notNow = button("Not now")
+        if notNow.waitForExistence(timeout: 15) {
+            settle(1.0)
+            snap("unlocked-account-offer")
+            notNow.tap()
+        }
+
+        var problems: [String] = []
+        if let problem = walkLessonAndItsQuiz() { problems.append(problem) }
+        returnToTabs()
+        if let problem = walkDailyPractice() { problems.append(problem) }
+        returnToTabs()
+        if let problem = walkScenario() { problems.append(problem) }
+        XCTAssertTrue(problems.isEmpty, problems.joined(separator: "; "))
     }
 
     func testOnboardingInDoubleLengthPseudoLanguage() {
@@ -263,6 +316,189 @@ final class OnboardingSweepTests: XCTestCase {
             settle(2.0)
             snap(name)
         }
+    }
+
+    // MARK: - Content (German run, unlocked)
+    //
+    // Best effort like the walk past the paywall: each path returns a
+    // description of where it stopped, or nil, and the test fails at the end
+    // so the screenshots of the other paths are still taken.
+
+    /// Courses -> "Beliefs & Reframes" -> "You are not your thoughts", page by
+    /// page, then the lesson quiz and the completion screen.
+    private func walkLessonAndItsQuiz() -> String? {
+        let courses = tabButton("Courses")
+        guard courses.waitForExistence(timeout: 20) else { return "lesson: no Courses tab" }
+        courses.tap()
+        settle(2.0)
+        snap("content-courses")
+
+        let course = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", t("Beliefs & Reframes"))).firstMatch
+        guard course.waitForExistence(timeout: 10) else { snap("stopped-before-course"); return "lesson: course card not found" }
+        course.tap()
+        settle(1.5)
+        snap("content-course-detail")
+
+        // Lesson titles come from the bundled German overlay, not the catalog.
+        let lesson = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "Du bist nicht deine Gedanken")).firstMatch
+        guard lesson.waitForExistence(timeout: 10) else { snap("stopped-before-lesson"); return "lesson: lesson card not found" }
+        lesson.tap()
+        settle(1.5)
+        snap("lesson-intro")
+
+        // Pages advance by a tap on the right half: one paragraph per tap.
+        let checkAnswer = button("Check Answer")
+        let complete = staticText("Lesson complete.")
+        for page in 1...30 {
+            if checkAnswer.exists || complete.exists { break }
+            app.coordinate(withNormalizedOffset: CGVector(dx: 0.8, dy: 0.5)).tap()
+            settle(0.9)
+            if checkAnswer.exists || complete.exists { break }
+            snap(String(format: "lesson-page-%02d", page))
+        }
+        return answerQuiz(name: "lesson-quiz", completion: "Lesson complete.", firstWait: 10)
+    }
+
+    /// Home -> Daily Practice "Start" -> five questions -> completion.
+    private func walkDailyPractice() -> String? {
+        let home = tabButton("Home")
+        guard home.waitForExistence(timeout: 10) else { return "daily practice: no Home tab" }
+        home.tap()
+        settle(2.0)
+        snap("content-home")
+
+        // "Home" and "Start" are both "Start" in German: the Daily Practice
+        // button is the upper one, the tab the lowest.
+        let starts = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", t("Start"))).allElementsBoundByIndex
+            .filter { $0.isHittable }
+            .sorted { $0.frame.minY < $1.frame.minY }
+        guard starts.count >= 2 else {
+            snap("stopped-before-daily-practice")
+            return "daily practice: Start button not found (already done today, or offline)"
+        }
+        starts[0].tap()
+        settle(1.0)
+        snap("daily-practice-loading")
+        return answerQuiz(name: "daily-practice", completion: "Daily practice complete.", firstWait: 25)
+    }
+
+    /// Scenarios -> "Bar Window" -> played to the end. Where a choice leads to
+    /// "Tap to retry", the next visit to that choice takes the next option.
+    private func walkScenario() -> String? {
+        let scenarios = tabButton("Scenarios")
+        guard scenarios.waitForExistence(timeout: 10) else { return "scenario: no Scenarios tab" }
+        scenarios.tap()
+        settle(3.0)
+        snap("content-scenarios")
+
+        let card = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "Die Bar")).firstMatch
+        guard card.waitForExistence(timeout: 15) else { snap("stopped-before-scenario"); return "scenario: \"Die Bar\" card not found" }
+        card.tap()
+        settle(1.5)
+        snap("scenario-intro")
+
+        let choose = staticText("Choose an option to continue")
+        let complete = staticText("Scenario complete.")
+        var tried: [String: Int] = [:]
+        var shots = 0
+        for _ in 1...80 {
+            if complete.exists {
+                settle(1.5)
+                snap("scenario-complete")
+                let next = button("Continue")
+                if next.exists { next.tap() }
+                return nil
+            }
+            if choose.exists {
+                let options = wideButtons(excluding: [])
+                guard !options.isEmpty else { snap("stopped-at-scenario-options"); return "scenario: options not found" }
+                let key = options.map(\.label).joined(separator: "|")
+                let index = tried[key, default: 0] % options.count
+                tried[key, default: 0] += 1
+                if shots < 60 { shots += 1; snap("scenario-choice") }
+                options[index].tap()
+                settle(1.6)
+            } else {
+                if shots < 60 { shots += 1; snap("scenario-screen") }
+                app.coordinate(withNormalizedOffset: CGVector(dx: 0.75, dy: 0.5)).tap()
+                settle(1.0)
+            }
+        }
+        snap("stopped-in-scenario")
+        return "scenario: not finished after 80 steps"
+    }
+
+    /// Answers whatever quiz is on screen: the first option, "Check Answer",
+    /// "Next", until the completion screen, whose "Continue" is tapped.
+    private func answerQuiz(name: String, completion: String, firstWait: TimeInterval) -> String? {
+        let checkAnswer = button("Check Answer")
+        let complete = staticText(completion)
+        for number in 1...12 {
+            let deadline = Date().addingTimeInterval(number == 1 ? firstWait : 10)
+            while !checkAnswer.exists && !complete.exists && Date() < deadline { settle(0.5) }
+            if complete.exists {
+                settle(2.0) // XP and streak animations
+                snap("\(name)-complete")
+                let next = button("Continue")
+                guard next.waitForExistence(timeout: 5) else { return "\(name): no Continue on the completion screen" }
+                next.tap()
+                settle(1.5)
+                return nil
+            }
+            guard checkAnswer.exists else { snap("stopped-in-\(name)"); return "\(name): question \(number) did not appear" }
+            settle(0.8)
+            snap("\(name)-q\(number)")
+            let options = wideButtons(excluding: [t("Check Answer"), t("Next")])
+            guard let first = options.first else { return "\(name): no options on question \(number)" }
+            first.tap()
+            settle(0.5)
+            checkAnswer.tap()
+            settle(1.2)
+            snap("\(name)-q\(number)-checked")
+            let next = button("Next")
+            guard next.waitForExistence(timeout: 5) else { return "\(name): no Next after question \(number)" }
+            next.tap()
+            settle(1.0)
+        }
+        return "\(name): no completion screen after 12 questions"
+    }
+
+    /// Back to a screen with the tab bar: edge swipes, then the top-left
+    /// back chevron, which has no label.
+    private func returnToTabs() {
+        for attempt in 0..<4 {
+            let tab = tabButton("Courses")
+            if tab.exists && tab.isHittable { return }
+            if attempt < 3 {
+                let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.02, dy: 0.5))
+                start.press(forDuration: 0.05, thenDragTo: app.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.5)))
+            } else {
+                app.coordinate(withNormalizedOffset: CGVector(dx: 0.07, dy: 0.08)).tap()
+            }
+            settle(1.2)
+        }
+    }
+
+    /// A tab-bar button: of the buttons starting with the tab's name, the
+    /// lowest on screen ("Start" is also the Daily Practice button in German).
+    private func tabButton(_ text: String) -> XCUIElement {
+        let matches = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", t(text)))
+        let lowest = matches.allElementsBoundByIndex.filter { $0.exists }.max { $0.frame.minY < $1.frame.minY }
+        return lowest ?? matches.firstMatch
+    }
+
+    /// Full-width buttons, top to bottom: answer options in a quiz or a
+    /// scenario. Navigation chevrons and tab buttons are narrower.
+    private func wideButtons(excluding prefixes: [String]) -> [XCUIElement] {
+        let width = app.windows.firstMatch.frame.width
+        return app.buttons.allElementsBoundByIndex
+            .filter { $0.exists && $0.isHittable && $0.frame.width > width * 0.7 }
+            .filter { button in !prefixes.contains { button.label.hasPrefix($0) } }
+            .sorted { $0.frame.minY < $1.frame.minY }
+    }
+
+    private func staticText(_ english: String) -> XCUIElement {
+        app.staticTexts.matching(NSPredicate(format: "label BEGINSWITH %@", t(english))).firstMatch
     }
 
     // MARK: - Steps

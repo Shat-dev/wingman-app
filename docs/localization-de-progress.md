@@ -11,7 +11,7 @@ Branch `localization-release-b`. Rules and glossary: [localization-de-brief.md](
 2. ~~Apply the content-translation migration and the German rows.~~ **Done 2026-11-11** (see the log): the migration, the 42 English fixes and all 24 German files are live on production. Re-run a German file after any wording change from the review; each one is an idempotent upsert.
 3. **App Store listing in German** (G9): name, subtitle, keywords, description, screenshots, subscription display names.
 4. **German auth email templates** (G10) in the Supabase dashboard.
-5. **A German screenshot sweep that also opens lessons, a quiz and a scenario** (one prod guest user per run) on the SE, after step 2, to check layout with real German content.
+5. ~~German screenshot sweep with lessons, a quiz and a scenario.~~ **Done 2026-11-11** (see the log; screenshots in `docs/localization-baseline/german-content-se-2026-11-11/`). Re-run it after the native review if the wording changes much.
 6. **Smaller items:** decide whether to delete one of the duplicate Japan quiz questions (`4533a8d2…` / `58d8c403…`). The English lesson fixes (12_3, 13_1, 15_4, 20_4, 21_1, 21_2, 25_3, 11_5, typos) live only on this branch, so English users get them only when Release B ships unless they are cherry-picked earlier.
 
 The German DB rows are live, but only a build from this branch reads them; the app on the store today ignores the new tables. The German is still an unreviewed machine draft, so finish step 1 before shipping this branch.
@@ -23,7 +23,7 @@ The German DB rows are live, but only a build from this branch reads them; the a
 | UI catalogs (G2) | 574 of 574 strings drafted (2026-11-10) |
 | Lesson overlays (G3) | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-11). All 25 files load in the app (298 unit tests pass) |
 | Database content (G4) | Done: 15 of 15 scenarios, 765 of 765 questions |
-| German sweep (G7) | Onboarding and tabs on SE, 2026-11-11: no clipping. Lessons not yet seen in German |
+| German sweep (G7) | SE, 2026-11-11: onboarding, tabs, lesson 1_1 and its quiz, Daily Practice and the Bar Window scenario all in German, no clipping caused by German |
 
 Lesson order followed: the first course of each category before the second (1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, …), the order the app's file names give.
 
@@ -136,3 +136,8 @@ All earlier items were resolved on 2026-11-11; the decisions are below. Still op
   4. Ran the 24 files in `supabase/seed/content_translations_de/` with the Supabase CLI (`db query --linked`, from a scratch workdir linked to the project, nothing in the repo linked). All 24 committed without error.
   5. Verified: questions 765/765, scenarios 15/15, text screens 796/796, options 276/276; none missing, no option-count mismatch, no other locales. Security advisors: the new tables only show the same "anonymous sign-ins" notice their English parent tables already have.
   The store build (`Shat`) has no code that reads these tables. Release A asks only for its interface language, which is never German. So no current user sees the German rows until a Release B build ships.
+
+- **2026-11-11, about 16:00. German content sweep on the SE, at Arthur's request.** New test `OnboardingSweepTests.testOnboardingAndContentInGerman`: the German onboarding walk, then a relaunch with the Debug-only `-forcePremium YES` (nothing is free for a guest who closed the paywall; nothing is bought), `-lessonQuizEnabled YES` and `-reviewPromptEnabled NO`, then lesson 1_1 page by page and its quiz, today's Daily Practice (5 questions) and "Bar Window" played to the end. Passed in 5 minutes, 117 screenshots. One prod guest user; its lesson, Daily Practice and scenario completions are recorded like any user's. (A first attempt reached nothing: the simulator had shut down, so the reset failed and the old install skipped onboarding; no user was created.) `scripts/screenshots.py` now exports numbers above 99.
+  - Every lesson paragraph, quiz question, option, explanation, scenario screen, option and feedback line came up in German, from the overlay and the live DB rows. No English content anywhere. Onboarding screens are pixel-identical to this morning's run except the scenario-list walkthrough card, which now shows the German scenario titles.
+  - No clipped or overlapping text caused by German. Two things that are the same in English: the lesson title strip at the bottom of every lesson page is cut in half on the SE (`LessonView.swift:168`, `.padding(.bottom, -10)`), and the Home greeting is always "Good Morning," whatever the time.
+  - For the reviewer: lesson pages on the SE overflow and auto-scroll, so the start of a page scrolls out of view as paragraphs are added (e.g. `32-lesson-page-02`). German text is longer, so this happens more often than in English; worth a look on a real SE.

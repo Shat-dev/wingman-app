@@ -49,7 +49,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-NUMBERED = re.compile(r"^(\d{2})[a-z]?-")
+NUMBERED = re.compile(r"^(\d{2,3})[a-z]?-")
 
 
 def export(result_bundle, out_dir):
