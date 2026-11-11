@@ -25,7 +25,7 @@ Until 1 and 4 are done, a German phone shows German interface and lessons, but E
 |---|---|
 | UI catalogs (G2) | 574 of 574 strings drafted (2026-11-10) |
 | Lesson overlays (G3) | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-11). All 25 files load in the app (298 unit tests pass) |
-| Database content (G4) | 15 of 15 scenarios; 726 of 765 questions |
+| Database content (G4) | Done: 15 of 15 scenarios, 765 of 765 questions |
 | German sweep (G7) | Onboarding and tabs on SE, 2026-11-11: no clipping. Lessons not yet seen in German |
 
 Lesson order followed: the first course of each category before the second (1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, …), the order the app's file names give.
@@ -94,6 +94,7 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **2026-11-11. Questions 612–649** (flirting_chemistry rows 77–114, module pool; about 1,900 words). This starts `questions_04_flirting_chemistry_2`, which will hold rows 77–151. Two more items were added to the English fix list. `50183c21…`'s correct answer was the "I don't know if you've earned one yet" line removed from lesson 21_1; it now matches the lesson ("Only if you're getting the next round"), with a matching explanation. `a1c414f9…` "soo" became "so". The fix SQL now has 41 guarded updates. "Protect my queen" (chess pun) works in German as *meine Dame beschützen*.
 - **2026-11-11. Questions 650–686** (flirting_chemistry rows 115–151, module pool; about 1,800 words). `questions_04_flirting_chemistry_2` is complete, with 75 rows, so all 151 flirting_chemistry questions are done. The fix list was applied to `e91466f0…` ("Upper arm"), `f6feba7a…` (touch on her arm) and `f23233f3…` ("…when she's reciprocating"); a check confirmed every fixed id in the batch carries the fixed English. One more grammar fix was added (`a9af130c…` explanation), so the fix SQL now has 42 guarded updates.
 - **2026-11-11. Questions 687–726** (mastery_integration rows 1–40: lessons 22_1 to 25_4; about 1,900 words). This starts `questions_05_mastery_integration`, a single file for all 79 rows. Terms follow the course 22–25 overlays: "home court advantage" became *Heimvorteil*, "sticking point" became *Knackpunkt*, "plateau" became *Plateau*, and "experimental mindset" became *Haltung des Experimentierens*. "Volume" / "reps" are rendered as *oft ansprechen* / *Wiederholungen*. None of these rows were on the fix list, and there are no new flags.
+- **2026-11-11. Questions 727–765** (mastery_integration rows 41–79, module pool; about 1,800 words). `questions_05_mastery_integration` is complete, with 79 rows. **G4 is done.** A completeness check against the live DB (read-only) found that the md5 of all 765 question ids matches the local files exactly, as do the 796 scenario screens with text (screens of type `options` have no text) and the 276 options across 15 scenarios. No new flags.
 
 ## Questions for Arthur
 

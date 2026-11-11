@@ -199,6 +199,201 @@
       "question_text": {"en": "Which strategies can help break through a growth plateau?", "de": "Was kann helfen, ein Plateau zu durchbrechen?"},
       "options": {"en": ["Increasing difficulty intentionally", "Changing environments", "Taking a long break to recover motivation", "Focusing on one specific micro-skill"], "de": ["Den Schwierigkeitsgrad bewusst erhöhen", "Die Umgebung wechseln", "Eine lange Pause machen, um wieder motiviert zu sein", "Dich auf eine bestimmte kleine Fähigkeit konzentrieren"]},
       "explanation": {"en": "New challenges force adaptation and progress. Long breaks reinforce avoidance.", "de": "Neue Herausforderungen erzwingen Anpassung und Fortschritt. Lange Pausen verstärken das Vermeiden."}
+    },
+    "07805ac1-99db-4876-9227-20fb20fbcd1f": {
+      "question_text": {"en": "What can help you appear mysterious?", "de": "Was hilft dir, geheimnisvoll zu wirken?"},
+      "options": {"en": ["Share stories without over-explaining details", "Reveal yourself gradually through conversation", "Hint at depth without displaying entire resume", "All of the above"], "de": ["Geschichten erzählen, ohne jedes Detail zu erklären", "Dich im Gespräch nach und nach zeigen", "Tiefe andeuten, ohne deinen ganzen Lebenslauf auszubreiten", "Alle oben genannten"]},
+      "explanation": {"en": "Mystery keeps attention engaged by leaving room for curiosity and discovery.", "de": "Etwas Geheimnisvolles hält die Aufmerksamkeit wach, weil es Raum für Neugier und Entdeckung lässt."}
+    },
+    "09518935-f277-43f0-8803-f6f2caa97eee": {
+      "question_text": {"en": "What is the \"experimental mindset\"?", "de": "Was ist die „Haltung des Experimentierens“?"},
+      "options": {"en": ["Testing different approaches to find what works best", "Treating any outcome as data collection", "Shift from \"did I succeed or fail\" to \"what did I learn\"", "All of the above"], "de": ["Verschiedene Herangehensweisen testen, um herauszufinden, was am besten funktioniert", "Jedes Ergebnis als Datensammlung sehen", "Weg von „Hab ich’s geschafft oder nicht?“ hin zu „Was hab ich gelernt?“", "Alle oben genannten"]},
+      "explanation": {"en": "As long as you extract a lesson, the encounter was successful.", "de": "Solange du etwas daraus lernst, war die Begegnung ein Erfolg."}
+    },
+    "0b4d034c-f347-48a4-bf5e-2826500c82c6": {
+      "question_text": {"en": "You test a new opener and it sparks great conversation. What should you do next?", "de": "Du testest einen neuen Opener, und daraus entsteht ein tolles Gespräch. Was solltest du als Nächstes tun?"},
+      "options": {"en": ["Assume it will always work and never change", "Note what worked and test variations to refine", "Take it as proof you’re now perfect", "Stop experimenting since it succeeded"], "de": ["Davon ausgehen, dass er immer funktioniert, und nie etwas ändern", "Dir merken, was funktioniert hat, und Varianten testen, um ihn zu verfeinern", "Es als Beweis nehmen, dass du jetzt perfekt bist", "Aufhören zu experimentieren, weil es geklappt hat"]},
+      "explanation": {"en": "Success is data too—use it to continue learning and adjusting.", "de": "Auch Erfolg ist eine Information. Nutz ihn, um weiterzulernen und dich anzupassen."}
+    },
+    "142d920d-753e-4fc3-9a34-043fbf2cb37d": {
+      "question_text": {"en": "Which are low status signals in social environments that affect attraction?", "de": "Welche Signale für niedrigen Status wirken sich in sozialen Umgebungen auf die Anziehung aus?"},
+      "options": {"en": ["Standing alone near wall or edges of room", "Forcing yourself into conversations awkwardly", "Not adding much to a conversation or talking to people", "All of the above"], "de": ["Allein an der Wand oder am Rand des Raums stehen", "Dich ungeschickt in Gespräche drängen", "Kaum etwas zum Gespräch beitragen oder mit niemandem reden", "Alle oben genannten"]},
+      "explanation": {"en": "Low status signals come from disengagement, awkward entry, or lack of participation.", "de": "Signale für niedrigen Status entstehen durch Rückzug, einen ungeschickten Einstieg oder fehlende Beteiligung."}
+    },
+    "1c3b9eb2-3e17-4722-a2ee-0b94061906e1": {
+      "question_text": {"en": "You feel intense anxiety before an approach. What should you prioritize?", "de": "Vor dem Ansprechen bist du sehr nervös. Was hat Vorrang?"},
+      "options": {"en": ["Study more techniques to perfect your opener", "Prepare mentally for hours", "Wait until anxiety feels lower", "Do one small interaction today regardless of outcome"], "de": ["Mehr Techniken lernen, um deinen Opener zu perfektionieren", "Dich stundenlang mental vorbereiten", "Warten, bis die Nervosität nachlässt", "Heute eine kleine Begegnung machen, egal wie sie ausgeht"]},
+      "explanation": {"en": "Repeated exposure through volume habituates the nervous system to safety.", "de": "Wenn du dich oft der Situation stellst, gewöhnt sich dein Nervensystem daran, dass sie sicher ist."}
+    },
+    "1e482ecd-547c-44e9-96d0-74c25f5ef813": {
+      "question_text": {"en": "Women like talking to you but never flirt back. What is your sticking point?", "de": "Frauen reden gern mit dir, flirten aber nie zurück. Wo liegt dein Knackpunkt?"},
+      "options": {"en": ["Being likable and friendly", "Introducing flirtatious tension or playfulness", "Getting initial approaches accepted", "Following up after numbers"], "de": ["Sympathisch und freundlich sein", "Flirtspannung oder Verspieltheit reinbringen", "Dass die erste Ansprache angenommen wird", "Dich nach dem Nummerntausch melden"]},
+      "explanation": {"en": "Results change when practice focuses on the weakest link in the interaction.", "de": "Die Ergebnisse ändern sich, wenn du gezielt das schwächste Glied der Begegnung übst."}
+    },
+    "28e3345b-49dd-42c7-86fd-931c5c032deb": {
+      "question_text": {"en": "You’re naturally calm and thoughtful. What flirting style fits you best?", "de": "Du bist von Natur aus ruhig und nachdenklich. Welcher Flirtstil passt am besten zu dir?"},
+      "options": {"en": ["Pauses, direct eye contact, and unexpected questions", "Loud, high-energy bold statements", "Copying a funny instructor’s jokes", "Forcing direct compliments"], "de": ["Pausen, direkter Blickkontakt und überraschende Fragen", "Laute, energiegeladene, mutige Sprüche", "Die Witze eines lustigen Coaches kopieren", "Krampfhaft direkte Komplimente machen"]},
+      "explanation": {"en": "Express principles through your natural personality for authentic connection.", "de": "Setz die Prinzipien mit deiner eigenen Persönlichkeit um, dann entsteht echte Verbindung."}
+    },
+    "324d0f15-f4f3-4d1e-aa8a-9a3dbbda9f55": {
+      "question_text": {"en": "How does joining group activities change your chances to connect?", "de": "Wie verändern Gruppenaktivitäten deine Chancen, Leute kennenzulernen?"},
+      "options": {"en": ["It guarantees immediate connections", "It creates regular exposure and potential bridges to new people", "It keeps your world small and predictable"], "de": ["Sie garantieren sofort neue Kontakte", "Sie sorgen für regelmäßigen Kontakt und mögliche Brücken zu neuen Leuten", "Sie halten deine Welt klein und vorhersehbar"]},
+      "explanation": {"en": "Groups provide volume and indirect connections for natural opportunities.", "de": "Gruppen bringen viele Begegnungen und Kontakte über Umwege, und daraus entstehen ganz natürlich Gelegenheiten."}
+    },
+    "360f9f51-86bf-4779-ab39-a8155afc9bdd": {
+      "question_text": {"en": "Why does selective sharing create stronger attraction than full disclosure?", "de": "Warum erzeugt es mehr Anziehung, nur ausgewählt etwas von dir zu erzählen, statt alles preiszugeben?"},
+      "options": {"en": ["It floods her with information to process", "It leaves pockets of uncertainty for curiosity", "It invites her imagination to fill gaps"], "de": ["Es überschüttet sie mit Informationen", "Es lässt Lücken, die neugierig machen", "Es lädt ihre Fantasie ein, die Lücken zu füllen"]},
+      "explanation": {"en": "Mystery fuels wondering, making discovery gradual and compelling.", "de": "Etwas Geheimnisvolles regt zum Nachdenken an, und das Entdecken wird schrittweise und spannend."}
+    },
+    "4826161e-e13f-4b37-8fe4-6ee85878fd7e": {
+      "question_text": {"en": "What mindset shift is needed to create more chances?", "de": "Welche Veränderung in deiner Einstellung brauchst du, um mehr Gelegenheiten zu schaffen?"},
+      "options": {"en": ["Deliberately build social exposure into routine", "Say yes to new activities even when uncertain", "Expect every effort to yield immediate results"], "de": ["Bewusst mehr soziale Kontakte in den Alltag einbauen", "Zu neuen Aktivitäten Ja sagen, auch wenn du unsicher bist", "Erwarten, dass jede Mühe sofort Ergebnisse bringt"]},
+      "explanation": {"en": "Consistent action expands your world, allowing opportunities to arise.", "de": "Regelmäßiges Handeln erweitert deine Welt, und so entstehen Gelegenheiten."}
+    },
+    "48fe4298-aeef-4a2e-85e5-f1d2e2592692": {
+      "question_text": {"en": "What does an experimental mindset allow?", "de": "Was ermöglicht dir die Haltung des Experimentierens?"},
+      "options": {"en": ["Fail without feeling like a failure", "Learn from experiences instead of judging them", "Build database of what works in different contexts", "All of the above"], "de": ["Scheitern, ohne dich als Versager zu fühlen", "Aus Erfahrungen lernen, statt sie zu bewerten", "Eine Sammlung aufbauen, was in welcher Situation funktioniert", "Alle oben genannten"]},
+      "explanation": {"en": "When you treat approaches as experiments, rejection becomes data, not a failure.", "de": "Wenn du jedes Ansprechen als Experiment siehst, wird eine Abfuhr zu einer Information statt zu einem Versagen."}
+    },
+    "51e669d2-f554-48ce-843b-4c367370982e": {
+      "question_text": {"en": "Why does volume reduce approach anxiety?", "de": "Warum macht häufiges Ansprechen dich weniger nervös?"},
+      "options": {"en": ["It builds better lines", "It trains the nervous system through habituation", "It lowers perceived threat over time", "It replaces fear with confidence through logic"], "de": ["Es bringt bessere Sprüche", "Es trainiert dein Nervensystem durch Gewöhnung", "Die gefühlte Bedrohung sinkt mit der Zeit", "Logik ersetzt die Angst durch Selbstbewusstsein"]},
+      "explanation": {"en": "Anxiety fades through repeated safe exposure, not thinking or preparation.", "de": "Nervosität verschwindet, wenn du dich immer wieder sicheren Situationen stellst, nicht durch Nachdenken oder Vorbereitung."}
+    },
+    "5eb79a5b-9ac8-45c2-9e9d-423d1d2916e4": {
+      "question_text": {"en": "Your opener gets a polite but flat response. What should you think next?", "de": "Auf deinen Opener kommt eine höfliche, aber flache Antwort. Was solltest du denken?"},
+      "options": {"en": ["\"That opener didn’t land, what could I adjust next time?\"", "\"I failed and I’m bad at this.\"", "\"She wasn’t interested anyway.\"", "\"I should stop approaching today.\""], "de": ["„Der Opener kam nicht an. Was kann ich nächstes Mal anders machen?“", "„Ich hab versagt und bin schlecht darin.“", "„Sie hatte eh kein Interesse.“", "„Ich sollte heute aufhören, Leute anzusprechen.“"]},
+      "explanation": {"en": "Analyze variables to gather useful information for future tests.", "de": "Schau dir die Einflussfaktoren an, damit du nützliche Infos für die nächsten Versuche sammelst."}
+    },
+    "5feee0d2-d777-41cf-a17b-4a10cdba7c30": {
+      "question_text": {"en": "Why does having an interesting life help attraction?", "de": "Warum hilft dir ein interessantes Leben bei der Anziehung?"},
+      "options": {"en": ["Own gravity—people are naturally drawn to you", "Conversation material that flows naturally", "Both of the above"], "de": ["Eigene Anziehungskraft: Menschen fühlen sich ganz natürlich zu dir hingezogen", "Gesprächsstoff, der ganz natürlich fließt", "Beides"]},
+      "explanation": {"en": "An interesting life produces real experiences that draw people in naturally.", "de": "Ein interessantes Leben bringt echte Erlebnisse hervor, und die ziehen Menschen ganz natürlich an."}
+    },
+    "609555df-ed41-4234-bb64-85b739483e7a": {
+      "question_text": {"en": "Activities that create regular exposure to new people?", "de": "Welche Aktivitäten bringen dich regelmäßig mit neuen Leuten zusammen?"},
+      "options": {"en": ["Group fitness classes with consistent schedule", "Working from coffee shops instead of home", "Hobby clubs that meet regularly running, cooking, etc.", "All of the above"], "de": ["Fitnesskurse in der Gruppe mit festen Zeiten", "Im Café arbeiten statt zu Hause", "Hobbygruppen, die sich regelmäßig treffen, etwa zum Laufen oder Kochen", "Alle oben genannten"]},
+      "explanation": {"en": "Volume through deliberate exposure allows possibilities to emerge.", "de": "Wenn du dich bewusst oft unter Leute begibst, entstehen Möglichkeiten."}
+    },
+    "63f71c1b-3eab-460c-91fa-a52c22044efb": {
+      "question_text": {"en": "What signals that a man has a life beyond work?", "de": "Woran merkt man, dass ein Mann ein Leben jenseits der Arbeit hat?"},
+      "options": {"en": ["He references current learning or projects", "He speaks with curiosity about the world", "He avoids talking about himself", "He has stories from a life well lived"], "de": ["Er erwähnt, was er gerade lernt oder woran er arbeitet", "Er spricht neugierig über die Welt", "Er vermeidet es, über sich zu reden", "Er hat Geschichten aus einem erfüllten Leben"]},
+      "explanation": {"en": "Lived experiences show up naturally in how someone speaks.", "de": "Gelebte Erfahrungen zeigen sich ganz natürlich daran, wie jemand redet."}
+    },
+    "6cbe70b0-30ea-4012-9096-6f2a5efad2ed": {
+      "question_text": {"en": "Why is social status a powerful initial attraction cue?", "de": "Warum ist sozialer Status am Anfang ein so starkes Signal für Anziehung?"},
+      "options": {"en": ["It shows wealth or fame directly", "Others' positive responses signal you are enjoyable", "People trust group agreement on desirability"], "de": ["Er zeigt direkt Reichtum oder Berühmtheit", "Die positiven Reaktionen anderer zeigen, dass man gern mit dir Zeit verbringt", "Menschen vertrauen darauf, was die Gruppe attraktiv findet"]},
+      "explanation": {"en": "Status reflects how the environment values you, influencing receptiveness.", "de": "Status zeigt, wie dein Umfeld dich schätzt, und das beeinflusst, wie offen sie für dich ist."}
+    },
+    "79d8a1ab-f362-4b54-96da-46e704c946f6": {
+      "question_text": {"en": "Which signals lower perceived social status in a venue?", "de": "Welche Signale senken in einer Location deinen wahrgenommenen sozialen Status?"},
+      "options": {"en": ["Hovering on the edges of the room", "Being warmly greeted by multiple people", "Forced or abrupt approaches", "Visible comfort in the space"], "de": ["Am Rand des Raums herumstehen", "Von mehreren Leuten herzlich begrüßt werden", "Erzwungene oder abrupte Ansprachen", "Sichtbar wohl in der Umgebung sein"]},
+      "explanation": {"en": "Awkward positioning and forced engagement suggest low integration in the space.", "de": "Ein ungünstiger Platz und erzwungene Kontakte zeigen, dass du nicht richtig dazugehörst."}
+    },
+    "835a240c-8530-4ebc-a1a2-6750a3953290": {
+      "question_text": {"en": "You’re good at making people feel heard. What could you emphasize?", "de": "Du kannst Menschen gut das Gefühl geben, gehört zu werden. Worauf könntest du setzen?"},
+      "options": {"en": ["High-energy banter", "Loud storytelling", "Direct bold compliments", "Deep questions and active listening"], "de": ["Energiegeladenen Schlagabtausch", "Lautes Geschichtenerzählen", "Direkte, mutige Komplimente", "Tiefe Fragen und aktives Zuhören"]},
+      "explanation": {"en": "Use your natural strength to build rapport authentically.", "de": "Nutz deine natürliche Stärke, um auf echte Weise eine Verbindung aufzubauen."}
+    },
+    "929ddae6-c1d3-4185-b3f1-b34b2eb34346": {
+      "question_text": {"en": "You’re naturally intense and direct. What flirting style fits you best?", "de": "Du bist von Natur aus intensiv und direkt. Welcher Flirtstil passt am besten zu dir?"},
+      "options": {"en": ["Light banter and silly jokes", "Strong eye contact with calculated words and pauses", "Long stories and indirect hints", "Overly polite agreement"], "de": ["Lockerer Schlagabtausch und alberne Witze", "Starker Blickkontakt mit gezielten Worten und Pausen", "Lange Geschichten und indirekte Andeutungen", "Übertrieben höfliche Zustimmung"]},
+      "explanation": {"en": "Express principles through your natural personality for authentic connection.", "de": "Setz die Prinzipien mit deiner eigenen Persönlichkeit um, dann entsteht echte Verbindung."}
+    },
+    "95566af1-be99-4506-bdd8-59bc1224aa22": {
+      "question_text": {"en": "What does staying consistent primarily protect you from?", "de": "Wovor schützt dich Dranbleiben vor allem?"},
+      "options": {"en": ["Lack of motivation", "Skill plateaus", "Anxiety rebuilding and avoidance entrenching", "Social rejection"], "de": ["Vor fehlender Motivation", "Vor einem Plateau", "Davor, dass die Angst zurückkommt und sich Vermeidung festsetzt", "Vor sozialer Ablehnung"]},
+      "explanation": {"en": "Regular practice protects gains and prevents skill decay. Stay consistent.", "de": "Regelmäßiges Üben sichert deine Fortschritte und verhindert, dass Fähigkeiten verkümmern. Bleib dran."}
+    },
+    "971392d7-a116-4cf8-b454-2526464b795a": {
+      "question_text": {"en": "Why does volume reduce approach anxiety over time?", "de": "Warum macht häufiges Ansprechen dich mit der Zeit weniger nervös?"},
+      "options": {"en": ["The nervous system adapts to familiarity", "It teaches the body through habituation that it's safe", "Repeated exposure lowers the threat response", "All of the above"], "de": ["Das Nervensystem gewöhnt sich an Vertrautes", "Durch Gewöhnung lernt der Körper, dass es sicher ist", "Wiederholte Konfrontation schwächt die Bedrohungsreaktion", "Alle oben genannten"]},
+      "explanation": {"en": "Consistent reps desensitize fear through experience.", "de": "Regelmäßige Wiederholung baut die Angst durch Erfahrung ab."}
+    },
+    "98fd5abd-0203-4c21-bbff-f869372f2335": {
+      "question_text": {"en": "What signals high social status in an environment?", "de": "Was signalisiert in einer Umgebung hohen sozialen Status?"},
+      "options": {"en": ["People seek you out and include you in conversations", "Others speak to you with warmth and enjoyment", "You move through the space with comfort not awkwardness", "All of the above"], "de": ["Leute suchen deine Nähe und beziehen dich in Gespräche ein", "Andere reden herzlich und gern mit dir", "Du bewegst dich entspannt durch den Raum, nicht unbeholfen", "Alle oben genannten"]},
+      "explanation": {"en": "High status shows through ease, inclusion, and how others respond to you naturally.", "de": "Hoher Status zeigt sich an Leichtigkeit, daran, dass du einbezogen wirst, und daran, wie andere ganz natürlich auf dich reagieren."}
+    },
+    "99d720d0-bfa1-45ff-a43b-49f9f15f631e": {
+      "question_text": {"en": "Why does consistency make approaching feel easier over time?", "de": "Warum fühlt sich Ansprechen mit der Zeit leichter an, wenn du dranbleibst?"},
+      "options": {"en": ["Neural pathways become more efficient", "The brain categorizes the behavior as normal", "Fear is eliminated through logic"], "de": ["Die Nervenbahnen werden effizienter", "Das Gehirn stuft das Verhalten als normal ein", "Logik beseitigt die Angst"]},
+      "explanation": {"en": "Repetition strengthens neural pathways and shifts identity, reducing effort.", "de": "Wiederholung stärkt die Nervenbahnen und verändert dein Selbstbild, und es kostet weniger Mühe."}
+    },
+    "afbf1b2d-da55-4722-9e2b-7044a65e1227": {
+      "question_text": {"en": "You only approach on weekends in high-pressure settings. What does this risk?", "de": "Du sprichst nur am Wochenende an, in Situationen mit viel Druck. Was riskierst du damit?"},
+      "options": {"en": ["Faster habituation from intensity", "Immediate anxiety reduction", "Building strong skills quickly", "Slow progress due to infrequent exposure"], "de": ["Schnellere Gewöhnung durch die Intensität", "Sofort weniger Nervosität", "Schnell starke Fähigkeiten aufzubauen", "Langsamen Fortschritt, weil du dich zu selten der Situation stellst"]},
+      "explanation": {"en": "Rare reps keep the stimulus unfamiliar, prolonging high anxiety.", "de": "Seltene Wiederholungen halten die Situation fremd, und die Nervosität bleibt länger hoch."}
+    },
+    "b1dad7ff-1e71-4b22-b734-b1ca8f1c8973": {
+      "question_text": {"en": "Which signs suggest a social circle is limiting your growth?", "de": "Woran merkst du, dass dein Freundeskreis dich in deiner Entwicklung bremst?"},
+      "options": {"en": ["Mocking efforts to meet new people", "Avoiding social environments consistently", "Encouraging comfort over action", "Supporting small risks you take"], "de": ["Sie machen sich über deine Versuche lustig, neue Leute kennenzulernen", "Sie meiden ständig soziale Situationen", "Sie ermutigen eher zur Bequemlichkeit als zum Handeln", "Sie unterstützen kleine Risiken, die du eingehst"]},
+      "explanation": {"en": "Circles that normalize avoidance quietly shrink confidence.", "de": "Ein Umfeld, in dem Ausweichen normal ist, lässt dein Selbstbewusstsein still und leise schrumpfen."}
+    },
+    "b72f662b-1295-4658-bb7a-cf26f14aea82": {
+      "question_text": {"en": "How can you build status?", "de": "Wie kannst du Status aufbauen?"},
+      "options": {"en": ["Engage naturally with people in the room", "Move through the space with comfort", "Join conversations and add value", "Isolate yourself to seem mysterious"], "de": ["Ganz natürlich mit den Leuten im Raum ins Gespräch kommen", "Dich entspannt durch den Raum bewegen", "Bei Gesprächen mitmachen und etwas beitragen", "Dich absondern, um geheimnisvoll zu wirken"]},
+      "explanation": {"en": "Genuine social engagement creates proof others enjoy your presence.", "de": "Echtes Engagement im Miteinander zeigt, dass andere gern Zeit mit dir verbringen."}
+    },
+    "bfac329b-b9e4-4dbf-9045-786f91c69c40": {
+      "question_text": {"en": "You’re naturally warm and empathetic. What flirting style fits you best?", "de": "Du bist von Natur aus warmherzig und einfühlsam. Welcher Flirtstil passt am besten zu dir?"},
+      "options": {"en": ["Deep, curious questions that show genuine interest", "Aggressive bold statements", "Loud energy and rapid teasing", "Avoiding any personal topics"], "de": ["Tiefe, neugierige Fragen, die echtes Interesse zeigen", "Aggressive, mutige Sprüche", "Laute Energie und schnelles Necken", "Persönliche Themen ganz vermeiden"]},
+      "explanation": {"en": "Express principles through your natural personality for authentic connection.", "de": "Setz die Prinzipien mit deiner eigenen Persönlichkeit um, dann entsteht echte Verbindung."}
+    },
+    "c3ffa6e0-05e2-488d-a7f5-392b781d19f9": {
+      "question_text": {"en": "You prefer staying home because it feels easier. What is the hidden cost?", "de": "Du bleibst lieber zu Hause, weil es leichter ist. Was ist der versteckte Preis?"},
+      "options": {"en": ["Fewer chances for connection", "Reduced productivity", "Lost energy", "Lower standards"], "de": ["Weniger Chancen, Leute kennenzulernen", "Weniger Produktivität", "Verlorene Energie", "Niedrigere Ansprüche"]},
+      "explanation": {"en": "Comfort trades short-term ease for long-term isolation.", "de": "Bequemlichkeit tauscht kurzfristige Leichtigkeit gegen langfristige Isolation."}
+    },
+    "d089015f-4147-45d7-a8b2-91b48d80f944": {
+      "question_text": {"en": "Why doesn’t studying specific techniques resolve approach anxiety?", "de": "Warum hilft es nicht gegen die Nervosität beim Ansprechen, bestimmte Techniken zu lernen?"},
+      "options": {"en": ["Techniques don’t work", "Anxiety is irrational", "Knowledge is inaccessible when the nervous system is in threat mode", "Confidence can’t be learned"], "de": ["Techniken funktionieren nicht", "Nervosität ist irrational", "Im Alarmzustand des Nervensystems kommst du an dein Wissen nicht heran", "Selbstbewusstsein kann man nicht lernen"]},
+      "explanation": {"en": "Anxiety fades through repeated safe exposure, not thinking or preparation.", "de": "Nervosität verschwindet, wenn du dich immer wieder sicheren Situationen stellst, nicht durch Nachdenken oder Vorbereitung."}
+    },
+    "d5674fd6-bd0f-4780-bb0b-5afca3a759d9": {
+      "question_text": {"en": "What is the primary goal of creating more chances to connect?", "de": "Was ist das Hauptziel, wenn du mehr Gelegenheiten schaffst, Leute kennenzulernen?"},
+      "options": {"en": ["Force every outing to result in a date", "Build consistent exposure to new people", "Increase volume so opportunities arise naturally"], "de": ["Erzwingen, dass jedes Ausgehen zu einem Date führt", "Regelmäßig mit neuen Leuten in Kontakt kommen", "Öfter unter Leute gehen, damit sich ganz natürlich Gelegenheiten ergeben"]},
+      "explanation": {"en": "Volume through deliberate exposure allows possibilities to emerge.", "de": "Wenn du dich bewusst oft unter Leute begibst, entstehen Möglichkeiten."}
+    },
+    "d8b68638-1540-4aa1-a96a-3d316ea102b3": {
+      "question_text": {"en": "How does your social circle help in approaching and connecting?", "de": "Wie hilft dir dein Freundeskreis beim Ansprechen und Kennenlernen?"},
+      "options": {"en": ["Friends can provide encouragement for action", "Your environment can make being courageous easier", "Your friends can provide you with opportunities to meet new people", "All of the above"], "de": ["Freunde können dich ermutigen zu handeln", "Dein Umfeld kann es leichter machen, mutig zu sein", "Deine Freunde können dir Gelegenheiten verschaffen, neue Leute kennenzulernen", "Alle oben genannten"]},
+      "explanation": {"en": "Your environment either encourages growth or reinforces hesitation.", "de": "Dein Umfeld fördert entweder deine Entwicklung oder bestärkt dein Zögern."}
+    },
+    "db1590aa-6103-4532-bff1-7bcf8930cfef": {
+      "question_text": {"en": "Which behaviors preserve mystery in conversation?", "de": "Welches Verhalten bewahrt im Gespräch etwas Geheimnisvolles?"},
+      "options": {"en": ["Answering questions without over-explaining", "Sharing everything early to be transparent", "Revealing depth gradually", "Leaving space for follow-up questions"], "de": ["Fragen beantworten, ohne zu viel zu erklären", "Früh alles erzählen, um offen zu sein", "Tiefe nach und nach zeigen", "Raum für Nachfragen lassen"]},
+      "explanation": {"en": "Mystery is about pacing, not withholding or evasion.", "de": "Bei etwas Geheimnisvollem geht es ums Tempo, nicht ums Verschweigen oder Ausweichen."}
+    },
+    "db1e61cd-85f6-4787-a686-1e10e72ffe10": {
+      "question_text": {"en": "Which lifestyle elements naturally make conversations easier and more engaging?", "de": "Was in deinem Leben macht Gespräche ganz natürlich leichter und spannender?"},
+      "options": {"en": ["Ongoing hobbies or skills", "Curiosity about new experiences", "Waiting for the right person to add excitement", "Projects you’re actively working toward"], "de": ["Hobbys oder Fähigkeiten, an denen du dranbleibst", "Neugier auf neue Erfahrungen", "Darauf warten, dass die richtige Person Spannung in dein Leben bringt", "Projekte, an denen du aktiv arbeitest"]},
+      "explanation": {"en": "An interesting life creates conversational material without effort.", "de": "Ein interessantes Leben liefert mühelos Gesprächsstoff."}
+    },
+    "dda0749c-c9ba-4e4a-affe-2eb786b6ec12": {
+      "question_text": {"en": "Why is an interesting life attractive beyond surface charm?", "de": "Warum ist ein interessantes Leben mehr als nur oberflächlicher Charme?"},
+      "options": {"en": ["It provides genuine stories and material for conversation", "It shows you have a world independent of relationships", "It relies solely on impressive achievements"], "de": ["Es liefert echte Geschichten und Gesprächsstoff", "Es zeigt, dass du eine eigene Welt hast, unabhängig von Beziehungen", "Es beruht allein auf beeindruckenden Leistungen"]},
+      "explanation": {"en": "An interesting life produces real experiences that draw people in naturally.", "de": "Ein interessantes Leben bringt echte Erlebnisse hervor, und die ziehen Menschen ganz natürlich an."}
+    },
+    "e2c71b43-3067-41f1-9745-de39c9164feb": {
+      "question_text": {"en": "You’re naturally funny. What flirting style fits you best?", "de": "Du bist von Natur aus witzig. Welcher Flirtstil passt am besten zu dir?"},
+      "options": {"en": ["Incorporate humor and playful teasing", "Use intense eye contact and pauses", "Make bold direct statements", "Stay completely serious"], "de": ["Humor und verspieltes Necken einbauen", "Intensiven Blickkontakt und Pausen einsetzen", "Mutige, direkte Sprüche machen", "Komplett ernst bleiben"]},
+      "explanation": {"en": "Leverage your humor strength to express tension in your own way.", "de": "Nutz die Stärke deines Humors, um auf deine eigene Art Spannung zu erzeugen."}
+    },
+    "e310c934-f43c-49b6-b568-70a8a9baf70c": {
+      "question_text": {"en": "Which outcomes still count as progress under an experimental mindset?", "de": "Welche Ergebnisse zählen mit der Haltung des Experimentierens trotzdem als Fortschritt?"},
+      "options": {"en": ["Clear rejection", "Neutral response", "Short conversation", "All of the above"], "de": ["Eine klare Abfuhr", "Eine neutrale Reaktion", "Ein kurzes Gespräch", "Alle oben genannten"]},
+      "explanation": {"en": "As long as you extract a lesson, the encounter was successful.", "de": "Solange du etwas daraus lernst, war die Begegnung ein Erfolg."}
+    },
+    "e3d69b71-e0dd-4f11-b25f-ecc126cd2696": {
+      "question_text": {"en": "An approach ends quickly with little engagement. What should you focus on afterwards?", "de": "Ein Ansprechen endet schnell, und sie war kaum dabei. Worauf solltest du dich danach konzentrieren?"},
+      "options": {"en": ["How it proves you’re not good enough", "Avoiding similar situations", "What variables timing, energy, opener you can test differently", "Needing immediate success next time"], "de": ["Darauf, dass es beweist, dass du nicht gut genug bist", "Ähnliche Situationen zu vermeiden", "Welche Faktoren du anders testen kannst: Timing, Energie, Opener", "Darauf, dass es nächstes Mal sofort klappen muss"]},
+      "explanation": {"en": "Analyze variables to gather useful information for future tests.", "de": "Schau dir die Einflussfaktoren an, damit du nützliche Infos für die nächsten Versuche sammelst."}
+    },
+    "f3ef742e-f78a-42cd-a813-76571d61bce5": {
+      "question_text": {"en": "Why does mystery increase attraction?", "de": "Warum steigert etwas Geheimnisvolles die Anziehung?"},
+      "options": {"en": ["It makes you seem unavailable", "It gives her imagination something to work with", "It hides insecurity", "It prevents emotional connection"], "de": ["Du wirkst dadurch unerreichbar", "Ihre Fantasie bekommt etwas zum Arbeiten", "Es versteckt Unsicherheit", "Es verhindert emotionale Verbindung"]},
+      "explanation": {"en": "Curiosity is driven by incomplete information. Mystery keeps her mentally engaged.", "de": "Neugier entsteht durch unvollständige Informationen. Etwas Geheimnisvolles hält sie gedanklich dabei."}
     }
   }
 }
