@@ -2,22 +2,19 @@
 
 Branch `localization-release-b`. Rules and glossary: [localization-de-brief.md](localization-de-brief.md). Plan: section 7 of [localization-implementation-plan.md](localization-implementation-plan.md). Everything here is a machine draft (Claude), marked "needs review"; nothing is applied to the live database.
 
-## Where it stands (loop stopped 2026-11-11, about 02:20)
+## Where it stands (loop finished 2026-11-11, about 13:55)
 
-**Done:** the whole interface (574 catalog strings) and all 25 lesson courses (1,531 items, about 34,000 English words) are drafted in German, each passing its checker, with 298 unit tests green and every German lesson file loading in the app. All of it is a machine draft marked "needs review".
-
-**Blocked:** quiz questions and scenarios (G4, about 42,000 words). The Supabase connector reaches **Clera-App** (`rdgtvavltiqmwfzcadcv`), not Wingman-App (`bnckmgnysfliiypvxxii`), so the English rows and their IDs could not be read. Nothing was written to any database. The repo's `Wingman/Lesson/lesson_questions_seed.json` holds only the end-of-lesson questions as a cold-start copy, and may be stale, so it was not used to guess live IDs.
+**Done, all as a machine draft marked "needs review":** the whole interface (574 catalog strings), all 25 lesson courses (1,531 items) and all database content: 15 of 15 scenarios (796 text screens, 276 options) and 765 of 765 quiz questions, matched against the live DB ids. German DB content is in `localization/de/db/` (source JSON) and `supabase/seed/content_translations_de/` (24 upsert files, **not run**). Every checker passes: catalogs, lesson overlays, and the DB translation generator. The open content questions were resolved on 2026-11-11 in English and German together; see "Questions for Arthur" below.
 
 **What needs Arthur, in order:**
-1. **Point the Supabase connector at Wingman-App**, then restart the loop with the same prompt. It will pick up at G4.
-2. **Decide on the content flags below** (touch and escalation wording in 20_4, 21_2 and 25_3; the tone of 21_1, 11_5 and 15_4) and fix the English typos. The same edits then go into the German.
-3. **Native-speaker review** of everything, starting with the paywall, the sign-in legal line and onboarding (see the brief). Then re-import with `--reviewed`.
-4. **Apply the content-translation migration**, on a branch first (the checks are at the bottom of the migration file), and then the German rows once G4 exists.
-5. **App Store listing in German** (G9): name, subtitle, keywords, description, screenshots, subscription display names.
-6. **German auth email templates** (G10) in the Supabase dashboard.
-7. **A German screenshot sweep that also opens lessons** (one prod guest user per run), on the SE.
+1. **Native-speaker review** of everything: interface first (paywall, the sign-in legal line, onboarding; see the brief), then lessons, then quiz and scenarios. Then re-import the catalogs with `--reviewed`.
+2. **Apply the content-translation migration** (`supabase/migrations/20261110000000_content_translations.sql`) on a Supabase branch first; the checks are at the bottom of the file. Then run **`supabase/seed/content_fixes_en/2026-11-11_content_fixes.sql`** (42 guarded English fixes), then the 24 files in `supabase/seed/content_translations_de/`. Then production, in the same order. The German assumes the fixed English.
+3. **App Store listing in German** (G9): name, subtitle, keywords, description, screenshots, subscription display names.
+4. **German auth email templates** (G10) in the Supabase dashboard.
+5. **A German screenshot sweep that also opens lessons, a quiz and a scenario** (one prod guest user per run) on the SE, after step 2, to check layout with real German content.
+6. **Smaller items:** decide whether to delete one of the duplicate Japan quiz questions (`4533a8d2…` / `58d8c403…`). The English lesson fixes (12_3, 13_1, 15_4, 20_4, 21_1, 21_2, 25_3, 11_5, typos) live only on this branch, so English users get them only when Release B ships unless they are cherry-picked earlier.
 
-Until 1 and 4 are done, a German phone shows German interface and lessons, but English quizzes and scenarios. Don't ship this branch in that state.
+Until step 2 is done, a German phone shows a German interface and lessons but English quizzes and scenarios. Don't ship this branch in that state.
 
 ## Summary
 
