@@ -25,7 +25,7 @@ Until 1 and 4 are done, a German phone shows German interface and lessons, but E
 |---|---|
 | UI catalogs (G2) | 574 of 574 strings drafted (2026-11-10) |
 | Lesson overlays (G3) | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-11). All 25 files load in the app (298 unit tests pass) |
-| Database content (G4) | 15 of 15 scenarios; 153 of 765 questions |
+| Database content (G4) | 15 of 15 scenarios; 197 of 765 questions |
 | German sweep (G7) | Onboarding and tabs on SE, 2026-11-11: no clipping. Lessons not yet seen in German |
 
 Lesson order followed: the first course of each category before the second (1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, …), the order the app's file names give.
@@ -79,6 +79,7 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **2026-11-11. Questions 1–55** (mindset_foundations, lessons 1_1 to 5_2; about 2,400 words with options and explanations). Terms follow the course 1–5 overlays: *Erdung*, *Selbstbeobachtung*, *Wachstumsdenken*, *unabhängig vom Ergebnis*, *Körperpflege*, *Bestätigung*. "Approach" became *ansprechen*; "frame" became *Haltung*. For the reviewer: the options keep the English lengths roughly balanced, so the correct answer is not given away by length. "All of the above" became *Alle oben genannten*, and "Both of the above" became *Beides*.
 - **2026-11-11. Questions 56–109** (the rest of mindset_foundations: lessons 5_3 and 5_4, plus 50 module-pool questions with no lesson; about 2,300 words). `questions_01_mindset_foundations` is complete, with 109 rows. For the reviewer: the quoted self-talk options use German quotes „…“. "venue" became *Location*; "Speak on an exhale" became *beim Ausatmen sprechen*. `b400f47c…` "reduce self-interruption" is vague in English, so the German *dich weniger selbst unterbrechen* keeps it literal; a native reviewer may find a better phrasing.
 - **2026-11-11. Questions 110–153** (approach_mechanics rows 1–44: lessons 10_1 to 7_3 in text sort order, so 10 and 11 come before 6 and 7; about 1,900 words). This starts `questions_02_approach_mechanics_1`, which will hold rows 1–88. Rows are now fetched 44 at a time, so each file of 88 takes two iterations. Terms follow the course 6, 7, 10 and 11 overlays: *Opener*, *Neugier-Opener*, *Opener mit einer Vermutung*, *Zeitlimit*, *vorgetäuschter Abgang*, *Drei-Sekunden-Regel*. "Calibrated" became *fein abgestimmt*, and "calibration" became *Feingefühl*. "Target" (the woman) is rephrased as *die Frau, die dich interessiert*, because *Ziel* sounds objectifying in German. For the reviewer: `9e84223a…` has options that complete the sentence "…funktioniert, weil:", so they start in lower case.
+- **2026-11-11. Questions 154–197** (approach_mechanics rows 45–88: lessons 7_3 to 9_3, then the first 19 module-pool questions; about 1,900 words). `questions_02_approach_mechanics_1` is complete, with 88 rows. Terms follow the course 8 and 9 overlays: *indirekter / direkter Opener*, "frame" as *Rahmen* ("frame control" as *den Rahmen setzen*), and the three signal types *offen / höflich / kühl*. For the reviewer: `08850c3a…` asks "Your move?" but the options are signal readings, so the German asks *Wie liest du das?*. `06c68907…` ("activating evaluation mode") is paraphrased as *wenn sie dich … sofort einschätzen muss*.
 
 ## Questions for Arthur
 

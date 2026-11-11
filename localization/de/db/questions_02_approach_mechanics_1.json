@@ -219,6 +219,226 @@
       "question_text": {"en": "You're walking toward her with jerky, hesitant steps. Best move?", "de": "Du gehst mit ruckartigen, zögerlichen Schritten auf sie zu. Was tust du am besten?"},
       "options": {"en": ["Slow your pace, relax shoulders, steady yourself before closing distance", "Stop where you are and call out to her instead", "Maintain current movement to show authenticity and honesty"], "de": ["Langsamer gehen, die Schultern lockern und dich sammeln, bevor du näher kommst", "Stehen bleiben und ihr stattdessen etwas zurufen", "So weitergehen, um Echtheit und Ehrlichkeit zu zeigen"]},
       "explanation": {"en": "Relaxed movement communicates safety, making the interaction feel easier for her.", "de": "Entspannte Bewegungen vermitteln Sicherheit, und das Gespräch fällt ihr leichter."}
+    },
+    "bdb5e4d4-24f8-4710-a0ac-91194b2f10a8": {
+      "question_text": {"en": "Which movements reduce discomfort during your approach?", "de": "Welche Bewegungen machen deine Ansprache angenehmer?"},
+      "options": {"en": ["Steady pace", "Casual eye awareness", "Locked shoulders", "Upright posture"], "de": ["Gleichmäßiges Tempo", "Lockerer Blickkontakt", "Verkrampfte Schultern", "Aufrechte Haltung"]},
+      "explanation": {"en": "Relaxed movement communicates safety, making the interaction feel easier for her.", "de": "Entspannte Bewegungen vermitteln Sicherheit, und das Gespräch fällt ihr leichter."}
+    },
+    "7bc72d1b-23c3-4183-b696-a4c0d69085b0": {
+      "question_text": {"en": "Why does a small smile with eye contact before approaching help?", "de": "Warum hilft ein kleines Lächeln mit Blickkontakt, bevor du sie ansprichst?"},
+      "options": {"en": ["It signals friendly intent and gives her time to assess safety", "It builds attraction before you've even spoken to her", "It creates anticipation and makes her more invested"], "de": ["Es zeigt eine freundliche Absicht und gibt ihr Zeit einzuschätzen, ob du harmlos bist", "Es baut Anziehung auf, noch bevor du mit ihr gesprochen hast", "Es weckt Vorfreude und macht sie interessierter"]},
+      "explanation": {"en": "A small smile signals friendliness, while eye contact lets her register you calmly.", "de": "Ein kleines Lächeln signalisiert Freundlichkeit, und durch den Blickkontakt kann sie dich in Ruhe wahrnehmen."}
+    },
+    "48a8252e-7d72-4d16-ac74-c694f14bde94": {
+      "question_text": {"en": "You make eye contact from across the room. She looks away quickly. Best response?", "de": "Ihr habt quer durch den Raum Blickkontakt. Sie schaut schnell weg. Beste Reaktion?"},
+      "options": {"en": ["Still approach; a quick look-away is often automatic, not rejection", "Wait for her to look back before approaching to confirm interest", "Skip the approach since she signalled disinterest clearly"], "de": ["Trotzdem ansprechen: Schnelles Wegschauen ist oft ein Reflex, keine Ablehnung", "Warten, bis sie wieder herschaut, um sicher zu sein, dass sie Interesse hat", "Es lassen, weil sie klar Desinteresse gezeigt hat"]},
+      "explanation": {"en": "Quick look-away is often automatic, not conscious rejection; Approach anyway.", "de": "Schnelles Wegschauen ist oft ein Reflex, keine bewusste Ablehnung. Sprich sie trotzdem an."}
+    },
+    "42ba6d8b-fdaa-43b8-8fda-ad92c655df6e": {
+      "question_text": {"en": "Why does warm early eye contact improve first impressions?", "de": "Warum verbessert früher, warmer Blickkontakt den ersten Eindruck?"},
+      "options": {"en": ["It catches her off guard for stronger impact", "It gives her time for preliminary safety assessment", "It prevents surprise that triggers defensiveness", "It communicates friendly intent before arrival"], "de": ["Er überrumpelt sie und wirkt dadurch stärker", "Er gibt ihr Zeit für eine erste Einschätzung, ob du harmlos bist", "Er verhindert einen Schreckmoment, der sie abwehrend macht", "Er zeigt eine freundliche Absicht, bevor du bei ihr bist"]},
+      "explanation": {"en": "Visibility and warmth make the approach feel safe, not abrupt.", "de": "Wenn sie dich kommen sieht und du warm wirkst, fühlt sich die Ansprache sicher an statt abrupt."}
+    },
+    "9cbb1c37-1c29-4754-8d5f-f95600cf8b0a": {
+      "question_text": {"en": "Why do indirect openers reduce pressure in the approach for her?", "de": "Warum nehmen indirekte Opener für sie Druck aus der Ansprache?"},
+      "options": {"en": ["They feel like normal conversation", "They avoid attraction", "They make her attracted to you easier"], "de": ["Sie fühlen sich wie ein normales Gespräch an", "Sie vermeiden Anziehung", "Sie machen es leichter, dass sie sich zu dir hingezogen fühlt"]},
+      "explanation": {"en": "Indirect openers feel ordinary and natural, which lowers pressure for both people.", "de": "Indirekte Opener wirken alltäglich und natürlich, und das senkt den Druck für euch beide."}
+    },
+    "9d2e1560-b720-4464-8836-db55cf007d4a": {
+      "question_text": {"en": "You’re seated next to her at a café. What is an indirect opener you can use?", "de": "Im Café sitzt du neben ihr. Welchen indirekten Opener kannst du nutzen?"},
+      "options": {"en": ["Ask if she’s been here before and what’s good", "Compliment her appearance", "Ask if she’s single"], "de": ["Fragen, ob sie schon mal hier war und was gut ist", "Ihr Aussehen loben", "Fragen, ob sie Single ist"]},
+      "explanation": {"en": "Indirect openers feel ordinary and natural, which lowers pressure for both people.", "de": "Indirekte Opener wirken alltäglich und natürlich, und das senkt den Druck für euch beide."}
+    },
+    "5033dee2-a2a9-45d9-b214-0035a1ff5a9f": {
+      "question_text": {"en": "You're both waiting for a delayed train. What are some indirect openers?", "de": "Ihr wartet beide auf einen verspäteten Zug. Welche indirekten Opener gibt es?"},
+      "options": {"en": ["Compliment something she's wearing", "Ask if she knows when the train is coming", "Introduce yourself and ask her name", "Comment on the delay"], "de": ["Etwas loben, das sie trägt", "Fragen, ob sie weiß, wann der Zug kommt", "Dich vorstellen und nach ihrem Namen fragen", "Etwas zur Verspätung sagen"]},
+      "explanation": {"en": "Shared context makes the entry feel expected and easy to engage with.", "de": "Eine gemeinsame Situation lässt den Einstieg naheliegend wirken, und es fällt leicht, darauf einzugehen."}
+    },
+    "73629f15-ce28-4413-a2af-85b0b03c1ef2": {
+      "question_text": {"en": "What is a direct intent opener?", "de": "Was ist ein direkter Opener?"},
+      "options": {"en": ["Starting with light conversation to test comfort", "Using neutral small talk to build rapport", "Clearly stating attraction or romantic intent upfront"], "de": ["Mit einem lockeren Gespräch anfangen, um zu testen, wie wohl sie sich fühlt", "Mit neutralem Smalltalk eine Verbindung aufbauen", "Gleich zu Beginn klar sagen, dass du sie attraktiv findest oder romantisches Interesse hast"]},
+      "explanation": {"en": "Direct openers remove ambiguity by stating intent upfront. She knows why you are there.", "de": "Direkte Opener räumen Unklarheit aus, weil du deine Absicht gleich sagst. Sie weiß, warum du da bist."}
+    },
+    "adb1f5a5-29e7-4c3b-88a1-33da91269c81": {
+      "question_text": {"en": "You see her at a bar and want clarity fast. Best opener?", "de": "Du siehst sie in einer Bar und willst schnell Klarheit. Bester Opener?"},
+      "options": {"en": ["Comment on the venue", "Ask if she comes here often", "Joke about the crowd", "Say you wanted to meet her"], "de": ["Etwas über die Location sagen", "Fragen, ob sie oft hier ist", "Einen Witz über die Leute machen", "Sagen, dass du sie kennenlernen wolltest"]},
+      "explanation": {"en": "Being direct eliminates guessing and gets straight to intent.", "de": "Direkt zu sein erspart das Rätselraten und kommt gleich zur Sache."}
+    },
+    "b6195146-f317-46e7-b387-626cd480fe2b": {
+      "question_text": {"en": "Club. Loud music. What makes a direct opener work here?", "de": "Club. Laute Musik. Was lässt einen direkten Opener hier funktionieren?"},
+      "options": {"en": ["Calm, confident delivery without seeking permission", "Apologizing for interrupting her and her friends", "Steady eye contact and relaxed body language"], "de": ["Ruhig und selbstbewusst rüberbringen, ohne um Erlaubnis zu fragen", "Dich entschuldigen, dass du sie und ihre Freundinnen störst", "Ruhiger Blickkontakt und entspannte Körpersprache"]},
+      "explanation": {"en": "Direct openers lose strength when framed with apology instead of confidence.", "de": "Direkte Opener verlieren an Kraft, wenn du dich entschuldigst, statt selbstbewusst aufzutreten."}
+    },
+    "587818de-4443-410a-b2e6-4b7c30881359": {
+      "question_text": {"en": "What is frame control?", "de": "Was heißt es, den Rahmen zu setzen?"},
+      "options": {"en": ["Managing attraction signals", "Leading subject, pace, and energy", "Matching her mood", "Avoiding rejection"], "de": ["Signale der Anziehung steuern", "Thema, Tempo und Energie vorgeben", "Dich ihrer Stimmung anpassen", "Abfuhren vermeiden"]},
+      "explanation": {"en": "Frame control is leading the moment, not reacting to it.", "de": "Den Rahmen setzen heißt, den Moment zu führen, statt nur darauf zu reagieren."}
+    },
+    "6f2f6f50-a54c-4103-af26-fc4b7d7eb5a0": {
+      "question_text": {"en": "You approach her reading a book. Which opener shows belonging instead of intrusion?", "de": "Du sprichst sie an, während sie liest. Welcher Opener zeigt, dass du dazugehörst, statt zu stören?"},
+      "options": {"en": ["\"Sorry to interrupt, but what are you reading?\"", "\"Is that book any good? I've been thinking about reading it\"", "\"I don't mean to bother you, but I had to say hi\""], "de": ["„Sorry, dass ich störe, aber was liest du da?“", "„Ist das Buch gut? Ich überlege schon länger, es zu lesen.“", "„Ich will dich nicht nerven, aber ich musste kurz Hallo sagen.“"]},
+      "explanation": {"en": "Strong frame comes from confidence, not permission; open without apology.", "de": "Ein starker Rahmen kommt von Selbstbewusstsein, nicht von Erlaubnis. Steig ein, ohne dich zu entschuldigen."}
+    },
+    "90f24790-0a2d-429f-8aff-e70a5e1589ec": {
+      "question_text": {"en": "What makes an opener more interesting than what she was doing before?", "de": "Was macht einen Opener interessanter als das, was sie vorher gemacht hat?"},
+      "options": {"en": ["It's louder, bolder, or more energetic than her current environment", "It creates emotional hooks like curiosity, playfulness, or feeling valued", "It involves topics she's passionate about based on observation"], "de": ["Er ist lauter, mutiger oder energiegeladener als ihre Umgebung", "Er weckt Gefühle wie Neugier, Verspieltheit oder das Gefühl, geschätzt zu werden", "Er dreht sich um Themen, für die sie sich nach deiner Beobachtung begeistert"]},
+      "explanation": {"en": "Emotional hooks like playfulness and curiosity make frames compelling. Volume doesn't.", "de": "Gefühle wie Verspieltheit und Neugier machen einen Rahmen fesselnd. Lautstärke nicht."}
+    },
+    "2ecc4789-34ea-4c3f-a98b-9f7ded7e80ca": {
+      "question_text": {"en": "Why is matching your volume to the environment important?", "de": "Warum ist es wichtig, deine Lautstärke an die Umgebung anzupassen?"},
+      "options": {"en": ["To avoid shouting", "To prevent repetition", "To reduce interaction friction", "To sound attractive"], "de": ["Damit du nicht schreien musst", "Damit du dich nicht wiederholen musst", "Damit das Gespräch reibungsloser läuft", "Damit du attraktiv klingst"]},
+      "explanation": {"en": "Friction appears when volume is off; calibrate to keep things easy.", "de": "Reibung entsteht, wenn die Lautstärke nicht passt. Stimm sie ab, damit alles leicht bleibt."}
+    },
+    "e12bb639-9fd1-465e-9e08-5cdeb7ccd65f": {
+      "question_text": {"en": "She leans in and says “Sorry, what?” after your opener. Best move?", "de": "Nach deinem Opener lehnt sie sich vor und sagt: „Sorry, was?“ Was tust du am besten?"},
+      "options": {"en": ["Repeat the same line at the same volume", "Speak faster to get through the sentence", "Move closer into her space", "Adjust your volume and repeat calmly"], "de": ["Den Satz genauso laut wiederholen", "Schneller sprechen, um den Satz durchzukriegen", "Näher an sie heranrücken", "Deine Lautstärke anpassen und es ruhig wiederholen"]},
+      "explanation": {"en": "Adjust your volume to the environment. Calibration matters more than content.", "de": "Pass deine Lautstärke an die Umgebung an. Das Feingefühl zählt mehr als der Inhalt."}
+    },
+    "e173f101-7036-4046-854b-556473b41c8b": {
+      "question_text": {"en": "What creates friction in voice delivery?", "de": "Was sorgt beim Sprechen für Reibung?"},
+      "options": {"en": ["Speaking too quietly for the environment to hear clearly", "Using a deep, resonant tone in your voice", "Rushing through words without breathing", "Unclear articulation of words"], "de": ["So leise sprechen, dass man dich in der Umgebung nicht gut versteht", "Mit tiefer, voller Stimme sprechen", "Ohne Luft zu holen durch die Worte hetzen", "Undeutlich sprechen"]},
+      "explanation": {"en": "Friction comes from poor calibration; adjust volume, breathe, and speak clearly.", "de": "Reibung entsteht, wenn du dich nicht abstimmst. Pass die Lautstärke an, atme und sprich deutlich."}
+    },
+    "c3a6aa99-3aa6-471c-b81a-ea31d016cfb1": {
+      "question_text": {"en": "What behavior reflects genuine openness to interaction?", "de": "Welches Verhalten zeigt echte Offenheit für ein Gespräch?"},
+      "options": {"en": ["Smiling", "Neutral tone", "Asking questions back", "Responding to your questions"], "de": ["Lächeln", "Ein neutraler Tonfall", "Gegenfragen stellen", "Auf deine Fragen antworten"]},
+      "explanation": {"en": "Questions signal participation, not just politeness; treat this as a green light to continue.", "de": "Gegenfragen zeigen, dass sie wirklich dabei ist, nicht nur höflich. Nimm das als grünes Licht weiterzumachen."}
+    },
+    "100aee65-eee7-4907-899a-20d6b97820b1": {
+      "question_text": {"en": "What is the main purpose of reading early signals?", "de": "Wozu dient es vor allem, frühe Signale zu lesen?"},
+      "options": {"en": ["To escalate faster", "To avoid rejection", "To stay respectful", "To impress her"], "de": ["Um schneller weiterzugehen", "Um Abfuhren zu vermeiden", "Um respektvoll zu bleiben", "Um sie zu beeindrucken"]},
+      "explanation": {"en": "Her comfort comes first; use signals to decide when to continue or ease off.", "de": "Ihr Wohlgefühl kommt zuerst. Nutz die Signale, um zu entscheiden, ob du weitermachst oder dich zurücknimmst."}
+    },
+    "9745631b-e02b-44c5-8703-7cfda0ab734f": {
+      "question_text": {"en": "Which cues usually indicate politeness rather than receptivity?", "de": "Welche Signale deuten meist eher auf Höflichkeit als auf Offenheit hin?"},
+      "options": {"en": ["Brief smiles", "Short brief replies", "No questions back", "Pausing her activity"], "de": ["Ein kurzes Lächeln", "Knappe Antworten", "Keine Gegenfragen", "Sie unterbricht, was sie gerade tut"]},
+      "explanation": {"en": "Politeness maintains harmony without inviting continuation.", "de": "Höflichkeit wahrt die Harmonie, ohne zum Weitermachen einzuladen."}
+    },
+    "a1716c8d-11f9-4afa-b80c-5a108dce463e": {
+      "question_text": {"en": "When you’re unsure how interested she is, what’s the best next move?", "de": "Du bist unsicher, wie interessiert sie ist. Was ist der beste nächste Schritt?"},
+      "options": {"en": ["Continuing conversation until she warms up", "Making a clear move that allows an easy yes or no", "Asking multiple follow-up questions to build comfort", "Waiting for her to escalate"], "de": ["Weiterreden, bis sie auftaut", "Einen klaren Schritt machen, auf den sie leicht Ja oder Nein sagen kann", "Mehrere Nachfragen stellen, damit sie sich wohler fühlt", "Warten, bis sie einen Schritt weitergeht"]},
+      "explanation": {"en": "Clear lines remove ambiguity by revealing whether politeness is interest or courtesy.", "de": "Ein klarer Satz räumt Unklarheit aus und zeigt, ob hinter ihrer Freundlichkeit Interesse steckt oder nur Höflichkeit."}
+    },
+    "ab5203db-096d-46a0-b56b-1b2011ec738e": {
+      "question_text": {"en": "What is the purpose of making a single, clear move to confirm interest in an interaction?", "de": "Wozu dient ein einzelner, klarer Schritt, um herauszufinden, ob sie Interesse hat?"},
+      "options": {"en": ["To remove ambiguity and give her an easy out", "To persuade her to become interested", "To speed up the interaction regardless of her response"], "de": ["Unklarheit ausräumen und ihr einen leichten Ausweg lassen", "Sie dazu bringen, Interesse zu entwickeln", "Das Gespräch beschleunigen, egal wie sie reagiert"]},
+      "explanation": {"en": "Clear lines remove ambiguity by revealing whether politeness is interest or courtesy.", "de": "Ein klarer Satz räumt Unklarheit aus und zeigt, ob hinter ihrer Freundlichkeit Interesse steckt oder nur Höflichkeit."}
+    },
+    "450abadf-8d1e-486e-b76f-6d6eb4d366a0": {
+      "question_text": {"en": "After neutral signals, which line helps clarify interest?", "de": "Die Signale sind neutral. Welcher Satz hilft herauszufinden, ob sie Interesse hat?"},
+      "options": {"en": ["\"Want to grab coffee another day?\"", "\"So what do you do for work?\"", "\"I’ll let you get back to your day. Do you have Instagram?\"", "\"You’re kind of hard to read.\""], "de": ["„Lust, mal an einem anderen Tag einen Kaffee trinken zu gehen?“", "„Und, was machst du beruflich?“", "„Ich lass dich mal weitermachen. Hast du Instagram?“", "„Du bist irgendwie schwer zu durchschauen.“"]},
+      "explanation": {"en": "Clear lines remove ambiguity by revealing whether politeness is interest or courtesy.", "de": "Ein klarer Satz räumt Unklarheit aus und zeigt, ob hinter ihrer Freundlichkeit Interesse steckt oder nur Höflichkeit."}
+    },
+    "d5b86928-0a71-456d-a08d-f5aaaa20bce3": {
+      "question_text": {"en": "What do receptive signals typically include?", "de": "Was gehört typischerweise zu offenen Signalen?"},
+      "options": {"en": ["Turned body and genuine smile", "Questions back and sustained engagement", "Short answers and glancing away", "Leaning in or reciprocal energy"], "de": ["Sie dreht sich zu dir und lächelt echt", "Gegenfragen und anhaltendes Interesse", "Kurze Antworten und Wegschauen", "Sie lehnt sich vor oder erwidert deine Energie"]},
+      "explanation": {"en": "Receptive women show open, invested behavior from the start.", "de": "Frauen, die offen sind, zeigen von Anfang an zugewandtes, interessiertes Verhalten."}
+    },
+    "3401c3d2-b41a-4191-b69d-0ad4a8292b16": {
+      "question_text": {"en": "Reading signals correctly helps because it:", "de": "Signale richtig zu lesen hilft, weil es:"},
+      "options": {"en": ["Keeps interactions comfortable", "Prevents pressure", "Makes her more flirtatious", "Guarantees attraction"], "de": ["Begegnungen angenehm hält", "Druck verhindert", "sie flirtfreudiger macht", "Anziehung garantiert"]},
+      "explanation": {"en": "Calibration protects comfort, not outcomes.", "de": "Feingefühl schützt ihr Wohlgefühl, nicht dein Ergebnis."}
+    },
+    "e069eb31-5232-4ac9-b7e0-bd4b26b8bd92": {
+      "question_text": {"en": "She gives brief answer, glances back immediately, body angled away. What's her signal?", "de": "Sie antwortet knapp, schaut sofort wieder weg, ihr Körper ist abgewandt. Was ist ihr Signal?"},
+      "options": {"en": ["Receptive—she's shy and needs you to persist warmly", "Polite—uncertain; make one more attempt then assess again", "Cold—disengaged; exit cleanly without pushing further"], "de": ["Offen: Sie ist schüchtern, und du solltest herzlich dranbleiben", "Höflich: unklar. Noch ein Versuch, dann neu einschätzen", "Kühl: kein Interesse. Verabschiede dich sauber, ohne weiter zu drängen"]},
+      "explanation": {"en": "Closed body language outweighs replies; step back and leave calmly.", "de": "Verschlossene Körpersprache wiegt schwerer als ihre Antworten. Zieh dich zurück und geh ruhig."}
+    },
+    "0251b9d5-9ecf-4f71-aad2-dfc93f31e392": {
+      "question_text": {"en": "Which qualities help an opener feel engaging?", "de": "Was macht einen Opener fesselnd?"},
+      "options": {"en": ["Pressure", "Curiosity", "Playfulness", "Mystery"], "de": ["Druck", "Neugier", "Verspieltheit", "Etwas Geheimnisvolles"]},
+      "explanation": {"en": "Frames work best when they feel intriguing, not demanding.", "de": "Ein Rahmen wirkt am besten, wenn er neugierig macht, statt etwas zu fordern."}
+    },
+    "02e3aec0-93e1-49e3-8801-5e138b373f07": {
+      "question_text": {"en": "What makes the best indirect openers effective?", "de": "Was macht die besten indirekten Opener so wirksam?"},
+      "options": {"en": ["They explicitly state attraction", "They comment on the environment or observation around you", "They focus only on her appearance", "They ask for commitment early"], "de": ["Sie sagen offen, dass du sie attraktiv findest", "Sie greifen die Umgebung oder etwas auf, das dir auffällt", "Sie drehen sich nur um ihr Aussehen", "Sie verlangen früh eine Zusage"]},
+      "explanation": {"en": "Shared context creates comfort and natural flow.", "de": "Eine gemeinsame Situation schafft Wohlgefühl und einen natürlichen Gesprächsfluss."}
+    },
+    "0601d6e9-3b2f-4dab-8c82-816f101403cc": {
+      "question_text": {"en": "What signals tell you to continue building the interaction?", "de": "Welche Signale zeigen dir, dass du das Gespräch weiter aufbauen kannst?"},
+      "options": {"en": ["She turns toward you, asks questions, maintains open body language", "She smiles, gives long responses, and shows reciprocity", "Both of these indicate receptive signals"], "de": ["Sie dreht sich zu dir, stellt Fragen und hat eine offene Körpersprache", "Sie lächelt, antwortet ausführlich und geht auf dich ein", "Beides sind offene Signale"]},
+      "explanation": {"en": "All are receptive signals: continue building.", "de": "Das alles sind offene Signale. Mach weiter."}
+    },
+    "06c68907-301c-447a-b17d-47f93da821ac": {
+      "question_text": {"en": "What's the strength of activating evaluation mode immediately in a direct approach?", "de": "Was ist der Vorteil, wenn sie dich bei einem direkten Opener sofort einschätzen muss?"},
+      "options": {"en": ["Women respect men who are upfront about intentions", "Confident directness creates initial attraction spark", "If she's interested, you've skipped rapport-building pretence"], "de": ["Frauen respektieren Männer, die offen sagen, was sie wollen", "Selbstbewusste Direktheit erzeugt einen ersten Funken", "Wenn sie Interesse hat, sparst du dir das Vorspiel, nur so zu tun, als ginge es um etwas anderes"]},
+      "explanation": {"en": "If interest already exists, direct openers remove buildup and accelerate progression.", "de": "Wenn schon Interesse da ist, sparen direkte Opener den Anlauf und bringen euch schneller voran."}
+    },
+    "073d5930-369f-4dd9-9245-c250f26097bc": {
+      "question_text": {"en": "Why is politeness often misunderstood as receptiveness?", "de": "Warum wird Höflichkeit oft mit Offenheit verwechselt?"},
+      "options": {"en": ["It sounds friendly", "It hides discomfort", "It is dismissive", "It delays rejection"], "de": ["Sie klingt freundlich", "Sie verbirgt Unbehagen", "Sie ist abweisend", "Sie zögert eine Abfuhr hinaus"]},
+      "explanation": {"en": "Polite responses can hide disengagement; watch for reciprocity.", "de": "Höfliche Antworten können Desinteresse verbergen. Achte darauf, ob sie auf dich eingeht."}
+    },
+    "08850c3a-5d7f-4d3c-923c-731d1e3f4644": {
+      "question_text": {"en": "She says \"yeah\" with a smile, but keeps scanning the room while you speak. Your move?", "de": "Sie sagt lächelnd „ja“, schaut sich aber im Raum um, während du redest. Wie liest du das?"},
+      "options": {"en": ["Receptive—smiling means interest", "Polite—respectful but not present", "Mixed—distracted but curious", "Cold—scanning always means rejection"], "de": ["Offen: Lächeln heißt Interesse", "Höflich: respektvoll, aber nicht bei der Sache", "Gemischt: abgelenkt, aber neugierig", "Kühl: Umherschauen heißt immer Ablehnung"]},
+      "explanation": {"en": "Divided attention signals politeness, not engagement.", "de": "Geteilte Aufmerksamkeit zeigt Höflichkeit, kein echtes Interesse."}
+    },
+    "0a2112a8-7aa5-4d33-8a7d-8b46d381ad1c": {
+      "question_text": {"en": "She answers warmly but checks her phone repeatedly. This likely means?", "de": "Sie antwortet freundlich, schaut aber immer wieder aufs Handy. Was heißt das wahrscheinlich?"},
+      "options": {"en": ["She’s nervous", "She’s testing you", "She’s busy or disengaging", "She wants you to persist"], "de": ["Sie ist nervös", "Sie testet dich", "Sie hat zu tun oder verliert das Interesse", "Sie will, dass du dranbleibst"]},
+      "explanation": {"en": "Engagement requires focus; when it is missing, do not push forward.", "de": "Echtes Interesse braucht Aufmerksamkeit. Fehlt sie, dräng nicht weiter."}
+    },
+    "0b567d7e-67fa-4529-a5cb-2a646b501ae0": {
+      "question_text": {"en": "She's with friends at a bar. What determines whether a group opener works?", "de": "Sie ist mit Freundinnen in einer Bar. Wovon hängt ab, ob ein Opener für die Gruppe funktioniert?"},
+      "options": {"en": ["The opener needs to be interesting and involve their opinions", "Your confident delivery when asking the question", "How you transition from question to normal conversation"], "de": ["Der Opener muss interessant sein und nach ihrer Meinung fragen", "Wie selbstbewusst du die Frage stellst", "Wie du von der Frage in ein normales Gespräch übergehst"]},
+      "explanation": {"en": "Ensure the opener is interesting and requires involvement from the group.", "de": "Sorg dafür, dass der Opener interessant ist und die ganze Gruppe einbezieht."}
+    },
+    "0d78b9e6-8caf-46a0-9c29-39a256ccdd34": {
+      "question_text": {"en": "What does directness actually accomplish?", "de": "Was bewirkt Direktheit tatsächlich?"},
+      "options": {"en": ["Demonstrates attractive qualities", "Creates attraction through honesty", "She doesn't have to decode your intentions", "You don't have to pretend you're there for other reasons"], "de": ["Sie zeigt attraktive Eigenschaften", "Sie erzeugt Anziehung durch Ehrlichkeit", "Sie muss deine Absichten nicht erraten", "Du musst nicht so tun, als wärst du aus einem anderen Grund da"]},
+      "explanation": {"en": "Direct openers remove ambiguity by stating intent upfront. She knows why you are there.", "de": "Direkte Opener räumen Unklarheit aus, weil du deine Absicht gleich sagst. Sie weiß, warum du da bist."}
+    },
+    "0dca33cf-d79b-4b24-88c0-4b19d5c03b2c": {
+      "question_text": {"en": "You’re both at a dog park watching pets play. What opener reduces pressure?", "de": "Ihr seid beide auf der Hundewiese und schaut den Hunden beim Spielen zu. Welcher Opener nimmt Druck raus?"},
+      "options": {"en": ["\"Your dog is cute—like you.\"", "\"Want to exchange numbers?\"", "\"Dogs are better than people.\"", "\"What breed is yours? Mine’s always too energetic.\""], "de": ["„Dein Hund ist süß, genau wie du.“", "„Wollen wir Nummern tauschen?“", "„Hunde sind besser als Menschen.“", "„Was für eine Rasse ist deiner? Meiner ist immer total aufgedreht.“"]},
+      "explanation": {"en": "Situational shared experience starts conversation naturally.", "de": "Eine gemeinsame Situation bringt ein Gespräch ganz natürlich in Gang."}
+    },
+    "0e096470-35cf-4e08-bf03-85d6267ab373": {
+      "question_text": {"en": "Why does the pain of regret last longer than rejection?", "de": "Warum hält der Schmerz der Reue länger an als eine Abfuhr?"},
+      "options": {"en": ["Your brain replays missed opportunities for longer than brief rejections", "Rejection has closure; regret leaves unanswered questions indefinitely", "Both of the above"], "de": ["Dein Gehirn spielt verpasste Chancen länger ab als kurze Abfuhren", "Eine Abfuhr schließt etwas ab, Reue lässt Fragen für immer offen", "Beides"]},
+      "explanation": {"en": "Rejection provides closure while regret keeps the mind replaying what never happened.", "de": "Eine Abfuhr schließt etwas ab. Reue lässt den Kopf immer wieder durchspielen, was nie passiert ist."}
+    },
+    "0f4f3084-9f90-4036-ae95-cc8c706eba49": {
+      "question_text": {"en": "Why does asking for someone’s opinion feel more engaging than small talk?", "de": "Warum fesselt die Frage nach einer Meinung mehr als Smalltalk?"},
+      "options": {"en": ["Opinions require longer answers", "Opinions feel more intelligent", "Opinions signal that her judgment is valued", "Opinions feel safer than compliments"], "de": ["Meinungen brauchen längere Antworten", "Meinungen wirken intelligenter", "Die Frage zeigt, dass du ihr Urteil schätzt", "Meinungen fühlen sich sicherer an als Komplimente"]},
+      "explanation": {"en": "People light up when their perspective matters. Valuation creates engagement.", "de": "Menschen blühen auf, wenn ihre Sicht zählt. Wertschätzung weckt Interesse."}
+    },
+    "10284be9-9647-41db-8f18-3dfa77d66507": {
+      "question_text": {"en": "Where should your eyes be while approaching?", "de": "Wohin solltest du schauen, während du auf sie zugehst?"},
+      "options": {"en": ["Brief casual eye contact, not staring down or locking on her", "Locked on her to show clear intent and interest", "Looking slightly past her to avoid seeming too intense"], "de": ["Kurzer, lockerer Blickkontakt, ohne sie anzustarren oder zu fixieren", "Fest auf sie, um klare Absicht und Interesse zu zeigen", "Leicht an ihr vorbei, um nicht zu intensiv zu wirken"]},
+      "explanation": {"en": "Brief eye contact communicates awareness without pressure.", "de": "Kurzer Blickkontakt zeigt, dass du sie wahrnimmst, ohne Druck zu machen."}
+    },
+    "14546a1d-9532-4604-b285-8494197100dd": {
+      "question_text": {"en": "What is the goal of thoughtful approach angle and distance?", "de": "Was ist das Ziel, wenn du bewusst auf Winkel und Abstand achtest?"},
+      "options": {"en": ["Remove unnecessary barriers to comfort", "Show maximum confidence through closeness", "Make her feel slightly threatened", "Guarantee immediate attraction"], "de": ["Unnötige Hürden für ihr Wohlgefühl aus dem Weg räumen", "Durch Nähe maximales Selbstbewusstsein zeigen", "Ihr ein leicht bedrohliches Gefühl geben", "Sofortige Anziehung garantieren"]},
+      "explanation": {"en": "Respectful entry lets her engage without managing discomfort.", "de": "Ein respektvoller Einstieg lässt sie sich auf dich einlassen, ohne mit Unbehagen kämpfen zu müssen."}
+    },
+    "14dc2ce1-631c-4b7a-b151-4c74c34bb2a3": {
+      "question_text": {"en": "Club. You make eye contact with her across the room. She smiles. What's your move?", "de": "Club. Ihr habt quer durch den Raum Blickkontakt. Sie lächelt. Dein Zug?"},
+      "options": {"en": ["Smile back and wait to see if she approaches", "Move toward her immediately", "Keep making eye contact", "Wait until she's in a better position to approach"], "de": ["Zurücklächeln und abwarten, ob sie zu dir kommt", "Sofort auf sie zugehen", "Weiter Blickkontakt halten", "Warten, bis sie besser zu erreichen ist"]},
+      "explanation": {"en": "Clubs reward decisiveness; step in as soon as the window opens.", "de": "Im Club zahlt sich Entschlossenheit aus. Geh hin, sobald sich die Gelegenheit bietet."}
+    },
+    "152af858-f915-4ba0-97af-dcd17bde6c3a": {
+      "question_text": {"en": "Why is reading signals important for her comfort?", "de": "Warum ist es für ihr Wohlgefühl wichtig, Signale zu lesen?"},
+      "options": {"en": ["It prevents you from pushing past boundaries she hasn't opened", "Respecting her signals shows social calibration", "Continuing past polite or cold signals makes her uncomfortable", "All of the above"], "de": ["Es verhindert, dass du Grenzen überschreitest, die sie nicht geöffnet hat", "Wenn du ihre Signale respektierst, zeigst du soziales Feingefühl", "Wenn du trotz höflicher oder kühler Signale weitermachst, ist ihr das unangenehm", "Alle oben genannten"]},
+      "explanation": {"en": "Signals show what is welcome; follow them to avoid crossing unopened boundaries.", "de": "Signale zeigen, was willkommen ist. Richte dich danach, damit du keine Grenzen überschreitest, die sie nicht geöffnet hat."}
+    },
+    "16844e95-a04f-4bcf-a8af-c185f70db3c7": {
+      "question_text": {"en": "What delivery ruins a direct opener?", "de": "Welche Art, es rüberzubringen, ruiniert einen direkten Opener?"},
+      "options": {"en": ["Calm tone", "Eye contact", "Confident energy", "Apologetic energy"], "de": ["Ein ruhiger Ton", "Blickkontakt", "Selbstbewusste Energie", "Entschuldigende Energie"]},
+      "explanation": {"en": "Direct openers lose strength when framed with apology instead of confidence.", "de": "Direkte Opener verlieren an Kraft, wenn du dich entschuldigst, statt selbstbewusst aufzutreten."}
+    },
+    "170329e0-190e-459a-8870-3da632ce2a7f": {
+      "question_text": {"en": "Which behaviors signal a curiosity-driven approach?", "de": "Welches Verhalten zeigt, dass du aus Neugier ansprichst?"},
+      "options": {"en": ["Noticing details and asking about them", "Enjoying the conversation without thinking ahead", "Steering quickly toward getting contact details", "Letting the interaction unfold without forcing direction"], "de": ["Details bemerken und danach fragen", "Das Gespräch genießen, ohne vorauszudenken", "Schnell darauf hinarbeiten, ihre Nummer zu bekommen", "Das Gespräch sich entwickeln lassen, ohne eine Richtung zu erzwingen"]},
+      "explanation": {"en": "Curiosity stays present and exploratory. Agenda jumps ahead to outcomes.", "de": "Neugier bleibt im Moment und will entdecken. Eine Absicht springt gleich zum Ergebnis."}
+    },
+    "18168e30-017b-49fc-8902-92152cce90b8": {
+      "question_text": {"en": "In a loud nightclub, she briefly looks at you then turns back. What should you do?", "de": "In einem lauten Club schaut sie dich kurz an und dreht sich dann wieder weg. Was solltest du tun?"},
+      "options": {"en": ["Wait for a clearer sign she's interested", "Approach with good energy and a smile", "Speak softly to not interrupt her group", "Give up and find someone else"], "de": ["Auf ein deutlicheres Zeichen warten, dass sie Interesse hat", "Mit guter Energie und einem Lächeln hingehen", "Leise sprechen, um ihre Gruppe nicht zu stören", "Aufgeben und dir jemand anderen suchen"]},
+      "explanation": {"en": "Night venues reward quick, confident action before attention shifts.", "de": "Abends zahlt es sich aus, schnell und selbstbewusst zu handeln, bevor die Aufmerksamkeit woanders ist."}
     }
   }
 }
