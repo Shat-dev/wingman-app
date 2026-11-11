@@ -110,3 +110,7 @@ The sweep needs a clean install. On a simulator that has run it before, boot it,
 The run created one guest user in production and recorded the lesson, the Daily Practice set and the scenario as completed for that user.
 
 `german-content-se-2026-11-11-fixes/`: the same test re-run at about 23:00 the same day, after three layout fixes (lesson title strip, time-of-day greeting, lesson auto-scroll). Only the screens those fixes change are kept: 23 (Home, "Guten Abend,") and 30 to 44 (lesson intro and pages). Every other screen matched the earlier run, apart from the loading animation, the random quote and the German scenario titles. This run created one more guest user in production.
+
+## German content run on the iPhone 17 Pro (Release B, G7)
+
+`german-content-17-pro-2026-11-11/`: the same `testOnboardingAndContentInGerman` on the "Wingman L10n 17 Pro" simulator, 2026-11-11 about 23:20, after the layout fixes. All 117 screens, saved at half resolution as 128-colour PNGs (layout reading only). The paywall shows "Preise können nicht geladen werden" because a Debug build has no store products, and the notification prompt is in English because the simulator's system language is English; both are expected. The run created one guest user in production.
