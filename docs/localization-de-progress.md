@@ -25,7 +25,7 @@ Until 1 and 4 are done, a German phone shows German interface and lessons, but E
 |---|---|
 | UI catalogs (G2) | 574 of 574 strings drafted (2026-11-10) |
 | Lesson overlays (G3) | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-11). All 25 files load in the app (298 unit tests pass) |
-| Database content (G4) | 7 of 15 scenarios (1–7); 0 of 765 questions |
+| Database content (G4) | 8 of 15 scenarios (1–8); 0 of 765 questions |
 | German sweep (G7) | Onboarding and tabs on SE, 2026-11-11: no clipping. Lessons not yet seen in German |
 
 Lesson order followed: the first course of each category before the second (1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, …), the order the app's file names give.
@@ -67,6 +67,7 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **2026-11-11. Scenario 5, Final Stretch** (55 text screens, 17 options, about 590 words; 73 upserts, not run). For the reviewer: the title became *Die letzte Dehnung*, keeping the yoga pun; "warrior pose" became *Krieger*; "Tuesday regulars" became *Dienstags-Stammgäste*; "Victim-blaming tone" became *Das klingt, als wäre sie selbst schuld*.
 - **2026-11-11. Scenario 6, Delayed Together** (52 text screens, 17 options, about 550 words; 70 upserts, not run). For the reviewer: the title became *Gemeinsam verspätet*; "interstate" became *in einer anderen Stadt*; "every cloud has a silver lining" became *alles hat wohl sein Gutes*. "I'm... by the way" is shown as written (checked: the app substitutes no name into scenario text), so the German keeps the pause: *Ich bin übrigens …*.
 - **2026-11-11. Scenario 7, Catch the Drift** (51 text screens, 17 options, about 530 words; 69 upserts, not run). For the reviewer: the title became *Am Strand*, because the English idiom has no German equivalent; "swimsuit" became *Bikini*, which fits the beach and keeps the wrong option clearly wrong; "dwarf or king" coconut became *Zwerg- oder Königskokosnuss*. Two English typos are logged below.
+- **2026-11-11. Scenario 8, Picture This** (53 text screens, 18 options, about 590 words; 72 upserts, not run). For the reviewer: the title became *Ein Foto bitte*; "film camera" became *analoge Kamera*; "high aperture" became *große Blende*; "the brewery up 3rd street" became *oben an der Hauptstraße*, since German streets aren't numbered; "the old railway district" became *das alte Bahnhofsviertel*; "mansplaining" stays as it is, since it's used in German. "Asking about her work status feels qualifying" became *als würdest du sie abchecken*.
 
 ## Questions for Arthur
 
