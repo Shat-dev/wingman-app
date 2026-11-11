@@ -25,7 +25,7 @@ Until 1 and 4 are done, a German phone shows German interface and lessons, but E
 |---|---|
 | UI catalogs (G2) | 574 of 574 strings drafted (2026-11-10) |
 | Lesson overlays (G3) | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-11). All 25 files load in the app (298 unit tests pass) |
-| Database content (G4) | 15 of 15 scenarios; 414 of 765 questions |
+| Database content (G4) | 15 of 15 scenarios; 454 of 765 questions |
 | German sweep (G7) | Onboarding and tabs on SE, 2026-11-11: no clipping. Lessons not yet seen in German |
 
 Lesson order followed: the first course of each category before the second (1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, …), the order the app's file names give.
@@ -85,6 +85,7 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **2026-11-11. Questions 286–329** (approach_mechanics rows 177–220, module pool; about 2,000 words). This starts `questions_02_approach_mechanics_3`, which will hold rows 177–264. "Health nut" became *Gesundheitsfreak*; "thrifting" became *in Secondhandläden*; "the responsible friend who drives everyone home" became *die Vernünftige, die am Ende alle nach Hause fährt*. `c36a094c…` is a third question with the option "Either B or C" (German *B oder C*); it is added to the letter-reference flag below.
 - **2026-11-11. Questions 330–373** (approach_mechanics rows 221–264, module pool; about 2,000 words). `questions_02_approach_mechanics_3` is complete, with 88 rows, so all 264 approach_mechanics questions are done. "Social nightlife venues" became *In Bars und Clubs*; "a reader" became *Leseratte*. Source issues are logged below.
 - **2026-11-11. Questions 374–414** (conversational_skills rows 1–41: lessons 12_1 to 15_2; about 1,800 words). This starts `questions_03_conversational_skills_1`, which will hold rows 1–81. Conversational skills is 162 questions, so 2 files of 81, filled 41 and 40 at a time. Terms follow the course 12–15 overlays: "thread" became *Faden* (*an Fäden anknüpfen*), "subtext" became *Subtext*, "validate" became *würdigen*, "callback" became *Rückbezug*, "momentum" became *Schwung*, and processed/unprocessed sharing became *Verarbeitetes / Unverarbeitetes teilen*. "Ready for a close" became *reif für den Abschluss*. No content flags.
+- **2026-11-11. Questions 415–454** (conversational_skills rows 42–81: lessons 15_2 to 16_3, then 23 module-pool questions; about 1,800 words). `questions_03_conversational_skills_1` is complete, with 81 rows. "Assumed close" became *selbstverständlicher Abschluss*; "close" stays *Abschluss* / *zum Abschluss kommen*. `1cdf68f6…` has options that complete the sentence "Die Energie kann abfallen, weil:", so they start in lower case. No content flags.
 
 ## Questions for Arthur
 
