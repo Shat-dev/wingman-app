@@ -25,7 +25,7 @@ Until 1 and 4 are done, a German phone shows German interface and lessons, but E
 |---|---|
 | UI catalogs (G2) | 574 of 574 strings drafted (2026-11-10) |
 | Lesson overlays (G3) | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-11). All 25 files load in the app (298 unit tests pass) |
-| Database content (G4) | 15 of 15 scenarios; 329 of 765 questions |
+| Database content (G4) | 15 of 15 scenarios; 373 of 765 questions |
 | German sweep (G7) | Onboarding and tabs on SE, 2026-11-11: no clipping. Lessons not yet seen in German |
 
 Lesson order followed: the first course of each category before the second (1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, …), the order the app's file names give.
@@ -83,6 +83,7 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **2026-11-11. Questions 198–241** (approach_mechanics rows 89–132, all module-pool questions with no lesson; about 2,000 words). This starts `questions_02_approach_mechanics_2`, which will hold rows 89–176. Signal labels stay *Offen / Höflich / Kühl / Gemischt*. "Three feet" became *etwa einen Meter*. Several questions here are scene descriptions with no question mark (for example `1b9394c8…`, `2d63f1fb…`); the German keeps them as statements, as the English does.
 - **2026-11-11. Questions 242–285** (approach_mechanics rows 133–176, module pool; about 2,000 words). `questions_02_approach_mechanics_2` is complete, with 88 rows. "Between sets" became *Satzpause*; "spot" (gym) became *sichern*. The opener examples are adapted to natural German small talk, not translated literally.
 - **2026-11-11. Questions 286–329** (approach_mechanics rows 177–220, module pool; about 2,000 words). This starts `questions_02_approach_mechanics_3`, which will hold rows 177–264. "Health nut" became *Gesundheitsfreak*; "thrifting" became *in Secondhandläden*; "the responsible friend who drives everyone home" became *die Vernünftige, die am Ende alle nach Hause fährt*. `c36a094c…` is a third question with the option "Either B or C" (German *B oder C*); it is added to the letter-reference flag below.
+- **2026-11-11. Questions 330–373** (approach_mechanics rows 221–264, module pool; about 2,000 words). `questions_02_approach_mechanics_3` is complete, with 88 rows, so all 264 approach_mechanics questions are done. "Social nightlife venues" became *In Bars und Clubs*; "a reader" became *Leseratte*. Source issues are logged below.
 
 ## Questions for Arthur
 
@@ -105,3 +106,4 @@ Lesson order followed: the first course of each category before the second (1, 6
 - **Scenario 14, Dressed to Impress: English slips.** "Haha pressures on." should be "pressure's on" (`b1000012…`). "I have to let you know if the blue shirt works" (`b1000032…`) reads as if he already knows. It probably means "I'll have to let you know". The German follows the likely intent (*ich muss dir ja noch sagen, wie das blaue Hemd ankommt*). No content concerns in this one.
 - **Quiz `3c06a35a…` (Club, quieter area): letter reference and escalation.** The correct option reads "Either B or C depending on logistics and her signals". The app shows options without letters, as far as I can tell (I found no shuffling, so the order is stable), so "B" and "C" mean nothing to the user in either language. Option C is "Suggest another venue change or escalate physically", taught as part of a correct answer. The German keeps both as written (*B oder C*; *körperlich näherkommen*). Worth rewording in English first, together with the consent flags above.
 - **More quiz source issues (approach mechanics).** `59132ed6…` ("B and C") and `c36a094c…` ("Either B or C") have the same letter problem as `3c06a35a…`; the German keeps the letters. `884ee9cb…` sets the scene "at a musical play", but the options talk about a band or artist and music taste, which reads like a concert. The German keeps *Musical* to match the question; the English probably meant "concert" or "gig".
+- **More quiz source issues (approach mechanics, rows 221–264).** `cb1b3910…` (Bar, quieter area) is a near-copy of `3c06a35a…` (Club) with the same "Either B or C" and "escalate physically" answer, so it has the same flag. `d3daff27…` option 3 ends in a stray `”]` after the closing quote (`…coffee sometime?"”]`), a typo in the English. The German drops it. Fix the English in the DB.
