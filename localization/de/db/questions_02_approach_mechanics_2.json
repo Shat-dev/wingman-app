@@ -137,8 +137,8 @@
     },
     "3c06a35a-c102-4ca8-bce5-02e0afa2b5a6": {
       "question_text": {"en": "Club. You've moved to a quieter area with her. What's next?", "de": "Club. Ihr seid in eine ruhigere Ecke gegangen. Was kommt als Nächstes?"},
-      "options": {"en": ["Continue conversation and suggest meeting up another time", "Get her contact info now while momentum is strong", "Suggest another venue change or escalate physically", "Either B or C depending on logistics and her signals"], "de": ["Weiterreden und vorschlagen, euch ein andermal zu treffen", "Jetzt ihre Nummer holen, solange der Schwung da ist", "Noch einen Ortswechsel vorschlagen oder körperlich näherkommen", "B oder C, je nach Umständen und ihren Signalen"]},
-      "explanation": {"en": "Strong momentum calls for progression; either lock in contact or advance the interaction.", "de": "Bei starkem Schwung solltest du weitergehen: Entweder sicherst du dir den Kontakt, oder du bringst die Begegnung voran."}
+      "options": {"en": ["Continue conversation and suggest meeting up another time", "Get her contact info now while momentum is strong", "Suggest moving somewhere else together", "Get her number or suggest moving on together, depending on logistics and her signals"], "de": ["Weiterreden und vorschlagen, euch ein andermal zu treffen", "Jetzt ihre Nummer holen, solange der Schwung da ist", "Vorschlagen, gemeinsam woandershin zu gehen", "Ihre Nummer holen oder vorschlagen, gemeinsam weiterzuziehen, je nach Umständen und ihren Signalen"]},
+      "explanation": {"en": "Strong momentum calls for a next step: lock in contact, or suggest continuing elsewhere if her signals say yes.", "de": "Bei starkem Schwung ist ein nächster Schritt dran: Sichere dir den Kontakt oder schlag vor, woanders weiterzumachen, wenn ihre Signale Ja sagen."}
     },
     "3c98c86a-c4c9-43a5-be53-6cad77bf34c5": {
       "question_text": {"en": "When should you exit an interaction?", "de": "Wann solltest du ein Gespräch beenden?"},
@@ -242,7 +242,7 @@
     },
     "59132ed6-d432-4176-9308-5f83ffeb2e2c": {
       "question_text": {"en": "Why do smiles often mislead men during approaches?", "de": "Warum führt ein Lächeln Männer beim Ansprechen oft in die Irre?"},
-      "options": {"en": ["Smiles always signal attraction", "Smiles are a default social courtesy", "Men assume emotional warmth equals interest", "B and C"], "de": ["Ein Lächeln signalisiert immer Anziehung", "Lächeln ist eine übliche soziale Höflichkeit", "Männer halten Herzlichkeit für Interesse", "B und C"]},
+      "options": {"en": ["Smiles always signal attraction", "Smiles are a default social courtesy", "Men assume emotional warmth equals interest", "Both: smiles are often courtesy, and men read warmth as interest"], "de": ["Ein Lächeln signalisiert immer Anziehung", "Lächeln ist eine übliche soziale Höflichkeit", "Männer halten Herzlichkeit für Interesse", "Beides: Lächeln ist oft Höflichkeit, und Männer halten Herzlichkeit für Interesse"]},
       "explanation": {"en": "Smiles are often politeness, and men frequently interpret warmth as attraction.", "de": "Ein Lächeln ist oft Höflichkeit, und Männer deuten Herzlichkeit häufig als Anziehung."}
     },
     "5a89ed7d-2ccb-4fb2-ad5a-c8b0d73aab44": {
@@ -431,7 +431,7 @@
       "explanation": {"en": "Conversations can create possibilities that extend far beyond the moment.", "de": "Gespräche können Möglichkeiten schaffen, die weit über den Moment hinausreichen."}
     },
     "884ee9cb-5bc8-4593-8032-1bb68fe20856": {
-      "question_text": {"en": "You're both at a musical play. What’s an indirect opener?", "de": "Ihr seid beide in einem Musical. Was ist ein indirekter Opener?"},
+      "question_text": {"en": "You're both at a concert. What’s an indirect opener?", "de": "Ihr seid beide auf einem Konzert. Was ist ein indirekter Opener?"},
       "options": {"en": ["Ask if she's seen this band/artist before", "Comment on the crowd size or venue", "Tell her she has great taste in music"], "de": ["Fragen, ob sie die Band oder den Künstler schon mal gesehen hat", "Etwas zum Publikum oder zur Location sagen", "Ihr sagen, dass sie einen tollen Musikgeschmack hat"]},
       "explanation": {"en": "Staying with the shared experience allows comfort to build organically.", "de": "Wenn du beim gemeinsamen Erlebnis bleibst, kann sich ganz natürlich Vertrautheit aufbauen."}
     },

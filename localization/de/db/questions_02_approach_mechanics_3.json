@@ -212,7 +212,7 @@
     },
     "c36a094c-8b8b-4c97-b801-f551071a78ed": {
       "question_text": {"en": "She's wearing artistic, vintage-style clothing. Which opener uses assumptions effectively?", "de": "Sie trägt künstlerische Vintage-Kleidung. Welcher Opener nutzt eine Vermutung wirksam?"},
-      "options": {"en": ["\"I love your style. Where do you usually shop?\"", "\"You look like you work in something creative. Am I right?\"", "\"You definitely go thrifting, don't you?\"", "Either B or C"], "de": ["„Ich liebe deinen Stil. Wo kaufst du normalerweise ein?“", "„Du siehst aus, als würdest du was Kreatives machen. Stimmt’s?“", "„Du gehst bestimmt oft in Secondhandläden, oder?“", "B oder C"]},
+      "options": {"en": ["\"I love your style. Where do you usually shop?\"", "\"You look like you work in something creative. Am I right?\"", "\"You definitely go thrifting, don't you?\"", "Either the creative-work or the thrifting assumption"], "de": ["„Ich liebe deinen Stil. Wo kaufst du normalerweise ein?“", "„Du siehst aus, als würdest du was Kreatives machen. Stimmt’s?“", "„Du gehst bestimmt oft in Secondhandläden, oder?“", "Beide Vermutungen: kreativer Job oder Secondhand"]},
       "explanation": {"en": "Both require her engagement to confirm, deny, or explain.", "de": "Bei beiden muss sie sich einbringen, um zu bestätigen, zu widersprechen oder zu erklären."}
     },
     "c387493a-0ebd-41c3-b083-1a639c5a593d": {
@@ -257,8 +257,8 @@
     },
     "cb1b3910-7f46-4638-b7ba-949483f7d10a": {
       "question_text": {"en": "Bar. You've moved to a quieter area with her. What's next?", "de": "Bar. Ihr seid in eine ruhigere Ecke gegangen. Was kommt als Nächstes?"},
-      "options": {"en": ["Continue conversation and suggest meeting up another time", "Get her contact info now while momentum is strong", "Suggest another venue change or escalate physically", "Either B or C depending on logistics and her signals"], "de": ["Weiterreden und vorschlagen, euch ein andermal zu treffen", "Jetzt ihre Nummer holen, solange der Schwung da ist", "Noch einen Ortswechsel vorschlagen oder körperlich näherkommen", "B oder C, je nach Umständen und ihren Signalen"]},
-      "explanation": {"en": "Strong momentum calls for progression; either lock in contact or advance the interaction.", "de": "Bei starkem Schwung solltest du weitergehen: Entweder sicherst du dir den Kontakt, oder du bringst die Begegnung voran."}
+      "options": {"en": ["Continue conversation and suggest meeting up another time", "Get her contact info now while momentum is strong", "Suggest moving somewhere else together", "Get her number or suggest moving on together, depending on logistics and her signals"], "de": ["Weiterreden und vorschlagen, euch ein andermal zu treffen", "Jetzt ihre Nummer holen, solange der Schwung da ist", "Vorschlagen, gemeinsam woandershin zu gehen", "Ihre Nummer holen oder vorschlagen, gemeinsam weiterzuziehen, je nach Umständen und ihren Signalen"]},
+      "explanation": {"en": "Strong momentum calls for a next step: lock in contact, or suggest continuing elsewhere if her signals say yes.", "de": "Bei starkem Schwung ist ein nächster Schritt dran: Sichere dir den Kontakt oder schlag vor, woanders weiterzumachen, wenn ihre Signale Ja sagen."}
     },
     "ccb554b7-2aa7-47d7-a64b-d4d9612a37a1": {
       "question_text": {"en": "Why do certain approach angles and distances trigger discomfort?", "de": "Warum lösen bestimmte Winkel und Abstände beim Ansprechen Unbehagen aus?"},
@@ -292,7 +292,7 @@
     },
     "d3daff27-e652-43a8-8f20-af94b5be0f32": {
       "question_text": {"en": "Street. She’s friendly but you’re unsure of her interest. What’s the best next move?", "de": "Auf der Straße. Sie ist freundlich, aber du bist unsicher, ob sie Interesse hat. Was ist der beste nächste Schritt?"},
-      "options": {"en": ["Walk alongside her and continue talking", "Lower your energy and mirror her pace", "Say \"You seem cool. Want to grab coffee sometime?\"”]"], "de": ["Neben ihr hergehen und weiterreden", "Deine Energie runterfahren und dich ihrem Tempo anpassen", "Sagen: „Du wirkst cool. Lust, mal einen Kaffee trinken zu gehen?“"]},
+      "options": {"en": ["Walk alongside her and continue talking", "Lower your energy and mirror her pace", "Say \"You seem cool. Want to grab coffee sometime?\""], "de": ["Neben ihr hergehen und weiterreden", "Deine Energie runterfahren und dich ihrem Tempo anpassen", "Sagen: „Du wirkst cool. Lust, mal einen Kaffee trinken zu gehen?“"]},
       "explanation": {"en": "A simple invitation creates a clear opt-in or opt-out without forcing continuation.", "de": "Eine einfache Einladung lässt ihr klar die Wahl, ja oder nein zu sagen, ohne dass du das Gespräch erzwingst."}
     },
     "d43846a5-78ac-402f-95a0-7cfcb54078ce": {

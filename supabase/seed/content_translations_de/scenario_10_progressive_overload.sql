@@ -70,7 +70,7 @@ insert into public.scenario_screen_translations (screen_id, locale, text) values
   on conflict (screen_id, locale) do update set text = excluded.text;
 insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000021-0000-0000-0010-000000000021', 'de', 'Und, was trainierst du heute? Bereitest du dich auf was vor?')
   on conflict (screen_id, locale) do update set text = excluded.text;
-insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000022-0000-0000-0010-000000000022', 'de', 'Ja, tatsächlich. Nächsten Monat laufe ich einen Marathon. Dafür trainiere ich die Beine.')
+insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000022-0000-0000-0010-000000000022', 'de', 'Ja, tatsächlich. Nächsten Monat laufe ich einen Halbmarathon. Dafür trainiere ich die Beine.')
   on conflict (screen_id, locale) do update set text = excluded.text;
 insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000231-0000-0000-0010-000000000231', 'de', 'Du könntest dich mehr auf Tempoläufe statt auf Krafttraining konzentrieren.')
   on conflict (screen_id, locale) do update set text = excluded.text;

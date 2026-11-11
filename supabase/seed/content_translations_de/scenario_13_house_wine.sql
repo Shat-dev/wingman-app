@@ -14,7 +14,7 @@ insert into public.scenario_screen_translations (screen_id, locale, text) values
   on conflict (screen_id, locale) do update set text = excluded.text;
 insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000051-0000-0000-0013-000000000051', 'de', 'Hi, freut mich, ich bin …')
   on conflict (screen_id, locale) do update set text = excluded.text;
-insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000052-0000-0000-0013-000000000052', 'de', 'Das kann funktionieren, aber versuch, deinen Einstieg spannender zu machen.')
+insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000052-0000-0000-0013-000000000052', 'de', 'Ein sicherer Einstieg, aber er bleibt nicht hängen. Versuch einen verspielteren, spannenderen Opener.')
   on conflict (screen_id, locale) do update set text = excluded.text;
 insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000053-0000-0000-0013-000000000053', 'de', 'Hey, weißt du, wo das Bad ist?')
   on conflict (screen_id, locale) do update set text = excluded.text;
@@ -28,7 +28,7 @@ insert into public.scenario_screen_translations (screen_id, locale, text) values
   on conflict (screen_id, locale) do update set text = excluded.text;
 insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000083-0000-0000-0013-000000000083', 'de', 'Ja, bitte, sehr gern!')
   on conflict (screen_id, locale) do update set text = excluded.text;
-insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000084-0000-0000-0013-000000000084', 'de', 'Behalt die Führung. Zieh sie zurück auf, statt zu eifrig zu wirken.')
+insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000084-0000-0000-0013-000000000084', 'de', 'Bleib locker und verspielt. Zieh sie zurück auf, statt zu eifrig zu wirken.')
   on conflict (screen_id, locale) do update set text = excluded.text;
 insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000009-0000-0000-0013-000000000009', 'de', 'Du willst mich mit geklautem Wein bestechen? Bin dabei.')
   on conflict (screen_id, locale) do update set text = excluded.text;
@@ -82,7 +82,7 @@ insert into public.scenario_screen_translations (screen_id, locale, text) values
   on conflict (screen_id, locale) do update set text = excluded.text;
 insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000233-0000-0000-0013-000000000233', 'de', 'Wäre es für dich okay, wenn wir irgendwohin gehen, wo es ruhiger ist?')
   on conflict (screen_id, locale) do update set text = excluded.text;
-insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000234-0000-0000-0013-000000000234', 'de', 'Nach ihrem Wohlbefinden zu fragen ist zu förmlich. Schlag es selbstbewusst vor.')
+insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000234-0000-0000-0013-000000000234', 'de', 'Nachzufragen ist nie falsch, aber so formuliert wirkt es schwer. Eine lockere, selbstbewusste Einladung, zu der sie leicht Nein sagen kann, funktioniert besser.')
   on conflict (screen_id, locale) do update set text = excluded.text;
 insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000024-0000-0000-0013-000000000024', 'de', 'Wie auch immer, wir müssen den Tatort verlassen. Lass uns rausgehen.')
   on conflict (screen_id, locale) do update set text = excluded.text;
@@ -96,11 +96,11 @@ insert into public.scenario_screen_translations (screen_id, locale, text) values
   on conflict (screen_id, locale) do update set text = excluded.text;
 insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000273-0000-0000-0013-000000000273', 'de', 'Du drehst dich um und gehst Richtung Balkon. Sie folgt dir.')
   on conflict (screen_id, locale) do update set text = excluded.text;
-insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000274-0000-0000-0013-000000000274', 'de', 'Das kann funktionieren, aber du kannst die Situation auch für eine kurze Berührung nutzen.')
+insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000274-0000-0000-0013-000000000274', 'de', 'Das funktioniert auch. Eine kurze, leichte Berührung kann hier Wärme bringen, aber nur, wenn es ihr sichtlich angenehm ist.')
   on conflict (screen_id, locale) do update set text = excluded.text;
-insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000028-0000-0000-0013-000000000028', 'de', 'Du legst ihr leicht die Hand an den unteren Rücken, um sie durchzuführen.')
+insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000028-0000-0000-0013-000000000028', 'de', 'Du berührst leicht ihren Arm und nickst Richtung Balkon, um ihr den Weg zu zeigen.')
   on conflict (screen_id, locale) do update set text = excluded.text;
-insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000029-0000-0000-0013-000000000029', 'de', 'Die leichte Berührung ist ihr angenehm, und als ihr angekommen seid, nimmst du die Hand wieder weg.')
+insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000029-0000-0000-0013-000000000029', 'de', 'Sie lächelt und folgt dir. Die Berührung war kurz, und sie war ihr sichtlich angenehm.')
   on conflict (screen_id, locale) do update set text = excluded.text;
 insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000030-0000-0000-0013-000000000030', 'de', 'Geschafft. Du lässt die Begegnung Revue passieren.')
   on conflict (screen_id, locale) do update set text = excluded.text;
@@ -108,7 +108,7 @@ insert into public.scenario_screen_translations (screen_id, locale, text) values
   on conflict (screen_id, locale) do update set text = excluded.text;
 insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000032-0000-0000-0013-000000000032', 'de', 'Mit dem Weinklau hast du einen verspielten Rahmen geschaffen, der sich durch das ganze Gespräch zog.')
   on conflict (screen_id, locale) do update set text = excluded.text;
-insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000033-0000-0000-0013-000000000033', 'de', 'Du bist einen Schritt weitergegangen, hast sie an einen anderen Ort geführt und eine leichte Berührung eingesetzt.')
+insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000033-0000-0000-0013-000000000033', 'de', 'Du hast die Führung übernommen, einen ruhigeren Ort vorgeschlagen und jede Berührung leicht und kurz gehalten.')
   on conflict (screen_id, locale) do update set text = excluded.text;
 insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000034-0000-0000-0013-000000000034', 'de', 'Gut gemacht.')
   on conflict (screen_id, locale) do update set text = excluded.text;
@@ -148,7 +148,7 @@ insert into public.screen_option_translations (option_id, locale, text) values (
   on conflict (option_id, locale) do update set text = excluded.text;
 insert into public.screen_option_translations (option_id, locale, text) values ('c1000018-0000-0000-0013-000000000018', 'de', 'Fragen, ob es für sie okay ist, woandershin zu gehen')
   on conflict (option_id, locale) do update set text = excluded.text;
-insert into public.screen_option_translations (option_id, locale, text) values ('c1000019-0000-0000-0013-000000000019', 'de', 'Kurz die Hand leicht an ihren unteren Rücken legen')
+insert into public.screen_option_translations (option_id, locale, text) values ('c1000019-0000-0000-0013-000000000019', 'de', 'Sie leicht am Arm berühren, um ihr den Weg zu zeigen')
   on conflict (option_id, locale) do update set text = excluded.text;
 insert into public.screen_option_translations (option_id, locale, text) values ('c1000020-0000-0000-0013-000000000020', 'de', 'Ihr den Arm um die Schultern legen')
   on conflict (option_id, locale) do update set text = excluded.text;

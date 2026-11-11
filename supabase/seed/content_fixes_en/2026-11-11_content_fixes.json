@@ -1,0 +1,188 @@
+{
+ "screens": {
+  "b1000054-0000-0000-0007-000000000054": [
+   "Touch feels inasive, approach from the side and stop at a distance.",
+   "Touch feels invasive, approach from the side and stop at a distance."
+  ],
+  "b1000081-0000-0000-0007-000000000081": [
+   "Nice. So you must live close to here than?",
+   "Nice. So you must live close to here then?"
+  ],
+  "b1000001-0000-0000-0009-000000000001": [
+   "You're at the grocery store. Produce section. Looking for a carton of eggs.",
+   "You're at the grocery store. Dairy aisle. Looking for a carton of eggs."
+  ],
+  "b1000009-0000-0000-0009-000000000009": [
+   "Your serious? Okay, let's do it.",
+   "You're serious? Okay, let's do it."
+  ],
+  "b1000022-0000-0000-0010-000000000022": [
+   "Yeah actually. A marathon next month. Building leg strength for it.",
+   "Yeah actually. A half marathon next month. Building leg strength for it."
+  ],
+  "b1000052-0000-0000-0013-000000000052": [
+   "While this can work, try to make your opener more exciting.",
+   "This is a safe start, but it's forgettable. Try a more playful, exciting opener."
+  ],
+  "b1000084-0000-0000-0013-000000000084": [
+   "Maintain dominant frame. Tease back, don't be too eager.",
+   "Stay relaxed and playful. Tease back, don't be too eager."
+  ],
+  "b1000234-0000-0000-0013-000000000234": [
+   "Asking about her comfort level is too formal. Suggest it confidently.",
+   "Checking in is never wrong, but this phrasing makes it feel heavy. A light, confident invitation she can easily say no to works better."
+  ],
+  "b1000274-0000-0000-0013-000000000274": [
+   "While this can work, you can use this situation as a chance to use physical contact.",
+   "This works too. A brief, light touch can add warmth here, but only if she's clearly comfortable."
+  ],
+  "b1000028-0000-0000-0013-000000000028": [
+   "You place your hand lightly on her lower back to guide her through.",
+   "You lightly touch her arm and nod toward the balcony to guide her through."
+  ],
+  "b1000029-0000-0000-0013-000000000029": [
+   "She's comfortable with the light touch and you remove it once you arrive.",
+   "She smiles and follows. The touch was brief, and she was clearly comfortable with it."
+  ],
+  "b1000033-0000-0000-0013-000000000033": [
+   "You escalated by leading her somewhere else and used physical contact.",
+   "You took the lead by suggesting somewhere quieter, and kept any touch light and brief."
+  ],
+  "b1000012-0000-0000-0014-000000000012": [
+   "Haha pressures on.",
+   "Haha, pressure's on."
+  ],
+  "b1000032-0000-0000-0014-000000000032": [
+   "Hey I have to go now, but I have to let you know if the blue shirt works.",
+   "Hey I have to go now, but I'll have to let you know if the blue shirt works."
+  ]
+ },
+ "options": {
+  "c1000019-0000-0000-0013-000000000019": [
+   "Light hand on lower back briefly",
+   "Light touch on her arm to guide her"
+  ]
+ },
+ "questions": {
+  "3c06a35a-c102-4ca8-bce5-02e0afa2b5a6": {
+   "options": {
+    "2": [
+     "Suggest another venue change or escalate physically",
+     "Suggest moving somewhere else together"
+    ],
+    "3": [
+     "Either B or C depending on logistics and her signals",
+     "Get her number or suggest moving on together, depending on logistics and her signals"
+    ]
+   },
+   "explanation": [
+    "Strong momentum calls for progression; either lock in contact or advance the interaction.",
+    "Strong momentum calls for a next step: lock in contact, or suggest continuing elsewhere if her signals say yes."
+   ]
+  },
+  "cb1b3910-7f46-4638-b7ba-949483f7d10a": {
+   "options": {
+    "2": [
+     "Suggest another venue change or escalate physically",
+     "Suggest moving somewhere else together"
+    ],
+    "3": [
+     "Either B or C depending on logistics and her signals",
+     "Get her number or suggest moving on together, depending on logistics and her signals"
+    ]
+   },
+   "explanation": [
+    "Strong momentum calls for progression; either lock in contact or advance the interaction.",
+    "Strong momentum calls for a next step: lock in contact, or suggest continuing elsewhere if her signals say yes."
+   ]
+  },
+  "59132ed6-d432-4176-9308-5f83ffeb2e2c": {
+   "options": {
+    "3": [
+     "B and C",
+     "Both: smiles are often courtesy, and men read warmth as interest"
+    ]
+   }
+  },
+  "c36a094c-8b8b-4c97-b801-f551071a78ed": {
+   "options": {
+    "3": [
+     "Either B or C",
+     "Either the creative-work or the thrifting assumption"
+    ]
+   }
+  },
+  "674acf71-26d4-428e-aa33-571e27f0d7d7": {
+   "options": {
+    "3": [
+     "Both B and C",
+     "It builds on itself, and she feels heard"
+    ]
+   }
+  },
+  "884ee9cb-5bc8-4593-8032-1bb68fe20856": {
+   "question_text": [
+    "You're both at a musical play. What’s an indirect opener?",
+    "You're both at a concert. What’s an indirect opener?"
+   ]
+  },
+  "d3daff27-e652-43a8-8f20-af94b5be0f32": {
+   "options": {
+    "2": [
+     "Say \"You seem cool. Want to grab coffee sometime?\"”]",
+     "Say \"You seem cool. Want to grab coffee sometime?\""
+    ]
+   }
+  },
+  "4e01d376-3513-4958-b45f-3cbac7198e67": {
+   "options": {
+    "1": [
+     "\"China sounds amazing. You have to tell me how it goes.\"",
+     "\"Portugal sounds amazing. You have to tell me how it goes.\""
+    ]
+   }
+  },
+  "d45e9b83-7cd7-4c69-b73b-89ec09e1fe8d": {
+   "explanation": [
+    "Hand her your phone with assumption; this makes her comply easier.",
+    "Handing her your phone with a relaxed assumption makes saying yes easy, and she can still say no."
+   ]
+  },
+  "e91466f0-24f3-4932-ab70-eab86651982c": {
+   "options": {
+    "2": [
+     "Lower back during movement",
+     "Upper arm"
+    ]
+   }
+  },
+  "f6feba7a-6f51-4a47-b8a8-d65c8f9ea942": {
+   "options": {
+    "2": [
+     "Light hand on lower back briefly",
+     "A light touch on her arm to guide her"
+    ]
+   }
+  },
+  "93982613-1848-48bb-b22b-59bd8c12b62f": {
+   "options": {
+    "1": [
+     "Let your hand linger when touching her arm briefly",
+     "Let a touch on her arm linger briefly, if she's clearly enjoying it"
+    ],
+    "2": [
+     "Stand close enough so she's aware of your presence",
+     "Stand a little closer, as long as she stays relaxed"
+    ]
+   }
+  },
+  "f23233f3-ec06-4834-bf59-d052a683bed7": {
+   "options": {
+    "3": [
+     "Letting a touch linger briefly",
+     "Letting a touch linger briefly when she's reciprocating"
+    ]
+   }
+  }
+ }
+}

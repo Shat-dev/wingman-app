@@ -6,7 +6,7 @@
     }
   },
   "screens": {
-    "b1000001-0000-0000-0009-000000000001": {"en": "You're at the grocery store. Produce section. Looking for a carton of eggs.", "de": "Du bist im Supermarkt und suchst eine Packung Eier."},
+    "b1000001-0000-0000-0009-000000000001": {"en": "You're at the grocery store. Dairy aisle. Looking for a carton of eggs.", "de": "Du bist im Supermarkt und suchst eine Packung Eier."},
     "b1000002-0000-0000-0009-000000000002": {"en": "There's one left and you notice a woman also walking towards it.", "de": "Es ist nur noch eine da, und du merkst, dass eine Frau auch darauf zusteuert."},
     "b1000003-0000-0000-0009-000000000003": {"en": "The two of you make eye contact and realize you're both going for it.", "de": "Eure Blicke treffen sich, und ihr merkt beide, dass ihr dieselbe Packung wollt."},
     "b1000004-0000-0000-0009-000000000004": {"en": "She's looking at you. Waiting to see what you do.", "de": "Sie schaut dich an und wartet, was du machst."},
@@ -17,7 +17,7 @@
     "b1000006-0000-0000-0009-000000000006": {"en": "Looks like we both got good taste.", "de": "Sieht so aus, als hätten wir beide guten Geschmack."},
     "b1000007-0000-0000-0009-000000000007": {"en": "Haha it appears so.", "de": "Haha, scheint so."},
     "b1000008-0000-0000-0009-000000000008": {"en": "Scissors paper rock for it?", "de": "Schere, Stein, Papier drum?"},
-    "b1000009-0000-0000-0009-000000000009": {"en": "Your serious? Okay, let's do it.", "de": "Im Ernst? Okay, los geht's."},
+    "b1000009-0000-0000-0009-000000000009": {"en": "You're serious? Okay, let's do it.", "de": "Im Ernst? Okay, los geht's."},
     "b1000010-0000-0000-0009-000000000010": {"en": "Playful challenge created. She's matching your energy.", "de": "Eine verspielte Herausforderung. Sie geht auf deine Energie ein."},
     "b1000011-0000-0000-0009-000000000011": {"en": "You play. She wins. Rock beats scissors. She's grinning, victorious.", "de": "Ihr spielt. Sie gewinnt. Stein schlägt Schere. Sie grinst triumphierend."},
     "b1000121-0000-0000-0009-000000000121": {"en": "Wait, best of three. That's how it works.", "de": "Moment, wer zuerst zwei gewinnt. So geht das."},
