@@ -1,4 +1,4 @@
--- English content fixes, 2026-11-11. Generated from 2026-11-11_content_fixes.json.
+-- English content fixes. Generated from 2026-11-11_content_fixes.json by scripts/en_content_fixes_sql.py.
 -- NOT RUN. Each update applies only if the row still has the exact old text, so it is safe to run twice
 -- and does nothing to a row someone has already edited. Run on a branch first. Answer indexes are unchanged.
 begin;
@@ -35,4 +35,6 @@ update public.questions set options = jsonb_set(options, '{2}', to_jsonb('A ligh
 update public.questions set options = jsonb_set(options, '{1}', to_jsonb('Let a touch on her arm linger briefly, if she''s clearly enjoying it'::text)) where id = '93982613-1848-48bb-b22b-59bd8c12b62f' and options->>1 = 'Let your hand linger when touching her arm briefly';
 update public.questions set options = jsonb_set(options, '{2}', to_jsonb('Stand a little closer, as long as she stays relaxed'::text)) where id = '93982613-1848-48bb-b22b-59bd8c12b62f' and options->>2 = 'Stand close enough so she''s aware of your presence';
 update public.questions set options = jsonb_set(options, '{3}', to_jsonb('Letting a touch linger briefly when she''s reciprocating'::text)) where id = 'f23233f3-ec06-4834-bf59-d052a683bed7' and options->>3 = 'Letting a touch linger briefly';
+update public.questions set explanation = 'Asking what pulled her from psychology to design explores the transition, the most interesting part of what she said.' where id = 'c9c21217-6720-474d-becb-eea9a3d28503' and explanation = 'C explores the transition thread (most interesting part of her statement).';
+update public.questions set question_text = 'She mentions a career change. You''ve been through one yourself. Best response?' where id = 'fc8e3792-e6b6-47b1-b102-f1ec0d9d980b' and question_text = 'She mentions a career change. You are in the middle of one yourself. Best response?';
 commit;

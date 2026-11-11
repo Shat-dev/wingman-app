@@ -204,6 +204,206 @@
       "question_text": {"en": "Walking together, conversation slows. What signals a clean reset?", "de": "Ihr geht zusammen, und das Gespräch wird langsamer. Was zeigt einen sauberen Neustart?"},
       "options": {"en": ["A relaxed pause before redirecting", "Rapid topic switching", "Asking if she’s bored"], "de": ["Eine entspannte Pause, bevor du umlenkst", "Schnelle Themenwechsel", "Fragen, ob sie sich langweilt"]},
       "explanation": {"en": "Steadiness communicates confidence more than speed.", "de": "Ruhe zeigt mehr Selbstbewusstsein als Tempo."}
+    },
+    "a567d0df-afca-4f4d-bed2-fa676a9cd119": {
+      "question_text": {"en": "You notice she’s nodding but not adding much while you talk. Best adjustment?", "de": "Du merkst, dass sie nickt, aber kaum etwas beiträgt, während du redest. Was passt du am besten an?"},
+      "options": {"en": ["Finish your point strongly", "Speed up to get it out", "Pause and invite her perspective", "Switch topics abruptly"], "de": ["Deinen Punkt kraftvoll zu Ende bringen", "Schneller reden, um fertig zu werden", "Innehalten und nach ihrer Sicht fragen", "Abrupt das Thema wechseln"]},
+      "explanation": {"en": "Checking in restores balance and invites re-engagement.", "de": "Nachfragen bringt das Gleichgewicht zurück und lädt sie ein, wieder mitzumachen."}
+    },
+    "a6a5fa05-f1d7-453b-b228-4c8e34485599": {
+      "question_text": {"en": "What happens when you only ask questions?", "de": "Was passiert, wenn du nur Fragen stellst?"},
+      "options": {"en": ["She does all the work providing content", "Conversation feels like interview, not connection", "She gets exhausted from continuous answering", "All of the above"], "de": ["Sie muss den ganzen Inhalt liefern", "Das Gespräch fühlt sich wie ein Verhör an, nicht wie Verbindung", "Sie wird vom ständigen Antworten müde", "Alle oben genannten"]},
+      "explanation": {"en": "Too many questions create an extractive dynamic where she carries the conversation.", "de": "Zu viele Fragen wirken wie ein Ausfragen, bei dem sie das Gespräch allein trägt."}
+    },
+    "a734d277-baef-4344-8dd3-962cd62d6ac3": {
+      "question_text": {"en": "Why is associating yourself with positive emotions important?", "de": "Warum ist es wichtig, dass sie dich mit positiven Gefühlen verbindet?"},
+      "options": {"en": ["Emotions create stronger associations with you", "Positive feelings make her want more time with you", "Negative emotions always build attraction"], "de": ["Gefühle sorgen dafür, dass sie dich stärker mit etwas verbindet", "Positive Gefühle bringen sie dazu, mehr Zeit mit dir verbringen zu wollen", "Negative Gefühle bauen immer Anziehung auf"]},
+      "explanation": {"en": "Attraction builds on how she feels in your presence, not just content.", "de": "Anziehung entsteht aus dem, wie sie sich in deiner Nähe fühlt, nicht nur aus dem Inhalt."}
+    },
+    "a89cc880-19f7-430e-b699-51926d19b98b": {
+      "question_text": {"en": "She shares an opinion you disagree with. What response best preserves connection?", "de": "Sie äußert eine Meinung, die du nicht teilst. Welche Reaktion erhält die Verbindung am besten?"},
+      "options": {"en": ["Explaining why her view is flawed", "Agreeing to avoid tension", "Changing the subject immediately", "Acknowledging her view and asking how she arrived at it"], "de": ["Erklären, warum ihre Sicht falsch ist", "Zustimmen, um Spannung zu vermeiden", "Sofort das Thema wechseln", "Ihre Sicht anerkennen und fragen, wie sie dazu gekommen ist"]},
+      "explanation": {"en": "Curiosity keeps the interaction collaborative instead of competitive.", "de": "Neugier hält das Gespräch zu einem Miteinander statt zu einem Wettkampf."}
+    },
+    "a9785ffd-0cfe-4181-b029-10a0c6cc6131": {
+      "question_text": {"en": "\"I work in tech but I'm actually a painter on weekends.\" Best threading response?", "de": "„Ich arbeite in der Tech-Branche, aber am Wochenende male ich.“ Welche Antwort knüpft am besten an?"},
+      "options": {"en": ["\"Tech and art—that's an interesting combination, how'd that happen?\"", "\"Oh cool, what kind of tech work do you do?\"", "\"Painting! That's awesome. What do you paint?\""], "de": ["„Tech und Kunst, spannende Kombi. Wie kam das?“", "„Oh, cool. Was machst du genau in der Tech-Branche?“", "„Malen! Wie toll. Was malst du?“"]},
+      "explanation": {"en": "Combines both threads, shows you heard everything, creates opening for her story.", "de": "Verbindet beide Fäden, zeigt, dass du alles gehört hast, und öffnet die Tür für ihre Geschichte."}
+    },
+    "aa6e8752-217b-4419-a60b-1e74d05c3e39": {
+      "question_text": {"en": "She tells a funny story and laughs. What should your body language do?", "de": "Sie erzählt eine lustige Geschichte und lacht. Was sollte deine Körpersprache tun?"},
+      "options": {"en": ["Stay completely still and neutral", "Smile and nod during the punchline", "Look away to avoid seeming too eager", "Cross your arms and lean back"], "de": ["Völlig reglos und neutral bleiben", "Bei der Pointe lächeln und nicken", "Wegschauen, um nicht zu eifrig zu wirken", "Die Arme verschränken und dich zurücklehnen"]},
+      "explanation": {"en": "Matching her energy with facial responses shows genuine engagement.", "de": "Wenn du ihre Energie mit deiner Mimik aufgreifst, zeigst du echtes Interesse."}
+    },
+    "ab4ba3e7-8e8e-4347-a113-cdb95d15d251": {
+      "question_text": {"en": "Which behaviors commonly break conversational rhythm?", "de": "Welches Verhalten bringt den Gesprächsrhythmus oft durcheinander?"},
+      "options": {"en": ["Long, uninterrupted stories", "Short responses with no follow-up", "Brief sharing followed by space", "Checking in after making a point"], "de": ["Lange Geschichten ohne Pause", "Kurze Antworten ohne Nachfrage", "Kurz etwas erzählen und dann Raum lassen", "Nach einem Punkt nachfragen"]},
+      "explanation": {"en": "Both dominating and withdrawing force the rhythm off balance.", "de": "Dominieren und Zurückziehen bringen den Rhythmus beide aus dem Gleichgewicht."}
+    },
+    "add28003-e846-44f9-b448-3449baa804b7": {
+      "question_text": {"en": "She pushes back on your opinion. What indicates a healthy response from you?", "de": "Sie widerspricht deiner Meinung. Woran erkennst du, dass du gesund reagierst?"},
+      "options": {"en": ["Remaining relaxed and engaged", "Listing examples to prove your point", "Raising your voice to match intensity", "Withdrawing from the topic"], "de": ["Du bleibst entspannt und im Gespräch", "Du zählst Beispiele auf, um recht zu behalten", "Du wirst lauter, um mitzuhalten", "Du ziehst dich aus dem Thema zurück"]},
+      "explanation": {"en": "Staying relaxed shows you are not threatened by disagreement.", "de": "Wenn du entspannt bleibst, zeigst du, dass dich Widerspruch nicht aus der Ruhe bringt."}
+    },
+    "af3e39be-381e-451e-aa88-6cebba413dad": {
+      "question_text": {"en": "Examples of validating statements include which?", "de": "Welche Sätze würdigen das, was sie gesagt hat?"},
+      "options": {"en": ["\"That sounds rough.\"", "\"I can see why that matters to you.\"", "\"Why did that happen?\"", "\"That must have been tough.\""], "de": ["„Das klingt hart.“", "„Ich versteh, warum dir das wichtig ist.“", "„Warum ist das passiert?“", "„Das muss schwer gewesen sein.“"]},
+      "explanation": {"en": "Brief acknowledgments show her words have weight.", "de": "Kurze Anerkennung zeigt, dass ihre Worte Gewicht haben."}
+    },
+    "b14823ef-b8ce-4062-8fcb-4cfcf41fc931": {
+      "question_text": {"en": "When does disagreement become a problem?", "de": "Wann wird eine Meinungsverschiedenheit zum Problem?"},
+      "options": {"en": ["When being right matters more than staying connected", "When opinions are too different to find common ground", "When it happens too early before trust is built"], "de": ["Wenn Rechthaben wichtiger ist als die Verbindung", "Wenn die Meinungen zu verschieden sind, um Gemeinsamkeiten zu finden", "Wenn sie zu früh kommt, bevor Vertrauen da ist"]},
+      "explanation": {"en": "Connection breaks when being right becomes more important than understanding.", "de": "Die Verbindung bricht, wenn Rechthaben wichtiger wird als Verstehen."}
+    },
+    "b284a2c4-70e8-4c60-91c5-92cbc5e68edf": {
+      "question_text": {"en": "She lights up while talking about a hobby. You need to leave. What can guide your final line?", "de": "Sie blüht auf, als sie von einem Hobby erzählt. Du musst los. Woran kannst du deinen letzten Satz ausrichten?"},
+      "options": {"en": ["Ending efficiently", "Avoiding pressure", "Keeping it short", "Referencing what energized her"], "de": ["Effizient abschließen", "Druck vermeiden", "Es kurz halten", "Das aufgreifen, was sie so begeistert hat"]},
+      "explanation": {"en": "Ending on what mattered to her preserves the emotional tone of the interaction.", "de": "Wenn du mit dem aufhörst, was ihr wichtig war, bleibt die Stimmung der Begegnung erhalten."}
+    },
+    "b5ac4b83-5b84-4914-8cdf-cbba23aa7ff4": {
+      "question_text": {"en": "The conversation is light and fun about favorite ramen spots. How can you close?", "de": "Ihr redet locker und lustig über eure Lieblings-Ramenläden. Wie kannst du zum Abschluss kommen?"},
+      "options": {"en": ["\"We should go on a date sometime, can I take you to dinner?\"", "\"I’ll text you that ramen spot I mentioned. What’s your number?\"", "\"Let’s hang out soon, when are you free?\""], "de": ["„Wir sollten mal auf ein Date gehen. Darf ich dich zum Essen einladen?“", "„Ich schick dir den Ramenladen, den ich erwähnt hab. Was ist deine Nummer?“", "„Lass uns bald was machen. Wann hast du Zeit?“"]},
+      "explanation": {"en": "A small, low-stakes next step matches the tone and feels natural.", "de": "Ein kleiner nächster Schritt ohne Druck passt zur Stimmung und fühlt sich natürlich an."}
+    },
+    "b7fd7470-ddb6-4107-9390-97cff5fc0696": {
+      "question_text": {"en": "Why do generic goodbyes kill momentum after a strong conversation?", "de": "Warum macht ein allgemeiner Abschied den Schwung nach einem guten Gespräch kaputt?"},
+      "options": {"en": ["They make follow-up texts feel random", "They give her nothing specific to remember or reconnect with", "They show you were listening closely"], "de": ["Spätere Nachrichten wirken dann zusammenhanglos", "Sie hat nichts Konkretes, woran sie sich erinnern oder anknüpfen kann", "Er zeigt, dass du genau zugehört hast"]},
+      "explanation": {"en": "Generic exits close the interaction fully instead of bridging forward.", "de": "Ein allgemeiner Abschied schließt die Begegnung ganz ab, statt eine Brücke nach vorn zu bauen."}
+    },
+    "bac16dba-494e-42a6-85ef-76041bd6b867": {
+      "question_text": {"en": "Why does listening to respond prevent real connection?", "de": "Warum verhindert Zuhören, um zu antworten, echte Verbindung?"},
+      "options": {"en": ["Your mind focuses on your next statement instead of her words", "You miss subtext and emotional cues", "Responses feel generic and disconnected", "It shows you are fully present in the moment"], "de": ["Dein Kopf ist bei deinem nächsten Satz statt bei ihren Worten", "Du verpasst Subtext und emotionale Signale", "Deine Antworten wirken allgemein und ohne Bezug", "Es zeigt, dass du ganz im Moment bist"]},
+      "explanation": {"en": "Planning responses shifts focus inward and signals you are not truly hearing her.", "de": "Wer Antworten plant, ist mit dem Fokus bei sich und zeigt, dass er ihr nicht wirklich zuhört."}
+    },
+    "bb4ac1da-dc29-41e3-a551-022813ad2ba6": {
+      "question_text": {"en": "She says she’s free this weekend. What assumed close fits best?", "de": "Sie sagt, dass sie am Wochenende Zeit hat. Welcher selbstverständliche Abschluss passt am besten?"},
+      "options": {"en": ["\"Would you want to get dinner?\"", "\"Do you think we should meet up?\"", "\"We’re hanging out then. What’s your number?\"", "\"Maybe dinner if you’re interested?\""], "de": ["„Hättest du Lust, essen zu gehen?“", "„Meinst du, wir sollten uns treffen?“", "„Dann sehen wir uns. Was ist deine Nummer?“", "„Vielleicht Essen, falls du Interesse hast?“"]},
+      "explanation": {"en": "Assume the plan and move to logistics with confidence.", "de": "Geh vom Plan aus und kläre selbstbewusst das Praktische."}
+    },
+    "bf592d93-816d-437d-bf97-761e412be0fa": {
+      "question_text": {"en": "Why does responding to subtext create connection?", "de": "Warum schafft es Verbindung, auf den Subtext einzugehen?"},
+      "options": {"en": ["It shows you are listening beyond literal words", "It keeps the conversation surface-level", "It makes her feel truly understood", "It acknowledges the emotion behind her statement"], "de": ["Es zeigt, dass du über die wörtliche Bedeutung hinaus zuhörst", "Es hält das Gespräch an der Oberfläche", "Sie fühlt sich wirklich verstanden", "Es erkennt das Gefühl hinter ihren Worten an"]},
+      "explanation": {"en": "Subtext reveals the real message; addressing it builds attunement.", "de": "Der Subtext zeigt die eigentliche Botschaft. Wenn du darauf eingehst, seid ihr aufeinander eingestimmt."}
+    },
+    "c46c2263-5933-4984-8b1a-1cb44756f991": {
+      "question_text": {"en": "Why do long, step-by-step stories often lose engagement?", "de": "Warum verlieren lange, haarkleine Geschichten oft die Zuhörerin?"},
+      "options": {"en": ["They feel dishonest", "They are too vulnerable", "They show insecurity", "They require too much tracking"], "de": ["Sie wirken unehrlich", "Sie sind zu verletzlich", "Sie zeigen Unsicherheit", "Man muss sich zu viel merken"]},
+      "explanation": {"en": "When listeners have to work to follow, emotional connection drops.", "de": "Wenn man sich anstrengen muss, um zu folgen, lässt die emotionale Verbindung nach."}
+    },
+    "c6ab667b-89c1-40bf-81ce-fc391a31cf88": {
+      "question_text": {"en": "Why should early conversations stay light?", "de": "Warum sollten Gespräche am Anfang leicht bleiben?"},
+      "options": {"en": ["Trust needs time to build for heavier topics", "Unprocessed sharing creates imbalance", "Processed details invite natural closeness", "Depth is always better from the start"], "de": ["Für schwerere Themen braucht Vertrauen Zeit", "Unverarbeitetes zu teilen bringt alles aus dem Gleichgewicht", "Verarbeitete Details laden ganz natürlich zu Nähe ein", "Tiefe ist von Anfang an immer besser"]},
+      "explanation": {"en": "Light foundations allow connection to grow safely.", "de": "Auf einer leichten Grundlage kann Verbindung sicher wachsen."}
+    },
+    "c7773b16-20a8-4e4f-b8d5-ce0164ce4e7a": {
+      "question_text": {"en": "Why do big asks often create hesitation even after a good conversation?", "de": "Warum lösen große Bitten auch nach einem guten Gespräch oft Zögern aus?"},
+      "options": {"en": ["They raise the stakes suddenly", "They feel rehearsed", "They sound needy", "They reduce attraction"], "de": ["Plötzlich steht viel mehr auf dem Spiel", "Sie wirken einstudiert", "Sie klingen bedürftig", "Sie verringern die Anziehung"]},
+      "explanation": {"en": "When stakes rise too fast, people instinctively pull back.", "de": "Wenn zu schnell zu viel auf dem Spiel steht, ziehen sich Menschen instinktiv zurück."}
+    },
+    "c8c65a67-7bdf-4ffa-95d7-4d6f1b019a36": {
+      "question_text": {"en": "Three questions in a row, she's answering but energy feels flat. What should you do next?", "de": "Drei Fragen hintereinander. Sie antwortet, aber die Energie ist flach. Was solltest du als Nächstes tun?"},
+      "options": {"en": ["Ask more engaging question to recapture her interest", "Switch to a different topic that she's more passionate about", "Make a statement or observation to balance the exchange"], "de": ["Eine spannendere Frage stellen, um ihr Interesse zurückzuholen", "Zu einem Thema wechseln, für das sie sich mehr begeistert", "Eine Aussage oder Beobachtung machen, um den Austausch auszugleichen"]},
+      "explanation": {"en": "Observations give her something to respond to without the burden of answering.", "de": "Beobachtungen geben ihr etwas, worauf sie eingehen kann, ohne dass sie antworten muss."}
+    },
+    "c9c21217-6720-474d-becb-eea9a3d28503": {
+      "question_text": {"en": "She says \"I studied psychology but ended up in product design.\" Which threads are available?", "de": "Sie sagt: „Ich hab Psychologie studiert, bin aber im Produktdesign gelandet.“ Welche Fäden bieten sich an?"},
+      "options": {"en": ["\"Psychology's fascinating. My sister does it as well\"", "\"Where did you study psychology?\"", "\"That's quite a shift. What pulled you from psychology to design?\""], "de": ["„Psychologie ist faszinierend. Meine Schwester macht das auch.“", "„Wo hast du Psychologie studiert?“", "„Ganz schöner Wechsel. Was hat dich von der Psychologie zum Design gezogen?“"]},
+      "explanation": {"en": "Asking what pulled her from psychology to design explores the transition, the most interesting part of what she said.", "de": "Die Frage, was sie von der Psychologie zum Design gezogen hat, greift den Wechsel auf, den spannendsten Teil ihrer Aussage."}
+    },
+    "cb95d0ef-b417-4041-9b25-7d3df8389f7c": {
+      "question_text": {"en": "What makes observations effective in conversation?", "de": "Was macht Beobachtungen im Gespräch wirksam?"},
+      "options": {"en": ["They show you're paying attention to details", "They give her something to respond to without demands", "They create shared moment instead of extraction", "They demonstrate high confidence"], "de": ["Sie zeigen, dass du auf Details achtest", "Sie geben ihr etwas, worauf sie eingehen kann, ohne etwas zu verlangen", "Sie schaffen einen gemeinsamen Moment statt Ausfragen", "Sie zeigen großes Selbstbewusstsein"]},
+      "explanation": {"en": "Observations show attention, invite response without pressure, and encourage sharing.", "de": "Beobachtungen zeigen Aufmerksamkeit, laden ohne Druck zu einer Antwort ein und ermuntern sie, etwas zu erzählen."}
+    },
+    "cbd5d720-2cda-427f-b70b-062656b318b6": {
+      "question_text": {"en": "What does \"matching\" involve in conversation?", "de": "Was gehört im Gespräch zum „Anpassen“?"},
+      "options": {"en": ["Speaking at similar volume she's using", "Matching emotional depth she's currently sharing", "Reflecting her tone and communication style", "Agreeing with opinions she expresses"], "de": ["Ähnlich laut sprechen wie sie", "Dich der emotionalen Tiefe anpassen, auf der sie gerade erzählt", "Ihren Ton und ihre Art zu kommunizieren aufgreifen", "Ihren Meinungen zustimmen"]},
+      "explanation": {"en": "Matching regulates ease by aligning expression, not agreement.", "de": "Anpassen schafft Leichtigkeit, indem ihr euch im Ausdruck angleicht, nicht in der Meinung."}
+    },
+    "cca7a715-1724-4e42-a043-6c5cfa837473": {
+      "question_text": {"en": "She shares something vulnerable about her career change. What should you do next?", "de": "Sie erzählt etwas Persönliches über ihren Jobwechsel. Was solltest du als Nächstes tun?"},
+      "options": {"en": ["Immediately give advice or reassurance", "Pause, hold eye contact, and nod", "Ask a follow-up question right away", "Change the subject to keep momentum"], "de": ["Sofort einen Rat geben oder sie beruhigen", "Innehalten, Blickkontakt halten und nicken", "Gleich eine Nachfrage stellen", "Das Thema wechseln, um den Schwung zu halten"]},
+      "explanation": {"en": "Silence gives the conversation space and deepens the moment.", "de": "Stille gibt dem Gespräch Raum und vertieft den Moment."}
+    },
+    "cfd11024-05eb-4caa-a51a-88939ceb81d5": {
+      "question_text": {"en": "What usually happens when someone feels their subtext is understood?", "de": "Was passiert meistens, wenn sich jemand im Subtext verstanden fühlt?"},
+      "options": {"en": ["They shorten their answers", "They relax and expand", "They change topics", "They become more guarded"], "de": ["Die Antworten werden kürzer", "Die Person entspannt sich und erzählt mehr", "Sie wechselt das Thema", "Sie wird verschlossener"]},
+      "explanation": {"en": "Feeling understood invites openness and deeper sharing.", "de": "Wer sich verstanden fühlt, öffnet sich und erzählt mehr."}
+    },
+    "d226b626-28f6-4109-8268-b01d9a460890": {
+      "question_text": {"en": "What is the primary role of validating follow-ups?", "de": "Wozu dienen vor allem Nachfragen, die das Gesagte würdigen?"},
+      "options": {"en": ["To give advice on her situation", "To show her response matters before continuing", "To change the topic smoothly", "To ask deeper questions immediately"], "de": ["Um ihr Ratschläge zu ihrer Situation zu geben", "Um zu zeigen, dass ihre Antwort zählt, bevor es weitergeht", "Um elegant das Thema zu wechseln", "Um sofort tiefere Fragen zu stellen"]},
+      "explanation": {"en": "Validation pauses to recognize, creating space for connection.", "de": "Würdigen heißt, kurz innezuhalten und anzuerkennen. Das schafft Raum für Verbindung."}
+    },
+    "d38324bc-d000-4a3f-a909-0c700d82ce65": {
+      "question_text": {"en": "The energy feels high, but you have been talking for a while. What should you do?", "de": "Die Energie ist hoch, aber du redest schon eine Weile. Was solltest du tun?"},
+      "options": {"en": ["Continue to maintain momentum", "Pause and ask her opinion on what you said", "Apologize for talking too much", "End the interaction"], "de": ["Weiterreden, um den Schwung zu halten", "Innehalten und fragen, was sie zu deinem Punkt meint", "Dich entschuldigen, dass du so viel redest", "Das Gespräch beenden"]},
+      "explanation": {"en": "Check in to restore back-and-forth and prevent monologue.", "de": "Frag nach, damit wieder ein Hin und Her entsteht und kein Monolog."}
+    },
+    "d45e9b83-7cd7-4c69-b73b-89ec09e1fe8d": {
+      "question_text": {"en": "She’s laughing and leaning in. You want her number. What works best?", "de": "Sie lacht und lehnt sich zu dir. Du willst ihre Nummer. Was funktioniert am besten?"},
+      "options": {"en": ["\"Put your number in here, we’re continuing this.\"", "\"Would you mind giving me your number?\"", "\"Do you want to stay in touch?\"", "\"Maybe we can text sometime?\""], "de": ["„Tipp deine Nummer ein, das hier machen wir weiter.“", "„Würdest du mir vielleicht deine Nummer geben?“", "„Willst du in Kontakt bleiben?“", "„Vielleicht können wir mal schreiben?“"]},
+      "explanation": {"en": "Handing her your phone with a relaxed assumption makes saying yes easy, and she can still say no.", "de": "Wenn du ihr ganz selbstverständlich dein Handy gibst, fällt ihr ein Ja leicht, und sie kann trotzdem Nein sagen."}
+    },
+    "d8feb1b5-d12d-4bee-96bc-68092a37c841": {
+      "question_text": {"en": "Why are energy drops not the same as disinterest?", "de": "Warum ist ein Energieabfall nicht dasselbe wie Desinteresse?"},
+      "options": {"en": ["They often occur when a topic runs its course", "They can happen from a sensitive subject", "They are normal friction points in flow", "All of the above"], "de": ["Er kommt oft, wenn ein Thema ausgeschöpft ist", "Er kann von einem heiklen Thema kommen", "Er ist eine normale Reibungsstelle im Gesprächsfluss", "Alle oben genannten"]},
+      "explanation": {"en": "Energy dips are normal transitions, not signals of rejection.", "de": "Energietiefs sind normale Übergänge, keine Zeichen von Ablehnung."}
+    },
+    "de05395b-2be8-4a0f-a1a9-f8ccc2dea698": {
+      "question_text": {"en": "What do observations and statements contribute that questions alone do not?", "de": "Was tragen Beobachtungen und Aussagen bei, was Fragen allein nicht leisten?"},
+      "options": {"en": ["They reduce pressure", "They show attentiveness", "They balance conversational effort", "They force her to respond"], "de": ["Sie senken den Druck", "Sie zeigen Aufmerksamkeit", "Sie verteilen die Mühe im Gespräch gerechter", "Sie zwingen sie zu antworten"]},
+      "explanation": {"en": "Observations and statements invite response without demanding it.", "de": "Beobachtungen und Aussagen laden zu einer Antwort ein, ohne sie zu verlangen."}
+    },
+    "df1e06ae-6ab7-4483-aa1a-c651e45f6383": {
+      "question_text": {"en": "Effective non-verbal listening cues include which?", "de": "Welche nonverbalen Signale zeigen gutes Zuhören?"},
+      "options": {"en": ["Facing her directly", "Natural eye contact", "Slight lean-in", "Closed posture and crossed arms"], "de": ["Dich ihr direkt zuwenden", "Natürlicher Blickkontakt", "Dich leicht vorlehnen", "Verschlossene Haltung und verschränkte Arme"]},
+      "explanation": {"en": "Open body signals show interest and make her feel valued.", "de": "Offene Körpersignale zeigen Interesse und geben ihr das Gefühl, geschätzt zu werden."}
+    },
+    "e32b283b-6ea1-4914-8d33-e58a17093c39": {
+      "question_text": {"en": "She says, “This bar has a great vibe.” What is an observation response?", "de": "Sie sagt: „Die Bar hat eine tolle Atmosphäre.“ Welche Reaktion ist eine Beobachtung?"},
+      "options": {"en": ["\"Do you come here often?\"", "\"Yeah, the music here is always spot on.\"", "\"What do you like about it?\"", "\"Is this your favorite bar?\""], "de": ["„Bist du oft hier?“", "„Ja, die Musik hier ist immer genau richtig.“", "„Was gefällt dir daran?“", "„Ist das deine Lieblingsbar?“"]},
+      "explanation": {"en": "A statement shares your view and opens easy response.", "de": "Eine Aussage teilt deine Sicht und macht es ihr leicht, darauf einzugehen."}
+    },
+    "e6a811b3-1df2-496e-a632-731de2c90037": {
+      "question_text": {"en": "She shares something meaningful to her. What response deepens emotional connection?", "de": "Sie erzählt etwas, das ihr viel bedeutet. Welche Reaktion vertieft die emotionale Verbindung?"},
+      "options": {"en": ["Validating why it matters to her", "Offering solutions", "Sharing a similar story immediately", "Changing the subject to keep things light"], "de": ["Würdigen, warum es ihr wichtig ist", "Lösungen anbieten", "Sofort eine ähnliche Geschichte erzählen", "Das Thema wechseln, damit es leicht bleibt"]},
+      "explanation": {"en": "Feeling seen creates warmth and emotional safety.", "de": "Wer sich gesehen fühlt, spürt Wärme und emotionale Sicherheit."}
+    },
+    "f1489d76-0230-4524-9918-2a7b8ca71d2d": {
+      "question_text": {"en": "How does listening to understand benefit the interaction?", "de": "Was bringt es dem Gespräch, zuzuhören, um zu verstehen?"},
+      "options": {"en": ["It makes her feel genuinely heard", "It allows you to catch subtext and details", "It creates a more natural connection", "It speeds up the conversation flow"], "de": ["Sie fühlt sich wirklich gehört", "Du bekommst Subtext und Details mit", "Es entsteht eine natürlichere Verbindung", "Es beschleunigt den Gesprächsfluss"]},
+      "explanation": {"en": "Full presence builds attunement and turns talk into real understanding.", "de": "Volle Präsenz bringt euch auf eine Wellenlänge und macht aus Reden echtes Verstehen."}
+    },
+    "f4b3b908-47e7-45ae-9eb6-f5261d6f7325": {
+      "question_text": {"en": "She asks about travel. You share your entire itinerary. Energy fades. Better approach?", "de": "Sie fragt nach deinen Reisen. Du erzählst deine komplette Route. Die Energie lässt nach. Was wäre besser?"},
+      "options": {"en": ["Ask about her travels first before sharing yours", "Share all the highlights, skip boring logistics", "Select one specific meaningful moment from trip"], "de": ["Erst nach ihren Reisen fragen, bevor du von deinen erzählst", "Alle Highlights erzählen, das Langweilige weglassen", "Einen bestimmten, bedeutsamen Moment der Reise auswählen"]},
+      "explanation": {"en": "Focus on what you want her to understand, not everything that happened.", "de": "Konzentrier dich auf das, was sie verstehen soll, nicht auf alles, was passiert ist."}
+    },
+    "f5c61ea0-9f18-4235-a9ab-6adb6c8b8aac": {
+      "question_text": {"en": "Why does responding to subtext create connection?", "de": "Warum schafft es Verbindung, auf den Subtext einzugehen?"},
+      "options": {"en": ["It shows you're emotionally intelligent and perceptive", "She feels understood because you heard her actual message", "It demonstrates you're paying closer attention than others", "Emotional responses build attraction faster than logical ones"], "de": ["Es zeigt, dass du emotional intelligent und aufmerksam bist", "Sie fühlt sich verstanden, weil du ihre eigentliche Botschaft gehört hast", "Es zeigt, dass du genauer hinhörst als andere", "Emotionale Antworten bauen schneller Anziehung auf als sachliche"]},
+      "explanation": {"en": "Subtext carries the real message; respond to it so she feels genuinely understood.", "de": "Im Subtext steckt die eigentliche Botschaft. Geh darauf ein, damit sie sich wirklich verstanden fühlt."}
+    },
+    "faa961fa-7141-46c3-a897-d3e92bbb1ede": {
+      "question_text": {"en": "Why is laughter such a powerful emotional anchor?", "de": "Warum ist Lachen ein so starker emotionaler Anker?"},
+      "options": {"en": ["It creates shared positive emotion in the moment", "It signals social dominance", "It shows intelligence", "It distracts from awkwardness"], "de": ["Es schafft im Moment ein gemeinsames positives Gefühl", "Es signalisiert soziale Dominanz", "Es zeigt Intelligenz", "Es lenkt von Peinlichkeit ab"]},
+      "explanation": {"en": "Shared laughter creates instant positive association and ease.", "de": "Gemeinsames Lachen schafft sofort eine positive Verbindung und Leichtigkeit."}
+    },
+    "fc6a4d99-9dc3-4483-b053-8182553c1e5c": {
+      "question_text": {"en": "What is the best mindset when an energy drop in conversation happens?", "de": "Mit welcher Einstellung gehst du am besten mit einem Energieabfall im Gespräch um?"},
+      "options": {"en": ["See it as normal and redirect calmly", "Treat it as a failure and overcompensate", "Ignore it and keep the same topic", "End the interaction immediately"], "de": ["Ihn als normal sehen und ruhig umlenken", "Ihn als Versagen sehen und überkompensieren", "Ihn ignorieren und beim Thema bleiben", "Das Gespräch sofort beenden"]},
+      "explanation": {"en": "Staying steady preserves composure and restores rhythm naturally.", "de": "Wer ruhig bleibt, behält die Fassung und bringt den Rhythmus ganz natürlich zurück."}
+    },
+    "fc8e3792-e6b6-47b1-b102-f1ec0d9d980b": {
+      "question_text": {"en": "She mentions a career change. You've been through one yourself. Best response?", "de": "Sie erwähnt einen Jobwechsel. Du hast selbst schon einen hinter dir. Beste Reaktion?"},
+      "options": {"en": ["\"I’m going through the same thing; it’s awful\"", "Ignore her comment and change topic", "\"I’ve made a change before; it was challenging but rewarding\""], "de": ["„Ich mach gerade dasselbe durch. Es ist furchtbar.“", "Ihren Kommentar ignorieren und das Thema wechseln", "„Ich hab auch schon mal gewechselt. Es war herausfordernd, aber hat sich gelohnt.“"]},
+      "explanation": {"en": "Share a processed insight to relate without oversharing pain.", "de": "Teil eine verarbeitete Erkenntnis, um eine Verbindung herzustellen, ohne zu viel Schmerz abzuladen."}
+    },
+    "fe98319f-7a07-4376-a92b-a4c12040ed64": {
+      "question_text": {"en": "Why does validating her response create psychological safety?", "de": "Warum schafft es psychologische Sicherheit, ihre Antwort zu würdigen?"},
+      "options": {"en": ["It acknowledges her experiences matter", "It makes her feel understood and opens her up", "It rushes to the next question quickly"], "de": ["Es erkennt an, dass ihre Erfahrungen zählen", "Sie fühlt sich verstanden und öffnet sich", "Es hetzt schnell zur nächsten Frage"]},
+      "explanation": {"en": "Validation signals her words landed, fostering genuine exchange.", "de": "Würdigen zeigt, dass ihre Worte angekommen sind, und fördert einen echten Austausch."}
     }
   }
 }
