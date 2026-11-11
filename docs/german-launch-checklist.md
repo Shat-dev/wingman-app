@@ -48,9 +48,18 @@ Steps 1, 2 and 3 run in parallel. Steps 4 to 6 fit in while the proofreader work
 
 **Why:** Claude wrote all the German. The grammar is mostly right. What a writer can't catch in their own work is tone: what sounds natural to a German man and what sounds stiff, translated or cringe in a dating app. The same goes for wording around money and the law. The brief for the reviewer is [`localization-de-brief.md`](localization-de-brief.md).
 
-### 1a. Build a review pack (Claude, about an hour)
+### 1a. Build a review pack (Claude) ✅ done 2026-11-12
 
-The German lives in several formats, and the lesson files are German only, with no English next to them. Ask Claude to **"build the German review pack"**: one spreadsheet (or Google Sheet) per part, with these columns: ID, English, German, reviewer's version, comment.
+**The pack:** [`localization/de/review/wingman-german-review-pack.xlsx`](../localization/de/review/wingman-german-review-pack.xlsx). Rebuild it after any German change with `python3 scripts/german_review_pack.py`.
+
+It's one Excel workbook with six sheets:
+- **Read me:** what the app is, the house rules, and how to fill the sheets in.
+- **Choices to check:** 12 decisions for the proofreader to confirm or change.
+- **Interface:** 456 strings, sorted by screen. The 215 "Must read" rows (paywall, sign-in, onboarding, notifications) are highlighted in pink.
+- **Lesson 1_1** and **Lesson 6_1:** the two sample lessons, page by page.
+- **Daily quotes:** 120 quotes, lower priority.
+
+The proofreader writes only in the yellow columns: Your version, Status and Comment.
 
 Priority set, about 4,700 words:
 
