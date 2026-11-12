@@ -27,6 +27,9 @@ The generated SQL is NOT run by this script or anyone else automatically. It
 needs the content-translation migration applied first, and is meant to be run
 by Arthur, on a branch or local stack before production. Every statement is an
 upsert on (id, locale), so running a file twice is safe.
+
+It also rewrites the quiz-question copy bundled in the app
+(scripts/question_translations_seed.py), so the two cannot drift.
 """
 
 import json
@@ -146,7 +149,9 @@ def main():
             print("  -", p)
         return 1
     print(f"\nOK: {len(files)} file(s) written to {target}/")
-    return 0
+    # The app ships the quiz-question rows too; keep that copy in step.
+    import question_translations_seed
+    return question_translations_seed.main(["question_translations_seed.py", locale])
 
 
 if __name__ == "__main__":

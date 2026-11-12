@@ -84,8 +84,13 @@ final class QuestionTranslationCacheTests: XCTestCase {
         [QuestionTranslation(questionId: firstID, questionText: "Was sagst du zuerst?", options: ["Hi", "Nichts"], explanation: nil)]
     }
 
-    private func cache(language: String?, sync: CountingSync) -> QuestionTranslationCache {
-        QuestionTranslationCache(language: { language }, sync: sync, directory: directory, defaults: defaults)
+    private func cache(
+        language: String?, sync: CountingSync, seed: [QuestionTranslation] = []
+    ) -> QuestionTranslationCache {
+        QuestionTranslationCache(
+            language: { language }, sync: sync, directory: directory, defaults: defaults,
+            seed: { _ in seed }
+        )
     }
 
     private func files() -> [String] {
@@ -271,5 +276,104 @@ final class QuestionTranslationCacheTests: XCTestCase {
         XCTAssertNotEqual(QuestionTranslationCache.fingerprintKey("de"), "lesson_questions_synced_fingerprint")
         XCTAssertTrue(QuestionTranslationCache.fileName("de").contains("de"))
         XCTAssertTrue(QuestionTranslationCache.fingerprintKey("pt-br").hasSuffix("pt-br"))
+    }
+
+    // MARK: - Bundled translations
+
+    func testTheBundledTranslationsApplyBeforeAnyDownload() {
+        let sync = CountingSync()
+        let cache = cache(language: "de", sync: sync, seed: german)
+
+        XCTAssertEqual(cache.apply(to: questions)[0].question, "Was sagst du zuerst?")
+        XCTAssertEqual(sync.requests, [], "nothing to wait for")
+    }
+
+    func testEnglishIgnoresTheBundledTranslations() {
+        let cache = cache(language: nil, sync: CountingSync(), seed: german)
+        XCTAssertEqual(cache.apply(to: questions).map(\.question), questions.map(\.question))
+    }
+
+    func testAFailedRefreshKeepsTheBundledTranslations() async {
+        let sync = CountingSync()
+        sync.fails = true
+        let cache = cache(language: "de", sync: sync, seed: german)
+
+        _ = await cache.refresh()
+
+        XCTAssertEqual(cache.apply(to: questions)[0].question, "Was sagst du zuerst?")
+    }
+
+    func testADownloadReplacesTheBundledTranslations() async {
+        let sync = CountingSync()
+        sync.rows = [QuestionTranslation(questionId: secondID, questionText: "Und dann?", options: nil, explanation: nil)]
+        let cache = cache(language: "de", sync: sync, seed: german)
+
+        _ = await cache.refresh()
+
+        let result = cache.apply(to: questions)
+        XCTAssertEqual(result[0].question, "What do you say first?", "the download is the whole truth, not merged")
+        XCTAssertEqual(result[1].question, "Und dann?")
+    }
+
+    func testADownloadedFileWinsOverTheBundleOnTheNextLaunch() async {
+        let sync = CountingSync()
+        sync.rows = [QuestionTranslation(questionId: firstID, questionText: "Neu formuliert", options: nil, explanation: nil)]
+        _ = await cache(language: "de", sync: sync, seed: german).refresh()
+
+        let relaunched = cache(language: "de", sync: CountingSync(), seed: german)
+        XCTAssertEqual(relaunched.apply(to: questions)[0].question, "Neu formuliert")
+    }
+
+    func testAnUnreadableFileFallsBackToTheBundle() throws {
+        try Data("not json".utf8).write(to: directory.appendingPathComponent(QuestionTranslationCache.fileName("de")))
+        let cache = cache(language: "de", sync: CountingSync(), seed: german)
+        XCTAssertEqual(cache.apply(to: questions)[0].question, "Was sagst du zuerst?")
+    }
+
+    // MARK: - An empty download
+
+    /// A request without a session passes RLS as `anon`: 200, no rows.
+    func testAnEmptyDownloadIsNotStoredAndKeepsWhatIsCached() async {
+        let sync = CountingSync()
+        sync.rows = german
+        let cache = cache(language: "de", sync: sync)
+        _ = await cache.refresh()
+
+        sync.rows = []
+        sync.fingerprintValue = "0:-"
+        let changed = await cache.refresh()
+
+        XCTAssertFalse(changed)
+        XCTAssertEqual(cache.apply(to: questions)[0].question, "Was sagst du zuerst?")
+        XCTAssertEqual(defaults.string(forKey: QuestionTranslationCache.fingerprintKey("de")), "1:2026-11-10T00:00:00Z",
+                       "the old fingerprint stays, so a real answer downloads again")
+        let relaunched = self.cache(language: "de", sync: CountingSync())
+        XCTAssertEqual(relaunched.apply(to: questions)[0].question, "Was sagst du zuerst?", "the file on disk was not emptied")
+    }
+
+    func testAnEmptyFirstDownloadKeepsTheBundledTranslations() async {
+        let sync = CountingSync()
+        sync.fingerprintValue = "0:-"
+        let cache = cache(language: "de", sync: sync, seed: german)
+
+        _ = await cache.refresh()
+
+        XCTAssertEqual(cache.apply(to: questions)[0].question, "Was sagst du zuerst?")
+        XCTAssertEqual(files(), [], "nothing written")
+        XCTAssertNil(defaults.string(forKey: QuestionTranslationCache.fingerprintKey("de")))
+    }
+
+    // MARK: - The file this build ships
+
+    func testThisBuildShipsTheGermanQuizQuestions() {
+        let rows = QuestionTranslationSeed.load(language: "de")
+        XCTAssertEqual(rows.count, 765)
+        XCTAssertEqual(Set(rows.map(\.questionId)).count, rows.count, "no duplicate ids")
+        XCTAssertTrue(rows.allSatisfy { ($0.questionText ?? "").isEmpty == false && ($0.options ?? []).count >= 2 })
+    }
+
+    func testNoBundledTranslationsForEnglishOrAnUnknownLanguage() {
+        XCTAssertEqual(QuestionTranslationSeed.load(language: "en"), [])
+        XCTAssertEqual(QuestionTranslationSeed.load(language: "xx"), [])
     }
 }

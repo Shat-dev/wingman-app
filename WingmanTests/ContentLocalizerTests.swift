@@ -26,6 +26,8 @@ final class ContentLocalizerTests: XCTestCase {
 
         var requests: [String] = []
         var failing: Set<String> = []
+        /// Tables whose next request fails, after which they answer.
+        var failingOnce: Set<String> = []
 
         var questions: [QuestionTranslation] = []
         var scenarios: [ScenarioTranslation] = []
@@ -35,6 +37,7 @@ final class ContentLocalizerTests: XCTestCase {
         private func record(_ table: String, _ ids: [UUID], _ language: String) throws {
             requests.append("\(table) \(language) \(ids.count)")
             if failing.contains(table) { throw Failure() }
+            if failingOnce.remove(table) != nil { throw Failure() }
         }
 
         func questionTranslations(ids: [UUID], language: String) async throws -> [QuestionTranslation] {
@@ -58,8 +61,10 @@ final class ContentLocalizerTests: XCTestCase {
         }
     }
 
-    private func localizer(language: String?, fetcher: CountingFetcher) -> ContentLocalizer {
-        ContentLocalizer(language: { language }, fetcher: fetcher)
+    private func localizer(
+        language: String?, fetcher: CountingFetcher, bundled: [QuestionTranslation] = []
+    ) -> ContentLocalizer {
+        ContentLocalizer(language: { language }, fetcher: fetcher, retryDelay: .zero, bundledQuestions: { _ in bundled })
     }
 
     // MARK: - Fixtures
@@ -196,7 +201,7 @@ final class ContentLocalizerTests: XCTestCase {
         let fetcher = CountingFetcher()
         fetcher.failing = ["questions"]
         let result = await localizer(language: "de", fetcher: fetcher).localized(questions)
-        XCTAssertEqual(fetcher.requests.count, 1, "tried once, did not retry")
+        XCTAssertEqual(fetcher.requests.count, 2, "tried, then retried once, no more")
         XCTAssertEqual(result.map(\.question), questions.map(\.question))
         XCTAssertEqual(result.map(\.options), questions.map(\.options))
         XCTAssertEqual(result.map(\.explanation), questions.map(\.explanation))
@@ -228,5 +233,56 @@ final class ContentLocalizerTests: XCTestCase {
         let result = await localizer(language: "de", fetcher: fetcher).localized(scenes)
         XCTAssertEqual(result.map(\.text), scenes.map(\.text))
         XCTAssertEqual(result[1].options?.map(\.text), ["Say hi"])
+    }
+
+    // MARK: - One retry, then the bundled questions
+
+    func testAQuestionRequestThatFailsOnceIsRetriedAndTranslated() async {
+        let fetcher = CountingFetcher()
+        fetcher.questions = [QuestionTranslation(questionId: firstID, questionText: "Was sagst du zuerst?", options: nil, explanation: nil)]
+        fetcher.failingOnce = ["questions"]
+
+        let result = await localizer(language: "de", fetcher: fetcher).localized(questions)
+
+        XCTAssertEqual(fetcher.requests.count, 2)
+        XCTAssertEqual(result[0].question, "Was sagst du zuerst?")
+    }
+
+    func testAScenarioListRequestThatFailsOnceIsRetriedAndTranslated() async {
+        let fetcher = CountingFetcher()
+        fetcher.scenarios = [ScenarioTranslation(scenarioId: practices[0].id, title: "Barfenster", summary: nil)]
+        fetcher.failingOnce = ["scenarios"]
+
+        let result = await localizer(language: "de", fetcher: fetcher).localized(practices)
+
+        XCTAssertEqual(fetcher.requests.count, 2)
+        XCTAssertEqual(result[0].displayTitle, "Barfenster")
+    }
+
+    func testScreenAndOptionRequestsThatFailOnceAreRetried() async {
+        let fetcher = CountingFetcher()
+        fetcher.screens = [ScreenTranslation(screenId: firstID, text: "Du kommst rein.")]
+        fetcher.options = [OptionTranslation(optionId: optionID, text: "Sag hallo")]
+        fetcher.failingOnce = ["screens", "options"]
+
+        let result = await localizer(language: "de", fetcher: fetcher).localized(scenes)
+
+        XCTAssertEqual(fetcher.requests.count, 4)
+        XCTAssertEqual(result[0].text, "Du kommst rein.")
+        XCTAssertEqual(result[1].options?.first?.text, "Sag hallo")
+    }
+
+    func testFailedQuestionRequestsFallBackToTheBundledTranslations() async {
+        let fetcher = CountingFetcher()
+        fetcher.failing = ["questions"]
+        let bundled = [
+            QuestionTranslation(questionId: firstID, questionText: "Was sagst du zuerst?", options: nil, explanation: nil),
+            QuestionTranslation(questionId: UUID(), questionText: "Eine andere Frage", options: nil, explanation: nil)
+        ]
+
+        let result = await localizer(language: "de", fetcher: fetcher, bundled: bundled).localized(questions)
+
+        XCTAssertEqual(result[0].question, "Was sagst du zuerst?")
+        XCTAssertEqual(result.count, questions.count, "no extra questions from the bundle")
     }
 }

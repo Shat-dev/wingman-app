@@ -162,3 +162,21 @@ All earlier items were resolved on 2026-11-11; the decisions are below. Still op
 - The Settings link now shows the chosen language straight away ("Language: Deutsch") instead of the running one.
 - Checks: 316 unit tests pass (2 new). A one-off UI check on the 17 Pro simulator, since deleted: English → Deutsch → home → reopen in German → English → home → reopen in English. SpringBoard logs show a voluntary exit about 1.1 s after each trip to the background. Changing your mind and then leaving does not quit.
 - App Review note: Apple discourages apps quitting themselves. This only happens in the background, after an explicit language change, so the user never sees the app close. Low risk, but if Review objects, remove `LanguageRelaunch.arm()` and restore the app-switcher wording.
+
+## 2026-11-12, about 22:30. German quiz and scenario content: no English race
+
+A trace of when German database content loads showed it was likely, not guaranteed, to be German before a user saw it:
+
+- Lesson quizzes read an on-device cache that is empty on a fresh install. It fills only after a background download, which starts once a guest session exists ("Skip for now"). A quiz opened before that download finished stayed English for that quiz.
+- A download that came back with no rows (a request that went out without a session reads as `anon`, and RLS answers 200 with nothing) was saved over the cache.
+- A failed scenario or daily-practice translation request fell back to English silently, after a single try.
+
+Fixes:
+
+1. **German quiz questions ship in the app.** `Wingman/Content/question_translations_seed.de.json` holds 765 rows (339 KB). It is written by `scripts/question_translations_seed.py de` from the same `localization/de/db/questions_*.json` that produce the SQL; `db_translations_sql.py` now runs it too, and `--check` reports drift. `QuestionTranslationCache` uses the bundled rows until a download lands, and when the downloaded file is missing or unreadable. Quizzes are German from the first launch, offline included. The download replaces the bundle wholesale (no merge), so database edits still win.
+2. **An empty download is a failed read.** Nothing is stored, the fingerprint is left as it was, and the next refresh downloads again.
+3. **One retry.** Every `ContentLocalizer` request (scenario list, scenario screens and options, daily-practice questions) is tried once more after 0.6 s. If question translations still fail, the bundled German questions are laid over instead of English.
+
+Checks: 330 unit tests, 325 passed, 5 skipped (14 new or changed tests, including one that loads the 765 bundled rows from the app bundle). The regenerated SQL is byte-identical to what was applied to production. Not checked on a fresh install on a device: that needs a new guest user in production.
+
+Still possible: scenario screens and the scenario list stay English if both tries fail, for example when the phone is offline. The scenario list cannot load offline anyway.

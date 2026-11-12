@@ -14,10 +14,13 @@
 //    2. One extra request per content fetch in another language (two for a
 //       scenario's screens, run together: screen texts and option texts).
 //       Only the rows for the IDs just received, only the active language.
-//    3. A failure costs nothing but the translation. If the request fails
-//       (offline, the tables do not exist yet, a timeout) the English
-//       content is returned as it was. Content never disappears because a
-//       translation could not be fetched.
+//    3. A failure costs nothing but the translation. A failed request is
+//       tried once more after a short pause (a blip on a phone network is
+//       the usual cause). If that fails too (offline, the tables do not
+//       exist yet, a timeout) the English content is returned as it was,
+//       except for questions, which fall back to the translations bundled
+//       in the app. Content never disappears because a translation could
+//       not be fetched.
 //
 
 import Foundation
@@ -87,16 +90,22 @@ struct ContentLocalizer {
     /// The language to ask for; nil means English, and no request.
     var language: () -> String? = { L10n.contentLanguage }
     var fetcher: ContentTranslationFetching = SupabaseContentTranslationFetcher()
+    /// Pause before the one retry of a failed request.
+    var retryDelay: Duration = .milliseconds(600)
+    /// Question translations shipped in the app, used when the request fails.
+    var bundledQuestions: (String) -> [QuestionTranslation] = { QuestionTranslationSeed.load(language: $0) }
 
     /// Daily practice and quiz questions.
     func localized(_ questions: [QuizQuestion]) async -> [QuizQuestion] {
         guard let language = language(), !questions.isEmpty else { return questions }
         do {
-            let rows = try await fetcher.questionTranslations(ids: questions.map(\.id), language: language)
+            let rows = try await retryingOnce { try await fetcher.questionTranslations(ids: questions.map(\.id), language: language) }
             return ContentOverlay.apply(rows, to: questions)
         } catch {
-            log("🌍 Question translations unavailable (\(language)); showing English: \(error)")
-            return questions
+            let ids = Set(questions.map(\.id))
+            let bundled = bundledQuestions(language).filter { ids.contains($0.questionId) }
+            log("🌍 Question translations unavailable (\(language)); using \(bundled.count) bundled: \(error)")
+            return ContentOverlay.apply(bundled, to: questions)
         }
     }
 
@@ -104,7 +113,7 @@ struct ContentLocalizer {
     func localized(_ practices: [Practice]) async -> [Practice] {
         guard let language = language(), !practices.isEmpty else { return practices }
         do {
-            let rows = try await fetcher.scenarioTranslations(ids: practices.map(\.id), language: language)
+            let rows = try await retryingOnce { try await fetcher.scenarioTranslations(ids: practices.map(\.id), language: language) }
             return ContentOverlay.apply(rows, to: practices)
         } catch {
             log("🌍 Scenario translations unavailable (\(language)); showing English: \(error)")
@@ -127,10 +136,23 @@ struct ContentLocalizer {
         return ContentOverlay.apply(screens: await screenRows, options: await optionRows, to: scenes)
     }
 
+    /// Runs a request, and once more after `retryDelay` if it fails.
+    /// Cancellation is not retried.
+    private func retryingOnce<T>(_ request: () async throws -> T) async throws -> T {
+        do {
+            return try await request()
+        } catch is CancellationError {
+            throw CancellationError()
+        } catch {
+            try await Task.sleep(for: retryDelay)
+            return try await request()
+        }
+    }
+
     private func fetchOrEmpty<Row>(_ ids: [UUID], _ fetch: ([UUID]) async throws -> [Row]) async -> [Row] {
         guard !ids.isEmpty else { return [] }
         do {
-            return try await fetch(ids)
+            return try await retryingOnce { try await fetch(ids) }
         } catch {
             log("🌍 Scenario text translations unavailable; showing English: \(error)")
             return []

@@ -103,7 +103,7 @@ Ask Claude to **"apply the German review corrections"** and hand over the correc
 1. **Interface:** update `localization/de/catalogs.de.json`, then run
    `python3 scripts/import_catalog_translations.py de localization/de/catalogs.de.json --reviewed`. That marks the reviewed strings "translated" instead of "needs review". Then run `python3 scripts/check_string_catalogs.py --languages de --strict-lengths`.
 2. **Lessons:** edit the files in `Wingman/Courses/Lesson Overlays/`, then run `python3 scripts/lesson_overlays.py check de` until it passes.
-3. **Quiz and scenarios:** edit `localization/de/db/*.json`, then run `python3 scripts/db_translations_sql.py de` to regenerate `supabase/seed/content_translations_de/*.sql`. Re-run only the changed files on production. Each file is a safe, repeatable upsert. Writing to production needs your go-ahead each time.
+3. **Quiz and scenarios:** edit `localization/de/db/*.json`, then run `python3 scripts/db_translations_sql.py de` to regenerate `supabase/seed/content_translations_de/*.sql`. Re-run only the changed files on production. Each file is a safe, repeatable upsert. Writing to production needs your go-ahead each time. The same command rewrites the German quiz questions bundled in the app (`Wingman/Content/question_translations_seed.de.json`), so commit that file too; `python3 scripts/question_translations_seed.py de --check` confirms the app and the SQL match.
 4. Run the unit tests. If the wording changed a lot, re-run the German screenshot sweep (step 7).
 
 **Done when:** the checks pass, the strings show as reviewed, and the changes are committed on this branch.
@@ -242,13 +242,14 @@ Each automated screenshot sweep creates a real guest user in production, and a R
 
 1. **Check what's live first.** The branch says 1.14 (37), but the version in the repo is often already shipped. Check the App Store version (the iTunes lookup), the newest `$app_build` in PostHog and your Xcode archives. Then bump: Xcode and App Store Connect use the same number.
 2. **Which branch.** If you chose "Release A first" in step 3, ship `localization-release-a`, soak 7 days, then come back here. Otherwise merge `localization-release-b` into `Shat` (Claude can open the pull request) and archive from there.
-3. **Archive a Release build** in Xcode → Product → Archive → Distribute → App Store Connect.
-4. **In App Store Connect,** on the new version:
+3. **Check the bundled German quiz questions match the database source:** `python3 scripts/question_translations_seed.py de --check` (Claude can run it).
+4. **Archive a Release build** in Xcode → Product → Archive → Distribute → App Store Connect.
+5. **In App Store Connect,** on the new version:
    - attach the build;
    - add the German page from step 6;
    - write "What's New" in both languages;
    - submit for review.
-5. **Optional:** a TestFlight round with your German proofreader before you submit.
+6. **Optional:** a TestFlight round with your German proofreader before you submit.
 
 **Done when:** Apple approves and the version is live in the German store.
 

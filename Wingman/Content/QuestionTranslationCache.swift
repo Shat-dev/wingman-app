@@ -21,7 +21,16 @@
 //    - The fingerprint is the row count and newest change for that language.
 //      When it matches, a refresh costs one tiny request and no download.
 //    - A failed refresh keeps whatever is cached. Offline, a translated app
-//      shows the translations it last synced, or English.
+//      shows the translations it last synced, or the bundled ones.
+//    - The app ships each language's translations
+//      (`question_translations_seed.<lang>.json`, written by
+//      scripts/question_translations_seed.py from the same files as the
+//      database rows). They are used until the first download lands, so a
+//      quiz is translated from the first launch, offline included, instead
+//      of racing the background download. A downloaded file replaces them.
+//    - A download that comes back empty is treated as a failed read, never
+//      stored: a request that went out without a session passes RLS as
+//      `anon` and gets 200 with no rows.
 //
 
 import Foundation
@@ -86,6 +95,28 @@ struct SupabaseQuestionTranslationSync: QuestionTranslationSyncing {
     }
 }
 
+// MARK: - Bundled translations
+
+/// The translations shipped in the app bundle for a language.
+nonisolated enum QuestionTranslationSeed {
+
+    static func resourceName(_ language: String) -> String {
+        "question_translations_seed.\(language)"
+    }
+
+    /// Empty when the build ships none for the language, or the file is
+    /// unreadable (English, in effect, never a crash).
+    static func load(language: String, bundle: Bundle = .main) -> [QuestionTranslation] {
+        guard let url = bundle.url(forResource: resourceName(language), withExtension: "json") else { return [] }
+        do {
+            return try JSONDecoder().decode([QuestionTranslation].self, from: Data(contentsOf: url))
+        } catch {
+            log("⚠️ QuestionTranslationSeed: \(language) unreadable — \(error)")
+            return []
+        }
+    }
+}
+
 // MARK: - Cache
 
 @MainActor
@@ -97,6 +128,7 @@ final class QuestionTranslationCache {
     private let sync: QuestionTranslationSyncing
     private let directory: URL?
     private let defaults: UserDefaults
+    private let seed: (String) -> [QuestionTranslation]
 
     /// Translations for `loadedLanguage`, by question ID.
     private(set) var translations: [UUID: QuestionTranslation] = [:]
@@ -108,12 +140,14 @@ final class QuestionTranslationCache {
         directory: URL? = try? FileManager.default.url(
             for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true
         ),
-        defaults: UserDefaults = .standard
+        defaults: UserDefaults = .standard,
+        seed: @escaping (String) -> [QuestionTranslation] = { QuestionTranslationSeed.load(language: $0) }
     ) {
         self.language = language
         self.sync = sync
         self.directory = directory
         self.defaults = defaults
+        self.seed = seed
         loadFromDisk()
     }
 
@@ -148,6 +182,17 @@ final class QuestionTranslationCache {
             }
 
             let rows = try await sync.allTranslations(language: language)
+
+            // A shipped language always has translations, so none means the
+            // read failed (typically no session yet: RLS answers `anon` with
+            // 200 and no rows). Keep what is cached and store no
+            // fingerprint, so the next refresh downloads again.
+            guard !rows.isEmpty else {
+                log("⚠️ QuestionTranslationCache: \(language) download returned 0 rows — "
+                    + "treating as failure, keeping \(translations.count) cached")
+                return false
+            }
+
             let fresh = Dictionary(rows.map { ($0.questionId, $0) }, uniquingKeysWith: { first, _ in first })
             let changed = fresh != translations
 
@@ -180,22 +225,33 @@ final class QuestionTranslationCache {
         "question_translations.\(language).json"
     }
 
+    /// The downloaded file if there is a readable one, the bundled
+    /// translations otherwise.
     private func loadFromDisk() {
         translations = [:]
         loadedLanguage = language()
-        guard let language = language(),
-              let url = directory?.appendingPathComponent(Self.fileName(language)),
-              let data = try? Data(contentsOf: url) else { return }
+        guard let language = language() else { return }
 
-        do {
-            let rows = try JSONDecoder().decode([QuestionTranslation].self, from: data)
-            translations = Dictionary(rows.map { ($0.questionId, $0) }, uniquingKeysWith: { first, _ in first })
-        } catch {
-            // An unreadable file is the same as no file: English, and the
-            // missing fingerprint match will fetch it again.
-            defaults.removeObject(forKey: Self.fingerprintKey(language))
-            log("⚠️ QuestionTranslationCache: \(language) file unreadable, discarding — \(error)")
+        if let url = directory?.appendingPathComponent(Self.fileName(language)),
+           let data = try? Data(contentsOf: url) {
+            do {
+                let rows = try JSONDecoder().decode([QuestionTranslation].self, from: data)
+                translations = Self.byID(rows)
+                return
+            } catch {
+                // An unreadable file is the same as no file: the bundled
+                // translations, and the missing fingerprint match will
+                // fetch it again.
+                defaults.removeObject(forKey: Self.fingerprintKey(language))
+                log("⚠️ QuestionTranslationCache: \(language) file unreadable, discarding — \(error)")
+            }
         }
+
+        translations = Self.byID(seed(language))
+    }
+
+    private static func byID(_ rows: [QuestionTranslation]) -> [UUID: QuestionTranslation] {
+        Dictionary(rows.map { ($0.questionId, $0) }, uniquingKeysWith: { first, _ in first })
     }
 
     private func save(_ rows: [QuestionTranslation], language: String) {
