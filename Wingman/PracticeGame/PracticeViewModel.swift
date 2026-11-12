@@ -171,7 +171,9 @@ final class PracticeViewModel: ObservableObject {
             // show Try Again over a list that is actually current.
             errorMessage = nil
         } catch {
-            if surfacingErrors {
+            // Cancelled (the view went away): not a failure to show; the
+            // next appearance loads again.
+            if surfacingErrors, !(error is CancellationError) {
                 errorMessage = error.localizedDescription
             }
             // The list on screen is now either stale cache or empty; either
@@ -353,7 +355,9 @@ final class PracticeViewModel: ObservableObject {
             gameDataCache[practice.id] = data
             return data
         } catch {
-            errorMessage = error.localizedDescription
+            if !(error is CancellationError) {
+                errorMessage = error.localizedDescription
+            }
             return nil
         }
     }

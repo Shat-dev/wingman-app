@@ -172,8 +172,14 @@ final class PracticeService: PracticeServiceProtocol {
         // English: the list as loaded, no extra request. Another language:
         // display titles and summaries added by scenario ID; `title` itself
         // stays English for analytics. See `ContentLocalizer`.
+        let localized = await ContentLocalizer().localized(practices)
+        // A load cut off part-way (the Scenarios tab left mid-fetch, which
+        // the walkthrough does on purpose) can have its translation request
+        // cancelled after the English rows arrived. That must fail rather
+        // than hand back an English list to be cached as the real thing.
+        try Task.checkCancellation()
         return PracticeFetchResult(
-            practices: await ContentLocalizer().localized(practices),
+            practices: localized,
             progressAvailable: progressRowsOrNilResolved != nil
         )
     }
@@ -278,6 +284,11 @@ final class PracticeService: PracticeServiceProtocol {
             .value
 
         let startId = scenes.min(by: { $0.order < $1.order })?.id ?? ""
+        let localizedScenes = await ContentLocalizer().localized(scenes)
+        // Same as the list: a cancelled fetch (the prefetch is cancelled when
+        // the walkthrough moves off the Scenarios tab) must not return English
+        // screens, or `gameDataCache` keeps them for the whole session.
+        try Task.checkCancellation()
         // `title` stays the English title: it is what analytics records.
         // Screen and option text is display only, so it is translated in
         // place (no extra request in English). Branching and scoring come
@@ -286,7 +297,7 @@ final class PracticeService: PracticeServiceProtocol {
             id: scenarioId.uuidString,
             title: scenario?.title ?? "Practice Scenario",
             startingScreenId: startId,
-            scenes: await ContentLocalizer().localized(scenes)
+            scenes: localizedScenes
         )
     }
 

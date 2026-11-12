@@ -180,3 +180,13 @@ Fixes:
 Checks: 330 unit tests, 325 passed, 5 skipped (14 new or changed tests, including one that loads the 765 bundled rows from the app bundle). The regenerated SQL is byte-identical to what was applied to production. Not checked on a fresh install on a device: that needs a new guest user in production.
 
 Still possible: scenario screens and the scenario list stay English if both tries fail, for example when the phone is offline. The scenario list cannot load offline anyway.
+
+## 2026-11-13, about 00:30. First scenario in English after the walkthrough
+
+Arthur's device test (German via Xcode's App Language option): the first scenario played in English, the second in German.
+
+- Cause: the walkthrough shows the Scenarios tab and then moves on, which cancels `PracticeView`'s `.task`. Its prefetch had already received the English screens, but the translation request was cancelled, and `ContentLocalizer` treats any failure as "show English". The English screens went into `gameDataCache` and were reused for the rest of the session. Scenarios still locked at that point were fetched later, uncut, in German. The live data was complete: scenario 1 has 46/46 German screens (the other 6 are blank option screens) and 16/16 options.
+- Fix: `PracticeService.fetchGameData` and `fetchPractices` call `Task.checkCancellation()` after translating, so a cut-off load fails instead of returning English. The prefetch then caches nothing, and tapping the scenario fetches it fresh. A cancelled load no longer shows an error message.
+- Also cleared six main-actor isolation warnings (0c35bf0, no behaviour change).
+- Not a bug: after force-quitting, a build run with Xcode's App Language = German reopens in the phone's language, because that option only applies to launches from Xcode.
+- Checks: 330 unit tests (325 passed, 5 skipped), no build warnings. The walkthrough path itself is not re-tested; it needs a fresh install, which means a new guest user in production.
