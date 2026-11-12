@@ -198,3 +198,23 @@ Arthur chose to translate the five category names, which had been kept English a
 - Mindset & Foundations → Mindset & Grundlagen; Approach Mechanics → Ansprechen in der Praxis; Conversation Flow → Gesprächsfluss; Flirting & Chemistry → Flirten & Anziehung; Integration & Mastery → Alltag & Meisterschaft (all needs review).
 - Display only: `CourseCategory.displayName` now reads `Content.xcstrings`. The Home module carousel used hard-coded English titles and now uses `displayName`. `canonicalName`, which analytics sends, stays English. The daily-practice module values are untouched.
 - Checked on the 17 Pro and the SE in German: Courses tab chips and section header, Home carousel card. The longest name, "Ansprechen in der Praxis", fits. Unit tests: 331, 326 passed, 5 skipped. The old "never translated" test is replaced by one for the new rule, plus one that checks every category has German.
+
+## 2026-11-13, about 01:15. Fallback and analytics parity checks (checklist step 7, items 5 and 6)
+
+New tests in `WingmanTests/GermanReleaseChecksTests.swift` run against the German that ships, not made-up tables: the app's de.lproj, the 25 lesson overlays, the 765 bundled quiz rows, and the scenario files the live rows came from.
+
+**Fallback, all pass.** A fixed sample of the real German was removed and English appeared in its place, never a blank or a key:
+- every 6th interface and content string (Localizable and Content tables);
+- every 3rd category and course name;
+- about every 5th lesson key (300 titles, summaries and paragraphs);
+- every 7th quiz question (option count and the correct answer unchanged);
+- every 4th scenario screen and every 3rd option, in all 15 scenarios (correct answers unchanged).
+
+**Analytics parity, all pass.** With the real German showing (more than 90 % of lesson and course titles and all five categories visibly German), these are identical to the English run:
+- lesson, lesson-gate and locked-course properties for every lesson and course, plus category names;
+- the stored and sent value of every onboarding answer, alone and all-selected, for all six questions;
+- the scenario properties for all 15 scenarios.
+
+The earlier recorder test (19 scripted calls) still passes. **One difference was found:** a scan of all 99 analytics call sites shows four events send `error_message: error.localizedDescription` (`purchases_restore_failed` from the paywall, the one-time offer and Settings, and `approach_log_failed`). iOS writes that text in the app's language, so German users' values will be German. It is free text for diagnosis and is not used to group anything. Not changed.
+
+Still not covered: the plan's full run through the real screens with a sandbox purchase, and comparison with build 37 data. Unit tests: 339, 334 passed, 5 skipped.
