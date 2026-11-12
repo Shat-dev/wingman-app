@@ -981,6 +981,18 @@
         }
       }
     },
+    "Close Wingman from the app switcher, then open it again." : {
+      "comment" : "Alert message after picking another app language. The new language only applies from the next launch. Shown in the newly picked language.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Schließe Wingman im App-Umschalter und öffne die App dann erneut."
+          }
+        }
+      }
+    },
     "Close offer" : {
       "localizations" : {
         "de" : {
@@ -2011,6 +2023,28 @@
         }
       }
     },
+    "Language" : {
+      "comment" : "Title of the Settings → Language menu that lists the app's languages.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sprache"
+          }
+        }
+      }
+    },
+    "Language: %@" : {
+      "comment" : "Settings link. %@ is the language the app is running in, named in that language (English, Deutsch). Tapping opens Wingman's page in iOS Settings, where the language can be changed.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sprache: %@"
+          }
+        }
+      }
+    },
     "Last one. This one is you.\nEmpty today. In a month it either tells a story or it doesn't." : {
       "localizations" : {
         "de" : {
@@ -2869,6 +2903,18 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Erinnerungen ans Ansprechen-Üben und gelegentliche Angebote."
+          }
+        }
+      }
+    },
+    "Reopen Wingman to switch" : {
+      "comment" : "Alert title after picking another app language in Settings. Shown in the newly picked language, looked up by key at runtime.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Öffne Wingman neu, um zu wechseln"
           }
         }
       }

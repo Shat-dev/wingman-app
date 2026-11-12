@@ -253,6 +253,9 @@ enum Analytics {
         // shown and never capped, so a tap is a real visit to the review sheet —
         // though whether a rating followed is still invisible to us.
         static let rateAppTapped = "rate_app_tapped"
+        /// Settings → Language: the user picked a different language for the
+        /// next launch. Properties `from` (running now) and `to` (picked).
+        static let appLanguageSelected = "app_language_selected"
 
         // Account deletion. `account_deletion_started` is client-side and
         // deliberately fires before the request leaves, because the client's

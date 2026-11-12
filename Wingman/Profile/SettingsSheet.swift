@@ -26,6 +26,9 @@ struct SettingsSheet: View {
     @State private var successMessage = ""
     @State private var safariLink: IdentifiableURL?
     @State private var showCreateAccount = false
+    @State private var selectedLanguage = AppLanguageSettings.selectedLanguageCode
+    /// Set after picking another language: the one Wingman opens in next.
+    @State private var languageToReopenIn: String?
     // Read-only here: decides whether "Create a free account" can honestly
     // talk about protecting a log, or needs the generic pitch instead.
     @StateObject private var approachService = ApproachService.shared
@@ -35,6 +38,11 @@ struct SettingsSheet: View {
         ZStack {
             Color.white.ignoresSafeArea()
             
+            // The sheet has a fixed height and its rows are laid out to fit
+            // it. Where they don't (an SE, the tallest non-subscriber variant
+            // on a 6.3" phone, longer translations), scroll rather than clip
+            // the title and the last rows. Unchanged wherever it fits.
+            ScrollIfTooTall {
             VStack(spacing: 0) {
                     // MARK: - Grabber
                     HStack {
@@ -308,6 +316,40 @@ struct SettingsSheet: View {
                     .padding(.horizontal, 24)
                     .padding(.bottom, 16)
 
+                    // MARK: - Language
+                    //
+                    // A menu of the languages this build ships, ticked on the
+                    // one chosen. Picking another stores it for the next launch
+                    // and asks the user to reopen Wingman; see
+                    // AppLanguageSettings for why the switch is not live. A
+                    // one-line link: the sheet does not scroll, and ProfileView
+                    // adds this line's height to the sheet's detent. A globe,
+                    // not a flag: a language is not a country.
+                    if AppLanguageSettings.offersChoice {
+                        Menu {
+                            Picker(selection: languageSelection) {
+                                ForEach(AppLanguageSettings.availableLanguageCodes, id: \.self) { code in
+                                    Text(verbatim: AppLanguageSettings.name(of: code)).tag(code)
+                                }
+                            } label: {
+                                Text("Language")
+                            }
+                        } label: {
+                            HStack(spacing: 6) {
+                                Image(systemName: "globe")
+                                    .font(.system(size: 14, weight: .medium))
+                                    .accessibilityHidden(true)
+                                Text("Language: \(AppLanguageSettings.currentLanguageName)")
+                                    .underline()
+                            }
+                            .font(.manropeMedium(size: 14))
+                            .foregroundColor(.wingmanBlack)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        .padding(.horizontal, 24)
+                        .padding(.bottom, 16)
+                    }
+
                     // MARK: - Rate Wingman
                     //
                     // The standing way to rate, for people who go looking. Not
@@ -432,6 +474,7 @@ struct SettingsSheet: View {
                         Color.clear.frame(height: 32)
                     }
                 }
+            }
                 
                 // MARK: - Simple Loader Overlay (inside ZStack to maintain sheet size)
                 if isDeleting {
@@ -489,6 +532,17 @@ struct SettingsSheet: View {
         }
         .onChange(of: showingErrorAlert) { showing in
             if showing { HapticManager.shared.error() }
+        }
+        // In the language just chosen, not the running one: someone who
+        // switched away from a language they don't read can still read it.
+        .alert(
+            Text(verbatim: AppLanguageSettings.string("Reopen Wingman to switch", in: languageToReopenIn ?? AppLanguageSettings.currentLanguageCode)),
+            isPresented: Binding(get: { languageToReopenIn != nil }, set: { if !$0 { languageToReopenIn = nil } }),
+            presenting: languageToReopenIn
+        ) { code in
+            Button(AppLanguageSettings.string("OK", in: code)) { }
+        } message: { code in
+            Text(verbatim: AppLanguageSettings.string("Close Wingman from the app switcher, then open it again.", in: code))
         }
         .alert("Success", isPresented: $showingSuccessAlert) {
             Button("OK") { }
@@ -630,6 +684,28 @@ struct SettingsSheet: View {
         }
     }
     
+    /// Settings → Language's selection. Choosing a language stores it for
+    /// the next launch; choosing one other than the running language asks
+    /// the user to reopen Wingman.
+    private var languageSelection: Binding<String> {
+        Binding(
+            get: { selectedLanguage },
+            set: { code in
+                guard code != selectedLanguage else { return }
+                HapticManager.shared.selection()
+                Analytics.capture(Analytics.Event.appLanguageSelected, [
+                    "from": AppLanguageSettings.currentLanguageCode,
+                    "to": code
+                ])
+                log("Language selected: \(code)")
+                selectedLanguage = code
+                if AppLanguageSettings.select(code) {
+                    languageToReopenIn = code
+                }
+            }
+        )
+    }
+
     private func rateApp() {
         log("Rate Wingman tapped")
         Analytics.capture(Analytics.Event.rateAppTapped, ["source": "settings"])
@@ -763,4 +839,20 @@ struct SettingsSheet: View {
 #Preview {
     SettingsSheet(userName: "Shat")
         .environmentObject(AuthManager())
+}
+
+/// Shows `content` as it is when it fits the space offered, and inside a
+/// vertical scroll view when it is taller.
+private struct ScrollIfTooTall<Content: View>: View {
+    @ViewBuilder var content: Content
+
+    var body: some View {
+        ViewThatFits(in: .vertical) {
+            content
+            ScrollView(.vertical) {
+                content
+            }
+            .scrollBounceBehavior(.basedOnSize)
+        }
+    }
 }

@@ -583,6 +583,10 @@
     "only %@ per week": "nur %@ pro Woche",
     "per month": "pro Monat",
     "per year": "pro Jahr",
-    "“%@”": "„%@“"
+    "“%@”": "„%@“",
+    "Language: %@": "Sprache: %@",
+    "Language": "Sprache",
+    "Reopen Wingman to switch": "Öffne Wingman neu, um zu wechseln",
+    "Close Wingman from the app switcher, then open it again.": "Schließe Wingman im App-Umschalter und öffne die App dann erneut."
   }
 }

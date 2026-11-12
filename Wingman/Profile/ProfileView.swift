@@ -170,11 +170,13 @@ struct ProfileView: View {
                     // available screen height. Standard / Max phones keep the
                     // original fixed detent unchanged.
                     // Non-subscribers get 80pt more for the "Tips & offers"
-                    // row; the sheet doesn't scroll, so without it the title
-                    // is pushed off the top.
+                    // row, and a build with a second language 36pt more for
+                    // the Language link; the sheet doesn't scroll, so without
+                    // them the title is pushed off the top.
                     .presentationDetents(UIScreen.isSmallPhone
                         ? [.large]
-                        : [.height(authManager.hasActiveSubscription ? 720 : 800)])
+                        : [.height((authManager.hasActiveSubscription ? 720 : 800)
+                                   + (AppLanguageSettings.offersChoice ? 36 : 0))])
                     .presentationDragIndicator(.hidden)
                     .presentationCornerRadius(20)
             }
