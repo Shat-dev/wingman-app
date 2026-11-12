@@ -100,9 +100,11 @@ final class LessonQuestionStore: ObservableObject {
     /// file. Empty and never fetched while the app runs in English.
     private let translations: QuestionTranslationCache
 
-    init(service: LessonQuestionServiceProtocol, translations: QuestionTranslationCache = .shared) {
+    /// `translations` is resolved in the body for the same reason as
+    /// `service` above: `.shared` is main-actor isolated.
+    init(service: LessonQuestionServiceProtocol, translations: QuestionTranslationCache? = nil) {
         self.service = service
-        self.translations = translations
+        self.translations = translations ?? .shared
         loadQuestions()
     }
 

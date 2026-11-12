@@ -712,7 +712,7 @@ struct PaywallView: View {
             // Yearly Plan
             PlanRow(
                 title: String(localized: "Yearly Plan"),
-                price: viewModel.yearlyPackage.flatMap(PaywallPricing.weeklyPriceLine(for:)) ?? "",
+                price: viewModel.yearlyPackage.flatMap { PaywallPricing.weeklyPriceLine(for: $0) } ?? "",
                 weekly: viewModel.yearlyPrice,
                 weeklySubtitle: PaywallPricing.perYear,
                 isSelected: viewModel.selectedPlan == .yearly,
@@ -734,7 +734,7 @@ struct PaywallView: View {
             // Monthly Plan
             PlanRow(
                 title: String(localized: "Monthly Plan"),
-                price: viewModel.monthlyPackage.flatMap(PaywallPricing.weeklyPriceLine(for:)) ?? "",
+                price: viewModel.monthlyPackage.flatMap { PaywallPricing.weeklyPriceLine(for: $0) } ?? "",
                 weekly: viewModel.monthlyPrice,
                     weeklySubtitle: PaywallPricing.perMonth,
                     isSelected: viewModel.selectedPlan == .monthly,

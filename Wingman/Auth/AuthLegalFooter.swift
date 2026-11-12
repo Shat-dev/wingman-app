@@ -62,7 +62,7 @@ enum AuthLegalCopy {
 
     /// The pages `text` links to, in the order they appear.
     static func destinations(in text: AttributedString) -> [Destination] {
-        text.runs.compactMap { run in run.link.flatMap(destination(for:)) }
+        text.runs.compactMap { run in run.link.flatMap { destination(for: $0) } }
     }
 
     /// The sentence ready to show: the links underlined, everything else as

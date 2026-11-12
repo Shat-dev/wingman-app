@@ -136,7 +136,9 @@ final class QuestionTranslationCache {
 
     init(
         language: @escaping () -> String? = { L10n.contentLanguage },
-        sync: QuestionTranslationSyncing = SupabaseQuestionTranslationSync(),
+        // Optional and resolved in the body: a default argument is built
+        // outside the main actor, where this main-actor type cannot be made.
+        sync: QuestionTranslationSyncing? = nil,
         directory: URL? = try? FileManager.default.url(
             for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true
         ),
@@ -144,7 +146,7 @@ final class QuestionTranslationCache {
         seed: @escaping (String) -> [QuestionTranslation] = { QuestionTranslationSeed.load(language: $0) }
     ) {
         self.language = language
-        self.sync = sync
+        self.sync = sync ?? SupabaseQuestionTranslationSync()
         self.directory = directory
         self.defaults = defaults
         self.seed = seed

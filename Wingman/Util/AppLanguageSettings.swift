@@ -140,11 +140,10 @@ enum LanguageRelaunch {
     private static func quitWhileInBackground() {
         // Give PostHog a moment to send the queued events (the language
         // choice among them), then quit, unless the user came straight back,
-        // in which case wait for the next time they leave.
-        var task = UIBackgroundTaskIdentifier.invalid
-        task = UIApplication.shared.beginBackgroundTask {
-            UIApplication.shared.endBackgroundTask(task)
-        }
+        // in which case wait for the next time they leave. No expiration
+        // handler: if the background time ever ran out first, iOS ending
+        // the app is the outcome wanted anyway.
+        let task = UIApplication.shared.beginBackgroundTask(withName: "LanguageRelaunch", expirationHandler: nil)
         PostHogSDK.shared.flush()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             guard UIApplication.shared.applicationState == .background else {
