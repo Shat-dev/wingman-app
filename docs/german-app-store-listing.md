@@ -6,7 +6,11 @@ Drafted 2026-11-12 by Claude. Not proofread by a native speaker yet. Send it to 
 - German name and subtitle (recommended options).
 - Description, keywords, promotional text, What's New, support and marketing URLs.
 - Privacy policy URL: the English page.
-- 5 German screenshots in the required iPhone 6.1"/6.3" slot. They were resized from 1284 × 2778 to 1206 × 2622 (scaled, 3 px trimmed each side); the larger sizes inherit them.
+- 5 German screenshots in the required iPhone 6.1"/6.3" slot, re-uploaded the same evening with the fixes below. They were resized from 1284 × 2778 to 1206 × 2622 (scaled, 3 px trimmed each side); the larger sizes inherit them. The uploaded set and the scripts are in [`marketing/app-store-screenshots-de/`](../marketing/app-store-screenshots-de/). Arthur's originals in `Wingman Automation/Assets/German Screenshots/` are unchanged.
+  - **Image 1:** the text block was rebuilt from its own letters, so the font is unchanged: "Selbstvertrauen trainieren – im echten Leben" with no word broken, and "[wing-man] Substantiv" on one line (no repeated "Wingman"). Set at 93 % so "Selbstvertrauen" fits with a margin.
+  - **Images 3 + 4:** the three cards are re-set in German in the app's font (Manrope Medium, the app's sizes) with the app's wording: Kaffee und Regen / Hund & Flirt / Zwischen den Zeilen, the current German summaries, and "2 Lektionen", "3 Lektionen", "5 Lektionen erforderlich". The current app shows the count only, and "erforderlich" only on a locked card. Letters are never cut by the seam between the two images: where a line crosses it, the split falls between two whole letters.
+  - **Still open, needs Figma:** the image 1 headline lacks the comma German requires: "der Chancen**,** die du nicht nutzt". That's in the headline font, which isn't on this Mac.
+  - **Also true in the app:** the German "Kaffee und Regen" summary is four lines at this width, and the card allows three, so it ends "…wird eine Ch…" in the app and in the screenshot. A shorter summary would fix both; it needs a translation edit plus a database update.
 - Subscriptions: German group name ("Wingman Premium"), and Monatsabo / Jahresabo / Jahresabo for the three products.
 
 **Whatever build is submitted as 1.15 takes this German page live.** Only submit 1.15 with the German app.
