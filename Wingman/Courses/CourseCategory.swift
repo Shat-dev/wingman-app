@@ -70,10 +70,13 @@ extension Course {
 }
 
 extension CourseCategory {
-    /// The category name as shown. Category names are brand terms and are
-    /// deliberately not translated (localization plan, decision D2), so this
-    /// is the English name in every language.
-    var displayName: String { name }
+    /// The category name in the language the app is running in, falling
+    /// back to English. Display only. Category names were first kept English
+    /// as brand terms (localization plan, decision D2); Arthur chose on
+    /// 2026-11-13 to translate them, since they are the first headings a
+    /// translated user sees on the Courses tab. Analytics still sends the
+    /// English name (`canonicalName`).
+    var displayName: String { L10n.content(name) }
 }
 
 extension CourseCategory {

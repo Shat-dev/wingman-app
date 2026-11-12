@@ -217,6 +217,18 @@
         }
       }
     },
+    "Approach Mechanics" : {
+      "comment" : "Course category name: a Courses tab filter chip and section header, a Home carousel card, and the category part of the Home 'continue' card. Analytics keeps the English name.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ansprechen in der Praxis"
+          }
+        }
+      }
+    },
     "Approach Readiness" : {
       "comment" : "Course title.",
       "extractionState" : "manual",
@@ -381,6 +393,18 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Selbstvertrauen ist nicht angeboren. Du baust es dir auf"
+          }
+        }
+      }
+    },
+    "Conversation Flow" : {
+      "comment" : "Course category name: a Courses tab filter chip and section header, a Home carousel card, and the category part of the Home 'continue' card. Analytics keeps the English name.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gesprächsfluss"
           }
         }
       }
@@ -733,6 +757,18 @@
         }
       }
     },
+    "Flirting & Chemistry" : {
+      "comment" : "Course category name: a Courses tab filter chip and section header, a Home carousel card, and the category part of the Home 'continue' card. Analytics keeps the English name.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Flirten & Anziehung"
+          }
+        }
+      }
+    },
     "Flirting Prerequisites" : {
       "comment" : "Course title.",
       "extractionState" : "manual",
@@ -937,6 +973,18 @@
         }
       }
     },
+    "Integration & Mastery" : {
+      "comment" : "Course category name: a Courses tab filter chip and section header, a Home carousel card, and the category part of the Home 'continue' card. Analytics keeps the English name.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Alltag & Meisterschaft"
+          }
+        }
+      }
+    },
     "It always seems impossible until it’s done." : {
       "comment" : "Daily quote on the Home screen.",
       "extractionState" : "manual",
@@ -1089,6 +1137,18 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Meisterschaft & Identität"
+          }
+        }
+      }
+    },
+    "Mindset & Foundations" : {
+      "comment" : "Course category name: a Courses tab filter chip and section header, a Home carousel card, and the category part of the Home 'continue' card. Analytics keeps the English name.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mindset & Grundlagen"
           }
         }
       }

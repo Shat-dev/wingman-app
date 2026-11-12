@@ -132,18 +132,33 @@ final class CourseCatalogDisplayTests: XCTestCase {
         XCTAssertEqual(properties["course_title"] as? String, "Fear & Exposure")
     }
 
-    /// Category names are brand terms: shown in English even when a
-    /// translation for the same text happens to exist.
-    func testCategoryNamesAreNeverTranslated() throws {
-        let english = CourseCategory.dummyCategories.map(\.displayName)
-        XCTAssertEqual(english, [
+    /// Category names are shown translated (Arthur's call, 2026-11-13;
+    /// they were English-only before), English where there is no
+    /// translation, and analytics keeps the English name.
+    func testCategoryNamesAreTranslatedForDisplayOnly() throws {
+        let english = [
             "Mindset & Foundations",
             "Approach Mechanics",
             "Conversation Flow",
             "Flirting & Chemistry",
             "Integration & Mastery"
-        ])
-        try useTranslations(["Mindset & Foundations": "Denkweise & Grundlagen"])
+        ]
         XCTAssertEqual(CourseCategory.dummyCategories.map(\.displayName), english)
+
+        try useTranslations(["Mindset & Foundations": "Mindset & Grundlagen"])
+        let shown = CourseCategory.dummyCategories.map(\.displayName)
+        XCTAssertEqual(shown[0], "Mindset & Grundlagen")
+        XCTAssertEqual(Array(shown.dropFirst()), Array(english.dropFirst()), "no translation: English")
+        XCTAssertEqual(CourseCategory.dummyCategories.map(\.canonicalName), english, "analytics stays English")
+    }
+
+    /// The shipped German catalog names all five.
+    func testThisBuildHasGermanForEveryCategory() throws {
+        let path = try XCTUnwrap(Bundle.main.path(forResource: "de", ofType: "lproj"))
+        let german = try XCTUnwrap(Bundle(path: path))
+        for category in CourseCategory.dummyCategories {
+            let value = german.localizedString(forKey: category.name, value: nil, table: "Content")
+            XCTAssertNotEqual(value, category.name, "\(category.name) has no German")
+        }
     }
 }

@@ -62,8 +62,7 @@ extension Course {
 }
 
 extension CourseCategory {
-    /// English category name. A brand term: it is not translated on screen
-    /// either (localization plan, decision D2).
+    /// English category name, whatever language the screen shows it in.
     var canonicalName: String { name }
 }
 

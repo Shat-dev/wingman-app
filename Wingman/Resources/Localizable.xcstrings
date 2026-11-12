@@ -159,7 +159,7 @@
       }
     },
     "%@: %@" : {
-      "comment" : "Home 'continue' card. 1: category name (not translated). 2: course title.",
+      "comment" : "Home 'continue' card. 1: category name. 2: course title.",
       "localizations" : {
         "de" : {
           "stringUnit" : {

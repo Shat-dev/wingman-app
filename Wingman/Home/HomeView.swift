@@ -62,11 +62,11 @@ struct HomeView: View {
     private var modules: [(category: CourseCategory, title: String, subtitle: String, imageName: String)] {
         let categories = CourseCategory.dummyCategories
         return [
-            (categories[0], "Mindset & Foundations", "", "beliefandreframes"),
-            (categories[1], "Approach Mechanics", "", "approch_mech_ym"),
-            (categories[2], "Conversation Flow", "", "smalltalkandmomentum"),
-            (categories[3], "Flirting & Chemistry", "", "Flirting_ym"),
-            (categories[4], "Integration & Mastery", "", "Mastery&Identity")
+            (categories[0], categories[0].displayName, "", "beliefandreframes"),
+            (categories[1], categories[1].displayName, "", "approch_mech_ym"),
+            (categories[2], categories[2].displayName, "", "smalltalkandmomentum"),
+            (categories[3], categories[3].displayName, "", "Flirting_ym"),
+            (categories[4], categories[4].displayName, "", "Mastery&Identity")
         ]
     }
     

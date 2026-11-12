@@ -25,7 +25,8 @@ Men, mostly 25–55 (45+ is about a third of onboarding answers), who are nervou
 | Topic | Rule |
 |---|---|
 | Address | **du**, everywhere, including errors and the paywall. Imperatives in the short form: *versuch*, *wähl*, *prüf*. |
-| Never translate | **Wingman**, **XP** (the validator checks both), and the five category names, which are not in the catalog. |
+| Never translate | **Wingman**, **XP** (the validator checks both). |
+| Category names | Translated since 2026-11-13 (they were English-only before): *Mindset & Grundlagen*, *Ansprechen in der Praxis*, *Gesprächsfluss*, *Flirten & Anziehung*, *Alltag & Meisterschaft*. In `Content.xcstrings`; analytics keeps the English names. |
 | Level | **Level** for both the XP level and the four approach levels (one Swift string, "Level %lld", serves both). |
 | Approach (noun) | **das Ansprechen** for the act; **Ansprache** for one logged approach; *erfassen* for "to log". |
 | Subscription | **Abo** in the UI (*Monatsabo*, *Jahresabo*, *Abo verwalten*). |

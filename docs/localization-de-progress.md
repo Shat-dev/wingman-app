@@ -190,3 +190,11 @@ Arthur's device test (German via Xcode's App Language option): the first scenari
 - Also cleared six main-actor isolation warnings (0c35bf0, no behaviour change).
 - Not a bug: after force-quitting, a build run with Xcode's App Language = German reopens in the phone's language, because that option only applies to launches from Xcode.
 - Checks: 330 unit tests (325 passed, 5 skipped), no build warnings. The walkthrough path itself is not re-tested; it needs a fresh install, which means a new guest user in production.
+
+## 2026-11-13, about 00:45. Course category names translated
+
+Arthur chose to translate the five category names, which had been kept English as brand terms (decision D2). They are the first headings a German user sees on the Courses tab.
+
+- Mindset & Foundations → Mindset & Grundlagen; Approach Mechanics → Ansprechen in der Praxis; Conversation Flow → Gesprächsfluss; Flirting & Chemistry → Flirten & Anziehung; Integration & Mastery → Alltag & Meisterschaft (all needs review).
+- Display only: `CourseCategory.displayName` now reads `Content.xcstrings`. The Home module carousel used hard-coded English titles and now uses `displayName`. `canonicalName`, which analytics sends, stays English. The daily-practice module values are untouched.
+- Checked on the 17 Pro and the SE in German: Courses tab chips and section header, Home carousel card. The longest name, "Ansprechen in der Praxis", fits. Unit tests: 331, 326 passed, 5 skipped. The old "never translated" test is replaced by one for the new rule, plus one that checks every category has German.
