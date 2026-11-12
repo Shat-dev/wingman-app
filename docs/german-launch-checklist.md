@@ -196,6 +196,8 @@ Release B contains all of Release A (the English-only groundwork), which has not
 
 ## Step 6. German App Store page (G9)
 
+**Draft ready (2026-11-12):** [german-app-store-listing.md](german-app-store-listing.md) has the name, subtitle, keywords, description, promotional text, What's New, subscription names, and German text for all five screenshots, plus how to make them in Figma. It still needs the proofreader.
+
 **Why it matters:** the App Store indexes keywords separately for each country. With an English-only page, German searches don't find Wingman. That's the main point of the X article you shared: the store page usually brings more downloads than translating the app itself. Prices need no change: 17,99 € a month and 79,99 € a year are already set for Germany, and Germans buy at that level.
 
 **What to prepare** (Claude drafts all of it; you paste it in):
