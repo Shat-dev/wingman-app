@@ -2,6 +2,17 @@
 
 Drafted 2026-11-12 by Claude. Not proofread by a native speaker yet. Send it to the proofreader together with the review pack (checklist step 1).
 
+**Status 2026-11-12: entered in App Store Connect** on version **1.15** (Prepare for Submission; nothing submitted).
+- German name and subtitle (recommended options).
+- Description, keywords, promotional text, What's New, support and marketing URLs.
+- Privacy policy URL: the English page.
+- 5 German screenshots in the required iPhone 6.1"/6.3" slot. They were resized from 1284 × 2778 to 1206 × 2622 (scaled, 3 px trimmed each side); the larger sizes inherit them.
+- Subscriptions: German group name ("Wingman Premium"), and Monatsabo / Jahresabo / Jahresabo for the three products.
+
+**Whatever build is submitted as 1.15 takes this German page live.** Only submit 1.15 with the German app.
+
+Still English on the German page: the header/search-results banner ("Turn 'What if' into 'hi'"), the retention message on the cancel sheet, and the terms and privacy pages.
+
 **When it goes live:** with the Release B submission, not before. Name, subtitle, description, keywords, screenshots and "What's New" go live with a version. A German page for an English-only app draws "App ist nur auf Englisch" reviews. Promotional text can change at any time.
 
 **Where to paste it:** App Store Connect → Wingman.
@@ -36,7 +47,7 @@ Alternative: `Mehr Selbstvertrauen im Alltag` (30)
 dating,coach,selbstvertrauen,schüchtern,smalltalk,kennenlernen,date,charisma,ausstrahlung,männer
 ```
 
-95 characters.
+96 characters.
 - **Commas only, no spaces.** Words already in the name or subtitle (wingman, frauen, ansprechen, selbstbewusst, flirten, lernen) are left out, because Apple combines all three fields.
 - **Left out on purpose:**
   - "verführen", "aufreißen", "pickup": these are the pickup-artist tone the brief rules out.
