@@ -981,18 +981,6 @@
         }
       }
     },
-    "Close Wingman from the app switcher, then open it again." : {
-      "comment" : "Alert message after picking another app language. The new language only applies from the next launch. Shown in the newly picked language.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Schließe Wingman im App-Umschalter und öffne die App dann erneut."
-          }
-        }
-      }
-    },
     "Close offer" : {
       "localizations" : {
         "de" : {
@@ -1715,6 +1703,18 @@
         }
       }
     },
+    "Go to your home screen, then open Wingman again." : {
+      "comment" : "Alert message after picking another app language. The new language applies from the next launch; Wingman quits on its own once the user leaves it, so reopening from the home screen is enough. Shown in the newly picked language.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wechsle zum Home-Bildschirm und öffne Wingman dann erneut."
+          }
+        }
+      }
+    },
     "Goal Notifications" : {
       "localizations" : {
         "de" : {
@@ -2035,7 +2035,7 @@
       }
     },
     "Language: %@" : {
-      "comment" : "Settings link. %@ is the language the app is running in, named in that language (English, Deutsch). Tapping opens Wingman's page in iOS Settings, where the language can be changed.",
+      "comment" : "Settings link. %@ is the language Wingman runs in from its next launch, named in that language (English, Deutsch). Tapping opens a menu of the languages Wingman ships.",
       "localizations" : {
         "de" : {
           "stringUnit" : {

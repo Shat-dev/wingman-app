@@ -17,6 +17,8 @@
 //
 
 import Foundation
+import PostHog
+import UIKit
 
 nonisolated enum AppLanguageSettings {
 
@@ -101,5 +103,56 @@ nonisolated enum AppLanguageSettings {
               let bundle = Bundle(path: path) else { return english }
         let value = bundle.localizedString(forKey: english, value: english, table: nil)
         return value.isEmpty ? english : value
+    }
+}
+
+/// After a language change, quits Wingman the next time the user leaves it,
+/// so opening it again from the home screen starts it in the new language.
+///
+/// iOS fixes an app's language when the process starts, so the change needs
+/// a fresh launch. Without this, swiping up only backgrounds the app and the
+/// next tap brings back the same English process; people would have to know
+/// to close it from the app switcher. Quitting only ever happens in the
+/// background, never in front of the user, and only after they picked a
+/// language other than the running one.
+@MainActor
+enum LanguageRelaunch {
+    private static var observer: NSObjectProtocol?
+
+    static var isArmed: Bool { observer != nil }
+
+    /// Quit on the next trip to the background.
+    static func arm() {
+        guard observer == nil else { return }
+        observer = NotificationCenter.default.addObserver(
+            forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: .main
+        ) { _ in
+            MainActor.assumeIsolated { quitWhileInBackground() }
+        }
+    }
+
+    /// The user went back to the running language: nothing to relaunch for.
+    static func disarm() {
+        if let observer { NotificationCenter.default.removeObserver(observer) }
+        observer = nil
+    }
+
+    private static func quitWhileInBackground() {
+        // Give PostHog a moment to send the queued events (the language
+        // choice among them), then quit, unless the user came straight back,
+        // in which case wait for the next time they leave.
+        var task = UIBackgroundTaskIdentifier.invalid
+        task = UIApplication.shared.beginBackgroundTask {
+            UIApplication.shared.endBackgroundTask(task)
+        }
+        PostHogSDK.shared.flush()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            guard UIApplication.shared.applicationState == .background else {
+                UIApplication.shared.endBackgroundTask(task)
+                return
+            }
+            log("Quitting in the background to relaunch in the chosen language")
+            exit(0)
+        }
     }
 }

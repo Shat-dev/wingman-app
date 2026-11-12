@@ -51,4 +51,21 @@ final class AppLanguageSettingsTests: XCTestCase {
         XCTAssertEqual(AppLanguageSettings.string("Reopen Wingman to switch", in: "en"), "Reopen Wingman to switch")
         XCTAssertEqual(AppLanguageSettings.string("Reopen Wingman to switch", in: "xx"), "Reopen Wingman to switch")
     }
+
+    func testReopenInstructionIsReadInTheChosenLanguage() {
+        let english = "Go to your home screen, then open Wingman again."
+        XCTAssertEqual(AppLanguageSettings.string(english, in: "de"), "Wechsle zum Home-Bildschirm und öffne Wingman dann erneut.")
+        XCTAssertEqual(AppLanguageSettings.string(english, in: "en"), english)
+    }
+
+    @MainActor
+    func testRelaunchIsArmedOnlyUntilTheUserGoesBack() {
+        defer { LanguageRelaunch.disarm() }
+        XCTAssertFalse(LanguageRelaunch.isArmed)
+        LanguageRelaunch.arm()
+        LanguageRelaunch.arm()
+        XCTAssertTrue(LanguageRelaunch.isArmed)
+        LanguageRelaunch.disarm()
+        XCTAssertFalse(LanguageRelaunch.isArmed)
+    }
 }

@@ -339,7 +339,7 @@ struct SettingsSheet: View {
                                 Image(systemName: "globe")
                                     .font(.system(size: 14, weight: .medium))
                                     .accessibilityHidden(true)
-                                Text("Language: \(AppLanguageSettings.currentLanguageName)")
+                                Text("Language: \(AppLanguageSettings.name(of: selectedLanguage))")
                                     .underline()
                             }
                             .font(.manropeMedium(size: 14))
@@ -542,7 +542,7 @@ struct SettingsSheet: View {
         ) { code in
             Button(AppLanguageSettings.string("OK", in: code)) { }
         } message: { code in
-            Text(verbatim: AppLanguageSettings.string("Close Wingman from the app switcher, then open it again.", in: code))
+            Text(verbatim: AppLanguageSettings.string("Go to your home screen, then open Wingman again.", in: code))
         }
         .alert("Success", isPresented: $showingSuccessAlert) {
             Button("OK") { }
@@ -686,7 +686,8 @@ struct SettingsSheet: View {
     
     /// Settings → Language's selection. Choosing a language stores it for
     /// the next launch; choosing one other than the running language asks
-    /// the user to reopen Wingman.
+    /// the user to reopen Wingman, and Wingman quits by itself once they
+    /// leave it, so tapping its icon again opens it in the new language.
     private var languageSelection: Binding<String> {
         Binding(
             get: { selectedLanguage },
@@ -700,7 +701,10 @@ struct SettingsSheet: View {
                 log("Language selected: \(code)")
                 selectedLanguage = code
                 if AppLanguageSettings.select(code) {
+                    LanguageRelaunch.arm()
                     languageToReopenIn = code
+                } else {
+                    LanguageRelaunch.disarm()
                 }
             }
         )
