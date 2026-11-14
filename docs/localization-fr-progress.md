@@ -2,6 +2,43 @@
 
 Branch `localization-release-c-fr` (from `localization-release-c`). Rules and glossary: [localization-fr-brief.md](localization-fr-brief.md). Model: German, [localization-de-progress.md](localization-de-progress.md). Shared setup log (read-only here): [localization-release-c-progress.md](localization-release-c-progress.md). Everything here is a machine draft (Claude), marked "needs review"; nothing is applied to the live database.
 
+## Final summary (2026-11-15)
+
+**All four steps of the brief are done.** All of it is a machine draft marked "needs review". Nothing is marked reviewed, nothing was pushed, and nothing was written to Supabase, PostHog, RevenueCat, App Store Connect or Meta. No SQL was run. Branch `localization-release-c-fr`.
+
+| Part | Done | English words |
+|---|---|---|
+| Lesson overlays | 25 of 25 courses, 1,531 items | 34,442 |
+| Scenarios | 15 of 15 (796 text screens, 276 options) | about 10,400 (titles, summaries, screens, options) |
+| Quiz questions | 765 of 765, in German's nine files | about 32,000 |
+| Generated files | 24 SQL files in `supabase/seed/content_translations_fr/` (not run); `Wingman/Content/question_translations_seed.fr.json` (765) | |
+| Checks | catalog check, overlay check, DB generator and seed check pass; 341 unit tests, 336 passed, 5 skipped (pseudo-language probes), 0 failed; tu / spacing / anglicism scans clean | |
+| Review pack | `localization/fr/review/wingman-french-review-pack.xlsx`, 26 choices | |
+| App Store | `docs/french-app-store-listing.md` (France, plus notes for Canada); four `-fr.html` banner copies (not rendered) | |
+
+In all, about 77,000 English words were translated, not counting the UI catalogs, which were done by the setup session.
+
+### What needs Arthur
+
+1. **Native review.** Send the review pack and `docs/french-app-store-listing.md` to a French proofreader. Every string is still "needs review".
+2. **Consent addition, lesson 25_4_5_2.** The English says to try "earlier escalation" with no condition. The French adds *quand elle te le rend*, to match the 17_3 touch rule. Decide whether to keep it, and whether the English (and German) should say the same.
+3. **The live database check was not repeated.** The Supabase connector reaches only Clera-App (checked at the start and again at the end, 2026-11-15). The English text and ids come from German's files, which German checked against the live DB. When the connector reaches Wingman-App, a read-only md5 check of the 765 question ids and the scenario rows confirms the French files line up.
+4. **Applying the content.** Only you can say when to run the 24 SQL files in `supabase/seed/content_translations_fr/`; they have never been run. Run them with the Release C launch.
+5. **Legal question for the adviser.** Are English-only terms and privacy pages acceptable for a paid subscription sold in France (Code de la consommation, Loi Toubon)? It is the same open question as German, and it was not guessed.
+6. **Names shared across languages.** Scenario names stay as in English, for example Aurelie (French spelling *Aurélie*). Changing a name changes it for every language.
+7. **Strong research claims in course 3.** These include "neurologically impossible…", dopamine and serotonin. They are kept as strong as the English, as German did. Consider softening them in all languages.
+8. **Screenshots.**
+   - The Figma frames need the French text from the listing doc.
+   - French phone captures need a simulator run, which creates a guest user in production, so it needs your OK.
+   - The four `-fr.html` banners need rendering and a visual check.
+9. **App Store Connect.** Enter the French (and French (Canada)) page only with the build that ships French, as with German 1.15.
+
+### For the setup session
+
+- `marketing/app-store-assets/render.sh` renders four hard-coded names. To render the French banners, add `header-a-fr`, `header-b-fr`, `search-a-fr` and `search-b-fr` to it, or let it take a suffix. This file is outside the French session's files, so it was left unchanged.
+- No catalog mistakes, course-title problems or script bugs were found. The catalog titles *Prêt à aborder*, *Aller vers elle*, *Les incontournables* and *Concrétiser* all fit their lessons.
+- The Spanish content missing from this worktree made no test fail. It was skipped as intended.
+
 ## Where it stands
 
 All 25 lesson courses are drafted (1,531 items, 34,442 English words); every overlay passes `lesson_overlays.py check fr`. Database content is drafted: all 15 scenarios and all 765 quiz questions (about 32,000 English words in the quizzes); the SQL is generated, never run. Checks and review pack done (2026-11-15). App Store listing drafted (2026-11-15).
@@ -103,8 +140,8 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
 
 ## Questions for Arthur
 
-None yet.
+See "What needs Arthur" in the final summary at the top. Nothing blocked the work, so no question was sent mid-loop.
 
 ## For the setup session
 
-None yet.
+See the final summary at the top (render.sh only).
