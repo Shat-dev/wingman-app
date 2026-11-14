@@ -4,7 +4,7 @@ Branch `localization-release-c-fr` (from `localization-release-c`). Rules and gl
 
 ## Where it stands
 
-All 25 lesson courses are drafted (1,531 items, 34,442 English words); every overlay passes `lesson_overlays.py check fr`. Database content in progress: all 15 scenarios done; quiz questions 611 of 765. Checks, review pack and App Store listing not started.
+All 25 lesson courses are drafted (1,531 items, 34,442 English words); every overlay passes `lesson_overlays.py check fr`. Database content in progress: all 15 scenarios done; quiz questions 649 of 765. Checks, review pack and App Store listing not started.
 
 ## Summary
 
@@ -12,7 +12,7 @@ All 25 lesson courses are drafted (1,531 items, 34,442 English words); every ove
 |---|---|
 | UI catalogs | Done by the setup session (585 strings, draft) |
 | Lesson overlays | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-15) |
-| Database content | **15 of 15 scenarios** (796 text screens, 276 options); 611 of 765 quiz questions |
+| Database content | **15 of 15 scenarios** (796 text screens, 276 options); 649 of 765 quiz questions |
 | Checks and review pack | Not started |
 | App Store listing (France, notes for Canada) | Not started |
 
@@ -79,6 +79,7 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
 - **2026-11-15. Questions 496–535** (conversational_skills rows 123–162, module pool; about 1,700 words). `questions_03_conversational_skills_2` is complete (81 rows), so all 162 conversational_skills questions are done; seed check passes with 535. The three English fixes German logged are already in the source: `d45e9b83…` explanation ("she can still say no", kept as *elle peut toujours dire non*), `c9c21217…` (no letter reference) and `fc8e3792…` ("You've been through one yourself"). For the reviewer: "subtext" became *sous-texte*; "attunement" became *l'accord entre vous*; "checking in" became *lui laisser la parole*; "career change" became *reconversion*; "product design" became *design produit*; "ramen spot" became *resto de ramen*. All *vous* are plural (the two of you).
 - **2026-11-15. Questions 536–573** (flirting_chemistry rows 1–38: lessons 17_1 to 20_3; about 1,530 words). This starts `questions_04_flirting_chemistry_1` (38 of 76 rows), filled 38 at a time as German did; seed check passes with 573. Terms follow the course 17–21 overlays: "teasing" became *taquiner / taquinerie*, "banter" became *répartie*, "cheekiness" became *culot*, "light challenge" became *petit défi*, "mirroring" became *mimétisme*, "tension" stays *tension*. For the reviewer: "plausible deniability" became *sans te déclarer ouvertement* (German: *ohne dich festzulegen*); "You're out of my league" became *Tu joues dans une autre catégorie que moi*; "You're hot" became *Tu es canon*; "guilt trips or attitude" became *sans culpabiliser l'autre ni changer d'attitude*; the drink bet is *Pierre-feuille-ciseaux pour le prochain verre*. Respect and consent options keep the English strength (*Ne jamais la toucher sans signes clairs qu'elle est à l'aise*; *Un pas en arrière est une information, pas un rejet*). The one *vous* is plural ("you stay far apart").
 - **2026-11-15. Questions 574–611** (flirting_chemistry rows 39–76: lessons 20_4 to 21_3, then 26 module-pool questions; about 1,620 words). `questions_04_flirting_chemistry_1` is complete (76 rows); seed check passes with 611. The English fixes German logged are already in the source (`93982613…` conditions, `061b4ffe…`, `4684c791…`, `450fc086…`). The `93982613…` conditions keep their strength: *si elle y prend clairement plaisir*, *tant qu'elle reste détendue*; `5136a469…` keeps *sans forcer*. Terms follow the course 20–21 overlays: "disqualification" became *ne pas être impressionné d'emblée*, "callback" became *rappel*, "inside joke" became *blague entre vous*, "sexual tension" became *tension sexuelle*, "frame" became *posture*. For the reviewer: "oxytocin" became *ocytocine*; "star signs" became *signe astrologique*; "burn water" became *faire brûler de l'eau*; "premium blend" became *le café haut de gamme*. All *vous* are plural (the two of you).
+- **2026-11-15. Questions 612–649** (flirting_chemistry rows 77–114, module pool; about 1,650 words). This starts `questions_04_flirting_chemistry_2` (38 of 75 rows); seed check passes with 649. The English fixes German logged are already in the source: `50183c21…` now reads "Only if you're getting the next round" (*Seulement si tu paies la prochaine tournée*) and `a1c414f9…` "soo". `7a679b53…` keeps *Arrête immédiatement pour respecter ses limites physiques*. For the reviewer: "Protect my queen" became *protéger ma reine* (French chess calls the piece *la dame*, but *reine* is understood and keeps the pun; German used *Dame*); "do comedy" became *faire du stand-up*; "I have a boyfriend" became *J'ai un copain* (glossary); "pedestalizing" became *la mettre sur un piédestal*; "playing hard to get" became *elle joue les difficiles*. The one *vous* is plural ("between you").
 
 ## Questions for Arthur
 
