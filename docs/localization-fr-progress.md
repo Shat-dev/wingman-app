@@ -4,7 +4,7 @@ Branch `localization-release-c-fr` (from `localization-release-c`). Rules and gl
 
 ## Where it stands
 
-All 25 lesson courses are drafted (1,531 items, 34,442 English words); every overlay passes `lesson_overlays.py check fr`. Database content in progress: all 15 scenarios done; quiz questions 686 of 765. Checks, review pack and App Store listing not started.
+All 25 lesson courses are drafted (1,531 items, 34,442 English words); every overlay passes `lesson_overlays.py check fr`. Database content in progress: all 15 scenarios done; quiz questions 726 of 765. Checks, review pack and App Store listing not started.
 
 ## Summary
 
@@ -12,7 +12,7 @@ All 25 lesson courses are drafted (1,531 items, 34,442 English words); every ove
 |---|---|
 | UI catalogs | Done by the setup session (585 strings, draft) |
 | Lesson overlays | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-15) |
-| Database content | **15 of 15 scenarios** (796 text screens, 276 options); 686 of 765 quiz questions |
+| Database content | **15 of 15 scenarios** (796 text screens, 276 options); 726 of 765 quiz questions |
 | Checks and review pack | Not started |
 | App Store listing (France, notes for Canada) | Not started |
 
@@ -81,6 +81,7 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
 - **2026-11-15. Questions 574–611** (flirting_chemistry rows 39–76: lessons 20_4 to 21_3, then 26 module-pool questions; about 1,620 words). `questions_04_flirting_chemistry_1` is complete (76 rows); seed check passes with 611. The English fixes German logged are already in the source (`93982613…` conditions, `061b4ffe…`, `4684c791…`, `450fc086…`). The `93982613…` conditions keep their strength: *si elle y prend clairement plaisir*, *tant qu'elle reste détendue*; `5136a469…` keeps *sans forcer*. Terms follow the course 20–21 overlays: "disqualification" became *ne pas être impressionné d'emblée*, "callback" became *rappel*, "inside joke" became *blague entre vous*, "sexual tension" became *tension sexuelle*, "frame" became *posture*. For the reviewer: "oxytocin" became *ocytocine*; "star signs" became *signe astrologique*; "burn water" became *faire brûler de l'eau*; "premium blend" became *le café haut de gamme*. All *vous* are plural (the two of you).
 - **2026-11-15. Questions 612–649** (flirting_chemistry rows 77–114, module pool; about 1,650 words). This starts `questions_04_flirting_chemistry_2` (38 of 75 rows); seed check passes with 649. The English fixes German logged are already in the source: `50183c21…` now reads "Only if you're getting the next round" (*Seulement si tu paies la prochaine tournée*) and `a1c414f9…` "soo". `7a679b53…` keeps *Arrête immédiatement pour respecter ses limites physiques*. For the reviewer: "Protect my queen" became *protéger ma reine* (French chess calls the piece *la dame*, but *reine* is understood and keeps the pun; German used *Dame*); "do comedy" became *faire du stand-up*; "I have a boyfriend" became *J'ai un copain* (glossary); "pedestalizing" became *la mettre sur un piédestal*; "playing hard to get" became *elle joue les difficiles*. The one *vous* is plural ("between you").
 - **2026-11-15. Questions 650–686** (flirting_chemistry rows 115–151, module pool; about 1,490 words). `questions_04_flirting_chemistry_2` is complete (75 rows), so all 151 flirting_chemistry questions are done; seed check passes with 686. The English fixes German logged are already in the source (`e91466f0…` "Upper arm", `f6feba7a…` touch on her arm, `f23233f3…` "…when she's reciprocating", `a9af130c…`). Touch and distance answers keep the English strength: *Laisser durer un peu un contact quand elle te le rend*; *Respecte sa réaction en mettant en pause toute progression physique*; *Lui laisser plus d'espace et continuer calmement*. For the reviewer: "I could get lucky tonight" became *Ce soir, je pourrais avoir de la chance*; "the way to your heart" became *le chemin jusqu'à ton cœur*; "put her on the spot" became *la mettre sur la sellette*; "feel inadequate" became *se sent nulle*; "breaking rapport" became *rompre la complicité*.
+- **2026-11-15. Questions 687–726** (mastery_integration rows 1–40: lessons 22_1 to 25_4; about 1,670 words). This starts `questions_05_mastery_integration` (40 of 79 rows), a single file as in German; seed check passes with 726. Terms follow the course 22–25 overlays: "home court advantage" became *avantage du terrain*, "recognized regular" became *habitué reconnu*, "sticking point" became *point de blocage*, "plateau" became *plateau de progression*, "experimental mindset" became *esprit d'expérimentation*, "opening" became *entrée en matière*, "social exposure" became *exposition sociale*. For the reviewer: "reps" became *répétitions*; "volume" became *multiplier les approches* (no French noun fits; German used *oft ansprechen*); "social circle" became *entourage*; "put yourself out there" became *Lance-toi*; "night venues" became *les bars le soir*. No *vous* in this batch.
 
 ## Questions for Arthur
 
