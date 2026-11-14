@@ -1,0 +1,908 @@
+{
+  "questions": {
+    "11c71b51-0d39-47d4-b733-2c11ea3df4ab": {
+      "question_text": {
+        "en": "What makes flirting successful?",
+        "es": "¿Qué hace que un coqueteo salga bien?"
+      },
+      "options": {
+        "en": [
+          "Getting her number",
+          "Creating attraction quickly",
+          "Proving confidence",
+          "Creating an enjoyable, energizing moment"
+        ],
+        "es": [
+          "Conseguir su número",
+          "Generar atracción rápido",
+          "Demostrar seguridad",
+          "Crear un momento agradable y lleno de energía"
+        ]
+      },
+      "explanation": {
+        "en": "Flirting succeeds when the moment feels lighter and more alive, regardless of outcome.",
+        "es": "El coqueteo sale bien cuando el momento se siente más ligero y más vivo, sea cual sea el resultado."
+      }
+    },
+    "a2016c8a-bb00-46b1-8a8d-c78bcb62decf": {
+      "question_text": {
+        "en": "Why does focusing on outcomes often backfire in flirting?",
+        "es": "¿Por qué centrarte en el resultado suele salir mal al coquetear?"
+      },
+      "options": {
+        "en": [
+          "It makes conversations shorter",
+          "It slows escalation",
+          "It reduces confidence",
+          "It creates pressure and agenda"
+        ],
+        "es": [
+          "Acorta las conversaciones",
+          "Frena el avance",
+          "Te quita seguridad",
+          "Crea presión y una intención oculta"
+        ]
+      },
+      "explanation": {
+        "en": "Focus on making the interaction playful instead of trying to achieve a specific outcome.",
+        "es": "Céntrate en que la interacción sea juguetona en lugar de intentar conseguir un resultado concreto."
+      }
+    },
+    "37bff0df-2454-418b-b50a-db2845245a4e": {
+      "question_text": {
+        "en": "Why does focusing on enjoyment improve flirting outcomes?",
+        "es": "¿Por qué centrarte en disfrutar mejora los resultados al coquetear?"
+      },
+      "options": {
+        "en": [
+          "It removes hidden agendas",
+          "It makes you more present and relaxed",
+          "It creates outcome independence",
+          "It prioritizes proving your worth"
+        ],
+        "es": [
+          "Elimina las intenciones ocultas",
+          "Te hace estar más presente y relajado",
+          "Hace que no dependas del resultado",
+          "Prioriza demostrar lo que vales"
+        ]
+      },
+      "explanation": {
+        "en": "Enjoyment reframes success as the moment itself, not results.",
+        "es": "Disfrutar redefine el éxito como el momento en sí, no como el resultado."
+      }
+    },
+    "90e66462-8fdd-4fa4-a574-bda55becad8c": {
+      "question_text": {
+        "en": "How do you know whether to keep flirting?",
+        "es": "¿Cómo sabes si debes seguir coqueteando?"
+      },
+      "options": {
+        "en": [
+          "Trust your gut feeling about the interaction's vibe",
+          "Watch how she responds, not how you feel",
+          "Look for explicit verbal statements of interest",
+          "Assess if conversation has been going long enough"
+        ],
+        "es": [
+          "Confiar en tu intuición sobre la vibra de la interacción",
+          "Fijarte en cómo responde ella, no en cómo te sientes tú",
+          "Esperar a que diga claramente con palabras que le interesas",
+          "Valorar si la conversación ya duró lo suficiente"
+        ]
+      },
+      "explanation": {
+        "en": "Watch her responses and investment, not how you feel.",
+        "es": "Fíjate en sus respuestas y en cuánto se implica, no en cómo te sientes tú."
+      }
+    },
+    "eee49a49-b918-4f25-9827-edc1a9f9bdc0": {
+      "question_text": {
+        "en": "Which signals suggest you should hold back rather than escalate?",
+        "es": "¿Qué señales sugieren que te contengas en lugar de avanzar?"
+      },
+      "options": {
+        "en": [
+          "Neutral tone",
+          "Short answers",
+          "No questions returned",
+          "Genuine laughter"
+        ],
+        "es": [
+          "Un tono neutro",
+          "Respuestas cortas",
+          "No te devuelve preguntas",
+          "Una risa genuina"
+        ]
+      },
+      "explanation": {
+        "en": "Lack of reciprocal energy means the interaction hasn’t opened yet.",
+        "es": "Si no te devuelve la energía, la interacción todavía no se ha abierto."
+      }
+    },
+    "1ae2493f-bf71-457d-8f09-996e6cf2b464": {
+      "question_text": {
+        "en": "What does respect in flirting mean?",
+        "es": "¿Qué significa el respeto al coquetear?"
+      },
+      "options": {
+        "en": [
+          "Valuing her comfort and boundaries more than your outcome",
+          "Being confident throughout the interaction",
+          "Treating her as equal without being overly aggressive"
+        ],
+        "es": [
+          "Valorar su comodidad y sus límites por encima de tu resultado",
+          "Mostrar seguridad durante toda la interacción",
+          "Tratarla como a una igual sin ser demasiado agresivo"
+        ]
+      },
+      "explanation": {
+        "en": "Flirting stays respectful when you value her ease more than your success.",
+        "es": "El coqueteo se mantiene respetuoso cuando valoras su comodidad más que tu éxito."
+      }
+    },
+    "df3d8e11-15af-468e-ba4a-9cca550456d2": {
+      "question_text": {
+        "en": "What’s the cleanest way to protect both people when interest isn’t mutual?",
+        "es": "¿Cuál es la forma más limpia de proteger a los dos cuando el interés no es mutuo?"
+      },
+      "options": {
+        "en": [
+          "Exit early and politely",
+          "Joke to soften the moment",
+          "Push lightly to confirm",
+          "Wait for her to say no directly"
+        ],
+        "es": [
+          "Despedirte pronto y con educación",
+          "Bromear para suavizar el momento",
+          "Insistir un poco para confirmarlo",
+          "Esperar a que ella te diga que no directamente"
+        ]
+      },
+      "explanation": {
+        "en": "Early, respectful exits keep the moment light and prevent discomfort for both sides.",
+        "es": "Despedirte pronto y con respeto mantiene el momento ligero y evita la incomodidad para los dos."
+      }
+    },
+    "fed7fe50-0325-493e-8647-62755e05fab5": {
+      "question_text": {
+        "en": "What are baseline respect behaviors?",
+        "es": "¿Cuáles son los comportamientos mínimos de respeto?"
+      },
+      "options": {
+        "en": [
+          "Read her signals and honor them",
+          "Accept rejection without guilt trips or attitude",
+          "Never touch without clear comfort signs",
+          "Try one more time if you think she might be shy"
+        ],
+        "es": [
+          "Leer sus señales y respetarlas",
+          "Aceptar el rechazo sin hacerla sentir culpable y sin mala actitud",
+          "Nunca tocarla sin señales claras de que está cómoda",
+          "Intentarlo una vez más si crees que puede ser tímida"
+        ]
+      },
+      "explanation": {
+        "en": "Flirting stays respectful when you value her ease more than your success.",
+        "es": "El coqueteo se mantiene respetuoso cuando valoras su comodidad más que tu éxito."
+      }
+    },
+    "999e00ac-a18d-4b94-b3a8-e5c97c457f07": {
+      "question_text": {
+        "en": "Why does good energy matter more than lines?",
+        "es": "¿Por qué la buena energía importa más que las frases?"
+      },
+      "options": {
+        "en": [
+          "People remember feelings more than content",
+          "Attraction is mostly visual",
+          "Words are overrated in flirting",
+          "Confidence replaces conversation"
+        ],
+        "es": [
+          "La gente recuerda las sensaciones más que el contenido",
+          "La atracción es sobre todo visual",
+          "Las palabras están sobrevaloradas al coquetear",
+          "La seguridad reemplaza a la conversación"
+        ]
+      },
+      "explanation": {
+        "en": "Emotional experience is what sticks. Words are secondary to how the moment feels.",
+        "es": "Lo que se queda es la experiencia emocional. Las palabras importan menos que cómo se siente el momento."
+      }
+    },
+    "a3ec5acd-f47b-4bb8-bf22-81d9b16edd73": {
+      "question_text": {
+        "en": "A relaxed group is chatting calmly. How should your energy show up?",
+        "es": "Un grupo relajado está conversando con calma. ¿Cómo debería mostrarse tu energía?"
+      },
+      "options": {
+        "en": [
+          "High-energy to stand out",
+          "Slightly more relaxed than them",
+          "Matching or slightly above their pace",
+          "Quiet and reserved"
+        ],
+        "es": [
+          "Con mucha energía para destacar",
+          "Un poco más relajada que la de ellos",
+          "Igual a su ritmo o un poco por encima",
+          "Callada y reservada"
+        ]
+      },
+      "explanation": {
+        "en": "Matching their tone keeps the vibe comfortable and shared.",
+        "es": "Acompañar su tono mantiene un ambiente cómodo y compartido."
+      }
+    },
+    "50f09b6c-abae-46f2-a825-8acf3d58107e": {
+      "question_text": {
+        "en": "What does good energy create?",
+        "es": "¿Qué genera la buena energía?"
+      },
+      "options": {
+        "en": [
+          "Makes people feel lighter and more alive",
+          "Invites them to open up and play",
+          "Demonstrates social confidence and charisma",
+          "Creates the setting that makes flirting possible"
+        ],
+        "es": [
+          "Hace que la gente se sienta más ligera y más viva",
+          "Los invita a abrirse y a jugar",
+          "Demuestra seguridad social y carisma",
+          "Crea el ambiente que hace posible el coqueteo"
+        ]
+      },
+      "explanation": {
+        "en": "Good energy creates safety and playfulness, which allows flirting to emerge organically.",
+        "es": "La buena energía crea seguridad y ganas de jugar, y eso permite que el coqueteo surja de forma natural."
+      }
+    },
+    "a8695e9b-bb41-43c3-bf69-51511a2d5917": {
+      "question_text": {
+        "en": "She says she's really into yoga and flexible. How can you use humor?",
+        "es": "Te dice que le encanta el yoga y que es muy flexible. ¿Cómo puedes usar el humor?"
+      },
+      "options": {
+        "en": [
+          "List the health benefits of yoga seriously",
+          "Share your serious yoga routine",
+          "Ask how long she's been practicing",
+          "Playfully ask if she can touch her toes"
+        ],
+        "es": [
+          "Enumerar en serio los beneficios del yoga para la salud",
+          "Contarle tu rutina de yoga en serio",
+          "Preguntarle cuánto tiempo lleva practicando",
+          "Preguntarle en broma si llega a tocarse los pies"
+        ]
+      },
+      "explanation": {
+        "en": "Light teasing creates playful energy and invites banter.",
+        "es": "Tomarle un poco el pelo crea una energía juguetona e invita al ida y vuelta con humor."
+      }
+    },
+    "8150d416-c806-4f77-898e-1532d0bc733f": {
+      "question_text": {
+        "en": "What should you avoid when teasing?",
+        "es": "¿Qué deberías evitar al tomarle el pelo?"
+      },
+      "options": {
+        "en": [
+          "Exaggerating something she seems proud of",
+          "Light-hearted back-and-forth",
+          "Playful challenges to what she said",
+          "Topics she might be insecure about"
+        ],
+        "es": [
+          "Exagerar algo de lo que parece estar orgullosa",
+          "Un ida y vuelta desenfadado",
+          "Retarla en broma sobre lo que dijo",
+          "Temas que puedan hacerla sentir insegura"
+        ]
+      },
+      "explanation": {
+        "en": "Teasing works when it's fun, not potentially hurtful.",
+        "es": "Tomarle el pelo funciona cuando es divertido, no cuando puede herirla."
+      }
+    },
+    "4e5a0bc4-d01b-4f85-9404-749642fa56b6": {
+      "question_text": {
+        "en": "Which are examples of safe teasing topics?",
+        "es": "¿Cuáles son ejemplos de temas seguros para tomarle el pelo?"
+      },
+      "options": {
+        "en": [
+          "Physical appearance",
+          "Being competitive",
+          "Being overly organized",
+          "Bad cooking skills"
+        ],
+        "es": [
+          "Su aspecto físico",
+          "Que es muy competitiva",
+          "Que es demasiado organizada",
+          "Que cocina muy mal"
+        ]
+      },
+      "explanation": {
+        "en": "Tease traits that are light, non-threatening, and not tied to insecurity.",
+        "es": "Tómale el pelo con rasgos ligeros, que no amenacen y que no estén ligados a inseguridades."
+      }
+    },
+    "63acae8c-e04a-4fc9-98cb-693c477cc5f0": {
+      "question_text": {
+        "en": "What makes fun light challenges effective?",
+        "es": "¿Qué hace eficaces los retos ligeros y divertidos?"
+      },
+      "options": {
+        "en": [
+          "Gives her permission to be competitive and show personality",
+          "Either outcome creates a reason to continue the interaction",
+          "Moves from answering questions to actually playing",
+          "All of the above"
+        ],
+        "es": [
+          "Le dan permiso para ser competitiva y mostrar su personalidad",
+          "Gane quien gane, hay un motivo para seguir la interacción",
+          "Pasa de responder preguntas a jugar de verdad",
+          "Todas las anteriores"
+        ]
+      },
+      "explanation": {
+        "en": "Light challenges invite play, reveal personality, and keep interaction active.",
+        "es": "Los retos ligeros invitan a jugar, muestran la personalidad y mantienen viva la interacción."
+      }
+    },
+    "9ce27a06-8ab6-4d7f-9ede-e0cfb8108698": {
+      "question_text": {
+        "en": "She asks, “How old are you?”. What could you say next as a fun challenge?",
+        "es": "Te pregunta: “¿Cuántos años tienes?”. ¿Qué podrías decir como reto divertido?"
+      },
+      "options": {
+        "en": [
+          "Give your exact age directly",
+          "Say age doesn’t matter",
+          "Ignore the question",
+          "\"How old do I look? guess\""
+        ],
+        "es": [
+          "Decirle tu edad exacta directamente",
+          "Decirle que la edad no importa",
+          "Ignorar la pregunta",
+          "“¿Cuántos me echas? Adivina”"
+        ]
+      },
+      "explanation": {
+        "en": "Turn it into a playful guess to create shared tension and banter.",
+        "es": "Conviértelo en un juego de adivinar para crear tensión compartida y un ida y vuelta con humor."
+      }
+    },
+    "9e5d1aff-d472-4ad6-af85-3661a0c5fa0d": {
+      "question_text": {
+        "en": "Good light challenge examples?",
+        "es": "¿Qué ejemplos de retos ligeros funcionan bien?"
+      },
+      "options": {
+        "en": [
+          "\"Bet you can't name three capitals faster than me\"",
+          "\"Bet I can guess your go-to drink order\"",
+          "\"How old do I look? Guess\"",
+          "\"Rock paper scissors for next drink\""
+        ],
+        "es": [
+          "“A que no dices tres capitales más rápido que yo”",
+          "“A que adivino qué sueles pedir de tomar”",
+          "“¿Cuántos me echas? Adivina”",
+          "“Piedra, papel o tijera por la siguiente ronda”"
+        ]
+      },
+      "explanation": {
+        "en": "A light challenge is about shared play, not testing or pressure. There are no real stakes.",
+        "es": "Un reto ligero es un juego compartido, no una prueba ni una presión. No hay nada real en juego."
+      }
+    },
+    "72b1b5eb-51d6-4bae-82e9-d9b516852a92": {
+      "question_text": {
+        "en": "What makes cheekiness work vs. offend?",
+        "es": "¿Qué hace que la picardía funcione en vez de ofender?"
+      },
+      "options": {
+        "en": [
+          "Warmth in delivery—smile makes it clear you're playful",
+          "Tone matters more than actual words being said",
+          "Light unexpected angle, not mean or judgmental",
+          "All of the above"
+        ],
+        "es": [
+          "La calidez al decirlo: la sonrisa deja claro que estás jugando",
+          "El tono importa más que las palabras exactas",
+          "Un enfoque ligero e inesperado, no cruel ni crítico",
+          "Todas las anteriores"
+        ]
+      },
+      "explanation": {
+        "en": "Cheekiness works when warmth, tone, and lightness signal play, not judgment.",
+        "es": "La picardía funciona cuando la calidez, el tono y la ligereza indican juego, no juicio."
+      }
+    },
+    "c04e3fb3-07b8-49cb-9664-d35c6a113928": {
+      "question_text": {
+        "en": "She says, “I’m always late.” What could you say next?",
+        "es": "Te dice: “Siempre llego tarde”. ¿Qué podrías decir?"
+      },
+      "options": {
+        "en": [
+          "\"Good thing I’m always patient\"",
+          "\"That’s fine, no one’s perfect.\"",
+          "\"Why are you late?\"",
+          "\"I’m usually on time.\""
+        ],
+        "es": [
+          "“Menos mal que yo soy muy paciente”",
+          "“No pasa nada, nadie es perfecto.”",
+          "“¿Por qué llegas tarde?”",
+          "“Yo suelo ser puntual.”"
+        ]
+      },
+      "explanation": {
+        "en": "Cheeky response with smile invites her to play along lightly.",
+        "es": "Una respuesta pícara con una sonrisa la invita a seguirte el juego con ligereza."
+      }
+    },
+    "41b88925-4d87-4998-bcfb-64846e12bd89": {
+      "question_text": {
+        "en": "Why does adding cheekiness help flirting?",
+        "es": "¿Por qué un poco de picardía ayuda al coquetear?"
+      },
+      "options": {
+        "en": [
+          "It breaks overly agreeable patterns",
+          "It shows confidence with warmth",
+          "It creates playful tension and rhythm",
+          "It requires serious disagreement"
+        ],
+        "es": [
+          "Rompe la dinámica de darle la razón en todo",
+          "Muestra seguridad con calidez",
+          "Crea tensión juguetona y ritmo",
+          "Exige un desacuerdo serio"
+        ]
+      },
+      "explanation": {
+        "en": "Light pushback breaks monotony, creates playful tension, and keeps energy dynamic.",
+        "es": "Llevarle un poco la contraria rompe la monotonía, crea tensión juguetona y mantiene viva la energía."
+      }
+    },
+    "73e2048d-c6ed-4778-ac5a-699f953efb85": {
+      "question_text": {
+        "en": "Which compliment is most likely to create connection?",
+        "es": "¿Qué cumplido tiene más probabilidades de crear conexión?"
+      },
+      "options": {
+        "en": [
+          "\"You’re really beautiful.\"",
+          "\"You have amazing eyes.\"",
+          "\"You must get complimented all the time.\"",
+          "\"I like how you explain things.\""
+        ],
+        "es": [
+          "“Eres muy guapa.”",
+          "“Tienes unos ojos increíbles.”",
+          "“Seguro que te hacen cumplidos todo el tiempo.”",
+          "“Me gusta cómo explicas las cosas.”"
+        ]
+      },
+      "explanation": {
+        "en": "Compliments land best when they reflect her choice, not her traits.",
+        "es": "Los cumplidos llegan mejor cuando reflejan lo que ella elige hacer, no sus rasgos."
+      }
+    },
+    "3cb92c32-a188-4032-9345-29df03006c3e": {
+      "question_text": {
+        "en": "She shares an interesting take. What’s a good compliment?",
+        "es": "Te da un punto de vista interesante. ¿Qué es un buen cumplido?"
+      },
+      "options": {
+        "en": [
+          "\"That’s a unique way to think about it.\"",
+          "\"You’re so smart.\"",
+          "\"You’re different from other girls.\"",
+          "\"I like your accent.\""
+        ],
+        "es": [
+          "“Qué forma tan original de verlo.”",
+          "“Eres muy inteligente.”",
+          "“No eres como las demás.”",
+          "“Me gusta tu acento.”"
+        ]
+      },
+      "explanation": {
+        "en": "Acknowledging her perspective feels warm and pressure-free.",
+        "es": "Reconocer su perspectiva se siente cálido y sin presión."
+      }
+    },
+    "30a03b40-5f82-4a6d-9f66-d9ad8a4b99b5": {
+      "question_text": {
+        "en": "Which compliments are more likely to land well?",
+        "es": "¿Qué cumplidos tienen más probabilidades de caer bien?"
+      },
+      "options": {
+        "en": [
+          "\"You have great energy when you talk about this.\"",
+          "\"You’re hot.\"",
+          "\"I like how curious you are about this topic.\"",
+          "\"You’re out of my league.\""
+        ],
+        "es": [
+          "“Tienes una energía muy bonita cuando hablas de esto.”",
+          "“Estás buenísima.”",
+          "“Me gusta lo curiosa que eres con este tema.”",
+          "“Estás fuera de mi alcance.”"
+        ]
+      },
+      "explanation": {
+        "en": "Compliments that recognize behavior, energy, or character are best.",
+        "es": "Los mejores cumplidos son los que reconocen su forma de actuar, su energía o su carácter."
+      }
+    },
+    "1172a812-9aff-4cbd-a84b-c14454c9e1fa": {
+      "question_text": {
+        "en": "What makes a compliment flirtatious instead of just friendly?",
+        "es": "¿Qué hace que un cumplido sea coqueto y no solo amable?"
+      },
+      "options": {
+        "en": [
+          "Quick delivery and casual tone",
+          "Slow pacing and warmer voice",
+          "Holding eye contact and letting it land",
+          "Specific words about her appearance"
+        ],
+        "es": [
+          "Decirlo rápido y en tono casual",
+          "Un ritmo pausado y una voz más cálida",
+          "Sostener la mirada y dejar que llegue",
+          "Palabras concretas sobre su aspecto"
+        ]
+      },
+      "explanation": {
+        "en": "Tone, timing, and presence create the romantic signal, not the content alone.",
+        "es": "El tono, el momento y la presencia crean la señal romántica, no solo el contenido."
+      }
+    },
+    "9557570b-b2cb-4bd4-bb90-12db51a495fc": {
+      "question_text": {
+        "en": "How can you deliver a compliment to create attraction rather than politeness?",
+        "es": "¿Cómo puedes decir un cumplido para que genere atracción y no solo cortesía?"
+      },
+      "options": {
+        "en": [
+          "Hold eye contact with a small smile",
+          "Use a warmer, slower voice",
+          "Let a pause follow the compliment",
+          "All of the above"
+        ],
+        "es": [
+          "Sosteniendo la mirada con una pequeña sonrisa",
+          "Con una voz más cálida y pausada",
+          "Dejando una pausa después del cumplido",
+          "Todas las anteriores"
+        ]
+      },
+      "explanation": {
+        "en": "Intention through tone and timing signals desire.",
+        "es": "La intención que pones en el tono y el momento transmite deseo."
+      }
+    },
+    "f5fab3d7-5d70-4bb8-82fa-cb750e038f03": {
+      "question_text": {
+        "en": "Which version is more likely to create romantic tension with the same words?",
+        "es": "Con las mismas palabras, ¿qué versión tiene más probabilidades de crear tensión romántica?"
+      },
+      "options": {
+        "en": [
+          "“I like your dress” said quickly, walking by",
+          "“I like your dress” said with steady eye contact and a calm pause",
+          "“I like your dress” said from behind her"
+        ],
+        "es": [
+          "“Me gusta tu vestido”, dicho rápido al pasar",
+          "“Me gusta tu vestido”, dicho sosteniendo la mirada y con una pausa tranquila",
+          "“Me gusta tu vestido”, dicho desde detrás de ella"
+        ]
+      },
+      "explanation": {
+        "en": "Warmth plus presence makes it feel intentional rather than throwaway.",
+        "es": "La calidez sumada a tu presencia hace que se sienta intencional y no algo dicho por decir."
+      }
+    },
+    "92141af3-4469-4cb2-aeca-c8b66beca062": {
+      "question_text": {
+        "en": "What allows a single line to shift an interaction from polite into flirty?",
+        "es": "¿Qué permite que una sola frase lleve una interacción de lo cortés a lo coqueto?"
+      },
+      "options": {
+        "en": [
+          "Explicitly stating romantic intent so there is no ambiguity",
+          "Subtly implying interest while keeping plausible deniability",
+          "Giving a stronger compliment than before to raise attraction"
+        ],
+        "es": [
+          "Decir explícitamente tu intención romántica para que no haya ambigüedad",
+          "Dejar ver tu interés de forma sutil, sin comprometerte del todo",
+          "Hacer un cumplido más fuerte que antes para aumentar la atracción"
+        ]
+      },
+      "explanation": {
+        "en": "A flirty shift works best by implying interest rather than directly declaring it.",
+        "es": "Un giro coqueto funciona mejor cuando insinúa el interés en lugar de declararlo directamente."
+      }
+    },
+    "d81d87c2-562a-4457-9339-626b9b62911d": {
+      "question_text": {
+        "en": "The chat flows easily and she leans in slightly. What subtle line could shift it?",
+        "es": "La charla fluye con facilidad y ella se inclina un poco hacia ti. ¿Qué frase sutil podría cambiar el tono?"
+      },
+      "options": {
+        "en": [
+          "\"You’re interesting.\"",
+          "\"We talk well.\"",
+          "\"I like how this conversation feels with you.\""
+        ],
+        "es": [
+          "“Eres interesante.”",
+          "“Hablamos bien.”",
+          "“Me gusta cómo se siente esta conversación contigo.”"
+        ]
+      },
+      "explanation": {
+        "en": "Names the existing vibe gently, opening space for flirtation.",
+        "es": "Nombra con suavidad la vibra que ya existe y abre espacio para el coqueteo."
+      }
+    },
+    "de314e72-aecd-48e2-9e7e-904002814fcb": {
+      "question_text": {
+        "en": "Mood-shifting line examples?",
+        "es": "¿Qué frases sirven para cambiar el ambiente?"
+      },
+      "options": {
+        "en": [
+          "\"Let’s go get coffee sometime\"",
+          "\"I like how this conversation feels with you.\"",
+          "\"I wasn't expecting to meet someone like you today\"",
+          "\"We should do this again sometime\""
+        ],
+        "es": [
+          "“Vamos a tomar un café algún día”",
+          "“Me gusta cómo se siente esta conversación contigo.”",
+          "“No esperaba conocer a alguien como tú hoy”",
+          "“Deberíamos repetir esto algún día”"
+        ]
+      },
+      "explanation": {
+        "en": "A flirty shift works best by implying interest rather than directly declaring it.",
+        "es": "Un giro coqueto funciona mejor cuando insinúa el interés en lugar de declararlo directamente."
+      }
+    },
+    "bc3c84b8-fcbd-4347-ba4e-29499525a333": {
+      "question_text": {
+        "en": "Why does breaking eye contact too quickly weaken attraction?",
+        "es": "¿Por qué apartar la mirada demasiado rápido debilita la atracción?"
+      },
+      "options": {
+        "en": [
+          "It signals nervousness or uncertainty",
+          "It appears rude",
+          "It confuses the conversation",
+          "It reduces verbal clarity"
+        ],
+        "es": [
+          "Transmite nervios o inseguridad",
+          "Parece de mala educación",
+          "Confunde la conversación",
+          "Le quita claridad a lo que dices"
+        ]
+      },
+      "explanation": {
+        "en": "Repeatedly looking away breaks tension and stalls escalation.",
+        "es": "Apartar la mirada una y otra vez rompe la tensión y frena el avance."
+      }
+    },
+    "63f473ff-9a6a-4125-9a7b-03d7c4df9882": {
+      "question_text": {
+        "en": "Why can eye contact shift a conversation more effectively than a compliment?",
+        "es": "¿Por qué el contacto visual puede cambiar una conversación mejor que un cumplido?"
+      },
+      "options": {
+        "en": [
+          "It feels less rehearsed",
+          "It bypasses logic and works on feeling",
+          "It reduces the need for words",
+          "All of the above"
+        ],
+        "es": [
+          "Se siente menos ensayado",
+          "Se salta la lógica y actúa sobre lo que se siente",
+          "Reduce la necesidad de palabras",
+          "Todas las anteriores"
+        ]
+      },
+      "explanation": {
+        "en": "Eye contact works emotionally and instinctively, not intellectually.",
+        "es": "El contacto visual actúa en lo emocional y lo instintivo, no en lo intelectual."
+      }
+    },
+    "7dd24452-9d73-4619-a644-95a9de2edd1d": {
+      "question_text": {
+        "en": "Which moments are most suitable for sustained eye contact?",
+        "es": "¿Qué momentos son los más adecuados para sostener la mirada?"
+      },
+      "options": {
+        "en": [
+          "During natural pauses",
+          "When she is speaking emotionally",
+          "While interrupting her",
+          "When the conversation slows briefly"
+        ],
+        "es": [
+          "Durante las pausas naturales",
+          "Cuando ella habla con emoción",
+          "Mientras la interrumpes",
+          "Cuando la conversación se calma un momento"
+        ]
+      },
+      "explanation": {
+        "en": "Eye contact works best in calm, shared moments, not during interruptions.",
+        "es": "El contacto visual funciona mejor en momentos tranquilos y compartidos, no cuando interrumpes."
+      }
+    },
+    "79c89303-fe65-481b-8506-11cd45eaed32": {
+      "question_text": {
+        "en": "The vibe is positive but you stay far apart. What risk do you run?",
+        "es": "La vibra es buena, pero te quedas lejos de ella. ¿Qué riesgo corres?"
+      },
+      "options": {
+        "en": [
+          "Appearing too interested",
+          "Making her uncomfortable",
+          "Signalling disengagement despite words",
+          "Moving too fast"
+        ],
+        "es": [
+          "Parecer demasiado interesado",
+          "Incomodarla",
+          "Transmitir desinterés aunque tus palabras digan otra cosa",
+          "Ir demasiado rápido"
+        ]
+      },
+      "explanation": {
+        "en": "Distance mismatch can undermine verbal interest.",
+        "es": "Una distancia que no encaja puede restarle fuerza a tu interés expresado con palabras."
+      }
+    },
+    "f7200ef5-2102-4d79-abd9-e518cc3c8af8": {
+      "question_text": {
+        "en": "You take a small step closer and she subtly steps back. What does this mean?",
+        "es": "Das un pequeño paso hacia ella y ella da un paso atrás discretamente. ¿Qué significa?"
+      },
+      "options": {
+        "en": [
+          "She needs more space right now",
+          "She wants you to persist confidently",
+          "She is testing you",
+          "She dislikes you entirely"
+        ],
+        "es": [
+          "Necesita más espacio en este momento",
+          "Quiere que insistas con seguridad",
+          "Te está poniendo a prueba",
+          "No le gustas para nada"
+        ]
+      },
+      "explanation": {
+        "en": "A step back is information, not rejection. Give space and recalibrate.",
+        "es": "Un paso atrás es información, no un rechazo. Dale espacio y vuelve a ajustarte."
+      }
+    },
+    "a9930259-a42a-49fb-bdd4-9d319fe4fd04": {
+      "question_text": {
+        "en": "What mistakes create discomfort around proximity?",
+        "es": "¿Qué errores generan incomodidad con la cercanía?"
+      },
+      "options": {
+        "en": [
+          "Moving closer before rapport exists",
+          "Ignoring her physical responses",
+          "Adjusting distance gradually",
+          "Staying rigid despite her leaning in"
+        ],
+        "es": [
+          "Acercarte antes de que haya complicidad",
+          "Ignorar sus reacciones físicas",
+          "Ajustar la distancia poco a poco",
+          "Quedarte rígido aunque ella se incline hacia ti"
+        ]
+      },
+      "explanation": {
+        "en": "Discomfort comes from ignoring feedback or failing to respond to it.",
+        "es": "La incomodidad viene de ignorar sus reacciones o de no responder a ellas."
+      }
+    },
+    "c56a1006-a63d-4532-801e-49829be4ccd2": {
+      "question_text": {
+        "en": "What does body mirroring help communicate?",
+        "es": "¿Qué ayuda a comunicar el efecto espejo con el cuerpo?"
+      },
+      "options": {
+        "en": [
+          "Attraction through imitation",
+          "Dominance and control",
+          "Social safety and comfort",
+          "Confidence through posture"
+        ],
+        "es": [
+          "Atracción mediante la imitación",
+          "Dominancia y control",
+          "Seguridad social y comodidad",
+          "Seguridad en ti mismo a través de la postura"
+        ]
+      },
+      "explanation": {
+        "en": "Mirroring signals familiarity and ease at a subconscious level, which supports rapport.",
+        "es": "Reflejar su postura transmite familiaridad y comodidad a nivel inconsciente, y eso favorece la complicidad."
+      }
+    },
+    "9a5612de-f9a6-4bc1-bcbb-29d29d0b1f91": {
+      "question_text": {
+        "en": "She speaks softly and slowly during the conversation. What should you match?",
+        "es": "Ella habla bajito y despacio durante la conversación. ¿Qué deberías igualar?"
+      },
+      "options": {
+        "en": [
+          "Raise your volume to energize her",
+          "Stay at your original loud tone",
+          "Speak quickly to keep momentum",
+          "Lower your voice and slow your pacing"
+        ],
+        "es": [
+          "Subir el volumen para darle energía",
+          "Seguir con tu tono fuerte de antes",
+          "Hablar rápido para mantener el ritmo",
+          "Bajar la voz y hablar más pausado"
+        ]
+      },
+      "explanation": {
+        "en": "Matching her energy and tone builds rapport subconsciously.",
+        "es": "Igualar su energía y su tono crea complicidad de forma inconsciente."
+      }
+    },
+    "7dc61f4a-f296-4e9b-ae8f-01bd4a923b88": {
+      "question_text": {
+        "en": "Which are signs she may be mirroring you?",
+        "es": "¿Qué señales indican que quizá ella te está reflejando?"
+      },
+      "options": {
+        "en": [
+          "She adopts a similar posture after you shift",
+          "She matches your speaking pace",
+          "She asks more questions",
+          "She adjusts her body orientation toward you"
+        ],
+        "es": [
+          "Adopta una postura parecida después de que cambias la tuya",
+          "Iguala tu ritmo al hablar",
+          "Te hace más preguntas",
+          "Orienta su cuerpo hacia ti"
+        ]
+      },
+      "explanation": {
+        "en": "Physical and energetic alignment often indicate comfort and engagement.",
+        "es": "La sintonía física y de energía suele indicar comodidad e implicación."
+      }
+    }
+  }
+}
