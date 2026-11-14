@@ -2,7 +2,7 @@
 -- Do not edit by hand; edit the JSON and regenerate. Needs the content-translation
 -- migration (20261110000000) applied. Run on a branch first. Safe to run twice.
 begin;
-insert into public.scenario_translations (scenario_id, locale, title, summary) values ('a1000003-0000-0000-0000-000000000003', 'fr', 'Chiens et flirt', 'Des rires, des regards et deux chiens qui se courent après. Ici, tout est une question de timing.')
+insert into public.scenario_translations (scenario_id, locale, title, summary) values ('a1000003-0000-0000-0000-000000000003', 'fr', 'Chiens et flirt', 'Des rires, des regards et deux chiens qui se courent après. Ici, tout se joue dans le choix du moment.')
   on conflict (scenario_id, locale) do update set title = excluded.title, summary = excluded.summary;
 insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000001-0000-0000-0003-000000000001', 'fr', 'Tu promènes ton chien au parc.')
   on conflict (screen_id, locale) do update set text = excluded.text;
