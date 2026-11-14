@@ -4,7 +4,7 @@ Branch `localization-release-c-fr` (from `localization-release-c`). Rules and gl
 
 ## Where it stands
 
-All 25 lesson courses are drafted (1,531 items, 34,442 English words); every overlay passes `lesson_overlays.py check fr`. Database content in progress: all 15 scenarios done; quiz questions next (9 batch files, as German). Checks, review pack and App Store listing not started.
+All 25 lesson courses are drafted (1,531 items, 34,442 English words); every overlay passes `lesson_overlays.py check fr`. Database content in progress: all 15 scenarios done; quiz questions 55 of 765. Checks, review pack and App Store listing not started.
 
 ## Summary
 
@@ -12,7 +12,7 @@ All 25 lesson courses are drafted (1,531 items, 34,442 English words); every ove
 |---|---|
 | UI catalogs | Done by the setup session (585 strings, draft) |
 | Lesson overlays | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-15) |
-| Database content | **15 of 15 scenarios** (796 text screens, 276 options); 0 of 765 quiz questions |
+| Database content | **15 of 15 scenarios** (796 text screens, 276 options); 55 of 765 quiz questions |
 | Checks and review pack | Not started |
 | App Store listing (France, notes for Canada) | Not started |
 
@@ -64,6 +64,8 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
 - **2026-11-15. Scenario 13, House Wine** (52 text screens, 21 options, about 530 words; 76 upserts, not run). Translated from the English as fixed on 2026-11-11 (light touch on her arm, not the lower back; checking in is "never wrong"; the no-touch path "only if she's clearly comfortable"); all three are carried over with the same strength: *Un contact bref et léger … mais seulement si elle est clairement à l'aise*, *Vérifier qu'elle est à l'aise n'est jamais une erreur*, *une invitation … à laquelle elle peut facilement dire non*. For the reviewer: the title became *Le vin de la maison*, which keeps a double meaning (the host's house / house wine); "partner in crime" became *ma complice*; "crime scene" became *la scène du crime*; "house party" became *une soirée chez quelqu'un*; the deliberately wrong toast "to getting you drunk" became *à ta future cuite*.
 - **2026-11-15. Scenario 14, Dressed to Impress** (55 text screens, 20 options, about 560 words; 76 upserts, not run). For the reviewer: the title became *Question de style* (German: *Gut angezogen*); "shopping mall" became *centre commercial*; "food court" became *aire de restauration*; "pants" became *pantalon*; "more versatile" became *plus facile à porter avec tout*; "frame" became *accroche … pas la plus forte*; "socials" became *réseaux*. The English slip German logged ("I'll have to let you know if the blue shirt works") is translated by its meaning: *il faudra que je te dise si la chemise bleue a fait son effet*. *Marché conclu* was avoided (no *conclu* anywhere in the French database content).
 - **2026-11-15. Scenario 15, Study Buddy** (48 text screens, 18 options, about 470 words; upserts in `scenario_15_study_buddy.sql`, not run). **All 15 scenarios are now drafted: 796 text screens and 276 options, the same totals German matched against the live DB.** For the reviewer: the title became *Révisions à deux*; "paper" became *dossier* (a university assignment); "A girl" became *une jeune femme*; the chemistry pun holds (*étudier la chimie entre nous*); "Working hard or hardly working?" became *Tu bosses dur ou tu fais semblant ?*; "beauty sleep" became *sommeil réparateur*; "12pm" became *midi*. Aurelie's name is unchanged (stored once, not translated; a French reviewer may note the usual spelling is *Aurélie*).
+- **2026-11-15. Quiz batch plan.** Same nine files as German (`questions_01_mindset_foundations` 109, `questions_02_approach_mechanics_1/2/3` 88 each, `questions_03_conversational_skills_1/2` 81 each, `questions_04_flirting_chemistry_1` 76 and `_2` 75, `questions_05_mastery_integration` 79), in German's row order, filled about 44–55 questions per iteration. The English side and ids are copied from the German files. A partially filled file is fine for the generator; `Wingman/Content/question_translations_seed.fr.json` is regenerated each time and only holds what is done.
+- **2026-11-15. Questions 1–55** (mindset_foundations, lessons 1_1 to 5_2; about 2,400 words with options and explanations). `db_translations_sql.py fr` and `question_translations_seed.py fr --check` pass (55 questions). Terms follow the course 1–5 overlays: *ancrage*, *autosurveillance*, *état d'esprit de développement*, *ne pas dépendre du résultat*, *mentalité de pénurie*, *entretien* (grooming), *validation / approbation*. For the reviewer: options keep the English lengths roughly balanced so the right answer isn't given away by length; "All of the above" became *Toutes les réponses ci-dessus*, "Both of the above" *Les deux réponses ci-dessus*; quoted self-talk uses « ».
 
 ## Questions for Arthur
 

@@ -1,0 +1,1284 @@
+{
+  "questions": {
+    "bbed5acf-47e7-481b-a5b7-1d6b9eb91fd9": {
+      "question_text": {
+        "en": "The thought \"she won't like me\" appears before an approach. Best response?",
+        "fr": "Avant d’aborder, la pensée « Elle ne va pas m’apprécier » surgit. Meilleure réaction ?"
+      },
+      "options": {
+        "en": [
+          "Notice it as automatic fear, then approach anyway",
+          "Challenge it by listing reasons she might like you",
+          "Use it as motivation to improve your technique",
+          "Wait until the thought passes before approaching"
+        ],
+        "fr": [
+          "La reconnaître comme une peur automatique, puis aborder quand même",
+          "La contester en listant les raisons pour lesquelles elle pourrait t’apprécier",
+          "T’en servir comme motivation pour améliorer ta technique",
+          "Attendre que la pensée passe avant d’aborder"
+        ]
+      },
+      "explanation": {
+        "en": "The thought is automatic fear, not a signal to stop, approach anyway.",
+        "fr": "Cette pensée est une peur automatique, pas un signal d’arrêt. Aborde quand même."
+      }
+    },
+    "7547b293-5e2d-432b-91d9-4b652d3472a7": {
+      "question_text": {
+        "en": "You replay a conversation, building a critical story of yourself. What should you notice?",
+        "fr": "Tu te repasses une conversation et tu te construis une histoire critique sur toi. Que dois-tu remarquer ?"
+      },
+      "options": {
+        "en": [
+          "The story is factual evidence",
+          "Silence the replay immediately",
+          "You must fix every perceived flaw",
+          "Your mind is filling gaps with fear, not fact"
+        ],
+        "fr": [
+          "Cette histoire est une preuve factuelle",
+          "Il faut couper ce film tout de suite",
+          "Tu dois corriger chaque défaut perçu",
+          "Ton esprit comble les vides avec de la peur, pas avec des faits"
+        ]
+      },
+      "explanation": {
+        "en": "The mind fills gaps with fear by default; awareness breaks that pattern.",
+        "fr": "Par défaut, l’esprit comble les vides avec de la peur ; en prendre conscience brise ce schéma."
+      }
+    },
+    "d5706755-0591-489f-9b13-9ec5811a5057": {
+      "question_text": {
+        "en": "A thought says “I sounded awkward” after an approach. What should you do?",
+        "fr": "Après une approche, une pensée te dit « J’ai eu l’air gauche ». Que fais-tu ?"
+      },
+      "options": {
+        "en": [
+          "Accept it as proof and replay the moment",
+          "Let it define your self-view",
+          "Argue with the thought to silence it",
+          "Notice it as background noise without believing it"
+        ],
+        "fr": [
+          "L’accepter comme une preuve et te repasser le moment",
+          "La laisser définir l’image que tu as de toi",
+          "Argumenter contre cette pensée pour la faire taire",
+          "La remarquer comme un bruit de fond sans la croire"
+        ]
+      },
+      "explanation": {
+        "en": "You can’t control which thoughts appear, but you can control whether you believe them.",
+        "fr": "Tu ne contrôles pas les pensées qui surgissent, mais tu contrôles le fait de les croire ou non."
+      }
+    },
+    "70a9bde6-01ce-4b79-a9e2-97efa1252a1d": {
+      "question_text": {
+        "en": "What does rejection usually reflect?",
+        "fr": "Que reflète généralement un rejet ?"
+      },
+      "options": {
+        "en": [
+          "The other person’s comfort level",
+          "Your delivery mistakes",
+          "Low attraction",
+          "Social failure"
+        ],
+        "fr": [
+          "Le niveau de confort de l’autre personne",
+          "Tes erreurs dans la façon de faire",
+          "Un manque d’attirance",
+          "Un échec social"
+        ]
+      },
+      "explanation": {
+        "en": "Most withdrawal is self protection, not judgment.",
+        "fr": "La plupart des reculs sont une protection, pas un jugement."
+      }
+    },
+    "4792cc41-039e-460b-9a94-6f1fdb50ceb7": {
+      "question_text": {
+        "en": "Where does real confidence live after rejection?",
+        "fr": "Où se trouve la vraie confiance en soi après un rejet ?"
+      },
+      "options": {
+        "en": [
+          "In staying whole when not wanted",
+          "In avoiding all rejection",
+          "In gaining universal approval",
+          "In fixing every retreat"
+        ],
+        "fr": [
+          "Dans le fait de rester entier quand on ne veut pas de toi",
+          "Dans le fait d’éviter tout rejet",
+          "Dans l’approbation de tout le monde",
+          "Dans le fait de rattraper chaque recul"
+        ]
+      },
+      "explanation": {
+        "en": "Confidence is remaining steady regardless of others' reactions.",
+        "fr": "La confiance en soi, c’est rester stable quelles que soient les réactions des autres."
+      }
+    },
+    "db69db01-07df-42b3-8e90-41a34457e803": {
+      "question_text": {
+        "en": "She excuses herself politely after a short chat. What should you assume?",
+        "fr": "Après une courte discussion, elle prend poliment congé. Que dois-tu en conclure ?"
+      },
+      "options": {
+        "en": [
+          "You said something wrong and failed",
+          "Your value was judged and found lacking",
+          "She was protecting her own comfort or timing",
+          "You need to chase to fix it"
+        ],
+        "fr": [
+          "Tu as dit quelque chose de travers et tu as échoué",
+          "Ta valeur a été jugée insuffisante",
+          "Elle protégeait son propre confort, ou ce n’était pas le moment",
+          "Tu dois insister pour rattraper le coup"
+        ]
+      },
+      "explanation": {
+        "en": "Rejection is usually self-protection, not a verdict on you.",
+        "fr": "Un rejet est généralement une protection, pas un verdict sur toi."
+      }
+    },
+    "e37e687b-c171-4e4a-b17d-9ae50f0a2b9f": {
+      "question_text": {
+        "en": "What's the real source of confidence damage from bad moments?",
+        "fr": "Qu’est-ce qui abîme vraiment la confiance après un mauvais moment ?"
+      },
+      "options": {
+        "en": [
+          "The story you keep rehearsing, not the moment itself",
+          "How others perceived and reacted to what happened",
+          "The actual severity and awkwardness of the event"
+        ],
+        "fr": [
+          "L’histoire que tu te répètes, pas le moment lui-même",
+          "La façon dont les autres ont perçu la scène et y ont réagi",
+          "La gravité réelle et le côté gênant de l’événement"
+        ]
+      },
+      "explanation": {
+        "en": "The issue isn’t the moment but the memory you keep replaying.",
+        "fr": "Le problème n’est pas le moment, mais le souvenir que tu continues de te repasser."
+      }
+    },
+    "43e16323-ce86-4e7f-9c28-27d04a6dcc33": {
+      "question_text": {
+        "en": "What power do you have over past experiences?",
+        "fr": "Quel pouvoir as-tu sur tes expériences passées ?"
+      },
+      "options": {
+        "en": [
+          "Erasing them completely",
+          "Preventing all future awkwardness",
+          "Forcing others to forget them",
+          "Choosing the meaning and story you carry forward"
+        ],
+        "fr": [
+          "Les effacer complètement",
+          "Empêcher tout moment gênant à l’avenir",
+          "Forcer les autres à les oublier",
+          "Choisir le sens et l’histoire que tu en gardes"
+        ]
+      },
+      "explanation": {
+        "en": "Perspective is authorship; rewrite it to free yourself from negative noise.",
+        "fr": "Ton regard fait de toi l’auteur : réécris l’histoire pour te libérer du bruit négatif."
+      }
+    },
+    "b74e3d6f-b4f5-4f7f-a9fe-edc477912533": {
+      "question_text": {
+        "en": "A guy waits to feel confident before approaching. What's the problem?",
+        "fr": "Un homme attend de se sentir sûr de lui avant d’aborder. Quel est le problème ?"
+      },
+      "options": {
+        "en": [
+          "Confidence comes from evidence; waiting delays it",
+          "He should work on internal belief systems first",
+          "He needs more mental preparation before taking action"
+        ],
+        "fr": [
+          "La confiance vient des preuves ; attendre la retarde",
+          "Il devrait d’abord travailler ses croyances intérieures",
+          "Il a besoin de plus de préparation mentale avant d’agir"
+        ]
+      },
+      "explanation": {
+        "en": "The mind trusts measurable proof from action. Courage comes first, not confidence.",
+        "fr": "L’esprit se fie aux preuves concrètes de l’action. Le courage vient en premier, la confiance ensuite."
+      }
+    },
+    "b8219bd4-82ca-488f-a68f-22ee4942c702": {
+      "question_text": {
+        "en": "What counts as evidence that confidence is building?",
+        "fr": "Qu’est-ce qui prouve que la confiance se construit ?"
+      },
+      "options": {
+        "en": [
+          "Speaking up despite hesitation",
+          "Holding eye contact a second longer than comfortable",
+          "Waiting to feel ready",
+          "Following through when it would be easier to quit"
+        ],
+        "fr": [
+          "Prendre la parole malgré l’hésitation",
+          "Soutenir un regard une seconde de plus que ce qui te met à l’aise",
+          "Attendre de te sentir prêt",
+          "Aller jusqu’au bout quand il serait plus facile d’abandonner"
+        ]
+      },
+      "explanation": {
+        "en": "Evidence comes from taking action despite discomfort.",
+        "fr": "Les preuves viennent du fait d’agir malgré l’inconfort."
+      }
+    },
+    "12f0ca40-33ce-4e67-bffb-cfc678a28f97": {
+      "question_text": {
+        "en": "A guy approaches despite hesitation. What's the brain registering?",
+        "fr": "Un homme aborde malgré son hésitation. Qu’enregistre son cerveau ?"
+      },
+      "options": {
+        "en": [
+          "\"I did it anyway\" becomes proof that he can",
+          "\"I overcame fear\" which builds mental resilience over time",
+          "\"I was brave\" which reinforces positive self-identity",
+          "All of the above"
+        ],
+        "fr": [
+          "« Je l’ai fait quand même » devient la preuve qu’il en est capable",
+          "« J’ai surmonté ma peur », ce qui renforce sa résilience mentale avec le temps",
+          "« J’ai été courageux », ce qui renforce une image positive de lui-même",
+          "Toutes les réponses ci-dessus"
+        ]
+      },
+      "explanation": {
+        "en": "All these are benefits for the individual; increasing likelihood of approaching again.",
+        "fr": "Ce sont tous des bénéfices pour lui, qui augmentent ses chances d’aborder à nouveau."
+      }
+    },
+    "b0b79ba6-0f99-427a-8b41-59a2b41ccda1": {
+      "question_text": {
+        "en": "What's the strongest predictor of social skill improvement?",
+        "fr": "Qu’est-ce qui prédit le mieux les progrès en compétences sociales ?"
+      },
+      "options": {
+        "en": [
+          "Persistence through repeated practice",
+          "Natural talent and baseline social intelligence",
+          "Quality of instruction and mentorship received"
+        ],
+        "fr": [
+          "La persévérance à travers une pratique répétée",
+          "Le talent naturel et l’intelligence sociale de départ",
+          "La qualité de l’enseignement et de l’accompagnement reçus"
+        ]
+      },
+      "explanation": {
+        "en": "Improvement comes from accumulated practice over time.",
+        "fr": "Les progrès viennent de la pratique accumulée avec le temps."
+      }
+    },
+    "d3e5a977-5717-4d10-aebd-1477b55d9977": {
+      "question_text": {
+        "en": "Two guys have awkward interactions. One tries again; one stops. What differs?",
+        "fr": "Deux hommes vivent un échange gênant. L’un réessaie, l’autre arrête. Qu’est-ce qui les différencie ?"
+      },
+      "options": {
+        "en": [
+          "One concluded he lacked practice; the other concluded he lacked ability",
+          "One has natural social skills; the other doesn't",
+          "One had better techniques and fundamentals to build on"
+        ],
+        "fr": [
+          "L’un en a conclu qu’il manquait de pratique ; l’autre, qu’il manquait de talent",
+          "L’un a des compétences sociales naturelles, l’autre non",
+          "L’un avait de meilleures techniques et de meilleures bases"
+        ]
+      },
+      "explanation": {
+        "en": "The difference is in the conclusion they drew, not the interaction itself.",
+        "fr": "La différence tient à la conclusion qu’ils en ont tirée, pas à l’échange lui-même."
+      }
+    },
+    "f9d8c142-995d-43f7-81fe-a5b493c6b7af": {
+      "question_text": {
+        "en": "Which beliefs reflect a growth mindset?",
+        "fr": "Quelles croyances reflètent un état d’esprit de développement ?"
+      },
+      "options": {
+        "en": [
+          "Skills can improve",
+          "Effort leads somewhere",
+          "Failure defines ability"
+        ],
+        "fr": [
+          "Les compétences peuvent progresser",
+          "L’effort mène quelque part",
+          "L’échec définit tes capacités"
+        ]
+      },
+      "explanation": {
+        "en": "Learning continues when people believe their ability can grow.",
+        "fr": "On continue d’apprendre quand on croit que ses capacités peuvent grandir."
+      }
+    },
+    "2b35fc5b-fbe7-4df2-9a70-b1ba3a8b77b9": {
+      "question_text": {
+        "en": "Why does avoiding action increase fear over time?",
+        "fr": "Pourquoi éviter d’agir augmente-t-il la peur avec le temps ?"
+      },
+      "options": {
+        "en": [
+          "Confidence fades",
+          "Memory exaggerates",
+          "Risk feels larger",
+          "The body learns avoidance is safe"
+        ],
+        "fr": [
+          "La confiance s’estompe",
+          "La mémoire exagère",
+          "Le risque paraît plus grand",
+          "Le corps apprend que l’évitement est sans danger"
+        ]
+      },
+      "explanation": {
+        "en": "Each act of avoidance strengthens the body’s fear response.",
+        "fr": "Chaque évitement renforce la réaction de peur du corps."
+      }
+    },
+    "5ba6899a-7c48-43f0-9751-4de815468a09": {
+      "question_text": {
+        "en": "A guy wants to wait until fear subsides before approaching. What's the issue?",
+        "fr": "Un homme veut attendre que sa peur retombe avant d’aborder. Quel est le problème ?"
+      },
+      "options": {
+        "en": [
+          "He'll miss the optimal moment to start conversation",
+          "The fear will return stronger next time he tries",
+          "He's letting anxiety control his decision-making",
+          "Fear dissolves through action, not through waiting for readiness"
+        ],
+        "fr": [
+          "Il va rater le moment idéal pour engager la conversation",
+          "La peur reviendra plus forte la prochaine fois",
+          "Il laisse l’anxiété décider à sa place",
+          "La peur se dissout dans l’action, pas en attendant d’être prêt"
+        ]
+      },
+      "explanation": {
+        "en": "Fear doesn't vanish through thought or time; it dissolves with motion.",
+        "fr": "La peur ne disparaît ni par la réflexion ni avec le temps ; elle se dissout dans le mouvement."
+      }
+    },
+    "9f9aab5f-516e-467e-859b-ddaecdf461cd": {
+      "question_text": {
+        "en": "What happens when you approach despite fear?",
+        "fr": "Que se passe-t-il quand tu abordes malgré la peur ?"
+      },
+      "options": {
+        "en": [
+          "The prediction of pain always comes true",
+          "Confidence requires no fear beforehand",
+          "Fear grows stronger from exposure",
+          "The nervous system updates that the threat was false"
+        ],
+        "fr": [
+          "La douleur prédite arrive toujours",
+          "La confiance exige de ne pas avoir peur avant",
+          "La peur se renforce avec l’exposition",
+          "Le système nerveux enregistre que la menace était fausse"
+        ]
+      },
+      "explanation": {
+        "en": "Action disproves the prediction, softening future responses.",
+        "fr": "L’action dément la prédiction, ce qui adoucit les réactions suivantes."
+      }
+    },
+    "5ce08bb8-9bb3-4d2e-b08c-7b62c8593bb1": {
+      "question_text": {
+        "en": "Why does being seen feel more intense than it actually is?",
+        "fr": "Pourquoi le fait d’être vu paraît-il plus intense qu’il ne l’est ?"
+      },
+      "options": {
+        "en": [
+          "People are actually watching closely",
+          "Judgment is constant",
+          "The mind exaggerates focus on one’s self",
+          "Social rules are strict"
+        ],
+        "fr": [
+          "Les gens regardent vraiment de près",
+          "Le jugement est permanent",
+          "L’esprit exagère l’attention portée à soi",
+          "Les règles sociales sont strictes"
+        ]
+      },
+      "explanation": {
+        "en": "The mind overestimates how much others notice.",
+        "fr": "L’esprit surestime à quel point les autres font attention à nous."
+      }
+    },
+    "5ef57991-7795-4349-9a51-3c0db95233c6": {
+      "question_text": {
+        "en": "Attention shifts to you during a group conversation. What should you do?",
+        "fr": "Dans une conversation de groupe, l’attention se tourne vers toi. Que fais-tu ?"
+      },
+      "options": {
+        "en": [
+          "Stay relaxed and continue naturally",
+          "Retreat inwardly and self-monitor",
+          "Force confidence to hide tension",
+          "Exit the conversation quickly"
+        ],
+        "fr": [
+          "Rester détendu et continuer naturellement",
+          "Te replier sur toi et t’observer",
+          "Forcer l’assurance pour cacher la tension",
+          "Quitter vite la conversation"
+        ]
+      },
+      "explanation": {
+        "en": "Composure comes from moving through visibility without resistance.",
+        "fr": "Le sang-froid vient du fait d’accepter d’être visible sans résister."
+      }
+    },
+    "39115a96-71ac-4675-991c-cb9189cd877a": {
+      "question_text": {
+        "en": "How does self-monitoring affect presence?",
+        "fr": "Quel effet l’autosurveillance a-t-elle sur ta présence ?"
+      },
+      "options": {
+        "en": [
+          "It enhances authentic connection",
+          "It pulls you from expression to performance",
+          "It turns attention inward over outward"
+        ],
+        "fr": [
+          "Elle renforce un lien authentique",
+          "Elle te fait passer de l’expression au rôle que tu joues",
+          "Elle tourne ton attention vers l’intérieur plutôt que vers l’extérieur"
+        ]
+      },
+      "explanation": {
+        "en": "Monitoring undermines natural composure and flow.",
+        "fr": "S’observer sans cesse sape le sang-froid et le naturel."
+      }
+    },
+    "28ccfdfd-13b7-4bf5-9d16-e2ade47fa571": {
+      "question_text": {
+        "en": "What does shallow breathing signal to the body?",
+        "fr": "Que signale au corps une respiration superficielle ?"
+      },
+      "options": {
+        "en": [
+          "Safety",
+          "Threat",
+          "Focus",
+          "Confidence"
+        ],
+        "fr": [
+          "La sécurité",
+          "Une menace",
+          "La concentration",
+          "La confiance"
+        ]
+      },
+      "explanation": {
+        "en": "Fast breathing signals danger to the body. Slow the breath down to calm yourself.",
+        "fr": "Une respiration rapide signale un danger au corps. Ralentis-la pour te calmer."
+      }
+    },
+    "784400be-2ea4-4606-85a5-fb25457e3b9c": {
+      "question_text": {
+        "en": "Pressure rises and your mind races before speaking. What would help?",
+        "fr": "La pression monte et ton esprit s’emballe avant de parler. Qu’est-ce qui aiderait ?"
+      },
+      "options": {
+        "en": [
+          "Rehearse words mentally",
+          "Avoid the situation until you’re calm",
+          "One steady inhale and one controlled exhale"
+        ],
+        "fr": [
+          "Répéter tes phrases dans ta tête",
+          "Éviter la situation jusqu’à ce que tu sois calme",
+          "Une inspiration régulière et une expiration maîtrisée"
+        ]
+      },
+      "explanation": {
+        "en": "Breath awareness reminds the body you are in charge.",
+        "fr": "Être attentif à ta respiration rappelle à ton corps que c’est toi qui commandes."
+      }
+    },
+    "7a7a2960-2b38-4259-9599-598cc15e9937": {
+      "question_text": {
+        "en": "Why does slow breathing reduce fear effectively?",
+        "fr": "Pourquoi une respiration lente réduit-elle efficacement la peur ?"
+      },
+      "options": {
+        "en": [
+          "It directly argues with negative thoughts",
+          "It signals safety to the nervous system",
+          "It lowers heart rate and clears the mind"
+        ],
+        "fr": [
+          "Elle contredit directement les pensées négatives",
+          "Elle signale la sécurité au système nerveux",
+          "Elle ralentit le cœur et éclaircit l’esprit"
+        ]
+      },
+      "explanation": {
+        "en": "Slowing your exhale tells your nervous system there is no threat to solve.",
+        "fr": "Ralentir ton expiration dit à ton système nerveux qu’il n’y a aucune menace à gérer."
+      }
+    },
+    "013f4dc3-e950-4940-9fab-7657d9decb9b": {
+      "question_text": {
+        "en": "How does grounding interrupt spiralling thoughts?",
+        "fr": "Comment l’ancrage interrompt-il les pensées qui tournent en boucle ?"
+      },
+      "options": {
+        "en": [
+          "By reframing meaning",
+          "By shifting attention to sensation",
+          "By increasing focus",
+          "By suppressing emotion"
+        ],
+        "fr": [
+          "En changeant le sens des choses",
+          "En déplaçant l’attention vers les sensations",
+          "En augmentant la concentration",
+          "En étouffant l’émotion"
+        ]
+      },
+      "explanation": {
+        "en": "Grounding works by moving attention out of the mind and into physical sensation.",
+        "fr": "L’ancrage fonctionne en sortant l’attention de la tête pour la ramener aux sensations physiques."
+      }
+    },
+    "81883b1d-a00d-4283-b3fc-38c0192aaff9": {
+      "question_text": {
+        "en": "Where does anxiety live, and how does grounding help?",
+        "fr": "Où vit l’anxiété, et comment l’ancrage aide-t-il ?"
+      },
+      "options": {
+        "en": [
+          "Anxiety lives in past trauma; grounding creates new experiences",
+          "Anxiety lives in the body; grounding releases physical tension",
+          "Anxiety lives in future thoughts; grounding returns you to present reality"
+        ],
+        "fr": [
+          "L’anxiété vit dans les traumatismes passés ; l’ancrage crée de nouvelles expériences",
+          "L’anxiété vit dans le corps ; l’ancrage relâche les tensions physiques",
+          "L’anxiété vit dans les pensées sur l’avenir ; l’ancrage te ramène à la réalité présente"
+        ]
+      },
+      "explanation": {
+        "en": "Anxiety lives in future thought; grounding brings attention back to the present body.",
+        "fr": "L’anxiété vit dans les pensées sur l’avenir ; l’ancrage ramène l’attention au corps, dans le présent."
+      }
+    },
+    "b700e82d-a04f-4ae2-af7e-9af63595b855": {
+      "question_text": {
+        "en": "Which grounding actions help reduce anxiety?",
+        "fr": "Quels gestes d’ancrage aident à réduire l’anxiété ?"
+      },
+      "options": {
+        "en": [
+          "Feeling your feet on the floor",
+          "Noticing breath movement",
+          "Planning conversation lines",
+          "Relaxing the shoulders"
+        ],
+        "fr": [
+          "Sentir tes pieds sur le sol",
+          "Remarquer le mouvement de ta respiration",
+          "Préparer tes phrases",
+          "Relâcher les épaules"
+        ]
+      },
+      "explanation": {
+        "en": "Grounding works by moving attention out of the mind and into physical sensation.",
+        "fr": "L’ancrage fonctionne en sortant l’attention de la tête pour la ramener aux sensations physiques."
+      }
+    },
+    "4cdb8cfc-39c3-4aee-8e46-064ef4dd4976": {
+      "question_text": {
+        "en": "You feel stiff while standing during an approach. What helps most?",
+        "fr": "Pendant une approche, tu te sens raide, debout. Qu’est-ce qui aide le plus ?"
+      },
+      "options": {
+        "en": [
+          "Leaning forward",
+          "Slowing speech",
+          "Making jokes",
+          "Relaxing shoulders and breath"
+        ],
+        "fr": [
+          "Te pencher en avant",
+          "Parler plus lentement",
+          "Faire des blagues",
+          "Relâcher les épaules et respirer"
+        ]
+      },
+      "explanation": {
+        "en": "Easing the body first restores natural presence during the interaction.",
+        "fr": "Détendre d’abord le corps te rend ta présence naturelle pendant l’échange."
+      }
+    },
+    "35629852-7dc2-4adf-8383-df72ab56b0fb": {
+      "question_text": {
+        "en": "What's the relationship between body language and trust?",
+        "fr": "Quel est le lien entre langage corporel et confiance ?"
+      },
+      "options": {
+        "en": [
+          "Consistent body language over time builds trust",
+          "People trust what they see more than what they hear",
+          "Trustworthy people naturally display open, relaxed body language"
+        ],
+        "fr": [
+          "Un langage corporel cohérent dans le temps crée la confiance",
+          "Les gens font plus confiance à ce qu’ils voient qu’à ce qu’ils entendent",
+          "Les gens dignes de confiance ont naturellement un langage corporel ouvert et détendu"
+        ]
+      },
+      "explanation": {
+        "en": "People respond to nonverbal signals before listening to explanations.",
+        "fr": "Les gens réagissent aux signaux non verbaux avant d’écouter les explications."
+      }
+    },
+    "be052099-dc33-4516-be7b-fb7e8a574364": {
+      "question_text": {
+        "en": "Why does body language speak before words?",
+        "fr": "Pourquoi le langage corporel parle-t-il avant les mots ?"
+      },
+      "options": {
+        "en": [
+          "The brain reads movement and posture for safety first",
+          "People process non-verbal cues faster than verbal",
+          "Mismatched body and words create felt disconnect",
+          "Words always override physical signals"
+        ],
+        "fr": [
+          "Le cerveau lit d’abord les mouvements et la posture pour évaluer la sécurité",
+          "On traite les signaux non verbaux plus vite que les signaux verbaux",
+          "Un décalage entre le corps et les mots se ressent",
+          "Les mots l’emportent toujours sur les signaux physiques"
+        ]
+      },
+      "explanation": {
+        "en": "Non-verbals are processed instinctively before logic.",
+        "fr": "Le non-verbal est traité instinctivement, avant la logique."
+      }
+    },
+    "32686574-8a7a-4a9b-8887-1bf18793907c": {
+      "question_text": {
+        "en": "How do people actually take cues from your vocal tone?",
+        "fr": "Comment les gens se calent-ils vraiment sur le ton de ta voix ?"
+      },
+      "options": {
+        "en": [
+          "If you sound tense they feel tense; if you sound at ease they feel at ease",
+          "They consciously notice and evaluate your emotional state",
+          "Vocal patterns trigger mirror neurons that create empathy"
+        ],
+        "fr": [
+          "Si tu as l’air tendu, ils se sentent tendus ; si tu as l’air à l’aise, ils se sentent à l’aise",
+          "Ils remarquent et évaluent consciemment ton état émotionnel",
+          "Les intonations activent des neurones miroirs qui créent de l’empathie"
+        ]
+      },
+      "explanation": {
+        "en": "People unconsciously mirror your vocal energy. Keep it calm.",
+        "fr": "Les gens reproduisent inconsciemment l’énergie de ta voix. Garde-la calme."
+      }
+    },
+    "82c30e7d-5adc-41dc-afc4-5569d6e8fb80": {
+      "question_text": {
+        "en": "Which vocal patterns help others feel at ease?",
+        "fr": "Quelles façons de parler mettent les autres à l’aise ?"
+      },
+      "options": {
+        "en": [
+          "Slower pace",
+          "Speaking on exhale",
+          "Filling silence quickly",
+          "Steady volume"
+        ],
+        "fr": [
+          "Un débit plus lent",
+          "Parler sur l’expiration",
+          "Combler vite les silences",
+          "Un volume régulier"
+        ]
+      },
+      "explanation": {
+        "en": "Steady pacing and breath make your voice feel safe and easy to listen to.",
+        "fr": "Un rythme et un souffle réguliers rendent ta voix rassurante et agréable à écouter."
+      }
+    },
+    "5cdfce0f-0fe8-4f05-b355-7b070e7383bd": {
+      "question_text": {
+        "en": "Why does a calm voice influence people more than a loud one?",
+        "fr": "Pourquoi une voix posée influence-t-elle plus qu’une voix forte ?"
+      },
+      "options": {
+        "en": [
+          "It demands attention through volume",
+          "It signals safety and ease subconsciously",
+          "It makes people listen in without force",
+          "It creates gravity and relaxed rhythm"
+        ],
+        "fr": [
+          "Elle exige l’attention par le volume",
+          "Elle signale inconsciemment la sécurité et l’aisance",
+          "Elle pousse les gens à écouter sans forcer",
+          "Elle donne du poids et un rythme détendu"
+        ]
+      },
+      "explanation": {
+        "en": "Calm tone draws people in by communicating steadiness.",
+        "fr": "Un ton calme attire les gens parce qu’il transmet de la stabilité."
+      }
+    },
+    "6cd4ab05-6a0e-4e05-9ef2-09775c5c9496": {
+      "question_text": {
+        "en": "Why can low energy repel others?",
+        "fr": "Pourquoi une énergie basse peut-elle faire fuir les autres ?"
+      },
+      "options": {
+        "en": [
+          "It feels uncomfortable to mirror",
+          "It signals arrogance",
+          "It suggests disinterest"
+        ],
+        "fr": [
+          "Il est désagréable de s’y accorder",
+          "Elle signale de l’arrogance",
+          "Elle suggère un manque d’intérêt"
+        ]
+      },
+      "explanation": {
+        "en": "People instinctively avoid states that feel heavy. Keep your energy positive.",
+        "fr": "On évite instinctivement les états qui paraissent lourds. Garde une énergie positive."
+      }
+    },
+    "e40cadb9-6906-42bf-b334-b269e634ab6e": {
+      "question_text": {
+        "en": "How can you improve your energy before approaching?",
+        "fr": "Comment améliorer ton énergie avant d’aborder ?"
+      },
+      "options": {
+        "en": [
+          "Move your body briefly, smile, affirm yourself",
+          "Analyze the situation longer",
+          "Wait until confidence appears",
+          "Withdraw to avoid tension"
+        ],
+        "fr": [
+          "Bouger un peu, sourire, te dire quelques phrases positives",
+          "Analyser la situation plus longtemps",
+          "Attendre que la confiance arrive",
+          "Te retirer pour éviter la tension"
+        ]
+      },
+      "explanation": {
+        "en": "Physical movement quickly shifts state and raises energy.",
+        "fr": "Bouger change vite ton état et fait monter ton énergie."
+      }
+    },
+    "d028ed4f-fd88-4a7c-8aab-17f7a78c6a9a": {
+      "question_text": {
+        "en": "How does positive energy affect approaches?",
+        "fr": "Quel effet une énergie positive a-t-elle sur tes approches ?"
+      },
+      "options": {
+        "en": [
+          "It draws people in subconsciously",
+          "It invites interaction naturally",
+          "It requires perfect appearance"
+        ],
+        "fr": [
+          "Elle attire les gens inconsciemment",
+          "Elle invite naturellement à l’échange",
+          "Elle exige une apparence parfaite"
+        ]
+      },
+      "explanation": {
+        "en": "Good energy makes people lean in and feel better around you.",
+        "fr": "Une bonne énergie donne envie aux gens de se rapprocher et de se sentir mieux avec toi."
+      }
+    },
+    "55639c7a-b396-4a1c-ae26-431442cfe270": {
+      "question_text": {
+        "en": "What does a genuine smile signal first?",
+        "fr": "Que signale d’abord un sourire sincère ?"
+      },
+      "options": {
+        "en": [
+          "Attraction",
+          "Confidence",
+          "Safety and warmth",
+          "Playfulness"
+        ],
+        "fr": [
+          "L’attirance",
+          "L’assurance",
+          "La sécurité et la chaleur",
+          "Le jeu"
+        ]
+      },
+      "explanation": {
+        "en": "Smiles are read instantly as safe. This helps you before words are spoken.",
+        "fr": "Un sourire est perçu instantanément comme rassurant. Il t’aide avant même les premiers mots."
+      }
+    },
+    "cfa95ebd-1b35-41c8-8a50-fbcb06fee6aa": {
+      "question_text": {
+        "en": "Why does smiling lower social tension?",
+        "fr": "Pourquoi sourire réduit-il la tension sociale ?"
+      },
+      "options": {
+        "en": [
+          "It distracts attention",
+          "It activates positive emotional responses",
+          "It hides nervousness"
+        ],
+        "fr": [
+          "Il détourne l’attention",
+          "Il déclenche des réactions émotionnelles positives",
+          "Il cache la nervosité"
+        ]
+      },
+      "explanation": {
+        "en": "When you smile, both brains register positivity before words are exchanged.",
+        "fr": "Quand tu souris, les deux cerveaux enregistrent du positif avant le moindre mot."
+      }
+    },
+    "2886592f-4bba-4b7d-bcfc-6547f1eb778e": {
+      "question_text": {
+        "en": "How does a genuine smile create a positive response in both people?",
+        "fr": "Comment un sourire sincère crée-t-il une réaction positive chez les deux personnes ?"
+      },
+      "options": {
+        "en": [
+          "It signals threat to the nervous system",
+          "It improves mood and reduces stress neurologically",
+          "The brain mirrors the positive emotion subconsciously"
+        ],
+        "fr": [
+          "Il signale une menace au système nerveux",
+          "Il améliore l’humeur et réduit le stress, neurologiquement",
+          "Le cerveau reproduit inconsciemment l’émotion positive"
+        ]
+      },
+      "explanation": {
+        "en": "Smiling triggers mutual positive feelings before conversation starts.",
+        "fr": "Sourire déclenche des sensations positives partagées avant même que la conversation commence."
+      }
+    },
+    "2c9f06f7-4cf4-45f9-80cd-7c8fcac8c28c": {
+      "question_text": {
+        "en": "Why does relying on approval undermine confidence?",
+        "fr": "Pourquoi dépendre de l’approbation sape-t-il la confiance ?"
+      },
+      "options": {
+        "en": [
+          "It creates pressure",
+          "It limits expression",
+          "It signals self doubt",
+          "It weakens boundaries"
+        ],
+        "fr": [
+          "Ça crée de la pression",
+          "Ça limite l’expression",
+          "Ça trahit un doute sur soi",
+          "Ça affaiblit les limites"
+        ]
+      },
+      "explanation": {
+        "en": "Needing approval communicates a lack of self validation.",
+        "fr": "Avoir besoin d’approbation montre que tu ne t’approuves pas toi-même."
+      }
+    },
+    "7bd56cd8-1f4f-4678-8dce-d3e92a3e8932": {
+      "question_text": {
+        "en": "She shares an opinion you disagree with. What avoids seeking her approval?",
+        "fr": "Elle donne un avis avec lequel tu n’es pas d’accord. Qu’est-ce qui évite de chercher son approbation ?"
+      },
+      "options": {
+        "en": [
+          "Immediately agree to keep harmony",
+          "Politely share your different view without apology",
+          "Change your opinion to match hers",
+          "Stay silent to avoid conflict"
+        ],
+        "fr": [
+          "Approuver tout de suite pour préserver l’harmonie",
+          "Donner poliment ton avis différent, sans t’excuser",
+          "Changer d’avis pour coller au sien",
+          "Te taire pour éviter le conflit"
+        ]
+      },
+      "explanation": {
+        "en": "Holding your frame calmly signals self-approval without neediness.",
+        "fr": "Garder calmement ta position montre que tu t’approuves toi-même, sans être en demande."
+      }
+    },
+    "3fe6a5a2-4f72-4f9a-9d46-3a48ef587e96": {
+      "question_text": {
+        "en": "Why does approval-seeking repel attraction?",
+        "fr": "Pourquoi la recherche d’approbation fait-elle fuir l’attirance ?"
+      },
+      "options": {
+        "en": [
+          "It communicates desperation for validation",
+          "It ties your worth to her acceptance",
+          "It creates inauthenticity",
+          "It always guarantees deeper connection"
+        ],
+        "fr": [
+          "Elle trahit un besoin désespéré de validation",
+          "Elle fait dépendre ta valeur de son acceptation",
+          "Elle crée un manque d’authenticité",
+          "Elle garantit toujours un lien plus profond"
+        ]
+      },
+      "explanation": {
+        "en": "Approval-seeking signals self-doubt; self-acceptance signals strength.",
+        "fr": "Chercher l’approbation trahit un doute sur soi ; s’accepter montre de la force."
+      }
+    },
+    "e562de05-8b81-429d-b188-fbe14cf83db2": {
+      "question_text": {
+        "en": "A guy still feels nervous after months of practice. What should he measure?",
+        "fr": "Après des mois d’entraînement, un homme est toujours nerveux. Que doit-il mesurer ?"
+      },
+      "options": {
+        "en": [
+          "If other people progress faster with similar practice time",
+          "Whether he can do things now that he couldn't do before",
+          "How his current skill compares to naturally confident men"
+        ],
+        "fr": [
+          "Si d’autres progressent plus vite avec autant d’entraînement",
+          "S’il fait aujourd’hui des choses dont il était incapable avant",
+          "Où il en est comparé aux hommes naturellement sûrs d’eux"
+        ]
+      },
+      "explanation": {
+        "en": "The only meaningful measure is whether you're better than you were.",
+        "fr": "La seule mesure qui compte, c’est de savoir si tu fais mieux qu’avant."
+      }
+    },
+    "586652d7-39f3-41aa-9a2f-cb693ae30050": {
+      "question_text": {
+        "en": "Why is social comparison destructive for skill development?",
+        "fr": "Pourquoi se comparer aux autres est-il destructeur pour progresser ?"
+      },
+      "options": {
+        "en": [
+          "You don't know their starting point, practice volume, or full story",
+          "It creates unrealistic expectations that guarantee failure",
+          "You compare internal experience to external results, which isn't fair"
+        ],
+        "fr": [
+          "Tu ne connais ni leur point de départ, ni leur quantité d’entraînement, ni toute leur histoire",
+          "Ça crée des attentes irréalistes qui garantissent l’échec",
+          "Tu compares ton vécu intérieur à leurs résultats visibles, ce qui n’est pas juste"
+        ]
+      },
+      "explanation": {
+        "en": "You see their results without knowing their starting point or story.",
+        "fr": "Tu vois leurs résultats sans connaître leur point de départ ni leur histoire."
+      }
+    },
+    "9250aace-fa4f-4d66-95e4-793349439200": {
+      "question_text": {
+        "en": "What makes approaching feel lighter?",
+        "fr": "Qu’est-ce qui rend l’approche plus légère ?"
+      },
+      "options": {
+        "en": [
+          "Not letting the result define who you are",
+          "Accepting rejection as normal part of the process",
+          "Both of the above"
+        ],
+        "fr": [
+          "Ne pas laisser le résultat définir qui tu es",
+          "Accepter le rejet comme une étape normale du processus",
+          "Les deux réponses ci-dessus"
+        ]
+      },
+      "explanation": {
+        "en": "When the result doesn't determine your worth, approaching is less daunting.",
+        "fr": "Quand le résultat ne décide pas de ta valeur, aborder est moins intimidant."
+      }
+    },
+    "53bacb30-3d41-4c17-a18d-8c00b9bc1398": {
+      "question_text": {
+        "en": "What is outcome independence in social interactions?",
+        "fr": "Que veut dire ne pas dépendre du résultat dans un échange ?"
+      },
+      "options": {
+        "en": [
+          "Maintaining emotional equilibrium regardless of their response",
+          "Not caring about results at all",
+          "Forcing positive outcomes every time",
+          "Avoiding interactions to stay safe"
+        ],
+        "fr": [
+          "Garder ton équilibre émotionnel quelle que soit sa réaction",
+          "Te moquer complètement du résultat",
+          "Forcer un résultat positif à chaque fois",
+          "Éviter les échanges pour rester en sécurité"
+        ]
+      },
+      "explanation": {
+        "en": "When your mood stays steady regardless of response, you regain control.",
+        "fr": "Quand ton humeur reste stable quelle que soit la réaction, tu reprends le contrôle."
+      }
+    },
+    "83794883-664e-42e0-89fa-abc8d0f95334": {
+      "question_text": {
+        "en": "What does outcome independence actually mean?",
+        "fr": "Que signifie vraiment ne pas dépendre du résultat ?"
+      },
+      "options": {
+        "en": [
+          "Not caring about interaction results or success at all",
+          "Maintaining emotional equilibrium regardless of how interactions go",
+          "Your self-worth and mood aren't attached to specific results"
+        ],
+        "fr": [
+          "Ne pas du tout te soucier du résultat ou de la réussite de l’échange",
+          "Garder ton équilibre émotionnel quelle que soit la tournure de l’échange",
+          "Ta valeur et ton humeur ne dépendent pas d’un résultat précis"
+        ]
+      },
+      "explanation": {
+        "en": "You still care about results, but they no longer dictate how you feel or act.",
+        "fr": "Le résultat compte toujours pour toi, mais il ne dicte plus ce que tu ressens ni ce que tu fais."
+      }
+    },
+    "39d1a173-8185-476b-ba48-a86f79e52a48": {
+      "question_text": {
+        "en": "What is the key to handling positive responses effectively?",
+        "fr": "Quelle est la clé pour bien gérer une réaction positive ?"
+      },
+      "options": {
+        "en": [
+          "Trying harder to maintain her attention",
+          "Reducing energy to avoid pressure",
+          "Controlling the moment to prevent loss",
+          "Staying as the same version of you that created the interest"
+        ],
+        "fr": [
+          "Faire plus d’efforts pour garder son attention",
+          "Baisser ton énergie pour éviter la pression",
+          "Contrôler le moment pour ne pas le perdre",
+          "Rester la même version de toi qui a suscité son intérêt"
+        ]
+      },
+      "explanation": {
+        "en": "The version of you that created attraction is already sufficient. Do not upgrade or perform.",
+        "fr": "La version de toi qui a créé l’attirance suffit déjà. N’en rajoute pas et ne joue pas un rôle."
+      }
+    },
+    "3b61bcf4-54dc-4de9-8ba8-813071e2e979": {
+      "question_text": {
+        "en": "The vibe is great and she leans in. Your mind starts managing \"what next\". What should you do?",
+        "fr": "L’ambiance est super et elle se penche vers toi. Ton esprit commence à gérer « la suite ». Que fais-tu ?"
+      },
+      "options": {
+        "en": [
+          "Return to being present without controlling",
+          "Let thoughts take over to plan",
+          "Escalate quickly to capitalize",
+          "Pull back from the positive energy"
+        ],
+        "fr": [
+          "Revenir au moment présent sans chercher à contrôler",
+          "Laisser tes pensées prendre le dessus pour planifier",
+          "Aller plus loin très vite pour en profiter",
+          "Te retirer de cette énergie positive"
+        ]
+      },
+      "explanation": {
+        "en": "When things go well, your job is to maintain rhythm, not manage the outcome.",
+        "fr": "Quand tout va bien, ton rôle est de garder le rythme, pas de gérer le résultat."
+      }
+    },
+    "0b5dc6ef-1cda-498e-932d-4939839666ad": {
+      "question_text": {
+        "en": "Why can positive responses be destabilizing?",
+        "fr": "Pourquoi une réaction positive peut-elle déstabiliser ?"
+      },
+      "options": {
+        "en": [
+          "They trigger validation-seeking from scarcity mindset",
+          "They activate fear of losing the good feeling",
+          "They require no adjustment in behavior",
+          "They can create pressure to capitalize and control"
+        ],
+        "fr": [
+          "Elle déclenche une quête de validation née d’une mentalité de pénurie",
+          "Elle active la peur de perdre ce bon sentiment",
+          "Elle ne demande aucun ajustement de comportement",
+          "Elle peut créer une pression pour en profiter et tout contrôler"
+        ]
+      },
+      "explanation": {
+        "en": "Positive signals introduce something to lose, avoid shifting into outcome protection.",
+        "fr": "Les signaux positifs créent quelque chose à perdre ; évite de passer en mode protection du résultat."
+      }
+    },
+    "5956bc0c-e67e-486c-9121-0d4f3f555035": {
+      "question_text": {
+        "en": "What does fitness primarily change before others notice your body?",
+        "fr": "Que change d’abord la forme physique, avant même que les autres remarquent ton corps ?"
+      },
+      "options": {
+        "en": [
+          "Your workout knowledge and discipline",
+          "Your self-perception and internal confidence",
+          "Your ability to attract attention",
+          "Your conversational skills and charm"
+        ],
+        "fr": [
+          "Tes connaissances en entraînement et ta discipline",
+          "L’image que tu as de toi et ta confiance intérieure",
+          "Ta capacité à attirer l’attention",
+          "Ta conversation et ton charme"
+        ]
+      },
+      "explanation": {
+        "en": "Confidence grows when your internal view of yourself improves first.",
+        "fr": "La confiance grandit quand le regard que tu portes sur toi s’améliore d’abord."
+      }
+    },
+    "9ec8b2af-94c5-4b1c-a704-f2bd3e950b20": {
+      "question_text": {
+        "en": "How does fitness help increase confidence?",
+        "fr": "Comment la forme physique aide-t-elle à gagner confiance en soi ?"
+      },
+      "options": {
+        "en": [
+          "It provides physical proof you take yourself seriously",
+          "It makes you visibly attractive to women",
+          "It teaches discipline that transfers to dating",
+          "It gives you status in social settings"
+        ],
+        "fr": [
+          "Elle est la preuve physique que tu te prends au sérieux",
+          "Elle te rend visiblement attirant pour les femmes",
+          "Elle t’apprend une discipline qui sert aussi en séduction",
+          "Elle te donne du statut en société"
+        ]
+      },
+      "explanation": {
+        "en": "Fitness shifts self-perception first which increases the likelihood of you approaching.",
+        "fr": "La forme physique change d’abord l’image que tu as de toi, ce qui augmente tes chances d’aborder."
+      }
+    },
+    "d0c9fead-d08c-463e-82b3-6acbc68aa42b": {
+      "question_text": {
+        "en": "What creates the confidence shift from good fitness?",
+        "fr": "D’où vient le gain de confiance lié à une bonne forme physique ?"
+      },
+      "options": {
+        "en": [
+          "Believing your body is more capable",
+          "Seeing a body you respect in the mirror",
+          "Reduced self-monitoring in social situations",
+          "Getting compliments from others"
+        ],
+        "fr": [
+          "Croire que ton corps est plus capable",
+          "Voir dans le miroir un corps que tu respectes",
+          "T’observer moins en société",
+          "Recevoir des compliments"
+        ]
+      },
+      "explanation": {
+        "en": "Self respect shapes behavior long before external validation plays a role.",
+        "fr": "Le respect de soi façonne le comportement bien avant que la validation des autres entre en jeu."
+      }
+    },
+    "941578b4-3efd-48fd-bb43-567d6cc34570": {
+      "question_text": {
+        "en": "How does poor grooming affect first impressions?",
+        "fr": "Quel effet un manque d’entretien a-t-il sur la première impression ?"
+      },
+      "options": {
+        "en": [
+          "Women expect higher effort",
+          "It signals low status",
+          "It creates early hesitation before attraction forms"
+        ],
+        "fr": [
+          "Les femmes attendent plus d’efforts",
+          "Il signale un statut bas",
+          "Il crée une hésitation avant même que l’attirance naisse"
+        ]
+      },
+      "explanation": {
+        "en": "Early visual cues shape comfort and interest before conversation begins.",
+        "fr": "Les premiers signaux visuels façonnent l’aisance et l’intérêt avant que la conversation commence."
+      }
+    },
+    "320c1b55-513d-40ef-8b8a-5575836c5e6c": {
+      "question_text": {
+        "en": "What is the main internal effect of maintained grooming?",
+        "fr": "Quel est le principal effet intérieur d’une apparence entretenue ?"
+      },
+      "options": {
+        "en": [
+          "External validation from compliments",
+          "Forcing confidence through willpower",
+          "Dramatic change in physical features",
+          "Feeling sharp and put-together without effort"
+        ],
+        "fr": [
+          "La validation extérieure grâce aux compliments",
+          "Forcer la confiance par la volonté",
+          "Un changement spectaculaire de tes traits",
+          "Te sentir net et soigné sans effort"
+        ]
+      },
+      "explanation": {
+        "en": "Grooming shifts self-perception which increases the likelihood of you approaching.",
+        "fr": "Prendre soin de ton apparence change l’image que tu as de toi, ce qui augmente tes chances d’aborder."
+      }
+    },
+    "c8f3b672-a516-497b-889c-0bb6535c7859": {
+      "question_text": {
+        "en": "What are some benefits of grooming?",
+        "fr": "Quels sont les bénéfices d’une apparence entretenue ?"
+      },
+      "options": {
+        "en": [
+          "Better first impressions",
+          "Less internal barriers so behavior feels natural",
+          "Signals self-respect to potential partners",
+          "Creates an advantage over less groomed men"
+        ],
+        "fr": [
+          "Une meilleure première impression",
+          "Moins de barrières intérieures, donc un comportement plus naturel",
+          "Elle montre que tu te respectes",
+          "Elle te donne un avantage sur les hommes moins soignés"
+        ]
+      },
+      "explanation": {
+        "en": "Cleaner first impressions, freer behavior, and visible self respect.",
+        "fr": "Une première impression plus nette, un comportement plus libre et un respect de soi visible."
+      }
+    }
+  }
+}
