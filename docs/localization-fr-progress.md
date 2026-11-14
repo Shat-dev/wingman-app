@@ -4,7 +4,7 @@ Branch `localization-release-c-fr` (from `localization-release-c`). Rules and gl
 
 ## Where it stands
 
-All 25 lesson courses are drafted (1,531 items, 34,442 English words); every overlay passes `lesson_overlays.py check fr`. Database content in progress: all 15 scenarios done; quiz questions 329 of 765. Checks, review pack and App Store listing not started.
+All 25 lesson courses are drafted (1,531 items, 34,442 English words); every overlay passes `lesson_overlays.py check fr`. Database content in progress: all 15 scenarios done; quiz questions 373 of 765. Checks, review pack and App Store listing not started.
 
 ## Summary
 
@@ -12,7 +12,7 @@ All 25 lesson courses are drafted (1,531 items, 34,442 English words); every ove
 |---|---|
 | UI catalogs | Done by the setup session (585 strings, draft) |
 | Lesson overlays | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-15) |
-| Database content | **15 of 15 scenarios** (796 text screens, 276 options); 329 of 765 quiz questions |
+| Database content | **15 of 15 scenarios** (796 text screens, 276 options); 373 of 765 quiz questions |
 | Checks and review pack | Not started |
 | App Store listing (France, notes for Canada) | Not started |
 
@@ -72,6 +72,7 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
 - **2026-11-15. Questions 198–241** (approach_mechanics rows 89–132, module pool; about 2,000 words). Starts `questions_02_approach_mechanics_2` (rows 89–176); seed check passes with 241. Signal labels stay *Ouverture / Politesse / Froideur / Mitigé*. "Three feet" became *environ un mètre*. Several questions are scene descriptions with no question mark (`1b9394c8…`, `2d63f1fb…`, `3caf0039…`, `4fe08740…`, `5027deaf…`, `50916cec…`, `51944bdf…`); the French keeps them as statements, as the English does. "Close politely" became *termine poliment l'échange* (no *conclure*).
 - **2026-11-15. Questions 242–285** (approach_mechanics rows 133–176, module pool; about 2,000 words). `questions_02_approach_mechanics_2` is complete (88 rows); seed check passes with 285. "Between sets" became *entre deux séries*; "spot" (gym) became *t'assurer*; the opener examples are adapted to natural spoken French, not translated literally (*Il est pénible, ce retard. Tu sais combien de temps ça va durer ?*). `78cf663a…` uses plural *vous* (*Ça vous dérange si je me joins à vous ?*) because it addresses a group.
 - **2026-11-15. Questions 286–329** (approach_mechanics rows 177–220, module pool; about 2,000 words). Starts `questions_02_approach_mechanics_3` (rows 177–264); seed check passes with 329. "Health nut" became *une fana du manger sain*; "thrifting" became *chiner en friperie*; "the responsible friend who drives everyone home" became *l'amie raisonnable qui ramène tout le monde*. `c36a094c…` is one of the questions German flagged with a letter-style option ("Either B or C"); the current English already reads "Either the creative-work or the thrifting assumption" and the French follows that.
+- **2026-11-15. Questions 330–373** (approach_mechanics rows 221–264, module pool; about 2,000 words). `questions_02_approach_mechanics_3` is complete (88 rows), so all 264 approach_mechanics questions are done; seed check passes with 373. "Social nightlife venues" became *les bars et les boîtes*; "close politely" became *prendre congé poliment*; `dc0ff18e…` options complete the sentence "Donner le ton, c'est :", so they start in lower case. One plural imperative (*échangez vos coordonnées*) was changed to *prends ses coordonnées*.
 
 ## Questions for Arthur
 

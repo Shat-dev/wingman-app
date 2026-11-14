@@ -1017,6 +1017,1016 @@
         "en": "Apologizing frames you as an interruption; open as if you belong instead.",
         "fr": "T’excuser fait de toi un dérangement ; engage plutôt la conversation comme si tu étais à ta place."
       }
+    },
+    "c3fe310a-e657-4693-8a1b-acee8218f2a8": {
+      "question_text": {
+        "en": "What guideline makes an assumption opener feel perceptive rather than random?",
+        "fr": "Quelle règle rend une accroche par supposition perspicace plutôt que lancée au hasard ?"
+      },
+      "options": {
+        "en": [
+          "Deliver it confidently",
+          "Base it on observable evidence",
+          "Keep it vague",
+          "Make it challenging"
+        ],
+        "fr": [
+          "La dire avec assurance",
+          "La fonder sur ce que tu observes",
+          "Rester vague",
+          "La rendre provocante"
+        ]
+      },
+      "explanation": {
+        "en": "Grounding assumptions in visible cues makes them feel thoughtful rather than arbitrary.",
+        "fr": "Appuyer une supposition sur des signes visibles la rend réfléchie plutôt qu’arbitraire."
+      }
+    },
+    "c41c83a5-d2fe-4cdf-b37f-bcec922ef1d8": {
+      "question_text": {
+        "en": "\"My friend thinks I'm crazy but I think people who...\" What does this opener do?",
+        "fr": "« Mon pote me trouve fou, mais moi, je pense que les gens qui… » Que fait cette accroche ?"
+      },
+      "options": {
+        "en": [
+          "Creates debate frame where her opinion matters in resolving it",
+          "Shows personality and sense of humor to build attraction",
+          "Makes her guarded because you’re hitting on her"
+        ],
+        "fr": [
+          "Elle crée un débat où son avis compte pour trancher",
+          "Elle montre ta personnalité et ton humour pour créer de l’attirance",
+          "Elle la met sur ses gardes parce que tu la dragues"
+        ]
+      },
+      "explanation": {
+        "en": "Debate and dilemma frame invites her opinion, making her feel valued and involved.",
+        "fr": "Un débat ou un dilemme sollicite son avis, ce qui la valorise et l’implique."
+      }
+    },
+    "c4e94987-68b3-4c33-b481-27950bb88e63": {
+      "question_text": {
+        "en": "Which environments suit direct intent openers best?",
+        "fr": "Dans quels lieux les accroches directes conviennent-elles le mieux ?"
+      },
+      "options": {
+        "en": [
+          "Grocery stores",
+          "Quiet libraries",
+          "Doctor waiting rooms",
+          "Social nightlife venues"
+        ],
+        "fr": [
+          "Les supermarchés",
+          "Les bibliothèques calmes",
+          "Les salles d’attente chez le médecin",
+          "Les bars et les boîtes"
+        ]
+      },
+      "explanation": {
+        "en": "Direct intent fits environments built for attraction e.g. bars, nightclubs.",
+        "fr": "Une intention directe convient aux lieux faits pour les rencontres, comme les bars et les boîtes."
+      }
+    },
+    "c4ec10a6-7307-4d33-b4ac-bab091417d95": {
+      "question_text": {
+        "en": "Why does apologizing in your opener weaken frame control?",
+        "fr": "Pourquoi t’excuser dans ton accroche t’empêche-t-il de donner le ton ?"
+      },
+      "options": {
+        "en": [
+          "It assumes her activity is more important",
+          "It seeks permission instead of leading",
+          "It frames your presence as an interruption",
+          "It shows confident ownership of the moment"
+        ],
+        "fr": [
+          "Ça sous-entend que ce qu’elle faisait est plus important",
+          "Ça demande la permission au lieu de mener",
+          "Ça présente ta présence comme une interruption",
+          "Ça montre que tu assumes pleinement le moment"
+        ]
+      },
+      "explanation": {
+        "en": "Apology frames you as an interruption, not an option.",
+        "fr": "T’excuser fait de toi une interruption, pas une option."
+      }
+    },
+    "c728f4f6-0836-4faf-b386-b10c475ae132": {
+      "question_text": {
+        "en": "Why do indirect openers reduce pressure compared to direct?",
+        "fr": "Pourquoi les accroches indirectes mettent-elles moins de pression que les directes ?"
+      },
+      "options": {
+        "en": [
+          "They declare romantic interest immediately",
+          "They disguise approach as casual shared moment",
+          "They allow interaction to develop naturally",
+          "They hide intent behind situational comment"
+        ],
+        "fr": [
+          "Elles déclarent tout de suite un intérêt amoureux",
+          "Elles font passer l’approche pour un moment partagé ordinaire",
+          "Elles laissent l’échange se développer naturellement",
+          "Elles cachent l’intention derrière une remarque sur la situation"
+        ]
+      },
+      "explanation": {
+        "en": "Shared context makes the entry feel expected and easy to engage with.",
+        "fr": "Une situation partagée rend l’entrée en matière attendue et facile à suivre."
+      }
+    },
+    "c9f1e798-7318-4c31-b9db-3d51fbde0554": {
+      "question_text": {
+        "en": "What is the primary reason assumption-based openers create engagement?",
+        "fr": "Quelle est la raison principale pour laquelle les accroches par supposition créent de l’implication ?"
+      },
+      "options": {
+        "en": [
+          "They feel more confident than questions",
+          "They signal romantic intent early",
+          "They require her to actively respond rather than answer on autopilot"
+        ],
+        "fr": [
+          "Elles paraissent plus assurées que des questions",
+          "Elles signalent tôt une intention amoureuse",
+          "Elles l’obligent à répondre activement plutôt qu’en pilote automatique"
+        ]
+      },
+      "explanation": {
+        "en": "Assumptions demand response. She's instantly involved in correcting or confirming.",
+        "fr": "Une supposition appelle une réponse. Elle est tout de suite impliquée pour corriger ou confirmer."
+      }
+    },
+    "cad92129-8727-4718-bff9-4ab66c366d32": {
+      "question_text": {
+        "en": "Why do opinion openers create strong initial engagement?",
+        "fr": "Pourquoi les accroches qui demandent son avis créent-elles une forte implication dès le départ ?"
+      },
+      "options": {
+        "en": [
+          "They make her feel her perspective is important",
+          "They position her as someone whose judgment matters",
+          "They are transactional and quick to dismiss",
+          "They help by valuing her input"
+        ],
+        "fr": [
+          "Elle sent que son point de vue est important",
+          "Elles la présentent comme quelqu’un dont le jugement compte",
+          "Elles sont utilitaires et vite expédiées",
+          "Elles aident en valorisant ce qu’elle apporte"
+        ]
+      },
+      "explanation": {
+        "en": "People respond when they feel heard and taken seriously.",
+        "fr": "On réagit quand on se sent écouté et pris au sérieux."
+      }
+    },
+    "cb1b3910-7f46-4638-b7ba-949483f7d10a": {
+      "question_text": {
+        "en": "Bar. You've moved to a quieter area with her. What's next?",
+        "fr": "Au bar. Vous êtes allés dans un coin plus calme. Et ensuite ?"
+      },
+      "options": {
+        "en": [
+          "Continue conversation and suggest meeting up another time",
+          "Get her contact info now while momentum is strong",
+          "Suggest moving somewhere else together",
+          "Get her number or suggest moving on together, depending on logistics and her signals"
+        ],
+        "fr": [
+          "Continuer la conversation et proposer de se revoir une autre fois",
+          "Prendre ses coordonnées maintenant, tant que l’élan est fort",
+          "Proposer d’aller ailleurs ensemble",
+          "Prendre son numéro ou proposer de continuer ensemble ailleurs, selon l’organisation et ses signaux"
+        ]
+      },
+      "explanation": {
+        "en": "Strong momentum calls for a next step: lock in contact, or suggest continuing elsewhere if her signals say yes.",
+        "fr": "Un élan fort appelle une étape suivante : prends ses coordonnées, ou propose de continuer ailleurs si ses signaux disent oui."
+      }
+    },
+    "ccb554b7-2aa7-47d7-a64b-d4d9612a37a1": {
+      "question_text": {
+        "en": "Why do certain approach angles and distances trigger discomfort?",
+        "fr": "Pourquoi certains angles et certaines distances d’approche créent-ils un malaise ?"
+      },
+      "options": {
+        "en": [
+          "They activate automatic threat responses",
+          "They block potential movement or exits",
+          "They make your intent invisible during approach",
+          "They always show high confidence"
+        ],
+        "fr": [
+          "Ils déclenchent des réactions automatiques face à une menace",
+          "Ils bloquent ses mouvements ou ses sorties possibles",
+          "Ils rendent ton intention invisible pendant l’approche",
+          "Ils montrent toujours une grande assurance"
+        ]
+      },
+      "explanation": {
+        "en": "Poor angle and distance feels invasive, bypassing conscious choice.",
+        "fr": "Un mauvais angle et une mauvaise distance paraissent intrusifs, sans même passer par une décision consciente."
+      }
+    },
+    "cd75e2e6-d17a-4bb7-93e9-0f592f46fef8": {
+      "question_text": {
+        "en": "Why must your frame be more interesting than what she was doing before?",
+        "fr": "Pourquoi ton entrée en matière doit-elle être plus intéressante que ce qu’elle faisait avant ?"
+      },
+      "options": {
+        "en": [
+          "Otherwise she'll return to it",
+          "Humans are programmed to pay attention to interesting things",
+          "You need to capture her attention to compete with distractions",
+          "All of the above"
+        ],
+        "fr": [
+          "Sinon, elle y retournera",
+          "Les humains sont programmés pour prêter attention à ce qui est intéressant",
+          "Tu dois capter son attention face aux distractions",
+          "Toutes les réponses ci-dessus"
+        ]
+      },
+      "explanation": {
+        "en": "All true: if your frame isn't more compelling than her current reality, she returns to it.",
+        "fr": "Tout est vrai : si ce que tu proposes n’est pas plus captivant que ce qu’elle faisait, elle y retourne."
+      }
+    },
+    "ceadc18e-3007-4ed0-beba-55eb062fbd75": {
+      "question_text": {
+        "en": "Conversation is going well. She asks where you're from. You answer, then what?",
+        "fr": "La conversation se passe bien. Elle te demande d’où tu viens. Tu réponds, et ensuite ?"
+      },
+      "options": {
+        "en": [
+          "Ask her a different question to maintain lead",
+          "Elaborate on your answer to keep talking",
+          "Let her ask the next question to show you're listening"
+        ],
+        "fr": [
+          "Lui poser une autre question pour continuer à mener",
+          "Développer ta réponse pour continuer à parler",
+          "La laisser poser la question suivante pour montrer que tu écoutes"
+        ]
+      },
+      "explanation": {
+        "en": "Frame control means leading conversation forward; answer then redirect.",
+        "fr": "Donner le ton, c’est faire avancer la conversation ; réponds, puis relance."
+      }
+    },
+    "cf063d07-0835-4825-9d56-79f6e3255038": {
+      "question_text": {
+        "en": "You tell her you found her attractive. She thanks you but keeps responses short.",
+        "fr": "Tu lui dis que tu la trouves attirante. Elle te remercie, mais ses réponses restent courtes."
+      },
+      "options": {
+        "en": [
+          "Double down to show confidence",
+          "Switch to small talk to ease tension",
+          "Close politely and leave her comfortable"
+        ],
+        "fr": [
+          "En rajouter pour montrer ton assurance",
+          "Passer à une conversation légère pour détendre l’atmosphère",
+          "Prendre congé poliment et la laisser à l’aise"
+        ]
+      },
+      "explanation": {
+        "en": "Minimal responses after clear intent mean the interest isn’t mutual.",
+        "fr": "Des réponses minimales après une intention claire veulent dire que l’intérêt n’est pas réciproque."
+      }
+    },
+    "d0ec47ae-1140-4d62-b956-39af81780946": {
+      "question_text": {
+        "en": "Which behaviors signal strong frame control?",
+        "fr": "Quels comportements montrent que tu donnes bien le ton ?"
+      },
+      "options": {
+        "en": [
+          "Calm certainty",
+          "Indecision",
+          "Leading transitions",
+          "Needing agreement"
+        ],
+        "fr": [
+          "Une certitude calme",
+          "L’indécision",
+          "Mener les transitions",
+          "Avoir besoin de son accord"
+        ]
+      },
+      "explanation": {
+        "en": "Frame is held through direction, not agreement; guide instead of checking.",
+        "fr": "On donne le ton par la direction, pas par l’accord ; guide au lieu de vérifier."
+      }
+    },
+    "d1f7d186-8772-4b75-bb24-e34679605860": {
+      "question_text": {
+        "en": "You're both walking dogs that start playing. What works indirectly?",
+        "fr": "Vous promenez tous les deux vos chiens, qui se mettent à jouer. Qu’est-ce qui marche de façon indirecte ?"
+      },
+      "options": {
+        "en": [
+          "Comment on how the dogs get along",
+          "Compliment her or her dog's appearance",
+          "Ask what breed her dog is",
+          "Ask if she comes to this park often"
+        ],
+        "fr": [
+          "Commenter la façon dont les chiens s’entendent",
+          "Complimenter son physique ou celui de son chien",
+          "Lui demander de quelle race est son chien",
+          "Lui demander si elle vient souvent dans ce parc"
+        ]
+      },
+      "explanation": {
+        "en": "Staying with the shared experience allows comfort to build organically.",
+        "fr": "Rester sur l’expérience partagée laisse l’aisance s’installer naturellement."
+      }
+    },
+    "d3daff27-e652-43a8-8f20-af94b5be0f32": {
+      "question_text": {
+        "en": "Street. She’s friendly but you’re unsure of her interest. What’s the best next move?",
+        "fr": "Dans la rue. Elle est aimable, mais tu n’es pas sûr de son intérêt. Quelle est la meilleure chose à faire ?"
+      },
+      "options": {
+        "en": [
+          "Walk alongside her and continue talking",
+          "Lower your energy and mirror her pace",
+          "Say \"You seem cool. Want to grab coffee sometime?\""
+        ],
+        "fr": [
+          "Marcher à côté d’elle et continuer à parler",
+          "Baisser ton énergie et t’aligner sur son rythme",
+          "Dire « Tu as l’air cool. Ça te dirait qu’on prenne un café un de ces jours ? »"
+        ]
+      },
+      "explanation": {
+        "en": "A simple invitation creates a clear opt-in or opt-out without forcing continuation.",
+        "fr": "Une invitation simple lui permet de dire clairement oui ou non, sans forcer la suite."
+      }
+    },
+    "d43846a5-78ac-402f-95a0-7cfcb54078ce": {
+      "question_text": {
+        "en": "Why is it helpful to clarify instead of lingering after neutral responses?",
+        "fr": "Après des réponses neutres, pourquoi vaut-il mieux clarifier que t’attarder ?"
+      },
+      "options": {
+        "en": [
+          "It gives her a clear yes-or-no choice",
+          "It shortens awkward lingering",
+          "It forces her to reveal attraction",
+          "It removes the need for guessing"
+        ],
+        "fr": [
+          "Ça lui donne un choix clair, oui ou non",
+          "Ça abrège un moment gênant",
+          "Ça l’oblige à révéler son attirance",
+          "Ça évite d’avoir à deviner"
+        ]
+      },
+      "explanation": {
+        "en": "Clear lines remove ambiguity by revealing whether politeness is interest or courtesy.",
+        "fr": "Une phrase claire lève l’ambiguïté et révèle s’il s’agit d’intérêt ou de simple politesse."
+      }
+    },
+    "d466b22a-5014-4620-9cfa-19217d091ad6": {
+      "question_text": {
+        "en": "Which are effective indirect openers?",
+        "fr": "Quelles sont les accroches indirectes efficaces ?"
+      },
+      "options": {
+        "en": [
+          "Commenting on the environment",
+          "Asking about the situation you’re both in",
+          "Noticing shared experiences",
+          "Complimenting her looks"
+        ],
+        "fr": [
+          "Commenter le lieu",
+          "Poser une question sur la situation que vous vivez tous les deux",
+          "Remarquer une expérience partagée",
+          "Complimenter son physique"
+        ]
+      },
+      "explanation": {
+        "en": "Shared context makes the entry feel expected and easy to engage with.",
+        "fr": "Une situation partagée rend l’entrée en matière attendue et facile à suivre."
+      }
+    },
+    "d61d2413-5ee2-43c8-8cce-8d6030c1879e": {
+      "question_text": {
+        "en": "What kills frame control in an opener?",
+        "fr": "Qu’est-ce qui t’empêche de donner le ton dans une accroche ?"
+      },
+      "options": {
+        "en": [
+          "Making a direct statement instead of asking permission",
+          "Apologizing for approaching or interrupting",
+          "Asking if it's okay to talk to her first"
+        ],
+        "fr": [
+          "Faire une affirmation directe au lieu de demander la permission",
+          "T’excuser de l’aborder ou de l’interrompre",
+          "Lui demander d’abord si tu peux lui parler"
+        ]
+      },
+      "explanation": {
+        "en": "Apologizing frames you as an interruption; open as if you belong instead.",
+        "fr": "T’excuser fait de toi un dérangement ; engage plutôt la conversation comme si tu étais à ta place."
+      }
+    },
+    "d743d469-5774-4931-80b8-cf68fa8054d1": {
+      "question_text": {
+        "en": "You hesitate 30 seconds and someone else approaches her first. What caused this?",
+        "fr": "Tu hésites 30 secondes, et quelqu’un d’autre l’aborde avant toi. Qu’est-ce qui a causé ça ?"
+      },
+      "options": {
+        "en": [
+          "Giving your brain time to talk you out of it",
+          "Lack of a good opener",
+          "Her clear disinterest",
+          "Not feeling ready enough"
+        ],
+        "fr": [
+          "Tu as laissé à ton cerveau le temps de t’en dissuader",
+          "Il te manquait une bonne accroche",
+          "Son désintérêt évident",
+          "Tu ne te sentais pas assez prêt"
+        ]
+      },
+      "explanation": {
+        "en": "Acting quickly stops doubt from building. Move within three seconds of noticing her.",
+        "fr": "Agir vite empêche le doute de s’installer. Bouge dans les trois secondes après l’avoir remarquée."
+      }
+    },
+    "d76f2c05-59de-4480-a3a4-8dbe27fb2854": {
+      "question_text": {
+        "en": "Why does the three-second rule work?",
+        "fr": "Pourquoi la règle des trois secondes marche-t-elle ?"
+      },
+      "options": {
+        "en": [
+          "It gives you time to prepare a perfect opener",
+          "It allows you to assess her interest level first",
+          "It acts before threat detection builds resistance"
+        ],
+        "fr": [
+          "Elle te laisse le temps de préparer une accroche parfaite",
+          "Elle te permet d’évaluer d’abord son intérêt",
+          "Elle te fait agir avant que la détection des menaces ne crée de la résistance"
+        ]
+      },
+      "explanation": {
+        "en": "The rule works by acting before your brain generates reasons not to.",
+        "fr": "La règle marche parce que tu agis avant que ton cerveau ne trouve des raisons de ne pas y aller."
+      }
+    },
+    "daf41a36-31b3-4cc7-b731-be0601f73a66": {
+      "question_text": {
+        "en": "Why do curiosity based openers capture attention more effectively?",
+        "fr": "Pourquoi les accroches qui éveillent la curiosité captent-elles mieux l’attention ?"
+      },
+      "options": {
+        "en": [
+          "It lowers defenses",
+          "It creates obligation",
+          "It delays judgment",
+          "It triggers interest"
+        ],
+        "fr": [
+          "Elles font baisser les défenses",
+          "Elles créent une obligation",
+          "Elles retardent le jugement",
+          "Elles déclenchent l’intérêt"
+        ]
+      },
+      "explanation": {
+        "en": "Curiosity works because it naturally pulls attention; open with something intriguing.",
+        "fr": "La curiosité marche parce qu’elle attire naturellement l’attention ; commence par quelque chose d’intrigant."
+      }
+    },
+    "dc0ff18e-1928-43e2-b403-e3cb7a6b3ab2": {
+      "question_text": {
+        "en": "The conversation goes to a boring topic. Frame control means:",
+        "fr": "La conversation part sur un sujet ennuyeux. Donner le ton, c’est :"
+      },
+      "options": {
+        "en": [
+          "Follow her lead to show you're listening and interested",
+          "Redirect to a topic you find more interesting without dismissing hers",
+          "Tell her you'd rather talk about something else"
+        ],
+        "fr": [
+          "la suivre pour montrer que tu écoutes et que ça t’intéresse",
+          "réorienter vers un sujet qui t’intéresse plus, sans rejeter le sien",
+          "lui dire que tu préférerais parler d’autre chose"
+        ]
+      },
+      "explanation": {
+        "en": "Redirect by validating the moment and steering toward higher energy subjects.",
+        "fr": "Réoriente en reconnaissant le moment et en allant vers des sujets plus énergiques."
+      }
+    },
+    "dc4c48ee-7f80-40c8-8355-cfd7dfdf8159": {
+      "question_text": {
+        "en": "Café. You open. She smiles warmly but gives short answers and angles away.",
+        "fr": "Au café, tu engages la conversation. Elle sourit chaleureusement, mais répond en quelques mots et se tourne ailleurs."
+      },
+      "options": {
+        "en": [
+          "Receptive—warm smile indicates interest despite brief answers",
+          "Polite—smiling to be nice but body language shows reservation",
+          "Unclear—mixed signals require more interaction to assess"
+        ],
+        "fr": [
+          "Ouverture : un sourire chaleureux montre de l’intérêt malgré des réponses brèves",
+          "Politesse : elle sourit par gentillesse, mais son corps montre de la réserve",
+          "Pas clair : des signaux mitigés demandent plus d’échange pour juger"
+        ]
+      },
+      "explanation": {
+        "en": "When answers are brief and posture angles away, respect the boundary and exit.",
+        "fr": "Quand les réponses sont brèves et que la posture se détourne, respecte la limite et pars."
+      }
+    },
+    "ddf26019-643c-48e3-99bd-8ed12168ae51": {
+      "question_text": {
+        "en": "You see a woman reading a book you love on the train. What guarantees failure?",
+        "fr": "Dans le train, tu vois une femme qui lit un livre que tu adores. Qu’est-ce qui garantit l’échec ?"
+      },
+      "options": {
+        "en": [
+          "Approaching and getting rejected",
+          "Hesitating and not approaching at all",
+          "Waiting for her to speak first",
+          "Smiling but saying nothing"
+        ],
+        "fr": [
+          "L’aborder et te faire rejeter",
+          "Hésiter et ne pas l’aborder du tout",
+          "Attendre qu’elle parle en premier",
+          "Sourire sans rien dire"
+        ]
+      },
+      "explanation": {
+        "en": "Inaction ensures zero chance; action creates potential outcomes.",
+        "fr": "L’inaction garantit zéro chance ; l’action crée des possibilités."
+      }
+    },
+    "df7b348f-77a6-43b4-b9c2-72ba495cd148": {
+      "question_text": {
+        "en": "She smiles, answers, and asks you a question back. Best move?",
+        "fr": "Elle sourit, répond et te pose une question en retour. Meilleure chose à faire ?"
+      },
+      "options": {
+        "en": [
+          "Escalate quickly",
+          "Slow the interaction",
+          "Give her a compliment",
+          "Continue naturally"
+        ],
+        "fr": [
+          "Aller vite plus loin",
+          "Ralentir l’échange",
+          "Lui faire un compliment",
+          "Continuer naturellement"
+        ]
+      },
+      "explanation": {
+        "en": "When she reciprocates, continue naturally to build momentum without forcing pace.",
+        "fr": "Quand elle te renvoie la balle, continue naturellement pour créer de l’élan sans forcer le rythme."
+      }
+    },
+    "e0a819cd-0a51-464f-ae01-bb50bf45ca1b": {
+      "question_text": {
+        "en": "You say hi. She says her name, maintains eye contact, and asks where you are from.",
+        "fr": "Tu dis bonjour. Elle te donne son prénom, soutient ton regard et te demande d’où tu viens."
+      },
+      "options": {
+        "en": [
+          "She is receptive and investing in the interaction",
+          "She is polite and following social norms",
+          "She is gathering information to decide later"
+        ],
+        "fr": [
+          "Elle est ouverte et s’investit dans l’échange",
+          "Elle est polie et suit les conventions sociales",
+          "Elle récolte des informations pour décider plus tard"
+        ]
+      },
+      "explanation": {
+        "en": "Name mirroring and follow-up questions signal active interest, not passive politeness.",
+        "fr": "Donner son prénom en retour et poser des questions signale un intérêt actif, pas une politesse passive."
+      }
+    },
+    "e0b6a830-3f63-4d2b-b958-5db45a154beb": {
+      "question_text": {
+        "en": "Why is mistaking politeness for receptiveness a common error?",
+        "fr": "Pourquoi prendre la politesse pour de l’ouverture est-il une erreur courante ?"
+      },
+      "options": {
+        "en": [
+          "Men want to see interest so they over interpret polite behavior",
+          "Women are taught to be polite, men mistake this for attraction",
+          "Polite signals include smiles and warmth which men read as interest",
+          "All of the above"
+        ],
+        "fr": [
+          "Les hommes veulent voir de l’intérêt, alors ils surinterprètent la politesse",
+          "On apprend aux femmes à être polies, et les hommes prennent ça pour de l’attirance",
+          "Les signaux polis incluent des sourires et de la chaleur, que les hommes lisent comme de l’intérêt",
+          "Toutes les réponses ci-dessus"
+        ]
+      },
+      "explanation": {
+        "en": "Polite signals are intentionally soft; rely on sustained attention and questions instead.",
+        "fr": "Les signaux polis sont volontairement doux ; fie-toi plutôt à une attention qui dure et aux questions qu’elle te pose."
+      }
+    },
+    "e1d6b84b-cc78-420d-8d46-30d10f8f2b0a": {
+      "question_text": {
+        "en": "She engages warmly, touches your arm, asks questions, but then says \"My Uber's here\".",
+        "fr": "Elle échange chaleureusement, te touche le bras, pose des questions, puis dit : « Mon Uber est là. »"
+      },
+      "options": {
+        "en": [
+          "Receptive with time limit—get contacts before Uber arrives",
+          "Polite—touch and questions were courtesy before planned exit",
+          "Mixed—she stated a time constraint"
+        ],
+        "fr": [
+          "Ouverture avec une limite de temps : prends ses coordonnées avant que l’Uber arrive",
+          "Politesse : le contact et les questions étaient de la courtoisie avant un départ prévu",
+          "Mitigé : elle a annoncé une contrainte de temps"
+        ]
+      },
+      "explanation": {
+        "en": "Strong engagement plus a real time constraint is your cue to exchange numbers immediately.",
+        "fr": "Une forte implication plus une vraie contrainte de temps, c’est ton signal pour échanger vos numéros tout de suite."
+      }
+    },
+    "e2a6f6e8-963f-4da4-bfc3-a9cc1b615ab4": {
+      "question_text": {
+        "en": "What behavioral signals indicate receptive interest?",
+        "fr": "Quels comportements indiquent un intérêt réel ?"
+      },
+      "options": {
+        "en": [
+          "She gives short answers but maintains steady eye contact",
+          "She turns her body fully toward you when responding",
+          "She asks questions back or contributes to the conversation"
+        ],
+        "fr": [
+          "Elle répond brièvement, mais soutient ton regard",
+          "Elle se tourne entièrement vers toi pour répondre",
+          "Elle te pose des questions en retour ou nourrit la conversation"
+        ]
+      },
+      "explanation": {
+        "en": "When she invests through questions and open posture, interest is there; keep momentum.",
+        "fr": "Quand elle s’investit par des questions et une posture ouverte, l’intérêt est là ; garde l’élan."
+      }
+    },
+    "e2e4a209-5fc0-4faf-a13c-67ed31a8a170": {
+      "question_text": {
+        "en": "You only approach when you’re ready on planned outings. What does this limit?",
+        "fr": "Tu n’abordes que lors de sorties prévues, quand tu te sens prêt. Qu’est-ce que ça limite ?"
+      },
+      "options": {
+        "en": [
+          "Your overall practice volume and reps",
+          "Your chances of perfect interactions",
+          "Your appearance standards"
+        ],
+        "fr": [
+          "Ta quantité totale d’entraînement et de tentatives",
+          "Tes chances d’échanges parfaits",
+          "Tes exigences sur ton apparence"
+        ]
+      },
+      "explanation": {
+        "en": "Selective effort keeps volume low, slowing skill development.",
+        "fr": "Un effort sélectif garde une faible quantité d’approches, ce qui ralentit tes progrès."
+      }
+    },
+    "e3b36edc-fa81-4ae9-ba6b-80b396e930c4": {
+      "question_text": {
+        "en": "What makes wrong assumptions still effective?",
+        "fr": "Qu’est-ce qui rend une supposition fausse efficace quand même ?"
+      },
+      "options": {
+        "en": [
+          "She may correct you, which is still engagement",
+          "Her correction often leads to explaining the truth",
+          "Being wrong shows vulnerability which builds trust"
+        ],
+        "fr": [
+          "Elle va peut-être te corriger, et c’est déjà de l’implication",
+          "Sa correction l’amène souvent à t’expliquer la vérité",
+          "Te tromper montre ta vulnérabilité, ce qui crée la confiance"
+        ]
+      },
+      "explanation": {
+        "en": "Wrong assumptions create engagement through correction and explanation.",
+        "fr": "Une supposition fausse crée de l’implication par la correction et l’explication."
+      }
+    },
+    "e549d946-f5c9-48d5-8ed3-03653b7ab3b6": {
+      "question_text": {
+        "en": "You’re both browsing books in a quiet bookstore. What opener reduces pressure?",
+        "fr": "Vous feuilletez tous les deux des livres dans une librairie calme. Quelle accroche réduit la pression ?"
+      },
+      "options": {
+        "en": [
+          "\"You seem like a reader.\"",
+          "\"You look good with a book.\"",
+          "\"Can I have your contact?\"",
+          "\"Have you read anything good here lately?\""
+        ],
+        "fr": [
+          "« Tu as l’air de beaucoup lire. »",
+          "« Ça te va bien, un livre. »",
+          "« Je peux avoir tes coordonnées ? »",
+          "« Tu as lu quelque chose de bien ici, dernièrement ? »"
+        ]
+      },
+      "explanation": {
+        "en": "Situational shared experience starts conversation naturally.",
+        "fr": "Une expérience partagée sur le moment lance la conversation naturellement."
+      }
+    },
+    "e5eae06f-7a14-4c9f-ab68-d799aa9f603d": {
+      "question_text": {
+        "en": "She responds positively but says \"I have to get back to my friends in a second\". Your move?",
+        "fr": "Elle répond positivement, mais dit : « Je dois retourner voir mes amies dans une seconde. » Que fais-tu ?"
+      },
+      "options": {
+        "en": [
+          "Receptive response means continue despite time constraint mentioned",
+          "Make strong impression in limited time then let her go",
+          "Respect it: acknowledge then clean exit or quick contact exchange"
+        ],
+        "fr": [
+          "Une réponse ouverte veut dire : continue malgré la contrainte de temps",
+          "Faire forte impression en peu de temps, puis la laisser partir",
+          "Le respecter : en prendre acte, puis partir proprement ou échanger rapidement vos coordonnées"
+        ]
+      },
+      "explanation": {
+        "en": "Receptiveness does not remove time limits; keep momentum short or transition fast.",
+        "fr": "L’ouverture n’efface pas les limites de temps ; fais court ou passe vite à l’étape suivante."
+      }
+    },
+    "e6f7a034-55b9-4303-a1f2-e70269b09f81": {
+      "question_text": {
+        "en": "You see a woman with artistic tattoos. What opener creates engagement?",
+        "fr": "Tu vois une femme avec des tatouages artistiques. Quelle accroche l’implique ?"
+      },
+      "options": {
+        "en": [
+          "\"Hi, how are you doing tonight?\"",
+          "\"You look like someone who works in a creative field.\"",
+          "\"What do you do for work?\"",
+          "\"You look nice.\""
+        ],
+        "fr": [
+          "« Salut, ça va ce soir ? »",
+          "« Tu as l’air de travailler dans un domaine créatif. »",
+          "« Tu fais quoi dans la vie ? »",
+          "« Tu es jolie. »"
+        ]
+      },
+      "explanation": {
+        "en": "Specific assumptions require her to engage and respond personally.",
+        "fr": "Une supposition précise l’oblige à s’impliquer et à répondre personnellement."
+      }
+    },
+    "ea6aac0e-0b64-4be8-aa43-1990315262e0": {
+      "question_text": {
+        "en": "You say \"You're beautiful, I had to say hi\". She blushes, thanks you, but gives short answers.",
+        "fr": "Tu dis : « Tu es belle, il fallait que je te dise bonjour. » Elle rougit, te remercie, mais répond en quelques mots."
+      },
+      "options": {
+        "en": [
+          "Compliment her again to show continued interest",
+          "Tease her about being shy to build comfort",
+          "Exit gracefully—low reciprocity after direct opener signals no interest"
+        ],
+        "fr": [
+          "La complimenter encore pour montrer ton intérêt",
+          "La taquiner sur sa timidité pour la mettre à l’aise",
+          "Partir avec élégance : peu de réciprocité après une accroche directe veut dire pas d’intérêt"
+        ]
+      },
+      "explanation": {
+        "en": "Blush can be politeness. Short answers after direct opener means she's not interested.",
+        "fr": "Rougir peut être de la politesse. Des réponses courtes après une accroche directe veulent dire qu’elle n’est pas intéressée."
+      }
+    },
+    "ed852bcc-77f4-436a-9582-103cc2537be6": {
+      "question_text": {
+        "en": "You say \"I saw you and wanted to say hi\". She laughs, says hi, and asks what you do.",
+        "fr": "Tu dis : « Je t’ai vue et je voulais te dire bonjour. » Elle rit, te dit bonjour et te demande ce que tu fais dans la vie."
+      },
+      "options": {
+        "en": [
+          "She's just being polite in a social setting",
+          "She's reciprocating and open to continuing",
+          "She's surprised and buying time to assess"
+        ],
+        "fr": [
+          "Elle est juste polie dans un cadre social",
+          "Elle te renvoie la balle et elle est ouverte à la suite",
+          "Elle est surprise et gagne du temps pour évaluer"
+        ]
+      },
+      "explanation": {
+        "en": "Laugh and asking back signal reciprocity and genuine interest in continuing.",
+        "fr": "Son rire et ses questions en retour montrent de la réciprocité et une vraie envie de continuer."
+      }
+    },
+    "f0dd9eca-d510-4237-8ce4-290954082900": {
+      "question_text": {
+        "en": "What elements make a frame more interesting than her current activity?",
+        "fr": "Quels éléments rendent ton entrée en matière plus intéressante que ce qu’elle fait ?"
+      },
+      "options": {
+        "en": [
+          "Making playful assumptions that involve her immediately",
+          "Requesting her opinion on something she finds engaging",
+          "Being louder or more energetic than the environment around her"
+        ],
+        "fr": [
+          "Des suppositions joueuses qui l’impliquent tout de suite",
+          "Lui demander son avis sur quelque chose qui l’intéresse",
+          "Être plus fort ou plus énergique que ce qui l’entoure"
+        ]
+      },
+      "explanation": {
+        "en": "Engagement comes from involvement, not volume.",
+        "fr": "L’implication vient de la participation, pas du volume."
+      }
+    },
+    "f17c4317-4ac6-4db1-838b-c39a93c3de0f": {
+      "question_text": {
+        "en": "Bar. She’s friendly but you’re unsure of her interest. What’s the best next move?",
+        "fr": "Au bar. Elle est aimable, mais tu n’es pas sûr de son intérêt. Quelle est la meilleure chose à faire ?"
+      },
+      "options": {
+        "en": [
+          "Ask “Do you want to come get a drink?”",
+          "Make a bold physical escalation",
+          "Ask deeper questions to build connection",
+          "Wait silently to see if she re-engages"
+        ],
+        "fr": [
+          "Lui demander « Tu viens boire un verre ? »",
+          "Faire un geste physique audacieux",
+          "Poser des questions plus profondes pour créer du lien",
+          "Attendre en silence de voir si elle relance"
+        ]
+      },
+      "explanation": {
+        "en": "A simple invitation creates a clear opt-in or opt-out without forcing continuation.",
+        "fr": "Une invitation simple lui permet de dire clairement oui ou non, sans forcer la suite."
+      }
+    },
+    "f2b0e5af-f8e1-480b-aa9a-969dfa406d42": {
+      "question_text": {
+        "en": "She turns to you, smiles warmly, answers thoroughly, and fixes her hair while talking.",
+        "fr": "Elle se tourne vers toi, sourit chaleureusement, répond en détail et arrange ses cheveux en parlant."
+      },
+      "options": {
+        "en": [
+          "Highly receptive—turn, smile, thorough answers, hair touch all show interest",
+          "Polite—she's being friendly and the hair touch is coincidental",
+          "Nervous—she's anxious about the interaction, not necessarily interested"
+        ],
+        "fr": [
+          "Très ouverte : se tourner, sourire, répondre en détail et toucher ses cheveux montrent tous de l’intérêt",
+          "Politesse : elle est aimable, et le geste vers ses cheveux est une coïncidence",
+          "Nervosité : l’échange la stresse, sans qu’elle soit forcément intéressée"
+        ]
+      },
+      "explanation": {
+        "en": "Multiple positive cues together signal receptiveness; keep going.",
+        "fr": "Plusieurs signes positifs ensemble signalent l’ouverture ; continue."
+      }
+    },
+    "f2ebba26-20ab-4f42-bd4e-eda08aa656ef": {
+      "question_text": {
+        "en": "Why does opening with an apology weaken the interaction?",
+        "fr": "Pourquoi commencer par une excuse affaiblit-il l’échange ?"
+      },
+      "options": {
+        "en": [
+          "Poor timing",
+          "Weak attraction",
+          "You frame yourself as an interruption",
+          "She wasn’t single"
+        ],
+        "fr": [
+          "Un mauvais timing",
+          "Une attirance faible",
+          "Tu te présentes comme un dérangement",
+          "Elle n’était pas célibataire"
+        ]
+      },
+      "explanation": {
+        "en": "Apologizing frames you as an interruption; open as if you belong instead.",
+        "fr": "T’excuser fait de toi un dérangement ; engage plutôt la conversation comme si tu étais à ta place."
+      }
+    },
+    "fb2737de-57ac-46ae-bfd8-662497358e2a": {
+      "question_text": {
+        "en": "What makes mystery effective in frame building?",
+        "fr": "Qu’est-ce qui rend le mystère efficace dans une entrée en matière ?"
+      },
+      "options": {
+        "en": [
+          "She doesn't know what you'll say next, creating curiosity and attention",
+          "It prevents her from categorizing and dismissing you quickly",
+          "Women are naturally attracted to mysterious men"
+        ],
+        "fr": [
+          "Elle ne sait pas ce que tu vas dire ensuite, ce qui crée de la curiosité et de l’attention",
+          "Ça l’empêche de te ranger dans une case et de t’écarter vite",
+          "Les femmes sont naturellement attirées par les hommes mystérieux"
+        ]
+      },
+      "explanation": {
+        "en": "Mystery builds curiosity about what comes next, capturing attention.",
+        "fr": "Le mystère éveille la curiosité pour la suite, ce qui capte l’attention."
+      }
+    },
+    "fdbb58fb-2105-465e-9bb2-95117c0d4ee4": {
+      "question_text": {
+        "en": "She turns fully, smiles, but says \"I'm not really talking to people tonight\".",
+        "fr": "Elle se tourne entièrement vers toi, sourit, mais dit : « Je n’ai pas trop envie de parler aux gens ce soir. »"
+      },
+      "options": {
+        "en": [
+          "Polite rejection—despite positive body language, words show disinterest",
+          "Test—she's seeing if you'll persist past her objection",
+          "Mixed—body says yes, words say no; push past it gently"
+        ],
+        "fr": [
+          "Refus poli : malgré un langage corporel positif, ses mots montrent un désintérêt",
+          "Test : elle veut voir si tu vas passer outre son objection",
+          "Mitigé : son corps dit oui, ses mots disent non ; insiste en douceur"
+        ]
+      },
+      "explanation": {
+        "en": "Polite body language does not override a stated boundary; acknowledge it and exit.",
+        "fr": "Un langage corporel poli ne l’emporte pas sur une limite exprimée ; prends-en acte et pars."
+      }
+    },
+    "fdbdc05b-610e-4954-bace-34af89e1f619": {
+      "question_text": {
+        "en": "After a direct opener, she laughs briefly but immediately looks around the room.",
+        "fr": "Après une accroche directe, elle rit brièvement, mais regarde aussitôt autour d’elle."
+      },
+      "options": {
+        "en": [
+          "Increase energy to regain attention",
+          "Ask for her number before momentum fades",
+          "Let the interaction end naturally"
+        ],
+        "fr": [
+          "Monter en énergie pour récupérer son attention",
+          "Lui demander son numéro avant que l’élan retombe",
+          "Laisser l’échange se terminer naturellement"
+        ]
+      },
+      "explanation": {
+        "en": "Laughter may be courtesy; divided attention means it is time to disengage.",
+        "fr": "Le rire peut être de la politesse ; une attention partagée veut dire qu’il est temps de te retirer."
+      }
+    },
+    "ff750d3c-1bf6-4368-bb6c-04dc1b70a29b": {
+      "question_text": {
+        "en": "Why do time constraints work psychologically?",
+        "fr": "Pourquoi une limite de temps marche-t-elle sur le plan psychologique ?"
+      },
+      "options": {
+        "en": [
+          "Brain relaxes when moment doesn't feel like long commitment",
+          "Her guard lowers knowing she's not trapped in open-ended conversation",
+          "Creates scarcity that makes you seem more valuable"
+        ],
+        "fr": [
+          "Le cerveau se détend quand le moment ne ressemble pas à un long engagement",
+          "Elle baisse la garde en sachant qu’elle n’est pas coincée dans une conversation sans fin",
+          "Ça crée une rareté qui te donne plus de valeur"
+        ]
+      },
+      "explanation": {
+        "en": "Constraints remove fear of being stuck, which increases comfort.",
+        "fr": "Une limite enlève la peur d’être coincée, ce qui la met plus à l’aise."
+      }
     }
   }
 }
