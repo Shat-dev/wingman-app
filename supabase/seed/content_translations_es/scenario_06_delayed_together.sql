@@ -92,7 +92,7 @@ insert into public.scenario_screen_translations (screen_id, locale, text) values
   on conflict (screen_id, locale) do update set text = excluded.text;
 insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000291-0000-0000-0006-000000000291', 'es', 'Perdón, esto no es tan bueno como tus planes de verdad para esta noche.')
   on conflict (screen_id, locale) do update set text = excluded.text;
-insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000292-0000-0000-0006-000000000292', 'es', 'No te quedes en lo que se está perdiendo. Mantenlo ligero y mirando hacia adelante, no en plan de disculpa.')
+insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000292-0000-0000-0006-000000000292', 'es', 'No te quedes en lo que se está perdiendo. Mantenlo ligero y mirando hacia adelante, sin tono de disculpa.')
   on conflict (screen_id, locale) do update set text = excluded.text;
 insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000030-0000-0000-0006-000000000030', 'es', 'La comida del aeropuerto no le gana a una cena de compromiso, pero al menos estás en buena compañía.')
   on conflict (screen_id, locale) do update set text = excluded.text;

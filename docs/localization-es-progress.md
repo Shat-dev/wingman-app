@@ -4,7 +4,7 @@ Branch `localization-release-c-es` (from `localization-release-c`). Rules and gl
 
 ## Where it stands
 
-All 25 lesson courses are drafted (see Summary). All lessons, scenarios and quiz questions are drafted. Next: the checks and review pack, then the App Store listing.
+All 25 lesson courses are drafted (see Summary). All lessons, scenarios and quiz questions are drafted, and the text checks pass. Next: unit tests, the review pack, then the App Store listing.
 
 ## Summary
 
@@ -13,7 +13,7 @@ All 25 lesson courses are drafted (see Summary). All lessons, scenarios and quiz
 | UI catalogs | 585 of 585 strings drafted (setup session, 2026-11-15) |
 | Lesson overlays | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-15) |
 | Database content | **Done: 15 of 15 scenarios, 765 of 765 questions** (2026-11-15) |
-| Checks and review pack | Not started |
+| Checks and review pack | Text checks pass and word search done (2026-11-15); unit tests and review pack next |
 | App Store listing | Not started |
 
 Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14, 19, 24, then 4, 9, 15, 20, 25, then 5, 10, 16, 21, 11.
@@ -80,6 +80,7 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
 - **2026-11-15. Questions 650–686** (flirting_chemistry rows 115–151, module pool; 1,492 English words). `questions_04_flirting_chemistry_2` is complete, with 75 rows (German 75), so all 151 flirting_chemistry questions are done; the seed holds 686 and `--check` passes. The English fixes are carried over: `e91466f0…` ("Upper arm" → *La parte de arriba del brazo*), `f6feba7a…` (guiding through a crowd: *Un toque ligero en el brazo para guiarla*), `f23233f3…` (*cuando ella te lo devuelve*) and `a9af130c…`. Every touch question keeps its stop rule: `bd77420f…` *detén cualquier avance físico*, `f6cb6b9f…` *Darle más espacio*. "Breaking rapport" (`af902d35…`) became *romper la complicidad*, as in course 21. For the reviewer: "show me the way to your heart" became *¿Entonces me enseñas el camino a tu corazón?*; "That's arrogant haha" became *Qué creída, jaja*. No content flags.
 - **2026-11-15. Questions 687–726** (mastery_integration rows 1–40: lessons 22_1 to 25_4; 1,672 English words; 40 upserts, not run). This starts `questions_05_mastery_integration`, a single file for all 79 rows; the seed holds 726 and `--check` passes. Terms follow the course 22–25 overlays: "home court advantage" became *jugar de local*, "regular" *habitual*, "social proof" *prueba social*, "volume" / "reps" *cantidad de intentos* / *intentos*, "habituation" *habituación*, "automaticity" *automático*, "skill decay" *que tus habilidades se oxiden*, "experimental mindset" *mentalidad de experimentar*, "sticking point" *punto de estancamiento*, "growth plateau" *meseta en tu crecimiento*. For the reviewer: "vetted" became *respondieron por ti* / *aval social* (as course 23's *el lugar ya respondió por ti*); "weakest link" *el eslabón más débil*; "a bit of this and that—mostly creative stuff" *Un poco de todo, sobre todo cosas creativas*. No content flags.
 - **2026-11-15. Questions 727–765** (mastery_integration rows 41–79, module pool; 1,559 English words). `questions_05_mastery_integration` is complete, with 79 rows. **Database content is done:** a completeness check against German's files finds the same ids in every section of all 24 files (765 questions; every scenario's screens and options) and the same upsert count in every SQL file; the seed holds 765 and `--check` passes. The live DB check is still skipped (connector on Clera-App). For the reviewer: the five "style fits you best" questions (quiet, calm, intense, warm, funny) keep the options' contrast; "own gravity" became *magnetismo propio*; "hidden cost" *costo oculto* (Spain: *coste*); "Hobby clubs… running, cooking" *Clubes de pasatiempos… correr, cocinar*. No content flags.
+- **2026-11-15. Checks, part 1 (text).** `check_string_catalogs.py --languages de,es,fr --strict-lengths` passes (es: 406 + 179 strings, none fall back to English); `lesson_overlays.py check es` passes (1,531 of 1,531 items, 25 courses); `db_translations_sql.py es` regenerates 24 files with no changes and `question_translations_seed.py es --check` passes (765). Word search over all 6,997 Spanish strings (overlays and DB): no *vosotros* forms (no -áis/-éis verbs, no *os*), no *móvil*, *ordenador*, *guay* or anything with *coger*/*cojo*; the two *vale* hits are the verb *valer* (*vale la subida*, *cuánto vale*). Fixed 7 regional slips found by a wider search: *apurarse* ×3 in course 12 ("to fret" in Spain) → *precipitarse*; *en plan* (Spain-only) in course 25 and scenario 6 → *en un tono amistoso* / *sin tono de disculpa*; *Me veo fatal* in course 6 → *Me veo horrible*; *linda* in course 6 → *guapa* (matches quiz `4003461a…`). The Spanish UI catalogs have no hits either (only *vale más* and the Churchill quote's *fatal*, both correct). Kept on purpose: *celular*, *carro*, *manejar*, *departamento*, *trago*, *bolsa* (the brief's neutral Latin American choices); *súper* as an intensifier (*súper molesto*) is fine in both.
 
 ## For the setup session
 
