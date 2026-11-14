@@ -4,7 +4,7 @@ Branch `localization-release-c-fr` (from `localization-release-c`). Rules and gl
 
 ## Where it stands
 
-All 25 lesson courses are drafted (1,531 items, 34,442 English words); every overlay passes `lesson_overlays.py check fr`. Database content in progress: all 15 scenarios done; quiz questions 241 of 765. Checks, review pack and App Store listing not started.
+All 25 lesson courses are drafted (1,531 items, 34,442 English words); every overlay passes `lesson_overlays.py check fr`. Database content in progress: all 15 scenarios done; quiz questions 285 of 765. Checks, review pack and App Store listing not started.
 
 ## Summary
 
@@ -12,7 +12,7 @@ All 25 lesson courses are drafted (1,531 items, 34,442 English words); every ove
 |---|---|
 | UI catalogs | Done by the setup session (585 strings, draft) |
 | Lesson overlays | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-15) |
-| Database content | **15 of 15 scenarios** (796 text screens, 276 options); 241 of 765 quiz questions |
+| Database content | **15 of 15 scenarios** (796 text screens, 276 options); 285 of 765 quiz questions |
 | Checks and review pack | Not started |
 | App Store listing (France, notes for Canada) | Not started |
 
@@ -70,6 +70,7 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
 - **2026-11-15. Questions 110–153** (approach_mechanics rows 1–44: lessons 10_1 to 7_3 in text sort order, then course 6; about 1,900 words). Starts `questions_02_approach_mechanics_1` (rows 1–88). Terms follow the course 6, 7, 10 and 11 overlays: *accroche*, *accroche qui éveille la curiosité*, *accroche par supposition*, *limite de temps*, *fausse sortie*, *règle des trois secondes*. "Calibrated / calibration" became *savoir s'ajuster*. "Target" (the woman) is rephrased as *la femme qui t'intéresse*, as German did, since *cible* sounds objectifying. For the reviewer: `9e84223a…` has options that complete the sentence "… marche parce que :", so they start in lower case (as German).
 - **2026-11-15. Questions 154–197** (approach_mechanics rows 45–88: lessons 7_3 to 9_3, then 19 module-pool questions; about 1,900 words). `questions_02_approach_mechanics_1` is complete (88 rows); seed check passes with 197. Terms follow the course 8 and 9 overlays: *accroche indirecte / directe*, "frame control" *donner le ton*, the three signal types *ouverture / politesse / froideur*. For the reviewer: `08850c3a…` asks "Your move?" but its options are signal readings, so the French asks *Comment tu interprètes ça ?* (German did the same); `06c68907…` ("activating evaluation mode") is paraphrased as *où elle doit tout de suite se demander si tu lui plais*; `3401c3d2…` options complete the sentence, so they start in lower case; "nightclub / club" became *boîte*.
 - **2026-11-15. Questions 198–241** (approach_mechanics rows 89–132, module pool; about 2,000 words). Starts `questions_02_approach_mechanics_2` (rows 89–176); seed check passes with 241. Signal labels stay *Ouverture / Politesse / Froideur / Mitigé*. "Three feet" became *environ un mètre*. Several questions are scene descriptions with no question mark (`1b9394c8…`, `2d63f1fb…`, `3caf0039…`, `4fe08740…`, `5027deaf…`, `50916cec…`, `51944bdf…`); the French keeps them as statements, as the English does. "Close politely" became *termine poliment l'échange* (no *conclure*).
+- **2026-11-15. Questions 242–285** (approach_mechanics rows 133–176, module pool; about 2,000 words). `questions_02_approach_mechanics_2` is complete (88 rows); seed check passes with 285. "Between sets" became *entre deux séries*; "spot" (gym) became *t'assurer*; the opener examples are adapted to natural spoken French, not translated literally (*Il est pénible, ce retard. Tu sais combien de temps ça va durer ?*). `78cf663a…` uses plural *vous* (*Ça vous dérange si je me joins à vous ?*) because it addresses a group.
 
 ## Questions for Arthur
 
