@@ -4,7 +4,7 @@ Branch `localization-release-c-fr` (from `localization-release-c`). Rules and gl
 
 ## Where it stands
 
-All 25 lesson courses are drafted (1,531 items, 34,442 English words); every overlay passes `lesson_overlays.py check fr`. Database content in progress: all 15 scenarios done; quiz questions 495 of 765. Checks, review pack and App Store listing not started.
+All 25 lesson courses are drafted (1,531 items, 34,442 English words); every overlay passes `lesson_overlays.py check fr`. Database content in progress: all 15 scenarios done; quiz questions 535 of 765. Checks, review pack and App Store listing not started.
 
 ## Summary
 
@@ -12,7 +12,7 @@ All 25 lesson courses are drafted (1,531 items, 34,442 English words); every ove
 |---|---|
 | UI catalogs | Done by the setup session (585 strings, draft) |
 | Lesson overlays | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-15) |
-| Database content | **15 of 15 scenarios** (796 text screens, 276 options); 495 of 765 quiz questions |
+| Database content | **15 of 15 scenarios** (796 text screens, 276 options); 535 of 765 quiz questions |
 | Checks and review pack | Not started |
 | App Store listing (France, notes for Canada) | Not started |
 
@@ -76,6 +76,7 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
 - **2026-11-15. Questions 374–414** (conversational_skills rows 1–41: lessons 12_1 to 15_2; about 1,800 words). Starts `questions_03_conversational_skills_1` (rows 1–81, filled 41 then 40, as German); seed check passes with 414. Terms follow the course 12–15 overlays: *rebondir sur un fil*, *sous-texte*, *reconnaître / reconnaissance*, *rappel*, *élan*, *expérience digérée / non digérée*. "Ready for a close" became *le moment est venu de concrétiser*; "a bridge, not a conclusion" became *un pont, pas un point final*.
 - **2026-11-15. Questions 415–454** (conversational_skills rows 42–81: lessons 15_2 to 16_3, then 23 module-pool questions; about 1,800 words). `questions_03_conversational_skills_1` is complete (81 rows); seed check passes with 454. "Assumed close" became *proposer la suite comme une évidence*; "close" is *concrétiser* throughout. `1cdf68f6…` options complete the sentence "Une baisse d'énergie peut arriver parce que :", so they start in lower case (as German).
 - **2026-11-15. Questions 455–495** (conversational_skills rows 82–122, module pool; about 1,850 words). This starts `questions_03_conversational_skills_2` (41 of 81 rows); seed check passes with 495. `674acf71…` uses the fixed English ("It builds on itself, and she feels heard"), so no letter reference remains. `58d8c403…` is a duplicate of `4533a8d2…` in the English and is translated identically. Portland and Seattle stay, as in German's database file (German moved the sister to Hamburg only in the lesson). For the reviewer: "I practice law" became *Je suis avocate*; "lock something in" became *Il faut que j'obtienne quelque chose*; "processed sharing" stays *expérience digérée*; "caretaking" became *prendre soin de toi*. The three *vous* are plural ("you both", her and her sister).
+- **2026-11-15. Questions 496–535** (conversational_skills rows 123–162, module pool; about 1,700 words). `questions_03_conversational_skills_2` is complete (81 rows), so all 162 conversational_skills questions are done; seed check passes with 535. The three English fixes German logged are already in the source: `d45e9b83…` explanation ("she can still say no", kept as *elle peut toujours dire non*), `c9c21217…` (no letter reference) and `fc8e3792…` ("You've been through one yourself"). For the reviewer: "subtext" became *sous-texte*; "attunement" became *l'accord entre vous*; "checking in" became *lui laisser la parole*; "career change" became *reconversion*; "product design" became *design produit*; "ramen spot" became *resto de ramen*. All *vous* are plural (the two of you).
 
 ## Questions for Arthur
 
