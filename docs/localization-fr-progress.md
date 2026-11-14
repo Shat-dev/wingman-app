@@ -4,14 +4,14 @@ Branch `localization-release-c-fr` (from `localization-release-c`). Rules and gl
 
 ## Where it stands
 
-Lesson overlays in progress (23 of 25 courses). Database content, checks, review pack and App Store listing not started.
+Lesson overlays in progress (24 of 25 courses). Database content, checks, review pack and App Store listing not started.
 
 ## Summary
 
 | Part | State |
 |---|---|
 | UI catalogs | Done by the setup session (585 strings, draft) |
-| Lesson overlays | 23 of 25 courses, 1,382 of 1,531 items |
+| Lesson overlays | 24 of 25 courses, 1,433 of 1,531 items |
 | Database content | Not started (15 scenarios, 765 quiz questions) |
 | Checks and review pack | Not started |
 | App Store listing (France, notes for Canada) | Not started |
@@ -46,6 +46,7 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
 - **2026-11-15. Course 5, Non-negotiables** (4 lessons, 54 items, 1,302 English words). The check passes. The course covers fitness, grooming, hygiene and style, so the catalog title *Les incontournables* fits (German changed its guess; no change needed in French). For the reviewer: "grooming" became *entretien* / *prendre soin de son apparence*; "cologne" became *parfum*; "shredded" became *sec comme un athlète*; "underdressed" became *mal habillé*; "fit / frame" (clothes) became *coupe / morphologie*; "looks that already work" became *styles qui ont déjà fait leurs preuves* (avoiding *looks*). "Gym work, cardio" became *musculation, cardio* (*cardio* is normal French).
 - **2026-11-15. Course 10, Situational Specific Approaches** (3 lessons, 50 items, 1,249 English words). The check passes. For the reviewer: "Daytime / Nighttime Approaches" became *Aborder en journée / le soir*; "venue" became *lieu* / *bar* (not *Location*, which is German usage); "logistics" became *l'organisation de la suite*; "calibration" became *savoir s'ajuster*. The bad example in 10_1_3_1 (a tap on the shoulder from behind) is kept as the negative example it is. In 10_3 her friends are *amies* (female), as German did; the English "friends" could be a mixed group, so a reviewer may prefer *ses amis*. The group opener *Vous avez l'air de passer la meilleure soirée de tout le bar. On fête quoi ?* uses plural *vous*, which is correct for a group. "I'm…" became *Je m'appelle…* (no name is substituted).
 - **2026-11-15. Course 16, Advanced Conversation Skills** (3 lessons, 51 items, 1,133 English words). The check passes. For the reviewer: "energy drop" became *baisse d'énergie*; "reset" became *relancer*; "emotional anchoring" became *ancrage émotionnel*; "validation" became *reconnaissance* (glossary); "going back to school" became *reprendre des études*; "debt and credentials" became *le coût des études et la valeur des diplômes* (student debt is far less of a theme in France, as German noted for Germany); "roommate" became *colocataire*. The reset line "Mine tastes kind of funky" became *Le mien a un goût un peu bizarre*.
+- **2026-11-15. Course 21, Advanced Flirting Skills** (3 lessons, 51 items, 1,183 English words). The check passes. For the reviewer: "Disqualification Techniques" is a pickup-artist term with no neutral French; rewritten by meaning, as German did: *Ne pas être impressionné d'emblée* (title and running text). "Sexual tension" is *tension sexuelle* where the English says so; the title became *Flirter en créant de la tension*. **21_2_6_1 keeps every condition of the English:** a longer touch only *si elle apprécie clairement le moment*, closer only *tant qu'elle reste détendue, et arrête-toi si elle recule*. "Callbacks & Inside Jokes" became *Rappels et blagues entre vous*. The birds became *pigeons* (more natural in a French street) and the callback line *Attention, danger droit devant.*; "footpath" became *trottoir*. "Buy me a drink / Only if you're getting the next round" became *Offre-moi un verre. / Seulement si tu paies la prochaine tournée.*
 
 ## Questions for Arthur
 
