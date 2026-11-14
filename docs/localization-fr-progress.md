@@ -4,14 +4,14 @@ Branch `localization-release-c-fr` (from `localization-release-c`). Rules and gl
 
 ## Where it stands
 
-Lesson overlays in progress (16 of 25 courses). Database content, checks, review pack and App Store listing not started.
+Lesson overlays in progress (17 of 25 courses). Database content, checks, review pack and App Store listing not started.
 
 ## Summary
 
 | Part | State |
 |---|---|
 | UI catalogs | Done by the setup session (585 strings, draft) |
-| Lesson overlays | 16 of 25 courses, 991 of 1,531 items |
+| Lesson overlays | 17 of 25 courses, 1,030 of 1,531 items |
 | Database content | Not started (15 scenarios, 765 quiz questions) |
 | Checks and review pack | Not started |
 | App Store listing (France, notes for Canada) | Not started |
@@ -39,6 +39,7 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
 - **2026-11-15. Course 19, Compliments & Verbal Chemistry** (3 lessons, 46 items, 1,020 English words). The check passes. For the reviewer: "Being Nice Is Not Desire" became *Être gentil, ce n'est pas du désir*; "flirtatious / flirty" is always *charmeur* (German had alternated; French is consistent with the catalog); "compliments that land" became *des compliments qui font mouche*; "charged" became *se charger d'électricité*; "made it click" became *ça m'a fait tilt*. Also replaced the anglicism "rush du matin" with *l'affluence du matin*, here and in course 8 (8_1_4_1).
 - **2026-11-15. Course 24, Mastery & Identity** (3 lessons, 51 items, 1,077 English words). The check passes. For the reviewer: "volume" became *quantité* (*La quantité crée l'habitude*); "reps" became *tentatives*; "habituation" became *habituation*; "automaticity" became *automatisation*; "approach anxiety" became *l'appréhension avant d'aborder*; "skill decay" became *l'oubli des compétences*. The four learning stages use the usual French terms (*incompétence inconsciente* … *compétence inconsciente*). "You're just flowing" became *Tu te laisses porter*.
 - **2026-11-15. Course 4, Inner Stability** (4 lessons, 74 items, 1,572 English words). The check passes. For the reviewer: "approval-seeking" became *chercher l'approbation*; "outcome independence" became *ne pas dépendre du résultat* (lesson title too), consistent with course 17; "highlight reel vs behind-the-scenes" became *ses meilleurs moments … tes coulisses*; "scarcity mindset" became *mentalité de pénurie*; "hold their own frame" became *gardent leur cap*; "desperation repels" became *le désespoir fait fuir*; "staying level" became *rester stable*. Her friends in 4_3 are *amies* (female), as the scene implies.
+- **2026-11-15. Course 9, Reading & Responding** (3 lessons, 39 items, 855 English words). The check passes. For the reviewer: the three signal types became *ouverte / polie / froide* (*signaux d'ouverture / de politesse / de froideur* in the 9_3 guide); "seeing someone" became *elle voit quelqu'un*; the exit line "Nice talking to you" became *Ravi d'avoir discuté avec toi. Bonne fin de journée.*; "escalate" became *aller plus loin* (no physical meaning); "overstay your welcome" became *t'attarder plus que de raison*. The 9_3 lists use semicolons between items (French list style).
 
 ## Questions for Arthur
 
