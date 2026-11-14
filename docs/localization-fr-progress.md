@@ -4,14 +4,14 @@ Branch `localization-release-c-fr` (from `localization-release-c`). Rules and gl
 
 ## Where it stands
 
-Lesson overlays in progress (14 of 25 courses). Database content, checks, review pack and App Store listing not started.
+Lesson overlays in progress (15 of 25 courses). Database content, checks, review pack and App Store listing not started.
 
 ## Summary
 
 | Part | State |
 |---|---|
 | UI catalogs | Done by the setup session (585 strings, draft) |
-| Lesson overlays | 14 of 25 courses, 866 of 1,531 items |
+| Lesson overlays | 15 of 25 courses, 917 of 1,531 items |
 | Database content | Not started (15 scenarios, 765 quiz questions) |
 | Checks and review pack | Not started |
 | App Store listing (France, notes for Canada) | Not started |
@@ -37,6 +37,7 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
 - **2026-11-15. Course 8, The Opener** (4 lessons, 62 items, 1,444 English words). The check passes. For the reviewer: "indirect / direct (intent) openers" became *accroches indirectes / directes*; "frame control" became *donner le ton* (lesson title); "frame" is *posture* for the man's stance but **cadre** where the English means how the interaction is framed (*Elle a accepté ce cadre*; also *le cadre est déjà posé* in 6_3), since *posture* doesn't fit there. "Voice mechanics" became simply *Ta voix* (German did the same). "Rapport-building pretence" became *tout le cinéma censé créer de la complicité*. The example openers are rewritten as natural spoken French (*La queue est interminable aujourd'hui. C'est toujours comme ça ?*; *Il est bien, ce livre ?*). "Clubs" became *boîtes*.
 - **2026-11-15. Course 14, Sharing & Vulnerability** (4 lessons, 62 items, 1,432 English words). The check passes. For the reviewer: "reciprocity rhythm" became *le rythme de la réciprocité*; "processed / unprocessed sharing" became *partager une expérience digérée / non digérée*; "Share the lesson, not the wound" became *Partage la leçon, pas la blessure*; "matching" became *s'accorder*; "calibration followed by escalation" became *On s'ajuste d'abord, on va plus loin ensuite* (avoiding *escalade*); "oversharing" became *confidences de trop*; "rapport" became *complicité*. "High school" became *le lycée*.
 - **2026-11-15. Course 19, Compliments & Verbal Chemistry** (3 lessons, 46 items, 1,020 English words). The check passes. For the reviewer: "Being Nice Is Not Desire" became *Être gentil, ce n'est pas du désir*; "flirtatious / flirty" is always *charmeur* (German had alternated; French is consistent with the catalog); "compliments that land" became *des compliments qui font mouche*; "charged" became *se charger d'électricité*; "made it click" became *ça m'a fait tilt*. Also replaced the anglicism "rush du matin" with *l'affluence du matin*, here and in course 8 (8_1_4_1).
+- **2026-11-15. Course 24, Mastery & Identity** (3 lessons, 51 items, 1,077 English words). The check passes. For the reviewer: "volume" became *quantité* (*La quantité crée l'habitude*); "reps" became *tentatives*; "habituation" became *habituation*; "automaticity" became *automatisation*; "approach anxiety" became *l'appréhension avant d'aborder*; "skill decay" became *l'oubli des compétences*. The four learning stages use the usual French terms (*incompétence inconsciente* … *compétence inconsciente*). "You're just flowing" became *Tu te laisses porter*.
 
 ## Questions for Arthur
 
