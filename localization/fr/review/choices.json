@@ -1,5 +1,5 @@
 {
-  "_about": "Per-language settings for scripts/review_pack.py: the 'Choices to check' rows, the 'How to fill it in' rules, and the example row on the Read me sheet. Seeded by the Release C setup session with the interface choices; the French session adds the lesson and database choices.",
+  "_about": "Per-language settings for scripts/review_pack.py: the 'Choices to check' rows, the 'How to fill it in' rules, and the example row on the Read me sheet. Seeded by the Release C setup session with the interface choices; the French session added the lesson and database choices (2026-11-15).",
   "language": "French",
   "choices": [
     {
@@ -73,6 +73,90 @@
       "what": "Subscription = abonnement (Gérer les abonnements); footer links CGU and Confidentialité; full names Conditions d’utilisation and Politique de confidentialité. The pages themselves stay English for now.",
       "where": "Paywall, sign-in",
       "question": "OK? French consumer law expects clear price and renewal terms; flag anything ambiguous."
+    },
+    {
+      "topic": "Consent addition (25_4_5_2)",
+      "what": "Lesson 25_4 says to try \"earlier escalation\" with no condition in English. The French adds quand elle te le rend, to match the touch rule used everywhere else (17_3, 20_4, 21_2).",
+      "where": "Lesson 25_4",
+      "question": "Arthur decides: keep the added condition, or add it to the English too?"
+    },
+    {
+      "topic": "allez, tant pis",
+      "what": "\"screw it\" became allez, tant pis (course 2). German chose the coarser Scheiß drauf; et merde would match the English register.",
+      "where": "Lessons",
+      "question": "Too soft? Keep, or use et merde?"
+    },
+    {
+      "topic": "Concrétiser in lessons and quizzes",
+      "what": "\"Close\" is concrétiser everywhere; \"assumed close\" became proposer la suite comme une évidence. conclure / conclusion never mean closing (only \"en a conclu\" = concluded).",
+      "where": "Lessons 15, quizzes",
+      "question": "Reads naturally in quiz answers?"
+    },
+    {
+      "topic": "Ne pas être impressionné d'emblée",
+      "what": "\"Disqualification\" (a pickup-artist term) is rewritten by meaning: ne pas être impressionné d'emblée. \"Callback / inside joke\" = rappel / blague entre vous.",
+      "where": "Lessons 21, quizzes",
+      "question": "Natural?"
+    },
+    {
+      "topic": "posture vs cadre",
+      "what": "\"Frame\" is posture for the man's stance, but cadre where it means how the interaction is framed (Elle a accepté ce cadre).",
+      "where": "Lessons 6, 8",
+      "question": "Consistent enough?"
+    },
+    {
+      "topic": "Reconnaître, not valider",
+      "what": "\"Validation\" is reconnaître / la reconnaissance (valider avoided); \"attunement\" = être en phase / l'accord entre vous; \"subtext\" = sous-texte.",
+      "where": "Lessons 13, 16, quizzes",
+      "question": "Natural?"
+    },
+    {
+      "topic": "taquinerie, répartie, culot",
+      "what": "teasing = taquinerie (charrier in casual lines), banter = répartie, cheekiness = culot / culotté, light challenge = petit défi, mirroring = mimétisme.",
+      "where": "Lessons 18–21, quizzes",
+      "question": "Any that sound translated?"
+    },
+    {
+      "topic": "Volume and reps",
+      "what": "No French noun fits \"volume\": lessons use quantité / faire beaucoup d'approches, quizzes multiplier les approches; reps = tentatives (lessons) / répétitions (quizzes).",
+      "where": "Lessons 6, 23, 24; quizzes",
+      "question": "Pick one rendering for reps?"
+    },
+    {
+      "topic": "French places and units",
+      "what": "Distances are metric (45 cm, un mètre); the sister lives in Bordeaux in the lesson; streets have no numbers (la brasserie au coin de la rue). Quiz questions keep Portland / Seattle, as German's database did.",
+      "where": "Lessons, scenarios, quizzes",
+      "question": "Localise the quiz cities too?"
+    },
+    {
+      "topic": "Women's names",
+      "what": "Scenario names are stored once and unchanged (Amber, Mel, Sara, Emily, Claire, Zoe, Natalie, Aurelie…). Aurelie would be spelled Aurélie in French.",
+      "where": "Scenarios",
+      "question": "Arthur decides whether names can change (shared across languages)."
+    },
+    {
+      "topic": "amies vs amis",
+      "what": "Her friends are amies (female) in lessons 4_3 and 10_3 and in scenario 12; the English \"friends\" could be a mixed group.",
+      "where": "Lessons 4, 10; scenario 12",
+      "question": "Keep amies, or ses amis?"
+    },
+    {
+      "topic": "Scenario titles",
+      "what": "Puns adapted: Le dernier étirement (Final Stretch), Retardés ensemble, Au bord de l'eau (Catch the Drift), Photo souvenir, La dernière boîte d'œufs, Surcharge progressive, Sur le sentier, Soirée networking, Le vin de la maison, Question de style, Révisions à deux.",
+      "where": "Scenarios",
+      "question": "Do they work as titles?"
+    },
+    {
+      "topic": "Strong research claims",
+      "what": "Course 3 keeps the English's strong claims (\"neurologically impossible…\", dopamine and serotonin) as German did.",
+      "where": "Lesson 3",
+      "question": "Soften in all languages?"
+    },
+    {
+      "topic": "Anglicisms kept",
+      "what": "Kept as normal French: flirt / flirter, week-end, barista, networking, road trip, stand-up, selfie, GPS, cool (in spoken lines only). timing was replaced by moment.",
+      "where": "Whole content",
+      "question": "Any that should go?"
     }
   ],
   "rules": [
