@@ -4,7 +4,7 @@ Branch `localization-release-c-fr` (from `localization-release-c`). Rules and gl
 
 ## Where it stands
 
-All 25 lesson courses are drafted (1,531 items, 34,442 English words); every overlay passes `lesson_overlays.py check fr`. Database content in progress: 4 of 15 scenarios. Checks, review pack and App Store listing not started.
+All 25 lesson courses are drafted (1,531 items, 34,442 English words); every overlay passes `lesson_overlays.py check fr`. Database content in progress: 5 of 15 scenarios. Checks, review pack and App Store listing not started.
 
 ## Summary
 
@@ -12,7 +12,7 @@ All 25 lesson courses are drafted (1,531 items, 34,442 English words); every ove
 |---|---|
 | UI catalogs | Done by the setup session (585 strings, draft) |
 | Lesson overlays | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-15) |
-| Database content | 4 of 15 scenarios; 0 of 765 quiz questions |
+| Database content | 5 of 15 scenarios; 0 of 765 quiz questions |
 | Checks and review pack | Not started |
 | App Store listing (France, notes for Canada) | Not started |
 
@@ -53,6 +53,7 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
 - **2026-11-15. Scenario 2, Coffee Connections** (51 text screens, 18 options, about 510 words; 70 upserts, not run). For the reviewer: the title became *Café et pluie* (the English pun has no French equivalent; German did the same); "Hey good looking, let me sit here." became *Salut, beauté, je m'assois là.* (deliberately the wrong option); "Is anyone sitting here?" became *C'est libre ici ?*, so the reply "No go for it" became *Oui, vas-y, installe-toi*, the natural answer to that question (German made the same switch). "I'll pick you up at 8" became *à 20 h*. "Tech start up" became *start-up de la tech*. Lauren's name is unchanged.
 - **2026-11-15. Scenario 3, Fetch & Flirt** (44 text screens, 14 options, about 420 words; 59 upserts, not run). For the reviewer: the title became *Chiens et flirt*; her dog is female (*chienne*, as the English *She's normally shy* implies), so "made a new friend" became *s'est fait une nouvelle copine* (German: *eine neue Freundin*); the deliberately suggestive wrong option stays suggestive (*On devrait refaire ce que font nos chiens, plus tard*); "fountain" became *fontaine*; "frame control" became *donner le ton*. Naomi's name is unchanged. **Option style fixed across scenarios 1–3:** options are infinitives addressed to the reader, so reflexives use *te* (*Te tourner vers elle et te présenter*, *Te mettre à côté d'elle*, *T'asseoir en silence*), matching *ton chien* / *tes plans*.
 - **2026-11-15. Scenario 4, Read Between Lines** (51 text screens, 20 options, about 540 words; 74 upserts, not run). For the reviewer: the title became *Entre les lignes*; "rom coms" became *romans à l'eau de rose*, since it's a bookstore (German: *Liebesromane*); "mystery / detective stories" became *polars*; "magic fiction" became *roman de fantasy*; "blurb" became *quatrième de couverture*; "expert advice" became *un avis d'experte* (she's the expert). The English line "I have to tell you how my sister finds your recommendation" is translated by its intended meaning: *il faudra que je te dise ce que ma sœur a pensé de ton conseil*. Genre options use a spaced slash (*Aventure / fantasy*). Katie's name is unchanged.
+- **2026-11-15. Scenario 5, Final Stretch** (55 text screens, 17 options, about 590 words; 74 upserts, not run). For the reviewer: the title became *Le dernier étirement*, keeping the yoga pun (German: *Die letzte Dehnung*); "warrior pose" became *posture du guerrier*; "Tuesday regulars" became *des habitués du mardi*; "Victim-blaming tone" became *Ça sonne comme si c'était de sa faute*; "lockdown" became *confinement*; "parking lot" became *parking*. Amber's name is unchanged.
 
 ## Questions for Arthur
 
