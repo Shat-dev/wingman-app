@@ -1,0 +1,968 @@
+{
+  "questions": {
+    "d2027ed3-7670-4963-9212-4e48cccf8097": {
+      "question_text": {
+        "en": "What happens when you build on threads instead of jumping to new questions?",
+        "fr": "Que se passe-t-il quand tu rebondis sur les fils au lieu de sauter à de nouvelles questions ?"
+      },
+      "options": {
+        "en": [
+          "Conversation feels more natural and less like an interview",
+          "She feels heard because you're engaging with what she shared",
+          "Both of the above"
+        ],
+        "fr": [
+          "La conversation paraît plus naturelle et moins comme un entretien",
+          "Elle se sent écoutée parce que tu t’intéresses à ce qu’elle a partagé",
+          "Les deux réponses ci-dessus"
+        ]
+      },
+      "explanation": {
+        "en": "Threading signals presence and attention; use her last detail as your next step.",
+        "fr": "Rebondir sur les fils montre ta présence et ton attention ; fais du dernier détail qu’elle a donné ta prochaine étape."
+      }
+    },
+    "999bda2b-2b88-4a84-bd9c-d736ccb07089": {
+      "question_text": {
+        "en": "She says \"I work in marketing.\" Which response demonstrates threading?",
+        "fr": "Elle dit : « Je travaille dans le marketing. » Quelle réponse rebondit sur un fil ?"
+      },
+      "options": {
+        "en": [
+          "\"That's cool. Where are you from originally?\"",
+          "\"I have a friend in marketing too. Small world\"",
+          "\"Oh nice. I work in finance\"",
+          "\"Marketing's interesting. What kind? - social media, brand, analytics?\""
+        ],
+        "fr": [
+          "« Cool. Tu viens d’où, à l’origine ? »",
+          "« J’ai un ami dans le marketing aussi. Le monde est petit. »",
+          "« Ah, sympa. Moi, je suis dans la finance. »",
+          "« Le marketing, c’est intéressant. Quel genre : réseaux sociaux, marque, analyse de données ? »"
+        ]
+      },
+      "explanation": {
+        "en": "Threading means exploring her topic further; ask specifics about what she mentioned.",
+        "fr": "Rebondir sur un fil, c’est creuser son sujet ; pose des questions précises sur ce qu’elle a mentionné."
+      }
+    },
+    "2923827f-429f-4dd6-ac88-436a5a9dbbc6": {
+      "question_text": {
+        "en": "How should you choose which thread to follow?",
+        "fr": "Comment choisir le fil à suivre ?"
+      },
+      "options": {
+        "en": [
+          "Pick one detail that interests you",
+          "Use a pre-prepared question list",
+          "Build on something specific she shared"
+        ],
+        "fr": [
+          "Choisir un détail qui t’intéresse",
+          "Utiliser une liste de questions préparée",
+          "Rebondir sur quelque chose de précis qu’elle a partagé"
+        ]
+      },
+      "explanation": {
+        "en": "Any detail she offers can move things forward; pick the one that sparks curiosity for you.",
+        "fr": "N’importe quel détail qu’elle donne peut faire avancer les choses ; choisis celui qui éveille ta curiosité."
+      }
+    },
+    "29feaa96-2d35-4ba5-9ebd-71eb7f487487": {
+      "question_text": {
+        "en": "Why can relying only on questions make a conversation feel tense?",
+        "fr": "Pourquoi ne faire que poser des questions peut-il rendre une conversation tendue ?"
+      },
+      "options": {
+        "en": [
+          "Questions slow the conversation",
+          "Questions shift responsibility onto her repeatedly",
+          "Questions sound rehearsed",
+          "Questions reduce attraction"
+        ],
+        "fr": [
+          "Les questions ralentissent la conversation",
+          "Les questions lui renvoient sans cesse la responsabilité",
+          "Les questions paraissent récitées",
+          "Les questions réduisent l’attirance"
+        ]
+      },
+      "explanation": {
+        "en": "Too many questions create an extractive dynamic where she carries the conversation.",
+        "fr": "Trop de questions créent une dynamique où tu ne fais que prendre, et c’est elle qui porte la conversation."
+      }
+    },
+    "52edb21f-05cb-41ea-a94c-5ec38eca6a8d": {
+      "question_text": {
+        "en": "What do statements and observations accomplish that questions don't?",
+        "fr": "Qu’apportent les affirmations et les observations que les questions n’apportent pas ?"
+      },
+      "options": {
+        "en": [
+          "They demonstrate confidence by sharing your perspective",
+          "They show you're interesting enough to share thoughts",
+          "They create openings for response without demanding answers"
+        ],
+        "fr": [
+          "Elles montrent ton assurance en partageant ton point de vue",
+          "Elles montrent que tu es assez intéressant pour partager tes idées",
+          "Elles ouvrent des portes pour répondre, sans exiger de réponse"
+        ]
+      },
+      "explanation": {
+        "en": "Observations give her something to respond to without the burden of answering.",
+        "fr": "Les observations lui donnent quelque chose à quoi réagir, sans le poids d’une question."
+      }
+    },
+    "89a9c6b7-ea88-49ca-a0b1-19c9f94287cd": {
+      "question_text": {
+        "en": "Which responses are observations or statements rather than extractions?",
+        "fr": "Quelles réponses sont des observations ou des affirmations plutôt que des demandes d’information ?"
+      },
+      "options": {
+        "en": [
+          "\"You look like you needed that drink.\"",
+          "\"That sounds exhausting.\"",
+          "\"Do you usually work late?\"",
+          "\"This place gets hectic on weekends.\""
+        ],
+        "fr": [
+          "« On dirait que tu avais besoin de ce verre. »",
+          "« Ça a l’air épuisant. »",
+          "« Tu travailles souvent tard ? »",
+          "« Ici, c’est la folie le week-end. »"
+        ]
+      },
+      "explanation": {
+        "en": "These contribute context or perspective instead of requesting more information.",
+        "fr": "Celles-ci apportent du contexte ou un point de vue au lieu de demander plus d’informations."
+      }
+    },
+    "a8dcf867-454f-44e9-b824-f823389b43f0": {
+      "question_text": {
+        "en": "What best defines healthy conversational momentum?",
+        "fr": "Qu’est-ce qui définit le mieux un bon élan dans une conversation ?"
+      },
+      "options": {
+        "en": [
+          "Talking confidently without pauses",
+          "Letting her lead entirely",
+          "Filling silence as quickly as possible",
+          "A steady back-and-forth where both contribute"
+        ],
+        "fr": [
+          "Parler avec assurance, sans pause",
+          "La laisser tout mener",
+          "Combler le silence le plus vite possible",
+          "Un va-et-vient régulier où chacun apporte sa part"
+        ]
+      },
+      "explanation": {
+        "en": "Momentum comes from shared contribution, not constant talking or complete passivity.",
+        "fr": "L’élan vient d’une participation partagée, pas d’un flot de paroles ni d’une passivité totale."
+      }
+    },
+    "3b838c1a-69b1-4328-9785-cd16d57ae3b6": {
+      "question_text": {
+        "en": "She mentions a recent trip. You’ve been there too. How could you respond?",
+        "fr": "Elle parle d’un voyage récent. Tu es allé au même endroit. Comment pourrais-tu répondre ?"
+      },
+      "options": {
+        "en": [
+          "Tell her everything you did on your trip",
+          "Say “Yeah, I’ve been there” and stop",
+          "Share one sentence, then invite her to expand"
+        ],
+        "fr": [
+          "Lui raconter tout ce que tu as fait pendant ton voyage",
+          "Dire « Ouais, j’y suis allé » et t’arrêter là",
+          "Partager une phrase, puis l’inviter à développer"
+        ]
+      },
+      "explanation": {
+        "en": "Brief contribution followed by space keeps momentum shared.",
+        "fr": "Une courte contribution suivie d’un espace pour elle garde un élan partagé."
+      }
+    },
+    "2760f510-bd8b-4ac3-bab9-6e67951fb689": {
+      "question_text": {
+        "en": "Why does dominating the conversation reduce her investment?",
+        "fr": "Pourquoi monopoliser la conversation réduit-il son envie de s’investir ?"
+      },
+      "options": {
+        "en": [
+          "It prevents her from contributing",
+          "It creates a one-sided monologue",
+          "It shows you are actively listening"
+        ],
+        "fr": [
+          "Ça l’empêche d’apporter sa part",
+          "Ça crée un monologue à sens unique",
+          "Ça montre que tu écoutes activement"
+        ]
+      },
+      "explanation": {
+        "en": "Dominating removes space for her, breaking balanced momentum.",
+        "fr": "Monopoliser la parole lui enlève toute place et casse l’équilibre de l’élan."
+      }
+    },
+    "6e149fa3-93c4-42b2-9c8e-f7f88712cc49": {
+      "question_text": {
+        "en": "She finishes explaining a difficult decision and looks at you. What’s the best response?",
+        "fr": "Elle finit de t’expliquer une décision difficile et te regarde. Quelle est la meilleure réponse ?"
+      },
+      "options": {
+        "en": [
+          "Immediately reassure her",
+          "Offer advice right away",
+          "Pause briefly, maintain eye contact, then respond",
+          "Change the topic to lighten the mood"
+        ],
+        "fr": [
+          "La rassurer tout de suite",
+          "Lui donner un conseil immédiatement",
+          "Marquer une courte pause, soutenir son regard, puis répondre",
+          "Changer de sujet pour alléger l’ambiance"
+        ]
+      },
+      "explanation": {
+        "en": "A brief pause shows you’re processing her words and invites depth.",
+        "fr": "Une courte pause montre que tu assimiles ce qu’elle dit et l’invite à aller plus loin."
+      }
+    },
+    "f100da89-837b-4ce4-89f0-13a05418c184": {
+      "question_text": {
+        "en": "You ask a thoughtful question. She thinks before answering. What should you do?",
+        "fr": "Tu poses une question réfléchie. Elle prend le temps de réfléchir avant de répondre. Que fais-tu ?"
+      },
+      "options": {
+        "en": [
+          "Jump in to help her",
+          "Rephrase the question",
+          "Add another question",
+          "Hold the space and let her think"
+        ],
+        "fr": [
+          "Intervenir pour l’aider",
+          "Reformuler la question",
+          "Ajouter une autre question",
+          "Laisser le silence et la laisser réfléchir"
+        ]
+      },
+      "explanation": {
+        "en": "Letting her think without pressure shows patience and confidence.",
+        "fr": "La laisser réfléchir sans pression montre ta patience et ton assurance."
+      }
+    },
+    "af284377-c4c0-42ca-a6f4-112ce777e549": {
+      "question_text": {
+        "en": "When is silence most effective in conversation?",
+        "fr": "Quand le silence est-il le plus efficace dans une conversation ?"
+      },
+      "options": {
+        "en": [
+          "After she shares something personal",
+          "When you don’t know what to say",
+          "Right before making a considered statement",
+          "To avoid contributing altogether"
+        ],
+        "fr": [
+          "Après qu’elle a partagé quelque chose de personnel",
+          "Quand tu ne sais pas quoi dire",
+          "Juste avant une affirmation réfléchie",
+          "Pour éviter complètement d’apporter ta part"
+        ]
+      },
+      "explanation": {
+        "en": "Silence works when it allows reflection or adds weight, not when it replaces engagement.",
+        "fr": "Le silence marche quand il laisse place à la réflexion ou donne du poids, pas quand il remplace l’échange."
+      }
+    },
+    "5d75efc2-36fb-47a3-9f27-cb0833551415": {
+      "question_text": {
+        "en": "What is subtext in conversation?",
+        "fr": "Qu’est-ce que le sous-texte dans une conversation ?"
+      },
+      "options": {
+        "en": [
+          "The exact words spoken",
+          "The emotional meaning behind the words",
+          "The volume of her voice only",
+          "The length of her sentences"
+        ],
+        "fr": [
+          "Les mots exacts prononcés",
+          "Le sens émotionnel derrière les mots",
+          "Seulement le volume de sa voix",
+          "La longueur de ses phrases"
+        ]
+      },
+      "explanation": {
+        "en": "Subtext is the gap between stated words and underlying feeling. Respond to this.",
+        "fr": "Le sous-texte, c’est l’écart entre les mots dits et le ressenti derrière. Réponds à ça."
+      }
+    },
+    "9fe24bb8-edce-4a11-ac05-37dcfca6822d": {
+      "question_text": {
+        "en": "She says, “I just moved here,” in a quiet, uncertain tone. What is a thoughtful response?",
+        "fr": "Elle dit « Je viens d’emménager ici » d’un ton doux et hésitant. Quelle est une réponse attentive ?"
+      },
+      "options": {
+        "en": [
+          "\"Where did you move from?\"",
+          "\"Do you like it so far?\"",
+          "\"That can be a lot. How’s the adjustment been?\"",
+          "\"What do you do for work?\""
+        ],
+        "fr": [
+          "« Tu viens d’où ? »",
+          "« Ça te plaît pour l’instant ? »",
+          "« Ça fait beaucoup de changements. Comment se passe la transition ? »",
+          "« Tu fais quoi dans la vie ? »"
+        ]
+      },
+      "explanation": {
+        "en": "This response acknowledges the emotional layer implied by her tone.",
+        "fr": "Cette réponse reconnaît la dimension émotionnelle que son ton laisse entendre."
+      }
+    },
+    "4434c17e-e1bd-4981-8ea6-566ffaae5de4": {
+      "question_text": {
+        "en": "Which mistakes prevent you from hearing subtext?",
+        "fr": "Quelles erreurs t’empêchent d’entendre le sous-texte ?"
+      },
+      "options": {
+        "en": [
+          "Listening for keywords only",
+          "Planning your next question",
+          "Paying attention to tone and pacing"
+        ],
+        "fr": [
+          "N’écouter que les mots-clés",
+          "Préparer ta question suivante",
+          "Faire attention au ton et au rythme"
+        ]
+      },
+      "explanation": {
+        "en": "Subtext is missed when attention is on extraction rather than presence. Be present.",
+        "fr": "On rate le sous-texte quand on cherche à soutirer des informations au lieu d’être présent. Sois présent."
+      }
+    },
+    "69b81da3-8a21-43e7-9c1f-52aedcb7f44f": {
+      "question_text": {
+        "en": "What does it mean to listen to understand?",
+        "fr": "Que veut dire écouter pour comprendre ?"
+      },
+      "options": {
+        "en": [
+          "Waiting politely until it is your turn to speak",
+          "Preparing a thoughtful reply while she talks",
+          "Agreeing with whatever she says",
+          "Being fully present with what she is communicating"
+        ],
+        "fr": [
+          "Attendre poliment ton tour de parler",
+          "Préparer une réponse réfléchie pendant qu’elle parle",
+          "Approuver tout ce qu’elle dit",
+          "Être pleinement présent à ce qu’elle exprime"
+        ]
+      },
+      "explanation": {
+        "en": "Listening to understand means prioritising comprehension over preparation.",
+        "fr": "Écouter pour comprendre, c’est faire passer la compréhension avant la préparation de ta réponse."
+      }
+    },
+    "94878e49-fd86-4e6f-8398-cdb055f272a3": {
+      "question_text": {
+        "en": "Why does planning your response while she is speaking reduce connection?",
+        "fr": "Pourquoi préparer ta réponse pendant qu’elle parle réduit-il le lien ?"
+      },
+      "options": {
+        "en": [
+          "It slows the conversation",
+          "It makes you sound scripted",
+          "It increases silence",
+          "It pulls attention away from her meaning"
+        ],
+        "fr": [
+          "Ça ralentit la conversation",
+          "Ça te fait paraître récité",
+          "Ça augmente les silences",
+          "Ça détourne ton attention de ce qu’elle veut dire"
+        ]
+      },
+      "explanation": {
+        "en": "Pre-planning shifts focus inward and causes you to miss nuance and subtext.",
+        "fr": "Préparer ta réponse tourne ton attention vers toi et te fait rater les nuances et le sous-texte."
+      }
+    },
+    "e596b988-c6fd-4182-add2-2c2b0eeb4cc4": {
+      "question_text": {
+        "en": "Which responses show you listened to understand?",
+        "fr": "Quelles réponses montrent que tu as écouté pour comprendre ?"
+      },
+      "options": {
+        "en": [
+          "Offering solutions immediately",
+          "Naming the feeling she hinted at",
+          "Pausing before replying",
+          "Building directly on her last sentence"
+        ],
+        "fr": [
+          "Proposer tout de suite des solutions",
+          "Nommer le ressenti qu’elle a laissé entendre",
+          "Marquer une pause avant de répondre",
+          "Rebondir directement sur sa dernière phrase"
+        ]
+      },
+      "explanation": {
+        "en": "Understanding comes from presence, not fixing or showcasing insight.",
+        "fr": "La compréhension vient de la présence, pas du fait de tout régler ou d’étaler ta perspicacité."
+      }
+    },
+    "5e09607d-070f-41c5-af20-c696a61f1329": {
+      "question_text": {
+        "en": "What is the purpose of validating her response before continuing the conversation?",
+        "fr": "À quoi sert le fait de reconnaître sa réponse avant de continuer la conversation ?"
+      },
+      "options": {
+        "en": [
+          "To show her words were understood and mattered",
+          "To slow the conversation down deliberately",
+          "To sound emotionally intelligent",
+          "To avoid asking follow-up questions"
+        ],
+        "fr": [
+          "À montrer que ses mots ont été compris et qu’ils comptent",
+          "À ralentir volontairement la conversation",
+          "À paraître émotionnellement intelligent",
+          "À éviter de poser des questions de relance"
+        ]
+      },
+      "explanation": {
+        "en": "Validation shows her message was received before the conversation moves on.",
+        "fr": "La reconnaissance montre que son message a été reçu avant que la conversation avance."
+      }
+    },
+    "0af9f869-b543-4bea-bfe5-e3c0c0722302": {
+      "question_text": {
+        "en": "She says, “My sister and I don’t get to see each other much anymore.” Best response?",
+        "fr": "Elle dit : « Ma sœur et moi, on ne se voit plus beaucoup. » Meilleure réponse ?"
+      },
+      "options": {
+        "en": [
+          "\"That’s life.\"",
+          "\"How old is she?\"",
+          "\"Distance can be hard. Do you two talk often?\"",
+          "\"Where does she live now?\""
+        ],
+        "fr": [
+          "« C’est la vie. »",
+          "« Elle a quel âge ? »",
+          "« La distance, ça peut être dur. Vous vous parlez souvent, toutes les deux ? »",
+          "« Elle habite où, maintenant ? »"
+        ]
+      },
+      "explanation": {
+        "en": "Naming the emotional reality before asking keeps the moment human.",
+        "fr": "Nommer la réalité émotionnelle avant de poser une question garde le moment humain."
+      }
+    },
+    "0810f6d9-5a61-4b89-b159-0607132c5f66": {
+      "question_text": {
+        "en": "Which statements qualify as validation?",
+        "fr": "Quelles phrases sont des marques de reconnaissance ?"
+      },
+      "options": {
+        "en": [
+          "\"That sounds like it took effort.\"",
+          "\"Why did you do that?\"",
+          "\"I can see why that mattered to you.\"",
+          "\"Cool.\""
+        ],
+        "fr": [
+          "« Ça a dû demander des efforts. »",
+          "« Pourquoi tu as fait ça ? »",
+          "« Je comprends que ça ait compté pour toi. »",
+          "« Cool. »"
+        ]
+      },
+      "explanation": {
+        "en": "Validation acknowledges meaning or effort, not just content.",
+        "fr": "La reconnaissance salue le sens ou l’effort, pas seulement le contenu."
+      }
+    },
+    "8e246a4f-c248-490c-956f-77029e0a2ad4": {
+      "question_text": {
+        "en": "What are non-verbal listening cues?",
+        "fr": "Que sont les signes d’écoute non verbaux ?"
+      },
+      "options": {
+        "en": [
+          "Body language signals that communicate engagement and attention",
+          "Facial expressions that show emotional reactions to content",
+          "Posture adjustments that demonstrate active listening",
+          "All of the above"
+        ],
+        "fr": [
+          "Des signaux corporels qui montrent ton implication et ton attention",
+          "Des expressions du visage qui montrent tes réactions à ce qu’elle dit",
+          "Des ajustements de posture qui montrent une écoute active",
+          "Toutes les réponses ci-dessus"
+        ]
+      },
+      "explanation": {
+        "en": "Non-verbal cues communicate you're present and processing her words.",
+        "fr": "Les signes non verbaux montrent que tu es présent et que tu assimiles ce qu’elle dit."
+      }
+    },
+    "61372c16-e1e3-47b9-b21c-d9331ef4e852": {
+      "question_text": {
+        "en": "She’s telling a story with rising energy. What non-verbal cues best support the moment?",
+        "fr": "Elle raconte une histoire avec de plus en plus d’énergie. Quels signes non verbaux accompagnent le mieux le moment ?"
+      },
+      "options": {
+        "en": [
+          "Still posture to avoid distraction",
+          "Smiles and reactive expressions",
+          "Looking away to give space",
+          "Verbal encouragement without movement"
+        ],
+        "fr": [
+          "Une posture immobile pour ne pas la distraire",
+          "Des sourires et des expressions qui réagissent",
+          "Regarder ailleurs pour lui laisser de l’espace",
+          "Des encouragements verbaux sans bouger"
+        ]
+      },
+      "explanation": {
+        "en": "Matching her energy physically shows you’re emotionally tracking her story.",
+        "fr": "T’accorder physiquement à son énergie montre que tu suis son histoire émotionnellement."
+      }
+    },
+    "9fcc9a77-636d-4e32-833f-dd1e41b91be5": {
+      "question_text": {
+        "en": "Which signals communicate distraction?",
+        "fr": "Quels signaux trahissent la distraction ?"
+      },
+      "options": {
+        "en": [
+          "Flat facial expression",
+          "Body angled away",
+          "Mirroring her expressions",
+          "Glancing around the room"
+        ],
+        "fr": [
+          "Un visage inexpressif",
+          "Un corps tourné ailleurs",
+          "Reproduire ses expressions",
+          "Balayer la salle du regard"
+        ]
+      },
+      "explanation": {
+        "en": "Stillness without responsiveness often reads as disengagement.",
+        "fr": "Une immobilité sans réaction passe souvent pour du désintérêt."
+      }
+    },
+    "1e90c6c9-0d3b-47fc-b3ac-599c201f184d": {
+      "question_text": {
+        "en": "Which elements are most important to match early on?",
+        "fr": "Quels éléments est-il le plus important d’accorder au début ?"
+      },
+      "options": {
+        "en": [
+          "Emotional depth",
+          "Speaking pace",
+          "Volume and energy",
+          "All of the above"
+        ],
+        "fr": [
+          "La profondeur émotionnelle",
+          "Le débit de parole",
+          "Le volume et l’énergie",
+          "Toutes les réponses ci-dessus"
+        ]
+      },
+      "explanation": {
+        "en": "Early comfort comes from matching emotional depth, pace, and energy.",
+        "fr": "L’aisance du début vient du fait de s’accorder en profondeur émotionnelle, en rythme et en énergie."
+      }
+    },
+    "6886b3ac-3f9a-4fba-ad87-515db908bb79": {
+      "question_text": {
+        "en": "She speaks emotionally about a recent event. What could you do first?",
+        "fr": "Elle parle avec émotion d’un événement récent. Que pourrais-tu faire en premier ?"
+      },
+      "options": {
+        "en": [
+          "Match her emotional tone with empathy",
+          "Respond with practical advice",
+          "Shift to a humorous story",
+          "Ask factual questions"
+        ],
+        "fr": [
+          "T’accorder à son ton émotionnel avec empathie",
+          "Répondre par un conseil pratique",
+          "Passer à une histoire drôle",
+          "Poser des questions factuelles"
+        ]
+      },
+      "explanation": {
+        "en": "Reflect her tone to show sync before guiding elsewhere.",
+        "fr": "Reflète son ton pour montrer que vous êtes en phase avant d’aller ailleurs."
+      }
+    },
+    "003c10ec-d480-4896-916d-26f2d942ba10": {
+      "question_text": {
+        "en": "Why does matching her depth and style first help build rapport?",
+        "fr": "Pourquoi t’accorder d’abord à sa profondeur et à sa façon de parler aide-t-il à créer de la complicité ?"
+      },
+      "options": {
+        "en": [
+          "It signals similarity and relaxes her nervous system",
+          "It shows you are attuned to her current energy",
+          "It reduces friction from mismatched levels",
+          "It immediately escalates to deeper topics"
+        ],
+        "fr": [
+          "Ça signale une ressemblance et détend son système nerveux",
+          "Ça montre que tu es à l’écoute de son énergie du moment",
+          "Ça réduit les frictions dues à un décalage",
+          "Ça fait tout de suite passer à des sujets plus profonds"
+        ]
+      },
+      "explanation": {
+        "en": "Matching establishes sync, making escalation feel natural.",
+        "fr": "S’accorder vous met en phase, ce qui rend naturel le fait d’aller plus loin."
+      }
+    },
+    "3327c759-7a65-49ec-96b3-d70b813c73ef": {
+      "question_text": {
+        "en": "What is the most effective way to share a story?",
+        "fr": "Quelle est la façon la plus efficace de partager une histoire ?"
+      },
+      "options": {
+        "en": [
+          "Sharing fewer personal details",
+          "Sharing emotions without context",
+          "Sharing experiences with perspective and resolution",
+          "Avoiding vulnerability entirely"
+        ],
+        "fr": [
+          "Partager moins de détails personnels",
+          "Partager des émotions sans contexte",
+          "Partager des expériences avec du recul et une résolution",
+          "Éviter complètement la vulnérabilité"
+        ]
+      },
+      "explanation": {
+        "en": "Effective sharing includes a reflection and resolution; share what you learned.",
+        "fr": "Partager efficacement inclut du recul et une résolution ; partage ce que tu en as appris."
+      }
+    },
+    "c32cb2cd-cf15-4d66-aa1f-8bc019d02b51": {
+      "question_text": {
+        "en": "Early conversation. She asks, “What do you do?” Which response is best calibrated?",
+        "fr": "Début de conversation. Elle te demande : « Tu fais quoi dans la vie ? » Quelle réponse est la mieux ajustée ?"
+      },
+      "options": {
+        "en": [
+          "\"I work in tech, but I hate it and don’t know what I want to do instead.\"",
+          "\"I work in tech. It’s demanding, but it’s teaching me a lot about discipline.\"",
+          "\"It’s complicated. I don’t really like talking about it.\""
+        ],
+        "fr": [
+          "« Je bosse dans la tech, mais je déteste ça et je ne sais pas quoi faire à la place. »",
+          "« Je bosse dans la tech. C’est exigeant, mais ça m’apprend beaucoup de discipline. »",
+          "« C’est compliqué. Je n’aime pas trop en parler. »"
+        ]
+      },
+      "explanation": {
+        "en": "This acknowledges reality while showing perspective. It invites curiosity, not concern.",
+        "fr": "Cette réponse reconnaît la réalité tout en montrant du recul. Elle suscite la curiosité, pas l’inquiétude."
+      }
+    },
+    "2924bec5-27b6-4372-95e0-97a1b87cd7f5": {
+      "question_text": {
+        "en": "Why is processed sharing better than unprocessed in early conversations?",
+        "fr": "Pourquoi partager une expérience digérée vaut-il mieux qu’une expérience non digérée en début de conversation ?"
+      },
+      "options": {
+        "en": [
+          "It shows self-awareness and growth",
+          "It avoids putting emotional weight on her",
+          "It invites closeness without creating pressure",
+          "It dumps unresolved struggles for sympathy"
+        ],
+        "fr": [
+          "Ça montre de la lucidité sur toi et de l’évolution",
+          "Ça évite de lui faire porter un poids émotionnel",
+          "Ça invite à la proximité sans créer de pression",
+          "Ça déverse des difficultés non résolues pour attirer la compassion"
+        ]
+      },
+      "explanation": {
+        "en": "Processed experiences build connection; unprocessed ones create discomfort.",
+        "fr": "Les expériences digérées créent du lien ; les expériences non digérées créent du malaise."
+      }
+    },
+    "72b691fd-5105-42a5-b902-f35bd796089d": {
+      "question_text": {
+        "en": "What is the main goal of telling a story in a conversation?",
+        "fr": "Quel est le but principal quand tu racontes une histoire dans une conversation ?"
+      },
+      "options": {
+        "en": [
+          "To impress her with your life history",
+          "To compete with her stories",
+          "To fill time until she speaks again",
+          "To reveal something meaningful about yourself"
+        ],
+        "fr": [
+          "L’impressionner avec ton parcours",
+          "Rivaliser avec ses histoires",
+          "Meubler en attendant qu’elle reparle",
+          "Révéler quelque chose d’important sur toi"
+        ]
+      },
+      "explanation": {
+        "en": "A clear, honest snapshot helps her understand you quickly.",
+        "fr": "Un instantané clair et sincère l’aide à te comprendre vite."
+      }
+    },
+    "26a750bf-98fb-4c3c-a099-407b3b3aabb9": {
+      "question_text": {
+        "en": "She asks how you got into your current job. What could you share?",
+        "fr": "Elle te demande comment tu es arrivé à ton travail actuel. Que pourrais-tu partager ?"
+      },
+      "options": {
+        "en": [
+          "Your full timeline from high school to now",
+          "Only the current role without context",
+          "One key moment that made you switch fields"
+        ],
+        "fr": [
+          "Toute ta chronologie depuis le lycée",
+          "Seulement ton poste actuel, sans contexte",
+          "Un moment clé qui t’a fait changer de voie"
+        ]
+      },
+      "explanation": {
+        "en": "Focus on one meaningful moment to reveal character clearly and keep engagement.",
+        "fr": "Concentre-toi sur un moment qui compte pour montrer clairement qui tu es et garder son attention."
+      }
+    },
+    "2330422b-5fb8-4763-a6cc-a1631f85f12d": {
+      "question_text": {
+        "en": "Which elements are essential to a story that holds attention?",
+        "fr": "Quels éléments sont essentiels pour qu’une histoire retienne l’attention ?"
+      },
+      "options": {
+        "en": [
+          "Setup for quick context",
+          "Conflict or tension to create stakes",
+          "Resolution or takeaway",
+          "Exact dates and names"
+        ],
+        "fr": [
+          "Une mise en place pour donner vite le contexte",
+          "Un conflit ou une tension pour créer un enjeu",
+          "Une résolution ou une leçon",
+          "Les dates et les noms exacts"
+        ]
+      },
+      "explanation": {
+        "en": "Focus on what you want her to understand, not everything that happened.",
+        "fr": "Concentre-toi sur ce que tu veux qu’elle comprenne, pas sur tout ce qui s’est passé."
+      }
+    },
+    "1ce28b32-b0c8-4221-b1ff-d3645dd9b96d": {
+      "question_text": {
+        "en": "Why do unlinked stories create separation instead of connection?",
+        "fr": "Pourquoi des histoires sans lien avec elle créent-elles de la distance plutôt que du lien ?"
+      },
+      "options": {
+        "en": [
+          "They make you seem self-centered and not interested in her",
+          "You talked about yourself without bringing her in",
+          "She's waiting for her turn instead of engaging with your story"
+        ],
+        "fr": [
+          "Elles te font paraître centré sur toi et pas intéressé par elle",
+          "Tu as parlé de toi sans l’inclure",
+          "Elle attend son tour au lieu de s’intéresser à ton histoire"
+        ]
+      },
+      "explanation": {
+        "en": "Sharing without linking creates distance; invite her perspective to keep connection alive.",
+        "fr": "Partager sans relier crée de la distance ; invite son point de vue pour garder le lien vivant."
+      }
+    },
+    "3f38e00a-0c18-4520-94c4-258ed755d84d": {
+      "question_text": {
+        "en": "Which ending links back? You: “When I moved here, the first few months were isolating\".",
+        "fr": "Quelle fin relie l’histoire à elle ? Toi : « Quand je suis arrivé ici, les premiers mois, je me sentais assez isolé. »"
+      },
+      "options": {
+        "en": [
+          "\"Anyway, it worked out for me.\"",
+          "\"That city is tough at first.\"",
+          "\"Moving is always hard.\"",
+          "\"How has the adjustment been for you so far?\""
+        ],
+        "fr": [
+          "« Bref, ça s’est arrangé pour moi. »",
+          "« Cette ville est dure au début. »",
+          "« Déménager, c’est toujours difficile. »",
+          "« Et toi, comment se passe ton adaptation pour l’instant ? »"
+        ]
+      },
+      "explanation": {
+        "en": "Directly inviting her perspective converts your experience into shared ground.",
+        "fr": "Inviter directement son point de vue transforme ton expérience en terrain commun."
+      }
+    },
+    "d6f93781-4c91-4d3e-835b-28dd4c18773b": {
+      "question_text": {
+        "en": "How can you link your stories back to her?",
+        "fr": "Comment relier tes histoires à elle ?"
+      },
+      "options": {
+        "en": [
+          "Ask how she'd handle situation you described",
+          "Connect it to something she mentioned earlier",
+          "Compliment her on related quality or perspective"
+        ],
+        "fr": [
+          "Lui demander comment elle réagirait dans la situation que tu as décrite",
+          "Rattacher l’histoire à quelque chose qu’elle a mentionné plus tôt",
+          "La complimenter sur une qualité ou un point de vue en rapport"
+        ]
+      },
+      "explanation": {
+        "en": "Connection forms when your story becomes a bridge, not a conclusion.",
+        "fr": "Le lien se crée quand ton histoire devient un pont, pas un point final."
+      }
+    },
+    "445fcfa0-4ff7-4518-ac38-f732d3f82c0a": {
+      "question_text": {
+        "en": "She freely shares personal details and laughs easily. What does this indicate?",
+        "fr": "Elle partage spontanément des détails personnels et rit facilement. Qu’est-ce que ça indique ?"
+      },
+      "options": {
+        "en": [
+          "She is just being polite",
+          "The connection has enough weight to support a close",
+          "She wants you to leave",
+          "The interaction is still surface-level"
+        ],
+        "fr": [
+          "Elle est juste polie",
+          "Le lien a assez de poids pour que tu concrétises",
+          "Elle veut que tu partes",
+          "L’échange est encore superficiel"
+        ]
+      },
+      "explanation": {
+        "en": "Voluntary sharing and energy show the moment is ready for a close.",
+        "fr": "Des confidences spontanées et de l’énergie montrent que le moment est venu de concrétiser."
+      }
+    },
+    "22126888-2232-418e-83ad-f3149c24f572": {
+      "question_text": {
+        "en": "Her replies come with warmth, and she expands on what you say. What does this indicate?",
+        "fr": "Elle répond avec chaleur et développe ce que tu dis. Qu’est-ce que ça indique ?"
+      },
+      "options": {
+        "en": [
+          "The connection has enough weight to support a close",
+          "She is tolerating the conversation",
+          "She wants to keep things short",
+          "The talk is still surface-level"
+        ],
+        "fr": [
+          "Le lien a assez de poids pour que tu concrétises",
+          "Elle supporte la conversation",
+          "Elle veut faire court",
+          "La discussion est encore superficielle"
+        ]
+      },
+      "explanation": {
+        "en": "Warmth and elaboration signal strong investment; the moment is ready for a close.",
+        "fr": "La chaleur et le fait de développer montrent un fort investissement ; le moment est venu de concrétiser."
+      }
+    },
+    "8c9143a9-92d6-4ec0-bd1d-cc131e69c354": {
+      "question_text": {
+        "en": "What are key signs the moment is ready to close?",
+        "fr": "Quels sont les signes clés que le moment est venu de concrétiser ?"
+      },
+      "options": {
+        "en": [
+          "She gives short, polite replies",
+          "She contributes more than necessary",
+          "She asks questions about you",
+          "She shows sustained presence and curiosity"
+        ],
+        "fr": [
+          "Elle donne des réponses courtes et polies",
+          "Elle apporte plus que nécessaire",
+          "Elle te pose des questions sur toi",
+          "Elle montre une présence et une curiosité qui durent"
+        ]
+      },
+      "explanation": {
+        "en": "When she invests, asks about you, and stays engaged, the moment is ready for a close.",
+        "fr": "Quand elle s’investit, s’intéresse à toi et reste impliquée, le moment est venu de concrétiser."
+      }
+    },
+    "372fbba5-b4e8-4738-9cf6-186872aed9ae": {
+      "question_text": {
+        "en": "Why should you link your exit to something you both discussed?",
+        "fr": "Pourquoi rattacher ta sortie à quelque chose dont vous avez parlé ?"
+      },
+      "options": {
+        "en": [
+          "To sound thoughtful",
+          "To create a reason to follow up naturally",
+          "To prove you were paying attention",
+          "To increase attraction immediately"
+        ],
+        "fr": [
+          "Pour paraître attentionné",
+          "Pour créer une raison naturelle de donner suite",
+          "Pour prouver que tu faisais attention",
+          "Pour augmenter tout de suite l’attirance"
+        ]
+      },
+      "explanation": {
+        "en": "Linking to a shared detail gives a natural reason to reconnect.",
+        "fr": "Rappeler un détail partagé donne une raison naturelle de reprendre contact."
+      }
+    },
+    "4bf82e54-bc68-47b4-954e-9a2f34ad7cee": {
+      "question_text": {
+        "en": "You had a good conversation about her upcoming trip. What is the best way to exit?",
+        "fr": "Vous avez eu une bonne conversation sur son prochain voyage. Quelle est la meilleure façon de partir ?"
+      },
+      "options": {
+        "en": [
+          "\"Nice meeting you, take care\"",
+          "\"I should let you go\"",
+          "Say goodbye quickly to avoid awkwardness",
+          "Reference the trip and suggest continuing later"
+        ],
+        "fr": [
+          "« Ravi de t’avoir rencontrée, prends soin de toi »",
+          "« Je vais te laisser »",
+          "Dire au revoir vite pour éviter la gêne",
+          "Faire référence au voyage et proposer d’en reparler plus tard"
+        ]
+      },
+      "explanation": {
+        "en": "A callback to something she cared about keeps the interaction alive beyond the goodbye.",
+        "fr": "Rappeler quelque chose qui lui tenait à cœur fait vivre l’échange au-delà de l’au revoir."
+      }
+    }
+  }
+}
