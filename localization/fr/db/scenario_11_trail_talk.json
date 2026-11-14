@@ -1,0 +1,334 @@
+{
+  "scenario": {
+    "a1000011-0000-0000-0000-000000000011": {
+      "title": {
+        "en": "Trail Talk",
+        "fr": "Sur le sentier"
+      },
+      "summary": {
+        "en": "Steady climb, quiet moments between steps. A shared path creates the opening.",
+        "fr": "Une montée régulière, des moments calmes entre deux pas. Un chemin partagé crée l’ouverture."
+      }
+    }
+  },
+  "screens": {
+    "b1000001-0000-0000-0011-000000000001": {
+      "en": "You've decided to go on a scenic hike.",
+      "fr": "Tu as décidé de faire une belle randonnée."
+    },
+    "b1000002-0000-0000-0011-000000000002": {
+      "en": "You're halfway up when you reach a resting look out spot.",
+      "fr": "À mi-chemin, tu arrives à un point de vue où l’on peut faire une pause."
+    },
+    "b1000003-0000-0000-0011-000000000003": {
+      "en": "A woman is sitting there on a rock, taking in the view.",
+      "fr": "Une femme est assise sur un rocher et contemple la vue."
+    },
+    "b1000004-0000-0000-0011-000000000004": {
+      "en": "She's alone. Looking out at the view. Peaceful moment.",
+      "fr": "Elle est seule. Elle regarde le paysage. Un moment paisible."
+    },
+    "b1000005-0000-0000-0011-000000000005": {
+      "en": "You walk up to the viewpoint. She glances over briefly then looks back.",
+      "fr": "Tu t’avances jusqu’au point de vue. Elle te jette un bref regard, puis se retourne vers la vue."
+    },
+    "b1000061-0000-0000-0011-000000000061": {
+      "en": "You sit right next to her. She shifts away and gets up shortly after.",
+      "fr": "Tu t’assois juste à côté d’elle. Elle s’écarte, puis se lève peu après."
+    },
+    "b1000062-0000-0000-0011-000000000062": {
+      "en": "The best approaches don't block her exit paths. It keeps her defenses down.",
+      "fr": "Les meilleures approches ne bloquent pas son passage. Elle reste ainsi détendue."
+    },
+    "b1000007-0000-0000-0011-000000000007": {
+      "en": "This views definitely worth the climb.",
+      "fr": "Cette vue vaut vraiment la montée."
+    },
+    "b1000008-0000-0000-0011-000000000008": {
+      "en": "Yeah it's beautiful. Perfect day for it too.",
+      "fr": "Oui, c’est magnifique. Et la journée est parfaite pour ça."
+    },
+    "b1000009-0000-0000-0011-000000000009": {
+      "en": "Nice hiking boots. Are those Salomons?",
+      "fr": "Elles sont bien, tes chaussures de rando. Ce sont des Salomon ?"
+    },
+    "b1000010-0000-0000-0011-000000000010": {
+      "en": "Thank you, yeah they are, I just got them.",
+      "fr": "Merci, oui, je viens de les acheter."
+    },
+    "b1000011-0000-0000-0011-000000000011": {
+      "en": "She's sitting on a rock, relaxed. You're standing over her.",
+      "fr": "Elle est assise sur un rocher, détendue. Toi, tu es debout, au-dessus d’elle."
+    },
+    "b1000121-0000-0000-0011-000000000121": {
+      "en": "You squat down in front of her. Blocking her view. She leans back.",
+      "fr": "Tu t’accroupis devant elle. Tu lui bouches la vue. Elle se recule."
+    },
+    "b1000122-0000-0000-0011-000000000122": {
+      "en": "Squatting in front of someone is invasive and weird. Sit beside her instead.",
+      "fr": "S’accroupir devant quelqu’un est intrusif et bizarre. Assieds-toi plutôt à côté d’elle."
+    },
+    "b1000123-0000-0000-0011-000000000123": {
+      "en": "You continue talking. She has to look up to talk to you. Feels uneven.",
+      "fr": "Tu continues à parler. Elle doit lever la tête pour te répondre. L’échange est déséquilibré."
+    },
+    "b1000124-0000-0000-0011-000000000124": {
+      "en": "While this can work, it's better to mirror their body movements.",
+      "fr": "Ça peut marcher, mais il vaut mieux te mettre à la même hauteur qu’elle."
+    },
+    "b1000013-0000-0000-0011-000000000013": {
+      "en": "Same level now. The exchange is now more even.",
+      "fr": "Vous êtes à la même hauteur maintenant. L’échange est plus équilibré."
+    },
+    "b1000141-0000-0000-0011-000000000141": {
+      "en": "Hiking solo today? Usually with friends or...?",
+      "fr": "Tu randonnes seule aujourd’hui ? D’habitude, tu viens avec des amis ou… ?"
+    },
+    "b1000142-0000-0000-0011-000000000142": {
+      "en": "Questioning why she's alone implies it's unusual or risky. Don't make it weird.",
+      "fr": "Lui demander pourquoi elle est seule laisse entendre que c’est inhabituel ou risqué. Ne rends pas la situation bizarre."
+    },
+    "b1000143-0000-0000-0011-000000000143": {
+      "en": "Where do you live around here?",
+      "fr": "Tu habites où, par ici ?"
+    },
+    "b1000144-0000-0000-0011-000000000144": {
+      "en": "Asking about her specific location feels invasive. Ask about hiking instead.",
+      "fr": "Lui demander où elle habite précisément paraît intrusif. Parle plutôt de randonnée."
+    },
+    "b1000015-0000-0000-0011-000000000015": {
+      "en": "Have you hiked this trail before or first time?",
+      "fr": "Tu as déjà fait ce sentier ou c’est la première fois ?"
+    },
+    "b1000016-0000-0000-0011-000000000016": {
+      "en": "Yeah pretty regularly. Couple times a month when the weather's nice like this.",
+      "fr": "Oui, assez souvent. Deux ou trois fois par mois quand il fait beau comme ça."
+    },
+    "b1000017-0000-0000-0011-000000000017": {
+      "en": "She's a regular. Knows the trail well.",
+      "fr": "C’est une habituée. Elle connaît bien le sentier."
+    },
+    "b1000181-0000-0000-0011-000000000181": {
+      "en": "I've done the coastal trail and the forest loop...",
+      "fr": "Moi, j’ai fait le sentier côtier et la boucle de la forêt…"
+    },
+    "b1000182-0000-0000-0011-000000000182": {
+      "en": "She didn't ask about your hiking resume.",
+      "fr": "Elle ne t’a pas demandé ton CV de randonneur."
+    },
+    "b1000183-0000-0000-0011-000000000183": {
+      "en": "Can you rank all the trails around here from best to worst?",
+      "fr": "Tu peux me classer tous les sentiers du coin, du meilleur au pire ?"
+    },
+    "b1000184-0000-0000-0011-000000000184": {
+      "en": "Asking for excessive detail feels demanding. Just ask for simple recommendations.",
+      "fr": "Demander trop de détails paraît exigeant. Demande-lui simplement quelques conseils."
+    },
+    "b1000019-0000-0000-0011-000000000019": {
+      "en": "Sounds doable. Any other trails you recommend? Need some expert advice.",
+      "fr": "Ça a l’air faisable. Tu me conseilles d’autres sentiers ? J’ai besoin d’un avis d’experte."
+    },
+    "b1000020-0000-0000-0011-000000000020": {
+      "en": "Ha, not an expert but I've done most of them. What kind of hikes do you like?",
+      "fr": "Ha, je ne suis pas experte, mais j’en ai fait la plupart. Tu aimes quel genre de randos ?"
+    },
+    "b1000211-0000-0000-0011-000000000211": {
+      "en": "Could you be my hiking guide? Show me around?",
+      "fr": "Tu pourrais être ma guide de randonnée ? Me faire découvrir le coin ?"
+    },
+    "b1000212-0000-0000-0011-000000000212": {
+      "en": "Asking directly without playful framing feels like a request. Keep it light.",
+      "fr": "Demander directement, sans touche de jeu, ressemble à une requête. Reste léger."
+    },
+    "b1000213-0000-0000-0011-000000000213": {
+      "en": "I'm terrible with directions honestly. I need constant supervision.",
+      "fr": "Honnêtement, je n’ai aucun sens de l’orientation. Il me faut quelqu’un pour me surveiller en permanence."
+    },
+    "b1000214-0000-0000-0011-000000000214": {
+      "en": "Too much self-deprecation isn't charming, it's needy. Joke lightly.",
+      "fr": "Trop d’autodérision n’a rien de charmant, ça fait demandeur. Plaisante avec légèreté."
+    },
+    "b1000022-0000-0000-0011-000000000022": {
+      "en": "Scenic ones ideally. Might need a local guide in case I get lost however.",
+      "fr": "Celles avec de belles vues, idéalement. Mais j’aurais peut-être besoin d’une guide du coin, au cas où je me perdrais."
+    },
+    "b1000023-0000-0000-0011-000000000023": {
+      "en": "She laughs at your joke.",
+      "fr": "Elle rit à ta blague."
+    },
+    "b1000024-0000-0000-0011-000000000024": {
+      "en": "Was that your subtle way of asking me to show you around?",
+      "fr": "C’était ta façon subtile de me demander de te faire visiter ?"
+    },
+    "b1000025-0000-0000-0011-000000000025": {
+      "en": "I thought I was being smooth. Clearly need more practice.",
+      "fr": "Je pensais être discret. Faut croire que j’ai besoin d’entraînement."
+    },
+    "b1000026-0000-0000-0011-000000000026": {
+      "en": "She's laughing. Flirty energy established. She's heading to the summit.",
+      "fr": "Elle rit. Le flirt est lancé. Elle repart vers le sommet."
+    },
+    "b1000271-0000-0000-0011-000000000271": {
+      "en": "You should let me come with you. It's safer with two people.",
+      "fr": "Tu devrais me laisser venir avec toi. C’est plus sûr à deux."
+    },
+    "b1000272-0000-0000-0011-000000000272": {
+      "en": "Framing it as protection feels patronizing. Focus on shared enjoyment instead.",
+      "fr": "Présenter ça comme une protection paraît condescendant. Mets plutôt l’accent sur le plaisir partagé."
+    },
+    "b1000273-0000-0000-0011-000000000273": {
+      "en": "Do you usually hike with people or do you prefer going solo?",
+      "fr": "D’habitude, tu randonnes accompagnée ou tu préfères y aller seule ?"
+    },
+    "b1000274-0000-0000-0011-000000000274": {
+      "en": "Asking preference gives her an easy out. Escalate and make the playful ask.",
+      "fr": "Lui demander ses préférences lui offre une porte de sortie facile. Va plus loin et fais ta demande avec légèreté."
+    },
+    "b1000028-0000-0000-0011-000000000028": {
+      "en": "Well since we're both heading up anyway, we can use this as a trial session.",
+      "fr": "Bon, vu qu’on monte tous les deux, on n’a qu’à en faire une séance d’essai."
+    },
+    "b1000029-0000-0000-0011-000000000029": {
+      "en": "Ha, alright. Trial run. But if you can't keep up, you're on your own.",
+      "fr": "Ha, d’accord. Séance d’essai. Mais si tu ne suis pas, je te laisse en route."
+    },
+    "b1000030-0000-0000-0011-000000000030": {
+      "en": "Playful framing worked. She agreed. You're hiking together now.",
+      "fr": "Le ton joueur a marché. Elle a accepté. Vous randonnez ensemble maintenant."
+    },
+    "b1000311-0000-0000-0011-000000000311": {
+      "en": "You wait for her to introduce herself. She doesn't.",
+      "fr": "Tu attends qu’elle se présente. Elle ne le fait pas."
+    },
+    "b1000312-0000-0000-0011-000000000312": {
+      "en": "Take initiative with introductions too. Lead the social interaction.",
+      "fr": "Prends aussi l’initiative des présentations. Mène l’échange."
+    },
+    "b1000313-0000-0000-0011-000000000313": {
+      "en": "You both start hiking. Ten minutes pass. Still no names.",
+      "fr": "Vous commencez à marcher. Dix minutes passent. Toujours pas de prénoms."
+    },
+    "b1000314-0000-0000-0011-000000000314": {
+      "en": "This was the perfect opportunity to turn from strangers to acquaintances.",
+      "fr": "C’était l’occasion parfaite de passer d’inconnus à connaissances."
+    },
+    "b1000032-0000-0000-0011-000000000032": {
+      "en": "I'm... should probably know my guide's name.",
+      "fr": "Moi, c’est… Je devrais sans doute connaître le prénom de ma guide."
+    },
+    "b1000033-0000-0000-0011-000000000033": {
+      "en": "Haha, Natalie. Nice to meet you.",
+      "fr": "Haha, Natalie. Enchantée."
+    },
+    "b1000034-0000-0000-0011-000000000034": {
+      "en": "You are now hiking together. Natural conversation flows along the way.",
+      "fr": "Vous randonnez ensemble maintenant. La conversation coule naturellement en chemin."
+    },
+    "b1000035-0000-0000-0011-000000000035": {
+      "en": "Success. You review your interaction with Natalie.",
+      "fr": "Réussi. Tu repenses à ton échange avec Natalie."
+    },
+    "b1000036-0000-0000-0011-000000000036": {
+      "en": "You read the moment and sat down to mirror her level instead of standing over her.",
+      "fr": "Tu as lu le moment et tu t’es assis pour te mettre à sa hauteur, au lieu de rester debout au-dessus d’elle."
+    },
+    "b1000037-0000-0000-0011-000000000037": {
+      "en": "You opened naturally by commenting on the shared view and trail experience.",
+      "fr": "Tu as engagé la conversation naturellement en parlant de la vue et du sentier que vous partagiez."
+    },
+    "b1000038-0000-0000-0011-000000000038": {
+      "en": "You added playful energy with the local guide banter, shifting from friendly to flirty.",
+      "fr": "Tu as apporté une énergie joueuse avec la plaisanterie sur la guide du coin, passant de l’amical au flirt."
+    },
+    "b1000039-0000-0000-0011-000000000039": {
+      "en": "You capitalized on momentum by suggesting hiking together. Overall, well done.",
+      "fr": "Tu as profité de l’élan en proposant de randonner ensemble. Dans l’ensemble, bien joué."
+    }
+  },
+  "options": {
+    "c1000001-0000-0000-0011-000000000001": {
+      "en": "Make a light comment about the view",
+      "fr": "Faire une remarque légère sur la vue"
+    },
+    "c1000002-0000-0000-0011-000000000002": {
+      "en": "Sit close to her and talk about the view",
+      "fr": "T’asseoir tout près d’elle et parler de la vue"
+    },
+    "c1000003-0000-0000-0011-000000000003": {
+      "en": "Ask about her hiking gear",
+      "fr": "L’interroger sur son équipement de rando"
+    },
+    "c1000004-0000-0000-0011-000000000004": {
+      "en": "Sit down on a nearby rock to get on her level",
+      "fr": "T’asseoir sur un rocher voisin pour te mettre à sa hauteur"
+    },
+    "c1000005-0000-0000-0011-000000000005": {
+      "en": "Squat down in front of her",
+      "fr": "T’accroupir devant elle"
+    },
+    "c1000006-0000-0000-0011-000000000006": {
+      "en": "Continue talking at the current level",
+      "fr": "Continuer à parler debout"
+    },
+    "c1000008-0000-0000-0011-000000000008": {
+      "en": "Ask why she's hiking alone today",
+      "fr": "Lui demander pourquoi elle randonne seule aujourd’hui"
+    },
+    "c1000007-0000-0000-0011-000000000007": {
+      "en": "Ask if she hikes here regularly",
+      "fr": "Lui demander si elle vient souvent ici"
+    },
+    "c1000009-0000-0000-0011-000000000009": {
+      "en": "Ask if she lives in the area",
+      "fr": "Lui demander si elle habite dans le coin"
+    },
+    "c1000010-0000-0000-0011-000000000010": {
+      "en": "Acknowledge and ask for suggestions",
+      "fr": "Rebondir et lui demander des conseils"
+    },
+    "c1000012-0000-0000-0011-000000000012": {
+      "en": "Ask her to rank all local trails",
+      "fr": "Lui demander de classer tous les sentiers du coin"
+    },
+    "c1000011-0000-0000-0011-000000000011": {
+      "en": "Tell her which trails you've already done",
+      "fr": "Lui dire quels sentiers tu as déjà faits"
+    },
+    "c1000014-0000-0000-0011-000000000014": {
+      "en": "Ask her to be your hiking guide",
+      "fr": "Lui demander d’être ta guide de randonnée"
+    },
+    "c1000013-0000-0000-0011-000000000013": {
+      "en": "Answer then playfully suggest needing a local guide",
+      "fr": "Répondre, puis glisser en plaisantant que tu aurais besoin d’une guide du coin"
+    },
+    "c1000015-0000-0000-0011-000000000015": {
+      "en": "Say you're bad with directions and need supervision",
+      "fr": "Dire que tu n’as aucun sens de l’orientation et qu’il te faut quelqu’un pour te surveiller"
+    },
+    "c1000017-0000-0000-0011-000000000017": {
+      "en": "Suggest she should let you come for safety",
+      "fr": "Lui dire qu’elle devrait te laisser venir, pour sa sécurité"
+    },
+    "c1000016-0000-0000-0011-000000000016": {
+      "en": "Playfully suggest hiking together as a trial run",
+      "fr": "Proposer en plaisantant de randonner ensemble, à titre d’essai"
+    },
+    "c1000018-0000-0000-0011-000000000018": {
+      "en": "Ask if she prefers solo hikes",
+      "fr": "Lui demander si elle préfère randonner seule"
+    },
+    "c1000020-0000-0000-0011-000000000020": {
+      "en": "Wait for her to introduce herself first",
+      "fr": "Attendre qu’elle se présente en premier"
+    },
+    "c1000021-0000-0000-0011-000000000021": {
+      "en": "Start hiking without introducing yourself",
+      "fr": "Commencer à marcher sans te présenter"
+    },
+    "c1000019-0000-0000-0011-000000000019": {
+      "en": "Light comment about needing to know your guide's name",
+      "fr": "Glisser une remarque légère sur le fait de devoir connaître le prénom de ta guide"
+    }
+  }
+}

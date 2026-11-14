@@ -4,7 +4,7 @@ Branch `localization-release-c-fr` (from `localization-release-c`). Rules and gl
 
 ## Where it stands
 
-All 25 lesson courses are drafted (1,531 items, 34,442 English words); every overlay passes `lesson_overlays.py check fr`. Database content in progress: 10 of 15 scenarios. Checks, review pack and App Store listing not started.
+All 25 lesson courses are drafted (1,531 items, 34,442 English words); every overlay passes `lesson_overlays.py check fr`. Database content in progress: 11 of 15 scenarios. Checks, review pack and App Store listing not started.
 
 ## Summary
 
@@ -12,7 +12,7 @@ All 25 lesson courses are drafted (1,531 items, 34,442 English words); every ove
 |---|---|
 | UI catalogs | Done by the setup session (585 strings, draft) |
 | Lesson overlays | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-15) |
-| Database content | 10 of 15 scenarios; 0 of 765 quiz questions |
+| Database content | 11 of 15 scenarios; 0 of 765 quiz questions |
 | Checks and review pack | Not started |
 | App Store listing (France, notes for Canada) | Not started |
 
@@ -59,6 +59,7 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
 - **2026-11-15. Scenario 8, Picture This** (53 text screens, 18 options, about 590 words; 72 upserts, not run). For the reviewer: the title became *Photo souvenir*; "film camera" became *argentique*; "high aperture" became *une grande ouverture*; "the brewery up 3rd street" became *la brasserie au coin de la rue* (the brief's own example; French streets aren't numbered); "the old railway district" became *l'ancien quartier de la gare*; "mansplaining" stays (used in French); "asking about her work status feels qualifying" became *donne l'impression que tu la jauges*; "get her digits" became *lui demander son numéro*. Emily's name is unchanged.
 - **2026-11-15. Scenario 9, Carton Collision** (55 text screens, 18 options, about 565 words; 75 upserts, not run). For the reviewer: the title became *La dernière boîte d'œufs*; "Scissors paper rock" became *pierre-feuille-ciseaux*; "best of three" became *en deux manches gagnantes*; "fair and square" became *à la régulière*; "100%." became *Carrément.* (avoids the percent sign); "Dairy aisle" became *au rayon des œufs*, since French supermarkets don't keep eggs with dairy (German dropped the aisle). The subtext problem German logged (she never says she was lonely, yet the next screens react to loneliness) is kept as in the English: *C'était un bon moyen de m'occuper* is as close as the English allows. Claire's name is unchanged.
 - **2026-11-15. Scenario 10, Progressive Overload** (56 text screens, 20 options, about 590 words; 78 upserts, not run). For the reviewer: the title became *Surcharge progressive* (the usual French gym term); "cable machine" became *poulie*; "work in" became *alterner (les séries)*; "push day" became *séance push : pecs, épaules, triceps*; "tempo runs" became *sorties au seuil*; "the City Half … along the waterfront" became *le semi de la ville … il longe les quais*. The English inconsistency German logged (she trains for a half marathon, two options say "marathon") is resolved in French: both options say *semi-marathon*. Zoe's name is unchanged.
+- **2026-11-15. Scenario 11, Trail Talk** (56 text screens, 21 options, about 610 words; 80 upserts, not run). For the reviewer: the title became *Sur le sentier*; "local guide" became *une guide du coin* (feminine, since it refers to her; German did the same); "trial session / trial run" became *séance d'essai*; "Flirty energy established" became *Le flirt est lancé*; "hiking resume" became *CV de randonneur*; "mirror their body movements" became *te mettre à la même hauteur qu'elle*; "escalate" became *va plus loin*. Salomon (a French brand) stays. The English typo "This views definitely" is translated by meaning. Natalie's name is unchanged.
 
 ## Questions for Arthur
 
