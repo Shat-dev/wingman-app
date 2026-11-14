@@ -4,7 +4,7 @@ Branch `localization-release-c-fr` (from `localization-release-c`). Rules and gl
 
 ## Where it stands
 
-All 25 lesson courses are drafted (1,531 items, 34,442 English words); every overlay passes `lesson_overlays.py check fr`. Database content in progress: all 15 scenarios done; quiz questions 55 of 765. Checks, review pack and App Store listing not started.
+All 25 lesson courses are drafted (1,531 items, 34,442 English words); every overlay passes `lesson_overlays.py check fr`. Database content in progress: all 15 scenarios done; quiz questions 109 of 765. Checks, review pack and App Store listing not started.
 
 ## Summary
 
@@ -12,7 +12,7 @@ All 25 lesson courses are drafted (1,531 items, 34,442 English words); every ove
 |---|---|
 | UI catalogs | Done by the setup session (585 strings, draft) |
 | Lesson overlays | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-15) |
-| Database content | **15 of 15 scenarios** (796 text screens, 276 options); 55 of 765 quiz questions |
+| Database content | **15 of 15 scenarios** (796 text screens, 276 options); 109 of 765 quiz questions |
 | Checks and review pack | Not started |
 | App Store listing (France, notes for Canada) | Not started |
 
@@ -66,6 +66,7 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
 - **2026-11-15. Scenario 15, Study Buddy** (48 text screens, 18 options, about 470 words; upserts in `scenario_15_study_buddy.sql`, not run). **All 15 scenarios are now drafted: 796 text screens and 276 options, the same totals German matched against the live DB.** For the reviewer: the title became *Révisions à deux*; "paper" became *dossier* (a university assignment); "A girl" became *une jeune femme*; the chemistry pun holds (*étudier la chimie entre nous*); "Working hard or hardly working?" became *Tu bosses dur ou tu fais semblant ?*; "beauty sleep" became *sommeil réparateur*; "12pm" became *midi*. Aurelie's name is unchanged (stored once, not translated; a French reviewer may note the usual spelling is *Aurélie*).
 - **2026-11-15. Quiz batch plan.** Same nine files as German (`questions_01_mindset_foundations` 109, `questions_02_approach_mechanics_1/2/3` 88 each, `questions_03_conversational_skills_1/2` 81 each, `questions_04_flirting_chemistry_1` 76 and `_2` 75, `questions_05_mastery_integration` 79), in German's row order, filled about 44–55 questions per iteration. The English side and ids are copied from the German files. A partially filled file is fine for the generator; `Wingman/Content/question_translations_seed.fr.json` is regenerated each time and only holds what is done.
 - **2026-11-15. Questions 1–55** (mindset_foundations, lessons 1_1 to 5_2; about 2,400 words with options and explanations). `db_translations_sql.py fr` and `question_translations_seed.py fr --check` pass (55 questions). Terms follow the course 1–5 overlays: *ancrage*, *autosurveillance*, *état d'esprit de développement*, *ne pas dépendre du résultat*, *mentalité de pénurie*, *entretien* (grooming), *validation / approbation*. For the reviewer: options keep the English lengths roughly balanced so the right answer isn't given away by length; "All of the above" became *Toutes les réponses ci-dessus*, "Both of the above" *Les deux réponses ci-dessus*; quoted self-talk uses « ».
+- **2026-11-15. Questions 56–109** (the rest of mindset_foundations: lessons 5_3 and 5_4, plus 50 module-pool questions; about 2,300 words). `questions_01_mindset_foundations` is complete (109 rows); the seed check passes with 109. For the reviewer: quoted self-talk options use « » (*« Ça n'a pas marché, qu'est-ce que je peux ajuster la prochaine fois ? »*); "venue" became *bar*; "Speak on an exhale" became *parler sur l'expiration*; `b400f47c…` "reduce self-interruption" is vague in English (German logged it too) and stays literal: *moins t'interrompre toi-même*; "releases calming chemicals" became *libère des substances apaisantes*.
 
 ## Questions for Arthur
 
