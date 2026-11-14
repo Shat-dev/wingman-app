@@ -4,14 +4,14 @@ Branch `localization-release-c-fr` (from `localization-release-c`). Rules and gl
 
 ## Where it stands
 
-Lesson overlays in progress (18 of 25 courses). Database content, checks, review pack and App Store listing not started.
+Lesson overlays in progress (19 of 25 courses). Database content, checks, review pack and App Store listing not started.
 
 ## Summary
 
 | Part | State |
 |---|---|
 | UI catalogs | Done by the setup session (585 strings, draft) |
-| Lesson overlays | 18 of 25 courses, 1,092 of 1,531 items |
+| Lesson overlays | 19 of 25 courses, 1,155 of 1,531 items |
 | Database content | Not started (15 scenarios, 765 quiz questions) |
 | Checks and review pack | Not started |
 | App Store listing (France, notes for Canada) | Not started |
@@ -41,6 +41,7 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
 - **2026-11-15. Course 4, Inner Stability** (4 lessons, 74 items, 1,572 English words). The check passes. For the reviewer: "approval-seeking" became *chercher l'approbation*; "outcome independence" became *ne pas dépendre du résultat* (lesson title too), consistent with course 17; "highlight reel vs behind-the-scenes" became *ses meilleurs moments … tes coulisses*; "scarcity mindset" became *mentalité de pénurie*; "hold their own frame" became *gardent leur cap*; "desperation repels" became *le désespoir fait fuir*; "staying level" became *rester stable*. Her friends in 4_3 are *amies* (female), as the scene implies.
 - **2026-11-15. Course 9, Reading & Responding** (3 lessons, 39 items, 855 English words). The check passes. For the reviewer: the three signal types became *ouverte / polie / froide* (*signaux d'ouverture / de politesse / de froideur* in the 9_3 guide); "seeing someone" became *elle voit quelqu'un*; the exit line "Nice talking to you" became *Ravi d'avoir discuté avec toi. Bonne fin de journée.*; "escalate" became *aller plus loin* (no physical meaning); "overstay your welcome" became *t'attarder plus que de raison*. The 9_3 lists use semicolons between items (French list style).
 - **2026-11-15. Course 15, Closing** (4 lessons, 62 items, 1,558 English words). The check passes. **"Close / closing" is *concrétiser* throughout; *conclure* appears nowhere in the lessons** (a search found only *en a conclu* = "concluded", in 1_5, which is unambiguous; *une conclusion nette* in 9_2 was changed to *une sortie nette* to be safe). The catalog title *Concrétiser* fits. For the reviewer: "close-ready" became *prête à se concrétiser*; "the ask" became *ta demande*; "assumed close / assume the close" became *proposer la suite comme une évidence* (lesson title *Pars du principe qu'elle est intéressée*); "choice architecture" became *architecture du choix*; "callback" became *rappel*. The 15_4 sentence "and still leaves her completely free to say no" is kept firm: *tout en la laissant entièrement libre de dire non*. "Portugal is unreal. You have to try the…" became *Il faut absolument que tu goûtes les…* (left open, as in the English).
+- **2026-11-15. Course 20, Physical Presence** (4 lessons, 63 items, 1,450 English words). The check passes. **Touch (20_4) carries the 17_3 stop rule as strictly as the English:** *Observe sa réaction : si elle se recule ou se crispe, arrête immédiatement et laisse-lui de l'espace.* The intimate zone in 20_2 is only *uniquement en présence de signes d'intérêt clairs*. Distances are metric: four feet became *un peu plus d'un mètre*, two to four feet *de 60 cm à un peu plus d'un mètre*, under two feet *moins de 60 cm*. For the reviewer: "escalate" became *faire monter l'attirance* / *faire avancer les choses*; "mirroring" became *mimétisme* / *refléter*; "chameleon effect" became *l'effet caméléon*; "calibrated" became *dosé*. The English slip in 20_3_4_2 is rendered by meaning (*à la même hauteur et dans la même posture*), as German did.
 
 ## Questions for Arthur
 
