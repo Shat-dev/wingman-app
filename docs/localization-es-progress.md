@@ -4,7 +4,21 @@ Branch `localization-release-c-es` (from `localization-release-c`). Rules and gl
 
 ## Where it stands
 
-All 25 lesson courses are drafted (see Summary). All lessons, scenarios and quiz questions are drafted, all checks pass and the review pack is built. Next: the App Store listing.
+**Done, all as a machine draft marked "needs review" (2026-11-15):** all 25 lesson courses (1,531 items, 34,442 English words) and all database content: 15 of 15 scenarios (about 10,400 English words) and 765 of 765 quiz questions (32,011 English words, with options and explanations). That's about 76,800 English words in all; the interface catalogs (585 strings) came from the setup session. Spanish DB content is in `localization/es/db/` (24 source files, English and Spanish side by side) and `supabase/seed/content_translations_es/` (24 upsert files, **not run**); the bundled quiz seed `Wingman/Content/question_translations_seed.es.json` holds all 765. Every checker passes (catalogs `--strict-lengths`, lesson overlays, DB generator, seed `--check`), the unit tests pass on "Wingman L10n 17 Pro" (341 run, 336 passed, 5 skipped by design, 0 failed), and a word search found no *vosotros*, *móvil*, *ordenador*, *guay* or *coger* (7 regional slips fixed). The review pack is `localization/es/review/wingman-spanish-review-pack.xlsx` (25 choices to check). The App Store listing draft is [spanish-app-store-listing.md](spanish-app-store-listing.md), with Spanish copies of the four banner mockups in `marketing/app-store-assets/` (not rendered, not uploaded). Nothing is pushed, merged, applied to Supabase or entered in App Store Connect.
+
+### What needs Arthur
+
+1. **Native review.** Send the review pack and the listing draft to a Spanish reviewer; the brief asks for a Mexican reviewer plus a Spaniard's pass on the paywall and onboarding. Start with "Choices to check" (consent wording first). Nothing is marked reviewed.
+2. **The live DB check.** The Supabase connector reached only Clera-App all session, so no Spanish id was checked against Wingman-App. The ids are German's, which German matched against the live DB on 2026-11-11 (md5 of all 765 question ids), and the Spanish files match German's id for id. Before applying, point the connector at Wingman-App (`bnckmgnysfliiypvxxii`) and re-run a SELECT-only check.
+3. **Applying the Spanish rows.** The 24 SQL files are generated, never run. Apply them only after review and the check above, the way German's were applied.
+4. **Merging.** `localization-release-c-es` is local and unpushed; merging it into `localization-release-c` (with the French branch) is for the setup session or you.
+5. **App Store listing.** Pick the name and subtitle (recommended: *Wingman: Hablar con mujeres* / *Aprende a ligar con seguridad*), decide whether Spain gets its own localization (notes included), make the five screenshots in Figma from the caption tables, and render the banner copies if you want them. Spanish phone captures create a prod guest user each run, so they need your OK.
+6. **Legal question (not guessed):** the terms and privacy pages are English only. Whether a Spanish listing needs Spanish versions or a note is the same open question as German's (see "Questions for Arthur").
+7. **Smaller items:** German's duplicate Japan question (`4533a8d2…` / `58d8c403…`) has identical Spanish; deleting one is still your call.
+
+### For the setup session (summary)
+
+No catalog mistakes or script bugs found. One small note below about `render.sh`.
 
 ## Summary
 
@@ -14,7 +28,7 @@ All 25 lesson courses are drafted (see Summary). All lessons, scenarios and quiz
 | Lesson overlays | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-15) |
 | Database content | **Done: 15 of 15 scenarios, 765 of 765 questions** (2026-11-15) |
 | Checks and review pack | **Done** (2026-11-15): all checks pass; review pack built |
-| App Store listing | Not started |
+| App Store listing | **Drafted** (2026-11-15): [spanish-app-store-listing.md](spanish-app-store-listing.md); banner copies `marketing/app-store-assets/*-es.html` |
 
 Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14, 19, 24, then 4, 9, 15, 20, 25, then 5, 10, 16, 21, 11.
 
@@ -83,11 +97,17 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
 - **2026-11-15. Checks, part 1 (text).** `check_string_catalogs.py --languages de,es,fr --strict-lengths` passes (es: 406 + 179 strings, none fall back to English); `lesson_overlays.py check es` passes (1,531 of 1,531 items, 25 courses); `db_translations_sql.py es` regenerates 24 files with no changes and `question_translations_seed.py es --check` passes (765). Word search over all 6,997 Spanish strings (overlays and DB): no *vosotros* forms (no -áis/-éis verbs, no *os*), no *móvil*, *ordenador*, *guay* or anything with *coger*/*cojo*; the two *vale* hits are the verb *valer* (*vale la subida*, *cuánto vale*). Fixed 7 regional slips found by a wider search: *apurarse* ×3 in course 12 ("to fret" in Spain) → *precipitarse*; *en plan* (Spain-only) in course 25 and scenario 6 → *en un tono amistoso* / *sin tono de disculpa*; *Me veo fatal* in course 6 → *Me veo horrible*; *linda* in course 6 → *guapa* (matches quiz `4003461a…`). The Spanish UI catalogs have no hits either (only *vale más* and the Churchill quote's *fatal*, both correct). Kept on purpose: *celular*, *carro*, *manejar*, *departamento*, *trago*, *bolsa* (the brief's neutral Latin American choices); *súper* as an intensifier (*súper molesto*) is fine in both.
 - **2026-11-15. Checks, part 2 (unit tests).** `xcodebuild test -scheme Wingman -only-testing:WingmanTests` on "Wingman L10n 17 Pro" (AE5F46EA…), own derived-data folder: **341 run, 336 passed, 5 skipped, 0 failed** (65 s), the same totals as the setup session's run. The 5 skips are the double-length pseudo-language probes, which are off by design. `ReleaseLanguageChecksTests` ran the Spanish that ships (lesson overlays, 765 bundled quiz rows, scenario files) and passed; it skipped only French content, with the note "not fully bundled yet", which is the intended behaviour in this worktree, so nothing for the setup session. `AnalyticsParityTests` (a translated app sends exactly what English sends) and the per-field fallback tests passed. The two "de file unreadable" warnings in the log come from `QuestionTranslationCacheTests` writing "not json" on purpose. No UI sweep and nothing against production.
 - **2026-11-15. Review pack.** `localization/es/review/choices.json` now has 25 "Choices to check" rows: the setup session's 13 interface choices plus 12 for lessons and database content (consent wording, *seguridad* safety/confidence, *no impresionarte de inmediato*, core terms, teasing/cheeky/banter, signal types, example lines, Latin American everyday words with Spain's equivalents, places and units, scenario titles, wordplay, the duplicate Japan question). `python3 scripts/review_pack.py es` wrote `localization/es/review/wingman-spanish-review-pack.xlsx`: Read me, Choices to check (25), Interface (465 strings), Lesson 1_1 and Lesson 6_1 (the two sample lessons, English next to Spanish), Daily quotes (120). As for German, the pack covers the interface and two sample lessons; the rest of the lessons and the DB content are reviewed from `localization/es/db/*.json` and the overlay files. Nothing is marked reviewed.
+- **2026-11-15. App Store listing.** `docs/spanish-app-store-listing.md`, modelled on the German one: Spanish (Mexico) name *Wingman: Hablar con mujeres* (27), subtitle *Aprende a ligar con seguridad* (29), 99-character keywords, promotional text (128), description (follows the live English point for point, no free trial), What's New, subscription names *Plan mensual* / *Plan anual* (as the paywall), screenshot captions for all five images (phone contents as the Spanish app shows them), plus Spanish (Spain) notes (name *Wingman: Ligar con confianza*, subtitle *Habla con mujeres sin miedo*, its own keywords, *ajustes* in What's New). Keyword research (web search, 2026-11-15): Spanish-language competitors for *hablar con mujeres* are few and small (Labia, Alpha, a paid guide), most coaching apps show English listings in the Mexican store, and *ligar* is crowded by dating apps (Kismia). Left out: *seducir/seducción/conquistar* (pickup tone) and *ansiedad* (health apps). New files `marketing/app-store-assets/header-a-es.html`, `header-b-es.html`, `search-a-es.html`, `search-b-es.html`: the banner mockups in Spanish, with the A headlines' font sizes scaled down by estimate. Not rendered, not uploaded. **All four steps are done; the loop stops here.**
 
 ## For the setup session
 
 (Catalog mistakes, better course titles, script bugs. Nothing edited from here.)
 
+- No catalog mistakes, course-title changes or script bugs found. The Spanish UI catalogs passed the same word search as the content (only correct uses of *vale más* and the Churchill quote's *fatal*).
+- `marketing/app-store-assets/render.sh` renders only the four English names. To render the Spanish copies, add `header-a-es`, `header-b-es`, `search-a-es` and `search-b-es` (same sizes as their English twins). Not edited from here; it's shared with French.
+
 ## Questions for Arthur
 
-(None yet.)
+1. **Terms and privacy pages (legal).** They are English only. Does a Spanish App Store listing need Spanish versions of them, or a note that they're in English? Same open point as German's checklist step 2; not guessed.
+2. **Spanish phone screenshots.** Fresh Spanish captures on the simulator would make the screenshots match the app, but each capture run creates a guest user in production. OK to do, or caption-only for the first launch?
+3. **Supabase connector.** It reached only Clera-App all session (re-checked twice). Switch it to Wingman-App before the Spanish rows are applied, so the SELECT-only id check can run.
