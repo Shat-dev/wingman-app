@@ -4,14 +4,14 @@ Branch `localization-release-c-es` (from `localization-release-c`). Rules and gl
 
 ## Where it stands
 
-Lessons in progress (see Summary). Not yet started: database content, checks, App Store listing.
+All 25 lesson courses are drafted (see Summary). Next: database content (15 scenarios, then 765 quiz questions), then checks and the App Store listing.
 
 ## Summary
 
 | Part | State |
 |---|---|
 | UI catalogs | 585 of 585 strings drafted (setup session, 2026-11-15) |
-| Lesson overlays | 24 of 25 courses (1,433 of 1,531 items) |
+| Lesson overlays | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-15) |
 | Database content | Not started (15 scenarios, 765 questions) |
 | Checks and review pack | Not started |
 | App Store listing | Not started |
@@ -45,6 +45,7 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
 - **2026-11-15. Course 10, Situational Specific Approaches** (3 lessons, 50 items, 1,249 English words). The check passes. For the reviewer: "Daytime / Nighttime Approaches" became *Acercarte de día / de noche*; "venue" became *lugar*; "logistics" became *la parte práctica*; "calibration" became *saber leer la situación*; the group opener "You all look like you are having the best night in here. What are we celebrating?" became *Parece que ustedes son las que más se están divirtiendo aquí. ¿Qué estamos celebrando?*. The bad example in 10_1_3_1 (a tap on the shoulder from behind) stays as the negative example it is. Mexico-only *echar porras*, *pendientes* (errands) and *pasársela* were replaced with neutral wording. The catalog title *Acercamientos según la situación* fits.
 - **2026-11-15. Course 16, Advanced Conversation Skills** (3 lessons, 51 items, 1,133 English words). The check passes. For the reviewer: "energy drop" became *caída de energía*; "emotional anchoring" became *anclaje emocional* (and "anchor" *ancla*); "validation" is *reconocimiento*, as in course 13; "debt and credentials" became *lo caros que son los estudios y lo poco que valen los títulos* (student debt isn't a Latin American theme, as German found); "roommate" became *compañera de departamento* (brief: *departamento*; Spain would say *compañera de piso*); "The food tastes kind of funky" became *La mía sabe un poco rara*.
 - **2026-11-15. Course 21, Advanced Flirting Skills** (3 lessons, 51 items, 1,183 English words). The check passes. "Disqualification Techniques" is a pickup-artist term with no neutral Spanish; as the brief says, it is rewritten by meaning: title *No impresionarte de inmediato*, and the concept the same way in the body. The touch line in 21_2_6_1 keeps every condition (*si ella claramente está disfrutando… siempre que ella siga relajada, y detente si se aparta*). For the reviewer: "sexual tension" became *tensión sexual*; "rapport" became *complicidad* in this lesson (it's what gets broken); "Callbacks & Inside Jokes" became *Retomar bromas y chistes privados*, with "callback" as *retomar (un detalle)*; "You have really good eye contact" became *Tienes una forma muy bonita de mirar*; "Buy me a drink" / "Only if you're getting the next round" became *Invítame un trago* / *Solo si la siguiente ronda la pagas tú*; "footpath" became *acera* (not Mexico's *banqueta*).
+- **2026-11-15. Course 11, Advanced Opening Techniques** (5 lessons, 98 items, 2,157 English words). The check passes. **All 25 courses are now drafted in Spanish (34,442 English words, 1,531 items).** For the reviewer: "curiosity / assumption / opinion openers" became *aperturas de curiosidad / con una suposición / de opinión*; "information gap" became *vacío de información*; "thrifting" became *buscar ropa en tiendas de segunda mano*; "try-hard" became *pasarse de intenso*; "a woman's opinion" became *la opinión de una mujer*; "False Exits" became *la falsa salida*; "time constraint" became *límite de tiempo*; "hook point" became *punto de enganche*. The English slips into third person in 11_5_6_2 ("He can walk away…"); Spanish keeps the lesson's *tú* (*Puedes alejarte…*).
 
 ## For the setup session
 
