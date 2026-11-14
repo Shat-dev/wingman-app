@@ -4,14 +4,14 @@ Branch `localization-release-c-fr` (from `localization-release-c`). Rules and gl
 
 ## Where it stands
 
-Lesson overlays in progress (7 of 25 courses). Database content, checks, review pack and App Store listing not started.
+Lesson overlays in progress (8 of 25 courses). Database content, checks, review pack and App Store listing not started.
 
 ## Summary
 
 | Part | State |
 |---|---|
 | UI catalogs | Done by the setup session (585 strings, draft) |
-| Lesson overlays | 7 of 25 courses, 467 of 1,531 items |
+| Lesson overlays | 8 of 25 courses, 530 of 1,531 items |
 | Database content | Not started (15 scenarios, 765 quiz questions) |
 | Checks and review pack | Not started |
 | App Store listing (France, notes for Canada) | Not started |
@@ -30,6 +30,7 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
 - **2026-11-15. Course 22, Upgrading Your Lifestyle** (4 lessons, 61 items, 1,447 English words). The check passes. The first course of every category is now done. For the reviewer: "social proof" became *preuve sociale*; "social circle" became *entourage*; "networking event" became *soirée de networking* (the usual French term); "playing games" became *jouer aux jeux vidéo*; "not a flex" became *il ne frime pas*; "resume" became *CV*; "The Interesting Man Advantage" became *L'atout de l'homme intéressant*. Bali / Australia kept (they are travel, not the reader's city).
 - **2026-11-15. Course 2, Fear & Exposure** (4 lessons, 61 items, 1,344 English words). The check passes. For the reviewer: "screw it" became *allez, tant pis* (German chose the coarse *Scheiß drauf*; the French is milder on purpose, matching the "calm older brother" tone; *et merde* would match the English register if wanted); "grounding" became *ancrage* (*Points d'ancrage : garder les pieds sur terre*); "bottom-up regulation" became *régulation ascendante (bottom-up)*; "nerves" became *le trac*; "performing" became *jouer un rôle*; "self-monitoring" became *autosurveillance*. "That girl" (2_3_3_1) stays *cette fille*, casual as in the English.
 - **2026-11-15. Course 7, The Physical Approach** (4 lessons, 67 items, 1,492 English words). The check passes. Distances are metric: eighteen inches became *45 cm*, three feet *un mètre*. For the reviewer: "the 3-second rule" became *la règle des 3 secondes*; "overthinking" became *réflexion excessive*; "analysis paralysis" became *paralysie de l'analyse*; "outdoor cafes" became *en terrasse*; "social calibration" became *tu sais lire la situation*; "approach angle / distance" became *angle / distance d'approche*. The lessons cover the 3-second rule, angle and distance, posture while walking up and eye contact, so the catalog title *Aller vers elle* fits (German changed its title for the same reason; no change needed here).
+- **2026-11-15. Course 13, Listening & Attunement** (4 lessons, 63 items, 1,383 English words). The check passes. For the reviewer: "validating" became *reconnaître* / *la reconnaissance* (*valider* avoided, per the glossary); "validating follow-ups" became *une relance qui reconnaît ce qu'elle dit*; "attunement / attuned" became *être à l'écoute / en phase*; "subtext" became *sous-texte*; "non-verbal listening cues" became *signes d'écoute non verbaux*. The sister lives in Bordeaux rather than Portland (German used Hamburg). "I'm fine" became *Ça va*.
 
 ## Questions for Arthur
 
