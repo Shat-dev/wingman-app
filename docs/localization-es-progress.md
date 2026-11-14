@@ -11,7 +11,7 @@ Lessons in progress (see Summary). Not yet started: database content, checks, Ap
 | Part | State |
 |---|---|
 | UI catalogs | 585 of 585 strings drafted (setup session, 2026-11-15) |
-| Lesson overlays | 9 of 25 courses (579 of 1,531 items) |
+| Lesson overlays | 10 of 25 courses (628 of 1,531 items) |
 | Database content | Not started (15 scenarios, 765 questions) |
 | Checks and review pack | Not started |
 | App Store listing | Not started |
@@ -30,6 +30,7 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
 - **2026-11-15. Course 7, The Physical Approach** (4 lessons, 67 items, 1,492 English words). The check passes. The lessons are about the walk-up itself (3-second rule, angle and distance, posture, eye contact), so the catalog title *Cómo acercarte* fits; no change suggested. Distances are metric: 18 inches became *45 cm*, three feet *un metro, más o menos*. For the reviewer: "overthinking" became *darle (demasiadas) vueltas*, now also in course 1; "analysis paralysis" became *parálisis por análisis*; "social calibration" became *sabes leer la situación*; "What are you drinking?" became *¿Qué estás tomando?*. Avoided *apurarse* (in Spain it can mean "to fret"), *voltear* and *más seguido*, which are Latin American only.
 - **2026-11-15. Course 13, Listening & Attunement** (4 lessons, 63 items, 1,383 English words). The check passes. For the reviewer: "attunement" became *estar en sintonía*; "subtext" became *subtexto* (lesson title *Escucha lo que no se dice*); "validating" became *reconocer* / *reconocimiento* throughout (the brief keeps *validar* for sparing use), so "Validating Her Response First" became *Primero reconoce lo que te dijo*; "Non-Verbal Listening Cues" became *Escuchar con el cuerpo*; "Good on you for maintaining it" became *Qué bien que lo cuides*. The sister lives in Guadalajara rather than Portland.
 - **2026-11-15. Course 18, Playfulness & Spark** (3 lessons, 49 items, 1,167 English words). The check passes. For the reviewer: "banter" became *ida y vuelta (con humor)* / *bromear*; "teasing" became *tomarle el pelo*; "cheek / cheeky" became *picardía / pícaro, atrevido* (lesson title *Ponle un poco de picardía*, which matches the catalog's course title *Picardía y chispa*); "light challenges" became *retos ligeros*; "How old do I look? Guess." became *¿Cuántos me echas? Adivina*; the café line "it's a big decision, isn't it?" became *es una decisión que te cambia la vida, ¿no?* so the irony reads; "mock shock" became *indignación de mentira*.
+- **2026-11-15. Course 23, Creating Opportunities** (3 lessons, 49 items, 1,180 English words). The check passes. For the reviewer: "home court advantage" became *jugar de local* (a football phrase used across Latin America and Spain); "regular" became *cliente habitual* / *los habituales*; "foam rolling near the turf" became *pasándote el rodillo de espuma cerca de la zona de césped artificial*; "kettlebells" became *pesas rusas*; "running club" became *club de corredores*; "reps" are *intentos*; "inside joke" became *una broma que solo ustedes entienden*; "the room already vouched for you" became *el lugar ya respondió por ti*. Avoided *súper* (Mexico) and *pasto* (Latin America) in favour of *supermercado* and *césped*.
 
 ## For the setup session
 
