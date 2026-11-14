@@ -11,7 +11,7 @@ Lessons in progress (see Summary). Not yet started: database content, checks, Ap
 | Part | State |
 |---|---|
 | UI catalogs | 585 of 585 strings drafted (setup session, 2026-11-15) |
-| Lesson overlays | 15 of 25 courses (917 of 1,531 items) |
+| Lesson overlays | 16 of 25 courses (991 of 1,531 items) |
 | Database content | Not started (15 scenarios, 765 questions) |
 | Checks and review pack | Not started |
 | App Store listing | Not started |
@@ -36,6 +36,7 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
 - **2026-11-15. Course 14, Sharing & Vulnerability** (4 lessons, 62 items, 1,432 English words). The check passes. For the reviewer: "reciprocity rhythm" became *el ritmo de la reciprocidad*; "calibration followed by escalation" became *leer la situación y después avanzar*; "processed / unprocessed sharing" became *compartir algo procesado / sin procesar*; "oversharing" became *contar de más*; "Share the lesson, not the wound" became *Cuenta la lección, no la herida*; story structure "setup, conflict, resolution" became *planteamiento, conflicto y desenlace*; "Match First, Then Lead" became *Primero acompaña, luego guía*. The catalog's course title *Abrirte y mostrarte vulnerable* fits these lessons. "High school" became *tus años de escuela* (school names differ by country: *prepa*, *instituto*, *colegio*).
 - **2026-11-15. Course 19, Compliments & Verbal Chemistry** (3 lessons, 46 items, 1,020 English words). The check passes. For the reviewer: "Being Nice Is Not Desire" became *Ser amable no es lo mismo que desear*; "flirtatious" is consistently *coqueto* (German had two words for it; Spanish uses one); "charged" became *con chispa*; "the frame has shifted" became *el tono ya cambió*; "Nice dress!" became *¡Qué bonito vestido!* (neutral; *lindo* is Latin American); the mood-shifting line is *Se te iluminan los ojos cuando te ríes. Me gusta.*
 - **2026-11-15. Course 24, Mastery & Identity** (3 lessons, 51 items, 1,077 English words). The check passes. The third round is done. For the reviewer: "volume" became *cantidad* (lesson title *La cantidad crea familiaridad*); "reps" *intentos*; "habituation" *habituación*; "automaticity" *automatización*; "skill decay" became *que tus habilidades se oxiden*; the four learning stages use the usual Spanish terms (*incompetencia inconsciente* … *competencia inconsciente*). The driving example uses *manejar* (the brief's choice; Spain says *conducir*) and *señalizar* rather than a regional word for the indicator.
+- **2026-11-15. Course 4, Inner Stability** (4 lessons, 74 items, 1,572 English words). The check passes. For the reviewer: "approval-seeking" became *buscar aprobación*; "outcome independence" became *no depender del resultado (outcome independence)*, as in course 17 and the brief; "highlight reel vs behind-the-scenes footage" became *sus mejores momentos* vs *tus escenas detrás de cámaras* (Spain would say *entre bastidores*); "scarcity mindset" became *mentalidad de escasez*; "high stakes" became *algo de vida o muerte*; "Own Your Pace" became *Respeta tu propio ritmo*; "Handling Positive Responses" became *Cuando la respuesta es positiva*.
 
 ## For the setup session
 
