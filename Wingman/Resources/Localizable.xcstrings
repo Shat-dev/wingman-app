@@ -19,6 +19,12 @@
             "state" : "new",
             "value" : "%1$@ billed today for your first %2$lld months, then %3$@/month. Cancel anytime in App Store settings."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hoy pagas %1$@ por tus primeros %2$lld meses; después, %3$@ al mes. Cancela cuando quieras en la configuración del App Store."
+          }
         }
       }
     },
@@ -35,6 +41,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$@ billed today for your first %2$lld months, then %3$@/year. Cancel anytime in App Store settings."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hoy pagas %1$@ por tus primeros %2$lld meses; después, %3$@ al año. Cancela cuando quieras en la configuración del App Store."
           }
         }
       }
@@ -53,6 +65,12 @@
             "state" : "new",
             "value" : "%1$@ billed today for your first %2$lld years, then %3$@/month. Cancel anytime in App Store settings."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hoy pagas %1$@ por tus primeros %2$lld años; después, %3$@ al mes. Cancela cuando quieras en la configuración del App Store."
+          }
         }
       }
     },
@@ -69,6 +87,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$@ billed today for your first %2$lld years, then %3$@/year. Cancel anytime in App Store settings."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hoy pagas %1$@ por tus primeros %2$lld años; después, %3$@ al año. Cancela cuando quieras en la configuración del App Store."
           }
         }
       }
@@ -87,6 +111,12 @@
             "state" : "new",
             "value" : "%1$@ billed today for your first month, then %2$@/month. Cancel anytime in App Store settings."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hoy pagas %1$@ por tu primer mes; después, %2$@ al mes. Cancela cuando quieras en la configuración del App Store."
+          }
         }
       }
     },
@@ -103,6 +133,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$@ billed today for your first month, then %2$@/year. Cancel anytime in App Store settings."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hoy pagas %1$@ por tu primer mes; después, %2$@ al año. Cancela cuando quieras en la configuración del App Store."
           }
         }
       }
@@ -121,6 +157,12 @@
             "state" : "new",
             "value" : "%1$@ billed today for your first year, then %2$@/month. Cancel anytime in App Store settings."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hoy pagas %1$@ por tu primer año; después, %2$@ al mes. Cancela cuando quieras en la configuración del App Store."
+          }
         }
       }
     },
@@ -137,6 +179,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$@ billed today for your first year, then %2$@/year. Cancel anytime in App Store settings."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hoy pagas %1$@ por tu primer año; después, %2$@ al año. Cancela cuando quieras en la configuración del App Store."
           }
         }
       }
@@ -155,6 +203,12 @@
             "state" : "new",
             "value" : "%1$@ billed today, then %2$@ at each renewal. Cancel anytime in App Store settings."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hoy pagas %1$@; después, %2$@ en cada renovación. Cancela cuando quieras en la configuración del App Store."
+          }
         }
       }
     },
@@ -172,6 +226,12 @@
             "state" : "new",
             "value" : "%1$@: %2$@"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%1$@: %2$@"
+          }
         }
       }
     },
@@ -187,6 +247,12 @@
             "state" : "needs_review",
             "value" : "%lld richtig"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld correctas"
+          }
         }
       }
     },
@@ -198,6 +264,12 @@
             "state" : "needs_review",
             "value" : "%lld Tage in Folge"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Racha de %lld días"
+          }
         }
       }
     },
@@ -208,6 +280,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "vor %lld Tagen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hace %lld días"
           }
         }
       }
@@ -246,6 +324,24 @@
                 "stringUnit" : {
                   "state" : "translated",
                   "value" : "%lld lessons"
+                }
+              }
+            }
+          }
+        },
+        "es" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "needs_review",
+                  "value" : "%lld lección"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "needs_review",
+                  "value" : "%lld lecciones"
                 }
               }
             }
@@ -291,6 +387,24 @@
               }
             }
           }
+        },
+        "es" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "needs_review",
+                  "value" : "Se necesita %lld lección"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "needs_review",
+                  "value" : "Se necesitan %lld lecciones"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -301,6 +415,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "%lld Min."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld min"
           }
         }
       }
@@ -313,6 +433,12 @@
             "state" : "needs_review",
             "value" : "%lld Min./Tag"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld min / día"
+          }
         }
       }
     },
@@ -324,6 +450,12 @@
             "state" : "needs_review",
             "value" : "%lld Minuten"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld minutos"
+          }
         }
       }
     },
@@ -331,6 +463,12 @@
       "comment" : "A percentage, e.g. course progress or a discount. Use your language's spacing between number and percent sign.",
       "localizations" : {
         "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld %%"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "%lld %%"
@@ -346,6 +484,12 @@
             "state" : "needs_review",
             "value" : "%lld Tage gratis"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld días gratis"
+          }
         }
       }
     },
@@ -356,6 +500,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "%lld Monate gratis"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld meses gratis"
           }
         }
       }
@@ -368,6 +518,12 @@
             "state" : "needs_review",
             "value" : "%lld-Monats-Abo"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Plan de %lld meses"
+          }
         }
       }
     },
@@ -378,6 +534,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "%lld Jahre gratis"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld años gratis"
           }
         }
       }
@@ -394,6 +556,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
+            "value" : "%1$lld. %2$@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "%1$lld. %2$@"
           }
         }
@@ -415,6 +583,12 @@
             "state" : "needs_review",
             "value" : "1 – sehr nervös"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "1 - muy nervioso"
+          }
         }
       }
     },
@@ -425,6 +599,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "1 richtig"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "1 correcta"
           }
         }
       }
@@ -437,6 +617,12 @@
             "state" : "needs_review",
             "value" : "vor 1 Tag"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ayer"
+          }
         }
       }
     },
@@ -447,6 +633,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "1 Tag in Folge"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Racha de 1 día"
           }
         }
       }
@@ -459,6 +651,12 @@
             "state" : "needs_review",
             "value" : "10 – sehr selbstbewusst"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "10 - muy seguro"
+          }
         }
       }
     },
@@ -470,6 +668,12 @@
             "state" : "needs_review",
             "value" : "3x"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "3 veces"
+          }
         }
       }
     },
@@ -479,6 +683,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "45 % aller Männer zwischen 18 und 24 haben noch nie eine Frau angesprochen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "De los hombres de 18 a 24 años, el 45 % nunca se ha acercado a una mujer"
           }
         }
       }
@@ -490,6 +700,12 @@
             "state" : "needs_review",
             "value" : "48 % aller Männer zwischen 26 und 40 haben im letzten Jahr niemanden angesprochen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "De los hombres de 26 a 40 años, el 48 % no se ha acercado a nadie en el último año"
+          }
         }
       }
     },
@@ -499,6 +715,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "58 % aller Männer, die regelmäßig ansprechen, bekommen eine Nummer, ein Date oder eine Beziehung"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "De los hombres que se acercan con constancia, el 58 % consigue un número, una cita o una relación"
           }
         }
       }
@@ -510,6 +732,12 @@
             "state" : "needs_review",
             "value" : "63 % aller Single-Männer bereuen, dass sie in jüngeren Jahren keine Frauen angesprochen haben"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "De los hombres solteros, el 63 % lamenta no haberse acercado a mujeres cuando era más joven"
+          }
         }
       }
     },
@@ -519,6 +747,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "77 % aller Frauen zwischen 18 und 30 wünschen sich, öfter angesprochen zu werden"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "De las mujeres de 18 a 30 años, el 77 % quiere que más hombres le hablen"
           }
         }
       }
@@ -530,6 +764,12 @@
             "state" : "needs_review",
             "value" : "Ein Mann sieht einer Frau nach und stellt sich vor, wie sie zusammen wären"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Un hombre ve pasar a una mujer e imagina que están juntos"
+          }
         }
       }
     },
@@ -539,6 +779,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Konto"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cuenta"
           }
         }
       }
@@ -550,6 +796,12 @@
             "state" : "needs_review",
             "value" : "Namen hinzufügen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Agrega tu nombre"
+          }
         }
       }
     },
@@ -559,6 +811,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Alles richtig"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Todo correcto"
           }
         }
       }
@@ -570,6 +828,12 @@
             "state" : "needs_review",
             "value" : "Erlaube Mitteilungen für Tipps und Angebote. Du kannst sie jederzeit in den Einstellungen ausschalten."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Permite las notificaciones de consejos y ofertas. Puedes desactivarlas cuando quieras en Configuración."
+          }
         }
       }
     },
@@ -579,6 +843,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Fast geschafft, gleich kannst du loslegen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ya casi: en un segundo podrás explorar."
           }
         }
       }
@@ -590,6 +860,12 @@
             "state" : "needs_review",
             "value" : "Fast die Hälfte der Männer hat im letzten Jahr niemanden angesprochen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Casi la mitad de los hombres no se ha acercado a nadie en el último año"
+          }
         }
       }
     },
@@ -599,6 +875,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Fast die Hälfte der Männer in deinem Alter hat noch nie eine Frau angesprochen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Casi la mitad de los hombres de tu edad nunca se ha acercado a una mujer"
           }
         }
       }
@@ -610,6 +892,12 @@
             "state" : "needs_review",
             "value" : "Fast die Hälfte der Männer in deinem Alter hat im letzten Jahr niemanden angesprochen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Casi la mitad de los hombres de tu edad no se ha acercado a nadie en el último año"
+          }
         }
       }
     },
@@ -619,6 +907,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Du hast schon ein Konto?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿Ya tienes una cuenta?"
           }
         }
       }
@@ -630,6 +924,12 @@
             "state" : "needs_review",
             "value" : "Ein Fehler ist aufgetreten"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ocurrió un error"
+          }
         }
       }
     },
@@ -639,6 +939,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Ein unerwarteter Fehler ist aufgetreten. Bitte versuch es noch einmal."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ocurrió un error inesperado. Inténtalo de nuevo."
           }
         }
       }
@@ -650,6 +956,12 @@
             "state" : "needs_review",
             "value" : "Ein unbekannter Fehler ist aufgetreten. Bitte versuch es noch einmal."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ocurrió un error desconocido. Inténtalo de nuevo."
+          }
         }
       }
     },
@@ -659,6 +971,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Deine Antworten werden ausgewertet"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Analizando tus respuestas"
           }
         }
       }
@@ -670,6 +988,12 @@
             "state" : "needs_review",
             "value" : "Und hier übst du.\nBuchladen, Fitnessstudio, Café. Wähl, was du sagst, und sieh, was passiert."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Y aquí es donde practicas.\nLibrería, gimnasio, cafetería. Elige qué decir y mira qué pasa."
+          }
         }
       }
     },
@@ -679,6 +1003,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Nervös"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nervioso"
           }
         }
       }
@@ -690,6 +1020,12 @@
             "state" : "needs_review",
             "value" : "Leitfaden zu den Levels"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Guía de niveles"
+          }
         }
       }
     },
@@ -699,6 +1035,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Sprich jemanden, der dich interessiert, direkt an"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Acércate de inmediato a alguien que te interese"
           }
         }
       }
@@ -710,6 +1052,12 @@
             "state" : "needs_review",
             "value" : "Ansprechen nach Level"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Acercamientos por nivel"
+          }
         }
       }
     },
@@ -719,6 +1067,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Erfasste Ansprachen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Acercamientos registrados"
           }
         }
       }
@@ -730,6 +1084,12 @@
             "state" : "needs_review",
             "value" : "Erfasste Ansprachen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Acercamientos registrados"
+          }
         }
       }
     },
@@ -739,6 +1099,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Zeichenlimit fast erreicht"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Casi llegas al límite de caracteres"
           }
         }
       }
@@ -750,6 +1116,12 @@
             "state" : "needs_review",
             "value" : "Möchtest du diesen Eintrag wirklich löschen?"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿Seguro que quieres eliminar este acercamiento?"
+          }
         }
       }
     },
@@ -759,6 +1131,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Möchtest du dein Konto wirklich löschen? Das kann nicht rückgängig gemacht werden."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿Seguro que quieres eliminar tu cuenta? Esta acción no se puede deshacer."
           }
         }
       }
@@ -770,6 +1148,12 @@
             "state" : "needs_review",
             "value" : "Einen Mitarbeiter um eine Empfehlung bitten"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pedirle una recomendación a un empleado"
+          }
         }
       }
     },
@@ -780,6 +1164,12 @@
             "state" : "needs_review",
             "value" : "Nach ihrer Nummer fragen (wenn keine Zeit für mehr bleibt)"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pedirle su número (si no hay tiempo para crear conexión)"
+          }
         }
       }
     },
@@ -789,6 +1179,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Jemanden um etwas bitten"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pedirle algo a la persona"
           }
         }
       }
@@ -801,6 +1197,12 @@
             "state" : "needs_review",
             "value" : "Zurück"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Atrás"
+          }
         }
       }
     },
@@ -812,6 +1214,12 @@
             "state" : "needs_review",
             "value" : "Sofortige Abrechnung. Jederzeit in den App-Store-Einstellungen kündbar."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Se cobra de inmediato. Cancela cuando quieras en la configuración del App Store."
+          }
         }
       }
     },
@@ -821,6 +1229,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Kurze Lektionen für den Arbeitsweg oder die Mittagspause"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lecciones cortas para el trayecto o la hora de la comida"
           }
         }
       }
@@ -832,6 +1246,12 @@
             "state" : "needs_review",
             "value" : "Bau das Selbstvertrauen auf, zu handeln, wenn es darauf ankommt"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Construye la seguridad para actuar cuando importa"
+          }
         }
       }
     },
@@ -841,6 +1261,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Dein Übungsplan wird erstellt"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Creando tu plan de práctica"
           }
         }
       }
@@ -857,6 +1283,12 @@
             "state" : "needs_review",
             "value" : "Indem du fortfährst, stimmst du unseren [AGB](terms) und der [Datenschutzerklärung](privacy) zu"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Al continuar, aceptas nuestros [Términos](terms) y nuestra [Política de privacidad](privacy)"
+          }
         }
       }
     },
@@ -866,6 +1298,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Kann man Verbindung mit Geld aufwiegen?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿Se le puede poner precio a conectar con alguien?"
           }
         }
       }
@@ -877,6 +1315,12 @@
             "state" : "needs_review",
             "value" : "Preise können nicht geladen werden"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se pueden cargar los precios"
+          }
         }
       }
     },
@@ -886,6 +1330,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Abbrechen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cancelar"
           }
         }
       }
@@ -897,6 +1347,12 @@
             "state" : "needs_review",
             "value" : "Lockerer Plausch mit einer Mitreisenden im Zug"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Charla casual con una compañera de viaje en el tren"
+          }
         }
       }
     },
@@ -906,6 +1362,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Mit einer Stammkundin im Fitnessstudio über Trainingspläne reden"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hablar de rutinas con una habitual del gimnasio"
           }
         }
       }
@@ -917,6 +1379,12 @@
             "state" : "needs_review",
             "value" : "Antwort prüfen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Comprobar respuesta"
+          }
         }
       }
     },
@@ -926,6 +1394,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Schau später wieder vorbei, dann gibt es neue Übungsfragen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Vuelve más tarde para ver nuevas preguntas de práctica."
           }
         }
       }
@@ -937,6 +1411,12 @@
             "state" : "needs_review",
             "value" : "Prüf deine Verbindung und versuch es noch einmal."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Revisa tu conexión e inténtalo de nuevo."
+          }
         }
       }
     },
@@ -947,6 +1427,12 @@
             "state" : "needs_review",
             "value" : "Sieh dir deine Reflexionen an, um Erkenntnisse zu gewinnen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Revisa tus reflexiones para ver lo que aprendiste"
+          }
         }
       }
     },
@@ -956,6 +1442,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Wähl eine Option, um fortzufahren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Elige una opción para continuar"
           }
         }
       }
@@ -968,6 +1460,12 @@
             "state" : "needs_review",
             "value" : "%lld %% sichern"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Obtén %lld %% de descuento"
+          }
         }
       }
     },
@@ -977,6 +1475,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Rabatt sichern"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Quiero mi descuento"
           }
         }
       }
@@ -988,6 +1492,12 @@
             "state" : "needs_review",
             "value" : "Angebot schließen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cerrar oferta"
+          }
         }
       }
     },
@@ -997,6 +1507,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Paywall schließen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cerrar pantalla de pago"
           }
         }
       }
@@ -1008,6 +1524,12 @@
             "state" : "needs_review",
             "value" : "Schließt du das, ist es für immer weg"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Si cierras esto, no vuelve"
+          }
         }
       }
     },
@@ -1017,6 +1539,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Wirke natürlich, nicht nervös"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Se te ve natural, no nervioso"
           }
         }
       }
@@ -1029,6 +1557,12 @@
             "state" : "needs_review",
             "value" : "Verpflichten"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Comprometerme"
+          }
         }
       }
     },
@@ -1039,6 +1573,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Abgemacht."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Comprometido."
           }
         }
       }
@@ -1051,6 +1591,12 @@
             "state" : "needs_review",
             "value" : "Schließ alle Lektionen in „%@“ ab, um diesen Kurs freizuschalten."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Completa todas las lecciones de %@ para desbloquear este curso."
+          }
         }
       }
     },
@@ -1060,6 +1606,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Schließ alle Lektionen im vorherigen Kurs ab, um diesen Kurs freizuschalten."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Completa todas las lecciones del curso anterior para desbloquear este."
           }
         }
       }
@@ -1072,6 +1624,12 @@
             "state" : "needs_review",
             "value" : "Erledigt"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Completado"
+          }
         }
       }
     },
@@ -1081,6 +1639,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Selbstvertrauen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nivel de seguridad"
           }
         }
       }
@@ -1092,6 +1656,12 @@
             "state" : "needs_review",
             "value" : "Selbstvertrauen im Verlauf"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tu seguridad con el tiempo"
+          }
         }
       }
     },
@@ -1101,6 +1671,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Selbstvertrauen ist eine Fähigkeit. Und Fähigkeiten kann man aufbauen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "La seguridad es una habilidad. Las habilidades se construyen."
           }
         }
       }
@@ -1113,6 +1689,12 @@
             "state" : "needs_review",
             "value" : "Selbstvertrauen: %lld/10"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Seguridad: %lld/10"
+          }
         }
       }
     },
@@ -1122,6 +1704,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Selbstbewusst"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Seguro"
           }
         }
       }
@@ -1133,6 +1721,12 @@
             "state" : "needs_review",
             "value" : "Glückwunsch! Wie hast du dich gefühlt? Wie war die Situation? Wie ist es gelaufen?"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¡Felicidades! ¿Cómo te sentiste? ¿Cuál era la situación? ¿Cómo te fue?"
+          }
         }
       }
     },
@@ -1142,6 +1736,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Weiter"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Continuar"
           }
         }
       }
@@ -1153,6 +1753,12 @@
             "state" : "needs_review",
             "value" : "Mit Apple fortfahren"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Continuar con Apple"
+          }
         }
       }
     },
@@ -1162,6 +1768,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Mit Google fortfahren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Continuar con Google"
           }
         }
       }
@@ -1173,6 +1785,12 @@
             "state" : "needs_review",
             "value" : "Richtige Antwort!"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¡Respuesta correcta!"
+          }
         }
       }
     },
@@ -1182,6 +1800,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Richtige Antwort!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¡Respuesta correcta!"
           }
         }
       }
@@ -1193,6 +1817,12 @@
             "state" : "needs_review",
             "value" : "Abo-Optionen konnten nicht geladen werden. Bitte versuch es noch einmal."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se pudieron cargar las opciones de suscripción. Inténtalo de nuevo."
+          }
         }
       }
     },
@@ -1202,6 +1832,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Die heutigen Fragen konnten nicht geladen werden. Bitte versuch es noch einmal."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se pudieron cargar las preguntas de hoy. Inténtalo de nuevo."
           }
         }
       }
@@ -1213,6 +1849,12 @@
             "state" : "needs_review",
             "value" : "Deine tägliche Übung konnte nicht geladen werden. Bitte versuch es noch einmal."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se pudo cargar tu práctica diaria. Inténtalo de nuevo."
+          }
         }
       }
     },
@@ -1222,6 +1864,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Dein Abo konnte nicht geladen werden. Bitte versuch es noch einmal."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se pudo cargar tu suscripción. Inténtalo de nuevo."
           }
         }
       }
@@ -1233,6 +1881,12 @@
             "state" : "needs_review",
             "value" : "Deine Antwort konnte nicht gespeichert werden. Bitte versuch es noch einmal."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se pudo guardar tu respuesta. Inténtalo de nuevo."
+          }
         }
       }
     },
@@ -1242,6 +1896,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Die Anmeldung konnte nicht gestartet werden. Bitte versuch es noch einmal."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se pudo iniciar sesión. Inténtalo de nuevo."
           }
         }
       }
@@ -1253,6 +1913,12 @@
             "state" : "needs_review",
             "value" : "Deine Serie konnte nicht aktualisiert werden. Bitte versuch es noch einmal."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se pudo actualizar tu racha. Inténtalo de nuevo."
+          }
         }
       }
     },
@@ -1262,6 +1928,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Kurs abgeschlossen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Curso completado."
           }
         }
       }
@@ -1274,6 +1946,12 @@
             "state" : "needs_review",
             "value" : "Kurse"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cursos"
+          }
         }
       }
     },
@@ -1283,6 +1961,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Kurse. Mindset, Ansprechen, Flirten, Dranbleiben.\nKurze Lektionen für den Mann, der handelt – nicht den, der erstarrt."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cursos. Mentalidad, acercarte, coquetear, dar seguimiento.\nLecciones cortas que forman al hombre que actúa, no al que se congela."
           }
         }
       }
@@ -1294,6 +1978,12 @@
             "state" : "needs_review",
             "value" : "Konto erstellen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Crear cuenta"
+          }
         }
       }
     },
@@ -1303,6 +1993,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Kostenloses Konto erstellen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Crea una cuenta gratis"
           }
         }
       }
@@ -1314,6 +2010,12 @@
             "state" : "needs_review",
             "value" : "Erstell ein kostenloses Konto, damit deine Antworten und dein Fortschritt gespeichert werden."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Crea una cuenta gratis para guardar tus respuestas y tu progreso."
+          }
         }
       }
     },
@@ -1323,6 +2025,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Gelegenheiten für echten Kontakt schaffen und dabei locker bleiben."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Crear oportunidades para conectar sin dejar de ser casual."
           }
         }
       }
@@ -1334,6 +2042,12 @@
             "state" : "needs_review",
             "value" : "Tägliche Übung"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Práctica diaria"
+          }
         }
       }
     },
@@ -1343,6 +2057,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Tägliches Leseziel"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Meta diaria de lectura"
           }
         }
       }
@@ -1354,6 +2074,12 @@
             "state" : "needs_review",
             "value" : "Tägliche Lese-Erinnerung"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Recordatorio diario de lectura"
+          }
         }
       }
     },
@@ -1363,6 +2089,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Tägliche Übung abgeschlossen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Práctica diaria completada."
           }
         }
       }
@@ -1375,6 +2107,12 @@
             "state" : "needs_review",
             "value" : "Datenfehler: %@"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Error de datos: %@"
+          }
         }
       }
     },
@@ -1384,6 +2122,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Tag 1 auf dem Weg zum Typen, der es einfach macht"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Día 1 para convertirte en el hombre que se anima"
           }
         }
       }
@@ -1395,6 +2139,12 @@
             "state" : "needs_review",
             "value" : "Löschen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Eliminar"
+          }
         }
       }
     },
@@ -1404,6 +2154,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Konto löschen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Eliminar cuenta"
           }
         }
       }
@@ -1415,6 +2171,12 @@
             "state" : "needs_review",
             "value" : "Eintrag löschen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Eliminar acercamiento"
+          }
         }
       }
     },
@@ -1424,6 +2186,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Meine Daten löschen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Eliminar mis datos"
           }
         }
       }
@@ -1435,6 +2203,12 @@
             "state" : "needs_review",
             "value" : "Löschen fehlgeschlagen. Bitte versuch es später noch einmal."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se pudo eliminar. Inténtalo más tarde."
+          }
         }
       }
     },
@@ -1444,6 +2218,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Sicherheit gewinnen durch alltägliche Begegnungen, bei denen nichts auf dem Spiel steht."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ganar soltura con intercambios cotidianos en los que no hay nada en juego."
           }
         }
       }
@@ -1456,6 +2236,12 @@
             "state" : "needs_review",
             "value" : "Direktes Ansprechen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Acercamiento directo"
+          }
         }
       }
     },
@@ -1466,6 +2252,12 @@
             "state" : "needs_review",
             "value" : "Direktes Kompliment zu Persönlichkeit oder Aussehen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cumplido directo sobre su personalidad o su aspecto"
+          }
         }
       }
     },
@@ -1475,6 +2267,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Willst du oft Frauen ansprechen, tust es aber nicht?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿Muchas veces quieres hablar con mujeres pero no lo haces?"
           }
         }
       }
@@ -1487,6 +2285,12 @@
             "state" : "needs_review",
             "value" : "Nichts tun"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sin hacer nada"
+          }
         }
       }
     },
@@ -1496,6 +2300,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Werd nicht Teil dieser Statistik. Dein zukünftiges Ich zählt auf dich."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No seas parte de esa estadística. Tu yo del futuro cuenta contigo."
           }
         }
       }
@@ -1507,6 +2317,12 @@
             "state" : "needs_review",
             "value" : "Verlier dein Logbuch nicht"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No pierdas tu registro"
+          }
         }
       }
     },
@@ -1516,6 +2332,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Z. B. Im Café angesprochen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ej.: Me acerqué en una cafetería"
           }
         }
       }
@@ -1527,6 +2349,12 @@
             "state" : "needs_review",
             "value" : "Bearbeiten"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Editar"
+          }
         }
       }
     },
@@ -1536,6 +2364,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Eintrag bearbeiten"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Editar acercamiento"
           }
         }
       }
@@ -1547,6 +2381,12 @@
             "state" : "needs_review",
             "value" : "Profil bearbeiten"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Editar perfil"
+          }
         }
       }
     },
@@ -1557,6 +2397,12 @@
             "state" : "needs_review",
             "value" : "Gib deinen Namen ein"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Escribe tu nombre"
+          }
         }
       }
     },
@@ -1566,6 +2412,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Fehler"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Error"
           }
         }
       }
@@ -1578,6 +2430,12 @@
             "state" : "needs_review",
             "value" : "Beispiele"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ejemplos"
+          }
         }
       }
     },
@@ -1587,6 +2445,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Längeres Gespräch"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Conversación más larga"
           }
         }
       }
@@ -1598,6 +2462,12 @@
             "state" : "needs_review",
             "value" : "Extrem selbstbewusst"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Totalmente seguro"
+          }
         }
       }
     },
@@ -1607,6 +2477,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Löschen fehlgeschlagen. Bitte versuch es noch einmal."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se pudo eliminar el acercamiento. Inténtalo de nuevo."
           }
         }
       }
@@ -1618,6 +2494,12 @@
             "state" : "needs_review",
             "value" : "Einträge konnten nicht geladen werden. Bitte versuch es noch einmal."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se pudieron cargar los acercamientos. Inténtalo de nuevo."
+          }
         }
       }
     },
@@ -1627,6 +2509,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Wiederherstellen fehlgeschlagen. Bitte versuch es noch einmal."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se pudieron restaurar las compras. Inténtalo de nuevo."
           }
         }
       }
@@ -1638,6 +2526,12 @@
             "state" : "needs_review",
             "value" : "Speichern fehlgeschlagen. Bitte versuch es noch einmal."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se pudo guardar. Inténtalo de nuevo."
+          }
         }
       }
     },
@@ -1647,6 +2541,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Aktualisieren fehlgeschlagen. Bitte versuch es noch einmal."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se pudo actualizar. Inténtalo de nuevo."
           }
         }
       }
@@ -1659,6 +2559,12 @@
             "state" : "needs_review",
             "value" : "Feedback"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Comentario"
+          }
         }
       }
     },
@@ -1668,6 +2574,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Fühl dich sicher statt nervös"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Siéntete seguro, no nervioso"
           }
         }
       }
@@ -1680,6 +2592,12 @@
             "state" : "needs_review",
             "value" : "Vor"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Adelante"
+          }
         }
       }
     },
@@ -1690,6 +2608,12 @@
             "state" : "needs_review",
             "value" : "Los geht’s"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Empezar"
+          }
         }
       }
     },
@@ -1699,6 +2623,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Ergreif die Initiative ohne Grübeln"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Da el primer paso sin darle vueltas"
           }
         }
       }
@@ -1712,6 +2642,12 @@
             "state" : "needs_review",
             "value" : "Wechsle zum Home-Bildschirm und öffne Wingman dann erneut."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ve a tu pantalla de inicio y vuelve a abrir Wingman."
+          }
         }
       }
     },
@@ -1721,6 +2657,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Ziel-Mitteilungen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Notificaciones de meta"
           }
         }
       }
@@ -1733,6 +2675,12 @@
             "state" : "needs_review",
             "value" : "Guten Tag,"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Buenas tardes,"
+          }
         }
       }
     },
@@ -1743,6 +2691,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Guten Abend,"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Buenas noches,"
           }
         }
       }
@@ -1755,6 +2709,12 @@
             "state" : "needs_review",
             "value" : "Guten Morgen,"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Buenos días,"
+          }
         }
       }
     },
@@ -1764,6 +2724,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Viel Glück, wir drücken dir die Daumen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mucha suerte, estamos contigo."
           }
         }
       }
@@ -1775,6 +2741,12 @@
             "state" : "needs_review",
             "value" : "Mit Nachbarn ein bisschen Smalltalk halten"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Saludar a tus vecinos con una charla casual"
+          }
         }
       }
     },
@@ -1784,6 +2756,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Die Hälfte der Männer spricht niemanden an. Die meisten, die es tun, haben Erfolg."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "La mitad de los hombres no se acerca. La mayoría de los que lo hacen, lo logra."
           }
         }
       }
@@ -1796,6 +2774,12 @@
             "state" : "needs_review",
             "value" : "Sie"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ella"
+          }
         }
       }
     },
@@ -1807,6 +2791,12 @@
             "state" : "needs_review",
             "value" : "Start"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Inicio"
+          }
         }
       }
     },
@@ -1816,6 +2806,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Wie hast du dich gefühlt? Was ist passiert? Ist dir etwas aufgefallen, hast du etwas gelernt?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿Cómo te sentiste? ¿Qué pasó? Algo que hayas notado o aprendido"
           }
         }
       }
@@ -1827,6 +2823,12 @@
             "state" : "needs_review",
             "value" : "Wie alt bist du?"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿Cuántos años tienes?"
+          }
         }
       }
     },
@@ -1836,6 +2838,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Ich werde zu einem Mann, der handelt."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Me estoy convirtiendo en un hombre que actúa."
           }
         }
       }
@@ -1847,6 +2855,12 @@
             "state" : "needs_review",
             "value" : "Soziale Situationen machen mir keine Angst mehr. Das ist mehr wert als jedes Date."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Dejé de temerles por completo a las situaciones sociales. Eso vale más que cualquier cita."
+          }
         }
       }
     },
@@ -1857,6 +2871,12 @@
             "state" : "needs_review",
             "value" : "Früher bin ich erstarrt, wenn ich an einer Frau vorbeiging. Nach 3 Wochen hatte ich mein erstes echtes Gespräch mit einer Fremden. Das war der Durchbruch."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Antes me congelaba al pasar junto a una chica. A las 3 semanas tuve mi primera conversación de verdad con una desconocida. Ese fue el logro."
+          }
         }
       }
     },
@@ -1866,6 +2886,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Ich habe jedes Buch dazu gelesen – keins hat mich wirklich ins Handeln gebracht. Die tägliche Struktur hat das geändert."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Leí todos los libros sobre el tema y ninguno me hizo actuar. La estructura diaria lo cambió."
           }
         }
       }
@@ -1878,6 +2904,12 @@
             "state" : "needs_review",
             "value" : "Ich, %@, werde zu einem Mann, der handelt."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Yo, %@, me estoy convirtiendo en un hombre que actúa."
+          }
         }
       }
     },
@@ -1889,6 +2921,12 @@
             "state" : "needs_review",
             "value" : "IN 1 MONAT"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "EN 1 MES"
+          }
         }
       }
     },
@@ -1898,6 +2936,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Falsche Antwort."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Respuesta incorrecta."
           }
         }
       }
@@ -1909,6 +2953,12 @@
             "state" : "needs_review",
             "value" : "Falsche Antwort."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Respuesta incorrecta."
+          }
         }
       }
     },
@@ -1918,6 +2968,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Indirektes Ansprechen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Acercamiento indirecto"
           }
         }
       }
@@ -1929,6 +2985,12 @@
             "state" : "needs_review",
             "value" : "Ungültige Fragedaten empfangen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Se recibieron datos de pregunta no válidos"
+          }
         }
       }
     },
@@ -1938,6 +3000,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Ungültige Antwort von Apple. Bitte versuch es noch einmal."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Respuesta no válida de Apple. Inténtalo de nuevo."
           }
         }
       }
@@ -1949,6 +3017,12 @@
             "state" : "needs_review",
             "value" : "Freunde einladen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Invitar amigos"
+          }
         }
       }
     },
@@ -1959,6 +3033,12 @@
             "state" : "needs_review",
             "value" : "Lade deine Freunde in die Community ein und lernt zusammen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Invita a tus amigos a la comunidad y aprendan juntos"
+          }
         }
       }
     },
@@ -1968,6 +3048,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Es ist nur auf diesem Gerät gespeichert. Mit einem Konto bleibt es erhalten, wenn du das Handy wechselst."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Solo está en este dispositivo. Con una cuenta lo conservas si cambias de celular."
           }
         }
       }
@@ -1980,6 +3066,12 @@
             "state" : "needs_review",
             "value" : "Komm mit zu Wingman! %@"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¡Únete a Wingman conmigo! %@"
+          }
         }
       }
     },
@@ -1989,6 +3081,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Schließ dich den Männern an, die handeln"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Únete a los hombres que pasan a la acción"
           }
         }
       }
@@ -2000,6 +3098,12 @@
             "state" : "needs_review",
             "value" : "Kein peinliches Schweigen mehr"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fluye, sin silencios incómodos"
+          }
         }
       }
     },
@@ -2010,6 +3114,12 @@
             "state" : "needs_review",
             "value" : "Ein Gespräch über den Smalltalk hinaus führen, ganz ohne romantische Absicht."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mantener una conversación más allá de la charla casual sin ningún interés romántico."
+          }
         }
       }
     },
@@ -2019,6 +3129,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Wisse genau, wie du sie ansprichst"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sabrás cómo iniciar la charla"
           }
         }
       }
@@ -2031,6 +3147,12 @@
             "state" : "needs_review",
             "value" : "Sprache"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Idioma"
+          }
         }
       }
     },
@@ -2042,6 +3164,12 @@
             "state" : "needs_review",
             "value" : "Sprache: %@"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Idioma: %@"
+          }
         }
       }
     },
@@ -2052,6 +3180,12 @@
             "state" : "needs_review",
             "value" : "Der Letzte. Das bist du.\nHeute noch leer. In einem Monat erzählt er eine Geschichte – oder eben nicht."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "El último. Este eres tú.\nHoy está vacío. En un mes contará una historia… o no."
+          }
         }
       }
     },
@@ -2061,6 +3195,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Lektion abgeschlossen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lección completada."
           }
         }
       }
@@ -2073,6 +3213,12 @@
             "state" : "needs_review",
             "value" : "Lektionen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lecciones"
+          }
         }
       }
     },
@@ -2084,6 +3230,12 @@
             "state" : "needs_review",
             "value" : "Level %lld"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nivel %lld"
+          }
         }
       }
     },
@@ -2094,6 +3246,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Level %lld erreicht."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nivel %lld alcanzado."
           }
         }
       }
@@ -2112,6 +3270,12 @@
             "state" : "new",
             "value" : "Level %1$lld · %2$lld XP to Level %3$lld"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nivel %1$lld · faltan %2$lld XP para el nivel %3$lld"
+          }
         }
       }
     },
@@ -2122,6 +3286,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Level %lld · Höchstes Level erreicht"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nivel %lld · Nivel máximo alcanzado"
           }
         }
       }
@@ -2140,6 +3310,12 @@
             "state" : "new",
             "value" : "Level %1$lld: %2$@"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nivel %1$lld: %2$@"
+          }
         }
       }
     },
@@ -2149,6 +3325,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Level 1"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nivel 1"
           }
         }
       }
@@ -2160,6 +3342,12 @@
             "state" : "needs_review",
             "value" : "Level 1: Soziales Aufwärmen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nivel 1: Calentamiento social"
+          }
         }
       }
     },
@@ -2169,6 +3357,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Level 1: Soziales Aufwärmen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nivel 1: Calentamiento social"
           }
         }
       }
@@ -2180,6 +3374,12 @@
             "state" : "needs_review",
             "value" : "Level 2: Längeres Gespräch"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nivel 2: Conversación más larga"
+          }
         }
       }
     },
@@ -2189,6 +3389,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Level 2: Längeres Gespräch"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nivel 2: Conversación más larga"
           }
         }
       }
@@ -2200,6 +3406,12 @@
             "state" : "needs_review",
             "value" : "Level 3: Indirektes Ansprechen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nivel 3: Acercamiento indirecto"
+          }
         }
       }
     },
@@ -2209,6 +3421,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Level 3: Indirektes Ansprechen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nivel 3: Acercamiento indirecto"
           }
         }
       }
@@ -2220,6 +3438,12 @@
             "state" : "needs_review",
             "value" : "Level 4: Direktes Ansprechen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nivel 4: Acercamiento directo"
+          }
         }
       }
     },
@@ -2229,6 +3453,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Level 4: Direktes Ansprechen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nivel 4: Acercamiento directo"
           }
         }
       }
@@ -2240,6 +3470,12 @@
             "state" : "needs_review",
             "value" : "Einträge werden geladen …"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cargando acercamientos…"
+          }
         }
       }
     },
@@ -2249,6 +3485,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Abo-Optionen werden geladen …"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cargando opciones de suscripción…"
           }
         }
       }
@@ -2260,6 +3502,12 @@
             "state" : "needs_review",
             "value" : "Die heutigen Übungsfragen werden geladen …"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cargando las preguntas de práctica de hoy…"
+          }
         }
       }
     },
@@ -2269,6 +3517,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Wird geladen …"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cargando…"
           }
         }
       }
@@ -2280,6 +3534,12 @@
             "state" : "needs_review",
             "value" : "Ansprechen erfassen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Registrar acercamiento"
+          }
         }
       }
     },
@@ -2289,6 +3549,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Anmelden"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Iniciar sesión"
           }
         }
       }
@@ -2300,6 +3566,12 @@
             "state" : "needs_review",
             "value" : "Abmelden"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cerrar sesión"
+          }
         }
       }
     },
@@ -2309,6 +3581,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Anmelden"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Iniciar sesión"
           }
         }
       }
@@ -2320,6 +3598,12 @@
             "state" : "needs_review",
             "value" : "Eine lockere Bemerkung in der Warteschlange machen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hacer un comentario ligero en una fila"
+          }
         }
       }
     },
@@ -2329,6 +3613,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Gleich beim Opener klar zeigen, dass sie dir gefällt. Ohne Umschweife."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Dejar claro desde la apertura que te atrae. Sin ambigüedades."
           }
         }
       }
@@ -2340,6 +3630,12 @@
             "state" : "needs_review",
             "value" : "Abos verwalten"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gestionar suscripciones"
+          }
         }
       }
     },
@@ -2349,6 +3645,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Maximale Zeichenzahl erreicht"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Llegaste al máximo de caracteres"
           }
         }
       }
@@ -2361,6 +3663,12 @@
             "state" : "needs_review",
             "value" : "Mittel"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Moderado"
+          }
         }
       }
     },
@@ -2370,6 +3678,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Etwas nervös"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nervios moderados"
           }
         }
       }
@@ -2381,6 +3695,12 @@
             "state" : "needs_review",
             "value" : "Monatsabo"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Plan mensual"
+          }
         }
       }
     },
@@ -2391,6 +3711,12 @@
             "state" : "needs_review",
             "value" : "Die meisten Männer bereuen die Chancen, die sie nicht genutzt haben"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "La mayoría de los hombres lamenta las oportunidades que no aprovechó"
+          }
         }
       }
     },
@@ -2400,6 +3726,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Die meisten Frauen möchten öfter angesprochen werden"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "La mayoría de las mujeres quiere que le hablen más"
           }
         }
       }
@@ -2412,6 +3744,12 @@
             "state" : "needs_review",
             "value" : "Name"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nombre"
+          }
         }
       }
     },
@@ -2422,12 +3760,24 @@
             "state" : "needs_review",
             "value" : "Netzwerkfehler: Bitte prüf deine Verbindung und versuch es noch einmal."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Error de red: revisa tu conexión e inténtalo de nuevo."
+          }
         }
       }
     },
     "Neutral" : {
       "localizations" : {
         "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Neutral"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Neutral"
@@ -2443,6 +3793,12 @@
             "state" : "needs_review",
             "value" : "Weiter"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Siguiente"
+          }
         }
       }
     },
@@ -2452,6 +3808,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Keine Verbindung"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sin conexión"
           }
         }
       }
@@ -2463,6 +3825,12 @@
             "state" : "needs_review",
             "value" : "Kein Konto"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sin cuenta"
+          }
         }
       }
     },
@@ -2472,6 +3840,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Keine aktiven Abos zum Wiederherstellen gefunden"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se encontraron suscripciones activas para restaurar"
           }
         }
       }
@@ -2483,6 +3857,12 @@
             "state" : "needs_review",
             "value" : "Noch keine Daten"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Aún no hay datos de acercamientos"
+          }
         }
       }
     },
@@ -2492,6 +3872,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Keine Einträge gefunden"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se encontraron acercamientos"
           }
         }
       }
@@ -2503,6 +3889,12 @@
             "state" : "needs_review",
             "value" : "Noch keine Ansprachen erfasst"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Aún no has registrado acercamientos"
+          }
         }
       }
     },
@@ -2512,6 +3904,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Keine billigen Sprüche. Einfach ruhige, praktische Tipps, wie man präsent ist. Meine soziale Angst ist nur noch halb so groß."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nada de frases cursis. Solo consejos tranquilos y prácticos para estar presente. Mi ansiedad social bajó a la mitad."
           }
         }
       }
@@ -2523,6 +3921,12 @@
             "state" : "needs_review",
             "value" : "Keine Internetverbindung"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sin conexión a internet"
+          }
         }
       }
     },
@@ -2533,6 +3937,12 @@
             "state" : "needs_review",
             "value" : "Keine Internetverbindung. Bitte prüf dein Netzwerk und versuch es noch einmal."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sin conexión a internet. Revisa tu red e inténtalo de nuevo."
+          }
         }
       }
     },
@@ -2542,6 +3952,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Nie mehr „Was wäre, wenn …“"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Se acabaron los “¿y si…?”"
           }
         }
       }
@@ -2554,6 +3970,12 @@
             "state" : "needs_review",
             "value" : "Jetzt keine Zahlung. Jederzeit vor Ende des Testzeitraums kündbar."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hoy no pagas nada. Cancela cuando quieras antes de que termine tu prueba."
+          }
         }
       }
     },
@@ -2563,6 +3985,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Keine Fragen verfügbar"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No hay preguntas disponibles"
           }
         }
       }
@@ -2574,6 +4002,12 @@
             "state" : "needs_review",
             "value" : "Noch keine Reflexionen. Erfasse Ansprachen mit Notizen, um Erkenntnisse zu sehen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Aún no hay reflexiones. Registra acercamientos con notas para ver lo que aprendes"
+          }
         }
       }
     },
@@ -2583,6 +4017,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Nicht jetzt"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ahora no"
           }
         }
       }
@@ -2595,6 +4035,12 @@
             "state" : "needs_review",
             "value" : "Notizen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Notas"
+          }
         }
       }
     },
@@ -2604,6 +4050,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Sonst ist nichts einzurichten – du landest direkt in der App."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No hay nada más que configurar: entrarás directo a la app."
           }
         }
       }
@@ -2616,12 +4068,24 @@
             "state" : "needs_review",
             "value" : "AUS"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "NO"
+          }
         }
       }
     },
     "OK" : {
       "localizations" : {
         "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "OK"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "OK"
@@ -2637,6 +4101,12 @@
             "state" : "needs_review",
             "value" : "AN"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "SÍ"
+          }
         }
       }
     },
@@ -2648,6 +4118,12 @@
             "state" : "needs_review",
             "value" : "EINMALIGES ANGEBOT"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "OFERTA ÚNICA"
+          }
         }
       }
     },
@@ -2657,6 +4133,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Ein letzter Schritt"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Un último paso"
           }
         }
       }
@@ -2668,6 +4150,12 @@
             "state" : "needs_review",
             "value" : "Eins nach dem anderen. Spiel zuerst das Szenario."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Una cosa a la vez. Primero juega el escenario."
+          }
         }
       }
     },
@@ -2677,6 +4165,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Hoppla!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¡Uy!"
           }
         }
       }
@@ -2689,6 +4183,12 @@
             "state" : "needs_review",
             "value" : "Öffnen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Abrir"
+          }
         }
       }
     },
@@ -2699,6 +4199,12 @@
             "state" : "needs_review",
             "value" : "Dein Erlebnis wird optimiert"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Optimizando tu experiencia"
+          }
         }
       }
     },
@@ -2708,6 +4214,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Deine Lektionen werden angepasst"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Personalizando tus lecciones"
           }
         }
       }
@@ -2720,6 +4232,12 @@
             "state" : "needs_review",
             "value" : "Abo"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Plan"
+          }
         }
       }
     },
@@ -2729,6 +4247,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Bitte versuch es noch einmal!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¡Inténtalo de nuevo!"
           }
         }
       }
@@ -2740,6 +4264,12 @@
             "state" : "needs_review",
             "value" : "Bitte melde dich an, um auf die Übungen zuzugreifen."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Inicia sesión para acceder a las prácticas."
+          }
         }
       }
     },
@@ -2749,6 +4279,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Bitte gib deinem Eintrag einen Titel"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ponle un título a tu acercamiento"
           }
         }
       }
@@ -2760,6 +4296,12 @@
             "state" : "needs_review",
             "value" : "Bitte wähl ein Abo aus"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Elige un plan de suscripción"
+          }
         }
       }
     },
@@ -2770,6 +4312,12 @@
             "state" : "needs_review",
             "value" : "Bitte versuch es noch einmal!"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¡Inténtalo de nuevo!"
+          }
         }
       }
     },
@@ -2779,6 +4327,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Bitte warten …"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Espera un momento…"
           }
         }
       }
@@ -2791,6 +4345,12 @@
             "state" : "needs_review",
             "value" : "Üben"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Práctica"
+          }
         }
       }
     },
@@ -2802,6 +4362,12 @@
             "state" : "needs_review",
             "value" : "Datenschutz"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Privacidad"
+          }
         }
       }
     },
@@ -2812,6 +4378,12 @@
             "state" : "needs_review",
             "value" : "Datenschutzerklärung"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Política de privacidad"
+          }
         }
       }
     },
@@ -2821,6 +4393,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Wird verarbeitet …"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Procesando…"
           }
         }
       }
@@ -2833,6 +4411,12 @@
             "state" : "needs_review",
             "value" : "Profil"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Perfil"
+          }
         }
       }
     },
@@ -2842,6 +4426,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Kauf abgeschlossen, aber keine Berechtigung gefunden. Bitte wende dich an den Support."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "La compra se completó, pero no encontramos tu acceso. Contacta a soporte."
           }
         }
       }
@@ -2853,6 +4443,12 @@
             "state" : "needs_review",
             "value" : "Kauf fehlgeschlagen. Bitte versuch es noch einmal."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "La compra falló. Inténtalo de nuevo."
+          }
         }
       }
     },
@@ -2862,6 +4458,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Käufe sind vorübergehend nicht möglich. Bitte versuch es später noch einmal."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Las compras no están disponibles por ahora. Inténtalo más tarde."
           }
         }
       }
@@ -2873,6 +4475,12 @@
             "state" : "needs_review",
             "value" : "Käufe sind auf diesem Gerät nicht erlaubt. Prüf die Bildschirmzeit-Beschränkungen und versuch es noch einmal."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se permiten compras en este dispositivo. Revisa las restricciones de Tiempo en pantalla e inténtalo de nuevo."
+          }
         }
       }
     },
@@ -2882,6 +4490,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Käufe erfolgreich wiederhergestellt!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¡Compras restauradas!"
           }
         }
       }
@@ -2894,6 +4508,12 @@
             "state" : "needs_review",
             "value" : "Wingman bewerten"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Calificar Wingman"
+          }
         }
       }
     },
@@ -2903,6 +4523,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Erinnerungen ans Ansprechen-Üben und gelegentliche Angebote."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Recordatorios para practicar y alguna que otra oferta."
           }
         }
       }
@@ -2916,6 +4542,12 @@
             "state" : "needs_review",
             "value" : "Öffne Wingman neu, um zu wechseln"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Vuelve a abrir Wingman para cambiar"
+          }
         }
       }
     },
@@ -2927,6 +4559,12 @@
             "state" : "needs_review",
             "value" : "Wiederherstellen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Restaurar"
+          }
         }
       }
     },
@@ -2936,6 +4574,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Kauf wiederherstellen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Restaurar compra"
           }
         }
       }
@@ -2947,6 +4591,12 @@
             "state" : "needs_review",
             "value" : "Wiederherstellen fehlgeschlagen. Bitte versuch es noch einmal."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se pudo restaurar. Inténtalo de nuevo."
+          }
         }
       }
     },
@@ -2956,6 +4606,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Wird wiederhergestellt …"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Restaurando…"
           }
         }
       }
@@ -2967,6 +4623,12 @@
             "state" : "needs_review",
             "value" : "Erneut versuchen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Reintentar"
+          }
         }
       }
     },
@@ -2977,6 +4639,12 @@
             "state" : "needs_review",
             "value" : "Im Moment ist es an dieses Gerät gebunden. Mit einem Konto bleiben dein Abo und dein Fortschritt erhalten, wenn du das Handy wechselst."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Por ahora está ligada a este dispositivo. Con una cuenta conservas tu suscripción y tu progreso si cambias de celular."
+          }
         }
       }
     },
@@ -2986,6 +4654,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Speichern"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Guardar"
           }
         }
       }
@@ -2998,6 +4672,12 @@
             "state" : "needs_review",
             "value" : "Sichere deine %lld Ansprachen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Guarda tus %lld acercamientos"
+          }
         }
       }
     },
@@ -3007,6 +4687,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Sichere deine erste Ansprache"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Guarda tu primer acercamiento"
           }
         }
       }
@@ -3018,6 +4704,12 @@
             "state" : "needs_review",
             "value" : "Fortschritt speichern, auf allen Geräten synchronisieren und mehr."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Guarda tu progreso, sincroniza tus dispositivos y más."
+          }
         }
       }
     },
@@ -3027,6 +4719,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Gespeichert!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¡Guardado!"
           }
         }
       }
@@ -3038,6 +4736,12 @@
             "state" : "needs_review",
             "value" : "Szenario abgeschlossen."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Escenario completado."
+          }
         }
       }
     },
@@ -3047,6 +4751,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Szenario nicht gefunden."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se encontró el escenario."
           }
         }
       }
@@ -3059,6 +4769,12 @@
             "state" : "needs_review",
             "value" : "Szenarien"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Escenarios"
+          }
         }
       }
     },
@@ -3068,6 +4784,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Wissenschaftlich fundierte Techniken, die wirklich hängen bleiben"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Técnicas con base científica que sí se te quedan"
           }
         }
       }
@@ -3079,6 +4801,12 @@
             "state" : "needs_review",
             "value" : "Suchen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Buscar"
+          }
         }
       }
     },
@@ -3088,6 +4816,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Sichere dir dein Abo"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Asegura tu suscripción"
           }
         }
       }
@@ -3099,6 +4833,12 @@
             "state" : "needs_review",
             "value" : "Wähl alles Zutreffende aus"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Elige todas las que apliquen"
+          }
         }
       }
     },
@@ -3108,6 +4848,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Serverfehler: Bitte versuch es später noch einmal."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Error del servidor: inténtalo más tarde."
           }
         }
       }
@@ -3119,6 +4865,12 @@
             "state" : "needs_review",
             "value" : "Einstellungen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Configuración"
+          }
         }
       }
     },
@@ -3129,6 +4881,12 @@
             "state" : "needs_review",
             "value" : "Leitfaden anzeigen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ver guía de niveles"
+          }
         }
       }
     },
@@ -3138,6 +4896,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Anmeldung fehlgeschlagen. Bitte versuch es noch einmal."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se pudo iniciar sesión. Inténtalo de nuevo."
           }
         }
       }
@@ -3150,6 +4914,12 @@
             "state" : "needs_review",
             "value" : "Anmeldung fehlgeschlagen: %@"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se pudo iniciar sesión: %@"
+          }
         }
       }
     },
@@ -3159,6 +4929,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Für die Anmeldung ist eine Eingabe nötig."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Para iniciar sesión, tienes que interactuar."
           }
         }
       }
@@ -3170,6 +4946,12 @@
             "state" : "needs_review",
             "value" : "Die Anmeldung wurde nicht verarbeitet. Bitte versuch es noch einmal."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se completó el inicio de sesión. Inténtalo de nuevo."
+          }
         }
       }
     },
@@ -3179,6 +4961,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Anmeldung läuft …"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Iniciando sesión…"
           }
         }
       }
@@ -3190,6 +4978,12 @@
             "state" : "needs_review",
             "value" : "Überspringen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Omitir"
+          }
         }
       }
     },
@@ -3200,6 +4994,12 @@
             "state" : "needs_review",
             "value" : "Erst mal überspringen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Omitir por ahora"
+          }
         }
       }
     },
@@ -3209,6 +5009,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Leicht nervös"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Un poco nervioso"
           }
         }
       }
@@ -3221,6 +5027,12 @@
             "state" : "needs_review",
             "value" : "Soziales Üben"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Práctica social"
+          }
         }
       }
     },
@@ -3230,6 +5042,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Etwas ist schiefgelaufen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Algo salió mal"
           }
         }
       }
@@ -3241,6 +5059,12 @@
             "state" : "needs_review",
             "value" : "Bei uns ist etwas schiefgelaufen. Bitte versuch es noch einmal."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Algo salió mal de nuestro lado. Inténtalo de nuevo."
+          }
         }
       }
     },
@@ -3250,6 +5074,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Ziemlich selbstbewusst"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Algo seguro"
           }
         }
       }
@@ -3262,6 +5092,12 @@
             "state" : "needs_review",
             "value" : "Start"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Empezar"
+          }
         }
       }
     },
@@ -3271,6 +5107,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Übung starten"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Empezar práctica"
           }
         }
       }
@@ -3282,6 +5124,12 @@
             "state" : "needs_review",
             "value" : "Fang an, ihn zu füllen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Empieza a llenarlo"
+          }
         }
       }
     },
@@ -3292,6 +5140,12 @@
             "state" : "needs_review",
             "value" : "Erfasse Ansprachen, um deine Aufschlüsselung zu sehen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Registra acercamientos para ver tu desglose"
+          }
         }
       }
     },
@@ -3301,6 +5155,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Erfasse deine sozialen Begegnungen, um sie hier zu sehen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Registra tus interacciones sociales para verlas aquí"
           }
         }
       }
@@ -3313,6 +5173,12 @@
             "state" : "needs_review",
             "value" : "Schritte"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pasos"
+          }
         }
       }
     },
@@ -3322,6 +5188,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Egal, was andere denken"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Olvídate del qué dirán"
           }
         }
       }
@@ -3333,6 +5205,12 @@
             "state" : "needs_review",
             "value" : "Keine Angst mehr vor Zurückweisung"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Que el miedo al rechazo no te frene"
+          }
         }
       }
     },
@@ -3342,6 +5220,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Red es dir nicht mehr aus"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Deja de convencerte de no hacerlo"
           }
         }
       }
@@ -3353,6 +5237,12 @@
             "state" : "needs_review",
             "value" : "Dezentes Kompliment / verspieltes Necken"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cumplido sutil / bromas con chispa"
+          }
         }
       }
     },
@@ -3362,6 +5252,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Erfolg"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Listo"
           }
         }
       }
@@ -3374,6 +5270,12 @@
             "state" : "needs_review",
             "value" : "Empfohlen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sugerida"
+          }
         }
       }
     },
@@ -3385,6 +5287,12 @@
             "state" : "needs_review",
             "value" : "HEUTE"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "HOY"
+          }
         }
       }
     },
@@ -3394,6 +5302,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Dauert nur ein paar Sekunden. Sonst ändert sich nichts."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Toma unos segundos. Nada más cambia."
           }
         }
       }
@@ -3405,6 +5319,12 @@
             "state" : "needs_review",
             "value" : "Einen Hundebesitzer auf seinen Hund ansprechen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hablar con alguien sobre su perro"
+          }
         }
       }
     },
@@ -3414,6 +5334,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Mit jemandem reden, der dich interessieren könnte"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hablar con alguien que te interesa"
           }
         }
       }
@@ -3425,6 +5351,12 @@
             "state" : "needs_review",
             "value" : "Tippen und halten, um dich zu verpflichten."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mantén presionado para comprometerte."
+          }
         }
       }
     },
@@ -3434,6 +5366,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Tippen zum Fortfahren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Toca para continuar"
           }
         }
       }
@@ -3445,6 +5383,12 @@
             "state" : "needs_review",
             "value" : "Tippen zum Beenden"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Toca para terminar"
+          }
         }
       }
     },
@@ -3454,6 +5398,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Tippen zum Wiederholen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Toca para reintentar"
           }
         }
       }
@@ -3466,6 +5416,12 @@
             "state" : "needs_review",
             "value" : "AGB"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Términos"
+          }
         }
       }
     },
@@ -3475,6 +5431,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Nutzungsbedingungen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Términos de uso"
           }
         }
       }
@@ -3486,6 +5448,12 @@
             "state" : "needs_review",
             "value" : "Dieses Konto ist bereits mit einem anderen Wingman-Login verknüpft. Melde dich stattdessen damit an – der Fortschritt aus dieser Sitzung wird nicht übernommen."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Esa cuenta ya está vinculada a otro inicio de sesión de Wingman. Inicia sesión con ella; el progreso de esta sesión no se transferirá."
+          }
         }
       }
     },
@@ -3495,6 +5463,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Der kommt erst später dran. Fang mit dem ersten an."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ese viene más adelante. Empieza por el primero."
           }
         }
       }
@@ -3506,6 +5480,12 @@
             "state" : "needs_review",
             "value" : "Diese Zahlungsmethode wurde abgelehnt. Prüf deine Zahlungsdaten im App Store und versuch es noch einmal."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Se rechazó ese método de pago. Revisa tus datos de pago en el App Store e inténtalo de nuevo."
+          }
         }
       }
     },
@@ -3515,6 +5495,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Der App Store hat gerade Probleme. Bitte versuch es in ein paar Minuten noch einmal."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "El App Store tiene problemas en este momento. Inténtalo de nuevo en unos minutos."
           }
         }
       }
@@ -3526,6 +5512,12 @@
             "state" : "needs_review",
             "value" : "Schritt für Schritt raus aus der Starre und rein ins Gespräch."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "El método paso a paso para dejar de congelarte y empezar la conversación."
+          }
         }
       }
     },
@@ -3535,6 +5527,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Sie warten nur darauf, dass du den ersten Schritt machst"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Solo están esperando que des el primer paso"
           }
         }
       }
@@ -3546,6 +5544,12 @@
             "state" : "needs_review",
             "value" : "Sie sind nur auf diesem Gerät gespeichert. Mit einem Konto bleiben sie erhalten, wenn du das Handy wechselst."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Solo están en este dispositivo. Con una cuenta los conservas si cambias de celular."
+          }
         }
       }
     },
@@ -3555,6 +5559,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Das sagen Wingman-Nutzer"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lo que dicen los usuarios de Wingman"
           }
         }
       }
@@ -3566,6 +5576,12 @@
             "state" : "needs_review",
             "value" : "Damit werden deine erfassten Ansprachen und dein gesamter Fortschritt auf diesem Gerät gelöscht. Es gibt kein Konto, aus dem sie wiederhergestellt werden könnten. Das kann nicht rückgängig gemacht werden."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Esto elimina tus acercamientos registrados y todo tu progreso en este dispositivo. No hay ninguna cuenta para recuperarlos. Esta acción no se puede deshacer."
+          }
         }
       }
     },
@@ -3576,6 +5592,12 @@
             "state" : "needs_review",
             "value" : "Dieses Abo ist für deinen App-Store-Account gerade nicht verfügbar."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Este plan no está disponible en tu cuenta del App Store en este momento."
+          }
         }
       }
     },
@@ -3585,6 +5607,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Dieser Kauf muss erst genehmigt werden – meist vom Kontoinhaber oder deiner Bank. Sobald er genehmigt ist, bekommst du automatisch Zugriff."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Esta compra necesita aprobación antes de completarse, normalmente del titular de la cuenta o de tu banco. Tendrás acceso automáticamente cuando se apruebe."
           }
         }
       }
@@ -3597,6 +5625,12 @@
             "state" : "needs_review",
             "value" : "Zeit für deine tägliche Lektüre! Dein Ziel heute: %lld Minuten."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¡Hora de tu lectura diaria! Tu meta de hoy son %lld minutos."
+          }
         }
       }
     },
@@ -3606,6 +5640,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Tipps & Angebote"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Consejos y ofertas"
           }
         }
       }
@@ -3618,6 +5658,12 @@
             "state" : "needs_review",
             "value" : "Titel"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Título"
+          }
         }
       }
     },
@@ -3627,6 +5673,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Um zu erreichen, was ich will, muss ich wachsen. Ich lasse nicht die Angst für mich entscheiden. Ich nutze meine Chance und lerne aus dem, was passiert."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Para lograr lo que quiero, tengo que crecer. No dejaré que el miedo decida por mí. Aprovecharé mi oportunidad y aprenderé de lo que pase."
           }
         }
       }
@@ -3639,6 +5691,12 @@
             "state" : "needs_review",
             "value" : "Heute"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hoy"
+          }
         }
       }
     },
@@ -3650,6 +5708,12 @@
             "state" : "needs_review",
             "value" : "Längste Serie"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mejor racha"
+          }
         }
       }
     },
@@ -3660,6 +5724,12 @@
             "state" : "needs_review",
             "value" : "Erneut versuchen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Intentar de nuevo"
+          }
         }
       }
     },
@@ -3669,6 +5739,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Versuch es mit anderen Suchbegriffen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Prueba con otros términos de búsqueda"
           }
         }
       }
@@ -3681,6 +5757,12 @@
             "state" : "needs_review",
             "value" : "Für %@ testen"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pruébalo por %@"
+          }
         }
       }
     },
@@ -3691,6 +5773,12 @@
             "state" : "needs_review",
             "value" : "Vom Smalltalk zu echter Chemie"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "De la charla casual a la química"
+          }
         }
       }
     },
@@ -3700,6 +5788,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Aus „Was wäre, wenn“ wird „Hallo“."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Convierte el “¿y si…?” en “hola”."
           }
         }
       }
@@ -3712,6 +5806,12 @@
             "state" : "needs_review",
             "value" : "Unbekannt"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Desconocida"
+          }
         }
       }
     },
@@ -3721,6 +5821,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Als Nächstes"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "A continuación"
           }
         }
       }
@@ -3732,6 +5838,12 @@
             "state" : "needs_review",
             "value" : "Eintrag aktualisieren"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Actualizar acercamiento"
+          }
         }
       }
     },
@@ -3741,6 +5853,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Aktualisiert!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¡Actualizado!"
           }
         }
       }
@@ -3753,6 +5871,12 @@
             "state" : "needs_review",
             "value" : "Nutzer"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Usuario"
+          }
         }
       }
     },
@@ -3762,6 +5886,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Nutzer nicht angemeldet"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Usuario no autenticado"
           }
         }
       }
@@ -3773,6 +5903,12 @@
             "state" : "needs_review",
             "value" : "Nicht angemeldet. Bitte melde dich an, um die täglichen Übungsfragen zu sehen."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Usuario no autenticado. Inicia sesión para acceder a las preguntas de práctica diaria."
+          }
         }
       }
     },
@@ -3783,6 +5919,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Wingman jeden Tag nutzen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Usando Wingman cada día"
           }
         }
       }
@@ -3798,6 +5940,12 @@
             "state" : "needs_review",
             "value" : "Sehr nervös"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Muy nervioso"
+          }
         }
       }
     },
@@ -3807,6 +5955,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Sehr selbstbewusst"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Muy seguro"
           }
         }
       }
@@ -3818,6 +5972,12 @@
             "state" : "needs_review",
             "value" : "Warte auf Genehmigung"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Esperando aprobación"
+          }
         }
       }
     },
@@ -3827,6 +5987,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Geh ohne Zögern auf sie zu"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Acércate a ella sin dudar"
           }
         }
       }
@@ -3838,6 +6004,12 @@
             "state" : "needs_review",
             "value" : "Für diese Apple-ID wurde kein aktives Abo gefunden."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No encontramos una suscripción activa para este ID de Apple."
+          }
         }
       }
     },
@@ -3847,6 +6019,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Willkommen zurück"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bienvenido de nuevo"
           }
         }
       }
@@ -3858,6 +6036,12 @@
             "state" : "needs_review",
             "value" : "Willkommen bei Wingman. Hier bist du zu Hause.\nDie tägliche Übung hält dich in Form. Dein Logbuch füllt sich mit Momenten, die du genutzt hast – nicht mit solchen, die du im Kopf durchspielst."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bienvenido a Wingman. Este es tu inicio.\nLa práctica diaria te mantiene en forma. El registro se llena de momentos que aprovechaste, no que repasaste en tu cabeza."
+          }
         }
       }
     },
@@ -3867,6 +6051,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Was möchtest du vor allem verbessern?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿Qué esperas mejorar principalmente?"
           }
         }
       }
@@ -3878,6 +6068,12 @@
             "state" : "needs_review",
             "value" : "Was hat dich zu Wingman gebracht?"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿Qué te trajo a Wingman?"
+          }
         }
       }
     },
@@ -3887,6 +6083,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Was passiert in der Sekunde, bevor du erstarrst?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿Qué pasa en el segundo antes de congelarte?"
           }
         }
       }
@@ -3898,6 +6100,12 @@
             "state" : "needs_review",
             "value" : "Was, wenn ein bisschen Nervosität einfach echt wirkt?"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿Y si un poco de nervios solo se nota como algo genuino?"
+          }
         }
       }
     },
@@ -3907,6 +6115,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Was, wenn dein Opener gar nicht clever sein muss?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿Y si tu frase de apertura no tuviera que ser ingeniosa?"
           }
         }
       }
@@ -3918,6 +6132,12 @@
             "state" : "needs_review",
             "value" : "Welche Art von Begegnung?"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿Qué tipo de interacción?"
+          }
         }
       }
     },
@@ -3927,6 +6147,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Was hält dich normalerweise davon ab?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿Qué suele impedírtelo?"
           }
         }
       }
@@ -3938,6 +6164,12 @@
             "state" : "needs_review",
             "value" : "Was würde sich diese Woche ändern, wenn du dir deiner selbst sicher wärst?"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿Qué cambiaría esta semana si te sintieras seguro de ti mismo?"
+          }
         }
       }
     },
@@ -3947,6 +6179,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Wie würde sich dein erstes Gespräch nach der Pause anhören?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿Cómo sonaría tu primera conversación al volver a intentarlo?"
           }
         }
       }
@@ -3958,6 +6196,12 @@
             "state" : "needs_review",
             "value" : "Welche Frage könntest du stellen, die kein Smalltalk ist?"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿Qué pregunta podrías hacer que no sea de charla casual?"
+          }
         }
       }
     },
@@ -3967,6 +6211,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Was ist das eine, das dich davon abhält, Hallo zu sagen?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿Qué es lo único que te impide saludar?"
           }
         }
       }
@@ -3978,6 +6228,12 @@
             "state" : "needs_review",
             "value" : "Was würde dich ein höfliches „Nein“ wirklich kosten?"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿Qué te costaría de verdad un “no” amable?"
+          }
         }
       }
     },
@@ -3987,6 +6243,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Wann hat sich ein Gespräch zuletzt nach mehr als Smalltalk angefühlt?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿Cuándo fue la última vez que una conversación fue más allá de lo casual?"
           }
         }
       }
@@ -3998,6 +6260,12 @@
             "state" : "needs_review",
             "value" : "Wann hast du zuletzt jemanden ohne Bildschirm dazwischen kennengelernt?"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿Cuándo fue la última vez que conociste a alguien sin una pantalla de por medio?"
+          }
         }
       }
     },
@@ -4007,6 +6275,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Wann hast du zuletzt ein Gespräch mit einer Fremden angefangen?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿Cuándo fue la última vez que empezaste una conversación con alguien que no conocías?"
           }
         }
       }
@@ -4018,6 +6292,12 @@
             "state" : "needs_review",
             "value" : "Wann hast du zuletzt in der Öffentlichkeit eine Frau angesprochen?"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿Cuándo fue la última vez que le hablaste a una mujer en público?"
+          }
         }
       }
     },
@@ -4027,6 +6307,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Wo in deinem Alltag könntest du einmal mehr Hallo sagen?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿En qué momento de tu día podrías saludar a alguien más?"
           }
         }
       }
@@ -4038,6 +6324,12 @@
             "state" : "needs_review",
             "value" : "Auf welcher Seite willst du stehen?"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿De qué lado quieres estar?"
+          }
         }
       }
     },
@@ -4047,6 +6339,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Wen hast du heute bemerkt, aber nicht angesprochen?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿A quién viste hoy y no le hablaste?"
           }
         }
       }
@@ -4058,6 +6356,12 @@
             "state" : "needs_review",
             "value" : "Wen würdest du diese Woche ansprechen, wenn Nervosität keine Rolle spielte?"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿Con quién hablarías esta semana si los nervios no contaran?"
+          }
         }
       }
     },
@@ -4067,6 +6371,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Würde sich überhaupt jemand daran erinnern, dass du Hallo gesagt hast?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿De verdad alguien a tu alrededor recordaría que saludaste?"
           }
         }
       }
@@ -4083,6 +6393,12 @@
             "state" : "needs_review",
             "value" : "XP-Punkte"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Puntos XP"
+          }
         }
       }
     },
@@ -4092,6 +6408,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Jahresabo"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Plan anual"
           }
         }
       }
@@ -4104,6 +6426,12 @@
             "state" : "needs_review",
             "value" : "Du"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tú"
+          }
         }
       }
     },
@@ -4113,6 +6441,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Du hast auf diesem Konto bereits ein Abo. Tippe auf „Wiederherstellen“, um wieder Zugriff zu bekommen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ya tienes una suscripción en esta cuenta. Toca Restaurar para recuperar el acceso."
           }
         }
       }
@@ -4124,6 +6458,12 @@
             "state" : "needs_review",
             "value" : "Du scheinst offline zu sein. Stell die Verbindung wieder her und versuch es noch einmal."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Parece que no tienes conexión. Vuelve a conectarte e inténtalo de nuevo."
+          }
         }
       }
     },
@@ -4134,6 +6474,12 @@
             "state" : "needs_review",
             "value" : "Du bist nicht allein. Millionen Männer tun sich schwer damit, Frauen anzusprechen."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No estás solo. Millones de hombres tienen dificultades para acercarse."
+          }
         }
       }
     },
@@ -4143,6 +6489,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Du bist nicht der Einzige, der hier festhängt."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No eres el único que se ha quedado atascado aquí."
           }
         }
       }
@@ -4155,6 +6507,12 @@
             "state" : "needs_review",
             "value" : "Deine Module"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tus módulos"
+          }
         }
       }
     },
@@ -4164,6 +6522,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Dein Logbuch ist nur auf diesem Gerät gespeichert. Mit einem Konto bleibt es erhalten, wenn du dein Handy verlierst oder wechselst."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tu registro de acercamientos solo se guarda en este dispositivo. Con una cuenta lo conservas si pierdes o cambias de celular."
           }
         }
       }
@@ -4175,6 +6539,12 @@
             "state" : "needs_review",
             "value" : "Dein Name"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tu nombre"
+          }
         }
       }
     },
@@ -4185,6 +6555,12 @@
             "state" : "needs_review",
             "value" : "Dein Fortschritt ist nur auf diesem Gerät gespeichert."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tu progreso solo se guarda en este dispositivo."
+          }
         }
       }
     },
@@ -4194,6 +6570,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Dein Abo ist so oder so bereits aktiv."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tu suscripción ya está activa de cualquier forma."
           }
         }
       }
@@ -4210,6 +6592,12 @@
             "state" : "needs_review",
             "value" : "schnellere Fortschritte als mit allgemeinen Ratgeber-Videos"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "más progreso que ver videos de consejos genéricos"
+          }
         }
       }
     },
@@ -4220,6 +6608,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "für deine ersten %lld Monate"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "por tus primeros %lld meses"
           }
         }
       }
@@ -4232,6 +6626,12 @@
             "state" : "needs_review",
             "value" : "für deine ersten %lld Jahre"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "por tus primeros %lld años"
+          }
         }
       }
     },
@@ -4242,6 +6642,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "für deinen ersten Monat"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "por tu primer mes"
           }
         }
       }
@@ -4254,6 +6660,12 @@
             "state" : "needs_review",
             "value" : "für dein erstes Jahr"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "por tu primer año"
+          }
         }
       }
     },
@@ -4264,6 +6676,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Rabatt auf deine ersten %lld Monate"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "de descuento en tus primeros %lld meses"
           }
         }
       }
@@ -4276,6 +6694,12 @@
             "state" : "needs_review",
             "value" : "Rabatt auf deine ersten %lld Jahre"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "de descuento en tus primeros %lld años"
+          }
         }
       }
     },
@@ -4286,6 +6710,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Rabatt auf deinen ersten Monat"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "de descuento en tu primer mes"
           }
         }
       }
@@ -4298,6 +6728,12 @@
             "state" : "needs_review",
             "value" : "Rabatt auf dein erstes Jahr"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "de descuento en tu primer año"
+          }
         }
       }
     },
@@ -4308,6 +6744,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "nur %@ pro Woche"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "solo %@ a la semana"
           }
         }
       }
@@ -4320,6 +6762,12 @@
             "state" : "needs_review",
             "value" : "pro Monat"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "al mes"
+          }
         }
       }
     },
@@ -4331,6 +6779,12 @@
             "state" : "needs_review",
             "value" : "pro Jahr"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "al año"
+          }
         }
       }
     },
@@ -4341,6 +6795,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "„%@“"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "“%@”"
           }
         }
       }

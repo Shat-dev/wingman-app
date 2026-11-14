@@ -6,7 +6,7 @@ Model: German (Release B), see [localization-de-progress.md](localization-de-pro
 
 ## Where it stands
 
-Phase 0 is done: the scripts and tests work for `de`, `es` and `fr`, German output is unchanged, and 341 unit tests pass. Phase 1 is done: both briefs are written. Next is Phase 2, the Spanish interface catalogs.
+Phase 0 is done: the scripts and tests work for `de`, `es` and `fr`, German output is unchanged, and 341 unit tests pass. Phase 2 has started: the Spanish interface catalogs are drafted and pass every check; French is next.
 
 ## Summary
 
@@ -16,7 +16,7 @@ Phase 0 is done: the scripts and tests work for `de`, `es` and `fr`, German outp
 | 0 | Language-generic scripts and tests | Done (2026-11-15) |
 | 1 | Spanish brief | Done (2026-11-15) |
 | 1 | French brief | Done (2026-11-15) |
-| 2 | Spanish UI catalogs | Not started |
+| 2 | Spanish UI catalogs | 585 of 585 strings drafted (2026-11-15) |
 | 2 | French UI catalogs | Not started |
 | 3 | Spanish and French sessions started | Not started |
 
@@ -34,6 +34,12 @@ Phase 0 is done: the scripts and tests work for `de`, `es` and `fr`, German outp
   - Unit tests on "Wingman L10n 17 Pro": 341 run, 336 passed, 5 skipped, 0 failed (2 new).
 - **2026-11-15. Phase 1: Spanish brief** ([localization-es-brief.md](localization-es-brief.md)). Sections as German's, plus a glossary for the lesson session and the validator workaround. Choices taken: *tú* / *ustedes*; neutral Latin American words (*celular*, *computadora*, *carro*; no *coger*, *vale*, *guay*, *chévere*, *padre*); *acercamiento* for an approach (not *abordaje*); *frase de apertura* for opener; *concretar* for close / closing (course 15 title *Concretar*); *suscripción*; *Términos* / *Privacidad*; *Configuración* for iOS settings (Latin American iOS; Spain says *Ajustes*); *Nivel %lld*; numbers `45 %` with a no-break space (RAE/ASALE), in format strings `%lld %%`; ¿ ¡ always; curly “…” quotes; one/other plurals. **Validator:** a literal `%` followed by space + d/s/u/f/@ (or ld/lf/ll) reads as a placeholder, so Spanish *45 % de los hombres*, *45% de*, *77 % son* all fail. Workaround in the brief: reorder (*el 45 % nunca se ha acercado…*) or say it in words (*45 de cada 100 hombres*). French has the same problem (*% des*, *% sont*, *% sur*). Checked against the regex.
 - **2026-11-15. Phase 1: French brief** ([localization-fr-brief.md](localization-fr-brief.md)). Choices taken: *tu*; metropolitan French, no Québec-only words (*portable*, not *cellulaire*; no *magasiner*, *char*, *blonde*), no écriture inclusive; *aborder* / *une approche* (not *abordage*); *phrase d'accroche* for opener; **close / closing = *concrétiser*, never *conclure*** (sexual meaning in French dating talk; course 15 title *Concrétiser*); *abonnement*; *CGU* / *Confidentialité*; *Réglages*; *Niveau %lld*; `45 %` and the narrow no-break space (U+202F) before ; : ! ? and inside « »; 0 and 1 singular (iOS puts 0 in *one*, so *one* must read right for 0). Same validator workaround as Spanish (*Parmi les hommes…, 45 % n'ont jamais…*, or *près d'un homme sur deux*).
+- **2026-11-15. Phase 2: Spanish interface catalogs** (`localization/es/catalogs.es.json`, imported into both String Catalogs as "needs review"): 406 Localizable + 179 Content strings, all drafted. `check_string_catalogs.py --languages de,es,fr --strict-lengths` passes. Only `es` entries changed in the catalogs (German compared value by value). Unit tests: 341 run, 336 passed, 5 skipped; the Spanish catalog fallback and onboarding-parity checks now run instead of skipping.
+  - Paywall ticks all fit (longest 35 of 36: *Que el miedo al rechazo no te frene*, *Da el primer paso sin darle vueltas*).
+  - Price sentences: one shape for every currency, *Hoy pagas %1$@ por tu primer año; después, %2$@ al año.* The price is never a grammatical subject and no currency word sits around it, so it reads correctly with `MX$199.00`, `COP 39.900`, `ARS 4.999`, `CLP 3.990`, `29,99 €`, `CA$12.99`, `CHF 12.00`. *solo %@ a la semana* and *Pruébalo por %@* (trial button, `%@` = zero price) also hold. None break.
+  - Statistic screens use the reorder workaround: *De los hombres de 18 a 24 años, el 45 % nunca se ha acercado a una mujer* (no-break space before %).
+  - **Course titles to check against the lessons** (the Spanish session may suggest better ones): *Listo para acercarte* (Approach Readiness), *Cómo acercarte* (The Physical Approach; German changed to *Die Annäherung* for the same reason), *Lo indispensable* (Non-negotiables: fitness, grooming, style), *Concretar* (Closing), *Acercamientos según la situación* (Situational Specific Approaches), *Creencias y nuevas perspectivas* (Beliefs & Reframes), *Picardía y chispa* (Playfulness & Spark), *Bases del coqueteo* (Flirting Prerequisites), *Abrirte y mostrarte vulnerable* (Sharing & Vulnerability).
+  - Other choices for the reviewer: settings toggle reads *SÍ / NO*; Home greeting after 18:00 is *Buenas noches,* (Latin Americans still say *buenas tardes* until dark); baseball quotes became football (*El que no patea al arco, no mete gol*; *Entra a la cancha: desde la banca no se meten goles*); Gretzky became *Fallas todos los tiros que no intentas*; Nora Ephron became *sé el protagonista de tu vida*; *durazno* (Latin America) in the peach quote, *melocotón* in Spain.
 
 ## Questions for Arthur
 
