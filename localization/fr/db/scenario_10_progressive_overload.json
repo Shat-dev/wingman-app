@@ -1,0 +1,326 @@
+{
+  "scenario": {
+    "a1000010-0000-0000-0000-000000000010": {
+      "title": {
+        "en": "Progressive Overload",
+        "fr": "Surcharge progressive"
+      },
+      "summary": {
+        "en": "Same time, same place. One strong moment turns routine into rapport.",
+        "fr": "Même heure, même endroit. Un seul bon moment transforme une routine en complicité."
+      }
+    }
+  },
+  "screens": {
+    "b1000001-0000-0000-0010-000000000001": {
+      "en": "You're at the gym. Monday afternoon.",
+      "fr": "Tu es à la salle de sport. Lundi après-midi."
+    },
+    "b1000002-0000-0000-0010-000000000002": {
+      "en": "You've seen her here before, same time slot, past few weeks.",
+      "fr": "Tu l’as déjà vue ici, au même créneau, ces dernières semaines."
+    },
+    "b1000003-0000-0000-0010-000000000003": {
+      "en": "You've never spoken. Just the occasional polite smile when passing.",
+      "fr": "Vous ne vous êtes jamais parlé. Juste un sourire poli de temps en temps en vous croisant."
+    },
+    "b1000004-0000-0000-0010-000000000004": {
+      "en": "She's next to the water station right now and you're walking past.",
+      "fr": "Elle est près de la fontaine à eau, et tu passes à côté."
+    },
+    "b1000051-0000-0000-0010-000000000051": {
+      "en": "Sorry I really need to finish my sets.",
+      "fr": "Désolée, il faut vraiment que je finisse mes séries."
+    },
+    "b1000052-0000-0000-0010-000000000052": {
+      "en": "While this can work, save real conversation for when the timing is better.",
+      "fr": "Ça peut marcher, mais garde la vraie conversation pour un meilleur moment."
+    },
+    "b1000053-0000-0000-0010-000000000053": {
+      "en": "That's a nice gym outfit.",
+      "fr": "Elle est sympa, ta tenue de sport."
+    },
+    "b1000054-0000-0000-0010-000000000054": {
+      "en": "At the gym, it may be better to avoid appearance based remarks.",
+      "fr": "À la salle, mieux vaut éviter les remarques sur le physique ou la tenue."
+    },
+    "b1000006-0000-0000-0010-000000000006": {
+      "en": "You smile and say 'hey'. Simple and friendly.",
+      "fr": "Tu souris et tu dis « salut ». Simple et sympa."
+    },
+    "b1000007-0000-0000-0010-000000000007": {
+      "en": "She smiles and greets you back. Brief but warm.",
+      "fr": "Elle sourit et te salue en retour. Bref, mais chaleureux."
+    },
+    "b1000008-0000-0000-0010-000000000008": {
+      "en": "Natural acknowledgment. Ice broken. You both head back to your workouts.",
+      "fr": "Un salut naturel. La glace est brisée. Vous retournez chacun à votre entraînement."
+    },
+    "b1000009-0000-0000-0010-000000000009": {
+      "en": "You're doing your own thing, she's doing hers. The gym's busy now.",
+      "fr": "Tu fais ta séance, elle fait la sienne. La salle est pleine maintenant."
+    },
+    "b1000010-0000-0000-0010-000000000010": {
+      "en": "You head to the cable machine for your next exercise. She's there using it.",
+      "fr": "Tu vas à la poulie pour ton exercice suivant. Elle est dessus."
+    },
+    "b1000111-0000-0000-0010-000000000111": {
+      "en": "So crowded in here. Management should add more equipment.",
+      "fr": "C’est plein à craquer ici. La salle devrait ajouter des machines."
+    },
+    "b1000112-0000-0000-0010-000000000112": {
+      "en": "Complaining kills energy. Make it collaborative, not negative.",
+      "fr": "Se plaindre plombe l’énergie. Propose de faire équipe au lieu d’être négatif."
+    },
+    "b1000113-0000-0000-0010-000000000113": {
+      "en": "You stand nearby, hovering. She glances up. You're still standing there. Awkward.",
+      "fr": "Tu restes planté à côté, à attendre. Elle lève les yeux. Tu es toujours là. Gênant."
+    },
+    "b1000114-0000-0000-0010-000000000114": {
+      "en": "Hovering without speaking creates pressure. Either ask to work in or move on.",
+      "fr": "Attendre sans rien dire crée de la pression. Soit tu proposes d’alterner, soit tu passes à autre chose."
+    },
+    "b1000012-0000-0000-0010-000000000012": {
+      "en": "Can I jump in with you? It's soo busy at the moment.",
+      "fr": "Je peux alterner avec toi ? C’est vraiment plein en ce moment."
+    },
+    "b1000013-0000-0000-0010-000000000013": {
+      "en": "Yeah that's fine, no problem.",
+      "fr": "Oui, pas de souci."
+    },
+    "b1000014-0000-0000-0010-000000000014": {
+      "en": "You adjust the weight. She's resting, scrolling her phone between sets.",
+      "fr": "Tu règles la charge. Elle récupère et fait défiler son téléphone entre deux séries."
+    },
+    "b1000151-0000-0000-0010-000000000151": {
+      "en": "I've been meaning to introduce myself to you.",
+      "fr": "Ça fait un moment que je voulais me présenter."
+    },
+    "b1000152-0000-0000-0010-000000000152": {
+      "en": "Admitting you've been planning this makes it feel calculated. Keep it spontaneous.",
+      "fr": "Avouer que tu y pensais depuis longtemps paraît calculé. Reste spontané."
+    },
+    "b1000153-0000-0000-0010-000000000153": {
+      "en": "Have you noticed me here at this time before?",
+      "fr": "Tu m’as déjà remarqué ici, à cette heure-là ?"
+    },
+    "b1000154-0000-0000-0010-000000000154": {
+      "en": "Asking if she's noticed you puts pressure on her. Acknowledge simply.",
+      "fr": "Lui demander si elle t’a remarqué lui met la pression. Constate-le simplement."
+    },
+    "b1000016-0000-0000-0010-000000000016": {
+      "en": "I think I've seen you here before. Monday afternoon right?",
+      "fr": "Il me semble que je t’ai déjà vue ici. Le lundi après-midi, c’est ça ?"
+    },
+    "b1000017-0000-0000-0010-000000000017": {
+      "en": "Oh yeah, I've noticed that too actually.",
+      "fr": "Ah oui, je l’avais remarqué aussi, en fait."
+    },
+    "b1000018-0000-0000-0010-000000000018": {
+      "en": "Mutual recognition established. Natural conversation happening between sets.",
+      "fr": "Vous vous êtes reconnus. La conversation se fait naturellement entre les séries."
+    },
+    "b1000019-0000-0000-0010-000000000019": {
+      "en": "You finish your set. She's getting ready for hers. Brief window for chat.",
+      "fr": "Tu finis ta série. Elle se prépare pour la sienne. Une petite fenêtre pour discuter."
+    },
+    "b1000201-0000-0000-0010-000000000201": {
+      "en": "I'm doing push day. Chest, shoulders, triceps...",
+      "fr": "Moi, c’est séance push : pecs, épaules, triceps…"
+    },
+    "b1000202-0000-0000-0010-000000000202": {
+      "en": "Volunteering your routine unprompted is self-centered. Ask about her first.",
+      "fr": "Raconter ton programme sans qu’on te le demande, c’est égocentrique. Intéresse-toi d’abord à elle."
+    },
+    "b1000203-0000-0000-0010-000000000203": {
+      "en": "Your form on that last one was a bit off. Want me to show you?",
+      "fr": "Ta technique sur la dernière n’était pas tout à fait au point. Tu veux que je te montre ?"
+    },
+    "b1000204-0000-0000-0010-000000000204": {
+      "en": "Unsolicited form advice is condescending. Don't give gym advice unless asked.",
+      "fr": "Corriger sa technique sans qu’elle le demande est condescendant. Ne donne pas de conseils à la salle si on ne t’en demande pas."
+    },
+    "b1000021-0000-0000-0010-000000000021": {
+      "en": "So what you working on today? Training for anything?",
+      "fr": "Tu travailles quoi aujourd’hui ? Tu te prépares pour quelque chose ?"
+    },
+    "b1000022-0000-0000-0010-000000000022": {
+      "en": "Yeah actually. A half marathon next month. Building leg strength for it.",
+      "fr": "Oui, en fait. Un semi-marathon le mois prochain. Je renforce mes jambes pour ça."
+    },
+    "b1000231-0000-0000-0010-000000000231": {
+      "en": "You could focus more on tempo runs than strength training instead.",
+      "fr": "Tu devrais plutôt miser sur des sorties au seuil que sur la muscu."
+    },
+    "b1000232-0000-0000-0010-000000000232": {
+      "en": "Unsolicited training advice is condescending. Just show interest.",
+      "fr": "Un conseil d’entraînement qu’on n’a pas demandé est condescendant. Montre simplement de l’intérêt."
+    },
+    "b1000233-0000-0000-0010-000000000233": {
+      "en": "Oh nice, so how was your day today? What do you do for work?",
+      "fr": "Ah, sympa. Et ta journée, elle s’est passée comment ? Tu fais quoi dans la vie ?"
+    },
+    "b1000234-0000-0000-0010-000000000234": {
+      "en": "She just shared something she's working toward. Stay with that topic for now.",
+      "fr": "Elle vient de te parler d’un objectif qui compte pour elle. Reste sur ce sujet pour l’instant."
+    },
+    "b1000024-0000-0000-0010-000000000024": {
+      "en": "That's awesome. Which race? I always see them advertised around here.",
+      "fr": "Génial. Lequel ? J’en vois toujours passer des affiches par ici."
+    },
+    "b1000025-0000-0000-0010-000000000025": {
+      "en": "The City Half. Runs along the waterfront. Supposed to be a good course.",
+      "fr": "Le semi de la ville. Il longe les quais. Il paraît que le parcours est sympa."
+    },
+    "b1000026-0000-0000-0010-000000000026": {
+      "en": "You continue alternating sets. Natural exchanges between each.",
+      "fr": "Vous continuez à alterner les séries. Quelques échanges naturels entre chacune."
+    },
+    "b1000271-0000-0000-0010-000000000271": {
+      "en": "You wait for her to introduce herself. She doesn't. She says bye and leaves.",
+      "fr": "Tu attends qu’elle se présente. Elle ne le fait pas. Elle te dit au revoir et s’en va."
+    },
+    "b1000272-0000-0000-0010-000000000272": {
+      "en": "Don't wait for her to make social moves. Take initiative with introductions.",
+      "fr": "N’attends pas qu’elle fasse le premier pas social. Prends l’initiative de te présenter."
+    },
+    "b1000273-0000-0000-0010-000000000273": {
+      "en": "We've been talking this whole time and don't even know each other's names.",
+      "fr": "On discute depuis tout à l’heure et on ne connaît même pas nos prénoms."
+    },
+    "b1000274-0000-0000-0010-000000000274": {
+      "en": "Making a big deal about it can be awkward. Just introduce yourself simply.",
+      "fr": "En faire toute une histoire peut être gênant. Présente-toi simplement."
+    },
+    "b1000028-0000-0000-0010-000000000028": {
+      "en": "I'm... now we don't need anymore awkward gym nods.",
+      "fr": "Moi, c’est… Comme ça, fini les petits signes de tête gênés à la salle."
+    },
+    "b1000029-0000-0000-0010-000000000029": {
+      "en": "Haha nice to meet you, I'm Zoe.",
+      "fr": "Haha, enchantée, moi, c’est Zoe."
+    },
+    "b1000030-0000-0000-0010-000000000030": {
+      "en": "You're both finishing up with the cable machine now. Good energy.",
+      "fr": "Vous avez tous les deux bientôt fini à la poulie. Bonne énergie."
+    },
+    "b1000032-0000-0000-0010-000000000032": {
+      "en": "Hey let's grab a coffee sometime? What's your number?",
+      "fr": "Ça te dirait qu’on prenne un café un de ces jours ? C’est quoi, ton numéro ?"
+    },
+    "b1000033-0000-0000-0010-000000000033": {
+      "en": "Yeah sure, I'd like that, here's my number.",
+      "fr": "Oui, avec plaisir, voilà mon numéro."
+    },
+    "b1000034-0000-0000-0010-000000000034": {
+      "en": "It was nice meeting you officially, I'll see you next week?",
+      "fr": "Ravi d’avoir enfin fait officiellement ta connaissance. À la semaine prochaine ?"
+    },
+    "b1000035-0000-0000-0010-000000000035": {
+      "en": "Haha yes it was, I'll see you then. Enjoy your week.",
+      "fr": "Haha, moi aussi. À la semaine prochaine. Bonne semaine !"
+    },
+    "b1000036-0000-0000-0010-000000000036": {
+      "en": "Success. You review your interaction with Zoe.",
+      "fr": "Réussi. Tu repenses à ton échange avec Zoe."
+    },
+    "b1000037-0000-0000-0010-000000000037": {
+      "en": "You opened naturally by using the shared environment.",
+      "fr": "Tu as engagé la conversation naturellement en t’appuyant sur ce que vous partagez."
+    },
+    "b1000038-0000-0000-0010-000000000038": {
+      "en": "You showed curiosity towards Zoe and getting to know her.",
+      "fr": "Tu as montré de la curiosité envers Zoe et l’envie de la connaître."
+    },
+    "b1000039-0000-0000-0010-000000000039": {
+      "en": "You introduced yourself to turn the dynamic from strangers to acquaintances.",
+      "fr": "Tu t’es présenté, et vous êtes passés d’inconnus à connaissances."
+    },
+    "b1000040-0000-0000-0010-000000000040": {
+      "en": "And you closed well by building on the connection. Overall a huge success.",
+      "fr": "Et tu as bien concrétisé en t’appuyant sur le lien créé. Une vraie réussite."
+    }
+  },
+  "options": {
+    "c1000002-0000-0000-0010-000000000002": {
+      "en": "Try to start a full conversation now",
+      "fr": "Essayer de lancer une vraie conversation tout de suite"
+    },
+    "c1000001-0000-0000-0010-000000000001": {
+      "en": "Give a friendly smile and simple greeting",
+      "fr": "Lui faire un sourire amical et la saluer simplement"
+    },
+    "c1000003-0000-0000-0010-000000000003": {
+      "en": "Compliment her gym outfit",
+      "fr": "Complimenter sa tenue de sport"
+    },
+    "c1000005-0000-0000-0010-000000000005": {
+      "en": "Complain about how crowded it is",
+      "fr": "Te plaindre qu’il y ait autant de monde"
+    },
+    "c1000004-0000-0000-0010-000000000004": {
+      "en": "Acknowledge the busy gym then suggest working in together",
+      "fr": "Constater que la salle est pleine, puis proposer d’alterner"
+    },
+    "c1000006-0000-0000-0010-000000000006": {
+      "en": "Stand there and wait until she's done",
+      "fr": "Rester là et attendre qu’elle ait fini"
+    },
+    "c1000009-0000-0000-0010-000000000009": {
+      "en": "Ask if she's noticed you here before",
+      "fr": "Lui demander si elle t’a déjà remarqué ici"
+    },
+    "c1000008-0000-0000-0010-000000000008": {
+      "en": "Say you've been meaning to introduce yourself",
+      "fr": "Dire que tu voulais te présenter depuis un moment"
+    },
+    "c1000007-0000-0000-0010-000000000007": {
+      "en": "Acknowledge you've both been here same time",
+      "fr": "Constater que vous venez tous les deux au même créneau"
+    },
+    "c1000010-0000-0000-0010-000000000010": {
+      "en": "Ask what she's working on today / training for anything",
+      "fr": "Lui demander ce qu’elle travaille aujourd’hui, si elle se prépare pour quelque chose"
+    },
+    "c1000011-0000-0000-0010-000000000011": {
+      "en": "Tell her what you're training today",
+      "fr": "Lui dire ce que tu travailles aujourd’hui"
+    },
+    "c1000012-0000-0000-0010-000000000012": {
+      "en": "Give advice on her form",
+      "fr": "Lui donner des conseils sur sa technique"
+    },
+    "c1000014-0000-0000-0010-000000000014": {
+      "en": "Give advice on how to train for a marathon",
+      "fr": "Lui donner des conseils pour préparer son semi-marathon"
+    },
+    "c1000013-0000-0000-0010-000000000013": {
+      "en": "Ask about the marathon",
+      "fr": "L’interroger sur son semi-marathon"
+    },
+    "c1000015-0000-0000-0010-000000000015": {
+      "en": "Ask about her day today",
+      "fr": "Lui demander comment s’est passée sa journée"
+    },
+    "c1000016-0000-0000-0010-000000000016": {
+      "en": "Introduce yourself",
+      "fr": "Te présenter"
+    },
+    "c1000017-0000-0000-0010-000000000017": {
+      "en": "Wait for her to introduce herself first",
+      "fr": "Attendre qu’elle se présente en premier"
+    },
+    "c1000018-0000-0000-0010-000000000018": {
+      "en": "Comment that you don't know each other's names",
+      "fr": "Faire remarquer que vous ne connaissez pas vos prénoms"
+    },
+    "c1000019-0000-0000-0010-000000000019": {
+      "en": "Ask for her contact",
+      "fr": "Lui demander ses coordonnées"
+    },
+    "c1000020-0000-0000-0010-000000000020": {
+      "en": "Say it was nice to meet her and you'll see her next Monday",
+      "fr": "Dire que tu as été ravi de la rencontrer et que tu la verras lundi prochain"
+    }
+  }
+}
