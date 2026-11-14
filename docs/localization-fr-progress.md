@@ -4,7 +4,7 @@ Branch `localization-release-c-fr` (from `localization-release-c`). Rules and gl
 
 ## Where it stands
 
-All 25 lesson courses are drafted (1,531 items, 34,442 English words); every overlay passes `lesson_overlays.py check fr`. Database content in progress: 8 of 15 scenarios. Checks, review pack and App Store listing not started.
+All 25 lesson courses are drafted (1,531 items, 34,442 English words); every overlay passes `lesson_overlays.py check fr`. Database content in progress: 9 of 15 scenarios. Checks, review pack and App Store listing not started.
 
 ## Summary
 
@@ -12,7 +12,7 @@ All 25 lesson courses are drafted (1,531 items, 34,442 English words); every ove
 |---|---|
 | UI catalogs | Done by the setup session (585 strings, draft) |
 | Lesson overlays | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-15) |
-| Database content | 8 of 15 scenarios; 0 of 765 quiz questions |
+| Database content | 9 of 15 scenarios; 0 of 765 quiz questions |
 | Checks and review pack | Not started |
 | App Store listing (France, notes for Canada) | Not started |
 
@@ -57,6 +57,7 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
 - **2026-11-15. Scenario 6, Delayed Together** (52 text screens, 17 options, about 550 words; 72 upserts, not run). For the reviewer: the title became *Retardés ensemble*; "interstate" became *dans une autre ville* (as German); "every cloud has a silver lining" became *À quelque chose malheur est bon*; "mechanical issues" became *problème technique* (the usual French airport phrase); "mates" became *potes*; her friends' dinner is *un dîner entre amies*. "I'm... by the way" is shown as written (the app substitutes no name), so the French keeps the pause: *Moi, c'est…, au fait.* Mel's name is unchanged.
 - **2026-11-15. Scenario 7, Catch the Drift** (51 text screens, 17 options, about 530 words; 71 upserts, not run). For the reviewer: the title became *Au bord de l'eau* (the English idiom has no French equivalent; German used *Am Strand*); "swimsuit" became *maillot de bain*; "dwarf or king" coconut became *naine ou royale*; "sand person" became *plutôt sable que baignade* / *Plutôt sable ?* (not *team sable*, which is slang); "north lot" became *parking nord*. The English typos German logged ("soo", the stray period after "as well") are translated by meaning. A search of every French file found no plural imperative addressed to the reader (one *Marchez plutôt* was fixed to *Propose plutôt de marcher*). Sara's name is unchanged.
 - **2026-11-15. Scenario 8, Picture This** (53 text screens, 18 options, about 590 words; 72 upserts, not run). For the reviewer: the title became *Photo souvenir*; "film camera" became *argentique*; "high aperture" became *une grande ouverture*; "the brewery up 3rd street" became *la brasserie au coin de la rue* (the brief's own example; French streets aren't numbered); "the old railway district" became *l'ancien quartier de la gare*; "mansplaining" stays (used in French); "asking about her work status feels qualifying" became *donne l'impression que tu la jauges*; "get her digits" became *lui demander son numéro*. Emily's name is unchanged.
+- **2026-11-15. Scenario 9, Carton Collision** (55 text screens, 18 options, about 565 words; 75 upserts, not run). For the reviewer: the title became *La dernière boîte d'œufs*; "Scissors paper rock" became *pierre-feuille-ciseaux*; "best of three" became *en deux manches gagnantes*; "fair and square" became *à la régulière*; "100%." became *Carrément.* (avoids the percent sign); "Dairy aisle" became *au rayon des œufs*, since French supermarkets don't keep eggs with dairy (German dropped the aisle). The subtext problem German logged (she never says she was lonely, yet the next screens react to loneliness) is kept as in the English: *C'était un bon moyen de m'occuper* is as close as the English allows. Claire's name is unchanged.
 
 ## Questions for Arthur
 
