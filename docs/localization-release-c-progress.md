@@ -6,7 +6,7 @@ Model: German (Release B), see [localization-de-progress.md](localization-de-pro
 
 ## Where it stands
 
-Phase 0 is done: the scripts and tests work for `de`, `es` and `fr`, German output is unchanged, and 341 unit tests pass. Next is Phase 1, the Spanish brief.
+Phase 0 is done: the scripts and tests work for `de`, `es` and `fr`, German output is unchanged, and 341 unit tests pass. Phase 1 has started: the Spanish brief is written; the French brief is next.
 
 ## Summary
 
@@ -14,7 +14,7 @@ Phase 0 is done: the scripts and tests work for `de`, `es` and `fr`, German outp
 |---|---|---|
 | 0 | Branch and prompts | Done (2026-11-15) |
 | 0 | Language-generic scripts and tests | Done (2026-11-15) |
-| 1 | Spanish brief | Not started |
+| 1 | Spanish brief | Done (2026-11-15) |
 | 1 | French brief | Not started |
 | 2 | Spanish UI catalogs | Not started |
 | 2 | French UI catalogs | Not started |
@@ -32,6 +32,7 @@ Phase 0 is done: the scripts and tests work for `de`, `es` and `fr`, German outp
   - Tests: `LessonOverlayTests` allows overlays for `de`, `es`, `fr` and rejects others, and checks every bundled file of each loads. `GermanReleaseChecksTests` → `ReleaseLanguageChecksTests`: the same fallback and analytics-parity checks, run for every shipped language. German is required and its assertions are unchanged; a Spanish or French part (catalogs, all 25 overlays, all 765 quiz rows, all 15 scenario files) that isn't complete is skipped with a `note: ReleaseLanguageChecks skipped …` line in the test log. `AppLanguageSettingsTests`: Spanish and French names, and every regional tag (es-MX, es-419, es-ES, fr-CA, fr-BE…) lands on `es` / `fr`. `StringCatalogTests` and the "this build offers" test accept es/fr appearing once their catalogs exist; **tighten both to exactly en, de, es, fr after Phase 2.**
   - `OnboardingSweepTests`: Spanish (`es`, `es_MX`) and French (`fr`, `fr_FR`) variants of both German sweeps. The lesson and scenario titles are now read from the language's overlay and DB file instead of hard-coded German; the starts of long sentences are derived from the catalog for es/fr (German keeps its hand-written list); the Daily Practice "Start" button no longer assumes the Home tab is also called "Start". Compiled, **not run**.
   - Unit tests on "Wingman L10n 17 Pro": 341 run, 336 passed, 5 skipped, 0 failed (2 new).
+- **2026-11-15. Phase 1: Spanish brief** ([localization-es-brief.md](localization-es-brief.md)). Sections as German's, plus a glossary for the lesson session and the validator workaround. Choices taken: *tú* / *ustedes*; neutral Latin American words (*celular*, *computadora*, *carro*; no *coger*, *vale*, *guay*, *chévere*, *padre*); *acercamiento* for an approach (not *abordaje*); *frase de apertura* for opener; *concretar* for close / closing (course 15 title *Concretar*); *suscripción*; *Términos* / *Privacidad*; *Configuración* for iOS settings (Latin American iOS; Spain says *Ajustes*); *Nivel %lld*; numbers `45 %` with a no-break space (RAE/ASALE), in format strings `%lld %%`; ¿ ¡ always; curly “…” quotes; one/other plurals. **Validator:** a literal `%` followed by space + d/s/u/f/@ (or ld/lf/ll) reads as a placeholder, so Spanish *45 % de los hombres*, *45% de*, *77 % son* all fail. Workaround in the brief: reorder (*el 45 % nunca se ha acercado…*) or say it in words (*45 de cada 100 hombres*). French has the same problem (*% des*, *% sont*, *% sur*). Checked against the regex.
 
 ## Questions for Arthur
 
