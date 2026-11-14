@@ -4,7 +4,7 @@ Branch `localization-release-c-fr` (from `localization-release-c`). Rules and gl
 
 ## Where it stands
 
-All 25 lesson courses are drafted (1,531 items, 34,442 English words); every overlay passes `lesson_overlays.py check fr`. Database content in progress: 1 of 15 scenarios. Checks, review pack and App Store listing not started.
+All 25 lesson courses are drafted (1,531 items, 34,442 English words); every overlay passes `lesson_overlays.py check fr`. Database content in progress: 2 of 15 scenarios. Checks, review pack and App Store listing not started.
 
 ## Summary
 
@@ -12,7 +12,7 @@ All 25 lesson courses are drafted (1,531 items, 34,442 English words); every ove
 |---|---|
 | UI catalogs | Done by the setup session (585 strings, draft) |
 | Lesson overlays | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-15) |
-| Database content | 1 of 15 scenarios; 0 of 765 quiz questions |
+| Database content | 2 of 15 scenarios; 0 of 765 quiz questions |
 | Checks and review pack | Not started |
 | App Store listing (France, notes for Canada) | Not started |
 
@@ -50,6 +50,7 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
 - **2026-11-15. Course 11, Advanced Opening Techniques** (5 lessons, 98 items, 2,157 English words). The check passes. **All 25 courses are now drafted in French (34,442 English words).** Every file has no straight apostrophe and no ordinary space before ; : ! ?; every *vous* in the lessons is plural ("you both", a group) or inside *rendez-vous*. For the reviewer: "curiosity / assumption / opinion openers" became *accroches qui éveillent la curiosité / par supposition / qui demandent son avis*; "information gap" became *manque d'information*; "a woman's opinion" became *un avis féminin*; "thrifting" became *chiner en friperie*; "try-hard" became *en faire trop*; "False Exits" became *la fausse sortie* (title *Technique du soir : la fausse sortie*); "hook point" became *le moment où elle accroche*; "time constraints" became *annoncer une limite de temps*; "value gap" became *un manque*.
 - **2026-11-15. Supabase check skipped.** `list_projects` on the Supabase connector returns only Clera-App (`rdgtvavltiqmwfzcadcv`), not Wingman-App. Per the rules, no live check was run and nothing was read or written. The English side is copied from `localization/de/db/`, which German matched against the live DB on 2026-11-11 (md5 of all 765 question ids, 796 text screens, 276 options), after the 42 English fixes were applied to production. If the connector reaches Wingman-App later, re-check a sample of ids with SELECT only.
 - **2026-11-15. Scenario 1, Bar Window** (46 text screens, 16 options, about 480 words). `localization/fr/db/scenario_01_bar_window.json` (English and French side by side, same shape as German); `scripts/db_translations_sql.py fr` writes `supabase/seed/content_translations_fr/scenario_01_bar_window.sql`, 63 upserts, **not run**. For the reviewer: the title became *Au bar*; "vodka lemonade / vodka soda" became *vodka-pomme / vodka-tonic* (the French bar classics; the joke is a near-miss guess); "add my Instagram" became *ajoute-moi sur Instagram*; "Uber" stays. "A girl" became *une femme*. The birthday friend and her group are female (*une amie*, *elles*), as the later screens imply. "Transactional" became *intéressé* / *ne s'achète pas*; "you never closed" became *tu n'as jamais concrétisé*. Options use the infinitive (*Commencer à marcher vers elle*). Sophie's name is unchanged.
+- **2026-11-15. Scenario 2, Coffee Connections** (51 text screens, 18 options, about 510 words; 70 upserts, not run). For the reviewer: the title became *Café et pluie* (the English pun has no French equivalent; German did the same); "Hey good looking, let me sit here." became *Salut, beauté, je m'assois là.* (deliberately the wrong option); "Is anyone sitting here?" became *C'est libre ici ?*, so the reply "No go for it" became *Oui, vas-y, installe-toi*, the natural answer to that question (German made the same switch). "I'll pick you up at 8" became *à 20 h*. "Tech start up" became *start-up de la tech*. Lauren's name is unchanged.
 
 ## Questions for Arthur
 
