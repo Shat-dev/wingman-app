@@ -1,0 +1,101 @@
+{
+  "_about": "Per-language settings for scripts/review_pack.py: the 'Choices to check' rows, the 'How to fill it in' rules, and the example row on the Read me sheet. Seeded by the Release C setup session with the interface choices; the Spanish session adds the lesson and database choices.",
+  "language": "Spanish",
+  "choices": [
+    {
+      "topic": "Tone overall",
+      "what": "Calm, direct older brother; informal tú everywhere, including errors and the paywall.",
+      "where": "Whole app",
+      "question": "Does it sound like a man would talk? Anything stiff, translated or cringe?"
+    },
+    {
+      "topic": "One Spanish for every country",
+      "what": "Neutral Latin American Spanish (celular, computadora, carro), shown in Mexico, Colombia, Argentina, the US and Spain alike. No vosotros, no vos.",
+      "where": "Whole app",
+      "question": "Does anything read as one country only? Would a Spaniard stumble anywhere?"
+    },
+    {
+      "topic": "acercamiento",
+      "what": "\"approach\" is acercarte (verb) and acercamiento (noun, also one logged approach): Registrar acercamiento. Not abordaje.",
+      "where": "Whole app",
+      "question": "Natural, or would you say it differently?"
+    },
+    {
+      "topic": "Concretar",
+      "what": "\"Closing\" (asking for the number or the next step) is concretar; course 15 is titled Concretar.",
+      "where": "Interface sheet, area Courses; lessons",
+      "question": "Clear? cerrar sounded like ending the conversation."
+    },
+    {
+      "topic": "Configuración",
+      "what": "\"Settings\" / \"App Store settings\" use Configuración, the Latin American iOS word. Spain's iOS says Ajustes.",
+      "where": "Paywall, settings",
+      "question": "OK for both regions?"
+    },
+    {
+      "topic": "Escenarios",
+      "what": "The Scenarios tab is Escenarios.",
+      "where": "Tab bar",
+      "question": "Or Situaciones?"
+    },
+    {
+      "topic": "Statistic screens",
+      "what": "Reworded so the percent sign isn't followed by \"de\" (a validator rule): De los hombres de 18 a 24 años, el 45 % nunca se ha acercado a una mujer.",
+      "where": "Onboarding",
+      "question": "Natural? \"45 de cada 100 hombres…\" is the alternative."
+    },
+    {
+      "topic": "Course titles",
+      "what": "Translated before the lessons: Listo para acercarte, Cómo acercarte (The Physical Approach), Lo indispensable (Non-negotiables), Concretar, Acercamientos según la situación, Creencias y nuevas perspectivas, Picardía y chispa, Bases del coqueteo, Abrirte y mostrarte vulnerable.",
+      "where": "Interface sheet, area Courses",
+      "question": "Check each against its lessons."
+    },
+    {
+      "topic": "Football, not baseball",
+      "what": "Baseball quotes became football: El que no patea al arco, no mete gol; Entra a la cancha: desde la banca no se meten goles.",
+      "where": "Daily quotes",
+      "question": "Natural?"
+    },
+    {
+      "topic": "El protagonista de tu vida",
+      "what": "Nora Ephron's \"be the heroine of your life\" became sé el protagonista de tu vida, since the readers are men.",
+      "where": "Daily quotes",
+      "question": "Keep, or restore the original?"
+    },
+    {
+      "topic": "Greetings",
+      "what": "Buenos días, (05:00–11:59) / Buenas tardes, (12:00–17:59) / Buenas noches, (from 18:00).",
+      "where": "Interface sheet, area Home",
+      "question": "Is Buenas noches, at 18:00 too early where you live?"
+    },
+    {
+      "topic": "Never translated",
+      "what": "Wingman and XP stay as they are. The five category names are translated (Mentalidad y bases, Acercarse en la práctica, Fluidez en la conversación, Coqueteo y química, Día a día y maestría).",
+      "where": "Whole app",
+      "question": "Category names OK?"
+    },
+    {
+      "topic": "suscripción, Términos, Privacidad",
+      "what": "Subscription = suscripción (Gestionar suscripciones); footer links Términos and Privacidad; full names Términos de uso and Política de privacidad. The pages themselves stay English for now.",
+      "where": "Paywall, sign-in",
+      "question": "OK?"
+    }
+  ],
+  "rules": [
+    "Edit only the yellow columns: \"Your version\", \"Status\" and \"Comment\". Leave a row's \"Your version\" empty if the Spanish is fine, and set Status to OK.",
+    "Keep placeholders exactly: %@, %lld, %1$@, %2$lld and so on. They may move within the sentence, but don't change, add or remove them. %% is a percent sign.",
+    "Keep link targets: in [Términos](terms) translate the word in square brackets only; never change (terms) or (privacy).",
+    "Paywall ticks have a hard limit of 36 characters (see the \"Max length\" column); longer lines get hidden on small iPhones.",
+    "Use tú everywhere, and ustedes for the plural; never vosotros or vos. Imperatives in the short form: elige, prueba, toca.",
+    "Neutral Latin American Spanish that a Spaniard also reads naturally: celular, computadora, carro. Avoid coger, vale, guay, chévere, padre and other words that belong to one country.",
+    "Numbers: 45 % (no-break space). Opening ¿ and ¡ always. Quotation marks “…”. Ellipsis: Cargando… (the single … character, no space before it).",
+    "Adapt rather than translate word for word: if an American image doesn't land in Spanish, replace it with one that does.",
+    "Don't edit the grey Key column; it is how your changes get back into the app."
+  ],
+  "example": {
+    "english": "Try again",
+    "draft": "Intentar de nuevo",
+    "yours": "Vuelve a intentarlo",
+    "comment": "Sounds more natural on a button."
+  }
+}

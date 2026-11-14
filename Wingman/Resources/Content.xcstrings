@@ -16,6 +16,12 @@
             "state" : "needs_review",
             "value" : "18–24"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "18–24"
+          }
         }
       }
     },
@@ -30,6 +36,12 @@
           }
         },
         "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "25–34"
+          }
+        },
+        "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "25–34"
@@ -52,6 +64,12 @@
             "state" : "needs_review",
             "value" : "35–44"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "35–44"
+          }
         }
       }
     },
@@ -66,6 +84,12 @@
           }
         },
         "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "45–54"
+          }
+        },
+        "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "45–54"
@@ -88,6 +112,12 @@
             "state" : "needs_review",
             "value" : "55+"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "55+"
+          }
         }
       }
     },
@@ -105,6 +135,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Hace unos meses"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Il y a quelques mois"
           }
         }
       }
@@ -124,6 +160,12 @@
             "state" : "needs_review",
             "value" : "El hombre que le teme más al dolor que al fracaso probará los dos"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "L’homme qui craint la douleur plus que l’échec goûtera aux deux"
+          }
         }
       }
     },
@@ -141,6 +183,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Una persona que nunca ha cometido un error nunca ha intentado nada nuevo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Une personne qui n’a jamais commis d’erreur n’a jamais tenté d’innover."
           }
         }
       }
@@ -160,6 +208,12 @@
             "state" : "needs_review",
             "value" : "Un barco en el puerto está seguro, pero no fue construido para eso."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Un bateau est en sécurité au port, mais ce n’est pas pour cela qu’il a été construit."
+          }
         }
       }
     },
@@ -177,6 +231,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Sobre todo, sé el protagonista de tu vida, no la víctima."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Avant tout, sois le héros de ta vie, pas la victime."
           }
         }
       }
@@ -196,6 +256,12 @@
             "state" : "needs_review",
             "value" : "Acepta la responsabilidad de tu vida. Debes saber que eres tú quien te llevará adonde quieres ir, nadie más."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Assume la responsabilité de ta vie. Sache que c’est toi qui te mèneras là où tu veux aller, personne d’autre."
+          }
         }
       }
     },
@@ -213,6 +279,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Conversación avanzada"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Conversation avancée"
           }
         }
       }
@@ -232,6 +304,12 @@
             "state" : "needs_review",
             "value" : "Coqueteo avanzado"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Flirt avancé"
+          }
         }
       }
     },
@@ -249,6 +327,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Aperturas avanzadas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Accroches avancées"
           }
         }
       }
@@ -268,6 +352,12 @@
             "state" : "needs_review",
             "value" : "Todos nuestros sueños pueden hacerse realidad si tenemos el valor de perseguirlos."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tous nos rêves peuvent devenir réalité si nous avons le courage de les poursuivre."
+          }
         }
       }
     },
@@ -285,6 +375,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Todo cambio, incluso un cambio para bien, siempre trae inconvenientes e incomodidades."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tout changement, même pour le mieux, s’accompagne toujours d’inconvénients et d’inconfort."
           }
         }
       }
@@ -304,6 +400,12 @@
             "state" : "needs_review",
             "value" : "Cada problema es una oportunidad para dar lo mejor de ti."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Chaque problème est une occasion de donner le meilleur de toi."
+          }
         }
       }
     },
@@ -321,6 +423,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Cualquier cosa que pase es mejor que no pase nada."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tout ce qui arrive vaut mieux que rien du tout."
           }
         }
       }
@@ -340,6 +448,12 @@
             "state" : "needs_review",
             "value" : "Acercarse en la práctica"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "L’approche en pratique"
+          }
         }
       }
     },
@@ -357,6 +471,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Listo para acercarte"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Prêt à aborder"
           }
         }
       }
@@ -376,6 +496,12 @@
             "state" : "needs_review",
             "value" : "De vuelta en la soltería tras una ruptura o un divorcio"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "De nouveau célibataire après une rupture ou un divorce"
+          }
         }
       }
     },
@@ -393,6 +519,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "No temas crecer lentamente; teme solo quedarte quieto."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "N’aie pas peur d’avancer lentement, aie seulement peur de rester immobile."
           }
         }
       }
@@ -412,6 +544,12 @@
             "state" : "needs_review",
             "value" : "Creencias y nuevas perspectivas"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Croyances et recadrages"
+          }
         }
       }
     },
@@ -429,6 +567,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Cree que lo que haces marca la diferencia, porque la marca."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Crois que ce que tu fais compte, parce que c’est le cas."
           }
         }
       }
@@ -448,6 +592,12 @@
             "state" : "needs_review",
             "value" : "Cree que puedes y ya estás a mitad de camino."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Crois que tu peux, et tu as déjà fait la moitié du chemin."
+          }
         }
       }
     },
@@ -465,6 +615,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Mejor mentalidad y más seguridad"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Un meilleur état d’esprit et plus de confiance"
           }
         }
       }
@@ -484,6 +640,12 @@
             "state" : "needs_review",
             "value" : "Los valientes quizá no vivan para siempre, pero los cautelosos no viven en absoluto."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Les braves ne vivent peut-être pas éternellement, mais les prudents ne vivent pas du tout."
+          }
         }
       }
     },
@@ -501,6 +663,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Cambiar es mejorar. Llévate a lugares donde nunca has estado."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Changer, c’est progresser. Pousse-toi vers des endroits où tu n’es jamais allé."
           }
         }
       }
@@ -520,6 +688,12 @@
             "state" : "needs_review",
             "value" : "El cambio es difícil al principio, caótico a la mitad y maravilloso al final."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Le changement est difficile au début, chaotique au milieu et magnifique à la fin."
+          }
         }
       }
     },
@@ -537,6 +711,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Concretar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Concrétiser"
           }
         }
       }
@@ -556,6 +736,12 @@
             "state" : "needs_review",
             "value" : "Las zonas de confort son lugares tranquilos donde nada cambia."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Les zones de confort sont des endroits tranquilles où rien ne change."
+          }
         }
       }
     },
@@ -573,6 +759,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Cumplidos y química verbal"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Compliments et alchimie verbale"
           }
         }
       }
@@ -592,6 +784,12 @@
             "state" : "needs_review",
             "value" : "La seguridad no es algo con lo que naces. Es algo que construyes."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "La confiance en soi n’est pas innée. Elle se construit."
+          }
         }
       }
     },
@@ -609,6 +807,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Fluidez en la conversación"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fluidité de la conversation"
           }
         }
       }
@@ -628,6 +832,12 @@
             "state" : "needs_review",
             "value" : "El valor es estar muerto de miedo y avanzar de todos modos."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Le courage, c’est être mort de peur et avancer quand même."
+          }
         }
       }
     },
@@ -645,6 +855,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "El valor es la cuna de la seguridad."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Le courage est le berceau de la confiance."
           }
         }
       }
@@ -664,6 +880,12 @@
             "state" : "needs_review",
             "value" : "Crear oportunidades"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Créer des occasions"
+          }
         }
       }
     },
@@ -681,6 +903,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Generar atracción e interés romántico"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Susciter l’attirance et l’intérêt romantique"
           }
         }
       }
@@ -700,6 +928,12 @@
             "state" : "needs_review",
             "value" : "La derrota no es el peor de los fracasos. No haberlo intentado es el verdadero fracaso."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "La défaite n’est pas le pire des échecs. Ne pas avoir essayé est le véritable échec."
+          }
         }
       }
     },
@@ -717,6 +951,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "No dejes que lo que no puedes hacer interfiera con lo que sí puedes hacer."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ne laisse pas ce que tu ne peux pas faire t’empêcher de faire ce que tu peux faire."
           }
         }
       }
@@ -736,6 +976,12 @@
             "state" : "needs_review",
             "value" : "Haz hoy lo que otros no harán y logra mañana lo que otros no podrán."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fais aujourd’hui ce que les autres ne feront pas, et accomplis demain ce que les autres ne pourront pas."
+          }
         }
       }
     },
@@ -753,6 +999,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "No dejes que el miedo a perder sea más grande que la emoción de ganar."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ne laisse pas la peur de perdre être plus grande que l’envie de gagner."
           }
         }
       }
@@ -772,6 +1024,12 @@
             "state" : "needs_review",
             "value" : "No esperes a que lleguen las oportunidades. Levántate y créalas."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "N’attends pas que les occasions arrivent. Lève-toi et crée-les."
+          }
         }
       }
     },
@@ -789,6 +1047,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "No esperes. Nunca será el momento perfecto."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "N’attends pas. Le moment ne sera jamais parfait."
           }
         }
       }
@@ -808,6 +1072,12 @@
             "state" : "needs_review",
             "value" : "No te preocupes por fracasar; solo tienes que acertar una vez."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ne t’inquiète pas de l’échec : il suffit de réussir une fois."
+          }
         }
       }
     },
@@ -825,6 +1095,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Cansado de las apps de citas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lassé des applis de rencontre"
           }
         }
       }
@@ -844,6 +1120,12 @@
             "state" : "needs_review",
             "value" : "La duda mata más sueños que el fracaso."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Le doute tue plus de rêves que l’échec ne le fera jamais."
+          }
         }
       }
     },
@@ -861,6 +1143,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Sueña en grande y atrévete a fallar."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Rêve grand et ose échouer."
           }
         }
       }
@@ -880,6 +1168,12 @@
             "state" : "needs_review",
             "value" : "La energía y la perseverancia lo conquistan todo."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "L’énergie et la persévérance viennent à bout de tout."
+          }
         }
       }
     },
@@ -897,6 +1191,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Cada “no” te acerca un paso más al “sí”."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Chaque « non » te rapproche d’un « oui »."
           }
         }
       }
@@ -916,6 +1216,12 @@
             "state" : "needs_review",
             "value" : "Cada acercamiento es práctica para el que funciona."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Chaque approche est un entraînement pour celle qui marchera."
+          }
         }
       }
     },
@@ -933,6 +1239,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Todo maestro fue alguna vez un principiante que se negó a rendirse."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tout maître a d’abord été un débutant qui a refusé d’abandonner."
           }
         }
       }
@@ -952,6 +1264,12 @@
             "state" : "needs_review",
             "value" : "Toda persona exitosa ha enfrentado el rechazo. La diferencia es que no dejó que eso le impidiera volver a intentarlo."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Toute personne qui a réussi a connu le rejet. La différence, c’est qu’elle ne l’a pas laissé l’empêcher de réessayer."
+          }
         }
       }
     },
@@ -969,6 +1287,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Siempre"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "À chaque fois"
           }
         }
       }
@@ -988,6 +1312,12 @@
             "state" : "needs_review",
             "value" : "Todo lo que siempre has querido está del otro lado del miedo."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tout ce que tu as toujours voulu se trouve de l’autre côté de la peur."
+          }
         }
       }
     },
@@ -1005,6 +1335,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "El fracaso y el rechazo son los primeros pasos hacia el éxito."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "L’échec et le rejet sont les premiers pas vers la réussite."
           }
         }
       }
@@ -1024,6 +1360,12 @@
             "state" : "needs_review",
             "value" : "El fracaso es éxito en progreso."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "L’échec, c’est la réussite en cours."
+          }
         }
       }
     },
@@ -1041,6 +1383,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "El fracaso es el condimento que le da sabor al éxito."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "L’échec est le condiment qui donne sa saveur au succès."
           }
         }
       }
@@ -1060,6 +1408,12 @@
             "state" : "needs_review",
             "value" : "Cáete siete veces, levántate ocho."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tombe sept fois, relève-toi huit."
+          }
         }
       }
     },
@@ -1077,6 +1431,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Miedo y exposición"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Peur et exposition"
           }
         }
       }
@@ -1096,6 +1456,12 @@
             "state" : "needs_review",
             "value" : "El miedo pierde fuerza cuando das un paso hacia él."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "La peur perd de sa force quand tu avances vers elle."
+          }
         }
       }
     },
@@ -1113,6 +1479,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Miedo al rechazo o a hacer el ridículo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "La peur du rejet ou d’être ridicule"
           }
         }
       }
@@ -1132,6 +1504,12 @@
             "state" : "needs_review",
             "value" : "Miedo a lo que piensen los demás"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "La peur du regard des autres"
+          }
         }
       }
     },
@@ -1149,6 +1527,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Coqueteo y química"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Séduction et alchimie"
           }
         }
       }
@@ -1168,6 +1552,12 @@
             "state" : "needs_review",
             "value" : "Bases del coqueteo"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Les bases du flirt"
+          }
         }
       }
     },
@@ -1185,6 +1575,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "La felicidad depende de nosotros mismos."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Le bonheur dépend de nous-mêmes."
           }
         }
       }
@@ -1204,6 +1600,12 @@
             "state" : "needs_review",
             "value" : "La felicidad no es algo hecho. Viene de tus propias acciones."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Le bonheur n’est pas quelque chose de tout fait. Il vient de tes propres actions."
+          }
         }
       }
     },
@@ -1221,6 +1623,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Quien no es lo bastante valiente para arriesgarse no logrará nada en la vida."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Celui qui n’a pas le courage de prendre des risques n’accomplira rien dans sa vie."
           }
         }
       }
@@ -1240,6 +1648,12 @@
             "state" : "needs_review",
             "value" : "Me congelo con las mujeres que me atraen"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Je me fige face aux femmes qui me plaisent"
+          }
         }
       }
     },
@@ -1257,6 +1671,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Si nada cambiara, no existirían las mariposas."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Si rien ne changeait jamais, il n’y aurait pas de papillons."
           }
         }
       }
@@ -1276,6 +1696,12 @@
             "state" : "needs_review",
             "value" : "Si no hay lucha, no hay progreso."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sans lutte, pas de progrès."
+          }
         }
       }
     },
@@ -1293,6 +1719,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Si no estás dispuesto a arriesgarte a lo inusual, tendrás que conformarte con lo ordinario."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Si tu n’es pas prêt à risquer l’inhabituel, tu devras te contenter de l’ordinaire."
           }
         }
       }
@@ -1312,6 +1744,12 @@
             "state" : "needs_review",
             "value" : "Si no lo intentas, nunca sabrás lo que pudo haber sido."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Si tu n’essaies pas, tu ne sauras jamais ce qui aurait pu être."
+          }
         }
       }
     },
@@ -1329,6 +1767,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Si no te gusta algo, cámbialo. Si no puedes cambiarlo, cambia tu actitud."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Si quelque chose ne te plaît pas, change-le. Si tu ne peux pas le changer, change ton attitude."
           }
         }
       }
@@ -1348,6 +1792,12 @@
             "state" : "needs_review",
             "value" : "Si no arriesgas nada, lo arriesgas todo."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Si tu ne risques rien, tu risques tout."
+          }
         }
       }
     },
@@ -1365,6 +1815,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "El que no patea al arco, no mete gol."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Si tu ne tires pas, tu ne marques pas."
           }
         }
       }
@@ -1384,6 +1840,12 @@
             "state" : "needs_review",
             "value" : "Si miras hacia el sol, verás que las sombras quedan detrás de ti."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tourne-toi vers le soleil, et les ombres passeront derrière toi."
+          }
         }
       }
     },
@@ -1401,6 +1863,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Si esperas sentirte listo, esperarás para siempre."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Si tu attends d’être prêt, tu attendras toujours."
           }
         }
       }
@@ -1420,6 +1888,12 @@
             "state" : "needs_review",
             "value" : "Para triunfar, tus ganas de tener éxito deben ser más grandes que tu miedo a fracasar."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pour réussir, ton envie de réussir doit être plus grande que ta peur d’échouer."
+          }
         }
       }
     },
@@ -1437,6 +1911,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Quedarte quieto garantiza que no pase nada. Actuar es el único camino que crea posibilidades."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "L’inaction garantit qu’il ne se passe rien. L’action est le seul chemin qui crée des possibilités."
           }
         }
       }
@@ -1456,6 +1936,12 @@
             "state" : "needs_review",
             "value" : "Estabilidad interior"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Stabilité intérieure"
+          }
         }
       }
     },
@@ -1473,6 +1959,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Día a día y maestría"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Au quotidien et maîtrise"
           }
         }
       }
@@ -1492,6 +1984,12 @@
             "state" : "needs_review",
             "value" : "Siempre parece imposible hasta que se hace."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cela semble toujours impossible, jusqu’à ce qu’on le fasse."
+          }
         }
       }
     },
@@ -1509,6 +2007,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "No importa lo lento que vayas, siempre y cuando no te detengas."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Peu importe la lenteur à laquelle tu avances, du moment que tu ne t’arrêtes pas."
           }
         }
       }
@@ -1528,6 +2032,12 @@
             "state" : "needs_review",
             "value" : "Es necesario exponerte al rechazo y aceptar que te van a rechazar."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Il faut s’exposer au rejet et accepter d’être rejeté."
+          }
         }
       }
     },
@@ -1545,6 +2055,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "No es porque las cosas sean difíciles que no nos atrevemos; es porque no nos atrevemos que son difíciles."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ce n’est pas parce que les choses sont difficiles que nous n’osons pas, c’est parce que nous n’osons pas qu’elles sont difficiles."
           }
         }
       }
@@ -1564,6 +2080,12 @@
             "state" : "needs_review",
             "value" : "Es mejor saber y decepcionarte que nunca saber y siempre preguntártelo."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mieux vaut savoir et être déçu que ne jamais savoir et toujours se demander."
+          }
         }
       }
     },
@@ -1581,6 +2103,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Mantener la conversación"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Faire durer la conversation"
           }
         }
       }
@@ -1600,6 +2128,12 @@
             "state" : "needs_review",
             "value" : "Lánzate antes de estar listo; el crecimiento ocurre en pleno salto."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Saute avant d’être prêt : on grandit en plein vol."
+          }
         }
       }
     },
@@ -1617,6 +2151,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Aprendizaje y autoconocimiento"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Apprendre et se découvrir"
           }
         }
       }
@@ -1636,6 +2176,12 @@
             "state" : "needs_review",
             "value" : "Aprender a acercarme"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Apprendre à aborder"
+          }
         }
       }
     },
@@ -1653,6 +2199,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "La vida no se trata de elegir la opción más segura. Se trata de vivir una vida que valga la pena."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "La vie, ce n’est pas choisir l’option la plus sûre. C’est vivre une vie qui en vaut la peine."
           }
         }
       }
@@ -1672,6 +2224,12 @@
             "state" : "needs_review",
             "value" : "La vida se encoge o se expande en proporción al valor de cada uno."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "La vie se rétrécit ou s’épanouit en proportion du courage de chacun."
+          }
         }
       }
     },
@@ -1689,6 +2247,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Escucha y sintonía"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Écouter et être en phase"
           }
         }
       }
@@ -1708,6 +2272,12 @@
             "state" : "needs_review",
             "value" : "Maestría e identidad"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Maîtrise et identité"
+          }
         }
       }
     },
@@ -1725,6 +2295,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Mentalidad y bases"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "État d’esprit et bases"
           }
         }
       }
@@ -1744,6 +2320,12 @@
             "state" : "needs_review",
             "value" : "Hace más de un año"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Il y a plus d’un an"
+          }
         }
       }
     },
@@ -1761,6 +2343,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Casi siempre"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "La plupart du temps"
           }
         }
       }
@@ -1780,6 +2368,12 @@
             "state" : "needs_review",
             "value" : "Nunca me he acercado a nadie"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Je n’ai jamais abordé personne"
+          }
         }
       }
     },
@@ -1797,6 +2391,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Nunca le temas al rechazo; témele a una vida de arrepentimientos."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ne crains jamais le rejet, crains une vie de regrets."
           }
         }
       }
@@ -1816,6 +2416,12 @@
             "state" : "needs_review",
             "value" : "Ningún acercamiento se desperdicia: o funciona o te muestra qué cambiar."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Aucune approche n’est perdue : soit elle marche, soit elle te montre quoi changer."
+          }
         }
       }
     },
@@ -1833,6 +2439,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Nadie puede hacerte sentir inferior sin tu consentimiento."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Personne ne peut te faire sentir inférieur sans ton consentement."
           }
         }
       }
@@ -1852,6 +2464,12 @@
             "state" : "needs_review",
             "value" : "No, normalmente me animo"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Non, je me lance en général"
+          }
         }
       }
     },
@@ -1869,6 +2487,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Lo indispensable"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Les incontournables"
           }
         }
       }
@@ -1888,6 +2512,12 @@
             "state" : "needs_review",
             "value" : "No saber qué decir ni cómo empezar"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ne pas savoir quoi dire ni comment commencer"
+          }
         }
       }
     },
@@ -1905,6 +2535,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Un paso valiente vale más que una vida de “¿y si…?”."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Un geste audacieux vaut mieux qu’une vie de « et si… »."
           }
         }
       }
@@ -1924,6 +2560,12 @@
             "state" : "needs_review",
             "value" : "Uno puede elegir volver hacia la seguridad o avanzar hacia el crecimiento."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "On peut choisir de revenir vers la sécurité ou d’avancer vers la croissance."
+          }
         }
       }
     },
@@ -1941,6 +2583,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Otro"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Autre"
           }
         }
       }
@@ -1960,6 +2608,12 @@
             "state" : "needs_review",
             "value" : "Nuestra mayor gloria no está en no caer nunca, sino en levantarnos cada vez que caemos."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Notre plus grande gloire n’est pas de ne jamais tomber, mais de nous relever à chaque chute."
+          }
         }
       }
     },
@@ -1977,6 +2631,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Paciencia, perseverancia y sudor forman una combinación imbatible para el éxito."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Patience, persévérance et transpiration forment une combinaison imbattable pour réussir."
           }
         }
       }
@@ -1996,6 +2656,12 @@
             "state" : "needs_review",
             "value" : "Presencia física"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Présence physique"
+          }
         }
       }
     },
@@ -2013,6 +2679,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Picardía y chispa"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Jeu et étincelle"
           }
         }
       }
@@ -2032,6 +2704,12 @@
             "state" : "needs_review",
             "value" : "Presencia y expresión"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Présence et expression"
+          }
         }
       }
     },
@@ -2049,6 +2727,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Casi nunca"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Rarement"
           }
         }
       }
@@ -2068,6 +2752,12 @@
             "state" : "needs_review",
             "value" : "Leer y responder"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lire et répondre"
+          }
         }
       }
     },
@@ -2085,6 +2775,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Reconocer que no estás donde quieres estar es el punto de partida para empezar a cambiar tu vida."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Reconnaître que tu n’es pas là où tu veux être, c’est le point de départ pour changer ta vie."
           }
         }
       }
@@ -2104,6 +2800,12 @@
             "state" : "needs_review",
             "value" : "El rechazo no es el final. Solo es un paso en el camino correcto."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Le rejet n’est pas la fin. Juste un pas sur le bon chemin."
+          }
         }
       }
     },
@@ -2121,6 +2823,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Cambia el miedo a lo desconocido por curiosidad."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Remplace la peur de l’inconnu par la curiosité."
           }
         }
       }
@@ -2140,6 +2848,12 @@
             "state" : "needs_review",
             "value" : "Abrirte y mostrarte vulnerable"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Se confier et se montrer vulnérable"
+          }
         }
       }
     },
@@ -2157,6 +2871,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Acercamientos según la situación"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Aborder selon la situation"
           }
         }
       }
@@ -2176,6 +2896,12 @@
             "state" : "needs_review",
             "value" : "Más valen pequeñas acciones hechas que grandes acciones planeadas."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mieux valent de petites actions accomplies que de grandes actions planifiées."
+          }
         }
       }
     },
@@ -2193,6 +2919,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Charla casual y ritmo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Conversation légère et élan"
           }
         }
       }
@@ -2212,6 +2944,12 @@
             "state" : "needs_review",
             "value" : "A veces"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Parfois"
+          }
         }
       }
     },
@@ -2229,6 +2967,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Empieza donde estás. Usa lo que tienes. Haz lo que puedas."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Commence là où tu es. Utilise ce que tu as. Fais ce que tu peux."
           }
         }
       }
@@ -2248,6 +2992,12 @@
             "state" : "needs_review",
             "value" : "El éxito no es definitivo, el fracaso no es fatal: lo que cuenta es el valor para continuar."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Le succès n’est pas final, l’échec n’est pas fatal : c’est le courage de continuer qui compte."
+          }
         }
       }
     },
@@ -2265,6 +3015,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "El éxito es la suma de pequeños esfuerzos repetidos día tras día."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Le succès est la somme de petits efforts, répétés jour après jour."
           }
         }
       }
@@ -2284,6 +3040,12 @@
             "state" : "needs_review",
             "value" : "El éxito consiste en ir de fracaso en fracaso sin perder el entusiasmo."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Le succès, c’est d’aller d’échec en échec sans perdre son enthousiasme."
+          }
         }
       }
     },
@@ -2301,6 +3063,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Las personas exitosas hacen con gusto lo que las demás no están dispuestas a hacer."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ceux qui réussissent font volontiers ce que les autres refusent de faire."
           }
         }
       }
@@ -2320,6 +3088,12 @@
             "state" : "needs_review",
             "value" : "Entra a la cancha: desde la banca no se meten goles."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tente ta chance : on ne marque pas depuis le banc de touche."
+          }
         }
       }
     },
@@ -2337,6 +3111,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "La apertura"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "L’accroche"
           }
         }
       }
@@ -2356,6 +3136,12 @@
             "state" : "needs_review",
             "value" : "Cómo acercarte"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Aller vers elle"
+          }
         }
       }
     },
@@ -2373,6 +3159,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "La mejor manera de predecir el futuro es crearlo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "La meilleure façon de prédire l’avenir, c’est de le créer."
           }
         }
       }
@@ -2392,6 +3184,12 @@
             "state" : "needs_review",
             "value" : "El mayor riesgo es no arriesgarse."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Le plus grand risque, c’est de ne prendre aucun risque."
+          }
         }
       }
     },
@@ -2409,6 +3207,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "La cueva a la que temes entrar guarda el tesoro que buscas."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "La grotte où tu as peur d’entrer renferme le trésor que tu cherches."
           }
         }
       }
@@ -2428,6 +3232,12 @@
             "state" : "needs_review",
             "value" : "La puerta sigue cerrada hasta que giras la manija. Ella no puede decirle que sí a la versión de ti que nunca aparece."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "La porte reste fermée tant que tu ne tournes pas la poignée. Elle ne peut pas dire oui à la version de toi qui ne se montre jamais."
+          }
         }
       }
     },
@@ -2445,6 +3255,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "El partido no empieza hasta que pisas la cancha."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Le match ne commence pas tant que tu n’es pas sur le terrain."
           }
         }
       }
@@ -2464,6 +3280,12 @@
             "state" : "needs_review",
             "value" : "La mayor gloria de vivir no está en no caer nunca, sino en levantarnos cada vez que caemos."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "La plus grande gloire de la vie n’est pas de ne jamais tomber, mais de se relever à chaque chute."
+          }
         }
       }
     },
@@ -2481,6 +3303,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "El que es torpe le gana igual al que nunca actúa."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Le gars maladroit l’emporte quand même sur celui qui n’agit jamais."
           }
         }
       }
@@ -2500,6 +3328,12 @@
             "state" : "needs_review",
             "value" : "Un viaje de mil millas comienza con un solo paso."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Un voyage de mille lieues commence par un premier pas."
+          }
         }
       }
     },
@@ -2517,6 +3351,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "El hombre que mueve una montaña empieza cargando piedras pequeñas."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "L’homme qui déplace une montagne commence par déplacer de petites pierres."
           }
         }
       }
@@ -2536,6 +3376,12 @@
             "state" : "needs_review",
             "value" : "El hombre que quieres ser se construye decisión tras decisión."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "L’homme que tu veux être se construit une décision à la fois."
+          }
         }
       }
     },
@@ -2553,6 +3399,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "El maestro ha fallado más veces de las que el principiante lo ha intentado."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Le maître a échoué plus de fois que le débutant n’a essayé."
           }
         }
       }
@@ -2572,6 +3424,12 @@
             "state" : "needs_review",
             "value" : "La forma más segura de triunfar es intentarlo siempre una vez más."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "La façon la plus sûre de réussir est toujours d’essayer une fois de plus."
+          }
         }
       }
     },
@@ -2589,6 +3447,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "El único mal acercamiento es el que no hiciste."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "La seule mauvaise approche est celle que tu n’as pas tentée."
           }
         }
       }
@@ -2608,6 +3472,12 @@
             "state" : "needs_review",
             "value" : "El único fracaso es dejar de intentarlo."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Le seul échec, c’est d’arrêter d’essayer."
+          }
         }
       }
     },
@@ -2625,6 +3495,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "El único viaje imposible es el que nunca empiezas."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Le seul voyage impossible est celui que tu ne commences jamais."
           }
         }
       }
@@ -2644,6 +3520,12 @@
             "state" : "needs_review",
             "value" : "El único límite para lograr nuestro mañana serán nuestras dudas de hoy."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "La seule limite à nos réalisations de demain, ce sont nos doutes d’aujourd’hui."
+          }
         }
       }
     },
@@ -2661,6 +3543,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "El único lugar donde el éxito viene antes que el trabajo es el diccionario."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Le seul endroit où le succès vient avant le travail, c’est dans le dictionnaire."
           }
         }
       }
@@ -2680,6 +3568,12 @@
             "state" : "needs_review",
             "value" : "El secreto para salir adelante es empezar."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Le secret pour avancer, c’est de commencer."
+          }
         }
       }
     },
@@ -2697,6 +3591,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "El guerrero exitoso es un hombre común con un enfoque como un láser."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Le guerrier qui réussit est un homme ordinaire doté d’une concentration de laser."
           }
         }
       }
@@ -2716,6 +3616,12 @@
             "state" : "needs_review",
             "value" : "Solo hay una forma de evitar la crítica: no hacer nada, no decir nada y no ser nada."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Il n’y a qu’une façon d’éviter la critique : ne rien faire, ne rien dire et n’être rien."
+          }
         }
       }
     },
@@ -2733,6 +3639,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Habrá veces en que triunfes y veces en que fracases, y las dos son igual de importantes."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Il y aura des moments où tu réussiras et d’autres où tu échoueras, et les deux sont tout aussi importants."
           }
         }
       }
@@ -2752,6 +3664,12 @@
             "state" : "needs_review",
             "value" : "Cansado de estar solo"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fatigué d’être seul"
+          }
         }
       }
     },
@@ -2769,6 +3687,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Confía en ti. Eres capaz de mucho más de lo que crees."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fais-toi confiance. Tu es capable de bien plus que tu ne le penses."
           }
         }
       }
@@ -2788,6 +3712,12 @@
             "state" : "needs_review",
             "value" : "Mejora tu estilo de vida"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Améliorer ton mode de vie"
+          }
         }
       }
     },
@@ -2805,6 +3735,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Quiero más seguridad en general"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Avoir plus confiance en moi en général"
           }
         }
       }
@@ -2824,6 +3760,12 @@
             "state" : "needs_review",
             "value" : "No crecemos cuando las cosas son fáciles. Crecemos cuando enfrentamos retos."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "On ne grandit pas quand tout est facile. On grandit face aux défis."
+          }
         }
       }
     },
@@ -2841,6 +3783,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Puede que suframos muchas derrotas, pero no debemos ser derrotados."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nous connaîtrons peut-être bien des défaites, mais nous ne devons pas être vaincus."
           }
         }
       }
@@ -2860,6 +3808,12 @@
             "state" : "needs_review",
             "value" : "Lo que no estás cambiando, lo estás eligiendo."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ce que tu ne changes pas, tu le choisis."
+          }
         }
       }
     },
@@ -2877,6 +3831,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Todo lo que la mente humana puede concebir y creer, lo puede lograr."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tout ce que l’esprit humain peut concevoir et croire, il peut le réaliser."
           }
         }
       }
@@ -2896,6 +3856,12 @@
             "state" : "needs_review",
             "value" : "Cuando saltar te da miedo, ese es justo el momento de saltar."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Quand sauter fait peur, c’est justement le moment de sauter."
+          }
         }
       }
     },
@@ -2913,6 +3879,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Tanto si crees que puedes como si crees que no, tienes razón."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Que tu penses être capable ou ne pas être capable, tu as raison."
           }
         }
       }
@@ -2932,6 +3904,12 @@
             "state" : "needs_review",
             "value" : "En el último mes"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Au cours du dernier mois"
+          }
         }
       }
     },
@@ -2949,6 +3927,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "En la última semana"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Au cours de la dernière semaine"
           }
         }
       }
@@ -2968,6 +3952,12 @@
             "state" : "needs_review",
             "value" : "Me preocupa dar una mala impresión"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Peur de donner une mauvaise impression"
+          }
         }
       }
     },
@@ -2985,6 +3975,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Puedes ser el durazno más maduro y jugoso del mundo y aun así habrá alguien a quien no le gusten los duraznos."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tu peux être la pêche la plus mûre et la plus juteuse du monde, il y aura toujours quelqu’un qui déteste les pêches."
           }
         }
       }
@@ -3004,6 +4000,12 @@
             "state" : "needs_review",
             "value" : "Puedes elegir el valor o puedes elegir la comodidad, pero no puedes elegir ambos."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tu peux choisir le courage, ou tu peux choisir le confort, mais tu ne peux pas choisir les deux."
+          }
         }
       }
     },
@@ -3021,6 +4023,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Puedes desperdiciar tu vida trazando líneas o puedes vivirla cruzándolas."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tu peux gâcher ta vie à tracer des limites. Ou tu peux vivre ta vie en les franchissant."
           }
         }
       }
@@ -3040,6 +4048,12 @@
             "state" : "needs_review",
             "value" : "Puedes, deberías y, si eres lo bastante valiente para empezar, lo harás."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tu peux, tu devrais, et si tu as le courage de commencer, tu le feras."
+          }
         }
       }
     },
@@ -3057,6 +4071,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "No puedes cambiar lo que te niegas a enfrentar."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tu ne peux pas changer ce que tu refuses d’affronter."
           }
         }
       }
@@ -3076,6 +4096,12 @@
             "state" : "needs_review",
             "value" : "No puedes nadar hacia nuevos horizontes hasta que tengas el valor de perder de vista la orilla."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "On ne découvre pas de terre nouvelle sans consentir à perdre de vue le rivage."
+          }
         }
       }
     },
@@ -3093,6 +4119,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "No puedes ganar un partido que nunca juegas."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tu ne peux pas gagner un match que tu ne joues jamais."
           }
         }
       }
@@ -3112,6 +4144,12 @@
             "state" : "needs_review",
             "value" : "No puedes controlar lo que hacen los demás, pero sí cómo reaccionas."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tu ne contrôles pas les actes des autres, mais tu contrôles ta réaction."
+          }
         }
       }
     },
@@ -3129,6 +4167,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "No puedes caer si no subes. Pero no hay alegría en pasar toda la vida en el suelo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tu ne peux pas tomber si tu ne grimpes pas. Mais il n’y a aucune joie à passer toute sa vie au sol."
           }
         }
       }
@@ -3148,6 +4192,12 @@
             "state" : "needs_review",
             "value" : "No tienes que ser genial para empezar, pero tienes que empezar para ser genial."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pas besoin d’être excellent pour commencer, mais il faut commencer pour devenir excellent."
+          }
         }
       }
     },
@@ -3165,6 +4215,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "No tienes que ver toda la escalera, solo da el primer paso."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tu n’as pas besoin de voir tout l’escalier, monte juste la première marche."
           }
         }
       }
@@ -3184,6 +4240,12 @@
             "state" : "needs_review",
             "value" : "No pierdes por intentarlo. Pierdes por nunca saberlo."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "On ne perd pas en essayant. On perd en ne sachant jamais."
+          }
         }
       }
     },
@@ -3202,6 +4264,12 @@
             "state" : "needs_review",
             "value" : "Fallas todos los tiros que no intentas."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tous les tirs que tu ne tentes pas sont ratés d’avance."
+          }
         }
       }
     },
@@ -3219,6 +4287,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Nunca ararás un campo si solo le das vueltas en tu cabeza."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tu ne laboureras jamais un champ en le retournant seulement dans ta tête."
           }
         }
       }

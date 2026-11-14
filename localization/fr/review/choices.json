@@ -1,0 +1,95 @@
+{
+  "_about": "Per-language settings for scripts/review_pack.py: the 'Choices to check' rows, the 'How to fill it in' rules, and the example row on the Read me sheet. Seeded by the Release C setup session with the interface choices; the French session adds the lesson and database choices.",
+  "language": "French",
+  "choices": [
+    {
+      "topic": "Tone overall",
+      "what": "Calm, direct older brother; informal tu everywhere, including errors and the paywall.",
+      "where": "Whole app",
+      "question": "Does it sound like a man would talk? Anything stiff, translated or cringe?"
+    },
+    {
+      "topic": "Metropolitan French",
+      "what": "France as the reference; the same text shows in Canada, Belgium and Switzerland. No Québec-only words, no écriture inclusive.",
+      "where": "Whole app",
+      "question": "Anything that would jar for a Canadian or Belgian reader?"
+    },
+    {
+      "topic": "aborder / une approche",
+      "what": "\"approach\" is aborder (verb) and une approche (noun, also one logged approach): Noter une approche.",
+      "where": "Whole app",
+      "question": "Natural?"
+    },
+    {
+      "topic": "Concrétiser, never conclure",
+      "what": "\"Closing\" (asking for the number or the next step) is concrétiser; course 15 is titled Concrétiser. conclure is avoided because it means sleeping together in French dating talk.",
+      "where": "Interface sheet, area Courses; lessons",
+      "question": "Clear?"
+    },
+    {
+      "topic": "Typography",
+      "what": "Narrow no-break space before ; : ! ? and inside « »; 45 % with a narrow no-break space.",
+      "where": "Whole app",
+      "question": "Deliberate. Confirm nothing looks off on screen."
+    },
+    {
+      "topic": "Statistic screens",
+      "what": "Reworded so the percent sign isn't followed by \"des\" (a validator rule): Parmi les hommes de 18 à 24 ans, 45 % n’ont jamais abordé une femme.",
+      "where": "Onboarding",
+      "question": "Natural? \"Près d’un homme sur deux…\" is the alternative."
+    },
+    {
+      "topic": "Course titles",
+      "what": "Translated before the lessons: Prêt à aborder, Aller vers elle (The Physical Approach), Les incontournables (Non-negotiables), Concrétiser, Aborder selon la situation, Croyances et recadrages, Jeu et étincelle, Les bases du flirt, Se confier et se montrer vulnérable.",
+      "where": "Interface sheet, area Courses",
+      "question": "Check each against its lessons."
+    },
+    {
+      "topic": "Football, not baseball",
+      "what": "Baseball quotes became football: Si tu ne tires pas, tu ne marques pas; Tente ta chance : on ne marque pas depuis le banc de touche.",
+      "where": "Daily quotes",
+      "question": "Natural?"
+    },
+    {
+      "topic": "Le héros de ta vie",
+      "what": "Nora Ephron's \"be the heroine of your life\" became sois le héros de ta vie, since the readers are men.",
+      "where": "Daily quotes",
+      "question": "Keep, or restore the original?"
+    },
+    {
+      "topic": "Formule, OUI / NON",
+      "what": "Plan = formule (Formule mensuelle, Formule annuelle); the reminder toggle reads OUI / NON.",
+      "where": "Paywall, settings",
+      "question": "OK?"
+    },
+    {
+      "topic": "Never translated",
+      "what": "Wingman and XP stay as they are. The five category names are translated (État d’esprit et bases, L’approche en pratique, Fluidité de la conversation, Séduction et alchimie, Au quotidien et maîtrise).",
+      "where": "Whole app",
+      "question": "Category names OK?"
+    },
+    {
+      "topic": "abonnement, CGU, Confidentialité",
+      "what": "Subscription = abonnement (Gérer les abonnements); footer links CGU and Confidentialité; full names Conditions d’utilisation and Politique de confidentialité. The pages themselves stay English for now.",
+      "where": "Paywall, sign-in",
+      "question": "OK? French consumer law expects clear price and renewal terms; flag anything ambiguous."
+    }
+  ],
+  "rules": [
+    "Edit only the yellow columns: \"Your version\", \"Status\" and \"Comment\". Leave a row's \"Your version\" empty if the French is fine, and set Status to OK.",
+    "Keep placeholders exactly: %@, %lld, %1$@, %2$lld and so on. They may move within the sentence, but don't change, add or remove them. %% is a percent sign.",
+    "Keep link targets: in [CGU](terms) translate the word in square brackets only; never change (terms) or (privacy).",
+    "Paywall ticks have a hard limit of 36 characters (see the \"Max length\" column); longer lines get hidden on small iPhones.",
+    "Use tu everywhere. Imperatives: choisis, essaie, touche.",
+    "Metropolitan French, readable in Canada, Belgium and Switzerland too. No Québec-only words, no écriture inclusive.",
+    "Typography: a narrow no-break space before ; : ! ? and inside « », and in 45 %. Ellipsis: Chargement… (the single … character, no space before it).",
+    "Adapt rather than translate word for word: if an American image doesn't land in French, replace it with one that does.",
+    "Don't edit the grey Key column; it is how your changes get back into the app."
+  ],
+  "example": {
+    "english": "Try again",
+    "draft": "Réessayer",
+    "yours": "Réessaie",
+    "comment": "Matches the tu used everywhere else."
+  }
+}

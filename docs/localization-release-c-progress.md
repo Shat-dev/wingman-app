@@ -6,7 +6,7 @@ Model: German (Release B), see [localization-de-progress.md](localization-de-pro
 
 ## Where it stands
 
-Phase 0 is done: the scripts and tests work for `de`, `es` and `fr`, German output is unchanged, and 341 unit tests pass. Phase 2 has started: the Spanish interface catalogs are drafted and pass every check; French is next.
+Phase 0 is done: the scripts and tests work for `de`, `es` and `fr`, German output is unchanged, and 341 unit tests pass. Phases 0–2 are done: tooling, both briefs and both interface catalogs are committed and every check passes. Next is Phase 3, starting the Spanish and French sessions.
 
 ## Summary
 
@@ -17,7 +17,7 @@ Phase 0 is done: the scripts and tests work for `de`, `es` and `fr`, German outp
 | 1 | Spanish brief | Done (2026-11-15) |
 | 1 | French brief | Done (2026-11-15) |
 | 2 | Spanish UI catalogs | 585 of 585 strings drafted (2026-11-15) |
-| 2 | French UI catalogs | Not started |
+| 2 | French UI catalogs | 585 of 585 strings drafted (2026-11-15) |
 | 3 | Spanish and French sessions started | Not started |
 
 ## Log
@@ -40,6 +40,13 @@ Phase 0 is done: the scripts and tests work for `de`, `es` and `fr`, German outp
   - Statistic screens use the reorder workaround: *De los hombres de 18 a 24 años, el 45 % nunca se ha acercado a una mujer* (no-break space before %).
   - **Course titles to check against the lessons** (the Spanish session may suggest better ones): *Listo para acercarte* (Approach Readiness), *Cómo acercarte* (The Physical Approach; German changed to *Die Annäherung* for the same reason), *Lo indispensable* (Non-negotiables: fitness, grooming, style), *Concretar* (Closing), *Acercamientos según la situación* (Situational Specific Approaches), *Creencias y nuevas perspectivas* (Beliefs & Reframes), *Picardía y chispa* (Playfulness & Spark), *Bases del coqueteo* (Flirting Prerequisites), *Abrirte y mostrarte vulnerable* (Sharing & Vulnerability).
   - Other choices for the reviewer: settings toggle reads *SÍ / NO*; Home greeting after 18:00 is *Buenas noches,* (Latin Americans still say *buenas tardes* until dark); baseball quotes became football (*El que no patea al arco, no mete gol*; *Entra a la cancha: desde la banca no se meten goles*); Gretzky became *Fallas todos los tiros que no intentas*; Nora Ephron became *sé el protagonista de tu vida*; *durazno* (Latin America) in the peach quote, *melocotón* in Spain.
+- **2026-11-15. Phase 2: French interface catalogs** (`localization/fr/catalogs.fr.json`, imported as "needs review"): 406 + 179 strings, all drafted. The strict catalog check passes for de, es, fr; only `fr` entries changed in the catalogs. Typography: narrow no-break space (U+202F) before ? ! : ; and inside « », and in `45 %` / `%lld %%`; typographic apostrophe ’.
+  - Paywall ticks all fit (longest 35 of 36: *Ne crains plus le regard des autres*).
+  - Price sentences: *Aujourd’hui, tu paies %1$@ pour ta première année, puis %2$@ par an.* The price is never the subject and no word agrees with it, so `29,99 €`, `CHF 12.00` and `12,99 $ CA` all read correctly; *seulement %@ par semaine* and *Essayer pour %@* hold. None break.
+  - **Course titles to check against the lessons:** *Prêt à aborder* (Approach Readiness), *Aller vers elle* (The Physical Approach), *Les incontournables* (Non-negotiables), *Concrétiser* (Closing; never *conclure*), *Aborder selon la situation*, *Croyances et recadrages* (Beliefs & Reframes), *Jeu et étincelle* (Playfulness & Spark), *Les bases du flirt* (Flirting Prerequisites), *Se confier et se montrer vulnérable*.
+  - Other choices: plan = *formule*; reminder toggle *OUI / NON*; Gide's quote uses his own French (*On ne découvre pas de terre nouvelle sans consentir à perdre de vue le rivage*); Sénèque's in its usual French form; Gretzky became *Tous les tirs que tu ne tentes pas sont ratés d’avance*.
+  - Tests tightened as planned: `StringCatalogTests` and `AppLanguageSettingsTests` now require exactly en, de, es, fr in the bundle. 341 run, 336 passed, 5 skipped. Spanish and French catalog fallback and onboarding-parity checks run and pass; only their lessons, quiz and scenarios are still skipped (not translated yet).
+  - Review packs: seeded `localization/es/review/choices.json` and `localization/fr/review/choices.json` with the rules and the interface choices above, so `python3 scripts/review_pack.py es|fr` already builds. The language sessions add their lesson and database choices. German's pack is still cell-for-cell identical.
 
 ## Questions for Arthur
 

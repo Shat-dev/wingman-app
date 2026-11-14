@@ -24,12 +24,8 @@ final class AppLanguageSettingsTests: XCTestCase {
         XCTAssertEqual(AppLanguageSettings.availableLanguageCodes(localizations: ["de", "Base", "en", "fr"]), ["en", "de", "fr"])
     }
 
-    /// English and German always; Spanish and French once their catalogs are
-    /// translated (Release C). Nothing else.
-    func testThisBuildOffersEnglishGermanAndReleaseCLanguages() {
-        let codes = AppLanguageSettings.availableLanguageCodes
-        XCTAssertEqual(Array(codes.prefix(2)), ["en", "de"])
-        XCTAssertTrue(Set(codes).isSubset(of: ["en", "de", "es", "fr"]), "\(codes)")
+    func testThisBuildOffersEnglishGermanSpanishAndFrench() {
+        XCTAssertEqual(AppLanguageSettings.availableLanguageCodes, ["en", "de", "es", "fr"])
     }
 
     /// The Settings menu lists every shipped language under its own name.
