@@ -4,14 +4,14 @@ Branch `localization-release-c-fr` (from `localization-release-c`). Rules and gl
 
 ## Where it stands
 
-Lesson overlays in progress (10 of 25 courses). Database content, checks, review pack and App Store listing not started.
+Lesson overlays in progress (11 of 25 courses). Database content, checks, review pack and App Store listing not started.
 
 ## Summary
 
 | Part | State |
 |---|---|
 | UI catalogs | Done by the setup session (585 strings, draft) |
-| Lesson overlays | 10 of 25 courses, 628 of 1,531 items |
+| Lesson overlays | 11 of 25 courses, 696 of 1,531 items |
 | Database content | Not started (15 scenarios, 765 quiz questions) |
 | Checks and review pack | Not started |
 | App Store listing (France, notes for Canada) | Not started |
@@ -33,6 +33,7 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
 - **2026-11-15. Course 13, Listening & Attunement** (4 lessons, 63 items, 1,383 English words). The check passes. For the reviewer: "validating" became *reconnaître* / *la reconnaissance* (*valider* avoided, per the glossary); "validating follow-ups" became *une relance qui reconnaît ce qu'elle dit*; "attunement / attuned" became *être à l'écoute / en phase*; "subtext" became *sous-texte*; "non-verbal listening cues" became *signes d'écoute non verbaux*. The sister lives in Bordeaux rather than Portland (German used Hamburg). "I'm fine" became *Ça va*.
 - **2026-11-15. Course 18, Playfulness & Spark** (3 lessons, 49 items, 1,167 English words). The check passes. For the reviewer: "banter" became *répartie* / *échanges taquins*; "teasing" became *taquinerie* (*charrier* in casual lines); "cheek / cheeky" became *culot / culotté* (*Un peu de culot*); "a smirk" became *un sourire en coin*; "calibration" here became *doser* (it's about how much humour). The café line "it's a big decision, isn't it?" became *C'est le choix d'une vie, hein ?* so the irony still reads (German did the same). "Bad at cooking" became *ses talents de cuisinière* (teasing, ironic). Every *vous* in the file is the plural "you both".
 - **2026-11-15. Course 23, Creating Opportunities** (3 lessons, 49 items, 1,180 English words). The check passes. For the reviewer: "home court advantage" became *l'avantage du terrain*; "regular" became *habitué*; "foam rolling near the turf" became *passer le rouleau de massage près de l'espace gazon*; "running club" became *club de course à pied*; "reps" became *tentatives*; "volume" became *quantité*; "vouched for you" became *s'est portée garante de toi*. "Kettlebells", "CrossFit" and "barista" are kept (normal in French gyms and cafés).
+- **2026-11-15. Course 3, Presence & Expressions** (4 lessons, 68 items, 1,378 English words). The check passes. For the reviewer: "emotional contagion" became *contagion émotionnelle*; "mirror neurons" became *neurones miroirs*; "positive affirmations" became *Répète-toi quelques phrases positives* (*affirmations positives* reads like self-help jargon); "speak on an exhale" became *parle sur l'expiration*; "a calm voice" became *une voix posée*. The research claims ("neurologically impossible…", dopamine and serotonin) are kept as strong as the English, as German did; consider softening them in all languages.
 
 ## Questions for Arthur
 
