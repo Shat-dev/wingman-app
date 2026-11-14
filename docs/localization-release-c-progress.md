@@ -6,7 +6,7 @@ Model: German (Release B), see [localization-de-progress.md](localization-de-pro
 
 ## Where it stands
 
-Phase 0 is done: the scripts and tests work for `de`, `es` and `fr`, German output is unchanged, and 341 unit tests pass. Phase 1 has started: the Spanish brief is written; the French brief is next.
+Phase 0 is done: the scripts and tests work for `de`, `es` and `fr`, German output is unchanged, and 341 unit tests pass. Phase 1 is done: both briefs are written. Next is Phase 2, the Spanish interface catalogs.
 
 ## Summary
 
@@ -15,7 +15,7 @@ Phase 0 is done: the scripts and tests work for `de`, `es` and `fr`, German outp
 | 0 | Branch and prompts | Done (2026-11-15) |
 | 0 | Language-generic scripts and tests | Done (2026-11-15) |
 | 1 | Spanish brief | Done (2026-11-15) |
-| 1 | French brief | Not started |
+| 1 | French brief | Done (2026-11-15) |
 | 2 | Spanish UI catalogs | Not started |
 | 2 | French UI catalogs | Not started |
 | 3 | Spanish and French sessions started | Not started |
@@ -33,6 +33,7 @@ Phase 0 is done: the scripts and tests work for `de`, `es` and `fr`, German outp
   - `OnboardingSweepTests`: Spanish (`es`, `es_MX`) and French (`fr`, `fr_FR`) variants of both German sweeps. The lesson and scenario titles are now read from the language's overlay and DB file instead of hard-coded German; the starts of long sentences are derived from the catalog for es/fr (German keeps its hand-written list); the Daily Practice "Start" button no longer assumes the Home tab is also called "Start". Compiled, **not run**.
   - Unit tests on "Wingman L10n 17 Pro": 341 run, 336 passed, 5 skipped, 0 failed (2 new).
 - **2026-11-15. Phase 1: Spanish brief** ([localization-es-brief.md](localization-es-brief.md)). Sections as German's, plus a glossary for the lesson session and the validator workaround. Choices taken: *tú* / *ustedes*; neutral Latin American words (*celular*, *computadora*, *carro*; no *coger*, *vale*, *guay*, *chévere*, *padre*); *acercamiento* for an approach (not *abordaje*); *frase de apertura* for opener; *concretar* for close / closing (course 15 title *Concretar*); *suscripción*; *Términos* / *Privacidad*; *Configuración* for iOS settings (Latin American iOS; Spain says *Ajustes*); *Nivel %lld*; numbers `45 %` with a no-break space (RAE/ASALE), in format strings `%lld %%`; ¿ ¡ always; curly “…” quotes; one/other plurals. **Validator:** a literal `%` followed by space + d/s/u/f/@ (or ld/lf/ll) reads as a placeholder, so Spanish *45 % de los hombres*, *45% de*, *77 % son* all fail. Workaround in the brief: reorder (*el 45 % nunca se ha acercado…*) or say it in words (*45 de cada 100 hombres*). French has the same problem (*% des*, *% sont*, *% sur*). Checked against the regex.
+- **2026-11-15. Phase 1: French brief** ([localization-fr-brief.md](localization-fr-brief.md)). Choices taken: *tu*; metropolitan French, no Québec-only words (*portable*, not *cellulaire*; no *magasiner*, *char*, *blonde*), no écriture inclusive; *aborder* / *une approche* (not *abordage*); *phrase d'accroche* for opener; **close / closing = *concrétiser*, never *conclure*** (sexual meaning in French dating talk; course 15 title *Concrétiser*); *abonnement*; *CGU* / *Confidentialité*; *Réglages*; *Niveau %lld*; `45 %` and the narrow no-break space (U+202F) before ; : ! ? and inside « »; 0 and 1 singular (iOS puts 0 in *one*, so *one* must read right for 0). Same validator workaround as Spanish (*Parmi les hommes…, 45 % n'ont jamais…*, or *près d'un homme sur deux*).
 
 ## Questions for Arthur
 
