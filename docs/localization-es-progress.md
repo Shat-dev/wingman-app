@@ -4,7 +4,7 @@ Branch `localization-release-c-es` (from `localization-release-c`). Rules and gl
 
 ## Where it stands
 
-All 25 lesson courses are drafted (see Summary). All 15 scenarios are drafted. Next: the rest of the 765 quiz questions (nine files, as German), then checks and the App Store listing.
+All 25 lesson courses are drafted (see Summary). All lessons, scenarios and quiz questions are drafted. Next: the checks and review pack, then the App Store listing.
 
 ## Summary
 
@@ -12,7 +12,7 @@ All 25 lesson courses are drafted (see Summary). All 15 scenarios are drafted. N
 |---|---|
 | UI catalogs | 585 of 585 strings drafted (setup session, 2026-11-15) |
 | Lesson overlays | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-15) |
-| Database content | **15 of 15 scenarios**; 726 of 765 questions (8 of 9 files complete) |
+| Database content | **Done: 15 of 15 scenarios, 765 of 765 questions** (2026-11-15) |
 | Checks and review pack | Not started |
 | App Store listing | Not started |
 
@@ -79,6 +79,7 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
 - **2026-11-15. Questions 612–649** (flirting_chemistry rows 77–114, module pool; 1,648 English words; 38 upserts, not run). This starts `questions_04_flirting_chemistry_2`, which will hold rows 77–151; the seed holds 649 and `--check` passes. `50183c21…` carries the English fix (the right answer is the lesson 21_1 line "Only if you're getting the next round"), rendered as in course 21: *Solo si la siguiente ronda la pagas tú*. `7a679b53…` (she steps back from a touch) keeps *Detente de inmediato*. "Protect my queen" (chess pun) works as *Menos mal que sé proteger a mi reina*. "Calibrated touch" is *contacto medido*, as in course 20. For the reviewer: "You're cursed" (wrong queue) became *estás salada* ("unlucky", used in Mexico and Spain; check it reads well elsewhere); "flip the table" became *no me vuelques el tablero*; "pedestalizing" became *ponerla en un pedestal*. No content flags.
 - **2026-11-15. Questions 650–686** (flirting_chemistry rows 115–151, module pool; 1,492 English words). `questions_04_flirting_chemistry_2` is complete, with 75 rows (German 75), so all 151 flirting_chemistry questions are done; the seed holds 686 and `--check` passes. The English fixes are carried over: `e91466f0…` ("Upper arm" → *La parte de arriba del brazo*), `f6feba7a…` (guiding through a crowd: *Un toque ligero en el brazo para guiarla*), `f23233f3…` (*cuando ella te lo devuelve*) and `a9af130c…`. Every touch question keeps its stop rule: `bd77420f…` *detén cualquier avance físico*, `f6cb6b9f…` *Darle más espacio*. "Breaking rapport" (`af902d35…`) became *romper la complicidad*, as in course 21. For the reviewer: "show me the way to your heart" became *¿Entonces me enseñas el camino a tu corazón?*; "That's arrogant haha" became *Qué creída, jaja*. No content flags.
 - **2026-11-15. Questions 687–726** (mastery_integration rows 1–40: lessons 22_1 to 25_4; 1,672 English words; 40 upserts, not run). This starts `questions_05_mastery_integration`, a single file for all 79 rows; the seed holds 726 and `--check` passes. Terms follow the course 22–25 overlays: "home court advantage" became *jugar de local*, "regular" *habitual*, "social proof" *prueba social*, "volume" / "reps" *cantidad de intentos* / *intentos*, "habituation" *habituación*, "automaticity" *automático*, "skill decay" *que tus habilidades se oxiden*, "experimental mindset" *mentalidad de experimentar*, "sticking point" *punto de estancamiento*, "growth plateau" *meseta en tu crecimiento*. For the reviewer: "vetted" became *respondieron por ti* / *aval social* (as course 23's *el lugar ya respondió por ti*); "weakest link" *el eslabón más débil*; "a bit of this and that—mostly creative stuff" *Un poco de todo, sobre todo cosas creativas*. No content flags.
+- **2026-11-15. Questions 727–765** (mastery_integration rows 41–79, module pool; 1,559 English words). `questions_05_mastery_integration` is complete, with 79 rows. **Database content is done:** a completeness check against German's files finds the same ids in every section of all 24 files (765 questions; every scenario's screens and options) and the same upsert count in every SQL file; the seed holds 765 and `--check` passes. The live DB check is still skipped (connector on Clera-App). For the reviewer: the five "style fits you best" questions (quiet, calm, intense, warm, funny) keep the options' contrast; "own gravity" became *magnetismo propio*; "hidden cost" *costo oculto* (Spain: *coste*); "Hobby clubs… running, cooking" *Clubes de pasatiempos… correr, cocinar*. No content flags.
 
 ## For the setup session
 
