@@ -4,7 +4,7 @@ Branch `localization-release-c-es` (from `localization-release-c`). Rules and gl
 
 ## Where it stands
 
-All 25 lesson courses are drafted (see Summary). Next: database content (15 scenarios, then 765 quiz questions), then checks and the App Store listing.
+All 25 lesson courses are drafted (see Summary). All 15 scenarios are drafted. Next: the rest of the 765 quiz questions (nine files, as German), then checks and the App Store listing.
 
 ## Summary
 
@@ -12,7 +12,7 @@ All 25 lesson courses are drafted (see Summary). Next: database content (15 scen
 |---|---|
 | UI catalogs | 585 of 585 strings drafted (setup session, 2026-11-15) |
 | Lesson overlays | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-15) |
-| Database content | **15 of 15 scenarios**; 0 of 765 questions |
+| Database content | **15 of 15 scenarios**; 55 of 765 questions |
 | Checks and review pack | Not started |
 | App Store listing | Not started |
 
@@ -61,8 +61,8 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
 - **2026-11-15. Scenario 12, Performance Review** (56 text screens, 21 options, about 620 words; 80 upserts, not run, same as German). For the reviewer: the title became *Noche de networking* (as German's *Networking-Abend*; the work-appraisal pun doesn't carry over and *evaluación de desempeño* would mislead); "networking event" keeps *networking*; "keynote speaker" became *conferencista invitado*; "Q&A" became *la ronda de preguntas*; "approached it with logic instead of theory" became *lo enfocaras desde lo práctico y no desde la teoría*, which matches her reply about execution (as German); "the break / work holidays" became *las vacaciones*; "road trip" became *viaje en carretera*; "name tags" became *etiquetas con el nombre* (not Mexico's *gafetes*). She does the road trip with *amigas*.
 - **2026-11-15. Scenario 13, House Wine** (52 text screens, 21 options, about 530 words; 76 upserts, not run, same as German). The English here already carries the 2026-11-11 content fixes (guiding touch is a light touch on her arm; checking in is "never wrong"; the no-touch path says a touch works "only if she's clearly comfortable"), and the Spanish keeps each condition: *pero solo si ella está claramente cómoda*; *una invitación ligera y segura, a la que pueda decir que no fácilmente*. For the reviewer: the title became *El vino de la casa*; "partner in crime" became *mi cómplice*; "crime scene" became *la escena del crimen*; "I'm down" became *Me apunto*; the deliberately wrong toast "to getting you drunk" stays wrong (*por emborracharte*); "ditched" became *la dejaron plantada*.
 - **2026-11-15. Scenario 14, Dressed to Impress** (55 text screens, 20 options, about 560 words; 76 upserts, not run, same as German). For the reviewer: the title became *Una segunda opinión* (the English idiom has no tight equivalent; German used *Gut angezogen*); "frame" became *Esta apertura no es la más fuerte*; "socials" became *redes*; "food court" became *la zona de comidas*; "pants" became *pantalones*; "pressure's on" became *qué presión*; "Or is that private information" became *¿O es información confidencial?*. The unnamed woman stays unnamed, as in the English.
-
 - **2026-11-15. Scenario 15, Study Buddy** (about 636 words; 67 upserts, not run, same as German). For the reviewer: the title became *Compañera de estudio*; Aurelie keeps her name; "paper" became *trabajo*; "A girl" became *Una mujer joven*; the chemistry pun holds with *química* ("I'd fail" became *reprobaría*, the Latin American verb; Spain would say *suspendería*); "Working hard or hardly working?" has no Spanish twin and became *¿Estudiando a fondo o haciendo como que estudias?* (check it still reads as teasing); "beauty sleep" became *sueño reparador*. Avoided Mexico-only *jalar* ("pull up a chair" became *Acercas una silla*) and *va* (became *bueno*). No content flags.
+- **2026-11-15. Questions 1–55** (mindset_foundations, lessons 1_1 to 5_2; 2,186 English words with options and explanations; 55 upserts, not run). This starts `questions_01_mindset_foundations` (109 rows), filled over two iterations as German did; the English side is German's file, so it already carries the English fixes. The bundled seed `Wingman/Content/question_translations_seed.es.json` now exists (55 rows; `--check` passes) and is picked up by the synchronized folder, no project change. Terms follow the course 1–5 overlays: *anclaje* (grounding), *aprobación*, *vigilarte* (self-monitoring), *aplomo*, *no depender del resultado*, *mentalidad de crecimiento*, *arreglo personal* (grooming), *prueba(s)* (evidence). For the reviewer: Spanish *seguridad* means both "safety" and "confidence", so where they sit side by side "safety" became *confianza* or *ser de fiar* (`55639c7a…`: "Safety and warmth" → *Confianza y calidez* next to *Seguridad en ti mismo*) and "confidence" stays *seguridad (en ti mismo)*; in `28ccfdfd…` the options are *Seguridad* (safety) and *Confianza* (confidence), check they don't read as the same. "All of the above" became *Todas las anteriores*, "Both of the above" *Las dos anteriores*. Options keep roughly the English lengths so the right answer isn't given away by length. No content flags.
 
 ## For the setup session
 
