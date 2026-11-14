@@ -4,14 +4,14 @@ Branch `localization-release-c-fr` (from `localization-release-c`). Rules and gl
 
 ## Where it stands
 
-Lesson overlays in progress (12 of 25 courses). Database content, checks, review pack and App Store listing not started.
+Lesson overlays in progress (13 of 25 courses). Database content, checks, review pack and App Store listing not started.
 
 ## Summary
 
 | Part | State |
 |---|---|
 | UI catalogs | Done by the setup session (585 strings, draft) |
-| Lesson overlays | 12 of 25 courses, 758 of 1,531 items |
+| Lesson overlays | 13 of 25 courses, 820 of 1,531 items |
 | Database content | Not started (15 scenarios, 765 quiz questions) |
 | Checks and review pack | Not started |
 | App Store listing (France, notes for Canada) | Not started |
@@ -35,6 +35,7 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
 - **2026-11-15. Course 23, Creating Opportunities** (3 lessons, 49 items, 1,180 English words). The check passes. For the reviewer: "home court advantage" became *l'avantage du terrain*; "regular" became *habitué*; "foam rolling near the turf" became *passer le rouleau de massage près de l'espace gazon*; "running club" became *club de course à pied*; "reps" became *tentatives*; "volume" became *quantité*; "vouched for you" became *s'est portée garante de toi*. "Kettlebells", "CrossFit" and "barista" are kept (normal in French gyms and cafés).
 - **2026-11-15. Course 3, Presence & Expressions** (4 lessons, 68 items, 1,378 English words). The check passes. For the reviewer: "emotional contagion" became *contagion émotionnelle*; "mirror neurons" became *neurones miroirs*; "positive affirmations" became *Répète-toi quelques phrases positives* (*affirmations positives* reads like self-help jargon); "speak on an exhale" became *parle sur l'expiration*; "a calm voice" became *une voix posée*. The research claims ("neurologically impossible…", dopamine and serotonin) are kept as strong as the English, as German did; consider softening them in all languages.
 - **2026-11-15. Course 8, The Opener** (4 lessons, 62 items, 1,444 English words). The check passes. For the reviewer: "indirect / direct (intent) openers" became *accroches indirectes / directes*; "frame control" became *donner le ton* (lesson title); "frame" is *posture* for the man's stance but **cadre** where the English means how the interaction is framed (*Elle a accepté ce cadre*; also *le cadre est déjà posé* in 6_3), since *posture* doesn't fit there. "Voice mechanics" became simply *Ta voix* (German did the same). "Rapport-building pretence" became *tout le cinéma censé créer de la complicité*. The example openers are rewritten as natural spoken French (*La queue est interminable aujourd'hui. C'est toujours comme ça ?*; *Il est bien, ce livre ?*). "Clubs" became *boîtes*.
+- **2026-11-15. Course 14, Sharing & Vulnerability** (4 lessons, 62 items, 1,432 English words). The check passes. For the reviewer: "reciprocity rhythm" became *le rythme de la réciprocité*; "processed / unprocessed sharing" became *partager une expérience digérée / non digérée*; "Share the lesson, not the wound" became *Partage la leçon, pas la blessure*; "matching" became *s'accorder*; "calibration followed by escalation" became *On s'ajuste d'abord, on va plus loin ensuite* (avoiding *escalade*); "oversharing" became *confidences de trop*; "rapport" became *complicité*. "High school" became *le lycée*.
 
 ## Questions for Arthur
 
