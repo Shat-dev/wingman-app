@@ -4,7 +4,7 @@ Branch `localization-release-c-fr` (from `localization-release-c`). Rules and gl
 
 ## Where it stands
 
-All 25 lesson courses are drafted (1,531 items, 34,442 English words); every overlay passes `lesson_overlays.py check fr`. Database content is drafted: all 15 scenarios and all 765 quiz questions (about 32,000 English words in the quizzes); the SQL is generated, never run. Checks and review pack done (2026-11-15). App Store listing not started.
+All 25 lesson courses are drafted (1,531 items, 34,442 English words); every overlay passes `lesson_overlays.py check fr`. Database content is drafted: all 15 scenarios and all 765 quiz questions (about 32,000 English words in the quizzes); the SQL is generated, never run. Checks and review pack done (2026-11-15). App Store listing drafted (2026-11-15).
 
 ## Summary
 
@@ -14,7 +14,7 @@ All 25 lesson courses are drafted (1,531 items, 34,442 English words); every ove
 | Lesson overlays | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-15) |
 | Database content | **15 of 15 scenarios** (796 text screens, 276 options); **765 of 765 quiz questions** (2026-11-15) |
 | Checks and review pack | **Done** (2026-11-15): all checks pass; 341 unit tests, 336 passed, 5 skipped; review pack built |
-| App Store listing (France, notes for Canada) | Not started |
+| App Store listing (France, notes for Canada) | **Drafted** (2026-11-15): [french-app-store-listing.md](french-app-store-listing.md) and four `-fr.html` banner copies, not rendered or uploaded |
 
 Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14, 19, 24, then 4, 9, 15, 20, 25, then 5, 10, 16, 21, 11.
 
@@ -90,6 +90,16 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
   - Unit tests on "Wingman L10n 17 Pro" (`-only-testing:WingmanTests`): **341 tests, 336 passed, 5 skipped, 0 failures.** The 5 skipped are `PseudoLanguageProbeTests` (they skip outside a pseudo-language run, as on German's branch). The per-language fallback tests (`ContentOverlayTests`, `LessonOverlayTests`, `QuestionTranslationCacheTests`, `ContentLocalizerTests`) and `AnalyticsParityTests` pass. The Spanish content missing from this worktree did not fail anything, so nothing to report to the setup session.
   - Scans of every French string (6,997 in the overlays and database files): no straight apostrophe, no `...`, no ordinary or missing space before ; : ! ?, every « » has narrow no-break spaces, no number+unit without U+202F. All 174 *vous* were read: each is plural ("you both", a group, "you guys"), inside a quote addressed to a group, or *rendez-vous*; none addresses the reader. *Conclu-* appears only as "concluded" (6 times), never for closing. Anglicisms: "timing" (8 options or screens) was replaced by *moment* wording (*Le bon moment*, *Un moment mal choisi*, *tout se joue dans le choix du moment*); "rester cool" became *rester impassible*. Kept as normal French: *flirt / flirter*, *week-end*, *barista*, *networking*, *road trip*, *stand-up*, *selfie*, *GPS*, *cool* in spoken lines only, and *growth mindset* once in brackets as a term gloss (as German).
   - `localization/fr/review/choices.json`: 14 lesson and database choices added to the setup session's 12 (26 in all), including the 25_4_5_2 consent addition, *allez, tant pis*, *concrétiser*, *ne pas être impressionné d'emblée*, *posture / cadre*, reps / volume, cities, names and *amies*. `python3 scripts/review_pack.py fr` wrote `localization/fr/review/wingman-french-review-pack.xlsx` (465 interface strings, 32 lesson items, 120 quotes, 26 choices). Nothing is marked reviewed.
+- **2026-11-15. App Store listing (step 4).** `docs/french-app-store-listing.md`, modelled on the German listing; character counts checked by script.
+  - Name *Wingman: Aborder une femme* (26), alternative *Wingman: Séduction & Confiance* (30).
+  - Subtitle *Confiance en soi et séduction* (29), alternative *Gagne en assurance, ose parler* (30).
+  - Keywords (98): draguer, drague, flirt, flirter, séduire, timide, rencontre, coach, charisme, conversation, célibataire, date. *Aborder*, *femme*, *confiance* and *séduction* are in the name and subtitle; pickup terms and mental-health terms are left out.
+  - Promotional text (147), description (follows the English point for point, no new claims, no trial), What's New, subscription display names *Formule mensuelle* / *Formule annuelle* (matching the paywall; the discount product gets the yearly name, nothing else changed).
+  - French text for all five Figma screenshots; the phone contents are taken from the French catalog and database files, so they match the app.
+  - Notes for French (Canada): own localization needed, Québec typography, *cruiser* in the keywords.
+  - The store search for the name used Apple's public search API (country=fr, no personal data): "aborder une femme" returns one unrelated app; "draguer" is crowded with AI pick-up-line apps; another "Wingman : Coach Rencontres IA" exists (1 rating).
+  - Translated copies of the four HTML banners in `marketing/app-store-assets/` (`header-a-fr.html`, `header-b-fr.html`, `search-a-fr.html`, `search-b-fr.html`): text only, same layout and art; not rendered or uploaded. Their phone images are still English captures.
+  - Open, for the adviser: whether English-only terms and privacy pages are acceptable for a paid service sold in France (Code de la consommation, Loi Toubon). Not guessed. For the reviewer: *tu* on the store page (like the app) versus *vous*.
 
 ## Questions for Arthur
 
