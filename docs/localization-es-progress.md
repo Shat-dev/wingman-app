@@ -12,7 +12,7 @@ All 25 lesson courses are drafted (see Summary). Next: database content (15 scen
 |---|---|
 | UI catalogs | 585 of 585 strings drafted (setup session, 2026-11-15) |
 | Lesson overlays | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-15) |
-| Database content | 5 of 15 scenarios; 0 of 765 questions |
+| Database content | 6 of 15 scenarios; 0 of 765 questions |
 | Checks and review pack | Not started |
 | App Store listing | Not started |
 
@@ -52,6 +52,7 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
 - **2026-11-15. Scenario 3, Fetch & Flirt** (44 text screens, 14 options, about 420 words; 59 upserts, not run). For the reviewer: the title became *Perros y coqueteo*; her dog is female (*perrita*, *la mía… tímida*), so his dog "made a new friend" became *una nueva amiga*; "He's not usually this smooth" became *No suele ser tan lanzado*; the deliberately suggestive wrong option "We should recreate what our dogs are doing later" stays suggestive (*Luego deberíamos hacer lo mismo que están haciendo nuestros perros*); "play dates" became *citas para que jueguen*; "Frame control is leading the moment" became *Marcar el tono es llevar el momento*; "fountain" became *fuente*; "a few feet apart" became *a un par de metros*. Naomi's name is unchanged.
 - **2026-11-15. Scenario 4, Read Between Lines** (51 text screens, 20 options, about 540 words; 74 upserts, not run; German's log says 72, but its SQL file also has 74). For the reviewer: the title became *Entre líneas*; "rom coms" became *novelas románticas*, since it's a bookstore (as German); "magic fiction" became *novela de fantasía*; "expert advice" became *el consejo de una experta*; "socials" became *redes*. The English line "I have to tell you how my sister finds your recommendation" is translated as intended ("I'll have to tell you…"): *tengo que contarte qué le pareció tu recomendación a mi hermana*. Katie's name is unchanged.
 - **2026-11-15. Scenario 5, Final Stretch** (55 text screens, 17 options, about 590 words; 74 upserts, not run, same as German's SQL file). For the reviewer: the title became *El último estiramiento*, keeping the yoga pun as German did; "warrior pose" became *postura del guerrero*; "Tuesday regulars" became *los fijos de los martes*; "Victim-blaming tone" became *Suena a que la culpa es de ella*; "lockdown" became *la pandemia*; "mats" became *colchonetas* (Mexico says *tapetes*, Spain *esterillas*); "jacket" became *chaqueta* (not Mexico's *chamarra*). Walking her to her car stays a plain offer, as in the English. Amber's name is unchanged.
+- **2026-11-15. Scenario 6, Delayed Together** (52 text screens, 17 options, about 550 words; 72 upserts, not run, same as German). For the reviewer: the title became *Retrasados juntos*; "interstate" became *en otra ciudad*; "every cloud has a silver lining" became *no hay mal que por bien no venga*; "departure gates" became *sala de embarque*; "mates" became *amigos*; the wrong option "We can go on a date" became *Puede ser una cita*. "I'm... by the way" is shown as written (the app substitutes no name, as German checked), so Spanish keeps the pause: *Por cierto, soy…*. Mel's name is unchanged.
 
 ## For the setup session
 
