@@ -1,0 +1,334 @@
+{
+  "scenario": {
+    "a1000012-0000-0000-0000-000000000012": {
+      "title": {
+        "en": "Performance Review",
+        "es": "Noche de networking"
+      },
+      "summary": {
+        "en": "Name tags, small talk. One genuine interaction cuts through the noise.",
+        "es": "Etiquetas con el nombre, charla de compromiso. Una interacción auténtica se distingue entre todo el ruido."
+      }
+    }
+  },
+  "screens": {
+    "b1000001-0000-0000-0012-000000000001": {
+      "en": "You started a new job and your company is hosting a networking event.",
+      "es": "Empezaste en un trabajo nuevo y tu empresa organiza un evento de networking."
+    },
+    "b1000002-0000-0000-0012-000000000002": {
+      "en": "There's a keynote speaker presenting about industry trends.",
+      "es": "Hay un conferencista invitado que habla sobre las tendencias del sector."
+    },
+    "b1000003-0000-0000-0012-000000000003": {
+      "en": "During Q&A, a woman asks an interesting question.",
+      "es": "En la ronda de preguntas, una mujer hace una pregunta interesante."
+    },
+    "b1000004-0000-0000-0012-000000000004": {
+      "en": "The talk ends. People start mingling. You see the same woman.",
+      "es": "La charla termina. La gente empieza a mezclarse. Ves a la misma mujer."
+    },
+    "b1000051-0000-0000-0012-000000000051": {
+      "en": "So about your question, I think the answer is that you need to...",
+      "es": "Sobre tu pregunta, creo que la respuesta es que tienes que…"
+    },
+    "b1000052-0000-0000-0012-000000000052": {
+      "en": "Acknowledge her first, don't use this as a way to showcase your expertise.",
+      "es": "Primero reconócela a ella; no lo uses como excusa para lucir lo que sabes."
+    },
+    "b1000053-0000-0000-0012-000000000053": {
+      "en": "Great question back there by the way.",
+      "es": "Buena pregunta la de antes, por cierto."
+    },
+    "b1000054-0000-0000-0012-000000000054": {
+      "en": "Generic compliments don't land as well. Be specific about what was good.",
+      "es": "Los cumplidos genéricos no llegan igual. Sé concreto sobre qué fue lo bueno."
+    },
+    "b1000006-0000-0000-0012-000000000006": {
+      "en": "Hey that was an insightful question you asked.",
+      "es": "Oye, qué pregunta tan acertada hiciste."
+    },
+    "b1000007-0000-0000-0012-000000000007": {
+      "en": "I liked how you approached it with logic instead of theory.",
+      "es": "Me gustó que lo enfocaras desde lo práctico y no desde la teoría."
+    },
+    "b1000008-0000-0000-0012-000000000008": {
+      "en": "Thanks! I feel we get a lot of theory and not enough about execution.",
+      "es": "¡Gracias! Siento que nos dan mucha teoría y muy poco sobre cómo llevarla a cabo."
+    },
+    "b1000009-0000-0000-0012-000000000009": {
+      "en": "You acknowledged the substance of her question. She's engaging.",
+      "es": "Reconociste el fondo de su pregunta. Está interesada."
+    },
+    "b1000101-0000-0000-0012-000000000101": {
+      "en": "I think theory is important. You need framework before execution.",
+      "es": "Yo creo que la teoría es importante. Necesitas un marco antes de ejecutar."
+    },
+    "b1000102-0000-0000-0012-000000000102": {
+      "en": "Acknowledge her perspective before offering a different view.",
+      "es": "Reconoce su punto de vista antes de ofrecer otro distinto."
+    },
+    "b1000103-0000-0000-0012-000000000103": {
+      "en": "Yeah, so what do you do for work then?",
+      "es": "Bueno. ¿Y tú a qué te dedicas?"
+    },
+    "b1000104-0000-0000-0012-000000000104": {
+      "en": "Build on her perspective first, then you can ask this.",
+      "es": "Primero construye sobre su punto de vista; después puedes preguntar esto."
+    },
+    "b1000011-0000-0000-0012-000000000011": {
+      "en": "Agreed. It's easy to talk strategy but implementation is what's crucial.",
+      "es": "Totalmente. Es fácil hablar de estrategia, pero lo clave es la ejecución."
+    },
+    "b1000012-0000-0000-0012-000000000012": {
+      "en": "Yeah exactly, I completely agree...",
+      "es": "Sí, exacto, estoy totalmente de acuerdo…"
+    },
+    "b1000013-0000-0000-0012-000000000013": {
+      "en": "Brief pause, she's waiting for you to continue.",
+      "es": "Una breve pausa; está esperando a que sigas."
+    },
+    "b1000141-0000-0000-0012-000000000141": {
+      "en": "What did you think of the other speakers today?",
+      "es": "¿Qué te parecieron los otros ponentes de hoy?"
+    },
+    "b1000142-0000-0000-0012-000000000142": {
+      "en": "While this can work, it keeps it professional and not personal.",
+      "es": "Puede funcionar, pero lo mantiene en lo profesional y no en lo personal."
+    },
+    "b1000143-0000-0000-0012-000000000143": {
+      "en": "So what kind of execution challenges have you specifically run into then?",
+      "es": "¿Y con qué problemas concretos de ejecución te has encontrado?"
+    },
+    "b1000144-0000-0000-0012-000000000144": {
+      "en": "Pushing the same topic can get boring. Move on to something more interesting.",
+      "es": "Insistir en el mismo tema puede volverse aburrido. Pasa a algo más interesante."
+    },
+    "b1000015-0000-0000-0012-000000000015": {
+      "en": "So what's your story? What made you choose this career?",
+      "es": "¿Y cuál es tu historia? ¿Por qué elegiste esta carrera?"
+    },
+    "b1000016-0000-0000-0012-000000000016": {
+      "en": "I studied history but now I work in marketing.",
+      "es": "Estudié historia, pero ahora trabajo en marketing."
+    },
+    "b1000171-0000-0000-0012-000000000171": {
+      "en": "Oh that's funny actually, my friend studies history.",
+      "es": "Ah, qué curioso, un amigo mío estudia historia."
+    },
+    "b1000172-0000-0000-0012-000000000172": {
+      "en": "She shared a personal career pivot and you made it about your friend.",
+      "es": "Te contó un giro personal en su carrera y tú hablaste de tu amigo."
+    },
+    "b1000173-0000-0000-0012-000000000173": {
+      "en": "Where did you study history?",
+      "es": "¿Y dónde estudiaste historia?"
+    },
+    "b1000174-0000-0000-0012-000000000174": {
+      "en": "Asking where she studied is surface level. The interesting part is why she changed.",
+      "es": "Preguntarle dónde estudió es superficial. Lo interesante es por qué cambió."
+    },
+    "b1000018-0000-0000-0012-000000000018": {
+      "en": "History to marketing? That's a unique switch. I feel like they're completely different.",
+      "es": "¿De historia a marketing? Qué cambio tan particular. Siento que no tienen nada que ver."
+    },
+    "b1000019-0000-0000-0012-000000000019": {
+      "en": "Yeah it is actually. I was doing my final year and realized history wasn't for me.",
+      "es": "Sí, la verdad. Estaba en el último año y me di cuenta de que la historia no era lo mío."
+    },
+    "b1000020-0000-0000-0012-000000000020": {
+      "en": "You caught the subtext and now she's opening up naturally.",
+      "es": "Captaste lo que había detrás y ahora se está abriendo con naturalidad."
+    },
+    "b1000021-0000-0000-0012-000000000021": {
+      "en": "The conversation is flowing, but the topic's been professional so far.",
+      "es": "La conversación fluye, pero hasta ahora el tema ha sido profesional."
+    },
+    "b1000221-0000-0000-0012-000000000221": {
+      "en": "What do your parents think about your switch?",
+      "es": "¿Y qué piensan tus padres de tu cambio?"
+    },
+    "b1000222-0000-0000-0012-000000000222": {
+      "en": "Family dynamics may be too invasive for a networking event. Keep it about her.",
+      "es": "Los temas de familia pueden ser demasiado invasivos en un evento de networking. Céntrate en ella."
+    },
+    "b1000223-0000-0000-0012-000000000223": {
+      "en": "That was really brave of you. Seriously, that takes a lot of courage.",
+      "es": "Qué valiente de tu parte. En serio, eso requiere mucho valor."
+    },
+    "b1000224-0000-0000-0012-000000000224": {
+      "en": "Over-praising a normal life decision feels patronizing. Keep it light and playful.",
+      "es": "Elogiar de más una decisión normal de la vida suena condescendiente. Mantenlo ligero y juguetón."
+    },
+    "b1000023-0000-0000-0012-000000000023": {
+      "en": "Forget work for a sec. Got any plans you're looking forward to over the break?",
+      "es": "Olvidémonos del trabajo un segundo. ¿Tienes algún plan para las vacaciones que te ilusione?"
+    },
+    "b1000024-0000-0000-0012-000000000024": {
+      "en": "My friends and I are doing a road trip up the coast. Haven't planned any of it though.",
+      "es": "Mis amigas y yo vamos a hacer un viaje en carretera por la costa. Aunque no hemos planeado nada."
+    },
+    "b1000251-0000-0000-0012-000000000251": {
+      "en": "Oh I did a road trip last year actually. We went up to...",
+      "es": "Ah, yo hice un viaje en carretera el año pasado. Fuimos hasta…"
+    },
+    "b1000252-0000-0000-0012-000000000252": {
+      "en": "Hijacking it with your own trip kills her momentum. Keep it about her.",
+      "es": "Robarle el tema con tu propio viaje le corta el impulso. Céntrate en ella."
+    },
+    "b1000253-0000-0000-0012-000000000253": {
+      "en": "You should download this travel app. It plans everything for you.",
+      "es": "Deberías descargarte esta app de viajes. Te lo planea todo."
+    },
+    "b1000254-0000-0000-0012-000000000254": {
+      "en": "Unsolicited advice sounds like you're not listening. She enjoys the spontaneity.",
+      "es": "Dar consejos que nadie pidió suena a que no escuchas. A ella le gusta la espontaneidad."
+    },
+    "b1000026-0000-0000-0012-000000000026": {
+      "en": "Well it seems like you're a better marketer than an organizer.",
+      "es": "Bueno, parece que se te da mejor el marketing que organizar."
+    },
+    "b1000027-0000-0000-0012-000000000027": {
+      "en": "Haha that's definitely true.",
+      "es": "Jaja, eso es muy cierto."
+    },
+    "b1000028-0000-0000-0012-000000000028": {
+      "en": "Playful joke worked, she's laughing, the energy is good.",
+      "es": "La broma funcionó; se está riendo y la energía es buena."
+    },
+    "b1000029-0000-0000-0012-000000000029": {
+      "en": "However, the event is coming to a close now.",
+      "es": "Pero el evento ya está por terminar."
+    },
+    "b1000301-0000-0000-0012-000000000301": {
+      "en": "Can I get your number?",
+      "es": "¿Me das tu número?"
+    },
+    "b1000302-0000-0000-0012-000000000302": {
+      "en": "While this can work, try to make the close more memorable.",
+      "es": "Puede funcionar, pero intenta que el momento de concretar sea más memorable."
+    },
+    "b1000303-0000-0000-0012-000000000303": {
+      "en": "Hey if you're free let's get drinks tomorrow night.",
+      "es": "Oye, si estás libre, vamos a tomar algo mañana en la noche."
+    },
+    "b1000304-0000-0000-0012-000000000304": {
+      "en": "Make the close easy for her to say yes to. This ask might have too much pressure.",
+      "es": "Haz que sea fácil decirte que sí. Esta propuesta puede meterle demasiada presión."
+    },
+    "b1000031-0000-0000-0012-000000000031": {
+      "en": "Hey this was fun, let's come to the next networking event together.",
+      "es": "Oye, esto estuvo divertido. Vamos juntos al próximo evento de networking."
+    },
+    "b1000032-0000-0000-0012-000000000032": {
+      "en": "Yeah for sure, here I'll give you my number.",
+      "es": "Sí, claro, te paso mi número."
+    },
+    "b1000033-0000-0000-0012-000000000033": {
+      "en": "Success. You replay the conversation in your head.",
+      "es": "Lo lograste. Repasas la conversación en tu cabeza."
+    },
+    "b1000034-0000-0000-0012-000000000034": {
+      "en": "You complimented her specific question instead of being generic.",
+      "es": "Elogiaste su pregunta en concreto en lugar de decir algo genérico."
+    },
+    "b1000035-0000-0000-0012-000000000035": {
+      "en": "You listened for subtext when she mentioned switching from history to marketing.",
+      "es": "Escuchaste lo que había detrás cuando mencionó su cambio de historia a marketing."
+    },
+    "b1000036-0000-0000-0012-000000000036": {
+      "en": "You shifted the energy from professional to playful at the right moment.",
+      "es": "Pasaste de lo profesional a lo juguetón en el momento justo."
+    },
+    "b1000037-0000-0000-0012-000000000037": {
+      "en": "You closed with the next event suggestion which felt low pressure. Well done.",
+      "es": "Y concretaste proponiendo el próximo evento, algo sin presión. Bien hecho."
+    }
+  },
+  "options": {
+    "c1000001-0000-0000-0012-000000000001": {
+      "en": "Tell her your response to her question",
+      "es": "Darle tu respuesta a su pregunta"
+    },
+    "c1000002-0000-0000-0012-000000000002": {
+      "en": "Say 'great question' to her",
+      "es": "Decirle “buena pregunta”"
+    },
+    "c1000003-0000-0000-0012-000000000003": {
+      "en": "Compliment the specific question she asked",
+      "es": "Elogiar la pregunta concreta que hizo"
+    },
+    "c1000004-0000-0000-0012-000000000004": {
+      "en": "Build on her observation and go deeper",
+      "es": "Seguir con su observación y profundizar"
+    },
+    "c1000005-0000-0000-0012-000000000005": {
+      "en": "Talk about the importance of theory",
+      "es": "Hablar de la importancia de la teoría"
+    },
+    "c1000006-0000-0000-0012-000000000006": {
+      "en": "Ask what she does for work",
+      "es": "Preguntarle a qué se dedica"
+    },
+    "c1000007-0000-0000-0012-000000000007": {
+      "en": "Personal question about her career",
+      "es": "Hacerle una pregunta personal sobre su carrera"
+    },
+    "c1000008-0000-0000-0012-000000000008": {
+      "en": "Ask what she thinks of the other speakers today",
+      "es": "Preguntarle qué le parecieron los otros ponentes"
+    },
+    "c1000009-0000-0000-0012-000000000009": {
+      "en": "Keep pushing the theory vs execution topic deeper",
+      "es": "Seguir profundizando en el tema de teoría vs. ejecución"
+    },
+    "c1000011-0000-0000-0012-000000000011": {
+      "en": "Tell her your friend studies history",
+      "es": "Contarle que un amigo tuyo estudia historia"
+    },
+    "c1000010-0000-0000-0012-000000000010": {
+      "en": "Note how it is an interesting career shift",
+      "es": "Comentar que es un cambio de carrera interesante"
+    },
+    "c1000012-0000-0000-0012-000000000012": {
+      "en": "Ask where she studied history",
+      "es": "Preguntarle dónde estudió historia"
+    },
+    "c1000013-0000-0000-0012-000000000013": {
+      "en": "Ask if she has any travel plans over the work holidays",
+      "es": "Preguntarle si tiene planes de viaje para las vacaciones"
+    },
+    "c1000014-0000-0000-0012-000000000014": {
+      "en": "Ask what her parents think about the switch",
+      "es": "Preguntarle qué piensan sus padres del cambio"
+    },
+    "c1000015-0000-0000-0012-000000000015": {
+      "en": "Compliment how brave she was to switch",
+      "es": "Elogiar lo valiente que fue al cambiar"
+    },
+    "c1000017-0000-0000-0012-000000000017": {
+      "en": "Share your own road trip experience",
+      "es": "Contarle tu propia experiencia de viaje en carretera"
+    },
+    "c1000016-0000-0000-0012-000000000016": {
+      "en": "Tease her about the lack of planning",
+      "es": "Tomarle el pelo por no haber planeado nada"
+    },
+    "c1000018-0000-0000-0012-000000000018": {
+      "en": "Suggest she downloads a travel app",
+      "es": "Sugerirle que se descargue una app de viajes"
+    },
+    "c1000019-0000-0000-0012-000000000019": {
+      "en": "Suggest coming to the next networking event together",
+      "es": "Proponer ir juntos al próximo evento de networking"
+    },
+    "c1000020-0000-0000-0012-000000000020": {
+      "en": "Ask for her number",
+      "es": "Pedirle su número"
+    },
+    "c1000021-0000-0000-0012-000000000021": {
+      "en": "Suggest getting drinks tomorrow night",
+      "es": "Proponerle ir a tomar algo mañana en la noche"
+    }
+  }
+}
