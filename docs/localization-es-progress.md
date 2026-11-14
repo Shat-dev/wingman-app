@@ -12,7 +12,7 @@ All 25 lesson courses are drafted (see Summary). Next: database content (15 scen
 |---|---|
 | UI catalogs | 585 of 585 strings drafted (setup session, 2026-11-15) |
 | Lesson overlays | **25 of 25 courses, 1,531 of 1,531 items** (2026-11-15) |
-| Database content | 1 of 15 scenarios; 0 of 765 questions |
+| Database content | 2 of 15 scenarios; 0 of 765 questions |
 | Checks and review pack | Not started |
 | App Store listing | Not started |
 
@@ -48,6 +48,7 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
 - **2026-11-15. Course 11, Advanced Opening Techniques** (5 lessons, 98 items, 2,157 English words). The check passes. **All 25 courses are now drafted in Spanish (34,442 English words, 1,531 items).** For the reviewer: "curiosity / assumption / opinion openers" became *aperturas de curiosidad / con una suposición / de opinión*; "information gap" became *vacío de información*; "thrifting" became *buscar ropa en tiendas de segunda mano*; "try-hard" became *pasarse de intenso*; "a woman's opinion" became *la opinión de una mujer*; "False Exits" became *la falsa salida*; "time constraint" became *límite de tiempo*; "hook point" became *punto de enganche*. The English slips into third person in 11_5_6_2 ("He can walk away…"); Spanish keeps the lesson's *tú* (*Puedes alejarte…*).
 - **2026-11-15. DB check skipped.** `list_projects` on the Supabase connector returns only Clera-App (`rdgtvavltiqmwfzcadcv`), so the live-id check is skipped, as the task says. Nothing was read or written. The English side comes from German's `localization/de/db/*.json`, which were matched against the live DB ids on 2026-11-11; re-check a sample once the connector reaches Wingman-App again.
 - **2026-11-15. Scenario 1, Bar Window** (46 text screens, 16 options, about 480 words; 63 upserts, **not run**). Format as German: `localization/es/db/scenario_01_bar_window.json` holds English and Spanish side by side; `scripts/db_translations_sql.py es` checks it and writes `supabase/seed/content_translations_es/scenario_01_bar_window.sql`. For the reviewer: the title "Bar Window" (a pun on window of opportunity) became *Tu momento en el bar*; "vodka lemonade / vodka soda" became *vodka con limonada / vodka con soda*; "add my Instagram" became *sígueme en Instagram*; "leadership, not a bodyguard" became *que tomes la iniciativa, no un guardaespaldas*; "Success" became *Lo lograste*; "kill the vibe" became *matan la vibra*. Sophie's name is unchanged. The birthday friend is female (*una amiga*), as her friends are throughout.
+- **2026-11-15. Scenario 2, Coffee Connections** (51 text screens, 18 options, about 510 words; 70 upserts, not run). For the reviewer: the title became *Café y lluvia* (the English pun doesn't carry over, as in German); "Is anyone sitting here?" became *¿Está ocupado este lugar?*, so her reply "No go for it" is *No, adelante*; the deliberately wrong option "Hey good looking, let me sit here." became *Hola, guapa, me siento aquí.*; "dedicated employee" became *eso es compromiso con la empresa*; "I'll pick you up at 8?" became *¿Paso por ti a las 8?* (Latin American; Spain: *¿Te recojo a las 8?*). Lauren's name is unchanged.
 
 ## For the setup session
 

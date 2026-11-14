@@ -1,0 +1,294 @@
+{
+  "scenario": {
+    "a1000002-0000-0000-0000-000000000002": {
+      "title": {
+        "en": "Coffee Connections",
+        "es": "Café y lluvia"
+      },
+      "summary": {
+        "en": "Bad weather, warm coffee, shared space. A simple moment turns into an opportunity.",
+        "es": "Mal tiempo, café caliente, un espacio compartido. Un momento sencillo se convierte en una oportunidad."
+      }
+    }
+  },
+  "screens": {
+    "b1000001-0000-0000-0002-000000000001": {
+      "en": "It is raining heavy outside and you've just entered a cafe",
+      "es": "Está lloviendo fuerte y acabas de entrar a un café."
+    },
+    "b1000002-0000-0000-0002-000000000002": {
+      "en": "You see a girl sitting by herself in the corner.",
+      "es": "Ves a una mujer sentada sola en un rincón."
+    },
+    "b1000003-0000-0000-0002-000000000003": {
+      "en": "You walk over to her.",
+      "es": "Caminas hacia ella."
+    },
+    "b1000041-0000-0000-0002-000000000041": {
+      "en": "Ummm... yeah that's fine.",
+      "es": "Mmm… sí, está bien."
+    },
+    "b1000042-0000-0000-0002-000000000042": {
+      "en": "Apologizing frames you as an interruption. You should not apologize for your presence.",
+      "es": "Pedir perdón te presenta como una interrupción. No tienes que disculparte por estar ahí."
+    },
+    "b1000043-0000-0000-0002-000000000043": {
+      "en": "Ummm... yeah that's fine.",
+      "es": "Mmm… sí, está bien."
+    },
+    "b1000044-0000-0000-0002-000000000044": {
+      "en": "While being direct sometimes works, it may come across as too forward in a cafe.",
+      "es": "Ser directo a veces funciona, pero en un café puede parecer demasiado atrevido."
+    },
+    "b1000005-0000-0000-0002-000000000005": {
+      "en": "Hey, is anyone sitting here?",
+      "es": "Hola, ¿está ocupado este lugar?"
+    },
+    "b1000006-0000-0000-0002-000000000006": {
+      "en": "No go for it.",
+      "es": "No, adelante."
+    },
+    "b1000071-0000-0000-0002-000000000071": {
+      "en": "Umm.. it's Lauren, why?",
+      "es": "Mmm… Lauren, ¿por qué?"
+    },
+    "b1000072-0000-0000-0002-000000000072": {
+      "en": "Too direct, too fast. Build a moment before asking personal questions.",
+      "es": "Demasiado directo, demasiado rápido. Crea un momento antes de hacer preguntas personales."
+    },
+    "b1000073-0000-0000-0002-000000000073": {
+      "en": "You sit. Silence. She glances up, then back to her book.",
+      "es": "Te sientas. Silencio. Ella levanta la vista y vuelve a su libro."
+    },
+    "b1000074-0000-0000-0002-000000000074": {
+      "en": "You approached her, so you need to lead interaction.",
+      "es": "Tú te acercaste, así que te toca llevar la interacción."
+    },
+    "b1000008-0000-0000-0002-000000000008": {
+      "en": "Looks like we're stuck here, the rain's intense.",
+      "es": "Parece que nos quedamos atrapados aquí; la lluvia está fuertísima."
+    },
+    "b1000009-0000-0000-0002-000000000009": {
+      "en": "Lauren closes the book slightly, giving you her attention.",
+      "es": "Lauren entrecierra un poco el libro y te presta atención."
+    },
+    "b1000010-0000-0000-0002-000000000010": {
+      "en": "Tell me about it. My train just got delayed for an hour.",
+      "es": "Ni me digas. Mi tren se acaba de retrasar una hora."
+    },
+    "b1000111-0000-0000-0002-000000000111": {
+      "en": "Nice, what coffee did you get? I got a latte.",
+      "es": "Qué bien, ¿qué café pediste? Yo pedí un latte."
+    },
+    "b1000112-0000-0000-0002-000000000112": {
+      "en": "You made it about yourself. She gave you a thread, you ignored it.",
+      "es": "Hablaste de ti. Ella te dio un hilo y lo ignoraste."
+    },
+    "b1000113-0000-0000-0002-000000000113": {
+      "en": "Yeah I was planning to hit the gym but guess not now.",
+      "es": "Sí, yo pensaba ir al gimnasio, pero ya no creo."
+    },
+    "b1000114-0000-0000-0002-000000000114": {
+      "en": "You made it about yourself. She gave you a thread, you ignored it.",
+      "es": "Hablaste de ti. Ella te dio un hilo y lo ignoraste."
+    },
+    "b1000012-0000-0000-0002-000000000012": {
+      "en": "That's unlucky, what did you have on?",
+      "es": "Qué mala suerte. ¿Qué tenías que hacer?"
+    },
+    "b1000013-0000-0000-0002-000000000013": {
+      "en": "Job interview across town. Already sent them a message about being late.",
+      "es": "Una entrevista de trabajo al otro lado de la ciudad. Ya les avisé que voy a llegar tarde."
+    },
+    "b1000014-0000-0000-0002-000000000014": {
+      "en": "Haha what a first impression. I'm sure they'll understand.",
+      "es": "Jaja, vaya primera impresión. Seguro que lo van a entender."
+    },
+    "b1000015-0000-0000-0002-000000000015": {
+      "en": "I hope so. I really hope I get it.",
+      "es": "Eso espero. De verdad quiero que me den el trabajo."
+    },
+    "b1000161-0000-0000-0002-000000000161": {
+      "en": "I remember when I was late once and I...",
+      "es": "Me acuerdo de una vez que llegué tarde y…"
+    },
+    "b1000162-0000-0000-0002-000000000162": {
+      "en": "You made it about yourself. She gave you a thread, you ignored it.",
+      "es": "Hablaste de ti. Ella te dio un hilo y lo ignoraste."
+    },
+    "b1000163-0000-0000-0002-000000000163": {
+      "en": "How late are you going to be?",
+      "es": "¿Y qué tan tarde vas a llegar?"
+    },
+    "b1000164-0000-0000-0002-000000000164": {
+      "en": "You added pressure when she was already stressed. Read the room and lighten it.",
+      "es": "Le metiste presión cuando ya estaba estresada. Lee el ambiente y aligéralo."
+    },
+    "b1000017-0000-0000-0002-000000000017": {
+      "en": "At least you'll be memorable. Showing up soaked from the rain, dedicated employee.",
+      "es": "Por lo menos te van a recordar. Llegar empapada por la lluvia: eso es compromiso con la empresa."
+    },
+    "b1000018-0000-0000-0002-000000000018": {
+      "en": "True. If anything it shows I tried, right?",
+      "es": "Es cierto. Al menos demuestra que lo intenté, ¿no?"
+    },
+    "b1000019-0000-0000-0002-000000000019": {
+      "en": "Lauren relaxes a bit. You lightened the mood instead of adding to her stress.",
+      "es": "Lauren se relaja un poco. Aligeraste el ambiente en lugar de sumarle estrés."
+    },
+    "b1000201-0000-0000-0002-000000000201": {
+      "en": "Hey let's exchange numbers?",
+      "es": "Oye, ¿nos pasamos los números?"
+    },
+    "b1000202-0000-0000-0002-000000000202": {
+      "en": "Too forward, too fast. You had momentum, don't force the close prematurely.",
+      "es": "Demasiado directo, demasiado rápido. Tenías ritmo; no fuerces el momento de concretar antes de tiempo."
+    },
+    "b1000203-0000-0000-0002-000000000203": {
+      "en": "Anyway, so that's a cool phone case.",
+      "es": "En fin, qué buena funda de celular."
+    },
+    "b1000204-0000-0000-0002-000000000204": {
+      "en": "While you can ask about this later, continue on the existing thread about her job.",
+      "es": "Puedes preguntarle por eso más tarde; sigue con el hilo que ya tienen sobre su trabajo."
+    },
+    "b1000021-0000-0000-0002-000000000021": {
+      "en": "What's the job anyway?",
+      "es": "¿Y de qué es el trabajo?"
+    },
+    "b1000022-0000-0000-0002-000000000022": {
+      "en": "Marketing for a tech start up, been applying for months now.",
+      "es": "De marketing en una startup tecnológica. Llevo meses mandando solicitudes."
+    },
+    "b1000023-0000-0000-0002-000000000023": {
+      "en": "You and Lauren are talking. The energy is good. Natural back and forth.",
+      "es": "Lauren y tú están conversando. La energía es buena. Un ida y vuelta natural."
+    },
+    "b1000024-0000-0000-0002-000000000024": {
+      "en": "You lose track of time... All of a sudden her phone buzzes.",
+      "es": "Pierdes la noción del tiempo… De pronto, le vibra el celular."
+    },
+    "b1000025-0000-0000-0002-000000000025": {
+      "en": "Oh, my train's here in five minutes.",
+      "es": "Ay, mi tren llega en cinco minutos."
+    },
+    "b1000026-0000-0000-0002-000000000026": {
+      "en": "She starts gathering her things, and is preparing to leave.",
+      "es": "Empieza a recoger sus cosas y se prepara para irse."
+    },
+    "b1000271-0000-0000-0002-000000000271": {
+      "en": "Hey I know a restaurant we can have dinner tomorrow at, I'll pick you up at 8?",
+      "es": "Oye, conozco un restaurante donde podemos cenar mañana. ¿Paso por ti a las 8?"
+    },
+    "b1000272-0000-0000-0002-000000000272": {
+      "en": "While this can work, closes work best when the ask feels small so saying yes feels natural.",
+      "es": "Puede funcionar, pero concretar funciona mejor cuando lo que pides es pequeño y decir que sí sale natural."
+    },
+    "b1000273-0000-0000-0002-000000000273": {
+      "en": "Best of luck with your job interview...",
+      "es": "Mucha suerte en tu entrevista…"
+    },
+    "b1000274-0000-0000-0002-000000000274": {
+      "en": "She was engaged and receptive. But you never closed, the story ends there.",
+      "es": "Ella estaba interesada y abierta. Pero nunca concretaste, y la historia termina ahí."
+    },
+    "b1000028-0000-0000-0002-000000000028": {
+      "en": "Hey tell me how your interview goes, what's your number?",
+      "es": "Oye, cuéntame cómo te va en la entrevista. ¿Cuál es tu número?"
+    },
+    "b1000029-0000-0000-0002-000000000029": {
+      "en": "Haha of course, I'll let you know. My number is...",
+      "es": "Jaja, claro, te aviso. Mi número es…"
+    },
+    "b1000030-0000-0000-0002-000000000030": {
+      "en": "Success. You review your interaction with Lauren.",
+      "es": "Lo lograste. Repasas tu interacción con Lauren."
+    },
+    "b1000031-0000-0000-0002-000000000031": {
+      "en": "You opened with a shared experience so the conversation felt natural.",
+      "es": "Empezaste con algo que estaban viviendo los dos, así que la conversación se sintió natural."
+    },
+    "b1000032-0000-0000-0002-000000000032": {
+      "en": "You associated yourself with positive emotions by calming her down.",
+      "es": "Hiciste que te asociara con emociones positivas al ayudarla a calmarse."
+    },
+    "b1000033-0000-0000-0002-000000000033": {
+      "en": "And you followed on the conversational threads she gave you. Well done.",
+      "es": "Y seguiste los hilos de conversación que ella te dio. Bien hecho."
+    }
+  },
+  "options": {
+    "c1000001-0000-0000-0002-000000000001": {
+      "en": "\"Is anyone sitting here?\"",
+      "es": "“¿Está ocupado este lugar?”"
+    },
+    "c1000002-0000-0000-0002-000000000002": {
+      "en": "\"Hey sorry to bother you, can I sit with you?\"",
+      "es": "“Perdón por molestarte, ¿me puedo sentar contigo?”"
+    },
+    "c1000003-0000-0000-0002-000000000003": {
+      "en": "\"Hey good looking, let me sit here.\"",
+      "es": "“Hola, guapa, me siento aquí.”"
+    },
+    "c1000004-0000-0000-0002-000000000004": {
+      "en": "Ask her what her name is",
+      "es": "Preguntarle cómo se llama"
+    },
+    "c1000005-0000-0000-0002-000000000005": {
+      "en": "Make a comment on the weather",
+      "es": "Hacer un comentario sobre el clima"
+    },
+    "c1000006-0000-0000-0002-000000000006": {
+      "en": "Sit quietly and wait for her to start talking",
+      "es": "Sentarte en silencio y esperar a que ella hable"
+    },
+    "c1000007-0000-0000-0002-000000000007": {
+      "en": "Ask where she was headed to",
+      "es": "Preguntarle adónde iba"
+    },
+    "c1000008-0000-0000-0002-000000000008": {
+      "en": "Ask about the coffee she's drinking",
+      "es": "Preguntarle por el café que está tomando"
+    },
+    "c1000009-0000-0000-0002-000000000009": {
+      "en": "Share your failed plans from the rain",
+      "es": "Contarle tus planes que arruinó la lluvia"
+    },
+    "c1000010-0000-0000-0002-000000000010": {
+      "en": "Share your failed interview experiences",
+      "es": "Contarle tus entrevistas que salieron mal"
+    },
+    "c1000011-0000-0000-0002-000000000011": {
+      "en": "Ask her how late she'll be for the interview",
+      "es": "Preguntarle qué tan tarde va a llegar a la entrevista"
+    },
+    "c1000012-0000-0000-0002-000000000012": {
+      "en": "Be playful and reassuring about the situation",
+      "es": "Tomártelo con humor y tranquilizarla"
+    },
+    "c1000013-0000-0000-0002-000000000013": {
+      "en": "Ask her what kind of role it is",
+      "es": "Preguntarle de qué es el puesto"
+    },
+    "c1000014-0000-0000-0002-000000000014": {
+      "en": "Suggest exchanging numbers",
+      "es": "Proponer pasarse los números"
+    },
+    "c1000015-0000-0000-0002-000000000015": {
+      "en": "Change the subject and comment on her phone case",
+      "es": "Cambiar de tema y comentar su funda de celular"
+    },
+    "c1000016-0000-0000-0002-000000000016": {
+      "en": "Ask her to let you know how her job interview goes",
+      "es": "Pedirle que te cuente cómo le va en la entrevista"
+    },
+    "c1000017-0000-0000-0002-000000000017": {
+      "en": "Ask to go on a dinner date tomorrow night",
+      "es": "Invitarla a cenar mañana en la noche"
+    },
+    "c1000018-0000-0000-0002-000000000018": {
+      "en": "Wish her good luck for her interview",
+      "es": "Desearle suerte en su entrevista"
+    }
+  }
+}
