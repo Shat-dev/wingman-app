@@ -6,7 +6,7 @@ Model: German (Release B), see [localization-de-progress.md](localization-de-pro
 
 ## Where it stands
 
-Phase 0 is done: the scripts and tests work for `de`, `es` and `fr`, German output is unchanged, and 341 unit tests pass. Setup is finished (Phases 0–3). Tooling, both briefs and both interface catalogs are committed on `localization-release-c`, and every check passes. The Spanish and French sessions are proposed as cards ("Wingman Spanish (Release C)", "Wingman French (Release C)"): **Arthur clicks both to start them.** Each works in its own worktree on `localization-release-c-es` / `-fr` and keeps its own log (`docs/localization-es-progress.md`, `docs/localization-fr-progress.md`). After both finish, Arthur asks for the final step (merge, checks, `docs/release-c-launch-checklist.md`).
+Phase 0 is done: the scripts and tests work for `de`, `es` and `fr`, German output is unchanged, and 341 unit tests pass. Setup is finished (Phases 0–3). Tooling, both briefs and both interface catalogs are committed on `localization-release-c`, and every check passes. The Spanish and French sessions are running (started by Arthur 2026-11-15): "Wingman Spanish (Release C)" `local_62c3374a-8126-4bf2-9d24-93e13f33d5fe` and "Wingman French (Release C)" `local_f45151bc-13ff-4b5b-98b0-c07fffcff746`. Each works in its own worktree on `localization-release-c-es` / `-fr` and keeps its own log (`docs/localization-es-progress.md`, `docs/localization-fr-progress.md`). After both finish, Arthur asks for the final step (merge, checks, `docs/release-c-launch-checklist.md`).
 
 ## Summary
 
@@ -18,7 +18,7 @@ Phase 0 is done: the scripts and tests work for `de`, `es` and `fr`, German outp
 | 1 | French brief | Done (2026-11-15) |
 | 2 | Spanish UI catalogs | 585 of 585 strings drafted (2026-11-15) |
 | 2 | French UI catalogs | 585 of 585 strings drafted (2026-11-15) |
-| 3 | Spanish and French sessions | Proposed as cards 2026-11-15; waiting for Arthur to start them |
+| 3 | Spanish and French sessions | Running since 2026-11-15 |
 
 ## Log
 
@@ -47,8 +47,8 @@ Phase 0 is done: the scripts and tests work for `de`, `es` and `fr`, German outp
   - Other choices: plan = *formule*; reminder toggle *OUI / NON*; Gide's quote uses his own French (*On ne découvre pas de terre nouvelle sans consentir à perdre de vue le rivage*); Sénèque's in its usual French form; Gretzky became *Tous les tirs que tu ne tentes pas sont ratés d’avance*.
   - Tests tightened as planned: `StringCatalogTests` and `AppLanguageSettingsTests` now require exactly en, de, es, fr in the bundle. 341 run, 336 passed, 5 skipped. Spanish and French catalog fallback and onboarding-parity checks run and pass; only their lessons, quiz and scenarios are still skipped (not translated yet).
   - Review packs: seeded `localization/es/review/choices.json` and `localization/fr/review/choices.json` with the rules and the interface choices above, so `python3 scripts/review_pack.py es|fr` already builds. The language sessions add their lesson and database choices. German's pack is still cell-for-cell identical.
-- **2026-11-15. Phase 3: hand-off.** Working tree clean apart from the uncommitted scheme change. Starting the sessions directly was refused by the app (this turn was woken by the loop's timer, not by Arthur), so both are proposed as cards instead: "Wingman Spanish (Release C)" (`task_cfea173c`) and "Wingman French (Release C)" (`task_caceae03`), Opus, fresh context, own worktree, each with the full text of its prompt file. Cards expire after 7 days. The setup loop is stopped.
+- **2026-11-15. Phase 3: hand-off.** Working tree clean apart from the uncommitted scheme change. Starting the sessions directly was refused by the app (this turn was woken by the loop's timer, not by Arthur), so both are proposed as cards instead: "Wingman Spanish (Release C)" (`task_cfea173c`) and "Wingman French (Release C)" (`task_caceae03`), Opus, fresh context, own worktree, each with the full text of its prompt file. Cards expire after 7 days. The setup loop is stopped. Arthur started both cards the same night: Spanish `local_62c3374a-8126-4bf2-9d24-93e13f33d5fe`, French `local_f45151bc-13ff-4b5b-98b0-c07fffcff746`.
 
 ## Questions for Arthur
 
-1. **Start the two language sessions**: click the "Wingman Spanish (Release C)" and "Wingman French (Release C)" cards.
+None open. Both language sessions are running; their questions go in their own logs.
