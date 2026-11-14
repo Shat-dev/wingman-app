@@ -1,0 +1,282 @@
+{
+  "scenario": {
+    "a1000015-0000-0000-0000-000000000015": {
+      "title": {
+        "en": "Study Buddy",
+        "es": "Compañera de estudio"
+      },
+      "summary": {
+        "en": "The library is silent, but the chemistry between you doesn't have to be.",
+        "es": "En la biblioteca hay silencio, pero la química entre ustedes no tiene por qué callarse."
+      }
+    }
+  },
+  "screens": {
+    "b1000001-0000-0000-0015-000000000001": {
+      "en": "You're at the library. 12pm on a Tuesday.",
+      "es": "Estás en la biblioteca. Martes, 12 del mediodía."
+    },
+    "b1000002-0000-0000-0015-000000000002": {
+      "en": "A girl sits at a table near the windows. Textbooks spread out. Laptop open.",
+      "es": "Una mujer joven está sentada en una mesa junto a las ventanas. Libros de texto por todas partes. La laptop abierta."
+    },
+    "b1000003-0000-0000-0015-000000000003": {
+      "en": "You walk over. She looks up briefly.",
+      "es": "Te acercas. Ella levanta la vista un momento."
+    },
+    "b1000005-0000-0000-0015-000000000005": {
+      "en": "Hey I've got to head out soon, but I just wanted to come say hi. I'm...",
+      "es": "Hola, me tengo que ir en un rato, pero quería venir a saludarte. Soy…"
+    },
+    "b1000006-0000-0000-0015-000000000006": {
+      "en": "Oh, hey! I'm Aurelie.",
+      "es": "¡Ah, hola! Soy Aurelie."
+    },
+    "b1000007-0000-0000-0015-000000000007": {
+      "en": "Aurelie smiles and turns slightly towards you.",
+      "es": "Aurelie sonríe y se gira un poco hacia ti."
+    },
+    "b1000009-0000-0000-0015-000000000009": {
+      "en": "So what you studying? Working hard or hardly working?",
+      "es": "¿Y qué estudias? ¿Estudiando a fondo o haciendo como que estudias?"
+    },
+    "b1000010-0000-0000-0015-000000000010": {
+      "en": "Chemistry, got my last paper due tomorrow then I'm done.",
+      "es": "Química. Mañana entrego mi último trabajo y termino."
+    },
+    "b1000012-0000-0000-0015-000000000012": {
+      "en": "Chemistry huh? Maybe you could just study this interaction instead.",
+      "es": "¿Química? Quizá deberías estudiar la química de esta interacción."
+    },
+    "b1000013-0000-0000-0015-000000000013": {
+      "en": "Hahaha maybe, but then I'd most likely fail.",
+      "es": "Jajaja, quizá, pero seguro que reprobaría."
+    },
+    "b1000014-0000-0000-0015-000000000014": {
+      "en": "She's laughing. The energy is good and playful. She's engaged.",
+      "es": "Se está riendo. La energía es buena y juguetona. Está metida en la conversación."
+    },
+    "b1000016-0000-0000-0015-000000000016": {
+      "en": "So do you have any plans to celebrate after you finish this thing?",
+      "es": "¿Y tienes algún plan para celebrar cuando termines?"
+    },
+    "b1000017-0000-0000-0015-000000000017": {
+      "en": "Honestly? Probably just sleeping for like twelve hours straight.",
+      "es": "¿La verdad? Seguramente dormir unas doce horas seguidas."
+    },
+    "b1000019-0000-0000-0015-000000000019": {
+      "en": "Well after your beauty sleep let's grab coffee.",
+      "es": "Bueno, después de tu sueño reparador vamos por un café."
+    },
+    "b1000020-0000-0000-0015-000000000020": {
+      "en": "Haha sure let's do it, here's my Instagram...",
+      "es": "Jaja, bueno, hagámoslo. Aquí tienes mi Instagram…"
+    },
+    "b1000021-0000-0000-0015-000000000021": {
+      "en": "Aurelie gives you her Instagram, and you leave after.",
+      "es": "Aurelie te pasa su Instagram, y después te vas."
+    },
+    "b1000022-0000-0000-0015-000000000022": {
+      "en": "You want to follow up and message her.",
+      "es": "Quieres darle seguimiento y escribirle."
+    },
+    "b1000024-0000-0000-0015-000000000024": {
+      "en": "Now that you're refreshed after your sleep, let's get coffee?",
+      "es": "Ahora que ya descansaste después de dormir tanto, ¿vamos por ese café?"
+    },
+    "b1000025-0000-0000-0015-000000000025": {
+      "en": "Aurelie responds warmly, the two of you organize plans.",
+      "es": "Aurelie te responde con calidez y los dos quedan en un plan."
+    },
+    "b1000026-0000-0000-0015-000000000026": {
+      "en": "Success. You reflect on the interaction.",
+      "es": "Lo lograste. Repasas la interacción."
+    },
+    "b1000027-0000-0000-0015-000000000027": {
+      "en": "You used a time constraint opener to reduce pressure.",
+      "es": "Empezaste poniendo un límite de tiempo para quitar presión."
+    },
+    "b1000028-0000-0000-0015-000000000028": {
+      "en": "You established flirty energy with jokes and playful energy.",
+      "es": "Creaste un ambiente coqueto con bromas y energía juguetona."
+    },
+    "b1000029-0000-0000-0015-000000000029": {
+      "en": "You asked about celebration plans instead of stress, keeping it fun.",
+      "es": "Le preguntaste por sus planes para celebrar en lugar de por el estrés, y lo mantuviste divertido."
+    },
+    "b1000030-0000-0000-0015-000000000030": {
+      "en": "And you followed up on Instagram with a callback. Well done.",
+      "es": "Y le escribiste por Instagram retomando lo que hablaron. Bien hecho."
+    },
+    "b1000041-0000-0000-0015-000000000041": {
+      "en": "You pull out the chair and sit down. You ask what she's working on.",
+      "es": "Acercas una silla y te sientas. Le preguntas en qué está trabajando."
+    },
+    "b1000042-0000-0000-0015-000000000042": {
+      "en": "Don't make yourself comfortable in her study space without an invitation.",
+      "es": "No te pongas cómodo en su espacio de estudio sin que te invite."
+    },
+    "b1000043-0000-0000-0015-000000000043": {
+      "en": "Want to study together? I could probably help you with that.",
+      "es": "¿Quieres que estudiemos juntos? Seguro te puedo ayudar con eso."
+    },
+    "b1000044-0000-0000-0015-000000000044": {
+      "en": "She didn't ask for help. Don't presume you know her subject better.",
+      "es": "No te pidió ayuda. No des por hecho que sabes más que ella de su materia."
+    },
+    "b1000081-0000-0000-0015-000000000081": {
+      "en": "Sorry for interrupting. I know you're studying.",
+      "es": "Perdón por interrumpir. Ya sé que estás estudiando."
+    },
+    "b1000082-0000-0000-0015-000000000082": {
+      "en": "Apologizing frames you as a bother. There is nothing wrong with approaching.",
+      "es": "Pedir perdón te presenta como una molestia. No tiene nada de malo acercarte."
+    },
+    "b1000083-0000-0000-0015-000000000083": {
+      "en": "Hey so do you want to take a quick coffee break downstairs?",
+      "es": "Oye, ¿quieres tomarte un descanso rápido y bajar por un café?"
+    },
+    "b1000084-0000-0000-0015-000000000084": {
+      "en": "While being direct sometimes works, you can build more rapport here first.",
+      "es": "Ser directo a veces funciona, pero aquí puedes crear más confianza primero."
+    },
+    "b1000111-0000-0000-0015-000000000111": {
+      "en": "I could help you with it if you want. I'm pretty good at writing papers.",
+      "es": "Te puedo ayudar si quieres. Se me da bastante bien escribir trabajos."
+    },
+    "b1000112-0000-0000-0015-000000000112": {
+      "en": "You're here to create attraction. Not tutor her. Don't frame yourself that way.",
+      "es": "Estás aquí para despertar atracción, no para darle clases. No te presentes así."
+    },
+    "b1000113-0000-0000-0015-000000000113": {
+      "en": "So what exactly in chemistry is your paper about?",
+      "es": "¿Y de qué trata exactamente tu trabajo de química?"
+    },
+    "b1000114-0000-0000-0015-000000000114": {
+      "en": "While this can work, it keeps the interaction platonic not flirtatious.",
+      "es": "Puede funcionar, pero mantiene la interacción en lo platónico, no en el coqueteo."
+    },
+    "b1000151-0000-0000-0015-000000000151": {
+      "en": "So how much of the paper have you finished so far?",
+      "es": "¿Y cuánto llevas del trabajo?"
+    },
+    "b1000152-0000-0000-0015-000000000152": {
+      "en": "Don't kill the vibe with boring logistics. Keep the flirtation going.",
+      "es": "No mates el ambiente con detalles prácticos aburridos. Sigue con el coqueteo."
+    },
+    "b1000153-0000-0000-0015-000000000153": {
+      "en": "So are you stressed about the deadline at all?",
+      "es": "¿Y estás estresada por la fecha de entrega?"
+    },
+    "b1000154-0000-0000-0015-000000000154": {
+      "en": "Asking about stress kills the fun. Associate yourself with positive emotions.",
+      "es": "Preguntar por el estrés mata la diversión. Haz que te asocie con emociones positivas."
+    },
+    "b1000181-0000-0000-0015-000000000181": {
+      "en": "The optimal sleeping time is actually 7-9 hours.",
+      "es": "En realidad, lo ideal es dormir entre 7 y 9 horas."
+    },
+    "b1000182-0000-0000-0015-000000000182": {
+      "en": "You're not her sleep consultant. Don't give unsolicited advice.",
+      "es": "No eres su asesor de sueño. No des consejos que nadie pidió."
+    },
+    "b1000183-0000-0000-0015-000000000183": {
+      "en": "A better plan is getting dinner with me instead to celebrate.",
+      "es": "Un mejor plan es que cenes conmigo para celebrarlo."
+    },
+    "b1000184-0000-0000-0015-000000000184": {
+      "en": "While this can work, keep the ask light so yes is the path of least resistance.",
+      "es": "Puede funcionar, pero mantén la propuesta ligera para que decir que sí sea lo más fácil."
+    },
+    "b1000231-0000-0000-0015-000000000231": {
+      "en": "Hey! How's the chemistry paper going? Getting through it okay?",
+      "es": "¡Hola! ¿Qué tal va el trabajo de química? ¿Lo estás sacando bien?"
+    },
+    "b1000232-0000-0000-0015-000000000232": {
+      "en": "This keeps it platonic. Be playful, keep it fun instead.",
+      "es": "Esto lo mantiene en lo platónico. Sé juguetón y mantenlo divertido."
+    },
+    "b1000233-0000-0000-0015-000000000233": {
+      "en": "Your insta photos are cool, seems like you travel a lot.",
+      "es": "Qué buenas tus fotos de Insta, parece que viajas mucho."
+    },
+    "b1000234-0000-0000-0015-000000000234": {
+      "en": "You met her in person. Reference that interaction.",
+      "es": "La conociste en persona. Haz referencia a esa conversación."
+    }
+  },
+  "options": {
+    "c1000001-0000-0000-0015-000000000001": {
+      "en": "Time constraint opener and state your intent",
+      "es": "Empezar con un límite de tiempo y decir tu intención"
+    },
+    "c1000002-0000-0000-0015-000000000002": {
+      "en": "Sit down and ask about her work",
+      "es": "Sentarte y preguntarle por lo que hace"
+    },
+    "c1000003-0000-0000-0015-000000000003": {
+      "en": "Ask to study together because you can help her",
+      "es": "Proponerle estudiar juntos porque la puedes ayudar"
+    },
+    "c1000004-0000-0000-0015-000000000004": {
+      "en": "Ask light-heartedly what she's studying",
+      "es": "Preguntarle en tono ligero qué estudia"
+    },
+    "c1000005-0000-0000-0015-000000000005": {
+      "en": "Apologize for interrupting her studying",
+      "es": "Pedirle perdón por interrumpir su estudio"
+    },
+    "c1000006-0000-0000-0015-000000000006": {
+      "en": "Ask if she wants to take a break and get coffee",
+      "es": "Preguntarle si quiere tomarse un descanso para un café"
+    },
+    "c1000007-0000-0000-0015-000000000007": {
+      "en": "Make a flirty joke about chemistry",
+      "es": "Hacer una broma coqueta sobre la química"
+    },
+    "c1000008-0000-0000-0015-000000000008": {
+      "en": "Offer to help her write the paper",
+      "es": "Ofrecerte a ayudarla a escribir el trabajo"
+    },
+    "c1000009-0000-0000-0015-000000000009": {
+      "en": "Ask what specifically her paper's on",
+      "es": "Preguntarle de qué trata exactamente su trabajo"
+    },
+    "c1000010-0000-0000-0015-000000000010": {
+      "en": "Ask if she's got any plans to celebrate after",
+      "es": "Preguntarle si tiene planes para celebrar después"
+    },
+    "c1000011-0000-0000-0015-000000000011": {
+      "en": "Ask how much of the paper she's finished",
+      "es": "Preguntarle cuánto lleva del trabajo"
+    },
+    "c1000012-0000-0000-0015-000000000012": {
+      "en": "Ask if she's stressed at all about the due date",
+      "es": "Preguntarle si está estresada por la fecha de entrega"
+    },
+    "c1000013-0000-0000-0015-000000000013": {
+      "en": "Tease her response and suggest coffee",
+      "es": "Bromear con su respuesta y proponer un café"
+    },
+    "c1000014-0000-0000-0015-000000000014": {
+      "en": "Tell her what the optimal sleeping time is",
+      "es": "Decirle cuántas horas es ideal dormir"
+    },
+    "c1000015-0000-0000-0015-000000000015": {
+      "en": "Tell her a better plan is to get dinner with you",
+      "es": "Decirle que un mejor plan es cenar contigo"
+    },
+    "c1000016-0000-0000-0015-000000000016": {
+      "en": "Reference beauty sleep and set actual plans",
+      "es": "Retomar lo del sueño reparador y concretar un plan"
+    },
+    "c1000017-0000-0000-0015-000000000017": {
+      "en": "Ask her how her paper went",
+      "es": "Preguntarle cómo le fue con el trabajo"
+    },
+    "c1000018-0000-0000-0015-000000000018": {
+      "en": "Message her about her Instagram photos",
+      "es": "Escribirle sobre sus fotos de Instagram"
+    }
+  }
+}
