@@ -4,14 +4,14 @@ Branch `localization-release-c-fr` (from `localization-release-c`). Rules and gl
 
 ## Where it stands
 
-Lesson overlays in progress (22 of 25 courses). Database content, checks, review pack and App Store listing not started.
+Lesson overlays in progress (23 of 25 courses). Database content, checks, review pack and App Store listing not started.
 
 ## Summary
 
 | Part | State |
 |---|---|
 | UI catalogs | Done by the setup session (585 strings, draft) |
-| Lesson overlays | 22 of 25 courses, 1,331 of 1,531 items |
+| Lesson overlays | 23 of 25 courses, 1,382 of 1,531 items |
 | Database content | Not started (15 scenarios, 765 quiz questions) |
 | Checks and review pack | Not started |
 | App Store listing (France, notes for Canada) | Not started |
@@ -45,6 +45,7 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
 - **2026-11-15. Course 25, Learning & Self Discovery** (4 lessons, 72 items, 1,569 English words). The check passes. For the reviewer: "sticking point" became *point de blocage*; "growth plateau" became *plateau de progression*; "experimental mindset" became *l'esprit d'expérimentation*; "calibration" became *s'ajuster* here (as German used *Gespür*, not the technical term); "self-proclaimed dating coach" became *soi-disant coach en séduction*; "the opening" became *l'entrée en matière*; "closing" became *concrétiser*. "Physical escalation" is rendered as *faire progresser / introduire le contact physique*; 25_3_7_2 keeps the English condition *et seulement quand elle te le rend clairement*. **One addition to check:** 25_4_5_2 ("try for … earlier escalation") has no condition in English; the French adds *quand elle te le rend*, to match the 17_3 standard Arthur applied to the touch lessons in Release B. Remove it if the English stays as is, or add "when she's reciprocating" to the English. The basketball free-throw example stays (basketball is common in France); *60 %* / *75 %* use U+202F and pass the validator.
 - **2026-11-15. Course 5, Non-negotiables** (4 lessons, 54 items, 1,302 English words). The check passes. The course covers fitness, grooming, hygiene and style, so the catalog title *Les incontournables* fits (German changed its guess; no change needed in French). For the reviewer: "grooming" became *entretien* / *prendre soin de son apparence*; "cologne" became *parfum*; "shredded" became *sec comme un athlète*; "underdressed" became *mal habillé*; "fit / frame" (clothes) became *coupe / morphologie*; "looks that already work" became *styles qui ont déjà fait leurs preuves* (avoiding *looks*). "Gym work, cardio" became *musculation, cardio* (*cardio* is normal French).
 - **2026-11-15. Course 10, Situational Specific Approaches** (3 lessons, 50 items, 1,249 English words). The check passes. For the reviewer: "Daytime / Nighttime Approaches" became *Aborder en journée / le soir*; "venue" became *lieu* / *bar* (not *Location*, which is German usage); "logistics" became *l'organisation de la suite*; "calibration" became *savoir s'ajuster*. The bad example in 10_1_3_1 (a tap on the shoulder from behind) is kept as the negative example it is. In 10_3 her friends are *amies* (female), as German did; the English "friends" could be a mixed group, so a reviewer may prefer *ses amis*. The group opener *Vous avez l'air de passer la meilleure soirée de tout le bar. On fête quoi ?* uses plural *vous*, which is correct for a group. "I'm…" became *Je m'appelle…* (no name is substituted).
+- **2026-11-15. Course 16, Advanced Conversation Skills** (3 lessons, 51 items, 1,133 English words). The check passes. For the reviewer: "energy drop" became *baisse d'énergie*; "reset" became *relancer*; "emotional anchoring" became *ancrage émotionnel*; "validation" became *reconnaissance* (glossary); "going back to school" became *reprendre des études*; "debt and credentials" became *le coût des études et la valeur des diplômes* (student debt is far less of a theme in France, as German noted for Germany); "roommate" became *colocataire*. The reset line "Mine tastes kind of funky" became *Le mien a un goût un peu bizarre*.
 
 ## Questions for Arthur
 
