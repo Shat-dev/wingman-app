@@ -1,0 +1,302 @@
+{
+  "scenario": {
+    "a1000008-0000-0000-0000-000000000008": {
+      "title": {
+        "en": "Picture This",
+        "fr": "Photo souvenir"
+      },
+      "summary": {
+        "en": "Perfect light, quiet moment, helping hands. A brief glance might open something else.",
+        "fr": "Une lumière parfaite, un moment calme, un coup de main. Un bref regard pourrait ouvrir autre chose."
+      }
+    }
+  },
+  "screens": {
+    "b1000001-0000-0000-0008-000000000001": {
+      "en": "You're at a scenic lookout. City views, golden hour light. Beautiful spot.",
+      "fr": "Tu es à un point de vue. La ville à tes pieds, la lumière dorée de fin de journée. Un endroit magnifique."
+    },
+    "b1000002-0000-0000-0008-000000000002": {
+      "en": "A woman is taking photos with a unique camera standing alone.",
+      "fr": "Une femme, seule, prend des photos avec un appareil original."
+    },
+    "b1000003-0000-0000-0008-000000000003": {
+      "en": "She steps back to review her shots on the screen.",
+      "fr": "Elle recule pour regarder ses photos sur l’écran."
+    },
+    "b1000004-0000-0000-0008-000000000004": {
+      "en": "Now she's trying to take a selfie but it looks awkward.",
+      "fr": "Maintenant, elle essaie de prendre un selfie, mais elle n’a pas l’air à l’aise."
+    },
+    "b1000051-0000-0000-0008-000000000051": {
+      "en": "Hey I saw you taking photos, can I see them?",
+      "fr": "Salut, je t’ai vue prendre des photos, je peux les voir ?"
+    },
+    "b1000052-0000-0000-0008-000000000052": {
+      "en": "Asking to see her work puts her on the spot. Build rapport and let her offer.",
+      "fr": "Lui demander de voir son travail la met sur la sellette. Crée de la complicité et laisse-la te les proposer."
+    },
+    "b1000053-0000-0000-0008-000000000053": {
+      "en": "Are you a professional photographer? Is this what you do for work?",
+      "fr": "Tu es photographe professionnelle ? C’est ton métier ?"
+    },
+    "b1000054-0000-0000-0008-000000000054": {
+      "en": "Work questions are boring and asking about her work status feels qualifying.",
+      "fr": "Les questions sur le travail sont ennuyeuses, et l’interroger sur son statut donne l’impression que tu la jauges."
+    },
+    "b1000006-0000-0000-0008-000000000006": {
+      "en": "Hey want me to take one for you?",
+      "fr": "Tu veux que je t’en prenne une ?"
+    },
+    "b1000007-0000-0000-0008-000000000007": {
+      "en": "Oh that'd be great actually. Thank you.",
+      "fr": "Oh, ce serait super, en fait. Merci."
+    },
+    "b1000008-0000-0000-0008-000000000008": {
+      "en": "She hands you the camera smiling. You take a few photos then hand it back.",
+      "fr": "Elle te tend l’appareil en souriant. Tu prends quelques photos, puis tu le lui rends."
+    },
+    "b1000009-0000-0000-0008-000000000009": {
+      "en": "Wow these are really good, thank you.",
+      "fr": "Waouh, elles sont vraiment bien, merci."
+    },
+    "b1000101-0000-0000-0008-000000000101": {
+      "en": "Thank you, yeah I used to do photography, I had a Canon...",
+      "fr": "Merci, oui, je faisais de la photo avant, j’avais un Canon…"
+    },
+    "b1000102-0000-0000-0008-000000000102": {
+      "en": "Her compliment was not an excuse for you to brag about your photography skills.",
+      "fr": "Son compliment n’était pas une excuse pour vanter tes talents de photographe."
+    },
+    "b1000103-0000-0000-0008-000000000103": {
+      "en": "What settings are you using for this light? I recommend a high aperture...",
+      "fr": "Tu utilises quels réglages pour cette lumière ? Je te conseille une grande ouverture…"
+    },
+    "b1000104-0000-0000-0008-000000000104": {
+      "en": "Technical questions feel like mansplaining. She knows her own camera.",
+      "fr": "Les questions techniques sonnent comme du mansplaining. Elle connaît son propre appareil."
+    },
+    "b1000011-0000-0000-0008-000000000011": {
+      "en": "That's a nice setup. Film camera? You don't see much of them nowadays.",
+      "fr": "Il est beau, ton matériel. C’est de l’argentique ? On n’en voit plus beaucoup aujourd’hui."
+    },
+    "b1000012-0000-0000-0008-000000000012": {
+      "en": "Yeah it's a vintage Nikon. I love the look film gives you. Digital's too clean.",
+      "fr": "Oui, c’est un vieux Nikon. J’adore le rendu de l’argentique. Le numérique, c’est trop lisse."
+    },
+    "b1000013-0000-0000-0008-000000000013": {
+      "en": "She's opening up about her interest which is a good sign of engagement.",
+      "fr": "Elle se livre sur sa passion, un bon signe qu’elle est dans l’échange."
+    },
+    "b1000141-0000-0000-0008-000000000141": {
+      "en": "You can use software to make photos from digital cameras look...",
+      "fr": "Avec un logiciel, tu peux donner aux photos numériques un rendu…"
+    },
+    "b1000142-0000-0000-0008-000000000142": {
+      "en": "She shared her opinion. Don't lecture back. Move the conversation forward.",
+      "fr": "Elle a donné son avis. Ne lui fais pas la leçon. Fais avancer la conversation."
+    },
+    "b1000143-0000-0000-0008-000000000143": {
+      "en": "So where do you get your film developed?",
+      "fr": "Et tu fais développer tes pellicules où ?"
+    },
+    "b1000144-0000-0000-0008-000000000144": {
+      "en": "Staying in technical photography territory keeps it impersonal. Make it personal.",
+      "fr": "Rester sur la technique photo garde l’échange impersonnel. Rends-le personnel."
+    },
+    "b1000015-0000-0000-0008-000000000015": {
+      "en": "Film definitely has that feel.",
+      "fr": "C’est vrai que l’argentique a un vrai charme."
+    },
+    "b1000016-0000-0000-0008-000000000016": {
+      "en": "Are you from around here or just visiting?",
+      "fr": "Tu es du coin ou tu es de passage ?"
+    },
+    "b1000017-0000-0000-0008-000000000017": {
+      "en": "Visiting. Came up for the weekend. This spot was highly recommended.",
+      "fr": "De passage. Je suis venue pour le week-end. On m’a vraiment conseillé cet endroit."
+    },
+    "b1000181-0000-0000-0008-000000000181": {
+      "en": "Ahh just in the down town area.",
+      "fr": "Ah, juste dans le centre."
+    },
+    "b1000182-0000-0000-0008-000000000182": {
+      "en": "Asking about her accommodation this early may feel invasive.",
+      "fr": "Lui demander où elle loge aussi tôt peut paraître intrusif."
+    },
+    "b1000183-0000-0000-0008-000000000183": {
+      "en": "I could show you around if you want.",
+      "fr": "Je pourrais te faire visiter, si tu veux."
+    },
+    "b1000184-0000-0000-0008-000000000184": {
+      "en": "Offering to spend hours together when you just met feels pushy. Suggest spots first.",
+      "fr": "Proposer de passer des heures ensemble alors que vous venez de vous rencontrer paraît insistant. Suggère d’abord quelques endroits."
+    },
+    "b1000019-0000-0000-0008-000000000019": {
+      "en": "How long are you here? I could suggest some good spots if you have time.",
+      "fr": "Tu restes combien de temps ? Je peux te conseiller quelques bons coins, si tu as le temps."
+    },
+    "b1000020-0000-0000-0008-000000000020": {
+      "en": "Just til Sunday evening. I'd definitely take recommendations though.",
+      "fr": "Jusqu’à dimanche soir. Mais je prends volontiers des conseils."
+    },
+    "b1000211-0000-0000-0008-000000000211": {
+      "en": "Ok what’s your number first?",
+      "fr": "D’accord, d’abord, c’est quoi ton numéro ?"
+    },
+    "b1000212-0000-0000-0008-000000000212": {
+      "en": "Asking for contact before providing value feels transactional. Help first, then ask.",
+      "fr": "Demander ses coordonnées avant d’apporter quoi que ce soit paraît intéressé. Aide d’abord, demande ensuite."
+    },
+    "b1000213-0000-0000-0008-000000000213": {
+      "en": "Okay, so there's the brewery up 3rd street, there's the...",
+      "fr": "Alors, il y a la brasserie au coin de la rue, il y a le…"
+    },
+    "b1000214-0000-0000-0008-000000000214": {
+      "en": "Information overload, list a few then use it as a natural method to get her digits.",
+      "fr": "Trop d’informations d’un coup : cites-en quelques-uns, puis sers-t’en pour lui demander son numéro naturellement."
+    },
+    "b1000022-0000-0000-0008-000000000022": {
+      "en": "For film, the old railway district has amazing light. And the botanical gardens...",
+      "fr": "Pour l’argentique, l’ancien quartier de la gare a une lumière incroyable. Et le jardin botanique…"
+    },
+    "b1000023-0000-0000-0008-000000000023": {
+      "en": "There's more but I don't want to info dump, want me to send you a list?",
+      "fr": "Il y en a d’autres, mais je ne veux pas tout te déballer d’un coup. Je t’envoie une liste ?"
+    },
+    "b1000024-0000-0000-0008-000000000024": {
+      "en": "Those sound perfect actually. Yeah that'd be really helpful, thank you.",
+      "fr": "Ça a l’air parfait, en fait. Oui, ça m’aiderait beaucoup, merci."
+    },
+    "b1000025-0000-0000-0008-000000000025": {
+      "en": "Emily gives you her contact. She's smiling, reciprocating and engaged.",
+      "fr": "Emily te donne son numéro. Elle sourit, te rend la pareille et reste dans l’échange."
+    },
+    "b1000026-0000-0000-0008-000000000026": {
+      "en": "Suddenly you remember there's another spot close by.",
+      "fr": "Tout à coup, tu te souviens qu’il y a un autre endroit tout près."
+    },
+    "b1000271-0000-0000-0008-000000000271": {
+      "en": "Would it be okay if I showed you one? Only if you want. No pressure.",
+      "fr": "Ça t’irait si je t’en montrais un ? Seulement si tu veux. Aucune pression."
+    },
+    "b1000272-0000-0000-0008-000000000272": {
+      "en": "Apologetic energy kills confidence. If you think it's a good idea, suggest it clearly.",
+      "fr": "Une énergie d’excuse tue l’assurance. Si tu penses que c’est une bonne idée, propose-la clairement."
+    },
+    "b1000273-0000-0000-0008-000000000273": {
+      "en": "There's a spot close by here, you just need to walk down 10 minutes down...",
+      "fr": "Il y a un endroit tout près d’ici, il suffit de descendre une dizaine de minutes…"
+    },
+    "b1000274-0000-0000-0008-000000000274": {
+      "en": "If you were free, giving directions instead of offering to show her is a loss.",
+      "fr": "Si tu étais libre, donner l’itinéraire au lieu de proposer de l’y emmener, c’est une occasion perdue."
+    },
+    "b1000028-0000-0000-0008-000000000028": {
+      "en": "Actually if you're free now, I could show you one of the spots? It's close by.",
+      "fr": "En fait, si tu es libre maintenant, je peux te montrer un de ces endroits ? C’est tout près."
+    },
+    "b1000029-0000-0000-0008-000000000029": {
+      "en": "Yeah sure I've got time, let's go.",
+      "fr": "Oui, avec plaisir, j’ai le temps. On y va."
+    },
+    "b1000030-0000-0000-0008-000000000030": {
+      "en": "You both start walking towards the spot. The conversation flows naturally.",
+      "fr": "Vous partez tous les deux vers l’endroit. La conversation coule naturellement."
+    },
+    "b1000031-0000-0000-0008-000000000031": {
+      "en": "Success. You review your interaction with Emily.",
+      "fr": "Réussi. Tu repenses à ton échange avec Emily."
+    },
+    "b1000032-0000-0000-0008-000000000032": {
+      "en": "You read the moment and offered help naturally.",
+      "fr": "Tu as lu le moment et proposé ton aide naturellement."
+    },
+    "b1000033-0000-0000-0008-000000000033": {
+      "en": "You showed genuine interest in her passion about photography.",
+      "fr": "Tu as montré un vrai intérêt pour sa passion de la photo."
+    },
+    "b1000034-0000-0000-0008-000000000034": {
+      "en": "You provided real value first before asking for contact.",
+      "fr": "Tu lui as d’abord vraiment rendu service avant de demander ses coordonnées."
+    },
+    "b1000035-0000-0000-0008-000000000035": {
+      "en": "You secured her contact then extended the interaction as a bonus. Well done.",
+      "fr": "Tu as obtenu son numéro, puis tu as prolongé l’échange en bonus. Bien joué."
+    }
+  },
+  "options": {
+    "c1000002-0000-0000-0008-000000000002": {
+      "en": "Ask if you can see the photos she took of the view",
+      "fr": "Lui demander si tu peux voir ses photos de la vue"
+    },
+    "c1000001-0000-0000-0008-000000000001": {
+      "en": "Offer to take her photo with the view",
+      "fr": "Proposer de la prendre en photo devant la vue"
+    },
+    "c1000003-0000-0000-0008-000000000003": {
+      "en": "Comment that she must be a professional",
+      "fr": "Lui dire qu’elle doit être professionnelle"
+    },
+    "c1000004-0000-0000-0008-000000000004": {
+      "en": "Ask about the vintage camera",
+      "fr": "L’interroger sur son appareil vintage"
+    },
+    "c1000005-0000-0000-0008-000000000005": {
+      "en": "Thank her and talk about your photography experience",
+      "fr": "La remercier et parler de ton expérience en photo"
+    },
+    "c1000006-0000-0000-0008-000000000006": {
+      "en": "Ask what settings she's using and tell her your recommendation",
+      "fr": "Lui demander ses réglages et lui donner ton conseil"
+    },
+    "c1000009-0000-0000-0008-000000000009": {
+      "en": "Ask where she develops her film",
+      "fr": "Lui demander où elle fait développer ses pellicules"
+    },
+    "c1000008-0000-0000-0008-000000000008": {
+      "en": "Tell her that digital cameras can have a film effect",
+      "fr": "Lui dire qu’on peut donner un effet argentique au numérique"
+    },
+    "c1000007-0000-0000-0008-000000000007": {
+      "en": "Build on her opinion then ask if she's from here",
+      "fr": "Rebondir sur son avis, puis lui demander si elle est d’ici"
+    },
+    "c1000010-0000-0000-0008-000000000010": {
+      "en": "Offer other suggestions she might like",
+      "fr": "Lui proposer d’autres endroits qui pourraient lui plaire"
+    },
+    "c1000011-0000-0000-0008-000000000011": {
+      "en": "Ask where she's staying",
+      "fr": "Lui demander où elle loge"
+    },
+    "c1000012-0000-0000-0008-000000000012": {
+      "en": "Offer to be her tour guide",
+      "fr": "Proposer d’être son guide"
+    },
+    "c1000014-0000-0000-0008-000000000014": {
+      "en": "Ask for her number to give recommendations",
+      "fr": "Lui demander son numéro pour lui envoyer des conseils"
+    },
+    "c1000013-0000-0000-0008-000000000013": {
+      "en": "Give her 2-3 spots then offer to send full list",
+      "fr": "Lui donner 2 ou 3 endroits, puis proposer de lui envoyer la liste complète"
+    },
+    "c1000015-0000-0000-0008-000000000015": {
+      "en": "List all your favourite spots",
+      "fr": "Énumérer tous tes endroits préférés"
+    },
+    "c1000016-0000-0000-0008-000000000016": {
+      "en": "Suggest showing her the nearby spot now",
+      "fr": "Proposer de lui montrer tout de suite l’endroit tout près"
+    },
+    "c1000017-0000-0000-0008-000000000017": {
+      "en": "Ask her permission if you can show her the spot",
+      "fr": "Lui demander la permission de lui montrer l’endroit"
+    },
+    "c1000018-0000-0000-0008-000000000018": {
+      "en": "Tell her the spot and give her instructions on how to get there",
+      "fr": "Lui indiquer l’endroit et lui expliquer comment y aller"
+    }
+  }
+}
