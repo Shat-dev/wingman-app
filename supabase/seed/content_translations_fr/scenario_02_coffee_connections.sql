@@ -116,7 +116,7 @@ insert into public.screen_option_translations (option_id, locale, text) values (
   on conflict (option_id, locale) do update set text = excluded.text;
 insert into public.screen_option_translations (option_id, locale, text) values ('c1000005-0000-0000-0002-000000000005', 'fr', 'Faire une remarque sur le temps')
   on conflict (option_id, locale) do update set text = excluded.text;
-insert into public.screen_option_translations (option_id, locale, text) values ('c1000006-0000-0000-0002-000000000006', 'fr', 'S’asseoir en silence et attendre qu’elle parle')
+insert into public.screen_option_translations (option_id, locale, text) values ('c1000006-0000-0000-0002-000000000006', 'fr', 'T’asseoir en silence et attendre qu’elle parle')
   on conflict (option_id, locale) do update set text = excluded.text;
 insert into public.screen_option_translations (option_id, locale, text) values ('c1000007-0000-0000-0002-000000000007', 'fr', 'Lui demander où elle allait')
   on conflict (option_id, locale) do update set text = excluded.text;

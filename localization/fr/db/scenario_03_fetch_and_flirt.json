@@ -1,0 +1,250 @@
+{
+  "scenario": {
+    "a1000003-0000-0000-0000-000000000003": {
+      "title": {
+        "en": "Fetch & Flirt",
+        "fr": "Chiens et flirt"
+      },
+      "summary": {
+        "en": "Laughter, eye contact, and two dogs chasing each other. Timing matters here.",
+        "fr": "Des rires, des regards et deux chiens qui se courent après. Ici, tout est une question de timing."
+      }
+    }
+  },
+  "screens": {
+    "b1000001-0000-0000-0003-000000000001": {
+      "en": "You're at the park walking your dog.",
+      "fr": "Tu promènes ton chien au parc."
+    },
+    "b1000002-0000-0000-0003-000000000002": {
+      "en": "A small fluffy dog runs toward yours. The owner follows close behind.",
+      "fr": "Une petite chienne toute poilue court vers le tien. Sa propriétaire la suit de près."
+    },
+    "b1000003-0000-0000-0003-000000000003": {
+      "en": "The two dogs start playing together. She's watching. You're a few feet apart.",
+      "fr": "Les deux chiens commencent à jouer ensemble. Elle les regarde. Vous êtes à un mètre ou deux l’un de l’autre."
+    },
+    "b1000041-0000-0000-0003-000000000041": {
+      "en": "Did you know my dog is really rare...",
+      "fr": "Tu savais que mon chien est d’une race très rare…"
+    },
+    "b1000042-0000-0000-0003-000000000042": {
+      "en": "You can talk about this later. Use the current shared situation of your dogs.",
+      "fr": "Tu pourras en parler plus tard. Sers-toi de ce que vous vivez là, maintenant, avec vos chiens."
+    },
+    "b1000043-0000-0000-0003-000000000043": {
+      "en": "You and your dog are both really pretty.",
+      "fr": "Ton chien et toi, vous êtes vraiment jolis."
+    },
+    "b1000044-0000-0000-0003-000000000044": {
+      "en": "While being direct sometimes works, you can build more rapport here.",
+      "fr": "Être direct marche parfois, mais ici, tu peux d’abord créer plus de complicité."
+    },
+    "b1000005-0000-0000-0003-000000000005": {
+      "en": "Looks like mine just made a new friend. He's not usually this smooth.",
+      "fr": "On dirait que le mien vient de se faire une nouvelle copine. D’habitude, il n’est pas aussi charmeur."
+    },
+    "b1000006-0000-0000-0003-000000000006": {
+      "en": "Neither is mine. She's normally shy.",
+      "fr": "La mienne non plus. D’habitude, elle est timide."
+    },
+    "b1000007-0000-0000-0003-000000000007": {
+      "en": "I guess it's my dogs lucky day then.",
+      "fr": "C’est le jour de chance de mon chien, alors."
+    },
+    "b1000008-0000-0000-0003-000000000008": {
+      "en": "Haha maybe.",
+      "fr": "Haha, peut-être."
+    },
+    "b1000009-0000-0000-0003-000000000009": {
+      "en": "You observe the dogs and they start jumping and rolling over each other.",
+      "fr": "Tu regardes les chiens : ils se mettent à sauter et à se rouler l’un sur l’autre."
+    },
+    "b1000010-0000-0000-0003-000000000010": {
+      "en": "You look over and see her laughing.",
+      "fr": "Tu tournes la tête et tu la vois rire."
+    },
+    "b1000111-0000-0000-0003-000000000111": {
+      "en": "Wow that's a crazy thing to say.",
+      "fr": "Waouh, c’est n’importe quoi de dire ça."
+    },
+    "b1000112-0000-0000-0003-000000000112": {
+      "en": "While this line may work depending on the dynamic, build more rapport first.",
+      "fr": "Selon la dynamique, cette phrase peut marcher, mais crée d’abord plus de complicité."
+    },
+    "b1000113-0000-0000-0003-000000000113": {
+      "en": "Umm maybe, I'm not really from here.",
+      "fr": "Euh, peut-être, je ne suis pas vraiment d’ici."
+    },
+    "b1000114-0000-0000-0003-000000000114": {
+      "en": "Too early. You're pushing for commitment before building rapport.",
+      "fr": "Trop tôt. Tu cherches un engagement avant d’avoir créé de la complicité."
+    },
+    "b1000012-0000-0000-0003-000000000012": {
+      "en": "Looks like they're better at this than we are.",
+      "fr": "On dirait qu’ils sont plus doués que nous pour ça."
+    },
+    "b1000013-0000-0000-0003-000000000013": {
+      "en": "Haha right? We could learn a thing or two from them.",
+      "fr": "Haha, c’est clair ! On a des choses à apprendre d’eux."
+    },
+    "b1000014-0000-0000-0003-000000000014": {
+      "en": "She's smiling, fully engaged now. You're both standing closer, watching the dogs.",
+      "fr": "Elle sourit, complètement dans l’échange maintenant. Vous vous êtes rapprochés tous les deux en regardant les chiens."
+    },
+    "b1000015-0000-0000-0003-000000000015": {
+      "en": "Her dog suddenly grabs a stick and runs. Your dog chases. They're off together.",
+      "fr": "Tout à coup, sa chienne attrape un bâton et part en courant. Ton chien la poursuit. Les voilà partis ensemble."
+    },
+    "b1000161-0000-0000-0003-000000000161": {
+      "en": "You keep watching the dogs. Silence...",
+      "fr": "Tu continues de regarder les chiens. Silence…"
+    },
+    "b1000162-0000-0000-0003-000000000162": {
+      "en": "This was an opening. Ignoring it signals disinterest or social obliviousness.",
+      "fr": "C’était une ouverture. L’ignorer montre un manque d’intérêt ou d’intelligence sociale."
+    },
+    "b1000163-0000-0000-0003-000000000163": {
+      "en": "Hey do you need to go watch your dog by the way?",
+      "fr": "Au fait, tu dois peut-être aller surveiller ta chienne ?"
+    },
+    "b1000164-0000-0000-0003-000000000164": {
+      "en": "You gave her an out she didn't ask for. Don't end interactions prematurely.",
+      "fr": "Tu lui as offert une porte de sortie qu’elle n’avait pas demandée. Ne mets pas fin aux échanges trop tôt."
+    },
+    "b1000017-0000-0000-0003-000000000017": {
+      "en": "You face her, smile, and introduce yourself. She smiles back.",
+      "fr": "Tu te tournes vers elle, tu souris et tu te présentes. Elle te rend ton sourire."
+    },
+    "b1000018-0000-0000-0003-000000000018": {
+      "en": "Nice to meet you, I'm Naomi.",
+      "fr": "Enchantée, moi, c’est Naomi."
+    },
+    "b1000019-0000-0000-0003-000000000019": {
+      "en": "The energy is good. You lock eyes. She holds it.",
+      "fr": "L’énergie est bonne. Vos regards se croisent. Elle le soutient."
+    },
+    "b1000201-0000-0000-0003-000000000201": {
+      "en": "You break the moment and look back at the dogs.",
+      "fr": "Tu romps le moment et tu regardes de nouveau les chiens."
+    },
+    "b1000202-0000-0000-0003-000000000202": {
+      "en": "Eye contact communicates interest non-verbally. Breaking it early signals otherwise.",
+      "fr": "Le regard exprime l’intérêt sans les mots. Le rompre trop tôt dit le contraire."
+    },
+    "b1000203-0000-0000-0003-000000000203": {
+      "en": "So how are you today?",
+      "fr": "Alors, ça va aujourd’hui ?"
+    },
+    "b1000204-0000-0000-0003-000000000204": {
+      "en": "Filling silence with questions kills chemistry. Let the moment exist naturally.",
+      "fr": "Combler le silence avec des questions tue l’alchimie. Laisse le moment exister naturellement."
+    },
+    "b1000021-0000-0000-0003-000000000021": {
+      "en": "You both hold eye contact while smiling at each other. Pause.",
+      "fr": "Vous soutenez tous les deux le regard en vous souriant. Une pause."
+    },
+    "b1000022-0000-0000-0003-000000000022": {
+      "en": "You look away naturally, but the energy has shifted.",
+      "fr": "Tu détournes le regard naturellement, mais l’énergie a changé."
+    },
+    "b1000023-0000-0000-0003-000000000023": {
+      "en": "Eventually the dogs come running back and are panting.",
+      "fr": "Les chiens finissent par revenir en courant, la langue pendante."
+    },
+    "b1000241-0000-0000-0003-000000000241": {
+      "en": "These dogs look thirsty, what should we do?",
+      "fr": "Ils ont l’air d’avoir soif, ces chiens. On fait quoi ?"
+    },
+    "b1000242-0000-0000-0003-000000000242": {
+      "en": "Frame control is leading the moment, not reacting to it.",
+      "fr": "Donner le ton, c’est mener le moment, pas y réagir."
+    },
+    "b1000025-0000-0000-0003-000000000025": {
+      "en": "Hey I know a spot with a fountain for the dogs, let's go there.",
+      "fr": "Je connais un coin avec une fontaine pour les chiens, viens, on y va."
+    },
+    "b1000026-0000-0000-0003-000000000026": {
+      "en": "Yeah let's go, they look thirsty.",
+      "fr": "Oui, allons-y, ils ont l’air d’avoir soif."
+    },
+    "b1000027-0000-0000-0003-000000000027": {
+      "en": "You and Naomi walk together, the conversation flows well.",
+      "fr": "Naomi et toi marchez ensemble, la conversation coule toute seule."
+    },
+    "b1000028-0000-0000-0003-000000000028": {
+      "en": "Success. You review your interaction with Naomi.",
+      "fr": "Réussi. Tu repenses à ton échange avec Naomi."
+    },
+    "b1000029-0000-0000-0003-000000000029": {
+      "en": "You opened with a shared experience so the conversation felt natural.",
+      "fr": "Tu as commencé par une expérience partagée, donc la conversation a paru naturelle."
+    },
+    "b1000030-0000-0000-0003-000000000030": {
+      "en": "You responded to openings when the moment could deepen.",
+      "fr": "Tu as saisi les ouvertures quand le moment pouvait s’approfondir."
+    },
+    "b1000031-0000-0000-0003-000000000031": {
+      "en": "And you took initiative by taking the dogs to the fountain. Well done.",
+      "fr": "Et tu as pris l’initiative en emmenant les chiens à la fontaine. Bien joué."
+    }
+  },
+  "options": {
+    "c1000001-0000-0000-0003-000000000001": {
+      "en": "Comment on how the dogs get along",
+      "fr": "Commenter la façon dont les chiens s’entendent"
+    },
+    "c1000002-0000-0000-0003-000000000002": {
+      "en": "Talk about your dog's breed",
+      "fr": "Parler de la race de ton chien"
+    },
+    "c1000003-0000-0000-0003-000000000003": {
+      "en": "Compliment her and her dog",
+      "fr": "La complimenter, elle et sa chienne"
+    },
+    "c1000004-0000-0000-0003-000000000004": {
+      "en": "\"We should recreate what our dogs are doing later\"",
+      "fr": "« On devrait refaire ce que font nos chiens, plus tard »"
+    },
+    "c1000005-0000-0000-0003-000000000005": {
+      "en": "\"Looks like they're better at this than we are\"",
+      "fr": "« On dirait qu’ils sont plus doués que nous pour ça »"
+    },
+    "c1000006-0000-0000-0003-000000000006": {
+      "en": "\"We should organize some play dates for our dogs\"",
+      "fr": "« On devrait organiser des petites séances de jeu pour nos chiens »"
+    },
+    "c1000007-0000-0000-0003-000000000007": {
+      "en": "Ask if she needs to go get her dog since it's small",
+      "fr": "Lui demander si elle doit aller chercher sa chienne, vu qu’elle est petite"
+    },
+    "c1000008-0000-0000-0003-000000000008": {
+      "en": "Continue looking towards your dog",
+      "fr": "Continuer à regarder ton chien"
+    },
+    "c1000009-0000-0000-0003-000000000009": {
+      "en": "Face her and introduce yourself",
+      "fr": "Te tourner vers elle et te présenter"
+    },
+    "c1000010-0000-0000-0003-000000000010": {
+      "en": "Hold the eye contact and let the moment breathe",
+      "fr": "Soutenir le regard et laisser le moment respirer"
+    },
+    "c1000011-0000-0000-0003-000000000011": {
+      "en": "Look back at the dogs to avoid awkwardness",
+      "fr": "Regarder de nouveau les chiens pour éviter la gêne"
+    },
+    "c1000012-0000-0000-0003-000000000012": {
+      "en": "Break it by asking how she is",
+      "fr": "Rompre le moment en lui demandant comment elle va"
+    },
+    "c1000013-0000-0000-0003-000000000013": {
+      "en": "Suggest going together to get water for the dogs",
+      "fr": "Proposer d’aller ensemble donner de l’eau aux chiens"
+    },
+    "c1000014-0000-0000-0003-000000000014": {
+      "en": "State that the dogs are thirsty and ask what to do",
+      "fr": "Dire que les chiens ont soif et demander quoi faire"
+    }
+  }
+}

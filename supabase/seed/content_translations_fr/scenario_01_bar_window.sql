@@ -104,7 +104,7 @@ insert into public.screen_option_translations (option_id, locale, text) values (
   on conflict (option_id, locale) do update set text = excluded.text;
 insert into public.screen_option_translations (option_id, locale, text) values ('c1000004-0000-0000-0000-000000000004', 'fr', 'Rester derrière elle et attendre qu’elle se retourne')
   on conflict (option_id, locale) do update set text = excluded.text;
-insert into public.screen_option_translations (option_id, locale, text) values ('c1000005-0000-0000-0000-000000000005', 'fr', 'Se mettre à côté d’elle et lancer une remarque légère')
+insert into public.screen_option_translations (option_id, locale, text) values ('c1000005-0000-0000-0000-000000000005', 'fr', 'Te mettre à côté d’elle et lancer une remarque légère')
   on conflict (option_id, locale) do update set text = excluded.text;
 insert into public.screen_option_translations (option_id, locale, text) values ('c1000006-0000-0000-0000-000000000006', 'fr', 'Lui taper sur l’épaule et lui proposer un verre')
   on conflict (option_id, locale) do update set text = excluded.text;
