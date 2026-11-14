@@ -31,22 +31,25 @@
 //  Each method is one such user. Run it on a throwaway simulator and not in
 //  a loop.
 //
-//    testOnboardingInGerman
-//        The same walk with the app launched in German (`-AppleLanguages (de)`).
-//        Nothing is compared; the screenshots are read for German layout
-//        problems (Release B, G7).
+//    testOnboardingInGerman / InSpanish / InFrench
+//        The same walk with the app launched in that language
+//        (`-AppleLanguages (de)`, `(es)` with `es_MX`, `(fr)` with `fr_FR`).
+//        Nothing is compared; the screenshots are read for layout problems in
+//        that language (Release B, G7; Release C).
 //
-//    testOnboardingAndContentInGerman
-//        The German walk, then a relaunch with the Debug-only
+//    testOnboardingAndContentInGerman / InSpanish / InFrench
+//        The walk in that language, then a relaunch with the Debug-only
 //        `-forcePremium YES` and a walk through the first lesson and its
 //        quiz, today's Daily Practice and the "Bar Window" scenario, to see
-//        the German lesson overlays and database rows on screen. Also
-//        records those completions for its guest user in production.
+//        the lesson overlays and database rows on screen. Also records those
+//        completions for its guest user in production.
 //
 //  Elements are found by the start of their visible text because the app has
 //  no accessibility identifiers yet (the start, so that a doubled string
-//  still matches). The walk names them in English; in the German run `t()`
-//  turns each into its German text from localization/de/catalogs.de.json.
+//  still matches). The walk names them in English; in a translated run `t()`
+//  turns each into its translation from localization/<lang>/catalogs.<lang>.json,
+//  and the lesson and scenario titles come from that language's lesson
+//  overlay and localization/<lang>/db/scenario_01_bar_window.json.
 //
 //  Everything up to the paywall is asserted. What follows the paywall is
 //  walked as far as it goes and never fails the run: those screens depend on
@@ -61,11 +64,28 @@ final class OnboardingSweepTests: XCTestCase {
     private var app: XCUIApplication!
     private var shot = 0
 
-    /// English text -> German, for the German run only. Empty otherwise.
-    private var german: [String: String] = [:]
+    /// English text -> the running translation, for a translated run only.
+    /// Empty otherwise.
+    private var translation: [String: String] = [:]
+    /// The translated run's language ("de", "es", "fr"); nil in English.
+    private var language: String?
 
-    /// The start of a longer string the walk looks for by its beginning.
-    /// The catalog has only the whole sentence, so these are listed by hand.
+    /// How each translated run is launched.
+    private static let launchArguments: [String: [String]] = [
+        "de": ["-AppleLanguages", "(de)", "-AppleLocale", "de_DE"],
+        "es": ["-AppleLanguages", "(es)", "-AppleLocale", "es_MX"],
+        "fr": ["-AppleLanguages", "(fr)", "-AppleLocale", "fr_FR"]
+    ]
+
+    /// The English starts of longer strings the walk looks for by their
+    /// beginning. The catalog has only the whole sentence.
+    private static let englishPrefixes = [
+        "Welcome to Wingman", "Courses. Mindset", "And this is where you practise",
+        "Last one. This one is you", "Good luck", "Commit"
+    ]
+
+    /// German's starts, listed by hand in Release B. Other languages derive
+    /// theirs from the catalog (`derivedPrefixes`).
     private static let germanPrefixes: [String: String] = [
         "Welcome to Wingman": "Willkommen bei Wingman",
         "Courses. Mindset": "Kurse. Mindset",
@@ -75,10 +95,12 @@ final class OnboardingSweepTests: XCTestCase {
         "Commit": "Verpflichten"
     ]
 
-    private static func loadGerman() -> [String: String] {
-        let url = URL(fileURLWithPath: #filePath)
-            .deletingLastPathComponent().deletingLastPathComponent()
-            .appendingPathComponent("localization/de/catalogs.de.json")
+    private static var repo: URL {
+        URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent()
+    }
+
+    private static func loadTranslation(_ language: String) -> [String: String] {
+        let url = repo.appendingPathComponent("localization/\(language)/catalogs.\(language).json")
         guard let data = try? Data(contentsOf: url),
               let catalogs = try? JSONSerialization.jsonObject(with: data) as? [String: [String: Any]] else { return [:] }
         var table: [String: String] = [:]
@@ -87,12 +109,54 @@ final class OnboardingSweepTests: XCTestCase {
                 if let text = value as? String { table[english] = text }
             }
         }
-        return table.merging(germanPrefixes) { _, prefix in prefix }
+        let prefixes = language == "de" ? germanPrefixes : derivedPrefixes(from: table)
+        return table.merging(prefixes) { _, prefix in prefix }
+    }
+
+    /// For each English start with no catalog entry of its own: the first
+    /// line of the translation of the catalog string that begins with it.
+    /// The first line is always a start of the text on screen.
+    private static func derivedPrefixes(from table: [String: String]) -> [String: String] {
+        var prefixes: [String: String] = [:]
+        for prefix in englishPrefixes where table[prefix] == nil {
+            guard let key = table.keys.filter({ $0.hasPrefix(prefix) }).min(by: { $0.count < $1.count }),
+                  let firstLine = table[key]?.components(separatedBy: "\n").first, !firstLine.isEmpty else { continue }
+            prefixes[prefix] = firstLine
+        }
+        return prefixes
     }
 
     /// The text the running app shows for `english`.
     private func t(_ english: String) -> String {
-        german.isEmpty ? english : (german[english] ?? english)
+        translation.isEmpty ? english : (translation[english] ?? english)
+    }
+
+    /// A lesson title as the translated run shows it: from that language's
+    /// bundled overlay. English when there is no overlay.
+    private func lessonTitle(_ lessonId: String, courseId: String, english: String) -> String {
+        guard let language,
+              let data = try? Data(contentsOf: Self.repo.appendingPathComponent(
+                "Wingman/Courses/Lesson Overlays/lesson_overlay_\(courseId)_\(language).json")),
+              let overlay = try? JSONSerialization.jsonObject(with: data) as? [String: String],
+              let title = overlay["\(lessonId).title"] else { return english }
+        return title
+    }
+
+    /// A scenario title as the translated run shows it: from that language's
+    /// database source file. English when there is none.
+    private func scenarioTitle(file: String, english: String) -> String {
+        guard let language,
+              let data = try? Data(contentsOf: Self.repo.appendingPathComponent("localization/\(language)/db/\(file)")),
+              let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+              let scenario = (json["scenario"] as? [String: Any])?.first?.value as? [String: Any],
+              let title = (scenario["title"] as? [String: String])?[language] else { return english }
+        return title
+    }
+
+    private func useTranslation(_ language: String) {
+        self.language = language
+        translation = Self.loadTranslation(language)
+        XCTAssertFalse(translation.isEmpty, "Could not read localization/\(language)/catalogs.\(language).json")
     }
 
     /// Set to true, for one run, to also photograph the paywall with the
@@ -109,10 +173,13 @@ final class OnboardingSweepTests: XCTestCase {
         walkFromLandingThroughTheApp()
     }
 
-    func testOnboardingInGerman() {
-        german = Self.loadGerman()
-        XCTAssertFalse(german.isEmpty, "Could not read localization/de/catalogs.de.json")
-        app.launchArguments += ["-AppleLanguages", "(de)", "-AppleLocale", "de_DE"]
+    func testOnboardingInGerman() { walkOnboarding(in: "de") }
+    func testOnboardingInSpanish() { walkOnboarding(in: "es") }
+    func testOnboardingInFrench() { walkOnboarding(in: "fr") }
+
+    private func walkOnboarding(in language: String) {
+        useTranslation(language)
+        app.launchArguments += Self.launchArguments[language]!
         app.launch()
         walkFromLandingThroughTheApp()
     }
@@ -129,10 +196,13 @@ final class OnboardingSweepTests: XCTestCase {
     /// Side effects, beyond the guest user every run creates: the lesson, the
     /// Daily Practice set and the scenario are recorded as completed for that
     /// guest in production (progress, streak, XP rows), as any user's would be.
-    func testOnboardingAndContentInGerman() {
-        german = Self.loadGerman()
-        XCTAssertFalse(german.isEmpty, "Could not read localization/de/catalogs.de.json")
-        let language = ["-AppleLanguages", "(de)", "-AppleLocale", "de_DE"]
+    func testOnboardingAndContentInGerman() { walkOnboardingAndContent(in: "de") }
+    func testOnboardingAndContentInSpanish() { walkOnboardingAndContent(in: "es") }
+    func testOnboardingAndContentInFrench() { walkOnboardingAndContent(in: "fr") }
+
+    private func walkOnboardingAndContent(in languageCode: String) {
+        useTranslation(languageCode)
+        let language = Self.launchArguments[languageCode]!
         app.launchArguments += language
         app.launch()
         walkFromLandingThroughTheApp()
@@ -318,7 +388,7 @@ final class OnboardingSweepTests: XCTestCase {
         }
     }
 
-    // MARK: - Content (German run, unlocked)
+    // MARK: - Content (translated run, unlocked)
     //
     // Best effort like the walk past the paywall: each path returns a
     // description of where it stopped, or nil, and the test fails at the end
@@ -339,8 +409,9 @@ final class OnboardingSweepTests: XCTestCase {
         settle(1.5)
         snap("content-course-detail")
 
-        // Lesson titles come from the bundled German overlay, not the catalog.
-        let lesson = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "Du bist nicht deine Gedanken")).firstMatch
+        // Lesson titles come from the bundled overlay, not the catalog.
+        let lessonName = lessonTitle("lesson_1_1", courseId: "course_1", english: "You are not your thoughts")
+        let lesson = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", lessonName)).firstMatch
         guard lesson.waitForExistence(timeout: 10) else { snap("stopped-before-lesson"); return "lesson: lesson card not found" }
         lesson.tap()
         settle(1.5)
@@ -368,11 +439,13 @@ final class OnboardingSweepTests: XCTestCase {
         snap("content-home")
 
         // "Home" and "Start" are both "Start" in German: the Daily Practice
-        // button is the upper one, the tab the lowest.
+        // button is the upper one, the tab the lowest. Where the two differ
+        // (Spanish, French), the button is the only match.
         let starts = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", t("Start"))).allElementsBoundByIndex
             .filter { $0.isHittable }
             .sorted { $0.frame.minY < $1.frame.minY }
-        guard starts.count >= 2 else {
+        let tabSharesTheLabel = t("Home").hasPrefix(t("Start"))
+        guard starts.count >= (tabSharesTheLabel ? 2 : 1) else {
             snap("stopped-before-daily-practice")
             return "daily practice: Start button not found (already done today, or offline)"
         }
@@ -391,8 +464,9 @@ final class OnboardingSweepTests: XCTestCase {
         settle(3.0)
         snap("content-scenarios")
 
-        let card = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "Die Bar")).firstMatch
-        guard card.waitForExistence(timeout: 15) else { snap("stopped-before-scenario"); return "scenario: \"Die Bar\" card not found" }
+        let scenarioName = scenarioTitle(file: "scenario_01_bar_window.json", english: "Bar Window")
+        let card = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", scenarioName)).firstMatch
+        guard card.waitForExistence(timeout: 15) else { snap("stopped-before-scenario"); return "scenario: \"\(scenarioName)\" card not found" }
         card.tap()
         settle(1.5)
         snap("scenario-intro")

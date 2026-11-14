@@ -4,7 +4,7 @@
 Run from the repo root before every build that adds or changes translations:
 
     python3 scripts/check_string_catalogs.py                 # Release A: English only
-    python3 scripts/check_string_catalogs.py --languages de  # once German exists
+    python3 scripts/check_string_catalogs.py --languages de,es,fr  # German, Spanish, French
 
 Exits non-zero if anything is wrong. Checks:
 

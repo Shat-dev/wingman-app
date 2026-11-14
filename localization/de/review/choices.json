@@ -1,0 +1,94 @@
+{
+  "_about": "Per-language settings for scripts/review_pack.py: the 'Choices to check' rows, the 'How to fill it in' rules, and the example row on the Read me sheet. Each language session edits its own copy; the script stays the same.",
+  "language": "German",
+  "choices": [
+    {
+      "topic": "Tone overall",
+      "what": "Calm, direct older brother; informal du everywhere, including errors and the paywall.",
+      "where": "Whole app",
+      "question": "Does it sound like a German man would talk? Anything stiff, translated or cringe?"
+    },
+    {
+      "topic": "„…“ quotation marks",
+      "what": "German quotes open low and close high: „So wie hier.“",
+      "where": "Whole app",
+      "question": "Deliberate. Confirm; Arthur asked about it."
+    },
+    {
+      "topic": "Scheiß drauf",
+      "what": "\"screw it\" became Scheiß drauf (course 2, Fear & Exposure).",
+      "where": "Lessons",
+      "question": "Coarsest phrase in the app. Keep, or soften to Egal?"
+    },
+    {
+      "topic": "flirty / flirtend",
+      "what": "\"flirtatious\" appears as both flirtend and flirty (the paywall tick uses flirty).",
+      "where": "Lessons, paywall",
+      "question": "Pick one."
+    },
+    {
+      "topic": "Social Proof",
+      "what": "\"social proof\" became sozialer Beweis (Social Proof).",
+      "where": "Lessons",
+      "question": "Natural, or too technical?"
+    },
+    {
+      "topic": "Course titles",
+      "what": "Guessed without the lesson text: Die Annäherung (The Physical Approach), Das Pflichtprogramm (Non-negotiables), Der Abschluss (Closing), Bereit zum Ansprechen (Approach Readiness).",
+      "where": "Interface sheet, area Courses",
+      "question": "Check each against its lessons."
+    },
+    {
+      "topic": "Der Held deines Lebens",
+      "what": "Nora Ephron's \"be the heroine of your life\" became der Held deines Lebens, since the readers are men.",
+      "where": "Daily quotes",
+      "question": "Keep, or restore the original?"
+    },
+    {
+      "topic": "Guten Tag,",
+      "what": "Home greeting from 12:00 to 17:59 (Guten Morgen, / Guten Tag, / Guten Abend,). \"Guten Nachmittag\" is rarely said.",
+      "where": "Interface sheet, area Home",
+      "question": "Agree?"
+    },
+    {
+      "topic": "Loanwords kept",
+      "what": "Smalltalk, Opener, Date, Feedback, Level, Mindset, Lifestyle stay as normal German usage.",
+      "where": "Whole app",
+      "question": "Any that sound wrong to you?"
+    },
+    {
+      "topic": "Never translated",
+      "what": "Wingman, XP and the five category names (Mindset & Foundations, Approach Mechanics, Conversation Flow, Flirting & Chemistry, Integration & Mastery) stay in English.",
+      "where": "Whole app",
+      "question": "Deliberate; no change needed."
+    },
+    {
+      "topic": "Abo, gratis, Testzeitraum",
+      "what": "Subscription = Abo (Monatsabo, Jahresabo); free trial = gratis on a badge, Testzeitraum in sentences.",
+      "where": "Paywall",
+      "question": "Natural?"
+    },
+    {
+      "topic": "AGB / Datenschutz",
+      "what": "Footer links read AGB and Datenschutz; the pages themselves stay English for now.",
+      "where": "Sign-in, paywall",
+      "question": "OK?"
+    }
+  ],
+  "rules": [
+    "Edit only the yellow columns: \"Your version\", \"Status\" and \"Comment\". Leave a row's \"Your version\" empty if the German is fine, and set Status to OK.",
+    "Keep placeholders exactly: %@, %lld, %1$@, %2$lld and so on. They may move within the sentence, but don't change, add or remove them. %% is a percent sign.",
+    "Keep link targets: in [AGB](terms) translate the word in square brackets only; never change (terms) or (privacy).",
+    "Paywall ticks have a hard limit of 36 characters (see the \"Max length\" column); longer lines get hidden on small iPhones.",
+    "Use du everywhere. Imperatives in the short form: versuch, wähl, prüf.",
+    "Numbers: a space before %, as in 45 %. Ranges with an en dash: 18–24. Ellipsis: Wird geladen … (space, then the single … character).",
+    "Adapt rather than translate word for word: if an American image doesn't land in German, replace it with one that does.",
+    "Don't edit the grey Key column; it is how your changes get back into the app."
+  ],
+  "example": {
+    "english": "Try again",
+    "draft": "Erneut versuchen",
+    "yours": "Nochmal versuchen",
+    "comment": "Sounds more natural on a button."
+  }
+}

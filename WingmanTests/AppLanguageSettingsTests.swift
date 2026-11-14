@@ -24,13 +24,38 @@ final class AppLanguageSettingsTests: XCTestCase {
         XCTAssertEqual(AppLanguageSettings.availableLanguageCodes(localizations: ["de", "Base", "en", "fr"]), ["en", "de", "fr"])
     }
 
-    func testThisBuildOffersEnglishAndGerman() {
-        XCTAssertEqual(AppLanguageSettings.availableLanguageCodes, ["en", "de"])
+    /// English and German always; Spanish and French once their catalogs are
+    /// translated (Release C). Nothing else.
+    func testThisBuildOffersEnglishGermanAndReleaseCLanguages() {
+        let codes = AppLanguageSettings.availableLanguageCodes
+        XCTAssertEqual(Array(codes.prefix(2)), ["en", "de"])
+        XCTAssertTrue(Set(codes).isSubset(of: ["en", "de", "es", "fr"]), "\(codes)")
+    }
+
+    /// The Settings menu lists every shipped language under its own name.
+    func testTheMenuListsSpanishAndFrenchByTheirOwnNames() {
+        let codes = AppLanguageSettings.availableLanguageCodes(localizations: ["Base", "en", "de", "es", "fr"])
+        XCTAssertEqual(codes, ["en", "de", "es", "fr"])
+        XCTAssertEqual(codes.map(AppLanguageSettings.name(of:)), ["English", "Deutsch", "Español", "Français"])
     }
 
     func testLanguagesAreNamedInTheirOwnLanguage() {
         XCTAssertEqual(AppLanguageSettings.name(of: "en"), "English")
         XCTAssertEqual(AppLanguageSettings.name(of: "de"), "Deutsch")
+        XCTAssertEqual(AppLanguageSettings.name(of: "es"), "Español")
+        XCTAssertEqual(AppLanguageSettings.name(of: "fr"), "Français")
+    }
+
+    /// One Spanish and one French: every regional variant iOS stores lands on
+    /// `es` or `fr` (Release C ships no es-419, es-MX or fr-CA).
+    func testRegionalSpanishAndFrenchChoicesMapToTheOneShippedLanguage() {
+        let available = ["en", "de", "es", "fr"]
+        for stored in ["es", "es-MX", "es-ES", "es-419", "es-US", "es-CO", "es-AR"] {
+            XCTAssertEqual(AppLanguageSettings.selectedLanguageCode(stored: [stored], available: available, running: "en"), "es", stored)
+        }
+        for stored in ["fr", "fr-FR", "fr-CA", "fr-BE", "fr-CH"] {
+            XCTAssertEqual(AppLanguageSettings.selectedLanguageCode(stored: [stored], available: available, running: "en"), "fr", stored)
+        }
     }
 
     func testChosenLanguageFollowsTheStoredChoice() {

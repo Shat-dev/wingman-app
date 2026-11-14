@@ -16,13 +16,13 @@ English files' IDs to translated text (see Wingman/Content/LessonOverlay.swift):
 Run from the repo root.
 
     python3 scripts/lesson_overlays.py export de out/
-        Writes one file per course into out/, already named for German and
+        Writes one file per course into out/, already named for the language and
         in the app's format, with the ENGLISH text as each value. A
         translator replaces the values and sends the files back. Keys, and
         the order they are in, must not change.
 
     python3 scripts/lesson_overlays.py check de [folder]
-        Checks every German overlay in the folder (default: anywhere under
+        Checks every overlay in that language in the folder (default: anywhere under
         Wingman/) against the English lessons. Exits non-zero on a problem.
 
         Problems (the file must be fixed):

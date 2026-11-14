@@ -211,21 +211,36 @@ final class LessonOverlayTests: XCTestCase {
 
     // MARK: - The app's own lessons
 
-    /// Overlay files ship only for the languages the app ships (German from
-    /// Release B), and every bundled German file actually loads.
+    /// Languages allowed to ship lesson overlays: German (Release B), Spanish
+    /// and French (Release C).
+    static let shippedOverlayLanguages = ["de", "es", "fr"]
+
+    /// Overlay files ship only for the languages the app ships, and every
+    /// bundled overlay file actually loads. German is complete; Spanish and
+    /// French may still be partial while Release C is being translated.
     func testTheAppBundleShipsOverlaysOnlyForShippedLanguages() {
         for index in 1...25 {
-            for language in ["sv", "fr", "es", "nl"] {
+            for language in ["sv", "nl", "it", "pt"] {
                 XCTAssertNil(LessonOverlay.load(courseId: "course_\(index)", language: language))
             }
         }
-        let germanFiles = (Bundle.main.urls(forResourcesWithExtension: "json", subdirectory: nil) ?? [])
+        let overlayFiles = (Bundle.main.urls(forResourcesWithExtension: "json", subdirectory: nil) ?? [])
             .map(\.lastPathComponent)
-            .filter { $0.hasPrefix("lesson_overlay_") && $0.hasSuffix("_de.json") }
+            .filter { $0.hasPrefix("lesson_overlay_") }
+        for file in overlayFiles {
+            let stem = file.dropLast(".json".count)
+            let language = String(stem[stem.index(after: stem.lastIndex(of: "_")!)...])
+            XCTAssertTrue(Self.shippedOverlayLanguages.contains(language),
+                          "\(file) is for '\(language)', which the app does not ship")
+        }
+        let germanFiles = overlayFiles.filter { $0.hasSuffix("_de.json") }
         XCTAssertFalse(germanFiles.isEmpty, "No German lesson overlay is bundled")
-        for file in germanFiles {
-            let courseId = String(file.dropFirst("lesson_overlay_".count).dropLast("_de.json".count))
-            XCTAssertNotNil(LessonOverlay.load(courseId: courseId, language: "de"), "\(file) does not load")
+        for language in Self.shippedOverlayLanguages {
+            let suffix = "_\(language).json"
+            for file in overlayFiles where file.hasSuffix(suffix) {
+                let courseId = String(file.dropFirst("lesson_overlay_".count).dropLast(suffix.count))
+                XCTAssertNotNil(LessonOverlay.load(courseId: courseId, language: language), "\(file) does not load")
+            }
         }
     }
 
