@@ -35,6 +35,15 @@ nonisolated enum PaywallTrial {
         let unit: Unit
     }
 
+    /// The trial a user would actually get: the product's free trial, but
+    /// only when the user is still eligible for it. Nil means no trial copy
+    /// anywhere on the paywall (badge, "Try for $0.00", disclosure), whatever
+    /// the eligibility check says, because a product with no free trial has
+    /// nothing to give (Apple Guideline 3.1.2).
+    static func offeredTrial(isEligible: Bool, productTrial: Length?) -> Length? {
+        isEligible ? productTrial : nil
+    }
+
     /// The period units an introductory offer can use.
     enum OfferUnit: Equatable {
         case day
