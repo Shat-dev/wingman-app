@@ -768,9 +768,10 @@ struct PaywallView: View {
     }
 
     // MARK: - Trial Disclosure
-    /// Trial conversion disclosure. The copy flips on eligibility so returning
-    /// users who have already burned their trial on this Apple ID see accurate
-    /// "billed immediately" messaging (Apple Guideline 3.1.2).
+    /// Trial conversion disclosure. The copy flips on `startsWithFreeTrial` so
+    /// returning users who have already burned their trial on this Apple ID,
+    /// and everyone on a product with no free trial, see accurate "billed
+    /// immediately" messaging (Apple Guideline 3.1.2).
     ///
     /// Rendered by `body` in the pinned block below the CTA, never inside the
     /// ScrollView. This is the strongest objection-killer on the screen and the
@@ -793,7 +794,7 @@ struct PaywallView: View {
     /// Two variants, one line, never optional.
     private var disclosureCopy: String {
         return PaywallCopy.disclosure(
-            startsWithFreeTrial: viewModel.isTrialEligible(for: viewModel.selectedPlan)
+            startsWithFreeTrial: viewModel.startsWithFreeTrial(for: viewModel.selectedPlan)
         )
     }
 
@@ -849,12 +850,15 @@ struct PaywallView: View {
     /// purchase really is billed immediately. Claiming $0 there would be a
     /// false trial claim under Apple Guideline 3.1.2.
     ///
-    /// Eligibility is the same `isTrialEligible(for:)` that drives the plan
-    /// card's "3-day Free Trial" badge, so badge and button can never
-    /// disagree — including on the optimistic pre-check default, where both
-    /// treat unknown/not-yet-loaded as eligible.
+    /// A product with no free trial also keeps "Continue", from the first
+    /// frame: eligibility reads as eligible until it loads, so it cannot
+    /// decide this on its own.
+    ///
+    /// The rule is `startsWithFreeTrial(for:)`, the same one behind the plan
+    /// card's "3-day Free Trial" badge and the disclosure line, so the three
+    /// can never disagree.
     private var continueButtonTitle: String {
-        guard viewModel.isTrialEligible(for: viewModel.selectedPlan) else {
+        guard viewModel.startsWithFreeTrial(for: viewModel.selectedPlan) else {
             return String(localized: "Continue")
         }
         return PaywallCopy.tryForFree(zeroPrice: viewModel.zeroPriceString)

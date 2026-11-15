@@ -95,4 +95,34 @@ final class PaywallTrialTests: XCTestCase {
             XCTAssertEqual(badge(count, .day), "\(count)-day Free Trial")
         }
     }
+
+    // MARK: - Which trial the paywall may promise
+
+    /// The bug: before eligibility loads it reads as eligible, and a product
+    /// with no free trial still showed "Try for $0.00" and the "no payment
+    /// now" line. No product trial means no trial copy, eligible or not.
+    func testNoProductTrialMeansNoTrialCopyEvenWhenEligible() {
+        XCTAssertNil(PaywallTrial.offeredTrial(isEligible: true, productTrial: nil))
+        XCTAssertNil(PaywallTrial.offeredTrial(isEligible: false, productTrial: nil))
+        XCTAssertEqual(
+            PaywallCopy.disclosure(startsWithFreeTrial: PaywallTrial.offeredTrial(isEligible: true, productTrial: nil) != nil),
+            "Billed immediately. Cancel anytime in App Store settings."
+        )
+    }
+
+    /// A product that has a trial still offers it to an eligible user.
+    func testProductTrialIsOfferedToAnEligibleUser() {
+        let threeDays = length(3, .day)
+        XCTAssertNotNil(threeDays)
+        XCTAssertEqual(PaywallTrial.offeredTrial(isEligible: true, productTrial: threeDays), threeDays)
+        XCTAssertEqual(
+            PaywallCopy.disclosure(startsWithFreeTrial: PaywallTrial.offeredTrial(isEligible: true, productTrial: threeDays) != nil),
+            "No payment now. Cancel anytime before your trial ends."
+        )
+    }
+
+    /// A user who already used their trial is never promised one.
+    func testProductTrialIsNotOfferedToAnIneligibleUser() {
+        XCTAssertNil(PaywallTrial.offeredTrial(isEligible: false, productTrial: length(3, .day)))
+    }
 }

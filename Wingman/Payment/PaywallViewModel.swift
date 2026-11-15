@@ -162,17 +162,37 @@ final class PaywallViewModel: ObservableObject {
         return plan == .yearly ? isYearlyTrialEligible : isMonthlyTrialEligible
     }
 
-    /// The trial badge for a plan's row ("3-day Free Trial"), or nil for no
-    /// badge.
+    /// The free trial this user would get on `plan`, or nil when there is
+    /// none to promise.
     ///
-    /// Two things have to hold: this user can still get the trial (the same
-    /// eligibility that drives the button and the line under it), and the
+    /// Two things have to hold: this user can still get the trial, and the
     /// product really has a free trial, whose length is read from the App
-    /// Store rather than assumed. See `PaywallTrial`.
-    func trialBadge(for plan: SubscriptionPlan) -> String? {
-        guard isTrialEligible(for: plan) else { return nil }
+    /// Store rather than assumed. Eligibility alone is not enough: before it
+    /// loads it reads as eligible (see `isEligibleStatus`), so a product with
+    /// no trial would otherwise claim "Try for $0.00" until the check came
+    /// back. No package yet means nothing to promise either.
+    ///
+    /// The badge, the purchase button and the line under it all read this,
+    /// so the three can never disagree. Analytics keep raw eligibility
+    /// (`is_trial_eligible`).
+    func freeTrialLength(for plan: SubscriptionPlan) -> PaywallTrial.Length? {
         let package = plan == .yearly ? yearlyPackage : monthlyPackage
-        return package?.storeProduct.freeTrialLength.map(PaywallTrial.badge)
+        return PaywallTrial.offeredTrial(
+            isEligible: isTrialEligible(for: plan),
+            productTrial: package?.storeProduct.freeTrialLength
+        )
+    }
+
+    /// True when buying `plan` starts a free trial for this user: the
+    /// button reads "Try for $0.00" and the disclosure says no payment now.
+    func startsWithFreeTrial(for plan: SubscriptionPlan) -> Bool {
+        freeTrialLength(for: plan) != nil
+    }
+
+    /// The trial badge for a plan's row ("3-day Free Trial"), or nil for no
+    /// badge. Same rule as the button: `freeTrialLength(for:)`.
+    func trialBadge(for plan: SubscriptionPlan) -> String? {
+        freeTrialLength(for: plan).map(PaywallTrial.badge)
     }
 
     /// Nil (not-yet-checked) → eligible (optimistic). `.unknown` (fresh install,
