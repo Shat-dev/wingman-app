@@ -4,7 +4,7 @@ Branch `localization-release-d-ja` (from `Shat` at `38cad8d`, which contains "Me
 
 ## Where it stands
 
-**Phases 0 (groundwork) and 1 (brief) are done (2026-11-16).** The project, the tests, the scripts and the sweep know about `ja`, and the rules and glossary are written; no Japanese app text exists yet, so the app is unchanged and no build offers Japanese. Next: Phase 2, the interface catalogs.
+**Phases 0 (groundwork) and 1 (brief) are done (2026-11-16).** The project, the tests, the scripts and the sweep know about `ja`, and the rules and glossary are written; Phase 2 is half done: the 407 `Localizable` strings are drafted and imported; the 179 `Content` strings (onboarding answers, course and category names, 120 daily quotes) are next. **From this commit on, a build of this branch offers 日本語 in Settings with English lessons, quizzes and scenarios behind it. Don't archive from this branch.**
 
 Nothing is pushed, merged, applied to Supabase or entered in App Store Connect. No UI sweep and no Release build has been run.
 
@@ -14,7 +14,7 @@ Nothing is pushed, merged, applied to Supabase or entered in App Store Connect. 
 |---|---|---|
 | 0 | Branch, prompt, groundwork | **Done** (2026-11-16) |
 | 1 | Brief ([localization-ja-brief.md](localization-ja-brief.md)) | **Done** (2026-11-16) |
-| 2 | Interface catalogs (586 strings: 407 + 179) | Not started |
+| 2 | Interface catalogs (586 strings: 407 + 179) | **407 of 586** (Localizable done 2026-11-16; Content next) |
 | 3 | Lesson overlays (25 courses, 1,531 items, 34,475 English words) | 0 of 25 |
 | 4 | Database content (15 scenarios, 765 quiz questions) | Not started |
 | 5 | Checks and review pack | Not started |
@@ -56,14 +56,38 @@ To do once Phase 2 is in (carried over from how Release C did it): move `ja` fro
   - **Category names (draft):** マインドセットと土台, アプローチの実践, 会話の流れ, 恋の駆け引きと相性, 日常への定着と熟達.
   - **Validator:** `%` before Japanese is safe (the es/fr `% d` problem does not arise as long as no space or Latin word follows the sign); checked the brief's example strings against the script. The paywall tick limit is 18 full-width characters.
   - No app text, Swift or script changed in this unit, so no tests were run.
+- **2026-11-16. Phase 2, part 1: Japanese interface strings, `Localizable`** (407 strings, 2,249 English words). `localization/ja/catalogs.ja.json`, imported into `Localizable.xcstrings` as "needs review". `check_string_catalogs.py --languages de,es,fr,ja --strict-lengths` passes (ja: 407 translated; Content still falls back to English). Only `ja` entries changed in the catalog (parsed and compared; `Content.xcstrings` is byte-identical). A scratch check also confirmed every positional placeholder points at an argument of the right type, and found no full-width digits, no half-width punctuation inside Japanese, no ナンパ and no 声かけ.
+  - **Paywall ticks** all fit: the widest is 28 of 36 (「断られる怖さに、もう負けない」, 「気まずい沈黙なしで会話が続く」).
+  - **Price sentences.** One shape for every currency: 「本日%1$@が請求されます（最初の1年間分）。その後は年額%2$@で更新されます。App Storeの設定からいつでも解約できます。」 Read with `¥2,900` / `¥5,800` and with `$27.99` / `$55.99`: both read correctly, and no 円 or symbol sits around the placeholder. It says "更新されます" (renews) where the English says "then %@/year"; same meaning, clearer in Japanese. Also 「1週間あたりわずか%@」, 「%@で試す」 (trial button), 「すぐに請求されます。…」, and under the plan prices 「月額」 / 「年額」. None break.
+  - **Statistic screens** are worded neutrally (no 「日本の」), numbers unchanged: 「18〜24歳の男性の45%は、女性に声をかけたことがありません」. Each is listed under Cultural flags.
+  - **Choices for the reviewer:** approach levels 「人と話すウォーミングアップ」, 「長めの会話」, 「さりげないアプローチ」, 「ダイレクトアプローチ」; "Daily Reading Goal / Reminder" became 「毎日の学習目標」 / 「毎日の学習リマインダー」 (読書 would mean books); "Commit" / "Committed." became 「誓う」 / 「誓いました。」 and the pledge 「%@は、自分から行動する男になります。」; "hi" in the prompts is 「こんにちは」; testimonials speak as 僕 in です・ます; "unlock" is 「解放されます」; "streak" 「%lld日連続」 and 「最長連続記録」; the scenario speaker label "You" is 「あなた」 (the only あなた in the interface; a label needs a word) and "Her" is 「彼女」; "Start" (Daily Practice) is 「スタート」 and "Get started" 「はじめる」; "Oops!" is 「おっと！」; footer "Privacy" uses the full 「プライバシーポリシー」; "Apple ID" kept as the English key has it (iOS now says Appleアカウント).
+  - **Sentences built from pieces** (three, all readable; see Questions for Arthur 3).
+  - **Unit tests** on "Wingman L10n 17 Pro": **349 run, 344 passed, 5 skipped, 0 failed**, the same as before. `ja.lproj` is now in the bundle and the language tests accept it; the Japanese catalog checks are still skipped ("interface catalogs: not fully bundled yet") until `Content` is in. The three "unreadable" warnings come from tests that write corrupt files on purpose.
 
 ## Cultural flags for Arthur
 
 (Advice translated faithfully that may not suit Japan, and every statistic. Lesson id and one sentence each. Arthur decides; nothing is rewritten.)
 
-None yet: no content translated. One thing to know before the first flags arrive: the women's names stay as in English, in katakana, while the examples move to Tokyo, Osaka or Fukuoka, so ソフィー in a Tokyo bar reads as a foreign woman. That follows the decision in the prompt; it is listed in the brief's open points.
+One thing to know first: the women's names stay as in English, in katakana, while the examples move to Tokyo, Osaka or Fukuoka, so ソフィー in a Tokyo bar reads as a foreign woman. That follows the decision in the prompt; it is listed in the brief's open points.
+
+**Interface (onboarding, paywall, approach guide)**
+
+1. **Statistics, onboarding and paywall.** Numbers kept, worded neutrally, not presented as Japanese findings. None has a source in the app, and Japanese figures would likely differ (cold approaches are rarer and less welcome in Japan):
+   - "45% of men aged 18-24 have never approached a woman"
+   - "48% of men aged 26-40 haven't approached in the past year"
+   - "58% of men who consistently approach get a number, date, or relationship"
+   - "63% of single men regret not approaching women when they were younger"
+   - "77% of women aged between 18 and 30 want to be approached more"
+   - The unnumbered versions: "Almost half of men (your age) have never approached / haven't approached in the past year", "Half of men don't approach. Most who do, succeed.", "Millions of men struggle with approaching."
+2. **"Most women want to be talked to more" and "They're just waiting for you to make the first move"** (paywall and onboarding lines). The claim most likely to be doubted by a Japanese reader, and by a Japanese reviewer of the App Store page: being spoken to by a stranger in public is widely associated with ナンパ and scouting, and many women there say they dislike it.
+3. **Approach level guide, "Casual chat talk with fellow passenger on train"** (level 2 example). Talking to a stranger on a train is unusual in Japan and can read as intrusive; a café counter, a standing bar or a class would be the local equivalent.
+4. **Approach level guide, "Direct compliment on personality or appearance"** and **"Approach someone you are interested straight away"** (level 4). A direct compliment on looks from a stranger is forward by Japanese norms.
 
 ## Questions for Arthur
 
 1. **Fonts in Japanese (look at this in the sweep).** The app's text is set in Manrope (bundled in `Wingman/Fonts`) and Poppins (named in code; no Poppins file is in `Wingman/Fonts`). Neither has Japanese glyphs, so iOS draws Japanese in its own font (Hiragino Sans) while digits, `%`, "Wingman" and "XP" stay in Manrope. No font was added, as decided. When the Japanese sweep is run, headings and bold text need a look: the fallback's weight may not match (Manrope Bold/SemiBold next to Hiragino W6), Japanese lines sit taller, and tops can clip where a fixed line height or tight frame was tuned for Latin letters.
 2. **Japanese sweep.** `testOnboardingInJapanese` and `testOnboardingAndContentInJapanese` exist but have not been run. Each run creates a guest user in production, so they wait for your say-so.
+3. **Three interface sentences are built from pieces** and can't follow Japanese order exactly. All read acceptably in the draft; say if you want the code changed.
+   - **Home, greeting.** The greeting is one line and the name the next ("Good Morning," / "Arthur"). Japanese says the name first with さん (「アーサーさん、おはようございます」). The draft drops the comma (「おはようございます」 then the name), which reads fine but shows the bare name.
+   - **Growth screen, "3x" bullet.** The bold "3x" is joined to the rest by a space in code. The draft is 「3倍」 + 「ありきたりなアドバイス動画を見るより速く上達」, shown as "3倍 ありきたりな…": a figure, a gap, then its explanation.
+   - **One-time offer, under the big "50%".** 「最初の1年間オフ」 sits under the number, so it reads "50% / 最初の1年間オフ". Fine as a poster-style line.
