@@ -1,10 +1,10 @@
 # Japanese (Release D): progress log
 
-Branch `localization-release-d-ja` (from `Shat` at `38cad8d`, which contains "Merge Release C (Spanish + French) into Shat; bump to 1.16 (40)"). Prompt: [localization-release-d/japanese-prompt.md](localization-release-d/japanese-prompt.md). Rules and glossary: `docs/localization-ja-brief.md` (Phase 1, not written yet). Models: German [localization-de-progress.md](localization-de-progress.md), Spanish [localization-es-progress.md](localization-es-progress.md), French [localization-fr-progress.md](localization-fr-progress.md), shared setup [localization-release-c-progress.md](localization-release-c-progress.md). Everything translated here is a machine draft (Claude), marked "needs review"; nothing is applied to the live database, and Arthur has no Japanese proofreader yet.
+Branch `localization-release-d-ja` (from `Shat` at `38cad8d`, which contains "Merge Release C (Spanish + French) into Shat; bump to 1.16 (40)"). Prompt: [localization-release-d/japanese-prompt.md](localization-release-d/japanese-prompt.md). Rules and glossary: [localization-ja-brief.md](localization-ja-brief.md). Models: German [localization-de-progress.md](localization-de-progress.md), Spanish [localization-es-progress.md](localization-es-progress.md), French [localization-fr-progress.md](localization-fr-progress.md), shared setup [localization-release-c-progress.md](localization-release-c-progress.md). Everything translated here is a machine draft (Claude), marked "needs review"; nothing is applied to the live database, and Arthur has no Japanese proofreader yet.
 
 ## Where it stands
 
-**Phase 0 (groundwork) is done (2026-11-16).** The project, the tests, the scripts and the sweep know about `ja`; no Japanese text exists yet, so the app is unchanged and no build offers Japanese. Next: Phase 1, the brief.
+**Phases 0 (groundwork) and 1 (brief) are done (2026-11-16).** The project, the tests, the scripts and the sweep know about `ja`, and the rules and glossary are written; no Japanese app text exists yet, so the app is unchanged and no build offers Japanese. Next: Phase 2, the interface catalogs.
 
 Nothing is pushed, merged, applied to Supabase or entered in App Store Connect. No UI sweep and no Release build has been run.
 
@@ -13,7 +13,7 @@ Nothing is pushed, merged, applied to Supabase or entered in App Store Connect. 
 | Phase | Part | State |
 |---|---|---|
 | 0 | Branch, prompt, groundwork | **Done** (2026-11-16) |
-| 1 | Brief (`docs/localization-ja-brief.md`) | Not started |
+| 1 | Brief ([localization-ja-brief.md](localization-ja-brief.md)) | **Done** (2026-11-16) |
 | 2 | Interface catalogs (586 strings: 407 + 179) | Not started |
 | 3 | Lesson overlays (25 courses, 1,531 items, 34,475 English words) | 0 of 25 |
 | 4 | Database content (15 scenarios, 765 quiz questions) | Not started |
@@ -45,12 +45,23 @@ To do once Phase 2 is in (carried over from how Release C did it): move `ja` fro
     - `OneTimeOfferViewModel.introPricePerMonthString` builds its own formatter from the device locale without the product's currency, so on a phone set to another region it would print the yen amount with that region's symbol and decimals (`$241.67`). It is not shown anywhere in the app today (no caller), so nothing is wrong on screen; noted in case the line is ever put back.
   - **Counts.** The catalogs now hold 586 translatable strings (407 Localizable + 179 Content), one more than the 585 in the prompt (Localizable has 416 entries, 9 marked do-not-translate). The English lessons are 34,475 words in 1,531 items (34,442 when Spanish and French were done; the English was edited since).
   - **Unit tests** on "Wingman L10n 17 Pro": **349 run, 344 passed, 5 skipped, 0 failed** (80 s; `xcodebuild test -scheme Wingman -only-testing:WingmanTests`, own derived-data folder; the UI-test target, with the new Japanese sweeps, compiled as part of the same build). The 5 skips are the double-length pseudo-language probes, off by design. The log has the expected `note: ReleaseLanguageChecks skipped 'ja' …` lines for all four Japanese parts and none for de, es or fr, whose fallback and analytics-parity checks ran in full.
+- **2026-11-16. Phase 1: Japanese brief** ([localization-ja-brief.md](localization-ja-brief.md)). Sections as the French brief: who reads this, adapt-don't-translate examples, fixed choices, validator notes, hard limits, glossary, "look at these first", open points. The prompt's decisions are marked "(decided)". My own choices, for the reviewer to check:
+  - **Approach:** verb 声をかける; noun アプローチ (「アプローチを記録」). The native noun 声かけ is kept out of the interface because police bulletins use it (「声かけ事案」); it can still be a search keyword. ナンパ only where the English itself talks about pickup culture (ナンパ師, ナンパの決まり文句), each use logged.
+  - **Subscription wording:** サブスクリプション; 月額プラン / 年額プラン / %lldか月プラン; 「サブスクリプションを管理」; cancel is 解約; 「購入を復元」; 無料トライアル. Terms / Privacy: 利用規約 / プライバシーポリシー (same for the footer and the full names). iOS Settings: 設定. These follow Apple's Japanese usage as I know it; not checked on a Japanese iPhone from here.
+  - **Level:** レベル%lld. **Dates:** iOS formats them (2026年11月16日); in text 11月16日; 「%lld日前」, 「昨日」. **Months:** か月.
+  - **Numbers and punctuation:** half-width digits, `%` and Latin letters with no space to the Japanese (45%の男性); full-width 、。「」！？（）：; ranges 18〜24歳; one … in the interface; large numbers the Japanese way (6万).
+  - **Voice:** です・ます in running text; buttons and titles in short forms; no pronoun for the reader; the reader's own first person is 僕 (俺 only in casual scenario dialogue).
+  - **Glossary:** opener 最初のひと言; closing 次につなげる (not クロージング, sales jargon); calibration 相手の反応を見て合わせる; outcome independence 結果に左右されない; social proof 社会的証明; reps / volume 場数 / 数をこなす; banter 軽い掛け合い; teasing 軽くからかう; escalation 距離を縮める; rejection 断られること; flirting 恋の駆け引き (open point: 駆け引き can also mean "playing games"); 17_3 consent line written out, as strict as the English.
+  - **Names:** ソフィー, ローレン, ナオミ, ケイティ, アンバー, メル, サラ, エミリー, クレア, ゾーイ, ナタリー, オレリー; scenarios 12–14 have no name. He says 〜さん until the scene turns casual.
+  - **Category names (draft):** マインドセットと土台, アプローチの実践, 会話の流れ, 恋の駆け引きと相性, 日常への定着と熟達.
+  - **Validator:** `%` before Japanese is safe (the es/fr `% d` problem does not arise as long as no space or Latin word follows the sign); checked the brief's example strings against the script. The paywall tick limit is 18 full-width characters.
+  - No app text, Swift or script changed in this unit, so no tests were run.
 
 ## Cultural flags for Arthur
 
 (Advice translated faithfully that may not suit Japan, and every statistic. Lesson id and one sentence each. Arthur decides; nothing is rewritten.)
 
-None yet: no content translated.
+None yet: no content translated. One thing to know before the first flags arrive: the women's names stay as in English, in katakana, while the examples move to Tokyo, Osaka or Fukuoka, so ソフィー in a Tokyo bar reads as a foreign woman. That follows the decision in the prompt; it is listed in the brief's open points.
 
 ## Questions for Arthur
 
