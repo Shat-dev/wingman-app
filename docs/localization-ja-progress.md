@@ -4,7 +4,7 @@ Branch `localization-release-d-ja` (from `Shat` at `38cad8d`, which contains "Me
 
 ## Where it stands
 
-**Phases 0 (groundwork) and 1 (brief) are done (2026-11-16).** The project, the tests, the scripts and the sweep know about `ja`, and the rules and glossary are written; Phase 2 is half done: the 407 `Localizable` strings are drafted and imported; the 179 `Content` strings (onboarding answers, course and category names, 120 daily quotes) are next. **From this commit on, a build of this branch offers 日本語 in Settings with English lessons, quizzes and scenarios behind it. Don't archive from this branch.**
+**Phases 0 (groundwork), 1 (brief) and 2 (interface catalogs) are done (2026-11-16).** The whole interface is drafted in Japanese: 586 strings, 3,852 English words, all "needs review". Next: Phase 3, the lesson overlays, starting with course 1. **A build of this branch offers 日本語 in Settings with English lessons, quizzes and scenarios behind it. Don't archive from this branch until the content is in.**
 
 Nothing is pushed, merged, applied to Supabase or entered in App Store Connect. No UI sweep and no Release build has been run.
 
@@ -14,15 +14,13 @@ Nothing is pushed, merged, applied to Supabase or entered in App Store Connect. 
 |---|---|---|
 | 0 | Branch, prompt, groundwork | **Done** (2026-11-16) |
 | 1 | Brief ([localization-ja-brief.md](localization-ja-brief.md)) | **Done** (2026-11-16) |
-| 2 | Interface catalogs (586 strings: 407 + 179) | **407 of 586** (Localizable done 2026-11-16; Content next) |
+| 2 | Interface catalogs (586 strings: 407 + 179) | **Done: 586 of 586 drafted** (2026-11-16) |
 | 3 | Lesson overlays (25 courses, 1,531 items, 34,475 English words) | 0 of 25 |
 | 4 | Database content (15 scenarios, 765 quiz questions) | Not started |
 | 5 | Checks and review pack | Not started |
 | 6 | App Store listing draft | Not started |
 
 Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14, 19, 24, then 4, 9, 15, 20, 25, then 5, 10, 16, 21, 11.
-
-To do once Phase 2 is in (carried over from how Release C did it): move `ja` from `incomingLanguages` into `shippedLanguages` in `StringCatalogTests`, and make `AppLanguageSettingsTests.testThisBuildOffers…` require exactly en, de, es, fr, ja.
 
 ## Log
 
@@ -63,6 +61,14 @@ To do once Phase 2 is in (carried over from how Release C did it): move `ja` fro
   - **Choices for the reviewer:** approach levels 「人と話すウォーミングアップ」, 「長めの会話」, 「さりげないアプローチ」, 「ダイレクトアプローチ」; "Daily Reading Goal / Reminder" became 「毎日の学習目標」 / 「毎日の学習リマインダー」 (読書 would mean books); "Commit" / "Committed." became 「誓う」 / 「誓いました。」 and the pledge 「%@は、自分から行動する男になります。」; "hi" in the prompts is 「こんにちは」; testimonials speak as 僕 in です・ます; "unlock" is 「解放されます」; "streak" 「%lld日連続」 and 「最長連続記録」; the scenario speaker label "You" is 「あなた」 (the only あなた in the interface; a label needs a word) and "Her" is 「彼女」; "Start" (Daily Practice) is 「スタート」 and "Get started" 「はじめる」; "Oops!" is 「おっと！」; footer "Privacy" uses the full 「プライバシーポリシー」; "Apple ID" kept as the English key has it (iOS now says Appleアカウント).
   - **Sentences built from pieces** (three, all readable; see Questions for Arthur 3).
   - **Unit tests** on "Wingman L10n 17 Pro": **349 run, 344 passed, 5 skipped, 0 failed**, the same as before. `ja.lproj` is now in the bundle and the language tests accept it; the Japanese catalog checks are still skipped ("interface catalogs: not fully bundled yet") until `Content` is in. The three "unreadable" warnings come from tests that write corrupt files on purpose.
+- **2026-11-16. Phase 2, part 2: Japanese interface strings, `Content`** (179 strings, 1,603 English words: 34 onboarding answers, 25 course titles, 5 category names, 120 daily quotes; with part 1 that is all 586 strings, 3,852 English words). Imported as "needs review". `check_string_catalogs.py --languages de,es,fr,ja --strict-lengths` passes with nothing falling back to English in any language; only `ja` entries changed in either catalog.
+  - **Course titles to check against the lessons** (the lesson iterations log better ones rather than changing them silently): 思い込みと捉え直し (Beliefs & Reframes), 恐れと場慣れ (Fear & Exposure), 存在感と表情, ぶれない心 (Inner Stability), 外せない基本 (Non-negotiables), 声をかける準備 (Approach Readiness), 近づき方 (The Physical Approach), 最初のひと言 (The Opener), 反応を読んで応える (Reading & Responding), 場面別のアプローチ, 最初のひと言・上級編, 雑談と会話の勢い (Small talk & Momentum), 聞く力と波長合わせ (Listening & Attunement), 自己開示と弱さの見せ方 (Sharing & Vulnerability), 次につなげる (Closing), 会話術・上級編, 恋の駆け引きの前提 (Flirting Prerequisites), 遊び心とときめき (Playfulness & Spark), 褒め言葉と惹かれ合う会話 (Compliments & Verbal Chemistry), 身体で伝える存在感 (Physical Presence), 恋の駆け引き・上級編, ライフスタイルを磨く, チャンスをつくる (Creating Opportunities), 熟達とアイデンティティ (Mastery & Identity), 学びと自己発見.
+  - **Category names** as in the brief: マインドセットと土台, アプローチの実践, 会話の流れ, 恋の駆け引きと相性, 日常への定着と熟達.
+  - **Onboarding answers:** ages as 18〜24歳 … 55歳以上; "Done with dating apps" became 「マッチングアプリに疲れた」 (the Japanese word for dating apps); the goal options are noun phrases (「声のかけ方」, 「会話を続ける力」, 「異性として惹きつける力」); "No, I usually go for it" is 「いいえ、たいてい声をかけます」.
+  - **Daily quotes** are in plain form (だ・である), which is how quotations and sayings are written in Japanese; they are quotes, not the coach speaking, so the です・ます rule doesn't apply. Proverbs use their Japanese originals: 「七転び八起き。」, 「千里の道も一歩から。」. Gretzky is the usual 「打たないシュートは、100%外れる。」. Baseball quotes stay baseball. "Be the heroine of your life" became 「主人公であれ」 (the Japanese word has no gender, so the German question doesn't arise). The dictionary joke survives: せいこう does come before どりょく in a Japanese dictionary (「成功が努力より先に来るのは、辞書の中だけだ。」). The Eleanor Roosevelt quote is reworded to avoid あなた. The quotes have no attributions in the app, so none were added.
+  - **Tests tightened, as planned:** `StringCatalogTests` and `AppLanguageSettingsTests` now require exactly en, de, es, fr, ja in the bundle. Two small additions: the "reopen Wingman" note is checked in Japanese, and the growth-screen render test on the iPhone SE size now also draws the Japanese copy (it asserts the Continue button stays on screen and attaches the picture as `translated-growth-ja-375x580`; no simulator sweep, no network).
+  - **Unit tests** on "Wingman L10n 17 Pro": **349 run, 344 passed, 5 skipped, 0 failed.** The Japanese interface-catalog checks now run instead of skipping (fallback to English when a string is missing, and analytics parity for the onboarding answers); only the Japanese lessons, quiz and scenarios are still skipped. After the three wording changes below, the catalog check and the four affected test classes were re-run (29 tests, 0 failed).
+  - **What the render showed** ([picture](localization-baseline/japanese-renders-2026-11-16/growth-screen-ja-375x580.png), iPhone SE width, unit test, no sweep). The system's Japanese font sits well next to Manrope: weights match, nothing is clipped, line height is fine. That is one screen, so the font question stays open for the sweep, but the first evidence is good. It also showed the line-break problem the brief warned about: on a small phone the first draft split 自信 across two lines in the headline, テクニック in a bullet, and wrapped the chart label as 「Wingmanを毎 / 日使う」. All three were shortened so they fit on one line: headline 「大事な場面で動ける自信を」, bullet 「科学的根拠に基づく、身につく方法」, chart label 「毎日Wingman」. The "3倍" bullet still takes two lines, with a clean break.
 
 ## Cultural flags for Arthur
 

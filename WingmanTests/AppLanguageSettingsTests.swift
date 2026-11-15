@@ -24,12 +24,8 @@ final class AppLanguageSettingsTests: XCTestCase {
         XCTAssertEqual(AppLanguageSettings.availableLanguageCodes(localizations: ["de", "Base", "en", "fr"]), ["en", "de", "fr"])
     }
 
-    /// English, German, Spanish and French always; Japanese once its
-    /// catalogs are translated (Release D). Nothing else.
-    func testThisBuildOffersEnglishGermanSpanishFrenchAndReleaseDLanguages() {
-        let codes = AppLanguageSettings.availableLanguageCodes
-        XCTAssertEqual(Array(codes.prefix(4)), ["en", "de", "es", "fr"])
-        XCTAssertTrue(Set(codes).isSubset(of: ["en", "de", "es", "fr", "ja"]), "\(codes)")
+    func testThisBuildOffersEnglishGermanSpanishFrenchAndJapanese() {
+        XCTAssertEqual(AppLanguageSettings.availableLanguageCodes, ["en", "de", "es", "fr", "ja"])
     }
 
     /// Release D: the Settings menu lists Japanese last, as 日本語.
@@ -93,6 +89,7 @@ final class AppLanguageSettingsTests: XCTestCase {
 
     func testReopenNoteIsReadInTheChosenLanguage() {
         XCTAssertEqual(AppLanguageSettings.string("Reopen Wingman to switch", in: "de"), "Öffne Wingman neu, um zu wechseln")
+        XCTAssertEqual(AppLanguageSettings.string("Reopen Wingman to switch", in: "ja"), "切り替えるにはWingmanを開き直してください")
         XCTAssertEqual(AppLanguageSettings.string("Reopen Wingman to switch", in: "en"), "Reopen Wingman to switch")
         XCTAssertEqual(AppLanguageSettings.string("Reopen Wingman to switch", in: "xx"), "Reopen Wingman to switch")
     }
