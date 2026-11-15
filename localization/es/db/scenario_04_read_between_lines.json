@@ -1,0 +1,310 @@
+{
+  "scenario": {
+    "a1000004-0000-0000-0000-000000000004": {
+      "title": {
+        "en": "Read Between Lines",
+        "es": "Entre líneas"
+      },
+      "summary": {
+        "en": "Books, silence, and a reason to talk. Lead gently and let interest build.",
+        "es": "Libros, silencio y un motivo para hablar. Lleva la conversación con suavidad y deja que crezca el interés."
+      }
+    }
+  },
+  "screens": {
+    "b1000001-0000-0000-0004-000000000001": {
+      "en": "You're in a book store. Fiction section. Looking for a birthday gift for your sister.",
+      "es": "Estás en una librería, en la sección de novela, buscando un regalo de cumpleaños para tu hermana."
+    },
+    "b1000002-0000-0000-0004-000000000002": {
+      "en": "A woman is browsing nearby. She picks up a book, reads the blurb, puts it down.",
+      "es": "Una mujer está mirando libros cerca de ti. Toma uno, lee la contraportada y lo vuelve a dejar."
+    },
+    "b1000031-0000-0000-0004-000000000031": {
+      "en": "Looks like we're both in the same section.",
+      "es": "Parece que los dos estamos en la misma sección."
+    },
+    "b1000032-0000-0000-0004-000000000032": {
+      "en": "Stating the obvious without purpose goes nowhere. Give her a reason to engage.",
+      "es": "Decir lo obvio sin un propósito no lleva a nada. Dale un motivo para participar."
+    },
+    "b1000033-0000-0000-0004-000000000033": {
+      "en": "Yeah sometimes.",
+      "es": "Sí, a veces."
+    },
+    "b1000034-0000-0000-0004-000000000034": {
+      "en": "This opener isn't that interesting. Use the environment for natural openers.",
+      "es": "Esta apertura no es muy interesante. Usa lo que tienes alrededor para empezar con naturalidad."
+    },
+    "b1000004-0000-0000-0004-000000000004": {
+      "en": "Hey quick question. I'm trying to find a book for my sister. Any recommendations?",
+      "es": "Oye, una pregunta rápida. Estoy buscando un libro para mi hermana. ¿Me recomiendas alguno?"
+    },
+    "b1000005-0000-0000-0004-000000000005": {
+      "en": "Oh sure. What kind of books is she into?",
+      "es": "Ah, claro. ¿Qué tipo de libros le gustan?"
+    },
+    "b1000006-0000-0000-0004-000000000006": {
+      "en": "She's engaged. Turned toward you fully. The advice frame gives her a role.",
+      "es": "Está interesada. Se giró completamente hacia ti. Pedirle consejo le da un papel."
+    },
+    "b1000071-0000-0000-0004-000000000071": {
+      "en": "Umm ok, well that makes it hard to help then.",
+      "es": "Mmm, bueno, así es difícil ayudarte."
+    },
+    "b1000072-0000-0000-0004-000000000072": {
+      "en": "You need to create the interaction, not wait for it to happen to you.",
+      "es": "Tienes que crear la interacción, no esperar a que te pase."
+    },
+    "b1000073-0000-0000-0004-000000000073": {
+      "en": "Umm ok, I'm not sure there's a lot of options...",
+      "es": "Mmm, bueno, no sé si hay muchas opciones…"
+    },
+    "b1000074-0000-0000-0004-000000000074": {
+      "en": "Flat answers kill personality. Show who you are through how you describe things.",
+      "es": "Las respuestas planas matan tu personalidad. Muestra quién eres por cómo describes las cosas."
+    },
+    "b1000008-0000-0000-0004-000000000008": {
+      "en": "She's really into mystery. Like clever detective stories.",
+      "es": "Le encantan las novelas de misterio. Las historias de detectives ingeniosas."
+    },
+    "b1000009-0000-0000-0004-000000000009": {
+      "en": "Interesting haha. Yeah I have some suggestions, follow me.",
+      "es": "Interesante, jaja. Sí, tengo algunas ideas, ven conmigo."
+    },
+    "b1000010-0000-0000-0004-000000000010": {
+      "en": "She's helping now. You follow. Natural progression together.",
+      "es": "Ahora te está ayudando. La sigues. Avanzan juntos con naturalidad."
+    },
+    "b1000011-0000-0000-0004-000000000011": {
+      "en": "Here, I think she'll like this. I've read it before and loved it. It's about...",
+      "es": "Mira, creo que este le va a gustar. Ya lo leí y me encantó. Trata de…"
+    },
+    "b1000121-0000-0000-0004-000000000121": {
+      "en": "Thanks for this by the way...",
+      "es": "Gracias por esto, por cierto…"
+    },
+    "b1000122-0000-0000-0004-000000000122": {
+      "en": "Frame control is leading the moment, not waiting for it to happen.",
+      "es": "Marcar el tono es llevar el momento, no esperar a que pase."
+    },
+    "b1000123-0000-0000-0004-000000000123": {
+      "en": "I've been meaning to read more myself. Last thing I read was...",
+      "es": "Yo también quiero leer más. Lo último que leí fue…"
+    },
+    "b1000124-0000-0000-0004-000000000124": {
+      "en": "She just opened up about her passion. Keep the spotlight on her, not yourself.",
+      "es": "Te acaba de hablar de algo que le apasiona. Mantén la atención en ella, no en ti."
+    },
+    "b1000013-0000-0000-0004-000000000013": {
+      "en": "Thank you, so what are you currently reading?",
+      "es": "Gracias. ¿Y tú qué estás leyendo ahora?"
+    },
+    "b1000014-0000-0000-0004-000000000014": {
+      "en": "She shows you her book. Excited to share.",
+      "es": "Te enseña su libro, con ganas de contártelo."
+    },
+    "b1000015-0000-0000-0004-000000000015": {
+      "en": "She's fully engaged. Talking about something she clearly loves. Energy is good.",
+      "es": "Está completamente metida en la conversación. Habla de algo que claramente le encanta. La energía es buena."
+    },
+    "b1000016-0000-0000-0004-000000000016": {
+      "en": "I'm reading this magic fiction, it's my 3rd book from the author this month...",
+      "es": "Estoy leyendo esta novela de fantasía; es el tercer libro de la autora que leo este mes…"
+    },
+    "b1000171-0000-0000-0004-000000000171": {
+      "en": "Yeah I'm not much of a reader",
+      "es": "Sí, yo no leo mucho."
+    },
+    "b1000172-0000-0000-0004-000000000172": {
+      "en": "The energy is high, don't undermine the connection with negativity.",
+      "es": "La energía está alta; no debilites la conexión con negatividad."
+    },
+    "b1000173-0000-0000-0004-000000000173": {
+      "en": "Three a month? Must have a lot of free time.",
+      "es": "¿Tres al mes? Debes de tener mucho tiempo libre."
+    },
+    "b1000174-0000-0000-0004-000000000174": {
+      "en": "Saying she has too much time feels critical. Never reduce what she is proud of.",
+      "es": "Decirle que tiene demasiado tiempo suena a crítica. Nunca le restes valor a algo de lo que está orgullosa."
+    },
+    "b1000018-0000-0000-0004-000000000018": {
+      "en": "Okay I got my sister sorted. Now one for me, I need some expert advice.",
+      "es": "Bueno, lo de mi hermana ya está resuelto. Ahora uno para mí; necesito el consejo de una experta."
+    },
+    "b1000019-0000-0000-0004-000000000019": {
+      "en": "For you? Alright, what kind of stuff do you like?",
+      "es": "¿Para ti? A ver, ¿qué te gusta?"
+    },
+    "b1000020-0000-0000-0004-000000000020": {
+      "en": "The dynamic shifted. She's helping you personally now.",
+      "es": "La dinámica cambió. Ahora te está ayudando a ti en persona."
+    },
+    "b1000211-0000-0000-0004-000000000211": {
+      "en": "I will read whatever you recommend.",
+      "es": "Leeré lo que me recomiendes."
+    },
+    "b1000212-0000-0000-0004-000000000212": {
+      "en": "Take control of the situation. Show your personality through preferences.",
+      "es": "Toma las riendas de la situación. Muestra tu personalidad a través de tus gustos."
+    },
+    "b1000213-0000-0000-0004-000000000213": {
+      "en": "I like self-help informational books",
+      "es": "Me gustan los libros de desarrollo personal."
+    },
+    "b1000214-0000-0000-0004-000000000214": {
+      "en": "While this works, it keeps it platonic. Use this as an opportunity to be playful.",
+      "es": "Funciona, pero lo mantiene en lo platónico. Aprovecha para ser juguetón."
+    },
+    "b1000022-0000-0000-0004-000000000022": {
+      "en": "I'm into rom coms. Especially the ones where strangers meet in bookstores.",
+      "es": "Me gustan las novelas románticas. Sobre todo esas en las que dos desconocidos se conocen en una librería."
+    },
+    "b1000023-0000-0000-0004-000000000023": {
+      "en": "Katie catches on immediately and laughs.",
+      "es": "Katie lo capta al instante y se ríe."
+    },
+    "b1000024-0000-0000-0004-000000000024": {
+      "en": "Oh really? How convenient.",
+      "es": "¿Ah, sí? Qué conveniente."
+    },
+    "b1000025-0000-0000-0004-000000000025": {
+      "en": "She's smiling, reciprocating the playful energy. The flirtation is subtle.",
+      "es": "Sonríe y te sigue el juego. El coqueteo es sutil."
+    },
+    "b1000026-0000-0000-0004-000000000026": {
+      "en": "Haha, I'm just kidding. I'm actually into...",
+      "es": "Jaja, es broma. En realidad me gustan…"
+    },
+    "b1000028-0000-0000-0004-000000000028": {
+      "en": "Alright, let's go find you something then.",
+      "es": "Bueno, entonces vamos a buscarte algo."
+    },
+    "b1000029-0000-0000-0004-000000000029": {
+      "en": "Katie eventually finds you a book, and you two go to checkout together.",
+      "es": "Al final Katie te encuentra un libro, y van juntos a pagar."
+    },
+    "b1000030-0000-0000-0004-000000000030": {
+      "en": "You buy your books and now you're outside the store together.",
+      "es": "Compran sus libros y ya están afuera de la tienda, juntos."
+    },
+    "b100032a-0000-0000-0004-00000000032a": {
+      "en": "Hey if you're free, let's go grab a coffee?",
+      "es": "Oye, si estás libre, ¿vamos a tomar un café?"
+    },
+    "b100033a-0000-0000-0004-00000000033a": {
+      "en": "Yeah sure, there's a place across the street that's good.",
+      "es": "Sí, claro, enfrente hay un lugar que está bueno."
+    },
+    "b100034a-0000-0000-0004-00000000034a": {
+      "en": "Hey I have to go now, but I have to tell you how my sister finds your recommendation.",
+      "es": "Oye, me tengo que ir, pero tengo que contarte qué le pareció tu recomendación a mi hermana."
+    },
+    "b1000035-0000-0000-0004-000000000035": {
+      "en": "Haha of course, here's my instagram.",
+      "es": "Jaja, claro, aquí tienes mi Instagram."
+    },
+    "b1000036-0000-0000-0004-000000000036": {
+      "en": "Success. You review your interaction with Katie.",
+      "es": "Lo lograste. Repasas tu interacción con Katie."
+    },
+    "b1000037-0000-0000-0004-000000000037": {
+      "en": "You opened naturally and made her opinion feel valued.",
+      "es": "Empezaste con naturalidad e hiciste que sintiera que su opinión valía."
+    },
+    "b1000038-0000-0000-0004-000000000038": {
+      "en": "You showed curiosity towards Katie's interests.",
+      "es": "Mostraste curiosidad por lo que le interesa a Katie."
+    },
+    "b1000039-0000-0000-0004-000000000039": {
+      "en": "You were able to show playful flirtiness and escalate the connection.",
+      "es": "Supiste coquetear con juego y llevar la conexión un paso más allá."
+    },
+    "b1000040-0000-0000-0004-000000000040": {
+      "en": "And you closed well by building on the connection. Well done.",
+      "es": "Y concretaste bien, construyendo sobre esa conexión. Bien hecho."
+    }
+  },
+  "options": {
+    "c1000001-0000-0000-0004-000000000001": {
+      "en": "Comment that you're both looking at the same section",
+      "es": "Comentar que los dos están mirando la misma sección"
+    },
+    "c1000002-0000-0000-0004-000000000002": {
+      "en": "Ask if she comes here often",
+      "es": "Preguntarle si viene a menudo"
+    },
+    "c1000003-0000-0000-0004-000000000003": {
+      "en": "Ask for her advice on books",
+      "es": "Pedirle consejo sobre libros"
+    },
+    "c1000004-0000-0000-0004-000000000004": {
+      "en": "List off some generic genres",
+      "es": "Enumerar algunos géneros genéricos"
+    },
+    "c1000005-0000-0000-0004-000000000005": {
+      "en": "Say you have no idea",
+      "es": "Decir que no tienes ni idea"
+    },
+    "c1000006-0000-0000-0004-000000000006": {
+      "en": "Describe your sister's taste with personality",
+      "es": "Describir con gracia los gustos de tu hermana"
+    },
+    "c1000007-0000-0000-0004-000000000007": {
+      "en": "Thank her for the book and wait for her to talk",
+      "es": "Darle las gracias por el libro y esperar a que hable"
+    },
+    "c1000008-0000-0000-0004-000000000008": {
+      "en": "Ask her what book she's reading ",
+      "es": "Preguntarle qué libro está leyendo"
+    },
+    "c1000009-0000-0000-0004-000000000009": {
+      "en": "Tell her about books you've read recently",
+      "es": "Contarle los libros que has leído últimamente"
+    },
+    "c1000010-0000-0000-0004-000000000010": {
+      "en": "Joke about needing a recommendation for yourself",
+      "es": "Bromear con que necesitas una recomendación para ti"
+    },
+    "c1000011-0000-0000-0004-000000000011": {
+      "en": "Say you're not much of a reader yourself",
+      "es": "Decir que tú no lees mucho"
+    },
+    "c1000012-0000-0000-0004-000000000012": {
+      "en": "Comment that she must have a lot of time then",
+      "es": "Comentar que entonces debe de tener mucho tiempo"
+    },
+    "c1000013-0000-0000-0004-000000000013": {
+      "en": "Say you'll read whatever she recommends",
+      "es": "Decir que leerás lo que te recomiende"
+    },
+    "c1000014-0000-0000-0004-000000000014": {
+      "en": "Use this opportunity to flirt about your current situation",
+      "es": "Aprovechar para coquetear con la situación en la que están"
+    },
+    "c1000015-0000-0000-0004-000000000015": {
+      "en": "State the exact genre you're looking for",
+      "es": "Decir exactamente qué género buscas"
+    },
+    "c1000016-0000-0000-0004-000000000016": {
+      "en": "Adventure/Fantasy books",
+      "es": "Aventura/fantasía"
+    },
+    "c1000017-0000-0000-0004-000000000017": {
+      "en": "Non-fiction/Self-help books",
+      "es": "No ficción/desarrollo personal"
+    },
+    "c1000018-0000-0000-0004-000000000018": {
+      "en": "Fiction/Realism books",
+      "es": "Novela realista"
+    },
+    "c1000019-0000-0000-0004-000000000019": {
+      "en": "Suggest getting food/coffee now",
+      "es": "Proponer ir a comer algo o tomar un café ahora"
+    },
+    "c1000020-0000-0000-0004-000000000020": {
+      "en": "Ask for her socials and callback to her recommendation",
+      "es": "Pedirle sus redes y retomar su recomendación"
+    }
+  }
+}

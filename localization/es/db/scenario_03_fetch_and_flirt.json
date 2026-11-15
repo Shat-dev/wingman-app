@@ -1,0 +1,250 @@
+{
+  "scenario": {
+    "a1000003-0000-0000-0000-000000000003": {
+      "title": {
+        "en": "Fetch & Flirt",
+        "es": "Perros y coqueteo"
+      },
+      "summary": {
+        "en": "Laughter, eye contact, and two dogs chasing each other. Timing matters here.",
+        "es": "Risas, miradas y dos perros persiguiéndose. Aquí el momento lo es todo."
+      }
+    }
+  },
+  "screens": {
+    "b1000001-0000-0000-0003-000000000001": {
+      "en": "You're at the park walking your dog.",
+      "es": "Estás en el parque paseando a tu perro."
+    },
+    "b1000002-0000-0000-0003-000000000002": {
+      "en": "A small fluffy dog runs toward yours. The owner follows close behind.",
+      "es": "Una perrita pequeña y peluda corre hacia el tuyo. Su dueña viene justo detrás."
+    },
+    "b1000003-0000-0000-0003-000000000003": {
+      "en": "The two dogs start playing together. She's watching. You're a few feet apart.",
+      "es": "Los dos perros empiezan a jugar. Ella los está mirando. Están a un par de metros."
+    },
+    "b1000041-0000-0000-0003-000000000041": {
+      "en": "Did you know my dog is really rare...",
+      "es": "¿Sabías que mi perro es de una raza muy rara…?"
+    },
+    "b1000042-0000-0000-0003-000000000042": {
+      "en": "You can talk about this later. Use the current shared situation of your dogs.",
+      "es": "De eso puedes hablar después. Aprovecha lo que están viviendo ahora con sus perros."
+    },
+    "b1000043-0000-0000-0003-000000000043": {
+      "en": "You and your dog are both really pretty.",
+      "es": "Tú y tu perrita son preciosas."
+    },
+    "b1000044-0000-0000-0003-000000000044": {
+      "en": "While being direct sometimes works, you can build more rapport here.",
+      "es": "Ser directo a veces funciona, pero aquí puedes crear más confianza primero."
+    },
+    "b1000005-0000-0000-0003-000000000005": {
+      "en": "Looks like mine just made a new friend. He's not usually this smooth.",
+      "es": "Parece que el mío acaba de hacer una nueva amiga. No suele ser tan lanzado."
+    },
+    "b1000006-0000-0000-0003-000000000006": {
+      "en": "Neither is mine. She's normally shy.",
+      "es": "La mía tampoco. Normalmente es tímida."
+    },
+    "b1000007-0000-0000-0003-000000000007": {
+      "en": "I guess it's my dogs lucky day then.",
+      "es": "Entonces hoy es el día de suerte de mi perro."
+    },
+    "b1000008-0000-0000-0003-000000000008": {
+      "en": "Haha maybe.",
+      "es": "Jaja, puede ser."
+    },
+    "b1000009-0000-0000-0003-000000000009": {
+      "en": "You observe the dogs and they start jumping and rolling over each other.",
+      "es": "Miras a los perros: empiezan a saltar y a revolcarse uno encima del otro."
+    },
+    "b1000010-0000-0000-0003-000000000010": {
+      "en": "You look over and see her laughing.",
+      "es": "La miras y la ves riéndose."
+    },
+    "b1000111-0000-0000-0003-000000000111": {
+      "en": "Wow that's a crazy thing to say.",
+      "es": "Vaya, qué cosa más rara de decir."
+    },
+    "b1000112-0000-0000-0003-000000000112": {
+      "en": "While this line may work depending on the dynamic, build more rapport first.",
+      "es": "Esta frase puede funcionar según la dinámica, pero primero crea más confianza."
+    },
+    "b1000113-0000-0000-0003-000000000113": {
+      "en": "Umm maybe, I'm not really from here.",
+      "es": "Mmm, quizá, la verdad es que no soy de aquí."
+    },
+    "b1000114-0000-0000-0003-000000000114": {
+      "en": "Too early. You're pushing for commitment before building rapport.",
+      "es": "Demasiado pronto. Estás pidiendo un compromiso antes de crear confianza."
+    },
+    "b1000012-0000-0000-0003-000000000012": {
+      "en": "Looks like they're better at this than we are.",
+      "es": "Parece que a ellos se les da esto mejor que a nosotros."
+    },
+    "b1000013-0000-0000-0003-000000000013": {
+      "en": "Haha right? We could learn a thing or two from them.",
+      "es": "Jaja, ¿verdad? Podríamos aprender un par de cosas de ellos."
+    },
+    "b1000014-0000-0000-0003-000000000014": {
+      "en": "She's smiling, fully engaged now. You're both standing closer, watching the dogs.",
+      "es": "Ella sonríe, ya completamente metida en la conversación. Los dos están más cerca, mirando a los perros."
+    },
+    "b1000015-0000-0000-0003-000000000015": {
+      "en": "Her dog suddenly grabs a stick and runs. Your dog chases. They're off together.",
+      "es": "De repente, su perrita agarra un palo y sale corriendo. Tu perro la persigue. Se van juntos."
+    },
+    "b1000161-0000-0000-0003-000000000161": {
+      "en": "You keep watching the dogs. Silence...",
+      "es": "Sigues mirando a los perros. Silencio…"
+    },
+    "b1000162-0000-0000-0003-000000000162": {
+      "en": "This was an opening. Ignoring it signals disinterest or social obliviousness.",
+      "es": "Esto era una oportunidad. Ignorarla transmite desinterés o que no te das cuenta de nada."
+    },
+    "b1000163-0000-0000-0003-000000000163": {
+      "en": "Hey do you need to go watch your dog by the way?",
+      "es": "Oye, ¿no tienes que ir a vigilar a tu perrita?"
+    },
+    "b1000164-0000-0000-0003-000000000164": {
+      "en": "You gave her an out she didn't ask for. Don't end interactions prematurely.",
+      "es": "Le diste una salida que no pidió. No termines las interacciones antes de tiempo."
+    },
+    "b1000017-0000-0000-0003-000000000017": {
+      "en": "You face her, smile, and introduce yourself. She smiles back.",
+      "es": "Te pones de frente a ella, sonríes y te presentas. Ella te devuelve la sonrisa."
+    },
+    "b1000018-0000-0000-0003-000000000018": {
+      "en": "Nice to meet you, I'm Naomi.",
+      "es": "Mucho gusto, soy Naomi."
+    },
+    "b1000019-0000-0000-0003-000000000019": {
+      "en": "The energy is good. You lock eyes. She holds it.",
+      "es": "La energía es buena. Se miran a los ojos. Ella te sostiene la mirada."
+    },
+    "b1000201-0000-0000-0003-000000000201": {
+      "en": "You break the moment and look back at the dogs.",
+      "es": "Rompes el momento y vuelves a mirar a los perros."
+    },
+    "b1000202-0000-0000-0003-000000000202": {
+      "en": "Eye contact communicates interest non-verbally. Breaking it early signals otherwise.",
+      "es": "El contacto visual comunica interés sin palabras. Romperlo antes de tiempo comunica lo contrario."
+    },
+    "b1000203-0000-0000-0003-000000000203": {
+      "en": "So how are you today?",
+      "es": "Y… ¿qué tal tu día?"
+    },
+    "b1000204-0000-0000-0003-000000000204": {
+      "en": "Filling silence with questions kills chemistry. Let the moment exist naturally.",
+      "es": "Llenar el silencio con preguntas mata la química. Deja que el momento exista con naturalidad."
+    },
+    "b1000021-0000-0000-0003-000000000021": {
+      "en": "You both hold eye contact while smiling at each other. Pause.",
+      "es": "Los dos se sostienen la mirada mientras se sonríen. Una pausa."
+    },
+    "b1000022-0000-0000-0003-000000000022": {
+      "en": "You look away naturally, but the energy has shifted.",
+      "es": "Apartas la mirada con naturalidad, pero la energía ya cambió."
+    },
+    "b1000023-0000-0000-0003-000000000023": {
+      "en": "Eventually the dogs come running back and are panting.",
+      "es": "Al rato, los perros vuelven corriendo, jadeando."
+    },
+    "b1000241-0000-0000-0003-000000000241": {
+      "en": "These dogs look thirsty, what should we do?",
+      "es": "Estos perros tienen pinta de tener sed, ¿qué hacemos?"
+    },
+    "b1000242-0000-0000-0003-000000000242": {
+      "en": "Frame control is leading the moment, not reacting to it.",
+      "es": "Marcar el tono es llevar el momento, no reaccionar a él."
+    },
+    "b1000025-0000-0000-0003-000000000025": {
+      "en": "Hey I know a spot with a fountain for the dogs, let's go there.",
+      "es": "Oye, conozco un sitio con una fuente para los perros. Vamos."
+    },
+    "b1000026-0000-0000-0003-000000000026": {
+      "en": "Yeah let's go, they look thirsty.",
+      "es": "Sí, vamos, se ve que tienen sed."
+    },
+    "b1000027-0000-0000-0003-000000000027": {
+      "en": "You and Naomi walk together, the conversation flows well.",
+      "es": "Naomi y tú caminan juntos; la conversación fluye."
+    },
+    "b1000028-0000-0000-0003-000000000028": {
+      "en": "Success. You review your interaction with Naomi.",
+      "es": "Lo lograste. Repasas tu interacción con Naomi."
+    },
+    "b1000029-0000-0000-0003-000000000029": {
+      "en": "You opened with a shared experience so the conversation felt natural.",
+      "es": "Empezaste con algo que estaban viviendo los dos, así que la conversación se sintió natural."
+    },
+    "b1000030-0000-0000-0003-000000000030": {
+      "en": "You responded to openings when the moment could deepen.",
+      "es": "Respondiste a las oportunidades cuando el momento podía ir a más."
+    },
+    "b1000031-0000-0000-0003-000000000031": {
+      "en": "And you took initiative by taking the dogs to the fountain. Well done.",
+      "es": "Y tomaste la iniciativa al llevar a los perros a la fuente. Bien hecho."
+    }
+  },
+  "options": {
+    "c1000001-0000-0000-0003-000000000001": {
+      "en": "Comment on how the dogs get along",
+      "es": "Comentar lo bien que se llevan los perros"
+    },
+    "c1000002-0000-0000-0003-000000000002": {
+      "en": "Talk about your dog's breed",
+      "es": "Hablar de la raza de tu perro"
+    },
+    "c1000003-0000-0000-0003-000000000003": {
+      "en": "Compliment her and her dog",
+      "es": "Hacerle un cumplido a ella y a su perrita"
+    },
+    "c1000004-0000-0000-0003-000000000004": {
+      "en": "\"We should recreate what our dogs are doing later\"",
+      "es": "“Luego deberíamos hacer lo mismo que están haciendo nuestros perros”"
+    },
+    "c1000005-0000-0000-0003-000000000005": {
+      "en": "\"Looks like they're better at this than we are\"",
+      "es": "“Parece que a ellos se les da esto mejor que a nosotros”"
+    },
+    "c1000006-0000-0000-0003-000000000006": {
+      "en": "\"We should organize some play dates for our dogs\"",
+      "es": "“Deberíamos organizar citas para que jueguen nuestros perros”"
+    },
+    "c1000007-0000-0000-0003-000000000007": {
+      "en": "Ask if she needs to go get her dog since it's small",
+      "es": "Preguntarle si tiene que ir a buscar a su perrita, porque es pequeña"
+    },
+    "c1000008-0000-0000-0003-000000000008": {
+      "en": "Continue looking towards your dog",
+      "es": "Seguir mirando a tu perro"
+    },
+    "c1000009-0000-0000-0003-000000000009": {
+      "en": "Face her and introduce yourself",
+      "es": "Ponerte de frente a ella y presentarte"
+    },
+    "c1000010-0000-0000-0003-000000000010": {
+      "en": "Hold the eye contact and let the moment breathe",
+      "es": "Sostener la mirada y dejar que el momento respire"
+    },
+    "c1000011-0000-0000-0003-000000000011": {
+      "en": "Look back at the dogs to avoid awkwardness",
+      "es": "Volver a mirar a los perros para evitar la incomodidad"
+    },
+    "c1000012-0000-0000-0003-000000000012": {
+      "en": "Break it by asking how she is",
+      "es": "Romperla preguntándole cómo está"
+    },
+    "c1000013-0000-0000-0003-000000000013": {
+      "en": "Suggest going together to get water for the dogs",
+      "es": "Proponer ir juntos a buscar agua para los perros"
+    },
+    "c1000014-0000-0000-0003-000000000014": {
+      "en": "State that the dogs are thirsty and ask what to do",
+      "es": "Decir que los perros tienen sed y preguntarle qué hacer"
+    }
+  }
+}

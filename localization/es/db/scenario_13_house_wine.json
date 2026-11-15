@@ -1,0 +1,318 @@
+{
+  "scenario": {
+    "a1000013-0000-0000-0000-000000000013": {
+      "title": {
+        "en": "House Wine",
+        "es": "El vino de la casa"
+      },
+      "summary": {
+        "en": "A party, a drink, and chemistry that drowned out everything else.",
+        "es": "Una fiesta, una copa y una química que tapó todo lo demás."
+      }
+    }
+  },
+  "screens": {
+    "b1000001-0000-0000-0013-000000000001": {
+      "en": "You're at a house party. Music's loud. About 30 people. Good energy.",
+      "es": "Estás en una fiesta en una casa. Música alta. Unas 30 personas. Buena energía."
+    },
+    "b1000002-0000-0000-0013-000000000002": {
+      "en": "You spot a woman by herself in the kitchen. She's pouring herself a drink.",
+      "es": "Ves a una mujer sola en la cocina. Se está sirviendo algo de tomar."
+    },
+    "b1000003-0000-0000-0013-000000000003": {
+      "en": "You walk into the kitchen. She glances up briefly as you enter.",
+      "es": "Entras a la cocina. Ella levanta la vista un momento cuando entras."
+    },
+    "b1000004-0000-0000-0013-000000000004": {
+      "en": "You want to get better at being more direct and flirtatious.",
+      "es": "Quieres practicar ser más directo y más coqueto."
+    },
+    "b1000051-0000-0000-0013-000000000051": {
+      "en": "Hi, nice to meet you, I'm...",
+      "es": "Hola, mucho gusto, soy…"
+    },
+    "b1000052-0000-0000-0013-000000000052": {
+      "en": "This is a safe start, but it's forgettable. Try a more playful, exciting opener.",
+      "es": "Es un comienzo seguro, pero se olvida fácil. Prueba una apertura más juguetona y emocionante."
+    },
+    "b1000053-0000-0000-0013-000000000053": {
+      "en": "Hey do you know where the restroom is?",
+      "es": "Oye, ¿sabes dónde está el baño?"
+    },
+    "b1000006-0000-0000-0013-000000000006": {
+      "en": "You planning on stealing that entire bottle.",
+      "es": "¿Piensas robarte la botella entera?"
+    },
+    "b1000007-0000-0000-0013-000000000007": {
+      "en": "If you stay quiet about it, I'll share it with you.",
+      "es": "Si no dices nada, la comparto contigo."
+    },
+    "b1000081-0000-0000-0013-000000000081": {
+      "en": "Maybe we should put it back. I don't want to get in trouble.",
+      "es": "Mejor la devolvemos. No quiero meterme en problemas."
+    },
+    "b1000082-0000-0000-0013-000000000082": {
+      "en": "Match her energy. She was being playful and you went serious.",
+      "es": "Ponte a su nivel. Ella estaba jugando y tú te pusiste serio."
+    },
+    "b1000083-0000-0000-0013-000000000083": {
+      "en": "Yes please, I'd love some!",
+      "es": "¡Sí, por favor, me encantaría!"
+    },
+    "b1000084-0000-0000-0013-000000000084": {
+      "en": "Stay relaxed and playful. Tease back, don't be too eager.",
+      "es": "Mantente relajado y juguetón. Devuélvele la broma; no te muestres tan ansioso."
+    },
+    "b1000009-0000-0000-0013-000000000009": {
+      "en": "Trying to bribe me with stolen wine? I'm down.",
+      "es": "¿Me estás sobornando con vino robado? Me apunto."
+    },
+    "b1000010-0000-0000-0013-000000000010": {
+      "en": "She laughs and starts pouring you a cup of wine.",
+      "es": "Se ríe y empieza a servirte un vaso de vino."
+    },
+    "b1000111-0000-0000-0013-000000000111": {
+      "en": "Cheers, to getting you drunk.",
+      "es": "Salud, por emborracharte."
+    },
+    "b1000112-0000-0000-0013-000000000112": {
+      "en": "Implying you're trying to intoxicate her may be too forward here.",
+      "es": "Insinuar que la quieres emborrachar puede ser demasiado atrevido aquí."
+    },
+    "b1000113-0000-0000-0013-000000000113": {
+      "en": "Cheers for the drink.",
+      "es": "Salud, y gracias por la copa."
+    },
+    "b1000114-0000-0000-0013-000000000114": {
+      "en": "While this can work, make the toast part of the fun.",
+      "es": "Puede funcionar, pero haz que el brindis sea parte de la diversión."
+    },
+    "b1000012-0000-0000-0013-000000000012": {
+      "en": "Cheers to my partner in crime.",
+      "es": "Salud, por mi cómplice."
+    },
+    "b1000013-0000-0000-0013-000000000013": {
+      "en": "Hahaha cheers.",
+      "es": "Jajaja, salud."
+    },
+    "b1000014-0000-0000-0013-000000000014": {
+      "en": "She's smiling. Good sign of openness and engagement.",
+      "es": "Está sonriendo. Buena señal de que está abierta e interesada."
+    },
+    "b1000151-0000-0000-0013-000000000151": {
+      "en": "So what do you do for work?",
+      "es": "¿Y a qué te dedicas?"
+    },
+    "b1000152-0000-0000-0013-000000000152": {
+      "en": "Work questions aren't an exciting narrative in night-time situations.",
+      "es": "De noche, las preguntas de trabajo no generan una historia emocionante."
+    },
+    "b1000153-0000-0000-0013-000000000153": {
+      "en": "So the host, him and I go way back...",
+      "es": "Pues el anfitrión y yo nos conocemos desde hace años…"
+    },
+    "b1000154-0000-0000-0013-000000000154": {
+      "en": "She didn't ask. Ask about hers first, then share if she reciprocates.",
+      "es": "No te lo preguntó. Primero pregúntale a ella; luego cuenta lo tuyo si te devuelve la pregunta."
+    },
+    "b1000016-0000-0000-0013-000000000016": {
+      "en": "So how do you know the host? Or did you come here just to steal the wine.",
+      "es": "¿Y de qué conoces al anfitrión? ¿O viniste solo a robarte el vino?"
+    },
+    "b1000017-0000-0000-0013-000000000017": {
+      "en": "Haha might as well of. Friend of a friend situation. I barely know him honestly.",
+      "es": "Jaja, ganas no me faltan. Es amigo de una amiga. La verdad es que apenas lo conozco."
+    },
+    "b1000018-0000-0000-0013-000000000018": {
+      "en": "My friend just left however so now I'm solo.",
+      "es": "Mi amiga se acaba de ir, así que ahora estoy sola."
+    },
+    "b1000191-0000-0000-0013-000000000191": {
+      "en": "That sucks. Why did they bail?",
+      "es": "Qué mal. ¿Por qué se fue?"
+    },
+    "b1000192-0000-0000-0013-000000000192": {
+      "en": "She doesn't want to dwell on being ditched. Keep it fun and playful.",
+      "es": "No quiere quedarse pensando en que la dejaron plantada. Mantenlo divertido y juguetón."
+    },
+    "b1000193-0000-0000-0013-000000000193": {
+      "en": "Well since you're solo let's stay together tonight then.",
+      "es": "Bueno, como estás sola, quedémonos juntos el resto de la noche."
+    },
+    "b1000194-0000-0000-0013-000000000194": {
+      "en": "She's not asking for social help and this may put too much pressure on her.",
+      "es": "No te está pidiendo compañía y esto puede presionarla demasiado."
+    },
+    "b1000020-0000-0000-0013-000000000020": {
+      "en": "Well lucky me then, I should thank your friend.",
+      "es": "Pues qué suerte la mía. Tendría que darle las gracias a tu amiga."
+    },
+    "b1000021-0000-0000-0013-000000000021": {
+      "en": "Haha well I'm glad you're enjoying your night.",
+      "es": "Jaja, bueno, me alegra que estés disfrutando la noche."
+    },
+    "b1000022-0000-0000-0013-000000000022": {
+      "en": "The energy is good and flirty. You're both engaged. Still in the loud kitchen.",
+      "es": "La energía es buena y hay coqueteo. Los dos están metidos en la conversación. Siguen en la cocina, con mucho ruido."
+    },
+    "b1000231-0000-0000-0013-000000000231": {
+      "en": "I'm heading outside. Come if you want.",
+      "es": "Voy a salir. Ven si quieres."
+    },
+    "b1000232-0000-0000-0013-000000000232": {
+      "en": "Invite her specifically to come with you. Don't make it optional.",
+      "es": "Invítala a ella directamente a ir contigo. No lo plantees como algo opcional."
+    },
+    "b1000233-0000-0000-0013-000000000233": {
+      "en": "Would you be comfortable going somewhere quieter?",
+      "es": "¿Te sentirías cómoda si vamos a un lugar más tranquilo?"
+    },
+    "b1000234-0000-0000-0013-000000000234": {
+      "en": "Checking in is never wrong, but this phrasing makes it feel heavy. A light, confident invitation she can easily say no to works better.",
+      "es": "Preguntar cómo se siente nunca está mal, pero así suena pesado. Funciona mejor una invitación ligera y segura, a la que pueda decir que no fácilmente."
+    },
+    "b1000024-0000-0000-0013-000000000024": {
+      "en": "Anyway, we have to leave the crime scene. Let's go outside.",
+      "es": "Bueno, tenemos que huir de la escena del crimen. Vamos afuera."
+    },
+    "b1000025-0000-0000-0013-000000000025": {
+      "en": "Good point, let's go.",
+      "es": "Buen punto, vamos."
+    },
+    "b1000026-0000-0000-0013-000000000026": {
+      "en": "You're guiding her through the party and it's really crowded.",
+      "es": "La vas guiando entre la gente de la fiesta y está muy lleno."
+    },
+    "b1000271-0000-0000-0013-000000000271": {
+      "en": "You put your arm around her shoulders as you walk. She stiffens slightly.",
+      "es": "Le pasas el brazo por los hombros mientras caminan. Ella se tensa un poco."
+    },
+    "b1000272-0000-0000-0013-000000000272": {
+      "en": "While this can work, it may be too quick for this level of intimacy. You just met.",
+      "es": "Puede funcionar, pero puede ser demasiado pronto para ese nivel de cercanía. Se acaban de conocer."
+    },
+    "b1000273-0000-0000-0013-000000000273": {
+      "en": "You turn and walk toward the balcony. She follows behind.",
+      "es": "Te das la vuelta y caminas hacia el balcón. Ella te sigue."
+    },
+    "b1000274-0000-0000-0013-000000000274": {
+      "en": "This works too. A brief, light touch can add warmth here, but only if she's clearly comfortable.",
+      "es": "Esto también funciona. Un roce breve y ligero puede añadir calidez aquí, pero solo si ella está claramente cómoda."
+    },
+    "b1000028-0000-0000-0013-000000000028": {
+      "en": "You lightly touch her arm and nod toward the balcony to guide her through.",
+      "es": "Le tocas el brazo con suavidad y señalas el balcón con la cabeza para guiarla entre la gente."
+    },
+    "b1000029-0000-0000-0013-000000000029": {
+      "en": "She smiles and follows. The touch was brief, and she was clearly comfortable with it.",
+      "es": "Ella sonríe y te sigue. El roce fue breve, y ella estaba claramente cómoda."
+    },
+    "b1000030-0000-0000-0013-000000000030": {
+      "en": "Success. You reflect on the interaction.",
+      "es": "Lo lograste. Repasas la interacción."
+    },
+    "b1000031-0000-0000-0013-000000000031": {
+      "en": "You opened with bold flirtation instead of boring small talk.",
+      "es": "Empezaste con un coqueteo atrevido en lugar de una charla aburrida."
+    },
+    "b1000032-0000-0000-0013-000000000032": {
+      "en": "You created a playful frame with the wine theft that carried throughout.",
+      "es": "Creaste un juego con el robo del vino que se mantuvo durante toda la conversación."
+    },
+    "b1000033-0000-0000-0013-000000000033": {
+      "en": "You took the lead by suggesting somewhere quieter, and kept any touch light and brief.",
+      "es": "Tomaste la iniciativa al proponer un lugar más tranquilo, y cualquier contacto fue ligero y breve."
+    },
+    "b1000034-0000-0000-0013-000000000034": {
+      "en": "Well done.",
+      "es": "Bien hecho."
+    }
+  },
+  "options": {
+    "c1000001-0000-0000-0013-000000000001": {
+      "en": "Make a playful joke about stealing the alcohol",
+      "es": "Bromear con que se está robando el alcohol"
+    },
+    "c1000002-0000-0000-0013-000000000002": {
+      "en": "Introduce yourself politely first",
+      "es": "Presentarte primero con educación"
+    },
+    "c1000003-0000-0000-0013-000000000003": {
+      "en": "Ask if she knows where the restroom is",
+      "es": "Preguntarle si sabe dónde está el baño"
+    },
+    "c1000004-0000-0000-0013-000000000004": {
+      "en": "Continue the playfulness",
+      "es": "Seguir con el juego"
+    },
+    "c1000005-0000-0000-0013-000000000005": {
+      "en": "Suggest putting it back to be safe",
+      "es": "Proponer devolverla por si acaso"
+    },
+    "c1000006-0000-0000-0013-000000000006": {
+      "en": "Eagerly accept the deal",
+      "es": "Aceptar el trato con demasiadas ganas"
+    },
+    "c1000008-0000-0000-0013-000000000008": {
+      "en": "Make an overly sexual toast",
+      "es": "Hacer un brindis demasiado sexual"
+    },
+    "c1000007-0000-0000-0013-000000000007": {
+      "en": "Make a playful toast about the stolen wine",
+      "es": "Hacer un brindis en broma por el vino robado"
+    },
+    "c1000009-0000-0000-0013-000000000009": {
+      "en": "Thank her for the drink",
+      "es": "Darle las gracias por la copa"
+    },
+    "c1000010-0000-0000-0013-000000000010": {
+      "en": "Ask how she knows the host playfully",
+      "es": "Preguntarle en broma de qué conoce al anfitrión"
+    },
+    "c1000011-0000-0000-0013-000000000011": {
+      "en": "Ask what she does for work",
+      "es": "Preguntarle a qué se dedica"
+    },
+    "c1000012-0000-0000-0013-000000000012": {
+      "en": "Share your connection to the host",
+      "es": "Contarle de qué conoces al anfitrión"
+    },
+    "c1000014-0000-0000-0013-000000000014": {
+      "en": "Sympathize and ask why her friend left",
+      "es": "Mostrar empatía y preguntarle por qué se fue su amiga"
+    },
+    "c1000013-0000-0000-0013-000000000013": {
+      "en": "Flirty joke about this being good for you",
+      "es": "Bromear coqueteando con que eso es buena suerte para ti"
+    },
+    "c1000015-0000-0000-0013-000000000015": {
+      "en": "Ask if she wants to stay together tonight then",
+      "es": "Proponerle quedarse juntos el resto de la noche"
+    },
+    "c1000017-0000-0000-0013-000000000017": {
+      "en": "Say you're moving elsewhere and she can join you",
+      "es": "Decir que te vas a otro lado y que puede venir si quiere"
+    },
+    "c1000016-0000-0000-0013-000000000016": {
+      "en": "Suggest moving with a callback",
+      "es": "Proponer moverse a otro lugar retomando la broma"
+    },
+    "c1000018-0000-0000-0013-000000000018": {
+      "en": "Ask if she's comfortable moving elsewhere",
+      "es": "Preguntarle si se sentiría cómoda yendo a otro lugar"
+    },
+    "c1000019-0000-0000-0013-000000000019": {
+      "en": "Light touch on her arm to guide her",
+      "es": "Tocarle el brazo con suavidad para guiarla"
+    },
+    "c1000020-0000-0000-0013-000000000020": {
+      "en": "Arm around her shoulders",
+      "es": "Pasarle el brazo por los hombros"
+    },
+    "c1000021-0000-0000-0013-000000000021": {
+      "en": "No touch and just walk forward",
+      "es": "Sin contacto, solo caminar adelante"
+    }
+  }
+}

@@ -1,0 +1,298 @@
+{
+  "scenario": {
+    "a1000007-0000-0000-0000-000000000007": {
+      "title": {
+        "en": "Catch the Drift",
+        "es": "Atardecer en la playa"
+      },
+      "summary": {
+        "en": "Golden hour, calm energy, passing paths. A brief glance becomes an opening.",
+        "es": "Hora dorada, energía tranquila, caminos que se cruzan. Una mirada breve se convierte en una oportunidad."
+      }
+    }
+  },
+  "screens": {
+    "b1000001-0000-0000-0007-000000000001": {
+      "en": "You've decided to go for a walk on the beach at the end of a long week.",
+      "es": "Después de una semana larga, decides ir a caminar por la playa."
+    },
+    "b1000002-0000-0000-0007-000000000002": {
+      "en": "It's the late afternoon, a beautiful sunset, and the weather is perfect.",
+      "es": "Está cayendo la tarde, hay un atardecer precioso y el clima es perfecto."
+    },
+    "b1000003-0000-0000-0007-000000000003": {
+      "en": "You're walking along the shore and you see a woman coming from the other way.",
+      "es": "Vas caminando por la orilla y ves a una mujer que viene en sentido contrario."
+    },
+    "b1000004-0000-0000-0007-000000000004": {
+      "en": "She's holding a coconut. You're about to pass each other.",
+      "es": "Lleva un coco en la mano. Están a punto de cruzarse."
+    },
+    "b1000051-0000-0000-0007-000000000051": {
+      "en": "You stop in front of her, she's guarded and steps back.",
+      "es": "Te paras frente a ella; se pone a la defensiva y da un paso atrás."
+    },
+    "b1000052-0000-0000-0007-000000000052": {
+      "en": "The best approaches don't block her exit paths. It keeps her defenses down.",
+      "es": "Los mejores acercamientos no le bloquean la salida. Así baja la guardia."
+    },
+    "b1000053-0000-0000-0007-000000000053": {
+      "en": "She turns, startled and steps back.",
+      "es": "Se gira, sobresaltada, y da un paso atrás."
+    },
+    "b1000054-0000-0000-0007-000000000054": {
+      "en": "Touch feels invasive, approach from the side and stop at a distance.",
+      "es": "Tocarla se siente invasivo. Acércate de lado y detente a cierta distancia."
+    },
+    "b1000006-0000-0000-0007-000000000006": {
+      "en": "This sunset is soo nice right now.",
+      "es": "Qué bonito está el atardecer ahora."
+    },
+    "b1000007-0000-0000-0007-000000000007": {
+      "en": "Yeah it's beautiful. One of the nicest I've seen here.",
+      "es": "Sí, está precioso. De los más bonitos que he visto aquí."
+    },
+    "b1000081-0000-0000-0007-000000000081": {
+      "en": "Nice. So you must live close to here then?",
+      "es": "Qué bien. ¿Entonces vives cerca de aquí?"
+    },
+    "b1000082-0000-0000-0007-000000000082": {
+      "en": "Jumping to location questions may feel invasive. Build more rapport first.",
+      "es": "Saltar a preguntas sobre dónde vive puede sentirse invasivo. Crea más confianza primero."
+    },
+    "b1000083-0000-0000-0007-000000000083": {
+      "en": "Yeah it is.",
+      "es": "Sí, lo es."
+    },
+    "b1000084-0000-0000-0007-000000000084": {
+      "en": "Lead the encounter and keep the conversation going.",
+      "es": "Lleva tú el encuentro y mantén viva la conversación."
+    },
+    "b1000009-0000-0000-0007-000000000009": {
+      "en": "Oh nice, do you come here often then?",
+      "es": "Ah, qué bien. ¿Entonces vienes a menudo?"
+    },
+    "b1000010-0000-0000-0007-000000000010": {
+      "en": "Yeah, every weekend when the weather's good.",
+      "es": "Sí, todos los fines de semana cuando hace buen tiempo."
+    },
+    "b1000011-0000-0000-0007-000000000011": {
+      "en": "She's angled towards you and has stopped walking.",
+      "es": "Está girada hacia ti y dejó de caminar."
+    },
+    "b1000121-0000-0000-0007-000000000121": {
+      "en": "Sorry I'm good with just this one.",
+      "es": "Perdón, con este tengo suficiente."
+    },
+    "b1000122-0000-0000-0007-000000000122": {
+      "en": "Offering to buy her one without rapport feels transactional.",
+      "es": "Ofrecerte a comprarle otro sin haber creado confianza lo vuelve un intercambio."
+    },
+    "b1000123-0000-0000-0007-000000000123": {
+      "en": "So that coconut, is it a dwarf or king? do you know?",
+      "es": "Oye, ese coco, ¿es de los enanos o de los reales? ¿Sabes?"
+    },
+    "b1000124-0000-0000-0007-000000000124": {
+      "en": "Over-focusing on the coconut kills the playful energy. Keep it fun.",
+      "es": "Centrarte de más en el coco mata la energía juguetona. Mantenlo divertido."
+    },
+    "b1000013-0000-0000-0007-000000000013": {
+      "en": "So is the coconut part of your weekend tradition as well.",
+      "es": "¿Y el coco también es parte de tu tradición de fin de semana?"
+    },
+    "b1000014-0000-0000-0007-000000000014": {
+      "en": "Haha yes, they're soo good. Highly recommend it.",
+      "es": "Jaja, sí, están buenísimos. Te los recomiendo."
+    },
+    "b1000015-0000-0000-0007-000000000015": {
+      "en": "Alright I'll take your word for it, I'll get one next time.",
+      "es": "Bueno, te creo. La próxima vez me compro uno."
+    },
+    "b1000016-0000-0000-0007-000000000016": {
+      "en": "The energy is good, you're building rapport.",
+      "es": "La energía es buena; están creando confianza."
+    },
+    "b1000017-0000-0000-0007-000000000017": {
+      "en": "Suddenly a wave rolls in, almost reaching your feet. You both step back slightly.",
+      "es": "De repente llega una ola que casi les alcanza los pies. Los dos dan un pequeño paso atrás."
+    },
+    "b1000181-0000-0000-0007-000000000181": {
+      "en": "So about those coconuts, are they fresh daily?",
+      "es": "Oye, sobre los cocos, ¿los traen frescos todos los días?"
+    },
+    "b1000182-0000-0000-0007-000000000182": {
+      "en": "The wave created a natural transition. Ignoring it delays progression.",
+      "es": "La ola creó una transición natural. Ignorarla frena el avance."
+    },
+    "b1000183-0000-0000-0007-000000000183": {
+      "en": "Are you wearing a swimsuit underneath? Want to swim?",
+      "es": "¿Llevas bikini debajo? ¿Quieres nadar?"
+    },
+    "b1000184-0000-0000-0007-000000000184": {
+      "en": "This was not the play. Asking about what she's wearing underneath is invasive.",
+      "es": "Por ahí no era. Preguntarle qué lleva debajo es invasivo."
+    },
+    "b1000019-0000-0000-0007-000000000019": {
+      "en": "That was close. Is the water nice? Do you swim when you come here?",
+      "es": "Estuvo cerca. ¿El agua está buena? ¿Nadas cuando vienes?"
+    },
+    "b1000020-0000-0000-0007-000000000020": {
+      "en": "Sometimes during the summer but I'm more of a sand person myself.",
+      "es": "A veces en verano, pero yo soy más de arena."
+    },
+    "b1000021-0000-0000-0007-000000000021": {
+      "en": "Sand person? So you just build sandcastles then?",
+      "es": "¿De arena? ¿O sea que solo haces castillos de arena?"
+    },
+    "b1000022-0000-0000-0007-000000000022": {
+      "en": "Sara laughs at your joke. The conversation is good. You're building rapport.",
+      "es": "Sara se ríe de tu broma. La conversación va bien. Están creando confianza."
+    },
+    "b1000023-0000-0000-0007-000000000023": {
+      "en": "She glances at her watch briefly. Not rushing but aware of time.",
+      "es": "Mira su reloj un momento. No tiene prisa, pero está pendiente de la hora."
+    },
+    "b1000241-0000-0000-0007-000000000241": {
+      "en": "Let’s sit down over there and talk more?",
+      "es": "¿Nos sentamos ahí y seguimos hablando?"
+    },
+    "b1000242-0000-0000-0007-000000000242": {
+      "en": "Suggesting sitting down extends commitment. Walk instead.",
+      "es": "Proponer sentarse le pide más compromiso. Mejor caminen."
+    },
+    "b1000025-0000-0000-0007-000000000025": {
+      "en": "Which way are you parked? I'm heading back that direction.",
+      "es": "¿Dónde dejaste el carro? Yo voy para allá."
+    },
+    "b1000026-0000-0000-0007-000000000026": {
+      "en": "Oh, I'm up near the north lot. You?",
+      "es": "Ah, en el estacionamiento del norte. ¿Y tú?"
+    },
+    "b1000027-0000-0000-0007-000000000027": {
+      "en": "Same area. Let's walk back together.",
+      "es": "Por la misma zona. Volvamos caminando juntos."
+    },
+    "b1000028-0000-0000-0007-000000000028": {
+      "en": "Yeah sure, I should be heading back anyway.",
+      "es": "Sí, claro, de todos modos ya debería regresar."
+    },
+    "b1000029-0000-0000-0007-000000000029": {
+      "en": "You're walking back to the cars, the conversation is going well.",
+      "es": "Van caminando de vuelta a los carros; la conversación va muy bien."
+    },
+    "b1000030-0000-0000-0007-000000000030": {
+      "en": "You've reached the carpark now.",
+      "es": "Ya llegaron al estacionamiento."
+    },
+    "b1000311-0000-0000-0007-000000000311": {
+      "en": "Hey I know a restaurant we can have dinner tomorrow at, I'll pick you up at 8?",
+      "es": "Oye, conozco un restaurante donde podemos cenar mañana. ¿Paso por ti a las 8?"
+    },
+    "b1000312-0000-0000-0007-000000000312": {
+      "en": "While this can work, closes work best when the ask feels small.",
+      "es": "Puede funcionar, pero concretar funciona mejor cuando lo que pides es pequeño."
+    },
+    "b1000313-0000-0000-0007-000000000313": {
+      "en": "Hey let's do this again next week? Same time?",
+      "es": "Oye, ¿repetimos la próxima semana? ¿A la misma hora?"
+    },
+    "b1000314-0000-0000-0007-000000000314": {
+      "en": "While this can work, it may put commitment pressure on her.",
+      "es": "Puede funcionar, pero puede hacerla sentir presionada a comprometerse."
+    },
+    "b1000032-0000-0000-0007-000000000032": {
+      "en": "Hey what's your number? I need to give you my review on the coconut.",
+      "es": "Oye, ¿cuál es tu número? Te tengo que dar mi opinión sobre el coco."
+    },
+    "b1000033-0000-0000-0007-000000000033": {
+      "en": "Haha of course, let me know. My number is...",
+      "es": "Jaja, claro, ya me contarás. Mi número es…"
+    },
+    "b1000034-0000-0000-0007-000000000034": {
+      "en": "Success. You review your encounter with Sara.",
+      "es": "Lo lograste. Repasas tu encuentro con Sara."
+    },
+    "b1000035-0000-0000-0007-000000000035": {
+      "en": "You opened at an angle that didn't trigger defence mechanisms.",
+      "es": "Te acercaste desde un ángulo que no la puso a la defensiva."
+    },
+    "b1000036-0000-0000-0007-000000000036": {
+      "en": "You made humorous jokes and callbacks to set a positive vibe.",
+      "es": "Hiciste bromas y retomaste detalles para crear un buen ambiente."
+    },
+    "b1000037-0000-0000-0007-000000000037": {
+      "en": "And you closed well by making the follow up easy. Well done.",
+      "es": "Y concretaste bien, haciendo que el siguiente paso fuera fácil. Bien hecho."
+    }
+  },
+  "options": {
+    "c1000001-0000-0000-0007-000000000001": {
+      "en": "Approach from the side and open",
+      "es": "Acercarte de lado y empezar a hablar"
+    },
+    "c1000002-0000-0000-0007-000000000002": {
+      "en": "Stop in front of her and open",
+      "es": "Pararte frente a ella y empezar a hablar"
+    },
+    "c1000003-0000-0000-0007-000000000003": {
+      "en": "Tap her on the shoulder to get her attention",
+      "es": "Tocarle el hombro para llamar su atención"
+    },
+    "c1000005-0000-0000-0007-000000000005": {
+      "en": "Ask if she lives close to here",
+      "es": "Preguntarle si vive cerca de aquí"
+    },
+    "c1000004-0000-0000-0007-000000000004": {
+      "en": "Build on her comment and ask if she comes often",
+      "es": "Seguir con su comentario y preguntarle si viene a menudo"
+    },
+    "c1000006-0000-0000-0007-000000000006": {
+      "en": "Agree and let her build the sentence",
+      "es": "Darle la razón y dejar que ella siga"
+    },
+    "c1000009-0000-0000-0007-000000000009": {
+      "en": "Ask about the specifics of the coconut",
+      "es": "Preguntarle detalles sobre el coco"
+    },
+    "c1000008-0000-0000-0007-000000000008": {
+      "en": "Offer to buy her another coconut",
+      "es": "Ofrecerte a comprarle otro coco"
+    },
+    "c1000007-0000-0000-0007-000000000007": {
+      "en": "Joke about the coconut being part of her weekend routine",
+      "es": "Bromear con que el coco es parte de su rutina de fin de semana"
+    },
+    "c1000010-0000-0000-0007-000000000010": {
+      "en": "Make a light comment about the water then ask if she swims",
+      "es": "Hacer un comentario ligero sobre el agua y preguntarle si nada"
+    },
+    "c1000011-0000-0000-0007-000000000011": {
+      "en": "Keep talking about the coconut",
+      "es": "Seguir hablando del coco"
+    },
+    "c1000012-0000-0000-0007-000000000012": {
+      "en": "Ask if she's wearing a swimsuit and if she wants to swim",
+      "es": "Preguntarle si lleva bikini y si quiere nadar"
+    },
+    "c1000014-0000-0000-0007-000000000014": {
+      "en": "Ask if she wants to sit and talk more",
+      "es": "Preguntarle si quiere sentarse a seguir hablando"
+    },
+    "c1000013-0000-0000-0007-000000000013": {
+      "en": "Ask which way she's parked and offer to walk together",
+      "es": "Preguntarle dónde dejó el carro y ofrecerte a caminar juntos"
+    },
+    "c1000017-0000-0000-0007-000000000017": {
+      "en": "Ask to meet her here same time next week",
+      "es": "Proponerle verse aquí a la misma hora la próxima semana"
+    },
+    "c1000016-0000-0000-0007-000000000016": {
+      "en": "Ask to go on a dinner date tomorrow night",
+      "es": "Invitarla a cenar mañana en la noche"
+    },
+    "c1000015-0000-0000-0007-000000000015": {
+      "en": "Ask for her number with a callback to the coconut",
+      "es": "Pedirle su número retomando lo del coco"
+    }
+  }
+}
