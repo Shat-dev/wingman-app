@@ -5,6 +5,7 @@ Run from the repo root before every build that adds or changes translations:
 
     python3 scripts/check_string_catalogs.py                 # Release A: English only
     python3 scripts/check_string_catalogs.py --languages de,es,fr  # German, Spanish, French
+    python3 scripts/check_string_catalogs.py --languages de,es,fr,ja  # ... and Japanese
 
 Exits non-zero if anything is wrong. Checks:
 
@@ -33,12 +34,17 @@ they wrap on a small phone. Those strings have a maximum length (see
 LENGTH_LIMITS). A translation over the limit is reported as a warning, or as
 a problem with --strict-lengths. The English text itself is always held to
 the limit.
+
+Lengths are measured as width on screen, in Latin-letter widths: a Japanese
+(or other East Asian wide or full-width) character counts as 2, because it is
+drawn about twice as wide. For Latin-script text this is the character count.
 """
 
 import argparse
 import json
 import re
 import sys
+import unicodedata
 from collections import Counter
 from pathlib import Path
 
@@ -69,6 +75,22 @@ LENGTH_LIMITS = {
         "No more \u201cwhat if\u201d moments": PAYWALL_TICK_LIMIT,
     },
 }
+
+
+def display_width(text):
+    """Width of `text` on screen, in Latin-letter widths: East Asian wide (W)
+    and full-width (F) characters count as 2, everything else as 1. Equal to
+    len(text) for Latin-script text."""
+    return sum(2 if unicodedata.east_asian_width(character) in ("W", "F") else 1 for character in text)
+
+
+def has_brand_term(term, text):
+    """True if `term` stands in `text` as a word of its own. The edges are
+    tested against Latin letters only (and digits after it), not with \b:
+    Japanese has no spaces, and \b sees no word boundary in "Wingmanで" or
+    "100XPを"."""
+    return re.search(rf"(?<![A-Za-z_]){re.escape(term)}(?![A-Za-z0-9_])", text) is not None
+
 
 # printf-style specifiers as Foundation writes them: %@, %lld, %1$@, %2$lld, %d, %f, %%.
 SPECIFIER = re.compile(r"%(?:(\d+)\$)?(?:[-+ 0#]*\d*(?:\.\d+)?)(lld|ld|d|@|f|lf|u|llu|s|%)")
@@ -115,15 +137,19 @@ def check_lengths(name, strings, errors, warnings):
                 "(was the English text changed? update LENGTH_LIMITS)"
             )
             continue
-        if len(key) > limit:
-            errors.append(f"{where}: the English text is {len(key)} characters, limit {limit}")
+        if display_width(key) > limit:
+            errors.append(f"{where}: the English text is {display_width(key)} characters, limit {limit}")
         for language, localization in entry.get("localizations", {}).items():
             if language == SOURCE_LANGUAGE:
                 continue
             for label, value in string_units(localization):
-                if len(value) > limit:
+                width = display_width(value)
+                if width > limit:
                     tag = f"{where} [{language}{(' ' + label) if label else ''}]"
-                    warnings.append(f"{tag}: {len(value)} characters, limit {limit}: \"{value}\"")
+                    size = f"{width} characters"
+                    if width != len(value):
+                        size = f"{width} wide ({len(value)} characters, wide ones count twice)"
+                    warnings.append(f"{tag}: {size}, limit {limit}: \"{value}\"")
 
 
 def check_catalog(name, path, allowed, errors, missing, warnings):
@@ -180,7 +206,7 @@ def check_catalog(name, path, allowed, errors, missing, warnings):
                     )
                 if language != SOURCE_LANGUAGE:
                     for term in BRAND_TERMS:
-                        if re.search(rf"\b{re.escape(term)}\b", key) and not re.search(rf"\b{re.escape(term)}\b", value):
+                        if has_brand_term(term, key) and not has_brand_term(term, value):
                             errors.append(f"{tag}: brand term \"{term}\" is missing from the translation")
 
         for language in allowed:

@@ -26,10 +26,16 @@ final class StringCatalogTests: XCTestCase {
     /// Adding a language is a deliberate act: change this set, `knownRegions`
     /// and the validator's `--languages` together.
     private let shippedLanguages: Set<String> = ["en", "de", "es", "fr"]
+    /// Release D: Japanese appears in the bundle once its catalogs are
+    /// translated. Allowed, not yet required; move it into `shippedLanguages`
+    /// after that.
+    private let incomingLanguages: Set<String> = ["ja"]
 
     func testAppBundleDeclaresExactlyTheShippedLanguages() {
         let localizations = Set(Bundle.main.localizations).subtracting(["Base"])
-        XCTAssertEqual(localizations, shippedLanguages, "The bundle's languages differ from the ones meant to ship.")
+        XCTAssertTrue(shippedLanguages.isSubset(of: localizations), "A shipped language is missing from the bundle: \(localizations)")
+        XCTAssertTrue(localizations.isSubset(of: shippedLanguages.union(incomingLanguages)),
+                      "The bundle's languages differ from the ones meant to ship: \(localizations)")
         XCTAssertEqual(Bundle.main.developmentLocalization, "en")
         XCTAssertEqual(Bundle.main.preferredLocalizations.first, "en")
     }

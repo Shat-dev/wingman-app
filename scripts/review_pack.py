@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build a language's review pack: one Excel workbook for a native proofreader.
 
-    python3 scripts/review_pack.py <locale> [out.xlsx]      (de, es, fr)
+    python3 scripts/review_pack.py <locale> [out.xlsx]      (de, es, fr, ja)
 
 Default output: localization/<locale>/review/wingman-<language>-review-pack.xlsx
 (for example localization/de/review/wingman-german-review-pack.xlsx).

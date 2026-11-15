@@ -212,12 +212,12 @@ final class LessonOverlayTests: XCTestCase {
     // MARK: - The app's own lessons
 
     /// Languages allowed to ship lesson overlays: German (Release B), Spanish
-    /// and French (Release C).
-    static let shippedOverlayLanguages = ["de", "es", "fr"]
+    /// and French (Release C), Japanese (Release D).
+    static let shippedOverlayLanguages = ["de", "es", "fr", "ja"]
 
     /// Overlay files ship only for the languages the app ships, and every
-    /// bundled overlay file actually loads. German is complete; Spanish and
-    /// French may still be partial while Release C is being translated.
+    /// bundled overlay file actually loads. German is complete; Japanese may
+    /// still be partial while Release D is being translated.
     func testTheAppBundleShipsOverlaysOnlyForShippedLanguages() {
         for index in 1...25 {
             for language in ["sv", "nl", "it", "pt"] {

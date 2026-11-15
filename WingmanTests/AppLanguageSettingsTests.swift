@@ -24,8 +24,31 @@ final class AppLanguageSettingsTests: XCTestCase {
         XCTAssertEqual(AppLanguageSettings.availableLanguageCodes(localizations: ["de", "Base", "en", "fr"]), ["en", "de", "fr"])
     }
 
-    func testThisBuildOffersEnglishGermanSpanishAndFrench() {
-        XCTAssertEqual(AppLanguageSettings.availableLanguageCodes, ["en", "de", "es", "fr"])
+    /// English, German, Spanish and French always; Japanese once its
+    /// catalogs are translated (Release D). Nothing else.
+    func testThisBuildOffersEnglishGermanSpanishFrenchAndReleaseDLanguages() {
+        let codes = AppLanguageSettings.availableLanguageCodes
+        XCTAssertEqual(Array(codes.prefix(4)), ["en", "de", "es", "fr"])
+        XCTAssertTrue(Set(codes).isSubset(of: ["en", "de", "es", "fr", "ja"]), "\(codes)")
+    }
+
+    /// Release D: the Settings menu lists Japanese last, as 日本語.
+    func testTheMenuListsJapaneseByItsOwnName() {
+        let codes = AppLanguageSettings.availableLanguageCodes(localizations: ["Base", "ja", "en", "de", "es", "fr"])
+        XCTAssertEqual(codes, ["en", "de", "es", "fr", "ja"])
+        XCTAssertEqual(codes.map(AppLanguageSettings.name(of:)), ["English", "Deutsch", "Español", "Français", "日本語"])
+    }
+
+    /// One Japanese: iOS stores "ja" or "ja-JP" (and "ja-US" on a phone set
+    /// to another region); each lands on `ja`.
+    func testRegionalJapaneseChoicesMapToTheOneShippedLanguage() {
+        let available = ["en", "de", "es", "fr", "ja"]
+        for stored in ["ja", "ja-JP", "ja-US"] {
+            XCTAssertEqual(AppLanguageSettings.selectedLanguageCode(stored: [stored], available: available, running: "en"), "ja", stored)
+        }
+        // Adding Japanese moves no one else.
+        XCTAssertEqual(AppLanguageSettings.selectedLanguageCode(stored: ["fr-CA"], available: available, running: "en"), "fr")
+        XCTAssertEqual(AppLanguageSettings.selectedLanguageCode(stored: ["zh-Hans"], available: available, running: "en"), "en")
     }
 
     /// The Settings menu lists every shipped language under its own name.
@@ -40,6 +63,7 @@ final class AppLanguageSettingsTests: XCTestCase {
         XCTAssertEqual(AppLanguageSettings.name(of: "de"), "Deutsch")
         XCTAssertEqual(AppLanguageSettings.name(of: "es"), "Español")
         XCTAssertEqual(AppLanguageSettings.name(of: "fr"), "Français")
+        XCTAssertEqual(AppLanguageSettings.name(of: "ja"), "日本語")
     }
 
     /// One Spanish and one French: every regional variant iOS stores lands on
