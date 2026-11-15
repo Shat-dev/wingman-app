@@ -268,7 +268,7 @@ final class OnboardingScreenRenderTests: XCTestCase {
             "fr": ["Gagne l’assurance d’agir quand ça compte", "3 fois",
                    "plus de progrès qu’en regardant des vidéos de conseils génériques",
                    "Des leçons courtes, à faire dans les transports ou pendant la pause déjeuner",
-                   "Des techniques fondées sur la science, qui restent",
+                   "Des techniques fondées sur la science, qui s’ancrent vraiment",
                    "Avec Wingman chaque jour", "Ne rien faire"]
         ]
         try useATranslatedApp()

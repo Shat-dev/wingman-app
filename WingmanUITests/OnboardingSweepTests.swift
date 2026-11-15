@@ -298,6 +298,11 @@ final class OnboardingSweepTests: XCTestCase {
         if commit.waitForExistence(timeout: 8) {
             settle(0.8)
             snap("commitment-pact")
+            // A quick tap first, as about half of users do, so the
+            // "keep holding" hint that replaces the instruction is captured.
+            commit.press(forDuration: 0.3)
+            settle(0.8)
+            snap("commitment-pact-keep-holding")
             commit.press(forDuration: 2.5)
         }
 
