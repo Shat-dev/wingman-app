@@ -4,7 +4,7 @@ Branch `localization-release-d-ja` (from `Shat` at `38cad8d`, which contains "Me
 
 ## Where it stands
 
-**Phases 0 (groundwork), 1 (brief) and 2 (interface catalogs) are done (2026-11-16).** The whole interface is drafted in Japanese: 586 strings, 3,852 English words, all "needs review". Next: Phase 3, the lesson overlays, starting with course 1. **A build of this branch offers 日本語 in Settings with English lessons, quizzes and scenarios behind it. Don't archive from this branch until the content is in.**
+**Phases 0 (groundwork), 1 (brief) and 2 (interface catalogs) are done (2026-11-16).** The whole interface is drafted in Japanese: 586 strings, 3,852 English words, all "needs review". Phase 3 (lesson overlays) has started: 1 of 25 courses. Next: course 6. **A build of this branch offers 日本語 in Settings with English lessons, quizzes and scenarios behind it. Don't archive from this branch until the content is in.**
 
 Nothing is pushed, merged, applied to Supabase or entered in App Store Connect. No UI sweep and no Release build has been run.
 
@@ -15,7 +15,7 @@ Nothing is pushed, merged, applied to Supabase or entered in App Store Connect. 
 | 0 | Branch, prompt, groundwork | **Done** (2026-11-16) |
 | 1 | Brief ([localization-ja-brief.md](localization-ja-brief.md)) | **Done** (2026-11-16) |
 | 2 | Interface catalogs (586 strings: 407 + 179) | **Done: 586 of 586 drafted** (2026-11-16) |
-| 3 | Lesson overlays (25 courses, 1,531 items, 34,475 English words) | 0 of 25 |
+| 3 | Lesson overlays (25 courses, 1,531 items, 34,475 English words) | **1 of 25 courses, 80 of 1,531 items** (course 1) |
 | 4 | Database content (15 scenarios, 765 quiz questions) | Not started |
 | 5 | Checks and review pack | Not started |
 | 6 | App Store listing draft | Not started |
@@ -69,6 +69,7 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
   - **Tests tightened, as planned:** `StringCatalogTests` and `AppLanguageSettingsTests` now require exactly en, de, es, fr, ja in the bundle. Two small additions: the "reopen Wingman" note is checked in Japanese, and the growth-screen render test on the iPhone SE size now also draws the Japanese copy (it asserts the Continue button stays on screen and attaches the picture as `translated-growth-ja-375x580`; no simulator sweep, no network).
   - **Unit tests** on "Wingman L10n 17 Pro": **349 run, 344 passed, 5 skipped, 0 failed.** The Japanese interface-catalog checks now run instead of skipping (fallback to English when a string is missing, and analytics parity for the onboarding answers); only the Japanese lessons, quiz and scenarios are still skipped. After the three wording changes below, the catalog check and the four affected test classes were re-run (29 tests, 0 failed).
   - **What the render showed** ([picture](localization-baseline/japanese-renders-2026-11-16/growth-screen-ja-375x580.png), iPhone SE width, unit test, no sweep). The system's Japanese font sits well next to Manrope: weights match, nothing is clipped, line height is fine. That is one screen, so the font question stays open for the sweep, but the first evidence is good. It also showed the line-break problem the brief warned about: on a small phone the first draft split 自信 across two lines in the headline, テクニック in a bullet, and wrapped the chart label as 「Wingmanを毎 / 日使う」. All three were shortened so they fit on one line: headline 「大事な場面で動ける自信を」, bullet 「科学的根拠に基づく、身につく方法」, chart label 「毎日Wingman」. The "3倍" bullet still takes two lines, with a clean break.
+- **2026-11-16. Course 1, Beliefs & Reframes** (5 lessons, 80 items, 1,782 English words). `lesson_overlay_course_1_ja.json`. `lesson_overlays.py check ja` passes (80 of 80). No Swift changed, so no test run. Body text is です・ます throughout; lists of example actions stay in dictionary form (「口を開いてみる。」), which is normal in Japanese. For the reviewer: "growth mindset / fixed mindset" became 成長マインドセット / 固定マインドセット, with the English in brackets on first use; "competence confidence loop" became 「有能感と自信のループ」 with the English in brackets; "composure" 落ち着き; "overthinking" 考えすぎ; "rejection" is 「断られること」 in running text (lesson 1_2 title: 「断られても、自分への否定ではない」); "reframe" 捉え直す; "self-fulfilling prophecy" 自己成就的な予言; "the joke lands flat" 「すべってしまいます」; "kills the mood" 「場をしらけさせる人」; "60,000 thoughts" is 「およそ6万もの思考」. The catalog's course title 「思い込みと捉え直し」 fits the lessons.
 
 ## Cultural flags for Arthur
 
@@ -88,6 +89,11 @@ One thing to know first: the women's names stay as in English, in katakana, whil
 2. **"Most women want to be talked to more" and "They're just waiting for you to make the first move"** (paywall and onboarding lines). The claim most likely to be doubted by a Japanese reader, and by a Japanese reviewer of the App Store page: being spoken to by a stranger in public is widely associated with ナンパ and scouting, and many women there say they dislike it.
 3. **Approach level guide, "Casual chat talk with fellow passenger on train"** (level 2 example). Talking to a stranger on a train is unusual in Japan and can read as intrusive; a café counter, a standing bar or a class would be the local equivalent.
 4. **Approach level guide, "Direct compliment on personality or appearance"** and **"Approach someone you are interested straight away"** (level 4). A direct compliment on looks from a stranger is forward by Japanese norms.
+
+**Lessons**
+
+5. **content_1_1_1_1, "around 60,000 thoughts a day"** (statistic, kept as stated: 「1日におよそ6万もの思考」; the lesson gives no source).
+6. **content_1_4_2_2, "Psychologists call this the competence confidence loop"** (a research claim, kept as the English has it; I could not place the term in the Japanese psychology literature, so it carries the English in brackets).
 
 ## Questions for Arthur
 
