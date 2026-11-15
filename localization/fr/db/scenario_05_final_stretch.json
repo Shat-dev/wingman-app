@@ -1,0 +1,310 @@
+{
+  "scenario": {
+    "a1000005-0000-0000-0000-000000000005": {
+      "title": {
+        "en": "Final Stretch",
+        "fr": "Le dernier étirement"
+      },
+      "summary": {
+        "en": "Weekly classes, shared glances, unspoken curiosity. The class ends. Do you step in?",
+        "fr": "Un cours chaque semaine, des regards échangés, une curiosité silencieuse. Le cours se termine. Tu te lances ?"
+      }
+    }
+  },
+  "screens": {
+    "b1000001-0000-0000-0005-000000000001": {
+      "en": "You've been trying to meet more women so you've signed up for a weekly yoga class.",
+      "fr": "Tu essaies de rencontrer plus de femmes, alors tu t’es inscrit à un cours de yoga hebdomadaire."
+    },
+    "b1000002-0000-0000-0005-000000000002": {
+      "en": "This is your third class on Tuesday and you've seen the same girl each week.",
+      "fr": "C’est ton troisième cours du mardi, et tu as vu la même femme chaque semaine."
+    },
+    "b1000003-0000-0000-0005-000000000003": {
+      "en": "You've never spoken. Just polite nods, brief eye contact here and there.",
+      "fr": "Vous ne vous êtes jamais parlé. Juste des signes de tête polis, quelques regards furtifs de temps en temps."
+    },
+    "b1000004-0000-0000-0005-000000000004": {
+      "en": "Class ends. Everyone's rolling up their mats, grabbing water bottles, heading out.",
+      "fr": "Le cours se termine. Tout le monde roule son tapis, prend sa gourde et s’en va."
+    },
+    "b1000005-0000-0000-0005-000000000005": {
+      "en": "She's packing up near the door. You're both heading the same direction naturally.",
+      "fr": "Elle range ses affaires près de la porte. Vous allez tout naturellement dans la même direction."
+    },
+    "b1000061-0000-0000-0005-000000000061": {
+      "en": "Hey, do you come to this class often?",
+      "fr": "Salut, tu viens souvent à ce cours ?"
+    },
+    "b1000062-0000-0000-0005-000000000062": {
+      "en": "You've seen her before. Don't ask what you and her already know.",
+      "fr": "Tu l’as déjà vue ici. Ne demande pas ce que vous savez déjà tous les deux."
+    },
+    "b1000063-0000-0000-0005-000000000063": {
+      "en": "On that warrior pose, you want to keep your knee...",
+      "fr": "Sur la posture du guerrier, il faut garder le genou…"
+    },
+    "b1000064-0000-0000-0005-000000000064": {
+      "en": "Unsolicited advice is patronizing, especially to a woman in a fitness space. Don't do this.",
+      "fr": "Un conseil qu’on n’a pas demandé est condescendant, surtout envers une femme dans un cours de sport. Ne fais pas ça."
+    },
+    "b1000007-0000-0000-0005-000000000007": {
+      "en": "How'd you find the class? That last sequence was hard.",
+      "fr": "Tu as trouvé le cours comment ? La dernière séquence était dure."
+    },
+    "b1000008-0000-0000-0005-000000000008": {
+      "en": "Right? I almost fell over in that warrior pose.",
+      "fr": "Carrément ! J’ai failli tomber pendant la posture du guerrier."
+    },
+    "b1000009-0000-0000-0005-000000000009": {
+      "en": "You're both walking toward the exit. Natural pace. She's putting on her jacket.",
+      "fr": "Vous marchez tous les deux vers la sortie. Tranquillement. Elle enfile sa veste."
+    },
+    "b1000010-0000-0000-0005-000000000010": {
+      "en": "You're at the door now. This is the moment to continue or part ways.",
+      "fr": "Vous voilà à la porte. C’est le moment de continuer ou de vous séparer."
+    },
+    "b1000111-0000-0000-0005-000000000111": {
+      "en": "So what makes you come on Tuesdays?",
+      "fr": "Et qu’est-ce qui te fait venir le mardi ?"
+    },
+    "b1000112-0000-0000-0005-000000000112": {
+      "en": "While this can work, keep observations light and interesting.",
+      "fr": "Ça peut marcher, mais garde tes observations légères et intéressantes."
+    },
+    "b1000113-0000-0000-0005-000000000113": {
+      "en": "I’ve noticed you always get here early and set up in the back left corner.",
+      "fr": "J’ai remarqué que tu arrives toujours en avance et que tu t’installes dans le coin au fond à gauche."
+    },
+    "b1000114-0000-0000-0005-000000000114": {
+      "en": "Too specific. Signals you've been studying her movements closely.",
+      "fr": "Trop précis. Ça montre que tu as observé ses faits et gestes de très près."
+    },
+    "b1000012-0000-0000-0005-000000000012": {
+      "en": "I think I've seen you here the last few Tuesdays.",
+      "fr": "Il me semble que je t’ai vue ici les derniers mardis."
+    },
+    "b1000013-0000-0000-0005-000000000013": {
+      "en": "Yeah I've noticed that too. Guess we're Tuesday regulars.",
+      "fr": "Oui, je l’ai remarqué aussi. On est des habitués du mardi, faut croire."
+    },
+    "b1000014-0000-0000-0005-000000000014": {
+      "en": "You're both outside now. Walking towards the parking lot. Natural pace, good energy.",
+      "fr": "Vous êtes dehors maintenant. Vous marchez vers le parking. Tranquillement, dans une bonne énergie."
+    },
+    "b1000151-0000-0000-0005-000000000151": {
+      "en": "Hey let's go get some drinks now.",
+      "fr": "Allez, on va boire un verre maintenant."
+    },
+    "b1000152-0000-0000-0005-000000000152": {
+      "en": "Build more rapport. This risks making future class uncomfortable for both of you.",
+      "fr": "Crée plus de complicité d’abord. Là, tu risques de rendre les prochains cours gênants pour vous deux."
+    },
+    "b1000153-0000-0000-0005-000000000153": {
+      "en": "Okay, I'll see you next week. Bye.",
+      "fr": "Bon, à la semaine prochaine. Salut."
+    },
+    "b1000154-0000-0000-0005-000000000154": {
+      "en": "No name exchange, keeps you as strangers instead of acquaintances.",
+      "fr": "Sans échanger vos prénoms, vous restez des inconnus au lieu de devenir des connaissances."
+    },
+    "b1000017-0000-0000-0005-000000000017": {
+      "en": "Nice to meet you, I'm Amber.",
+      "fr": "Enchantée, moi, c’est Amber."
+    },
+    "b1000018-0000-0000-0005-000000000018": {
+      "en": "Names exchanged. You're not strangers anymore but acquaintances.",
+      "fr": "Vous avez échangé vos prénoms. Vous n’êtes plus des inconnus, mais des connaissances."
+    },
+    "b1000019-0000-0000-0005-000000000019": {
+      "en": "The other people in the class have left but she is not walking yet towards her car.",
+      "fr": "Les autres participants sont partis, mais elle ne se dirige pas encore vers sa voiture."
+    },
+    "b1000201-0000-0000-0005-000000000201": {
+      "en": "I just do some stuff online.",
+      "fr": "Je fais des trucs en ligne."
+    },
+    "b1000202-0000-0000-0005-000000000202": {
+      "en": "Keep the conversation on the existing yoga thread. Work questions are boring early on.",
+      "fr": "Reste sur le fil du yoga. Les questions sur le travail sont ennuyeuses au début."
+    },
+    "b1000203-0000-0000-0005-000000000203": {
+      "en": "Umm ok, that's an interesting journey.",
+      "fr": "Euh, d’accord, c’est un parcours intéressant."
+    },
+    "b1000204-0000-0000-0005-000000000204": {
+      "en": "You made it about yourself. Keep focus on building connection by learning about her.",
+      "fr": "Tu as tout ramené à toi. Reste concentré sur le lien en apprenant à la connaître."
+    },
+    "b1000021-0000-0000-0005-000000000021": {
+      "en": "You seem pretty comfortable with the poses. How long have you been doing yoga?",
+      "fr": "Tu as l’air très à l’aise dans les postures. Tu fais du yoga depuis combien de temps ?"
+    },
+    "b1000022-0000-0000-0005-000000000022": {
+      "en": "About four years now. Started during lockdown and just kept going.",
+      "fr": "Ça fait environ quatre ans. J’ai commencé pendant le confinement et je n’ai jamais arrêté."
+    },
+    "b1000023-0000-0000-0005-000000000023": {
+      "en": "The conversation is good, you're talking about each other's interests, life, etc.",
+      "fr": "La conversation est agréable, vous parlez de vos centres d’intérêt, de vos vies, etc."
+    },
+    "b1000024-0000-0000-0005-000000000024": {
+      "en": "You're talking well. Before you realize it, the sun has set. The parking lot is dark.",
+      "fr": "Vous discutez bien. Sans que tu t’en rendes compte, le soleil s’est couché. Le parking est plongé dans le noir."
+    },
+    "b1000025-0000-0000-0005-000000000025": {
+      "en": "Oh wow, I've lost track of time. I should probably get going.",
+      "fr": "Oh là là, je n’ai pas vu le temps passer. Je devrais y aller."
+    },
+    "b1000026-0000-0000-0005-000000000026": {
+      "en": "Amber looks toward where she's parked. It's far away, in a dark corner.",
+      "fr": "Amber regarde vers l’endroit où elle est garée. C’est loin, dans un coin sombre."
+    },
+    "b1000271-0000-0000-0005-000000000271": {
+      "en": "Yeah, I know. Anyway, bye.",
+      "fr": "Ouais, je sais. Bon, salut."
+    },
+    "b1000272-0000-0000-0005-000000000272": {
+      "en": "Victim-blaming tone. Not helpful. Just offer to walk her without commentary.",
+      "fr": "Ça sonne comme si c’était de sa faute. Ça n’aide pas. Propose simplement de la raccompagner, sans commentaire."
+    },
+    "b1000273-0000-0000-0005-000000000273": {
+      "en": "Yeah... I should go.",
+      "fr": "Ouais… je devrais y aller."
+    },
+    "b1000274-0000-0000-0005-000000000274": {
+      "en": "Making her more aware of danger doesn't help. Be the solution, not a source of worry.",
+      "fr": "Lui faire prendre conscience du danger ne l’aide pas. Sois la solution, pas une source d’inquiétude."
+    },
+    "b1000028-0000-0000-0005-000000000028": {
+      "en": "Hey let me walk you to your car. It got dark fast.",
+      "fr": "Je te raccompagne à ta voiture. Il fait vite nuit."
+    },
+    "b1000029-0000-0000-0005-000000000029": {
+      "en": "That's nice of you, thank you.",
+      "fr": "C’est gentil, merci."
+    },
+    "b1000030-0000-0000-0005-000000000030": {
+      "en": "Amber seems relieved, not uncomfortable by your offer.",
+      "fr": "Amber a l’air soulagée, pas gênée par ta proposition."
+    },
+    "b1000031-0000-0000-0005-000000000031": {
+      "en": "You walk together. The conversation flows easy and you get to her car.",
+      "fr": "Vous marchez ensemble. La conversation coule facilement, et vous arrivez à sa voiture."
+    },
+    "b1000032-0000-0000-0005-000000000032": {
+      "en": "Thank you for that, you didn't have to.",
+      "fr": "Merci pour ça, tu n’étais pas obligé."
+    },
+    "b1000033-0000-0000-0005-000000000033": {
+      "en": "Don't worry about it, it's all good.",
+      "fr": "Pas de souci, c’est normal."
+    },
+    "b1000035-0000-0000-0005-000000000035": {
+      "en": "Hey let's grab a coffee sometime? What's your number?",
+      "fr": "Ça te dirait qu’on prenne un café un de ces jours ? C’est quoi, ton numéro ?"
+    },
+    "b1000036-0000-0000-0005-000000000036": {
+      "en": "Yeah sure, I'd like that, here's my number.",
+      "fr": "Oui, avec plaisir, voilà mon numéro."
+    },
+    "b1000037-0000-0000-0005-000000000037": {
+      "en": "It was nice meeting you officially, I'll see you next week?",
+      "fr": "Ravi d’avoir enfin fait officiellement ta connaissance. À la semaine prochaine ?"
+    },
+    "b1000038-0000-0000-0005-000000000038": {
+      "en": "Haha yes it was, I'll see you then. Enjoy your week.",
+      "fr": "Haha, moi aussi. À la semaine prochaine. Bonne semaine !"
+    },
+    "b1000039-0000-0000-0005-000000000039": {
+      "en": "Success. You review your interaction with Amber.",
+      "fr": "Réussi. Tu repenses à ton échange avec Amber."
+    },
+    "b1000040-0000-0000-0005-000000000040": {
+      "en": "You opened naturally by using the shared environment.",
+      "fr": "Tu as engagé la conversation naturellement en t’appuyant sur ce que vous partagez."
+    },
+    "b1000041-0000-0000-0005-000000000041": {
+      "en": "You showed curiosity towards Amber and getting to know her.",
+      "fr": "Tu as montré de la curiosité envers Amber et l’envie de la connaître."
+    },
+    "b1000042-0000-0000-0005-000000000042": {
+      "en": "You stepped up and walked her to her car.",
+      "fr": "Tu as pris les devants et tu l’as raccompagnée à sa voiture."
+    },
+    "b1000043-0000-0000-0005-000000000043": {
+      "en": "And you closed well by building on the connection. Overall a huge success.",
+      "fr": "Et tu as bien concrétisé en t’appuyant sur le lien créé. Une vraie réussite."
+    }
+  },
+  "options": {
+    "c1000002-0000-0000-0005-000000000002": {
+      "en": "Ask if she comes to this class regularly",
+      "fr": "Lui demander si elle vient régulièrement à ce cours"
+    },
+    "c1000001-0000-0000-0005-000000000001": {
+      "en": "Make a light comment about the class as you pass",
+      "fr": "Faire une remarque légère sur le cours en passant"
+    },
+    "c1000003-0000-0000-0005-000000000003": {
+      "en": "Offer advice on a pose she was struggling with",
+      "fr": "Lui donner un conseil sur une posture qui lui posait problème"
+    },
+    "c1000006-0000-0000-0005-000000000006": {
+      "en": "Point out details you've noticed about her routine",
+      "fr": "Lui faire part de détails que tu as remarqués dans ses habitudes"
+    },
+    "c1000005-0000-0000-0005-000000000005": {
+      "en": "Ask why she comes on Tuesdays",
+      "fr": "Lui demander pourquoi elle vient le mardi"
+    },
+    "c1000004-0000-0000-0005-000000000004": {
+      "en": "Acknowledge that you've seen her here before casually",
+      "fr": "Dire en passant que tu l’as déjà vue ici"
+    },
+    "c1000007-0000-0000-0005-000000000007": {
+      "en": "Introduce yourself naturally",
+      "fr": "Te présenter naturellement"
+    },
+    "c1000008-0000-0000-0005-000000000008": {
+      "en": "Ask her out before she leaves",
+      "fr": "Lui proposer de sortir avant qu’elle parte"
+    },
+    "c1000009-0000-0000-0005-000000000009": {
+      "en": "Tell her you'll see her next week",
+      "fr": "Lui dire « à la semaine prochaine »"
+    },
+    "c1000011-0000-0000-0005-000000000011": {
+      "en": "Ask what she does for work",
+      "fr": "Lui demander ce qu’elle fait dans la vie"
+    },
+    "c1000010-0000-0000-0005-000000000010": {
+      "en": "Natural compliment and ask about her yoga journey",
+      "fr": "Lui faire un compliment naturel et l’interroger sur son parcours en yoga"
+    },
+    "c1000012-0000-0000-0005-000000000012": {
+      "en": "Tell her about why you got into yoga",
+      "fr": "Lui raconter pourquoi tu t’es mis au yoga"
+    },
+    "c1000015-0000-0000-0005-000000000015": {
+      "en": "Make a joke about the parking lot being dark",
+      "fr": "Faire une blague sur le parking plongé dans le noir"
+    },
+    "c1000014-0000-0000-0005-000000000014": {
+      "en": "Tell her she could park closer next time",
+      "fr": "Lui dire qu’elle pourrait se garer plus près la prochaine fois"
+    },
+    "c1000013-0000-0000-0005-000000000013": {
+      "en": "Offer to walk her to her car casually",
+      "fr": "Proposer simplement de la raccompagner à sa voiture"
+    },
+    "c1000016-0000-0000-0005-000000000016": {
+      "en": "Ask for her contact",
+      "fr": "Lui demander ses coordonnées"
+    },
+    "c1000017-0000-0000-0005-000000000017": {
+      "en": "Say it was nice to meet her and you'll see her next Tuesday",
+      "fr": "Dire que tu as été ravi de la rencontrer et que tu la verras mardi prochain"
+    }
+  }
+}

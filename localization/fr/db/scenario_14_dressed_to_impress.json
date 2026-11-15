@@ -1,0 +1,318 @@
+{
+  "scenario": {
+    "a1000014-0000-0000-0000-000000000014": {
+      "title": {
+        "en": "Dressed to Impress",
+        "fr": "Question de style"
+      },
+      "summary": {
+        "en": "A quick second opinion becomes playful and a reason to keep talking.",
+        "fr": "Un avis rapide devient un jeu et une raison de continuer à parler."
+      }
+    }
+  },
+  "screens": {
+    "b1000001-0000-0000-0014-000000000001": {
+      "en": "You're at a shopping mall. Saturday afternoon. Moderately busy.",
+      "fr": "Tu es dans un centre commercial. Samedi après-midi. Un peu de monde."
+    },
+    "b1000002-0000-0000-0014-000000000002": {
+      "en": "You enter a clothing store. You spot a woman shopping nearby.",
+      "fr": "Tu entres dans un magasin de vêtements. Tu repères une femme qui fait du shopping à côté."
+    },
+    "b1000003-0000-0000-0014-000000000003": {
+      "en": "She comes closer and you're deciding between either a blue or grey shirt.",
+      "fr": "Elle se rapproche, et toi, tu hésites entre une chemise bleue et une grise."
+    },
+    "b1000005-0000-0000-0014-000000000005": {
+      "en": "You look like you know style. I need your expertise quickly.",
+      "fr": "Tu as l’air de t’y connaître en style. J’ai besoin de ton expertise, vite."
+    },
+    "b1000006-0000-0000-0014-000000000006": {
+      "en": "She angles her body to you, smiles. Slightly surprised.",
+      "fr": "Elle se tourne vers toi et sourit. Un peu surprise."
+    },
+    "b1000007-0000-0000-0014-000000000007": {
+      "en": "Sure, what's up?",
+      "fr": "Bien sûr, qu’est-ce qu’il y a ?"
+    },
+    "b1000008-0000-0000-0014-000000000008": {
+      "en": "Which of these shirts do you think work?",
+      "fr": "Laquelle de ces chemises tu trouves la mieux ?"
+    },
+    "b1000009-0000-0000-0014-000000000009": {
+      "en": "Definitely the blue one.",
+      "fr": "La bleue, sans hésiter."
+    },
+    "b1000011-0000-0000-0014-000000000011": {
+      "en": "OK, I'm going to trust you on this. Thank you.",
+      "fr": "D’accord, je te fais confiance. Merci."
+    },
+    "b1000012-0000-0000-0014-000000000012": {
+      "en": "Haha, pressure's on.",
+      "fr": "Haha, me voilà sous pression."
+    },
+    "b1000014-0000-0000-0014-000000000014": {
+      "en": "So what brings you here? Buy anything exciting?",
+      "fr": "Et toi, qu’est-ce qui t’amène ? Tu as acheté un truc sympa ?"
+    },
+    "b1000015-0000-0000-0014-000000000015": {
+      "en": "Actually returning something. Impulse buy I regretted.",
+      "fr": "En fait, je rapporte quelque chose. Un achat sur un coup de tête que j’ai regretté."
+    },
+    "b1000017-0000-0000-0014-000000000017": {
+      "en": "Wow so you've given me such confident shopping advice...",
+      "fr": "Waouh, tu viens de me donner des conseils de shopping avec tellement d’assurance…"
+    },
+    "b1000018-0000-0000-0014-000000000018": {
+      "en": "And here you are returning your own.",
+      "fr": "Et toi, tu es là pour rapporter tes propres achats."
+    },
+    "b1000019-0000-0000-0014-000000000019": {
+      "en": "She's laughing at herself. She's comfortable being teased.",
+      "fr": "Elle rit d’elle-même. Elle est à l’aise avec la taquinerie."
+    },
+    "b1000020-0000-0000-0014-000000000020": {
+      "en": "Hahaha I know, I know. I should take my own advice.",
+      "fr": "Hahaha, je sais, je sais. Je ferais bien de suivre mes propres conseils."
+    },
+    "b1000022-0000-0000-0014-000000000022": {
+      "en": "So what are you returning? Or is that private information.",
+      "fr": "Et tu rapportes quoi ? À moins que ce soit confidentiel."
+    },
+    "b1000023-0000-0000-0014-000000000023": {
+      "en": "Just these pants, I realized too late that the material isn't that comfortable.",
+      "fr": "Juste ce pantalon. Je me suis rendu compte trop tard que la matière n’était pas très confortable."
+    },
+    "b1000025-0000-0000-0014-000000000025": {
+      "en": "Well since you helped find me a shirt...",
+      "fr": "Bon, vu que tu m’as aidé à trouver une chemise…"
+    },
+    "b1000026-0000-0000-0014-000000000026": {
+      "en": "It's only fair if I help you find some comfy pants.",
+      "fr": "C’est normal que je t’aide à trouver un pantalon confortable."
+    },
+    "b1000027-0000-0000-0014-000000000027": {
+      "en": "Haha is that so? Okay deal...",
+      "fr": "Haha, ah oui ? D’accord, ça marche…"
+    },
+    "b1000028-0000-0000-0014-000000000028": {
+      "en": "You walk around. The conversation flows well.",
+      "fr": "Vous faites le tour du magasin. La conversation coule bien."
+    },
+    "b1000030-0000-0000-0014-000000000030": {
+      "en": "Hey if you're free want to come grab a coffee?",
+      "fr": "Si tu es libre, ça te dit d’aller boire un café ?"
+    },
+    "b1000031-0000-0000-0014-000000000031": {
+      "en": "Yeah sure, there's a place downstairs in the food court that's good.",
+      "fr": "Oui, avec plaisir, il y a un bon café en bas, dans l’aire de restauration."
+    },
+    "b1000032-0000-0000-0014-000000000032": {
+      "en": "Hey I have to go now, but I'll have to let you know if the blue shirt works.",
+      "fr": "Je dois y aller, mais il faudra que je te dise si la chemise bleue a fait son effet."
+    },
+    "b1000033-0000-0000-0014-000000000033": {
+      "en": "Haha of course, here's my Instagram.",
+      "fr": "Haha, bien sûr, voilà mon Instagram."
+    },
+    "b1000034-0000-0000-0014-000000000034": {
+      "en": "Success. You reflect on the interaction.",
+      "fr": "Réussi. Tu repenses à l’échange."
+    },
+    "b1000035-0000-0000-0014-000000000035": {
+      "en": "You opened naturally and made her opinion feel valued.",
+      "fr": "Tu as engagé la conversation naturellement et tu as valorisé son avis."
+    },
+    "b1000036-0000-0000-0014-000000000036": {
+      "en": "You used humour and teasing to deepen the connection.",
+      "fr": "Tu as utilisé l’humour et la taquinerie pour approfondir le lien."
+    },
+    "b1000037-0000-0000-0014-000000000037": {
+      "en": "You were able to show playfulness and escalate.",
+      "fr": "Tu as su être joueur et faire avancer les choses."
+    },
+    "b1000038-0000-0000-0014-000000000038": {
+      "en": "And you closed well by building on the connection. Well done.",
+      "fr": "Et tu as bien concrétisé en t’appuyant sur le lien créé. Bien joué."
+    },
+    "b1000041-0000-0000-0014-000000000041": {
+      "en": "Do you work here?",
+      "fr": "Tu travailles ici ?"
+    },
+    "b1000042-0000-0000-0014-000000000042": {
+      "en": "This opener doesn't hold the strongest frame. You also saw her shopping.",
+      "fr": "Cette accroche n’est pas la plus forte. Et tu l’as vue faire ses achats."
+    },
+    "b1000043-0000-0000-0014-000000000043": {
+      "en": "Which one?",
+      "fr": "Laquelle ?"
+    },
+    "b1000044-0000-0000-0014-000000000044": {
+      "en": "No context or politeness. Make it a request not a command.",
+      "fr": "Ni contexte ni politesse. Formule une demande, pas un ordre."
+    },
+    "b1000101-0000-0000-0014-000000000101": {
+      "en": "Really? I actually think the grey is more versatile though.",
+      "fr": "Ah bon ? Moi, je trouve la grise plus facile à porter avec tout."
+    },
+    "b1000102-0000-0000-0014-000000000102": {
+      "en": "You asked for her opinion. Why ask if you're going to disagree?",
+      "fr": "Tu lui as demandé son avis. Pourquoi demander si c’est pour la contredire ?"
+    },
+    "b1000103-0000-0000-0014-000000000103": {
+      "en": "Cool. So are you from around here?",
+      "fr": "Cool. Et tu es d’ici ?"
+    },
+    "b1000104-0000-0000-0014-000000000104": {
+      "en": "Acknowledge what she said before pivoting.",
+      "fr": "Reconnais ce qu’elle a dit avant de changer de sujet."
+    },
+    "b1000131-0000-0000-0014-000000000131": {
+      "en": "Yeah, I've got a weekend event on so I need a new shirt.",
+      "fr": "Oui, j’ai un événement ce week-end, il me faut une nouvelle chemise."
+    },
+    "b1000132-0000-0000-0014-000000000132": {
+      "en": "You made it about yourself. She gave you a thread, you ignored it.",
+      "fr": "Tu as tout ramené à toi. Elle t’a tendu un fil, tu l’as ignoré."
+    },
+    "b1000133-0000-0000-0014-000000000133": {
+      "en": "I'll let you know how it turns out! What's your number?",
+      "fr": "Je te dirai ce que ça a donné ! C’est quoi, ton numéro ?"
+    },
+    "b1000134-0000-0000-0014-000000000134": {
+      "en": "While this can work, it may be a bit too forward. Build rapport first.",
+      "fr": "Ça peut marcher, mais c’est peut-être un peu trop entreprenant. Crée d’abord de la complicité."
+    },
+    "b1000161-0000-0000-0014-000000000161": {
+      "en": "That's good that you're saving money...",
+      "fr": "C’est bien de faire des économies…"
+    },
+    "b1000162-0000-0000-0014-000000000162": {
+      "en": "Build rapport. Don't teach about personal finance.",
+      "fr": "Crée de la complicité. Ne lui fais pas un cours de finances personnelles."
+    },
+    "b1000163-0000-0000-0014-000000000163": {
+      "en": "I remember when I had to return this...",
+      "fr": "Je me souviens, une fois, j’ai dû rapporter…"
+    },
+    "b1000164-0000-0000-0014-000000000164": {
+      "en": "She didn't ask, keep it about her.",
+      "fr": "Elle ne t’a rien demandé, reste centré sur elle."
+    },
+    "b1000211-0000-0000-0014-000000000211": {
+      "en": "Hey can I see what you're returning?",
+      "fr": "Je peux voir ce que tu rapportes ?"
+    },
+    "b1000212-0000-0000-0014-000000000212": {
+      "en": "Risky because it could be something private.",
+      "fr": "Risqué, parce que ça pourrait être quelque chose de personnel."
+    },
+    "b1000213-0000-0000-0014-000000000213": {
+      "en": "Ok, well maybe you should buy this instead...",
+      "fr": "Bon, tu devrais peut-être acheter ça à la place…"
+    },
+    "b1000214-0000-0000-0014-000000000214": {
+      "en": "Keep building connection, don't try to solve her shopping problem.",
+      "fr": "Continue à créer du lien, n’essaie pas de résoudre son problème de shopping."
+    },
+    "b1000241-0000-0000-0014-000000000241": {
+      "en": "Yeah you gotta watch out for synthetic materials, they can really harm...",
+      "fr": "Ouais, il faut faire gaffe aux matières synthétiques, elles peuvent vraiment abîmer…"
+    },
+    "b1000242-0000-0000-0014-000000000242": {
+      "en": "She doesn't need a textile lecture from you. Be playful, not informative.",
+      "fr": "Elle n’a pas besoin d’un cours sur les textiles. Sois joueur, pas informatif."
+    },
+    "b1000243-0000-0000-0014-000000000243": {
+      "en": "What size were they? Did you try them on in the store?",
+      "fr": "Il faisait quelle taille ? Tu l’avais essayé en cabine ?"
+    },
+    "b1000244-0000-0000-0014-000000000244": {
+      "en": "Asking about the logistics of her pants is not an interesting narrative.",
+      "fr": "Parler des détails pratiques de son pantalon n’a rien de captivant."
+    }
+  },
+  "options": {
+    "c1000001-0000-0000-0014-000000000001": {
+      "en": "Assumption opener then ask for her opinion",
+      "fr": "Accroche par supposition, puis lui demander son avis"
+    },
+    "c1000002-0000-0000-0014-000000000002": {
+      "en": "Ask if she works there first",
+      "fr": "Lui demander d’abord si elle travaille ici"
+    },
+    "c1000003-0000-0000-0014-000000000003": {
+      "en": "Ask which shirt straight away",
+      "fr": "Lui demander directement quelle chemise"
+    },
+    "c1000004-0000-0000-0014-000000000004": {
+      "en": "Build on her answer",
+      "fr": "Rebondir sur sa réponse"
+    },
+    "c1000005-0000-0000-0014-000000000005": {
+      "en": "Tell her how you like the grey",
+      "fr": "Lui dire que tu préfères la grise"
+    },
+    "c1000006-0000-0000-0014-000000000006": {
+      "en": "Ask something else quickly",
+      "fr": "Enchaîner vite sur autre chose"
+    },
+    "c1000007-0000-0000-0014-000000000007": {
+      "en": "Ask about her shopping experience",
+      "fr": "L’interroger sur son shopping"
+    },
+    "c1000008-0000-0000-0014-000000000008": {
+      "en": "Expand on why you're buying a shirt",
+      "fr": "Expliquer pourquoi tu achètes une chemise"
+    },
+    "c1000009-0000-0000-0014-000000000009": {
+      "en": "Tell her you'll let her know and ask for her number",
+      "fr": "Lui dire que tu lui diras ce que ça a donné et lui demander son numéro"
+    },
+    "c1000010-0000-0000-0014-000000000010": {
+      "en": "Tease her about indecisiveness and use a callback",
+      "fr": "La taquiner sur son indécision avec un rappel"
+    },
+    "c1000011-0000-0000-0014-000000000011": {
+      "en": "Say it's good finance to return things",
+      "fr": "Lui dire que rapporter ses achats, c’est bien géré"
+    },
+    "c1000012-0000-0000-0014-000000000012": {
+      "en": "Tell her about when you returned something",
+      "fr": "Lui raconter une fois où tu as rapporté un achat"
+    },
+    "c1000013-0000-0000-0014-000000000013": {
+      "en": "Ask about the purchase playfully",
+      "fr": "L’interroger sur son achat avec légèreté"
+    },
+    "c1000014-0000-0000-0014-000000000014": {
+      "en": "Ask to see what she bought",
+      "fr": "Demander à voir ce qu’elle a acheté"
+    },
+    "c1000015-0000-0000-0014-000000000015": {
+      "en": "Give her a recommendation on what to buy",
+      "fr": "Lui conseiller quoi acheter"
+    },
+    "c1000016-0000-0000-0014-000000000016": {
+      "en": "Offer to help as payback for her advice",
+      "fr": "Proposer de l’aider pour la remercier de son conseil"
+    },
+    "c1000017-0000-0000-0014-000000000017": {
+      "en": "Tell her how fabric can harm her skin",
+      "fr": "Lui expliquer en quoi certains tissus abîment la peau"
+    },
+    "c1000018-0000-0000-0014-000000000018": {
+      "en": "Ask more about the pants and why she didn't like them",
+      "fr": "L’interroger sur le pantalon et ce qui ne lui plaisait pas"
+    },
+    "c1000019-0000-0000-0014-000000000019": {
+      "en": "Suggest getting food/coffee now",
+      "fr": "Proposer d’aller manger un morceau ou boire un café maintenant"
+    },
+    "c1000020-0000-0000-0014-000000000020": {
+      "en": "You have to leave but ask for her socials",
+      "fr": "Dire que tu dois partir, mais lui demander ses réseaux"
+    }
+  }
+}

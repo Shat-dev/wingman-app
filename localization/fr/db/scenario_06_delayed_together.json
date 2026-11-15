@@ -1,0 +1,302 @@
+{
+  "scenario": {
+    "a1000006-0000-0000-0000-000000000006": {
+      "title": {
+        "en": "Delayed Together",
+        "fr": "Retardés ensemble"
+      },
+      "summary": {
+        "en": "Crowded terminal, shared frustration, time to kill. A small move changes the whole wait.",
+        "fr": "Un terminal bondé, une frustration partagée, du temps à tuer. Un petit geste change toute l’attente."
+      }
+    }
+  },
+  "screens": {
+    "b1000001-0000-0000-0006-000000000001": {
+      "en": "You're about to go visit some friends interstate for the weekend.",
+      "fr": "Tu pars rendre visite à des amis dans une autre ville pour le week-end."
+    },
+    "b1000002-0000-0000-0006-000000000002": {
+      "en": "You've just arrived to the departure gates, looking forward to your trip away.",
+      "fr": "Tu viens d’arriver à la porte d’embarquement, impatient de partir."
+    },
+    "b1000003-0000-0000-0006-000000000003": {
+      "en": "Suddenly there's an announcement.",
+      "fr": "Tout à coup, une annonce."
+    },
+    "b1000004-0000-0000-0006-000000000004": {
+      "en": "\"The flight will be delayed two hours due to mechanical issues\".",
+      "fr": "« Le vol aura deux heures de retard en raison d’un problème technique. »"
+    },
+    "b1000005-0000-0000-0006-000000000005": {
+      "en": "You see her sitting on the benches. She sighs and puts her phone down.",
+      "fr": "Tu la vois assise sur les sièges. Elle soupire et pose son téléphone."
+    },
+    "b1000061-0000-0000-0006-000000000061": {
+      "en": "You sit next to her. She glances over, shifts slightly away. Awkward silence.",
+      "fr": "Tu t’assois à côté d’elle. Elle te jette un regard et s’écarte légèrement. Silence gênant."
+    },
+    "b1000062-0000-0000-0006-000000000062": {
+      "en": "Proximity without talking feels invasive. Moving that close needs a reason first.",
+      "fr": "S’approcher sans parler paraît intrusif. Pour t’approcher autant, il faut d’abord une raison."
+    },
+    "b1000063-0000-0000-0006-000000000063": {
+      "en": "Hey are you travelling for work or just for fun?",
+      "fr": "Salut, tu voyages pour le travail ou pour le plaisir ?"
+    },
+    "b1000064-0000-0000-0006-000000000064": {
+      "en": "While this may work, use the natural shared experience of the delay.",
+      "fr": "Ça peut marcher, mais sers-toi de ce que vous vivez naturellement tous les deux : le retard."
+    },
+    "b1000007-0000-0000-0006-000000000007": {
+      "en": "Hey are you on the delayed flight too?",
+      "fr": "Salut, toi aussi, tu es sur le vol en retard ?"
+    },
+    "b1000008-0000-0000-0006-000000000008": {
+      "en": "Yeah. Two hour delay apparently. Not ideal.",
+      "fr": "Oui. Deux heures de retard, apparemment. Pas idéal."
+    },
+    "b1000009-0000-0000-0006-000000000009": {
+      "en": "Common destination established. Natural reason to keep talking.",
+      "fr": "Vous allez au même endroit. Une raison naturelle de continuer à parler."
+    },
+    "b1000101-0000-0000-0006-000000000101": {
+      "en": "Yeah it's soo annoying, I was meant to...",
+      "fr": "Ouais, c’est trop énervant, moi qui devais…"
+    },
+    "b1000102-0000-0000-0006-000000000102": {
+      "en": "Complaining dampens the mood. Lift it up instead.",
+      "fr": "Se plaindre plombe l’ambiance. Fais-la remonter, au contraire."
+    },
+    "b1000103-0000-0000-0006-000000000103": {
+      "en": "Maybe you can check if there are other flights?",
+      "fr": "Tu pourrais peut-être regarder s’il y a d’autres vols ?"
+    },
+    "b1000104-0000-0000-0006-000000000104": {
+      "en": "She's venting frustration, not asking for solutions. Use emotion not logic.",
+      "fr": "Elle exprime sa frustration, elle ne cherche pas de solution. Réponds à l’émotion, pas avec la logique."
+    },
+    "b1000011-0000-0000-0006-000000000011": {
+      "en": "Not ideal is an understatement. Did you have plans tonight?",
+      "fr": "« Pas idéal », c’est un euphémisme. Tu avais quelque chose de prévu ce soir ?"
+    },
+    "b1000012-0000-0000-0006-000000000012": {
+      "en": "Yeah, had a friends dinner. Guess that's not happening anymore.",
+      "fr": "Oui, un dîner entre amies. Je crois que c’est raté."
+    },
+    "b1000013-0000-0000-0006-000000000013": {
+      "en": "Empathy landed well. She's sharing freely. The conversation has momentum.",
+      "fr": "Ton empathie a fait mouche. Elle se confie facilement. La conversation a de l’élan."
+    },
+    "b1000141-0000-0000-0006-000000000141": {
+      "en": "That must be sad then that you're missing your dinner tonight.",
+      "fr": "Ça doit être triste de rater ton dîner ce soir, alors."
+    },
+    "b1000142-0000-0000-0006-000000000142": {
+      "en": "Sympathy alone doesn't move the conversation forward, add something.",
+      "fr": "La compassion seule ne fait pas avancer la conversation, apporte quelque chose."
+    },
+    "b1000143-0000-0000-0006-000000000143": {
+      "en": "Yeah I was meant to meet my friends. We try to meet yearly and this weekend we...",
+      "fr": "Oui, je devais retrouver mes amis. On essaie de se voir une fois par an, et ce week-end, on…"
+    },
+    "b1000144-0000-0000-0006-000000000144": {
+      "en": "You made it about yourself. Answer her question briefly then return focus to her.",
+      "fr": "Tu as tout ramené à toi. Réponds brièvement à sa question, puis reviens sur elle."
+    },
+    "b1000015-0000-0000-0006-000000000015": {
+      "en": "Same actually. Was supposed to meet some mates tonight too.",
+      "fr": "Pareil, en fait. Je devais retrouver des potes ce soir, moi aussi."
+    },
+    "b1000016-0000-0000-0006-000000000016": {
+      "en": "Oh really? What were you guys planning on doing?",
+      "fr": "Ah oui ? Vous aviez prévu quoi ?"
+    },
+    "b1000017-0000-0000-0006-000000000017": {
+      "en": "We do a weekend getaway each year, helps us stay in touch.",
+      "fr": "On part en week-end ensemble chaque année, ça nous aide à garder le contact."
+    },
+    "b1000018-0000-0000-0006-000000000018": {
+      "en": "What about yours, was it a special occasion?",
+      "fr": "Et toi, c’était une occasion spéciale ?"
+    },
+    "b1000019-0000-0000-0006-000000000019": {
+      "en": "Sort of. My friend just got engaged, so we were celebrating that.",
+      "fr": "En quelque sorte. Mon amie vient de se fiancer, alors on fêtait ça."
+    },
+    "b1000201-0000-0000-0006-000000000201": {
+      "en": "What's your name?",
+      "fr": "Tu t’appelles comment ?"
+    },
+    "b1000202-0000-0000-0006-000000000202": {
+      "en": "Give your name first. Leading makes her reciprocation natural, not pressured.",
+      "fr": "Donne ton prénom d’abord. Si tu montres l’exemple, elle te répond naturellement, sans pression."
+    },
+    "b1000203-0000-0000-0006-000000000203": {
+      "en": "You introduce yourself and lend out your hand for a handshake.",
+      "fr": "Tu te présentes et tu lui tends la main."
+    },
+    "b1000204-0000-0000-0006-000000000204": {
+      "en": "While this can work, match the casual energy, don't shift tones suddenly.",
+      "fr": "Ça peut marcher, mais reste sur la même énergie décontractée, ne change pas de ton d’un coup."
+    },
+    "b1000021-0000-0000-0006-000000000021": {
+      "en": "I'm... by the way. Since we're going to be stuck here together.",
+      "fr": "Moi, c’est…, au fait. Vu qu’on va être coincés ici ensemble."
+    },
+    "b1000022-0000-0000-0006-000000000022": {
+      "en": "Mel. Nice to meet you.",
+      "fr": "Mel. Enchantée."
+    },
+    "b1000023-0000-0000-0006-000000000023": {
+      "en": "The conversation is good, you're building rapport.",
+      "fr": "La conversation se passe bien, la complicité s’installe."
+    },
+    "b1000024-0000-0000-0006-000000000024": {
+      "en": "You've been talking at the gate for 10 minutes. Two hours still to go.",
+      "fr": "Vous parlez à la porte d’embarquement depuis 10 minutes. Il reste encore deux heures."
+    },
+    "b1000251-0000-0000-0006-000000000251": {
+      "en": "Maybe later, I'm not that hungry at the moment.",
+      "fr": "Peut-être plus tard, je n’ai pas très faim pour l’instant."
+    },
+    "b1000252-0000-0000-0006-000000000252": {
+      "en": "Apologetic energy kills confidence. If it's a good idea, suggest it clearly.",
+      "fr": "Une énergie d’excuse tue l’assurance. Si c’est une bonne idée, propose-la clairement."
+    },
+    "b1000253-0000-0000-0006-000000000253": {
+      "en": "Maybe later, I'm not that hungry at the moment.",
+      "fr": "Peut-être plus tard, je n’ai pas très faim pour l’instant."
+    },
+    "b1000254-0000-0000-0006-000000000254": {
+      "en": "Calling it a date adds pressure. Keep it casual. The intent still lands.",
+      "fr": "Parler de rendez-vous ajoute de la pression. Reste décontracté. L’intention passe quand même."
+    },
+    "b1000026-0000-0000-0006-000000000026": {
+      "en": "Yeah actually, that sounds good. There's a place just over there.",
+      "fr": "Oui, en fait, bonne idée. Il y a un endroit juste là."
+    },
+    "b1000027-0000-0000-0006-000000000027": {
+      "en": "You're walking to the restaurant together. Natural progression.",
+      "fr": "Vous marchez ensemble vers le restaurant. Tout se fait naturellement."
+    },
+    "b1000028-0000-0000-0006-000000000028": {
+      "en": "You reach the counter. Ordering moment. Good energy between you both.",
+      "fr": "Vous arrivez au comptoir. Le moment de commander. Bonne énergie entre vous."
+    },
+    "b1000291-0000-0000-0006-000000000291": {
+      "en": "Sorry this isn't as good as your actual plans tonight.",
+      "fr": "Désolé, ça ne vaut pas ce que tu avais vraiment prévu ce soir."
+    },
+    "b1000292-0000-0000-0006-000000000292": {
+      "en": "Don't dwell on what she's missing. Keep it light and forward-looking, not apologetic.",
+      "fr": "Ne t’attarde pas sur ce qu’elle rate. Reste léger et tourné vers la suite, sans t’excuser."
+    },
+    "b1000030-0000-0000-0006-000000000030": {
+      "en": "Airport food won't beat an engagement dinner, but at least you're in good company.",
+      "fr": "Un repas d’aéroport ne vaudra pas un dîner de fiançailles, mais au moins, tu es en bonne compagnie."
+    },
+    "b1000031-0000-0000-0006-000000000031": {
+      "en": "Haha is that so? Guess every cloud has a silver lining.",
+      "fr": "Haha, tu crois ? À quelque chose malheur est bon, faut croire."
+    },
+    "b1000032-0000-0000-0006-000000000032": {
+      "en": "You and Mel enjoy your meals together and continue chatting.",
+      "fr": "Mel et toi profitez de votre repas en continuant à discuter."
+    },
+    "b1000033-0000-0000-0006-000000000033": {
+      "en": "The time passes quick and before you board she gives you her number.",
+      "fr": "Le temps passe vite, et avant l’embarquement, elle te donne son numéro."
+    },
+    "b1000034-0000-0000-0006-000000000034": {
+      "en": "Success. You review your interaction with Mel.",
+      "fr": "Réussi. Tu repenses à ton échange avec Mel."
+    },
+    "b1000035-0000-0000-0006-000000000035": {
+      "en": "You opened naturally by using the shared environment.",
+      "fr": "Tu as engagé la conversation naturellement en t’appuyant sur ce que vous partagiez."
+    },
+    "b1000036-0000-0000-0006-000000000036": {
+      "en": "You showed curiosity towards Mel and getting to know her plans.",
+      "fr": "Tu as montré de la curiosité envers Mel et ses projets."
+    },
+    "b1000037-0000-0000-0006-000000000037": {
+      "en": "You lightened the mood by using playful callbacks.",
+      "fr": "Tu as allégé l’ambiance avec des rappels pleins d’humour."
+    },
+    "b1000038-0000-0000-0006-000000000038": {
+      "en": "And you escalated to a more intimate setting. Well done.",
+      "fr": "Et tu as su passer à un cadre plus intime. Bien joué."
+    }
+  },
+  "options": {
+    "c1000002-0000-0000-0006-000000000002": {
+      "en": "Move to sit down next to her first",
+      "fr": "Aller d’abord t’asseoir à côté d’elle"
+    },
+    "c1000001-0000-0000-0006-000000000001": {
+      "en": "Ask if she's on the same delayed flight",
+      "fr": "Lui demander si elle est sur le même vol en retard"
+    },
+    "c1000003-0000-0000-0006-000000000003": {
+      "en": "Ask if she travels for work or pleasure",
+      "fr": "Lui demander si elle voyage pour le travail ou pour le plaisir"
+    },
+    "c1000004-0000-0000-0006-000000000004": {
+      "en": "Relate to the annoyance, then ask about her plans",
+      "fr": "Dire que tu comprends son agacement, puis lui demander ce qu’elle avait prévu"
+    },
+    "c1000005-0000-0000-0006-000000000005": {
+      "en": "Vent about the delay and your missed plans",
+      "fr": "Te plaindre du retard et de tes plans tombés à l’eau"
+    },
+    "c1000006-0000-0000-0006-000000000006": {
+      "en": "Use logic to help and say there might be other flights",
+      "fr": "Jouer la logique et lui dire qu’il y a peut-être d’autres vols"
+    },
+    "c1000008-0000-0000-0006-000000000008": {
+      "en": "Continue to sympathize a bit more",
+      "fr": "Continuer à compatir encore un peu"
+    },
+    "c1000007-0000-0000-0006-000000000007": {
+      "en": "Relate briefly then redirect back to her",
+      "fr": "Dire brièvement que c’est pareil pour toi, puis revenir sur elle"
+    },
+    "c1000009-0000-0000-0006-000000000009": {
+      "en": "Share your weekend plan with your friends",
+      "fr": "Lui raconter ton week-end prévu avec tes amis"
+    },
+    "c1000012-0000-0000-0006-000000000012": {
+      "en": "Introduce yourself formally",
+      "fr": "Te présenter de façon formelle"
+    },
+    "c1000011-0000-0000-0006-000000000011": {
+      "en": "Ask what her name is first",
+      "fr": "Lui demander d’abord comment elle s’appelle"
+    },
+    "c1000010-0000-0000-0006-000000000010": {
+      "en": "Introduce yourself with a light callback to the situation",
+      "fr": "Te présenter avec un petit clin d’œil à la situation"
+    },
+    "c1000014-0000-0000-0006-000000000014": {
+      "en": "\"I know it's random but do you want to go get coffee? Only if you want.\"",
+      "fr": "« Je sais que ça sort de nulle part, mais tu veux aller boire un café ? Seulement si tu en as envie. »"
+    },
+    "c1000013-0000-0000-0006-000000000013": {
+      "en": "\"Well since we're here for a while, want to go grab some food?\"",
+      "fr": "« Bon, vu qu’on est là pour un moment, ça te dit d’aller manger un morceau ? »"
+    },
+    "c1000015-0000-0000-0006-000000000015": {
+      "en": "\"Want to get some food? We can go on a date.\"",
+      "fr": "« Ça te dit d’aller manger un truc ? On peut en faire un rendez-vous. »"
+    },
+    "c1000016-0000-0000-0006-000000000016": {
+      "en": "Make a flirty playful callback about the engagement dinner",
+      "fr": "Faire un rappel joueur et charmeur au dîner de fiançailles"
+    },
+    "c1000017-0000-0000-0006-000000000017": {
+      "en": "Apologize that this isn't as good as her real plans tonight",
+      "fr": "T’excuser que ça ne vaille pas ce qu’elle avait vraiment prévu ce soir"
+    }
+  }
+}
