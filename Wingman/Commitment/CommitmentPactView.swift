@@ -30,6 +30,11 @@ struct CommitmentPactView: View {
     /// button is broken.
     private let holdDuration: TimeInterval = 1.2
 
+    /// How far a finger may drift during the hold before it counts as a
+    /// scroll and the hold is dropped. Generous, so a thumb resting on glass
+    /// never trips it.
+    private static let holdSlop: CGFloat = 24
+
     /// Fill of the ring around the logo, 0…1. Animated to 1 over
     /// `holdDuration` while held, and back to 0 on an early release.
     @State private var holdProgress: CGFloat = 0
@@ -47,9 +52,24 @@ struct CommitmentPactView: View {
     /// whole press, from restarting the timer on every callback.
     @State private var isHolding = false
 
+    /// Presses that ended before the ring filled. From the first one on, the
+    /// line under the logo says to keep holding instead of naming the
+    /// gesture. Also sent with the commit, to see how many people need it.
+    @State private var earlyReleases = 0
+
+    /// Briefly true after an early release, to bump the line under the logo
+    /// so the changed instruction is noticed.
+    @State private var nudgePulse = false
+
     @State private var appearedAt: Date?
 
     private let pact = CommitmentPactCopy.pact
+
+    /// `earlyReleases` is for previews and render tests, to draw the
+    /// "keep holding" state without a gesture. The app passes nothing.
+    init(earlyReleases: Int = 0) {
+        _earlyReleases = State(initialValue: earlyReleases)
+    }
 
     /// The name from the optional onboarding screen, or `nil` if it was
     /// skipped. Read once at construction rather than per render: it cannot
@@ -61,6 +81,15 @@ struct CommitmentPactView: View {
     /// given.
     private var headline: String {
         CommitmentPactCopy.headline(for: name)
+    }
+
+    /// The line under the logo: how to commit, a nudge to keep holding after
+    /// an early release, then "Committed."
+    private var instruction: String {
+        if hasCommitted { return CommitmentPactCopy.committed }
+        return earlyReleases > 0
+            ? CommitmentPactCopy.keepHolding
+            : CommitmentPactCopy.holdInstruction
     }
 
     var body: some View {
@@ -93,16 +122,49 @@ struct CommitmentPactView: View {
             VStack(spacing: 22) {
                 logoButton
 
-                Text(hasCommitted
-                     ? CommitmentPactCopy.committed
-                     : CommitmentPactCopy.holdInstruction)
-                    .font(.manropeSemiBold(size: 14))
-                    .foregroundColor(hasCommitted ? .wingmanBlack : .wingmanBlack.opacity(0.55))
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 40)
-                    .animation(.easeInOut(duration: 0.2), value: hasCommitted)
+                // Sized by the taller of the two instructions, so the logo
+                // doesn't jump when a two-line one swaps for a one-line one.
+                ZStack {
+                    Text(CommitmentPactCopy.holdInstruction).hidden()
+                    Text(CommitmentPactCopy.keepHolding).hidden()
+                    Text(instruction)
+                        .foregroundColor(hasCommitted || earlyReleases > 0
+                                         ? .wingmanBlack
+                                         : .wingmanBlack.opacity(0.55))
+                        .scaleEffect(nudgePulse ? 1.08 : 1)
+                        .animation(.easeInOut(duration: 0.2), value: hasCommitted)
+                        .animation(.easeInOut(duration: 0.2), value: earlyReleases)
+                }
+                .font(.manropeSemiBold(size: 14))
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 40)
             }
             .padding(.bottom, 64)
+            // The whole lower part of the screen takes the hold, not only the
+            // logo. Every earlier onboarding screen has its "Continue" button
+            // down here, and replays show people pressing that spot, or the
+            // instruction, and getting nothing back.
+            .frame(maxWidth: .infinity)
+            .contentShape(Rectangle())
+            .gesture(
+                DragGesture(minimumDistance: 0)
+                    .onChanged { value in
+                        // A finger that travels is scrolling (a translated
+                        // pact can make this screen scroll), not holding.
+                        if hypot(value.translation.width, value.translation.height) > Self.holdSlop {
+                            cancelHold()
+                        } else {
+                            beginHold()
+                        }
+                    }
+                    .onEnded { value in
+                        if hypot(value.translation.width, value.translation.height) > Self.holdSlop {
+                            cancelHold()
+                        } else {
+                            endHold()
+                        }
+                    }
+            )
         }
         // English fits. A longer translated pact used to squeeze the line
         // under the logo down to one cut-off line; now the screen scrolls.
@@ -161,12 +223,8 @@ struct CommitmentPactView: View {
                 .animation(.easeOut(duration: 0.18), value: isHolding)
                 .animation(.easeOut(duration: 0.3), value: hasCommitted)
         }
-        .contentShape(Circle())
-        .gesture(
-            DragGesture(minimumDistance: 0)
-                .onChanged { _ in beginHold() }
-                .onEnded { _ in endHold() }
-        )
+        // The press itself is handled by the section around the logo; see
+        // `body`.
         // The hold is a nice interaction and a bad requirement: it is not
         // reliably performable with a switch control or VoiceOver's activate
         // gesture. Exposing this as a plain button gives assistive tech a
@@ -199,7 +257,26 @@ struct CommitmentPactView: View {
     /// than snapping, so a near-miss reads as "not quite" instead of as the
     /// screen rejecting them.
     private func endHold() {
-        guard !hasCommitted else { return }
+        guard !hasCommitted, isHolding else { return }
+        cancelHold()
+
+        // Say why nothing happened: swap in "Keep holding…" and bump it.
+        earlyReleases += 1
+        HapticManager.shared.warning()
+        withAnimation(.spring(response: 0.2, dampingFraction: 0.5)) {
+            nudgePulse = true
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.18) {
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
+                nudgePulse = false
+            }
+        }
+    }
+
+    /// Drops a hold in progress without the nudge: for a press that turned
+    /// into a scroll, and the first half of `endHold`.
+    private func cancelHold() {
+        guard !hasCommitted, isHolding else { return }
         isHolding = false
 
         commitWorkItem?.cancel()
@@ -224,7 +301,8 @@ struct CommitmentPactView: View {
 
         var properties: [String: Any] = [
             "headline": CommitmentPactCopy.analyticsHeadline,
-            "personalized": name != nil
+            "personalized": name != nil,
+            "early_releases": earlyReleases
         ]
         if let appearedAt {
             properties["time_on_screen_seconds"] = Analytics.elapsedSeconds(since: appearedAt)
@@ -242,5 +320,10 @@ struct CommitmentPactView: View {
 
 #Preview {
     CommitmentPactView()
+        .environmentObject(AuthManager())
+}
+
+#Preview("After an early release") {
+    CommitmentPactView(earlyReleases: 1)
         .environmentObject(AuthManager())
 }

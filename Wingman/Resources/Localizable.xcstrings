@@ -2083,7 +2083,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Verpflichten"
+            "value" : "Versprechen besiegeln"
           }
         },
         "es" : {
@@ -4185,6 +4185,29 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Rejoins les hommes qui passent à l’action"
+          }
+        }
+      }
+    },
+    "Keep holding until the ring fills." : {
+      "comment" : "Commitment pact screen, under the logo, after the user let go before the press-and-hold finished. The ring is the circle around the logo that fills while holding.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Halte weiter gedrückt, bis der Kreis voll ist."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mantén presionado hasta que se llene el círculo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Maintiens appuyé jusqu’à ce que le cercle soit plein."
           }
         }
       }
@@ -7275,7 +7298,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Tippen und halten, um dich zu verpflichten."
+            "value" : "Halte das Logo gedrückt, um dein Versprechen zu besiegeln."
           }
         },
         "es" : {

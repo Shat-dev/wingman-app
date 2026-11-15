@@ -68,6 +68,15 @@ enum CommitmentPactCopy {
 
     static let holdInstruction = String(localized: "Tap and hold to commit.")
 
+    /// Replaces `holdInstruction` after a press that ends before the ring
+    /// fills. About half of users tap first (replays, Nov 2026); the ring
+    /// rewinding on its own doesn't say why nothing happened, and some
+    /// German users left after a single tap.
+    static let keepHolding = String(
+        localized: "Keep holding until the ring fills.",
+        comment: "Commitment pact screen, under the logo, after the user let go before the press-and-hold finished. The ring is the circle around the logo that fills while holding."
+    )
+
     /// Replaces the instruction once the hold completes, for the beat before
     /// the screen hands off to the paywall.
     static let committed = String(localized: "Committed.")

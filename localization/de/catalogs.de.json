@@ -271,7 +271,7 @@
     "Close paywall": "Paywall schließen",
     "Close this and it’s gone for good": "Schließt du das, ist es für immer weg",
     "Come across natural, not nervous": "Wirke natürlich, nicht nervös",
-    "Commit": "Verpflichten",
+    "Commit": "Versprechen besiegeln",
     "Committed.": "Abgemacht.",
     "Complete all lessons in %@ to unlock this course.": "Schließ alle Lektionen in „%@“ ab, um diesen Kurs freizuschalten.",
     "Complete all lessons in the previous course to unlock this course.": "Schließ alle Lektionen im vorherigen Kurs ab, um diesen Kurs freizuschalten.",
@@ -500,7 +500,7 @@
     "Takes a few seconds. Nothing else changes.": "Dauert nur ein paar Sekunden. Sonst ändert sich nichts.",
     "Talk to dog owner about their dog": "Einen Hundebesitzer auf seinen Hund ansprechen",
     "Talking to someone you may be interested in": "Mit jemandem reden, der dich interessieren könnte",
-    "Tap and hold to commit.": "Tippen und halten, um dich zu verpflichten.",
+    "Tap and hold to commit.": "Halte das Logo gedrückt, um dein Versprechen zu besiegeln.",
     "Tap to continue": "Tippen zum Fortfahren",
     "Tap to finish": "Tippen zum Beenden",
     "Tap to retry": "Tippen zum Wiederholen",
@@ -592,6 +592,7 @@
     "Language: %@": "Sprache: %@",
     "Language": "Sprache",
     "Reopen Wingman to switch": "Öffne Wingman neu, um zu wechseln",
-    "Go to your home screen, then open Wingman again.": "Wechsle zum Home-Bildschirm und öffne Wingman dann erneut."
+    "Go to your home screen, then open Wingman again.": "Wechsle zum Home-Bildschirm und öffne Wingman dann erneut.",
+    "Keep holding until the ring fills.": "Halte weiter gedrückt, bis der Kreis voll ist."
   }
 }
