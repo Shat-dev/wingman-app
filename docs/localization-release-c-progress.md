@@ -1,0 +1,75 @@
+# Spanish and French (Release C): setup log
+
+Branch `localization-release-c`. Prompt: [localization-release-c/0-setup-prompt.md](localization-release-c/0-setup-prompt.md). This is the shared log for the setup session (Phases 0–3). The two language sessions keep their own logs: `docs/localization-es-progress.md` and `docs/localization-fr-progress.md`. Everything translated here is a machine draft (Claude), marked "needs review"; nothing is applied to the live database.
+
+Model: German (Release B), see [localization-de-progress.md](localization-de-progress.md) and [localization-de-brief.md](localization-de-brief.md).
+
+## Where it stands
+
+**Release C is fully drafted and merged (2026-11-15).**
+- **Spanish and French:** the interface, all 25 courses, 15 scenarios and 765 quiz questions, all marked "needs review".
+- **Branches:** `localization-release-c-es` and `-fr` are merged into `localization-release-c`.
+- **Checks:** every check passes for de, es and fr. Unit tests: 341 run, 0 failed, and nothing is skipped for es or fr any more.
+- **Next:** Arthur's steps are in [release-c-launch-checklist.md](release-c-launch-checklist.md) (proofreads, regional pricing, legal, database check and apply, App Store pages, testing, submit).
+- **Database check (2026-11-15):** passed, read-only against Wingman-App. Every es/fr id (765 questions, 15 scenarios, 796 screens, 276 options) exists in production and matches German's set; the 95 uncovered screens are textless `options` screens; 0 es/fr rows live; last English edit 2026-11-11 04:23 UTC, before the drafts.
+- **Database apply (2026-11-15, Arthur's ask):** all 24 es and 24 fr files applied to production via the Supabase CLI, no errors; 765/15/796/276 rows per language; de unchanged; 12/12 random texts match the files. Only builds from this branch read them.
+- **Simulator sweeps (2026-11-15, Arthur's ask):** es/fr content sweeps passed on the SE and 17 Pro (117 screens each, all read; OCR found no English but the iOS notification prompt). Fixed on the SE: growth-screen last bullet cut off (chart shrinks first in translated layout, `GrowthProjectionScreen`/`GrowthChartView`), Spanish chart label shortened to *Con Wingman cada día*, French paywall headline under the close X (`PaywallView` trailing room when the illustration is hidden). Re-ran the onboarding sweeps in both languages to confirm. New render test `testTranslatedGrowthProjectionRendersSpanishAndFrenchOnASmallPhone`; 342 unit tests, 0 failed; string checks clean. Six prod guest users. Screens in `docs/localization-baseline/*-2026-11-15*`.
+- **Not done yet:** nothing is pushed.
+
+## Summary
+
+| Phase | Part | State |
+|---|---|---|
+| 0 | Branch and prompts | Done (2026-11-15) |
+| 0 | Language-generic scripts and tests | Done (2026-11-15) |
+| 1 | Spanish brief | Done (2026-11-15) |
+| 1 | French brief | Done (2026-11-15) |
+| 2 | Spanish UI catalogs | 585 of 585 strings drafted (2026-11-15) |
+| 2 | French UI catalogs | 585 of 585 strings drafted (2026-11-15) |
+| 3 | Spanish and French sessions | Finished 2026-11-15 (es `cf79210`, fr `9db4dfe`) |
+| Final | Merge, checks, launch checklist | Done 2026-11-15 |
+
+## Log
+
+- **2026-11-15. Branch and prompts.** `localization-release-b` had two commits not in `Shat` (`69c708b`, `893fef3`, "Final changes", 13 Nov: Xcode 26.6 upgrade check, one analyzer setting, test-target ID reorder, scheme tweaks). Asked Arthur; he chose to branch from `localization-release-b`, so `localization-release-c` starts at `893fef3` and includes them. `Shat` is unchanged. The uncommitted scheme change (Run language `de` → `en`) stays uncommitted, as the prompt says. First commit: "Release C: prompts".
+
+- **2026-11-15. Phase 0: language-generic tooling and tests.** Everything German-only now takes the locale; German output is unchanged.
+  - `project.pbxproj` `knownRegions`: added `es`, `fr`. The app code already worked for any language: the Settings picker lists the bundle's localizations and names them with `Locale` (*Español*, *Français*); `L10n.contentLanguage` uses the running localization; `QuestionTranslationSeed` loads `question_translations_seed.<lang>.json`; new files are bundled automatically (synchronized folders).
+  - `scripts/db_translations_sql.py <locale>`: reads the locale's own JSON key (it was hard-coded `"de"`), messages name the language, and it stops cleanly if `localization/<locale>/db/` doesn't exist. Regenerating German gives byte-identical SQL (24 files) and seed (765 rows): `git diff` shows nothing.
+  - `scripts/german_review_pack.py` → `scripts/review_pack.py <locale>`. The "Choices to check" rows, the "How to fill it in" rules and the Read me example now live in `localization/<locale>/review/choices.json` (German's written from the old constants). The German workbook is cell-for-cell identical (values, fonts, fills, comments, widths, validations compared). `docs/german-launch-checklist.md` points at the new command.
+  - `lesson_overlays.py`, `question_translations_seed.py`, `import_catalog_translations.py`, `check_string_catalogs.py` already took the locale; only German-only wording in two docstrings changed. `check_string_catalogs.py --languages de,es,fr --strict-lengths` passes (es and fr fall back to English everywhere).
+  - Tests: `LessonOverlayTests` allows overlays for `de`, `es`, `fr` and rejects others, and checks every bundled file of each loads. `GermanReleaseChecksTests` → `ReleaseLanguageChecksTests`: the same fallback and analytics-parity checks, run for every shipped language. German is required and its assertions are unchanged; a Spanish or French part (catalogs, all 25 overlays, all 765 quiz rows, all 15 scenario files) that isn't complete is skipped with a `note: ReleaseLanguageChecks skipped …` line in the test log. `AppLanguageSettingsTests`: Spanish and French names, and every regional tag (es-MX, es-419, es-ES, fr-CA, fr-BE…) lands on `es` / `fr`. `StringCatalogTests` and the "this build offers" test accept es/fr appearing once their catalogs exist; **tighten both to exactly en, de, es, fr after Phase 2.**
+  - `OnboardingSweepTests`: Spanish (`es`, `es_MX`) and French (`fr`, `fr_FR`) variants of both German sweeps. The lesson and scenario titles are now read from the language's overlay and DB file instead of hard-coded German; the starts of long sentences are derived from the catalog for es/fr (German keeps its hand-written list); the Daily Practice "Start" button no longer assumes the Home tab is also called "Start". Compiled, **not run**.
+  - Unit tests on "Wingman L10n 17 Pro": 341 run, 336 passed, 5 skipped, 0 failed (2 new).
+- **2026-11-15. Phase 1: Spanish brief** ([localization-es-brief.md](localization-es-brief.md)). Sections as German's, plus a glossary for the lesson session and the validator workaround. Choices taken: *tú* / *ustedes*; neutral Latin American words (*celular*, *computadora*, *carro*; no *coger*, *vale*, *guay*, *chévere*, *padre*); *acercamiento* for an approach (not *abordaje*); *frase de apertura* for opener; *concretar* for close / closing (course 15 title *Concretar*); *suscripción*; *Términos* / *Privacidad*; *Configuración* for iOS settings (Latin American iOS; Spain says *Ajustes*); *Nivel %lld*; numbers `45 %` with a no-break space (RAE/ASALE), in format strings `%lld %%`; ¿ ¡ always; curly “…” quotes; one/other plurals. **Validator:** a literal `%` followed by space + d/s/u/f/@ (or ld/lf/ll) reads as a placeholder, so Spanish *45 % de los hombres*, *45% de*, *77 % son* all fail. Workaround in the brief: reorder (*el 45 % nunca se ha acercado…*) or say it in words (*45 de cada 100 hombres*). French has the same problem (*% des*, *% sont*, *% sur*). Checked against the regex.
+- **2026-11-15. Phase 1: French brief** ([localization-fr-brief.md](localization-fr-brief.md)). Choices taken: *tu*; metropolitan French, no Québec-only words (*portable*, not *cellulaire*; no *magasiner*, *char*, *blonde*), no écriture inclusive; *aborder* / *une approche* (not *abordage*); *phrase d'accroche* for opener; **close / closing = *concrétiser*, never *conclure*** (sexual meaning in French dating talk; course 15 title *Concrétiser*); *abonnement*; *CGU* / *Confidentialité*; *Réglages*; *Niveau %lld*; `45 %` and the narrow no-break space (U+202F) before ; : ! ? and inside « »; 0 and 1 singular (iOS puts 0 in *one*, so *one* must read right for 0). Same validator workaround as Spanish (*Parmi les hommes…, 45 % n'ont jamais…*, or *près d'un homme sur deux*).
+- **2026-11-15. Phase 2: Spanish interface catalogs** (`localization/es/catalogs.es.json`, imported into both String Catalogs as "needs review"): 406 Localizable + 179 Content strings, all drafted. `check_string_catalogs.py --languages de,es,fr --strict-lengths` passes. Only `es` entries changed in the catalogs (German compared value by value). Unit tests: 341 run, 336 passed, 5 skipped; the Spanish catalog fallback and onboarding-parity checks now run instead of skipping.
+  - Paywall ticks all fit (longest 35 of 36: *Que el miedo al rechazo no te frene*, *Da el primer paso sin darle vueltas*).
+  - Price sentences: one shape for every currency, *Hoy pagas %1$@ por tu primer año; después, %2$@ al año.* The price is never a grammatical subject and no currency word sits around it, so it reads correctly with `MX$199.00`, `COP 39.900`, `ARS 4.999`, `CLP 3.990`, `29,99 €`, `CA$12.99`, `CHF 12.00`. *solo %@ a la semana* and *Pruébalo por %@* (trial button, `%@` = zero price) also hold. None break.
+  - Statistic screens use the reorder workaround: *De los hombres de 18 a 24 años, el 45 % nunca se ha acercado a una mujer* (no-break space before %).
+  - **Course titles to check against the lessons** (the Spanish session may suggest better ones): *Listo para acercarte* (Approach Readiness), *Cómo acercarte* (The Physical Approach; German changed to *Die Annäherung* for the same reason), *Lo indispensable* (Non-negotiables: fitness, grooming, style), *Concretar* (Closing), *Acercamientos según la situación* (Situational Specific Approaches), *Creencias y nuevas perspectivas* (Beliefs & Reframes), *Picardía y chispa* (Playfulness & Spark), *Bases del coqueteo* (Flirting Prerequisites), *Abrirte y mostrarte vulnerable* (Sharing & Vulnerability).
+  - Other choices for the reviewer: settings toggle reads *SÍ / NO*; Home greeting after 18:00 is *Buenas noches,* (Latin Americans still say *buenas tardes* until dark); baseball quotes became football (*El que no patea al arco, no mete gol*; *Entra a la cancha: desde la banca no se meten goles*); Gretzky became *Fallas todos los tiros que no intentas*; Nora Ephron became *sé el protagonista de tu vida*; *durazno* (Latin America) in the peach quote, *melocotón* in Spain.
+- **2026-11-15. Phase 2: French interface catalogs** (`localization/fr/catalogs.fr.json`, imported as "needs review"): 406 + 179 strings, all drafted. The strict catalog check passes for de, es, fr; only `fr` entries changed in the catalogs. Typography: narrow no-break space (U+202F) before ? ! : ; and inside « », and in `45 %` / `%lld %%`; typographic apostrophe ’.
+  - Paywall ticks all fit (longest 35 of 36: *Ne crains plus le regard des autres*).
+  - Price sentences: *Aujourd’hui, tu paies %1$@ pour ta première année, puis %2$@ par an.* The price is never the subject and no word agrees with it, so `29,99 €`, `CHF 12.00` and `12,99 $ CA` all read correctly; *seulement %@ par semaine* and *Essayer pour %@* hold. None break.
+  - **Course titles to check against the lessons:** *Prêt à aborder* (Approach Readiness), *Aller vers elle* (The Physical Approach), *Les incontournables* (Non-negotiables), *Concrétiser* (Closing; never *conclure*), *Aborder selon la situation*, *Croyances et recadrages* (Beliefs & Reframes), *Jeu et étincelle* (Playfulness & Spark), *Les bases du flirt* (Flirting Prerequisites), *Se confier et se montrer vulnérable*.
+  - Other choices: plan = *formule*; reminder toggle *OUI / NON*; Gide's quote uses his own French (*On ne découvre pas de terre nouvelle sans consentir à perdre de vue le rivage*); Sénèque's in its usual French form; Gretzky became *Tous les tirs que tu ne tentes pas sont ratés d’avance*.
+  - Tests tightened as planned: `StringCatalogTests` and `AppLanguageSettingsTests` now require exactly en, de, es, fr in the bundle. 341 run, 336 passed, 5 skipped. Spanish and French catalog fallback and onboarding-parity checks run and pass; only their lessons, quiz and scenarios are still skipped (not translated yet).
+  - Review packs: seeded `localization/es/review/choices.json` and `localization/fr/review/choices.json` with the rules and the interface choices above, so `python3 scripts/review_pack.py es|fr` already builds. The language sessions add their lesson and database choices. German's pack is still cell-for-cell identical.
+- **2026-11-15. Phase 3: hand-off.** Working tree clean apart from the uncommitted scheme change. Starting the sessions directly was refused by the app (this turn was woken by the loop's timer, not by Arthur), so both are proposed as cards instead: "Wingman Spanish (Release C)" (`task_cfea173c`) and "Wingman French (Release C)" (`task_caceae03`), Opus, fresh context, own worktree, each with the full text of its prompt file. Cards expire after 7 days. The setup loop is stopped. Arthur started both cards the same night: Spanish `local_62c3374a-8126-4bf2-9d24-93e13f33d5fe`, French `local_f45151bc-13ff-4b5b-98b0-c07fffcff746`.
+
+- **2026-11-15. Final step: merge, checks, launch checklist** (Arthur asked).
+  - **Language sessions:** both finished overnight. Spanish ended at `cf79210` (67 commits) and French at `9db4dfe`.
+  - **Merge:** both branches were cut from `9b623ac` and share no files, so `--no-ff` merges `8e504a5` (es) and `cb729af` (fr) went in with no conflicts.
+  - **render.sh:** `marketing/app-store-assets/render.sh` now also renders the `-es` and `-fr` banner copies when they exist. The English output is unchanged. It was not run.
+  - **Checks:**
+    - `check_string_catalogs.py --languages de,es,fr --strict-lengths` passes.
+    - `lesson_overlays.py check` passes for de, es and fr (1,531 of 1,531 items each).
+    - `db_translations_sql.py` regenerates all three byte-identically.
+    - `question_translations_seed.py --check` passes for all three (765 each).
+  - **Unit tests** on "Wingman L10n 17 Pro": 341 run, 336 passed, 5 skipped by design, 0 failed. There are no `ReleaseLanguageChecks skipped` notes any more, so the fallback and parity checks now run in full for es and fr. The three "unreadable" warnings in the log come from tests that write corrupt files on purpose; they appear in every run.
+  - **Checklist:** wrote [release-c-launch-checklist.md](release-c-launch-checklist.md), modelled on the German one. It gathers the items the two sessions left for Arthur.
+
+## Questions for Arthur
+
+None open here. Everything the language sessions left for Arthur is now in [release-c-launch-checklist.md](release-c-launch-checklist.md).

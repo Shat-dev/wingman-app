@@ -14,10 +14,14 @@ render() { # name width height
     --window-size=$2,$3 --screenshot="png/$1$suffix.png" "file://$PWD/$1.html$query" 2>/dev/null
 }
 
-render header-a 3840 1646
-render header-b 3840 1646
-render search-a 3840 2560
-render search-b 3840 2560
+# English, then each translated copy that exists (header-a-es.html, …).
+for lang in "" -es -fr; do
+  [[ -f header-a$lang.html ]] || continue
+  render header-a$lang 3840 1646
+  render header-b$lang 3840 1646
+  render search-a$lang 3840 2560
+  render search-b$lang 3840 2560
+done
 
 # Apple rejects images with an alpha channel; also make a 1920×1280 search size.
 python3 - "$suffix" <<'EOF'

@@ -1,0 +1,314 @@
+{
+  "scenario": {
+    "a1000009-0000-0000-0000-000000000009": {
+      "title": {
+        "en": "Carton Collision",
+        "es": "La última caja de huevos"
+      },
+      "summary": {
+        "en": "Two hands reach at once. How you handle it decides what comes next.",
+        "es": "Dos manos van por lo mismo al mismo tiempo. Cómo lo manejes decide lo que viene después."
+      }
+    }
+  },
+  "screens": {
+    "b1000001-0000-0000-0009-000000000001": {
+      "en": "You're at the grocery store. Dairy aisle. Looking for a carton of eggs.",
+      "es": "Estás en el supermercado, en el pasillo de los lácteos, buscando una caja de huevos."
+    },
+    "b1000002-0000-0000-0009-000000000002": {
+      "en": "There's one left and you notice a woman also walking towards it.",
+      "es": "Queda una sola y te das cuenta de que una mujer también va hacia ella."
+    },
+    "b1000003-0000-0000-0009-000000000003": {
+      "en": "The two of you make eye contact and realize you're both going for it.",
+      "es": "Cruzan miradas y se dan cuenta de que los dos van por la misma."
+    },
+    "b1000004-0000-0000-0009-000000000004": {
+      "en": "She's looking at you. Waiting to see what you do.",
+      "es": "Ella te mira. Espera a ver qué haces."
+    },
+    "b1000051-0000-0000-0009-000000000051": {
+      "en": "Sorry, sorry, you can have it.",
+      "es": "Perdón, perdón, llévatela tú."
+    },
+    "b1000052-0000-0000-0009-000000000052": {
+      "en": "Over-apologizing weakens your frame. Be confident and light about it.",
+      "es": "Disculparte de más debilita tu actitud. Tómatelo con seguridad y ligereza."
+    },
+    "b1000053-0000-0000-0009-000000000053": {
+      "en": "What do you need it for?",
+      "es": "¿Para qué la necesitas?"
+    },
+    "b1000054-0000-0000-0009-000000000054": {
+      "en": "Interrogating her can feel invasive. Keep it light about the moment itself first.",
+      "es": "Interrogarla puede sentirse invasivo. Primero mantén la ligereza sobre el momento en sí."
+    },
+    "b1000006-0000-0000-0009-000000000006": {
+      "en": "Looks like we both got good taste.",
+      "es": "Parece que los dos tenemos buen gusto."
+    },
+    "b1000007-0000-0000-0009-000000000007": {
+      "en": "Haha it appears so.",
+      "es": "Jaja, eso parece."
+    },
+    "b1000008-0000-0000-0009-000000000008": {
+      "en": "Scissors paper rock for it?",
+      "es": "¿Piedra, papel o tijera?"
+    },
+    "b1000009-0000-0000-0009-000000000009": {
+      "en": "You're serious? Okay, let's do it.",
+      "es": "¿En serio? Bueno, vamos."
+    },
+    "b1000010-0000-0000-0009-000000000010": {
+      "en": "Playful challenge created. She's matching your energy.",
+      "es": "Creaste un reto juguetón. Ella te sigue el juego."
+    },
+    "b1000011-0000-0000-0009-000000000011": {
+      "en": "You play. She wins. Rock beats scissors. She's grinning, victorious.",
+      "es": "Juegan. Gana ella. Piedra le gana a tijera. Sonríe, victoriosa."
+    },
+    "b1000121-0000-0000-0009-000000000121": {
+      "en": "Wait, best of three. That's how it works.",
+      "es": "Espera, es el que gane dos de tres. Así se juega."
+    },
+    "b1000122-0000-0000-0009-000000000122": {
+      "en": "Changing rules after losing is childish. Accept defeat with grace and humor.",
+      "es": "Cambiar las reglas después de perder es infantil. Acepta la derrota con elegancia y humor."
+    },
+    "b1000123-0000-0000-0009-000000000123": {
+      "en": "Actually eggs are bad for your cholesterol anyway, you have it.",
+      "es": "La verdad es que los huevos son malos para el colesterol; quédatela tú."
+    },
+    "b1000124-0000-0000-0009-000000000124": {
+      "en": "Being sour kills the playful energy. Don't diminish what she won.",
+      "es": "Ponerte amargado mata la energía juguetona. No le restes valor a lo que ganó."
+    },
+    "b1000013-0000-0000-0009-000000000013": {
+      "en": "Fair and square. So what's on the menu with the eggs?",
+      "es": "Ganaste limpiamente. ¿Y qué vas a preparar con los huevos?"
+    },
+    "b1000014-0000-0000-0009-000000000014": {
+      "en": "Making brownies actually. Sunday baking tradition.",
+      "es": "Brownies, la verdad. Es mi tradición de hornear los domingos."
+    },
+    "b1000015-0000-0000-0009-000000000015": {
+      "en": "She's smiling. Sharing personal routine. Good sign of openness and engagement.",
+      "es": "Está sonriendo. Te cuenta algo de su rutina. Buena señal de que está abierta e interesada."
+    },
+    "b1000161-0000-0000-0009-000000000161": {
+      "en": "Who do you bake them for? Someone special?",
+      "es": "¿Para quién los haces? ¿Para alguien especial?"
+    },
+    "b1000162-0000-0000-0009-000000000162": {
+      "en": "Asking if she has a partner or who she's cooking for is too invasive early on.",
+      "es": "Preguntarle si tiene pareja o para quién cocina es demasiado invasivo tan pronto."
+    },
+    "b1000163-0000-0000-0009-000000000163": {
+      "en": "I bake too actually. I made a chocolate chip cookie...",
+      "es": "Yo también horneo, la verdad. Una vez hice unas galletas con chispas de chocolate…"
+    },
+    "b1000164-0000-0000-0009-000000000164": {
+      "en": "She shared her tradition. Keep focus on her first, don't make it about yourself yet.",
+      "es": "Te contó su tradición. Céntrate primero en ella; no hables de ti todavía."
+    },
+    "b1000017-0000-0000-0009-000000000017": {
+      "en": "That's a cool tradition to have. How long you been doing it for?",
+      "es": "Qué buena tradición. ¿Desde cuándo lo haces?"
+    },
+    "b1000018-0000-0000-0009-000000000018": {
+      "en": "Since I moved out on my own last year actually.",
+      "es": "Desde que me fui a vivir sola el año pasado, la verdad."
+    },
+    "b1000019-0000-0000-0009-000000000019": {
+      "en": "Was a good way to pass time and now it's my thing.",
+      "es": "Era una buena forma de pasar el tiempo y ahora es lo mío."
+    },
+    "b1000201-0000-0000-0009-000000000201": {
+      "en": "Living alone is awesome though, right? So much freedom.",
+      "es": "Pero vivir solo está genial, ¿no? Tienes mucha libertad."
+    },
+    "b1000202-0000-0000-0009-000000000202": {
+      "en": "Responding with positivity may dismiss her experience. Listen to subtext.",
+      "es": "Responder con positividad puede restarle importancia a lo que vivió. Escucha lo que no dice."
+    },
+    "b1000203-0000-0000-0009-000000000203": {
+      "en": "Oh nice, what else do you bake besides brownies?",
+      "es": "Qué bien, ¿y qué más horneas además de brownies?"
+    },
+    "b1000204-0000-0000-0009-000000000204": {
+      "en": "She expressed a struggle and a reason. Missing that loses connection.",
+      "es": "Te contó algo difícil y por qué lo hace. Si no lo captas, pierdes la conexión."
+    },
+    "b1000021-0000-0000-0009-000000000021": {
+      "en": "Yeah living alone can be like that.",
+      "es": "Sí, vivir sola a veces es así."
+    },
+    "b1000022-0000-0000-0009-000000000022": {
+      "en": "But sounds like you found something good for yourself.",
+      "es": "Pero parece que encontraste algo bueno para ti."
+    },
+    "b1000023-0000-0000-0009-000000000023": {
+      "en": "100%. It was an adjustment but baking gave me something to look forward to.",
+      "es": "Totalmente. Me costó adaptarme, pero hornear me dio algo que esperar con ganas."
+    },
+    "b1000024-0000-0000-0009-000000000024": {
+      "en": "You acknowledged the emotional subtext and she felt understood.",
+      "es": "Reconociste lo que había detrás de sus palabras y se sintió comprendida."
+    },
+    "b1000251-0000-0000-0009-000000000251": {
+      "en": "Hey I've got a recipe I can give you...",
+      "es": "Oye, tengo una receta que te puedo pasar…"
+    },
+    "b1000252-0000-0000-0009-000000000252": {
+      "en": "This can work later, for now focus on personal questions.",
+      "es": "Eso puede funcionar más tarde; por ahora céntrate en preguntas personales."
+    },
+    "b1000253-0000-0000-0009-000000000253": {
+      "en": "So do you still feel lonely on Sundays?",
+      "es": "¿Y todavía te sientes sola los domingos?"
+    },
+    "b1000254-0000-0000-0009-000000000254": {
+      "en": "She shared past feelings, not current struggle. Acknowledge the growth.",
+      "es": "Te contó cómo se sentía antes, no un problema actual. Reconoce lo que ha avanzado."
+    },
+    "b1000026-0000-0000-0009-000000000026": {
+      "en": "You look her in the eyes, smile, then introduce yourself.",
+      "es": "La miras a los ojos, sonríes y te presentas."
+    },
+    "b1000027-0000-0000-0009-000000000027": {
+      "en": "Nice to meet you, I'm Claire.",
+      "es": "Mucho gusto, soy Claire."
+    },
+    "b1000028-0000-0000-0009-000000000028": {
+      "en": "The conversation is good, you're building rapport.",
+      "es": "La conversación va bien; están creando confianza."
+    },
+    "b1000029-0000-0000-0009-000000000029": {
+      "en": "She glances at her basket. Not rushing, but aware she has shopping to finish.",
+      "es": "Mira su canasta. No tiene prisa, pero sabe que todavía le falta terminar sus compras."
+    },
+    "b1000301-0000-0000-0009-000000000301": {
+      "en": "It was nice meeting you, I'm sure I'll see you here again.",
+      "es": "Un gusto conocerte, seguro que te vuelvo a ver por aquí."
+    },
+    "b1000302-0000-0000-0009-000000000302": {
+      "en": "Hoping to run into someone again is passive. Take action, don't leave it to chance.",
+      "es": "Esperar volver a encontrarte con alguien es pasivo. Actúa; no lo dejes a la suerte."
+    },
+    "b1000031-0000-0000-0009-000000000031": {
+      "en": "Alright Claire, one more round. Rock paper scissors. If I win, I get your number.",
+      "es": "Bueno, Claire, una ronda más. Piedra, papel o tijera. Si gano yo, me das tu número."
+    },
+    "b1000032-0000-0000-0009-000000000032": {
+      "en": "Haha you're really going back to that? Okay, you're on.",
+      "es": "Jaja, ¿en serio vuelves con eso? Está bien, acepto."
+    },
+    "b1000033-0000-0000-0009-000000000033": {
+      "en": "Playful callback. She's engaged. You play, you win this time. She's smiling.",
+      "es": "Retomaste el juego con humor. Ella está metida. Juegan y esta vez ganas tú. Ella sonríe."
+    },
+    "b1000034-0000-0000-0009-000000000034": {
+      "en": "Well since you took the eggs you'll have to let me know how the brownies turn out.",
+      "es": "Bueno, como te llevaste los huevos, me vas a tener que contar cómo te quedan los brownies."
+    },
+    "b1000035-0000-0000-0009-000000000035": {
+      "en": "Haha for sure, here take my number, it's...",
+      "es": "Jaja, claro, toma, mi número es…"
+    },
+    "b1000036-0000-0000-0009-000000000036": {
+      "en": "Success. You review your interaction with Claire.",
+      "es": "Lo lograste. Repasas tu interacción con Claire."
+    },
+    "b1000037-0000-0000-0009-000000000037": {
+      "en": "You turned a random collision into a playful moment.",
+      "es": "Convertiste un choque casual en un momento juguetón."
+    },
+    "b1000038-0000-0000-0009-000000000038": {
+      "en": "You listened to subtext showing real understanding.",
+      "es": "Escuchaste lo que no decía y mostraste que de verdad la entendías."
+    },
+    "b1000039-0000-0000-0009-000000000039": {
+      "en": "You introduced yourself at the right time after building connection.",
+      "es": "Te presentaste en el momento justo, después de crear conexión."
+    },
+    "b1000040-0000-0000-0009-000000000040": {
+      "en": "And you closed well by creating a playful callback to your opener. Well done.",
+      "es": "Y concretaste bien, retomando con humor cómo empezó todo. Bien hecho."
+    }
+  },
+  "options": {
+    "c1000001-0000-0000-0009-000000000001": {
+      "en": "Acknowledge it then create a playful challenge",
+      "es": "Reconocer la situación y proponer un reto juguetón"
+    },
+    "c1000002-0000-0000-0009-000000000002": {
+      "en": "Apologize and let her have it",
+      "es": "Pedir perdón y dejar que se la lleve"
+    },
+    "c1000003-0000-0000-0009-000000000003": {
+      "en": "Ask what she needs the eggs for",
+      "es": "Preguntarle para qué necesita los huevos"
+    },
+    "c1000006-0000-0000-0009-000000000006": {
+      "en": "Say these eggs are unhealthy anyway",
+      "es": "Decir que, total, los huevos no son sanos"
+    },
+    "c1000005-0000-0000-0009-000000000005": {
+      "en": "Say you want best of three",
+      "es": "Decir que quieres jugar a dos de tres"
+    },
+    "c1000004-0000-0000-0009-000000000004": {
+      "en": "Be a good sport then ask what she's making",
+      "es": "Saber perder y preguntarle qué va a preparar"
+    },
+    "c1000009-0000-0000-0009-000000000009": {
+      "en": "Tell her about your baking experiences",
+      "es": "Contarle tus experiencias horneando"
+    },
+    "c1000008-0000-0000-0009-000000000008": {
+      "en": "Ask if she's baking for someone",
+      "es": "Preguntarle si hornea para alguien"
+    },
+    "c1000007-0000-0000-0009-000000000007": {
+      "en": "Ask about her Sunday baking tradition",
+      "es": "Preguntarle por su tradición de hornear los domingos"
+    },
+    "c1000011-0000-0000-0009-000000000011": {
+      "en": "Say that living alone is great",
+      "es": "Decir que vivir solo es genial"
+    },
+    "c1000010-0000-0000-0009-000000000010": {
+      "en": "Acknowledge the adjustment and her solution",
+      "es": "Reconocer lo que le costó adaptarse y cómo lo resolvió"
+    },
+    "c1000012-0000-0000-0009-000000000012": {
+      "en": "Ask what else she bakes",
+      "es": "Preguntarle qué más hornea"
+    },
+    "c1000013-0000-0000-0009-000000000013": {
+      "en": "Look in her eyes, smile and introduce yourself",
+      "es": "Mirarla a los ojos, sonreír y presentarte"
+    },
+    "c1000014-0000-0000-0009-000000000014": {
+      "en": "Offer to give her a baking recipe",
+      "es": "Ofrecerte a pasarle una receta"
+    },
+    "c1000015-0000-0000-0009-000000000015": {
+      "en": "Ask her if she still feels lonely",
+      "es": "Preguntarle si todavía se siente sola"
+    },
+    "c1000016-0000-0000-0009-000000000016": {
+      "en": "Rock, paper, scissors for her number",
+      "es": "Jugar piedra, papel o tijera por su número"
+    },
+    "c1000017-0000-0000-0009-000000000017": {
+      "en": "Say it was nice to meet her and you'll see her next time",
+      "es": "Decir que te dio gusto conocerla y que la verás la próxima vez"
+    },
+    "c1000018-0000-0000-0009-000000000018": {
+      "en": "Ask for her number with reference to recipes/baking",
+      "es": "Pedirle su número retomando lo de las recetas y los brownies"
+    }
+  }
+}

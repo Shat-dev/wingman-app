@@ -1,0 +1,266 @@
+{
+  "scenario": {
+    "a1000001-0000-0000-0000-000000000001": {
+      "title": {
+        "en": "Bar Window",
+        "fr": "Au bar"
+      },
+      "summary": {
+        "en": "Loud music, crowded space, short attention spans. You notice her. Do you lead or wait?",
+        "fr": "Musique forte, bar bondé, attention qui s’envole vite. Tu la remarques. Tu prends les devants ou tu attends ?"
+      }
+    }
+  },
+  "screens": {
+    "b1000001-0000-0000-0000-000000000001": {
+      "en": "After a long week of work you’ve decided to unwind and get a drink at the bar.",
+      "fr": "Après une longue semaine de travail, tu as décidé de décompresser et de prendre un verre dans un bar."
+    },
+    "b1000002-0000-0000-0000-000000000002": {
+      "en": "You enter the bar and see a girl standing by herself ordering a drink.",
+      "fr": "Tu entres dans le bar et tu vois une femme seule au comptoir, en train de commander."
+    },
+    "b1000003-0000-0000-0000-000000000003": {
+      "en": "She glances over at you briefly, smiles, then faces back to the bar.",
+      "fr": "Elle te jette un bref regard, sourit, puis se retourne vers le comptoir."
+    },
+    "b1000041-0000-0000-0000-000000000041": {
+      "en": "You wait a while but by then another man starts talking to her.",
+      "fr": "Tu attends un moment, mais entre-temps, un autre homme a commencé à lui parler."
+    },
+    "b1000042-0000-0000-0000-000000000042": {
+      "en": "Night environments change quickly. Hesitation turns signals into missed chances.",
+      "fr": "Le soir, tout change vite. L’hésitation transforme les signaux en occasions manquées."
+    },
+    "b1000005-0000-0000-0000-000000000005": {
+      "en": "You walk over with relaxed energy. No hesitation. Arms swinging naturally.",
+      "fr": "Tu t’approches, détendu. Sans hésiter. Les bras qui se balancent naturellement."
+    },
+    "b1000006-0000-0000-0000-000000000006": {
+      "en": "You get closer and she's still facing the bar.",
+      "fr": "Tu te rapproches, et elle est toujours tournée vers le comptoir."
+    },
+    "b1000071-0000-0000-0000-000000000071": {
+      "en": "You stand a few feet away. Waiting. She picks up her drink, then she turns and leaves.",
+      "fr": "Tu restes à un mètre ou deux. Tu attends. Elle prend son verre, se retourne et s’en va."
+    },
+    "b1000072-0000-0000-0000-000000000072": {
+      "en": "You need to create the interaction, not wait for it to happen to you.",
+      "fr": "C’est à toi de créer l’échange, pas d’attendre qu’il t’arrive."
+    },
+    "b1000073-0000-0000-0000-000000000073": {
+      "en": "She turns, startled. Declines your offer as she already has a drink.",
+      "fr": "Elle se retourne, surprise. Elle décline ta proposition, elle a déjà un verre."
+    },
+    "b1000074-0000-0000-0000-000000000074": {
+      "en": "Shoulder tap was invasive. Drink offer before rapport made it transactional.",
+      "fr": "Toucher son épaule était intrusif. Proposer un verre avant toute complicité a rendu l’échange intéressé."
+    },
+    "b1000008-0000-0000-0000-000000000008": {
+      "en": "Let me guess, vodka lemonade?",
+      "fr": "Laisse-moi deviner : vodka-pomme ?"
+    },
+    "b1000009-0000-0000-0000-000000000009": {
+      "en": "Vodka soda, actually. Close though.",
+      "fr": "Vodka-tonic, en fait. Mais pas loin."
+    },
+    "b1000010-0000-0000-0000-000000000010": {
+      "en": "She's engaged and shifts to face you, smiling. Holding eye contact.",
+      "fr": "Elle est dans l’échange et se tourne vers toi en souriant. Elle soutient ton regard."
+    },
+    "b1000111-0000-0000-0000-000000000111": {
+      "en": "Umm... Maybe later, I still have this one.",
+      "fr": "Euh… Peut-être plus tard, j’ai encore celui-là."
+    },
+    "b1000112-0000-0000-0000-000000000112": {
+      "en": "Attraction isn't transactional. She was already engaged.",
+      "fr": "L’attirance ne s’achète pas. Elle était déjà dans l’échange."
+    },
+    "b1000113-0000-0000-0000-000000000113": {
+      "en": "She responds with \"Marketing, what about you?\" but her energy is off.",
+      "fr": "Elle répond « Dans le marketing, et toi ? », mais son énergie n’y est plus."
+    },
+    "b1000114-0000-0000-0000-000000000114": {
+      "en": "Nightclubs are playful and spontaneous. Interview questions kill the vibe.",
+      "fr": "En soirée, on est dans le jeu et la spontanéité. Les questions d’entretien d’embauche tuent l’ambiance."
+    },
+    "b1000012-0000-0000-0000-000000000012": {
+      "en": "Healthy choice. What brings you here tonight?",
+      "fr": "Choix raisonnable. Qu’est-ce qui t’amène ici ce soir ?"
+    },
+    "b1000013-0000-0000-0000-000000000013": {
+      "en": "We're just celebrating our friend's birthday tonight...",
+      "fr": "On fête l’anniversaire d’une amie ce soir…"
+    },
+    "b1000014-0000-0000-0000-000000000014": {
+      "en": "I hope they won't be annoyed that I've stolen you away from them then.",
+      "fr": "J’espère qu’elles ne m’en voudront pas de t’avoir volée à elles, alors."
+    },
+    "b1000015-0000-0000-0000-000000000015": {
+      "en": "Hahaha I'm sure they'll live.",
+      "fr": "Hahaha, elles survivront, j’en suis sûre."
+    },
+    "b1000016-0000-0000-0000-000000000016": {
+      "en": "You're still talking at the bar. She's laughing, leaning in close. The energy is good.",
+      "fr": "Vous discutez toujours au comptoir. Elle rit et se penche vers toi. L’ambiance est bonne."
+    },
+    "b1000017-0000-0000-0000-000000000017": {
+      "en": "However the bar's getting busier now. People keep bumping into her.",
+      "fr": "Mais le bar se remplit. Les gens n’arrêtent pas de la bousculer."
+    },
+    "b1000181-0000-0000-0000-000000000181": {
+      "en": "You keep talking and someone bumps her. She spills her drink.",
+      "fr": "Tu continues à parler, et quelqu’un la bouscule. Elle renverse son verre."
+    },
+    "b1000182-0000-0000-0000-000000000182": {
+      "en": "Notice discomfort and adjust. Ignoring it shows that you're oblivious.",
+      "fr": "Remarque son inconfort et adapte-toi. L’ignorer montre que tu ne fais pas attention."
+    },
+    "b1000183-0000-0000-0000-000000000183": {
+      "en": "Someone bumps her. You push them and Sophie steps back.",
+      "fr": "Quelqu’un la bouscule. Tu le repousses, et Sophie recule."
+    },
+    "b1000184-0000-0000-0000-000000000184": {
+      "en": "Overprotecting signals insecurity. She needs leadership, not a bodyguard.",
+      "fr": "Trop la protéger trahit de l’insécurité. Elle a besoin que tu prennes les choses en main, pas d’un garde du corps."
+    },
+    "b1000019-0000-0000-0000-000000000019": {
+      "en": "Hey it's getting busy here, let's go sit down over there.",
+      "fr": "Ça commence à être bondé ici, viens, on va s’asseoir là-bas."
+    },
+    "b1000020-0000-0000-0000-000000000020": {
+      "en": "Sophie agrees and you move to a quieter spot together alone.",
+      "fr": "Sophie accepte, et vous allez tous les deux dans un coin plus calme."
+    },
+    "b1000021-0000-0000-0000-000000000021": {
+      "en": "The two of you continue your conversation sitting down, the vibe is intimate.",
+      "fr": "Vous continuez votre conversation assis, l’ambiance est intime."
+    },
+    "b1000022-0000-0000-0000-000000000022": {
+      "en": "However you see one of her friends approaching and hovering nearby.",
+      "fr": "Mais tu vois l’une de ses amies s’approcher et rester dans les parages."
+    },
+    "b1000231-0000-0000-0000-000000000231": {
+      "en": "You keep talking and her friend comes and pulls Sophie away.",
+      "fr": "Tu continues à parler, et son amie vient chercher Sophie et l’emmène."
+    },
+    "b1000232-0000-0000-0000-000000000232": {
+      "en": "Inclusion reduces social tension and preserves control. Acknowledge her friends.",
+      "fr": "Inclure les autres réduit la tension sociale et te garde maître de la situation. Salue ses amies."
+    },
+    "b1000024-0000-0000-0000-000000000024": {
+      "en": "Hey, Happy Birthday, how are you?",
+      "fr": "Salut, joyeux anniversaire ! Ça va ?"
+    },
+    "b1000025-0000-0000-0000-000000000025": {
+      "en": "Her friend laughs and answers your question.",
+      "fr": "Son amie rit et te répond."
+    },
+    "b1000026-0000-0000-0000-000000000026": {
+      "en": "However, she informs Sophie that their Uber is here and they have to leave.",
+      "fr": "Mais elle annonce à Sophie que leur Uber est arrivé et qu’elles doivent partir."
+    },
+    "b1000027-0000-0000-0000-000000000027": {
+      "en": "Sophie gets up to leave with her friend.",
+      "fr": "Sophie se lève pour partir avec son amie."
+    },
+    "b1000281-0000-0000-0000-000000000281": {
+      "en": "Well it was nice to meet you. Goodbye Sophie.",
+      "fr": "Bon, ravi de t’avoir rencontrée. Salut, Sophie."
+    },
+    "b1000282-0000-0000-0000-000000000282": {
+      "en": "She was engaged and receptive. But you never closed, the story ends there.",
+      "fr": "Elle était dans l’échange et réceptive. Mais tu n’as jamais concrétisé, et l’histoire s’arrête là."
+    },
+    "b1000029-0000-0000-0000-000000000029": {
+      "en": "Hey before you leave add my Instagram.",
+      "fr": "Avant que tu partes, ajoute-moi sur Instagram."
+    },
+    "b1000030-0000-0000-0000-000000000030": {
+      "en": "Sophie pulls out her phone and adds you happily and leaves after. Success.",
+      "fr": "Sophie sort son téléphone, t’ajoute avec plaisir, puis s’en va. Réussi."
+    },
+    "b1000031-0000-0000-0000-000000000031": {
+      "en": "You review your interaction with Sophie tonight.",
+      "fr": "Tu repenses à ton échange avec Sophie ce soir."
+    },
+    "b1000032-0000-0000-0000-000000000032": {
+      "en": "You opened naturally and kept it playful instead of transactional.",
+      "fr": "Tu as engagé la conversation naturellement et tu es resté dans le jeu au lieu d’être intéressé."
+    },
+    "b1000033-0000-0000-0000-000000000033": {
+      "en": "You read the environment well by moving from the bar and also greeting her friend.",
+      "fr": "Tu as bien lu la situation en quittant le comptoir et en saluant aussi son amie."
+    },
+    "b1000034-0000-0000-0000-000000000034": {
+      "en": "And you had an enjoyable fun conversation. Well done.",
+      "fr": "Et vous avez eu une conversation vraiment agréable. Bien joué."
+    }
+  },
+  "options": {
+    "c1000001-0000-0000-0000-000000000001": {
+      "en": "Wait and scout out the venue first",
+      "fr": "Attendre et faire d’abord le tour du bar"
+    },
+    "c1000002-0000-0000-0000-000000000002": {
+      "en": "Try make eye contact again then go",
+      "fr": "Essayer de croiser son regard encore, puis y aller"
+    },
+    "c1000003-0000-0000-0000-000000000003": {
+      "en": "Start walking towards her",
+      "fr": "Commencer à marcher vers elle"
+    },
+    "c1000004-0000-0000-0000-000000000004": {
+      "en": "Stand behind her and wait for her to turn around",
+      "fr": "Rester derrière elle et attendre qu’elle se retourne"
+    },
+    "c1000005-0000-0000-0000-000000000005": {
+      "en": "Stand beside her and open with a light comment",
+      "fr": "Te mettre à côté d’elle et lancer une remarque légère"
+    },
+    "c1000006-0000-0000-0000-000000000006": {
+      "en": "Tap her shoulder and offer to buy her a drink",
+      "fr": "Lui taper sur l’épaule et lui proposer un verre"
+    },
+    "c1000007-0000-0000-0000-000000000007": {
+      "en": "Ask to buy her next drink after she's done",
+      "fr": "Proposer de lui offrir le prochain verre quand elle aura fini"
+    },
+    "c1000008-0000-0000-0000-000000000008": {
+      "en": "Build on her answer then ask what brings her here tonight",
+      "fr": "Rebondir sur sa réponse, puis lui demander ce qui l’amène ce soir"
+    },
+    "c1000009-0000-0000-0000-000000000009": {
+      "en": "Ask her what she does for work",
+      "fr": "Lui demander ce qu’elle fait dans la vie"
+    },
+    "c1000010-0000-0000-0000-000000000010": {
+      "en": "Suggest moving to a quieter spot",
+      "fr": "Proposer d’aller dans un coin plus calme"
+    },
+    "c1000011-0000-0000-0000-000000000011": {
+      "en": "Ignore it and keep talking",
+      "fr": "L’ignorer et continuer à parler"
+    },
+    "c1000012-0000-0000-0000-000000000012": {
+      "en": "Start pushing people away from her",
+      "fr": "Commencer à repousser les gens autour d’elle"
+    },
+    "c1000013-0000-0000-0000-000000000013": {
+      "en": "Smile at the friend and greet her",
+      "fr": "Sourire à son amie et la saluer"
+    },
+    "c1000014-0000-0000-0000-000000000014": {
+      "en": "Ignore her and keep talking to Sophie",
+      "fr": "L’ignorer et continuer à parler à Sophie"
+    },
+    "c1000015-0000-0000-0000-000000000015": {
+      "en": "Say \"It was nice to meet you\" and leave it",
+      "fr": "Dire « Ravi de t’avoir rencontrée » et en rester là"
+    },
+    "c1000016-0000-0000-0000-000000000016": {
+      "en": "Ask for her details before she leaves",
+      "fr": "Lui demander ses coordonnées avant qu’elle parte"
+    }
+  }
+}

@@ -50,7 +50,7 @@ Steps 1, 2 and 3 run in parallel. Steps 4 to 6 fit in while the proofreader work
 
 ### 1a. Build a review pack (Claude) ✅ done 2026-11-12
 
-**The pack:** [`localization/de/review/wingman-german-review-pack.xlsx`](../localization/de/review/wingman-german-review-pack.xlsx). Rebuild it after any German change with `python3 scripts/german_review_pack.py`.
+**The pack:** [`localization/de/review/wingman-german-review-pack.xlsx`](../localization/de/review/wingman-german-review-pack.xlsx). Rebuild it after any German change with `python3 scripts/review_pack.py de` (choices and rules in `localization/de/review/choices.json`).
 
 It's one Excel workbook with six sheets:
 - **Read me:** what the app is, the house rules, and how to fill the sheets in.
@@ -230,7 +230,7 @@ Each automated screenshot sweep creates a real guest user in production, and a R
 2. **A real iPhone set to German:** Settings → General → Language & Region → iPhone Language → Deutsch. Or set only Wingman: Settings → Wingman → Language. Check that the iOS permission pop-ups, such as notifications, appear in German. The simulator showed them in English only because its own language was English.
 3. **German notifications:** allow them, then trigger or wait for a reminder. Non-subscribers get one a day after onboarding; there's also the daily lesson reminder.
 4. **More lessons on screen:** so far only lesson 1_1 was checked on screen. Open the first lesson of a few other courses (6, 12, 17, 22) and one long lesson on the smallest iPhone you can get.
-5. **Fallback check** (Claude): hide a few German strings and rows, and confirm English appears instead of a blank. The plan's exit gate asks for this. ✅ Done 2026-11-13: `GermanReleaseChecksTests`.
+5. **Fallback check** (Claude): hide a few German strings and rows, and confirm English appears instead of a blank. The plan's exit gate asks for this. ✅ Done 2026-11-13: `GermanReleaseChecksTests` (since Release C `ReleaseLanguageChecksTests`, which runs the same checks for de, es and fr).
 6. **Analytics parity in German** (Claude): analytics event names and values must be identical to English, so your dashboards keep working. ✅ Done 2026-11-13: identical, except `error_message` on four failure events, which follows the app's language (see the progress log).
 7. **If the review changed a lot of wording,** re-run the German sweep on the SE and the 17 Pro (Claude, with your go-ahead).
 

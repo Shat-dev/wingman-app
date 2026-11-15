@@ -250,6 +250,51 @@ final class OnboardingScreenRenderTests: XCTestCase {
         XCTAssertGreaterThan(try inkShare(of: image, in: CGRect(x: 24, y: 0, width: size.width - 48, height: 120)), 0.01)
     }
 
+    /// The real Spanish and French copy on an iPhone SE. Before 2026-11-15
+    /// the fit test read the chart at its full 260pt, so these scrolled and
+    /// left the last bullet cut off at the fold; now the chart shrinks first,
+    /// as it does in English. Whether the last bullet is whole is not
+    /// something a pixel count tells reliably, so the attachments
+    /// ("translated-growth-<lang>-375x580") are the proof to look at; the
+    /// assertion only guards the Continue button. (German's three-line
+    /// headline still needs the scroll fallback on an SE.)
+    func testTranslatedGrowthProjectionRendersSpanishAndFrenchOnASmallPhone() throws {
+        let copy: [String: [String]] = [
+            "es": ["Construye la seguridad para actuar cuando importa", "3 veces",
+                   "más progreso que ver videos de consejos genéricos",
+                   "Lecciones cortas para el trayecto o la hora de la comida",
+                   "Técnicas con base científica que sí se te quedan",
+                   "Con Wingman cada día", "Sin hacer nada"],
+            "fr": ["Gagne l’assurance d’agir quand ça compte", "3 fois",
+                   "plus de progrès qu’en regardant des vidéos de conseils génériques",
+                   "Des leçons courtes, à faire dans les transports ou pendant la pause déjeuner",
+                   "Des techniques fondées sur la science, qui restent",
+                   "Avec Wingman chaque jour", "Ne rien faire"]
+        ]
+        try useATranslatedApp()
+        let size = Self.small
+        let icons = GrowthProjectionContent.default.bullets.map(\.systemImage)
+        for (language, text) in copy.sorted(by: { $0.key < $1.key }) {
+            let content = GrowthProjectionContent(
+                headline: text[0],
+                bullets: [
+                    .init(systemImage: icons[0], emphasis: text[1], text: text[2]),
+                    .init(systemImage: icons[1], emphasis: nil, text: text[3]),
+                    .init(systemImage: icons[2], emphasis: nil, text: text[4])
+                ],
+                positiveLabel: text[5], negativeLabel: text[6], footnote: nil
+            )
+            let image = try draw(
+                GrowthProjectionScreen(content: content, onContinue: {}),
+                size: size, name: "translated-growth-\(language)-\(tag(size))", wait: 3.5
+            )
+            XCTAssertGreaterThan(
+                try inkShare(of: image, in: CGRect(x: 30, y: size.height - 62, width: size.width - 60, height: 40)), 0.7,
+                language
+            )
+        }
+    }
+
     func testTranslatedGrowthProjectionMatchesEnglishWhenTheTextFits() throws {
         let size = Self.sizes[1]
         let english = try draw(GrowthProjectionScreen(onContinue: {}), size: size, name: "english-again-growth-\(tag(size))", wait: 3.5)

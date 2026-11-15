@@ -24,13 +24,34 @@ final class AppLanguageSettingsTests: XCTestCase {
         XCTAssertEqual(AppLanguageSettings.availableLanguageCodes(localizations: ["de", "Base", "en", "fr"]), ["en", "de", "fr"])
     }
 
-    func testThisBuildOffersEnglishAndGerman() {
-        XCTAssertEqual(AppLanguageSettings.availableLanguageCodes, ["en", "de"])
+    func testThisBuildOffersEnglishGermanSpanishAndFrench() {
+        XCTAssertEqual(AppLanguageSettings.availableLanguageCodes, ["en", "de", "es", "fr"])
+    }
+
+    /// The Settings menu lists every shipped language under its own name.
+    func testTheMenuListsSpanishAndFrenchByTheirOwnNames() {
+        let codes = AppLanguageSettings.availableLanguageCodes(localizations: ["Base", "en", "de", "es", "fr"])
+        XCTAssertEqual(codes, ["en", "de", "es", "fr"])
+        XCTAssertEqual(codes.map(AppLanguageSettings.name(of:)), ["English", "Deutsch", "Español", "Français"])
     }
 
     func testLanguagesAreNamedInTheirOwnLanguage() {
         XCTAssertEqual(AppLanguageSettings.name(of: "en"), "English")
         XCTAssertEqual(AppLanguageSettings.name(of: "de"), "Deutsch")
+        XCTAssertEqual(AppLanguageSettings.name(of: "es"), "Español")
+        XCTAssertEqual(AppLanguageSettings.name(of: "fr"), "Français")
+    }
+
+    /// One Spanish and one French: every regional variant iOS stores lands on
+    /// `es` or `fr` (Release C ships no es-419, es-MX or fr-CA).
+    func testRegionalSpanishAndFrenchChoicesMapToTheOneShippedLanguage() {
+        let available = ["en", "de", "es", "fr"]
+        for stored in ["es", "es-MX", "es-ES", "es-419", "es-US", "es-CO", "es-AR"] {
+            XCTAssertEqual(AppLanguageSettings.selectedLanguageCode(stored: [stored], available: available, running: "en"), "es", stored)
+        }
+        for stored in ["fr", "fr-FR", "fr-CA", "fr-BE", "fr-CH"] {
+            XCTAssertEqual(AppLanguageSettings.selectedLanguageCode(stored: [stored], available: available, running: "en"), "fr", stored)
+        }
     }
 
     func testChosenLanguageFollowsTheStoredChoice() {

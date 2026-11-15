@@ -1,25 +1,28 @@
 #!/usr/bin/env python3
 """Turn reviewed-side-by-side translation files into SQL for the translation tables.
 
-    python3 scripts/db_translations_sql.py de
-        Reads every localization/de/db/*.json and writes the matching
-        supabase/seed/content_translations_de/<same name>.sql. Exits non-zero on
-        a problem.
+    python3 scripts/db_translations_sql.py <locale>      (de, es, fr)
+        Reads every localization/<locale>/db/*.json and writes the matching
+        supabase/seed/content_translations_<locale>/<same name>.sql, then the
+        bundled Wingman/Content/question_translations_seed.<locale>.json.
+        Exits non-zero on a problem.
 
-Each JSON file holds English and German side by side, so a reviewer reads it
-directly. The English is a copy of the live row at the time of export: the
-SQL only ever writes the German, keyed by the row's id.
+Each JSON file holds English and the translation side by side, so a reviewer
+reads it directly. The English is a copy of the live row at the time of
+export: the SQL only ever writes the translation, keyed by the row's id. The
+translation sits under the locale's own key ("de", "es", "fr"):
 
-  {"scenario":  {"<scenario id>": {"title": {"en", "de"}, "summary": {"en", "de"}}},
-   "screens":   {"<screen id>":   {"en", "de"}},
-   "options":   {"<option id>":   {"en", "de"}},
-   "questions": {"<question id>": {"question_text": {"en", "de"},
-                                   "options": {"en": [...], "de": [...]},
-                                   "explanation": {"en", "de"}}}}
+  {"scenario":  {"<scenario id>": {"title": {"en", "<locale>"}, "summary": {"en", "<locale>"}}},
+   "screens":   {"<screen id>":   {"en", "<locale>"}},
+   "options":   {"<option id>":   {"en", "<locale>"}},
+   "questions": {"<question id>": {"question_text": {"en", "<locale>"},
+                                   "options": {"en": [...], "<locale>": [...]},
+                                   "explanation": {"en", "<locale>"}}}}
 
-Checks: every id is a UUID, no German text is blank, no German text still
-equals a non-trivial English text (a sign it was skipped), and a question's
-German options have exactly as many entries as its English options (the
+Checks: every id is a UUID, no translated text is blank, no translated text
+still equals a non-trivial English text (a sign it was skipped), and a
+question's translated options have exactly as many entries as its English
+options (the
 database trigger rejects anything else, and correctness is an index into that
 array).
 
@@ -45,15 +48,23 @@ def lit(text):
     return "'" + text.replace("'", "''") + "'"
 
 
-def check_text(where, pair, problems):
-    de = pair.get("de")
+LANGUAGE_NAMES = {"de": "German", "es": "Spanish", "fr": "French"}
+
+
+def language_name(locale):
+    return LANGUAGE_NAMES.get(locale, locale)
+
+
+def check_text(where, pair, problems, locale):
+    text = pair.get(locale)
     en = pair.get("en", "")
-    if not isinstance(de, str) or not de.strip():
-        problems.append(f"{where}: German text is missing or blank")
+    name = language_name(locale)
+    if not isinstance(text, str) or not text.strip():
+        problems.append(f"{where}: {name} text is missing or blank")
         return None
-    if len(en.split()) > 3 and de.strip() == en.strip():
-        problems.append(f"{where}: German text is identical to the English")
-    return de
+    if len(en.split()) > 3 and text.strip() == en.strip():
+        problems.append(f"{where}: {name} text is identical to the English")
+    return text
 
 
 def build(path, locale, problems):
@@ -74,8 +85,8 @@ def build(path, locale, problems):
     for sid, fields in data.get("scenario", {}).items():
         if not need_uuid("scenario", sid):
             continue
-        title = check_text(f"{path.name} scenario {sid} title", fields["title"], problems)
-        summary = check_text(f"{path.name} scenario {sid} summary", fields["summary"], problems)
+        title = check_text(f"{path.name} scenario {sid} title", fields["title"], problems, locale)
+        summary = check_text(f"{path.name} scenario {sid} summary", fields["summary"], problems, locale)
         if title and summary:
             out.append(
                 "insert into public.scenario_translations (scenario_id, locale, title, summary) values "
@@ -90,7 +101,7 @@ def build(path, locale, problems):
         for rid, pair in data.get(section, {}).items():
             if not need_uuid(key_name, rid):
                 continue
-            text = check_text(f"{path.name} {key_name} {rid}", pair, problems)
+            text = check_text(f"{path.name} {key_name} {rid}", pair, problems, locale)
             if text:
                 out.append(
                     f"insert into public.{table} ({column}, locale, text) values "
@@ -102,20 +113,24 @@ def build(path, locale, problems):
         if not need_uuid("question", qid):
             continue
         where = f"{path.name} question {qid}"
-        qtext = check_text(where + " text", fields["question_text"], problems)
+        qtext = check_text(where + " text", fields["question_text"], problems, locale)
         explanation = None
         if fields.get("explanation") is not None:
-            explanation = check_text(where + " explanation", fields["explanation"], problems)
+            explanation = check_text(where + " explanation", fields["explanation"], problems, locale)
+        name = language_name(locale)
         opts_en = fields["options"]["en"]
-        opts_de = fields["options"]["de"]
-        if len(opts_de) != len(opts_en):
-            problems.append(f"{where}: {len(opts_de)} German options for {len(opts_en)} English")
+        opts_tr = fields["options"].get(locale)
+        if not isinstance(opts_tr, list):
+            problems.append(f"{where}: {name} options are missing")
             continue
-        if any(not isinstance(o, str) or not o.strip() for o in opts_de):
-            problems.append(f"{where}: a German option is blank")
+        if len(opts_tr) != len(opts_en):
+            problems.append(f"{where}: {len(opts_tr)} {name} options for {len(opts_en)} English")
+            continue
+        if any(not isinstance(o, str) or not o.strip() for o in opts_tr):
+            problems.append(f"{where}: a {name} option is blank")
             continue
         if qtext:
-            options_json = json.dumps(opts_de, ensure_ascii=False)
+            options_json = json.dumps(opts_tr, ensure_ascii=False)
             out.append(
                 "insert into public.question_translations (question_id, locale, question_text, options, explanation) values "
                 f"({lit(qid)}, {lit(locale)}, {lit(qtext)}, {lit(options_json)}::jsonb, "
@@ -134,6 +149,9 @@ def main():
         return 2
     locale = sys.argv[1]
     source = Path(f"localization/{locale}/db")
+    if not source.is_dir():
+        print(f"No {source}/ folder: nothing to generate for {locale!r}.")
+        return 1
     target = Path(f"supabase/seed/content_translations_{locale}")
     target.mkdir(parents=True, exist_ok=True)
     problems = []

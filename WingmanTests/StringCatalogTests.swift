@@ -25,7 +25,7 @@ final class StringCatalogTests: XCTestCase {
 
     /// Adding a language is a deliberate act: change this set, `knownRegions`
     /// and the validator's `--languages` together.
-    private let shippedLanguages: Set<String> = ["en", "de"]
+    private let shippedLanguages: Set<String> = ["en", "de", "es", "fr"]
 
     func testAppBundleDeclaresExactlyTheShippedLanguages() {
         let localizations = Set(Bundle.main.localizations).subtracting(["Base"])

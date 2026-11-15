@@ -71,15 +71,28 @@ struct GrowthProjectionScreen: View {
         VStack(alignment: .leading, spacing: 0) {
             // English: the chart, headline and bullets sit directly in this
             // stack, as they always have. In a translated app they are one
-            // block that scrolls when longer text makes it too tall, so the
-            // chart is never pushed off the top and Continue stays on screen.
+            // block, tried first with the full chart, then with the chart at
+            // its smallest (what English does on its own on an SE), and only
+            // then scrolled, so the chart is never pushed off the top,
+            // Continue stays on screen and the last bullet is not left cut
+            // off at the fold (Spanish and French on the SE, 2026-11-15).
             if L10n.usesSourceLanguageLayout {
-                chartAndCopy
+                chartAndCopy()
             } else {
-                VStack(alignment: .leading, spacing: 0) {
-                    chartAndCopy
+                ViewThatFits(in: .vertical) {
+                    VStack(alignment: .leading, spacing: 0) {
+                        chartAndCopy()
+                    }
+                    VStack(alignment: .leading, spacing: 0) {
+                        chartAndCopy(chartIdealHeight: GrowthChartView.minimumHeight)
+                    }
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 0) {
+                            chartAndCopy(chartIdealHeight: GrowthChartView.minimumHeight)
+                        }
+                    }
+                    .scrollBounceBehavior(.basedOnSize)
                 }
-                .scrollsWhenTooTallIfTranslated()
             }
 
             Spacer(minLength: 24)
@@ -119,10 +132,11 @@ struct GrowthProjectionScreen: View {
 
     /// Everything above the Continue button.
     @ViewBuilder
-    private var chartAndCopy: some View {
+    private func chartAndCopy(chartIdealHeight: CGFloat = 260) -> some View {
         GrowthChartView(
             positiveLabel: content.positiveLabel,
-            negativeLabel: content.negativeLabel
+            negativeLabel: content.negativeLabel,
+            idealHeight: chartIdealHeight
         )
 
         // `maxHeight` rather than an exact height, so these two gaps
