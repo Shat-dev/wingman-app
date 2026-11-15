@@ -11,7 +11,10 @@ Model: German (Release B), see [localization-de-progress.md](localization-de-pro
 - **Branches:** `localization-release-c-es` and `-fr` are merged into `localization-release-c`.
 - **Checks:** every check passes for de, es and fr. Unit tests: 341 run, 0 failed, and nothing is skipped for es or fr any more.
 - **Next:** Arthur's steps are in [release-c-launch-checklist.md](release-c-launch-checklist.md) (proofreads, regional pricing, legal, database check and apply, App Store pages, testing, submit).
-- **Not done yet:** the SQL has never been run, and nothing is pushed.
+- **Database check (2026-11-15):** passed, read-only against Wingman-App. Every es/fr id (765 questions, 15 scenarios, 796 screens, 276 options) exists in production and matches German's set; the 95 uncovered screens are textless `options` screens; 0 es/fr rows live; last English edit 2026-11-11 04:23 UTC, before the drafts.
+- **Database apply (2026-11-15, Arthur's ask):** all 24 es and 24 fr files applied to production via the Supabase CLI, no errors; 765/15/796/276 rows per language; de unchanged; 12/12 random texts match the files. Only builds from this branch read them.
+- **Simulator sweeps (2026-11-15, Arthur's ask):** es/fr content sweeps passed on the SE and 17 Pro (117 screens each, all read; OCR found no English but the iOS notification prompt). Fixed on the SE: growth-screen last bullet cut off (chart shrinks first in translated layout, `GrowthProjectionScreen`/`GrowthChartView`), Spanish chart label shortened to *Con Wingman cada día*, French paywall headline under the close X (`PaywallView` trailing room when the illustration is hidden). Re-ran the onboarding sweeps in both languages to confirm. New render test `testTranslatedGrowthProjectionRendersSpanishAndFrenchOnASmallPhone`; 342 unit tests, 0 failed; string checks clean. Six prod guest users. Screens in `docs/localization-baseline/*-2026-11-15*`.
+- **Not done yet:** nothing is pushed.
 
 ## Summary
 

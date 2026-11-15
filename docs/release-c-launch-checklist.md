@@ -10,7 +10,7 @@ Written 2026-11-15 for Arthur. Branch `localization-release-c`. Nothing here is 
   - 15 scenarios.
 - **Checks:** every check passes for German, Spanish and French. The unit tests pass on the merged branch with nothing skipped (341 run, 336 passed, 5 skipped by design, 0 failed; 2026-11-15).
 - **Not seen on screen yet:** no simulator sweep has run in Spanish or French. Each run creates a guest user in production, so it waits for your OK.
-- **Database rows:** the Spanish and French rows are generated as SQL but **have never been run**. Production has no Spanish or French rows.
+- **Database rows:** live in production. The read-only check passed and all rows were written to production on 2026-11-15 (step 6); they are still the unreviewed draft.
 - **Draft status:** all of it is a machine draft (written by Claude) and has not been read by a native speaker.
 - **Earlier releases:** this branch also contains all of Release A and Release B (German), and neither has shipped.
 
@@ -51,7 +51,7 @@ Start these four this week. They take the longest, and they don't depend on each
 | 3 | Privacy and legal check | You and adviser | Quote; 1–3 weeks | Marketing in those countries |
 | 4 | Small decisions | You | 20 minutes | Nothing big |
 | 5 | Auth emails | You, or Claude to draft | 15 minutes to 1 hour | Submission |
-| 6 | Database: check, then apply | Claude, with your go-ahead | 1 hour | Testing scenarios, submission |
+| 6 | Database: check ✅, apply ✅ (re-apply changed files after proofreads) | Claude, with your go-ahead | 1 hour | Testing scenarios, submission |
 | 7 | App Store pages | Claude drafted; you finish and paste | 1–2 days | Submission |
 | 8 | Testing before submission | You, Claude | 1–2 days | Submission |
 | 9 | Version, build, submit | You, with Claude | 1–2 hours plus Apple review | Launch |
@@ -178,10 +178,12 @@ The same check as German step 5, done once for all languages:
 
 **Why it matters:** scenarios read their Spanish and French text from the database, so until these rows are live, scenarios show in English. Quiz questions and lessons are also bundled in the app, so they work without the database.
 
-1. **Read-only check first.** The Supabase connector reached only Clera-App all night, so neither language session could compare its ids with production. The ids are German's, which were checked against the live database on 2026-11-11, and both languages match German id for id.
-   - Point the connector at **Wingman-App** (`bnckmgnysfliiypvxxii`).
-   - Ask Claude to **"run the Release C database check"**. That is a SELECT-only md5 of the 765 question ids plus the scenario rows.
-2. **Apply after the proofreads,** so you write to production once:
+1. **Read-only check first.** ✅ Done 2026-11-15 (SELECT only, via the Supabase CLI from a scratch folder; the connector still reached only Clera-App).
+   - Spanish, French and German files use the identical id sets (765 questions, 15 scenarios, 796 screens, 276 options).
+   - Every one of those ids exists in production. Production has 765 questions, 15 scenarios and 276 options in total. Its other 95 screens are all `options` screens with no text, so nothing is missing.
+   - German rows are live for all of them; production has 0 Spanish and 0 French rows.
+   - The last English edit in production was 2026-11-11 04:23 UTC (the 42 English fixes), before the Spanish and French drafts, so the drafts translate the current English.
+2. **Applied 2026-11-15** ✅ (Arthur asked for it before the proofreads). All 48 files ran without error, each in its own transaction. Production now has 765 questions, 15 scenarios, 796 screens and 276 options for each of `es` and `fr`, German is unchanged, and 12 randomly picked texts match the files byte for byte. After the proofreads, re-run only the files whose wording changed (step 3 below). The files:
    - Spanish: 24 files in `supabase/seed/content_translations_es/`.
    - French: 24 files in `supabase/seed/content_translations_fr/`.
 
@@ -232,10 +234,16 @@ Sweeps and Release builds touch production (a guest user per sweep, real analyti
    - Buy the monthly, the yearly and the one-time offer.
    - Tick [`localization-disclosure-checklist.md`](localization-disclosure-checklist.md) for each language: copy its per-language sign-off row for Spanish (Mexico) and French (France).
    - **Check:** peso and euro prices; the Spanish and French price sentences; the offer's percentage after your step 2 prices; and that premium unlocks.
-2. **Simulator sweeps (Claude, with your go-ahead).**
-   - `WingmanUITests/OnboardingSweepTests` has Spanish and French versions of the German sweeps, for onboarding and for content. They are compiled but have never been run.
-   - Run them on the SE and the 17 Pro.
-   - Spanish and French are often longer than English, so look for clipped text on the SE.
+2. **Simulator sweeps** ✅ done 2026-11-15 (Arthur asked for them).
+   - The Spanish and French content sweeps (onboarding, lesson 1_1 and its quiz, Daily Practice, the Bar Window scenario) passed on the SE and the 17 Pro: 4 runs, 117 screens each, every screen read.
+   - Everything shows in Spanish or French, including the scenario played from the production rows. The only English is the iOS notification pop-up, which follows the phone's language (the simulator is English); a Spanish or French phone shows it translated.
+   - Two layout bugs on the SE, both fixed and confirmed on screen by re-running the onboarding sweeps in both languages:
+     - growth screen: the third bullet was cut off at the fold (the chart now shrinks first in a translated app); the Spanish chart label became *Con Wingman cada día* so it fits on two lines;
+     - paywall: the French headline ran under the close ✕ (a translated headline now keeps clear of it when the illustration is hidden).
+   - Expected, not bugs: "can't load prices" on the paywall (a Debug build has no store products); long quiz answers scroll under "Check answer" on the SE, as in German.
+   - Still the case for German: its three-line growth headline needs the screen to scroll on an SE.
+   - Six guest users were created in production (4 content runs, 2 re-runs), with lesson, Daily Practice and scenario completions for the first four.
+   - Screens: `docs/localization-baseline/{spanish,french}-content-{se,17-pro}-2026-11-15/` and the `-se-…-fixes` folders.
 3. **A real iPhone in each language:**
    - the iOS permission pop-ups;
    - notifications;
