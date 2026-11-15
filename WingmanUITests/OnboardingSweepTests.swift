@@ -72,7 +72,7 @@ final class OnboardingSweepTests: XCTestCase {
         "And this is where you practise": "Und hier übst du",
         "Last one. This one is you": "Der Letzte. Das bist du",
         "Good luck": "Viel Glück",
-        "Commit": "Verpflichten"
+        "Commit": "Versprechen besiegeln"
     ]
 
     private static func loadGerman() -> [String: String] {
