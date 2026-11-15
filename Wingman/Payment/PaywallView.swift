@@ -384,6 +384,16 @@ struct PaywallView: View {
                                                 .font(.manropeBold(size: 24, relativeTo: .title))
                                                 .foregroundColor(.wingmanBlack)
                                                 .fixedSize(horizontal: false, vertical: true)
+                                                // Without the illustration the
+                                                // headline sits level with the
+                                                // close X; a long first line ran
+                                                // under it (French on the SE,
+                                                // 2026-11-15). English keeps its
+                                                // layout exactly.
+                                                .padding(
+                                                    .trailing,
+                                                    !showsIllustration && !L10n.usesSourceLanguageLayout ? 28 : 0
+                                                )
                                                 .padding(.bottom, 2)
                                         }
                                         ForEach(page.bullets, id: \.self) { bullet in

@@ -129,6 +129,13 @@ struct GrowthChartView: View {
     /// Axis captions under the plot.
     var startCaption: String = String(localized: "TODAY")
     var endCaption: String = String(localized: "IN 1 MONTH")
+    /// The height asked for where nothing else needs the room. A translated
+    /// app passes `minimumHeight` when the copy below only fits with a
+    /// smaller chart, because its fit test reads ideal sizes.
+    var idealHeight: CGFloat = 260
+
+    /// The smallest the chart is drawn; see the note on the frame below.
+    static let minimumHeight: CGFloat = 170
 
     // Every visibility toggle is its own `Bool` rather than a comparison
     // against `progress`. `progress` is written inside a `withAnimation`, so a
@@ -259,7 +266,7 @@ struct GrowthChartView: View {
         // crowding the curves; everything inside is positioned off
         // `GeometryReader` proportions, so the chart rescales cleanly down to
         // it rather than clipping.
-        .frame(minHeight: 170, idealHeight: 260, maxHeight: 260)
+        .frame(minHeight: Self.minimumHeight, idealHeight: idealHeight, maxHeight: 260)
         .onAppear(perform: runAnimation)
         // The chart is decorative; the copy underneath carries the meaning.
         .accessibilityHidden(true)
