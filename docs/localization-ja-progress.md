@@ -4,7 +4,7 @@ Branch `localization-release-d-ja` (from `Shat` at `38cad8d`, which contains "Me
 
 ## Where it stands
 
-**Phases 0 (groundwork), 1 (brief) and 2 (interface catalogs) are done (2026-11-16).** The whole interface is drafted in Japanese: 586 strings, 3,852 English words, all "needs review". Phase 3 (lesson overlays) has started: 1 of 25 courses. Next: course 6. **A build of this branch offers 日本語 in Settings with English lessons, quizzes and scenarios behind it. Don't archive from this branch until the content is in.**
+**Phases 0 (groundwork), 1 (brief) and 2 (interface catalogs) are done (2026-11-16).** The whole interface is drafted in Japanese: 586 strings, 3,852 English words, all "needs review". Phase 3 (lesson overlays) is under way: 2 of 25 courses. Next: course 12. **A build of this branch offers 日本語 in Settings with English lessons, quizzes and scenarios behind it. Don't archive from this branch until the content is in.**
 
 Nothing is pushed, merged, applied to Supabase or entered in App Store Connect. No UI sweep and no Release build has been run.
 
@@ -15,7 +15,7 @@ Nothing is pushed, merged, applied to Supabase or entered in App Store Connect. 
 | 0 | Branch, prompt, groundwork | **Done** (2026-11-16) |
 | 1 | Brief ([localization-ja-brief.md](localization-ja-brief.md)) | **Done** (2026-11-16) |
 | 2 | Interface catalogs (586 strings: 407 + 179) | **Done: 586 of 586 drafted** (2026-11-16) |
-| 3 | Lesson overlays (25 courses, 1,531 items, 34,475 English words) | **1 of 25 courses, 80 of 1,531 items** (course 1) |
+| 3 | Lesson overlays (25 courses, 1,531 items, 34,475 English words) | **2 of 25 courses, 148 of 1,531 items** (courses 1, 6; 3,285 English words) |
 | 4 | Database content (15 scenarios, 765 quiz questions) | Not started |
 | 5 | Checks and review pack | Not started |
 | 6 | App Store listing draft | Not started |
@@ -70,6 +70,7 @@ Lesson order, as German: 1, 6, 12, 17, 22, then 2, 7, 13, 18, 23, then 3, 8, 14,
   - **Unit tests** on "Wingman L10n 17 Pro": **349 run, 344 passed, 5 skipped, 0 failed.** The Japanese interface-catalog checks now run instead of skipping (fallback to English when a string is missing, and analytics parity for the onboarding answers); only the Japanese lessons, quiz and scenarios are still skipped. After the three wording changes below, the catalog check and the four affected test classes were re-run (29 tests, 0 failed).
   - **What the render showed** ([picture](localization-baseline/japanese-renders-2026-11-16/growth-screen-ja-375x580.png), iPhone SE width, unit test, no sweep). The system's Japanese font sits well next to Manrope: weights match, nothing is clipped, line height is fine. That is one screen, so the font question stays open for the sweep, but the first evidence is good. It also showed the line-break problem the brief warned about: on a small phone the first draft split 自信 across two lines in the headline, テクニック in a bullet, and wrapped the chart label as 「Wingmanを毎 / 日使う」. All three were shortened so they fit on one line: headline 「大事な場面で動ける自信を」, bullet 「科学的根拠に基づく、身につく方法」, chart label 「毎日Wingman」. The "3倍" bullet still takes two lines, with a clean break.
 - **2026-11-16. Course 1, Beliefs & Reframes** (5 lessons, 80 items, 1,782 English words). `lesson_overlay_course_1_ja.json`. `lesson_overlays.py check ja` passes (80 of 80). No Swift changed, so no test run. Body text is です・ます throughout; lists of example actions stay in dictionary form (「口を開いてみる。」), which is normal in Japanese. For the reviewer: "growth mindset / fixed mindset" became 成長マインドセット / 固定マインドセット, with the English in brackets on first use; "competence confidence loop" became 「有能感と自信のループ」 with the English in brackets; "composure" 落ち着き; "overthinking" 考えすぎ; "rejection" is 「断られること」 in running text (lesson 1_2 title: 「断られても、自分への否定ではない」); "reframe" 捉え直す; "self-fulfilling prophecy" 自己成就的な予言; "the joke lands flat" 「すべってしまいます」; "kills the mood" 「場をしらけさせる人」; "60,000 thoughts" is 「およそ6万もの思考」. The catalog's course title 「思い込みと捉え直し」 fits the lessons.
+- **2026-11-16. Course 6, Approach Readiness** (4 lessons, 68 items, 1,503 English words). `lesson_overlay_course_6_ja.json`. The check passes (148 of 1,531). For the reviewer: "You're always in the field" became 「いつでも、そこが実践の場」 ("in the field" is 実践の場 throughout; フィールド would be pickup jargon); "agenda" became 下心, so "Curiosity Beats Agenda" is 「下心より好奇心」 (下心 is "ulterior motive", a little stronger than "agenda"; 思惑 is the milder option); "got a rep" / "volume" became 「場数をひとつ積めました」 / 場数; "the frame is already set" became 「場の空気はもう決まっています」; "opener" is 最初のひと言. Asking for her number became asking for LINE (「LINEを聞くと、教えてくれます」), as decided. The grocery store is a スーパー on a Sunday morning; the train stays a train (see flags); her Iceland stickers stay. The example lines are rewritten as polite spoken Japanese: 「こんにちは。かわいいなと思って、お話ししてみたくて」 (the agenda-first opener), 「それ、アイスランドのステッカーですか？ちょうど去年行ったんです」, 「寝起きみたいな格好ですみません。でも、どうしてもひと言ごあいさつしたくて」. **ナンパ is used once**, where the English says "pickup lines" as the thing that doesn't work (content_6_3_6_2: 「ナンパの決まり文句」), as the brief allows. The catalog title 「声をかける準備」 fits. Brief updated: no space after ！ or ？ (it had asked for a full-width space mid-text; the interface strings and lessons don't use one). A small scratch lint (full-width digits, half-width punctuation, pronouns, avoided words, stray spaces) runs on each course; courses 1 and 6 are clean apart from that one allowed ナンパ.
 
 ## Cultural flags for Arthur
 
@@ -94,6 +95,10 @@ One thing to know first: the women's names stay as in English, in katakana, whil
 
 5. **content_1_1_1_1, "around 60,000 thoughts a day"** (statistic, kept as stated: 「1日におよそ6万もの思考」; the lesson gives no source).
 6. **content_1_4_2_2, "Psychologists call this the competence confidence loop"** (a research claim, kept as the English has it; I could not place the term in the Japanese psychology literature, so it carries the English in brackets).
+7. **Lesson 6_1 (content_6_1_2_1 to 6_1_4_1), approaching a woman on a train.** Both examples are set on a train, and the good one ends with him getting her contact. Speaking to a stranger on a train is unusual in Japan and trains are where women are most wary of men; a bookshop or café would carry the same lesson. Translated as written.
+8. **content_6_1_5_3, "The woman outside the cafe. The one on the train. The one walking down the street."** Street and train approaches listed as missed chances to regret; in Japan a street approach is what ナンパ means.
+9. **Lesson 6_4, "You're Always in the Field"** (content_6_4_1_2: "the coffee shop, the gym, the grocery store, or anywhere women are"; content_6_4_5_2). Approaching everywhere, every day, as a habit. This is the "persistence in public" concern: in Japan it is the behaviour most likely to be read as ナンパ, and gyms and supermarkets are not seen as places to be approached.
+10. **content_6_3_3_1, the direct opener "Hi, I thought you were cute and wanted to meet you."** Shown as the weaker example, so the lesson already steers away from it; noted because a direct compliment to a stranger is more forward in Japan than in the US.
 
 ## Questions for Arthur
 
