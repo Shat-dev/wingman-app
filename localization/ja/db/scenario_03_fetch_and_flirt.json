@@ -1,0 +1,250 @@
+{
+  "scenario": {
+    "a1000003-0000-0000-0000-000000000003": {
+      "title": {
+        "en": "Fetch & Flirt",
+        "ja": "犬がつないだ出会い"
+      },
+      "summary": {
+        "en": "Laughter, eye contact, and two dogs chasing each other. Timing matters here.",
+        "ja": "笑い声、アイコンタクト、そして追いかけっこをする2匹の犬。ここでは、タイミングがものを言います。"
+      }
+    }
+  },
+  "screens": {
+    "b1000001-0000-0000-0003-000000000001": {
+      "en": "You're at the park walking your dog.",
+      "ja": "公園で、犬の散歩をしています。"
+    },
+    "b1000002-0000-0000-0003-000000000002": {
+      "en": "A small fluffy dog runs toward yours. The owner follows close behind.",
+      "ja": "小さくてふわふわの犬が、こちらの犬に向かって走ってきます。飼い主が、そのすぐ後ろを追ってきます。"
+    },
+    "b1000003-0000-0000-0003-000000000003": {
+      "en": "The two dogs start playing together. She's watching. You're a few feet apart.",
+      "ja": "2匹の犬が一緒に遊び始めます。彼女はそれを見ています。二人の距離は1メートルほどです。"
+    },
+    "b1000041-0000-0000-0003-000000000041": {
+      "en": "Did you know my dog is really rare...",
+      "ja": "知っていますか？うちの犬、すごく珍しい犬種で……"
+    },
+    "b1000042-0000-0000-0003-000000000042": {
+      "en": "You can talk about this later. Use the current shared situation of your dogs.",
+      "ja": "その話は、あとでもできます。今は、犬たちという共通の状況を使いましょう。"
+    },
+    "b1000043-0000-0000-0003-000000000043": {
+      "en": "You and your dog are both really pretty.",
+      "ja": "飼い主さんもワンちゃんも、すごくきれいですね。"
+    },
+    "b1000044-0000-0000-0003-000000000044": {
+      "en": "While being direct sometimes works, you can build more rapport here.",
+      "ja": "ストレートな言い方がうまくいくこともありますが、ここではもっと打ち解けることができます。"
+    },
+    "b1000005-0000-0000-0003-000000000005": {
+      "en": "Looks like mine just made a new friend. He's not usually this smooth.",
+      "ja": "うちの子に、新しい友達ができたみたいです。ふだんは、こんなに積極的じゃないんですけど。"
+    },
+    "b1000006-0000-0000-0003-000000000006": {
+      "en": "Neither is mine. She's normally shy.",
+      "ja": "うちの子もです。いつもは人見知りなのに。"
+    },
+    "b1000007-0000-0000-0003-000000000007": {
+      "en": "I guess it's my dogs lucky day then.",
+      "ja": "じゃあ、今日はうちの子のラッキーデーですね。"
+    },
+    "b1000008-0000-0000-0003-000000000008": {
+      "en": "Haha maybe.",
+      "ja": "あはは、そうかも。"
+    },
+    "b1000009-0000-0000-0003-000000000009": {
+      "en": "You observe the dogs and they start jumping and rolling over each other.",
+      "ja": "犬たちを見ていると、飛び跳ねたり、お互いの上を転がったりし始めます。"
+    },
+    "b1000010-0000-0000-0003-000000000010": {
+      "en": "You look over and see her laughing.",
+      "ja": "ふと見ると、彼女が笑っています。"
+    },
+    "b1000111-0000-0000-0003-000000000111": {
+      "en": "Wow that's a crazy thing to say.",
+      "ja": "え、すごいことを言いますね。"
+    },
+    "b1000112-0000-0000-0003-000000000112": {
+      "en": "While this line may work depending on the dynamic, build more rapport first.",
+      "ja": "このセリフは、関係によってはうまくいくこともあります。でも、まずはもっと打ち解けましょう。"
+    },
+    "b1000113-0000-0000-0003-000000000113": {
+      "en": "Umm maybe, I'm not really from here.",
+      "ja": "うーん、どうでしょう。私、この辺の人じゃないので。"
+    },
+    "b1000114-0000-0000-0003-000000000114": {
+      "en": "Too early. You're pushing for commitment before building rapport.",
+      "ja": "早すぎます。打ち解ける前に、約束を取りつけようとしています。"
+    },
+    "b1000012-0000-0000-0003-000000000012": {
+      "en": "Looks like they're better at this than we are.",
+      "ja": "どうやら、あの子たちのほうが、僕たちより上手みたいですね。"
+    },
+    "b1000013-0000-0000-0003-000000000013": {
+      "en": "Haha right? We could learn a thing or two from them.",
+      "ja": "あはは、本当ですね。少し見習わないと。"
+    },
+    "b1000014-0000-0000-0003-000000000014": {
+      "en": "She's smiling, fully engaged now. You're both standing closer, watching the dogs.",
+      "ja": "彼女はほほえんで、すっかり会話に乗っています。二人は前より近くに立って、犬たちを見ています。"
+    },
+    "b1000015-0000-0000-0003-000000000015": {
+      "en": "Her dog suddenly grabs a stick and runs. Your dog chases. They're off together.",
+      "ja": "彼女の犬が突然、棒をくわえて走り出します。こちらの犬が追いかけます。2匹は一緒に駆けていきます。"
+    },
+    "b1000161-0000-0000-0003-000000000161": {
+      "en": "You keep watching the dogs. Silence...",
+      "ja": "犬たちを見続けます。沈黙が流れます……"
+    },
+    "b1000162-0000-0000-0003-000000000162": {
+      "en": "This was an opening. Ignoring it signals disinterest or social obliviousness.",
+      "ja": "これは、きっかけでした。無視すると、関心がないか、場が読めない人だと伝わります。"
+    },
+    "b1000163-0000-0000-0003-000000000163": {
+      "en": "Hey do you need to go watch your dog by the way?",
+      "ja": "そういえば、ワンちゃんを見に行かなくて大丈夫ですか？"
+    },
+    "b1000164-0000-0000-0003-000000000164": {
+      "en": "You gave her an out she didn't ask for. Don't end interactions prematurely.",
+      "ja": "彼女が求めてもいない出口を、差し出してしまいました。やり取りを早々に終わらせないでください。"
+    },
+    "b1000017-0000-0000-0003-000000000017": {
+      "en": "You face her, smile, and introduce yourself. She smiles back.",
+      "ja": "彼女のほうを向いて、ほほえみ、自己紹介をします。彼女もほほえみ返します。"
+    },
+    "b1000018-0000-0000-0003-000000000018": {
+      "en": "Nice to meet you, I'm Naomi.",
+      "ja": "はじめまして。ナオミです。"
+    },
+    "b1000019-0000-0000-0003-000000000019": {
+      "en": "The energy is good. You lock eyes. She holds it.",
+      "ja": "良い雰囲気です。目が合います。彼女は、目をそらしません。"
+    },
+    "b1000201-0000-0000-0003-000000000201": {
+      "en": "You break the moment and look back at the dogs.",
+      "ja": "その瞬間を自分で壊して、犬たちのほうへ視線を戻します。"
+    },
+    "b1000202-0000-0000-0003-000000000202": {
+      "en": "Eye contact communicates interest non-verbally. Breaking it early signals otherwise.",
+      "ja": "アイコンタクトは、言葉を使わずに関心を伝えます。早く外しすぎると、その逆が伝わります。"
+    },
+    "b1000203-0000-0000-0003-000000000203": {
+      "en": "So how are you today?",
+      "ja": "それで、今日は調子どうですか？"
+    },
+    "b1000204-0000-0000-0003-000000000204": {
+      "en": "Filling silence with questions kills chemistry. Let the moment exist naturally.",
+      "ja": "沈黙を質問で埋めると、惹かれ合う空気が消えてしまいます。その瞬間を、そのまま自然に存在させましょう。"
+    },
+    "b1000021-0000-0000-0003-000000000021": {
+      "en": "You both hold eye contact while smiling at each other. Pause.",
+      "ja": "二人とも、ほほえみながら目を合わせたままです。少しの間。"
+    },
+    "b1000022-0000-0000-0003-000000000022": {
+      "en": "You look away naturally, but the energy has shifted.",
+      "ja": "自然に視線を外します。でも、場の空気は変わっています。"
+    },
+    "b1000023-0000-0000-0003-000000000023": {
+      "en": "Eventually the dogs come running back and are panting.",
+      "ja": "やがて犬たちが、息を切らして走って戻ってきます。"
+    },
+    "b1000241-0000-0000-0003-000000000241": {
+      "en": "These dogs look thirsty, what should we do?",
+      "ja": "この子たち、喉が渇いていそうですね。どうしましょうか？"
+    },
+    "b1000242-0000-0000-0003-000000000242": {
+      "en": "Frame control is leading the moment, not reacting to it.",
+      "ja": "空気をリードするとは、その場に反応することではなく、その場を導くことです。"
+    },
+    "b1000025-0000-0000-0003-000000000025": {
+      "en": "Hey I know a spot with a fountain for the dogs, let's go there.",
+      "ja": "犬用の水飲み場があるところを知っているんです。そこへ行きましょう。"
+    },
+    "b1000026-0000-0000-0003-000000000026": {
+      "en": "Yeah let's go, they look thirsty.",
+      "ja": "そうですね、行きましょう。喉が渇いていそうですし。"
+    },
+    "b1000027-0000-0000-0003-000000000027": {
+      "en": "You and Naomi walk together, the conversation flows well.",
+      "ja": "ナオミと一緒に歩きます。会話は心地よく弾みます。"
+    },
+    "b1000028-0000-0000-0003-000000000028": {
+      "en": "Success. You review your interaction with Naomi.",
+      "ja": "成功です。ナオミとのやり取りを振り返ります。"
+    },
+    "b1000029-0000-0000-0003-000000000029": {
+      "en": "You opened with a shared experience so the conversation felt natural.",
+      "ja": "同じ状況を共有していることから話しかけたので、会話が自然に感じられました。"
+    },
+    "b1000030-0000-0000-0003-000000000030": {
+      "en": "You responded to openings when the moment could deepen.",
+      "ja": "その場を深められるきっかけに、きちんと応えました。"
+    },
+    "b1000031-0000-0000-0003-000000000031": {
+      "en": "And you took initiative by taking the dogs to the fountain. Well done.",
+      "ja": "そして、犬たちを水飲み場へ連れていくことで、自分から動きました。よくできました。"
+    }
+  },
+  "options": {
+    "c1000001-0000-0000-0003-000000000001": {
+      "en": "Comment on how the dogs get along",
+      "ja": "犬たちの仲の良さについてコメントする"
+    },
+    "c1000002-0000-0000-0003-000000000002": {
+      "en": "Talk about your dog's breed",
+      "ja": "自分の犬の犬種について話す"
+    },
+    "c1000003-0000-0000-0003-000000000003": {
+      "en": "Compliment her and her dog",
+      "ja": "彼女と彼女の犬を褒める"
+    },
+    "c1000004-0000-0000-0003-000000000004": {
+      "en": "\"We should recreate what our dogs are doing later\"",
+      "ja": "「あとで、僕たちも犬たちと同じことをしませんか」"
+    },
+    "c1000005-0000-0000-0003-000000000005": {
+      "en": "\"Looks like they're better at this than we are\"",
+      "ja": "「あの子たちのほうが、僕たちより上手みたいですね」"
+    },
+    "c1000006-0000-0000-0003-000000000006": {
+      "en": "\"We should organize some play dates for our dogs\"",
+      "ja": "「今度、この子たちを遊ばせる日をつくりましょうよ」"
+    },
+    "c1000007-0000-0000-0003-000000000007": {
+      "en": "Ask if she needs to go get her dog since it's small",
+      "ja": "彼女の犬は小さいので、迎えに行かなくていいかと尋ねる"
+    },
+    "c1000008-0000-0000-0003-000000000008": {
+      "en": "Continue looking towards your dog",
+      "ja": "自分の犬のほうを見続ける"
+    },
+    "c1000009-0000-0000-0003-000000000009": {
+      "en": "Face her and introduce yourself",
+      "ja": "彼女のほうを向いて、自己紹介をする"
+    },
+    "c1000010-0000-0000-0003-000000000010": {
+      "en": "Hold the eye contact and let the moment breathe",
+      "ja": "目を合わせたまま、その瞬間にひと呼吸を与える"
+    },
+    "c1000011-0000-0000-0003-000000000011": {
+      "en": "Look back at the dogs to avoid awkwardness",
+      "ja": "気まずさを避けるために、犬たちのほうへ視線を戻す"
+    },
+    "c1000012-0000-0000-0003-000000000012": {
+      "en": "Break it by asking how she is",
+      "ja": "調子はどうかと尋ねて、その瞬間を終わらせる"
+    },
+    "c1000013-0000-0000-0003-000000000013": {
+      "en": "Suggest going together to get water for the dogs",
+      "ja": "犬たちの水を一緒にもらいに行こうと提案する"
+    },
+    "c1000014-0000-0000-0003-000000000014": {
+      "en": "State that the dogs are thirsty and ask what to do",
+      "ja": "犬たちは喉が渇いていると言って、どうするかを尋ねる"
+    }
+  }
+}
