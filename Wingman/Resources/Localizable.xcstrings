@@ -3603,7 +3603,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "自分から動ける男になる、1日目"
+            "value" : "動ける男になる、1日目"
           }
         }
       }
@@ -5185,7 +5185,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "友達をコミュニティに招待して、一緒に学びましょう"
+            "value" : "友達を招待して、\n一緒に学びましょう"
           }
         }
       }
@@ -8306,7 +8306,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "サブスクリプションを保護する"
+            "value" : "サブスクリプションを\n保護する"
           }
         }
       }
@@ -9517,7 +9517,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "固まらずに会話を始められるようになる、一歩ずつの方法。"
+            "value" : "固まらずに会話を始められるようになる、\n一歩ずつの方法。"
           }
         }
       }
@@ -9998,7 +9998,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "「もしあのとき…」を「こんにちは」に変えよう。"
+            "value" : "「もしあのとき…」を\n「こんにちは」に。"
           }
         }
       }
@@ -11215,7 +11215,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "ここでつまずいている人は、ほかにもたくさんいます。"
+            "value" : "ここでつまずく人は、たくさんいます。"
           }
         }
       }

@@ -178,7 +178,22 @@
     "Approach Mechanics": "Ansprechen in der Praxis",
     "Conversation Flow": "Gesprächsfluss",
     "Flirting & Chemistry": "Flirten & Anziehung",
-    "Integration & Mastery": "Alltag & Meisterschaft"
+    "Integration & Mastery": "Alltag & Meisterschaft",
+    "Sophie": "Sophie",
+    "Lauren": "Lauren",
+    "Naomi": "Naomi",
+    "Katie": "Katie",
+    "Amber": "Amber",
+    "Mel": "Mel",
+    "Sara": "Sara",
+    "Emily": "Emily",
+    "Claire": "Claire",
+    "Zoe": "Zoe",
+    "Natalie": "Natalie",
+    "Lulu": "Lulu",
+    "Molly": "Molly",
+    "Ellie": "Ellie",
+    "Aurelie": "Aurelie"
   },
   "Localizable": {
     "%@ billed today for your first %lld months, then %@/month. Cancel anytime in App Store settings.": "Heute werden %1$@ für deine ersten %2$lld Monate berechnet, danach %3$@/Monat. Jederzeit in den App-Store-Einstellungen kündbar.",
