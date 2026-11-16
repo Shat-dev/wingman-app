@@ -1,0 +1,266 @@
+{
+  "scenario": {
+    "a1000001-0000-0000-0000-000000000001": {
+      "title": {
+        "en": "Bar Window",
+        "ja": "バーでのチャンス"
+      },
+      "summary": {
+        "en": "Loud music, crowded space, short attention spans. You notice her. Do you lead or wait?",
+        "ja": "大音量の音楽、混み合った店内、すぐに移ってしまう注意。彼女に気づきました。リードしますか、それとも待ちますか？"
+      }
+    }
+  },
+  "screens": {
+    "b1000001-0000-0000-0000-000000000001": {
+      "en": "After a long week of work you’ve decided to unwind and get a drink at the bar.",
+      "ja": "長い一週間の仕事を終えて、バーで一杯飲んでくつろぐことにしました。"
+    },
+    "b1000002-0000-0000-0000-000000000002": {
+      "en": "You enter the bar and see a girl standing by herself ordering a drink.",
+      "ja": "バーに入ると、一人で立って飲み物を注文している女性が目に入ります。"
+    },
+    "b1000003-0000-0000-0000-000000000003": {
+      "en": "She glances over at you briefly, smiles, then faces back to the bar.",
+      "ja": "彼女はちらりとこちらを見て、ほほえみ、またカウンターのほうへ向き直ります。"
+    },
+    "b1000041-0000-0000-0000-000000000041": {
+      "en": "You wait a while but by then another man starts talking to her.",
+      "ja": "しばらく待ちます。でもそのうちに、別の男性が彼女に話しかけ始めます。"
+    },
+    "b1000042-0000-0000-0000-000000000042": {
+      "en": "Night environments change quickly. Hesitation turns signals into missed chances.",
+      "ja": "夜の場は、状況がすぐに変わります。ためらうと、サインは逃したチャンスに変わります。"
+    },
+    "b1000005-0000-0000-0000-000000000005": {
+      "en": "You walk over with relaxed energy. No hesitation. Arms swinging naturally.",
+      "ja": "リラックスした様子で歩いていきます。ためらいはありません。腕は自然に振れています。"
+    },
+    "b1000006-0000-0000-0000-000000000006": {
+      "en": "You get closer and she's still facing the bar.",
+      "ja": "近づいても、彼女はまだカウンターのほうを向いたままです。"
+    },
+    "b1000071-0000-0000-0000-000000000071": {
+      "en": "You stand a few feet away. Waiting. She picks up her drink, then she turns and leaves.",
+      "ja": "1メートルほど離れて立ち、待ちます。彼女はグラスを手に取り、向きを変えて、立ち去ります。"
+    },
+    "b1000072-0000-0000-0000-000000000072": {
+      "en": "You need to create the interaction, not wait for it to happen to you.",
+      "ja": "やり取りは、起きるのを待つものではありません。自分からつくるものです。"
+    },
+    "b1000073-0000-0000-0000-000000000073": {
+      "en": "She turns, startled. Declines your offer as she already has a drink.",
+      "ja": "彼女は驚いて振り向きます。もう飲み物があるからと、申し出を断ります。"
+    },
+    "b1000074-0000-0000-0000-000000000074": {
+      "en": "Shoulder tap was invasive. Drink offer before rapport made it transactional.",
+      "ja": "肩をたたくのは、踏み込みすぎでした。打ち解ける前に一杯おごると言ったことで、取引のようになってしまいました。"
+    },
+    "b1000008-0000-0000-0000-000000000008": {
+      "en": "Let me guess, vodka lemonade?",
+      "ja": "当てましょうか。ウォッカレモネード？"
+    },
+    "b1000009-0000-0000-0000-000000000009": {
+      "en": "Vodka soda, actually. Close though.",
+      "ja": "実はウォッカソーダです。惜しいですね。"
+    },
+    "b1000010-0000-0000-0000-000000000010": {
+      "en": "She's engaged and shifts to face you, smiling. Holding eye contact.",
+      "ja": "彼女は会話に乗り、こちらに向き直って、ほほえみます。目も合わせたままです。"
+    },
+    "b1000111-0000-0000-0000-000000000111": {
+      "en": "Umm... Maybe later, I still have this one.",
+      "ja": "うーん……あとでもいいですか。まだこれがあるので。"
+    },
+    "b1000112-0000-0000-0000-000000000112": {
+      "en": "Attraction isn't transactional. She was already engaged.",
+      "ja": "惹かれる気持ちは、取引ではありません。彼女はもう、会話に乗っていました。"
+    },
+    "b1000113-0000-0000-0000-000000000113": {
+      "en": "She responds with \"Marketing, what about you?\" but her energy is off.",
+      "ja": "彼女は「マーケティングです。そちらは？」と答えますが、どこか乗り気ではありません。"
+    },
+    "b1000114-0000-0000-0000-000000000114": {
+      "en": "Nightclubs are playful and spontaneous. Interview questions kill the vibe.",
+      "ja": "夜の店は、遊び心とその場のノリを楽しむところです。面接のような質問は、雰囲気を壊します。"
+    },
+    "b1000012-0000-0000-0000-000000000012": {
+      "en": "Healthy choice. What brings you here tonight?",
+      "ja": "ヘルシーですね。今夜はどうしてここに？"
+    },
+    "b1000013-0000-0000-0000-000000000013": {
+      "en": "We're just celebrating our friend's birthday tonight...",
+      "ja": "今夜は、友達の誕生日のお祝いなんです……"
+    },
+    "b1000014-0000-0000-0000-000000000014": {
+      "en": "I hope they won't be annoyed that I've stolen you away from them then.",
+      "ja": "じゃあ、連れ出しちゃって、お友達に怒られないといいんですけど。"
+    },
+    "b1000015-0000-0000-0000-000000000015": {
+      "en": "Hahaha I'm sure they'll live.",
+      "ja": "あはは、きっと大丈夫ですよ。"
+    },
+    "b1000016-0000-0000-0000-000000000016": {
+      "en": "You're still talking at the bar. She's laughing, leaning in close. The energy is good.",
+      "ja": "まだカウンターで話しています。彼女は笑い、身を寄せてきます。良い雰囲気です。"
+    },
+    "b1000017-0000-0000-0000-000000000017": {
+      "en": "However the bar's getting busier now. People keep bumping into her.",
+      "ja": "でも、カウンターが混んできました。周りの人が、何度も彼女にぶつかります。"
+    },
+    "b1000181-0000-0000-0000-000000000181": {
+      "en": "You keep talking and someone bumps her. She spills her drink.",
+      "ja": "そのまま話し続けていると、誰かが彼女にぶつかります。彼女は飲み物をこぼしてしまいます。"
+    },
+    "b1000182-0000-0000-0000-000000000182": {
+      "en": "Notice discomfort and adjust. Ignoring it shows that you're oblivious.",
+      "ja": "居心地の悪さに気づいて、対応しましょう。無視すると、周りが見えていない人だと伝わります。"
+    },
+    "b1000183-0000-0000-0000-000000000183": {
+      "en": "Someone bumps her. You push them and Sophie steps back.",
+      "ja": "誰かが彼女にぶつかります。その人を押しのけると、ソフィーは一歩下がります。"
+    },
+    "b1000184-0000-0000-0000-000000000184": {
+      "en": "Overprotecting signals insecurity. She needs leadership, not a bodyguard.",
+      "ja": "守りすぎると、自信のなさが伝わります。彼女に必要なのは、ボディガードではなく、リードしてくれる人です。"
+    },
+    "b1000019-0000-0000-0000-000000000019": {
+      "en": "Hey it's getting busy here, let's go sit down over there.",
+      "ja": "混んできましたね。あっちに座りましょう。"
+    },
+    "b1000020-0000-0000-0000-000000000020": {
+      "en": "Sophie agrees and you move to a quieter spot together alone.",
+      "ja": "ソフィーはうなずき、二人で静かな場所へ移ります。"
+    },
+    "b1000021-0000-0000-0000-000000000021": {
+      "en": "The two of you continue your conversation sitting down, the vibe is intimate.",
+      "ja": "座って会話を続けます。二人だけの、親密な雰囲気です。"
+    },
+    "b1000022-0000-0000-0000-000000000022": {
+      "en": "However you see one of her friends approaching and hovering nearby.",
+      "ja": "でも、彼女の友人の一人が近づいてきて、そばで様子をうかがっているのが見えます。"
+    },
+    "b1000231-0000-0000-0000-000000000231": {
+      "en": "You keep talking and her friend comes and pulls Sophie away.",
+      "ja": "そのまま話し続けていると、友人がやってきて、ソフィーを連れていってしまいます。"
+    },
+    "b1000232-0000-0000-0000-000000000232": {
+      "en": "Inclusion reduces social tension and preserves control. Acknowledge her friends.",
+      "ja": "輪に入れることで、その場の緊張がやわらぎ、流れも保てます。彼女の友人にも、きちんと向き合いましょう。"
+    },
+    "b1000024-0000-0000-0000-000000000024": {
+      "en": "Hey, Happy Birthday, how are you?",
+      "ja": "あ、お誕生日おめでとうございます。楽しんでいますか？"
+    },
+    "b1000025-0000-0000-0000-000000000025": {
+      "en": "Her friend laughs and answers your question.",
+      "ja": "友人は笑って、質問に答えてくれます。"
+    },
+    "b1000026-0000-0000-0000-000000000026": {
+      "en": "However, she informs Sophie that their Uber is here and they have to leave.",
+      "ja": "でも彼女は、タクシーが来たからもう行かないと、とソフィーに伝えます。"
+    },
+    "b1000027-0000-0000-0000-000000000027": {
+      "en": "Sophie gets up to leave with her friend.",
+      "ja": "ソフィーは、友人と一緒に帰ろうと立ち上がります。"
+    },
+    "b1000281-0000-0000-0000-000000000281": {
+      "en": "Well it was nice to meet you. Goodbye Sophie.",
+      "ja": "会えてよかったです。さようなら、ソフィーさん。"
+    },
+    "b1000282-0000-0000-0000-000000000282": {
+      "en": "She was engaged and receptive. But you never closed, the story ends there.",
+      "ja": "彼女は会話に乗り、受け入れてくれていました。でも、次につなげなかったので、物語はここで終わりです。"
+    },
+    "b1000029-0000-0000-0000-000000000029": {
+      "en": "Hey before you leave add my Instagram.",
+      "ja": "あ、帰る前に、LINEを交換しましょう。"
+    },
+    "b1000030-0000-0000-0000-000000000030": {
+      "en": "Sophie pulls out her phone and adds you happily and leaves after. Success.",
+      "ja": "ソフィーはうれしそうにスマホを取り出して、LINEを交換し、帰っていきます。成功です。"
+    },
+    "b1000031-0000-0000-0000-000000000031": {
+      "en": "You review your interaction with Sophie tonight.",
+      "ja": "今夜のソフィーとのやり取りを振り返ります。"
+    },
+    "b1000032-0000-0000-0000-000000000032": {
+      "en": "You opened naturally and kept it playful instead of transactional.",
+      "ja": "自然に話しかけ、取引のようにせず、遊び心のあるやり取りを保ちました。"
+    },
+    "b1000033-0000-0000-0000-000000000033": {
+      "en": "You read the environment well by moving from the bar and also greeting her friend.",
+      "ja": "カウンターから移動し、彼女の友人にもあいさつして、その場の状況をよく読みました。"
+    },
+    "b1000034-0000-0000-0000-000000000034": {
+      "en": "And you had an enjoyable fun conversation. Well done.",
+      "ja": "そして、楽しい会話ができました。よくできました。"
+    }
+  },
+  "options": {
+    "c1000001-0000-0000-0000-000000000001": {
+      "en": "Wait and scout out the venue first",
+      "ja": "まず店内の様子を見ながら待つ"
+    },
+    "c1000002-0000-0000-0000-000000000002": {
+      "en": "Try make eye contact again then go",
+      "ja": "もう一度目を合わせてから行く"
+    },
+    "c1000003-0000-0000-0000-000000000003": {
+      "en": "Start walking towards her",
+      "ja": "彼女のほうへ歩き出す"
+    },
+    "c1000004-0000-0000-0000-000000000004": {
+      "en": "Stand behind her and wait for her to turn around",
+      "ja": "彼女の後ろに立って、振り向くのを待つ"
+    },
+    "c1000005-0000-0000-0000-000000000005": {
+      "en": "Stand beside her and open with a light comment",
+      "ja": "隣に立って、軽いひと言で話しかける"
+    },
+    "c1000006-0000-0000-0000-000000000006": {
+      "en": "Tap her shoulder and offer to buy her a drink",
+      "ja": "肩をたたいて、一杯おごると申し出る"
+    },
+    "c1000007-0000-0000-0000-000000000007": {
+      "en": "Ask to buy her next drink after she's done",
+      "ja": "今の一杯が終わったら、次をおごると言う"
+    },
+    "c1000008-0000-0000-0000-000000000008": {
+      "en": "Build on her answer then ask what brings her here tonight",
+      "ja": "彼女の答えを広げてから、今夜ここに来た理由を尋ねる"
+    },
+    "c1000009-0000-0000-0000-000000000009": {
+      "en": "Ask her what she does for work",
+      "ja": "仕事は何をしているのかを尋ねる"
+    },
+    "c1000010-0000-0000-0000-000000000010": {
+      "en": "Suggest moving to a quieter spot",
+      "ja": "もっと静かな場所へ移ろうと提案する"
+    },
+    "c1000011-0000-0000-0000-000000000011": {
+      "en": "Ignore it and keep talking",
+      "ja": "気にせず、話し続ける"
+    },
+    "c1000012-0000-0000-0000-000000000012": {
+      "en": "Start pushing people away from her",
+      "ja": "周りの人を彼女から押しのけ始める"
+    },
+    "c1000013-0000-0000-0000-000000000013": {
+      "en": "Smile at the friend and greet her",
+      "ja": "友人にほほえんで、あいさつする"
+    },
+    "c1000014-0000-0000-0000-000000000014": {
+      "en": "Ignore her and keep talking to Sophie",
+      "ja": "友人を無視して、ソフィーと話し続ける"
+    },
+    "c1000015-0000-0000-0000-000000000015": {
+      "en": "Say \"It was nice to meet you\" and leave it",
+      "ja": "「会えてよかったです」と言って、そのままにする"
+    },
+    "c1000016-0000-0000-0000-000000000016": {
+      "en": "Ask for her details before she leaves",
+      "ja": "帰る前に連絡先を聞く"
+    }
+  }
+}
