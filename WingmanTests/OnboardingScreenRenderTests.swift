@@ -269,7 +269,15 @@ final class OnboardingScreenRenderTests: XCTestCase {
                    "plus de progrès qu’en regardant des vidéos de conseils génériques",
                    "Des leçons courtes, à faire dans les transports ou pendant la pause déjeuner",
                    "Des techniques fondées sur la science, qui s’ancrent vraiment",
-                   "Avec Wingman chaque jour", "Ne rien faire"]
+                   "Avec Wingman chaque jour", "Ne rien faire"],
+            // Release D. Japanese is drawn in the system's Japanese font
+            // (Manrope has no Japanese glyphs); the attachment
+            // "translated-growth-ja-375x580" shows how that looks.
+            "ja": ["大事な場面で動ける自信を", "3倍",
+                   "ありきたりなアドバイス動画を見るより速く上達",
+                   "通勤中や昼休みにできる、短いレッスン",
+                   "科学的根拠に基づく、身につく方法",
+                   "毎日Wingman", "何もしない"]
         ]
         try useATranslatedApp()
         let size = Self.small

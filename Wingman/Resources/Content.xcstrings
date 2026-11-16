@@ -22,6 +22,12 @@
             "state" : "needs_review",
             "value" : "18–24"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "18〜24歳"
+          }
         }
       }
     },
@@ -45,6 +51,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "25–34"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "25〜34歳"
           }
         }
       }
@@ -70,6 +82,12 @@
             "state" : "needs_review",
             "value" : "35–44"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "35〜44歳"
+          }
         }
       }
     },
@@ -93,6 +111,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "45–54"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "45〜54歳"
           }
         }
       }
@@ -118,6 +142,12 @@
             "state" : "needs_review",
             "value" : "55+"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "55歳以上"
+          }
         }
       }
     },
@@ -141,6 +171,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Il y a quelques mois"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "数か月前"
           }
         }
       }
@@ -166,6 +202,12 @@
             "state" : "needs_review",
             "value" : "L’homme qui craint la douleur plus que l’échec goûtera aux deux"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "失敗よりも痛みを恐れる者は、その両方を味わうことになる。"
+          }
         }
       }
     },
@@ -189,6 +231,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Une personne qui n’a jamais commis d’erreur n’a jamais tenté d’innover."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "一度も失敗したことがない人は、新しいことに挑戦したことがない人だ。"
           }
         }
       }
@@ -214,6 +262,12 @@
             "state" : "needs_review",
             "value" : "Un bateau est en sécurité au port, mais ce n’est pas pour cela qu’il a été construit."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "船は港にいれば安全だ。だが、船はそのために造られたのではない。"
+          }
         }
       }
     },
@@ -237,6 +291,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Avant tout, sois le héros de ta vie, pas la victime."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "何よりも、人生の犠牲者ではなく、主人公であれ。"
           }
         }
       }
@@ -262,6 +322,12 @@
             "state" : "needs_review",
             "value" : "Assume la responsabilité de ta vie. Sache que c’est toi qui te mèneras là où tu veux aller, personne d’autre."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "自分の人生に責任を持とう。行きたい場所へ連れていってくれるのは、ほかの誰でもない、自分自身だ。"
+          }
         }
       }
     },
@@ -285,6 +351,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Conversation avancée"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "会話術・上級編"
           }
         }
       }
@@ -310,6 +382,12 @@
             "state" : "needs_review",
             "value" : "Flirt avancé"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "恋の駆け引き・上級編"
+          }
         }
       }
     },
@@ -333,6 +411,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Accroches avancées"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "最初のひと言・上級編"
           }
         }
       }
@@ -358,6 +442,12 @@
             "state" : "needs_review",
             "value" : "Tous nos rêves peuvent devenir réalité si nous avons le courage de les poursuivre."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "追い求める勇気があれば、夢はすべてかなう。"
+          }
         }
       }
     },
@@ -381,6 +471,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Tout changement, même pour le mieux, s’accompagne toujours d’inconvénients et d’inconfort."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "どんな変化にも、たとえ良い変化であっても、不便と居心地の悪さがついてくる。"
           }
         }
       }
@@ -406,6 +502,12 @@
             "state" : "needs_review",
             "value" : "Chaque problème est une occasion de donner le meilleur de toi."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "どんな問題も、ベストを尽くすチャンスだ。"
+          }
         }
       }
     },
@@ -429,6 +531,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Tout ce qui arrive vaut mieux que rien du tout."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "何も起きないより、何かが起きるほうがずっといい。"
           }
         }
       }
@@ -454,6 +562,12 @@
             "state" : "needs_review",
             "value" : "L’approche en pratique"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "アプローチの実践"
+          }
         }
       }
     },
@@ -477,6 +591,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Prêt à aborder"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "声をかける準備"
           }
         }
       }
@@ -502,6 +622,12 @@
             "state" : "needs_review",
             "value" : "De nouveau célibataire après une rupture ou un divorce"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "別れや離婚を経て、また出会いを探している"
+          }
         }
       }
     },
@@ -525,6 +651,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "N’aie pas peur d’avancer lentement, aie seulement peur de rester immobile."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ゆっくり進むことを恐れるな。恐れるべきは、立ち止まることだけだ。"
           }
         }
       }
@@ -550,6 +682,12 @@
             "state" : "needs_review",
             "value" : "Croyances et recadrages"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "思い込みと捉え直し"
+          }
         }
       }
     },
@@ -573,6 +711,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Crois que ce que tu fais compte, parce que c’est le cas."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "自分の行動が変化を生むと信じよう。実際に、生むのだから。"
           }
         }
       }
@@ -598,6 +742,12 @@
             "state" : "needs_review",
             "value" : "Crois que tu peux, et tu as déjà fait la moitié du chemin."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "できると信じれば、もう半分まで来ている。"
+          }
         }
       }
     },
@@ -621,6 +771,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Un meilleur état d’esprit et plus de confiance"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "マインドセットと自信"
           }
         }
       }
@@ -646,6 +802,12 @@
             "state" : "needs_review",
             "value" : "Les braves ne vivent peut-être pas éternellement, mais les prudents ne vivent pas du tout."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "勇敢な者は永遠には生きられないかもしれない。だが、用心ばかりの者は、そもそも生きてすらいない。"
+          }
         }
       }
     },
@@ -669,6 +831,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Changer, c’est progresser. Pousse-toi vers des endroits où tu n’es jamais allé."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "変化とは自分を磨くことだ。まだ行ったことのない場所へ、自分を押し出そう。"
           }
         }
       }
@@ -694,6 +862,12 @@
             "state" : "needs_review",
             "value" : "Le changement est difficile au début, chaotique au milieu et magnifique à la fin."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "変化は、最初はつらく、途中は混乱し、最後には素晴らしい。"
+          }
         }
       }
     },
@@ -717,6 +891,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Concrétiser"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "次につなげる"
           }
         }
       }
@@ -742,6 +922,12 @@
             "state" : "needs_review",
             "value" : "Les zones de confort sont des endroits tranquilles où rien ne change."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "コンフォートゾーンは、何も変わらない静かな場所だ。"
+          }
         }
       }
     },
@@ -765,6 +951,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Compliments et alchimie verbale"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "褒め言葉と惹かれ合う会話"
           }
         }
       }
@@ -790,6 +982,12 @@
             "state" : "needs_review",
             "value" : "La confiance en soi n’est pas innée. Elle se construit."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "自信は生まれつきのものではない。自分で築いていくものだ。"
+          }
         }
       }
     },
@@ -813,6 +1011,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Fluidité de la conversation"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "会話の流れ"
           }
         }
       }
@@ -838,6 +1042,12 @@
             "state" : "needs_review",
             "value" : "Le courage, c’est être mort de peur et avancer quand même."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "勇気とは、死ぬほど怖くても、それでも前に進むことだ。"
+          }
         }
       }
     },
@@ -861,6 +1071,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Le courage est le berceau de la confiance."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "勇気は、自信が生まれる場所だ。"
           }
         }
       }
@@ -886,6 +1102,12 @@
             "state" : "needs_review",
             "value" : "Créer des occasions"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "チャンスをつくる"
+          }
         }
       }
     },
@@ -909,6 +1131,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Susciter l’attirance et l’intérêt romantique"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "異性として惹きつける力"
           }
         }
       }
@@ -934,6 +1162,12 @@
             "state" : "needs_review",
             "value" : "La défaite n’est pas le pire des échecs. Ne pas avoir essayé est le véritable échec."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "敗北は最悪の失敗ではない。挑戦しなかったことこそ、本当の失敗だ。"
+          }
         }
       }
     },
@@ -957,6 +1191,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Ne laisse pas ce que tu ne peux pas faire t’empêcher de faire ce que tu peux faire."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "できないことに、できることの邪魔をさせてはいけない。"
           }
         }
       }
@@ -982,6 +1222,12 @@
             "state" : "needs_review",
             "value" : "Fais aujourd’hui ce que les autres ne feront pas, et accomplis demain ce que les autres ne pourront pas."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "人がやらないことを今日やれば、人ができないことを明日成し遂げられる。"
+          }
         }
       }
     },
@@ -1005,6 +1251,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Ne laisse pas la peur de perdre être plus grande que l’envie de gagner."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "負ける怖さを、勝つ喜びより大きくしてはいけない。"
           }
         }
       }
@@ -1030,6 +1282,12 @@
             "state" : "needs_review",
             "value" : "N’attends pas que les occasions arrivent. Lève-toi et crée-les."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "チャンスが来るのを待つな。立ち上がって、自分でつくれ。"
+          }
         }
       }
     },
@@ -1053,6 +1311,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "N’attends pas. Le moment ne sera jamais parfait."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "待つな。「ちょうどいい時」は永遠に来ない。"
           }
         }
       }
@@ -1078,6 +1342,12 @@
             "state" : "needs_review",
             "value" : "Ne t’inquiète pas de l’échec : il suffit de réussir une fois."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "失敗を心配するな。成功は一度すればいい。"
+          }
         }
       }
     },
@@ -1101,6 +1371,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Lassé des applis de rencontre"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "マッチングアプリに疲れた"
           }
         }
       }
@@ -1126,6 +1402,12 @@
             "state" : "needs_review",
             "value" : "Le doute tue plus de rêves que l’échec ne le fera jamais."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "失敗よりも、疑いのほうが多くの夢を殺す。"
+          }
         }
       }
     },
@@ -1149,6 +1431,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Rêve grand et ose échouer."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "大きな夢を持ち、失敗を恐れず挑め。"
           }
         }
       }
@@ -1174,6 +1462,12 @@
             "state" : "needs_review",
             "value" : "L’énergie et la persévérance viennent à bout de tout."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "活力と粘り強さは、すべてに打ち勝つ。"
+          }
         }
       }
     },
@@ -1197,6 +1491,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Chaque « non » te rapproche d’un « oui »."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "「ノー」をもらうたびに、「イエス」に一歩近づく。"
           }
         }
       }
@@ -1222,6 +1522,12 @@
             "state" : "needs_review",
             "value" : "Chaque approche est un entraînement pour celle qui marchera."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "すべてのアプローチは、うまくいく一回のための練習だ。"
+          }
         }
       }
     },
@@ -1245,6 +1551,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Tout maître a d’abord été un débutant qui a refusé d’abandonner."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "どんな達人も、かつてはあきらめなかった初心者だった。"
           }
         }
       }
@@ -1270,6 +1582,12 @@
             "state" : "needs_review",
             "value" : "Toute personne qui a réussi a connu le rejet. La différence, c’est qu’elle ne l’a pas laissé l’empêcher de réessayer."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "成功した人は皆、拒絶を経験している。違いは、それでも挑戦をやめなかったことだ。"
+          }
         }
       }
     },
@@ -1293,6 +1611,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "À chaque fois"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "毎回"
           }
         }
       }
@@ -1318,6 +1642,12 @@
             "state" : "needs_review",
             "value" : "Tout ce que tu as toujours voulu se trouve de l’autre côté de la peur."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "欲しかったものはすべて、恐怖の向こう側にある。"
+          }
         }
       }
     },
@@ -1341,6 +1671,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "L’échec et le rejet sont les premiers pas vers la réussite."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "失敗と拒絶は、成功への第一歩だ。"
           }
         }
       }
@@ -1366,6 +1702,12 @@
             "state" : "needs_review",
             "value" : "L’échec, c’est la réussite en cours."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "失敗とは、進行中の成功だ。"
+          }
         }
       }
     },
@@ -1389,6 +1731,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "L’échec est le condiment qui donne sa saveur au succès."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "失敗は、成功に味わいを与える調味料だ。"
           }
         }
       }
@@ -1414,6 +1762,12 @@
             "state" : "needs_review",
             "value" : "Tombe sept fois, relève-toi huit."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "七転び八起き。"
+          }
         }
       }
     },
@@ -1437,6 +1791,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Peur et exposition"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "恐れと場慣れ"
           }
         }
       }
@@ -1462,6 +1822,12 @@
             "state" : "needs_review",
             "value" : "La peur perd de sa force quand tu avances vers elle."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "恐怖は、こちらから一歩近づくと力を失う。"
+          }
         }
       }
     },
@@ -1485,6 +1851,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "La peur du rejet ou d’être ridicule"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "断られたり、恥をかいたりするのが怖い"
           }
         }
       }
@@ -1510,6 +1882,12 @@
             "state" : "needs_review",
             "value" : "La peur du regard des autres"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "周りにどう思われるかが怖い"
+          }
         }
       }
     },
@@ -1533,6 +1911,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Séduction et alchimie"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "恋の駆け引きと相性"
           }
         }
       }
@@ -1558,6 +1942,12 @@
             "state" : "needs_review",
             "value" : "Les bases du flirt"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "恋の駆け引きの前提"
+          }
         }
       }
     },
@@ -1581,6 +1971,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Le bonheur dépend de nous-mêmes."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "幸せは、自分次第だ。"
           }
         }
       }
@@ -1606,6 +2002,12 @@
             "state" : "needs_review",
             "value" : "Le bonheur n’est pas quelque chose de tout fait. Il vient de tes propres actions."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "幸せは、出来合いのものではない。自分の行動から生まれる。"
+          }
         }
       }
     },
@@ -1629,6 +2031,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Celui qui n’a pas le courage de prendre des risques n’accomplira rien dans sa vie."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "リスクを取る勇気のない者は、人生で何も成し遂げられない。"
           }
         }
       }
@@ -1654,6 +2062,12 @@
             "state" : "needs_review",
             "value" : "Je me fige face aux femmes qui me plaisent"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "気になる女性の前だと固まってしまう"
+          }
         }
       }
     },
@@ -1677,6 +2091,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Si rien ne changeait jamais, il n’y aurait pas de papillons."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "変化がなければ、蝶は生まれない。"
           }
         }
       }
@@ -1702,6 +2122,12 @@
             "state" : "needs_review",
             "value" : "Sans lutte, pas de progrès."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "苦闘なくして、進歩なし。"
+          }
         }
       }
     },
@@ -1725,6 +2151,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Si tu n’es pas prêt à risquer l’inhabituel, tu devras te contenter de l’ordinaire."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "非凡なことに賭ける気がないなら、平凡で満足するしかない。"
           }
         }
       }
@@ -1750,6 +2182,12 @@
             "state" : "needs_review",
             "value" : "Si tu n’essaies pas, tu ne sauras jamais ce qui aurait pu être."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "やってみなければ、どうなっていたかは永遠にわからない。"
+          }
         }
       }
     },
@@ -1773,6 +2211,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Si quelque chose ne te plaît pas, change-le. Si tu ne peux pas le changer, change ton attitude."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "気に入らないなら、変えればいい。変えられないなら、自分の態度を変えればいい。"
           }
         }
       }
@@ -1798,6 +2242,12 @@
             "state" : "needs_review",
             "value" : "Si tu ne risques rien, tu risques tout."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "何も賭けないことは、すべてを賭けることだ。"
+          }
         }
       }
     },
@@ -1821,6 +2271,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Si tu ne tires pas, tu ne marques pas."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "バットを振らなければ、ホームランは打てない。"
           }
         }
       }
@@ -1846,6 +2302,12 @@
             "state" : "needs_review",
             "value" : "Tourne-toi vers le soleil, et les ombres passeront derrière toi."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "太陽のほうを向いていれば、影は後ろに落ちる。"
+          }
         }
       }
     },
@@ -1869,6 +2331,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Si tu attends d’être prêt, tu attendras toujours."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "準備ができたと感じるまで待つなら、永遠に待つことになる。"
           }
         }
       }
@@ -1894,6 +2362,12 @@
             "state" : "needs_review",
             "value" : "Pour réussir, ton envie de réussir doit être plus grande que ta peur d’échouer."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "成功するには、失敗への恐れより、成功への願いが大きくなければならない。"
+          }
         }
       }
     },
@@ -1917,6 +2391,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "L’inaction garantit qu’il ne se passe rien. L’action est le seul chemin qui crée des possibilités."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "行動しなければ、何も起こらないことだけが確実になる。可能性を生む道は、行動しかない。"
           }
         }
       }
@@ -1942,6 +2422,12 @@
             "state" : "needs_review",
             "value" : "Stabilité intérieure"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ぶれない心"
+          }
         }
       }
     },
@@ -1965,6 +2451,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Au quotidien et maîtrise"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "日常への定着と熟達"
           }
         }
       }
@@ -1990,6 +2482,12 @@
             "state" : "needs_review",
             "value" : "Cela semble toujours impossible, jusqu’à ce qu’on le fasse."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "何事も、成し遂げるまでは不可能に見える。"
+          }
         }
       }
     },
@@ -2013,6 +2511,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Peu importe la lenteur à laquelle tu avances, du moment que tu ne t’arrêtes pas."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "止まりさえしなければ、どんなにゆっくり進んでもかまわない。"
           }
         }
       }
@@ -2038,6 +2542,12 @@
             "state" : "needs_review",
             "value" : "Il faut s’exposer au rejet et accepter d’être rejeté."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "拒絶されうる場に自分を置き、拒絶されることを受け入れる必要がある。"
+          }
         }
       }
     },
@@ -2061,6 +2571,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Ce n’est pas parce que les choses sont difficiles que nous n’osons pas, c’est parce que nous n’osons pas qu’elles sont difficiles."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "難しいから挑まないのではない。挑まないから難しくなるのだ。"
           }
         }
       }
@@ -2086,6 +2602,12 @@
             "state" : "needs_review",
             "value" : "Mieux vaut savoir et être déçu que ne jamais savoir et toujours se demander."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "知ってがっかりするほうが、知らないまま思い悩み続けるよりいい。"
+          }
         }
       }
     },
@@ -2109,6 +2631,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Faire durer la conversation"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "会話を続ける力"
           }
         }
       }
@@ -2134,6 +2662,12 @@
             "state" : "needs_review",
             "value" : "Saute avant d’être prêt : on grandit en plein vol."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "準備ができる前に跳べ。成長は空中で起こる。"
+          }
         }
       }
     },
@@ -2157,6 +2691,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Apprendre et se découvrir"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "学びと自己発見"
           }
         }
       }
@@ -2182,6 +2722,12 @@
             "state" : "needs_review",
             "value" : "Apprendre à aborder"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "声のかけ方"
+          }
         }
       }
     },
@@ -2205,6 +2751,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "La vie, ce n’est pas choisir l’option la plus sûre. C’est vivre une vie qui en vaut la peine."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "人生とは、安全な道を選ぶことではない。生きる価値のある人生を生きることだ。"
           }
         }
       }
@@ -2230,6 +2782,12 @@
             "state" : "needs_review",
             "value" : "La vie se rétrécit ou s’épanouit en proportion du courage de chacun."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "人生は、勇気に比例して縮みもすれば、広がりもする。"
+          }
         }
       }
     },
@@ -2253,6 +2811,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Écouter et être en phase"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "聞く力と波長合わせ"
           }
         }
       }
@@ -2278,6 +2842,12 @@
             "state" : "needs_review",
             "value" : "Maîtrise et identité"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "熟達とアイデンティティ"
+          }
         }
       }
     },
@@ -2301,6 +2871,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "État d’esprit et bases"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "マインドセットと土台"
           }
         }
       }
@@ -2326,6 +2902,12 @@
             "state" : "needs_review",
             "value" : "Il y a plus d’un an"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "1年以上前"
+          }
         }
       }
     },
@@ -2349,6 +2931,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "La plupart du temps"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ほとんどの場合"
           }
         }
       }
@@ -2374,6 +2962,12 @@
             "state" : "needs_review",
             "value" : "Je n’ai jamais abordé personne"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "声をかけたことがない"
+          }
         }
       }
     },
@@ -2397,6 +2991,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Ne crains jamais le rejet, crains une vie de regrets."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "拒絶を恐れるな。後悔し続ける人生を恐れよ。"
           }
         }
       }
@@ -2422,6 +3022,12 @@
             "state" : "needs_review",
             "value" : "Aucune approche n’est perdue : soit elle marche, soit elle te montre quoi changer."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "無駄なアプローチはない。うまくいくか、何を変えるべきかがわかるかのどちらかだ。"
+          }
         }
       }
     },
@@ -2445,6 +3051,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Personne ne peut te faire sentir inférieur sans ton consentement."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "自分が同意しない限り、誰にも劣等感を抱かされることはない。"
           }
         }
       }
@@ -2470,6 +3082,12 @@
             "state" : "needs_review",
             "value" : "Non, je me lance en général"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "いいえ、たいてい声をかけます"
+          }
         }
       }
     },
@@ -2493,6 +3111,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Les incontournables"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "外せない基本"
           }
         }
       }
@@ -2518,6 +3142,12 @@
             "state" : "needs_review",
             "value" : "Ne pas savoir quoi dire ni comment commencer"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "何を言えばいいか、どう始めればいいかわからない"
+          }
         }
       }
     },
@@ -2541,6 +3171,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Un geste audacieux vaut mieux qu’une vie de « et si… »."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "一度の大胆な行動は、一生分の「もしも」に勝る。"
           }
         }
       }
@@ -2566,6 +3202,12 @@
             "state" : "needs_review",
             "value" : "On peut choisir de revenir vers la sécurité ou d’avancer vers la croissance."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "人は、安全へ引き返すことも、成長へ踏み出すことも選べる。"
+          }
         }
       }
     },
@@ -2589,6 +3231,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Autre"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "その他"
           }
         }
       }
@@ -2614,6 +3262,12 @@
             "state" : "needs_review",
             "value" : "Notre plus grande gloire n’est pas de ne jamais tomber, mais de nous relever à chaque chute."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "最大の栄光は、一度も転ばないことではなく、転ぶたびに起き上がることにある。"
+          }
         }
       }
     },
@@ -2637,6 +3291,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Patience, persévérance et transpiration forment une combinaison imbattable pour réussir."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "忍耐、粘り強さ、そして汗。この3つが揃えば、成功は揺るがない。"
           }
         }
       }
@@ -2662,6 +3322,12 @@
             "state" : "needs_review",
             "value" : "Présence physique"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "身体で伝える存在感"
+          }
         }
       }
     },
@@ -2685,6 +3351,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Jeu et étincelle"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "遊び心とときめき"
           }
         }
       }
@@ -2710,6 +3382,12 @@
             "state" : "needs_review",
             "value" : "Présence et expression"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "存在感と表情"
+          }
         }
       }
     },
@@ -2733,6 +3411,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Rarement"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "めったにない"
           }
         }
       }
@@ -2758,6 +3442,12 @@
             "state" : "needs_review",
             "value" : "Lire et répondre"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "反応を読んで応える"
+          }
         }
       }
     },
@@ -2781,6 +3471,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Reconnaître que tu n’es pas là où tu veux être, c’est le point de départ pour changer ta vie."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "今いる場所が望む場所ではないと認めることが、人生を変える出発点になる。"
           }
         }
       }
@@ -2806,6 +3502,12 @@
             "state" : "needs_review",
             "value" : "Le rejet n’est pas la fin. Juste un pas sur le bon chemin."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "拒絶は終わりではない。正しい道の途中の一歩にすぎない。"
+          }
         }
       }
     },
@@ -2829,6 +3531,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Remplace la peur de l’inconnu par la curiosité."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "未知への恐れを、好奇心に置き換えよう。"
           }
         }
       }
@@ -2854,6 +3562,12 @@
             "state" : "needs_review",
             "value" : "Se confier et se montrer vulnérable"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "自己開示と弱さの見せ方"
+          }
         }
       }
     },
@@ -2877,6 +3591,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Aborder selon la situation"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "場面別のアプローチ"
           }
         }
       }
@@ -2902,6 +3622,12 @@
             "state" : "needs_review",
             "value" : "Mieux valent de petites actions accomplies que de grandes actions planifiées."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "計画しただけの偉業より、やり遂げた小さな行いのほうがいい。"
+          }
         }
       }
     },
@@ -2925,6 +3651,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Conversation légère et élan"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "雑談と会話の勢い"
           }
         }
       }
@@ -2950,6 +3682,12 @@
             "state" : "needs_review",
             "value" : "Parfois"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ときどき"
+          }
         }
       }
     },
@@ -2973,6 +3711,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Commence là où tu es. Utilise ce que tu as. Fais ce que tu peux."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "今いる場所から始めよう。持っているものを使おう。できることをしよう。"
           }
         }
       }
@@ -2998,6 +3742,12 @@
             "state" : "needs_review",
             "value" : "Le succès n’est pas final, l’échec n’est pas fatal : c’est le courage de continuer qui compte."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "成功は終着点ではなく、失敗は致命的ではない。大切なのは、続ける勇気だ。"
+          }
         }
       }
     },
@@ -3021,6 +3771,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Le succès est la somme de petits efforts, répétés jour après jour."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "成功とは、毎日繰り返す小さな努力の積み重ねだ。"
           }
         }
       }
@@ -3046,6 +3802,12 @@
             "state" : "needs_review",
             "value" : "Le succès, c’est d’aller d’échec en échec sans perdre son enthousiasme."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "成功とは、熱意を失わずに、失敗から失敗へと歩み続けることだ。"
+          }
         }
       }
     },
@@ -3069,6 +3831,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Ceux qui réussissent font volontiers ce que les autres refusent de faire."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "成功する人は、成功しない人がやりたがらないことを進んでやる。"
           }
         }
       }
@@ -3094,6 +3862,12 @@
             "state" : "needs_review",
             "value" : "Tente ta chance : on ne marque pas depuis le banc de touche."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "バットを振ろう。ベンチからホームランは生まれない。"
+          }
         }
       }
     },
@@ -3117,6 +3891,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "L’accroche"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "最初のひと言"
           }
         }
       }
@@ -3142,6 +3922,12 @@
             "state" : "needs_review",
             "value" : "Aller vers elle"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "近づき方"
+          }
         }
       }
     },
@@ -3165,6 +3951,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "La meilleure façon de prédire l’avenir, c’est de le créer."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "未来を予測する最良の方法は、未来を自分でつくることだ。"
           }
         }
       }
@@ -3190,6 +3982,12 @@
             "state" : "needs_review",
             "value" : "Le plus grand risque, c’est de ne prendre aucun risque."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "最大のリスクは、リスクを一切取らないことだ。"
+          }
         }
       }
     },
@@ -3213,6 +4011,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "La grotte où tu as peur d’entrer renferme le trésor que tu cherches."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "入るのを恐れている洞窟にこそ、探している宝がある。"
           }
         }
       }
@@ -3238,6 +4042,12 @@
             "state" : "needs_review",
             "value" : "La porte reste fermée tant que tu ne tournes pas la poignée. Elle ne peut pas dire oui à la version de toi qui ne se montre jamais."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ドアは、ノブを回すまで閉じたままだ。姿を見せない相手に、彼女は「はい」と言えない。"
+          }
         }
       }
     },
@@ -3261,6 +4071,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Le match ne commence pas tant que tu n’es pas sur le terrain."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "フィールドに立つまで、試合は始まらない。"
           }
         }
       }
@@ -3286,6 +4102,12 @@
             "state" : "needs_review",
             "value" : "La plus grande gloire de la vie n’est pas de ne jamais tomber, mais de se relever à chaque chute."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "生きるうえで最も輝かしいのは、一度も転ばないことではない。転ぶたびに起き上がることだ。"
+          }
         }
       }
     },
@@ -3309,6 +4131,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Le gars maladroit l’emporte quand même sur celui qui n’agit jamais."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ぎこちなくても動く男は、何もしない男に勝る。"
           }
         }
       }
@@ -3334,6 +4162,12 @@
             "state" : "needs_review",
             "value" : "Un voyage de mille lieues commence par un premier pas."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "千里の道も一歩から。"
+          }
         }
       }
     },
@@ -3357,6 +4191,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "L’homme qui déplace une montagne commence par déplacer de petites pierres."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "山を動かす者は、小さな石を運ぶことから始める。"
           }
         }
       }
@@ -3382,6 +4222,12 @@
             "state" : "needs_review",
             "value" : "L’homme que tu veux être se construit une décision à la fois."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "なりたい男には、ひとつひとつの決断を重ねてなっていく。"
+          }
         }
       }
     },
@@ -3405,6 +4251,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Le maître a échoué plus de fois que le débutant n’a essayé."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "達人は、初心者が挑戦した回数よりも多く失敗している。"
           }
         }
       }
@@ -3430,6 +4282,12 @@
             "state" : "needs_review",
             "value" : "La façon la plus sûre de réussir est toujours d’essayer une fois de plus."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "成功する最も確実な方法は、いつでも「もう一回だけ」試してみることだ。"
+          }
         }
       }
     },
@@ -3453,6 +4311,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "La seule mauvaise approche est celle que tu n’as pas tentée."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "悪いアプローチがあるとすれば、しなかったアプローチだけだ。"
           }
         }
       }
@@ -3478,6 +4342,12 @@
             "state" : "needs_review",
             "value" : "Le seul échec, c’est d’arrêter d’essayer."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "唯一の失敗は、挑戦をやめることだ。"
+          }
         }
       }
     },
@@ -3501,6 +4371,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Le seul voyage impossible est celui que tu ne commences jamais."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "不可能な旅は、始めなかった旅だけだ。"
           }
         }
       }
@@ -3526,6 +4402,12 @@
             "state" : "needs_review",
             "value" : "La seule limite à nos réalisations de demain, ce sont nos doutes d’aujourd’hui."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "明日の実現を阻むのは、今日の疑いだけだ。"
+          }
         }
       }
     },
@@ -3549,6 +4431,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Le seul endroit où le succès vient avant le travail, c’est dans le dictionnaire."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "成功が努力より先に来るのは、辞書の中だけだ。"
           }
         }
       }
@@ -3574,6 +4462,12 @@
             "state" : "needs_review",
             "value" : "Le secret pour avancer, c’est de commencer."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "前に進む秘訣は、まず始めることだ。"
+          }
         }
       }
     },
@@ -3597,6 +4491,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Le guerrier qui réussit est un homme ordinaire doté d’une concentration de laser."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "成功する戦士とは、レーザーのような集中力を持った、普通の人間だ。"
           }
         }
       }
@@ -3622,6 +4522,12 @@
             "state" : "needs_review",
             "value" : "Il n’y a qu’une façon d’éviter la critique : ne rien faire, ne rien dire et n’être rien."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "批判を避ける方法はひとつしかない。何もせず、何も言わず、何者にもならないことだ。"
+          }
         }
       }
     },
@@ -3645,6 +4551,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Il y aura des moments où tu réussiras et d’autres où tu échoueras, et les deux sont tout aussi importants."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "成功するときもあれば、失敗するときもある。そのどちらも、同じように大切だ。"
           }
         }
       }
@@ -3670,6 +4582,12 @@
             "state" : "needs_review",
             "value" : "Fatigué d’être seul"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ひとりでいるのに疲れた"
+          }
         }
       }
     },
@@ -3693,6 +4611,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Fais-toi confiance. Tu es capable de bien plus que tu ne le penses."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "自分を信じよう。思っているより、ずっと多くのことができる。"
           }
         }
       }
@@ -3718,6 +4642,12 @@
             "state" : "needs_review",
             "value" : "Améliorer ton mode de vie"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ライフスタイルを磨く"
+          }
         }
       }
     },
@@ -3741,6 +4671,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Avoir plus confiance en moi en général"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "全般的にもっと自信をつけたい"
           }
         }
       }
@@ -3766,6 +4702,12 @@
             "state" : "needs_review",
             "value" : "On ne grandit pas quand tout est facile. On grandit face aux défis."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "物事が簡単なとき、人は成長しない。困難に向き合うときに成長する。"
+          }
         }
       }
     },
@@ -3789,6 +4731,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Nous connaîtrons peut-être bien des défaites, mais nous ne devons pas être vaincus."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "何度も敗北に出会うかもしれない。だが、打ち負かされてはならない。"
           }
         }
       }
@@ -3814,6 +4762,12 @@
             "state" : "needs_review",
             "value" : "Ce que tu ne changes pas, tu le choisis."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "変えようとしないものは、自分で選んでいるものだ。"
+          }
         }
       }
     },
@@ -3837,6 +4791,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Tout ce que l’esprit humain peut concevoir et croire, il peut le réaliser."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "人が心に思い描き、信じられることは、すべて実現できる。"
           }
         }
       }
@@ -3862,6 +4822,12 @@
             "state" : "needs_review",
             "value" : "Quand sauter fait peur, c’est justement le moment de sauter."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "跳ぶのが怖いと感じるとき、それこそが跳ぶべきときだ。"
+          }
         }
       }
     },
@@ -3885,6 +4851,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Que tu penses être capable ou ne pas être capable, tu as raison."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "できると思っても、できないと思っても、どちらも正しい。"
           }
         }
       }
@@ -3910,6 +4882,12 @@
             "state" : "needs_review",
             "value" : "Au cours du dernier mois"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "この1か月以内"
+          }
         }
       }
     },
@@ -3933,6 +4911,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Au cours de la dernière semaine"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "この1週間以内"
           }
         }
       }
@@ -3958,6 +4942,12 @@
             "state" : "needs_review",
             "value" : "Peur de donner une mauvaise impression"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "変な印象を与えないか心配"
+          }
         }
       }
     },
@@ -3981,6 +4971,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Tu peux être la pêche la plus mûre et la plus juteuse du monde, il y aura toujours quelqu’un qui déteste les pêches."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "世界で一番熟した、みずみずしい桃になれたとしても、桃が嫌いな人は必ずいる。"
           }
         }
       }
@@ -4006,6 +5002,12 @@
             "state" : "needs_review",
             "value" : "Tu peux choisir le courage, ou tu peux choisir le confort, mais tu ne peux pas choisir les deux."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "勇気を選ぶことも、安心を選ぶこともできる。だが、両方は選べない。"
+          }
         }
       }
     },
@@ -4029,6 +5031,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Tu peux gâcher ta vie à tracer des limites. Ou tu peux vivre ta vie en les franchissant."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "線を引くことに人生を費やすこともできる。その線を越えて生きることもできる。"
           }
         }
       }
@@ -4054,6 +5062,12 @@
             "state" : "needs_review",
             "value" : "Tu peux, tu devrais, et si tu as le courage de commencer, tu le feras."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "できる。やるべきだ。そして、始める勇気があるなら、きっとやり遂げる。"
+          }
         }
       }
     },
@@ -4077,6 +5091,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Tu ne peux pas changer ce que tu refuses d’affronter."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "向き合おうとしないものは、変えられない。"
           }
         }
       }
@@ -4102,6 +5122,12 @@
             "state" : "needs_review",
             "value" : "On ne découvre pas de terre nouvelle sans consentir à perdre de vue le rivage."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "岸を見失う勇気がなければ、新しい水平線へ泳ぎ出すことはできない。"
+          }
         }
       }
     },
@@ -4125,6 +5151,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Tu ne peux pas gagner un match que tu ne joues jamais."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "プレーしない試合には、勝てない。"
           }
         }
       }
@@ -4150,6 +5182,12 @@
             "state" : "needs_review",
             "value" : "Tu ne contrôles pas les actes des autres, mais tu contrôles ta réaction."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "人の行動はコントロールできない。だが、それにどう反応するかはコントロールできる。"
+          }
         }
       }
     },
@@ -4173,6 +5211,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Tu ne peux pas tomber si tu ne grimpes pas. Mais il n’y a aucune joie à passer toute sa vie au sol."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "登らなければ、落ちることもない。だが、一生を地面の上で過ごす人生に喜びはない。"
           }
         }
       }
@@ -4198,6 +5242,12 @@
             "state" : "needs_review",
             "value" : "Pas besoin d’être excellent pour commencer, mais il faut commencer pour devenir excellent."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "始めるのに偉大である必要はない。だが、偉大になるには始めなければならない。"
+          }
         }
       }
     },
@@ -4221,6 +5271,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Tu n’as pas besoin de voir tout l’escalier, monte juste la première marche."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "階段の全体が見えなくてもいい。最初の一段を上ればいい。"
           }
         }
       }
@@ -4246,6 +5302,12 @@
             "state" : "needs_review",
             "value" : "On ne perd pas en essayant. On perd en ne sachant jamais."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "挑戦して負けることはない。知ろうとしないことが、負けなのだ。"
+          }
         }
       }
     },
@@ -4270,6 +5332,12 @@
             "state" : "needs_review",
             "value" : "Tous les tirs que tu ne tentes pas sont ratés d’avance."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "打たないシュートは、100%外れる。"
+          }
         }
       }
     },
@@ -4293,6 +5361,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Tu ne laboureras jamais un champ en le retournant seulement dans ta tête."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "頭の中で耕しているだけでは、畑は決して耕せない。"
           }
         }
       }

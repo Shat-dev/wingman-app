@@ -1,0 +1,302 @@
+{
+  "scenario": {
+    "a1000006-0000-0000-0000-000000000006": {
+      "title": {
+        "en": "Delayed Together",
+        "ja": "一緒に足止め"
+      },
+      "summary": {
+        "en": "Crowded terminal, shared frustration, time to kill. A small move changes the whole wait.",
+        "ja": "混み合ったターミナル、同じいら立ち、持て余す時間。小さな一歩が、待ち時間をまるごと変えます。"
+      }
+    }
+  },
+  "screens": {
+    "b1000001-0000-0000-0006-000000000001": {
+      "en": "You're about to go visit some friends interstate for the weekend.",
+      "ja": "週末を使って、遠くの街に住む友人たちに会いに行くところです。"
+    },
+    "b1000002-0000-0000-0006-000000000002": {
+      "en": "You've just arrived to the departure gates, looking forward to your trip away.",
+      "ja": "ちょうど出発ゲートに着きました。旅行が楽しみです。"
+    },
+    "b1000003-0000-0000-0006-000000000003": {
+      "en": "Suddenly there's an announcement.",
+      "ja": "突然、アナウンスが流れます。"
+    },
+    "b1000004-0000-0000-0006-000000000004": {
+      "en": "\"The flight will be delayed two hours due to mechanical issues\".",
+      "ja": "「機材の不具合のため、当便の出発は2時間遅れる見込みです」"
+    },
+    "b1000005-0000-0000-0006-000000000005": {
+      "en": "You see her sitting on the benches. She sighs and puts her phone down.",
+      "ja": "ベンチに座っている彼女が目に入ります。彼女はため息をついて、スマホを置きます。"
+    },
+    "b1000061-0000-0000-0006-000000000061": {
+      "en": "You sit next to her. She glances over, shifts slightly away. Awkward silence.",
+      "ja": "彼女の隣に座ります。彼女はちらりとこちらを見て、少しだけ体を離します。気まずい沈黙が流れます。"
+    },
+    "b1000062-0000-0000-0006-000000000062": {
+      "en": "Proximity without talking feels invasive. Moving that close needs a reason first.",
+      "ja": "何も話さずに近づくと、踏み込まれたように感じられます。そこまで近づくには、まず理由が必要です。"
+    },
+    "b1000063-0000-0000-0006-000000000063": {
+      "en": "Hey are you travelling for work or just for fun?",
+      "ja": "あの、お仕事ですか？それともご旅行ですか？"
+    },
+    "b1000064-0000-0000-0006-000000000064": {
+      "en": "While this may work, use the natural shared experience of the delay.",
+      "ja": "これでもうまくいくかもしれませんが、遅延という、自然に共有している状況を使いましょう。"
+    },
+    "b1000007-0000-0000-0006-000000000007": {
+      "en": "Hey are you on the delayed flight too?",
+      "ja": "あの、もしかして、同じ遅れている便ですか？"
+    },
+    "b1000008-0000-0000-0006-000000000008": {
+      "en": "Yeah. Two hour delay apparently. Not ideal.",
+      "ja": "ええ。2時間遅れだそうです。困りましたね。"
+    },
+    "b1000009-0000-0000-0006-000000000009": {
+      "en": "Common destination established. Natural reason to keep talking.",
+      "ja": "同じ行き先だとわかりました。話を続ける自然な理由ができました。"
+    },
+    "b1000101-0000-0000-0006-000000000101": {
+      "en": "Yeah it's soo annoying, I was meant to...",
+      "ja": "ですよね、本当に参りますよね。僕は本当なら……"
+    },
+    "b1000102-0000-0000-0006-000000000102": {
+      "en": "Complaining dampens the mood. Lift it up instead.",
+      "ja": "不満を言うと、場の空気が沈みます。そうではなく、空気を持ち上げましょう。"
+    },
+    "b1000103-0000-0000-0006-000000000103": {
+      "en": "Maybe you can check if there are other flights?",
+      "ja": "ほかの便がないか、確認してみたらどうですか？"
+    },
+    "b1000104-0000-0000-0006-000000000104": {
+      "en": "She's venting frustration, not asking for solutions. Use emotion not logic.",
+      "ja": "彼女はいら立ちを吐き出しているのであって、解決策を求めているのではありません。理屈ではなく、気持ちに応えましょう。"
+    },
+    "b1000011-0000-0000-0006-000000000011": {
+      "en": "Not ideal is an understatement. Did you have plans tonight?",
+      "ja": "「困りました」どころじゃないですよね。今夜、予定があったんですか？"
+    },
+    "b1000012-0000-0000-0006-000000000012": {
+      "en": "Yeah, had a friends dinner. Guess that's not happening anymore.",
+      "ja": "ええ、友達との食事会だったんです。もう無理そうですけど。"
+    },
+    "b1000013-0000-0000-0006-000000000013": {
+      "en": "Empathy landed well. She's sharing freely. The conversation has momentum.",
+      "ja": "共感がうまく届きました。彼女は自分から話してくれています。会話に流れができています。"
+    },
+    "b1000141-0000-0000-0006-000000000141": {
+      "en": "That must be sad then that you're missing your dinner tonight.",
+      "ja": "それは残念ですね。今夜の食事会に行けなくなって。"
+    },
+    "b1000142-0000-0000-0006-000000000142": {
+      "en": "Sympathy alone doesn't move the conversation forward, add something.",
+      "ja": "同情だけでは、会話は前に進みません。何かを付け加えましょう。"
+    },
+    "b1000143-0000-0000-0006-000000000143": {
+      "en": "Yeah I was meant to meet my friends. We try to meet yearly and this weekend we...",
+      "ja": "ええ、僕も友人たちと会うはずだったんです。年に一度は集まるようにしていて、今週末は……"
+    },
+    "b1000144-0000-0000-0006-000000000144": {
+      "en": "You made it about yourself. Answer her question briefly then return focus to her.",
+      "ja": "自分の話にしてしまいました。彼女の質問には手短に答えて、関心を彼女に戻しましょう。"
+    },
+    "b1000015-0000-0000-0006-000000000015": {
+      "en": "Same actually. Was supposed to meet some mates tonight too.",
+      "ja": "実は僕もなんです。今夜、友人たちと会うはずで。"
+    },
+    "b1000016-0000-0000-0006-000000000016": {
+      "en": "Oh really? What were you guys planning on doing?",
+      "ja": "そうなんですか？何をする予定だったんですか？"
+    },
+    "b1000017-0000-0000-0006-000000000017": {
+      "en": "We do a weekend getaway each year, helps us stay in touch.",
+      "ja": "毎年、週末に旅行をするんです。そうやって、連絡を取り合うようにしていて。"
+    },
+    "b1000018-0000-0000-0006-000000000018": {
+      "en": "What about yours, was it a special occasion?",
+      "ja": "そちらは、何か特別な集まりだったんですか？"
+    },
+    "b1000019-0000-0000-0006-000000000019": {
+      "en": "Sort of. My friend just got engaged, so we were celebrating that.",
+      "ja": "まあ、そうですね。友達が婚約したばかりで、そのお祝いだったんです。"
+    },
+    "b1000201-0000-0000-0006-000000000201": {
+      "en": "What's your name?",
+      "ja": "お名前は？"
+    },
+    "b1000202-0000-0000-0006-000000000202": {
+      "en": "Give your name first. Leading makes her reciprocation natural, not pressured.",
+      "ja": "先に自分の名前を伝えましょう。こちらからリードすれば、彼女も、プレッシャーなく自然に名乗り返せます。"
+    },
+    "b1000203-0000-0000-0006-000000000203": {
+      "en": "You introduce yourself and lend out your hand for a handshake.",
+      "ja": "自己紹介をして、握手のために手を差し出します。"
+    },
+    "b1000204-0000-0000-0006-000000000204": {
+      "en": "While this can work, match the casual energy, don't shift tones suddenly.",
+      "ja": "これでもうまくいくことはありますが、気楽な雰囲気に合わせましょう。急にトーンを変えないことです。"
+    },
+    "b1000021-0000-0000-0006-000000000021": {
+      "en": "I'm... by the way. Since we're going to be stuck here together.",
+      "ja": "ちなみに、僕は……といいます。しばらくここで一緒に足止めですし。"
+    },
+    "b1000022-0000-0000-0006-000000000022": {
+      "en": "Mel. Nice to meet you.",
+      "ja": "メルです。はじめまして。"
+    },
+    "b1000023-0000-0000-0006-000000000023": {
+      "en": "The conversation is good, you're building rapport.",
+      "ja": "会話は順調です。打ち解けてきています。"
+    },
+    "b1000024-0000-0000-0006-000000000024": {
+      "en": "You've been talking at the gate for 10 minutes. Two hours still to go.",
+      "ja": "ゲートで10分ほど話しています。あと2時間あります。"
+    },
+    "b1000251-0000-0000-0006-000000000251": {
+      "en": "Maybe later, I'm not that hungry at the moment.",
+      "ja": "またあとで。今はそんなにお腹が空いていないので。"
+    },
+    "b1000252-0000-0000-0006-000000000252": {
+      "en": "Apologetic energy kills confidence. If it's a good idea, suggest it clearly.",
+      "ja": "申し訳なさそうな態度は、自信を打ち消します。良い考えなら、はっきり提案しましょう。"
+    },
+    "b1000253-0000-0000-0006-000000000253": {
+      "en": "Maybe later, I'm not that hungry at the moment.",
+      "ja": "またあとで。今はそんなにお腹が空いていないので。"
+    },
+    "b1000254-0000-0000-0006-000000000254": {
+      "en": "Calling it a date adds pressure. Keep it casual. The intent still lands.",
+      "ja": "「デート」と呼ぶと、プレッシャーが加わります。気楽なままにしておきましょう。意図は、それでも伝わります。"
+    },
+    "b1000026-0000-0000-0006-000000000026": {
+      "en": "Yeah actually, that sounds good. There's a place just over there.",
+      "ja": "ええ、いいですね。すぐそこに、お店がありますよ。"
+    },
+    "b1000027-0000-0000-0006-000000000027": {
+      "en": "You're walking to the restaurant together. Natural progression.",
+      "ja": "一緒にレストランへ歩いていきます。自然な流れです。"
+    },
+    "b1000028-0000-0000-0006-000000000028": {
+      "en": "You reach the counter. Ordering moment. Good energy between you both.",
+      "ja": "カウンターに着きます。注文するところです。二人のあいだは、良い雰囲気です。"
+    },
+    "b1000291-0000-0000-0006-000000000291": {
+      "en": "Sorry this isn't as good as your actual plans tonight.",
+      "ja": "すみません、今夜の本来の予定ほど、いいものじゃなくて。"
+    },
+    "b1000292-0000-0000-0006-000000000292": {
+      "en": "Don't dwell on what she's missing. Keep it light and forward-looking, not apologetic.",
+      "ja": "彼女が逃したものに、こだわってはいけません。申し訳なさそうにせず、軽やかに、前を向いたままでいましょう。"
+    },
+    "b1000030-0000-0000-0006-000000000030": {
+      "en": "Airport food won't beat an engagement dinner, but at least you're in good company.",
+      "ja": "空港のごはんは婚約のお祝いディナーにはかないませんけど、少なくとも、一緒にいる相手は悪くないですよ。"
+    },
+    "b1000031-0000-0000-0006-000000000031": {
+      "en": "Haha is that so? Guess every cloud has a silver lining.",
+      "ja": "あはは、そうですか？悪いことばかりじゃない、ということですね。"
+    },
+    "b1000032-0000-0000-0006-000000000032": {
+      "en": "You and Mel enjoy your meals together and continue chatting.",
+      "ja": "メルと一緒に食事を楽しみ、おしゃべりを続けます。"
+    },
+    "b1000033-0000-0000-0006-000000000033": {
+      "en": "The time passes quick and before you board she gives you her number.",
+      "ja": "時間はあっという間に過ぎ、搭乗の前に、彼女がLINEを教えてくれます。"
+    },
+    "b1000034-0000-0000-0006-000000000034": {
+      "en": "Success. You review your interaction with Mel.",
+      "ja": "成功です。メルとのやり取りを振り返ります。"
+    },
+    "b1000035-0000-0000-0006-000000000035": {
+      "en": "You opened naturally by using the shared environment.",
+      "ja": "同じ環境を共有していることを使って、自然に話しかけました。"
+    },
+    "b1000036-0000-0000-0006-000000000036": {
+      "en": "You showed curiosity towards Mel and getting to know her plans.",
+      "ja": "メルに好奇心を向け、彼女の予定を知ろうとしました。"
+    },
+    "b1000037-0000-0000-0006-000000000037": {
+      "en": "You lightened the mood by using playful callbacks.",
+      "ja": "前に出た話題に遊び心を持って触れ、場の空気を軽くしました。"
+    },
+    "b1000038-0000-0000-0006-000000000038": {
+      "en": "And you escalated to a more intimate setting. Well done.",
+      "ja": "そして、より親密に話せる場へと進めました。よくできました。"
+    }
+  },
+  "options": {
+    "c1000002-0000-0000-0006-000000000002": {
+      "en": "Move to sit down next to her first",
+      "ja": "まず彼女の隣に移動して座る"
+    },
+    "c1000001-0000-0000-0006-000000000001": {
+      "en": "Ask if she's on the same delayed flight",
+      "ja": "同じ遅れている便かどうかを尋ねる"
+    },
+    "c1000003-0000-0000-0006-000000000003": {
+      "en": "Ask if she travels for work or pleasure",
+      "ja": "仕事の移動か、旅行かを尋ねる"
+    },
+    "c1000004-0000-0000-0006-000000000004": {
+      "en": "Relate to the annoyance, then ask about her plans",
+      "ja": "いら立ちに共感してから、彼女の予定を尋ねる"
+    },
+    "c1000005-0000-0000-0006-000000000005": {
+      "en": "Vent about the delay and your missed plans",
+      "ja": "遅延と、だめになった自分の予定について不満を言う"
+    },
+    "c1000006-0000-0000-0006-000000000006": {
+      "en": "Use logic to help and say there might be other flights",
+      "ja": "理屈で助けようとして、ほかの便があるかもしれないと言う"
+    },
+    "c1000008-0000-0000-0006-000000000008": {
+      "en": "Continue to sympathize a bit more",
+      "ja": "もう少し同情を示し続ける"
+    },
+    "c1000007-0000-0000-0006-000000000007": {
+      "en": "Relate briefly then redirect back to her",
+      "ja": "手短に共感してから、話を彼女に戻す"
+    },
+    "c1000009-0000-0000-0006-000000000009": {
+      "en": "Share your weekend plan with your friends",
+      "ja": "友人たちとの週末の予定を話す"
+    },
+    "c1000012-0000-0000-0006-000000000012": {
+      "en": "Introduce yourself formally",
+      "ja": "あらたまって自己紹介をする"
+    },
+    "c1000011-0000-0000-0006-000000000011": {
+      "en": "Ask what her name is first",
+      "ja": "先に彼女の名前を尋ねる"
+    },
+    "c1000010-0000-0000-0006-000000000010": {
+      "en": "Introduce yourself with a light callback to the situation",
+      "ja": "今の状況に軽く触れながら、自己紹介をする"
+    },
+    "c1000014-0000-0000-0006-000000000014": {
+      "en": "\"I know it's random but do you want to go get coffee? Only if you want.\"",
+      "ja": "「突然なんですけど、コーヒーでもどうですか？もしよかったら、でいいんですけど」"
+    },
+    "c1000013-0000-0000-0006-000000000013": {
+      "en": "\"Well since we're here for a while, want to go grab some food?\"",
+      "ja": "「しばらくここにいることになりそうですし、何か食べに行きませんか？」"
+    },
+    "c1000015-0000-0000-0006-000000000015": {
+      "en": "\"Want to get some food? We can go on a date.\"",
+      "ja": "「何か食べに行きませんか？デートということで」"
+    },
+    "c1000016-0000-0000-0006-000000000016": {
+      "en": "Make a flirty playful callback about the engagement dinner",
+      "ja": "婚約のお祝いディナーの話に、遊び心のある駆け引きで触れる"
+    },
+    "c1000017-0000-0000-0006-000000000017": {
+      "en": "Apologize that this isn't as good as her real plans tonight",
+      "ja": "今夜の本来の予定ほど良くなくて申し訳ない、と謝る"
+    }
+  }
+}

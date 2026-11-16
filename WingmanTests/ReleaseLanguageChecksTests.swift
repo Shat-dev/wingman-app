@@ -19,7 +19,8 @@
 //  same files the live database rows are generated from.
 //
 //  German (Release B) is complete and required: if any of it is missing, the
-//  tests fail. Spanish and French (Release C) are translated in parallel, so
+//  tests fail. Spanish and French (Release C) and Japanese (Release D) are
+//  translated after the tests were written, so
 //  a part of a language that is not fully bundled yet (catalogs, all 25
 //  lesson overlays, all 765 quiz rows, all 15 scenario files) is skipped with
 //  a note in the test log instead of failing.
@@ -32,7 +33,7 @@ import XCTest
 final class ReleaseLanguageChecksTests: XCTestCase {
 
     /// Every language the app ships translated content for.
-    static let shippedLanguages = ["de", "es", "fr"]
+    static let shippedLanguages = ["de", "es", "fr", "ja"]
     /// Languages that must be complete. The others are checked once bundled.
     static let requiredLanguages: Set<String> = ["de"]
 

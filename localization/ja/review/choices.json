@@ -1,0 +1,196 @@
+{
+  "_about": "Settings for scripts/review_pack.py ja. Everything in Japanese in this repo is an unreviewed machine draft; Arthur has no Japanese reader, so the order below is what a paid native check should cover first.",
+  "language": "Japanese",
+  "sample_lessons": [
+    ["course_17", "lesson_17_3"],
+    ["course_1", "lesson_1_1"],
+    ["course_6", "lesson_6_1"]
+  ],
+  "choices": [
+    {
+      "topic": "Where to start",
+      "what": "If time is short, read in this order: (1) Interface sheet, the pink \"Must read\" rows: paywall and one-time offer first, then sign-in, then onboarding. (2) The Lesson 17_3 sheet, which is the lesson on respect and consent. (3) This sheet. (4) Everything else.",
+      "where": "Whole file",
+      "question": "Tell us how far you got, so we know what is still unread."
+    },
+    {
+      "topic": "Tone overall",
+      "what": "The coach speaks in polite です・ます throughout: a calm, direct older brother or trusted 先輩, not a pickup coach and not a therapist. Errors, the paywall and notifications use the same voice.",
+      "where": "Whole app",
+      "question": "Does it read as a real Japanese man in his thirties would write it? Anything stiff, translated, preachy or cringe?"
+    },
+    {
+      "topic": "No 君, no お前, almost no あなた",
+      "what": "The reader is never called 君 or お前. あなた appears in only two places: the speaker label \"You\" in scenarios (「あなた」) and one quoted line in lesson 13_4. Everywhere else \"you\" is dropped, or is 自分 (himself) or こちら (his side of a conversation).",
+      "where": "Whole app",
+      "question": "Any sentence where it is unclear who is meant? Is こちら natural for the man's side? Should the speaker label be 「あなた」 or 「自分」?"
+    },
+    {
+      "topic": "Consent and respect (lesson 17_3)",
+      "what": "This lesson must be at least as strict in Japanese as in English. Examples: 「相手が心地よく感じているとはっきりわかるサインがない限り、決して触れないでください」, 「少しでも身を引いたら、すぐにやめましょう」, 「断られたら、相手に罪悪感を抱かせたり、不機嫌な態度を取ったりせずに受け入れてください」.",
+      "where": "Lesson 17_3 sheet",
+      "question": "Is every instruction as firm as the English? Has politeness softened anything into a suggestion?"
+    },
+    {
+      "topic": "Paywall and billing wording",
+      "what": "Billing sentences follow the pattern 「本日%1$@が請求されます（最初の1年間分）。その後は月額%2$@で更新されます。App Storeの設定からいつでも解約できます。」. Terms used: サブスクリプション, 利用規約, プライバシーポリシー, 購入を復元, 解約.",
+      "where": "Interface sheet, area Paywall & one-time offer",
+      "question": "Are these the words Japanese App Store users expect? Is each sentence unambiguous about what is charged today and what renews? (Wording only; legal questions go to Arthur.)"
+    },
+    {
+      "topic": "Three sentences built from pieces",
+      "what": "The app joins these from separate strings, so the pieces must read in the fixed order: (a) Home greeting: 「おはようございます」 / 「こんにちは」 / 「こんばんは」 on one line and the user's name on the next; (b) onboarding: bold 「3倍」 followed by 「ありきたりなアドバイス動画を見るより速く上達」; (c) one-time offer: a big \"50%\" with 「最初の1年間オフ」 under it.",
+      "where": "Interface sheet: Home, Onboarding, Paywall & one-time offer",
+      "question": "Do all three read correctly in that order? If not, what order would Japanese need?"
+    },
+    {
+      "topic": "Statistic screens",
+      "what": "Onboarding and the paywall quote figures from English-language sources. The numbers are kept as they are and are not presented as findings about Japan.",
+      "where": "Interface sheet, area Onboarding and Paywall",
+      "question": "Does any line sound like a claim about Japanese men or women? Any figure that would make a Japanese reader distrust the app?"
+    },
+    {
+      "topic": "声をかける / アプローチ",
+      "what": "\"To approach\" is 声をかける. The noun, including one logged approach, is アプローチ (「アプローチを記録」). 声かけ is not used as a noun. ナンパ is avoided everywhere except once, for \"pickup lines\" in lesson 6_3 (「ナンパの決まり文句」).",
+      "where": "Whole app",
+      "question": "Natural? Does アプローチ work as a countable thing in the log? Is keeping ナンパ out the right call for this audience?"
+    },
+    {
+      "topic": "最初のひと言",
+      "what": "\"Opener\" is 最初のひと言. Indirect and direct openers are さりげないひと言 and ストレートなひと言; the three types are 好奇心を引くひと言, 推測から入るひと言 and 意見を聞くひと言.",
+      "where": "Lessons and quizzes (courses 8 and 11)",
+      "question": "Clear and natural, or would a shorter term be better?"
+    },
+    {
+      "topic": "次につなげる",
+      "what": "\"Closing\" (asking for her contact or the next step) is 次につなげる, never クロージング. An \"assumed close\" is 前提に立った提案: 「コーヒー、行きましょう。LINE、交換しましょう」.",
+      "where": "Lessons and quizzes (course 15)",
+      "question": "Does 「LINE、交換しましょう」 sound confident and polite, or pushy?"
+    },
+    {
+      "topic": "駆け引き for flirting",
+      "what": "\"Flirting\" is 駆け引き or 恋の駆け引き, and \"flirtatious\" (of a line) is 恋愛的な含みのある. \"Escalate\" is 距離を縮める.",
+      "where": "Lessons and quizzes (courses 17 to 21); course titles on the Interface sheet",
+      "question": "駆け引き can also mean tactics or playing games. Does it sound manipulative here? Is there a better everyday word?"
+    },
+    {
+      "topic": "Reading her signals",
+      "what": "The three signals are 受け入れのサイン, 礼儀のサイン and 冷たいサイン; \"neutral\" is どちらともつかない; traffic lights are 青信号, 黄信号, 赤信号. \"Calibration\" is 相手の反応を見て合わせる.",
+      "where": "Lessons and quizzes (courses 9 and 17)",
+      "question": "Natural? Is 礼儀のサイン clear as \"she is only being polite\"?"
+    },
+    {
+      "topic": "空気をリードする / 自分の軸",
+      "what": "\"Frame control\" is 空気をリードする; \"frame\" is 場の空気 when it is the mood he sets and 自分の軸 when it is his own steadiness.",
+      "where": "Lessons and quizzes (course 8 and later)",
+      "question": "Do the two renderings read as one idea? Anything confusing?"
+    },
+    {
+      "topic": "簡単にはなびかない",
+      "what": "\"Disqualification\" (lesson 21_1: not being automatically impressed) is 簡単にはなびかない. Example lines: 「次の一杯をおごってくれるなら」, 「ちょうどいいですね。こちらも、うるさいほうなので」.",
+      "where": "Lessons and quizzes (course 21)",
+      "question": "Does the idea survive? Do the example lines sound playful or rude in Japanese?"
+    },
+    {
+      "topic": "Listening words",
+      "what": "\"Subtext\" is 言外のメッセージ, \"validating\" is 受け止める, \"attunement\" is 波長を合わせる, \"threads\" are 糸口 (threading: 糸口をたどる), \"observations\" and \"statements\" are 観察 and 自分のひと言, \"processed sharing\" is 整理のついた話.",
+      "where": "Lessons and quizzes (courses 12 to 14)",
+      "question": "Any of these that a Japanese reader would not understand at first sight?"
+    },
+    {
+      "topic": "Playful words",
+      "what": "\"Teasing\" is からかい, \"cheekiness\" is いたずら心 (cheeky: いたずらっぽい), \"banter\" is 軽い掛け合い, \"light challenges\" are 軽い、遊びの勝負.",
+      "where": "Lessons and quizzes (course 18)",
+      "question": "Natural? Teasing a woman he has just met is riskier in Japanese; do the example lines stay on the safe side?"
+    },
+    {
+      "topic": "場数 and practice words",
+      "what": "\"Volume\" and \"reps\" are 場数; \"sticking point\" is つまずきポイント; \"plateau\" is 成長の停滞期; \"experimental mindset\" is 実験のマインドセット; \"outcome independence\" is 結果に左右されない.",
+      "where": "Lessons and quizzes (courses 1 to 5 and 23 to 25)",
+      "question": "Natural?"
+    },
+    {
+      "topic": "Status words",
+      "what": "\"Social status\" is 社会的な立ち位置, \"social proof\" is 社会的証明, \"home court advantage\" is ホームグラウンドの強み, a \"regular\" is 顔なじみの常連.",
+      "where": "Lessons and quizzes (courses 22 and 23)",
+      "question": "Does 社会的な立ち位置 read as how the room sees him, not as rank or income?"
+    },
+    {
+      "topic": "Katakana kept, and never translated",
+      "what": "Never translated: Wingman, XP. Kept as katakana loanwords: ミラーリング, グラウンディング, アイコンタクト, ボディランゲージ, マインドセット, エネルギー.",
+      "where": "Whole app",
+      "question": "Any of these that should be a Japanese word instead? Is エネルギー natural for a person's mood and presence?"
+    },
+    {
+      "topic": "LINE instead of phone numbers",
+      "what": "Every ask for a phone number became an ask for LINE. Instagram is kept in three places where the scene is about her posts or her followers: scenario 15, lesson 21_1 and the quiz question built on that lesson.",
+      "where": "Lessons, quizzes and scenarios",
+      "question": "Right for men of 25 to 55 in Japan? Any line where asking for LINE sounds too fast?"
+    },
+    {
+      "topic": "Examples moved to Japan",
+      "what": "Places and habits were swapped where the English would mean nothing: 札幌, 大阪, 福岡 and 熊本 for American cities; a trip to Japan became 台湾; an Uber became a taxi she called; \"cereal for dinner\" became カップ麺; feet became metres; a barista calls the order, not her name. The advice itself was not changed.",
+      "where": "Lessons, quizzes and scenarios",
+      "question": "Any swap that reads oddly? Any American detail still left that should have been swapped?"
+    },
+    {
+      "topic": "Women's names",
+      "what": "The women in scenarios keep their foreign names in katakana (ソフィー, ローレン, ナオミ and so on), and he addresses them with さん.",
+      "where": "Scenarios (not in this file)",
+      "question": "Should they have Japanese names instead?"
+    },
+    {
+      "topic": "Lists in dictionary form",
+      "what": "33 lesson paragraphs put a short list or clause in dictionary form inside polite text and then pick it up, as in 「爪を切る。シャワーを浴びる。清潔な服を着る。」 or 「…小さくほほえむ。それだけで、…伝わります」. It mirrors the English fragment lists.",
+      "where": "Lessons (lesson 1_1 and 6_1 sheets show the style)",
+      "question": "Acceptable in です・ます writing, or should every sentence end politely?"
+    },
+    {
+      "topic": "Quiz voice",
+      "what": "Question stems are polite questions (「…どれですか？」). Options are short dictionary-form or noun phrases; where the stem asks \"why\", each option ends in 〜から. \"All of the above\" is 上のすべて and \"Both of the above\" is 上の両方. Explanations are です・ます.",
+      "where": "Quizzes (not in this file)",
+      "question": "Is that the usual shape of a Japanese quiz? Is 上のすべて right when the app may shuffle the options?"
+    },
+    {
+      "topic": "Typography",
+      "what": "Full-width 、。「」！？ in Japanese sentences; half-width digits, % and Latin letters with no space around them (「3倍」, 「50%」, 「Wingmanを」); no space after ！ or ？. A quoted line that ends a sentence is written 「…」。 with the full stop after the bracket.",
+      "where": "Whole app",
+      "question": "Is 「…」。 acceptable, or should the full stop be dropped? Anything else that looks typeset by a foreigner?"
+    },
+    {
+      "topic": "Line breaks and length",
+      "what": "A spreadsheet cannot show how lines wrap. Paywall ticks have a hard limit of 18 Japanese characters. One onboarding headline was already shortened because it broke a word across two lines.",
+      "where": "Interface sheet (see \"Max length\")",
+      "question": "Any headline or button that is long for a phone screen, or that would break in the middle of a word?"
+    },
+    {
+      "topic": "Course and lesson titles",
+      "what": "Titles are short and mostly in dictionary form or noun phrases: 「空気をリードする」, 「簡単にはなびかない」, 「場数が、慣れをつくる」.",
+      "where": "Interface sheet, area Courses; lesson sheets",
+      "question": "Do they read as titles? Any that sounds like a literal translation?"
+    },
+    {
+      "topic": "Advice that may not fit Japan",
+      "what": "The advice was translated as written, not adapted. 63 points where it may land differently in Japan are listed for Arthur under \"Cultural flags for Arthur\" in docs/localization-ja-progress.md: for example starting conversations on trains, in libraries and at the gym, holding eye contact with strangers, early touch, and treating a quick look-away as no signal.",
+      "where": "Lessons, quizzes and scenarios",
+      "question": "Which of these would a Japanese man be wrong to follow? Which are fine?"
+    }
+  ],
+  "rules": [
+    "Edit only the yellow columns: \"Your version\", \"Status\" and \"Comment\". Leave a row's \"Your version\" empty if the Japanese is fine, and set Status to OK.",
+    "Keep placeholders exactly: %@, %lld, %1$@, %2$lld and so on. They may move within the sentence, but don't change, add or remove them. %% is a percent sign.",
+    "Keep link targets: in [利用規約](terms) translate the word in square brackets only; never change (terms) or (privacy).",
+    "Paywall ticks have a hard limit (see the \"Max length\" column). A full-width character counts as two, so a limit of 36 means 18 Japanese characters; longer lines get hidden on small iPhones.",
+    "The coach speaks in polite です・ます. Never 君 or お前; あなた only where the sentence fails without it.",
+    "Punctuation: full-width 、。「」！？ in Japanese sentences. Digits, % and Latin letters stay half-width with no space around them. No space after ！ or ？.",
+    "Never translate Wingman or XP.",
+    "Adapt rather than translate word for word: if an image or example doesn't land in Japanese, replace it with one that does. Don't change what the advice says; flag advice that doesn't fit Japan in Comment instead.",
+    "Don't edit the grey Key column; it is how your changes get back into the app."
+  ],
+  "example": {
+    "english": "Try Again",
+    "draft": "もう一度",
+    "yours": "もう一度試す",
+    "comment": "A button reads better with a verb."
+  }
+}

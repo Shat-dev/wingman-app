@@ -1,0 +1,318 @@
+{
+  "scenario": {
+    "a1000013-0000-0000-0000-000000000013": {
+      "title": {
+        "en": "House Wine",
+        "ja": "ホームパーティーのワイン"
+      },
+      "summary": {
+        "en": "A party, a drink, and chemistry that drowned out everything else.",
+        "ja": "パーティーと、一杯のお酒と、ほかのすべてをかき消すほどの惹かれ合い。"
+      }
+    }
+  },
+  "screens": {
+    "b1000001-0000-0000-0013-000000000001": {
+      "en": "You're at a house party. Music's loud. About 30 people. Good energy.",
+      "ja": "ホームパーティーに来ています。音楽は大音量。30人ほどがいます。良い雰囲気です。"
+    },
+    "b1000002-0000-0000-0013-000000000002": {
+      "en": "You spot a woman by herself in the kitchen. She's pouring herself a drink.",
+      "ja": "キッチンに、一人でいる女性が目に入ります。自分の飲み物を注いでいるところです。"
+    },
+    "b1000003-0000-0000-0013-000000000003": {
+      "en": "You walk into the kitchen. She glances up briefly as you enter.",
+      "ja": "キッチンに入っていきます。入ったとき、彼女がちらりと顔を上げます。"
+    },
+    "b1000004-0000-0000-0013-000000000004": {
+      "en": "You want to get better at being more direct and flirtatious.",
+      "ja": "もっとストレートに、もっと遊び心のある駆け引きができるようになりたいと思っています。"
+    },
+    "b1000051-0000-0000-0013-000000000051": {
+      "en": "Hi, nice to meet you, I'm...",
+      "ja": "こんばんは、はじめまして。僕は……"
+    },
+    "b1000052-0000-0000-0013-000000000052": {
+      "en": "This is a safe start, but it's forgettable. Try a more playful, exciting opener.",
+      "ja": "無難な始め方ですが、記憶に残りません。もっと遊び心のある、わくわくする最初のひと言を試してみましょう。"
+    },
+    "b1000053-0000-0000-0013-000000000053": {
+      "en": "Hey do you know where the restroom is?",
+      "ja": "あの、お手洗いはどこかご存じですか？"
+    },
+    "b1000006-0000-0000-0013-000000000006": {
+      "en": "You planning on stealing that entire bottle.",
+      "ja": "そのボトル、まるごと持っていくつもりですか？"
+    },
+    "b1000007-0000-0000-0013-000000000007": {
+      "en": "If you stay quiet about it, I'll share it with you.",
+      "ja": "黙っていてくれるなら、分けてあげますよ。"
+    },
+    "b1000081-0000-0000-0013-000000000081": {
+      "en": "Maybe we should put it back. I don't want to get in trouble.",
+      "ja": "戻しておいたほうがいいかもしれませんね。怒られたくないので。"
+    },
+    "b1000082-0000-0000-0013-000000000082": {
+      "en": "Match her energy. She was being playful and you went serious.",
+      "ja": "彼女のエネルギーに合わせましょう。彼女は遊び心を見せていたのに、まじめに返してしまいました。"
+    },
+    "b1000083-0000-0000-0013-000000000083": {
+      "en": "Yes please, I'd love some!",
+      "ja": "はい、ぜひお願いします！"
+    },
+    "b1000084-0000-0000-0013-000000000084": {
+      "en": "Stay relaxed and playful. Tease back, don't be too eager.",
+      "ja": "リラックスして、遊び心を保ちましょう。軽くからかい返すのです。前のめりになりすぎないようにしましょう。"
+    },
+    "b1000009-0000-0000-0013-000000000009": {
+      "en": "Trying to bribe me with stolen wine? I'm down.",
+      "ja": "盗んだワインで買収ですか？乗りました。"
+    },
+    "b1000010-0000-0000-0013-000000000010": {
+      "en": "She laughs and starts pouring you a cup of wine.",
+      "ja": "彼女は笑って、ワインをカップに注いでくれます。"
+    },
+    "b1000111-0000-0000-0013-000000000111": {
+      "en": "Cheers, to getting you drunk.",
+      "ja": "乾杯。今夜、酔わせてしまうことに。"
+    },
+    "b1000112-0000-0000-0013-000000000112": {
+      "en": "Implying you're trying to intoxicate her may be too forward here.",
+      "ja": "酔わせようとしているとほのめかすのは、ここでは踏み込みすぎかもしれません。"
+    },
+    "b1000113-0000-0000-0013-000000000113": {
+      "en": "Cheers for the drink.",
+      "ja": "ごちそうさまです。乾杯。"
+    },
+    "b1000114-0000-0000-0013-000000000114": {
+      "en": "While this can work, make the toast part of the fun.",
+      "ja": "これでもうまくいくことはありますが、乾杯そのものを、楽しみの一部にしましょう。"
+    },
+    "b1000012-0000-0000-0013-000000000012": {
+      "en": "Cheers to my partner in crime.",
+      "ja": "共犯者に、乾杯。"
+    },
+    "b1000013-0000-0000-0013-000000000013": {
+      "en": "Hahaha cheers.",
+      "ja": "あはは、乾杯。"
+    },
+    "b1000014-0000-0000-0013-000000000014": {
+      "en": "She's smiling. Good sign of openness and engagement.",
+      "ja": "彼女はほほえんでいます。心を開き、会話に乗っているという良いサインです。"
+    },
+    "b1000151-0000-0000-0013-000000000151": {
+      "en": "So what do you do for work?",
+      "ja": "ところで、お仕事は何をされているんですか？"
+    },
+    "b1000152-0000-0000-0013-000000000152": {
+      "en": "Work questions aren't an exciting narrative in night-time situations.",
+      "ja": "夜の場では、仕事の質問はわくわくする話題になりません。"
+    },
+    "b1000153-0000-0000-0013-000000000153": {
+      "en": "So the host, him and I go way back...",
+      "ja": "主催の彼とは、昔からの付き合いでして……"
+    },
+    "b1000154-0000-0000-0013-000000000154": {
+      "en": "She didn't ask. Ask about hers first, then share if she reciprocates.",
+      "ja": "彼女は尋ねていません。まず彼女のほうのことを尋ね、彼女も同じように聞き返してくれたら、話しましょう。"
+    },
+    "b1000016-0000-0000-0013-000000000016": {
+      "en": "So how do you know the host? Or did you come here just to steal the wine.",
+      "ja": "主催の人とは、どういう知り合いなんですか？それとも、ワインを盗むためだけに来たとか？"
+    },
+    "b1000017-0000-0000-0013-000000000017": {
+      "en": "Haha might as well of. Friend of a friend situation. I barely know him honestly.",
+      "ja": "あはは、もうそれでいい気がします。友達の友達、という感じで。正直、ほとんど知らないんです。"
+    },
+    "b1000018-0000-0000-0013-000000000018": {
+      "en": "My friend just left however so now I'm solo.",
+      "ja": "でも、一緒に来た友達がさっき帰っちゃって。今は一人なんです。"
+    },
+    "b1000191-0000-0000-0013-000000000191": {
+      "en": "That sucks. Why did they bail?",
+      "ja": "それはひどいですね。どうして帰っちゃったんですか？"
+    },
+    "b1000192-0000-0000-0013-000000000192": {
+      "en": "She doesn't want to dwell on being ditched. Keep it fun and playful.",
+      "ja": "彼女は、置いていかれたことにこだわりたくはありません。楽しく、遊び心のあるままにしておきましょう。"
+    },
+    "b1000193-0000-0000-0013-000000000193": {
+      "en": "Well since you're solo let's stay together tonight then.",
+      "ja": "じゃあ、一人なら、今夜はずっと一緒にいましょうよ。"
+    },
+    "b1000194-0000-0000-0013-000000000194": {
+      "en": "She's not asking for social help and this may put too much pressure on her.",
+      "ja": "彼女は、相手をしてくれる人を求めているわけではありません。これでは、プレッシャーをかけすぎるかもしれません。"
+    },
+    "b1000020-0000-0000-0013-000000000020": {
+      "en": "Well lucky me then, I should thank your friend.",
+      "ja": "それは、僕にとってはラッキーですね。お友達に感謝しないと。"
+    },
+    "b1000021-0000-0000-0013-000000000021": {
+      "en": "Haha well I'm glad you're enjoying your night.",
+      "ja": "あはは、今夜を楽しんでもらえているなら何よりです。"
+    },
+    "b1000022-0000-0000-0013-000000000022": {
+      "en": "The energy is good and flirty. You're both engaged. Still in the loud kitchen.",
+      "ja": "雰囲気は良く、遊び心のある駆け引きも続いています。二人とも、会話に乗っています。まだ、騒がしいキッチンにいます。"
+    },
+    "b1000231-0000-0000-0013-000000000231": {
+      "en": "I'm heading outside. Come if you want.",
+      "ja": "僕は外に出ます。よかったらどうぞ。"
+    },
+    "b1000232-0000-0000-0013-000000000232": {
+      "en": "Invite her specifically to come with you. Don't make it optional.",
+      "ja": "一緒に来てほしいと、彼女に向けてはっきり誘いましょう。「どちらでもいい」という形にしないことです。"
+    },
+    "b1000233-0000-0000-0013-000000000233": {
+      "en": "Would you be comfortable going somewhere quieter?",
+      "ja": "もっと静かなところへ移っても、大丈夫ですか？"
+    },
+    "b1000234-0000-0000-0013-000000000234": {
+      "en": "Checking in is never wrong, but this phrasing makes it feel heavy. A light, confident invitation she can easily say no to works better.",
+      "ja": "相手の気持ちを確かめるのは、決して間違いではありません。でもこの言い方だと、重く感じられます。彼女が気軽に断れる、軽くて自信のある誘いのほうがうまくいきます。"
+    },
+    "b1000024-0000-0000-0013-000000000024": {
+      "en": "Anyway, we have to leave the crime scene. Let's go outside.",
+      "ja": "ところで、犯行現場からは離れないと。外に出ましょう。"
+    },
+    "b1000025-0000-0000-0013-000000000025": {
+      "en": "Good point, let's go.",
+      "ja": "たしかに。行きましょう。"
+    },
+    "b1000026-0000-0000-0013-000000000026": {
+      "en": "You're guiding her through the party and it's really crowded.",
+      "ja": "彼女を案内しながら、パーティーの中を進みます。とても混み合っています。"
+    },
+    "b1000271-0000-0000-0013-000000000271": {
+      "en": "You put your arm around her shoulders as you walk. She stiffens slightly.",
+      "ja": "歩きながら、彼女の肩に腕を回します。彼女の体が、少しこわばります。"
+    },
+    "b1000272-0000-0000-0013-000000000272": {
+      "en": "While this can work, it may be too quick for this level of intimacy. You just met.",
+      "ja": "これでうまくいくこともありますが、この段階の親しさに対しては、早すぎるかもしれません。出会ったばかりです。"
+    },
+    "b1000273-0000-0000-0013-000000000273": {
+      "en": "You turn and walk toward the balcony. She follows behind.",
+      "ja": "向きを変えて、バルコニーのほうへ歩きます。彼女は後ろからついてきます。"
+    },
+    "b1000274-0000-0000-0013-000000000274": {
+      "en": "This works too. A brief, light touch can add warmth here, but only if she's clearly comfortable.",
+      "ja": "これでも問題ありません。短く軽いタッチは、ここで温かさを加えることもできます。ただしそれは、彼女がはっきりと心地よさそうにしている場合だけです。"
+    },
+    "b1000028-0000-0000-0013-000000000028": {
+      "en": "You lightly touch her arm and nod toward the balcony to guide her through.",
+      "ja": "彼女の腕に軽く触れ、バルコニーのほうをあごで示して、人混みの中を案内します。"
+    },
+    "b1000029-0000-0000-0013-000000000029": {
+      "en": "She smiles and follows. The touch was brief, and she was clearly comfortable with it.",
+      "ja": "彼女はほほえんで、ついてきます。触れたのは短いあいだで、彼女ははっきりと心地よさそうにしていました。"
+    },
+    "b1000030-0000-0000-0013-000000000030": {
+      "en": "Success. You reflect on the interaction.",
+      "ja": "成功です。やり取りを振り返ります。"
+    },
+    "b1000031-0000-0000-0013-000000000031": {
+      "en": "You opened with bold flirtation instead of boring small talk.",
+      "ja": "退屈な雑談ではなく、大胆な駆け引きで話しかけました。"
+    },
+    "b1000032-0000-0000-0013-000000000032": {
+      "en": "You created a playful frame with the wine theft that carried throughout.",
+      "ja": "「ワイン泥棒」という遊び心のある設定をつくり、それが最後まで続きました。"
+    },
+    "b1000033-0000-0000-0013-000000000033": {
+      "en": "You took the lead by suggesting somewhere quieter, and kept any touch light and brief.",
+      "ja": "もっと静かな場所を提案してリードし、触れるときは軽く、短くにとどめました。"
+    },
+    "b1000034-0000-0000-0013-000000000034": {
+      "en": "Well done.",
+      "ja": "よくできました。"
+    }
+  },
+  "options": {
+    "c1000001-0000-0000-0013-000000000001": {
+      "en": "Make a playful joke about stealing the alcohol",
+      "ja": "お酒を盗むことについて、遊び心のある冗談を言う"
+    },
+    "c1000002-0000-0000-0013-000000000002": {
+      "en": "Introduce yourself politely first",
+      "ja": "まず礼儀正しく自己紹介をする"
+    },
+    "c1000003-0000-0000-0013-000000000003": {
+      "en": "Ask if she knows where the restroom is",
+      "ja": "お手洗いの場所を知っているか尋ねる"
+    },
+    "c1000004-0000-0000-0013-000000000004": {
+      "en": "Continue the playfulness",
+      "ja": "遊び心のあるやり取りを続ける"
+    },
+    "c1000005-0000-0000-0013-000000000005": {
+      "en": "Suggest putting it back to be safe",
+      "ja": "念のため、戻しておこうと提案する"
+    },
+    "c1000006-0000-0000-0013-000000000006": {
+      "en": "Eagerly accept the deal",
+      "ja": "前のめりに、その取引を受け入れる"
+    },
+    "c1000008-0000-0000-0013-000000000008": {
+      "en": "Make an overly sexual toast",
+      "ja": "露骨に性的な乾杯の言葉を言う"
+    },
+    "c1000007-0000-0000-0013-000000000007": {
+      "en": "Make a playful toast about the stolen wine",
+      "ja": "盗んだワインについて、遊び心のある乾杯をする"
+    },
+    "c1000009-0000-0000-0013-000000000009": {
+      "en": "Thank her for the drink",
+      "ja": "飲み物のお礼を言う"
+    },
+    "c1000010-0000-0000-0013-000000000010": {
+      "en": "Ask how she knows the host playfully",
+      "ja": "主催者とどういう知り合いなのかを、遊び心を込めて尋ねる"
+    },
+    "c1000011-0000-0000-0013-000000000011": {
+      "en": "Ask what she does for work",
+      "ja": "仕事は何をしているのかを尋ねる"
+    },
+    "c1000012-0000-0000-0013-000000000012": {
+      "en": "Share your connection to the host",
+      "ja": "自分と主催者とのつながりを話す"
+    },
+    "c1000014-0000-0000-0013-000000000014": {
+      "en": "Sympathize and ask why her friend left",
+      "ja": "同情して、友人がなぜ帰ったのかを尋ねる"
+    },
+    "c1000013-0000-0000-0013-000000000013": {
+      "en": "Flirty joke about this being good for you",
+      "ja": "自分にとっては好都合だと、駆け引きを込めた冗談を言う"
+    },
+    "c1000015-0000-0000-0013-000000000015": {
+      "en": "Ask if she wants to stay together tonight then",
+      "ja": "それなら今夜は一緒にいようと誘う"
+    },
+    "c1000017-0000-0000-0013-000000000017": {
+      "en": "Say you're moving elsewhere and she can join you",
+      "ja": "自分は別の場所へ移るので、来てもいいと言う"
+    },
+    "c1000016-0000-0000-0013-000000000016": {
+      "en": "Suggest moving with a callback",
+      "ja": "前に出た話題に触れながら、場所を移ろうと提案する"
+    },
+    "c1000018-0000-0000-0013-000000000018": {
+      "en": "Ask if she's comfortable moving elsewhere",
+      "ja": "別の場所へ移っても大丈夫かと尋ねる"
+    },
+    "c1000019-0000-0000-0013-000000000019": {
+      "en": "Light touch on her arm to guide her",
+      "ja": "彼女の腕に軽く触れて、案内する"
+    },
+    "c1000020-0000-0000-0013-000000000020": {
+      "en": "Arm around her shoulders",
+      "ja": "肩に腕を回す"
+    },
+    "c1000021-0000-0000-0013-000000000021": {
+      "en": "No touch and just walk forward",
+      "ja": "触れずに、そのまま前を歩く"
+    }
+  }
+}

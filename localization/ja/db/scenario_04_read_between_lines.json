@@ -1,0 +1,310 @@
+{
+  "scenario": {
+    "a1000004-0000-0000-0000-000000000004": {
+      "title": {
+        "en": "Read Between Lines",
+        "ja": "行間を読む"
+      },
+      "summary": {
+        "en": "Books, silence, and a reason to talk. Lead gently and let interest build.",
+        "ja": "本、静けさ、そして話しかける理由。やさしくリードして、関心が育つのを待ちましょう。"
+      }
+    }
+  },
+  "screens": {
+    "b1000001-0000-0000-0004-000000000001": {
+      "en": "You're in a book store. Fiction section. Looking for a birthday gift for your sister.",
+      "ja": "書店にいます。小説のコーナーです。妹の誕生日プレゼントを探しています。"
+    },
+    "b1000002-0000-0000-0004-000000000002": {
+      "en": "A woman is browsing nearby. She picks up a book, reads the blurb, puts it down.",
+      "ja": "近くで、一人の女性が本を見ています。1冊手に取り、紹介文を読んで、棚に戻します。"
+    },
+    "b1000031-0000-0000-0004-000000000031": {
+      "en": "Looks like we're both in the same section.",
+      "ja": "同じコーナーを見ているみたいですね。"
+    },
+    "b1000032-0000-0000-0004-000000000032": {
+      "en": "Stating the obvious without purpose goes nowhere. Give her a reason to engage.",
+      "ja": "目的もなく見たままを口にしても、どこにもつながりません。彼女が会話に乗る理由を渡しましょう。"
+    },
+    "b1000033-0000-0000-0004-000000000033": {
+      "en": "Yeah sometimes.",
+      "ja": "ええ、ときどき。"
+    },
+    "b1000034-0000-0000-0004-000000000034": {
+      "en": "This opener isn't that interesting. Use the environment for natural openers.",
+      "ja": "この最初のひと言は、あまり面白くありません。自然に話しかけるために、その場の環境を使いましょう。"
+    },
+    "b1000004-0000-0000-0004-000000000004": {
+      "en": "Hey quick question. I'm trying to find a book for my sister. Any recommendations?",
+      "ja": "あの、ちょっといいですか。妹に贈る本を探しているんですが、何かおすすめはありますか？"
+    },
+    "b1000005-0000-0000-0004-000000000005": {
+      "en": "Oh sure. What kind of books is she into?",
+      "ja": "ええ、もちろん。妹さんは、どんな本が好きなんですか？"
+    },
+    "b1000006-0000-0000-0004-000000000006": {
+      "en": "She's engaged. Turned toward you fully. The advice frame gives her a role.",
+      "ja": "彼女は会話に乗り、体をまっすぐこちらに向けています。アドバイスを求める形が、彼女に役割を渡します。"
+    },
+    "b1000071-0000-0000-0004-000000000071": {
+      "en": "Umm ok, well that makes it hard to help then.",
+      "ja": "えっと、そうですか。それだと、お手伝いするのが難しいですね。"
+    },
+    "b1000072-0000-0000-0004-000000000072": {
+      "en": "You need to create the interaction, not wait for it to happen to you.",
+      "ja": "やり取りは、起きるのを待つものではありません。自分からつくるものです。"
+    },
+    "b1000073-0000-0000-0004-000000000073": {
+      "en": "Umm ok, I'm not sure there's a lot of options...",
+      "ja": "えっと、そうですか。あまり選択肢がないかもしれません……"
+    },
+    "b1000074-0000-0000-0004-000000000074": {
+      "en": "Flat answers kill personality. Show who you are through how you describe things.",
+      "ja": "平板な答えは、人柄を消してしまいます。物事をどう表現するかを通じて、自分らしさを見せましょう。"
+    },
+    "b1000008-0000-0000-0004-000000000008": {
+      "en": "She's really into mystery. Like clever detective stories.",
+      "ja": "ミステリーに夢中なんです。頭の切れる探偵が出てくるような話が好きで。"
+    },
+    "b1000009-0000-0000-0004-000000000009": {
+      "en": "Interesting haha. Yeah I have some suggestions, follow me.",
+      "ja": "へえ、いいですね。それなら、おすすめがあります。こっちです。"
+    },
+    "b1000010-0000-0000-0004-000000000010": {
+      "en": "She's helping now. You follow. Natural progression together.",
+      "ja": "彼女が手伝ってくれています。あとについていきます。二人の距離が、自然に縮まっていきます。"
+    },
+    "b1000011-0000-0000-0004-000000000011": {
+      "en": "Here, I think she'll like this. I've read it before and loved it. It's about...",
+      "ja": "これ、妹さんに気に入ってもらえると思います。前に読んで、すごく好きだったんです。どんな話かというと……"
+    },
+    "b1000121-0000-0000-0004-000000000121": {
+      "en": "Thanks for this by the way...",
+      "ja": "ところで、ありがとうございます……"
+    },
+    "b1000122-0000-0000-0004-000000000122": {
+      "en": "Frame control is leading the moment, not waiting for it to happen.",
+      "ja": "空気をリードするとは、その場が動くのを待つことではなく、その場を導くことです。"
+    },
+    "b1000123-0000-0000-0004-000000000123": {
+      "en": "I've been meaning to read more myself. Last thing I read was...",
+      "ja": "僕ももっと読みたいと思っていたんです。最後に読んだのは……"
+    },
+    "b1000124-0000-0000-0004-000000000124": {
+      "en": "She just opened up about her passion. Keep the spotlight on her, not yourself.",
+      "ja": "彼女は今、自分の好きなことについて話してくれたところです。スポットライトは、自分ではなく彼女に当て続けましょう。"
+    },
+    "b1000013-0000-0000-0004-000000000013": {
+      "en": "Thank you, so what are you currently reading?",
+      "ja": "ありがとうございます。ちなみに、今は何を読んでいるんですか？"
+    },
+    "b1000014-0000-0000-0004-000000000014": {
+      "en": "She shows you her book. Excited to share.",
+      "ja": "彼女は、自分の本を見せてくれます。話したくてたまらない様子です。"
+    },
+    "b1000015-0000-0000-0004-000000000015": {
+      "en": "She's fully engaged. Talking about something she clearly loves. Energy is good.",
+      "ja": "彼女はすっかり会話に乗っています。明らかに大好きなことについて話しています。良い雰囲気です。"
+    },
+    "b1000016-0000-0000-0004-000000000016": {
+      "en": "I'm reading this magic fiction, it's my 3rd book from the author this month...",
+      "ja": "今はこのファンタジー小説を読んでいるんです。この作家の本は、今月もう3冊目で……"
+    },
+    "b1000171-0000-0000-0004-000000000171": {
+      "en": "Yeah I'm not much of a reader",
+      "ja": "僕は、あまり本を読まないほうで。"
+    },
+    "b1000172-0000-0000-0004-000000000172": {
+      "en": "The energy is high, don't undermine the connection with negativity.",
+      "ja": "場が盛り上がっています。後ろ向きなひと言で、つながりを損なわないでください。"
+    },
+    "b1000173-0000-0000-0004-000000000173": {
+      "en": "Three a month? Must have a lot of free time.",
+      "ja": "月に3冊？ずいぶん時間があるんですね。"
+    },
+    "b1000174-0000-0000-0004-000000000174": {
+      "en": "Saying she has too much time feels critical. Never reduce what she is proud of.",
+      "ja": "「時間がありすぎる」と言うと、批判に聞こえます。彼女が誇りに思っていることを、決しておとしめないでください。"
+    },
+    "b1000018-0000-0000-0004-000000000018": {
+      "en": "Okay I got my sister sorted. Now one for me, I need some expert advice.",
+      "ja": "よし、妹の分は決まりました。次は僕の分です。専門家のアドバイスが必要なんですが。"
+    },
+    "b1000019-0000-0000-0004-000000000019": {
+      "en": "For you? Alright, what kind of stuff do you like?",
+      "ja": "ご自分用ですか？いいですよ。どんなものが好きなんですか？"
+    },
+    "b1000020-0000-0000-0004-000000000020": {
+      "en": "The dynamic shifted. She's helping you personally now.",
+      "ja": "関係が変わりました。彼女は今、こちら個人のために手伝ってくれています。"
+    },
+    "b1000211-0000-0000-0004-000000000211": {
+      "en": "I will read whatever you recommend.",
+      "ja": "おすすめしてくれたものなら、何でも読みます。"
+    },
+    "b1000212-0000-0000-0004-000000000212": {
+      "en": "Take control of the situation. Show your personality through preferences.",
+      "ja": "その場の主導権を握りましょう。好みを伝えることで、自分らしさを見せましょう。"
+    },
+    "b1000213-0000-0000-0004-000000000213": {
+      "en": "I like self-help informational books",
+      "ja": "自己啓発系の、ためになる本が好きです。"
+    },
+    "b1000214-0000-0000-0004-000000000214": {
+      "en": "While this works, it keeps it platonic. Use this as an opportunity to be playful.",
+      "ja": "これでも問題はありませんが、友達どまりの空気のままです。遊び心を見せるチャンスとして使いましょう。"
+    },
+    "b1000022-0000-0000-0004-000000000022": {
+      "en": "I'm into rom coms. Especially the ones where strangers meet in bookstores.",
+      "ja": "恋愛ものが好きなんです。とくに、見知らぬ二人が書店で出会う話が。"
+    },
+    "b1000023-0000-0000-0004-000000000023": {
+      "en": "Katie catches on immediately and laughs.",
+      "ja": "ケイティはすぐに気づいて、笑います。"
+    },
+    "b1000024-0000-0000-0004-000000000024": {
+      "en": "Oh really? How convenient.",
+      "ja": "へえ、そうなんですか？ずいぶん都合がいいですね。"
+    },
+    "b1000025-0000-0000-0004-000000000025": {
+      "en": "She's smiling, reciprocating the playful energy. The flirtation is subtle.",
+      "ja": "彼女はほほえんで、遊び心のあるやり取りを返してくれています。駆け引きは、さりげないものです。"
+    },
+    "b1000026-0000-0000-0004-000000000026": {
+      "en": "Haha, I'm just kidding. I'm actually into...",
+      "ja": "あはは、冗談です。本当に好きなのは……"
+    },
+    "b1000028-0000-0000-0004-000000000028": {
+      "en": "Alright, let's go find you something then.",
+      "ja": "わかりました。じゃあ、何か探しに行きましょう。"
+    },
+    "b1000029-0000-0000-0004-000000000029": {
+      "en": "Katie eventually finds you a book, and you two go to checkout together.",
+      "ja": "やがてケイティが本を見つけてくれて、二人で一緒にレジへ向かいます。"
+    },
+    "b1000030-0000-0000-0004-000000000030": {
+      "en": "You buy your books and now you're outside the store together.",
+      "ja": "本を買い終えて、二人で店の外に出ています。"
+    },
+    "b100032a-0000-0000-0004-00000000032a": {
+      "en": "Hey if you're free, let's go grab a coffee?",
+      "ja": "よかったら、このあとコーヒーでも行きましょう。"
+    },
+    "b100033a-0000-0000-0004-00000000033a": {
+      "en": "Yeah sure, there's a place across the street that's good.",
+      "ja": "ええ、いいですよ。通りの向かいに、いいお店があるんです。"
+    },
+    "b100034a-0000-0000-0004-00000000034a": {
+      "en": "Hey I have to go now, but I have to tell you how my sister finds your recommendation.",
+      "ja": "もう行かないといけないんですが、おすすめしてもらった本を妹がどう思ったか、ぜひ報告させてください。"
+    },
+    "b1000035-0000-0000-0004-000000000035": {
+      "en": "Haha of course, here's my instagram.",
+      "ja": "あはは、もちろん。これ、私のLINEです。"
+    },
+    "b1000036-0000-0000-0004-000000000036": {
+      "en": "Success. You review your interaction with Katie.",
+      "ja": "成功です。ケイティとのやり取りを振り返ります。"
+    },
+    "b1000037-0000-0000-0004-000000000037": {
+      "en": "You opened naturally and made her opinion feel valued.",
+      "ja": "自然に話しかけ、彼女の意見が大切にされていると感じてもらえました。"
+    },
+    "b1000038-0000-0000-0004-000000000038": {
+      "en": "You showed curiosity towards Katie's interests.",
+      "ja": "ケイティの興味に、好奇心を向けました。"
+    },
+    "b1000039-0000-0000-0004-000000000039": {
+      "en": "You were able to show playful flirtiness and escalate the connection.",
+      "ja": "遊び心のある駆け引きを見せて、つながりを一歩進めることができました。"
+    },
+    "b1000040-0000-0000-0004-000000000040": {
+      "en": "And you closed well by building on the connection. Well done.",
+      "ja": "そして、築いたつながりを活かして、うまく次につなげました。よくできました。"
+    }
+  },
+  "options": {
+    "c1000001-0000-0000-0004-000000000001": {
+      "en": "Comment that you're both looking at the same section",
+      "ja": "二人とも同じコーナーを見ていることにコメントする"
+    },
+    "c1000002-0000-0000-0004-000000000002": {
+      "en": "Ask if she comes here often",
+      "ja": "ここにはよく来るのかと尋ねる"
+    },
+    "c1000003-0000-0000-0004-000000000003": {
+      "en": "Ask for her advice on books",
+      "ja": "本についてアドバイスを求める"
+    },
+    "c1000004-0000-0000-0004-000000000004": {
+      "en": "List off some generic genres",
+      "ja": "ありきたりなジャンルをいくつか挙げる"
+    },
+    "c1000005-0000-0000-0004-000000000005": {
+      "en": "Say you have no idea",
+      "ja": "まったくわからないと言う"
+    },
+    "c1000006-0000-0000-0004-000000000006": {
+      "en": "Describe your sister's taste with personality",
+      "ja": "妹の好みを、人柄が伝わるように説明する"
+    },
+    "c1000007-0000-0000-0004-000000000007": {
+      "en": "Thank her for the book and wait for her to talk",
+      "ja": "本のお礼を言って、彼女が話すのを待つ"
+    },
+    "c1000008-0000-0000-0004-000000000008": {
+      "en": "Ask her what book she's reading ",
+      "ja": "彼女が今読んでいる本を尋ねる"
+    },
+    "c1000009-0000-0000-0004-000000000009": {
+      "en": "Tell her about books you've read recently",
+      "ja": "自分が最近読んだ本の話をする"
+    },
+    "c1000010-0000-0000-0004-000000000010": {
+      "en": "Joke about needing a recommendation for yourself",
+      "ja": "自分にもおすすめが必要だと冗談めかして言う"
+    },
+    "c1000011-0000-0000-0004-000000000011": {
+      "en": "Say you're not much of a reader yourself",
+      "ja": "自分はあまり本を読まないと言う"
+    },
+    "c1000012-0000-0000-0004-000000000012": {
+      "en": "Comment that she must have a lot of time then",
+      "ja": "それなら時間がたくさんあるんですね、とコメントする"
+    },
+    "c1000013-0000-0000-0004-000000000013": {
+      "en": "Say you'll read whatever she recommends",
+      "ja": "彼女がすすめるものなら何でも読むと言う"
+    },
+    "c1000014-0000-0000-0004-000000000014": {
+      "en": "Use this opportunity to flirt about your current situation",
+      "ja": "この機会に、今の状況をネタにして駆け引きをする"
+    },
+    "c1000015-0000-0000-0004-000000000015": {
+      "en": "State the exact genre you're looking for",
+      "ja": "探しているジャンルをそのまま伝える"
+    },
+    "c1000016-0000-0000-0004-000000000016": {
+      "en": "Adventure/Fantasy books",
+      "ja": "冒険もの／ファンタジー"
+    },
+    "c1000017-0000-0000-0004-000000000017": {
+      "en": "Non-fiction/Self-help books",
+      "ja": "ノンフィクション／自己啓発"
+    },
+    "c1000018-0000-0000-0004-000000000018": {
+      "en": "Fiction/Realism books",
+      "ja": "フィクション／現実的な物語"
+    },
+    "c1000019-0000-0000-0004-000000000019": {
+      "en": "Suggest getting food/coffee now",
+      "ja": "今から食事かコーヒーに行こうと提案する"
+    },
+    "c1000020-0000-0000-0004-000000000020": {
+      "en": "Ask for her socials and callback to her recommendation",
+      "ja": "彼女のおすすめに触れながら、LINEを聞く"
+    }
+  }
+}

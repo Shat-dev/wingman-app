@@ -31,6 +31,12 @@
             "state" : "needs_review",
             "value" : "Aujourd’hui, tu paies %1$@ pour tes %2$lld premiers mois, puis %3$@ par mois. Annule à tout moment dans les réglages de l’App Store."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "本日%1$@が請求されます（最初の%2$lldか月分）。その後は月額%3$@で更新されます。App Storeの設定からいつでも解約できます。"
+          }
         }
       }
     },
@@ -59,6 +65,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Aujourd’hui, tu paies %1$@ pour tes %2$lld premiers mois, puis %3$@ par an. Annule à tout moment dans les réglages de l’App Store."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "本日%1$@が請求されます（最初の%2$lldか月分）。その後は年額%3$@で更新されます。App Storeの設定からいつでも解約できます。"
           }
         }
       }
@@ -89,6 +101,12 @@
             "state" : "needs_review",
             "value" : "Aujourd’hui, tu paies %1$@ pour tes %2$lld premières années, puis %3$@ par mois. Annule à tout moment dans les réglages de l’App Store."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "本日%1$@が請求されます（最初の%2$lld年間分）。その後は月額%3$@で更新されます。App Storeの設定からいつでも解約できます。"
+          }
         }
       }
     },
@@ -117,6 +135,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Aujourd’hui, tu paies %1$@ pour tes %2$lld premières années, puis %3$@ par an. Annule à tout moment dans les réglages de l’App Store."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "本日%1$@が請求されます（最初の%2$lld年間分）。その後は年額%3$@で更新されます。App Storeの設定からいつでも解約できます。"
           }
         }
       }
@@ -147,6 +171,12 @@
             "state" : "needs_review",
             "value" : "Aujourd’hui, tu paies %1$@ pour ton premier mois, puis %2$@ par mois. Annule à tout moment dans les réglages de l’App Store."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "本日%1$@が請求されます（最初の1か月分）。その後は月額%2$@で更新されます。App Storeの設定からいつでも解約できます。"
+          }
         }
       }
     },
@@ -175,6 +205,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Aujourd’hui, tu paies %1$@ pour ton premier mois, puis %2$@ par an. Annule à tout moment dans les réglages de l’App Store."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "本日%1$@が請求されます（最初の1か月分）。その後は年額%2$@で更新されます。App Storeの設定からいつでも解約できます。"
           }
         }
       }
@@ -205,6 +241,12 @@
             "state" : "needs_review",
             "value" : "Aujourd’hui, tu paies %1$@ pour ta première année, puis %2$@ par mois. Annule à tout moment dans les réglages de l’App Store."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "本日%1$@が請求されます（最初の1年間分）。その後は月額%2$@で更新されます。App Storeの設定からいつでも解約できます。"
+          }
         }
       }
     },
@@ -233,6 +275,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Aujourd’hui, tu paies %1$@ pour ta première année, puis %2$@ par an. Annule à tout moment dans les réglages de l’App Store."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "本日%1$@が請求されます（最初の1年間分）。その後は年額%2$@で更新されます。App Storeの設定からいつでも解約できます。"
           }
         }
       }
@@ -263,6 +311,12 @@
             "state" : "needs_review",
             "value" : "Aujourd’hui, tu paies %1$@, puis %2$@ à chaque renouvellement. Annule à tout moment dans les réglages de l’App Store."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "本日%1$@が請求されます。その後は更新のたびに%2$@が請求されます。App Storeの設定からいつでも解約できます。"
+          }
         }
       }
     },
@@ -292,6 +346,12 @@
             "state" : "needs_review",
             "value" : "%1$@ : %2$@"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%1$@：%2$@"
+          }
         }
       }
     },
@@ -319,6 +379,12 @@
             "state" : "needs_review",
             "value" : "%lld bonnes réponses"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld問正解"
+          }
         }
       }
     },
@@ -342,6 +408,12 @@
             "state" : "needs_review",
             "value" : "Série de %lld jours"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld日連続"
+          }
         }
       }
     },
@@ -364,6 +436,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Il y a %lld jours"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld日前"
           }
         }
       }
@@ -438,6 +516,18 @@
                 "stringUnit" : {
                   "state" : "needs_review",
                   "value" : "%lld leçons"
+                }
+              }
+            }
+          }
+        },
+        "ja" : {
+          "variations" : {
+            "plural" : {
+              "other" : {
+                "stringUnit" : {
+                  "state" : "needs_review",
+                  "value" : "%lldレッスン"
                 }
               }
             }
@@ -519,6 +609,18 @@
               }
             }
           }
+        },
+        "ja" : {
+          "variations" : {
+            "plural" : {
+              "other" : {
+                "stringUnit" : {
+                  "state" : "needs_review",
+                  "value" : "%lldレッスンの完了が必要"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -541,6 +643,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "%lld min"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld分"
           }
         }
       }
@@ -565,6 +673,12 @@
             "state" : "needs_review",
             "value" : "%lld min / jour"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "1日%lld分"
+          }
         }
       }
     },
@@ -587,6 +701,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "%lld minutes"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld分"
           }
         }
       }
@@ -611,6 +731,12 @@
             "state" : "needs_review",
             "value" : "%lld %%"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld%%"
+          }
         }
       }
     },
@@ -633,6 +759,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "%lld jours gratuits"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld日間無料"
           }
         }
       }
@@ -657,6 +789,12 @@
             "state" : "needs_review",
             "value" : "%lld mois gratuits"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lldか月無料"
+          }
         }
       }
     },
@@ -680,6 +818,12 @@
             "state" : "needs_review",
             "value" : "Formule %lld mois"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lldか月プラン"
+          }
         }
       }
     },
@@ -702,6 +846,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "%lld ans gratuits"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld年間無料"
           }
         }
       }
@@ -728,6 +878,12 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%1$lld. %2$@"
+          }
+        },
+        "ja" : {
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "%1$lld. %2$@"
@@ -763,6 +919,12 @@
             "state" : "needs_review",
             "value" : "1 - très anxieux"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "1：とても不安"
+          }
         }
       }
     },
@@ -785,6 +947,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "1 bonne réponse"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "1問正解"
           }
         }
       }
@@ -809,6 +977,12 @@
             "state" : "needs_review",
             "value" : "Hier"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "昨日"
+          }
         }
       }
     },
@@ -831,6 +1005,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "1 jour de série"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "1日連続"
           }
         }
       }
@@ -855,6 +1035,12 @@
             "state" : "needs_review",
             "value" : "10 - très sûr de moi"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "10：とても自信がある"
+          }
         }
       }
     },
@@ -878,6 +1064,12 @@
             "state" : "needs_review",
             "value" : "3 fois"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "3倍"
+          }
         }
       }
     },
@@ -899,6 +1091,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Parmi les hommes de 18 à 24 ans, 45 % n’ont jamais abordé une femme"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "18〜24歳の男性の45%は、女性に声をかけたことがありません"
           }
         }
       }
@@ -922,6 +1120,12 @@
             "state" : "needs_review",
             "value" : "Parmi les hommes de 26 à 40 ans, 48 % n’ont abordé personne au cours de l’année écoulée"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "26〜40歳の男性の48%は、この1年間、誰にも声をかけていません"
+          }
         }
       }
     },
@@ -943,6 +1147,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Parmi les hommes qui abordent régulièrement, 58 % obtiennent un numéro, un rendez-vous ou une relation"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "継続して声をかけている男性の58%が、連絡先の交換やデート、交際につながっています"
           }
         }
       }
@@ -966,6 +1176,12 @@
             "state" : "needs_review",
             "value" : "Parmi les hommes célibataires, 63 % regrettent de ne pas avoir abordé de femmes quand ils étaient plus jeunes"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "独身男性の63%が、若いころ女性に声をかけなかったことを後悔しています"
+          }
         }
       }
     },
@@ -987,6 +1203,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Parmi les femmes de 18 à 30 ans, 77 % aimeraient qu’on les aborde plus souvent"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "18〜30歳の女性の77%が、もっと声をかけてほしいと思っています"
           }
         }
       }
@@ -1010,6 +1232,12 @@
             "state" : "needs_review",
             "value" : "Un homme regarde passer une femme et les imagine ensemble"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "通り過ぎる女性を見つめ、二人でいるところを思い浮かべる男性"
+          }
         }
       }
     },
@@ -1031,6 +1259,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Compte"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "アカウント"
           }
         }
       }
@@ -1054,6 +1288,12 @@
             "state" : "needs_review",
             "value" : "Ajoute ton prénom"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "名前を追加"
+          }
         }
       }
     },
@@ -1075,6 +1315,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Tout bon"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "全問正解"
           }
         }
       }
@@ -1098,6 +1344,12 @@
             "state" : "needs_review",
             "value" : "Autorise les notifications pour les conseils et les offres. Tu peux les désactiver à tout moment dans Réglages."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ヒントやお得な情報の通知を許可してください。「設定」でいつでもオフにできます。"
+          }
         }
       }
     },
@@ -1119,6 +1371,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Presque fini, tu pourras explorer dans une seconde."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "もうすぐ完了です。すぐに自由に使えるようになります。"
           }
         }
       }
@@ -1142,6 +1400,12 @@
             "state" : "needs_review",
             "value" : "Près de la moitié des hommes n’ont abordé personne au cours de l’année écoulée"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "男性のほぼ半数が、この1年間、誰にも声をかけていません"
+          }
         }
       }
     },
@@ -1163,6 +1427,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Près de la moitié des hommes de ton âge n’ont jamais abordé une femme"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "同年代の男性のほぼ半数は、女性に声をかけたことがありません"
           }
         }
       }
@@ -1186,6 +1456,12 @@
             "state" : "needs_review",
             "value" : "Près de la moitié des hommes de ton âge n’ont abordé personne au cours de l’année écoulée"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "同年代の男性のほぼ半数が、この1年間、誰にも声をかけていません"
+          }
         }
       }
     },
@@ -1207,6 +1483,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Tu as déjà un compte ?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "すでにアカウントをお持ちですか？"
           }
         }
       }
@@ -1230,6 +1512,12 @@
             "state" : "needs_review",
             "value" : "Une erreur s’est produite"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "エラーが発生しました"
+          }
         }
       }
     },
@@ -1251,6 +1539,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Une erreur inattendue s’est produite. Réessaie."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "予期しないエラーが発生しました。もう一度お試しください。"
           }
         }
       }
@@ -1274,6 +1568,12 @@
             "state" : "needs_review",
             "value" : "Une erreur inconnue s’est produite. Réessaie."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "不明なエラーが発生しました。もう一度お試しください。"
+          }
         }
       }
     },
@@ -1295,6 +1595,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Analyse de tes réponses"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "回答を分析しています"
           }
         }
       }
@@ -1318,6 +1624,12 @@
             "state" : "needs_review",
             "value" : "Et c’est ici que tu t’entraînes.\nLibrairie, salle de sport, café. Choisis quoi dire, vois ce qui se passe."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "そして、ここが練習の場です。\n本屋、ジム、カフェ。何を言うかを選んで、どうなるかを見てみましょう。"
+          }
         }
       }
     },
@@ -1339,6 +1651,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Anxieux"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "不安"
           }
         }
       }
@@ -1362,6 +1680,12 @@
             "state" : "needs_review",
             "value" : "Guide des niveaux"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "アプローチレベルガイド"
+          }
         }
       }
     },
@@ -1383,6 +1707,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Aborde tout de suite quelqu’un qui t’intéresse"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "気になる相手に、すぐ声をかける"
           }
         }
       }
@@ -1406,6 +1736,12 @@
             "state" : "needs_review",
             "value" : "Approches par niveau"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "アプローチの内訳"
+          }
         }
       }
     },
@@ -1427,6 +1763,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Approches notées"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "記録したアプローチ"
           }
         }
       }
@@ -1450,6 +1792,12 @@
             "state" : "needs_review",
             "value" : "Approches notées"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "記録したアプローチ"
+          }
         }
       }
     },
@@ -1471,6 +1819,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Limite de caractères bientôt atteinte"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "もうすぐ文字数の上限です"
           }
         }
       }
@@ -1494,6 +1848,12 @@
             "state" : "needs_review",
             "value" : "Tu veux vraiment supprimer cette approche ?"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "このアプローチの記録を削除してもよろしいですか？"
+          }
         }
       }
     },
@@ -1515,6 +1875,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Tu veux vraiment supprimer ton compte ? Cette action est irréversible."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "アカウントを削除してもよろしいですか？この操作は取り消せません。"
           }
         }
       }
@@ -1538,6 +1904,12 @@
             "state" : "needs_review",
             "value" : "Demander un conseil à un vendeur"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "店員におすすめを聞く"
+          }
         }
       }
     },
@@ -1560,6 +1932,12 @@
             "state" : "needs_review",
             "value" : "Lui demander son numéro (si tu n’as pas le temps de créer un lien)"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "連絡先を聞く（打ち解ける時間がないとき）"
+          }
         }
       }
     },
@@ -1581,6 +1959,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Demander quelque chose à la personne"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "相手に何かをお願いする"
           }
         }
       }
@@ -1605,6 +1989,12 @@
             "state" : "needs_review",
             "value" : "Retour"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "戻る"
+          }
         }
       }
     },
@@ -1628,6 +2018,12 @@
             "state" : "needs_review",
             "value" : "Prélevé immédiatement. Annule à tout moment dans les réglages de l’App Store."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "すぐに請求されます。App Storeの設定からいつでも解約できます。"
+          }
         }
       }
     },
@@ -1649,6 +2045,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Des leçons courtes, à faire dans les transports ou pendant la pause déjeuner"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "通勤中や昼休みにできる、短いレッスン"
           }
         }
       }
@@ -1672,6 +2074,12 @@
             "state" : "needs_review",
             "value" : "Gagne l’assurance d’agir quand ça compte"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "大事な場面で動ける自信を"
+          }
         }
       }
     },
@@ -1693,6 +2101,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Création de ton plan d’entraînement"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "練習プランを作成しています"
           }
         }
       }
@@ -1721,6 +2135,12 @@
             "state" : "needs_review",
             "value" : "En continuant, tu acceptes nos [CGU](terms) et notre [Politique de confidentialité](privacy)"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "続行すると、[利用規約](terms)と[プライバシーポリシー](privacy)に同意したことになります"
+          }
         }
       }
     },
@@ -1742,6 +2162,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Peut-on mettre un prix sur une vraie rencontre ?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "人とのつながりに、値段はつけられますか？"
           }
         }
       }
@@ -1765,6 +2191,12 @@
             "state" : "needs_review",
             "value" : "Impossible de charger les prix"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "料金を読み込めません"
+          }
         }
       }
     },
@@ -1786,6 +2218,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Annuler"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "キャンセル"
           }
         }
       }
@@ -1809,6 +2247,12 @@
             "state" : "needs_review",
             "value" : "Discussion légère avec une voisine de train"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "電車で乗り合わせた人と軽く雑談する"
+          }
         }
       }
     },
@@ -1830,6 +2274,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Parler d’entraînement avec une habituée de la salle"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ジムの常連とトレーニングの話をする"
           }
         }
       }
@@ -1853,6 +2303,12 @@
             "state" : "needs_review",
             "value" : "Vérifier la réponse"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "答え合わせ"
+          }
         }
       }
     },
@@ -1874,6 +2330,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Reviens plus tard pour de nouvelles questions."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "新しい練習問題は、また後で確認してください。"
           }
         }
       }
@@ -1897,6 +2359,12 @@
             "state" : "needs_review",
             "value" : "Vérifie ta connexion et réessaie."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "接続を確認して、もう一度お試しください。"
+          }
         }
       }
     },
@@ -1919,6 +2387,12 @@
             "state" : "needs_review",
             "value" : "Consulte tes réflexions pour voir ce que tu en retiens"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "振り返りを見て、気づきを確認しましょう"
+          }
         }
       }
     },
@@ -1940,6 +2414,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Choisis une option pour continuer"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "続けるには選択肢を選んでください"
           }
         }
       }
@@ -1964,6 +2444,12 @@
             "state" : "needs_review",
             "value" : "Profite de %lld %% de réduction"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld%%オフを受け取る"
+          }
         }
       }
     },
@@ -1985,6 +2471,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "J’en profite"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "割引を受け取る"
           }
         }
       }
@@ -2008,6 +2500,12 @@
             "state" : "needs_review",
             "value" : "Fermer l’offre"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "オファーを閉じる"
+          }
         }
       }
     },
@@ -2029,6 +2527,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Fermer la page d’abonnement"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "プラン画面を閉じる"
           }
         }
       }
@@ -2052,6 +2556,12 @@
             "state" : "needs_review",
             "value" : "Ferme cette page et l’offre disparaît pour de bon"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "閉じると、二度と表示されません"
+          }
         }
       }
     },
@@ -2073,6 +2583,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Parais naturel, pas nerveux"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "緊張せず、自然体でいられる"
           }
         }
       }
@@ -2097,6 +2613,12 @@
             "state" : "needs_review",
             "value" : "M’engager"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "誓う"
+          }
         }
       }
     },
@@ -2119,6 +2641,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Engagé."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "誓いました。"
           }
         }
       }
@@ -2143,6 +2671,12 @@
             "state" : "needs_review",
             "value" : "Termine toutes les leçons de %@ pour débloquer ce cours."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "「%@」のレッスンをすべて完了すると、このコースが解放されます。"
+          }
         }
       }
     },
@@ -2164,6 +2698,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Termine toutes les leçons du cours précédent pour débloquer celui-ci."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "前のコースのレッスンをすべて完了すると、このコースが解放されます。"
           }
         }
       }
@@ -2188,6 +2728,12 @@
             "state" : "needs_review",
             "value" : "Terminé"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "完了"
+          }
         }
       }
     },
@@ -2209,6 +2755,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Niveau de confiance"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "自信レベル"
           }
         }
       }
@@ -2232,6 +2784,12 @@
             "state" : "needs_review",
             "value" : "Ta confiance au fil du temps"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "自信の推移"
+          }
         }
       }
     },
@@ -2253,6 +2811,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "La confiance est une compétence. Une compétence, ça se construit."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "自信はスキルです。スキルは鍛えられます。"
           }
         }
       }
@@ -2277,6 +2841,12 @@
             "state" : "needs_review",
             "value" : "Confiance : %lld/10"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "自信：%lld/10"
+          }
         }
       }
     },
@@ -2298,6 +2868,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Confiant"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "自信がある"
           }
         }
       }
@@ -2321,6 +2897,12 @@
             "state" : "needs_review",
             "value" : "Bravo ! Comment tu t’es senti ? Quelle était la situation ? Comment ça s’est passé ?"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "おめでとうございます！どんな気持ちでしたか？どんな状況で、どうなりましたか？"
+          }
         }
       }
     },
@@ -2342,6 +2924,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Continuer"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "続ける"
           }
         }
       }
@@ -2365,6 +2953,12 @@
             "state" : "needs_review",
             "value" : "Continuer avec Apple"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Appleで続ける"
+          }
         }
       }
     },
@@ -2386,6 +2980,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Continuer avec Google"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Googleで続ける"
           }
         }
       }
@@ -2409,6 +3009,12 @@
             "state" : "needs_review",
             "value" : "Bonne réponse !"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "正解！"
+          }
         }
       }
     },
@@ -2430,6 +3036,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Bonne réponse !"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "正解！"
           }
         }
       }
@@ -2453,6 +3065,12 @@
             "state" : "needs_review",
             "value" : "Impossible de charger les options d’abonnement. Réessaie."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "プランを読み込めませんでした。もう一度お試しください。"
+          }
         }
       }
     },
@@ -2474,6 +3092,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Impossible de charger les questions du jour. Réessaie."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "今日の問題を読み込めませんでした。もう一度お試しください。"
           }
         }
       }
@@ -2497,6 +3121,12 @@
             "state" : "needs_review",
             "value" : "Impossible de charger ton entraînement du jour. Réessaie."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "今日の練習を読み込めませんでした。もう一度お試しください。"
+          }
         }
       }
     },
@@ -2518,6 +3148,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Impossible de charger ton abonnement. Réessaie."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "サブスクリプションを読み込めませんでした。もう一度お試しください。"
           }
         }
       }
@@ -2541,6 +3177,12 @@
             "state" : "needs_review",
             "value" : "Impossible d’enregistrer ta réponse. Réessaie."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "回答を保存できませんでした。もう一度お試しください。"
+          }
         }
       }
     },
@@ -2562,6 +3204,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Impossible de lancer la connexion. Réessaie."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "サインインを開始できませんでした。もう一度お試しください。"
           }
         }
       }
@@ -2585,6 +3233,12 @@
             "state" : "needs_review",
             "value" : "Impossible de mettre à jour ta série. Réessaie."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "連続記録を更新できませんでした。もう一度お試しください。"
+          }
         }
       }
     },
@@ -2606,6 +3260,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Cours terminé."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "コース完了。"
           }
         }
       }
@@ -2630,6 +3290,12 @@
             "state" : "needs_review",
             "value" : "Cours"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "コース"
+          }
         }
       }
     },
@@ -2651,6 +3317,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Cours. État d’esprit, aborder, flirter, donner suite.\nDes leçons courtes pour devenir l’homme qui agit, pas celui qui se fige."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "コース。マインドセット、声のかけ方、恋の駆け引き、その後のフォロー。\n固まる男ではなく、動ける男をつくる短いレッスンです。"
           }
         }
       }
@@ -2674,6 +3346,12 @@
             "state" : "needs_review",
             "value" : "Créer un compte"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "アカウントを作成"
+          }
         }
       }
     },
@@ -2695,6 +3373,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Crée un compte gratuit"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "無料アカウントを作成"
           }
         }
       }
@@ -2718,6 +3402,12 @@
             "state" : "needs_review",
             "value" : "Crée un compte gratuit pour enregistrer tes réponses et ta progression."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "無料アカウントを作成すると、回答と進捗が保存されます。"
+          }
         }
       }
     },
@@ -2739,6 +3429,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Créer des occasions de rencontre, en restant détendu."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "気軽な雰囲気のまま、つながるきっかけをつくります。"
           }
         }
       }
@@ -2762,6 +3458,12 @@
             "state" : "needs_review",
             "value" : "Entraînement du jour"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "今日の練習"
+          }
         }
       }
     },
@@ -2783,6 +3485,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Objectif de lecture quotidien"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "毎日の学習目標"
           }
         }
       }
@@ -2806,6 +3514,12 @@
             "state" : "needs_review",
             "value" : "Rappel de lecture quotidien"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "毎日の学習リマインダー"
+          }
         }
       }
     },
@@ -2827,6 +3541,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Entraînement du jour terminé."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "今日の練習完了。"
           }
         }
       }
@@ -2851,6 +3571,12 @@
             "state" : "needs_review",
             "value" : "Erreur de données : %@"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "データエラー：%@"
+          }
         }
       }
     },
@@ -2872,6 +3598,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Jour 1 pour devenir l’homme qui se lance"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "自分から動ける男になる、1日目"
           }
         }
       }
@@ -2895,6 +3627,12 @@
             "state" : "needs_review",
             "value" : "Supprimer"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "削除"
+          }
         }
       }
     },
@@ -2916,6 +3654,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Supprimer le compte"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "アカウントを削除"
           }
         }
       }
@@ -2939,6 +3683,12 @@
             "state" : "needs_review",
             "value" : "Supprimer l’approche"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "アプローチを削除"
+          }
         }
       }
     },
@@ -2960,6 +3710,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Supprimer mes données"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "データを削除"
           }
         }
       }
@@ -2983,6 +3739,12 @@
             "state" : "needs_review",
             "value" : "Échec de la suppression. Réessaie plus tard."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "削除できませんでした。しばらくしてからもう一度お試しください。"
+          }
         }
       }
     },
@@ -3004,6 +3766,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Prendre de l’aisance dans les échanges du quotidien, sans aucun enjeu."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "失うもののほとんどない日常のやり取りで、人と話すことに慣れていきます。"
           }
         }
       }
@@ -3028,6 +3796,12 @@
             "state" : "needs_review",
             "value" : "Approche directe"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ダイレクトアプローチ"
+          }
         }
       }
     },
@@ -3050,6 +3824,12 @@
             "state" : "needs_review",
             "value" : "Compliment direct sur sa personnalité ou son apparence"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "人柄や見た目をストレートに褒める"
+          }
         }
       }
     },
@@ -3071,6 +3851,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Tu as souvent envie de parler à des femmes, mais tu ne le fais pas ?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "女性に話しかけたいのに、できないことがよくありますか？"
           }
         }
       }
@@ -3095,6 +3881,12 @@
             "state" : "needs_review",
             "value" : "Ne rien faire"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "何もしない"
+          }
         }
       }
     },
@@ -3116,6 +3908,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Ne fais pas partie de cette statistique. Ton futur toi compte sur toi."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "その数字の一人にならないでください。未来の自分が、今日の一歩を待っています。"
           }
         }
       }
@@ -3139,6 +3937,12 @@
             "state" : "needs_review",
             "value" : "Ne perds pas ton journal"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "記録をなくさないために"
+          }
         }
       }
     },
@@ -3160,6 +3964,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Ex. : approche au café"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "例：カフェで声をかけた"
           }
         }
       }
@@ -3183,6 +3993,12 @@
             "state" : "needs_review",
             "value" : "Modifier"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "編集"
+          }
         }
       }
     },
@@ -3204,6 +4020,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Modifier l’approche"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "アプローチを編集"
           }
         }
       }
@@ -3227,6 +4049,12 @@
             "state" : "needs_review",
             "value" : "Modifier le profil"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "プロフィールを編集"
+          }
         }
       }
     },
@@ -3249,6 +4077,12 @@
             "state" : "needs_review",
             "value" : "Saisis ton prénom"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "名前を入力"
+          }
         }
       }
     },
@@ -3270,6 +4104,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Erreur"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "エラー"
           }
         }
       }
@@ -3294,6 +4134,12 @@
             "state" : "needs_review",
             "value" : "Exemples"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "例"
+          }
         }
       }
     },
@@ -3315,6 +4161,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Conversation prolongée"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "長めの会話"
           }
         }
       }
@@ -3338,6 +4190,12 @@
             "state" : "needs_review",
             "value" : "Extrêmement confiant"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "非常に自信がある"
+          }
         }
       }
     },
@@ -3359,6 +4217,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Impossible de supprimer l’approche. Réessaie."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "アプローチを削除できませんでした。もう一度お試しください。"
           }
         }
       }
@@ -3382,6 +4246,12 @@
             "state" : "needs_review",
             "value" : "Impossible de charger les approches. Réessaie."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "アプローチを読み込めませんでした。もう一度お試しください。"
+          }
         }
       }
     },
@@ -3403,6 +4273,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Impossible de restaurer les achats. Réessaie."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "購入を復元できませんでした。もう一度お試しください。"
           }
         }
       }
@@ -3426,6 +4302,12 @@
             "state" : "needs_review",
             "value" : "Échec de l’enregistrement. Réessaie."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "保存できませんでした。もう一度お試しください。"
+          }
         }
       }
     },
@@ -3447,6 +4329,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Échec de la mise à jour. Réessaie."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "更新できませんでした。もう一度お試しください。"
           }
         }
       }
@@ -3471,6 +4359,12 @@
             "state" : "needs_review",
             "value" : "Conseil"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "フィードバック"
+          }
         }
       }
     },
@@ -3492,6 +4386,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Sois confiant, pas anxieux"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "不安ではなく、自信を持てる"
           }
         }
       }
@@ -3516,6 +4416,12 @@
             "state" : "needs_review",
             "value" : "Avancer"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "進む"
+          }
         }
       }
     },
@@ -3538,6 +4444,12 @@
             "state" : "needs_review",
             "value" : "Commencer"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "はじめる"
+          }
         }
       }
     },
@@ -3559,6 +4471,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Lance-toi sans trop réfléchir"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "考えすぎず、自分から動ける"
           }
         }
       }
@@ -3584,6 +4502,12 @@
             "state" : "needs_review",
             "value" : "Va sur ton écran d’accueil, puis rouvre Wingman."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ホーム画面に戻ってから、もう一度Wingmanを開いてください。"
+          }
         }
       }
     },
@@ -3605,6 +4529,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Notifications d’objectif"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "目標の通知"
           }
         }
       }
@@ -3629,6 +4559,12 @@
             "state" : "needs_review",
             "value" : "Bon après-midi,"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "こんにちは"
+          }
         }
       }
     },
@@ -3651,6 +4587,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Bonsoir,"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "こんばんは"
           }
         }
       }
@@ -3675,6 +4617,12 @@
             "state" : "needs_review",
             "value" : "Bonjour,"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "おはようございます"
+          }
         }
       }
     },
@@ -3696,6 +4644,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Bonne chance, on croit en toi."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "健闘を祈ります。応援しています。"
           }
         }
       }
@@ -3719,6 +4673,12 @@
             "state" : "needs_review",
             "value" : "Saluer ses voisins et échanger quelques mots"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "近所の人にあいさつして、少し雑談する"
+          }
         }
       }
     },
@@ -3740,6 +4700,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "La moitié des hommes n’abordent pas. La plupart de ceux qui le font réussissent."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "男性の半数は声をかけません。声をかけた人の多くは、うまくいっています。"
           }
         }
       }
@@ -3764,6 +4730,12 @@
             "state" : "needs_review",
             "value" : "Elle"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "彼女"
+          }
         }
       }
     },
@@ -3787,6 +4759,12 @@
             "state" : "needs_review",
             "value" : "Accueil"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ホーム"
+          }
         }
       }
     },
@@ -3808,6 +4786,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Comment tu t’es senti ? Que s’est-il passé ? Ce que tu as remarqué ou appris"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "どんな気持ちでしたか？何が起きましたか？気づいたことや学んだことを書きましょう"
           }
         }
       }
@@ -3831,6 +4815,12 @@
             "state" : "needs_review",
             "value" : "Quel âge as-tu ?"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "年齢を教えてください"
+          }
         }
       }
     },
@@ -3852,6 +4842,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Je deviens un homme qui passe à l’action."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "僕は、自分から行動する男になります。"
           }
         }
       }
@@ -3875,6 +4871,12 @@
             "state" : "needs_review",
             "value" : "Je n’appréhende plus du tout les situations sociales. Ça vaut plus que n’importe quel rendez-vous."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "人と関わる場面を怖いと思うことが、すっかりなくなりました。どんなデートよりも価値があります。"
+          }
         }
       }
     },
@@ -3897,6 +4899,12 @@
             "state" : "needs_review",
             "value" : "Avant, je me figeais en croisant une fille. Au bout de 3 semaines, j’ai eu ma première vraie conversation avec une inconnue. C’était ça, la victoire."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "以前は、女性とすれ違うだけで固まっていました。3週間後、初めて知らない人とちゃんと会話ができたんです。僕にとっては、それが勝利でした。"
+          }
         }
       }
     },
@@ -3918,6 +4926,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "J’ai lu tous les livres sur le sujet, aucun ne m’a vraiment fait agir. La structure quotidienne a tout changé."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "この手の本は全部読みましたが、実際に行動できたことは一度もありませんでした。毎日続ける仕組みが、それを変えてくれました。"
           }
         }
       }
@@ -3942,6 +4956,12 @@
             "state" : "needs_review",
             "value" : "Moi, %@, je deviens un homme qui passe à l’action."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@は、自分から行動する男になります。"
+          }
         }
       }
     },
@@ -3965,6 +4985,12 @@
             "state" : "needs_review",
             "value" : "DANS 1 MOIS"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "1か月後"
+          }
         }
       }
     },
@@ -3986,6 +5012,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Mauvaise réponse."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "不正解。"
           }
         }
       }
@@ -4009,6 +5041,12 @@
             "state" : "needs_review",
             "value" : "Mauvaise réponse."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "不正解。"
+          }
         }
       }
     },
@@ -4030,6 +5068,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Approche indirecte"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "さりげないアプローチ"
           }
         }
       }
@@ -4053,6 +5097,12 @@
             "state" : "needs_review",
             "value" : "Données de question invalides"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "受信した問題データが正しくありません"
+          }
         }
       }
     },
@@ -4074,6 +5124,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Réponse d’Apple invalide. Réessaie."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Appleから無効な応答がありました。もう一度お試しください。"
           }
         }
       }
@@ -4097,6 +5153,12 @@
             "state" : "needs_review",
             "value" : "Inviter des amis"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "友達を招待"
+          }
         }
       }
     },
@@ -4119,6 +5181,12 @@
             "state" : "needs_review",
             "value" : "Invite tes amis dans la communauté et progressez ensemble"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "友達をコミュニティに招待して、一緒に学びましょう"
+          }
         }
       }
     },
@@ -4140,6 +5208,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "C’est uniquement sur cet appareil. Un compte le conserve si tu changes de téléphone."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "この端末にのみ保存されています。アカウントがあれば、機種変更しても引き継げます。"
           }
         }
       }
@@ -4164,6 +5238,12 @@
             "state" : "needs_review",
             "value" : "Rejoins-moi sur Wingman ! %@"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wingmanを一緒に始めませんか？ %@"
+          }
         }
       }
     },
@@ -4185,6 +5265,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Rejoins les hommes qui passent à l’action"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "行動する男性たちの仲間になろう"
           }
         }
       }
@@ -4209,6 +5295,12 @@
             "state" : "needs_review",
             "value" : "Maintiens appuyé jusqu’à ce que le cercle soit plein."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "リングがいっぱいになるまで、押し続けてください。"
+          }
         }
       }
     },
@@ -4230,6 +5322,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Fluide, sans silences gênants"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "気まずい沈黙なしで会話が続く"
           }
         }
       }
@@ -4253,6 +5351,12 @@
             "state" : "needs_review",
             "value" : "Faire durer une conversation au-delà des banalités, sans visée romantique."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "恋愛の下心なしで、雑談の先まで会話を続けます。"
+          }
         }
       }
     },
@@ -4274,6 +5378,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Sais quoi dire pour commencer"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "話しかけ方がはっきりわかる"
           }
         }
       }
@@ -4298,6 +5408,12 @@
             "state" : "needs_review",
             "value" : "Langue"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "言語"
+          }
         }
       }
     },
@@ -4321,6 +5437,12 @@
             "state" : "needs_review",
             "value" : "Langue : %@"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "言語：%@"
+          }
         }
       }
     },
@@ -4343,6 +5465,12 @@
             "state" : "needs_review",
             "value" : "Le dernier. Celui-là, c’est toi.\nVide aujourd’hui. Dans un mois, il racontera une histoire… ou pas."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "最後です。ここは自分自身のページ。\n今日はまだ空っぽです。1か月後、ここに物語があるかどうかは自分次第です。"
+          }
         }
       }
     },
@@ -4364,6 +5492,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Leçon terminée."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "レッスン完了。"
           }
         }
       }
@@ -4388,6 +5522,12 @@
             "state" : "needs_review",
             "value" : "Leçons"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "レッスン"
+          }
         }
       }
     },
@@ -4411,6 +5551,12 @@
             "state" : "needs_review",
             "value" : "Niveau %lld"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "レベル%lld"
+          }
         }
       }
     },
@@ -4433,6 +5579,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Niveau %lld atteint."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "レベル%lldに到達しました。"
           }
         }
       }
@@ -4463,6 +5615,12 @@
             "state" : "needs_review",
             "value" : "Niveau %1$lld · encore %2$lld XP avant le niveau %3$lld"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "レベル%1$lld・レベル%3$lldまであと%2$lld XP"
+          }
         }
       }
     },
@@ -4485,6 +5643,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Niveau %lld · Niveau maximum atteint"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "レベル%lld・最高レベルに到達"
           }
         }
       }
@@ -4515,6 +5679,12 @@
             "state" : "needs_review",
             "value" : "Niveau %1$lld : %2$@"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "レベル%1$lld：%2$@"
+          }
         }
       }
     },
@@ -4536,6 +5706,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Niveau 1"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "レベル1"
           }
         }
       }
@@ -4559,6 +5735,12 @@
             "state" : "needs_review",
             "value" : "Niveau 1 : Échauffement social"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "レベル1：人と話すウォーミングアップ"
+          }
         }
       }
     },
@@ -4580,6 +5762,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Niveau 1 : Échauffement social"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "レベル1：人と話すウォーミングアップ"
           }
         }
       }
@@ -4603,6 +5791,12 @@
             "state" : "needs_review",
             "value" : "Niveau 2 : Conversation prolongée"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "レベル2：長めの会話"
+          }
         }
       }
     },
@@ -4624,6 +5818,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Niveau 2 : Conversation prolongée"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "レベル2：長めの会話"
           }
         }
       }
@@ -4647,6 +5847,12 @@
             "state" : "needs_review",
             "value" : "Niveau 3 : Approche indirecte"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "レベル3：さりげないアプローチ"
+          }
         }
       }
     },
@@ -4668,6 +5874,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Niveau 3 : Approche indirecte"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "レベル3：さりげないアプローチ"
           }
         }
       }
@@ -4691,6 +5903,12 @@
             "state" : "needs_review",
             "value" : "Niveau 4 : Approche directe"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "レベル4：ダイレクトアプローチ"
+          }
         }
       }
     },
@@ -4712,6 +5930,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Niveau 4 : Approche directe"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "レベル4：ダイレクトアプローチ"
           }
         }
       }
@@ -4735,6 +5959,12 @@
             "state" : "needs_review",
             "value" : "Chargement des approches…"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "アプローチを読み込み中…"
+          }
         }
       }
     },
@@ -4756,6 +5986,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Chargement des options d’abonnement…"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "プランを読み込み中…"
           }
         }
       }
@@ -4779,6 +6015,12 @@
             "state" : "needs_review",
             "value" : "Chargement des questions du jour…"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "今日の練習問題を読み込み中…"
+          }
         }
       }
     },
@@ -4800,6 +6042,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Chargement…"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "読み込み中…"
           }
         }
       }
@@ -4823,6 +6071,12 @@
             "state" : "needs_review",
             "value" : "Noter une approche"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "アプローチを記録"
+          }
         }
       }
     },
@@ -4844,6 +6098,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Se connecter"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ログイン"
           }
         }
       }
@@ -4867,6 +6127,12 @@
             "state" : "needs_review",
             "value" : "Se déconnecter"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ログアウト"
+          }
         }
       }
     },
@@ -4888,6 +6154,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Se connecter"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ログイン"
           }
         }
       }
@@ -4911,6 +6183,12 @@
             "state" : "needs_review",
             "value" : "Faire une remarque légère dans une file d’attente"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "行列で待っているときに、軽くひと言かける"
+          }
         }
       }
     },
@@ -4932,6 +6210,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Montrer clairement ton attirance dès l’accroche. Aucune ambiguïté."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "最初のひと言で、惹かれていることをはっきり伝えます。あいまいにはしません。"
           }
         }
       }
@@ -4955,6 +6239,12 @@
             "state" : "needs_review",
             "value" : "Gérer les abonnements"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "サブスクリプションを管理"
+          }
         }
       }
     },
@@ -4976,6 +6266,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Nombre maximal de caractères atteint"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "文字数の上限に達しました"
           }
         }
       }
@@ -5000,6 +6296,12 @@
             "state" : "needs_review",
             "value" : "Modéré"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ふつう"
+          }
         }
       }
     },
@@ -5021,6 +6323,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Anxiété modérée"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "やや不安"
           }
         }
       }
@@ -5044,6 +6352,12 @@
             "state" : "needs_review",
             "value" : "Formule mensuelle"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "月額プラン"
+          }
         }
       }
     },
@@ -5066,6 +6380,12 @@
             "state" : "needs_review",
             "value" : "La plupart des hommes regrettent les occasions qu’ils n’ont pas saisies"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "多くの男性が、つかまなかったチャンスを後悔しています"
+          }
         }
       }
     },
@@ -5087,6 +6407,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "La plupart des femmes aimeraient qu’on les aborde plus souvent"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "多くの女性は、もっと話しかけてほしいと思っています"
           }
         }
       }
@@ -5111,6 +6437,12 @@
             "state" : "needs_review",
             "value" : "Prénom"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "名前"
+          }
         }
       }
     },
@@ -5133,6 +6465,12 @@
             "state" : "needs_review",
             "value" : "Erreur réseau : vérifie ta connexion et réessaie."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ネットワークエラー：接続を確認して、もう一度お試しください。"
+          }
         }
       }
     },
@@ -5154,6 +6492,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Neutre"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "どちらでもない"
           }
         }
       }
@@ -5178,6 +6522,12 @@
             "state" : "needs_review",
             "value" : "Suivant"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "次へ"
+          }
         }
       }
     },
@@ -5199,6 +6549,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Pas de connexion"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "接続がありません"
           }
         }
       }
@@ -5222,6 +6578,12 @@
             "state" : "needs_review",
             "value" : "Aucun compte"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "アカウントなし"
+          }
         }
       }
     },
@@ -5243,6 +6605,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Aucun abonnement actif à restaurer"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "復元できる有効なサブスクリプションが見つかりません"
           }
         }
       }
@@ -5266,6 +6634,12 @@
             "state" : "needs_review",
             "value" : "Pas encore de données d’approche"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "アプローチのデータはまだありません"
+          }
         }
       }
     },
@@ -5287,6 +6661,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Aucune approche trouvée"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "アプローチが見つかりません"
           }
         }
       }
@@ -5310,6 +6690,12 @@
             "state" : "needs_review",
             "value" : "Aucune approche notée pour l’instant"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "まだアプローチの記録がありません"
+          }
         }
       }
     },
@@ -5331,6 +6717,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Pas de phrases de drague ringardes. Juste des conseils calmes et concrets pour être présent. Mon anxiété sociale a diminué de moitié."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "クサい決めゼリフは一切なし。落ち着いてその場にいるための、実践的な内容ばかりです。人前での不安は半分になりました。"
           }
         }
       }
@@ -5354,6 +6746,12 @@
             "state" : "needs_review",
             "value" : "Pas de connexion Internet"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "インターネットに接続されていません"
+          }
         }
       }
     },
@@ -5376,6 +6774,12 @@
             "state" : "needs_review",
             "value" : "Pas de connexion Internet. Vérifie ton réseau et réessaie."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "インターネットに接続されていません。ネットワークを確認して、もう一度お試しください。"
+          }
         }
       }
     },
@@ -5397,6 +6801,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Fini les « et si… »"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "「あのとき…」の後悔をなくす"
           }
         }
       }
@@ -5421,6 +6831,12 @@
             "state" : "needs_review",
             "value" : "Rien à payer maintenant. Annule à tout moment avant la fin de ton essai."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "今はお支払い不要です。トライアル終了前なら、いつでも解約できます。"
+          }
         }
       }
     },
@@ -5442,6 +6858,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Aucune question disponible"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "利用できる問題がありません"
           }
         }
       }
@@ -5465,6 +6887,12 @@
             "state" : "needs_review",
             "value" : "Pas encore de réflexions. Note des approches avec des remarques pour voir ce que tu en retiens"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "振り返りはまだありません。メモ付きでアプローチを記録すると、ここに気づきが表示されます"
+          }
         }
       }
     },
@@ -5486,6 +6914,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Plus tard"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "今はしない"
           }
         }
       }
@@ -5510,6 +6944,12 @@
             "state" : "needs_review",
             "value" : "Notes"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "メモ"
+          }
         }
       }
     },
@@ -5531,6 +6971,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Plus rien à configurer : tu arrives directement dans l’app."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ほかに設定は必要ありません。このままアプリを始められます。"
           }
         }
       }
@@ -5555,6 +7001,12 @@
             "state" : "needs_review",
             "value" : "NON"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "オフ"
+          }
         }
       }
     },
@@ -5573,6 +7025,12 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "OK"
+          }
+        },
+        "ja" : {
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "OK"
@@ -5600,6 +7058,12 @@
             "state" : "needs_review",
             "value" : "OUI"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "オン"
+          }
         }
       }
     },
@@ -5623,6 +7087,12 @@
             "state" : "needs_review",
             "value" : "OFFRE UNIQUE"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "1回限りのオファー"
+          }
         }
       }
     },
@@ -5644,6 +7114,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Une dernière étape"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "最後のステップ"
           }
         }
       }
@@ -5667,6 +7143,12 @@
             "state" : "needs_review",
             "value" : "Une chose à la fois. Joue d’abord le scénario."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ひとつずつ進めましょう。まずはシナリオをプレイしてください。"
+          }
         }
       }
     },
@@ -5688,6 +7170,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Oups !"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "おっと！"
           }
         }
       }
@@ -5712,6 +7200,12 @@
             "state" : "needs_review",
             "value" : "Ouvrir"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "開く"
+          }
         }
       }
     },
@@ -5734,6 +7228,12 @@
             "state" : "needs_review",
             "value" : "Optimisation de ton expérience"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "体験を最適化しています"
+          }
         }
       }
     },
@@ -5755,6 +7255,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Personnalisation de tes leçons"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "レッスンを最適な内容に調整しています"
           }
         }
       }
@@ -5779,6 +7285,12 @@
             "state" : "needs_review",
             "value" : "Formule"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "プラン"
+          }
         }
       }
     },
@@ -5800,6 +7312,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Réessaie !"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "もう一度お試しください！"
           }
         }
       }
@@ -5823,6 +7341,12 @@
             "state" : "needs_review",
             "value" : "Connecte-toi pour accéder aux exercices."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "練習を利用するにはログインしてください。"
+          }
         }
       }
     },
@@ -5844,6 +7368,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Donne un titre à ton approche"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "アプローチのタイトルを入力してください"
           }
         }
       }
@@ -5867,6 +7397,12 @@
             "state" : "needs_review",
             "value" : "Choisis une formule d’abonnement"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "プランを選択してください"
+          }
         }
       }
     },
@@ -5889,6 +7425,12 @@
             "state" : "needs_review",
             "value" : "Réessaie !"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "もう一度お試しください！"
+          }
         }
       }
     },
@@ -5910,6 +7452,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Patiente un instant…"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "お待ちください…"
           }
         }
       }
@@ -5934,6 +7482,12 @@
             "state" : "needs_review",
             "value" : "Entraînement"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "練習"
+          }
         }
       }
     },
@@ -5957,6 +7511,12 @@
             "state" : "needs_review",
             "value" : "Confidentialité"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "プライバシーポリシー"
+          }
         }
       }
     },
@@ -5979,6 +7539,12 @@
             "state" : "needs_review",
             "value" : "Politique de confidentialité"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "プライバシーポリシー"
+          }
         }
       }
     },
@@ -6000,6 +7566,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Traitement…"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "処理中…"
           }
         }
       }
@@ -6024,6 +7596,12 @@
             "state" : "needs_review",
             "value" : "Profil"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "プロフィール"
+          }
         }
       }
     },
@@ -6045,6 +7623,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Achat effectué, mais l’accès est introuvable. Contacte l’assistance."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "購入は完了しましたが、利用権を確認できませんでした。サポートにお問い合わせください。"
           }
         }
       }
@@ -6068,6 +7652,12 @@
             "state" : "needs_review",
             "value" : "Échec de l’achat. Réessaie."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "購入できませんでした。もう一度お試しください。"
+          }
         }
       }
     },
@@ -6089,6 +7679,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Les achats sont momentanément indisponibles. Réessaie plus tard."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "現在、購入を一時的にご利用いただけません。しばらくしてからもう一度お試しください。"
           }
         }
       }
@@ -6112,6 +7708,12 @@
             "state" : "needs_review",
             "value" : "Les achats ne sont pas autorisés sur cet appareil. Vérifie les restrictions de Temps d’écran et réessaie."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "この端末では購入が許可されていません。スクリーンタイムの制限を確認して、もう一度お試しください。"
+          }
         }
       }
     },
@@ -6133,6 +7735,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Achats restaurés !"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "購入を復元しました！"
           }
         }
       }
@@ -6157,6 +7765,12 @@
             "state" : "needs_review",
             "value" : "Noter Wingman"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wingmanを評価"
+          }
         }
       }
     },
@@ -6178,6 +7792,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Des rappels pour t’entraîner à aborder, et quelques offres de temps en temps."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "声をかける練習のリマインダーと、ときどきお得なお知らせが届きます。"
           }
         }
       }
@@ -6203,6 +7823,12 @@
             "state" : "needs_review",
             "value" : "Rouvre Wingman pour changer"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "切り替えるにはWingmanを開き直してください"
+          }
         }
       }
     },
@@ -6226,6 +7852,12 @@
             "state" : "needs_review",
             "value" : "Restaurer"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "復元"
+          }
         }
       }
     },
@@ -6247,6 +7879,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Restaurer l’achat"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "購入を復元"
           }
         }
       }
@@ -6270,6 +7908,12 @@
             "state" : "needs_review",
             "value" : "Échec de la restauration. Réessaie."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "復元できませんでした。もう一度お試しください。"
+          }
         }
       }
     },
@@ -6291,6 +7935,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Restauration…"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "復元中…"
           }
         }
       }
@@ -6314,6 +7964,12 @@
             "state" : "needs_review",
             "value" : "Réessayer"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "再試行"
+          }
         }
       }
     },
@@ -6336,6 +7992,12 @@
             "state" : "needs_review",
             "value" : "Pour l’instant, il est lié à cet appareil. Un compte conserve ton abonnement et ta progression si tu changes de téléphone."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "今はこの端末だけに紐づいています。アカウントを作成すれば、機種変更してもサブスクリプションと進捗を引き継げます。"
+          }
         }
       }
     },
@@ -6357,6 +8019,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Enregistrer"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "保存"
           }
         }
       }
@@ -6381,6 +8049,12 @@
             "state" : "needs_review",
             "value" : "Enregistre tes %lld approches"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld件のアプローチを保存しよう"
+          }
         }
       }
     },
@@ -6402,6 +8076,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Enregistre ta première approche"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "最初のアプローチを保存しよう"
           }
         }
       }
@@ -6425,6 +8105,12 @@
             "state" : "needs_review",
             "value" : "Enregistre ta progression, synchronise tes appareils, et plus encore."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "進捗の保存、複数の端末での同期などができます。"
+          }
         }
       }
     },
@@ -6446,6 +8132,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Enregistré !"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "保存しました！"
           }
         }
       }
@@ -6469,6 +8161,12 @@
             "state" : "needs_review",
             "value" : "Scénario terminé."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "シナリオ完了。"
+          }
         }
       }
     },
@@ -6490,6 +8188,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Scénario introuvable."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "シナリオが見つかりません。"
           }
         }
       }
@@ -6514,6 +8218,12 @@
             "state" : "needs_review",
             "value" : "Scénarios"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "シナリオ"
+          }
         }
       }
     },
@@ -6535,6 +8245,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Des techniques fondées sur la science, qui s’ancrent vraiment"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "科学的根拠に基づく、身につく方法"
           }
         }
       }
@@ -6558,6 +8274,12 @@
             "state" : "needs_review",
             "value" : "Rechercher"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "検索"
+          }
         }
       }
     },
@@ -6579,6 +8301,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Sécurise ton abonnement"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "サブスクリプションを保護する"
           }
         }
       }
@@ -6602,6 +8330,12 @@
             "state" : "needs_review",
             "value" : "Plusieurs réponses possibles"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "当てはまるものをすべて選択"
+          }
         }
       }
     },
@@ -6623,6 +8357,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Erreur du serveur : réessaie plus tard."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "サーバーエラー：しばらくしてからもう一度お試しください。"
           }
         }
       }
@@ -6646,6 +8386,12 @@
             "state" : "needs_review",
             "value" : "Réglages"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "設定"
+          }
         }
       }
     },
@@ -6668,6 +8414,12 @@
             "state" : "needs_review",
             "value" : "Voir le guide des niveaux"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "アプローチガイドを見る"
+          }
         }
       }
     },
@@ -6689,6 +8441,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Échec de la connexion. Réessaie."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "サインインできませんでした。もう一度お試しください。"
           }
         }
       }
@@ -6713,6 +8471,12 @@
             "state" : "needs_review",
             "value" : "Échec de la connexion : %@"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "サインインできませんでした：%@"
+          }
         }
       }
     },
@@ -6734,6 +8498,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "La connexion nécessite une action de ta part."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "サインインには操作が必要です。"
           }
         }
       }
@@ -6757,6 +8527,12 @@
             "state" : "needs_review",
             "value" : "La connexion n’a pas abouti. Réessaie."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "サインインを処理できませんでした。もう一度お試しください。"
+          }
         }
       }
     },
@@ -6778,6 +8554,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Connexion…"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "サインイン中…"
           }
         }
       }
@@ -6801,6 +8583,12 @@
             "state" : "needs_review",
             "value" : "Passer"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "スキップ"
+          }
         }
       }
     },
@@ -6823,6 +8611,12 @@
             "state" : "needs_review",
             "value" : "Passer pour l’instant"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "今はスキップ"
+          }
         }
       }
     },
@@ -6844,6 +8638,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Un peu nerveux"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "少し緊張"
           }
         }
       }
@@ -6868,6 +8668,12 @@
             "state" : "needs_review",
             "value" : "Entraînement social"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "人と話す練習"
+          }
         }
       }
     },
@@ -6889,6 +8695,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Un problème est survenu"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "問題が発生しました"
           }
         }
       }
@@ -6912,6 +8724,12 @@
             "state" : "needs_review",
             "value" : "Un problème est survenu de notre côté. Réessaie."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "こちら側で問題が発生しました。もう一度お試しください。"
+          }
         }
       }
     },
@@ -6933,6 +8751,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Plutôt confiant"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "まあまあ自信がある"
           }
         }
       }
@@ -6957,6 +8781,12 @@
             "state" : "needs_review",
             "value" : "Commencer"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "スタート"
+          }
         }
       }
     },
@@ -6978,6 +8808,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Commencer l’entraînement"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "練習をはじめる"
           }
         }
       }
@@ -7001,6 +8837,12 @@
             "state" : "needs_review",
             "value" : "Commence à le remplir"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "埋めていこう"
+          }
         }
       }
     },
@@ -7023,6 +8865,12 @@
             "state" : "needs_review",
             "value" : "Note des approches pour voir leur répartition"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "アプローチを記録すると、内訳が表示されます"
+          }
         }
       }
     },
@@ -7044,6 +8892,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Note tes interactions sociales pour les voir ici"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "人とのやり取りを記録すると、ここに表示されます"
           }
         }
       }
@@ -7068,6 +8922,12 @@
             "state" : "needs_review",
             "value" : "Étapes"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ステップ"
+          }
         }
       }
     },
@@ -7089,6 +8949,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Ne crains plus le regard des autres"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "人の目を気にするのをやめる"
           }
         }
       }
@@ -7112,6 +8978,12 @@
             "state" : "needs_review",
             "value" : "La peur du rejet ne gagne plus"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "断られる怖さに、もう負けない"
+          }
         }
       }
     },
@@ -7133,6 +9005,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Arrête de te trouver des excuses"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "自分に言い訳するのをやめる"
           }
         }
       }
@@ -7156,6 +9034,12 @@
             "state" : "needs_review",
             "value" : "Compliment subtil / échange taquin"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "さりげない褒め言葉／軽い掛け合い"
+          }
         }
       }
     },
@@ -7177,6 +9061,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "C’est fait"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "成功"
           }
         }
       }
@@ -7201,6 +9091,12 @@
             "state" : "needs_review",
             "value" : "Suggéré"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "おすすめ"
+          }
         }
       }
     },
@@ -7224,6 +9120,12 @@
             "state" : "needs_review",
             "value" : "AUJOURD’HUI"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "今日"
+          }
         }
       }
     },
@@ -7245,6 +9147,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Ça prend quelques secondes. Rien d’autre ne change."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "数秒で完了します。ほかは何も変わりません。"
           }
         }
       }
@@ -7268,6 +9176,12 @@
             "state" : "needs_review",
             "value" : "Parler à quelqu’un de son chien"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "犬の飼い主に、犬のことを聞いてみる"
+          }
         }
       }
     },
@@ -7289,6 +9203,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Parler à quelqu’un qui t’intéresse"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "気になる相手と話す"
           }
         }
       }
@@ -7312,6 +9232,12 @@
             "state" : "needs_review",
             "value" : "Maintiens appuyé pour t’engager."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "長押しして誓う"
+          }
         }
       }
     },
@@ -7333,6 +9259,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Touche pour continuer"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "タップして続ける"
           }
         }
       }
@@ -7356,6 +9288,12 @@
             "state" : "needs_review",
             "value" : "Touche pour terminer"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "タップして完了"
+          }
         }
       }
     },
@@ -7377,6 +9315,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Touche pour réessayer"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "タップして再試行"
           }
         }
       }
@@ -7401,6 +9345,12 @@
             "state" : "needs_review",
             "value" : "CGU"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "利用規約"
+          }
         }
       }
     },
@@ -7422,6 +9372,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Conditions d’utilisation"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "利用規約"
           }
         }
       }
@@ -7445,6 +9401,12 @@
             "state" : "needs_review",
             "value" : "Ce compte est déjà lié à une autre connexion Wingman. Connecte-toi plutôt avec celle-ci : la progression de cette session ne sera pas transférée."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "そのアカウントは、すでに別のWingmanログインに連携されています。そちらでログインしてください。今回のセッションの進捗は引き継がれません。"
+          }
         }
       }
     },
@@ -7466,6 +9428,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Celui-là vient plus tard. Commence par le premier."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "それはもう少し先です。まずは最初のものから始めましょう。"
           }
         }
       }
@@ -7489,6 +9457,12 @@
             "state" : "needs_review",
             "value" : "Ce moyen de paiement a été refusé. Vérifie tes informations de paiement dans l’App Store et réessaie."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "そのお支払い方法は承認されませんでした。App Storeでお支払い情報を確認して、もう一度お試しください。"
+          }
         }
       }
     },
@@ -7510,6 +9484,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "L’App Store rencontre un problème. Réessaie dans quelques minutes."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "現在、App Storeで問題が発生しています。数分後にもう一度お試しください。"
           }
         }
       }
@@ -7533,6 +9513,12 @@
             "state" : "needs_review",
             "value" : "La méthode pas à pas pour ne plus te figer et lancer la conversation."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "固まらずに会話を始められるようになる、一歩ずつの方法。"
+          }
         }
       }
     },
@@ -7554,6 +9540,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Elles n’attendent qu’une chose : que tu fasses le premier pas"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "相手は、最初の一歩を待っているだけです"
           }
         }
       }
@@ -7577,6 +9569,12 @@
             "state" : "needs_review",
             "value" : "Elles sont uniquement sur cet appareil. Un compte les conserve si tu changes de téléphone."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "この端末にのみ保存されています。アカウントがあれば、機種変更しても引き継げます。"
+          }
         }
       }
     },
@@ -7598,6 +9596,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Ce qu’en disent les utilisateurs de Wingman"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wingmanユーザーの声"
           }
         }
       }
@@ -7621,6 +9625,12 @@
             "state" : "needs_review",
             "value" : "Cette action supprime tes approches notées et toute ta progression sur cet appareil. Aucun compte ne permet de les récupérer. Cette action est irréversible."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "この端末に記録したアプローチと、すべての進捗が削除されます。復元できるアカウントはありません。この操作は取り消せません。"
+          }
         }
       }
     },
@@ -7643,6 +9653,12 @@
             "state" : "needs_review",
             "value" : "Cette formule n’est pas disponible sur ton compte App Store pour le moment."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "このプランは、現在お使いのApp Storeアカウントではご利用いただけません。"
+          }
         }
       }
     },
@@ -7664,6 +9680,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Cet achat doit être approuvé avant d’aboutir, en général par le titulaire du compte ou ta banque. Tu auras accès automatiquement une fois l’achat approuvé."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "この購入には承認が必要です（通常はアカウントの管理者または銀行による承認）。承認されると、自動的に利用できるようになります。"
           }
         }
       }
@@ -7688,6 +9710,12 @@
             "state" : "needs_review",
             "value" : "C’est l’heure de ta lecture du jour ! Ton objectif : %lld minutes aujourd’hui."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "今日の学習の時間です！今日の目標は%lld分です。"
+          }
         }
       }
     },
@@ -7709,6 +9737,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Conseils et offres"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ヒントとお得な情報"
           }
         }
       }
@@ -7733,6 +9767,12 @@
             "state" : "needs_review",
             "value" : "Titre"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "タイトル"
+          }
         }
       }
     },
@@ -7754,6 +9794,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Pour obtenir ce que je veux, je dois grandir. Je ne laisserai pas la peur décider à ma place. Je saisirai ma chance et j’apprendrai de ce qui arrivera."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "望むものを手に入れるには、成長しなければなりません。恐れに決断を任せません。チャンスをつかみ、起きたことから学びます。"
           }
         }
       }
@@ -7778,6 +9824,12 @@
             "state" : "needs_review",
             "value" : "Aujourd’hui"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "今日"
+          }
         }
       }
     },
@@ -7801,6 +9853,12 @@
             "state" : "needs_review",
             "value" : "Meilleure série"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "最長連続記録"
+          }
         }
       }
     },
@@ -7823,6 +9881,12 @@
             "state" : "needs_review",
             "value" : "Réessayer"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "もう一度"
+          }
         }
       }
     },
@@ -7844,6 +9908,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Essaie d’autres termes de recherche"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "検索ワードを変えてみてください"
           }
         }
       }
@@ -7868,6 +9938,12 @@
             "state" : "needs_review",
             "value" : "Essayer pour %@"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@で試す"
+          }
         }
       }
     },
@@ -7890,6 +9966,12 @@
             "state" : "needs_review",
             "value" : "Des banalités à la vraie alchimie"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "雑談から、惹かれ合う関係へ"
+          }
         }
       }
     },
@@ -7911,6 +9993,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Transforme le « et si » en « salut »."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "「もしあのとき…」を「こんにちは」に変えよう。"
           }
         }
       }
@@ -7935,6 +10023,12 @@
             "state" : "needs_review",
             "value" : "Inconnue"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "不明"
+          }
         }
       }
     },
@@ -7956,6 +10050,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "À suivre"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "次はこちら"
           }
         }
       }
@@ -7979,6 +10079,12 @@
             "state" : "needs_review",
             "value" : "Mettre à jour l’approche"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "アプローチを更新"
+          }
         }
       }
     },
@@ -8000,6 +10106,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Mis à jour !"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "更新しました！"
           }
         }
       }
@@ -8024,6 +10136,12 @@
             "state" : "needs_review",
             "value" : "Utilisateur"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ユーザー"
+          }
         }
       }
     },
@@ -8045,6 +10163,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Utilisateur non authentifié"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "認証されていません"
           }
         }
       }
@@ -8068,6 +10192,12 @@
             "state" : "needs_review",
             "value" : "Utilisateur non authentifié. Connecte-toi pour accéder aux questions de l’entraînement du jour."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "認証されていません。今日の練習の問題を利用するにはログインしてください。"
+          }
         }
       }
     },
@@ -8090,6 +10220,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Avec Wingman chaque jour"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "毎日Wingman"
           }
         }
       }
@@ -8117,6 +10253,12 @@
             "state" : "needs_review",
             "value" : "Très anxieux"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "とても不安"
+          }
         }
       }
     },
@@ -8138,6 +10280,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Très confiant"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "とても自信がある"
           }
         }
       }
@@ -8161,6 +10309,12 @@
             "state" : "needs_review",
             "value" : "En attente d’approbation"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "承認待ち"
+          }
         }
       }
     },
@@ -8182,6 +10336,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Va vers elle sans hésiter"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "迷わず彼女に声をかけられる"
           }
         }
       }
@@ -8205,6 +10365,12 @@
             "state" : "needs_review",
             "value" : "Aucun abonnement actif trouvé pour ce compte Apple."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "このApple IDには、有効なサブスクリプションが見つかりませんでした。"
+          }
         }
       }
     },
@@ -8226,6 +10392,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Content de te revoir"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "おかえりなさい"
           }
         }
       }
@@ -8249,6 +10421,12 @@
             "state" : "needs_review",
             "value" : "Bienvenue sur Wingman. Ici, c’est chez toi.\nL’entraînement du jour te garde affûté. Le journal se remplit de moments saisis, pas ressassés."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wingmanへようこそ。ここがホームです。\n今日の練習で感覚を保ちましょう。記録には、頭の中で繰り返した場面ではなく、実際に動いた瞬間がたまっていきます。"
+          }
         }
       }
     },
@@ -8270,6 +10448,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Qu’est-ce que tu veux surtout améliorer ?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "一番伸ばしたいのはどれですか？"
           }
         }
       }
@@ -8293,6 +10477,12 @@
             "state" : "needs_review",
             "value" : "Qu’est-ce qui t’amène sur Wingman ?"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wingmanを始めたきっかけは何ですか？"
+          }
         }
       }
     },
@@ -8314,6 +10504,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Que se passe-t-il dans la seconde où tu te figes ?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "固まってしまう直前の1秒、何が起きていますか？"
           }
         }
       }
@@ -8337,6 +10533,12 @@
             "state" : "needs_review",
             "value" : "Et si un peu de nervosité paraissait simplement sincère ?"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "少しの緊張は、誠実さとして伝わるだけだとしたら？"
+          }
         }
       }
     },
@@ -8358,6 +10560,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Et si ta phrase d’accroche n’avait pas besoin d’être brillante ?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "最初のひと言は、気の利いたものでなくていいとしたら？"
           }
         }
       }
@@ -8381,6 +10589,12 @@
             "state" : "needs_review",
             "value" : "Quel type d’interaction ?"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "どんなやり取りでしたか？"
+          }
         }
       }
     },
@@ -8402,6 +10616,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Qu’est-ce qui t’en empêche d’habitude ?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "いつも何がブレーキになっていますか？"
           }
         }
       }
@@ -8425,6 +10645,12 @@
             "state" : "needs_review",
             "value" : "Qu’est-ce que ça changerait cette semaine de te sentir sûr de toi ?"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "自分に自信が持てたら、今週は何が変わりますか？"
+          }
         }
       }
     },
@@ -8446,6 +10672,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "À quoi ressemblerait ta première conversation pour te relancer ?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "久しぶりに踏み出す最初の会話は、どんなものになりそうですか？"
           }
         }
       }
@@ -8469,6 +10701,12 @@
             "state" : "needs_review",
             "value" : "Quelle question pourrais-tu poser qui ne soit pas une banalité ?"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "雑談で終わらない質問をひとつ挙げるなら？"
+          }
         }
       }
     },
@@ -8490,6 +10728,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Quelle est la seule chose qui t’empêche de dire bonjour ?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "「こんにちは」のひと言を止めているものは何ですか？"
           }
         }
       }
@@ -8513,6 +10757,12 @@
             "state" : "needs_review",
             "value" : "Que te coûterait vraiment un « non » poli ?"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "丁寧に断られたとして、実際に失うものは何でしょう？"
+          }
         }
       }
     },
@@ -8534,6 +10784,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "À quand remonte une conversation qui allait au-delà des banalités ?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "雑談以上の会話ができたと感じたのは、最後はいつですか？"
           }
         }
       }
@@ -8557,6 +10813,12 @@
             "state" : "needs_review",
             "value" : "À quand remonte ta dernière rencontre sans écran entre vous ?"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "画面越しではなく誰かと出会ったのは、最後はいつですか？"
+          }
         }
       }
     },
@@ -8578,6 +10840,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "À quand remonte la dernière fois que tu as engagé la conversation avec un inconnu ?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "最後に知らない人に自分から話しかけたのはいつですか？"
           }
         }
       }
@@ -8601,6 +10869,12 @@
             "state" : "needs_review",
             "value" : "À quand remonte la dernière fois que tu as parlé à une femme dans un lieu public ?"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "最後に外で女性に話しかけたのはいつですか？"
+          }
         }
       }
     },
@@ -8622,6 +10896,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "À quel moment de ta journée pourrais-tu dire bonjour une fois de plus ?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "一日のどこかで、あいさつをもうひとつ増やせる場面はありますか？"
           }
         }
       }
@@ -8645,6 +10925,12 @@
             "state" : "needs_review",
             "value" : "De quel côté veux-tu être ?"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "どちら側にいたいですか？"
+          }
         }
       }
     },
@@ -8666,6 +10952,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Qui as-tu remarqué aujourd’hui sans lui parler ?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "今日、気になったのに話しかけなかった人はいましたか？"
           }
         }
       }
@@ -8689,6 +10981,12 @@
             "state" : "needs_review",
             "value" : "À qui parlerais-tu cette semaine si le trac ne comptait pas ?"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "緊張しないとしたら、今週は誰に話しかけますか？"
+          }
         }
       }
     },
@@ -8710,6 +11008,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Est-ce que quelqu’un autour de toi se souviendrait vraiment que tu as dit bonjour ?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "あいさつしたことを、周りの人は本当に覚えているでしょうか？"
           }
         }
       }
@@ -8738,6 +11042,12 @@
             "state" : "needs_review",
             "value" : "Points XP"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "XPポイント"
+          }
         }
       }
     },
@@ -8759,6 +11069,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Formule annuelle"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "年額プラン"
           }
         }
       }
@@ -8783,6 +11099,12 @@
             "state" : "needs_review",
             "value" : "Toi"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "あなた"
+          }
         }
       }
     },
@@ -8804,6 +11126,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Tu as déjà un abonnement sur ce compte. Touche Restaurer pour retrouver l’accès."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "このアカウントにはすでにサブスクリプションがあります。「復元」をタップすると、再び利用できます。"
           }
         }
       }
@@ -8827,6 +11155,12 @@
             "state" : "needs_review",
             "value" : "Tu sembles hors ligne. Reconnecte-toi et réessaie."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "オフラインのようです。接続し直して、もう一度お試しください。"
+          }
         }
       }
     },
@@ -8849,6 +11183,12 @@
             "state" : "needs_review",
             "value" : "Tu n’es pas seul. Des millions d’hommes ont du mal à aborder."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ひとりではありません。声をかけることに悩む男性は、何百万人もいます。"
+          }
         }
       }
     },
@@ -8870,6 +11210,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Tu n’es pas le seul à être resté bloqué."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ここでつまずいている人は、ほかにもたくさんいます。"
           }
         }
       }
@@ -8894,6 +11240,12 @@
             "state" : "needs_review",
             "value" : "Tes modules"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "学習モジュール"
+          }
         }
       }
     },
@@ -8915,6 +11267,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Ton journal d’approches est enregistré uniquement sur cet appareil. Un compte le conserve si tu perds ou changes de téléphone."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "アプローチの記録は、この端末にのみ保存されています。アカウントがあれば、紛失や機種変更のときも引き継げます。"
           }
         }
       }
@@ -8938,6 +11296,12 @@
             "state" : "needs_review",
             "value" : "Ton prénom"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "名前"
+          }
         }
       }
     },
@@ -8960,6 +11324,12 @@
             "state" : "needs_review",
             "value" : "Ta progression est enregistrée uniquement sur cet appareil."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "進捗はこの端末にのみ保存されています。"
+          }
         }
       }
     },
@@ -8981,6 +11351,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Ton abonnement est déjà actif dans tous les cas."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "いずれの場合も、サブスクリプションはすでに有効です。"
           }
         }
       }
@@ -9009,6 +11385,12 @@
             "state" : "needs_review",
             "value" : "plus de progrès qu’en regardant des vidéos de conseils génériques"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ありきたりなアドバイス動画を見るより速く上達"
+          }
         }
       }
     },
@@ -9031,6 +11413,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "pour tes %lld premiers mois"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "最初の%lldか月"
           }
         }
       }
@@ -9055,6 +11443,12 @@
             "state" : "needs_review",
             "value" : "pour tes %lld premières années"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "最初の%lld年間"
+          }
         }
       }
     },
@@ -9077,6 +11471,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "pour ton premier mois"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "最初の1か月"
           }
         }
       }
@@ -9101,6 +11501,12 @@
             "state" : "needs_review",
             "value" : "pour ta première année"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "最初の1年間"
+          }
         }
       }
     },
@@ -9123,6 +11529,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "de réduction sur tes %lld premiers mois"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "最初の%lldか月オフ"
           }
         }
       }
@@ -9147,6 +11559,12 @@
             "state" : "needs_review",
             "value" : "de réduction sur tes %lld premières années"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "最初の%lld年間オフ"
+          }
         }
       }
     },
@@ -9169,6 +11587,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "de réduction sur ton premier mois"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "最初の1か月オフ"
           }
         }
       }
@@ -9193,6 +11617,12 @@
             "state" : "needs_review",
             "value" : "de réduction sur ta première année"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "最初の1年間オフ"
+          }
         }
       }
     },
@@ -9215,6 +11645,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "seulement %@ par semaine"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "1週間あたりわずか%@"
           }
         }
       }
@@ -9239,6 +11675,12 @@
             "state" : "needs_review",
             "value" : "par mois"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "月額"
+          }
         }
       }
     },
@@ -9262,6 +11704,12 @@
             "state" : "needs_review",
             "value" : "par an"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "年額"
+          }
         }
       }
     },
@@ -9284,6 +11732,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "« %@ »"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "「%@」"
           }
         }
       }

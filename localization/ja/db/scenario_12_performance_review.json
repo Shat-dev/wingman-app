@@ -1,0 +1,334 @@
+{
+  "scenario": {
+    "a1000012-0000-0000-0000-000000000012": {
+      "title": {
+        "en": "Performance Review",
+        "ja": "交流会の夜"
+      },
+      "summary": {
+        "en": "Name tags, small talk. One genuine interaction cuts through the noise.",
+        "ja": "名札と、当たり障りのない雑談。その中で、ひとつの本物のやり取りが際立ちます。"
+      }
+    }
+  },
+  "screens": {
+    "b1000001-0000-0000-0012-000000000001": {
+      "en": "You started a new job and your company is hosting a networking event.",
+      "ja": "新しい仕事を始めたばかりです。会社が、交流会を開いています。"
+    },
+    "b1000002-0000-0000-0012-000000000002": {
+      "en": "There's a keynote speaker presenting about industry trends.",
+      "ja": "基調講演の登壇者が、業界の動向について話しています。"
+    },
+    "b1000003-0000-0000-0012-000000000003": {
+      "en": "During Q&A, a woman asks an interesting question.",
+      "ja": "質疑応答で、一人の女性が興味深い質問をします。"
+    },
+    "b1000004-0000-0000-0012-000000000004": {
+      "en": "The talk ends. People start mingling. You see the same woman.",
+      "ja": "講演が終わります。参加者が歓談を始めます。さっきの女性の姿が目に入ります。"
+    },
+    "b1000051-0000-0000-0012-000000000051": {
+      "en": "So about your question, I think the answer is that you need to...",
+      "ja": "さっきの質問ですけど、僕が思うに、答えは……"
+    },
+    "b1000052-0000-0000-0012-000000000052": {
+      "en": "Acknowledge her first, don't use this as a way to showcase your expertise.",
+      "ja": "まず、彼女の質問を認めましょう。これを、自分の専門知識を見せつける機会にしてはいけません。"
+    },
+    "b1000053-0000-0000-0012-000000000053": {
+      "en": "Great question back there by the way.",
+      "ja": "ところで、さっきはいい質問でしたね。"
+    },
+    "b1000054-0000-0000-0012-000000000054": {
+      "en": "Generic compliments don't land as well. Be specific about what was good.",
+      "ja": "ありきたりな褒め言葉は、あまり響きません。何がよかったのかを、具体的に伝えましょう。"
+    },
+    "b1000006-0000-0000-0012-000000000006": {
+      "en": "Hey that was an insightful question you asked.",
+      "ja": "あの、さっきの質問、鋭かったですね。"
+    },
+    "b1000007-0000-0000-0012-000000000007": {
+      "en": "I liked how you approached it with logic instead of theory.",
+      "ja": "理論ではなく、実践の視点から切り込んでいたのがよかったです。"
+    },
+    "b1000008-0000-0000-0012-000000000008": {
+      "en": "Thanks! I feel we get a lot of theory and not enough about execution.",
+      "ja": "ありがとうございます！理論の話ばかりで、実行についての話が足りない気がしていて。"
+    },
+    "b1000009-0000-0000-0012-000000000009": {
+      "en": "You acknowledged the substance of her question. She's engaging.",
+      "ja": "彼女の質問の中身を認めました。彼女は、会話に乗ってきています。"
+    },
+    "b1000101-0000-0000-0012-000000000101": {
+      "en": "I think theory is important. You need framework before execution.",
+      "ja": "理論は大事だと思いますよ。実行の前に、枠組みが必要ですから。"
+    },
+    "b1000102-0000-0000-0012-000000000102": {
+      "en": "Acknowledge her perspective before offering a different view.",
+      "ja": "別の見方を示す前に、まず彼女の見方を受け止めましょう。"
+    },
+    "b1000103-0000-0000-0012-000000000103": {
+      "en": "Yeah, so what do you do for work then?",
+      "ja": "なるほど。ところで、お仕事は何をされているんですか？"
+    },
+    "b1000104-0000-0000-0012-000000000104": {
+      "en": "Build on her perspective first, then you can ask this.",
+      "ja": "まず彼女の見方を広げましょう。そのあとなら、これを尋ねてもかまいません。"
+    },
+    "b1000011-0000-0000-0012-000000000011": {
+      "en": "Agreed. It's easy to talk strategy but implementation is what's crucial.",
+      "ja": "同感です。戦略を語るのは簡単ですけど、肝心なのは実行ですよね。"
+    },
+    "b1000012-0000-0000-0012-000000000012": {
+      "en": "Yeah exactly, I completely agree...",
+      "ja": "そう、まさにそうなんです。本当に同感です……"
+    },
+    "b1000013-0000-0000-0012-000000000013": {
+      "en": "Brief pause, she's waiting for you to continue.",
+      "ja": "少しの間。彼女は、こちらが話を続けるのを待っています。"
+    },
+    "b1000141-0000-0000-0012-000000000141": {
+      "en": "What did you think of the other speakers today?",
+      "ja": "今日のほかの登壇者は、どう思いましたか？"
+    },
+    "b1000142-0000-0000-0012-000000000142": {
+      "en": "While this can work, it keeps it professional and not personal.",
+      "ja": "これでもうまくいくことはありますが、仕事の話のままで、個人的な話になりません。"
+    },
+    "b1000143-0000-0000-0012-000000000143": {
+      "en": "So what kind of execution challenges have you specifically run into then?",
+      "ja": "それで、実行の面では、具体的にどんな課題にぶつかってきたんですか？"
+    },
+    "b1000144-0000-0000-0012-000000000144": {
+      "en": "Pushing the same topic can get boring. Move on to something more interesting.",
+      "ja": "同じ話題を掘り続けると、退屈になることがあります。もっと面白い話題に移りましょう。"
+    },
+    "b1000015-0000-0000-0012-000000000015": {
+      "en": "So what's your story? What made you choose this career?",
+      "ja": "ところで、これまでの経緯を聞かせてください。どうして今の仕事を選んだんですか？"
+    },
+    "b1000016-0000-0000-0012-000000000016": {
+      "en": "I studied history but now I work in marketing.",
+      "ja": "大学では歴史を学んでいたんですが、今はマーケティングの仕事をしています。"
+    },
+    "b1000171-0000-0000-0012-000000000171": {
+      "en": "Oh that's funny actually, my friend studies history.",
+      "ja": "へえ、面白いですね。実は友人も歴史を学んでいて。"
+    },
+    "b1000172-0000-0000-0012-000000000172": {
+      "en": "She shared a personal career pivot and you made it about your friend.",
+      "ja": "彼女は、個人的なキャリアの転換を話してくれました。それなのに、友人の話にしてしまいました。"
+    },
+    "b1000173-0000-0000-0012-000000000173": {
+      "en": "Where did you study history?",
+      "ja": "歴史は、どこで学んでいたんですか？"
+    },
+    "b1000174-0000-0000-0012-000000000174": {
+      "en": "Asking where she studied is surface level. The interesting part is why she changed.",
+      "ja": "どこで学んだかを尋ねるのは、表面的です。面白いのは、なぜ進路を変えたのか、という部分です。"
+    },
+    "b1000018-0000-0000-0012-000000000018": {
+      "en": "History to marketing? That's a unique switch. I feel like they're completely different.",
+      "ja": "歴史からマーケティングですか？珍しい転身ですね。まったく違う分野という感じがしますけど。"
+    },
+    "b1000019-0000-0000-0012-000000000019": {
+      "en": "Yeah it is actually. I was doing my final year and realized history wasn't for me.",
+      "ja": "ええ、本当にそうなんです。最終学年のときに、歴史は自分には向いていないと気づいて。"
+    },
+    "b1000020-0000-0000-0012-000000000020": {
+      "en": "You caught the subtext and now she's opening up naturally.",
+      "ja": "言外のメッセージを拾えました。彼女は今、自然に心を開いています。"
+    },
+    "b1000021-0000-0000-0012-000000000021": {
+      "en": "The conversation is flowing, but the topic's been professional so far.",
+      "ja": "会話は弾んでいます。でも、ここまでの話題は仕事のことばかりです。"
+    },
+    "b1000221-0000-0000-0012-000000000221": {
+      "en": "What do your parents think about your switch?",
+      "ja": "進路を変えたことを、ご両親はどう思っているんですか？"
+    },
+    "b1000222-0000-0000-0012-000000000222": {
+      "en": "Family dynamics may be too invasive for a networking event. Keep it about her.",
+      "ja": "家族との関係は、交流会の場では踏み込みすぎかもしれません。話は、彼女自身のことにとどめましょう。"
+    },
+    "b1000223-0000-0000-0012-000000000223": {
+      "en": "That was really brave of you. Seriously, that takes a lot of courage.",
+      "ja": "それは、本当に勇気のいることでしたね。本当に、大変な決断だったと思います。"
+    },
+    "b1000224-0000-0000-0012-000000000224": {
+      "en": "Over-praising a normal life decision feels patronizing. Keep it light and playful.",
+      "ja": "ごくふつうの人生の決断を褒めすぎると、相手を下に見ているように感じられます。軽やかに、遊び心を持ちましょう。"
+    },
+    "b1000023-0000-0000-0012-000000000023": {
+      "en": "Forget work for a sec. Got any plans you're looking forward to over the break?",
+      "ja": "仕事の話は、ちょっと置いておきましょう。今度の連休、楽しみにしている予定はありますか？"
+    },
+    "b1000024-0000-0000-0012-000000000024": {
+      "en": "My friends and I are doing a road trip up the coast. Haven't planned any of it though.",
+      "ja": "友達と、海沿いをドライブ旅行する予定なんです。まだ何も計画していないんですけど。"
+    },
+    "b1000251-0000-0000-0012-000000000251": {
+      "en": "Oh I did a road trip last year actually. We went up to...",
+      "ja": "あ、僕も去年、ドライブ旅行をしたんです。行き先は……"
+    },
+    "b1000252-0000-0000-0012-000000000252": {
+      "en": "Hijacking it with your own trip kills her momentum. Keep it about her.",
+      "ja": "自分の旅行の話で会話を乗っ取ると、彼女の勢いを止めてしまいます。話は彼女のことにとどめましょう。"
+    },
+    "b1000253-0000-0000-0012-000000000253": {
+      "en": "You should download this travel app. It plans everything for you.",
+      "ja": "この旅行アプリを入れるといいですよ。全部、計画してくれるんです。"
+    },
+    "b1000254-0000-0000-0012-000000000254": {
+      "en": "Unsolicited advice sounds like you're not listening. She enjoys the spontaneity.",
+      "ja": "頼まれていないアドバイスは、話を聞いていないように聞こえます。彼女は、行き当たりばったりを楽しんでいるのです。"
+    },
+    "b1000026-0000-0000-0012-000000000026": {
+      "en": "Well it seems like you're a better marketer than an organizer.",
+      "ja": "どうやら、計画を立てるより、マーケティングのほうがお得意みたいですね。"
+    },
+    "b1000027-0000-0000-0012-000000000027": {
+      "en": "Haha that's definitely true.",
+      "ja": "あはは、それは間違いないです。"
+    },
+    "b1000028-0000-0000-0012-000000000028": {
+      "en": "Playful joke worked, she's laughing, the energy is good.",
+      "ja": "遊び心のある冗談が、うまくいきました。彼女は笑っていて、良い雰囲気です。"
+    },
+    "b1000029-0000-0000-0012-000000000029": {
+      "en": "However, the event is coming to a close now.",
+      "ja": "でも、交流会はそろそろ終わりに近づいています。"
+    },
+    "b1000301-0000-0000-0012-000000000301": {
+      "en": "Can I get your number?",
+      "ja": "LINEを教えてもらえますか？"
+    },
+    "b1000302-0000-0000-0012-000000000302": {
+      "en": "While this can work, try to make the close more memorable.",
+      "ja": "これでもうまくいくことはありますが、もっと印象に残る形で次につなげてみましょう。"
+    },
+    "b1000303-0000-0000-0012-000000000303": {
+      "en": "Hey if you're free let's get drinks tomorrow night.",
+      "ja": "よかったら、明日の夜、飲みに行きましょう。"
+    },
+    "b1000304-0000-0000-0012-000000000304": {
+      "en": "Make the close easy for her to say yes to. This ask might have too much pressure.",
+      "ja": "彼女が「はい」と言いやすい誘いにしましょう。この誘いは、プレッシャーが大きすぎるかもしれません。"
+    },
+    "b1000031-0000-0000-0012-000000000031": {
+      "en": "Hey this was fun, let's come to the next networking event together.",
+      "ja": "今日は楽しかったです。次の交流会、一緒に行きましょう。"
+    },
+    "b1000032-0000-0000-0012-000000000032": {
+      "en": "Yeah for sure, here I'll give you my number.",
+      "ja": "ええ、ぜひ。じゃあ、LINEをお教えしますね。"
+    },
+    "b1000033-0000-0000-0012-000000000033": {
+      "en": "Success. You replay the conversation in your head.",
+      "ja": "成功です。頭の中で、会話を振り返ります。"
+    },
+    "b1000034-0000-0000-0012-000000000034": {
+      "en": "You complimented her specific question instead of being generic.",
+      "ja": "ありきたりな言葉ではなく、彼女の具体的な質問を褒めました。"
+    },
+    "b1000035-0000-0000-0012-000000000035": {
+      "en": "You listened for subtext when she mentioned switching from history to marketing.",
+      "ja": "歴史からマーケティングに転身したと聞いたとき、言外のメッセージに耳を澄ませました。"
+    },
+    "b1000036-0000-0000-0012-000000000036": {
+      "en": "You shifted the energy from professional to playful at the right moment.",
+      "ja": "ちょうどいいタイミングで、空気を仕事の話から遊び心のあるものへと切り替えました。"
+    },
+    "b1000037-0000-0000-0012-000000000037": {
+      "en": "You closed with the next event suggestion which felt low pressure. Well done.",
+      "ja": "次の交流会に誘う形で次につなげ、プレッシャーの少ない誘いになりました。よくできました。"
+    }
+  },
+  "options": {
+    "c1000001-0000-0000-0012-000000000001": {
+      "en": "Tell her your response to her question",
+      "ja": "彼女の質問に対する自分の答えを話す"
+    },
+    "c1000002-0000-0000-0012-000000000002": {
+      "en": "Say 'great question' to her",
+      "ja": "「いい質問でしたね」と言う"
+    },
+    "c1000003-0000-0000-0012-000000000003": {
+      "en": "Compliment the specific question she asked",
+      "ja": "彼女がした質問を、具体的に褒める"
+    },
+    "c1000004-0000-0000-0012-000000000004": {
+      "en": "Build on her observation and go deeper",
+      "ja": "彼女の見方を広げて、さらに掘り下げる"
+    },
+    "c1000005-0000-0000-0012-000000000005": {
+      "en": "Talk about the importance of theory",
+      "ja": "理論の大切さについて話す"
+    },
+    "c1000006-0000-0000-0012-000000000006": {
+      "en": "Ask what she does for work",
+      "ja": "仕事は何をしているのかを尋ねる"
+    },
+    "c1000007-0000-0000-0012-000000000007": {
+      "en": "Personal question about her career",
+      "ja": "彼女のキャリアについて、個人的な質問をする"
+    },
+    "c1000008-0000-0000-0012-000000000008": {
+      "en": "Ask what she thinks of the other speakers today",
+      "ja": "今日のほかの登壇者をどう思ったかを尋ねる"
+    },
+    "c1000009-0000-0000-0012-000000000009": {
+      "en": "Keep pushing the theory vs execution topic deeper",
+      "ja": "理論と実行の話題を、さらに掘り下げ続ける"
+    },
+    "c1000011-0000-0000-0012-000000000011": {
+      "en": "Tell her your friend studies history",
+      "ja": "友人が歴史を学んでいると話す"
+    },
+    "c1000010-0000-0000-0012-000000000010": {
+      "en": "Note how it is an interesting career shift",
+      "ja": "興味深いキャリアの転身だと伝える"
+    },
+    "c1000012-0000-0000-0012-000000000012": {
+      "en": "Ask where she studied history",
+      "ja": "歴史をどこで学んだのかを尋ねる"
+    },
+    "c1000013-0000-0000-0012-000000000013": {
+      "en": "Ask if she has any travel plans over the work holidays",
+      "ja": "連休に旅行の予定があるかを尋ねる"
+    },
+    "c1000014-0000-0000-0012-000000000014": {
+      "en": "Ask what her parents think about the switch",
+      "ja": "進路を変えたことを両親がどう思っているかを尋ねる"
+    },
+    "c1000015-0000-0000-0012-000000000015": {
+      "en": "Compliment how brave she was to switch",
+      "ja": "進路を変えた勇気を褒める"
+    },
+    "c1000017-0000-0000-0012-000000000017": {
+      "en": "Share your own road trip experience",
+      "ja": "自分のドライブ旅行の経験を話す"
+    },
+    "c1000016-0000-0000-0012-000000000016": {
+      "en": "Tease her about the lack of planning",
+      "ja": "計画がないことを軽くからかう"
+    },
+    "c1000018-0000-0000-0012-000000000018": {
+      "en": "Suggest she downloads a travel app",
+      "ja": "旅行アプリを入れるようにすすめる"
+    },
+    "c1000019-0000-0000-0012-000000000019": {
+      "en": "Suggest coming to the next networking event together",
+      "ja": "次の交流会に一緒に行こうと提案する"
+    },
+    "c1000020-0000-0000-0012-000000000020": {
+      "en": "Ask for her number",
+      "ja": "LINEを聞く"
+    },
+    "c1000021-0000-0000-0012-000000000021": {
+      "en": "Suggest getting drinks tomorrow night",
+      "ja": "明日の夜、飲みに行こうと提案する"
+    }
+  }
+}

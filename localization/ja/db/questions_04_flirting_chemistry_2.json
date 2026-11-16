@@ -1,0 +1,1762 @@
+{
+  "questions": {
+    "4af1893d-9998-48eb-b854-d76a961d685a": {
+      "question_text": {
+        "en": "Why should proximity changes be gradual rather than abrupt?",
+        "ja": "距離の変化は、なぜ急ではなく、少しずつであるべきなのですか？"
+      },
+      "options": {
+        "en": [
+          "Abrupt moves feel intrusive and break rapport",
+          "Gradual shifts match building emotional tone",
+          "Fast closeness always signals strong interest"
+        ],
+        "ja": [
+          "急な動きは踏み込まれたように感じられ、打ち解けた空気を壊すから",
+          "少しずつの変化は、高まっていく気持ちのトーンに合うから",
+          "すばやく近づくことは、いつでも強い関心を伝えるから"
+        ]
+      },
+      "explanation": {
+        "en": "Slow progression preserves safety and calibration.",
+        "ja": "ゆっくり進めることで、安心感と、相手に合わせる余地が保たれます。"
+      }
+    },
+    "4cbdb881-da9c-47a5-bedb-19e0456a3896": {
+      "question_text": {
+        "en": "What makes touch feel effective and not aggressive?",
+        "ja": "触れることを、強引ではなく、効果的に感じさせるものは何ですか？"
+      },
+      "options": {
+        "en": [
+          "Calibrated to her comfort level and rapport built",
+          "Brief and light, not prolonged or heavy",
+          "During natural moments like laughing or making point",
+          "All of the above"
+        ],
+        "ja": [
+          "彼女の心地よさと、築いてきた打ち解け具合に合っていること",
+          "短く軽いこと。長引いたり、重かったりしないこと",
+          "笑っているときや、話の要点を伝えるときなど、自然な瞬間であること",
+          "上のすべて"
+        ]
+      },
+      "explanation": {
+        "en": "Touch feels good when it matches rapport, stays light, and happens in natural moments.",
+        "ja": "触れることが心地よく感じられるのは、打ち解け具合に合っていて、軽いままで、自然な瞬間に起こるときです。"
+      }
+    },
+    "4f400953-0471-468b-911c-2009c87a96ac": {
+      "question_text": {
+        "en": "The conversation is fun and she's laughing. She leaves naturally. What should you think?",
+        "ja": "会話は楽しく、彼女は笑っています。そして、自然に立ち去ります。どう考えるべきですか？"
+      },
+      "options": {
+        "en": [
+          "This failed because I didn't get her number",
+          "The interaction was too short I failed",
+          "This succeeded because we both enjoyed the moment"
+        ],
+        "ja": [
+          "LINEを交換できなかったから、失敗だった",
+          "やり取りが短すぎたから、失敗だった",
+          "二人ともその時間を楽しんだから、成功だった"
+        ]
+      },
+      "explanation": {
+        "en": "A positive shared moment is the goal, regardless of further steps.",
+        "ja": "その先がどうであれ、目指すのは、二人で分かち合う前向きな時間です。"
+      }
+    },
+    "50183c21-27bd-480c-971a-891eac026c00": {
+      "question_text": {
+        "en": "She says, “Guys always buy me drinks.” What disqualification could you say next?",
+        "ja": "彼女が「男の人は、いつも飲み物をおごってくれるんです」と言います。簡単にはなびかない返しとして、次に何と言えますか？"
+      },
+      "options": {
+        "en": [
+          "\"Only if you're getting the next round.\"",
+          "\"Let me get you one then.\"",
+          "\"That makes sense—you’re charming.\"",
+          "\"What’s your favorite drink?\""
+        ],
+        "ja": [
+          "「次の一杯をおごってくれるなら」",
+          "「じゃあ、一杯ごちそうさせてください」",
+          "「わかります。魅力的ですから」",
+          "「好きな飲み物は何ですか？」"
+        ]
+      },
+      "explanation": {
+        "en": "A playful challenge instead of automatic agreement keeps it balanced and fun.",
+        "ja": "無条件に合わせる代わりに、遊び心を込めて挑むことで、釣り合いと楽しさが保たれます。"
+      }
+    },
+    "51566fba-0f2e-472b-9786-baa55e298382": {
+      "question_text": {
+        "en": "What makes touch feel natural rather than intrusive?",
+        "ja": "触れることを、踏み込まれた感じではなく、自然に感じさせるものは何ですか？"
+      },
+      "options": {
+        "en": [
+          "It is repeated frequently",
+          "It happens during emotionally warm moments",
+          "It is brief and light",
+          "It matches her level of comfort"
+        ],
+        "ja": [
+          "何度も繰り返すこと",
+          "気持ちの温かい瞬間に起こること",
+          "短く、軽いこと",
+          "彼女の心地よさの度合いに合っていること"
+        ]
+      },
+      "explanation": {
+        "en": "Frequency and force overwhelm. Timing and calibration create ease.",
+        "ja": "回数の多さや強さは、相手を圧倒します。タイミングと、相手に合わせることが、心地よさを生みます。"
+      }
+    },
+    "51c9bf97-c01a-4148-8ca9-32bec583870d": {
+      "question_text": {
+        "en": "She says, “I always pick the wrong queue.” What could you say next?",
+        "ja": "彼女が「私、いつも進みの遅い列を選んでしまうんです」と言います。次に何と言えますか？"
+      },
+      "options": {
+        "en": [
+          "\"Yeah, it happens to everyone.\"",
+          "\"Why do you think that?\"",
+          "\"This one is slow too.\"",
+          "\"Obviously you’re cursed—stick with me for good luck.\""
+        ],
+        "ja": [
+          "「ええ、誰にでもあることですよ」",
+          "「どうしてそう思うんですか？」",
+          "「この列も遅いですね」",
+          "「それはもう、呪われていますね。運を上げたいなら、こちらのそばにいてください」"
+        ]
+      },
+      "explanation": {
+        "en": "Warm exaggeration adds cheek and opens playful rhythm.",
+        "ja": "温かみのある大げさな言い方は、いたずら心を足し、遊び心のあるリズムを開きます。"
+      }
+    },
+    "530e8449-212d-45aa-8e97-70907690cac7": {
+      "question_text": {
+        "en": "What creates flirtatious delivery?",
+        "ja": "恋愛的な含みのある伝え方を生むものは、何ですか？"
+      },
+      "options": {
+        "en": [
+          "Slower pacing—not rushed",
+          "Holding eye contact while speaking",
+          "Letting words land with small pause",
+          "All of the above"
+        ],
+        "ja": [
+          "ゆっくりしたペース。急がないこと",
+          "話しながら、目を合わせたままでいること",
+          "小さな間を置いて、言葉が届くのを待つこと",
+          "上のすべて"
+        ]
+      },
+      "explanation": {
+        "en": "Flirtation comes from pace and presence; slow down, hold eye contact, and let words land.",
+        "ja": "駆け引きは、ペースと、その場にいる姿勢から生まれます。ゆっくり話し、目を合わせたまま、言葉が届くのを待ちましょう。"
+      }
+    },
+    "545da6d1-d1bc-41b2-90a4-6fb6c5a2003c": {
+      "question_text": {
+        "en": "What is “eye contact” in flirting?",
+        "ja": "駆け引きにおける「アイコンタクト」とは、何ですか？"
+      },
+      "options": {
+        "en": [
+          "Maintaining good eye contact throughout conversation",
+          "Intentional gaze to create tension and communicate interest",
+          "Looking deeply into her eyes to show confidence"
+        ],
+        "ja": [
+          "会話のあいだずっと、しっかり目を合わせ続けること",
+          "緊張感を生み、関心を伝えるための、意図のある視線",
+          "自信を示すために、彼女の目を深く見つめること"
+        ]
+      },
+      "explanation": {
+        "en": "Eye contact in flirting communicates interest through presence, not dominance or excess.",
+        "ja": "駆け引きにおけるアイコンタクトは、支配ややりすぎではなく、その場にいる姿勢を通じて、関心を伝えます。"
+      }
+    },
+    "56839c41-b051-44d1-8c8b-3c1fc53a0809": {
+      "question_text": {
+        "en": "She explains a complex topic to you. What compliment would land best?",
+        "ja": "彼女が、複雑な話題を説明してくれます。一番よく届く褒め言葉は、どれですか？"
+      },
+      "options": {
+        "en": [
+          "\"You broke this down really well, it was easy to follow along\"",
+          "\"You’re really beautiful.\"",
+          "\"You seem smart.\"",
+          "\"Your voice sounds really nice.\""
+        ],
+        "ja": [
+          "「すごくわかりやすく説明してくれましたね。ついていきやすかったです」",
+          "「本当にきれいですね」",
+          "「頭が良さそうですね」",
+          "「声がすごくいいですね」"
+        ]
+      },
+      "explanation": {
+        "en": "Specific to her choice and effort, it shows you truly saw her process.",
+        "ja": "彼女の選択と努力に絞った言葉で、その進め方を本当に見ていたことが伝わります。"
+      }
+    },
+    "57ea4716-3a0a-4ae1-9b73-029195409a88": {
+      "question_text": {
+        "en": "She stays engaged as you take one small step closer. What does this indicate?",
+        "ja": "小さく一歩近づいても、彼女は会話に乗ったままです。これは何を示していますか？"
+      },
+      "options": {
+        "en": [
+          "Green light; she is comfortable with reduced distance",
+          "She wants more space immediately",
+          "You should step back to stay safe",
+          "The interaction is still too early"
+        ],
+        "ja": [
+          "青信号。距離が縮まっても、彼女は心地よく感じている",
+          "すぐに、もっとスペースを求めている",
+          "安全のために、一歩下がるべきだ",
+          "やり取りは、まだ早すぎる段階にある"
+        ]
+      },
+      "explanation": {
+        "en": "Her staying put or reciprocating signals comfort with closer proximity.",
+        "ja": "その場にとどまったり、同じように返してきたりするのは、近い距離を心地よく感じているサインです。"
+      }
+    },
+    "6021e5f1-ba61-4cb2-82c5-d1977fcb9ef6": {
+      "question_text": {
+        "en": "She is relaxed and speaking softly in a quiet café. What should your energy match?",
+        "ja": "彼女は静かなカフェで、リラックスして、小さな声で話しています。こちらのエネルギーは、何に合わせるべきですか？"
+      },
+      "options": {
+        "en": [
+          "Relaxed and calm with a warm tone",
+          "High and animated to energize her",
+          "Dull and tired to seem nonchalant",
+          "Loud to overcome background noise"
+        ],
+        "ja": [
+          "温かいトーンで、リラックスして落ち着いたエネルギー",
+          "彼女を元気づける、高くて生き生きしたエネルギー",
+          "無頓着に見せるための、だるそうで疲れたエネルギー",
+          "周りの音に負けない、大きな声"
+        ]
+      },
+      "explanation": {
+        "en": "Match her relaxed mood to create shared comfort and calibration.",
+        "ja": "彼女のリラックスした気分に合わせて、二人で分かち合える心地よさをつくりましょう。"
+      }
+    },
+    "634ce3b6-9096-4656-87e7-87d80d609efd": {
+      "question_text": {
+        "en": "She creates a moment by looking deeply into your eyes. What does holding it indicate?",
+        "ja": "彼女が、こちらの目を深く見つめて、ひとつの瞬間をつくります。見つめ返すことは、何を示しますか？"
+      },
+      "options": {
+        "en": [
+          "Intentional interest and a desire to shift the dynamic",
+          "You are just being polite",
+          "Nervousness and discomfort"
+        ],
+        "ja": [
+          "意図のある関心と、関係を変えたいという気持ち",
+          "礼儀正しくしているだけ",
+          "緊張と居心地の悪さ"
+        ]
+      },
+      "explanation": {
+        "en": "Steady gaze silently communicates romantic intent.",
+        "ja": "落ち着いた視線は、恋愛的な意図を、言葉なしに伝えます。"
+      }
+    },
+    "63ef4906-b21c-4006-a7c2-c6651684dc24": {
+      "question_text": {
+        "en": "What makes a compliment land vs. fall flat?",
+        "ja": "届く褒め言葉と、空振りに終わる褒め言葉を分けるものは何ですか？"
+      },
+      "options": {
+        "en": [
+          "Specific, genuine, observational about something she chose",
+          "Focused on unique qualities that set her apart",
+          "Sincere and heartfelt without ulterior motives",
+          "All of the above"
+        ],
+        "ja": [
+          "具体的で、本心からで、彼女が選んだことをよく見たものであること",
+          "彼女をほかの人と分ける、独自の資質に目を向けていること",
+          "下心のない、誠実で心のこもったものであること",
+          "上のすべて"
+        ]
+      },
+      "explanation": {
+        "en": "Compliments land when they are specific, genuine, and tied to choices she made.",
+        "ja": "褒め言葉が届くのは、具体的で、本心からで、彼女が選んだことに結びついているときです。"
+      }
+    },
+    "645db147-5379-46df-8e63-f2d46db760eb": {
+      "question_text": {
+        "en": "She laughs warmly and leans in during the conversation. What could you do next?",
+        "ja": "会話の中で、彼女が温かく笑い、身を寄せてきます。次に何ができますか？"
+      },
+      "options": {
+        "en": [
+          "Keep hands in pockets to stay safe",
+          "Lightly touch her forearm briefly while smiling",
+          "Immediately hug her to escalate",
+          "Touch her lower back for guidance"
+        ],
+        "ja": [
+          "安全のために、手をポケットに入れたままにする",
+          "ほほえみながら、前腕に短く軽く触れる",
+          "距離を縮めるために、すぐにハグをする",
+          "導くように、腰に手を当てる"
+        ]
+      },
+      "explanation": {
+        "en": "Brief, light touch during high engagement reinforces chemistry naturally.",
+        "ja": "彼女がしっかり会話に乗っているときの短く軽いタッチは、相性の良さを自然に強めます。"
+      }
+    },
+    "6581dc47-ce07-4d7a-a3fb-126a6b812a79": {
+      "question_text": {
+        "en": "Why does warmth matter when delivering cheekiness?",
+        "ja": "いたずら心を伝えるとき、なぜ温かさが大切なのですか？"
+      },
+      "options": {
+        "en": [
+          "Warmth prevents cheekiness from feeling like actual rudeness",
+          "It increases verbal clarity so jokes are understood correctly",
+          "Warmth helps people remember conversations better"
+        ],
+        "ja": [
+          "温かさが、いたずら心を、本当の無礼に感じさせないから",
+          "言葉が明瞭になり、冗談が正しく理解されるから",
+          "温かさがあると、人は会話をよく覚えているから"
+        ]
+      },
+      "explanation": {
+        "en": "Warmth frames cheeky comments as playful; without it, the same words may feel rude.",
+        "ja": "温かさが、いたずらっぽいひと言を、遊びとして伝えます。それがなければ、同じ言葉が無礼に感じられることもあります。"
+      }
+    },
+    "67aef6c5-f235-4eb5-ad2b-86fb824c4b0a": {
+      "question_text": {
+        "en": "You notice her unique style in conversation. What is the best way to compliment?",
+        "ja": "会話の中で、彼女の個性的なスタイルに気づきます。一番良い褒め方はどれですか？"
+      },
+      "options": {
+        "en": [
+          "Say fast, “Cool style!” and move on",
+          "Use bolder words",
+          "Compliment generically without eye contact",
+          "Soften voice, meet eyes, say, “Your style really stands out.”"
+        ],
+        "ja": [
+          "「いいスタイルですね！」とさっと言って、次に進む",
+          "もっと大胆な言葉を使う",
+          "目を合わせずに、ありきたりに褒める",
+          "声をやわらげ、目を合わせて、「そのスタイル、すごく目を引きますね」と言う"
+        ]
+      },
+      "explanation": {
+        "en": "Deliberate delivery with warmth builds attraction over polite speed.",
+        "ja": "礼儀としてさっと言うよりも、温かさを込めて、ていねいに伝えるほうが、惹かれる気持ちを育てます。"
+      }
+    },
+    "69e57da2-5fe8-46fa-b9e1-c7e7f7579196": {
+      "question_text": {
+        "en": "What is the core purpose of adjusting proximity while flirting?",
+        "ja": "駆け引きの中で、距離を調整する一番の目的は何ですか？"
+      },
+      "options": {
+        "en": [
+          "To show dominance",
+          "To escalate attraction as quickly as possible",
+          "To test her boundaries",
+          "To match physical distance with emotional comfort"
+        ],
+        "ja": [
+          "支配力を示すこと",
+          "できるだけ早く、惹かれる気持ちを高めること",
+          "彼女の境界線を試すこと",
+          "体の距離を、気持ちの上での心地よさに合わせること"
+        ]
+      },
+      "explanation": {
+        "en": "Proximity works when it mirrors emotional comfort, not when it pushes or tests limits.",
+        "ja": "距離の近さがうまくいくのは、気持ちの上での心地よさを映しているときです。限界を押したり、試したりするときではありません。"
+      }
+    },
+    "6a0ee7f4-bdfd-47a6-901c-adfd7c6f56fa": {
+      "question_text": {
+        "en": "She jokes effortlessly during the conversation. What compliment suits?",
+        "ja": "彼女は会話の中で、さらりと冗談を言います。合う褒め言葉は、どれですか？"
+      },
+      "options": {
+        "en": [
+          "\"You’re hilarious, you should do comedy.\"",
+          "\"You’re funny for a girl.\"",
+          "\"I like your sense of humor, it’s really unique.\""
+        ],
+        "ja": [
+          "「最高に面白いですね。お笑いをやったほうがいいですよ」",
+          "「女の子にしては、面白いですね」",
+          "「そのユーモアのセンス、好きです。すごく個性的で」"
+        ]
+      },
+      "explanation": {
+        "en": "The best response mirrors the ease of the moment rather than escalating it.",
+        "ja": "一番良い返しは、その場を盛り上げようとするのではなく、その場の気楽さを映すものです。"
+      }
+    },
+    "71303602-cef7-48f0-9a80-8ba290228313": {
+      "question_text": {
+        "en": "What does sustained eye contact accomplish?",
+        "ja": "目を合わせ続けることは、何をもたらしますか？"
+      },
+      "options": {
+        "en": [
+          "Creates tension between you beyond words",
+          "Communicates interest without stating it verbally",
+          "Demonstrates social confidence"
+        ],
+        "ja": [
+          "言葉を超えた緊張感を、二人のあいだに生む",
+          "言葉にせずに、関心を伝える",
+          "人付き合いでの自信を示す"
+        ]
+      },
+      "explanation": {
+        "en": "Eye contact communicates interest non-verbally without forcing a response.",
+        "ja": "アイコンタクトは、反応を無理強いすることなく、言葉を使わずに関心を伝えます。"
+      }
+    },
+    "731d74c4-4ac6-43b0-bdcf-69cb8db3d00d": {
+      "question_text": {
+        "en": "She says, “I probably come here too much.” What could you say next?",
+        "ja": "彼女が「私、ここに来すぎかもしれません」と言います。次に何と言えますか？"
+      },
+      "options": {
+        "en": [
+          "\"They should name a drink after you at this point.\"",
+          "\"It’s a great place.\"",
+          "\"That’s not possible.\"",
+          "\"How often do you come?\""
+        ],
+        "ja": [
+          "「もう、名前のついたドリンクをつくってもらっていいくらいですね」",
+          "「いいお店ですよね」",
+          "「そんなことはありえませんよ」",
+          "「どれくらい来るんですか？」"
+        ]
+      },
+      "explanation": {
+        "en": "Playful exaggeration with warmth makes the moment memorable.",
+        "ja": "温かさのある、遊び心を込めた大げさな言い方は、その瞬間を記憶に残るものにします。"
+      }
+    },
+    "76d8660f-5734-4d14-9168-b2bd84bfeedf": {
+      "question_text": {
+        "en": "When is the best time to give a compliment?",
+        "ja": "褒め言葉を伝えるのに、一番良いタイミングはいつですか？"
+      },
+      "options": {
+        "en": [
+          "As the first thing you say",
+          "Right before asking for her number",
+          "Naturally, after she’s expressed something",
+          "Only if she compliments you first"
+        ],
+        "ja": [
+          "最初のひと言として",
+          "LINEを聞く直前に",
+          "彼女が何かを表現したあと、自然に",
+          "彼女が先に褒めてくれたときだけ"
+        ]
+      },
+      "explanation": {
+        "en": "Compliments land best when they emerge naturally from the interaction.",
+        "ja": "褒め言葉は、やり取りの中から自然に出てきたとき、一番よく届きます。"
+      }
+    },
+    "78f2a3a1-b8f1-4d88-9854-152a0b2895ec": {
+      "question_text": {
+        "en": "She mentions she’s really competitive at board games. What’s a funny response?",
+        "ja": "彼女が、ボードゲームではかなり負けず嫌いだと話します。面白い返しは、どれですか？"
+      },
+      "options": {
+        "en": [
+          "\"Competition can be unhealthy.\"",
+          "\"I take winning very seriously.\"",
+          "\"Just don’t flip the table when I beat you\"",
+          "\"Board games are fun.\""
+        ],
+        "ja": [
+          "「競争は、体に良くないこともありますよ」",
+          "「こちらは、勝つことにとても真剣です」",
+          "「こちらが勝っても、テーブルをひっくり返さないでくださいね」",
+          "「ボードゲームは楽しいですよね」"
+        ]
+      },
+      "explanation": {
+        "en": "Light exaggeration keeps things playful and escalates interaction.",
+        "ja": "軽い大げさな言い方は、遊び心のある雰囲気を保ち、やり取りを盛り上げます。"
+      }
+    },
+    "79b0dd38-20dd-41fe-91af-1e353ef1dd35": {
+      "question_text": {
+        "en": "She finishes a story and looks at you expectantly. What could create sexual tension?",
+        "ja": "彼女がエピソードを話し終え、期待するようにこちらを見ます。性的な緊張感を生めるのは、どれですか？"
+      },
+      "options": {
+        "en": [
+          "Say quickly, “That’s a great story” and ask another question",
+          "Compliment her intelligence immediately",
+          "Look away and change the topic",
+          "Hold eye contact longer, smile slowly, and say softly, “You told that really well.”"
+        ],
+        "ja": [
+          "「いい話ですね」とさっと言って、次の質問をする",
+          "すぐに彼女の知性を褒める",
+          "目をそらして、話題を変える",
+          "少し長く目を合わせ、ゆっくりほほえんで、やわらかく「話し方、すごく上手でしたね」と言う"
+        ]
+      },
+      "explanation": {
+        "en": "Prolonged gaze and warm delivery introduce possibility without pressure.",
+        "ja": "長めの視線と温かい伝え方は、プレッシャーをかけずに、可能性を持ち込みます。"
+      }
+    },
+    "7a679b53-6378-4e35-9329-c81feb6dbfcb": {
+      "question_text": {
+        "en": "She steps back when you touch her arm lightly. What should you do?",
+        "ja": "腕に軽く触れると、彼女が一歩下がります。どうするべきですか？"
+      },
+      "options": {
+        "en": [
+          "Stop touching and give space immediately",
+          "Ask if she’s okay with it",
+          "Assume she’s playing hard to get"
+        ],
+        "ja": [
+          "触れるのをやめて、すぐにスペースを空ける",
+          "触れても大丈夫かどうかを尋ねる",
+          "気のないふりをしているのだと思い込む"
+        ]
+      },
+      "explanation": {
+        "en": "Stop immediately to honor her physical boundaries.",
+        "ja": "彼女の体の境界線を尊重して、すぐにやめましょう。"
+      }
+    },
+    "7c711059-22dd-4139-9523-2de1103e125a": {
+      "question_text": {
+        "en": "What does it mean to calibrate your energy?",
+        "ja": "エネルギーをその場に合わせるとは、どういうことですか？"
+      },
+      "options": {
+        "en": [
+          "Always bring high excitement",
+          "Mirror exactly with no variation",
+          "Maintain the same vibe everywhere",
+          "Match or slightly elevate the existing mood"
+        ],
+        "ja": [
+          "いつでも高い興奮を持ち込むこと",
+          "変化をつけずに、そっくり同じにすること",
+          "どこでも同じ雰囲気を保つこと",
+          "今ある気分に合わせるか、少しだけ引き上げること"
+        ]
+      },
+      "explanation": {
+        "en": "Match the existing energy first, then raise it slightly if the moment allows.",
+        "ja": "まず今あるエネルギーに合わせ、その場が許すなら、少しだけ引き上げましょう。"
+      }
+    },
+    "897a30cf-cd54-4901-b729-6b351f07085b": {
+      "question_text": {
+        "en": "She says, “I’m terrible at making decisions.” How could you use cheek?",
+        "ja": "彼女が「私、決めるのがすごく苦手なんです」と言います。どういたずら心を使えますか？"
+      },
+      "options": {
+        "en": [
+          "\"That’s okay, nobody’s perfect.\"",
+          "\"What usually helps you decide?\"",
+          "\"Just pick anything, it’s fine.\"",
+          "\"So are you scared of the menu then?\""
+        ],
+        "ja": [
+          "「大丈夫ですよ。完璧な人なんていませんから」",
+          "「いつもは、何が決め手になるんですか？」",
+          "「何でもいいから選んでください。大丈夫ですよ」",
+          "「じゃあ、メニューが怖いんですね？」"
+        ]
+      },
+      "explanation": {
+        "en": "Light cheeky exaggeration invites a laugh and playful response.",
+        "ja": "軽くいたずらっぽい大げさな言い方は、笑いと、遊び心のある返しを招きます。"
+      }
+    },
+    "8b46401f-6a8e-4626-a152-9b226dc2e7bf": {
+      "question_text": {
+        "en": "You sense a good vibe but hesitate. What risk does waiting too long create?",
+        "ja": "良い雰囲気を感じていますが、ためらっています。待ちすぎると、どんなリスクが生まれますか？"
+      },
+      "options": {
+        "en": [
+          "She may think you are uninterested",
+          "The interaction stays polite and neutral",
+          "You lose the natural window for tension",
+          "All of the above"
+        ],
+        "ja": [
+          "関心がないと、彼女に思われるかもしれない",
+          "やり取りが、礼儀正しく、どちらともつかないままになる",
+          "緊張感が生まれる自然なタイミングを逃す",
+          "上のすべて"
+        ]
+      },
+      "explanation": {
+        "en": "These moments are time-sensitive. The window is small but meaningful.",
+        "ja": "こうした瞬間は、時間が限られています。チャンスは短いけれど、意味のあるものです。"
+      }
+    },
+    "8fbef46b-8fef-4c0e-a566-41439198e3e7": {
+      "question_text": {
+        "en": "She leans in slightly during a laugh. What could you do?",
+        "ja": "彼女が、笑いながら少し身を寄せます。何ができますか？"
+      },
+      "options": {
+        "en": [
+          "Stay rigidly at your original distance",
+          "Gradually close the gap to match her energy",
+          "Step back to give her space",
+          "Move very close immediately"
+        ],
+        "ja": [
+          "もとの距離のまま、固まっている",
+          "彼女のエネルギーに合わせて、少しずつ距離を詰める",
+          "スペースを空けるために、一歩下がる",
+          "すぐに、ぐっと近づく"
+        ]
+      },
+      "explanation": {
+        "en": "Mirror her signal of comfort to deepen the moment naturally.",
+        "ja": "彼女の心地よさのサインを映し返して、その瞬間を自然に深めましょう。"
+      }
+    },
+    "8fde0458-59d3-43bb-9001-d87062672d85": {
+      "question_text": {
+        "en": "Which version is more likely to create romantic tension with the same words?",
+        "ja": "同じ言葉でも、恋愛的な緊張感をより生みやすいのは、どの言い方ですか？"
+      },
+      "options": {
+        "en": [
+          "“You’re really funny” said fast and moving on to the next topic",
+          "“You’re really funny” said while looking at someone else",
+          "“You’re really funny” said slowly with warm eye contact and a pause"
+        ],
+        "ja": [
+          "さっと言って、次の話題に進む「本当に面白いですね」",
+          "ほかの人を見ながら言う「本当に面白いですね」",
+          "温かく目を合わせ、間を置いて、ゆっくり言う「本当に面白いですね」"
+        ]
+      },
+      "explanation": {
+        "en": "Deliberate pacing and presence make it feel charged, not just polite.",
+        "ja": "意図のあるペースと、その場にいる姿勢が、ただの礼儀ではなく、熱のあるひと言に感じさせます。"
+      }
+    },
+    "91ff2d3a-7637-491a-b8c0-a33a6b25a5bd": {
+      "question_text": {
+        "en": "What is “touch” in flirting?",
+        "ja": "駆け引きにおける「触れること」とは、何ですか？"
+      },
+      "options": {
+        "en": [
+          "Physical contact to demonstrate confidence and intent",
+          "Intentional, calibrated light contact to build comfort and attraction",
+          "Escalating from verbal to physical to show interest"
+        ],
+        "ja": [
+          "自信と意図を示すための、身体的な接触",
+          "安心感と惹かれる気持ちを育てるための、意図のある、相手に合わせた軽い接触",
+          "関心を示すために、言葉から体へと進めること"
+        ]
+      },
+      "explanation": {
+        "en": "Touch works when it feels natural and calibrated, building ease rather than pressure.",
+        "ja": "触れることがうまくいくのは、自然で、相手に合っていると感じられ、プレッシャーではなく心地よさを育てるときです。"
+      }
+    },
+    "9307f2f7-e573-4a52-81e2-e255d0fe0983": {
+      "question_text": {
+        "en": "A three-minute chat ends with laughs but no number. What should you view this as?",
+        "ja": "3分間の会話が、笑いとともに終わりますが、LINEは交換していません。これをどう捉えるべきですか？"
+      },
+      "options": {
+        "en": [
+          "A successful enjoyable moment",
+          "A complete failure",
+          "A missed opportunity to close",
+          "Wasted time"
+        ],
+        "ja": [
+          "うまくいった、楽しい時間",
+          "完全な失敗",
+          "次につなげるチャンスを逃した",
+          "時間の無駄"
+        ]
+      },
+      "explanation": {
+        "en": "The goal is the positive shared energy, not secondary outcomes.",
+        "ja": "目指すのは、二人で分かち合う前向きなエネルギーです。その先の結果ではありません。"
+      }
+    },
+    "94b2a1ba-b2aa-42e8-bf7a-d35951d81430": {
+      "question_text": {
+        "en": "You're approaching a lively group at the bar. What energy works?",
+        "ja": "バーで、にぎやかなグループに声をかけようとしています。どんなエネルギーがうまくいきますか？"
+      },
+      "options": {
+        "en": [
+          "Bring relaxed calm energy to balance their loudness",
+          "Match their lively energy with upbeat tone",
+          "Slightly exceed their energy to stand out positively"
+        ],
+        "ja": [
+          "相手のにぎやかさと釣り合うように、リラックスした落ち着いたエネルギーを持ち込む",
+          "明るいトーンで、相手のにぎやかなエネルギーに合わせる",
+          "良い意味で目立つように、相手のエネルギーを少し上回る"
+        ]
+      },
+      "explanation": {
+        "en": "People respond best to upbeat energy that fits their rhythm.",
+        "ja": "人は、自分たちのリズムに合った、明るいエネルギーに一番よく応えます。"
+      }
+    },
+    "95247c9b-621b-4050-bfa2-a28902ab1b90": {
+      "question_text": {
+        "en": "Why do light challenges build chemistry faster than regular talk?",
+        "ja": "軽い勝負は、なぜふつうの会話よりも速く相性の良さを育てるのですか？"
+      },
+      "options": {
+        "en": [
+          "They create small tension and investment",
+          "They turn strangers into temporary rivals or teammates",
+          "They require her active participation",
+          "All of the above"
+        ],
+        "ja": [
+          "小さな緊張感と、気持ちの入り方を生むから",
+          "知らない人同士を、ひとときのライバルやチームメイトに変えるから",
+          "彼女の積極的な参加が必要になるから",
+          "上のすべて"
+        ]
+      },
+      "explanation": {
+        "en": "Playful stakes spark energy and engagement without real pressure.",
+        "ja": "遊びの賭けは、本当のプレッシャーなしに、エネルギーと関わりに火をつけます。"
+      }
+    },
+    "a1c414f9-7ab4-4475-a07e-69d6eb6b1ba4": {
+      "question_text": {
+        "en": "She jokes about liking chess. What is a flirting response you could say?",
+        "ja": "彼女が、チェスが好きだと冗談めかして言います。駆け引きになる返しとして、何と言えますか？"
+      },
+      "options": {
+        "en": [
+          "\"Chess is so challenging.\"",
+          "\"Chess is such an easy sport.\"",
+          "\"Competition is unhealthy.\"",
+          "\"Good thing I know how to protect my queen.\""
+        ],
+        "ja": [
+          "「チェスは、すごく難しいですよね」",
+          "「チェスは、ずいぶん簡単な競技ですよね」",
+          "「競争は、体に良くないですよ」",
+          "「クイーンの守り方なら、心得ていますよ」"
+        ]
+      },
+      "explanation": {
+        "en": "Match her playfulness to escalate banter and energy.",
+        "ja": "彼女の遊び心に合わせて、軽い掛け合いとエネルギーを盛り上げましょう。"
+      }
+    },
+    "a25d7cd3-3b21-4ccb-89ba-1cffbbe6a49d": {
+      "question_text": {
+        "en": "Why does banter help build romantic chemistry?",
+        "ja": "軽い掛け合いは、なぜ恋愛的な相性を育てるのに役立つのですか？"
+      },
+      "options": {
+        "en": [
+          "They create light-hearted tension and playfulness",
+          "They shorten emotional distance through laughter",
+          "They keep conversation serious and polite",
+          "They introduce reciprocal back-and-forth energy"
+        ],
+        "ja": [
+          "気楽な緊張感と遊び心を生むから",
+          "笑いを通じて、気持ちの距離を縮めるから",
+          "会話を、まじめで礼儀正しいままに保つから",
+          "返し合うやり取りのエネルギーを持ち込むから"
+        ]
+      },
+      "explanation": {
+        "en": "Playfulness separates flirtation from mere friendly rapport.",
+        "ja": "遊び心が、駆け引きを、ただの感じのいい打ち解けた空気と分けます。"
+      }
+    },
+    "a2f4b225-b8a7-4317-8f9e-d5d7ce3e0c73": {
+      "question_text": {
+        "en": "Which behaviors signal respectful awareness?",
+        "ja": "相手を尊重した気づかいを示す行動は、どれですか？"
+      },
+      "options": {
+        "en": [
+          "Continuing conversation to change her mind",
+          "Accepting “I have a boyfriend” without probing",
+          "Stepping back when she gives short answers",
+          "Ending the interaction politely when engagement is low"
+        ],
+        "ja": [
+          "彼女の気を変えさせるために、会話を続けること",
+          "「彼氏がいます」という言葉を、詮索せずに受け入れること",
+          "彼女の返事が短いとき、一歩引くこと",
+          "会話に乗っていないとき、礼儀正しくやり取りを終えること"
+        ]
+      },
+      "explanation": {
+        "en": "Respect is how quickly you adjust and how cleanly you exit when interest isn’t there.",
+        "ja": "尊重とは、関心がないときに、どれだけ早く合わせ直し、どれだけすっきり立ち去れるかです。"
+      }
+    },
+    "a621c77a-69b0-4f0a-8e2f-6e12dbf8bc0b": {
+      "question_text": {
+        "en": "Why does disqualification create attraction?",
+        "ja": "簡単にはなびかない姿勢は、なぜ惹かれる気持ちを生むのですか？"
+      },
+      "options": {
+        "en": [
+          "It shows you are chasing her validation",
+          "It breaks the pattern of automatic agreement",
+          "It treats her as an equal rather than pedestalizing"
+        ],
+        "ja": [
+          "彼女の承認を追いかけていることを示すから",
+          "無条件に同意するパターンを破るから",
+          "彼女を持ち上げすぎるのではなく、対等な相手として扱うから"
+        ]
+      },
+      "explanation": {
+        "en": "Disqualification flips pursuit into balanced, mutual selection.",
+        "ja": "簡単にはなびかない姿勢は、追いかける形を、釣り合いの取れた、お互いに選び合う形へとひっくり返します。"
+      }
+    },
+    "a64d80aa-89d6-4008-bb0c-2e3f3d44e8d8": {
+      "question_text": {
+        "en": "What creates the “spark” of sexual tension?",
+        "ja": "性的な緊張感の「火花」を生むものは、何ですか？"
+      },
+      "options": {
+        "en": [
+          "Subtle uncertainty about whether it’s more than platonic",
+          "Keeping everything predictable and friendly",
+          "Explicitly stating romantic intentions early",
+          "Avoiding any physical awareness"
+        ],
+        "ja": [
+          "友達以上なのかどうかについての、かすかな不確かさ",
+          "すべてを、先が読めて感じのいいままに保つこと",
+          "早い段階で、恋愛的な意図をはっきり述べること",
+          "体の存在を、いっさい意識しないようにすること"
+        ]
+      },
+      "explanation": {
+        "en": "The question “is this something more?” keeps attention engaged.",
+        "ja": "「これは、それ以上の何かなのだろうか」という問いが、注意を引きつけ続けます。"
+      }
+    },
+    "a9af130c-ceeb-430c-817a-3b39ec63ff4b": {
+      "question_text": {
+        "en": "What best defines a light challenge in flirting?",
+        "ja": "駆け引きにおける軽い勝負を、最もよく表しているのはどれですか？"
+      },
+      "options": {
+        "en": [
+          "A playful interaction that creates engagement without consequences",
+          "A test designed to see how smart or skilled she is",
+          "A form of teasing meant to put her on the spot"
+        ],
+        "ja": [
+          "何の結果も伴わずに、関わりを生む遊び心のあるやり取り",
+          "彼女がどれだけ賢いか、腕があるかを見るためのテスト",
+          "彼女を困らせるための、からかいの一種"
+        ]
+      },
+      "explanation": {
+        "en": "A light challenge is shared, harmless play. There are no real stakes.",
+        "ja": "軽い勝負は、二人で分かち合う、害のない遊びです。本当にかかっているものは、何もありません。"
+      }
+    },
+    "ac1764e4-0635-4b2a-a9b1-3d396b43c335": {
+      "question_text": {
+        "en": "Which signals suggest it is safe to move slightly closer?",
+        "ja": "少しだけ近づいても大丈夫だと示すサインは、どれですか？"
+      },
+      "options": {
+        "en": [
+          "She stays relaxed when you step closer",
+          "She leans in while speaking",
+          "She maintains eye contact",
+          "She glances around the room frequently"
+        ],
+        "ja": [
+          "一歩近づいても、彼女がリラックスしたままでいる",
+          "話しながら、身を寄せてくる",
+          "目を合わせたままでいる",
+          "何度も部屋を見回す"
+        ]
+      },
+      "explanation": {
+        "en": "Comfort shows through stillness, reciprocity, and relaxed engagement.",
+        "ja": "心地よさは、その場にとどまること、同じように返してくること、リラックスした関わり方に表れます。"
+      }
+    },
+    "af902d35-dd20-4ecf-9ebd-6cc05bed06fb": {
+      "question_text": {
+        "en": "Why is breaking rapport necessary for sexual tension?",
+        "ja": "性的な緊張感のために、打ち解けた空気を破ることがなぜ必要なのですか？"
+      },
+      "options": {
+        "en": [
+          "Pure rapport keeps interactions platonic and predictable",
+          "Disruption introduces the question of romantic possibility",
+          "Constant rapport always builds attraction"
+        ],
+        "ja": [
+          "打ち解けた空気だけでは、やり取りが友達どまりで、先の読めるものになるから",
+          "空気を破ることで、「恋愛の可能性はあるのか」という問いが生まれるから",
+          "途切れない打ち解けた空気は、いつでも惹かれる気持ちを高めるから"
+        ]
+      },
+      "explanation": {
+        "en": "Tension comes from hinting at more than friendship.",
+        "ja": "緊張感は、友達以上の何かをにじませることから生まれます。"
+      }
+    },
+    "b39a64ab-2d91-47b4-9ea1-8646ba10c538": {
+      "question_text": {
+        "en": "Why does avoiding all touch often stall attraction?",
+        "ja": "触れることをいっさい避けると、なぜ惹かれる気持ちが育たなくなることが多いのですか？"
+      },
+      "options": {
+        "en": [
+          "It feels boring",
+          "It makes the interaction feel platonic",
+          "It shows lack of confidence",
+          "It slows conversation"
+        ],
+        "ja": [
+          "退屈に感じられるから",
+          "やり取りが、友達同士のものに感じられるから",
+          "自信のなさを示すから",
+          "会話のペースを落とすから"
+        ]
+      },
+      "explanation": {
+        "en": "Without physical escalation, the interaction can stay friendly rather than flirty.",
+        "ja": "体の面で距離が縮まらないと、やり取りは、恋愛的な含みのあるものではなく、感じのいいもののままになることがあります。"
+      }
+    },
+    "b4ae1063-f21b-4c92-b4e9-ddeb53c5685f": {
+      "question_text": {
+        "en": "She leans against the bar while talking. How can you mirror this?",
+        "ja": "彼女が、話しながらバーカウンターにもたれます。どうミラーリングできますか？"
+      },
+      "options": {
+        "en": [
+          "Stay rigid to show confidence",
+          "Immediately copy her exact position",
+          "Step closer to escalate",
+          "Gradually adopt a similar relaxed posture"
+        ],
+        "ja": [
+          "自信を示すために、固まったままでいる",
+          "すぐに、彼女とまったく同じ姿勢をまねる",
+          "距離を縮めるために、一歩近づく",
+          "少しずつ、似たようなリラックスした姿勢を取る"
+        ]
+      },
+      "explanation": {
+        "en": "Subtle alignment builds comfort without feeling performative.",
+        "ja": "さりげなくそろえることで、わざとらしさなしに、安心感が育ちます。"
+      }
+    },
+    "b4cb96a5-9dac-4da8-9559-0e356ea4eeeb": {
+      "question_text": {
+        "en": "Why does calibrated touch build attraction effectively?",
+        "ja": "相手に合わせたタッチは、なぜ効果的に惹かれる気持ちを育てるのですか？"
+      },
+      "options": {
+        "en": [
+          "It communicates romantic interest non-verbally",
+          "It adds a physical layer to existing connection",
+          "It works best when bold and frequent"
+        ],
+        "ja": [
+          "恋愛的な関心を、言葉を使わずに伝えるから",
+          "すでにあるつながりに、体の面での層を加えるから",
+          "大胆で、回数が多いときに一番うまくいくから"
+        ]
+      },
+      "explanation": {
+        "en": "Intentional touch strengthens chemistry when timed with comfort.",
+        "ja": "意図のあるタッチは、彼女が心地よく感じているタイミングに合っているとき、相性の良さを強めます。"
+      }
+    },
+    "b5aafcca-ae9a-48c1-974b-435701916b85": {
+      "question_text": {
+        "en": "She says she’s really good with maps. What’s a flirty response?",
+        "ja": "彼女が、地図を読むのがすごく得意だと言います。駆け引きになる返しは、どれですか？"
+      },
+      "options": {
+        "en": [
+          "\"Can you show me the way to your heart then?\"",
+          "\"You should probably use a GPS more.\"",
+          "\"That’s arrogant haha\"",
+          "\"Directions aren’t that hard.\""
+        ],
+        "ja": [
+          "「じゃあ、その心への道順も、教えてもらえますか？」",
+          "「地図アプリを、もっと使ったほうがいいんじゃないですか」",
+          "「それは、うぬぼれですね（笑）」",
+          "「道案内なんて、そんなに難しくないですよ」"
+        ]
+      },
+      "explanation": {
+        "en": "Flirty humor builds attraction by leaning into her statement playfully.",
+        "ja": "駆け引きのユーモアは、彼女の言葉に遊び心を込めて乗ることで、惹かれる気持ちを育てます。"
+      }
+    },
+    "b60b077a-0761-4330-9234-8fdcc1b81325": {
+      "question_text": {
+        "en": "Why does body mirroring build rapport at a subconscious level?",
+        "ja": "体のミラーリングは、なぜ無意識のレベルで打ち解けた空気を育てるのですか？"
+      },
+      "options": {
+        "en": [
+          "Brain registers matched body language as safe, familiar, trustworthy",
+          "Shows you're paying attention and engaged with her",
+          "Demonstrates social intelligence and emotional awareness"
+        ],
+        "ja": [
+          "脳が、そろったボディランゲージを、安全で、なじみがあり、信頼できるものとして受け取るから",
+          "注意を払っていて、彼女に関わっていることを示すから",
+          "人付き合いのうまさと、感情への気づきを示すから"
+        ]
+      },
+      "explanation": {
+        "en": "Mirroring signals familiarity and ease at a subconscious level, which supports rapport.",
+        "ja": "ミラーリングは、無意識のレベルで、親しみと心地よさを伝え、打ち解けるのを助けます。"
+      }
+    },
+    "b70c5e9d-c782-4a54-be4f-ed860758730b": {
+      "question_text": {
+        "en": "What type of compliments are best?",
+        "ja": "一番良い褒め言葉は、どんな種類のものですか？"
+      },
+      "options": {
+        "en": [
+          "Her style, humor, or perspective she brings",
+          "Effort or the way she engages with things",
+          "Something she chose or expressed, not inherited",
+          "All of the above"
+        ],
+        "ja": [
+          "彼女のスタイル、ユーモア、彼女ならではの見方に向けたもの",
+          "努力や、物事への関わり方に向けたもの",
+          "生まれ持ったものではなく、彼女が選んだり表現したりしたことに向けたもの",
+          "上のすべて"
+        ]
+      },
+      "explanation": {
+        "en": "Compliments land best when they reflect her choice, not her traits.",
+        "ja": "褒め言葉は、生まれ持った特徴ではなく、彼女が選んだことに向けられたとき、一番よく届きます。"
+      }
+    },
+    "bc66a400-41a9-4f56-9e78-344908ee749c": {
+      "question_text": {
+        "en": "Why can touch accelerate attraction more than words alone?",
+        "ja": "触れることは、なぜ言葉だけの場合よりも速く、惹かれる気持ちを高められるのですか？"
+      },
+      "options": {
+        "en": [
+          "It creates physiological bonding and comfort",
+          "It bypasses rational thinking",
+          "It shows dominance",
+          "It proves confidence"
+        ],
+        "ja": [
+          "生理的な絆と安心感を生むから",
+          "理性的な思考を通らないから",
+          "支配力を示すから",
+          "自信を証明するから"
+        ]
+      },
+      "explanation": {
+        "en": "Touch activates trust and bonding responses that words cannot create on their own.",
+        "ja": "触れることは、言葉だけでは生み出せない、信頼と絆の反応を呼び起こします。"
+      }
+    },
+    "bd77420f-f0c3-434d-a194-ed4c67dc0f59": {
+      "question_text": {
+        "en": "She pulls away slightly after a light arm touch. What should you do?",
+        "ja": "腕に軽く触れたあと、彼女が少し身を引きます。どうするべきですか？"
+      },
+      "options": {
+        "en": [
+          "Give space and continue without further touch",
+          "Touch again to show confidence",
+          "Apologize and ask permission next time",
+          "Escalate to a different touch"
+        ],
+        "ja": [
+          "スペースを空け、それ以上触れずに続ける",
+          "自信を示すために、もう一度触れる",
+          "謝って、次からは許可を求める",
+          "別の触れ方に進む"
+        ]
+      },
+      "explanation": {
+        "en": "Respect her response by pausing physical escalation.",
+        "ja": "彼女の反応を尊重して、体の距離を縮めるのをいったん止めましょう。"
+      }
+    },
+    "c23fa6ee-381a-4d27-bf59-41f86d51451f": {
+      "question_text": {
+        "en": "She teases you lightly and laughs. What could you say to tilt the moment?",
+        "ja": "彼女が、こちらを軽くからかって笑います。空気を少し変えるために、何と言えますか？"
+      },
+      "options": {
+        "en": [
+          "\"Your eyes really light up when you laugh, I like it\"",
+          "\"You’re funny.\"",
+          "\"Good one.\"",
+          "\"You win this round.\""
+        ],
+        "ja": [
+          "「笑うと、目がぱっと輝きますね。すてきだなと思って」",
+          "「面白いですね」",
+          "「うまいですね」",
+          "「今回は、そちらの勝ちですね」"
+        ]
+      },
+      "explanation": {
+        "en": "Soft tone and specific observation hints at attraction without heaviness.",
+        "ja": "やわらかいトーンと具体的な観察は、重くならずに、惹かれていることをにじませます。"
+      }
+    },
+    "c595ee3e-bb2d-4d31-8268-40919fdef131": {
+      "question_text": {
+        "en": "She brags playfully about being competitive in tennis. What could you say?",
+        "ja": "彼女が、テニスでは負けず嫌いだと、遊び心を込めて自慢します。何と言えますか？"
+      },
+      "options": {
+        "en": [
+          "\"That’s not always a good thing.\"",
+          "\"I love a challenge. Just don’t cry when I win.\"",
+          "\"Competition is unhealthy.\"",
+          "\"Tell me more about that.\""
+        ],
+        "ja": [
+          "「それは、いつも良いこととは限りませんよ」",
+          "「勝負は大好きです。こちらが勝っても、泣かないでくださいね」",
+          "「競争は、体に良くないですよ」",
+          "「それについて、もっと聞かせてください」"
+        ]
+      },
+      "explanation": {
+        "en": "Match her playfulness to escalate banter and energy.",
+        "ja": "彼女の遊び心に合わせて、軽い掛け合いとエネルギーを盛り上げましょう。"
+      }
+    },
+    "c98b4016-8474-4fa7-b00d-224a8135153a": {
+      "question_text": {
+        "en": "What reminder best supports the right internal frame before approaching?",
+        "ja": "声をかける前に、正しい心の持ち方を最もよく支える言葉は、どれですか？"
+      },
+      "options": {
+        "en": [
+          "\"I need to stand out\"",
+          "\"I could get lucky tonight\"",
+          "\"I need to be confident\"",
+          "\"My goal is to create a good moment\""
+        ],
+        "ja": [
+          "「目立たなければ」",
+          "「今夜は、いい思いができるかもしれない」",
+          "「自信を持たなければ」",
+          "「目指すのは、良い時間をつくることだ」"
+        ]
+      },
+      "explanation": {
+        "en": "This frame keeps you grounded, present, and pressure-free.",
+        "ja": "この心の持ち方は、地に足をつけ、その場にいて、プレッシャーのない状態を保たせてくれます。"
+      }
+    },
+    "cbbc6dae-7dab-4dde-93eb-57bc3de19179": {
+      "question_text": {
+        "en": "Which of the following is not a good use of a fun light challenge?",
+        "ja": "軽い、遊びの勝負の使い方として、良くないのはどれですか？"
+      },
+      "options": {
+        "en": [
+          "Guessing her coffee order",
+          "Asking her to rate two options and choose a side",
+          "Quizzing her on something she does not know",
+          "Turning a question into a playful guessing game"
+        ],
+        "ja": [
+          "彼女のコーヒーの注文を当てること",
+          "2つの選択肢を比べて、どちらかを選んでもらうこと",
+          "彼女の知らないことについて、クイズを出すこと",
+          "質問を、遊び心のある当てっこに変えること"
+        ]
+      },
+      "explanation": {
+        "en": "Challenges should never put her in a position to feel inadequate. The goal is to have fun.",
+        "ja": "勝負は、彼女が「自分は足りない」と感じるような立場に置くものであってはいけません。目指すのは、楽しむことです。"
+      }
+    },
+    "cde2d207-7899-48ff-a104-fbf28135a2b2": {
+      "question_text": {
+        "en": "What are signs she's comfortable with closer proximity?",
+        "ja": "距離が近づいても彼女が心地よく感じているサインは、どれですか？"
+      },
+      "options": {
+        "en": [
+          "She stays engaged when you move closer",
+          "She leans in or shifts toward you",
+          "She maintains eye contact throughout conversation"
+        ],
+        "ja": [
+          "こちらが近づいても、会話に乗ったままでいる",
+          "身を寄せたり、こちらのほうへ体を向けたりする",
+          "会話のあいだずっと、目を合わせたままでいる"
+        ]
+      },
+      "explanation": {
+        "en": "Comfort shows through stillness, reciprocity, and relaxed engagement.",
+        "ja": "心地よさは、その場にとどまること、同じように返してくること、リラックスした関わり方に表れます。"
+      }
+    },
+    "ce4b3a53-6296-4e5e-9208-4ef8f7666fd8": {
+      "question_text": {
+        "en": "What mindset supports using eye contact well?",
+        "ja": "アイコンタクトをうまく使うのを支える考え方は、どれですか？"
+      },
+      "options": {
+        "en": [
+          "\"I need to impress her\"",
+          "\"I should avoid awkwardness\"",
+          "\"I’m comfortable being seen\"",
+          "\"I need to say something clever\""
+        ],
+        "ja": [
+          "「彼女を感心させなければ」",
+          "「気まずさは避けるべきだ」",
+          "「見られていても、落ち着いていられる」",
+          "「何か気の利いたことを言わなければ」"
+        ]
+      },
+      "explanation": {
+        "en": "Eye contact that creates tension comes from comfort with presence, not performance.",
+        "ja": "緊張感を生むアイコンタクトは、うまく見せることからではなく、その場にいることへの落ち着きから生まれます。"
+      }
+    },
+    "cebe76a8-b37d-42fc-a5ff-e7a9ecc85c3c": {
+      "question_text": {
+        "en": "You start flirting with a woman at a bar. What should your primary goal be?",
+        "ja": "バーで、ある女性と駆け引きを始めます。一番の目標は、何であるべきですか？"
+      },
+      "options": {
+        "en": [
+          "Get her number or take her home tonight",
+          "Create a fun, enjoyable moment right now",
+          "Impress her with compliments and tension",
+          "Prove you are confident and worthy"
+        ],
+        "ja": [
+          "LINEを聞くか、今夜家に連れて帰ること",
+          "今この瞬間に、楽しく心地よい時間をつくること",
+          "褒め言葉と緊張感で、彼女を感心させること",
+          "自信があり、ふさわしい相手だと証明すること"
+        ]
+      },
+      "explanation": {
+        "en": "Flirting succeeds when the moment feels lighter and more alive, regardless of outcome.",
+        "ja": "駆け引きは、結果に関係なく、その時間がより軽やかで生き生きと感じられたとき、うまくいったと言えます。"
+      }
+    },
+    "d1e81b89-292c-47d2-881c-2ead24b571e1": {
+      "question_text": {
+        "en": "Why do compliments about effort or expression work better than compliments about looks?",
+        "ja": "努力や表現についての褒め言葉は、なぜ見た目についての褒め言葉よりもうまくいくのですか？"
+      },
+      "options": {
+        "en": [
+          "They feel more intellectual",
+          "They reduce pressure and feel more personal",
+          "They make you seem more interesting",
+          "They are harder to give"
+        ],
+        "ja": [
+          "より知的に感じられるから",
+          "プレッシャーを減らし、よりその人に向けたものに感じられるから",
+          "自分がより面白い人に見えるから",
+          "言うのがより難しいから"
+        ]
+      },
+      "explanation": {
+        "en": "Compliments that recognize choice and effort feel safer and more connecting.",
+        "ja": "選択と努力に目を向けた褒め言葉は、より安心でき、つながりを感じさせます。"
+      }
+    },
+    "d5e4ef95-c1aa-4bd2-a5ca-49fc6afba2c8": {
+      "question_text": {
+        "en": "Which of these behaviors may cause people to disengage?",
+        "ja": "人の関心を離れさせることがある行動は、どれですか？"
+      },
+      "options": {
+        "en": [
+          "Neutral body language",
+          "Asking simple questions",
+          "Short conversations",
+          "Bringing low or heavy energy"
+        ],
+        "ja": [
+          "どちらともつかないボディランゲージ",
+          "簡単な質問をすること",
+          "短い会話",
+          "低く重いエネルギーを持ち込むこと"
+        ]
+      },
+      "explanation": {
+        "en": "People instinctively move away from moods that feel draining.",
+        "ja": "人は、消耗させられるように感じる気分から、本能的に離れます。"
+      }
+    },
+    "e1d057ce-7c4d-495e-b2d7-fcc87a1c4105": {
+      "question_text": {
+        "en": "She says, “I’m very picky about guys.” What disqualification could you use next?",
+        "ja": "彼女が「私、男性にはすごくうるさいんです」と言います。簡単にはなびかない返しとして、次に何と言えますか？"
+      },
+      "options": {
+        "en": [
+          "\"That’s good—you should be.\"",
+          "\"What’s your type?\"",
+          "\"I’ll try to meet your standards.\"",
+          "\"Perfect, because I’m picky too.\""
+        ],
+        "ja": [
+          "「いいことですね。そうあるべきですよ」",
+          "「どんな人がタイプなんですか？」",
+          "「その基準を満たせるように、がんばります」",
+          "「ちょうどいいですね。こちらも、うるさいほうなので」"
+        ]
+      },
+      "explanation": {
+        "en": "Playful flip signals standards and balance without chasing approval.",
+        "ja": "遊び心のある切り返しは、承認を追いかけることなく、自分にも基準があることと、釣り合いを伝えます。"
+      }
+    },
+    "e7cbc051-5503-4e4c-b6fd-0a4dea2be140": {
+      "question_text": {
+        "en": "She shares a creative solution to a problem. What compliment would land best?",
+        "ja": "彼女が、ある問題への独創的な解決策を話します。一番よく届く褒め言葉は、どれですか？"
+      },
+      "options": {
+        "en": [
+          "\"You’re stunning.\"",
+          "\"That’s a really clever approach. I wouldn’t have thought of that.\"",
+          "\"You’re so intelligent.\"",
+          "\"Your voice is soothing.\""
+        ],
+        "ja": [
+          "「すごくきれいですね」",
+          "「それは、すごくうまいやり方ですね。思いつきませんでした」",
+          "「すごく頭がいいんですね」",
+          "「声に癒やされます」"
+        ]
+      },
+      "explanation": {
+        "en": "Focuses on her creative choice, making her feel seen for her thinking.",
+        "ja": "彼女の独創的な選択に目を向けた言葉で、その考え方を見てもらえたと感じさせます。"
+      }
+    },
+    "e91466f0-24f3-4932-ab70-eab86651982c": {
+      "question_text": {
+        "en": "Which areas are generally safe for early, calibrated touch?",
+        "ja": "早い段階の、相手に合わせたタッチで、一般的に無難な場所はどれですか？"
+      },
+      "options": {
+        "en": [
+          "Forearm",
+          "Shoulder",
+          "Upper arm",
+          "Waist or hips"
+        ],
+        "ja": [
+          "前腕",
+          "肩",
+          "二の腕",
+          "腰やヒップ"
+        ]
+      },
+      "explanation": {
+        "en": "Early touch should stay non-intimate and situationally appropriate.",
+        "ja": "早い段階のタッチは、親密すぎない場所にとどめ、その場の状況に合ったものにしましょう。"
+      }
+    },
+    "ea410aea-176d-48e3-8281-7a8a1353ca46": {
+      "question_text": {
+        "en": "The vibe is great but no touch yet. She touches your arm lightly. What could you do?",
+        "ja": "雰囲気はとても良いのですが、まだ触れ合ってはいません。彼女が、こちらの腕に軽く触れます。何ができますか？"
+      },
+      "options": {
+        "en": [
+          "Ignore it and keep distance",
+          "Comment on her touch",
+          "Immediately touch her more",
+          "Reciprocate with light touch later in a natural moment"
+        ],
+        "ja": [
+          "気づかないふりをして、距離を保つ",
+          "彼女が触れたことについて、ひと言言う",
+          "すぐに、もっと彼女に触れる",
+          "あとで、自然な瞬間に、軽いタッチで返す"
+        ]
+      },
+      "explanation": {
+        "en": "Match her signal gradually to align with mutual comfort.",
+        "ja": "お互いの心地よさに合うよう、彼女のサインに少しずつ合わせましょう。"
+      }
+    },
+    "ebdbe221-f51b-4b0c-bd4b-aae266f0bcb8": {
+      "question_text": {
+        "en": "Why do callbacks increase attraction?",
+        "ja": "話題の再登場は、なぜ惹かれる気持ちを高めるのですか？"
+      },
+      "options": {
+        "en": [
+          "They show dominance",
+          "They demonstrate intelligence",
+          "They reduce conversational effort",
+          "They signal attention and familiarity"
+        ],
+        "ja": [
+          "支配力を示すから",
+          "知性を示すから",
+          "会話の労力を減らすから",
+          "注意を払っていたことと、親しみを伝えるから"
+        ]
+      },
+      "explanation": {
+        "en": "Being remembered makes people feel seen, which deepens comfort and connection.",
+        "ja": "覚えていてもらえると、人は「ちゃんと見てもらえている」と感じ、安心感とつながりが深まります。"
+      }
+    },
+    "ec7b6208-0886-41d6-bcde-5876126e4cad": {
+      "question_text": {
+        "en": "What qualities make eye contact feel attractive rather than uncomfortable?",
+        "ja": "アイコンタクトを、居心地の悪いものではなく、魅力的に感じさせる要素は、どれですか？"
+      },
+      "options": {
+        "en": [
+          "Warmth",
+          "Relaxed posture",
+          "Calm pacing",
+          "Holding it intently"
+        ],
+        "ja": [
+          "温かさ",
+          "リラックスした姿勢",
+          "落ち着いたペース",
+          "食い入るように見つめ続けること"
+        ]
+      },
+      "explanation": {
+        "en": "Tension comes from ease and presence, not pressure.",
+        "ja": "緊張感は、プレッシャーからではなく、余裕と、その場にいる姿勢から生まれます。"
+      }
+    },
+    "efb89d58-f624-4e43-8edf-0cee0dad7d5c": {
+      "question_text": {
+        "en": "What are characteristics of good energy?",
+        "ja": "良いエネルギーの特徴は、どれですか？"
+      },
+      "options": {
+        "en": [
+          "Warm",
+          "Grounded",
+          "Slightly upbeat",
+          "Intense and dominant"
+        ],
+        "ja": [
+          "温かい",
+          "地に足がついている",
+          "少しだけ明るい",
+          "強烈で、支配的"
+        ]
+      },
+      "explanation": {
+        "en": "Good energy feels inviting and safe, not overwhelming or draining.",
+        "ja": "良いエネルギーは、相手を招き入れ、安心させるものです。圧倒したり、消耗させたりするものではありません。"
+      }
+    },
+    "f23233f3-ec06-4834-bf59-d052a683bed7": {
+      "question_text": {
+        "en": "Which behaviors can introduce sexual tension without words?",
+        "ja": "言葉を使わずに、性的な緊張感を持ち込める行動は、どれですか？"
+      },
+      "options": {
+        "en": [
+          "Sustained eye contact a beat longer",
+          "Standing slightly closer as rapport warms",
+          "Rapid-fire questions to keep momentum",
+          "Letting a touch linger briefly when she's reciprocating"
+        ],
+        "ja": [
+          "ひと呼吸長く、目を合わせ続けること",
+          "打ち解けてくるにつれて、少しだけ近くに立つこと",
+          "流れを保つための、矢継ぎ早の質問",
+          "彼女も同じように返しているとき、触れた手を少しだけそのままにすること"
+        ]
+      },
+      "explanation": {
+        "en": "Non-verbal cues that subtly break friendliness introduce possibility.",
+        "ja": "感じのいい空気をさりげなく破る、言葉以外の合図が、可能性を持ち込みます。"
+      }
+    },
+    "f442e1ff-0765-4613-91d3-e838e3234d98": {
+      "question_text": {
+        "en": "What is good energy in flirting?",
+        "ja": "駆け引きにおける良いエネルギーとは、何ですか？"
+      },
+      "options": {
+        "en": [
+          "Warm and grounded tone",
+          "Upbeat without being overwhelming",
+          "Flat and neutral to avoid mistakes",
+          "Slightly exceeding the moment's mood"
+        ],
+        "ja": [
+          "温かく、地に足のついたトーン",
+          "相手を圧倒しない明るさ",
+          "失敗を避けるための、平板でどちらともつかない態度",
+          "その場の気分を、少しだけ上回ること"
+        ]
+      },
+      "explanation": {
+        "en": "Good energy elevates the vibe and makes others feel alive.",
+        "ja": "良いエネルギーは、その場の空気を引き上げ、相手を生き生きとした気持ちにさせます。"
+      }
+    },
+    "f5266e4f-abf4-4ecb-b84d-f1a01c78df7c": {
+      "question_text": {
+        "en": "What most reliably turns a compliment from “nice” into “desire”?",
+        "ja": "褒め言葉を、「感じがいい」から「惹かれている」へ、最も確実に変えるものは何ですか？"
+      },
+      "options": {
+        "en": [
+          "More intense words",
+          "Better outfit-focused details",
+          "Tone, eye contact, and pacing",
+          "Saying it louder"
+        ],
+        "ja": [
+          "もっと強い言葉",
+          "服装についての、もっと細かい内容",
+          "トーン、アイコンタクト、ペース",
+          "もっと大きな声で言うこと"
+        ]
+      },
+      "explanation": {
+        "en": "The same words can feel friendly or charged depending on delivery.",
+        "ja": "同じ言葉でも、伝え方によって、感じのいいひと言にも、熱のあるひと言にもなります。"
+      }
+    },
+    "f6cb6b9f-3832-422f-a15d-ba9827f8dbf8": {
+      "question_text": {
+        "en": "She steps back slightly after you move closer. What should you do next?",
+        "ja": "こちらが近づいたあと、彼女が少し下がります。次にどうするべきですか？"
+      },
+      "options": {
+        "en": [
+          "Step closer again to show confidence",
+          "End the conversation",
+          "Ask if she’s uncomfortable",
+          "Give her more space and continue calmly"
+        ],
+        "ja": [
+          "自信を示すために、もう一度近づく",
+          "会話を終える",
+          "居心地が悪いかどうかを尋ねる",
+          "スペースをもっと空けて、落ち着いて続ける"
+        ]
+      },
+      "explanation": {
+        "en": "Respect her cue by adjusting back to maintain comfort and trust.",
+        "ja": "彼女の合図を尊重して元の距離に戻り、心地よさと信頼を保ちましょう。"
+      }
+    },
+    "f6feba7a-6f51-4a47-b8a8-d65c8f9ea942": {
+      "question_text": {
+        "en": "You’re guiding her through a crowded space. What touch is appropriate?",
+        "ja": "混み合った場所で、彼女を案内しています。ふさわしい触れ方はどれですか？"
+      },
+      "options": {
+        "en": [
+          "No touch needed",
+          "Arm around her shoulders",
+          "A light touch on her arm to guide her"
+        ],
+        "ja": [
+          "触れる必要はない",
+          "肩に腕を回す",
+          "導くために、腕に軽く触れる"
+        ]
+      },
+      "explanation": {
+        "en": "Functional, brief guidance matches the context and builds comfort.",
+        "ja": "必要に応じた短い誘導は、その場の状況に合っていて、安心感を育てます。"
+      }
+    },
+    "f798a3d2-77df-4e98-b5f6-850a383b86e9": {
+      "question_text": {
+        "en": "Why does subtle mirroring build rapport effectively?",
+        "ja": "さりげないミラーリングは、なぜ効果的に打ち解けた空気を育てるのですか？"
+      },
+      "options": {
+        "en": [
+          "It signals safety and compatibility at a subconscious level",
+          "It makes her feel you are familiar and trustworthy",
+          "It communicates similarity non-verbally",
+          "All of the above"
+        ],
+        "ja": [
+          "無意識のレベルで、安全と相性の良さを伝えるから",
+          "なじみがあって信頼できる相手だと、彼女に感じさせるから",
+          "似ていることを、言葉を使わずに伝えるから",
+          "上のすべて"
+        ]
+      },
+      "explanation": {
+        "en": "Mirroring signals familiarity and ease at a subconscious level, which supports rapport.",
+        "ja": "ミラーリングは、無意識のレベルで、親しみと心地よさを伝え、打ち解けるのを助けます。"
+      }
+    },
+    "f7b1d87a-9566-45e6-a098-77d7a9c2ebaf": {
+      "question_text": {
+        "en": "She sits down and you’re standing over her. What could you do to mirror better?",
+        "ja": "彼女が座り、こちらは彼女を見下ろす形で立っています。より良くミラーリングするために、何ができますか？"
+      },
+      "options": {
+        "en": [
+          "Ask if you can sit down too to be at the same level",
+          "Stay standing to keep a confident posture",
+          "Bend slightly to meet her eye level"
+        ],
+        "ja": [
+          "同じ高さになるよう、こちらも座っていいか尋ねる",
+          "自信のある姿勢を保つために、立ったままでいる",
+          "彼女の目の高さに合うよう、少しかがむ"
+        ]
+      },
+      "explanation": {
+        "en": "Aligning physical levels reduces imbalance and builds subconscious comfort.",
+        "ja": "体の高さをそろえると、偏りが減り、無意識のうちに安心感が育ちます。"
+      }
+    },
+    "f7dc51a9-b997-4ed3-a54b-5996a6886069": {
+      "question_text": {
+        "en": "Why do people naturally gravitate toward uplifting energy?",
+        "ja": "人は、なぜ気分を引き上げてくれるエネルギーに、自然と引き寄せられるのですか？"
+      },
+      "options": {
+        "en": [
+          "Warm people are more attractive and charismatic naturally",
+          "People protect emotional states—seek what elevates, avoid what drains",
+          "Engaging energy signals confidence and social status"
+        ],
+        "ja": [
+          "温かい人は、もともと、より魅力的でカリスマ性があるから",
+          "人は、自分の気持ちの状態を守るから。引き上げてくれるものを求め、消耗させるものを避ける",
+          "引き込むエネルギーは、自信と社会的な立ち位置を伝えるから"
+        ]
+      },
+      "explanation": {
+        "en": "People move towards what feels good and away from what doesn't.",
+        "ja": "人は、心地よく感じるもののほうへ動き、そうでないものから離れます。"
+      }
+    },
+    "fabb2d4d-834e-4aed-9716-9cafe7b3c118": {
+      "question_text": {
+        "en": "She shifts from standing straight to leaning against the bar. Best response?",
+        "ja": "彼女が、まっすぐ立っていた姿勢から、バーカウンターにもたれる姿勢に変えます。一番良い対応はどれですか？"
+      },
+      "options": {
+        "en": [
+          "Stay standing straight—mirroring too obvious is awkward",
+          "Ask if she's tired since she's leaning now",
+          "Shift to leaning as well naturally—mirror her broad posture change"
+        ],
+        "ja": [
+          "まっすぐ立ったままでいる。あからさまなミラーリングは、気まずいから",
+          "もたれているので、疲れているのかどうかを尋ねる",
+          "自然に、こちらももたれる。彼女の大きな姿勢の変化を映す"
+        ]
+      },
+      "explanation": {
+        "en": "Subtle alignment builds comfort without feeling performative.",
+        "ja": "さりげなくそろえることで、わざとらしさなしに、安心感が育ちます。"
+      }
+    },
+    "fbd08cf5-bc99-4004-98d5-438bd2be4a9c": {
+      "question_text": {
+        "en": "Which forms of mirroring are effective?",
+        "ja": "効果的なミラーリングの形は、どれですか？"
+      },
+      "options": {
+        "en": [
+          "Matching her posture or stance",
+          "Copying every small movement immediately",
+          "Aligning energy and pace",
+          "Adjusting volume to match hers"
+        ],
+        "ja": [
+          "彼女の姿勢や立ち方に合わせること",
+          "小さな動きを、ひとつ残らず、すぐにまねること",
+          "エネルギーとペースをそろえること",
+          "声の大きさを、彼女に合わせて調整すること"
+        ]
+      },
+      "explanation": {
+        "en": "Mirroring signals familiarity and ease at a subconscious level, which supports rapport.",
+        "ja": "ミラーリングは、無意識のレベルで、親しみと心地よさを伝え、打ち解けるのを助けます。"
+      }
+    }
+  }
+}

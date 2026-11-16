@@ -9,7 +9,8 @@
 //      `L10n.content`, maintained by hand (the compiler cannot see them).
 //
 //  These tests guard the rules: the app ships exactly the languages listed
-//  in `shippedLanguages` (English, and German from Release B), English text
+//  in `shippedLanguages` (English, German from Release B, Spanish and French
+//  from Release C, Japanese from Release D), English text
 //  is unchanged by the catalogs existing, and every string that
 //  is routed through `L10n.content` has a catalog entry for a translator to
 //  fill in.
@@ -25,7 +26,7 @@ final class StringCatalogTests: XCTestCase {
 
     /// Adding a language is a deliberate act: change this set, `knownRegions`
     /// and the validator's `--languages` together.
-    private let shippedLanguages: Set<String> = ["en", "de", "es", "fr"]
+    private let shippedLanguages: Set<String> = ["en", "de", "es", "fr", "ja"]
 
     func testAppBundleDeclaresExactlyTheShippedLanguages() {
         let localizations = Set(Bundle.main.localizations).subtracting(["Base"])

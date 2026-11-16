@@ -31,13 +31,17 @@
 //  Each method is one such user. Run it on a throwaway simulator and not in
 //  a loop.
 //
-//    testOnboardingInGerman / InSpanish / InFrench
+//    testOnboardingInGerman / InSpanish / InFrench / InJapanese
 //        The same walk with the app launched in that language
-//        (`-AppleLanguages (de)`, `(es)` with `es_MX`, `(fr)` with `fr_FR`).
+//        (`-AppleLanguages (de)`, `(es)` with `es_MX`, `(fr)` with `fr_FR`,
+//        `(ja)` with `ja_JP`).
 //        Nothing is compared; the screenshots are read for layout problems in
-//        that language (Release B, G7; Release C).
+//        that language (Release B, G7; Release C; Release D). In Japanese
+//        also look at headings and bold text: Manrope and Poppins have no
+//        Japanese glyphs, so iOS draws them in its own Japanese font
+//        (weight, line height, clipped tops).
 //
-//    testOnboardingAndContentInGerman / InSpanish / InFrench
+//    testOnboardingAndContentInGerman / InSpanish / InFrench / InJapanese
 //        The walk in that language, then a relaunch with the Debug-only
 //        `-forcePremium YES` and a walk through the first lesson and its
 //        quiz, today's Daily Practice and the "Bar Window" scenario, to see
@@ -67,14 +71,15 @@ final class OnboardingSweepTests: XCTestCase {
     /// English text -> the running translation, for a translated run only.
     /// Empty otherwise.
     private var translation: [String: String] = [:]
-    /// The translated run's language ("de", "es", "fr"); nil in English.
+    /// The translated run's language ("de", "es", "fr", "ja"); nil in English.
     private var language: String?
 
     /// How each translated run is launched.
     private static let launchArguments: [String: [String]] = [
         "de": ["-AppleLanguages", "(de)", "-AppleLocale", "de_DE"],
         "es": ["-AppleLanguages", "(es)", "-AppleLocale", "es_MX"],
-        "fr": ["-AppleLanguages", "(fr)", "-AppleLocale", "fr_FR"]
+        "fr": ["-AppleLanguages", "(fr)", "-AppleLocale", "fr_FR"],
+        "ja": ["-AppleLanguages", "(ja)", "-AppleLocale", "ja_JP"]
     ]
 
     /// The English starts of longer strings the walk looks for by their
@@ -176,6 +181,7 @@ final class OnboardingSweepTests: XCTestCase {
     func testOnboardingInGerman() { walkOnboarding(in: "de") }
     func testOnboardingInSpanish() { walkOnboarding(in: "es") }
     func testOnboardingInFrench() { walkOnboarding(in: "fr") }
+    func testOnboardingInJapanese() { walkOnboarding(in: "ja") }
 
     private func walkOnboarding(in language: String) {
         useTranslation(language)
@@ -199,6 +205,7 @@ final class OnboardingSweepTests: XCTestCase {
     func testOnboardingAndContentInGerman() { walkOnboardingAndContent(in: "de") }
     func testOnboardingAndContentInSpanish() { walkOnboardingAndContent(in: "es") }
     func testOnboardingAndContentInFrench() { walkOnboardingAndContent(in: "fr") }
+    func testOnboardingAndContentInJapanese() { walkOnboardingAndContent(in: "ja") }
 
     private func walkOnboardingAndContent(in languageCode: String) {
         useTranslation(languageCode)

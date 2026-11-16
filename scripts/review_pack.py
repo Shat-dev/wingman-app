@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build a language's review pack: one Excel workbook for a native proofreader.
 
-    python3 scripts/review_pack.py <locale> [out.xlsx]      (de, es, fr)
+    python3 scripts/review_pack.py <locale> [out.xlsx]      (de, es, fr, ja)
 
 Default output: localization/<locale>/review/wingman-<language>-review-pack.xlsx
 (for example localization/de/review/wingman-german-review-pack.xlsx).
@@ -13,6 +13,9 @@ so a language can fill in its own without editing this script:
    "choices":  [{"topic", "what", "where", "question"}, ...],   # "Choices to check" rows
    "rules":    ["...", ...],                                     # "How to fill it in"
    "example":  {"english", "draft", "yours", "comment"}}         # example row on Read me
+
+Optional: "sample_lessons": [["course_17", "lesson_17_3"], ...] picks which
+lessons get a sheet, in that order. Left out, it is lessons 1_1 and 6_1.
 
 Sheets:
   Read me          what the app is, the house rules, how to fill the sheet in
@@ -190,7 +193,7 @@ def read_me(ws, counts, settings):
         ("What's in this file", BOLD),
         (f"• Choices to check: {counts['choices']} translation decisions to confirm or change. Start here.", BODY),
         (f"• Interface: {counts['interface']} app strings, sorted by where they appear. Rows marked \"Must read\" (pink) carry money, legal weight or first impressions: paywall, sign-in, onboarding, notifications. Please read every one of those.", BODY),
-        (f"• Lesson 1_1 and Lesson 6_1: two sample lessons ({counts['lessons']} paragraphs), read in order as a user would.", BODY),
+        (f"• {counts['lesson_names']}: {counts['lesson_count']} ({counts['lessons']} paragraphs), read in order as a user would.", BODY),
         (f"• Daily quotes: {counts['quotes']} short quotes shown on the Home screen. Lower priority.", BODY),
         ("", BODY),
         ("How to fill it in", BOLD),
@@ -246,10 +249,18 @@ def interface_sheet(wb, draft, sources, language):
     return len(rows), quotes
 
 
-def lesson_sheets(wb, locale, language):
+def lesson_names(samples):
+    """("Lesson 1_1 and Lesson 6_1", "two sample lessons") for the Read me sheet."""
+    names = [lesson_id.replace("lesson_", "Lesson ") for _, lesson_id in samples]
+    joined = names[0] if len(names) == 1 else ", ".join(names[:-1]) + " and " + names[-1]
+    words = {1: "one sample lesson", 2: "two sample lessons", 3: "three sample lessons", 4: "four sample lessons"}
+    return joined, words.get(len(names), f"{len(names)} sample lessons")
+
+
+def lesson_sheets(wb, locale, language, samples=SAMPLE_LESSONS):
     english = lesson_overlays.english_by_course()
     total = 0
-    for course_id, lesson_id in SAMPLE_LESSONS:
+    for course_id, lesson_id in samples:
         overlay = Path(f"Wingman/Courses/Lesson Overlays/lesson_overlay_{course_id}_{locale}.json")
         translated = json.loads(overlay.read_text(encoding="utf-8")) if overlay.exists() else {}
         prefix = lesson_id.replace("lesson_", "content_") + "_"
@@ -298,7 +309,9 @@ def main():
     counts = {"choices": len(settings["choices"])}
     choices_sheet(wb, settings["choices"])
     counts["interface"], quotes = interface_sheet(wb, draft, swift_sources(), language)
-    counts["lessons"] = lesson_sheets(wb, locale, language)
+    samples = [tuple(sample) for sample in settings.get("sample_lessons", SAMPLE_LESSONS)]
+    counts["lesson_names"], counts["lesson_count"] = lesson_names(samples)
+    counts["lessons"] = lesson_sheets(wb, locale, language, samples)
     quotes_sheet(wb, quotes, language)
     counts["quotes"] = len(quotes)
     # Built last because it quotes the counts, but shown first.

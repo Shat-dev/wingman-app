@@ -1,0 +1,294 @@
+{
+  "scenario": {
+    "a1000002-0000-0000-0000-000000000002": {
+      "title": {
+        "en": "Coffee Connections",
+        "ja": "雨の日のカフェ"
+      },
+      "summary": {
+        "en": "Bad weather, warm coffee, shared space. A simple moment turns into an opportunity.",
+        "ja": "悪天候、温かいコーヒー、同じ空間。何気ないひとときが、チャンスに変わります。"
+      }
+    }
+  },
+  "screens": {
+    "b1000001-0000-0000-0002-000000000001": {
+      "en": "It is raining heavy outside and you've just entered a cafe",
+      "ja": "外はひどい雨です。ちょうどカフェに入ったところです。"
+    },
+    "b1000002-0000-0000-0002-000000000002": {
+      "en": "You see a girl sitting by herself in the corner.",
+      "ja": "隅の席に、一人で座っている女性が目に入ります。"
+    },
+    "b1000003-0000-0000-0002-000000000003": {
+      "en": "You walk over to her.",
+      "ja": "彼女のほうへ歩いていきます。"
+    },
+    "b1000041-0000-0000-0002-000000000041": {
+      "en": "Ummm... yeah that's fine.",
+      "ja": "えっと……はい、どうぞ。"
+    },
+    "b1000042-0000-0000-0002-000000000042": {
+      "en": "Apologizing frames you as an interruption. You should not apologize for your presence.",
+      "ja": "謝ると、自分を「邪魔な存在」として位置づけてしまいます。そこにいること自体を、謝る必要はありません。"
+    },
+    "b1000043-0000-0000-0002-000000000043": {
+      "en": "Ummm... yeah that's fine.",
+      "ja": "えっと……はい、どうぞ。"
+    },
+    "b1000044-0000-0000-0002-000000000044": {
+      "en": "While being direct sometimes works, it may come across as too forward in a cafe.",
+      "ja": "ストレートな言い方がうまくいくこともありますが、カフェでは踏み込みすぎに聞こえるかもしれません。"
+    },
+    "b1000005-0000-0000-0002-000000000005": {
+      "en": "Hey, is anyone sitting here?",
+      "ja": "この席、空いていますか？"
+    },
+    "b1000006-0000-0000-0002-000000000006": {
+      "en": "No go for it.",
+      "ja": "いえ、どうぞ。"
+    },
+    "b1000071-0000-0000-0002-000000000071": {
+      "en": "Umm.. it's Lauren, why?",
+      "ja": "えっと……ローレンですけど、どうしてですか？"
+    },
+    "b1000072-0000-0000-0002-000000000072": {
+      "en": "Too direct, too fast. Build a moment before asking personal questions.",
+      "ja": "ストレートすぎて、早すぎます。個人的な質問をする前に、まず場をつくりましょう。"
+    },
+    "b1000073-0000-0000-0002-000000000073": {
+      "en": "You sit. Silence. She glances up, then back to her book.",
+      "ja": "座ります。沈黙が流れます。彼女はちらりと顔を上げ、また本に目を戻します。"
+    },
+    "b1000074-0000-0000-0002-000000000074": {
+      "en": "You approached her, so you need to lead interaction.",
+      "ja": "声をかけたのは自分です。だから、やり取りをリードする必要があります。"
+    },
+    "b1000008-0000-0000-0002-000000000008": {
+      "en": "Looks like we're stuck here, the rain's intense.",
+      "ja": "しばらく足止めですね。すごい雨で。"
+    },
+    "b1000009-0000-0000-0002-000000000009": {
+      "en": "Lauren closes the book slightly, giving you her attention.",
+      "ja": "ローレンは本を少し閉じて、こちらに注意を向けます。"
+    },
+    "b1000010-0000-0000-0002-000000000010": {
+      "en": "Tell me about it. My train just got delayed for an hour.",
+      "ja": "本当に。電車が1時間も遅れちゃって。"
+    },
+    "b1000111-0000-0000-0002-000000000111": {
+      "en": "Nice, what coffee did you get? I got a latte.",
+      "ja": "へえ。何のコーヒーにしたんですか？僕はラテです。"
+    },
+    "b1000112-0000-0000-0002-000000000112": {
+      "en": "You made it about yourself. She gave you a thread, you ignored it.",
+      "ja": "自分の話にしてしまいました。彼女が糸口をくれたのに、それを無視しています。"
+    },
+    "b1000113-0000-0000-0002-000000000113": {
+      "en": "Yeah I was planning to hit the gym but guess not now.",
+      "ja": "ですよね。僕もジムに行くつもりだったんですけど、今日は無理そうです。"
+    },
+    "b1000114-0000-0000-0002-000000000114": {
+      "en": "You made it about yourself. She gave you a thread, you ignored it.",
+      "ja": "自分の話にしてしまいました。彼女が糸口をくれたのに、それを無視しています。"
+    },
+    "b1000012-0000-0000-0002-000000000012": {
+      "en": "That's unlucky, what did you have on?",
+      "ja": "それはついてないですね。何か予定があったんですか？"
+    },
+    "b1000013-0000-0000-0002-000000000013": {
+      "en": "Job interview across town. Already sent them a message about being late.",
+      "ja": "街の反対側で、就職の面接なんです。遅れるという連絡は、もう入れました。"
+    },
+    "b1000014-0000-0000-0002-000000000014": {
+      "en": "Haha what a first impression. I'm sure they'll understand.",
+      "ja": "あはは、すごい第一印象になりますね。きっとわかってくれますよ。"
+    },
+    "b1000015-0000-0000-0002-000000000015": {
+      "en": "I hope so. I really hope I get it.",
+      "ja": "だといいんですけど。本当に受かりたくて。"
+    },
+    "b1000161-0000-0000-0002-000000000161": {
+      "en": "I remember when I was late once and I...",
+      "ja": "僕も前に一度遅刻したことがあって、そのとき……"
+    },
+    "b1000162-0000-0000-0002-000000000162": {
+      "en": "You made it about yourself. She gave you a thread, you ignored it.",
+      "ja": "自分の話にしてしまいました。彼女が糸口をくれたのに、それを無視しています。"
+    },
+    "b1000163-0000-0000-0002-000000000163": {
+      "en": "How late are you going to be?",
+      "ja": "どのくらい遅れそうなんですか？"
+    },
+    "b1000164-0000-0000-0002-000000000164": {
+      "en": "You added pressure when she was already stressed. Read the room and lighten it.",
+      "ja": "彼女はすでにストレスを感じているのに、プレッシャーを足してしまいました。空気を読んで、場を軽くしましょう。"
+    },
+    "b1000017-0000-0000-0002-000000000017": {
+      "en": "At least you'll be memorable. Showing up soaked from the rain, dedicated employee.",
+      "ja": "少なくとも、印象には残りますよ。雨でずぶ濡れになって現れるなんて、仕事熱心な人だなって。"
+    },
+    "b1000018-0000-0000-0002-000000000018": {
+      "en": "True. If anything it shows I tried, right?",
+      "ja": "たしかに。少なくとも、がんばって来たことは伝わりますよね？"
+    },
+    "b1000019-0000-0000-0002-000000000019": {
+      "en": "Lauren relaxes a bit. You lightened the mood instead of adding to her stress.",
+      "ja": "ローレンは少しリラックスします。ストレスを足す代わりに、場の空気を軽くできました。"
+    },
+    "b1000201-0000-0000-0002-000000000201": {
+      "en": "Hey let's exchange numbers?",
+      "ja": "あの、LINE、交換しませんか？"
+    },
+    "b1000202-0000-0000-0002-000000000202": {
+      "en": "Too forward, too fast. You had momentum, don't force the close prematurely.",
+      "ja": "踏み込みすぎで、早すぎます。良い流れができていました。まだ早いうちに、無理に次へつなげようとしないでください。"
+    },
+    "b1000203-0000-0000-0002-000000000203": {
+      "en": "Anyway, so that's a cool phone case.",
+      "ja": "ところで、そのスマホケース、いいですね。"
+    },
+    "b1000204-0000-0000-0002-000000000204": {
+      "en": "While you can ask about this later, continue on the existing thread about her job.",
+      "ja": "これはあとで聞くこともできます。今は、彼女の仕事の話という糸口を続けましょう。"
+    },
+    "b1000021-0000-0000-0002-000000000021": {
+      "en": "What's the job anyway?",
+      "ja": "ちなみに、どんな仕事なんですか？"
+    },
+    "b1000022-0000-0000-0002-000000000022": {
+      "en": "Marketing for a tech start up, been applying for months now.",
+      "ja": "IT系スタートアップのマーケティングです。もう何か月も応募を続けていて。"
+    },
+    "b1000023-0000-0000-0002-000000000023": {
+      "en": "You and Lauren are talking. The energy is good. Natural back and forth.",
+      "ja": "ローレンと話しています。良い雰囲気です。自然な言葉のキャッチボールが続きます。"
+    },
+    "b1000024-0000-0000-0002-000000000024": {
+      "en": "You lose track of time... All of a sudden her phone buzzes.",
+      "ja": "時間を忘れて話し込んでいると……突然、彼女のスマホが震えます。"
+    },
+    "b1000025-0000-0000-0002-000000000025": {
+      "en": "Oh, my train's here in five minutes.",
+      "ja": "あ、あと5分で電車が来ます。"
+    },
+    "b1000026-0000-0000-0002-000000000026": {
+      "en": "She starts gathering her things, and is preparing to leave.",
+      "ja": "彼女は荷物をまとめ始め、帰る準備をしています。"
+    },
+    "b1000271-0000-0000-0002-000000000271": {
+      "en": "Hey I know a restaurant we can have dinner tomorrow at, I'll pick you up at 8?",
+      "ja": "いいレストランを知っているんです。明日、夕食に行きましょう。8時に迎えに行きますね？"
+    },
+    "b1000272-0000-0000-0002-000000000272": {
+      "en": "While this can work, closes work best when the ask feels small so saying yes feels natural.",
+      "ja": "これでうまくいくこともあります。でも、次につなげる誘いは、小さく感じられて「はい」と言いやすいときに一番うまくいきます。"
+    },
+    "b1000273-0000-0000-0002-000000000273": {
+      "en": "Best of luck with your job interview...",
+      "ja": "面接、がんばってくださいね……"
+    },
+    "b1000274-0000-0000-0002-000000000274": {
+      "en": "She was engaged and receptive. But you never closed, the story ends there.",
+      "ja": "彼女は会話に乗り、受け入れてくれていました。でも、次につなげなかったので、物語はここで終わりです。"
+    },
+    "b1000028-0000-0000-0002-000000000028": {
+      "en": "Hey tell me how your interview goes, what's your number?",
+      "ja": "面接がどうだったか、教えてください。LINE、聞いてもいいですか？"
+    },
+    "b1000029-0000-0000-0002-000000000029": {
+      "en": "Haha of course, I'll let you know. My number is...",
+      "ja": "あはは、もちろん。報告しますね。私のLINEは……"
+    },
+    "b1000030-0000-0000-0002-000000000030": {
+      "en": "Success. You review your interaction with Lauren.",
+      "ja": "成功です。ローレンとのやり取りを振り返ります。"
+    },
+    "b1000031-0000-0000-0002-000000000031": {
+      "en": "You opened with a shared experience so the conversation felt natural.",
+      "ja": "同じ状況を共有していることから話しかけたので、会話が自然に感じられました。"
+    },
+    "b1000032-0000-0000-0002-000000000032": {
+      "en": "You associated yourself with positive emotions by calming her down.",
+      "ja": "彼女を落ち着かせることで、自分を前向きな感情と結びつけました。"
+    },
+    "b1000033-0000-0000-0002-000000000033": {
+      "en": "And you followed on the conversational threads she gave you. Well done.",
+      "ja": "そして、彼女がくれた会話の糸口をたどりました。よくできました。"
+    }
+  },
+  "options": {
+    "c1000001-0000-0000-0002-000000000001": {
+      "en": "\"Is anyone sitting here?\"",
+      "ja": "「この席、空いていますか？」"
+    },
+    "c1000002-0000-0000-0002-000000000002": {
+      "en": "\"Hey sorry to bother you, can I sit with you?\"",
+      "ja": "「すみません、お邪魔してしまって。ご一緒してもいいですか？」"
+    },
+    "c1000003-0000-0000-0002-000000000003": {
+      "en": "\"Hey good looking, let me sit here.\"",
+      "ja": "「ねえ、きれいだね。ここ、座らせてよ」"
+    },
+    "c1000004-0000-0000-0002-000000000004": {
+      "en": "Ask her what her name is",
+      "ja": "名前を尋ねる"
+    },
+    "c1000005-0000-0000-0002-000000000005": {
+      "en": "Make a comment on the weather",
+      "ja": "天気についてひと言コメントする"
+    },
+    "c1000006-0000-0000-0002-000000000006": {
+      "en": "Sit quietly and wait for her to start talking",
+      "ja": "黙って座り、彼女が話し始めるのを待つ"
+    },
+    "c1000007-0000-0000-0002-000000000007": {
+      "en": "Ask where she was headed to",
+      "ja": "どこへ向かうところだったのかを尋ねる"
+    },
+    "c1000008-0000-0000-0002-000000000008": {
+      "en": "Ask about the coffee she's drinking",
+      "ja": "彼女が飲んでいるコーヒーについて尋ねる"
+    },
+    "c1000009-0000-0000-0002-000000000009": {
+      "en": "Share your failed plans from the rain",
+      "ja": "雨でだめになった自分の予定を話す"
+    },
+    "c1000010-0000-0000-0002-000000000010": {
+      "en": "Share your failed interview experiences",
+      "ja": "自分が面接で失敗した経験を話す"
+    },
+    "c1000011-0000-0000-0002-000000000011": {
+      "en": "Ask her how late she'll be for the interview",
+      "ja": "面接にどのくらい遅れそうかを尋ねる"
+    },
+    "c1000012-0000-0000-0002-000000000012": {
+      "en": "Be playful and reassuring about the situation",
+      "ja": "遊び心を持って、安心させるようなことを言う"
+    },
+    "c1000013-0000-0000-0002-000000000013": {
+      "en": "Ask her what kind of role it is",
+      "ja": "どんな職種なのかを尋ねる"
+    },
+    "c1000014-0000-0000-0002-000000000014": {
+      "en": "Suggest exchanging numbers",
+      "ja": "LINEの交換を提案する"
+    },
+    "c1000015-0000-0000-0002-000000000015": {
+      "en": "Change the subject and comment on her phone case",
+      "ja": "話題を変えて、彼女のスマホケースについてコメントする"
+    },
+    "c1000016-0000-0000-0002-000000000016": {
+      "en": "Ask her to let you know how her job interview goes",
+      "ja": "面接がどうだったか教えてほしいと伝える"
+    },
+    "c1000017-0000-0000-0002-000000000017": {
+      "en": "Ask to go on a dinner date tomorrow night",
+      "ja": "明日の夜、ディナーデートに誘う"
+    },
+    "c1000018-0000-0000-0002-000000000018": {
+      "en": "Wish her good luck for her interview",
+      "ja": "面接がうまくいくよう祈っていると伝える"
+    }
+  }
+}

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Turn reviewed-side-by-side translation files into SQL for the translation tables.
 
-    python3 scripts/db_translations_sql.py <locale>      (de, es, fr)
+    python3 scripts/db_translations_sql.py <locale>      (de, es, fr, ja)
         Reads every localization/<locale>/db/*.json and writes the matching
         supabase/seed/content_translations_<locale>/<same name>.sql, then the
         bundled Wingman/Content/question_translations_seed.<locale>.json.
@@ -10,7 +10,7 @@
 Each JSON file holds English and the translation side by side, so a reviewer
 reads it directly. The English is a copy of the live row at the time of
 export: the SQL only ever writes the translation, keyed by the row's id. The
-translation sits under the locale's own key ("de", "es", "fr"):
+translation sits under the locale's own key ("de", "es", "fr", "ja"):
 
   {"scenario":  {"<scenario id>": {"title": {"en", "<locale>"}, "summary": {"en", "<locale>"}}},
    "screens":   {"<screen id>":   {"en", "<locale>"}},
@@ -48,7 +48,7 @@ def lit(text):
     return "'" + text.replace("'", "''") + "'"
 
 
-LANGUAGE_NAMES = {"de": "German", "es": "Spanish", "fr": "French"}
+LANGUAGE_NAMES = {"de": "German", "es": "Spanish", "fr": "French", "ja": "Japanese"}
 
 
 def language_name(locale):
