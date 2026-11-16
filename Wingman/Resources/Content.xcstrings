@@ -488,7 +488,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Nach einer Trennung oder Scheidung wieder auf dem Markt"
+            "value" : "Nach einer Trennung oder Scheidung wieder Single"
           }
         },
         "es" : {
@@ -1496,7 +1496,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Angst vor den sozialen Folgen"
+            "value" : "Angst davor, was andere denken"
           }
         },
         "es" : {
@@ -1640,7 +1640,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Bei Frauen, die ich attraktiv finde, erstarre ich"
+            "value" : "Bei Frauen, die ich attraktiv finde, werde ich nervös"
           }
         },
         "es" : {
