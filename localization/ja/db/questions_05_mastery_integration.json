@@ -1,0 +1,950 @@
+{
+  "questions": {
+    "afe9db16-1b83-4292-ba6f-e10ecbe6ac93": {
+      "question_text": {
+        "en": "What is social status in attraction contexts?",
+        "ja": "惹かれ合いの場面での「社会的な立ち位置」とは、何ですか？"
+      },
+      "options": {
+        "en": [
+          "Financial success or celebrity",
+          "Physical appearance alone",
+          "Number of friends you arrive with",
+          "Perceived value based on how others respond to you"
+        ],
+        "ja": [
+          "経済的な成功や、有名であること",
+          "外見だけ",
+          "一緒に来た友人の数",
+          "周りが自分にどう反応するかにもとづく、見られ方としての価値"
+        ]
+      },
+      "explanation": {
+        "en": "Status is how the room reacts to you, signalling you are valued socially.",
+        "ja": "立ち位置とは、その場が自分にどう反応するかのことで、周りから大切にされていると伝えます。"
+      }
+    },
+    "746b1fe5-9312-4688-8acf-78d313a7752a": {
+      "question_text": {
+        "en": "You enter a venue and introduce yourself around. Later you approach her. What helped?",
+        "ja": "店に入り、周りの人にあいさつして回ります。そのあとで、彼女に声をかけます。何が助けになりましたか？"
+      },
+      "options": {
+        "en": [
+          "She is more open due to built social proof",
+          "Nothing; status doesn’t affect receptiveness",
+          "You must still overcome low status",
+          "The approach feels forced"
+        ],
+        "ja": [
+          "社会的証明ができていたので、彼女がより心を開いている",
+          "何も。立ち位置は、受け入れやすさに影響しない",
+          "それでも、低い立ち位置を乗り越えなければならない",
+          "声のかけ方が、無理をしているように感じられる"
+        ]
+      },
+      "explanation": {
+        "en": "Positive interactions raise status, making her more receptive.",
+        "ja": "前向きなやり取りが立ち位置を上げ、彼女をより受け入れやすくします。"
+      }
+    },
+    "c790b664-f094-409a-9440-448401e0ec8e": {
+      "question_text": {
+        "en": "How can someone build social status quickly in a new environment?",
+        "ja": "新しい環境で、どうすれば社会的な立ち位置をすばやく築けますか？"
+      },
+      "options": {
+        "en": [
+          "Introduce people to each other",
+          "Engage staff or hosts respectfully",
+          "Focus exclusively on one person",
+          "Contribute positively to group energy"
+        ],
+        "ja": [
+          "人と人を引き合わせる",
+          "スタッフや主催者に、敬意を持って接する",
+          "一人だけに集中する",
+          "グループのエネルギーに、前向きに貢献する"
+        ]
+      },
+      "explanation": {
+        "en": "Adding value to the social fabric raises status faster than pursuing a single target.",
+        "ja": "その場の人のつながりに価値を足すことは、一人だけを追いかけるよりも速く、立ち位置を上げます。"
+      }
+    },
+    "9d799275-6cc6-4451-9db7-bfb0e563f9bc": {
+      "question_text": {
+        "en": "What actually makes a man interesting in conversation?",
+        "ja": "会話の中で、男性を本当に面白くするものは何ですか？"
+      },
+      "options": {
+        "en": [
+          "Living a life that produces stories and perspective",
+          "Having strong opinions",
+          "Being funny on command",
+          "Talking confidently about himself"
+        ],
+        "ja": [
+          "エピソードと、ものの見方を生む人生を送っていること",
+          "強い意見を持っていること",
+          "求められればいつでも笑わせられること",
+          "自分について、自信を持って話すこと"
+        ]
+      },
+      "explanation": {
+        "en": "An interesting life produces real experiences that draw people in naturally.",
+        "ja": "面白い人生は、人を自然に引き込む、本物の経験を生みます。"
+      }
+    },
+    "d8654d59-aeba-4ca6-b2c9-c6824582ae10": {
+      "question_text": {
+        "en": "Signs someone lives an interesting life?",
+        "ja": "面白い人生を送っている人のサインは、どれですか？"
+      },
+      "options": {
+        "en": [
+          "They have stories from real experiences naturally",
+          "They ask better questions from genuine curiosity",
+          "They speak passionately about ongoing projects or interests",
+          "All of the above"
+        ],
+        "ja": [
+          "本物の経験から来るエピソードが、自然に出てくる",
+          "純粋な好奇心から、より良い質問をする",
+          "今取り組んでいることや関心ごとについて、熱を込めて話す",
+          "上のすべて"
+        ]
+      },
+      "explanation": {
+        "en": "An interesting life produces real experiences that draw people in naturally.",
+        "ja": "面白い人生は、人を自然に引き込む、本物の経験を生みます。"
+      }
+    },
+    "8dd4c710-136c-4930-a752-e6a21ba5f5ac": {
+      "question_text": {
+        "en": "How does an interesting life change conversation dynamics?",
+        "ja": "面白い人生は、会話のあり方をどう変えますか？"
+      },
+      "options": {
+        "en": [
+          "It turns talking into a performance",
+          "It provides natural topics without digging",
+          "It creates magnetic energy from real experiences"
+        ],
+        "ja": [
+          "話すことを、演技に変える",
+          "掘り起こさなくても、自然な話題をくれる",
+          "本物の経験から、人を引きつけるエネルギーを生む"
+        ]
+      },
+      "explanation": {
+        "en": "An interesting life produces effortless, engaging exchanges.",
+        "ja": "面白い人生は、無理のない、引き込まれるやり取りを生みます。"
+      }
+    },
+    "a96beb76-cf2b-44bb-8339-887ee43c1e0e": {
+      "question_text": {
+        "en": "Why does mystery help with attraction?",
+        "ja": "ミステリアスさは、なぜ惹かれる気持ちの助けになるのですか？"
+      },
+      "options": {
+        "en": [
+          "Uncertainty keeps her mentally engaged and curious",
+          "Brain pays more attention to what it cannot fully map",
+          "Gives her space to discover you vs flooding with information",
+          "All of the above"
+        ],
+        "ja": [
+          "不確かさが、彼女の頭を引きつけ、好奇心を保つから",
+          "脳は、全体像をつかみきれないものに、より多くの注意を向けるから",
+          "情報を浴びせるのではなく、彼女がこちらを知っていく余地を残すから",
+          "上のすべて"
+        ]
+      },
+      "explanation": {
+        "en": "Mystery keeps attention engaged by leaving room for curiosity and discovery.",
+        "ja": "ミステリアスさは、好奇心と発見の余地を残すことで、注意を引きつけ続けます。"
+      }
+    },
+    "87f62533-abcc-4fdd-ab12-24b45f5f4be0": {
+      "question_text": {
+        "en": "She asks what you do for work. What response creates the most mystery?",
+        "ja": "彼女が、仕事は何をしているのかと尋ねます。最もミステリアスさを生む返しは、どれですか？"
+      },
+      "options": {
+        "en": [
+          "Give a detailed breakdown of your job and projects",
+          "Say \"A bit of this and that—mostly creative stuff\" then ask about her",
+          "List your full career history",
+          "Say \"Nothing interesting\" and change topic"
+        ],
+        "ja": [
+          "仕事と担当している案件を、細かく説明する",
+          "「いろいろ少しずつ、ですね。主にクリエイティブ系です」と言って、彼女のことを尋ねる",
+          "これまでの職歴を、すべて並べる",
+          "「面白いことは何も」と言って、話題を変える"
+        ]
+      },
+      "explanation": {
+        "en": "Share just enough to intrigue, leaving space for her curiosity.",
+        "ja": "興味を引くのに足りる分だけ話し、彼女の好奇心の余地を残しましょう。"
+      }
+    },
+    "f45fc9f5-e0a3-4d7b-87bc-840a0f414623": {
+      "question_text": {
+        "en": "What happens when you over-explain yourself early in conversation?",
+        "ja": "会話の序盤で自分のことを説明しすぎると、何が起こりますか？"
+      },
+      "options": {
+        "en": [
+          "Her imagination stays actively engaged",
+          "Nothing left for her to discover or wonder about",
+          "Curiosity fades as the picture becomes complete"
+        ],
+        "ja": [
+          "彼女の想像力が、活発に働き続ける",
+          "彼女が見つけたり、想像したりするものが、何も残らない",
+          "全体像が見えてしまい、好奇心が薄れる"
+        ]
+      },
+      "explanation": {
+        "en": "Full disclosure removes uncertainty, reducing mental engagement.",
+        "ja": "すべてを明かすと、不確かさがなくなり、頭の中での関わりが減ります。"
+      }
+    },
+    "59011032-6b21-4d79-aaf3-ebe1fcb14211": {
+      "question_text": {
+        "en": "How does your social circle influence your confidence with women?",
+        "ja": "付き合う人たちは、女性に対する自信にどう影響しますか？"
+      },
+      "options": {
+        "en": [
+          "Social behavior feels normal or abnormal based on your environment",
+          "Friends directly teach attraction skills",
+          "Confidence is contagious biologically",
+          "Women prefer groups over individuals"
+        ],
+        "ja": [
+          "人との関わり方が、ふつうに感じられるか、変に感じられるかは、環境で決まる",
+          "友人が、惹かれ合いのスキルを直接教えてくれる",
+          "自信は、生物学的にうつる",
+          "女性は、一人よりもグループを好む"
+        ]
+      },
+      "explanation": {
+        "en": "Your environment either encourages growth or reinforces hesitation.",
+        "ja": "環境は、成長を後押しするか、ためらいを強めるかの、どちらかです。"
+      }
+    },
+    "80bb97c5-90cf-434a-a890-08a1daa36c04": {
+      "question_text": {
+        "en": "What happens when your friends avoid going out and meeting new people?",
+        "ja": "友人たちが、出かけることや新しい人に会うことを避けていると、何が起こりますか？"
+      },
+      "options": {
+        "en": [
+          "Your desire to approach weakens over time",
+          "The environment pushes you toward inaction",
+          "Approaching starts feeling unusual and unnecessary",
+          "All of the above"
+        ],
+        "ja": [
+          "声をかけたいという気持ちが、時間とともに弱まる",
+          "環境が、動かない方向へ押す",
+          "声をかけることが、変わったことで、必要のないことに感じられてくる",
+          "上のすべて"
+        ]
+      },
+      "explanation": {
+        "en": "Stay around proactive people who support action rather than avoidance.",
+        "ja": "避けることではなく、行動することを後押ししてくれる、自分から動く人たちのそばにいましょう。"
+      }
+    },
+    "3863647b-81d5-4ab3-9b63-30861c071216": {
+      "question_text": {
+        "en": "A growth-oriented social circle typically does what?",
+        "ja": "成長を大切にする仲間は、たいてい何をしてくれますか？"
+      },
+      "options": {
+        "en": [
+          "Nudges you forward when you hesitate",
+          "Celebrates effort, not just outcomes",
+          "Keeps you comfortable and content",
+          "Creates opportunities to meet new people"
+        ],
+        "ja": [
+          "ためらっているとき、背中を押してくれる",
+          "結果だけでなく、努力をたたえてくれる",
+          "居心地よく、満足したままでいさせてくれる",
+          "新しい人に出会う機会をつくってくれる"
+        ]
+      },
+      "explanation": {
+        "en": "Being around proactive people supports initiative rather than avoidance.",
+        "ja": "自分から動く人たちのそばにいると、避けることではなく、自分から踏み出すことが後押しされます。"
+      }
+    },
+    "5b78be7b-c378-4416-a5d7-3266ab3c3dfc": {
+      "question_text": {
+        "en": "How do you build social exposure into your routine?",
+        "ja": "人と関わる機会を、どうやって日課に組み込みますか？"
+      },
+      "options": {
+        "en": [
+          "Say yes to things even when you're tired",
+          "Go to places even when staying home is easier",
+          "Join groups even when you’re unsure you'll like them",
+          "All of the above"
+        ],
+        "ja": [
+          "疲れているときでも、誘いに「はい」と言う",
+          "家にいるほうが楽なときでも、出かける",
+          "気に入るかどうかわからなくても、グループに入ってみる",
+          "上のすべて"
+        ]
+      },
+      "explanation": {
+        "en": "Social exposure grows through repeated small choices to show up.",
+        "ja": "人と関わる機会は、「顔を出す」という小さな選択の繰り返しで育ちます。"
+      }
+    },
+    "49c55c64-36bd-4961-9847-6467136116c3": {
+      "question_text": {
+        "en": "You get invited to an event but feel tired. What should you prioritize?",
+        "ja": "イベントに誘われましたが、疲れを感じています。何を優先するべきですか？"
+      },
+      "options": {
+        "en": [
+          "Stay home for comfort every time",
+          "Go anyway to build exposure opportunities",
+          "Wait for perfect energy levels",
+          "Decline to avoid forced interaction"
+        ],
+        "ja": [
+          "毎回、心地よさのために家にいる",
+          "関わる機会を増やすために、それでも行く",
+          "エネルギーが万全になるのを待つ",
+          "無理な付き合いを避けるために、断る"
+        ]
+      },
+      "explanation": {
+        "en": "Saying yes despite fatigue increases volume and potential connections.",
+        "ja": "疲れていても「はい」と言うことで、場数と、つながりの可能性が増えます。"
+      }
+    },
+    "dbe59913-e0d6-4e3f-a500-abe814b9551c": {
+      "question_text": {
+        "en": "How do social connections compound over time?",
+        "ja": "人とのつながりは、時間とともにどう積み重なっていきますか？"
+      },
+      "options": {
+        "en": [
+          "One person can lead to many others",
+          "Invitations create new environments",
+          "Every interaction converts into something"
+        ],
+        "ja": [
+          "一人が、多くの人につながることがある",
+          "誘いが、新しい環境を生む",
+          "どんなやり取りも、必ず何かに変わる"
+        ]
+      },
+      "explanation": {
+        "en": "One connection can unlock dozens of indirect opportunities. Put yourself out there.",
+        "ja": "ひとつのつながりが、何十もの間接的なチャンスを開くことがあります。自分から外に出ていきましょう。"
+      }
+    },
+    "a683dd8f-530d-4c64-a862-57d8f10be86b": {
+      "question_text": {
+        "en": "Local training opportunities in daily routine?",
+        "ja": "日課の中にある、身近な練習の機会は、どれですか？"
+      },
+      "options": {
+        "en": [
+          "Quick chat with barista at regular coffee shop",
+          "Small interaction with person at gym you see regularly",
+          "Comment in grocery store checkout line",
+          "All of the above"
+        ],
+        "ja": [
+          "行きつけのカフェの店員との、ちょっとした会話",
+          "ジムでいつも見かける人との、短いやり取り",
+          "スーパーのレジの列でのひと言",
+          "上のすべて"
+        ]
+      },
+      "explanation": {
+        "en": "Small local interactions reduce pressure and build consistency.",
+        "ja": "身近な小さなやり取りは、プレッシャーを減らし、継続する力を育てます。"
+      }
+    },
+    "bb06d0a0-4845-4ac7-80b4-cca9c98be6a3": {
+      "question_text": {
+        "en": "You see the same barista every morning. What could you do to train?",
+        "ja": "毎朝、同じカフェの店員に会います。練習として、何ができますか？"
+      },
+      "options": {
+        "en": [
+          "Wait for a night venue instead",
+          "Avoid talking to stay comfortable",
+          "Make a small comment or chat briefly"
+        ],
+        "ja": [
+          "代わりに、夜の店に行くまで待つ",
+          "居心地よくいるために、話すのを避ける",
+          "ひと言かけるか、短く会話する"
+        ]
+      },
+      "explanation": {
+        "en": "Low-pressure daily interactions build comfort and skill naturally.",
+        "ja": "プレッシャーの少ない毎日のやり取りが、慣れとスキルを自然に育てます。"
+      }
+    },
+    "219c6ef8-a1ff-4dbe-8af3-fa8686d0e3c1": {
+      "question_text": {
+        "en": "What is the main advantage of local practice over night venues?",
+        "ja": "夜の店と比べたときの、身近な場所での練習の一番の利点は何ですか？"
+      },
+      "options": {
+        "en": [
+          "It limits interactions to weekends",
+          "It turns routine environments into training grounds",
+          "It requires special outings for every rep",
+          "It keeps stakes high for better results"
+        ],
+        "ja": [
+          "やり取りが、週末に限られること",
+          "いつもの環境が、練習の場に変わること",
+          "場数のひとつひとつに、特別な外出が必要になること",
+          "より良い結果のために、プレッシャーを高く保てること"
+        ]
+      },
+      "explanation": {
+        "en": "Everyday places provide endless low-pressure opportunities.",
+        "ja": "日常の場所は、プレッシャーの少ない機会を、いくらでも与えてくれます。"
+      }
+    },
+    "614a2ff0-a42d-4640-8fe2-752885cd8ed4": {
+      "question_text": {
+        "en": "What is \"home court advantage\" in social settings?",
+        "ja": "人が集まる場での「ホームグラウンドの強み」とは、何ですか？"
+      },
+      "options": {
+        "en": [
+          "Confidence that comes from being in familiar territory",
+          "Social proof and perceived status gained from being recognized regular",
+          "Advantage of knowing the layout and people in a venue",
+          "Comfort level that makes approaching feel less scary"
+        ],
+        "ja": [
+          "なじみのある場所にいることから来る自信",
+          "顔なじみの常連として認識されていることで得られる、社会的証明と立ち位置",
+          "店の間取りや、そこにいる人を知っているという有利さ",
+          "声をかけることをそれほど怖く感じさせない、居心地のよさ"
+        ]
+      },
+      "explanation": {
+        "en": "Home court = social proof/status from being recognized regular.",
+        "ja": "ホームグラウンドの強みとは、顔なじみの常連であることから来る、社会的証明と立ち位置のことです。"
+      }
+    },
+    "91be9da9-35e2-4ee6-a859-ebc43437dadd": {
+      "question_text": {
+        "en": "What does being a \"recognized regular\" signal to others?",
+        "ja": "「顔なじみの常連」であることは、周りに何を伝えますか？"
+      },
+      "options": {
+        "en": [
+          "You clearly belong in this space",
+          "Others have already accepted and vetted you",
+          "You have more money or status than typical visitors",
+          "You're safe to interact with"
+        ],
+        "ja": [
+          "明らかに、この場所の一員だということ",
+          "ほかの人たちが、すでに受け入れ、確かめた相手だということ",
+          "ふつうの客より、お金や地位があるということ",
+          "関わっても安全な相手だということ"
+        ]
+      },
+      "explanation": {
+        "en": "Belonging, social vetting, and safety signals = home court advantage.",
+        "ja": "この場の一員であること、周りに確かめられていること、安全であること。このサインが、ホームグラウンドの強みです。"
+      }
+    },
+    "7755c8f9-1d23-4c93-b84c-9bb4a6f5047f": {
+      "question_text": {
+        "en": "Ways to build home court advantage at a gym?",
+        "ja": "ジムで、ホームグラウンドの強みを築く方法は、どれですか？"
+      },
+      "options": {
+        "en": [
+          "Attend consistently at similar times to become recognized",
+          "Exchange brief friendly moments with staff and regulars",
+          "Only interact with people you're romantically interested in",
+          "Acknowledge familiar faces you've seen before"
+        ],
+        "ja": [
+          "顔を覚えてもらえるよう、同じような時間帯に継続して通う",
+          "スタッフや常連と、短く感じのいいやり取りを交わす",
+          "恋愛的に関心のある人とだけ、関わる",
+          "前に見かけたことのある顔に、あいさつする"
+        ]
+      },
+      "explanation": {
+        "en": "Consistency, friendly staff/regular interactions, acknowledging familiar faces = building home court.",
+        "ja": "継続して通うこと、スタッフや常連との感じのいいやり取り、顔なじみへのあいさつ。それが、ホームグラウンドを築きます。"
+      }
+    },
+    "4a4122bd-a43e-4662-aef4-08635258b40c": {
+      "question_text": {
+        "en": "What mindset best supports building volume?",
+        "ja": "場数を重ねることを最もよく支える考え方は、どれですか？"
+      },
+      "options": {
+        "en": [
+          "Each rep is teaching your nervous system positively",
+          "Every approach must lead somewhere",
+          "Results matter more than exposure",
+          "Avoid discomfort when possible"
+        ],
+        "ja": [
+          "一回一回が、神経系に良いことを教えている",
+          "声をかけたら、必ずどこかにつながらなければならない",
+          "関わる機会より、結果のほうが大切だ",
+          "できるときは、居心地の悪さを避ける"
+        ]
+      },
+      "explanation": {
+        "en": "Each interaction counts as training, regardless of outcome.",
+        "ja": "どんなやり取りも、結果に関係なく、練習として数に入ります。"
+      }
+    },
+    "659f514c-7bf3-425d-9c1e-cf5df2bb69ef": {
+      "question_text": {
+        "en": "An approach feels flat and you get no result. What should you view this as?",
+        "ja": "声をかけても手応えがなく、何の結果も得られません。これをどう捉えるべきですか？"
+      },
+      "options": {
+        "en": [
+          "A valuable rep toward habituation",
+          "A failure that reinforces anxiety",
+          "Proof you need better lines",
+          "Reason to stop for the day"
+        ],
+        "ja": [
+          "慣れに向けた、価値ある一回",
+          "不安を強める失敗",
+          "もっと良いセリフが必要だという証拠",
+          "今日はやめる理由"
+        ]
+      },
+      "explanation": {
+        "en": "Every interaction, regardless of outcome, contributes to positive learning.",
+        "ja": "どんなやり取りも、結果に関係なく、前向きな学びにつながります。"
+      }
+    },
+    "4e225e86-4aa9-4111-b01c-711e3725c89f": {
+      "question_text": {
+        "en": "Which behaviors increase effective volume?",
+        "ja": "意味のある場数を増やす行動は、どれですか？"
+      },
+      "options": {
+        "en": [
+          "One small interaction per day",
+          "Waiting until you feel confident",
+          "Consistent low-pressure reps",
+          "Only approaching when attraction is high"
+        ],
+        "ja": [
+          "一日にひとつの、小さなやり取り",
+          "自信が持てるまで待つこと",
+          "プレッシャーの少ない、継続した場数",
+          "強く惹かれたときだけ、声をかけること"
+        ]
+      },
+      "explanation": {
+        "en": "Consistency and frequency matter more than intensity.",
+        "ja": "激しさよりも、継続と頻度のほうが大切です。"
+      }
+    },
+    "b9f59424-635d-4624-ad50-aa3dd25f6855": {
+      "question_text": {
+        "en": "What does regular repetition create?",
+        "ja": "定期的な繰り返しは、何を生みますか？"
+      },
+      "options": {
+        "en": [
+          "Neural pathways strengthen through repeated behavior",
+          "Behavior migrates from \"occasionally do\" to \"things I am\"",
+          "Prevents anxiety rebuilding and avoidance entrenching",
+          "All of the above"
+        ],
+        "ja": [
+          "行動を繰り返すことで、神経回路が強化される",
+          "行動が、「たまにやること」から「自分はこういう人間だ」へ移る",
+          "不安がぶり返すことと、避ける癖が根づくことを防ぐ",
+          "上のすべて"
+        ]
+      },
+      "explanation": {
+        "en": "Regular practice protects gains and prevents skill decay. Stay consistent.",
+        "ja": "定期的な練習は、積み上げたものを守り、スキルが衰えるのを防ぎます。継続しましょう。"
+      }
+    },
+    "e6b9ff5d-fc7a-4e92-91d3-57411235152b": {
+      "question_text": {
+        "en": "What happens psychologically during long breaks from practice?",
+        "ja": "練習を長く休んでいるあいだ、心理的に何が起こりますか？"
+      },
+      "options": {
+        "en": [
+          "Skills strengthen further",
+          "Avoidance and anxiety have time to entrench",
+          "Neural pathways remain efficient",
+          "Progress compounds automatically"
+        ],
+        "ja": [
+          "スキルがさらに強まる",
+          "避ける癖と不安が、根づく時間を得る",
+          "神経回路が、効率的なままでいる",
+          "進歩が、自動的に積み重なる"
+        ]
+      },
+      "explanation": {
+        "en": "Breaks give the mind space to generate new reasons not to act.",
+        "ja": "休んでいるあいだに、心は、行動しない新しい理由をつくり出す余地を得ます。"
+      }
+    },
+    "dd2cece1-3524-4319-bd95-d773079fa01b": {
+      "question_text": {
+        "en": "Which behaviors support sustainable consistency?",
+        "ja": "無理なく続けられる継続を支える行動は、どれですか？"
+      },
+      "options": {
+        "en": [
+          "Setting a realistic weekly minimum",
+          "Waiting until you feel confident",
+          "Avoiding long gaps between reps",
+          "Treating small interactions as valid reps"
+        ],
+        "ja": [
+          "現実的な、週の最低ラインを決めること",
+          "自信が持てるまで待つこと",
+          "場数のあいだを、長く空けないこと",
+          "小さなやり取りも、ちゃんとした一回として扱うこと"
+        ]
+      },
+      "explanation": {
+        "en": "Momentum matters more than intensity; progress comes from continuity, not bursts.",
+        "ja": "激しさよりも、流れのほうが大切です。進歩は、一気にやることからではなく、続けることから生まれます。"
+      }
+    },
+    "3529af51-9b76-41c8-868a-2a04a415dc15": {
+      "question_text": {
+        "en": "What happens during the identity shift from \"practicing a skill\" to \"being someone who does it\"?",
+        "ja": "「スキルを練習している」から「それをする人間である」へと自己認識が変わるとき、何が起こりますか？"
+      },
+      "options": {
+        "en": [
+          "The behavior becomes inseparable from your self-concept",
+          "You stop needing external validation that you're good at it",
+          "The action moves from \"thing I do\" to \"who I am\"",
+          "Courage is no longer required because there's no gap to bridge"
+        ],
+        "ja": [
+          "その行動が、自己イメージと切り離せなくなる",
+          "自分はうまくやれているという、外からの承認が必要なくなる",
+          "その行為が、「していること」から「自分という人間」へ移る",
+          "埋めるべきすき間がないので、勇気がもう必要なくなる"
+        ]
+      },
+      "explanation": {
+        "en": "Inseparable from identity, \"thing I do\" → \"who I am,\" no gap requiring courage = identity shift.",
+        "ja": "行動が自分という人間と切り離せなくなり、「していること」が「自分という人間」になり、勇気を必要とするすき間がなくなる。それが、自己認識の変化です。"
+      }
+    },
+    "242a1957-a048-451a-9da7-8ab630640b24": {
+      "question_text": {
+        "en": "Why does approaching \"not require courage\" once you've reached automaticity?",
+        "ja": "自然にできる段階に達すると、なぜ声をかけるのに「勇気が必要なくなる」のですか？"
+      },
+      "options": {
+        "en": [
+          "You've done it so many times that fear completely disappears",
+          "There's no gap between who you are and what you're doing",
+          "Confidence from repeated success eliminates any hesitation",
+          "You've become so skilled that outcomes don't matter anymore"
+        ],
+        "ja": [
+          "何度もやってきたので、恐れが完全に消えるから",
+          "自分という人間と、していることのあいだに、すき間がないから",
+          "成功を重ねた自信が、ためらいをすべてなくすから",
+          "腕が上がりすぎて、結果がもうどうでもよくなるから"
+        ]
+      },
+      "explanation": {
+        "en": "You're not pushing against your nature—you're simply expressing who you are.",
+        "ja": "本来の自分に逆らって、無理に行動しているのではありません。ただ、自分という人間を表現しているのです。"
+      }
+    },
+    "371a7413-becb-4f2b-a50d-96a6e2786c70": {
+      "question_text": {
+        "en": "What defines the experimental mindset in skill development?",
+        "ja": "スキルを伸ばすうえでの「実験のマインドセット」を定義するものは、何ですか？"
+      },
+      "options": {
+        "en": [
+          "Treating each interaction as a performance",
+          "Measuring success by outcomes",
+          "Treating interactions as data collection",
+          "Avoiding rejection"
+        ],
+        "ja": [
+          "一回一回のやり取りを、本番の演技として扱うこと",
+          "成功を、結果で測ること",
+          "やり取りを、データ集めとして扱うこと",
+          "断られるのを避けること"
+        ]
+      },
+      "explanation": {
+        "en": "Each interaction is useful because it teaches you what to adjust next time.",
+        "ja": "どのやり取りも役に立ちます。次に何を変えればいいかを教えてくれるからです。"
+      }
+    },
+    "8a3d26a9-590a-4af0-95f0-d6c8c35f7896": {
+      "question_text": {
+        "en": "You try humor and it falls flat twice. What does an experimental mindset suggest?",
+        "ja": "ユーモアを試して、2回続けて空振りに終わります。実験のマインドセットに従うと、どうするべきですか？"
+      },
+      "options": {
+        "en": [
+          "Humor isn’t for you",
+          "Stop approaching",
+          "Memorize better jokes",
+          "Test a different style of humor or context"
+        ],
+        "ja": [
+          "自分にユーモアは向いていない",
+          "声をかけるのをやめる",
+          "もっと良い冗談を暗記する",
+          "別のタイプのユーモアや、別の場面で試す"
+        ]
+      },
+      "explanation": {
+        "en": "Each interaction teaches what to adjust next time, even when it doesn’t go well.",
+        "ja": "どのやり取りも、たとえうまくいかなくても、次に何を変えればいいかを教えてくれます。"
+      }
+    },
+    "28e0261e-75cb-4bdc-917c-8d6e653f374a": {
+      "question_text": {
+        "en": "How does the experimental mindset reduce the pain of rejection?",
+        "ja": "実験のマインドセットは、断られる痛みをどうやって減らしますか？"
+      },
+      "options": {
+        "en": [
+          "It attaches ego to every outcome",
+          "It treats interactions as data collection",
+          "It views rejection as valuable information"
+        ],
+        "ja": [
+          "すべての結果に、自尊心を結びつける",
+          "やり取りを、データ集めとして扱う",
+          "断られたことを、価値ある情報として見る"
+        ]
+      },
+      "explanation": {
+        "en": "Outcomes become learning opportunities, not proof of worth.",
+        "ja": "結果は、自分の価値の証明ではなく、学びの機会になります。"
+      }
+    },
+    "0d642fd6-f52e-4ce4-95a1-e14b1034c645": {
+      "question_text": {
+        "en": "Why does authenticity improve connection?",
+        "ja": "自分らしくいることは、なぜつながりを良くするのですか？"
+      },
+      "options": {
+        "en": [
+          "It guarantees attraction",
+          "It lowers anxiety",
+          "It frees mental bandwidth for listening and calibration",
+          "It avoids rejection"
+        ],
+        "ja": [
+          "惹かれる気持ちを保証するから",
+          "不安を下げるから",
+          "聞くことと、相手に合わせることに使える、頭の余裕が生まれるから",
+          "断られるのを避けられるから"
+        ]
+      },
+      "explanation": {
+        "en": "When you stop performing, you can actually engage.",
+        "ja": "演じるのをやめると、本当に関われるようになります。"
+      }
+    },
+    "b8b12ca4-eea8-4651-a0ba-a39ced8e6aef": {
+      "question_text": {
+        "en": "You’re naturally quiet and observant. What flirting style fits you best?",
+        "ja": "もともと物静かで、よく観察するタイプです。一番合う駆け引きのスタイルは、どれですか？"
+      },
+      "options": {
+        "en": [
+          "Rapid jokes and banter",
+          "Long explanations",
+          "Pauses and steady eye contact",
+          "Complimenting constantly"
+        ],
+        "ja": [
+          "矢継ぎ早の冗談と掛け合い",
+          "長い説明",
+          "間と、落ち着いたアイコンタクト",
+          "絶えず褒めること"
+        ]
+      },
+      "explanation": {
+        "en": "How you create tension should match your temperament.",
+        "ja": "緊張感の生み方は、自分の気質に合っているべきです。"
+      }
+    },
+    "30871b25-0072-4ec6-a580-9ac5cb667148": {
+      "question_text": {
+        "en": "Why does authentic style outperform borrowed techniques?",
+        "ja": "自分らしいスタイルは、なぜ借りもののテクニックを上回るのですか？"
+      },
+      "options": {
+        "en": [
+          "It frees cognitive resources for real connection",
+          "It aligns with your existing personality strengths",
+          "It requires pretending to maintain performance"
+        ],
+        "ja": [
+          "本物のつながりに使える、頭のリソースが空くから",
+          "もともとの人柄の強みと一致しているから",
+          "演技を保つために、ふりをする必要があるから"
+        ]
+      },
+      "explanation": {
+        "en": "Authenticity reduces effort and leverages what already works for you.",
+        "ja": "自分らしくいることは、労力を減らし、すでにうまくいっているものを活かします。"
+      }
+    },
+    "3d6c847d-5687-4a4a-a269-96782bfa828d": {
+      "question_text": {
+        "en": "Your approaches often end quickly with polite responses. What is your sticking point?",
+        "ja": "声をかけても、礼儀正しい返事をもらって、すぐに終わることがよくあります。つまずきポイントは、どこですか？"
+      },
+      "options": {
+        "en": [
+          "Opening successfully to hook interest",
+          "Escalating physically",
+          "Maintaining long conversations",
+          "Closing effectively"
+        ],
+        "ja": [
+          "関心をつかむ、うまい話しかけ方",
+          "体の面で距離を縮めること",
+          "長い会話を続けること",
+          "うまく次につなげること"
+        ]
+      },
+      "explanation": {
+        "en": "Results change when practice focuses on the weakest link in the interaction.",
+        "ja": "結果が変わるのは、やり取りの中の一番弱い部分に練習を集中させたときです。"
+      }
+    },
+    "53171673-bc87-47f9-a580-371caf722388": {
+      "question_text": {
+        "en": "You open well and converse easily, but it stays platonic. What is your sticking point?",
+        "ja": "話しかけるのはうまくいき、会話も楽にできますが、友達どまりのままです。つまずきポイントは、どこですか？"
+      },
+      "options": {
+        "en": [
+          "Opening",
+          "Conversation flow",
+          "Introducing flirtatious tension or playfulness",
+          "Closing"
+        ],
+        "ja": [
+          "話しかけること",
+          "会話の流れ",
+          "恋愛的な緊張感や遊び心を持ち込むこと",
+          "次につなげること"
+        ]
+      },
+      "explanation": {
+        "en": "Results change when practice focuses on the weakest link in the interaction.",
+        "ja": "結果が変わるのは、やり取りの中の一番弱い部分に練習を集中させたときです。"
+      }
+    },
+    "4195d2ca-e36c-4bd9-bb7e-e178e5d589ca": {
+      "question_text": {
+        "en": "You start conversations well, but they quickly become awkward. What is your sticking point?",
+        "ja": "会話を始めるのはうまくいきますが、すぐに気まずくなります。つまずきポイントは、どこですか？"
+      },
+      "options": {
+        "en": [
+          "Maintaining conversation flow and keeping her engaged",
+          "Delivering openers",
+          "Closing and getting numbers",
+          "Escalating physically"
+        ],
+        "ja": [
+          "会話の流れを保ち、彼女を引き込み続けること",
+          "最初のひと言を伝えること",
+          "次につなげて、LINEを交換すること",
+          "体の面で距離を縮めること"
+        ]
+      },
+      "explanation": {
+        "en": "Results change when practice focuses on the weakest link in the interaction.",
+        "ja": "結果が変わるのは、やり取りの中の一番弱い部分に練習を集中させたときです。"
+      }
+    },
+    "b31c3930-629e-4aab-974a-035d198918d4": {
+      "question_text": {
+        "en": "How do you accurately identify your weak points?",
+        "ja": "自分の弱点を、どうやって正確に見つけますか？"
+      },
+      "options": {
+        "en": [
+          "Assume it's general confidence",
+          "Observe recurring failure points across interactions",
+          "Review patterns in where things consistently fall apart"
+        ],
+        "ja": [
+          "全体的な自信の問題だと決めつける",
+          "複数のやり取りで、繰り返し失敗する箇所を観察する",
+          "いつも決まって崩れる場所のパターンを振り返る"
+        ]
+      },
+      "explanation": {
+        "en": "Sticking points emerge from specific, repeated breakdown moments.",
+        "ja": "つまずきポイントは、具体的な、繰り返し崩れる瞬間から見えてきます。"
+      }
+    },
+    "e977c9fd-3fd5-421d-b9c4-259a05b8af45": {
+      "question_text": {
+        "en": "Which strategies can help break through a growth plateau?",
+        "ja": "成長の停滞期を抜け出すのに役立つ方法は、どれですか？"
+      },
+      "options": {
+        "en": [
+          "Increasing difficulty intentionally",
+          "Changing environments",
+          "Taking a long break to recover motivation",
+          "Focusing on one specific micro-skill"
+        ],
+        "ja": [
+          "意図的に難易度を上げること",
+          "環境を変えること",
+          "やる気を取り戻すために、長く休むこと",
+          "具体的な小さなスキルひとつに集中すること"
+        ]
+      },
+      "explanation": {
+        "en": "New challenges force adaptation and progress. Long breaks reinforce avoidance.",
+        "ja": "新しい挑戦は、適応と進歩を促します。長い休みは、避ける癖を強めます。"
+      }
+    }
+  }
+}
