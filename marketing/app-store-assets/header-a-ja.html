@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>Header A (JA)</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .copy { position: absolute; left: 0; right: 0; top: 130px; text-align: center; }
+  .brand { --s: 96px; justify-content: center; margin-bottom: 48px; }
+  /* JA: 21 full-width characters on one line, so smaller than the English 172px; Latin tracking and line height reset. Not rendered yet. */
+  .headline { font-size: 140px; letter-spacing: 0; line-height: 1.2; }
+  .sub { font-size: 54px; margin-top: 30px; letter-spacing: 0; }
+  .label { font-size: 46px; top: 1470px; }
+</style>
+</head>
+<body class="header">
+  <div class="glow" style="left:1000px; top:500px; width:1840px; height:1700px"></div>
+
+  <div class="copy">
+    <div class="brand"><img src="src/icon.png" alt=""><span>Wingman</span></div>
+    <h1 class="headline">固まるのは、もう終わり。<em>自分から話しかける。</em></h1>
+    <p class="sub">緊張がやわらぎ、会話が楽になり、本物のつながりが生まれる。</p>
+  </div>
+
+  <!-- Before → practice → after -->
+  <img class="art" src="src/art-overthinking.png" alt="" style="left:640px;  top:640px; width:880px">
+  <div class="phone" data-src="src/app-choice.png" style="--w:560px; left:1640px; top:690px"></div>
+  <img class="art" src="src/art-talking.png"      alt="" style="left:2320px; top:640px; width:880px">
+
+  <div class="label" style="left:1080px">頭の中</div>
+  <div class="label" style="left:2760px">会話の中</div>
+
+  <!-- Assumed safe area: centre 80% width × 76% height -->
+  <div class="guide" style="left:10%; top:12%; width:80%; height:76%"></div>
+  <script src="phone.js"></script>
+</body>
+</html>
