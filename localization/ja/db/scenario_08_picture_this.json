@@ -1,0 +1,302 @@
+{
+  "scenario": {
+    "a1000008-0000-0000-0000-000000000008": {
+      "title": {
+        "en": "Picture This",
+        "ja": "写真、撮りましょうか"
+      },
+      "summary": {
+        "en": "Perfect light, quiet moment, helping hands. A brief glance might open something else.",
+        "ja": "完璧な光、静かなひととき、差し伸べる手。一瞬の視線が、別の何かを開くかもしれません。"
+      }
+    }
+  },
+  "screens": {
+    "b1000001-0000-0000-0008-000000000001": {
+      "en": "You're at a scenic lookout. City views, golden hour light. Beautiful spot.",
+      "ja": "眺めのいい展望スポットにいます。街の景色に、夕暮れどきの光。美しい場所です。"
+    },
+    "b1000002-0000-0000-0008-000000000002": {
+      "en": "A woman is taking photos with a unique camera standing alone.",
+      "ja": "一人の女性が、珍しいカメラで写真を撮っています。一人で立っています。"
+    },
+    "b1000003-0000-0000-0008-000000000003": {
+      "en": "She steps back to review her shots on the screen.",
+      "ja": "彼女は一歩下がって、撮った写真を画面で確認します。"
+    },
+    "b1000004-0000-0000-0008-000000000004": {
+      "en": "Now she's trying to take a selfie but it looks awkward.",
+      "ja": "今度は自撮りをしようとしていますが、うまくいかない様子です。"
+    },
+    "b1000051-0000-0000-0008-000000000051": {
+      "en": "Hey I saw you taking photos, can I see them?",
+      "ja": "あの、写真を撮っているのが見えたんですが、見せてもらえますか？"
+    },
+    "b1000052-0000-0000-0008-000000000052": {
+      "en": "Asking to see her work puts her on the spot. Build rapport and let her offer.",
+      "ja": "作品を見せてほしいと頼むと、彼女を困った立場に置いてしまいます。打ち解けて、彼女のほうから見せてくれるのを待ちましょう。"
+    },
+    "b1000053-0000-0000-0008-000000000053": {
+      "en": "Are you a professional photographer? Is this what you do for work?",
+      "ja": "プロのカメラマンなんですか？お仕事で撮っているんですか？"
+    },
+    "b1000054-0000-0000-0008-000000000054": {
+      "en": "Work questions are boring and asking about her work status feels qualifying.",
+      "ja": "仕事の質問は退屈ですし、仕事上の立場を尋ねると、品定めしているように感じられます。"
+    },
+    "b1000006-0000-0000-0008-000000000006": {
+      "en": "Hey want me to take one for you?",
+      "ja": "よかったら、撮りましょうか？"
+    },
+    "b1000007-0000-0000-0008-000000000007": {
+      "en": "Oh that'd be great actually. Thank you.",
+      "ja": "あ、助かります。ありがとうございます。"
+    },
+    "b1000008-0000-0000-0008-000000000008": {
+      "en": "She hands you the camera smiling. You take a few photos then hand it back.",
+      "ja": "彼女はほほえんで、カメラを渡してくれます。何枚か撮って、カメラを返します。"
+    },
+    "b1000009-0000-0000-0008-000000000009": {
+      "en": "Wow these are really good, thank you.",
+      "ja": "わあ、すごくよく撮れていますね。ありがとうございます。"
+    },
+    "b1000101-0000-0000-0008-000000000101": {
+      "en": "Thank you, yeah I used to do photography, I had a Canon...",
+      "ja": "ありがとうございます。実は前に写真をやっていて、キヤノンを持っていたんですが……"
+    },
+    "b1000102-0000-0000-0008-000000000102": {
+      "en": "Her compliment was not an excuse for you to brag about your photography skills.",
+      "ja": "彼女の褒め言葉は、自分の写真の腕を自慢する口実ではありませんでした。"
+    },
+    "b1000103-0000-0000-0008-000000000103": {
+      "en": "What settings are you using for this light? I recommend a high aperture...",
+      "ja": "この光だと、どんな設定で撮っているんですか？絞りはもっとこうしたほうが……"
+    },
+    "b1000104-0000-0000-0008-000000000104": {
+      "en": "Technical questions feel like mansplaining. She knows her own camera.",
+      "ja": "技術的な質問は、上から目線の解説のように感じられます。自分のカメラのことは、彼女がよく知っています。"
+    },
+    "b1000011-0000-0000-0008-000000000011": {
+      "en": "That's a nice setup. Film camera? You don't see much of them nowadays.",
+      "ja": "いい機材ですね。フィルムカメラですか？最近はあまり見かけませんよね。"
+    },
+    "b1000012-0000-0000-0008-000000000012": {
+      "en": "Yeah it's a vintage Nikon. I love the look film gives you. Digital's too clean.",
+      "ja": "ええ、古いニコンなんです。フィルムの写りが大好きで。デジタルは、きれいすぎるんですよね。"
+    },
+    "b1000013-0000-0000-0008-000000000013": {
+      "en": "She's opening up about her interest which is a good sign of engagement.",
+      "ja": "彼女は、自分の好きなことについて話し始めています。会話に乗っているという良いサインです。"
+    },
+    "b1000141-0000-0000-0008-000000000141": {
+      "en": "You can use software to make photos from digital cameras look...",
+      "ja": "ソフトを使えば、デジタルカメラの写真もフィルムっぽく……"
+    },
+    "b1000142-0000-0000-0008-000000000142": {
+      "en": "She shared her opinion. Don't lecture back. Move the conversation forward.",
+      "ja": "彼女は自分の意見を話してくれました。講釈で返してはいけません。会話を前に進めましょう。"
+    },
+    "b1000143-0000-0000-0008-000000000143": {
+      "en": "So where do you get your film developed?",
+      "ja": "フィルムの現像は、どこに出しているんですか？"
+    },
+    "b1000144-0000-0000-0008-000000000144": {
+      "en": "Staying in technical photography territory keeps it impersonal. Make it personal.",
+      "ja": "写真の技術的な話にとどまっていると、彼女個人の話になりません。もっと個人的な話にしましょう。"
+    },
+    "b1000015-0000-0000-0008-000000000015": {
+      "en": "Film definitely has that feel.",
+      "ja": "フィルムには、たしかにあの独特の雰囲気がありますよね。"
+    },
+    "b1000016-0000-0000-0008-000000000016": {
+      "en": "Are you from around here or just visiting?",
+      "ja": "この辺の方ですか？それとも、ご旅行ですか？"
+    },
+    "b1000017-0000-0000-0008-000000000017": {
+      "en": "Visiting. Came up for the weekend. This spot was highly recommended.",
+      "ja": "旅行です。週末を使って来ました。この場所、すごくおすすめされたので。"
+    },
+    "b1000181-0000-0000-0008-000000000181": {
+      "en": "Ahh just in the down town area.",
+      "ja": "ああ、街の中心部のほうです。"
+    },
+    "b1000182-0000-0000-0008-000000000182": {
+      "en": "Asking about her accommodation this early may feel invasive.",
+      "ja": "こんなに早い段階で泊まっている場所を尋ねると、踏み込まれたように感じさせるかもしれません。"
+    },
+    "b1000183-0000-0000-0008-000000000183": {
+      "en": "I could show you around if you want.",
+      "ja": "よかったら、僕が案内しますよ。"
+    },
+    "b1000184-0000-0000-0008-000000000184": {
+      "en": "Offering to spend hours together when you just met feels pushy. Suggest spots first.",
+      "ja": "出会ったばかりなのに何時間も一緒に過ごそうと申し出ると、押しが強く感じられます。まずは場所をおすすめしましょう。"
+    },
+    "b1000019-0000-0000-0008-000000000019": {
+      "en": "How long are you here? I could suggest some good spots if you have time.",
+      "ja": "いつまでいるんですか？時間があるなら、いい場所をいくつかおすすめできますよ。"
+    },
+    "b1000020-0000-0000-0008-000000000020": {
+      "en": "Just til Sunday evening. I'd definitely take recommendations though.",
+      "ja": "日曜の夕方までです。おすすめは、ぜひ聞きたいです。"
+    },
+    "b1000211-0000-0000-0008-000000000211": {
+      "en": "Ok what’s your number first?",
+      "ja": "じゃあ、まずLINEを教えてください。"
+    },
+    "b1000212-0000-0000-0008-000000000212": {
+      "en": "Asking for contact before providing value feels transactional. Help first, then ask.",
+      "ja": "何かを差し出す前に連絡先を聞くと、取引のように感じられます。先に助けて、それから聞きましょう。"
+    },
+    "b1000213-0000-0000-0008-000000000213": {
+      "en": "Okay, so there's the brewery up 3rd street, there's the...",
+      "ja": "ええと、まず角のクラフトビールの店があって、それから……"
+    },
+    "b1000214-0000-0000-0008-000000000214": {
+      "en": "Information overload, list a few then use it as a natural method to get her digits.",
+      "ja": "情報が多すぎます。いくつかだけ挙げて、それを連絡先を聞く自然なきっかけにしましょう。"
+    },
+    "b1000022-0000-0000-0008-000000000022": {
+      "en": "For film, the old railway district has amazing light. And the botanical gardens...",
+      "ja": "フィルムで撮るなら、昔の駅前の一帯は光がすばらしいですよ。それから植物園も……"
+    },
+    "b1000023-0000-0000-0008-000000000023": {
+      "en": "There's more but I don't want to info dump, want me to send you a list?",
+      "ja": "まだあるんですが、一気に並べすぎるのもよくないので。リストを送りましょうか？"
+    },
+    "b1000024-0000-0000-0008-000000000024": {
+      "en": "Those sound perfect actually. Yeah that'd be really helpful, thank you.",
+      "ja": "どれも、すごくよさそうです。ええ、とても助かります。ありがとうございます。"
+    },
+    "b1000025-0000-0000-0008-000000000025": {
+      "en": "Emily gives you her contact. She's smiling, reciprocating and engaged.",
+      "ja": "エミリーがLINEを教えてくれます。彼女はほほえんで、同じように気持ちを返し、会話に乗っています。"
+    },
+    "b1000026-0000-0000-0008-000000000026": {
+      "en": "Suddenly you remember there's another spot close by.",
+      "ja": "そのとき、近くにもうひとつ、いい場所があることを思い出します。"
+    },
+    "b1000271-0000-0000-0008-000000000271": {
+      "en": "Would it be okay if I showed you one? Only if you want. No pressure.",
+      "ja": "ひとつ、ご案内してもいいでしょうか？もしよければ、ですけど。無理にとは言いません。"
+    },
+    "b1000272-0000-0000-0008-000000000272": {
+      "en": "Apologetic energy kills confidence. If you think it's a good idea, suggest it clearly.",
+      "ja": "申し訳なさそうな態度は、自信を打ち消します。良い考えだと思うなら、はっきり提案しましょう。"
+    },
+    "b1000273-0000-0000-0008-000000000273": {
+      "en": "There's a spot close by here, you just need to walk down 10 minutes down...",
+      "ja": "この近くにいい場所があるんです。この道を10分ほど下っていくと……"
+    },
+    "b1000274-0000-0000-0008-000000000274": {
+      "en": "If you were free, giving directions instead of offering to show her is a loss.",
+      "ja": "時間があったのなら、案内すると申し出ずに道順だけを伝えるのは、もったいないことです。"
+    },
+    "b1000028-0000-0000-0008-000000000028": {
+      "en": "Actually if you're free now, I could show you one of the spots? It's close by.",
+      "ja": "そうだ、今お時間があるなら、そのうちのひとつをご案内しましょうか？すぐ近くなんです。"
+    },
+    "b1000029-0000-0000-0008-000000000029": {
+      "en": "Yeah sure I've got time, let's go.",
+      "ja": "ええ、時間はあります。行きましょう。"
+    },
+    "b1000030-0000-0000-0008-000000000030": {
+      "en": "You both start walking towards the spot. The conversation flows naturally.",
+      "ja": "二人で、その場所へ向かって歩き始めます。会話は自然に弾みます。"
+    },
+    "b1000031-0000-0000-0008-000000000031": {
+      "en": "Success. You review your interaction with Emily.",
+      "ja": "成功です。エミリーとのやり取りを振り返ります。"
+    },
+    "b1000032-0000-0000-0008-000000000032": {
+      "en": "You read the moment and offered help naturally.",
+      "ja": "その場を読んで、自然に手助けを申し出ました。"
+    },
+    "b1000033-0000-0000-0008-000000000033": {
+      "en": "You showed genuine interest in her passion about photography.",
+      "ja": "写真への彼女の情熱に、純粋な関心を示しました。"
+    },
+    "b1000034-0000-0000-0008-000000000034": {
+      "en": "You provided real value first before asking for contact.",
+      "ja": "連絡先を聞く前に、まず本当に役立つものを差し出しました。"
+    },
+    "b1000035-0000-0000-0008-000000000035": {
+      "en": "You secured her contact then extended the interaction as a bonus. Well done.",
+      "ja": "連絡先を交換し、そのうえで、おまけとしてやり取りを先へ延ばしました。よくできました。"
+    }
+  },
+  "options": {
+    "c1000002-0000-0000-0008-000000000002": {
+      "en": "Ask if you can see the photos she took of the view",
+      "ja": "彼女が撮った景色の写真を見せてほしいと頼む"
+    },
+    "c1000001-0000-0000-0008-000000000001": {
+      "en": "Offer to take her photo with the view",
+      "ja": "景色を背景に、彼女の写真を撮ると申し出る"
+    },
+    "c1000003-0000-0000-0008-000000000003": {
+      "en": "Comment that she must be a professional",
+      "ja": "きっとプロなんですね、とコメントする"
+    },
+    "c1000004-0000-0000-0008-000000000004": {
+      "en": "Ask about the vintage camera",
+      "ja": "古いカメラについて尋ねる"
+    },
+    "c1000005-0000-0000-0008-000000000005": {
+      "en": "Thank her and talk about your photography experience",
+      "ja": "お礼を言って、自分の写真の経験を話す"
+    },
+    "c1000006-0000-0000-0008-000000000006": {
+      "en": "Ask what settings she's using and tell her your recommendation",
+      "ja": "どんな設定で撮っているかを尋ねて、自分のおすすめを伝える"
+    },
+    "c1000009-0000-0000-0008-000000000009": {
+      "en": "Ask where she develops her film",
+      "ja": "フィルムをどこで現像しているかを尋ねる"
+    },
+    "c1000008-0000-0000-0008-000000000008": {
+      "en": "Tell her that digital cameras can have a film effect",
+      "ja": "デジタルカメラでもフィルム風にできると伝える"
+    },
+    "c1000007-0000-0000-0008-000000000007": {
+      "en": "Build on her opinion then ask if she's from here",
+      "ja": "彼女の意見を広げてから、この辺の人かどうかを尋ねる"
+    },
+    "c1000010-0000-0000-0008-000000000010": {
+      "en": "Offer other suggestions she might like",
+      "ja": "彼女が気に入りそうな、ほかの場所もおすすめできると伝える"
+    },
+    "c1000011-0000-0000-0008-000000000011": {
+      "en": "Ask where she's staying",
+      "ja": "どこに泊まっているのかを尋ねる"
+    },
+    "c1000012-0000-0000-0008-000000000012": {
+      "en": "Offer to be her tour guide",
+      "ja": "自分が観光案内をすると申し出る"
+    },
+    "c1000014-0000-0000-0008-000000000014": {
+      "en": "Ask for her number to give recommendations",
+      "ja": "おすすめを伝えるために、LINEを聞く"
+    },
+    "c1000013-0000-0000-0008-000000000013": {
+      "en": "Give her 2-3 spots then offer to send full list",
+      "ja": "2〜3か所だけ伝えて、全部のリストを送ると申し出る"
+    },
+    "c1000015-0000-0000-0008-000000000015": {
+      "en": "List all your favourite spots",
+      "ja": "お気に入りの場所をすべて並べる"
+    },
+    "c1000016-0000-0000-0008-000000000016": {
+      "en": "Suggest showing her the nearby spot now",
+      "ja": "近くの場所を、今から案内しようと提案する"
+    },
+    "c1000017-0000-0000-0008-000000000017": {
+      "en": "Ask her permission if you can show her the spot",
+      "ja": "その場所を案内してもいいかと、許可を求める"
+    },
+    "c1000018-0000-0000-0008-000000000018": {
+      "en": "Tell her the spot and give her instructions on how to get there",
+      "ja": "場所を伝えて、行き方を説明する"
+    }
+  }
+}
