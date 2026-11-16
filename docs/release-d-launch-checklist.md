@@ -9,9 +9,9 @@ Written 2026-11-16 for Arthur. This follows the Spanish and French checklist ([r
   - 765 quiz questions;
   - 15 scenarios.
 - **Merged into `Shat` on 2026-11-16** (merge commit `75d7b4d`). Not pushed. No version bump: the project still says 1.16 (40).
-- **Checks:** every check passes for German, Spanish, French and Japanese on the merge. Unit tests on the merge commit, on "Wingman L10n 17 Pro" (Debug build, unit tests only): 349 run, 344 passed, 0 failed, 5 skipped. The five skips are the pseudo-language probes, which skip themselves by design; nothing is skipped for Japanese.
+- **Checks:** every check passes for German, Spanish, French and Japanese. Unit tests after the sweep fixes, on "Wingman L10n 17 Pro" (Debug build, unit tests only): 353 run, 348 passed, 0 failed, 5 skipped. The five skips are the pseudo-language probes, which skip themselves by design; nothing is skipped for Japanese.
 - **The German fixes from the native speaker's review** (the commit already on `Shat`) came through the merge unchanged. German, Spanish and French strings are identical to what `Shat` had.
-- **Seen on screen: both simulators swept on 2026-11-16** (step 6; you asked for it). Both runs passed, all 236 screens were read, and nothing is cut off, overlapping or left in English apart from two things listed in step 6. Not seen yet: the paywall with prices and the one-time offer, which need a Release build.
+- **Seen on screen: both simulators swept twice on 2026-11-16** (step 6; you asked for it). The first pass found a name left in Latin letters and six untidy line breaks; you asked for them fixed, and the second pass confirmed the fixes on both phones. Not seen yet: the paywall with prices and the one-time offer, which need a Release build.
 - **Database rows: live in production since 2026-11-16** (step 5; you asked for it before the proofread). The read-only check passed first. With them in, a Japanese build shows everything in Japanese: the interface, lessons and quiz questions ship inside the app, and the 15 scenarios read these rows. They are still the unreviewed draft.
 - **Draft status:** all of it is a machine draft (written by Claude). **No Japanese speaker has read any of it**, and you have no Japanese reader in the team, so step 1 matters more here than it did for the other languages.
 - **The advice was translated, not adapted.** 63 places where it may land differently in Japan are listed for you (step 2).
@@ -47,7 +47,7 @@ Start these three this week. They take the longest, and they don't depend on eac
 | 3 | Pricing in yen, the one-time offer too | You (App Store Connect) | Launch in Japan |
 | 4 | Privacy and legal questions | You and adviser | Marketing in Japan |
 | 5 | Database: check ✅, apply ✅ (re-apply changed files after the proofread) | Claude, with your go-ahead | Scenarios in Japanese, testing, submission |
-| 6 | Japanese sweeps on both simulators: run ✅ (two decisions left for you; re-run after wording changes) | Claude, with your say-so | Submission |
+| 6 | Japanese sweeps on both simulators: run ✅, fixes ✅, re-run ✅ (run again after the proofread) | Claude, with your say-so | Submission |
 | 7 | Sandbox purchase in the Japanese storefront | You | Submission |
 | 8 | Keywords, listing pages, screenshots, subscription names | You, Claude drafted | Submission |
 | 9 | Version check, build, submit | You, with Claude | Launch |
@@ -185,44 +185,43 @@ Where: App Store Connect → your app → Subscriptions → the group → each s
 
 ---
 
-## Step 6. Japanese sweeps on both simulators (run on 2026-11-16; two decisions left)
+## Step 6. Japanese sweeps on both simulators (done 2026-11-16; run again after the proofread)
 
-**Done on 2026-11-16, when you asked.** `testOnboardingAndContentInJapanese` ran from a clean install on "Wingman L10n 17 Pro" and on "Wingman L10n SE" (Debug build of commit `10b07de`). Both passed with 0 failures, 118 screens each. Each run created one guest user in production, so there are two more.
+**Done on 2026-11-16, when you asked.** `testOnboardingAndContentInJapanese` ran from a clean install on "Wingman L10n 17 Pro" and on "Wingman L10n SE", twice: once on commit `10b07de`, and again on `9174fe5` after the fixes you asked for. All four runs passed with 0 failures, 118 screens each. Each run created one guest user in production, so there are four more.
 
-The run goes through onboarding, the paywall, the walkthrough, the four tabs, lesson 1_1 with its quiz, Daily Practice and the first scenario. Every one of the 236 screens was read. The pictures are in the repo:
+The run goes through onboarding, the paywall, the walkthrough, the four tabs, lesson 1_1 with its quiz, Daily Practice and the first scenario. Every screen of the first pass was read (236). On the second pass the changed screens were read on both phones, and every other screen was compared with the first pass by the screenshot script. The pictures in the repo are from the second pass:
 - [`localization-baseline/japanese-content-17-pro-2026-11-16/`](localization-baseline/japanese-content-17-pro-2026-11-16/)
 - [`localization-baseline/japanese-content-se-2026-11-16/`](localization-baseline/japanese-content-se-2026-11-16/)
 
-**What the screens showed, in the order this step listed:**
+**What the screens show, in the order this step listed:**
 1. **The font: fine.** iOS draws the Japanese in its own font next to the app's digits and "Wingman", and the weights and sizes sit together well on headings, buttons, cards and body text. Nothing is clipped at the top or bottom of a line. The daily quote on Home comes out in a serif Japanese font, which suits a quote.
-2. **Line breaks: nothing broken, six places look untidy.** iOS breaks Japanese lines wherever the line is full, so some headlines split a word. None is cut off; they are a matter of look. See the list below.
-3. **The small phone: fine.** The growth screen's bullets, the paywall headline next to the close ✕ and the long quiz answers all fit. On the SE the reviews screen is tight: its caption sits just above the Continue button (no overlap).
+2. **Line breaks: six fixed** (below). iOS breaks Japanese lines wherever the line is full, so a headline can split a word.
+3. **The small phone: fine.** The growth screen's bullets, the paywall headline next to the close ✕ and the long quiz answers all fit.
 4. **The three sentences built from pieces.** The Home greeting (「こんにちは」, then the name on the next line) and "3倍" with its explanation both read fine on screen. The third, "50%" over 「最初の1年間オフ」, sits on the one-time offer and was not reached: a Debug build cannot load prices. It gets checked in step 7.
 5. **Scenario cards: fine.** The summaries are shown in full on both phones (the first takes four lines, and the card grows to fit).
-6. **Left in English, two things.** The iOS notification pop-up, which follows the phone's language (expected). And the name above her speech bubble in scenarios: see decision A.
+6. **Left in English: only the iOS notification pop-up,** which follows the phone's language (expected).
 
 The scenario played in Japanese from the production rows on both phones, so step 5 is confirmed on screen. The paywall showed 「料金を読み込めません」, as expected in a Debug build.
 
-**The six untidy line breaks** (a slash marks where the line ends):
+**What the first pass found and the second pass confirmed fixed:**
 
-| Screen | 17 Pro | SE |
+| Where | First pass | Now |
 |---|---|---|
-| Landing headline | 「もしあのとき…」を「こ / んにちは」に変えよう。 | …「こんにちは」に変えよ / う。 |
-| Landing line under it | …一歩ず / つの方法。 | …一 / 歩ずつの方法。 |
-| Paywall headline | one line, fine | 自分から動ける男になる、1 / 日目 |
-| "Secure your subscription" headline | サブスクリプションを保 / 護する | breaks cleanly |
-| Profile, invite-a-friend card | …招待し / て、… | …招 / 待して、一緒に学びまし / ょう |
-| Reviews screen (SE only) | fine | the line under the headline takes two lines, which pushes the caption down against the button |
+| Scenarios, the name above her speech bubble | "Sophie" in Latin letters over text that says ソフィー | ソフィー. The app now shows the name through its translation table; all 15 names are in it. German, Spanish and French show the names exactly as before. |
+| Landing headline | 「…を「こ / んにちは」に変えよう。」 (17 Pro), 「…変えよ / う。」 (SE) | 「もしあのとき…」を / 「こんにちは」に。 |
+| Landing line under it | 一歩ずつ split across two lines | …ようになる、/ 一歩ずつの方法。 |
+| Paywall headline | 「…男になる、1 / 日目」 on the SE | 「動ける男になる、1日目」, one line on both |
+| "Secure your subscription" headline | 「サブスクリプションを保 / 護する」 on the 17 Pro | サブスクリプションを / 保護する |
+| Profile, invite-a-friend card | 「…招 / 待して、…まし / ょう」 on the SE | 友達を招待して、/ 一緒に学びましょう |
+| Reviews screen | The line under the headline took two lines. On the SE that pushed the caption against the Continue button; on the 17 Pro it pushed the fourth review slightly under the button. | 「ここでつまずく人は、たくさんいます。」, one line; all four reviews clear the button on both phones |
 
-Several onboarding questions also end with one or two characters alone on the last line (「か？」). That is normal in Japanese apps and was left.
+Three of these changed the wording, not just where the line ends, so they are worth a look by the proofreader: the landing headline (shorter, and no longer says 変えよう), the paywall headline (自分から dropped), and the invite card (コミュニティに dropped). The review pack was rebuilt and has the new wording.
 
-**Two decisions for you:**
-- **A. Her name above the speech bubble.** It shows "Sophie" in Latin letters while the story text says ソフィー. The label comes from the `woman_name` column of the `scenarios` table, which the translation tables do not carry, so all 15 scenarios do this. German, Spanish and French never noticed because the names are spelled the same. Options: leave it (Japanese readers read Latin names without trouble, but it looks unfinished); or have Claude make the app show the katakana name. That second one is a small code change plus 15 names, and it changes nothing for the other languages.
-- **B. The six line breaks.** Options: leave them for the proofreader to reword (the cheapest, and the wording is theirs to judge anyway); or have Claude shorten the six texts now and re-run the sweep, which creates two more guest users.
+Left as they are: several onboarding questions end with one or two characters alone on the last line (「か？」), and one review on the 17 Pro ends with 「た。」 alone. That is normal in Japanese apps.
 
-**After any wording change** (yours, the proofreader's or from A and B), run both sweeps again and compare with the pictures above.
+**After the proofread** (step 1), or any other wording change, run both sweeps again and compare with the pictures above: `python3 scripts/screenshots.py compare`. Daily Practice and the quote on Home differ from run to run.
 
-**Done when:** A and B are decided, any change is in, and both simulators have been swept again with every screen read.
+**Done when:** both simulators have been swept on the final wording and every changed screen read. True for the current draft as of 2026-11-16.
 
 ---
 
