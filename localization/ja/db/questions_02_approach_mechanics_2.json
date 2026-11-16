@@ -1019,6 +1019,1032 @@
         "en": "Decisive tests check willingness to move, join, or continue without pressure.",
         "ja": "はっきりした誘いは、動く、加わる、続けるといった意思を、プレッシャーをかけずに確かめます。"
       }
+    },
+    "520ac978-94f9-404d-aabe-55099eebb89e": {
+      "question_text": {
+        "en": "She mentions studying abroad. What response avoids an agenda?",
+        "ja": "彼女が、留学していたことを話します。下心のない返しは、どれですか？"
+      },
+      "options": {
+        "en": [
+          "Ask thoughtfully about what she loved most there",
+          "Compliment her looks to build attraction",
+          "Push for her number quickly",
+          "Share only your achievements"
+        ],
+        "ja": [
+          "そこで何が一番好きだったかを、心を込めて尋ねる",
+          "惹かれる気持ちを築くために、見た目を褒める",
+          "すぐにLINEを聞き出そうとする",
+          "自分の実績だけを話す"
+        ]
+      },
+      "explanation": {
+        "en": "Genuine interest in her story makes her feel seen, not pursued.",
+        "ja": "彼女の話への純粋な関心は、「追いかけられている」ではなく、「ちゃんと見てもらえている」と感じさせます。"
+      }
+    },
+    "530f7582-4d63-4e0c-bede-bf88b8fdbd71": {
+      "question_text": {
+        "en": "Why does stating “I can only stay for a moment” help reduce pressure?",
+        "ja": "「少ししかいられないんですが」と伝えることは、なぜプレッシャーを減らすのに役立つのですか？"
+      },
+      "options": {
+        "en": [
+          "She knows she's not trapped in open-ended conversation with a stranger",
+          "It shows you respect her time and won't waste it",
+          "Limited time creates urgency"
+        ],
+        "ja": [
+          "知らない人との終わりの見えない会話に、縛られるわけではないと分かるから",
+          "彼女の時間を尊重し、無駄にしないことを示すから",
+          "限られた時間が、緊急性を生むから"
+        ]
+      },
+      "explanation": {
+        "en": "A time constraint signals you’ll leave soon, lowering her guard.",
+        "ja": "時間の制限は、すぐに立ち去ることを伝え、彼女の警戒を下げます。"
+      }
+    },
+    "55289809-9c93-4056-aed5-077280b1ae2f": {
+      "question_text": {
+        "en": "What is the main strength of direct openers?",
+        "ja": "ストレートなひと言の、一番の強みは何ですか？"
+      },
+      "options": {
+        "en": [
+          "They make you feel more confident during the approach",
+          "They increase attraction through boldness",
+          "They remove ambiguity by stating intent immediately"
+        ],
+        "ja": [
+          "声をかけるときに、自分がより自信を持てること",
+          "大胆さによって、惹かれる気持ちを高めること",
+          "すぐに意図を伝えることで、あいまいさを取り除くこと"
+        ]
+      },
+      "explanation": {
+        "en": "Being direct eliminates guessing and gets straight to intent.",
+        "ja": "ストレートに伝えることで、探り合いがなくなり、すぐに意図が伝わります。"
+      }
+    },
+    "5645caed-20b5-412a-abcf-de263b1e3c46": {
+      "question_text": {
+        "en": "She’s scrolling her phone. What must your opener do to work?",
+        "ja": "彼女はスマホをスクロールしています。最初のひと言がうまくいくには、どうである必要がありますか？"
+      },
+      "options": {
+        "en": [
+          "Be polite",
+          "Be louder",
+          "Be interesting",
+          "Be quick and sharp"
+        ],
+        "ja": [
+          "礼儀正しいこと",
+          "もっと大きな声であること",
+          "面白いこと",
+          "短く、切れ味があること"
+        ]
+      },
+      "explanation": {
+        "en": "Your opener must be more interesting than what she was doing prior.",
+        "ja": "最初のひと言は、彼女がそれまでしていたことよりも面白くなければなりません。"
+      }
+    },
+    "59132ed6-d432-4176-9308-5f83ffeb2e2c": {
+      "question_text": {
+        "en": "Why do smiles often mislead men during approaches?",
+        "ja": "声をかけるとき、笑顔はなぜ男性を誤解させやすいのですか？"
+      },
+      "options": {
+        "en": [
+          "Smiles always signal attraction",
+          "Smiles are a default social courtesy",
+          "Men assume emotional warmth equals interest",
+          "Both: smiles are often courtesy, and men read warmth as interest"
+        ],
+        "ja": [
+          "笑顔は、いつでも惹かれているサインだから",
+          "笑顔は、人付き合いの基本的な礼儀だから",
+          "男性は、感情的な温かさを関心だと思い込むから",
+          "両方。笑顔は礼儀であることが多く、男性は温かさを関心と読むから"
+        ]
+      },
+      "explanation": {
+        "en": "Smiles are often politeness, and men frequently interpret warmth as attraction.",
+        "ja": "笑顔は礼儀であることが多く、男性はよく、温かさを「惹かれている」と解釈します。"
+      }
+    },
+    "5a89ed7d-2ccb-4fb2-ad5a-c8b0d73aab44": {
+      "question_text": {
+        "en": "She responds politely but briefly to your opener. What maintains frame control?",
+        "ja": "最初のひと言に、彼女は礼儀正しく、でも短く応じます。空気をリードし続けられるのは、どれですか？"
+      },
+      "options": {
+        "en": [
+          "Ask another engaging question to lead forward",
+          "Apologize for interrupting and leave",
+          "Wait for her to ask you questions",
+          "Match her low energy and stay neutral"
+        ],
+        "ja": [
+          "先へ導くために、引き込む質問をもう一つする",
+          "邪魔をしたことを謝って、立ち去る",
+          "彼女が質問してくるのを待つ",
+          "彼女の低いエネルギーに合わせて、どちらともつかない態度でいる"
+        ]
+      },
+      "explanation": {
+        "en": "You decide the direction; continue leading instead of following her retreat.",
+        "ja": "方向を決めるのは自分です。彼女が引くのに合わせるのではなく、リードし続けましょう。"
+      }
+    },
+    "5b1abc4a-c6ad-4dd2-b4a0-e8c4cf55f119": {
+      "question_text": {
+        "en": "Why does the brain read body motion before words?",
+        "ja": "脳は、なぜ言葉より先に体の動きを読むのですか？"
+      },
+      "options": {
+        "en": [
+          "It processes verbal content first",
+          "Motion signals intent and safety instinctively",
+          "Smooth movement indicates comfort",
+          "Tense movement broadcasts anxiety"
+        ],
+        "ja": [
+          "言葉の内容を先に処理するから",
+          "動きは、意図と安全を本能的に伝えるから",
+          "なめらかな動きは、心地よさを示すから",
+          "こわばった動きは、不安を発するから"
+        ]
+      },
+      "explanation": {
+        "en": "Relaxed movement communicates safety, making the interaction feel easier for her.",
+        "ja": "リラックスした動きは安全を伝え、彼女にとってやり取りを楽なものにします。"
+      }
+    },
+    "5b40af44-7fc8-4e4e-93fe-427ce1753d12": {
+      "question_text": {
+        "en": "Bar. You open. She barely turns, says \"hey\" flatly, scans the room while you're talking.",
+        "ja": "バーで声をかけます。彼女はほとんど振り向かず、平板に「どうも」と言い、こちらが話しているあいだ店内を見回しています。"
+      },
+      "options": {
+        "en": [
+          "Polite—being minimally courteous; make it brief or exit",
+          "Cold—clear disinterest; disengage immediately",
+          "Testing—seeing if you'll maintain frame despite low energy"
+        ],
+        "ja": [
+          "礼儀のサイン。最低限の礼儀を見せている。短くするか、切り上げる",
+          "冷たいサイン。はっきり関心がない。すぐに引く",
+          "テスト。エネルギーが低くても自分の軸を保てるかを見ている"
+        ]
+      },
+      "explanation": {
+        "en": "Closed body language outweighs replies; step back and leave calmly.",
+        "ja": "閉じたボディランゲージは、返事よりも重みがあります。一歩引いて、落ち着いて立ち去りましょう。"
+      }
+    },
+    "5bd1ec51-0293-467c-b328-37d4c947a52a": {
+      "question_text": {
+        "en": "You’re both waiting in a long coffee line. What are some indirect openers?",
+        "ja": "二人とも、カフェの長い列に並んでいます。さりげないひと言になるのは、どれですか？"
+      },
+      "options": {
+        "en": [
+          "Ask what she usually orders here",
+          "Compliment her smile",
+          "Comment on how slow the line is",
+          "Introduce yourself immediately"
+        ],
+        "ja": [
+          "ここでいつも何を頼むのかを聞く",
+          "笑顔を褒める",
+          "列の進みが遅いことに触れる",
+          "すぐに自己紹介をする"
+        ]
+      },
+      "explanation": {
+        "en": "Shared situations create natural, low-pressure entry points.",
+        "ja": "共有している状況は、自然で、プレッシャーの少ない入り口になります。"
+      }
+    },
+    "5c6d17f6-baa9-4899-916b-fc9639e67f2c": {
+      "question_text": {
+        "en": "She’s holding a phone with a very distinctive case. What could you say first to invoke curiosity?",
+        "ja": "彼女が、とても特徴的なケースをつけたスマホを持っています。好奇心を引くために、最初に何を言えますか？"
+      },
+      "options": {
+        "en": [
+          "\"Where did you get that phone case?\"",
+          "\"Do you like your phone?\"",
+          "\"Your phone case is interesting.\"",
+          "\"I’ve got a question about that phone case.\""
+        ],
+        "ja": [
+          "「そのスマホケース、どこで買ったんですか？」",
+          "「そのスマホ、気に入っていますか？」",
+          "「そのスマホケース、面白いですね」",
+          "「そのスマホケースについて、聞きたいことがあるんです」"
+        ]
+      },
+      "explanation": {
+        "en": "The setup creates curiosity before revealing the question.",
+        "ja": "前置きが、質問を明かす前に好奇心を生みます。"
+      }
+    },
+    "5e1e4ba0-77d1-47d1-b948-830f42c9bfc1": {
+      "question_text": {
+        "en": "What happens when your speech is rushed during an interaction?",
+        "ja": "やり取りの中で早口になると、何が起こりますか？"
+      },
+      "options": {
+        "en": [
+          "It lowers clarity",
+          "It signals tension",
+          "It breaks rhythm",
+          "All of the above"
+        ],
+        "ja": [
+          "聞き取りにくくなる",
+          "緊張が伝わる",
+          "リズムが崩れる",
+          "上のすべて"
+        ]
+      },
+      "explanation": {
+        "en": "When words rush, clarity drops and nervous energy shows. Slow your pace.",
+        "ja": "言葉が急ぐと、聞き取りにくくなり、緊張したエネルギーが表に出ます。ペースを落としましょう。"
+      }
+    },
+    "5e77a13d-51fd-4fc8-8b20-e153be35f50a": {
+      "question_text": {
+        "en": "What does a polite response typically indicate?",
+        "ja": "礼儀正しい反応は、たいてい何を示していますか？"
+      },
+      "options": {
+        "en": [
+          "She's interested but testing your confidence and frame",
+          "She's being kind to avoid confrontation despite zero interest",
+          "She's uncertain or not fully open; proceed slowly or exit"
+        ],
+        "ja": [
+          "関心はあるが、こちらの自信と軸を試している",
+          "関心はまったくないが、角を立てないように親切にしている",
+          "まだ決めかねているか、心を開ききっていない。ゆっくり進めるか、切り上げる"
+        ]
+      },
+      "explanation": {
+        "en": "Polite means uncertain or closed. Read her next signals carefully.",
+        "ja": "礼儀正しい反応は、決めかねているか、閉じているという意味です。次のサインを注意深く読み取りましょう。"
+      }
+    },
+    "5f79a125-3233-4761-a27a-0c3df5b785b6": {
+      "question_text": {
+        "en": "What happens when you set a time constraint?",
+        "ja": "時間の制限を伝えると、何が起こりますか？"
+      },
+      "options": {
+        "en": [
+          "Pressure drops because interaction has established exit",
+          "She relaxes knowing it won't be long commitment",
+          "You create urgency that makes her value the interaction more"
+        ],
+        "ja": [
+          "やり取りに出口ができるので、プレッシャーが下がる",
+          "長く付き合わされることはないと分かって、彼女がリラックスする",
+          "緊急性が生まれ、彼女がそのやり取りをより高く評価する"
+        ]
+      },
+      "explanation": {
+        "en": "Constraints remove fear of being stuck, which increases comfort.",
+        "ja": "制限があると、「抜け出せなくなる」という不安がなくなり、安心感が増します。"
+      }
+    },
+    "60bdd118-0868-4732-a177-bad97e1d37de": {
+      "question_text": {
+        "en": "She has a small tattoo visible on her wrist. What could you say first to invoke curiosity?",
+        "ja": "彼女の手首に、小さなタトゥーが見えます。好奇心を引くために、最初に何を言えますか？"
+      },
+      "options": {
+        "en": [
+          "\"Cool tattoo—what is it?\"",
+          "\"That tattoo looks nice.\"",
+          "\"I’ve got to ask about that tattoo.\"",
+          "\"Do you have more tattoos?\""
+        ],
+        "ja": [
+          "「かっこいいタトゥーですね。何の柄ですか？」",
+          "「そのタトゥー、素敵ですね」",
+          "「そのタトゥーのこと、どうしても聞きたくて」",
+          "「ほかにもタトゥーがあるんですか？」"
+        ]
+      },
+      "explanation": {
+        "en": "The setup creates curiosity before revealing the question.",
+        "ja": "前置きが、質問を明かす前に好奇心を生みます。"
+      }
+    },
+    "610a475a-54e4-4882-b442-6ebc0faac3a8": {
+      "question_text": {
+        "en": "You’re both waiting in a long coffee line. What indirect opener works best?",
+        "ja": "二人とも、カフェの長い列に並んでいます。一番うまくいくさりげないひと言は、どれですか？"
+      },
+      "options": {
+        "en": [
+          "\"You’re really pretty—I had to say hi.\"",
+          "\"What’s your number?\"",
+          "\"This line is ridiculous today, isn’t it?\"",
+          "\"You look like you need coffee.\""
+        ],
+        "ja": [
+          "「本当にきれいですね。どうしても声をかけたくて」",
+          "「LINE、教えてください」",
+          "「今日のこの列、すごいですね」",
+          "「コーヒーが必要そうな顔をしていますね」"
+        ]
+      },
+      "explanation": {
+        "en": "Situational comment feels natural and reduces pressure.",
+        "ja": "その場の状況についてのひと言は、自然に感じられ、プレッシャーを減らします。"
+      }
+    },
+    "611e32cc-c038-42d3-a1ce-086d78cbcd68": {
+      "question_text": {
+        "en": "She answers briefly, looks away, and shifts her feet. Best response?",
+        "ja": "彼女は短く答え、目をそらし、足を踏み替えます。一番良い対応はどれですか？"
+      },
+      "options": {
+        "en": [
+          "Ask deeper questions",
+          "Tease lightly",
+          "Exit cleanly",
+          "Increase energy"
+        ],
+        "ja": [
+          "もっと踏み込んだ質問をする",
+          "軽くからかう",
+          "すっきりと切り上げる",
+          "エネルギーを上げる"
+        ]
+      },
+      "explanation": {
+        "en": "Polite disengagement signals mean it is time to leave; exit cleanly without pushing.",
+        "ja": "礼儀正しく引いているサインは、立ち去るときだという意味です。押さずに、すっきりと切り上げましょう。"
+      }
+    },
+    "61e8562c-6ad4-4305-bf8f-d44fe44652ab": {
+      "question_text": {
+        "en": "What is the core mindset shift for curiosity-driven approaches?",
+        "ja": "好奇心から声をかけるための、中心となる考え方の切り替えは何ですか？"
+      },
+      "options": {
+        "en": [
+          "\"Can I get something from this?\"",
+          "\"Is this person interesting to me?\"",
+          "\"How can I impress her quickly?\"",
+          "\"Will this lead to a date?\""
+        ],
+        "ja": [
+          "「ここから何か得られるだろうか」",
+          "「この人は、自分にとって興味深い人だろうか」",
+          "「どうすれば、すばやく彼女を感心させられるだろうか」",
+          "「これはデートにつながるだろうか」"
+        ]
+      },
+      "explanation": {
+        "en": "Interest in her world removes agenda and enables genuine engagement.",
+        "ja": "彼女の世界への関心は、下心を取り除き、本物の関わりを可能にします。"
+      }
+    },
+    "6212b078-0050-447a-bf0f-ff2070f3f00c": {
+      "question_text": {
+        "en": "Coffee shop line. You open. She smiles briefly, says \"yeah\", then looks at her phone.",
+        "ja": "カフェの列で声をかけます。彼女は短くほほえみ、「うん」と言って、スマホに目を落とします。"
+      },
+      "options": {
+        "en": [
+          "Neutral—she's distracted but might engage if you persist",
+          "Polite—acknowledged you but immediately diverted attention",
+          "Cold—phone checking is deliberate dismissal signal"
+        ],
+        "ja": [
+          "どちらともつかないサイン。気は散っているが、粘れば応じてくれるかもしれない",
+          "礼儀のサイン。こちらを認めはしたが、すぐに注意をよそへ向けた",
+          "冷たいサイン。スマホを見るのは、意図的に退けるサイン"
+        ]
+      },
+      "explanation": {
+        "en": "She acknowledged you, then set a boundary; disengage without extending.",
+        "ja": "彼女はこちらを認めたうえで、境界線を引きました。引き延ばさずに、引きましょう。"
+      }
+    },
+    "624f3918-37e1-4cec-8932-2afa6e870e81": {
+      "question_text": {
+        "en": "You’re both stuck at a bus stop in the rain. What opener reduces pressure?",
+        "ja": "二人とも、雨の中、バス停で足止めされています。プレッシャーを減らす最初のひと言は、どれですか？"
+      },
+      "options": {
+        "en": [
+          "\"You’re stunning even in the rain.\"",
+          "\"Want my number?\"",
+          "\"Can I share your umbrella?\"",
+          "\"This weather is awful—do you know if the bus is late again?\""
+        ],
+        "ja": [
+          "「雨の中でも、本当におきれいですね」",
+          "「LINE、教えましょうか？」",
+          "「傘に入れてもらえますか？」",
+          "「ひどい天気ですね。バス、また遅れているんでしょうか？」"
+        ]
+      },
+      "explanation": {
+        "en": "Situational shared experience starts conversation naturally.",
+        "ja": "その場で共有している体験が、会話を自然に始めさせてくれます。"
+      }
+    },
+    "645565d5-3468-40e0-a262-b135680333a7": {
+      "question_text": {
+        "en": "You spot a keychain from a niche festival on her bag. What opener shows curiosity?",
+        "ja": "彼女のバッグに、マニアックなフェスのキーホルダーがついているのを見つけます。好奇心が伝わるひと言は、どれですか？"
+      },
+      "options": {
+        "en": [
+          "\"Cool keychain.\"",
+          "\"Your bag has personality.\"",
+          "\"You travel to events?\"",
+          "\"Did you go to that festival? I’ve heard it’s wild.\""
+        ],
+        "ja": [
+          "「かっこいいキーホルダーですね」",
+          "「個性のあるバッグですね」",
+          "「イベントによく行くんですか？」",
+          "「そのフェス、行ったんですか？すごいって聞きました」"
+        ]
+      },
+      "explanation": {
+        "en": "Curiosity about her experiences invites real connection without agenda.",
+        "ja": "彼女の経験への好奇心は、下心なしに、本物のつながりを招きます。"
+      }
+    },
+    "66e6b51f-4377-41cc-af99-be7fc8703380": {
+      "question_text": {
+        "en": "Daytime gym approach. She's between sets. Best move?",
+        "ja": "昼間のジムで声をかける場面です。彼女はセットの合間です。一番良い動きはどれですか？"
+      },
+      "options": {
+        "en": [
+          "Wait until she's completely done with workout to approach",
+          "Walk into sight line, catch eye contact, smile, approach during rest",
+          "Ask for spot or form check to create natural opening",
+          "Gym isn't appropriate, skip it"
+        ],
+        "ja": [
+          "彼女がトレーニングを完全に終えるまで待ってから、声をかける",
+          "視界に入り、目を合わせ、ほほえんで、休憩のあいだに声をかける",
+          "自然なきっかけをつくるために、補助やフォームのチェックを頼む",
+          "ジムはふさわしくないので、見送る"
+        ]
+      },
+      "explanation": {
+        "en": "Between sets is a brief window; use visible entry and eye contact to avoid surprise.",
+        "ja": "セットの合間は、短いチャンスです。驚かせないように、見える位置から近づき、目を合わせましょう。"
+      }
+    },
+    "6854fe8c-37a2-4b05-abb5-8e28e81f85df": {
+      "question_text": {
+        "en": "Street approach. She’s polite but you’re unsure. Which lines help clarify her interest levels?",
+        "ja": "路上で声をかけます。彼女は礼儀正しいのですが、関心があるのかどうか分かりません。彼女の関心の度合いをはっきりさせるのに役立つひと言は、どれですか？"
+      },
+      "options": {
+        "en": [
+          "\"I’ll walk this way anyway. Join me?\"",
+          "\"So where are you heading?\"",
+          "\"Want to grab a coffee sometime?\"",
+          "\"You seem interesting.\""
+        ],
+        "ja": [
+          "「どのみち、こっちへ歩くんです。一緒にどうですか？」",
+          "「それで、どちらへ行くところですか？」",
+          "「今度、コーヒーでもどうですか？」",
+          "「面白そうな人ですね」"
+        ]
+      },
+      "explanation": {
+        "en": "Movement or future invites test interest through action, not compliments.",
+        "ja": "一緒に動く誘いや先の約束への誘いは、褒め言葉ではなく、行動を通じて関心を確かめます。"
+      }
+    },
+    "6ae58be8-fa28-4df9-982d-734c8bf6bc6b": {
+      "question_text": {
+        "en": "The moment passes and you feel instant regret. What caused it?",
+        "ja": "その瞬間が過ぎ、すぐに後悔を感じます。原因は何ですか？"
+      },
+      "options": {
+        "en": [
+          "Rejection from trying",
+          "Her lack of interest",
+          "A conversation that went nowhere",
+          "Letting the chance go without acting"
+        ],
+        "ja": [
+          "挑戦して断られたこと",
+          "彼女に関心がなかったこと",
+          "どこにもつながらなかった会話",
+          "行動せずに、チャンスを見送ったこと"
+        ]
+      },
+      "explanation": {
+        "en": "Regret comes from missed opportunities, not failed attempts.",
+        "ja": "後悔は、失敗した挑戦からではなく、逃したチャンスから生まれます。"
+      }
+    },
+    "6c9441f0-7531-4148-a292-db648381ccf0": {
+      "question_text": {
+        "en": "Bookstore. What could you say as an opinion opener?",
+        "ja": "書店にいます。意見を聞くひと言として、何が言えますか？"
+      },
+      "options": {
+        "en": [
+          "\"I need your opinion on whether books make good gifts.\"",
+          "\"Do you know where the fiction section is?\"",
+          "\"Excuse me, are you reading something interesting?\""
+        ],
+        "ja": [
+          "「本はプレゼントとしてありかどうか、意見を聞かせてほしいんです」",
+          "「小説のコーナーはどこか、ご存じですか？」",
+          "「すみません、何か面白いものを読んでいるんですか？」"
+        ]
+      },
+      "explanation": {
+        "en": "Framing it as needing her judgment makes her feel valued immediately.",
+        "ja": "彼女の判断が必要だという形にすると、すぐに「大切にされている」と感じてもらえます。"
+      }
+    },
+    "6d84a13d-95e6-437d-9368-891c4d42990a": {
+      "question_text": {
+        "en": "Which cues usually indicate receptivity?",
+        "ja": "たいてい受け入れを示している手がかりは、どれですか？"
+      },
+      "options": {
+        "en": [
+          "Asking questions back",
+          "Facing toward you",
+          "Answering questions",
+          "Relaxed posture"
+        ],
+        "ja": [
+          "質問を返してくること",
+          "こちらに体を向けていること",
+          "質問に答えること",
+          "リラックスした姿勢"
+        ]
+      },
+      "explanation": {
+        "en": "Questions back and body orientation show interest; use them as green lights to continue.",
+        "ja": "質問を返してくることと体の向きは、関心を示しています。続けていい青信号として受け取りましょう。"
+      }
+    },
+    "6e852fdc-853b-47ca-bd28-81f1c157b93e": {
+      "question_text": {
+        "en": "In which environments do direct openers work best?",
+        "ja": "ストレートなひと言が一番うまくいくのは、どんな環境ですか？"
+      },
+      "options": {
+        "en": [
+          "Bars, clubs, parties, and social events",
+          "Quiet libraries or offices",
+          "Grocery stores during rush hour",
+          "Public transport commutes"
+        ],
+        "ja": [
+          "バー、クラブ、パーティー、交流イベント",
+          "静かな図書館やオフィス",
+          "混雑する時間帯のスーパー",
+          "通勤中の公共交通機関"
+        ]
+      },
+      "explanation": {
+        "en": "Romantic intent feels normal in social settings expecting connection.",
+        "ja": "出会いが期待されている社交の場では、恋愛的な意図も自然に感じられます。"
+      }
+    },
+    "6ead40bd-0dee-4b4c-935e-8cf034256a37": {
+      "question_text": {
+        "en": "Club. You say \"You caught my eye\". She smiles, says thanks, but turns back to her friends.",
+        "ja": "クラブで「つい目を引かれて」と言います。彼女はほほえんで「ありがとう」と言いますが、友人たちのほうへ向き直ります。"
+      },
+      "options": {
+        "en": [
+          "Tap her shoulder and try to continue the conversation",
+          "Introduce yourself to her friends to stay in the interaction",
+          "Exit cleanly—acknowledgment without engagement is a polite rejection"
+        ],
+        "ja": [
+          "肩をたたいて、会話を続けようとする",
+          "やり取りにとどまるために、彼女の友人たちに自己紹介する",
+          "すっきりと切り上げる。受け止めはしても乗ってこないのは、礼儀正しいお断り"
+        ]
+      },
+      "explanation": {
+        "en": "Smile-and-turn is polite dismissal. Overstaying after signals poor calibration.",
+        "ja": "ほほえんで向き直るのは、礼儀正しいお断りです。サインのあとも居座るのは、相手の反応に合わせられていない証拠です。"
+      }
+    },
+    "702ce88e-2efa-49c5-9ee5-e08ed426d983": {
+      "question_text": {
+        "en": "What makes curiosity openers effective?",
+        "ja": "好奇心を引くひと言は、なぜ効果的なのですか？"
+      },
+      "options": {
+        "en": [
+          "They invite her opinion or perspective, not just facts",
+          "They're more interesting than predictable factual questions",
+          "They create topics she naturally has thoughts about",
+          "All of the above"
+        ],
+        "ja": [
+          "事実だけでなく、彼女の意見や視点を招くから",
+          "予想のつく事実の質問よりも、面白いから",
+          "彼女が自然と考えを持っている話題をつくるから",
+          "上のすべて"
+        ]
+      },
+      "explanation": {
+        "en": "When information is incomplete, the brain seeks closure; use this to draw attention.",
+        "ja": "情報が欠けていると、脳はそれを埋めようとします。これを使って、注意を引きつけましょう。"
+      }
+    },
+    "722e2188-0d60-460b-8ec7-ca6850661d5a": {
+      "question_text": {
+        "en": "You see her with a bright, hand-painted phone case. What opener creates engagement?",
+        "ja": "彼女が、鮮やかな手描きのスマホケースを持っているのを見かけます。相手を引き込むひと言は、どれですか？"
+      },
+      "options": {
+        "en": [
+          "\"Cool phone case.\"",
+          "\"You have good style.\"",
+          "\"What time is it?\"",
+          "\"It looks like you made that phone case yourself.\""
+        ],
+        "ja": [
+          "「かっこいいスマホケースですね」",
+          "「センスがいいですね」",
+          "「今、何時ですか？」",
+          "「そのスマホケース、ご自分で作ったように見えますね」"
+        ]
+      },
+      "explanation": {
+        "en": "Specific assumptions require her to engage and respond personally.",
+        "ja": "具体的な推測は、彼女が自分のこととして関わり、答えることを求めます。"
+      }
+    },
+    "727d61fb-ef06-4574-b2e1-63fb70f840c8": {
+      "question_text": {
+        "en": "What is the main goal of a strong opening frame?",
+        "ja": "しっかりした最初の空気づくりの、主な目的は何ですか？"
+      },
+      "options": {
+        "en": [
+          "To impress",
+          "To remove rejection",
+          "To create interest",
+          "To avoid silence"
+        ],
+        "ja": [
+          "感心させること",
+          "断られる可能性をなくすこと",
+          "興味を生むこと",
+          "沈黙を避けること"
+        ]
+      },
+      "explanation": {
+        "en": "Opening frames should spark curiosity and emotional engagement.",
+        "ja": "最初につくる空気は、好奇心と感情的な関わりを呼び起こすものであるべきです。"
+      }
+    },
+    "732636f6-4948-4cf7-ab3c-1529a104b4c8": {
+      "question_text": {
+        "en": "Which responses usually mean it’s time to exit?",
+        "ja": "たいてい切り上げどきを意味する反応は、どれですか？"
+      },
+      "options": {
+        "en": [
+          "One-word replies",
+          "Turning away",
+          "No questions back",
+          "Answering questions"
+        ],
+        "ja": [
+          "ひと言だけの返事",
+          "体をそむけること",
+          "質問が返ってこないこと",
+          "質問に答えること"
+        ]
+      },
+      "explanation": {
+        "en": "Multiple disengagement cues signal exit.",
+        "ja": "関心が離れている手がかりがいくつも重なったら、切り上げどきです。"
+      }
+    },
+    "75d003ed-f14a-4b05-a68f-d5a813844935": {
+      "question_text": {
+        "en": "After your opener, she starts sharing her thoughts enthusiastically. Next move?",
+        "ja": "最初のひと言のあと、彼女が自分の考えを熱心に話し始めます。次の動きはどれですか？"
+      },
+      "options": {
+        "en": [
+          "Immediately ask for her number",
+          "Tell her your own opinion first",
+          "Switch to a different topic quickly",
+          "Listen and respond to her perspective"
+        ],
+        "ja": [
+          "すぐにLINEを聞く",
+          "まず自分の意見を話す",
+          "すぐに別の話題に切り替える",
+          "耳を傾け、彼女の見方に応える"
+        ]
+      },
+      "explanation": {
+        "en": "Building on her response rewards effort and keeps momentum alive.",
+        "ja": "彼女の答えを広げることは、その手間に報い、会話の流れを保ちます。"
+      }
+    },
+    "761e81ae-f2b8-48ba-a7a0-a8ebe688a7e5": {
+      "question_text": {
+        "en": "Street approach. You make a comment. She slows her pace, smiles, and walks beside you.",
+        "ja": "路上で声をかけます。ひと言かけると、彼女は歩くペースを落とし、ほほえんで、隣を歩きます。"
+      },
+      "options": {
+        "en": [
+          "She feels obligated to acknowledge you",
+          "She is receptive and choosing to stay engaged",
+          "She is neutral and waiting for you to finish"
+        ],
+        "ja": [
+          "こちらに応じる義務を感じている",
+          "受け入れていて、自分から関わり続けることを選んでいる",
+          "どちらともつかず、こちらが話し終えるのを待っている"
+        ]
+      },
+      "explanation": {
+        "en": "Adjusting her movement to match yours shows voluntary engagement; keep continuing.",
+        "ja": "こちらに合わせて動きを変えるのは、自分の意思で関わっている証拠です。そのまま続けましょう。"
+      }
+    },
+    "77d7bb74-c3e1-4044-bfb0-c36b1415c65e": {
+      "question_text": {
+        "en": "Why should you respect signals even when you're unsure if she's polite or receptive?",
+        "ja": "礼儀なのか受け入れなのか分からないときでも、なぜサインを尊重するべきなのですか？"
+      },
+      "options": {
+        "en": [
+          "Better to exit on polite signals than push past cold ones",
+          "Respecting uncertainty shows calibration",
+          "Her comfort matters more than your need to \"make sure\" she's interested",
+          "All of the above"
+        ],
+        "ja": [
+          "冷たいサインを押し切るより、礼儀のサインの段階で切り上げるほうがいいから",
+          "不確かさを尊重することが、相手に合わせられる人だと示すから",
+          "彼女の関心を「確かめたい」というこちらの欲求より、彼女の心地よさのほうが大切だから",
+          "上のすべて"
+        ]
+      },
+      "explanation": {
+        "en": "When uncertain, respect the less-interested signal; prioritize her comfort.",
+        "ja": "迷ったときは、関心が低いほうのサインを尊重しましょう。彼女の心地よさを優先します。"
+      }
+    },
+    "78cf663a-b29b-480e-a8ef-fe1997c76016": {
+      "question_text": {
+        "en": "You walk up and say, \"Mind if I join you guys?\" They say sure but continue their conversation.",
+        "ja": "歩み寄って、「ご一緒してもいいですか？」と言います。「どうぞ」と言われますが、グループはそのまま自分たちの会話を続けます。"
+      },
+      "options": {
+        "en": [
+          "Wait for a pause in their conversation, then introduce yourself",
+          "Make a joke to get their attention back on you",
+          "Exit—you asked to join their frame instead of creating your own"
+        ],
+        "ja": [
+          "会話が途切れるのを待ってから、自己紹介をする",
+          "注意をこちらに戻すために、冗談を言う",
+          "切り上げる。自分の空気をつくる代わりに、相手の空気に入れてもらおうとしたから"
+        ]
+      },
+      "explanation": {
+        "en": "When you ask to join, you enter their reality; create your own by opening with content.",
+        "ja": "加わっていいかと尋ねると、相手の現実に入ることになります。中身のあるひと言で話しかけて、自分の空気をつくりましょう。"
+      }
+    },
+    "7b6ea2f2-5183-4215-9488-2a520d528b32": {
+      "question_text": {
+        "en": "What does calm, friendly eye contact achieve before speaking?",
+        "ja": "話す前の、落ち着いた親しみのあるアイコンタクトは、何をもたらしますか？"
+      },
+      "options": {
+        "en": [
+          "Creates immediate intense attraction",
+          "Forces her to respond quickly",
+          "Signals positive intent non-verbally",
+          "Hides your approach completely"
+        ],
+        "ja": [
+          "すぐに、強烈に惹かれる気持ちを生む",
+          "彼女に、すばやい反応を強いる",
+          "言葉を使わずに、前向きな意図を伝える",
+          "近づいていることを、完全に隠す"
+        ]
+      },
+      "explanation": {
+        "en": "Warm friendly eyes reassure her nervous system of safety.",
+        "ja": "温かく親しみのあるまなざしは、彼女の神経系に「安全だ」と伝えて安心させます。"
+      }
+    },
+    "7b879d11-d60e-408e-b0dd-18f2dc6a1bab": {
+      "question_text": {
+        "en": "You’re both waiting for a delayed flight at the airport. What opener reduces pressure?",
+        "ja": "二人とも、空港で遅れている便を待っています。プレッシャーを減らす最初のひと言は、どれですか？"
+      },
+      "options": {
+        "en": [
+          "\"You look stressed—want to chat?\"",
+          "\"Can I get your number for the wait?\"",
+          "\"You’re attractive even with the delay.\"",
+          "\"This delay is rough—do you know how long it’ll be?\""
+        ],
+        "ja": [
+          "「お疲れのようですね。少し話しませんか？」",
+          "「待っているあいだ用に、LINEを教えてもらえますか？」",
+          "「遅れていても、魅力的ですね」",
+          "「この遅れ、こたえますね。あとどれくらいかかるか、ご存じですか？」"
+        ]
+      },
+      "explanation": {
+        "en": "Situational shared experience starts conversation naturally.",
+        "ja": "その場で共有している体験が、会話を自然に始めさせてくれます。"
+      }
+    },
+    "7d344225-54cf-45ff-b8bc-1f401a89453f": {
+      "question_text": {
+        "en": "What does relaxed movement communicate?",
+        "ja": "リラックスした動きは、何を伝えますか？"
+      },
+      "options": {
+        "en": [
+          "You believe you belong in the space you're occupying",
+          "Your body isn't broadcasting tension or discomfort",
+          "You've practiced this specific approach scenario before"
+        ],
+        "ja": [
+          "今いるその場所に、自分はいていいと信じていること",
+          "体が、緊張や居心地の悪さを発していないこと",
+          "まさにこの場面での声のかけ方を、前に練習したことがあること"
+        ]
+      },
+      "explanation": {
+        "en": "Smooth movement signals comfort and belonging.",
+        "ja": "なめらかな動きは、心地よさと、「ここにいて当然」という感覚を伝えます。"
+      }
+    },
+    "7e53f4ec-68aa-4155-b6ff-8c9214acf8e2": {
+      "question_text": {
+        "en": "What's the primary weakness of direct openers?",
+        "ja": "ストレートなひと言の、一番の弱みは何ですか？"
+      },
+      "options": {
+        "en": [
+          "They work only in specific social environments",
+          "They require more verbal skill than indirect openers",
+          "If she's not immediately attracted, interaction ends quickly"
+        ],
+        "ja": [
+          "特定の社交の場でしか、うまくいかないこと",
+          "さりげないひと言よりも、話す技術が必要なこと",
+          "彼女がすぐに惹かれなければ、やり取りがすぐに終わること"
+        ]
+      },
+      "explanation": {
+        "en": "Direct openers activate instant evaluation. No rapport buffer exists.",
+        "ja": "ストレートなひと言は、相手をすぐに「見きわめモード」にします。打ち解けるための緩衝材はありません。"
+      }
+    },
+    "80d3365a-d883-4997-8988-b8010451c01d": {
+      "question_text": {
+        "en": "You approach but she immediately steps back. Most likely cause?",
+        "ja": "声をかけると、彼女がすぐに一歩下がります。最も考えられる原因は何ですか？"
+      },
+      "options": {
+        "en": [
+          "You got too close or blocked her movement",
+          "She's not interested and is creating physical distance intentionally",
+          "She needs to go somewhere"
+        ],
+        "ja": [
+          "近づきすぎたか、彼女の動きをふさいだ",
+          "関心がなく、意図的に物理的な距離を取っている",
+          "どこかへ行かなければならない"
+        ]
+      },
+      "explanation": {
+        "en": "Pulling away is a reflexive safety response, not a deliberate judgment.",
+        "ja": "身を引くのは、安全のための反射的な反応であって、意図的な判断ではありません。"
+      }
+    },
+    "81df7422-a32e-4d7e-9ee5-03e32f5773ef": {
+      "question_text": {
+        "en": "Which psychological mechanism makes assumption openers effective?",
+        "ja": "推測から入るひと言を効果的にしている心理的な仕組みは、どれですか？"
+      },
+      "options": {
+        "en": [
+          "They trigger curiosity about how you formed the perception",
+          "They compliment her ego",
+          "They reduce rejection risk"
+        ],
+        "ja": [
+          "どうしてそう見えたのかについて、好奇心を引き起こす",
+          "彼女の自尊心をくすぐる",
+          "断られるリスクを減らす"
+        ]
+      },
+      "explanation": {
+        "en": "Assumptions spark curiosity about your perception, which keeps her mentally involved.",
+        "ja": "推測は、こちらの見方への好奇心を呼び起こし、彼女の頭を会話に引きつけておきます。"
+      }
+    },
+    "862f73dc-ec2a-4136-a805-782b65c7eece": {
+      "question_text": {
+        "en": "What can a single conversation potentially lead to?",
+        "ja": "たった一度の会話が、何につながる可能性がありますか？"
+      },
+      "options": {
+        "en": [
+          "Friendships, relationships, or opportunities you didn't expect",
+          "Experiences and stories you'll remember for years afterward",
+          "Meeting someone who becomes important in your life",
+          "All of the above"
+        ],
+        "ja": [
+          "思ってもみなかった友人関係、恋愛、あるいはチャンス",
+          "何年たっても覚えている経験やエピソード",
+          "人生で大切な存在になる誰かとの出会い",
+          "上のすべて"
+        ]
+      },
+      "explanation": {
+        "en": "Conversations can create possibilities that extend far beyond the moment.",
+        "ja": "会話は、その瞬間をはるかに超えて広がる可能性を生むことがあります。"
+      }
+    },
+    "884ee9cb-5bc8-4593-8032-1bb68fe20856": {
+      "question_text": {
+        "en": "You're both at a concert. What’s an indirect opener?",
+        "ja": "二人ともライブ会場にいます。さりげないひと言になるのは、どれですか？"
+      },
+      "options": {
+        "en": [
+          "Ask if she's seen this band/artist before",
+          "Comment on the crowd size or venue",
+          "Tell her she has great taste in music"
+        ],
+        "ja": [
+          "このバンドやアーティストを前にも見たことがあるかを聞く",
+          "人の多さや会場についてひと言言う",
+          "音楽の趣味がいいと伝える"
+        ]
+      },
+      "explanation": {
+        "en": "Staying with the shared experience allows comfort to build organically.",
+        "ja": "共有している体験から離れずにいると、安心感が自然に育っていきます。"
+      }
+    },
+    "88ec90e6-280c-40aa-896c-018951f9446c": {
+      "question_text": {
+        "en": "She’s reading a book with a cover you recognize. What opener shows curiosity?",
+        "ja": "彼女が、見覚えのある表紙の本を読んでいます。好奇心が伝わるひと言は、どれですか？"
+      },
+      "options": {
+        "en": [
+          "\"You seem like you read a lot.\"",
+          "\"Is that the new edition? How are you finding it so far?\"",
+          "\"Great choice—you look smart.\"",
+          "\"Mind if I join you?\""
+        ],
+        "ja": [
+          "「本をたくさん読みそうな方ですね」",
+          "「それ、新しい版ですか？ここまで読んでみて、どうですか？」",
+          "「いい選択ですね。頭が良さそうです」",
+          "「ご一緒してもいいですか？」"
+        ]
+      },
+      "explanation": {
+        "en": "Curiosity about her experiences invites real connection without agenda.",
+        "ja": "彼女の経験への好奇心は、下心なしに、本物のつながりを招きます。"
+      }
     }
   }
 }
