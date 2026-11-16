@@ -1279,6 +1279,1268 @@
         "en": "Cleaner first impressions, freer behavior, and visible self respect.",
         "ja": "より整った第一印象、より自由な振る舞い、そして目に見える自分への敬意です。"
       }
+    },
+    "1e694c46-0fd5-4820-84c0-2432a8fd7227": {
+      "question_text": {
+        "en": "How does good hygiene habits help approaching?",
+        "ja": "清潔にする習慣は、声をかけるときにどう役立ちますか？"
+      },
+      "options": {
+        "en": [
+          "It clears small barriers that interfere with attraction",
+          "Signals that you care about others",
+          "Making sure you smell better than other men",
+          "Creating a polished first impression every time"
+        ],
+        "ja": [
+          "惹かれる気持ちを妨げる小さな壁を、取り払ってくれる",
+          "周りの人を気づかっていることが伝わる",
+          "ほかの男性より、確実にいい香りがするようになる",
+          "毎回、洗練された第一印象をつくれる"
+        ]
+      },
+      "explanation": {
+        "en": "Hygiene removes invisible friction that creates distance.",
+        "ja": "清潔さは、距離を生む目に見えない引っかかりを取り除きます。"
+      }
+    },
+    "d0aa5e3a-b58e-4eea-8381-e21cbca6f874": {
+      "question_text": {
+        "en": "What does maintaining hygiene actually provide?",
+        "ja": "清潔さを保つことは、実際には何をもたらしますか？"
+      },
+      "options": {
+        "en": [
+          "Removes barriers that block attraction from forming",
+          "Creates internal certainty for closer interaction",
+          "Makes you more charming and socially skilled"
+        ],
+        "ja": [
+          "惹かれる気持ちが生まれるのを妨げる壁を、取り除く",
+          "近い距離でやり取りするための、内面の確かさを生む",
+          "より愛嬌があり、人付き合いの上手な人にしてくれる"
+        ]
+      },
+      "explanation": {
+        "en": "Hygiene assurance eliminates self monitoring and invisible barriers that cause friction.",
+        "ja": "清潔だという安心感は、自己監視と、引っかかりを生む目に見えない壁をなくします。"
+      }
+    },
+    "9b201136-be01-4de3-b7a9-41ab4fa02a38": {
+      "question_text": {
+        "en": "Why does poor style create invisible friction?",
+        "ja": "良くないスタイルは、なぜ目に見えない引っかかりを生むのですか？"
+      },
+      "options": {
+        "en": [
+          "It breaks conversation flow",
+          "It lowers vocal confidence",
+          "It shapes early judgments negatively",
+          "It signals introversion"
+        ],
+        "ja": [
+          "会話の流れを断ち切るから",
+          "声の自信を下げるから",
+          "最初の判断を、悪い方向に左右するから",
+          "内向的だと伝えるから"
+        ]
+      },
+      "explanation": {
+        "en": "Early judgments affect openness before interaction fully begins.",
+        "ja": "最初の判断は、やり取りが本格的に始まる前に、相手の心の開き方を左右します。"
+      }
+    },
+    "c3ef8c23-3bd4-42a1-ba4a-0cc007c4f952": {
+      "question_text": {
+        "en": "How does good style affect internal confidence?",
+        "ja": "良いスタイルは、内面の自信にどう影響しますか？"
+      },
+      "options": {
+        "en": [
+          "It improves humor",
+          "It increases dominance",
+          "It reduces self distraction",
+          "It lowers self monitoring"
+        ],
+        "ja": [
+          "ユーモアを良くする",
+          "支配力を高める",
+          "自分に気を取られることを減らす",
+          "自己監視を減らす"
+        ]
+      },
+      "explanation": {
+        "en": "Comfortable fit keeps attention outward instead of inward.",
+        "ja": "体に合った着心地のいい服は、注意を内側ではなく、外側に向けたままにしてくれます。"
+      }
+    },
+    "02e91b80-7376-4e58-a593-604cc6b23a79": {
+      "question_text": {
+        "en": "Your laugh feels forced and your voice high. What practice helps?",
+        "ja": "笑い声が無理をしているように感じられ、声も高くなっています。どんな練習が役立ちますか？"
+      },
+      "options": {
+        "en": [
+          "Speak louder on inhales",
+          "Raise pitch for attraction",
+          "Give a moment before thoughts and speak on an exhale",
+          "Speed up to match nerves"
+        ],
+        "ja": [
+          "息を吸いながら、もっと大きな声で話す",
+          "惹きつけるために、声を高くする",
+          "考えを口にする前にひと呼吸置き、吐く息に乗せて話す",
+          "緊張に合わせて、話すスピードを上げる"
+        ]
+      },
+      "explanation": {
+        "en": "Controlled pacing on exhale steadies tone and presence.",
+        "ja": "吐く息に乗せてペースをコントロールすると、トーンと存在感が安定します。"
+      }
+    },
+    "03af7107-7650-4d54-b1a7-e9dee067e1b1": {
+      "question_text": {
+        "en": "When someone starts monitoring themselves, what changes in the interaction?",
+        "ja": "人が自分を監視し始めると、やり取りの中で何が変わりますか？"
+      },
+      "options": {
+        "en": [
+          "Performance replaces connection",
+          "Expression decreases",
+          "Anxiety disappears"
+        ],
+        "ja": [
+          "つながりが、演技に置き換わる",
+          "表現が減る",
+          "不安が消える"
+        ]
+      },
+      "explanation": {
+        "en": "Self monitoring shifts focus away from genuine interaction.",
+        "ja": "自己監視は、本物のやり取りから意識をそらしてしまいます。"
+      }
+    },
+    "0cfb0ca8-28d9-426f-80c4-d26b972acc51": {
+      "question_text": {
+        "en": "A guy replays a conversation and decides he sounded awkward. What's happening?",
+        "ja": "ある男性が、会話を頭の中で再生して、自分はぎこちなかったと結論づけます。何が起きていますか？"
+      },
+      "options": {
+        "en": [
+          "He's learning from mistakes to improve next time",
+          "He's being realistic about his social performance",
+          "His mind is filling gaps with fear, not fact",
+          "Self-awareness is helping him identify weak points"
+        ],
+        "ja": [
+          "次に良くするために、失敗から学んでいる",
+          "自分の振る舞いについて、現実的に見ている",
+          "心が、事実ではなく恐れで空白を埋めている",
+          "自己認識が、弱点を見つける助けになっている"
+        ]
+      },
+      "explanation": {
+        "en": "The story your mind tells after is not a reliable account of what happened.",
+        "ja": "あとから心が語る物語は、実際に起きたことの信頼できる記録ではありません。"
+      }
+    },
+    "1050b192-a012-4512-86fb-9ceb4d8087e7": {
+      "question_text": {
+        "en": "Which effects can a genuine smile create?",
+        "ja": "本物の笑顔が生むことのある効果は、どれですか？"
+      },
+      "options": {
+        "en": [
+          "Reduced stress",
+          "Increased approachability",
+          "Lowered guard",
+          "Immediate attraction"
+        ],
+        "ja": [
+          "ストレスが減る",
+          "話しかけやすい印象が増す",
+          "警戒が下がる",
+          "すぐに惹かれる気持ちが生まれる"
+        ]
+      },
+      "explanation": {
+        "en": "A genuine smile signals warmth before the conversation begins.",
+        "ja": "本物の笑顔は、会話が始まる前に温かさを伝えます。"
+      }
+    },
+    "1078c50b-deac-4399-9cc9-3872de90104c": {
+      "question_text": {
+        "en": "What is the core shift behind confidence?",
+        "ja": "自信の根底にある、中心的な変化は何ですか？"
+      },
+      "options": {
+        "en": [
+          "Being admired",
+          "Being impressive",
+          "Being accepted",
+          "Not needing proof"
+        ],
+        "ja": [
+          "称賛されること",
+          "すごいと思われること",
+          "受け入れられること",
+          "証明を必要としなくなること"
+        ]
+      },
+      "explanation": {
+        "en": "Confidence stabilizes when worth no longer depends on others.",
+        "ja": "自分の価値が他人に左右されなくなったとき、自信は安定します。"
+      }
+    },
+    "1d689f0a-9831-4f51-86c0-26f91d7c3192": {
+      "question_text": {
+        "en": "Why does grounding work to reduce anxiety before approaching?",
+        "ja": "グラウンディングは、なぜ声をかける前の不安を和らげるのに役立つのですか？"
+      },
+      "options": {
+        "en": [
+          "It distracts your mind from anxious thoughts temporarily",
+          "Physical sensations signal safety, which deactivates the threat response",
+          "Focusing on your body builds confidence through awareness"
+        ],
+        "ja": [
+          "不安な考えから、一時的に気をそらしてくれるから",
+          "体の感覚が安全を伝え、脅威への反応を解除するから",
+          "体に意識を向けることで、気づきを通じて自信が育つから"
+        ]
+      },
+      "explanation": {
+        "en": "Grounding works by moving attention out of the mind and into physical sensation.",
+        "ja": "グラウンディングは、注意を頭の中から体の感覚へと移すことで働きます。"
+      }
+    },
+    "219e0cdc-a9ad-455f-86bd-5424943faf26": {
+      "question_text": {
+        "en": "A guy gets validation and immediately thinks \"don't mess this up\". What happens?",
+        "ja": "ある男性が、好意的な反応をもらった瞬間に「これを台無しにするな」と考えます。何が起こりますか？"
+      },
+      "options": {
+        "en": [
+          "The pressure helps him avoid mistakes",
+          "He creates pressure that changes his energy",
+          "The thought motivates him to stay engaged"
+        ],
+        "ja": [
+          "そのプレッシャーが、ミスを避ける助けになる",
+          "プレッシャーを生み、それが自分のエネルギーを変えてしまう",
+          "その考えが、会話に乗り続ける意欲になる"
+        ]
+      },
+      "explanation": {
+        "en": "Managing not to fail replaces relaxed engagement, harming rapport.",
+        "ja": "「失敗しないように」と管理することが、リラックスした関わり方に取って代わり、打ち解けた空気を損ないます。"
+      }
+    },
+    "259c1e7d-ff03-4cbb-8e6f-491608175612": {
+      "question_text": {
+        "en": "What does positive energy actually do?",
+        "ja": "ポジティブなエネルギーは、実際には何をしますか？"
+      },
+      "options": {
+        "en": [
+          "Draws people in because they feel better around you",
+          "Creates immediate attraction through high-status signals",
+          "Makes your words more persuasive",
+          "Invites interaction easier"
+        ],
+        "ja": [
+          "そばにいると気分が良くなるので、人を引き寄せる",
+          "立ち位置の高さを示すサインを通じて、すぐに惹かれる気持ちを生む",
+          "言葉の説得力を高める",
+          "やり取りを招き入れやすくする"
+        ]
+      },
+      "explanation": {
+        "en": "Positive energy makes people feel good, which naturally pulls them in.",
+        "ja": "ポジティブなエネルギーは人の気分を良くし、それが自然と人を引き寄せます。"
+      }
+    },
+    "2aba3577-76b4-423a-898b-cb6e1f03d88d": {
+      "question_text": {
+        "en": "A guy speaks fast with a higher pitch during an approach. What's happening?",
+        "ja": "ある男性が、声をかけている最中に、高めの声で早口で話しています。何が起きていますか？"
+      },
+      "options": {
+        "en": [
+          "His excitement is coming across as nervous energy",
+          "His tone signals tension, which she feels before hearing his words",
+          "He's unconsciously trying to fill silence and maintain momentum"
+        ],
+        "ja": [
+          "わくわくした気持ちが、落ち着きのなさとして伝わっている",
+          "トーンが緊張を伝え、彼女は言葉を聞く前にそれを感じ取っている",
+          "無意識のうちに、沈黙を埋めて流れを保とうとしている"
+        ]
+      },
+      "explanation": {
+        "en": "When tone is rushed or strained, people feel tension.",
+        "ja": "トーンが急いでいたり、張りつめていたりすると、人は緊張を感じ取ります。"
+      }
+    },
+    "35e59aa9-31b1-4b02-af42-50fe8b4a375c": {
+      "question_text": {
+        "en": "A guy has awkward words but great energy. What happens?",
+        "ja": "ある男性は、言葉はぎこちないものの、エネルギーはすばらしいです。何が起こりますか？"
+      },
+      "options": {
+        "en": [
+          "The interaction still feels good",
+          "The conversation fails",
+          "Interest drops quickly",
+          "People focus on his mistakes"
+        ],
+        "ja": [
+          "それでも、やり取りは心地よく感じられる",
+          "会話は失敗する",
+          "関心がすぐに下がる",
+          "周りは、彼の失敗に注目する"
+        ]
+      },
+      "explanation": {
+        "en": "When your energy feels positive, people enjoy being around you.",
+        "ja": "エネルギーが前向きに感じられると、人はそばにいることを楽しみます。"
+      }
+    },
+    "40266254-315c-41fe-9eba-7ad6413d86a3": {
+      "question_text": {
+        "en": "Why does smiling work better than words initially?",
+        "ja": "最初の段階では、なぜ言葉よりも笑顔のほうがうまくいくのですか？"
+      },
+      "options": {
+        "en": [
+          "Words feel risky",
+          "Faces are processed faster",
+          "Smiles show intent clearly",
+          "Silence feels confident"
+        ],
+        "ja": [
+          "言葉は、リスクがあるように感じられるから",
+          "顔のほうが、速く処理されるから",
+          "笑顔は、意図をはっきり示すから",
+          "沈黙は、自信があるように感じられるから"
+        ]
+      },
+      "explanation": {
+        "en": "The brain reads faces before language. Smile first, let it help you.",
+        "ja": "脳は、言葉より先に顔を読みます。まずほほえんで、笑顔に助けてもらいましょう。"
+      }
+    },
+    "43d2d9f6-2ffb-4330-8584-9a58b70d6399": {
+      "question_text": {
+        "en": "Why does fitness build confidence beyond appearance?",
+        "ja": "体を鍛えることは、なぜ見た目以上に自信を築くのですか？"
+      },
+      "options": {
+        "en": [
+          "It changes how others perceive you immediately",
+          "It improves your self-perception and respect for your body",
+          "It reduces internal self-monitoring and doubt"
+        ],
+        "ja": [
+          "周りからの見られ方を、すぐに変えるから",
+          "自分自身の見え方と、自分の体への敬意を高めるから",
+          "内側の自己監視と迷いを減らすから"
+        ]
+      },
+      "explanation": {
+        "en": "Fitness shapes internal belief and reduces noise, boosting natural confidence.",
+        "ja": "体を鍛えることは、内面の確信を形づくり、雑音を減らして、自然な自信を高めます。"
+      }
+    },
+    "46eb84b4-53da-484e-8846-fdb26ae3c785": {
+      "question_text": {
+        "en": "What strengthens confidence long term?",
+        "ja": "長い目で見て、自信を強くするものは何ですか？"
+      },
+      "options": {
+        "en": [
+          "Calm emotions",
+          "Clear plans",
+          "Avoiding discomfort",
+          "Acting despite fear"
+        ],
+        "ja": [
+          "穏やかな感情",
+          "はっきりした計画",
+          "居心地の悪さを避けること",
+          "恐れがあっても行動すること"
+        ]
+      },
+      "explanation": {
+        "en": "Confidence forms after showing up, not before.",
+        "ja": "自信は、その場に立つ前ではなく、立ったあとに形づくられます。"
+      }
+    },
+    "4ac6998e-65dd-431c-99de-be7a3f97072e": {
+      "question_text": {
+        "en": "Your shoulders tighten and eyes dart during an approach. What should you prioritize?",
+        "ja": "声をかけている最中に、肩がこわばり、目が泳ぎます。何を優先するべきですか？"
+      },
+      "options": {
+        "en": [
+          "Remove tense signals by relaxing posture and breath",
+          "Speak faster to override nerves",
+          "Force more eye contact intensely",
+          "Use bigger gestures to appear confident"
+        ],
+        "ja": [
+          "姿勢と呼吸をゆるめて、緊張のサインを取り除く",
+          "緊張を打ち消すために、もっと速く話す",
+          "無理にでも、もっと強く目を合わせる",
+          "自信があるように見せるために、身ぶりを大きくする"
+        ]
+      },
+      "explanation": {
+        "en": "Your body communicates safety or tension before your words ever arrive.",
+        "ja": "体は、言葉が届くよりも先に、安全か緊張かを伝えています。"
+      }
+    },
+    "51ceb33f-6d3d-4110-8369-52ab53cc3b2c": {
+      "question_text": {
+        "en": "She shows strong interest and you feel the urge to \"not mess it up\". What mindset helps?",
+        "ja": "彼女が強い関心を示していて、「これを台無しにしたくない」という衝動を感じます。どんな考え方が役立ちますか？"
+      },
+      "options": {
+        "en": [
+          "This rare chance must be secured",
+          "Pull back to play it safe",
+          "Ramp up to deserve the moment",
+          "Her interest is nice; keep being who attracted her"
+        ],
+        "ja": [
+          "このめったにないチャンスは、必ず確保しなければならない",
+          "安全策を取って、身を引く",
+          "この瞬間にふさわしくなるために、勢いを上げる",
+          "彼女の関心はうれしい。彼女を惹きつけた自分のままでいる"
+        ]
+      },
+      "explanation": {
+        "en": "Recognize interest without attaching or chasing more.",
+        "ja": "関心を認めながら、それに執着したり、さらに追いかけたりしないことです。"
+      }
+    },
+    "5423b03c-3be1-4925-81c1-77d8776ea860": {
+      "question_text": {
+        "en": "You’re walking toward her after eye contact. What expression helps most?",
+        "ja": "目が合ったあと、彼女のほうへ歩いています。どんな表情が一番役立ちますか？"
+      },
+      "options": {
+        "en": [
+          "Neutral serious face",
+          "Forced big grin",
+          "Warm, genuine smile maintained",
+          "No expression to stay cool"
+        ],
+        "ja": [
+          "感情を出さない、まじめな顔",
+          "無理につくった満面の笑み",
+          "温かく、本物の笑顔を保つ",
+          "クールでいるために、無表情"
+        ]
+      },
+      "explanation": {
+        "en": "A genuine smile signals safety before any words are exchanged.",
+        "ja": "本物の笑顔は、言葉を交わす前に、安全だと伝えます。"
+      }
+    },
+    "59af149f-a4e1-4e59-9e5c-79c015952617": {
+      "question_text": {
+        "en": "An interaction goes poorly. What should you think?",
+        "ja": "やり取りがうまくいきません。どう考えるべきですか？"
+      },
+      "options": {
+        "en": [
+          "\"That didn’t work, what can I adjust next time?\"",
+          "\"I’m fundamentally bad at this.\"",
+          "\"Some people are naturals; I’m not\".",
+          "\"I should stop trying.\""
+        ],
+        "ja": [
+          "「今のはうまくいかなかった。次は何を変えられるだろう」",
+          "「自分は、根本的にこういうのが下手だ」",
+          "「もともと得意な人もいる。自分は違う」",
+          "「もう挑戦するのはやめよう」"
+        ]
+      },
+      "explanation": {
+        "en": "Growth mindset reframes rejection as data for improvement.",
+        "ja": "成長マインドセットは、断られたことを、上達のためのデータとして捉え直します。"
+      }
+    },
+    "6050d9fa-5758-4a66-9d2a-4484751813c5": {
+      "question_text": {
+        "en": "A guy tries to control how he appears during attention. What's the cost?",
+        "ja": "ある男性が、注目されているときに、自分がどう見えるかをコントロールしようとします。その代償は何ですか？"
+      },
+      "options": {
+        "en": [
+          "He appears less confident and more self-conscious",
+          "People notice the performance and react negatively",
+          "Managing appearance makes him less authentic and more performative"
+        ],
+        "ja": [
+          "自信がなく、周りの目を気にしているように見える",
+          "周りがその演技に気づいて、否定的に反応する",
+          "見え方を管理することで、自分らしさが減り、演技が増える"
+        ]
+      },
+      "explanation": {
+        "en": "The more you try to manage how you appear, the less authentic you are.",
+        "ja": "どう見えるかを管理しようとすればするほど、自分らしさは失われます。"
+      }
+    },
+    "695eb047-3678-474b-a13a-26682bf11d5f": {
+      "question_text": {
+        "en": "You enter a venue with arms crossed and low energy. What happens next?",
+        "ja": "腕を組み、エネルギーの低いまま、店に入ります。このあと何が起こりますか？"
+      },
+      "options": {
+        "en": [
+          "People approach you eagerly",
+          "You feel more relaxed over time",
+          "People unconsciously avoid you",
+          "Your words carry more weight"
+        ],
+        "ja": [
+          "周りの人が、進んで話しかけてくる",
+          "時間がたつにつれて、リラックスしてくる",
+          "周りの人が、無意識のうちに避ける",
+          "自分の言葉に、より重みが出る"
+        ]
+      },
+      "explanation": {
+        "en": "Closed body language signals withdrawal, even if you want connection.",
+        "ja": "閉じたボディランゲージは、たとえつながりを求めていても、「引いている」と伝えてしまいます。"
+      }
+    },
+    "6e9907b3-8130-4125-a5aa-e6b1a0898b60": {
+      "question_text": {
+        "en": "What determines long-term improvement in social skills?",
+        "ja": "人付き合いのスキルが長い目で見て上達するかどうかを決めるものは、何ですか？"
+      },
+      "options": {
+        "en": [
+          "Natural talent from the start",
+          "Belief that abilities can develop through practice",
+          "Continuing effort despite setbacks",
+          "Avoiding challenges to protect confidence"
+        ],
+        "ja": [
+          "最初から持っている、生まれつきの才能",
+          "能力は練習で伸ばせるという信念",
+          "つまずいても、努力を続けること",
+          "自信を守るために、挑戦を避けること"
+        ]
+      },
+      "explanation": {
+        "en": "Skills develop only when you don’t quit and keep going.",
+        "ja": "スキルが伸びるのは、やめずに続けたときだけです。"
+      }
+    },
+    "7ea9a0ee-49fd-4682-8888-bb7fba4dfa72": {
+      "question_text": {
+        "en": "Your arms stay crossed and posture collapses mid-chat. What does this broadcast?",
+        "ja": "会話の途中で、腕は組んだままで、姿勢が崩れています。これは何を伝えていますか？"
+      },
+      "options": {
+        "en": [
+          "Discomfort pulling you inward despite words",
+          "Strong confident presence",
+          "Relaxed easy energy",
+          "Intentional mysterious vibe"
+        ],
+        "ja": [
+          "言葉とは裏腹に、居心地の悪さが自分を内側へ引き込んでいること",
+          "力強く、自信のある存在感",
+          "リラックスした、気楽なエネルギー",
+          "意図した、ミステリアスな雰囲気"
+        ]
+      },
+      "explanation": {
+        "en": "Tense body undermines spoken ease, creating disconnect.",
+        "ja": "緊張した体は、言葉の上での余裕を打ち消し、ずれを生みます。"
+      }
+    },
+    "7f2e5b24-f05e-439d-9f03-8ea8d846f05a": {
+      "question_text": {
+        "en": "You feel low energy before entering a venue. What could reset it?",
+        "ja": "店に入る前に、エネルギーが低いと感じます。何をすれば切り替えられますか？"
+      },
+      "options": {
+        "en": [
+          "Stay in the corner until better",
+          "Force louder conversation",
+          "Move your body and smile deliberately",
+          "Avoid interactions until natural"
+        ],
+        "ja": [
+          "良くなるまで、隅にいる",
+          "無理に、もっと大きな声で会話する",
+          "体を動かし、意識してほほえむ",
+          "自然にそうなるまで、やり取りを避ける"
+        ]
+      },
+      "explanation": {
+        "en": "Small actions shift energy to positive and inviting.",
+        "ja": "小さな行動が、エネルギーを前向きで、人を招き入れるものに切り替えます。"
+      }
+    },
+    "80156644-8f30-46b7-9f70-3e7b0fbd786f": {
+      "question_text": {
+        "en": "Chest tightens and mind races as you prepare to speak. What grounding techniques help?",
+        "ja": "話そうとすると、胸が締めつけられ、頭の中が駆けめぐります。どんなグラウンディングの技法が役立ちますか？"
+      },
+      "options": {
+        "en": [
+          "Think positive outcomes repeatedly",
+          "Force deeper conversation topics",
+          "Avoid the situation until calmer",
+          "Feel your feet on the ground and slow your breath"
+        ],
+        "ja": [
+          "良い結果を、繰り返し思い浮かべる",
+          "無理に、もっと深い話題にする",
+          "落ち着くまで、その場を避ける",
+          "地面についた足を感じ、呼吸をゆっくりにする"
+        ]
+      },
+      "explanation": {
+        "en": "Grounding works because it shifts attention from future thoughts to present sensations.",
+        "ja": "グラウンディングが効くのは、注意を未来についての思考から、今の感覚へと移すからです。"
+      }
+    },
+    "82bb1ff8-f12d-487b-9b54-090588f0d69d": {
+      "question_text": {
+        "en": "Why does positive feedback sometimes spike more adrenaline than rejection?",
+        "ja": "好意的な反応は、なぜ断られることよりもアドレナリンを急上昇させることがあるのですか？"
+      },
+      "options": {
+        "en": [
+          "Success is more emotionally intense than failure naturally",
+          "The nervous system reacts stronger to rewards than threats",
+          "It creates new fear: the fear of losing the opportunity"
+        ],
+        "ja": [
+          "成功は、もともと失敗より感情を強く揺さぶるから",
+          "神経系は、脅威より報酬に強く反応するから",
+          "「チャンスを失う恐れ」という、新しい恐れを生むから"
+        ]
+      },
+      "explanation": {
+        "en": "Positive signals introduce something to lose, avoid shifting into outcome protection.",
+        "ja": "好意的なサインは、「失うもの」を生みます。結果を守ろうとする状態に、切り替わらないようにしましょう。"
+      }
+    },
+    "8a5e8c45-7476-413e-8358-7c92cdbab538": {
+      "question_text": {
+        "en": "What weakens fear over time?",
+        "ja": "時間とともに恐れを弱めるものは、何ですか？"
+      },
+      "options": {
+        "en": [
+          "Positive self-talk before high-pressure moments",
+          "Acting despite the signal, which updates the system",
+          "Each approach that doesn't result in predicted pain",
+          "Motion rather than thought or mental preparation"
+        ],
+        "ja": [
+          "プレッシャーの高い場面の前に、前向きな言葉を自分にかけること",
+          "恐れのサインがあっても行動し、神経系を更新すること",
+          "予測した痛みが起きなかった、一回一回のアプローチ",
+          "考えることや心の準備ではなく、動くこと"
+        ]
+      },
+      "explanation": {
+        "en": "Fear softens when action proves predictions wrong.",
+        "ja": "行動が予測を覆したとき、恐れはやわらぎます。"
+      }
+    },
+    "8dc6c797-1c0b-443d-ab04-062afc92c412": {
+      "question_text": {
+        "en": "What happens when you stop needing approval?",
+        "ja": "承認を必要としなくなると、何が起こりますか？"
+      },
+      "options": {
+        "en": [
+          "Confidence becomes steadier",
+          "Attention decreases",
+          "Interactions shorten",
+          "Control is lost"
+        ],
+        "ja": [
+          "自信がより安定する",
+          "注目が減る",
+          "やり取りが短くなる",
+          "コントロールを失う"
+        ]
+      },
+      "explanation": {
+        "en": "Your worth does not depend on external validation.",
+        "ja": "自分の価値は、外からの承認に左右されません。"
+      }
+    },
+    "8f1849bb-0b9f-4680-afff-7f0d273e5810": {
+      "question_text": {
+        "en": "Which physical cues affect first impressions?",
+        "ja": "第一印象に影響する身体的な手がかりは、どれですか？"
+      },
+      "options": {
+        "en": [
+          "Eye behavior",
+          "Internal thoughts",
+          "Posture"
+        ],
+        "ja": [
+          "目の動き",
+          "頭の中の考え",
+          "姿勢"
+        ]
+      },
+      "explanation": {
+        "en": "Visible cues shape perception instantly.",
+        "ja": "目に見える手がかりは、一瞬で印象を形づくります。"
+      }
+    },
+    "94983000-db09-40ee-ac8e-75de9d87d3f6": {
+      "question_text": {
+        "en": "What happens when you act anyway despite fear?",
+        "ja": "恐れがあっても行動すると、何が起こりますか？"
+      },
+      "options": {
+        "en": [
+          "Doubt grows from lack of action",
+          "The brain learns fear isn’t final",
+          "Belief strengthens through exposure",
+          "Confidence forms from doing it anyway"
+        ],
+        "ja": [
+          "行動しないことで、疑いが大きくなる",
+          "「恐れがすべてを決めるわけではない」と脳が学ぶ",
+          "経験を重ねることで、自分を信じる気持ちが強まる",
+          "それでもやることから、自信が形づくられる"
+        ]
+      },
+      "explanation": {
+        "en": "Repeated survival updates the mind with trustworthy proof.",
+        "ja": "何度も乗り越えることで、心は信頼できる証拠によって更新されます。"
+      }
+    },
+    "9c28c269-1ab6-4f2a-9043-22fadc730b6b": {
+      "question_text": {
+        "en": "You hesitate to approach but do it anyway, and nothing bad happens. What does this do?",
+        "ja": "声をかけるのをためらいますが、それでも声をかけ、悪いことは何も起こりません。これは何をもたらしますか？"
+      },
+      "options": {
+        "en": [
+          "Small evidence your brain stores for future trust",
+          "Immediate perfect confidence",
+          "Temporary relief only"
+        ],
+        "ja": [
+          "脳が、この先の自分への信頼のために蓄える、小さな証拠",
+          "すぐに手に入る、完璧な自信",
+          "一時的な安心だけ"
+        ]
+      },
+      "explanation": {
+        "en": "Every time you act anyway, you add to a record you can rely on.",
+        "ja": "それでも行動するたびに、頼りにできる記録が積み上がっていきます。"
+      }
+    },
+    "a0b5f46b-7b16-4682-b089-7e8d882d5dea": {
+      "question_text": {
+        "en": "How does smiling help the person smiling?",
+        "ja": "ほほえむことは、ほほえむ本人にどう役立ちますか？"
+      },
+      "options": {
+        "en": [
+          "It improves posture",
+          "It releases calming chemicals",
+          "It increases dominance"
+        ],
+        "ja": [
+          "姿勢を良くする",
+          "気持ちを落ち着かせる物質を放出する",
+          "支配力を高める"
+        ]
+      },
+      "explanation": {
+        "en": "Smiling shifts internal state through neurochemical release. Smile more.",
+        "ja": "ほほえむと、神経化学物質が放出され、内面の状態が切り替わります。もっとほほえみましょう。"
+      }
+    },
+    "a7253e20-5530-468a-a086-0f0e27b02b4b": {
+      "question_text": {
+        "en": "Why does avoidance increase fear over time?",
+        "ja": "避けることは、なぜ時間とともに恐れを大きくするのですか？"
+      },
+      "options": {
+        "en": [
+          "It teaches the body avoidance is safer",
+          "It reinforces the fear response through non-exposure",
+          "It builds confidence gradually"
+        ],
+        "ja": [
+          "体に「避けるほうが安全だ」と教えるから",
+          "向き合わないことで、恐れの反応を強めるから",
+          "自信を少しずつ築くから"
+        ]
+      },
+      "explanation": {
+        "en": "Pulling back strengthens the avoidance loop and fear signal.",
+        "ja": "身を引くことは、回避のループと恐れのサインを強めます。"
+      }
+    },
+    "b400f47c-56f1-455f-8258-5bf582c021f8": {
+      "question_text": {
+        "en": "You feel nerves but want to appear relaxed. What aligns body with intent?",
+        "ja": "緊張を感じていますが、リラックスして見せたいと思っています。体を意図に合わせるのは、どれですか？"
+      },
+      "options": {
+        "en": [
+          "Stand tall, breathe fully, and reduce self-interruption",
+          "Cross arms to protect yourself",
+          "Avoid eye contact to reduce pressure",
+          "Fidget to release energy"
+        ],
+        "ja": [
+          "背筋を伸ばし、深く呼吸し、自分の言葉を自分でさえぎらない",
+          "身を守るために、腕を組む",
+          "プレッシャーを減らすために、目を合わせない",
+          "エネルギーを発散するために、そわそわ動く"
+        ]
+      },
+      "explanation": {
+        "en": "Open, steady body reflects calm without performance.",
+        "ja": "開いた、安定した体は、演じなくても落ち着きを映し出します。"
+      }
+    },
+    "b505f110-e322-4bf1-9300-fb0cc533a552": {
+      "question_text": {
+        "en": "A doubt arises: “She won’t like me.” What should you do?",
+        "ja": "「彼女には好かれない」という疑いが浮かびます。どうするべきですか？"
+      },
+      "options": {
+        "en": [
+          "Recognize it as noise and let it pass without belief",
+          "Fight the doubt to prove it wrong",
+          "Believe it to stay realistic",
+          "Replay it to analyze deeply"
+        ],
+        "ja": [
+          "ノイズだと気づき、信じ込まずに流す",
+          "間違いだと証明するために、その疑いと闘う",
+          "現実的でいるために、それを信じる",
+          "深く分析するために、繰り返し再生する"
+        ]
+      },
+      "explanation": {
+        "en": "You can’t control which thoughts appear, but you can control whether you believe them.",
+        "ja": "どんな考えが浮かぶかはコントロールできません。でも、それを信じるかどうかはコントロールできます。"
+      }
+    },
+    "b8441682-aa6b-4a9b-b7ac-97e0f2c1573d": {
+      "question_text": {
+        "en": "Why does positive energy attract interaction?",
+        "ja": "ポジティブなエネルギーは、なぜやり取りを引き寄せるのですか？"
+      },
+      "options": {
+        "en": [
+          "People feel better around it",
+          "It signals dominance",
+          "It demands attention"
+        ],
+        "ja": [
+          "そばにいると、人は気分が良くなるから",
+          "支配力を伝えるから",
+          "注目を要求するから"
+        ]
+      },
+      "explanation": {
+        "en": "Comfortable states draw people closer naturally. Keep your energy positive.",
+        "ja": "心地よい状態は、自然と人を引き寄せます。エネルギーは、前向きに保ちましょう。"
+      }
+    },
+    "b8999272-dae6-4926-b567-a975478a321d": {
+      "question_text": {
+        "en": "What breaks connection before conversation even begins?",
+        "ja": "会話が始まる前から、つながりを壊してしまうものは何ですか？"
+      },
+      "options": {
+        "en": [
+          "Darting eyes and closed posture signalling uncertainty",
+          "Tense body broadcasting discomfort while words sound relaxed",
+          "Saying the wrong opening line or using poor technique"
+        ],
+        "ja": [
+          "迷いを伝える、泳ぐ目と閉じた姿勢",
+          "言葉は落ち着いて聞こえるのに、居心地の悪さを発しているこわばった体",
+          "最初のひと言を間違えたり、テクニックがまずかったりすること"
+        ]
+      },
+      "explanation": {
+        "en": "Physical signals of discomfort break connection regardless of words.",
+        "ja": "居心地の悪さを示す体のサインは、言葉に関係なく、つながりを壊します。"
+      }
+    },
+    "c5d60b8c-c34d-4089-81c4-a5f56034f361": {
+      "question_text": {
+        "en": "You walk into a crowded room and feel every glance on you. What should you remind yourself?",
+        "ja": "人の多い部屋に入り、すべての視線が自分に向いているように感じます。何を自分に言い聞かせるべきですか？"
+      },
+      "options": {
+        "en": [
+          "Everyone is judging you harshly",
+          "You must perform perfectly to fit in",
+          "Most people are focused on themselves, not you",
+          "Hide until the feeling passes"
+        ],
+        "ja": [
+          "みんなが、こちらを厳しく評価している",
+          "なじむためには、完璧に振る舞わなければならない",
+          "ほとんどの人は、こちらのことではなく、自分自身のことで頭がいっぱいだ",
+          "その感覚が過ぎるまで、隠れている"
+        ]
+      },
+      "explanation": {
+        "en": "The mind exaggerates attention; reality is far less focused on you.",
+        "ja": "心は、自分に向けられた注目を大げさに見積もります。現実には、周りはそれほど見ていません。"
+      }
+    },
+    "c8828ffa-d37b-4033-9da0-bd56a61641e5": {
+      "question_text": {
+        "en": "The conversation flows perfectly and she shows clear interest. What should you avoid?",
+        "ja": "会話は申し分なく流れ、彼女ははっきりと関心を示しています。避けるべきことは何ですか？"
+      },
+      "options": {
+        "en": [
+          "Continuing naturally in the moment",
+          "Responding to her positive cues",
+          "Letting the rhythm breathe",
+          "Working harder for more validation"
+        ],
+        "ja": [
+          "その場の流れのまま、自然に続けること",
+          "彼女の好意的なサインに応えること",
+          "リズムに余白を持たせること",
+          "もっと承認を得ようと、さらにがんばること"
+        ]
+      },
+      "explanation": {
+        "en": "Approval-seeking pressure disrupts the natural flow.",
+        "ja": "承認を求めるプレッシャーは、自然な流れを乱します。"
+      }
+    },
+    "c918a4eb-10ec-4f35-a8de-8627f329a218": {
+      "question_text": {
+        "en": "You feel chest tightness and shallow breath mid-conversation. What should you focus on?",
+        "ja": "会話の途中で、胸が締めつけられ、呼吸が浅くなっているのを感じます。何に意識を向けるべきですか？"
+      },
+      "options": {
+        "en": [
+          "Force your voice to sound calm",
+          "Return to steady, controlled breathing",
+          "End the interaction to recover",
+          "Speed up talking to finish fast"
+        ],
+        "ja": [
+          "無理に、声を落ち着いて聞こえるようにする",
+          "安定した、コントロールされた呼吸に戻る",
+          "立て直すために、やり取りを終わらせる",
+          "早く終わらせるために、話すスピードを上げる"
+        ]
+      },
+      "explanation": {
+        "en": "Breath regulation steadies your voice before you try to steady your words.",
+        "ja": "呼吸を整えると、言葉を落ち着かせようとする前に、声が安定します。"
+      }
+    },
+    "dc39682a-160f-459c-a7c6-83758e6a8ad3": {
+      "question_text": {
+        "en": "What is the main benefit of consistent fitness training?",
+        "ja": "体を鍛え続けることの、主な利点は何ですか？"
+      },
+      "options": {
+        "en": [
+          "Perfect appearance for external validation",
+          "Your self-perception and internal confidence benefits",
+          "Immediate dramatic changes in looks",
+          "Forcing confidence through willpower"
+        ],
+        "ja": [
+          "外から認められるための、完璧な見た目",
+          "自分自身の見え方と、内側の自信が良くなること",
+          "見た目が、すぐに劇的に変わること",
+          "意志の力で、無理に自信をつくり出すこと"
+        ]
+      },
+      "explanation": {
+        "en": "A respected body creates effortless self-assurance from within.",
+        "ja": "自分で敬意を持てる体は、がんばらなくても湧いてくる、内側からの確信を生みます。"
+      }
+    },
+    "e0b7ae70-05c8-4c9c-8a5b-c48a3e0f6743": {
+      "question_text": {
+        "en": "Your body tenses before approaching someone. What does this signal?",
+        "ja": "誰かに声をかける前に、体がこわばります。これは何を示していますか？"
+      },
+      "options": {
+        "en": [
+          "Biology and opportunity for growth",
+          "Weakness and a reason to stop",
+          "Guaranteed negative outcome",
+          "Lack of readiness forever"
+        ],
+        "ja": [
+          "体の自然な反応であり、成長のチャンス",
+          "弱さであり、やめる理由",
+          "悪い結果が確実だということ",
+          "この先もずっと、準備ができないということ"
+        ]
+      },
+      "explanation": {
+        "en": "Fear is a normal physiological response, not a stop sign. Moving proves it wrong.",
+        "ja": "恐れは、ふつうの生理的な反応であって、止まれという合図ではありません。動くことで、それが間違いだと証明されます。"
+      }
+    },
+    "e172e286-a34d-4fba-a51e-7a29d03e5107": {
+      "question_text": {
+        "en": "She laughs easily, leans closer, and touches your arm. What should you do next?",
+        "ja": "彼女はよく笑い、身を寄せ、腕に触れてきます。次にどうするべきですか？"
+      },
+      "options": {
+        "en": [
+          "Ramp up energy and try harder to impress her",
+          "Start thinking about what to say to keep it perfect",
+          "Stay relaxed and continue as you were",
+          "Immediately escalate to close the moment"
+        ],
+        "ja": [
+          "エネルギーを上げて、彼女を感心させようともっとがんばる",
+          "完璧なままにするために、何を言うかを考え始める",
+          "リラックスしたまま、それまでと同じように続ける",
+          "この機を逃すまいと、すぐに距離を縮める"
+        ]
+      },
+      "explanation": {
+        "en": "Positive interest is not a cue to try harder; it is a cue to stay the same.",
+        "ja": "好意的な関心は、もっとがんばる合図ではありません。そのままでいる合図です。"
+      }
+    },
+    "e56ee826-cd5b-4fb6-8005-84e669a0b1d7": {
+      "question_text": {
+        "en": "Why does breathing help when fear arises before an approach?",
+        "ja": "声をかける前に恐れが湧いたとき、呼吸はなぜ助けになるのですか？"
+      },
+      "options": {
+        "en": [
+          "It distracts you from fear",
+          "It slows the moment",
+          "It improves confidence instantly",
+          "It signals safety to the nervous system"
+        ],
+        "ja": [
+          "恐れから気をそらしてくれるから",
+          "その瞬間をゆっくりにするから",
+          "すぐに自信を高めるから",
+          "神経系に、安全だと伝えるから"
+        ]
+      },
+      "explanation": {
+        "en": "Slow breathing tells the body it is safe, calming the state before action.",
+        "ja": "ゆっくりした呼吸は、体に安全だと伝え、行動する前の状態を落ち着かせます。"
+      }
+    },
+    "e750c943-9bb0-4a66-892d-3442f22cd528": {
+      "question_text": {
+        "en": "Why can charm fail when the body is tense?",
+        "ja": "体がこわばっていると、なぜ愛嬌が通じないことがあるのですか？"
+      },
+      "options": {
+        "en": [
+          "Attraction fades quickly",
+          "Words lose meaning",
+          "Timing feels off",
+          "Visual cues override speech"
+        ],
+        "ja": [
+          "惹かれる気持ちが、すぐに薄れるから",
+          "言葉が、意味を失うから",
+          "タイミングが、ずれて感じられるから",
+          "目に見える手がかりが、言葉を上書きするから"
+        ]
+      },
+      "explanation": {
+        "en": "The brain trusts what it sees not what it hears.",
+        "ja": "脳は、聞こえるものではなく、見えるものを信頼します。"
+      }
+    },
+    "e9e55ffe-f94e-4155-a34b-977fd5d465ba": {
+      "question_text": {
+        "en": "How is confidence primarily built?",
+        "ja": "自信は、主にどうやって築かれますか？"
+      },
+      "options": {
+        "en": [
+          "Through positive thinking and reassurance",
+          "From natural personality traits",
+          "By accumulating evidence from repeated actions",
+          "By avoiding risks until ready"
+        ],
+        "ja": [
+          "前向きに考え、自分を安心させることで",
+          "生まれつきの性格から",
+          "行動を繰り返して、証拠を積み重ねることで",
+          "準備ができるまで、リスクを避けることで"
+        ]
+      },
+      "explanation": {
+        "en": "Confidence grows from proof of surviving actions, not imagination.",
+        "ja": "自信は、想像からではなく、行動して乗り越えたという証拠から育ちます。"
+      }
+    },
+    "ec90b480-b289-4b95-82b0-39d6020cb7dc": {
+      "question_text": {
+        "en": "What's the difference between naturally confident men and hesitant ones?",
+        "ja": "もともと自信のある男性と、ためらう男性の違いは何ですか？"
+      },
+      "options": {
+        "en": [
+          "Confident men have accumulated more evidence through repetition",
+          "Personality traits determine baseline confidence levels",
+          "Confident men learned to believe in themselves earlier"
+        ],
+        "ja": [
+          "自信のある男性は、繰り返しを通じて、より多くの証拠を積み重ねてきた",
+          "性格が、自信の基本的な高さを決めている",
+          "自信のある男性は、より早い時期に、自分を信じることを学んだ"
+        ]
+      },
+      "explanation": {
+        "en": "The difference is accumulated proof; one has evidence he can rely on.",
+        "ja": "違いは、積み重ねた証拠です。一方には、頼りにできる証拠があります。"
+      }
+    },
+    "f030a547-86d7-4259-a4ec-1734e65a10e0": {
+      "question_text": {
+        "en": "A conversation stalls and feels awkward. What should you think?",
+        "ja": "会話が止まり、気まずく感じます。どう考えるべきですか？"
+      },
+      "options": {
+        "en": [
+          "\"I’ll never get better at this.\"",
+          "\"Failure means I’m deficient.\"",
+          "\"I’m not meant for this.\"",
+          "\"This is information, what can I adjust next time?\""
+        ],
+        "ja": [
+          "「自分は、これが上達することはない」",
+          "「失敗するのは、自分に欠けたところがあるからだ」",
+          "「自分は、こういうことに向いていない」",
+          "「これは情報だ。次は何を変えられるだろう」"
+        ]
+      },
+      "explanation": {
+        "en": "Growth treats setbacks as adjustable, keeping you engaged.",
+        "ja": "成長マインドセットは、つまずきを調整できるものとして捉え、挑戦を続けさせてくれます。"
+      }
+    },
+    "f41af47d-77fc-439e-bcbf-15e75a29eceb": {
+      "question_text": {
+        "en": "Which actions can raise your energy before approaching?",
+        "ja": "声をかける前にエネルギーを高められる行動は、どれですか？"
+      },
+      "options": {
+        "en": [
+          "Moving your body",
+          "Overthinking outcomes",
+          "Withdrawing socially",
+          "Smiling deliberately"
+        ],
+        "ja": [
+          "体を動かすこと",
+          "結果について考えすぎること",
+          "人との関わりから引くこと",
+          "意識してほほえむこと"
+        ]
+      },
+      "explanation": {
+        "en": "Small physical shifts quickly change internal state.",
+        "ja": "体の小さな変化が、内面の状態をすばやく変えます。"
+      }
+    },
+    "f8818fc9-4dc5-4af7-90ed-aa3dc88ca60d": {
+      "question_text": {
+        "en": "You’re spiralling about possible rejection. What could you focus on to help?",
+        "ja": "断られるかもしれないと、考えが渦を巻いています。何に意識を向けると助けになりますか？"
+      },
+      "options": {
+        "en": [
+          "Immediate sensations like breath or feet on ground",
+          "Rehearsing responses to every scenario",
+          "Judging your anxiety as weakness"
+        ],
+        "ja": [
+          "呼吸や、地面についた足など、今この瞬間の感覚",
+          "あらゆる場面への返しを、リハーサルすること",
+          "自分の不安を、弱さだと決めつけること"
+        ]
+      },
+      "explanation": {
+        "en": "Present physical reality pulls attention from future fears.",
+        "ja": "今ここにある体の感覚は、未来への恐れから注意を引き戻します。"
+      }
+    },
+    "faacab86-d6dc-4688-a30c-5fa3c018c113": {
+      "question_text": {
+        "en": "You want to improve your receptiveness. What should you adjust first?",
+        "ja": "人に受け入れられやすくなりたいと思っています。まず何を変えるべきですか？"
+      },
+      "options": {
+        "en": [
+          "Prepare perfect opening lines",
+          "Rehearse compliments",
+          "Wait for others to approach you",
+          "Shift your energy to positive and open"
+        ],
+        "ja": [
+          "完璧な最初のひと言を用意する",
+          "褒め言葉をリハーサルする",
+          "相手から話しかけてくるのを待つ",
+          "エネルギーを、前向きで開いたものに切り替える"
+        ]
+      },
+      "explanation": {
+        "en": "Positive energy invites others in before words are spoken.",
+        "ja": "ポジティブなエネルギーは、言葉を交わす前に、人を招き入れます。"
+      }
+    },
+    "ff0646b8-d942-49bb-841f-2415d6f99442": {
+      "question_text": {
+        "en": "You hold eye contact longer than usual and it goes fine. What should you recognize?",
+        "ja": "いつもより長く目を合わせ、何の問題もなく終わります。何に気づくべきですか？"
+      },
+      "options": {
+        "en": [
+          "It was luck, not evidence",
+          "One time doesn’t matter",
+          "Quiet proof you can trust yourself in similar moments"
+        ],
+        "ja": [
+          "証拠ではなく、運が良かっただけだ",
+          "一回だけでは、意味がない",
+          "似た場面で自分を信頼できるという、静かな証拠だ"
+        ]
+      },
+      "explanation": {
+        "en": "Small acts add to the record your brain relies on for confidence.",
+        "ja": "小さな行動が、脳が自信のよりどころにする記録に積み上がっていきます。"
+      }
     }
   }
 }
