@@ -1,0 +1,314 @@
+{
+  "scenario": {
+    "a1000009-0000-0000-0000-000000000009": {
+      "title": {
+        "en": "Carton Collision",
+        "ja": "最後の卵パック"
+      },
+      "summary": {
+        "en": "Two hands reach at once. How you handle it decides what comes next.",
+        "ja": "二人の手が、同時に伸びます。それをどう扱うかが、その先を決めます。"
+      }
+    }
+  },
+  "screens": {
+    "b1000001-0000-0000-0009-000000000001": {
+      "en": "You're at the grocery store. Dairy aisle. Looking for a carton of eggs.",
+      "ja": "スーパーにいます。卵売り場で、卵のパックを探しています。"
+    },
+    "b1000002-0000-0000-0009-000000000002": {
+      "en": "There's one left and you notice a woman also walking towards it.",
+      "ja": "残りはひとつ。そして、一人の女性も、それに向かって歩いてくるのに気づきます。"
+    },
+    "b1000003-0000-0000-0009-000000000003": {
+      "en": "The two of you make eye contact and realize you're both going for it.",
+      "ja": "二人の目が合い、お互いに同じものを取ろうとしていると気づきます。"
+    },
+    "b1000004-0000-0000-0009-000000000004": {
+      "en": "She's looking at you. Waiting to see what you do.",
+      "ja": "彼女がこちらを見ています。どうするのかを、待っています。"
+    },
+    "b1000051-0000-0000-0009-000000000051": {
+      "en": "Sorry, sorry, you can have it.",
+      "ja": "あ、すみません、すみません。どうぞ。"
+    },
+    "b1000052-0000-0000-0009-000000000052": {
+      "en": "Over-apologizing weakens your frame. Be confident and light about it.",
+      "ja": "謝りすぎると、自分の立場を弱くしてしまいます。自信を持って、軽やかに対応しましょう。"
+    },
+    "b1000053-0000-0000-0009-000000000053": {
+      "en": "What do you need it for?",
+      "ja": "何に使うんですか？"
+    },
+    "b1000054-0000-0000-0009-000000000054": {
+      "en": "Interrogating her can feel invasive. Keep it light about the moment itself first.",
+      "ja": "問いただすような質問は、踏み込まれたように感じさせます。まずは、この場面そのものについて、軽く話しましょう。"
+    },
+    "b1000006-0000-0000-0009-000000000006": {
+      "en": "Looks like we both got good taste.",
+      "ja": "お互い、見る目があるみたいですね。"
+    },
+    "b1000007-0000-0000-0009-000000000007": {
+      "en": "Haha it appears so.",
+      "ja": "あはは、そうみたいですね。"
+    },
+    "b1000008-0000-0000-0009-000000000008": {
+      "en": "Scissors paper rock for it?",
+      "ja": "じゃんけんで決めますか？"
+    },
+    "b1000009-0000-0000-0009-000000000009": {
+      "en": "You're serious? Okay, let's do it.",
+      "ja": "本気ですか？いいですよ、やりましょう。"
+    },
+    "b1000010-0000-0000-0009-000000000010": {
+      "en": "Playful challenge created. She's matching your energy.",
+      "ja": "遊びの勝負ができました。彼女は、こちらのエネルギーに合わせてくれています。"
+    },
+    "b1000011-0000-0000-0009-000000000011": {
+      "en": "You play. She wins. Rock beats scissors. She's grinning, victorious.",
+      "ja": "じゃんけんをします。彼女の勝ちです。グーはチョキに勝ちます。彼女は、勝ち誇ったようににっこりしています。"
+    },
+    "b1000121-0000-0000-0009-000000000121": {
+      "en": "Wait, best of three. That's how it works.",
+      "ja": "待ってください、三回勝負ですよ。そういうものでしょう。"
+    },
+    "b1000122-0000-0000-0009-000000000122": {
+      "en": "Changing rules after losing is childish. Accept defeat with grace and humor.",
+      "ja": "負けてからルールを変えるのは、子どもっぽいことです。潔く、ユーモアを持って負けを認めましょう。"
+    },
+    "b1000123-0000-0000-0009-000000000123": {
+      "en": "Actually eggs are bad for your cholesterol anyway, you have it.",
+      "ja": "まあ、卵はコレステロールに良くないですしね。どうぞ。"
+    },
+    "b1000124-0000-0000-0009-000000000124": {
+      "en": "Being sour kills the playful energy. Don't diminish what she won.",
+      "ja": "負け惜しみを言うと、遊び心のある空気が消えてしまいます。彼女の勝ちを、おとしめてはいけません。"
+    },
+    "b1000013-0000-0000-0009-000000000013": {
+      "en": "Fair and square. So what's on the menu with the eggs?",
+      "ja": "完敗です。それで、その卵で何をつくるんですか？"
+    },
+    "b1000014-0000-0000-0009-000000000014": {
+      "en": "Making brownies actually. Sunday baking tradition.",
+      "ja": "実はブラウニーなんです。日曜日のお菓子づくりが、恒例になっていて。"
+    },
+    "b1000015-0000-0000-0009-000000000015": {
+      "en": "She's smiling. Sharing personal routine. Good sign of openness and engagement.",
+      "ja": "彼女はほほえんでいます。自分の習慣を話してくれています。心を開き、会話に乗っているという良いサインです。"
+    },
+    "b1000161-0000-0000-0009-000000000161": {
+      "en": "Who do you bake them for? Someone special?",
+      "ja": "誰のために焼くんですか？特別な人とか？"
+    },
+    "b1000162-0000-0000-0009-000000000162": {
+      "en": "Asking if she has a partner or who she's cooking for is too invasive early on.",
+      "ja": "恋人がいるのか、誰のためにつくるのかを尋ねるのは、早い段階では踏み込みすぎです。"
+    },
+    "b1000163-0000-0000-0009-000000000163": {
+      "en": "I bake too actually. I made a chocolate chip cookie...",
+      "ja": "実は僕もお菓子を焼くんです。この前、チョコチップクッキーを……"
+    },
+    "b1000164-0000-0000-0009-000000000164": {
+      "en": "She shared her tradition. Keep focus on her first, don't make it about yourself yet.",
+      "ja": "彼女は、自分の恒例を話してくれました。まずは彼女に関心を向け続け、まだ自分の話にはしないでおきましょう。"
+    },
+    "b1000017-0000-0000-0009-000000000017": {
+      "en": "That's a cool tradition to have. How long you been doing it for?",
+      "ja": "いい習慣ですね。どのくらい続けているんですか？"
+    },
+    "b1000018-0000-0000-0009-000000000018": {
+      "en": "Since I moved out on my own last year actually.",
+      "ja": "去年、一人暮らしを始めてからなんです。"
+    },
+    "b1000019-0000-0000-0009-000000000019": {
+      "en": "Was a good way to pass time and now it's my thing.",
+      "ja": "時間をつぶすのにちょうどよくて、今ではすっかり自分の恒例になりました。"
+    },
+    "b1000201-0000-0000-0009-000000000201": {
+      "en": "Living alone is awesome though, right? So much freedom.",
+      "ja": "でも、一人暮らしって最高ですよね？すごく自由で。"
+    },
+    "b1000202-0000-0000-0009-000000000202": {
+      "en": "Responding with positivity may dismiss her experience. Listen to subtext.",
+      "ja": "前向きなことを返すと、彼女の体験を軽く扱うことになりかねません。言外のメッセージに耳を澄ませましょう。"
+    },
+    "b1000203-0000-0000-0009-000000000203": {
+      "en": "Oh nice, what else do you bake besides brownies?",
+      "ja": "いいですね。ブラウニー以外には、何を焼くんですか？"
+    },
+    "b1000204-0000-0000-0009-000000000204": {
+      "en": "She expressed a struggle and a reason. Missing that loses connection.",
+      "ja": "彼女は、苦労と、その理由を口にしました。そこを聞き逃すと、つながりを失います。"
+    },
+    "b1000021-0000-0000-0009-000000000021": {
+      "en": "Yeah living alone can be like that.",
+      "ja": "一人暮らしって、そういうところがありますよね。"
+    },
+    "b1000022-0000-0000-0009-000000000022": {
+      "en": "But sounds like you found something good for yourself.",
+      "ja": "でも、自分に合ういいものを見つけたんですね。"
+    },
+    "b1000023-0000-0000-0009-000000000023": {
+      "en": "100%. It was an adjustment but baking gave me something to look forward to.",
+      "ja": "本当にそうなんです。慣れるまで大変でしたけど、お菓子づくりのおかげで、楽しみができました。"
+    },
+    "b1000024-0000-0000-0009-000000000024": {
+      "en": "You acknowledged the emotional subtext and she felt understood.",
+      "ja": "言外の気持ちを受け止めたので、彼女は「わかってもらえた」と感じました。"
+    },
+    "b1000251-0000-0000-0009-000000000251": {
+      "en": "Hey I've got a recipe I can give you...",
+      "ja": "あの、僕、教えられるレシピがあるんですが……"
+    },
+    "b1000252-0000-0000-0009-000000000252": {
+      "en": "This can work later, for now focus on personal questions.",
+      "ja": "これは、あとでならうまくいくかもしれません。今は、彼女個人についての質問に集中しましょう。"
+    },
+    "b1000253-0000-0000-0009-000000000253": {
+      "en": "So do you still feel lonely on Sundays?",
+      "ja": "じゃあ、今でも日曜日は寂しいですか？"
+    },
+    "b1000254-0000-0000-0009-000000000254": {
+      "en": "She shared past feelings, not current struggle. Acknowledge the growth.",
+      "ja": "彼女が話したのは過去の気持ちで、今の悩みではありません。乗り越えてきたことを認めましょう。"
+    },
+    "b1000026-0000-0000-0009-000000000026": {
+      "en": "You look her in the eyes, smile, then introduce yourself.",
+      "ja": "彼女の目を見て、ほほえみ、自己紹介をします。"
+    },
+    "b1000027-0000-0000-0009-000000000027": {
+      "en": "Nice to meet you, I'm Claire.",
+      "ja": "はじめまして。クレアです。"
+    },
+    "b1000028-0000-0000-0009-000000000028": {
+      "en": "The conversation is good, you're building rapport.",
+      "ja": "会話は順調です。打ち解けてきています。"
+    },
+    "b1000029-0000-0000-0009-000000000029": {
+      "en": "She glances at her basket. Not rushing, but aware she has shopping to finish.",
+      "ja": "彼女が、買い物かごにちらりと目をやります。急いではいませんが、買い物を終えなければならないことは意識しています。"
+    },
+    "b1000301-0000-0000-0009-000000000301": {
+      "en": "It was nice meeting you, I'm sure I'll see you here again.",
+      "ja": "会えてよかったです。きっとまたここで会えますね。"
+    },
+    "b1000302-0000-0000-0009-000000000302": {
+      "en": "Hoping to run into someone again is passive. Take action, don't leave it to chance.",
+      "ja": "また偶然会えることを期待するのは、受け身です。運に任せず、自分から動きましょう。"
+    },
+    "b1000031-0000-0000-0009-000000000031": {
+      "en": "Alright Claire, one more round. Rock paper scissors. If I win, I get your number.",
+      "ja": "よし、クレアさん、もう一勝負です。じゃんけん。僕が勝ったら、LINEを教えてください。"
+    },
+    "b1000032-0000-0000-0009-000000000032": {
+      "en": "Haha you're really going back to that? Okay, you're on.",
+      "ja": "あはは、またそれですか？いいですよ、受けて立ちます。"
+    },
+    "b1000033-0000-0000-0009-000000000033": {
+      "en": "Playful callback. She's engaged. You play, you win this time. She's smiling.",
+      "ja": "前に出た話題への、遊び心のある切り返しです。彼女は乗っています。じゃんけんをして、今度はこちらの勝ちです。彼女はほほえんでいます。"
+    },
+    "b1000034-0000-0000-0009-000000000034": {
+      "en": "Well since you took the eggs you'll have to let me know how the brownies turn out.",
+      "ja": "卵を持っていったんですから、ブラウニーがどう焼けたか、教えてもらわないと。"
+    },
+    "b1000035-0000-0000-0009-000000000035": {
+      "en": "Haha for sure, here take my number, it's...",
+      "ja": "あはは、もちろん。これ、私のLINEです……"
+    },
+    "b1000036-0000-0000-0009-000000000036": {
+      "en": "Success. You review your interaction with Claire.",
+      "ja": "成功です。クレアとのやり取りを振り返ります。"
+    },
+    "b1000037-0000-0000-0009-000000000037": {
+      "en": "You turned a random collision into a playful moment.",
+      "ja": "偶然の鉢合わせを、遊び心のある瞬間に変えました。"
+    },
+    "b1000038-0000-0000-0009-000000000038": {
+      "en": "You listened to subtext showing real understanding.",
+      "ja": "言外のメッセージに耳を傾け、本当に理解していることを示しました。"
+    },
+    "b1000039-0000-0000-0009-000000000039": {
+      "en": "You introduced yourself at the right time after building connection.",
+      "ja": "つながりを築いたあとの、ちょうどいいタイミングで自己紹介をしました。"
+    },
+    "b1000040-0000-0000-0009-000000000040": {
+      "en": "And you closed well by creating a playful callback to your opener. Well done.",
+      "ja": "そして、最初のひと言に遊び心を持って触れ直すことで、うまく次につなげました。よくできました。"
+    }
+  },
+  "options": {
+    "c1000001-0000-0000-0009-000000000001": {
+      "en": "Acknowledge it then create a playful challenge",
+      "ja": "状況を受け止めてから、遊びの勝負を持ちかける"
+    },
+    "c1000002-0000-0000-0009-000000000002": {
+      "en": "Apologize and let her have it",
+      "ja": "謝って、彼女に譲る"
+    },
+    "c1000003-0000-0000-0009-000000000003": {
+      "en": "Ask what she needs the eggs for",
+      "ja": "卵を何に使うのかを尋ねる"
+    },
+    "c1000006-0000-0000-0009-000000000006": {
+      "en": "Say these eggs are unhealthy anyway",
+      "ja": "どうせこの卵は体に良くない、と言う"
+    },
+    "c1000005-0000-0000-0009-000000000005": {
+      "en": "Say you want best of three",
+      "ja": "三回勝負にしたいと言う"
+    },
+    "c1000004-0000-0000-0009-000000000004": {
+      "en": "Be a good sport then ask what she's making",
+      "ja": "潔く負けを認めて、何をつくるのかを尋ねる"
+    },
+    "c1000009-0000-0000-0009-000000000009": {
+      "en": "Tell her about your baking experiences",
+      "ja": "自分のお菓子づくりの経験を話す"
+    },
+    "c1000008-0000-0000-0009-000000000008": {
+      "en": "Ask if she's baking for someone",
+      "ja": "誰かのために焼くのかと尋ねる"
+    },
+    "c1000007-0000-0000-0009-000000000007": {
+      "en": "Ask about her Sunday baking tradition",
+      "ja": "日曜日のお菓子づくりの習慣について尋ねる"
+    },
+    "c1000011-0000-0000-0009-000000000011": {
+      "en": "Say that living alone is great",
+      "ja": "一人暮らしは最高だと言う"
+    },
+    "c1000010-0000-0000-0009-000000000010": {
+      "en": "Acknowledge the adjustment and her solution",
+      "ja": "慣れるまでの大変さと、彼女が見つけた解決策を受け止める"
+    },
+    "c1000012-0000-0000-0009-000000000012": {
+      "en": "Ask what else she bakes",
+      "ja": "ほかに何を焼くのかを尋ねる"
+    },
+    "c1000013-0000-0000-0009-000000000013": {
+      "en": "Look in her eyes, smile and introduce yourself",
+      "ja": "彼女の目を見て、ほほえみ、自己紹介をする"
+    },
+    "c1000014-0000-0000-0009-000000000014": {
+      "en": "Offer to give her a baking recipe",
+      "ja": "お菓子のレシピを教えると申し出る"
+    },
+    "c1000015-0000-0000-0009-000000000015": {
+      "en": "Ask her if she still feels lonely",
+      "ja": "今でも寂しいのかと尋ねる"
+    },
+    "c1000016-0000-0000-0009-000000000016": {
+      "en": "Rock, paper, scissors for her number",
+      "ja": "LINEをかけて、じゃんけんをする"
+    },
+    "c1000017-0000-0000-0009-000000000017": {
+      "en": "Say it was nice to meet her and you'll see her next time",
+      "ja": "会えてよかった、また今度、と言う"
+    },
+    "c1000018-0000-0000-0009-000000000018": {
+      "en": "Ask for her number with reference to recipes/baking",
+      "ja": "レシピやお菓子づくりの話に触れながら、LINEを聞く"
+    }
+  }
+}
