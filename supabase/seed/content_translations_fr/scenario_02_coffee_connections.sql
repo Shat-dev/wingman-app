@@ -38,11 +38,11 @@ insert into public.scenario_screen_translations (screen_id, locale, text) values
   on conflict (screen_id, locale) do update set text = excluded.text;
 insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000111-0000-0000-0002-000000000111', 'fr', 'Sympa. Tu as pris quoi comme café ? Moi, un latte.')
   on conflict (screen_id, locale) do update set text = excluded.text;
-insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000112-0000-0000-0002-000000000112', 'fr', 'Tu as tout ramené à toi. Elle t’a tendu un fil, tu l’as ignoré.')
+insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000112-0000-0000-0002-000000000112', 'fr', 'Tu as tout ramené à toi. Elle t’a tendu une perche, tu l’as ignorée.')
   on conflict (screen_id, locale) do update set text = excluded.text;
 insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000113-0000-0000-0002-000000000113', 'fr', 'Ouais, moi qui comptais aller à la salle, c’est raté.')
   on conflict (screen_id, locale) do update set text = excluded.text;
-insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000114-0000-0000-0002-000000000114', 'fr', 'Tu as tout ramené à toi. Elle t’a tendu un fil, tu l’as ignoré.')
+insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000114-0000-0000-0002-000000000114', 'fr', 'Tu as tout ramené à toi. Elle t’a tendu une perche, tu l’as ignorée.')
   on conflict (screen_id, locale) do update set text = excluded.text;
 insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000012-0000-0000-0002-000000000012', 'fr', 'Pas de chance. Tu avais quoi de prévu ?')
   on conflict (screen_id, locale) do update set text = excluded.text;
@@ -54,7 +54,7 @@ insert into public.scenario_screen_translations (screen_id, locale, text) values
   on conflict (screen_id, locale) do update set text = excluded.text;
 insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000161-0000-0000-0002-000000000161', 'fr', 'Je me souviens, une fois, j’étais en retard et…')
   on conflict (screen_id, locale) do update set text = excluded.text;
-insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000162-0000-0000-0002-000000000162', 'fr', 'Tu as tout ramené à toi. Elle t’a tendu un fil, tu l’as ignoré.')
+insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000162-0000-0000-0002-000000000162', 'fr', 'Tu as tout ramené à toi. Elle t’a tendu une perche, tu l’as ignorée.')
   on conflict (screen_id, locale) do update set text = excluded.text;
 insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000163-0000-0000-0002-000000000163', 'fr', 'Tu vas avoir combien de retard ?')
   on conflict (screen_id, locale) do update set text = excluded.text;

@@ -10,7 +10,7 @@ insert into public.scenario_screen_translations (screen_id, locale, text) values
   on conflict (screen_id, locale) do update set text = excluded.text;
 insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000003-0000-0000-0012-000000000003', 'de', 'In der Fragerunde stellt eine Frau eine interessante Frage.')
   on conflict (screen_id, locale) do update set text = excluded.text;
-insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000004-0000-0000-0012-000000000004', 'de', 'Der Vortrag ist vorbei. Die Leute fangen an, sich unters Volk zu mischen. Du siehst dieselbe Frau.')
+insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000004-0000-0000-0012-000000000004', 'de', 'Der Vortrag ist vorbei. Die Leute kommen miteinander ins Gespräch. Du siehst dieselbe Frau.')
   on conflict (screen_id, locale) do update set text = excluded.text;
 insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000051-0000-0000-0012-000000000051', 'de', 'Also, zu deiner Frage: Ich glaube, die Antwort ist, dass man …')
   on conflict (screen_id, locale) do update set text = excluded.text;

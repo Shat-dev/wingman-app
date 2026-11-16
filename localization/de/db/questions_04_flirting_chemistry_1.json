@@ -131,17 +131,17 @@
       "explanation": {"en": "Warmth plus presence makes it feel intentional rather than throwaway.", "de": "Wärme plus Präsenz lassen es bewusst wirken statt beiläufig."}
     },
     "92141af3-4469-4cb2-aeca-c8b66beca062": {
-      "question_text": {"en": "What allows a single line to shift an interaction from polite into flirty?", "de": "Was macht es möglich, dass ein einziger Satz ein Gespräch von höflich zu flirtend kippen lässt?"},
+      "question_text": {"en": "What allows a single line to shift an interaction from polite into flirty?", "de": "Was macht es möglich, dass ein einziger Satz aus einem höflichen Gespräch einen Flirt macht?"},
       "options": {"en": ["Explicitly stating romantic intent so there is no ambiguity", "Subtly implying interest while keeping plausible deniability", "Giving a stronger compliment than before to raise attraction"], "de": ["Romantisches Interesse ausdrücklich sagen, damit nichts unklar bleibt", "Interesse andeuten, ohne dich festzulegen", "Ein stärkeres Kompliment als vorher machen, um die Anziehung zu steigern"]},
       "explanation": {"en": "A flirty shift works best by implying interest rather than directly declaring it.", "de": "Der Wechsel zum Flirt gelingt am besten, wenn du Interesse andeutest, statt es direkt zu erklären."}
     },
     "d81d87c2-562a-4457-9339-626b9b62911d": {
-      "question_text": {"en": "The chat flows easily and she leans in slightly. What subtle line could shift it?", "de": "Das Gespräch läuft leicht, und sie lehnt sich etwas vor. Welcher dezente Satz könnte die Stimmung kippen lassen?"},
+      "question_text": {"en": "The chat flows easily and she leans in slightly. What subtle line could shift it?", "de": "Das Gespräch läuft leicht, und sie lehnt sich etwas vor. Welcher dezente Satz könnte die Stimmung verändern?"},
       "options": {"en": ["\"You’re interesting.\"", "\"We talk well.\"", "\"I like how this conversation feels with you.\""], "de": ["„Du bist interessant.“", "„Wir unterhalten uns gut.“", "„Ich mag, wie sich dieses Gespräch mit dir anfühlt.“"]},
       "explanation": {"en": "Names the existing vibe gently, opening space for flirtation.", "de": "Der Satz benennt sanft die Stimmung, die schon da ist, und öffnet Raum für einen Flirt."}
     },
     "de314e72-aecd-48e2-9e7e-904002814fcb": {
-      "question_text": {"en": "Mood-shifting line examples?", "de": "Beispiele für Sätze, die die Stimmung kippen lassen?"},
+      "question_text": {"en": "Mood-shifting line examples?", "de": "Beispiele für Sätze, die die Stimmung verändern?"},
       "options": {"en": ["\"Let’s go get coffee sometime\"", "\"I like how this conversation feels with you.\"", "\"I wasn't expecting to meet someone like you today\"", "\"We should do this again sometime\""], "de": ["„Lass uns mal einen Kaffee trinken gehen.“", "„Ich mag, wie sich dieses Gespräch mit dir anfühlt.“", "„Ich hab heute nicht damit gerechnet, jemanden wie dich zu treffen.“", "„Das sollten wir mal wiederholen.“"]},
       "explanation": {"en": "A flirty shift works best by implying interest rather than directly declaring it.", "de": "Der Wechsel zum Flirt gelingt am besten, wenn du Interesse andeutest, statt es direkt zu erklären."}
     },

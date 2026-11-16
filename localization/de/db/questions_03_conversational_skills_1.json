@@ -52,7 +52,7 @@
     },
     "f100da89-837b-4ce4-89f0-13a05418c184": {
       "question_text": {"en": "You ask a thoughtful question. She thinks before answering. What should you do?", "de": "Du stellst eine nachdenkliche Frage. Sie überlegt, bevor sie antwortet. Was solltest du tun?"},
-      "options": {"en": ["Jump in to help her", "Rephrase the question", "Add another question", "Hold the space and let her think"], "de": ["Einspringen und ihr helfen", "Die Frage umformulieren", "Noch eine Frage hinterherschieben", "Den Raum halten und sie nachdenken lassen"]},
+      "options": {"en": ["Jump in to help her", "Rephrase the question", "Add another question", "Hold the space and let her think"], "de": ["Einspringen und ihr helfen", "Die Frage umformulieren", "Noch eine Frage hinterherschieben", "Die Stille aushalten und sie nachdenken lassen"]},
       "explanation": {"en": "Letting her think without pressure shows patience and confidence.", "de": "Wenn du sie ohne Druck nachdenken lässt, zeigst du Geduld und Selbstbewusstsein."}
     },
     "af284377-c4c0-42ca-a6f4-112ce777e549": {

@@ -110,7 +110,7 @@ insert into public.screen_option_translations (option_id, locale, text) values (
   on conflict (option_id, locale) do update set text = excluded.text;
 insert into public.screen_option_translations (option_id, locale, text) values ('c1000009-0000-0000-0003-000000000009', 'ja', '彼女のほうを向いて、自己紹介をする')
   on conflict (option_id, locale) do update set text = excluded.text;
-insert into public.screen_option_translations (option_id, locale, text) values ('c1000010-0000-0000-0003-000000000010', 'ja', '目を合わせたまま、その瞬間にひと呼吸を与える')
+insert into public.screen_option_translations (option_id, locale, text) values ('c1000010-0000-0000-0003-000000000010', 'ja', '目を合わせたまま、間を味わう')
   on conflict (option_id, locale) do update set text = excluded.text;
 insert into public.screen_option_translations (option_id, locale, text) values ('c1000011-0000-0000-0003-000000000011', 'ja', '気まずさを避けるために、犬たちのほうへ視線を戻す')
   on conflict (option_id, locale) do update set text = excluded.text;

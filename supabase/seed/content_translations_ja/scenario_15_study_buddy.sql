@@ -90,7 +90,7 @@ insert into public.scenario_screen_translations (screen_id, locale, text) values
   on conflict (screen_id, locale) do update set text = excluded.text;
 insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000183-0000-0000-0015-000000000183', 'ja', 'もっといいプランがありますよ。お祝いに、僕と夕食に行くんです。')
   on conflict (screen_id, locale) do update set text = excluded.text;
-insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000184-0000-0000-0015-000000000184', 'ja', 'これでもうまくいくことはありますが、誘いは軽くしておきましょう。そうすれば、「はい」が一番抵抗の少ない道になります。')
+insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000184-0000-0000-0015-000000000184', 'ja', 'これでもうまくいくことはありますが、誘いは軽くしておきましょう。そうすれば、彼女も気軽に「はい」と言えます。')
   on conflict (screen_id, locale) do update set text = excluded.text;
 insert into public.scenario_screen_translations (screen_id, locale, text) values ('b1000231-0000-0000-0015-000000000231', 'ja', 'こんにちは！化学のレポートはどうですか？順調に進んでいますか？')
   on conflict (screen_id, locale) do update set text = excluded.text;
