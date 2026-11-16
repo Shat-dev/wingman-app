@@ -1,0 +1,968 @@
+{
+  "questions": {
+    "d2027ed3-7670-4963-9212-4e48cccf8097": {
+      "question_text": {
+        "en": "What happens when you build on threads instead of jumping to new questions?",
+        "ja": "新しい質問に飛びつくのではなく、糸口を広げていくと、何が起こりますか？"
+      },
+      "options": {
+        "en": [
+          "Conversation feels more natural and less like an interview",
+          "She feels heard because you're engaging with what she shared",
+          "Both of the above"
+        ],
+        "ja": [
+          "会話がより自然になり、面接のような感じが減る",
+          "話してくれた内容に向き合っているので、彼女は「聞いてもらえた」と感じる",
+          "上の両方"
+        ]
+      },
+      "explanation": {
+        "en": "Threading signals presence and attention; use her last detail as your next step.",
+        "ja": "糸口をたどることは、その場にいて、注意を向けていることを伝えます。彼女が最後に話した内容を、次の一歩にしましょう。"
+      }
+    },
+    "999bda2b-2b88-4a84-bd9c-d736ccb07089": {
+      "question_text": {
+        "en": "She says \"I work in marketing.\" Which response demonstrates threading?",
+        "ja": "彼女が「マーケティングの仕事をしています」と言います。糸口をたどっている返しは、どれですか？"
+      },
+      "options": {
+        "en": [
+          "\"That's cool. Where are you from originally?\"",
+          "\"I have a friend in marketing too. Small world\"",
+          "\"Oh nice. I work in finance\"",
+          "\"Marketing's interesting. What kind? - social media, brand, analytics?\""
+        ],
+        "ja": [
+          "「いいですね。ご出身はどちらですか？」",
+          "「友人にもマーケティングの人がいます。世間は狭いですね」",
+          "「へえ、いいですね。こちらは金融の仕事です」",
+          "「マーケティング、面白そうですね。どんな分野ですか？SNS、ブランド、それとも分析？」"
+        ]
+      },
+      "explanation": {
+        "en": "Threading means exploring her topic further; ask specifics about what she mentioned.",
+        "ja": "糸口をたどるとは、彼女の話題をさらに掘り下げることです。彼女が口にしたことについて、具体的に尋ねましょう。"
+      }
+    },
+    "2923827f-429f-4dd6-ac88-436a5a9dbbc6": {
+      "question_text": {
+        "en": "How should you choose which thread to follow?",
+        "ja": "どの糸口をたどるかは、どう選ぶべきですか？"
+      },
+      "options": {
+        "en": [
+          "Pick one detail that interests you",
+          "Use a pre-prepared question list",
+          "Build on something specific she shared"
+        ],
+        "ja": [
+          "自分が興味を持てる内容をひとつ選ぶ",
+          "あらかじめ用意した質問リストを使う",
+          "彼女が話してくれた具体的な内容を広げる"
+        ]
+      },
+      "explanation": {
+        "en": "Any detail she offers can move things forward; pick the one that sparks curiosity for you.",
+        "ja": "彼女が差し出すどんな内容も、会話を前に進められます。自分の好奇心が動くものを選びましょう。"
+      }
+    },
+    "29feaa96-2d35-4ba5-9ebd-71eb7f487487": {
+      "question_text": {
+        "en": "Why can relying only on questions make a conversation feel tense?",
+        "ja": "質問だけに頼ると、なぜ会話が張りつめた感じになることがあるのですか？"
+      },
+      "options": {
+        "en": [
+          "Questions slow the conversation",
+          "Questions shift responsibility onto her repeatedly",
+          "Questions sound rehearsed",
+          "Questions reduce attraction"
+        ],
+        "ja": [
+          "質問は、会話のペースを落とすから",
+          "質問は、何度も彼女に負担を移すから",
+          "質問は、練習してきたように聞こえるから",
+          "質問は、惹かれる気持ちを弱めるから"
+        ]
+      },
+      "explanation": {
+        "en": "Too many questions create an extractive dynamic where she carries the conversation.",
+        "ja": "質問が多すぎると、情報をもらうばかりの構図になり、彼女が会話を背負うことになります。"
+      }
+    },
+    "52edb21f-05cb-41ea-a94c-5ec38eca6a8d": {
+      "question_text": {
+        "en": "What do statements and observations accomplish that questions don't?",
+        "ja": "質問にはできなくて、自分のひと言や観察にできることは何ですか？"
+      },
+      "options": {
+        "en": [
+          "They demonstrate confidence by sharing your perspective",
+          "They show you're interesting enough to share thoughts",
+          "They create openings for response without demanding answers"
+        ],
+        "ja": [
+          "自分の見方を伝えることで、自信を示す",
+          "考えを話せるだけの面白さがある人だと示す",
+          "答えを求めることなく、返すきっかけをつくる"
+        ]
+      },
+      "explanation": {
+        "en": "Observations give her something to respond to without the burden of answering.",
+        "ja": "観察は、答える負担をかけずに、彼女に「返せるもの」を渡します。"
+      }
+    },
+    "89a9c6b7-ea88-49ca-a0b1-19c9f94287cd": {
+      "question_text": {
+        "en": "Which responses are observations or statements rather than extractions?",
+        "ja": "情報をもらうための質問ではなく、観察や自分のひと言になっている返しは、どれですか？"
+      },
+      "options": {
+        "en": [
+          "\"You look like you needed that drink.\"",
+          "\"That sounds exhausting.\"",
+          "\"Do you usually work late?\"",
+          "\"This place gets hectic on weekends.\""
+        ],
+        "ja": [
+          "「その一杯、必要だったという顔ですね」",
+          "「それは疲れそうですね」",
+          "「いつも遅くまで働いているんですか？」",
+          "「ここ、週末はすごく慌ただしくなりますよね」"
+        ]
+      },
+      "explanation": {
+        "en": "These contribute context or perspective instead of requesting more information.",
+        "ja": "これらは、さらに情報を求めるのではなく、状況や見方を差し出しています。"
+      }
+    },
+    "a8dcf867-454f-44e9-b824-f823389b43f0": {
+      "question_text": {
+        "en": "What best defines healthy conversational momentum?",
+        "ja": "健全な会話の流れを、最もよく表しているのはどれですか？"
+      },
+      "options": {
+        "en": [
+          "Talking confidently without pauses",
+          "Letting her lead entirely",
+          "Filling silence as quickly as possible",
+          "A steady back-and-forth where both contribute"
+        ],
+        "ja": [
+          "間を置かずに、自信を持って話すこと",
+          "完全に彼女にリードを任せること",
+          "沈黙を、できるだけ早く埋めること",
+          "二人ともが加わる、安定したやり取り"
+        ]
+      },
+      "explanation": {
+        "en": "Momentum comes from shared contribution, not constant talking or complete passivity.",
+        "ja": "会話の流れは、話し続けることでも、完全に受け身になることでもなく、二人で差し出し合うことから生まれます。"
+      }
+    },
+    "3b838c1a-69b1-4328-9785-cd16d57ae3b6": {
+      "question_text": {
+        "en": "She mentions a recent trip. You’ve been there too. How could you respond?",
+        "ja": "彼女が最近の旅行の話をします。そこには自分も行ったことがあります。どう返せますか？"
+      },
+      "options": {
+        "en": [
+          "Tell her everything you did on your trip",
+          "Say “Yeah, I’ve been there” and stop",
+          "Share one sentence, then invite her to expand"
+        ],
+        "ja": [
+          "自分の旅行でしたことを、すべて話す",
+          "「ええ、行ったことがあります」と言って、そこで終える",
+          "ひと言だけ話してから、彼女に続きを促す"
+        ]
+      },
+      "explanation": {
+        "en": "Brief contribution followed by space keeps momentum shared.",
+        "ja": "短く差し出して、そのあと余白を残すと、会話の流れを二人で分かち合えます。"
+      }
+    },
+    "2760f510-bd8b-4ac3-bab9-6e67951fb689": {
+      "question_text": {
+        "en": "Why does dominating the conversation reduce her investment?",
+        "ja": "会話を独占すると、なぜ彼女の気持ちが入らなくなるのですか？"
+      },
+      "options": {
+        "en": [
+          "It prevents her from contributing",
+          "It creates a one-sided monologue",
+          "It shows you are actively listening"
+        ],
+        "ja": [
+          "彼女が加わることを妨げるから",
+          "一方的な独演会になるから",
+          "しっかり聞いていることを示すから"
+        ]
+      },
+      "explanation": {
+        "en": "Dominating removes space for her, breaking balanced momentum.",
+        "ja": "独占すると、彼女の入る余地がなくなり、バランスの取れた会話の流れが崩れます。"
+      }
+    },
+    "6e149fa3-93c4-42b2-9c8e-f7f88712cc49": {
+      "question_text": {
+        "en": "She finishes explaining a difficult decision and looks at you. What’s the best response?",
+        "ja": "彼女が難しい決断について話し終え、こちらを見ます。一番良い返しはどれですか？"
+      },
+      "options": {
+        "en": [
+          "Immediately reassure her",
+          "Offer advice right away",
+          "Pause briefly, maintain eye contact, then respond",
+          "Change the topic to lighten the mood"
+        ],
+        "ja": [
+          "すぐに安心させる言葉をかける",
+          "すぐにアドバイスをする",
+          "少し間を置き、目を合わせたまま、それから応える",
+          "雰囲気を軽くするために、話題を変える"
+        ]
+      },
+      "explanation": {
+        "en": "A brief pause shows you’re processing her words and invites depth.",
+        "ja": "短い間は、彼女の言葉を受け取って考えていることを示し、話が深まるのを招きます。"
+      }
+    },
+    "f100da89-837b-4ce4-89f0-13a05418c184": {
+      "question_text": {
+        "en": "You ask a thoughtful question. She thinks before answering. What should you do?",
+        "ja": "考えさせる質問をします。彼女は答える前に考えています。どうするべきですか？"
+      },
+      "options": {
+        "en": [
+          "Jump in to help her",
+          "Rephrase the question",
+          "Add another question",
+          "Hold the space and let her think"
+        ],
+        "ja": [
+          "助け舟を出す",
+          "質問を言い換える",
+          "もうひとつ質問を足す",
+          "その間を保ち、彼女に考えてもらう"
+        ]
+      },
+      "explanation": {
+        "en": "Letting her think without pressure shows patience and confidence.",
+        "ja": "プレッシャーをかけずに考えてもらうことは、忍耐と自信を示します。"
+      }
+    },
+    "af284377-c4c0-42ca-a6f4-112ce777e549": {
+      "question_text": {
+        "en": "When is silence most effective in conversation?",
+        "ja": "会話の中で、沈黙が最も効果的なのはどんなときですか？"
+      },
+      "options": {
+        "en": [
+          "After she shares something personal",
+          "When you don’t know what to say",
+          "Right before making a considered statement",
+          "To avoid contributing altogether"
+        ],
+        "ja": [
+          "彼女が個人的なことを話してくれたあと",
+          "何を言えばいいか分からないとき",
+          "よく考えたひと言を口にする直前",
+          "会話に加わることを、まったく避けるため"
+        ]
+      },
+      "explanation": {
+        "en": "Silence works when it allows reflection or adds weight, not when it replaces engagement.",
+        "ja": "沈黙が効くのは、考える余地を与えたり、重みを加えたりするときです。関わることの代わりにするときではありません。"
+      }
+    },
+    "5d75efc2-36fb-47a3-9f27-cb0833551415": {
+      "question_text": {
+        "en": "What is subtext in conversation?",
+        "ja": "会話における「言外のメッセージ」とは、何ですか？"
+      },
+      "options": {
+        "en": [
+          "The exact words spoken",
+          "The emotional meaning behind the words",
+          "The volume of her voice only",
+          "The length of her sentences"
+        ],
+        "ja": [
+          "口にされた言葉そのもの",
+          "言葉の裏にある、気持ちの上での意味",
+          "彼女の声の大きさだけ",
+          "彼女の文の長さ"
+        ]
+      },
+      "explanation": {
+        "en": "Subtext is the gap between stated words and underlying feeling. Respond to this.",
+        "ja": "言外のメッセージとは、口にされた言葉と、その裏にある気持ちとのあいだにあるすき間のことです。そこに応えましょう。"
+      }
+    },
+    "9fe24bb8-edce-4a11-ac05-37dcfca6822d": {
+      "question_text": {
+        "en": "She says, “I just moved here,” in a quiet, uncertain tone. What is a thoughtful response?",
+        "ja": "彼女が、静かで不安げなトーンで「最近こっちに引っ越してきたんです」と言います。思いやりのある返しは、どれですか？"
+      },
+      "options": {
+        "en": [
+          "\"Where did you move from?\"",
+          "\"Do you like it so far?\"",
+          "\"That can be a lot. How’s the adjustment been?\"",
+          "\"What do you do for work?\""
+        ],
+        "ja": [
+          "「どちらから引っ越してきたんですか？」",
+          "「今のところ、気に入っていますか？」",
+          "「それは大変なこともありますよね。慣れるまで、どうでしたか？」",
+          "「お仕事は何をしているんですか？」"
+        ]
+      },
+      "explanation": {
+        "en": "This response acknowledges the emotional layer implied by her tone.",
+        "ja": "この返しは、彼女のトーンににじんでいた気持ちの部分を受け止めています。"
+      }
+    },
+    "4434c17e-e1bd-4981-8ea6-566ffaae5de4": {
+      "question_text": {
+        "en": "Which mistakes prevent you from hearing subtext?",
+        "ja": "言外のメッセージを聞き逃す原因になる間違いは、どれですか？"
+      },
+      "options": {
+        "en": [
+          "Listening for keywords only",
+          "Planning your next question",
+          "Paying attention to tone and pacing"
+        ],
+        "ja": [
+          "キーワードだけを聞いていること",
+          "次の質問を考えていること",
+          "トーンやペースに注意を向けていること"
+        ]
+      },
+      "explanation": {
+        "en": "Subtext is missed when attention is on extraction rather than presence. Be present.",
+        "ja": "言外のメッセージは、その場にいることではなく、情報をもらうことに注意が向いているときに聞き逃します。その場にしっかりいましょう。"
+      }
+    },
+    "69b81da3-8a21-43e7-9c1f-52aedcb7f44f": {
+      "question_text": {
+        "en": "What does it mean to listen to understand?",
+        "ja": "「理解するために聞く」とは、どういうことですか？"
+      },
+      "options": {
+        "en": [
+          "Waiting politely until it is your turn to speak",
+          "Preparing a thoughtful reply while she talks",
+          "Agreeing with whatever she says",
+          "Being fully present with what she is communicating"
+        ],
+        "ja": [
+          "自分の話す番が来るまで、礼儀正しく待つこと",
+          "彼女が話しているあいだに、気の利いた返事を準備すること",
+          "彼女の言うことに、何でも同意すること",
+          "彼女が伝えていることに対して、その場にしっかりいること"
+        ]
+      },
+      "explanation": {
+        "en": "Listening to understand means prioritising comprehension over preparation.",
+        "ja": "理解するために聞くとは、準備することよりも、理解することを優先することです。"
+      }
+    },
+    "94878e49-fd86-4e6f-8398-cdb055f272a3": {
+      "question_text": {
+        "en": "Why does planning your response while she is speaking reduce connection?",
+        "ja": "彼女が話しているあいだに返事を考えることは、なぜつながりを弱めるのですか？"
+      },
+      "options": {
+        "en": [
+          "It slows the conversation",
+          "It makes you sound scripted",
+          "It increases silence",
+          "It pulls attention away from her meaning"
+        ],
+        "ja": [
+          "会話のペースを落とすから",
+          "台本どおりに聞こえるから",
+          "沈黙が増えるから",
+          "彼女の伝えたいことから、注意がそれるから"
+        ]
+      },
+      "explanation": {
+        "en": "Pre-planning shifts focus inward and causes you to miss nuance and subtext.",
+        "ja": "先に返事を考えると、意識が内側に向き、ニュアンスや言外のメッセージを聞き逃します。"
+      }
+    },
+    "e596b988-c6fd-4182-add2-2c2b0eeb4cc4": {
+      "question_text": {
+        "en": "Which responses show you listened to understand?",
+        "ja": "理解するために聞いていたことが伝わる返しは、どれですか？"
+      },
+      "options": {
+        "en": [
+          "Offering solutions immediately",
+          "Naming the feeling she hinted at",
+          "Pausing before replying",
+          "Building directly on her last sentence"
+        ],
+        "ja": [
+          "すぐに解決策を出すこと",
+          "彼女がにじませた気持ちを、言葉にすること",
+          "返す前に、間を置くこと",
+          "彼女の最後のひと言を、そのまま広げること"
+        ]
+      },
+      "explanation": {
+        "en": "Understanding comes from presence, not fixing or showcasing insight.",
+        "ja": "理解は、問題を解決することや洞察を披露することからではなく、その場にいることから生まれます。"
+      }
+    },
+    "5e09607d-070f-41c5-af20-c696a61f1329": {
+      "question_text": {
+        "en": "What is the purpose of validating her response before continuing the conversation?",
+        "ja": "会話を続ける前に、彼女の言葉を受け止める目的は何ですか？"
+      },
+      "options": {
+        "en": [
+          "To show her words were understood and mattered",
+          "To slow the conversation down deliberately",
+          "To sound emotionally intelligent",
+          "To avoid asking follow-up questions"
+        ],
+        "ja": [
+          "彼女の言葉が理解され、大切にされたと示すため",
+          "会話のペースを、わざと落とすため",
+          "感情を読み取る力があるように聞こえるため",
+          "さらに質問するのを避けるため"
+        ]
+      },
+      "explanation": {
+        "en": "Validation shows her message was received before the conversation moves on.",
+        "ja": "受け止めることで、会話が先へ進む前に、彼女の伝えたことが届いたと示せます。"
+      }
+    },
+    "0af9f869-b543-4bea-bfe5-e3c0c0722302": {
+      "question_text": {
+        "en": "She says, “My sister and I don’t get to see each other much anymore.” Best response?",
+        "ja": "彼女が「姉とは、もうあまり会えなくなってしまって」と言います。一番良い返しはどれですか？"
+      },
+      "options": {
+        "en": [
+          "\"That’s life.\"",
+          "\"How old is she?\"",
+          "\"Distance can be hard. Do you two talk often?\"",
+          "\"Where does she live now?\""
+        ],
+        "ja": [
+          "「人生、そういうものですよ」",
+          "「お姉さんは、おいくつですか？」",
+          "「離れていると、つらいですよね。お二人は、よく話すんですか？」",
+          "「お姉さんは、今どちらに住んでいるんですか？」"
+        ]
+      },
+      "explanation": {
+        "en": "Naming the emotional reality before asking keeps the moment human.",
+        "ja": "尋ねる前に、そこにある気持ちを言葉にすると、その場が人間らしいものであり続けます。"
+      }
+    },
+    "0810f6d9-5a61-4b89-b159-0607132c5f66": {
+      "question_text": {
+        "en": "Which statements qualify as validation?",
+        "ja": "受け止める言葉と言えるのは、どれですか？"
+      },
+      "options": {
+        "en": [
+          "\"That sounds like it took effort.\"",
+          "\"Why did you do that?\"",
+          "\"I can see why that mattered to you.\"",
+          "\"Cool.\""
+        ],
+        "ja": [
+          "「それは、努力が必要だったでしょうね」",
+          "「どうしてそうしたんですか？」",
+          "「それが大切だった理由、わかります」",
+          "「いいですね」"
+        ]
+      },
+      "explanation": {
+        "en": "Validation acknowledges meaning or effort, not just content.",
+        "ja": "受け止めるとは、内容だけでなく、そこにある意味や努力を認めることです。"
+      }
+    },
+    "8e246a4f-c248-490c-956f-77029e0a2ad4": {
+      "question_text": {
+        "en": "What are non-verbal listening cues?",
+        "ja": "言葉を使わない「聞いている」という合図とは、何ですか？"
+      },
+      "options": {
+        "en": [
+          "Body language signals that communicate engagement and attention",
+          "Facial expressions that show emotional reactions to content",
+          "Posture adjustments that demonstrate active listening",
+          "All of the above"
+        ],
+        "ja": [
+          "関わっていることと、注意を向けていることを伝えるボディランゲージのサイン",
+          "話の内容への感情の動きを示す表情",
+          "しっかり聞いていることを示す姿勢の変化",
+          "上のすべて"
+        ]
+      },
+      "explanation": {
+        "en": "Non-verbal cues communicate you're present and processing her words.",
+        "ja": "言葉を使わない合図は、その場にいて、彼女の言葉を受け取っていることを伝えます。"
+      }
+    },
+    "61372c16-e1e3-47b9-b21c-d9331ef4e852": {
+      "question_text": {
+        "en": "She’s telling a story with rising energy. What non-verbal cues best support the moment?",
+        "ja": "彼女が、だんだん熱を帯びながらエピソードを話しています。その場を一番支える、言葉を使わない合図はどれですか？"
+      },
+      "options": {
+        "en": [
+          "Still posture to avoid distraction",
+          "Smiles and reactive expressions",
+          "Looking away to give space",
+          "Verbal encouragement without movement"
+        ],
+        "ja": [
+          "気を散らさないための、動かない姿勢",
+          "笑顔と、話に反応する表情",
+          "余白を与えるために、目をそらすこと",
+          "動きを伴わない、言葉での相づち"
+        ]
+      },
+      "explanation": {
+        "en": "Matching her energy physically shows you’re emotionally tracking her story.",
+        "ja": "体で彼女のエネルギーに合わせることは、気持ちの上で彼女の話についていっていることを示します。"
+      }
+    },
+    "9fcc9a77-636d-4e32-833f-dd1e41b91be5": {
+      "question_text": {
+        "en": "Which signals communicate distraction?",
+        "ja": "気が散っていることを伝えてしまうサインは、どれですか？"
+      },
+      "options": {
+        "en": [
+          "Flat facial expression",
+          "Body angled away",
+          "Mirroring her expressions",
+          "Glancing around the room"
+        ],
+        "ja": [
+          "平板な表情",
+          "そむけた体",
+          "彼女の表情を映し返すこと",
+          "部屋を見回すこと"
+        ]
+      },
+      "explanation": {
+        "en": "Stillness without responsiveness often reads as disengagement.",
+        "ja": "反応のない静止は、多くの場合、関心が離れていると受け取られます。"
+      }
+    },
+    "1e90c6c9-0d3b-47fc-b3ac-599c201f184d": {
+      "question_text": {
+        "en": "Which elements are most important to match early on?",
+        "ja": "早い段階で合わせることが最も大切な要素は、どれですか？"
+      },
+      "options": {
+        "en": [
+          "Emotional depth",
+          "Speaking pace",
+          "Volume and energy",
+          "All of the above"
+        ],
+        "ja": [
+          "気持ちの深さ",
+          "話すペース",
+          "声の大きさとエネルギー",
+          "上のすべて"
+        ]
+      },
+      "explanation": {
+        "en": "Early comfort comes from matching emotional depth, pace, and energy.",
+        "ja": "早い段階の安心感は、気持ちの深さ、ペース、エネルギーを合わせることから生まれます。"
+      }
+    },
+    "6886b3ac-3f9a-4fba-ad87-515db908bb79": {
+      "question_text": {
+        "en": "She speaks emotionally about a recent event. What could you do first?",
+        "ja": "彼女が、最近の出来事について感情を込めて話します。まず何ができますか？"
+      },
+      "options": {
+        "en": [
+          "Match her emotional tone with empathy",
+          "Respond with practical advice",
+          "Shift to a humorous story",
+          "Ask factual questions"
+        ],
+        "ja": [
+          "共感を持って、彼女の気持ちのトーンに合わせる",
+          "実用的なアドバイスで応える",
+          "笑えるエピソードに切り替える",
+          "事実についての質問をする"
+        ]
+      },
+      "explanation": {
+        "en": "Reflect her tone to show sync before guiding elsewhere.",
+        "ja": "別の方向へ導く前に、彼女のトーンを映し返して、波長が合っていることを示しましょう。"
+      }
+    },
+    "003c10ec-d480-4896-916d-26f2d942ba10": {
+      "question_text": {
+        "en": "Why does matching her depth and style first help build rapport?",
+        "ja": "まず彼女の深さや話し方に合わせることは、なぜ打ち解けるのに役立つのですか？"
+      },
+      "options": {
+        "en": [
+          "It signals similarity and relaxes her nervous system",
+          "It shows you are attuned to her current energy",
+          "It reduces friction from mismatched levels",
+          "It immediately escalates to deeper topics"
+        ],
+        "ja": [
+          "似ていることを伝え、彼女の神経系をリラックスさせるから",
+          "彼女の今のエネルギーに、波長を合わせていることを示すから",
+          "レベルが合わないことから来る引っかかりを減らすから",
+          "すぐに、もっと深い話題へ進めるから"
+        ]
+      },
+      "explanation": {
+        "en": "Matching establishes sync, making escalation feel natural.",
+        "ja": "合わせることで波長がそろい、距離を縮めることが自然に感じられます。"
+      }
+    },
+    "3327c759-7a65-49ec-96b3-d70b813c73ef": {
+      "question_text": {
+        "en": "What is the most effective way to share a story?",
+        "ja": "エピソードを話す、最も効果的な方法は何ですか？"
+      },
+      "options": {
+        "en": [
+          "Sharing fewer personal details",
+          "Sharing emotions without context",
+          "Sharing experiences with perspective and resolution",
+          "Avoiding vulnerability entirely"
+        ],
+        "ja": [
+          "個人的なことを、あまり話さないこと",
+          "背景なしに、感情だけを話すこと",
+          "自分なりの見方と結末を添えて、経験を話すこと",
+          "弱さを見せることを、完全に避けること"
+        ]
+      },
+      "explanation": {
+        "en": "Effective sharing includes a reflection and resolution; share what you learned.",
+        "ja": "効果的な話し方には、振り返りと結末が含まれます。そこから学んだことを話しましょう。"
+      }
+    },
+    "c32cb2cd-cf15-4d66-aa1f-8bc019d02b51": {
+      "question_text": {
+        "en": "Early conversation. She asks, “What do you do?” Which response is best calibrated?",
+        "ja": "会話の序盤です。彼女が「お仕事は何をしているんですか？」と尋ねます。その場に一番合っている返しは、どれですか？"
+      },
+      "options": {
+        "en": [
+          "\"I work in tech, but I hate it and don’t know what I want to do instead.\"",
+          "\"I work in tech. It’s demanding, but it’s teaching me a lot about discipline.\"",
+          "\"It’s complicated. I don’t really like talking about it.\""
+        ],
+        "ja": [
+          "「IT系の仕事ですが、嫌でたまらなくて。代わりに何がしたいのかも分からないんです」",
+          "「IT系の仕事です。大変ですが、自分を律することをたくさん教わっています」",
+          "「ちょっと複雑で。あまり話したくないんです」"
+        ]
+      },
+      "explanation": {
+        "en": "This acknowledges reality while showing perspective. It invites curiosity, not concern.",
+        "ja": "この返しは、現実を認めながら、自分なりの見方を示しています。心配ではなく、好奇心を招きます。"
+      }
+    },
+    "2924bec5-27b6-4372-95e0-97a1b87cd7f5": {
+      "question_text": {
+        "en": "Why is processed sharing better than unprocessed in early conversations?",
+        "ja": "会話の序盤では、なぜ整理のついた話のほうが、整理のついていない話より良いのですか？"
+      },
+      "options": {
+        "en": [
+          "It shows self-awareness and growth",
+          "It avoids putting emotional weight on her",
+          "It invites closeness without creating pressure",
+          "It dumps unresolved struggles for sympathy"
+        ],
+        "ja": [
+          "自己認識と成長を示すから",
+          "彼女に、気持ちの上での重荷を背負わせずに済むから",
+          "プレッシャーを生まずに、親しさを招くから",
+          "同情を引くために、解決していない悩みを丸投げするから"
+        ]
+      },
+      "explanation": {
+        "en": "Processed experiences build connection; unprocessed ones create discomfort.",
+        "ja": "整理のついた経験は、つながりを築きます。整理のついていない経験は、居心地の悪さを生みます。"
+      }
+    },
+    "72b691fd-5105-42a5-b902-f35bd796089d": {
+      "question_text": {
+        "en": "What is the main goal of telling a story in a conversation?",
+        "ja": "会話の中でエピソードを話す、主な目的は何ですか？"
+      },
+      "options": {
+        "en": [
+          "To impress her with your life history",
+          "To compete with her stories",
+          "To fill time until she speaks again",
+          "To reveal something meaningful about yourself"
+        ],
+        "ja": [
+          "自分の経歴で、彼女を感心させること",
+          "彼女のエピソードと張り合うこと",
+          "彼女がまた話し出すまで、時間を埋めること",
+          "自分について、意味のある何かを明かすこと"
+        ]
+      },
+      "explanation": {
+        "en": "A clear, honest snapshot helps her understand you quickly.",
+        "ja": "はっきりした、正直な一場面は、彼女がこちらをすばやく理解する助けになります。"
+      }
+    },
+    "26a750bf-98fb-4c3c-a099-407b3b3aabb9": {
+      "question_text": {
+        "en": "She asks how you got into your current job. What could you share?",
+        "ja": "彼女が、今の仕事に就いたきっかけを尋ねます。何を話せますか？"
+      },
+      "options": {
+        "en": [
+          "Your full timeline from high school to now",
+          "Only the current role without context",
+          "One key moment that made you switch fields"
+        ],
+        "ja": [
+          "高校から今までの、すべての経緯",
+          "背景なしに、今の役割だけ",
+          "分野を変えるきっかけになった、ひとつの大事な瞬間"
+        ]
+      },
+      "explanation": {
+        "en": "Focus on one meaningful moment to reveal character clearly and keep engagement.",
+        "ja": "意味のあるひとつの瞬間に絞ると、人柄がはっきり伝わり、相手の関心も保てます。"
+      }
+    },
+    "2330422b-5fb8-4763-a6cc-a1631f85f12d": {
+      "question_text": {
+        "en": "Which elements are essential to a story that holds attention?",
+        "ja": "注意を引きつけ続けるエピソードに欠かせない要素は、どれですか？"
+      },
+      "options": {
+        "en": [
+          "Setup for quick context",
+          "Conflict or tension to create stakes",
+          "Resolution or takeaway",
+          "Exact dates and names"
+        ],
+        "ja": [
+          "状況を手短に伝える導入",
+          "かかっているものを生む、葛藤や緊張",
+          "結末、または学び",
+          "正確な日付と名前"
+        ]
+      },
+      "explanation": {
+        "en": "Focus on what you want her to understand, not everything that happened.",
+        "ja": "起きたことのすべてではなく、彼女に理解してほしいことに絞りましょう。"
+      }
+    },
+    "1ce28b32-b0c8-4221-b1ff-d3645dd9b96d": {
+      "question_text": {
+        "en": "Why do unlinked stories create separation instead of connection?",
+        "ja": "つなげないままのエピソードは、なぜつながりではなく隔たりを生むのですか？"
+      },
+      "options": {
+        "en": [
+          "They make you seem self-centered and not interested in her",
+          "You talked about yourself without bringing her in",
+          "She's waiting for her turn instead of engaging with your story"
+        ],
+        "ja": [
+          "自己中心的で、彼女に関心がないように見えるから",
+          "彼女を引き入れずに、自分のことを話したから",
+          "彼女が、こちらの話に関わる代わりに、自分の番を待っているから"
+        ]
+      },
+      "explanation": {
+        "en": "Sharing without linking creates distance; invite her perspective to keep connection alive.",
+        "ja": "つなげないまま話すと、距離が生まれます。彼女の見方を招いて、つながりを保ちましょう。"
+      }
+    },
+    "3f38e00a-0c18-4520-94c4-258ed755d84d": {
+      "question_text": {
+        "en": "Which ending links back? You: “When I moved here, the first few months were isolating\".",
+        "ja": "彼女につなげている終わり方は、どれですか？こちらの話：「こっちに引っ越してきたとき、最初の数か月は孤独でした」"
+      },
+      "options": {
+        "en": [
+          "\"Anyway, it worked out for me.\"",
+          "\"That city is tough at first.\"",
+          "\"Moving is always hard.\"",
+          "\"How has the adjustment been for you so far?\""
+        ],
+        "ja": [
+          "「まあ、結局うまくいったんですけどね」",
+          "「あの街は、最初は大変ですよね」",
+          "「引っ越しは、いつでも大変ですよね」",
+          "「そちらは、ここまで慣れるのはどうでしたか？」"
+        ]
+      },
+      "explanation": {
+        "en": "Directly inviting her perspective converts your experience into shared ground.",
+        "ja": "彼女の見方を直接招くことで、自分の経験が、二人の共通の土台に変わります。"
+      }
+    },
+    "d6f93781-4c91-4d3e-835b-28dd4c18773b": {
+      "question_text": {
+        "en": "How can you link your stories back to her?",
+        "ja": "自分のエピソードを、どうすれば彼女につなげられますか？"
+      },
+      "options": {
+        "en": [
+          "Ask how she'd handle situation you described",
+          "Connect it to something she mentioned earlier",
+          "Compliment her on related quality or perspective"
+        ],
+        "ja": [
+          "話した状況で彼女ならどうするかを尋ねる",
+          "彼女が前に話してくれたことと結びつける",
+          "関係のある彼女の資質や見方を褒める"
+        ]
+      },
+      "explanation": {
+        "en": "Connection forms when your story becomes a bridge, not a conclusion.",
+        "ja": "つながりは、自分の話が結論ではなく、橋になったときに生まれます。"
+      }
+    },
+    "445fcfa0-4ff7-4518-ac38-f732d3f82c0a": {
+      "question_text": {
+        "en": "She freely shares personal details and laughs easily. What does this indicate?",
+        "ja": "彼女は個人的なことを進んで話し、よく笑います。これは何を示していますか？"
+      },
+      "options": {
+        "en": [
+          "She is just being polite",
+          "The connection has enough weight to support a close",
+          "She wants you to leave",
+          "The interaction is still surface-level"
+        ],
+        "ja": [
+          "礼儀正しくしているだけ",
+          "次につなげる誘いを支えられるだけの重みが、つながりに生まれている",
+          "こちらに立ち去ってほしいと思っている",
+          "やり取りは、まだ表面的なまま"
+        ]
+      },
+      "explanation": {
+        "en": "Voluntary sharing and energy show the moment is ready for a close.",
+        "ja": "進んで話してくれることと、そのエネルギーは、次につなげる機が熟したことを示しています。"
+      }
+    },
+    "22126888-2232-418e-83ad-f3149c24f572": {
+      "question_text": {
+        "en": "Her replies come with warmth, and she expands on what you say. What does this indicate?",
+        "ja": "彼女の返事には温かさがあり、こちらの話を広げてくれます。これは何を示していますか？"
+      },
+      "options": {
+        "en": [
+          "The connection has enough weight to support a close",
+          "She is tolerating the conversation",
+          "She wants to keep things short",
+          "The talk is still surface-level"
+        ],
+        "ja": [
+          "次につなげる誘いを支えられるだけの重みが、つながりに生まれている",
+          "会話に付き合ってくれているだけ",
+          "短く済ませたいと思っている",
+          "会話は、まだ表面的なまま"
+        ]
+      },
+      "explanation": {
+        "en": "Warmth and elaboration signal strong investment; the moment is ready for a close.",
+        "ja": "温かさと、話を広げてくれることは、しっかり気持ちが入っているサインです。次につなげる機が熟しています。"
+      }
+    },
+    "8c9143a9-92d6-4ec0-bd1d-cc131e69c354": {
+      "question_text": {
+        "en": "What are key signs the moment is ready to close?",
+        "ja": "次につなげる機が熟したことを示す、主なサインは何ですか？"
+      },
+      "options": {
+        "en": [
+          "She gives short, polite replies",
+          "She contributes more than necessary",
+          "She asks questions about you",
+          "She shows sustained presence and curiosity"
+        ],
+        "ja": [
+          "短く、礼儀正しい返事をする",
+          "必要以上に、会話に加わってくれる",
+          "こちらについて質問してくる",
+          "その場に居続け、好奇心を見せ続ける"
+        ]
+      },
+      "explanation": {
+        "en": "When she invests, asks about you, and stays engaged, the moment is ready for a close.",
+        "ja": "彼女が気持ちを注ぎ、こちらについて尋ね、関わり続けているなら、次につなげる機が熟しています。"
+      }
+    },
+    "372fbba5-b4e8-4738-9cf6-186872aed9ae": {
+      "question_text": {
+        "en": "Why should you link your exit to something you both discussed?",
+        "ja": "別れ際のひと言を、二人で話した内容に結びつけるべきなのは、なぜですか？"
+      },
+      "options": {
+        "en": [
+          "To sound thoughtful",
+          "To create a reason to follow up naturally",
+          "To prove you were paying attention",
+          "To increase attraction immediately"
+        ],
+        "ja": [
+          "思慮深く聞こえるため",
+          "また連絡する理由を、自然につくるため",
+          "注意を払っていたことを証明するため",
+          "すぐに惹かれる気持ちを高めるため"
+        ]
+      },
+      "explanation": {
+        "en": "Linking to a shared detail gives a natural reason to reconnect.",
+        "ja": "二人で話した内容に結びつけると、また連絡を取る自然な理由が生まれます。"
+      }
+    },
+    "4bf82e54-bc68-47b4-954e-9a2f34ad7cee": {
+      "question_text": {
+        "en": "You had a good conversation about her upcoming trip. What is the best way to exit?",
+        "ja": "彼女のこれからの旅行について、良い会話ができました。一番良い別れ方はどれですか？"
+      },
+      "options": {
+        "en": [
+          "\"Nice meeting you, take care\"",
+          "\"I should let you go\"",
+          "Say goodbye quickly to avoid awkwardness",
+          "Reference the trip and suggest continuing later"
+        ],
+        "ja": [
+          "「お会いできてよかったです。お元気で」",
+          "「そろそろ、引き止めるのはやめておきますね」",
+          "気まずさを避けるために、手早く別れを告げる",
+          "旅行の話に触れて、またあとで続きを話そうと提案する"
+        ]
+      },
+      "explanation": {
+        "en": "A callback to something she cared about keeps the interaction alive beyond the goodbye.",
+        "ja": "彼女が大切にしていた話題にもう一度触れると、別れのあとも、やり取りが生き続けます。"
+      }
+    }
+  }
+}
