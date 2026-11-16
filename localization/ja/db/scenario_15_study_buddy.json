@@ -1,0 +1,282 @@
+{
+  "scenario": {
+    "a1000015-0000-0000-0000-000000000015": {
+      "title": {
+        "en": "Study Buddy",
+        "ja": "図書館の勉強仲間"
+      },
+      "summary": {
+        "en": "The library is silent, but the chemistry between you doesn't have to be.",
+        "ja": "図書館は静かです。でも、二人のあいだの化学反応まで、静かである必要はありません。"
+      }
+    }
+  },
+  "screens": {
+    "b1000001-0000-0000-0015-000000000001": {
+      "en": "You're at the library. 12pm on a Tuesday.",
+      "ja": "図書館にいます。火曜日の正午です。"
+    },
+    "b1000002-0000-0000-0015-000000000002": {
+      "en": "A girl sits at a table near the windows. Textbooks spread out. Laptop open.",
+      "ja": "窓際の机に、一人の女性が座っています。教科書を広げ、ノートパソコンを開いています。"
+    },
+    "b1000003-0000-0000-0015-000000000003": {
+      "en": "You walk over. She looks up briefly.",
+      "ja": "歩いていきます。彼女が、ちらりと顔を上げます。"
+    },
+    "b1000005-0000-0000-0015-000000000005": {
+      "en": "Hey I've got to head out soon, but I just wanted to come say hi. I'm...",
+      "ja": "こんにちは。もうすぐ出ないといけないんですが、ひと言ごあいさつしたくて。僕は……"
+    },
+    "b1000006-0000-0000-0015-000000000006": {
+      "en": "Oh, hey! I'm Aurelie.",
+      "ja": "あ、こんにちは！オレリーです。"
+    },
+    "b1000007-0000-0000-0015-000000000007": {
+      "en": "Aurelie smiles and turns slightly towards you.",
+      "ja": "オレリーはほほえんで、体を少しこちらに向けます。"
+    },
+    "b1000009-0000-0000-0015-000000000009": {
+      "en": "So what you studying? Working hard or hardly working?",
+      "ja": "何を勉強しているんですか？がんばっていますか、それとも、がんばっているふりですか？"
+    },
+    "b1000010-0000-0000-0015-000000000010": {
+      "en": "Chemistry, got my last paper due tomorrow then I'm done.",
+      "ja": "化学です。最後のレポートの締め切りが明日で、それで全部終わりなんです。"
+    },
+    "b1000012-0000-0000-0015-000000000012": {
+      "en": "Chemistry huh? Maybe you could just study this interaction instead.",
+      "ja": "化学ですか。それなら、今ここで起きている化学反応を研究してみるのはどうですか。"
+    },
+    "b1000013-0000-0000-0015-000000000013": {
+      "en": "Hahaha maybe, but then I'd most likely fail.",
+      "ja": "あはは、そうかも。でもそれだと、たぶん落第しちゃいます。"
+    },
+    "b1000014-0000-0000-0015-000000000014": {
+      "en": "She's laughing. The energy is good and playful. She's engaged.",
+      "ja": "彼女は笑っています。遊び心のある、良い雰囲気です。彼女は会話に乗っています。"
+    },
+    "b1000016-0000-0000-0015-000000000016": {
+      "en": "So do you have any plans to celebrate after you finish this thing?",
+      "ja": "それが終わったら、何かお祝いの予定はあるんですか？"
+    },
+    "b1000017-0000-0000-0015-000000000017": {
+      "en": "Honestly? Probably just sleeping for like twelve hours straight.",
+      "ja": "正直に言うと？たぶん12時間くらい、ぶっ通しで寝るだけです。"
+    },
+    "b1000019-0000-0000-0015-000000000019": {
+      "en": "Well after your beauty sleep let's grab coffee.",
+      "ja": "じゃあ、ぐっすり眠ったあとで、コーヒーに行きましょう。"
+    },
+    "b1000020-0000-0000-0015-000000000020": {
+      "en": "Haha sure let's do it, here's my Instagram...",
+      "ja": "あはは、いいですよ、行きましょう。これ、私のインスタです……"
+    },
+    "b1000021-0000-0000-0015-000000000021": {
+      "en": "Aurelie gives you her Instagram, and you leave after.",
+      "ja": "オレリーがインスタを教えてくれて、そのあと、その場を離れます。"
+    },
+    "b1000022-0000-0000-0015-000000000022": {
+      "en": "You want to follow up and message her.",
+      "ja": "あらためて連絡を取り、メッセージを送ろうと思います。"
+    },
+    "b1000024-0000-0000-0015-000000000024": {
+      "en": "Now that you're refreshed after your sleep, let's get coffee?",
+      "ja": "ぐっすり眠って元気になったころですよね。コーヒー、行きましょう。"
+    },
+    "b1000025-0000-0000-0015-000000000025": {
+      "en": "Aurelie responds warmly, the two of you organize plans.",
+      "ja": "オレリーから感じのいい返事が来て、二人で予定を決めます。"
+    },
+    "b1000026-0000-0000-0015-000000000026": {
+      "en": "Success. You reflect on the interaction.",
+      "ja": "成功です。やり取りを振り返ります。"
+    },
+    "b1000027-0000-0000-0015-000000000027": {
+      "en": "You used a time constraint opener to reduce pressure.",
+      "ja": "プレッシャーを減らすために、時間の制限を伝えるひと言で話しかけました。"
+    },
+    "b1000028-0000-0000-0015-000000000028": {
+      "en": "You established flirty energy with jokes and playful energy.",
+      "ja": "冗談と遊び心で、駆け引きのある空気をつくりました。"
+    },
+    "b1000029-0000-0000-0015-000000000029": {
+      "en": "You asked about celebration plans instead of stress, keeping it fun.",
+      "ja": "ストレスのことではなく、お祝いの予定を尋ねて、楽しい雰囲気を保ちました。"
+    },
+    "b1000030-0000-0000-0015-000000000030": {
+      "en": "And you followed up on Instagram with a callback. Well done.",
+      "ja": "そして、前に出た話題に触れながら、インスタで連絡を取りました。よくできました。"
+    },
+    "b1000041-0000-0000-0015-000000000041": {
+      "en": "You pull out the chair and sit down. You ask what she's working on.",
+      "ja": "椅子を引いて、座ります。何に取り組んでいるのかを尋ねます。"
+    },
+    "b1000042-0000-0000-0015-000000000042": {
+      "en": "Don't make yourself comfortable in her study space without an invitation.",
+      "ja": "誘われてもいないのに、彼女の勉強スペースでくつろいではいけません。"
+    },
+    "b1000043-0000-0000-0015-000000000043": {
+      "en": "Want to study together? I could probably help you with that.",
+      "ja": "一緒に勉強しませんか？たぶん、お手伝いできると思います。"
+    },
+    "b1000044-0000-0000-0015-000000000044": {
+      "en": "She didn't ask for help. Don't presume you know her subject better.",
+      "ja": "彼女は助けを求めていません。彼女の科目を自分のほうがよく知っていると、決めつけてはいけません。"
+    },
+    "b1000081-0000-0000-0015-000000000081": {
+      "en": "Sorry for interrupting. I know you're studying.",
+      "ja": "お邪魔してすみません。勉強中ですよね。"
+    },
+    "b1000082-0000-0000-0015-000000000082": {
+      "en": "Apologizing frames you as a bother. There is nothing wrong with approaching.",
+      "ja": "謝ると、自分を「迷惑な存在」として位置づけてしまいます。声をかけることは、何も悪いことではありません。"
+    },
+    "b1000083-0000-0000-0015-000000000083": {
+      "en": "Hey so do you want to take a quick coffee break downstairs?",
+      "ja": "あの、下でちょっとコーヒー休憩でもしませんか？"
+    },
+    "b1000084-0000-0000-0015-000000000084": {
+      "en": "While being direct sometimes works, you can build more rapport here first.",
+      "ja": "ストレートな誘いがうまくいくこともありますが、ここではまず、もっと打ち解けることができます。"
+    },
+    "b1000111-0000-0000-0015-000000000111": {
+      "en": "I could help you with it if you want. I'm pretty good at writing papers.",
+      "ja": "よかったら手伝いますよ。レポートを書くのは、わりと得意なんです。"
+    },
+    "b1000112-0000-0000-0015-000000000112": {
+      "en": "You're here to create attraction. Not tutor her. Don't frame yourself that way.",
+      "ja": "ここにいるのは、惹かれる気持ちを生むためです。家庭教師をするためではありません。自分をそういう立場に置かないようにしましょう。"
+    },
+    "b1000113-0000-0000-0015-000000000113": {
+      "en": "So what exactly in chemistry is your paper about?",
+      "ja": "化学のレポートって、具体的にはどんな内容なんですか？"
+    },
+    "b1000114-0000-0000-0015-000000000114": {
+      "en": "While this can work, it keeps the interaction platonic not flirtatious.",
+      "ja": "これでもうまくいくことはありますが、やり取りが、駆け引きのない友達どまりのものになります。"
+    },
+    "b1000151-0000-0000-0015-000000000151": {
+      "en": "So how much of the paper have you finished so far?",
+      "ja": "レポートは、今どのくらいまで終わっているんですか？"
+    },
+    "b1000152-0000-0000-0015-000000000152": {
+      "en": "Don't kill the vibe with boring logistics. Keep the flirtation going.",
+      "ja": "退屈な細かい話で、雰囲気を壊してはいけません。駆け引きを続けましょう。"
+    },
+    "b1000153-0000-0000-0015-000000000153": {
+      "en": "So are you stressed about the deadline at all?",
+      "ja": "締め切りのことで、ストレスを感じていますか？"
+    },
+    "b1000154-0000-0000-0015-000000000154": {
+      "en": "Asking about stress kills the fun. Associate yourself with positive emotions.",
+      "ja": "ストレスについて尋ねると、楽しさが消えてしまいます。自分を、前向きな感情と結びつけましょう。"
+    },
+    "b1000181-0000-0000-0015-000000000181": {
+      "en": "The optimal sleeping time is actually 7-9 hours.",
+      "ja": "実は、理想の睡眠時間は7〜9時間なんですよ。"
+    },
+    "b1000182-0000-0000-0015-000000000182": {
+      "en": "You're not her sleep consultant. Don't give unsolicited advice.",
+      "ja": "彼女の睡眠コンサルタントではありません。頼まれていないアドバイスは、しないことです。"
+    },
+    "b1000183-0000-0000-0015-000000000183": {
+      "en": "A better plan is getting dinner with me instead to celebrate.",
+      "ja": "もっといいプランがありますよ。お祝いに、僕と夕食に行くんです。"
+    },
+    "b1000184-0000-0000-0015-000000000184": {
+      "en": "While this can work, keep the ask light so yes is the path of least resistance.",
+      "ja": "これでもうまくいくことはありますが、誘いは軽くしておきましょう。そうすれば、「はい」が一番抵抗の少ない道になります。"
+    },
+    "b1000231-0000-0000-0015-000000000231": {
+      "en": "Hey! How's the chemistry paper going? Getting through it okay?",
+      "ja": "こんにちは！化学のレポートはどうですか？順調に進んでいますか？"
+    },
+    "b1000232-0000-0000-0015-000000000232": {
+      "en": "This keeps it platonic. Be playful, keep it fun instead.",
+      "ja": "これでは友達どまりのままです。遊び心を持って、楽しいやり取りにしましょう。"
+    },
+    "b1000233-0000-0000-0015-000000000233": {
+      "en": "Your insta photos are cool, seems like you travel a lot.",
+      "ja": "インスタの写真、いいですね。よく旅行をするんですね。"
+    },
+    "b1000234-0000-0000-0015-000000000234": {
+      "en": "You met her in person. Reference that interaction.",
+      "ja": "彼女とは、直接会って知り合いました。そのときのやり取りに触れましょう。"
+    }
+  },
+  "options": {
+    "c1000001-0000-0000-0015-000000000001": {
+      "en": "Time constraint opener and state your intent",
+      "ja": "時間の制限を伝えるひと言で話しかけ、意図を伝える"
+    },
+    "c1000002-0000-0000-0015-000000000002": {
+      "en": "Sit down and ask about her work",
+      "ja": "座って、彼女が取り組んでいることについて尋ねる"
+    },
+    "c1000003-0000-0000-0015-000000000003": {
+      "en": "Ask to study together because you can help her",
+      "ja": "自分が手伝えるからと、一緒に勉強しようと誘う"
+    },
+    "c1000004-0000-0000-0015-000000000004": {
+      "en": "Ask light-heartedly what she's studying",
+      "ja": "何を勉強しているのかを、気軽に尋ねる"
+    },
+    "c1000005-0000-0000-0015-000000000005": {
+      "en": "Apologize for interrupting her studying",
+      "ja": "勉強の邪魔をしたことを謝る"
+    },
+    "c1000006-0000-0000-0015-000000000006": {
+      "en": "Ask if she wants to take a break and get coffee",
+      "ja": "休憩してコーヒーを飲みに行かないかと尋ねる"
+    },
+    "c1000007-0000-0000-0015-000000000007": {
+      "en": "Make a flirty joke about chemistry",
+      "ja": "化学について、駆け引きを込めた冗談を言う"
+    },
+    "c1000008-0000-0000-0015-000000000008": {
+      "en": "Offer to help her write the paper",
+      "ja": "レポートを書くのを手伝うと申し出る"
+    },
+    "c1000009-0000-0000-0015-000000000009": {
+      "en": "Ask what specifically her paper's on",
+      "ja": "レポートの具体的なテーマを尋ねる"
+    },
+    "c1000010-0000-0000-0015-000000000010": {
+      "en": "Ask if she's got any plans to celebrate after",
+      "ja": "終わったあと、お祝いの予定があるかを尋ねる"
+    },
+    "c1000011-0000-0000-0015-000000000011": {
+      "en": "Ask how much of the paper she's finished",
+      "ja": "レポートがどのくらい終わっているかを尋ねる"
+    },
+    "c1000012-0000-0000-0015-000000000012": {
+      "en": "Ask if she's stressed at all about the due date",
+      "ja": "締め切りのことでストレスを感じているかを尋ねる"
+    },
+    "c1000013-0000-0000-0015-000000000013": {
+      "en": "Tease her response and suggest coffee",
+      "ja": "彼女の返事を軽くからかって、コーヒーに誘う"
+    },
+    "c1000014-0000-0000-0015-000000000014": {
+      "en": "Tell her what the optimal sleeping time is",
+      "ja": "理想の睡眠時間を教える"
+    },
+    "c1000015-0000-0000-0015-000000000015": {
+      "en": "Tell her a better plan is to get dinner with you",
+      "ja": "自分と夕食に行くほうがいいプランだと言う"
+    },
+    "c1000016-0000-0000-0015-000000000016": {
+      "en": "Reference beauty sleep and set actual plans",
+      "ja": "ぐっすり眠った話に触れて、具体的な予定を決める"
+    },
+    "c1000017-0000-0000-0015-000000000017": {
+      "en": "Ask her how her paper went",
+      "ja": "レポートがどうだったかを尋ねる"
+    },
+    "c1000018-0000-0000-0015-000000000018": {
+      "en": "Message her about her Instagram photos",
+      "ja": "彼女のインスタの写真についてメッセージを送る"
+    }
+  }
+}
