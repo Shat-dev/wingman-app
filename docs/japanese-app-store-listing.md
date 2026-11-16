@@ -114,7 +114,7 @@ Wingmanが日本語に対応しました。すべてのレッスン、クイズ�
 ```
 
 - 設定 and 言語 are the labels the Japanese app shows.
-- **Only true once the Japanese database rows are applied.** Lessons and quiz questions ship inside the app; the 15 scenarios are read from the database and stay English until that SQL is run.
+- **True as of 2026-11-16 for a build that offers Japanese.** Lessons and quiz questions ship inside the app; the 15 scenarios are read from the database, and the Japanese rows were applied to production on that day.
 
 ## Subscriptions
 

@@ -12,7 +12,7 @@ Written 2026-11-16 for Arthur. This follows the Spanish and French checklist ([r
 - **Checks:** every check passes for German, Spanish, French and Japanese on the merge. Unit tests on the merge commit, on "Wingman L10n 17 Pro" (Debug build, unit tests only): 349 run, 344 passed, 0 failed, 5 skipped. The five skips are the pseudo-language probes, which skip themselves by design; nothing is skipped for Japanese.
 - **The German fixes from the native speaker's review** (the commit already on `Shat`) came through the merge unchanged. German, Spanish and French strings are identical to what `Shat` had.
 - **Not seen on screen yet:** no simulator sweep has run in Japanese, and no Release build. Each sweep creates a guest user in production, so it waits for your OK.
-- **Database rows: not applied.** The 15 scenarios read their text from the database, so they show in English until step 5 is done. The interface, lessons and quiz questions ship inside the app and are already Japanese in a build.
+- **Database rows: live in production since 2026-11-16** (step 5; you asked for it before the proofread). The read-only check passed first. With them in, a Japanese build shows everything in Japanese: the interface, lessons and quiz questions ship inside the app, and the 15 scenarios read these rows. They are still the unreviewed draft.
 - **Draft status:** all of it is a machine draft (written by Claude). **No Japanese speaker has read any of it**, and you have no Japanese reader in the team, so step 1 matters more here than it did for the other languages.
 - **The advice was translated, not adapted.** 63 places where it may land differently in Japan are listed for you (step 2).
 
@@ -46,7 +46,7 @@ Start these three this week. They take the longest, and they don't depend on eac
 | 2 | Cultural flags: a decision on each | You | The proofread of those lessons |
 | 3 | Pricing in yen, the one-time offer too | You (App Store Connect) | Launch in Japan |
 | 4 | Privacy and legal questions | You and adviser | Marketing in Japan |
-| 5 | Database: id check, then apply the Japanese rows | Claude, with your go-ahead | Scenarios in Japanese, testing, submission |
+| 5 | Database: check ✅, apply ✅ (re-apply changed files after the proofread) | Claude, with your go-ahead | Scenarios in Japanese, testing, submission |
 | 6 | Japanese sweeps on both simulators | Claude, with your say-so | Submission |
 | 7 | Sandbox purchase in the Japanese storefront | You | Submission |
 | 8 | Keywords, listing pages, screenshots, subscription names | You, Claude drafted | Submission |
@@ -169,16 +169,19 @@ Where: App Store Connect → your app → Subscriptions → the group → each s
 
 **Why it matters:** scenarios read their text from the database. Until the Japanese rows are live, all 15 scenarios show in English in a Japanese app, and the What's New line in the listing draft ("all lessons, quizzes and scenarios") is not true.
 
-1. **Read-only id check first. Not done yet.** It was skipped during the translation because the Supabase connector reached only Clera-App, not Wingman-App.
-   - Point the connector at Wingman-App, or use the Supabase CLI from a scratch folder as Release C did.
-   - SELECT only: confirm that every id in the Japanese files exists in production, and that production has no Japanese rows yet.
-   - What is already known without the database: the Japanese files use the same ids as the French ones, file for file, and every generated SQL file has the same number of upserts as its French twin (765 questions, 15 scenarios, 796 screens, 276 options).
-   - Also check the date of the last English edit in production. The Japanese was translated from the English in the repo's German files; if the English changed in production after 2026-11-15, those rows need a second look.
-2. **Then apply, with your go-ahead.** 24 files in `supabase/seed/content_translations_ja/`. Each is a safe, repeatable upsert, applied the way the other languages were. **None has ever been run.** Only a build that offers Japanese reads these rows, so applying them early shows nothing to current users.
+1. **Read-only check first.** ✅ Done 2026-11-16 (SELECT only, via the Supabase CLI from a scratch folder; the connector still reached only Clera-App, which was not touched).
+   - Every id in the Japanese files exists in production: 765 questions, 15 scenarios, 796 screens, 276 options, none missing. Production has 891 screens; the other 95 have no text.
+   - Production had no Japanese rows.
+   - The English in production is exactly the English the Japanese was translated from: every question text, option list and explanation, and every scenario title, summary, screen and option was compared, with 0 differences. The last English edit in production is still 2026-11-11 04:23 UTC.
+2. **Applied 2026-11-16** ✅ (you asked for it before the proofread). All 24 files in `supabase/seed/content_translations_ja/` ran without error, each in its own transaction; they contain only upserts into the four translation tables.
+   - Production now has 765 questions, 15 scenarios, 796 screens and 276 options for `ja`.
+   - Every one of those 1,852 rows was read back and matches the files exactly; there are no Japanese rows that are not in the files.
+   - German, Spanish and French are unchanged: the same row counts and the same last-updated times as before.
+   - Only a build that offers Japanese reads these rows, so current users see nothing different.
 3. **The duplicate quiz question** (`4533a8d2…` / `58d8c403…`) is still duplicated and carries the same Japanese in both rows. Leave both unless you decide otherwise; deleting one is a permanent change.
 4. **After the proofread:** re-run only the files whose wording changed. A database wording fix needs no app update.
 
-**Done when:** the check matches and the Japanese rows are live.
+**Done when:** the check matches and the Japanese rows are live. Both are true as of 2026-11-16; what remains is point 4 after the proofread.
 
 ---
 
@@ -188,7 +191,7 @@ Where: App Store Connect → your app → Subscriptions → the group → each s
 
 - **The tests exist and have never been run:** `testOnboardingInJapanese` and `testOnboardingAndContentInJapanese` in `WingmanUITests/OnboardingSweepTests.swift`.
 - **The simulators:** "Wingman L10n 17 Pro" and "Wingman L10n SE". Both are safe to reset.
-- **Run step 5 first,** or the scenario in the content sweep plays in English.
+- **Step 5 is done,** so the scenario in the content sweep should play in Japanese from the production rows. If it plays in English, that is a bug to chase.
 
 **What to look at, in this order:**
 1. **The font.** The app's fonts have no Japanese glyphs, so iOS draws Japanese in its own font while digits, %, "Wingman" and "XP" stay in the app's font. Check that headings and body text don't look mismatched in weight or size, especially where a number sits inside a Japanese sentence.
