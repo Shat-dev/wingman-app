@@ -1,0 +1,310 @@
+{
+  "scenario": {
+    "a1000005-0000-0000-0000-000000000005": {
+      "title": {
+        "en": "Final Stretch",
+        "ja": "最後のストレッチ"
+      },
+      "summary": {
+        "en": "Weekly classes, shared glances, unspoken curiosity. The class ends. Do you step in?",
+        "ja": "週に一度のクラス、ときどき合う視線、言葉にならない好奇心。クラスが終わります。一歩踏み出しますか？"
+      }
+    }
+  },
+  "screens": {
+    "b1000001-0000-0000-0005-000000000001": {
+      "en": "You've been trying to meet more women so you've signed up for a weekly yoga class.",
+      "ja": "もっと多くの女性と出会おうと、週に一度のヨガクラスに申し込みました。"
+    },
+    "b1000002-0000-0000-0005-000000000002": {
+      "en": "This is your third class on Tuesday and you've seen the same girl each week.",
+      "ja": "今日は3回目の火曜のクラスです。毎週、同じ女性を見かけています。"
+    },
+    "b1000003-0000-0000-0005-000000000003": {
+      "en": "You've never spoken. Just polite nods, brief eye contact here and there.",
+      "ja": "話したことは一度もありません。礼儀正しい会釈と、ときどき一瞬目が合うだけです。"
+    },
+    "b1000004-0000-0000-0005-000000000004": {
+      "en": "Class ends. Everyone's rolling up their mats, grabbing water bottles, heading out.",
+      "ja": "クラスが終わります。みんなマットを丸め、水のボトルを手に取り、出口へ向かっています。"
+    },
+    "b1000005-0000-0000-0005-000000000005": {
+      "en": "She's packing up near the door. You're both heading the same direction naturally.",
+      "ja": "彼女は、ドアの近くで荷物をまとめています。二人とも、自然と同じ方向へ向かっています。"
+    },
+    "b1000061-0000-0000-0005-000000000061": {
+      "en": "Hey, do you come to this class often?",
+      "ja": "あの、このクラスにはよく来るんですか？"
+    },
+    "b1000062-0000-0000-0005-000000000062": {
+      "en": "You've seen her before. Don't ask what you and her already know.",
+      "ja": "彼女のことは、前にも見かけています。二人ともすでに知っていることを、尋ねてはいけません。"
+    },
+    "b1000063-0000-0000-0005-000000000063": {
+      "en": "On that warrior pose, you want to keep your knee...",
+      "ja": "あの戦士のポーズですけど、ひざはこうしたほうが……"
+    },
+    "b1000064-0000-0000-0005-000000000064": {
+      "en": "Unsolicited advice is patronizing, especially to a woman in a fitness space. Don't do this.",
+      "ja": "頼まれていないアドバイスは、相手を下に見ているように聞こえます。フィットネスの場にいる女性に対しては、なおさらです。これはやめましょう。"
+    },
+    "b1000007-0000-0000-0005-000000000007": {
+      "en": "How'd you find the class? That last sequence was hard.",
+      "ja": "今日のクラス、どうでした？最後の流れ、きつかったですね。"
+    },
+    "b1000008-0000-0000-0005-000000000008": {
+      "en": "Right? I almost fell over in that warrior pose.",
+      "ja": "ですよね？あの戦士のポーズで、倒れそうになりました。"
+    },
+    "b1000009-0000-0000-0005-000000000009": {
+      "en": "You're both walking toward the exit. Natural pace. She's putting on her jacket.",
+      "ja": "二人とも、出口へ向かって歩いています。自然なペースです。彼女は上着を着ているところです。"
+    },
+    "b1000010-0000-0000-0005-000000000010": {
+      "en": "You're at the door now. This is the moment to continue or part ways.",
+      "ja": "今、ドアのところにいます。このまま続けるか、別れるかの分かれ目です。"
+    },
+    "b1000111-0000-0000-0005-000000000111": {
+      "en": "So what makes you come on Tuesdays?",
+      "ja": "どうして火曜日に来ているんですか？"
+    },
+    "b1000112-0000-0000-0005-000000000112": {
+      "en": "While this can work, keep observations light and interesting.",
+      "ja": "これでもうまくいくことはありますが、観察は軽く、興味を引くものにしておきましょう。"
+    },
+    "b1000113-0000-0000-0005-000000000113": {
+      "en": "I’ve noticed you always get here early and set up in the back left corner.",
+      "ja": "いつも早めに来て、後ろの左の隅にマットを敷いていますよね。"
+    },
+    "b1000114-0000-0000-0005-000000000114": {
+      "en": "Too specific. Signals you've been studying her movements closely.",
+      "ja": "細かすぎます。彼女の行動をじっと観察していたと伝わってしまいます。"
+    },
+    "b1000012-0000-0000-0005-000000000012": {
+      "en": "I think I've seen you here the last few Tuesdays.",
+      "ja": "ここ何回か、火曜日にお見かけした気がします。"
+    },
+    "b1000013-0000-0000-0005-000000000013": {
+      "en": "Yeah I've noticed that too. Guess we're Tuesday regulars.",
+      "ja": "ええ、私も気づいていました。お互い、火曜日の常連みたいですね。"
+    },
+    "b1000014-0000-0000-0005-000000000014": {
+      "en": "You're both outside now. Walking towards the parking lot. Natural pace, good energy.",
+      "ja": "二人とも、もう外に出ています。駐車場へ向かって歩いています。自然なペースで、良い雰囲気です。"
+    },
+    "b1000151-0000-0000-0005-000000000151": {
+      "en": "Hey let's go get some drinks now.",
+      "ja": "あの、今から飲みに行きましょうよ。"
+    },
+    "b1000152-0000-0000-0005-000000000152": {
+      "en": "Build more rapport. This risks making future class uncomfortable for both of you.",
+      "ja": "もっと打ち解けましょう。これでは、今後のクラスが二人ともにとって気まずいものになるおそれがあります。"
+    },
+    "b1000153-0000-0000-0005-000000000153": {
+      "en": "Okay, I'll see you next week. Bye.",
+      "ja": "じゃあ、また来週。さようなら。"
+    },
+    "b1000154-0000-0000-0005-000000000154": {
+      "en": "No name exchange, keeps you as strangers instead of acquaintances.",
+      "ja": "名前を伝え合っていないので、顔見知りにはなれず、他人のままです。"
+    },
+    "b1000017-0000-0000-0005-000000000017": {
+      "en": "Nice to meet you, I'm Amber.",
+      "ja": "はじめまして。アンバーです。"
+    },
+    "b1000018-0000-0000-0005-000000000018": {
+      "en": "Names exchanged. You're not strangers anymore but acquaintances.",
+      "ja": "名前を伝え合いました。もう他人ではなく、顔見知りです。"
+    },
+    "b1000019-0000-0000-0005-000000000019": {
+      "en": "The other people in the class have left but she is not walking yet towards her car.",
+      "ja": "クラスのほかの人たちは帰りましたが、彼女はまだ自分の車のほうへ歩き出していません。"
+    },
+    "b1000201-0000-0000-0005-000000000201": {
+      "en": "I just do some stuff online.",
+      "ja": "ネットでちょっとした仕事をしているだけです。"
+    },
+    "b1000202-0000-0000-0005-000000000202": {
+      "en": "Keep the conversation on the existing yoga thread. Work questions are boring early on.",
+      "ja": "会話は、すでに出ているヨガの話題のままにしておきましょう。出会って間もないうちは、仕事の質問は退屈です。"
+    },
+    "b1000203-0000-0000-0005-000000000203": {
+      "en": "Umm ok, that's an interesting journey.",
+      "ja": "えっと、そうなんですね。面白い経緯ですね。"
+    },
+    "b1000204-0000-0000-0005-000000000204": {
+      "en": "You made it about yourself. Keep focus on building connection by learning about her.",
+      "ja": "自分の話にしてしまいました。彼女のことを知って、つながりを築くことに集中し続けましょう。"
+    },
+    "b1000021-0000-0000-0005-000000000021": {
+      "en": "You seem pretty comfortable with the poses. How long have you been doing yoga?",
+      "ja": "ポーズにすごく慣れている感じですね。ヨガはどのくらい続けているんですか？"
+    },
+    "b1000022-0000-0000-0005-000000000022": {
+      "en": "About four years now. Started during lockdown and just kept going.",
+      "ja": "もう4年くらいです。コロナ禍のときに始めて、そのまま続けていて。"
+    },
+    "b1000023-0000-0000-0005-000000000023": {
+      "en": "The conversation is good, you're talking about each other's interests, life, etc.",
+      "ja": "会話は弾んでいます。お互いの興味や生活などについて話しています。"
+    },
+    "b1000024-0000-0000-0005-000000000024": {
+      "en": "You're talking well. Before you realize it, the sun has set. The parking lot is dark.",
+      "ja": "話が弾んでいます。気づかないうちに、日が沈んでいました。駐車場は暗くなっています。"
+    },
+    "b1000025-0000-0000-0005-000000000025": {
+      "en": "Oh wow, I've lost track of time. I should probably get going.",
+      "ja": "あ、もうこんな時間。そろそろ行かないと。"
+    },
+    "b1000026-0000-0000-0005-000000000026": {
+      "en": "Amber looks toward where she's parked. It's far away, in a dark corner.",
+      "ja": "アンバーは、自分が車を停めたほうを見ます。遠くの、暗い隅です。"
+    },
+    "b1000271-0000-0000-0005-000000000271": {
+      "en": "Yeah, I know. Anyway, bye.",
+      "ja": "ええ、そうですね。じゃあ、これで。"
+    },
+    "b1000272-0000-0000-0005-000000000272": {
+      "en": "Victim-blaming tone. Not helpful. Just offer to walk her without commentary.",
+      "ja": "彼女を責めるような口調です。役に立ちません。余計なことは言わずに、送ると申し出ましょう。"
+    },
+    "b1000273-0000-0000-0005-000000000273": {
+      "en": "Yeah... I should go.",
+      "ja": "ええ……もう行きますね。"
+    },
+    "b1000274-0000-0000-0005-000000000274": {
+      "en": "Making her more aware of danger doesn't help. Be the solution, not a source of worry.",
+      "ja": "危険をより意識させても、助けにはなりません。心配の種ではなく、解決策になりましょう。"
+    },
+    "b1000028-0000-0000-0005-000000000028": {
+      "en": "Hey let me walk you to your car. It got dark fast.",
+      "ja": "車まで送りますよ。あっという間に暗くなりましたね。"
+    },
+    "b1000029-0000-0000-0005-000000000029": {
+      "en": "That's nice of you, thank you.",
+      "ja": "ご親切に、ありがとうございます。"
+    },
+    "b1000030-0000-0000-0005-000000000030": {
+      "en": "Amber seems relieved, not uncomfortable by your offer.",
+      "ja": "アンバーは、その申し出に居心地が悪そうな様子はなく、ほっとしているようです。"
+    },
+    "b1000031-0000-0000-0005-000000000031": {
+      "en": "You walk together. The conversation flows easy and you get to her car.",
+      "ja": "一緒に歩きます。会話は気楽に弾み、彼女の車に着きます。"
+    },
+    "b1000032-0000-0000-0005-000000000032": {
+      "en": "Thank you for that, you didn't have to.",
+      "ja": "ありがとうございました。わざわざすみません。"
+    },
+    "b1000033-0000-0000-0005-000000000033": {
+      "en": "Don't worry about it, it's all good.",
+      "ja": "気にしないでください。大丈夫ですよ。"
+    },
+    "b1000035-0000-0000-0005-000000000035": {
+      "en": "Hey let's grab a coffee sometime? What's your number?",
+      "ja": "今度、コーヒーでも行きましょう。LINE、教えてもらえますか？"
+    },
+    "b1000036-0000-0000-0005-000000000036": {
+      "en": "Yeah sure, I'd like that, here's my number.",
+      "ja": "ええ、ぜひ。これ、私のLINEです。"
+    },
+    "b1000037-0000-0000-0005-000000000037": {
+      "en": "It was nice meeting you officially, I'll see you next week?",
+      "ja": "ちゃんとごあいさつできてよかったです。また来週、会えますか？"
+    },
+    "b1000038-0000-0000-0005-000000000038": {
+      "en": "Haha yes it was, I'll see you then. Enjoy your week.",
+      "ja": "あはは、本当ですね。ではまた来週。良い一週間を。"
+    },
+    "b1000039-0000-0000-0005-000000000039": {
+      "en": "Success. You review your interaction with Amber.",
+      "ja": "成功です。アンバーとのやり取りを振り返ります。"
+    },
+    "b1000040-0000-0000-0005-000000000040": {
+      "en": "You opened naturally by using the shared environment.",
+      "ja": "同じ環境を共有していることを使って、自然に話しかけました。"
+    },
+    "b1000041-0000-0000-0005-000000000041": {
+      "en": "You showed curiosity towards Amber and getting to know her.",
+      "ja": "アンバーに好奇心を向け、彼女のことを知ろうとしました。"
+    },
+    "b1000042-0000-0000-0005-000000000042": {
+      "en": "You stepped up and walked her to her car.",
+      "ja": "自分から申し出て、彼女を車まで送りました。"
+    },
+    "b1000043-0000-0000-0005-000000000043": {
+      "en": "And you closed well by building on the connection. Overall a huge success.",
+      "ja": "そして、築いたつながりを活かして、うまく次につなげました。全体として、大成功です。"
+    }
+  },
+  "options": {
+    "c1000002-0000-0000-0005-000000000002": {
+      "en": "Ask if she comes to this class regularly",
+      "ja": "このクラスにはよく来るのかと尋ねる"
+    },
+    "c1000001-0000-0000-0005-000000000001": {
+      "en": "Make a light comment about the class as you pass",
+      "ja": "すれ違いざまに、クラスについて軽くひと言コメントする"
+    },
+    "c1000003-0000-0000-0005-000000000003": {
+      "en": "Offer advice on a pose she was struggling with",
+      "ja": "彼女が苦労していたポーズについてアドバイスする"
+    },
+    "c1000006-0000-0000-0005-000000000006": {
+      "en": "Point out details you've noticed about her routine",
+      "ja": "彼女のいつもの行動について、気づいた細かな点を指摘する"
+    },
+    "c1000005-0000-0000-0005-000000000005": {
+      "en": "Ask why she comes on Tuesdays",
+      "ja": "なぜ火曜日に来るのかを尋ねる"
+    },
+    "c1000004-0000-0000-0005-000000000004": {
+      "en": "Acknowledge that you've seen her here before casually",
+      "ja": "前にもここで見かけたことを、さりげなく伝える"
+    },
+    "c1000007-0000-0000-0005-000000000007": {
+      "en": "Introduce yourself naturally",
+      "ja": "自然に自己紹介をする"
+    },
+    "c1000008-0000-0000-0005-000000000008": {
+      "en": "Ask her out before she leaves",
+      "ja": "彼女が帰る前に、デートに誘う"
+    },
+    "c1000009-0000-0000-0005-000000000009": {
+      "en": "Tell her you'll see her next week",
+      "ja": "また来週、と伝える"
+    },
+    "c1000011-0000-0000-0005-000000000011": {
+      "en": "Ask what she does for work",
+      "ja": "仕事は何をしているのかを尋ねる"
+    },
+    "c1000010-0000-0000-0005-000000000010": {
+      "en": "Natural compliment and ask about her yoga journey",
+      "ja": "自然に褒めて、ヨガを続けてきた経緯を尋ねる"
+    },
+    "c1000012-0000-0000-0005-000000000012": {
+      "en": "Tell her about why you got into yoga",
+      "ja": "自分がヨガを始めた理由を話す"
+    },
+    "c1000015-0000-0000-0005-000000000015": {
+      "en": "Make a joke about the parking lot being dark",
+      "ja": "駐車場が暗いことを冗談にする"
+    },
+    "c1000014-0000-0000-0005-000000000014": {
+      "en": "Tell her she could park closer next time",
+      "ja": "次はもっと近くに停めればいいのに、と言う"
+    },
+    "c1000013-0000-0000-0005-000000000013": {
+      "en": "Offer to walk her to her car casually",
+      "ja": "車まで送ると、さりげなく申し出る"
+    },
+    "c1000016-0000-0000-0005-000000000016": {
+      "en": "Ask for her contact",
+      "ja": "連絡先を聞く"
+    },
+    "c1000017-0000-0000-0005-000000000017": {
+      "en": "Say it was nice to meet her and you'll see her next Tuesday",
+      "ja": "会えてよかった、また来週の火曜日に、と伝える"
+    }
+  }
+}
