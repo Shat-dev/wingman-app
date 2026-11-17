@@ -34,7 +34,7 @@ enum PaywallSource: String {
 
 struct PaywallView: View {
 
-    @StateObject private var viewModel = PaywallViewModel()
+    @StateObject private var viewModel: PaywallViewModel
     @EnvironmentObject var authManager: AuthManager
 
     // Optional AuthManager for anonymous user purchase tracking
@@ -240,8 +240,13 @@ struct PaywallView: View {
         onDismiss: (() -> Void)? = nil,
         onOfflineBypass: (() -> Void)? = nil,
         source: PaywallSource,
-        onDismissReported: (() -> Void)? = nil
+        onDismissReported: (() -> Void)? = nil,
+        viewModel: PaywallViewModel? = nil
     ) {
+        // Every call site in the app leaves `viewModel` nil and gets the
+        // normal RevenueCat-backed one. Render tests pass one built on a
+        // fixture offering.
+        _viewModel = StateObject(wrappedValue: viewModel ?? PaywallViewModel())
         self.authManager_init = authManager
         self.isDismissible = isDismissible
         self.onDismiss = onDismiss
@@ -290,7 +295,7 @@ struct PaywallView: View {
     /// safe direction: the worst case is a hard wall becoming dismissible for
     /// someone on a flaky connection, versus an inescapable paywall.
     private var pricingUnavailable: Bool {
-        viewModel.offerings == nil || viewModel.lastLoadFailed
+        !viewModel.hasPricing || viewModel.lastLoadFailed
     }
 
     /// Whether to render the X. Normally just `isDismissible`, but a
@@ -495,7 +500,7 @@ struct PaywallView: View {
                 // a background refresh never flickers loaded prices back to a
                 // spinner. The retry control doubles as the in-progress
                 // indicator in the not-yet-loaded branch.
-                if viewModel.offerings != nil {
+                if viewModel.hasPricing {
                     plansSection
                     continueButton
                     trialDisclosure
@@ -684,7 +689,7 @@ struct PaywallView: View {
                 OneTimeOfferViewModel.preload()
             }
             viewModel.currentPage = 0
-            viewModel.selectPlan(.yearly)
+            viewModel.selectPlan(viewModel.defaultPlan)
 
             // PostHog: paywall_viewed — the top of the conversion funnel.
             // Guarded against SwiftUI's incidental re-mounts.
@@ -717,54 +722,70 @@ struct PaywallView: View {
     /// The real, purchasable plans. Rendered only when offerings have loaded;
     /// unchanged from the original content-state markup.
     private var plansSection: some View {
-        VStack(spacing: 12) {
+        // Always two rows: lifetime and monthly when the offering sells
+        // lifetime, yearly and monthly when it does not (see
+        // `PaywallViewModel.availablePlans`). The spacing is the two-row
+        // spacing the paywall has always had, including the extra 10pt under
+        // the first row.
+        let plans = viewModel.availablePlans
 
-            // Yearly Plan
-            PlanRow(
-                title: String(localized: "Yearly Plan"),
-                price: viewModel.yearlyPackage.flatMap { PaywallPricing.weeklyPriceLine(for: $0) } ?? "",
-                weekly: viewModel.yearlyPrice,
-                weeklySubtitle: PaywallPricing.perYear,
-                isSelected: viewModel.selectedPlan == .yearly,
-                badgeText: viewModel.selectedPlan == .yearly ? viewModel.trialBadge(for: .yearly) : nil
-            ) {
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    viewModel.selectPlan(.yearly)
-                }
-                Analytics.captureNow(
-                    "paywall_plan_selected",
-                    properties: paywallEventProperties([
-                        "plan": "yearly",
-                        "is_trial_eligible": viewModel.isYearlyTrialEligible
-                    ])
-                )
+        return VStack(spacing: 12) {
+            ForEach(plans, id: \.self) { plan in
+                planRow(for: plan)
+                    .padding(.bottom, plan == plans.first ? 10 : 0)
             }
-            .padding(.bottom,10)
-
-            // Monthly Plan
-            PlanRow(
-                title: String(localized: "Monthly Plan"),
-                price: viewModel.monthlyPackage.flatMap { PaywallPricing.weeklyPriceLine(for: $0) } ?? "",
-                weekly: viewModel.monthlyPrice,
-                    weeklySubtitle: PaywallPricing.perMonth,
-                    isSelected: viewModel.selectedPlan == .monthly,
-                    badgeText: viewModel.selectedPlan == .monthly ? viewModel.trialBadge(for: .monthly) : nil
-            ) {
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    viewModel.selectPlan(.monthly)
-                }
-                Analytics.captureNow(
-                    "paywall_plan_selected",
-                    properties: paywallEventProperties([
-                        "plan": "monthly",
-                        "is_trial_eligible": viewModel.isMonthlyTrialEligible
-                    ])
-                )
-            }
-
         }
         .padding(.horizontal, 20)
         .padding(.bottom, 8) // Breathing room before the pinned Continue button
+    }
+
+    private func planRow(for plan: SubscriptionPlan) -> some View {
+        let title: String
+        let detail: String
+        let price: String
+        let period: String
+
+        switch plan {
+        case .yearly:
+            title = String(localized: "Yearly Plan")
+            detail = viewModel.yearlyPackage.flatMap { PaywallPricing.weeklyPriceLine(for: $0) } ?? ""
+            price = viewModel.yearlyPrice
+            period = PaywallPricing.perYear
+        case .monthly:
+            title = String(localized: "Monthly Plan")
+            detail = viewModel.monthlyPackage.flatMap { PaywallPricing.weeklyPriceLine(for: $0) } ?? ""
+            price = viewModel.monthlyPrice
+            period = PaywallPricing.perMonth
+        case .lifetime:
+            // A single purchase: no weekly price to show and nothing recurring.
+            title = String(
+                localized: "Lifetime",
+                comment: "Paywall plan name, next to \"Yearly Plan\" and \"Monthly Plan\": a single purchase that never expires."
+            )
+            detail = PaywallPricing.payOnce
+            price = viewModel.lifetimePrice
+            period = PaywallPricing.oneTime
+        }
+
+        return PlanRow(
+            title: title,
+            price: detail,
+            weekly: price,
+            weeklySubtitle: period,
+            isSelected: viewModel.selectedPlan == plan,
+            badgeText: viewModel.selectedPlan == plan ? viewModel.trialBadge(for: plan) : nil
+        ) {
+            withAnimation(.easeInOut(duration: 0.2)) {
+                viewModel.selectPlan(plan)
+            }
+            Analytics.captureNow(
+                "paywall_plan_selected",
+                properties: paywallEventProperties([
+                    "plan": plan.rawValue,
+                    "is_trial_eligible": viewModel.isTrialEligible(for: plan)
+                ])
+            )
+        }
     }
 
     // MARK: - Trial Disclosure
@@ -793,6 +814,9 @@ struct PaywallView: View {
 
     /// Two variants, one line, never optional.
     private var disclosureCopy: String {
+        if viewModel.selectedPlan == .lifetime {
+            return PaywallCopy.lifetimeDisclosure
+        }
         return PaywallCopy.disclosure(
             startsWithFreeTrial: viewModel.startsWithFreeTrial(for: viewModel.selectedPlan)
         )

@@ -208,7 +208,9 @@ final class SubscriptionManager: NSObject, ObservableObject {
             if case .verified(let transaction) = result {
                 log("   - Found transaction: \(transaction.productID)")
                 if transaction.productID == Constants.YEARLY_PRODUCT_ID ||
-                   transaction.productID == Constants.MONTHLY_PRODUCT_ID {
+                   transaction.productID == Constants.MONTHLY_PRODUCT_ID ||
+                   transaction.productID == Constants.LIFETIME_PRODUCT_ID ||
+                   transaction.productID == Constants.LIFETIME_DISCOUNT_PRODUCT_ID {
                     hasActiveSubscription = true
                     if let expiryDate = transaction.expirationDate {
                         if latestExpiryDate == nil || expiryDate > latestExpiryDate! {

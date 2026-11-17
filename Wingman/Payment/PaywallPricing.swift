@@ -76,6 +76,18 @@ nonisolated enum PaywallPricing {
     static var perMonth: String {
         String(localized: "per month", comment: "Paywall plan row, under the monthly plan's full price ($12.99 per month).")
     }
+
+    /// Under the lifetime plan's price, where the subscriptions say "per
+    /// year" and "per month".
+    static var oneTime: String {
+        String(localized: "one-time", comment: "Paywall plan row, under the lifetime plan's price ($149.99 one-time). It is paid once, not per year or per month.")
+    }
+
+    /// Under the lifetime plan's name, where the subscriptions show their
+    /// weekly price. A one-time price has no weekly amount to show.
+    static var payOnce: String {
+        String(localized: "pay once, keep it forever", comment: "Paywall plan row, under the lifetime plan's name. Lower case, like the weekly price line on the other plans.")
+    }
 }
 
 extension PaywallPricing.BillingPeriod {

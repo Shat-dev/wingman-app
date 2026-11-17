@@ -5,6 +5,35 @@
       "comment" : "Empty placeholder text.",
       "shouldTranslate" : false
     },
+    "%@ billed once, today. No subscription, nothing to cancel." : {
+      "comment" : "One-time offer for the lifetime plan, under the button. %@ is the discounted price charged today. It is a single purchase, not a subscription.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Heute werden einmalig %@ berechnet. Kein Abo, nichts zu kündigen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hoy pagas %@, una sola vez. Sin suscripción, nada que cancelar."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Aujourd’hui, tu paies %@, une seule fois. Pas d’abonnement, rien à annuler."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "本日%@が一度だけ請求されます。サブスクリプションではないため、解約は不要です。"
+          }
+        }
+      }
+    },
     "%@ billed today for your first %lld months, then %@/month. Cancel anytime in App Store settings." : {
       "comment" : "One-time offer, under the button. First %@: the discounted price charged today. %lld: months the discount lasts, 2 or more. Second %@: the regular monthly price.",
       "localizations" : {
@@ -5940,6 +5969,35 @@
         }
       }
     },
+    "Lifetime" : {
+      "comment" : "Paywall plan name, next to \"Yearly Plan\" and \"Monthly Plan\": a single purchase that never expires.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lebenslang"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "De por vida"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "À vie"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "買い切りプラン"
+          }
+        }
+      }
+    },
     "Loading approaches..." : {
       "localizations" : {
         "de" : {
@@ -7148,6 +7206,35 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "ひとつずつ進めましょう。まずはシナリオをプレイしてください。"
+          }
+        }
+      }
+    },
+    "One-time payment. No subscription, nothing to cancel." : {
+      "comment" : "Paywall, under the purchase button, when the lifetime plan (a single purchase, not a subscription) is selected.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Einmalige Zahlung. Kein Abo, nichts zu kündigen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pago único. Sin suscripción, nada que cancelar."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Paiement unique. Pas d’abonnement, rien à annuler."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "一度きりのお支払いです。サブスクリプションではないため、解約は不要です。"
           }
         }
       }
@@ -11394,6 +11481,35 @@
         }
       }
     },
+    "for lifetime access" : {
+      "comment" : "One-time offer for the lifetime plan, under the discounted price (\"$89.99\").",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "für lebenslangen Zugang"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "por el acceso de por vida"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "pour l’accès à vie"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "買い切りプラン"
+          }
+        }
+      }
+    },
     "for your first %lld months" : {
       "comment" : "One-time offer, under the discounted price. %lld is a number of months, 2 or more.",
       "localizations" : {
@@ -11506,6 +11622,35 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "最初の1年間"
+          }
+        }
+      }
+    },
+    "off lifetime access" : {
+      "comment" : "One-time offer for the lifetime plan, under the big percentage (\"40%\").",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Rabatt auf lebenslangen Zugang"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "de descuento en el acceso de por vida"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "de réduction sur l’accès à vie"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "買い切りプランがオフ"
           }
         }
       }
@@ -11626,6 +11771,35 @@
         }
       }
     },
+    "one-time" : {
+      "comment" : "Paywall plan row, under the lifetime plan's price ($149.99 one-time). It is paid once, not per year or per month.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "einmalig"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "pago único"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "paiement unique"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "買い切り"
+          }
+        }
+      }
+    },
     "only %@ per week" : {
       "comment" : "Paywall plan row, under the plan's name. %@ is a price with its currency, for example $1.35.",
       "localizations" : {
@@ -11651,6 +11825,35 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "1週間あたりわずか%@"
+          }
+        }
+      }
+    },
+    "pay once, keep it forever" : {
+      "comment" : "Paywall plan row, under the lifetime plan's name. Lower case, like the weekly price line on the other plans.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "einmal zahlen, für immer behalten"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "paga una vez, tuyo para siempre"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "un seul paiement, à toi pour toujours"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "一度の支払いでずっと使える"
           }
         }
       }

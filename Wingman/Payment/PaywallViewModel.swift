@@ -100,14 +100,65 @@ final class PaywallViewModel: ObservableObject {
     @Published var selectedPlan: SubscriptionPlan = .yearly
     
     // MARK: - Computed Properties
+
+    /// A fixed offering to draw instead of RevenueCat's. Nil in the app.
+    /// Render tests pass one in, because a Debug build loads no products and
+    /// the plan rows would otherwise never appear.
+    private let fixtureOffering: Offering?
+
+    /// The offering the plans are read from.
+    private var currentOffering: Offering? {
+        fixtureOffering ?? offerings?.current
+    }
+
+    /// True once there are plans to show, rather than the loading or
+    /// "Can't load pricing" state.
+    var hasPricing: Bool {
+        offerings != nil || fixtureOffering != nil
+    }
+
     var yearlyPackage: Package? {
-        return offerings?.current?.package(identifier: "yearly") ??
-               offerings?.current?.annual
+        return currentOffering?.package(for: .yearly)
     }
 
     var monthlyPackage: Package? {
-        return offerings?.current?.package(identifier: "monthly") ??
-               offerings?.current?.monthly
+        return currentOffering?.package(for: .monthly)
+    }
+
+    /// The one-time lifetime purchase, or nil when the offering has none.
+    ///
+    /// This is the switch for the whole lifetime plan. When RevenueCat's
+    /// current offering carries a lifetime package, the paywall sells
+    /// lifetime and monthly, with lifetime selected. Take the package out in
+    /// the dashboard and the paywall falls back to yearly and monthly,
+    /// exactly as before, without a new build. The yearly package stays in
+    /// the offering throughout: it is what the paywall falls back to, and
+    /// what older builds sell.
+    var lifetimePackage: Package? {
+        return currentOffering?.package(for: .lifetime)
+    }
+
+    /// The plans on the paywall, top to bottom. Lifetime takes yearly's
+    /// place; the two are never shown together.
+    var availablePlans: [SubscriptionPlan] {
+        lifetimePackage != nil ? [.lifetime, .monthly] : [.yearly, .monthly]
+    }
+
+    /// The plan selected when the paywall opens: the first one shown.
+    var defaultPlan: SubscriptionPlan {
+        lifetimePackage != nil ? .lifetime : .yearly
+    }
+
+    /// Moves the selection to the default plan when the selected one is no
+    /// longer on the paywall. Run after every load, because the plans can
+    /// change under a paywall that is already open: the first frame is drawn
+    /// from RevenueCat's cache, and the fresh fetch may add or drop lifetime.
+    private func reconcileSelection() {
+        if availablePlans.contains(selectedPlan) {
+            selectedPackage = package(for: selectedPlan)
+        } else {
+            selectPlan(defaultPlan)
+        }
     }
 
     var yearlyPrice: String {
@@ -117,9 +168,17 @@ final class PaywallViewModel: ObservableObject {
     var monthlyPrice: String {
         return monthlyPackage?.storeProduct.localizedPriceString ?? ""
     }
-    
+
+    var lifetimePrice: String {
+        return lifetimePackage?.storeProduct.localizedPriceString ?? ""
+    }
+
+    func package(for plan: SubscriptionPlan) -> Package? {
+        return currentOffering?.package(for: plan)
+    }
+
     var currentPackage: Package? {
-        return selectedPlan == .yearly ? yearlyPackage : monthlyPackage
+        return package(for: selectedPlan)
     }
 
     /// A localized, currency-correct zero — "$0.00", "€0,00", "£0.00", "¥0" —
@@ -159,7 +218,12 @@ final class PaywallViewModel: ObservableObject {
     }
 
     func isTrialEligible(for plan: SubscriptionPlan) -> Bool {
-        return plan == .yearly ? isYearlyTrialEligible : isMonthlyTrialEligible
+        switch plan {
+        case .yearly:   return isYearlyTrialEligible
+        case .monthly:  return isMonthlyTrialEligible
+        // A one-time purchase has no introductory offer to be eligible for.
+        case .lifetime: return false
+        }
     }
 
     /// The free trial this user would get on `plan`, or nil when there is
@@ -176,10 +240,9 @@ final class PaywallViewModel: ObservableObject {
     /// so the three can never disagree. Analytics keep raw eligibility
     /// (`is_trial_eligible`).
     func freeTrialLength(for plan: SubscriptionPlan) -> PaywallTrial.Length? {
-        let package = plan == .yearly ? yearlyPackage : monthlyPackage
         return PaywallTrial.offeredTrial(
             isEligible: isTrialEligible(for: plan),
-            productTrial: package?.storeProduct.freeTrialLength
+            productTrial: package(for: plan)?.storeProduct.freeTrialLength
         )
     }
 
@@ -222,7 +285,17 @@ final class PaywallViewModel: ObservableObject {
     /// Combine store for the connectivity observer.
     private var cancellables = Set<AnyCancellable>()
 
-    init() {
+    init(fixtureOffering: Offering? = nil) {
+        self.fixtureOffering = fixtureOffering
+
+        // A fixture is complete as given: nothing to load, nothing to retry.
+        if fixtureOffering != nil {
+            self.isLoading = false
+            self.selectedPlan = defaultPlan
+            self.selectedPackage = package(for: defaultPlan)
+            return
+        }
+
         // Seed from RevenueCat's synchronous cache so the first frame can
         // render real plans rather than any pre-content state. This is exactly
         // what `cachedOfferings` exists for — RevenueCat's own documentation on
@@ -240,7 +313,8 @@ final class PaywallViewModel: ObservableObject {
         // testing mode.
         if Purchases.isConfigured, let cached = Purchases.shared.cachedOfferings {
             self.offerings = cached
-            self.selectedPackage = yearlyPackage
+            self.selectedPlan = defaultPlan
+            self.selectedPackage = package(for: defaultPlan)
         }
 
         observeConnectivity()
@@ -249,7 +323,7 @@ final class PaywallViewModel: ObservableObject {
 
     func selectPlan(_ plan: SubscriptionPlan) {
         selectedPlan = plan
-        selectedPackage = plan == .yearly ? yearlyPackage : monthlyPackage
+        selectedPackage = package(for: plan)
         log("🧾 Selected plan: \(plan.rawValue)")
     }
 
@@ -259,6 +333,7 @@ final class PaywallViewModel: ObservableObject {
     /// button, and the connectivity observer — duplicate triggers no-op while
     /// a load is already running.
     func loadOfferings() {
+        guard fixtureOffering == nil else { return }
         guard loadTask == nil else {
             log("ℹ️ PaywallViewModel: loadOfferings already running — coalescing duplicate trigger")
             return
@@ -303,8 +378,9 @@ final class PaywallViewModel: ObservableObject {
                 let fetchedOfferings = try await fetchOfferingsWithTimeout()
                 self.offerings = fetchedOfferings
 
-                // Auto-select yearly package by default
-                self.selectedPackage = yearlyPackage
+                // Keep the user's pick if that plan is still on the paywall;
+                // otherwise fall to the default (lifetime, or yearly without it).
+                reconcileSelection()
 
                 log("📦 PaywallViewModel: Loaded offerings (attempt \(attempt)/\(attemptBudget))")
 
@@ -440,15 +516,19 @@ final class PaywallViewModel: ObservableObject {
     /// locally). Non-throwing; failures leave unresolved products at
     /// `.unknown`, which the eligibility computed properties treat as eligible.
     private func loadIntroEligibility() async {
-        guard let yearlyID = yearlyPackage?.storeProduct.productIdentifier,
-              let monthlyID = monthlyPackage?.storeProduct.productIdentifier else {
-            return
-        }
+        // The subscriptions only: a one-time purchase has no introductory
+        // offer. Yearly is checked even while lifetime hides it, so the
+        // answer is already there if the paywall falls back to it.
+        let yearlyID = yearlyPackage?.storeProduct.productIdentifier
+        let monthlyID = monthlyPackage?.storeProduct.productIdentifier
+        let productIDs = [yearlyID, monthlyID].compactMap { $0 }
+        guard !productIDs.isEmpty else { return }
+
         let result = await Purchases.shared.checkTrialOrIntroDiscountEligibility(
-            productIdentifiers: [yearlyID, monthlyID]
+            productIdentifiers: productIDs
         )
         self.introEligibility = result
-        log("🎫 PaywallViewModel: Eligibility — yearly=\(result[yearlyID]?.status.rawValue ?? -1), monthly=\(result[monthlyID]?.status.rawValue ?? -1)")
+        log("🎫 PaywallViewModel: Eligibility — yearly=\(yearlyID.flatMap { result[$0]?.status.rawValue } ?? -1), monthly=\(monthlyID.flatMap { result[$0]?.status.rawValue } ?? -1)")
     }
 
     /// Reads App Store storefront country (StoreKit 2) and currency
@@ -466,6 +546,7 @@ final class PaywallViewModel: ObservableObject {
         // Currency from a loaded StoreProduct — yearly preferred, monthly fallback.
         let currency = yearlyPackage?.storeProduct.currencyCode
             ?? monthlyPackage?.storeProduct.currencyCode
+            ?? lifetimePackage?.storeProduct.currencyCode
 
         await authManager?.captureStoreContext(country: country, currency: currency)
     }
@@ -487,6 +568,11 @@ final class PaywallViewModel: ObservableObject {
         let plan: String = {
             if package.storeProduct.productIdentifier == Constants.YEARLY_PRODUCT_ID { return "yearly" }
             if package.storeProduct.productIdentifier == Constants.MONTHLY_PRODUCT_ID { return "monthly" }
+            // Matched on the package as well as the product id, so the label
+            // survives the lifetime product being given another id in App
+            // Store Connect.
+            if package.storeProduct.productIdentifier == Constants.LIFETIME_PRODUCT_ID
+                || package.packageType == .lifetime { return "lifetime" }
             return "unknown"
         }()
 

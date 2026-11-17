@@ -412,7 +412,14 @@
     "Language": "Langue",
     "Reopen Wingman to switch": "Rouvre Wingman pour changer",
     "Go to your home screen, then open Wingman again.": "Va sur ton écran d’accueil, puis rouvre Wingman.",
-    "Keep holding until the ring fills.": "Maintiens appuyé jusqu’à ce que le cercle soit plein."
+    "Keep holding until the ring fills.": "Maintiens appuyé jusqu’à ce que le cercle soit plein.",
+    "Lifetime": "À vie",
+    "pay once, keep it forever": "un seul paiement, à toi pour toujours",
+    "one-time": "paiement unique",
+    "One-time payment. No subscription, nothing to cancel.": "Paiement unique. Pas d’abonnement, rien à annuler.",
+    "off lifetime access": "de réduction sur l’accès à vie",
+    "for lifetime access": "pour l’accès à vie",
+    "%@ billed once, today. No subscription, nothing to cancel.": "Aujourd’hui, tu paies %@, une seule fois. Pas d’abonnement, rien à annuler."
   },
   "Content": {
     "18-24": "18–24",

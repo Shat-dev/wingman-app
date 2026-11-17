@@ -16,6 +16,8 @@ struct Constants {
     // MARK: - Subscription Product IDs
     static let YEARLY_PRODUCT_ID = RevenueCatConfig.ProductIds.yearly
     static let MONTHLY_PRODUCT_ID = RevenueCatConfig.ProductIds.monthly
+    static let LIFETIME_PRODUCT_ID = RevenueCatConfig.ProductIds.lifetime
+    static let LIFETIME_DISCOUNT_PRODUCT_ID = RevenueCatConfig.ProductIds.lifetimeDiscount
     static let WINGMAN_MONTHLY_PRODUCT_ID = RevenueCatConfig.ProductIds.monthly
     static let WINGMAN_YEARLY_PRODUCT_ID = RevenueCatConfig.ProductIds.yearly
 
@@ -23,6 +25,7 @@ struct Constants {
     static let ONE_TIME_OFFER_PRODUCT_ID = RevenueCatConfig.ProductIds.yearlyDiscount
     static let ONE_TIME_OFFER_OFFERING_ID = RevenueCatConfig.OneTimeOffer.offeringId
     static let ONE_TIME_OFFER_PACKAGE_ID = RevenueCatConfig.OneTimeOffer.packageId
+    static let ONE_TIME_OFFER_LIFETIME_PACKAGE_ID = RevenueCatConfig.OneTimeOffer.lifetimePackageId
 
     // MARK: - URLs
     static let PRIVACY_POLICY_URL = "https://www.getwingman.app/privacy"

@@ -66,6 +66,32 @@ nonisolated enum OneTimeOfferCopy {
         }
     }
 
+    // MARK: - Lifetime offer
+    //
+    // The offer when the paywall sells lifetime: a cheaper one-time purchase.
+    // Nothing here has a length or a renewal, so each line is a single
+    // sentence with at most the price as its placeholder.
+
+    /// Under the percentage: "off lifetime access".
+    static var lifetimeDiscountLine: String {
+        String(localized: "off lifetime access", comment: "One-time offer for the lifetime plan, under the big percentage (\"40%\").")
+    }
+
+    /// Under the price, when no trustworthy percentage exists:
+    /// "for lifetime access".
+    static var lifetimePriceLine: String {
+        String(localized: "for lifetime access", comment: "One-time offer for the lifetime plan, under the discounted price (\"$89.99\").")
+    }
+
+    /// Under the button: what is charged today, and that it is the only
+    /// charge.
+    static func lifetimeDisclosure(price: String) -> String {
+        String(
+            localized: "\(price) billed once, today. No subscription, nothing to cancel.",
+            comment: "One-time offer for the lifetime plan, under the button. %@ is the discounted price charged today. It is a single purchase, not a subscription."
+        )
+    }
+
     // MARK: - Disclosure under the button
 
     /// What is charged today, for how long, what it renews into, and how to

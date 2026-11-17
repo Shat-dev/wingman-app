@@ -6,10 +6,27 @@
 //
 
 import SwiftUI
+import RevenueCat
 
 enum SubscriptionPlan: String {
     case yearly
     case monthly
+    /// A one-time purchase that never expires. Offered only when the
+    /// RevenueCat offering carries a lifetime package.
+    case lifetime
+}
+
+extension Offering {
+
+    /// The package behind each plan, by the identifier it has in the
+    /// RevenueCat dashboard or, failing that, by its package type.
+    func package(for plan: SubscriptionPlan) -> Package? {
+        switch plan {
+        case .yearly:   return package(identifier: "yearly") ?? annual
+        case .monthly:  return package(identifier: "monthly") ?? monthly
+        case .lifetime: return package(identifier: "lifetime") ?? lifetime
+        }
+    }
 }
 
 struct PaywallPage: Identifiable {

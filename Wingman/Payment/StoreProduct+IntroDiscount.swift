@@ -9,6 +9,27 @@
 import Foundation
 import RevenueCat
 
+nonisolated enum OneTimeOfferPricing {
+
+    /// Whole-number percentage saved by paying `discountedPrice` instead of
+    /// `fullPrice`, for an offer that is a cheaper product rather than an
+    /// introductory price (the discounted lifetime purchase).
+    ///
+    /// The same rules as `StoreProduct.introSavingsPercent`: computed from the
+    /// storefront's two real prices, truncated and never rounded up, and nil
+    /// when the numbers are missing or implausible, in which case the caller
+    /// makes no numeric claim.
+    static func savingsPercent(fullPrice: Decimal, discountedPrice: Decimal) -> Int? {
+        guard fullPrice > 0, discountedPrice > 0, discountedPrice < fullPrice else { return nil }
+
+        let fraction = (fullPrice - discountedPrice) / fullPrice * 100
+        let percent = Int(NSDecimalNumber(decimal: fraction).doubleValue) // truncates
+
+        guard (1...99).contains(percent) else { return nil }
+        return percent
+    }
+}
+
 extension StoreProduct {
 
     /// Whole-number percentage saved in year 1, **computed from this

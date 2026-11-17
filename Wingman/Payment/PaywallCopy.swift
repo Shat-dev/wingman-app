@@ -52,6 +52,16 @@ enum PaywallCopy {
             )
     }
 
+    /// The line under the purchase button when the lifetime plan is selected.
+    /// It is a single charge, so neither subscription line above is true of
+    /// it: there is no trial and nothing to cancel.
+    static var lifetimeDisclosure: String {
+        String(
+            localized: "One-time payment. No subscription, nothing to cancel.",
+            comment: "Paywall, under the purchase button, when the lifetime plan (a single purchase, not a subscription) is selected."
+        )
+    }
+
     /// The main paywall's single page. The headline pairs with the "day 1"
     /// calendar illustration.
     static var mainPage: PaywallPage {

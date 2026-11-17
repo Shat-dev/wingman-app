@@ -6,6 +6,12 @@
 //  shown once, as soon as the user closes the onboarding paywall without
 //  subscribing (before the walkthrough; 1.12 showed it after).
 //
+//  When the paywall is selling lifetime, the offer is a discounted lifetime
+//  purchase instead: a second, cheaper product, because a one-time purchase
+//  cannot carry an introductory price. Its percentage is computed from the
+//  two lifetime prices. Without lifetime on the paywall, or without the
+//  discounted lifetime product, it is the yearly offer as before.
+//
 //  Reports through the standard `paywall_*` events with `source=postPaywall`
 //  (1.12 used `postDemo`), so
 //  every existing paywall funnel and the "Payments received" tile count it
@@ -46,6 +52,29 @@ final class OneTimeOfferViewModel: ObservableObject {
     static let source = PaywallSource.postPaywall
     static let offerName = "one_time_50"
     private static let plan = "yearly_discount"
+    /// The lifetime offer reports under its own names, so the two offers
+    /// compare cleanly in the same funnels.
+    static let lifetimeOfferName = "one_time_lifetime"
+    private static let lifetimePlan = "lifetime_discount"
+
+    /// The full-price lifetime package from the main paywall, set only when
+    /// the offer is the discounted lifetime purchase. It is what the
+    /// discounted price is struck through against.
+    @Published private(set) var regularLifetimePackage: Package?
+
+    /// True when the offer is the discounted lifetime purchase rather than
+    /// the discounted first year.
+    var isLifetime: Bool { regularLifetimePackage != nil }
+
+    init() {}
+
+    /// An offer that is ready as given, for render tests: a Debug build loads
+    /// no products. `regularLifetime` makes it the lifetime offer.
+    init(fixturePackage: Package, regularLifetime: Package? = nil) {
+        self.package = fixturePackage
+        self.regularLifetimePackage = regularLifetime
+        self.state = .ready
+    }
 
     func dismissAlert() {
         error = nil
@@ -56,14 +85,31 @@ final class OneTimeOfferViewModel: ObservableObject {
 
     /// Price charged today for year one. Only read once `state == .ready`,
     /// which guarantees the intro offer exists.
-    var introPriceString: String { package?.storeProduct.introPriceString ?? "" }
+    ///
+    /// For the lifetime offer this is the discounted product's own price.
+    var introPriceString: String {
+        if isLifetime { return package?.storeProduct.localizedPriceString ?? "" }
+        return package?.storeProduct.introPriceString ?? ""
+    }
 
-    /// Standard yearly price, which the discounted year renews into.
-    var fullPriceString: String { package?.storeProduct.localizedPriceString ?? "" }
+    /// Standard yearly price, which the discounted year renews into. For the
+    /// lifetime offer, the full lifetime price from the main paywall.
+    var fullPriceString: String {
+        if let regularLifetimePackage { return regularLifetimePackage.storeProduct.localizedPriceString }
+        return package?.storeProduct.localizedPriceString ?? ""
+    }
 
     /// Computed from the storefront's real prices, never asserted — see
-    /// `StoreProduct.introSavingsPercent`. Nil means make no numeric claim.
-    var savingsPercent: Int? { package?.storeProduct.introSavingsPercent }
+    /// `StoreProduct.introSavingsPercent` and, for the lifetime offer,
+    /// `OneTimeOfferPricing.savingsPercent`. Nil means make no numeric claim.
+    var savingsPercent: Int? {
+        guard let regularLifetimePackage else { return package?.storeProduct.introSavingsPercent }
+        guard let discounted = package?.storeProduct else { return nil }
+        return OneTimeOfferPricing.savingsPercent(
+            fullPrice: regularLifetimePackage.storeProduct.price,
+            discountedPrice: discounted.price
+        )
+    }
 
     /// How long the discount lasts, read from the intro offer. Only read
     /// once `state == .ready`, which guarantees it.
@@ -79,14 +125,22 @@ final class OneTimeOfferViewModel: ObservableObject {
     /// The line under the big number: "off your first year" under a
     /// percentage, "for your first year" under a price.
     var heroLine: String {
-        savingsPercent != nil
+        if isLifetime {
+            return savingsPercent != nil
+                ? OneTimeOfferCopy.lifetimeDiscountLine
+                : OneTimeOfferCopy.lifetimePriceLine
+        }
+        return savingsPercent != nil
             ? OneTimeOfferCopy.discountLine(first: introDuration)
             : OneTimeOfferCopy.priceLine(first: introDuration)
     }
 
     /// The disclosure under the button. See `OneTimeOfferCopy.disclosure`.
     var disclosure: String {
-        OneTimeOfferCopy.disclosure(
+        if isLifetime {
+            return OneTimeOfferCopy.lifetimeDisclosure(price: introPriceString)
+        }
+        return OneTimeOfferCopy.disclosure(
             introPrice: introPriceString,
             first: introDuration,
             fullPrice: fullPriceString,
@@ -126,10 +180,10 @@ final class OneTimeOfferViewModel: ObservableObject {
 
     private var baseProperties: [String: Any] {
         var properties: [String: Any] = [
-            "plan": Self.plan,
+            "plan": isLifetime ? Self.lifetimePlan : Self.plan,
             "product_id": productId,
             "source": Self.source.rawValue,
-            "offer": Self.offerName
+            "offer": isLifetime ? Self.lifetimeOfferName : Self.offerName
         ]
         // Numeric prices, once the product has loaded. Added beside the
         // formatted `intro_price` / `full_price` strings on `paywall_viewed`,
@@ -204,6 +258,29 @@ final class OneTimeOfferViewModel: ObservableObject {
         guard let offering = offerings.all[Constants.ONE_TIME_OFFER_OFFERING_ID] else {
             return fail("offering_not_found")
         }
+
+        // Lifetime first. Two things have to hold: the main paywall is
+        // selling lifetime (its package is in the current offering), and the
+        // discounted lifetime package is in this one. Either missing means
+        // the yearly offer below, which is the fallback. Taking lifetime off
+        // the paywall therefore brings the yearly offer back with it.
+        if let regular = offerings.current?.package(for: .lifetime),
+           let discounted = offering.package(identifier: Constants.ONE_TIME_OFFER_LIFETIME_PACKAGE_ID) {
+            // The discount is the difference between two products, so it is
+            // only a discount if the second one really is cheaper, in the
+            // same currency. Anything else would strike through a price
+            // under a "discount" that is not one.
+            guard discounted.storeProduct.currencyCode == regular.storeProduct.currencyCode,
+                  discounted.storeProduct.price > 0,
+                  discounted.storeProduct.price < regular.storeProduct.price else {
+                return fail("lifetime_discount_not_cheaper")
+            }
+            self.regularLifetimePackage = regular
+            self.package = discounted
+            state = .ready
+            return
+        }
+
         guard let package = offering.package(identifier: Constants.ONE_TIME_OFFER_PACKAGE_ID) else {
             return fail("package_not_found")
         }

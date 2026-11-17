@@ -40,6 +40,17 @@ struct RevenueCatConfig {
         /// Monthly subscription product ID
         static let monthly = "wingman_monthly"
 
+        /// Lifetime product ID: a non-consumable in-app purchase, not a
+        /// subscription. Attached to the same entitlement, which then never
+        /// expires.
+        static let lifetime = "wingman_lifetime"
+
+        /// Discounted lifetime product ID: a second non-consumable at a lower
+        /// price. A one-time purchase cannot carry an introductory offer, so
+        /// the discount is a product of its own. Used only by the one-time
+        /// offer, never by the main paywall.
+        static let lifetimeDiscount = "wingman_lifetime_discount"
+
         /// Discounted annual product ID — carries its own Pay-Up-Front
         /// introductory offer (50% off year 1, then renews at the standard
         /// yearly price). Used only by the post-demo one-time offer, never by
@@ -55,6 +66,11 @@ struct RevenueCatConfig {
     struct OneTimeOffer {
         static let offeringId = "second_chance"
         static let packageId = "yearly_discount"
+
+        /// The discounted lifetime package, in the same Offering. When it is
+        /// there and the main paywall is selling lifetime, the offer is this
+        /// one; otherwise it is the yearly discount above.
+        static let lifetimePackageId = "lifetime_discount"
     }
 
     // MARK: - Environment Detection
