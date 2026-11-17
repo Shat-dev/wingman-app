@@ -1,0 +1,64 @@
+Wingman onboarding in Spanish: 22 screens
+==========================================
+
+Screens 01-17: onboarding, from the landing screen to the paywall.
+Screens 18-22: the first-run walkthrough a new user sees after the paywall.
+
+Captured on an iPhone 17 Pro simulator on 15 Nov 2026 (half resolution).
+
+
+What the Spanish is meant to be
+-------------------------------
+One Spanish for every market: neutral Latin American Spanish that a
+Spaniard also reads naturally. These choices are deliberate, so please
+do not "correct" them to Spain's usage:
+
+  - tu everywhere; plural "ustedes", never "vosotros"
+  - "celular" (not "movil"), "Configuracion" (not "Ajustes")
+  - curly quotation marks, not angle quotes
+
+When something reads oddly, it helps to say which kind of problem it is:
+
+  A. Wrong or unclear in any Spanish (grammar, typo, clumsy, machine-like)
+  B. Fine, but a Spaniard would say it differently
+  C. Sounds strange or off-putting to a Spaniard
+
+
+Wording already changed since these pictures were taken
+-------------------------------------------------------
+The app now says the text on the right. No need to flag the old text.
+
+Screen 01 (under the headline)
+  old: El metodo paso a paso para dejar de congelarte y empezar la conversacion.
+  now: El metodo paso a paso para dejar de bloquearte y empezar la conversacion.
+
+Screens 02, 08, 10 (grey line under the question)
+  old: Elige todas las que apliquen
+  now: Elige todas las que correspondan
+
+Screen 02 (second answer)
+  old: Me congelo con las mujeres que me atraen
+  now: Me bloqueo con las mujeres que me atraen
+
+Screen 15 (first quote)
+  old: Antes me congelaba al pasar junto a una chica. ...
+  now: Antes me bloqueaba al pasar junto a una chica. ...
+
+Screen 19 (walkthrough card)
+  old: ... no al que se congela.
+  now: ... no al que se bloquea.
+
+
+Not pictured
+------------
+  - Screen 14: the grey box in English is Apple's own notification
+    prompt, not app text. On a Spanish phone Apple shows it in Spanish.
+  - Screen 16, if the user lets go too early, the line under the button
+    becomes: "Manten presionado hasta que se llene el circulo."
+    When the hold completes, the screen says: "!Trato hecho!"
+  - Screen 17: the paywall could not load prices on the test phone, so
+    the plans, prices and purchase button are missing from this picture.
+  - The one-time discount offer shown after the paywall is not pictured.
+
+(Accents are left out of this note so it opens cleanly anywhere; the app
+itself has them.)

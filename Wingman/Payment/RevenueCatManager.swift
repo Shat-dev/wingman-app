@@ -7,6 +7,7 @@
 
 import Foundation
 import RevenueCat
+import StoreKit
 import SwiftUI
 import Combine
 
@@ -92,9 +93,47 @@ final class RevenueCatManager: NSObject, ObservableObject {
         log("🆔 RevenueCat: Identity: \(Purchases.shared.appUserID)")
 
         Task {
+            await syncProfileAttributes()
             await refreshCustomerInfo()
             await fetchOfferings()
         }
+    }
+
+    // MARK: - Profile attributes
+
+    /// The custom attributes shown on a customer's RevenueCat profile: the
+    /// language the app runs in, the phone's first preferred language, and
+    /// the App Store country. Same names and values as the PostHog
+    /// super-properties, so a customer reads the same in both places.
+    ///
+    /// A missing storefront is left out rather than sent empty: RevenueCat
+    /// treats an empty value as "delete this attribute", which would wipe a
+    /// value an earlier launch had set.
+    nonisolated static func profileAttributes(
+        language: [String: Any] = Analytics.languageSuperProperties(),
+        storefront: String?
+    ) -> [String: String] {
+        var attributes: [String: String] = [:]
+        for key in ["app_language", "device_language"] {
+            if let value = language[key] as? String, !value.isEmpty {
+                attributes[key] = value
+            }
+        }
+        if let storefront, !storefront.isEmpty {
+            attributes["storefront"] = storefront
+        }
+        return attributes
+    }
+
+    /// Writes `profileAttributes` to the current RevenueCat customer.
+    /// Attributes belong to one app user id, so this runs again after every
+    /// identity change; the SDK only uploads values that changed.
+    func syncProfileAttributes() async {
+        guard Purchases.isConfigured else { return }
+        let storefront = await StoreKit.Storefront.current?.countryCode
+        let attributes = Self.profileAttributes(storefront: storefront)
+        Purchases.shared.attribution.setAttributes(attributes)
+        log("🏷️ RevenueCat: Profile attributes set: \(attributes)")
     }
     
     // MARK: - User Management
@@ -102,6 +141,7 @@ final class RevenueCatManager: NSObject, ObservableObject {
         Task {
             do {
                 _ = try await Purchases.shared.logIn(userID)
+                await syncProfileAttributes()
                 await refreshCustomerInfo()
                 log("🔑 RevenueCat: User logged in with ID: \(userID)")
             } catch {
@@ -114,6 +154,7 @@ final class RevenueCatManager: NSObject, ObservableObject {
         Task {
             do {
                 _ = try await Purchases.shared.logOut()
+                await syncProfileAttributes()
                 await refreshCustomerInfo()
                 log("👋 RevenueCat: User logged out")
             } catch {
@@ -159,6 +200,7 @@ final class RevenueCatManager: NSObject, ObservableObject {
             log("📋 RevenueCat: Anonymous entitlements: \(anonymousCustomerInfo.entitlements.active.keys)")
 
             _ = try await Purchases.shared.logIn(userID)
+            await syncProfileAttributes()
             let finalCustomerInfo = try await Purchases.shared.customerInfo()
             log("📋 RevenueCat: Final entitlements: \(finalCustomerInfo.entitlements.active.keys)")
 

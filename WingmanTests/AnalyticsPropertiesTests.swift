@@ -203,4 +203,30 @@ final class AnalyticsPropertiesTests: XCTestCase {
         let properties = Analytics.languageSuperProperties(preferredLanguages: [])
         XCTAssertEqual(properties["device_language"] as? String, "unknown")
     }
+
+    // MARK: - RevenueCat profile attributes
+
+    func testRevenueCatProfileAttributesCarryLanguageAndStorefront() {
+        let attributes = RevenueCatManager.profileAttributes(
+            language: ["app_language": "de", "device_language": "de-DE"],
+            storefront: "DEU"
+        )
+        XCTAssertEqual(attributes, [
+            "app_language": "de",
+            "device_language": "de-DE",
+            "storefront": "DEU"
+        ])
+    }
+
+    func testRevenueCatProfileAttributesLeaveOutAnUnknownStorefront() {
+        // An empty value tells RevenueCat to delete the attribute, so a
+        // storefront StoreKit could not report must be absent, not empty.
+        for storefront in [nil, ""] as [String?] {
+            let attributes = RevenueCatManager.profileAttributes(
+                language: ["app_language": "en", "device_language": "en-GB"],
+                storefront: storefront
+            )
+            XCTAssertEqual(Set(attributes.keys), ["app_language", "device_language"])
+        }
+    }
 }
