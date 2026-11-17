@@ -3884,8 +3884,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "女性に話しかけたいのに、できないことがよくありますか？"
+            "state" : "translated",
+            "value" : "女性に話しかけたいのに、\nなかなか話しかけられない\nことがありますか？"
           }
         }
       }
@@ -4733,8 +4733,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "男性の半数は声をかけません。声をかけた人の多くは、うまくいっています。"
+            "state" : "translated",
+            "value" : "男性の半数は女性に\n声をかけません。\n一方、声をかけた人の多くは\nうまくいっています。"
           }
         }
       }
@@ -9603,8 +9603,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "固まらずに会話を始められるようになる、一歩ずつの方法。"
+            "state" : "translated",
+            "value" : "スムーズに会話を始められるように\nなるための方法"
           }
         }
       }
