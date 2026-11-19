@@ -66,6 +66,9 @@ struct WingmanApp: App {
         WindowGroup {
             RootView()
                 .environmentObject(authManager)
+                // Window size for layout decisions, in place of the
+                // deprecated `UIScreen.main` (see Util/Device+Screen.swift).
+                .readsWindowSize()
                 .preferredColorScheme(.light) // Force Light Mode
                 // App-wide Dynamic Type ceiling — pins the whole app to the
                 // default text size (`.large`). Our custom fonts opt into

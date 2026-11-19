@@ -37,6 +37,15 @@ struct PaywallView: View {
     @StateObject private var viewModel: PaywallViewModel
     @EnvironmentObject var authManager: AuthManager
 
+    /// The measured window (Util/Device+Screen.swift). In a window shorter
+    /// than any current iPhone (iPhone Duo outer display, a folded half) the
+    /// pinned block below would leave the carousel no room and could push the
+    /// footer off the bottom, so the plan cards move up into the scroll area
+    /// there and only the button, the disclosure and the footer stay pinned.
+    /// Never true on a current iPhone, whose layout is untouched.
+    @Environment(\.windowSize) private var windowSize
+    private var isShortWindow: Bool { WindowMetrics.isShortWindow(windowSize) }
+
     // Optional AuthManager for anonymous user purchase tracking
     let authManager_init: AuthManager?
 
@@ -347,6 +356,15 @@ struct PaywallView: View {
                 // mode than a paging TabView clipping the bullets.
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 0) {
+                        // Short windows only: the plans head the scroll area
+                        // so they are on screen first, above the carousel.
+                        if isShortWindow && viewModel.hasPricing {
+                            plansSection
+                                // Clear of the 44pt close button, which sits in
+                                // the top-trailing corner over this area.
+                                .padding(.top, 44)
+                        }
+
                         // MARK: - Carousel
                         TabView(selection: $viewModel.currentPage) {
                             ForEach(viewModel.pages.indices, id: \.self) { index in
@@ -501,7 +519,9 @@ struct PaywallView: View {
                 // spinner. The retry control doubles as the in-progress
                 // indicator in the not-yet-loaded branch.
                 if viewModel.hasPricing {
-                    plansSection
+                    if !isShortWindow {
+                        plansSection
+                    }
                     continueButton
                     trialDisclosure
                 } else {
@@ -516,6 +536,9 @@ struct PaywallView: View {
                 footerLinks
             }
             .background(Color.white)
+            // A centred column on a regular-width window (iPhone Duo inner
+            // display); untouched in compact width.
+            .readableColumn(ReadableColumn.narrow)
         }
         // MARK: - Dynamic Type stopgap
         //

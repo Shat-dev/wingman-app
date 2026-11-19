@@ -239,6 +239,12 @@ struct AuthView: View {
                 legalFooter
             }
         }
+        // Untouched on every current iPhone; scrolls in a window shorter
+        // than any of them if the legal footer would otherwise be cut off.
+        .scrollsWhenTooTallInShortWindow()
+        // A centred column on a regular-width window (iPhone Duo inner
+        // display); untouched in compact width.
+        .readableColumn(ReadableColumn.narrow)
         .navigationBarBackButtonHidden(true)
         .enableInteractivePopGesture()
         .sheet(item: $safariLink) { SafariView(url: $0.url) }

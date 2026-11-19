@@ -168,6 +168,7 @@ struct CommitmentPactView: View {
         }
         // English fits. A longer translated pact used to squeeze the line
         // under the logo down to one cut-off line; now the screen scrolls.
+        .readableColumn()
         .scrollsWhenTooTallIfTranslated()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.white.ignoresSafeArea())

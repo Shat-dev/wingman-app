@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 import Supabase
 import Auth
-import UIKit  // for UIScreen in the swipe-back gesture threshold
+import UIKit
 
 struct OnboardingView: View {
     // Optional binding to control navigation back to Landing (anonymous flow)
@@ -129,6 +129,11 @@ struct OnboardingView: View {
                 .offset(x: dragX)
         }
         .clipped() // Clip content during animation to prevent overlap
+        .onGeometryChange(for: CGFloat.self) { proxy in
+            proxy.size.width
+        } action: { width in
+            pageWidth = width
+        }
         // Pin the top bar to the top of the safe area. This decouples its
         // Y coordinate from any size demands placed by inner content —
         // SwiftUI's safe-area system positions the inset view at the
@@ -146,6 +151,7 @@ struct OnboardingView: View {
                 showBackButton: shouldShowBackButton,
                 onBack: goBack
             )
+            .readableColumn()
         }
         // Single opaque background for the whole view, extending through
         // the safe area. Consolidated from 4 previously-stacked white
@@ -201,6 +207,9 @@ struct OnboardingView: View {
     /// paints behind what was already there.
     private func pageWrapper(for target: OnboardingScreen) -> some View {
         screenContent(for: target)
+            // Phone layout in a centred column on a regular-width window
+            // (iPhone Duo inner display); untouched in compact width.
+            .readableColumn()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.white)
     }
@@ -285,14 +294,16 @@ struct OnboardingView: View {
 
     /// Width used for both the drag thresholds and the parallax offset.
     ///
-    /// Deliberately still `UIScreen.main.bounds` (deprecated since iOS 16)
-    /// rather than a `GeometryReader`. The app is portrait-locked to iPhone
-    /// — `UISupportedInterfaceOrientations` is portrait-only — so this
-    /// equals the container width, and wrapping the paging stack in a
-    /// `GeometryReader` would restructure the `safeAreaInset` layout that
-    /// the body documents as the fix for the statistic screens' 13pt shift.
-    /// Swap it for a measured width if the app ever ships landscape or iPad.
-    private var pageWidth: CGFloat { UIScreen.main.bounds.width }
+    /// Measured from the paging stack itself (`onGeometryChange` after
+    /// `.clipped()` in `body`) rather than read from the deprecated
+    /// `UIScreen.main.bounds`. On every current iPhone the stack spans the
+    /// full portrait screen, so this is the same number; on a window that
+    /// is not the whole screen, or changes size while the app runs (iPhone
+    /// Duo, split screen), it is the page's real width. A background
+    /// measurement rather than a `GeometryReader` wrapper, so the
+    /// `safeAreaInset` layout the body documents as the fix for the
+    /// statistic screens' 13pt shift is untouched.
+    @State private var pageWidth: CGFloat = 0
 
     /// The screen drawn underneath the current one during a drag, or `nil`
     /// to suppress the preview.

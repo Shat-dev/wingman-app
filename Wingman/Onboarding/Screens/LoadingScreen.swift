@@ -142,6 +142,10 @@ struct LoadingScreen: View {
 
             Spacer()
         }
+        // Untouched on every current iPhone; scrolls in a window shorter
+        // than any of them. Inside `onAppear(perform: start)`, so the
+        // one-shot start (Supabase write, notification prompt) is unaffected.
+        .scrollsWhenTooTallInShortWindow()
         .overlay(alignment: .bottom) {
             if showsConsentLine {
                 Text("Allow notifications for tips and offers. Turn them off anytime in Settings.")

@@ -312,6 +312,9 @@ struct LogApproachBottomSheet: View {
                     .padding(.bottom, 40)
                 }
             }
+            // A centred column on a regular-width window (iPhone Duo inner
+            // display); untouched in compact width.
+            .readableColumn()
             .offset(y: dragOffset)
             .gesture(
                 DragGesture()

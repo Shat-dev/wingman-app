@@ -9,6 +9,10 @@ import Supabase
 import PostHog
 
 struct ProfileView: View {
+    /// The measured window, in place of `UIScreen.main` (Util/Device+Screen.swift).
+    @Environment(\.windowSize) private var windowSize
+    private var isSmallPhone: Bool { WindowMetrics.isSmallPhone(windowSize) }
+
     @EnvironmentObject var authManager: AuthManager
     @State private var showSettings = false
     @State private var showEditProfile = false
@@ -158,6 +162,9 @@ struct ProfileView: View {
                     }
                     }
                 }
+                // A centred column on a regular-width window (iPhone Duo inner
+                // display); untouched in compact width.
+                .readableColumn()
             }
             // Remove system nav title and toolbar entirely
             .navigationBarTitleDisplayMode(.inline)
@@ -173,7 +180,7 @@ struct ProfileView: View {
                     // row, and a build with a second language 36pt more for
                     // the Language link; the sheet doesn't scroll, so without
                     // them the title is pushed off the top.
-                    .presentationDetents(UIScreen.isSmallPhone
+                    .presentationDetents(isSmallPhone || WindowMetrics.isShortWindow(windowSize)
                         ? [.large]
                         : [.height((authManager.hasActiveSubscription ? 720 : 800)
                                    + (AppLanguageSettings.offersChoice ? 36 : 0))])
@@ -210,7 +217,7 @@ struct ProfileView: View {
                     // the avatar card re-renders immediately on save.
                     UserProfileStore.shared.apply(name: newName)
                 }
-                .presentationDetents([.medium])
+                .presentationDetents(WindowMetrics.isShortWindow(windowSize) ? [.large] : [.medium])
                 .presentationDragIndicator(.hidden)
                 .presentationCornerRadius(20)
             }
@@ -380,8 +387,21 @@ struct InviteFriendsCard: View {
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let window = windowScene.windows.first,
            let rootVC = window.rootViewController {
+            Self.anchorPopover(activityVC, in: window)
             rootVC.present(activityVC, animated: true)
         }
+    }
+
+    /// Gives a popover-style presentation (the share sheet) somewhere to
+    /// point. In a regular-width window — the iPhone Duo's inner display —
+    /// `UIActivityViewController` presents as a popover, and a popover with no
+    /// source throws. In compact width, every current iPhone, UIKit presents it
+    /// as a sheet and ignores the anchor, exactly as before.
+    static func anchorPopover(_ controller: UIViewController, in window: UIWindow) {
+        guard let popover = controller.popoverPresentationController else { return }
+        popover.sourceView = window
+        popover.sourceRect = CGRect(x: window.bounds.midX, y: window.bounds.midY, width: 0, height: 0)
+        popover.permittedArrowDirections = []
     }
 }
 

@@ -8,6 +8,10 @@ import Combine
 import PostHog
 
 struct ApproachesLoggedListView: View {
+    /// The measured window, in place of `UIScreen.main` (Util/Device+Screen.swift).
+    @Environment(\.windowSize) private var windowSize
+    private var isSmallPhone: Bool { WindowMetrics.isSmallPhone(windowSize) }
+
     @Environment(\.dismiss) private var dismiss
     @StateObject private var approachService = ApproachService.shared
     @State private var searchText = ""
@@ -157,6 +161,9 @@ struct ApproachesLoggedListView: View {
                         .padding()
                     }
                 }
+                // A centred column on a regular-width window (iPhone Duo inner
+                // display); untouched in compact width.
+                .readableColumn()
             }
             .navigationBarHidden(true)
             .alert("Delete Approach", isPresented: $showingDeleteAlert) {
@@ -183,7 +190,7 @@ struct ApproachesLoggedListView: View {
                 // SE-only: matches the HomeView presentation — fractional
                 // detent lets users shrink the sheet if the editor feels
                 // cramped. Standard / Max phones unchanged.
-                .presentationDetents(UIScreen.isSmallPhone ? [.fraction(0.9), .large] : [.large])
+                .presentationDetents(isSmallPhone ? [.fraction(0.9), .large] : [.large])
                 .presentationDragIndicator(.hidden)
                 .presentationCornerRadius(20)
             }

@@ -49,6 +49,10 @@ struct SocialProofContent {
 }
 
 struct SocialProofScreen: View {
+    /// The measured window, in place of `UIScreen.main` (Util/Device+Screen.swift).
+    @Environment(\.windowSize) private var windowSize
+    private var isSmallPhone: Bool { WindowMetrics.isSmallPhone(windowSize) }
+
     var content: SocialProofContent = .default
     let onContinue: () -> Void
 
@@ -69,10 +73,10 @@ struct SocialProofScreen: View {
     var body: some View {
         VStack(spacing: 0) {
             ScrollView(.vertical, showsIndicators: false) {
-                VStack(spacing: UIScreen.isSmallPhone ? 14 : 24) {
+                VStack(spacing: isSmallPhone ? 14 : 24) {
                     header
 
-                    VStack(spacing: UIScreen.isSmallPhone ? 10 : 14) {
+                    VStack(spacing: isSmallPhone ? 10 : 14) {
                         ForEach(Array(content.testimonials.enumerated()), id: \.element) { index, quote in
                             TestimonialCard(text: quote)
                                 .opacity(index < revealedCards ? 1 : 0)
@@ -88,8 +92,8 @@ struct SocialProofScreen: View {
                             .padding(.top, 4)
                     }
                 }
-                .padding(.top, UIScreen.isSmallPhone ? 4 : 20)
-                .padding(.bottom, UIScreen.isSmallPhone ? 8 : 20)
+                .padding(.top, isSmallPhone ? 4 : 20)
+                .padding(.bottom, isSmallPhone ? 8 : 20)
             }
 
             Button(action: {
@@ -114,8 +118,8 @@ struct SocialProofScreen: View {
             .buttonStyle(ScalePressStyle())
             .contentShape(Rectangle())
         }
-        .padding(.horizontal, UIScreen.isSmallPhone ? 20 : 24)
-        .padding(.bottom, UIScreen.isSmallPhone ? 10 : 16)
+        .padding(.horizontal, isSmallPhone ? 20 : 24)
+        .padding(.bottom, isSmallPhone ? 10 : 16)
         .onAppear {
             guard !didStartReveal else { return }
             didStartReveal = true
@@ -130,7 +134,7 @@ struct SocialProofScreen: View {
     }
 
     private var header: some View {
-        VStack(spacing: UIScreen.isSmallPhone ? 8 : 12) {
+        VStack(spacing: isSmallPhone ? 8 : 12) {
             // Tinted via `.renderingMode(.template)` so the imported PNG
             // renders in `wingmanBlack` whatever colour it was authored in.
             Image("stars")
@@ -138,18 +142,18 @@ struct SocialProofScreen: View {
                 .renderingMode(.template)
                 .scaledToFit()
                 .foregroundColor(.wingmanBlack)
-                .frame(height: UIScreen.isSmallPhone ? 28 : 34)
+                .frame(height: isSmallPhone ? 28 : 34)
                 .padding(.horizontal, 56)
 
             Text(content.headline)
-                .font(.manropeSemiBold(size: UIScreen.isSmallPhone ? 24 : 30))
+                .font(.manropeSemiBold(size: isSmallPhone ? 24 : 30))
                 .foregroundColor(.wingmanBlack)
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
 
             if let subtitle = content.subtitle {
                 Text(subtitle)
-                    .font(.manropeRegular(size: UIScreen.isSmallPhone ? 14 : 16))
+                    .font(.manropeRegular(size: isSmallPhone ? 14 : 16))
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
@@ -164,6 +168,10 @@ struct SocialProofScreen: View {
 /// the onboarding aesthetic — subtle `wingmanBlack` stroke plus a soft shadow,
 /// the same pattern `OptionButton` uses for question rows.
 private struct TestimonialCard: View {
+    /// The measured window, in place of `UIScreen.main` (Util/Device+Screen.swift).
+    @Environment(\.windowSize) private var windowSize
+    private var isSmallPhone: Bool { WindowMetrics.isSmallPhone(windowSize) }
+
     let text: String
 
     var body: some View {
@@ -176,23 +184,23 @@ private struct TestimonialCard: View {
             Image("left_leaves")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 22, height: UIScreen.isSmallPhone ? 36 : 44)
+                .frame(width: 22, height: isSmallPhone ? 36 : 44)
 
             Text("\u{201C}\(text)\u{201D}")
-                .font(.manropeRegular(size: UIScreen.isSmallPhone ? 12 : 13))
+                .font(.manropeRegular(size: isSmallPhone ? 12 : 13))
                 .italic()
                 .foregroundColor(.wingmanBlack)
-                .lineSpacing(UIScreen.isSmallPhone ? 2 : 3)
+                .lineSpacing(isSmallPhone ? 2 : 3)
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity)
 
             Image("right_leaves")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 22, height: UIScreen.isSmallPhone ? 36 : 44)
+                .frame(width: 22, height: isSmallPhone ? 36 : 44)
         }
-        .padding(.vertical, UIScreen.isSmallPhone ? 12 : 18)
-        .padding(.horizontal, UIScreen.isSmallPhone ? 12 : 16)
+        .padding(.vertical, isSmallPhone ? 12 : 18)
+        .padding(.horizontal, isSmallPhone ? 12 : 16)
         .background(Color.white)
         .overlay(
             RoundedRectangle(cornerRadius: 10)

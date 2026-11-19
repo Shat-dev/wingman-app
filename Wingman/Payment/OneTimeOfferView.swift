@@ -23,6 +23,12 @@ struct OneTimeOfferView: View {
     @StateObject private var viewModel: OneTimeOfferViewModel
     @EnvironmentObject var authManager: AuthManager
 
+    /// The measured window (Util/Device+Screen.swift). Shorter than any
+    /// current iPhone (iPhone Duo outer display, a folded half), the screen
+    /// cannot fit, so the offer scrolls and the claim button, the disclosure
+    /// and the footer stay pinned. Never true on a current iPhone.
+    @Environment(\.windowSize) private var windowSize
+
     /// Called once, when the user leaves by any route (purchase, close,
     /// restore, or the offer turning out to be unavailable).
     let onFinish: () -> Void
@@ -62,8 +68,15 @@ struct OneTimeOfferView: View {
             case .ready:
                 // Short screens (SE: ~647pt usable) get a smaller image and number.
                 GeometryReader { geo in
-                    content(isCompact: geo.size.height < 700)
+                    if WindowMetrics.isShortWindow(windowSize) {
+                        shortWindowContent
+                    } else {
+                        content(isCompact: geo.size.height < 700)
+                    }
                 }
+                // A centred column on a regular-width window (iPhone Duo inner
+                // display); untouched in compact width.
+                .readableColumn(ReadableColumn.narrow)
                 .transition(.opacity.combined(with: .offset(y: 12)))
             case .unavailable:
                 Color.clear
@@ -195,6 +208,71 @@ struct OneTimeOfferView: View {
 
             onceNotice
                 .padding(.horizontal, 20)
+
+            claimButton
+                .padding(.horizontal, 20)
+                .padding(.top, 12)
+
+            Text(viewModel.disclosure)
+                .font(.manropeMedium(size: 12))
+                .foregroundColor(secondary)
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.horizontal, 28)
+                .padding(.top, 10)
+
+            footerLinks
+                .padding(.bottom, 8)
+        }
+        .frame(maxWidth: .infinity)
+    }
+
+    /// `content(isCompact: true)` for a window shorter than any current
+    /// iPhone: the same pieces, with everything above the claim button in a
+    /// scroll view so the button, the disclosure and Terms / Restore /
+    /// Privacy are always on screen.
+    private var shortWindowContent: some View {
+        VStack(spacing: 0) {
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack(spacing: 0) {
+                    // Smaller than even the compact layout's 110pt, so the
+                    // discount itself is on screen without scrolling.
+                    Image("landing_what_if")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxHeight: 64)
+                        .padding(.horizontal, 8)
+                        .padding(.top, 16)
+                        .accessibilityHidden(true)
+
+                    Text("Can you put a price on connection?")
+                        .font(.manropeBold(size: 22, relativeTo: .title))
+                        .foregroundColor(.wingmanBlack)
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.horizontal, 24)
+                        .padding(.top, 8)
+                        .padding(.bottom, 12)
+
+                    Text("ONE-TIME OFFER")
+                        .font(.manropeSemiBold(size: 12))
+                        .tracking(1.2)
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 4)
+                        .background(Color.wingmanBlack)
+                        .cornerRadius(6)
+                        .padding(.bottom, 8)
+
+                    hero(isCompact: true)
+                        .padding(.bottom, 12)
+
+                    onceNotice
+                        .padding(.horizontal, 20)
+                }
+                .frame(maxWidth: .infinity)
+            }
+            .scrollBounceBehavior(.basedOnSize)
 
             claimButton
                 .padding(.horizontal, 20)

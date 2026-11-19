@@ -162,6 +162,9 @@ struct CourseDetailSheet: View {
                     .padding(.top, 12)
                 }
             }
+            // A centred column on a regular-width window (iPhone Duo inner
+            // display); untouched in compact width.
+            .readableColumn()
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true) // ensure iOS back button is hidden

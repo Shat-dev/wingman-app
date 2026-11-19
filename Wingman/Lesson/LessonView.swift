@@ -188,6 +188,9 @@ struct LessonView: View {
                 }
                 .padding(.bottom, titleBottomPadding())
             }
+            // A centred column on a regular-width window (iPhone Duo inner
+            // display); untouched in compact width.
+            .readableColumn()
         }
         .navigationBarHidden(true)
         .enableInteractivePopGesture()

@@ -50,6 +50,9 @@ struct PracticeView: View {
                         practiceListView
                     }
                 }
+                // A centred column on a regular-width window (iPhone Duo inner
+                // display); untouched in compact width.
+                .readableColumn()
 
                 // Full-screen loading overlay when fetching game scenes
                 if isLoadingGame {

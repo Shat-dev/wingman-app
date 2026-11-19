@@ -45,6 +45,9 @@ struct WalkthroughOverlayView: View {
                 scrim(beat)
                 card(beat)
                     .padding(.horizontal, 16)
+                    // A centred card on a regular-width window (iPhone Duo
+                    // inner display); untouched in compact width.
+                    .readableColumn(ReadableColumn.narrow)
                     .padding(.bottom, tabBarHeight + 14)
             }
             .transition(.opacity)

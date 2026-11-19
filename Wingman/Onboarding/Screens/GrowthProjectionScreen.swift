@@ -60,6 +60,15 @@ struct GrowthProjectionContent {
 }
 
 struct GrowthProjectionScreen: View {
+    /// The measured window, in place of `UIScreen.main` (Util/Device+Screen.swift).
+    @Environment(\.windowSize) private var windowSize
+    private var isSmallPhone: Bool { WindowMetrics.isSmallPhone(windowSize) }
+    /// English keeps its fixed layout everywhere except a window shorter than
+    /// any current iPhone, where it takes the translated fit-or-scroll path.
+    private var usesFixedLayout: Bool {
+        L10n.usesSourceLanguageLayout && !WindowMetrics.isShortWindow(windowSize)
+    }
+
     var content: GrowthProjectionContent = .default
     let onContinue: () -> Void
 
@@ -76,7 +85,7 @@ struct GrowthProjectionScreen: View {
             // then scrolled, so the chart is never pushed off the top,
             // Continue stays on screen and the last bullet is not left cut
             // off at the fold (Spanish and French on the SE, 2026-11-15).
-            if L10n.usesSourceLanguageLayout {
+            if usesFixedLayout {
                 chartAndCopy()
             } else {
                 ViewThatFits(in: .vertical) {
@@ -127,7 +136,7 @@ struct GrowthProjectionScreen: View {
     /// otherwise a block that only fits with its gaps collapsed would be
     /// kept unscrolled and run into the Continue button.
     private func gapIdealHeight(_ small: CGFloat, _ regular: CGFloat) -> CGFloat? {
-        L10n.usesSourceLanguageLayout ? nil : (UIScreen.isSmallPhone ? small : regular)
+        usesFixedLayout ? nil : (isSmallPhone || WindowMetrics.isShortWindow(windowSize) ? small : regular)
     }
 
     /// Everything above the Continue button.
@@ -144,10 +153,10 @@ struct GrowthProjectionScreen: View {
         // has no intrinsic size, so each still takes its full value
         // wherever there is room. See the note on `GrowthChartView`'s
         // frame for why anything here has to be compressible at all.
-        Spacer().frame(idealHeight: gapIdealHeight(16, 28), maxHeight: UIScreen.isSmallPhone ? 16 : 28)
+        Spacer().frame(idealHeight: gapIdealHeight(16, 28), maxHeight: isSmallPhone ? 16 : 28)
 
         Text(content.headline)
-            .font(.manropeSemiBold(size: UIScreen.isSmallPhone ? 21 : 24))
+            .font(.manropeSemiBold(size: isSmallPhone ? 21 : 24))
             .foregroundColor(.wingmanBlack)
             .lineSpacing(3)
             .multilineTextAlignment(.leading)
@@ -156,7 +165,7 @@ struct GrowthProjectionScreen: View {
             .opacity(showCopy ? 1 : 0)
             .offset(y: showCopy ? 0 : 8)
 
-        Spacer().frame(idealHeight: gapIdealHeight(16, 24), maxHeight: UIScreen.isSmallPhone ? 16 : 24)
+        Spacer().frame(idealHeight: gapIdealHeight(16, 24), maxHeight: isSmallPhone ? 16 : 24)
 
         VStack(alignment: .leading, spacing: 18) {
             ForEach(content.bullets) { bullet in

@@ -75,6 +75,10 @@ private enum T {
 }
 
 struct CompletionScreen<Detail: View>: View {
+    /// The measured window, in place of `UIScreen.main` (Util/Device+Screen.swift).
+    @Environment(\.windowSize) private var windowSize
+    private var isSmallPhone: Bool { WindowMetrics.isSmallPhone(windowSize) }
+
 
     let title: String
     /// The `source_id` of the award this screen is waiting for: the lesson id,
@@ -204,7 +208,7 @@ struct CompletionScreen<Detail: View>: View {
     /// The mark dominates the layout, and the XP block and level bar are new
     /// weight below it. At the previous 291pt this overflowed SE-class devices.
     private var markSize: CGFloat {
-        UIScreen.isSmallPhone ? 150 : 220
+        isSmallPhone || WindowMetrics.isShortWindow(windowSize) ? 150 : 220
     }
 
     /// Space held for the reward block before anything is in it: the summed
@@ -213,6 +217,80 @@ struct CompletionScreen<Detail: View>: View {
     private var reservedRewardHeight: CGFloat { 96 }
 
     // MARK: - Body
+
+    /// Everything above the Continue button.
+    @ViewBuilder private var columnContent: some View {
+        Spacer().frame(height: 12)
+
+        Image("checklist")
+            .resizable()
+            .scaledToFit()
+            .frame(width: markSize, height: markSize)
+            .allowsHitTesting(false)
+            .opacity(showMark ? 1 : 0)
+            .scaleEffect(showMark ? 1 : 0.96)
+
+        Text(title)
+            .font(.manropeSemiBold(size: 28))
+            .foregroundColor(.wingmanBlack)
+            .kerning(-0.3)
+            .multilineTextAlignment(.center)
+            .padding(.horizontal, 24)
+            .padding(.top, 20)
+            .opacity(showTitle ? 1 : 0)
+            .offset(y: showTitle ? 0 : 8)
+
+        // Reserved height, so a late-arriving award does not shove the
+        // detail slot down after it has already faded in. Sized to the
+        // un-itemised case; an itemised award grows past it at 520ms,
+        // before the detail appears at 980ms.
+        VStack(spacing: 12) {
+            xpBlock
+            streakRow
+        }
+        .frame(minHeight: reservedRewardHeight, alignment: .top)
+        .padding(.top, 24)
+
+        detail()
+            .padding(.top, 20)
+            .opacity(showDetail ? 1 : 0)
+    }
+
+    private var continueButton: some View {
+        Button(action: {
+            isActive = false
+            HapticManager.shared.tapStrong()
+            onContinue()
+
+            // The App Store rating ask hangs off THIS tap, not off a
+            // timer on the screen. It used to fire 2.6s after appear,
+            // behind the `isActive` guard — and Continue is live from
+            // the first frame, so everyone who tapped through quickly
+            // (the people most obviously enjoying themselves) was
+            // never asked at all. Continue is the one thing every
+            // finished lesson, scenario and daily practice is
+            // guaranteed to pass through, so it is the only trigger
+            // that reaches all of them.
+            //
+            // After `onContinue()` on purpose: for a lesson that call
+            // is what records the completion, so the ask should not
+            // get ahead of it. Every rule about whether to ask, and
+            // the short wait for this screen to finish leaving, lives
+            // in `ReviewPromptManager`.
+            ReviewPromptManager.shared.requestAfterDismissal(trigger: "completion_continue")
+        }) {
+            Text(continueTitle)
+                .font(.manropeSemiBold(size: 16))
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .labelHeight(52)
+                .background(Color.wingmanBlack)
+                .cornerRadius(5)
+        }
+        .buttonStyle(ScalePressStyle())
+        .padding(.horizontal, 20)
+        .padding(.bottom, 24)
+    }
 
     var body: some View {
         ZStack {
@@ -228,78 +306,39 @@ struct CompletionScreen<Detail: View>: View {
             // shifts" — layout reflow, not animation. With the flexible space
             // all below, anything that grows grows downward into it and nothing
             // above ever moves.
-            VStack(spacing: 0) {
-                Spacer().frame(height: 12)
+            // A window shorter than any current iPhone (iPhone Duo outer
+            // display, a folded half) cannot fit this column, and Continue is
+            // the only way out of the screen, so there the column scrolls and
+            // Continue stays pinned below it. Every current iPhone gets the
+            // column exactly as it was. The animation state lives on this
+            // view, so switching between the two loses nothing.
+            Group {
+                if WindowMetrics.isShortWindow(windowSize) {
+                    VStack(spacing: 0) {
+                        ScrollView {
+                            VStack(spacing: 0) {
+                                columnContent
+                            }
+                            .frame(maxWidth: .infinity)
+                        }
+                        .scrollBounceBehavior(.basedOnSize)
+                        .padding(.bottom, 12)
 
-                Image("checklist")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: markSize, height: markSize)
-                    .allowsHitTesting(false)
-                    .opacity(showMark ? 1 : 0)
-                    .scaleEffect(showMark ? 1 : 0.96)
+                        continueButton
+                    }
+                } else {
+                    VStack(spacing: 0) {
+                        columnContent
 
-                Text(title)
-                    .font(.manropeSemiBold(size: 28))
-                    .foregroundColor(.wingmanBlack)
-                    .kerning(-0.3)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 24)
-                    .padding(.top, 20)
-                    .opacity(showTitle ? 1 : 0)
-                    .offset(y: showTitle ? 0 : 8)
+                        Spacer(minLength: 16)
 
-                // Reserved height, so a late-arriving award does not shove the
-                // detail slot down after it has already faded in. Sized to the
-                // un-itemised case; an itemised award grows past it at 520ms,
-                // before the detail appears at 980ms.
-                VStack(spacing: 12) {
-                    xpBlock
-                    streakRow
+                        continueButton
+                    }
                 }
-                .frame(minHeight: reservedRewardHeight, alignment: .top)
-                .padding(.top, 24)
-
-                detail()
-                    .padding(.top, 20)
-                    .opacity(showDetail ? 1 : 0)
-
-                Spacer(minLength: 16)
-
-                Button(action: {
-                    isActive = false
-                    HapticManager.shared.tapStrong()
-                    onContinue()
-
-                    // The App Store rating ask hangs off THIS tap, not off a
-                    // timer on the screen. It used to fire 2.6s after appear,
-                    // behind the `isActive` guard — and Continue is live from
-                    // the first frame, so everyone who tapped through quickly
-                    // (the people most obviously enjoying themselves) was
-                    // never asked at all. Continue is the one thing every
-                    // finished lesson, scenario and daily practice is
-                    // guaranteed to pass through, so it is the only trigger
-                    // that reaches all of them.
-                    //
-                    // After `onContinue()` on purpose: for a lesson that call
-                    // is what records the completion, so the ask should not
-                    // get ahead of it. Every rule about whether to ask, and
-                    // the short wait for this screen to finish leaving, lives
-                    // in `ReviewPromptManager`.
-                    ReviewPromptManager.shared.requestAfterDismissal(trigger: "completion_continue")
-                }) {
-                    Text(continueTitle)
-                        .font(.manropeSemiBold(size: 16))
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .labelHeight(52)
-                        .background(Color.wingmanBlack)
-                        .cornerRadius(5)
-                }
-                .buttonStyle(ScalePressStyle())
-                .padding(.horizontal, 20)
-                .padding(.bottom, 24)
             }
+            // A centred column on a regular-width window (iPhone Duo inner
+            // display); untouched in compact width.
+            .readableColumn()
         }
         .animation(.easeOut(duration: 0.25), value: streakAdvance)
         .onAppear(perform: runIntro)

@@ -86,6 +86,9 @@ struct QuizQuestionView: View {
                     .transition(.opacity)
             }
         }
+        // A centred column on a regular-width window (iPhone Duo inner
+        // display); untouched in compact width.
+        .readableColumn()
     }
 
     // MARK: - Single Select Option Button

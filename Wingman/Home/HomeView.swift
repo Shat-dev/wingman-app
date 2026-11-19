@@ -9,6 +9,10 @@ import Supabase
 import PostHog
 
 struct HomeView: View {
+    /// The measured window, in place of `UIScreen.main` (Util/Device+Screen.swift).
+    @Environment(\.windowSize) private var windowSize
+    private var isSmallPhone: Bool { WindowMetrics.isSmallPhone(windowSize) }
+
     // Binding added so Home can change the selected tab in MainTabView
     @Binding var selectedTab: Int
     @EnvironmentObject private var coursesRouter: CoursesRouter
@@ -300,6 +304,9 @@ struct HomeView: View {
                     }
                     }
                 }
+                // A centred column on a regular-width window (iPhone Duo inner
+                // display); untouched in compact width.
+                .readableColumn()
             }
             .navigationBarHidden(true)
             .navigationDestination(isPresented: Binding(
@@ -320,7 +327,7 @@ struct HomeView: View {
                     // `.large` so users can drag the sheet shorter if the
                     // TextEditor/Slider stack feels cramped. Standard / Max
                     // phones retain the original `.large`-only behavior.
-                    .presentationDetents(UIScreen.isSmallPhone ? [.fraction(0.9), .large] : [.large])
+                    .presentationDetents(isSmallPhone ? [.fraction(0.9), .large] : [.large])
                     .presentationDragIndicator(.hidden)
                     .presentationCornerRadius(20)
             }
@@ -356,7 +363,6 @@ struct PeekCarousel: View {
     let onModuleSelected: (CourseCategory) -> Void
     
     @State private var dragOffset: CGFloat = 0
-    @State private var screenWidth: CGFloat = UIScreen.main.bounds.width
     @GestureState private var isHorizontalDrag: Bool = false
     @State private var horizontalDragActive: Bool = false
 
@@ -364,10 +370,6 @@ struct PeekCarousel: View {
     private let cardSpacing: CGFloat = 12
     private let horizontalPadding: CGFloat = 20
     private let peekAmount: CGFloat = 40  // How much of next card to show
-
-    private var cardWidth: CGFloat {
-        screenWidth - horizontalPadding - peekAmount - cardSpacing
-    }
 
     // Toggle to enable/disable custom horizontal pan detection overlay for the carousel
     private let useCarouselPan = true
@@ -429,9 +431,6 @@ struct PeekCarousel: View {
                             }
                         }
                 )
-                .onAppear {
-                    screenWidth = width
-                }
             }
             .frame(height: moduleCarouselHeight) // Cards only
 

@@ -15,11 +15,16 @@ struct StatisticScreen: View {
     let statistic: StatisticContent
     let onContinue: () -> Void
 
+    /// The measured window (Util/Device+Screen.swift). In a window shorter
+    /// than any current iPhone, English takes the same fit-or-scroll path a
+    /// translated app takes, since its fixed layout no longer fits there.
+    @Environment(\.windowSize) private var windowSize
+
     /// English always gets `fittedLayout`, the layout this screen has always
     /// had. A translated app gets the same layout whenever its text fits;
     /// when it does not, the content scrolls (see `scrollingLayout`).
     var body: some View {
-        if L10n.usesSourceLanguageLayout {
+        if L10n.usesSourceLanguageLayout && !WindowMetrics.isShortWindow(windowSize) {
             fittedLayout(imageIdealHeight: 220, gapIdealHeight: nil)
         } else {
             ViewThatFits(in: .vertical) {

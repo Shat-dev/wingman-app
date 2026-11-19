@@ -10,6 +10,10 @@ import RevenueCat
 import PostHog
 
 struct SettingsSheet: View {
+    /// The measured window, in place of `UIScreen.main` (Util/Device+Screen.swift).
+    @Environment(\.windowSize) private var windowSize
+    private var isSmallPhone: Bool { WindowMetrics.isSmallPhone(windowSize) }
+
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var authManager: AuthManager
     @State private var goalNotifications = true
@@ -89,7 +93,7 @@ struct SettingsSheet: View {
                                 // "Settings" in the HStack. Keyed on the same
                                 // `isSmallPhone` flag that selects the detent,
                                 // so the two cannot drift apart.
-                                .padding(.top, UIScreen.isSmallPhone ? 0 : -20)
+                                .padding(.top, isSmallPhone || WindowMetrics.isShortWindow(windowSize) ? 0 : -20)
                                 .padding(.trailing, -2)
                                 .opacity(0.5)
                         }
@@ -556,7 +560,7 @@ struct SettingsSheet: View {
             DailyReadingGoalSheet(currentGoal: dailyReadingGoal) { newGoal in
                 dailyReadingGoal = newGoal
             }
-            .presentationDetents([.medium])
+            .presentationDetents(WindowMetrics.isShortWindow(windowSize) ? [.large] : [.medium])
             .presentationDragIndicator(.hidden)
             .presentationCornerRadius(20)
         }

@@ -94,20 +94,44 @@ extension View {
     /// shown as it is whenever it fits the height it is given; when longer
     /// text makes it too tall, it is put in a scroll view instead of being
     /// squeezed or pushed off the screen.
-    @ViewBuilder
+    ///
+    /// The same applies in English in a window shorter than any current
+    /// iPhone (`WindowMetrics.isShortWindow`: the iPhone Duo's outer display,
+    /// a folded half), where English no longer fits either. On every current
+    /// iPhone English is untouched, exactly as before.
     func scrollsWhenTooTallIfTranslated(
         usesSourceLanguageLayout: Bool = L10n.usesSourceLanguageLayout
     ) -> some View {
-        if usesSourceLanguageLayout {
-            self
-        } else {
+        modifier(ScrollsWhenTooTall(adaptsInEveryWindow: !usesSourceLanguageLayout))
+    }
+
+    /// For a block of content that fits every current iPhone in every
+    /// language: the view itself, untouched, except in a window shorter than
+    /// any current iPhone, where it scrolls if — and only if — it no longer
+    /// fits. Put it inside any `onAppear` / `task` and below any one-shot
+    /// `@State`, because switching between the two arrangements re-creates
+    /// what is inside.
+    func scrollsWhenTooTallInShortWindow() -> some View {
+        modifier(ScrollsWhenTooTall(adaptsInEveryWindow: false))
+    }
+}
+
+private struct ScrollsWhenTooTall: ViewModifier {
+    /// True in a translated app: fit-or-scroll in every window.
+    let adaptsInEveryWindow: Bool
+    @Environment(\.windowSize) private var windowSize
+
+    func body(content: Content) -> some View {
+        if adaptsInEveryWindow || WindowMetrics.isShortWindow(windowSize) {
             ViewThatFits(in: .vertical) {
-                self
+                content
                 ScrollView {
-                    self
+                    content
                 }
                 .scrollBounceBehavior(.basedOnSize)
             }
+        } else {
+            content
         }
     }
 }
