@@ -27,7 +27,7 @@
 "Identical" means pixel-identical renders and the same test results compared with the baseline, on all four current-iPhone simulators, in English and in the translated layout.
 
 **Still open before calling Duo support shipped:**
-1. Install the iOS 27.2 simulator runtime. Then, on the iPhone Duo simulator:
+1. *(Mostly done 2026-11-19: live walk-through on the Duo simulator covered onboarding, paywall, walkthrough, tabs, the share sheet and Log Approach in both poses, with the fold mid-flow. Only paywall-gated content and the mid-purchase fold remain. See the loop log.)* Earlier: *(Partly done 2026-11-19: runtime installed; outer display measured at 466×678, inner at 951×669 landscape. Landing checked live in every pose, and all 17 rendered screens checked closed and open. See the loop log.)* Remaining on the iPhone Duo simulator:
    - Run the §8 pose walk-through.
    - Fold mid-purchase and mid-lesson.
    - Check the pact press-and-hold in a short window and the share sheet on the inner display.

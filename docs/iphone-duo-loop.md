@@ -191,3 +191,39 @@ Each loop iteration reads this file, does the **first unchecked step**, verifies
 
 - **Final run:** the S5 re-run had all code in place and no app code changed after it. Every device: 35/35 baseline renders identical, all 373 tests pass (5 skipped, as in the baseline).
 - **Audit:** `docs/iphone-duo-audit.md` §0 now records what shipped and what's still open.
+
+### 2026-11-19: iPhone Duo simulator pass (after the loop)
+
+- **Runtime:** iOS 27.2 simulator installed with Arthur's OK (8.32 GB). It also brought a Duo-specific runtime, `iOS-27-2-iPhone19-4`. Throwaway simulator: `Wingman Duo Test` (AE160CE4), Debug build.
+- **Measured:**
+  - Closed (outer display): **466×678 pt**, portrait. The status bar and camera sit in a strip down the right edge, and the app keeps its content clear of it.
+  - Open and half-open at 110° (inner display): **951×669 pt landscape**, regular width. The app's portrait lock does not keep it upright there.
+  - So `isShortWindow` (< 568 pt) does not fire in either full-screen pose. On the outer display `isSmallPhone` is true (678 < 700), so the SE spacing applies. The short-window paths remain for split screen and shorter panes.
+- **Live app:** Landing checked closed, open and half-open. Correct layout, no controls in the fold; the illustration crosses it.
+- **Render tests on the Duo:**
+  - Closed: all 17 screens fit, including the paywall and offer footers and the completion Continue.
+  - Open: all in readable columns, centred within the safe area (about 433 pt, not the window centre of 475, because of the right-edge status strip).
+  - `WindowSizeEnvironmentTests` and `ShareSheetAnchorTests` pass in both poses.
+- **Test-only fix:** `ShareSheetAnchorTests` now waits for its window to be installed. iOS 27.2 defers a sheet whose presenter isn't in the window yet; the app presents from its long-lived main window, so it's unaffected.
+- **S8 note:** in the open pose the paywall/offer Restore link sits about 40 pt left of the fold (the column is centred in the safe area). The pact's hold area spans the whole lower screen, so it can be held either side of the fold. S8 stays optional.
+- **Not done:** onboarding-to-app flows (Home, lessons, scenarios, Profile/Invite) in the live app. Getting past onboarding writes a guest user to production Supabase, and Arthur hasn't OK'd that. The mid-purchase fold also needs a Release build and a sandbox account.
+
+### 2026-11-19: live walk-through on the iPhone Duo simulator (Arthur OK'd one prod guest user)
+
+Debug build: PostHog `dev`, no pricing. Onboarding was done partly closed and partly open, folding and unfolding at the points below. It created **one guest user in production Supabase**.
+
+- **Onboarding (all steps):** correct in both poses.
+  - The step and the selected answer survived an unfold on question 1.
+  - Unfolding during the loading screen didn't restart it: the sequence finished and only **one** notification prompt appeared (the one-shot start isn't re-fired).
+  - Social proof and the pact sit in the column. The press-and-hold works open.
+- **Paywall:**
+  - Onboarding paywall: correct closed and open. Privacy/Restore/Terms are visible; the X appears and closes as before.
+  - Feature-gate sheet (lessons, daily practice): presents as a wide sheet on the inner display, survives a fold to the outer display, and its footer stays visible.
+- **Walkthrough → Home, Courses, Scenarios, Profile:**
+  - Each is in its readable column on the inner display.
+  - The walkthrough step survives an unfold.
+  - The tab bar spans the window and stays clear of the camera strip.
+- **Invite Friends share sheet on the inner display:** presents as a centred popover with no arrow. **No crash.** S4 is confirmed in the live app.
+- **Log Approach sheet:** text typed with the keyboard up survives an unfold. The sheet sits in its column. It was closed without saving, so no approach was written.
+- **Not reachable:** lessons, scenarios and daily practice. All are behind the subscription gate once the walkthrough spends the demo, and a Debug build can't buy. So the mid-lesson and mid-scenario folds and the mid-purchase fold still need a Release build and a sandbox purchase by Arthur.
+- **The simulator** was left in the closed pose. The throwaway `Wingman Duo Test` simulator holds the guest session.

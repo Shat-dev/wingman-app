@@ -26,8 +26,14 @@ final class ShareSheetAnchorTests: XCTestCase {
             root.traitOverrides.horizontalSizeClass = .regular
         }
         window.rootViewController = root
-        window.isHidden = false
-        RunLoop.main.run(until: Date().addingTimeInterval(0.3))
+        window.makeKeyAndVisible()
+        // iOS 27 defers a presentation whose presenter is not in the window
+        // yet; give the fresh test window time to settle first.
+        let deadline = Date().addingTimeInterval(3.0)
+        while root.view.window == nil && Date() < deadline {
+            RunLoop.main.run(until: Date().addingTimeInterval(0.1))
+        }
+        RunLoop.main.run(until: Date().addingTimeInterval(0.5))
 
         let activity = UIActivityViewController(activityItems: ["Join me on Wingman!"], applicationActivities: nil)
         InviteFriendsCard.anchorPopover(activity, in: window)
