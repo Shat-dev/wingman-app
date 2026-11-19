@@ -451,6 +451,36 @@
         }
       }
     },
+    "Amber" : {
+      "comment" : "Scenario character name, shown above her speech bubble.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Amber"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Amber"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Amber"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "アンバー"
+          }
+        }
+      }
+    },
     "Any change, even a change for the better, is always accompanied by drawbacks and discomforts." : {
       "comment" : "Daily quote on the Home screen.",
       "extractionState" : "manual",
@@ -597,6 +627,36 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "声をかける準備"
+          }
+        }
+      }
+    },
+    "Aurelie" : {
+      "comment" : "Scenario character name, shown above her speech bubble.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Aurelie"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Aurelie"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Aurelie"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "オレリー"
           }
         }
       }
@@ -867,6 +927,36 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "変化は、最初はつらく、途中は混乱し、最後には素晴らしい。"
+          }
+        }
+      }
+    },
+    "Claire" : {
+      "comment" : "Scenario character name, shown above her speech bubble.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Claire"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Claire"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Claire"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "クレア"
           }
         }
       }
@@ -1437,6 +1527,66 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "大きな夢を持ち、失敗を恐れず挑め。"
+          }
+        }
+      }
+    },
+    "Ellie" : {
+      "comment" : "Scenario character name, shown above her speech bubble.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ellie"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ellie"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ellie"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "エリー"
+          }
+        }
+      }
+    },
+    "Emily" : {
+      "comment" : "Scenario character name, shown above her speech bubble.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Emily"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Emily"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Emily"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "エミリー"
           }
         }
       }
@@ -2611,6 +2761,36 @@
         }
       }
     },
+    "Katie" : {
+      "comment" : "Scenario character name, shown above her speech bubble.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Katie"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Katie"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Katie"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ケイティ"
+          }
+        }
+      }
+    },
     "Keeping conversations going" : {
       "comment" : "Onboarding answer option.",
       "extractionState" : "manual",
@@ -2637,6 +2817,36 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "会話を続ける力"
+          }
+        }
+      }
+    },
+    "Lauren" : {
+      "comment" : "Scenario character name, shown above her speech bubble.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lauren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lauren"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lauren"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ローレン"
           }
         }
       }
@@ -2821,6 +3031,36 @@
         }
       }
     },
+    "Lulu" : {
+      "comment" : "Scenario character name, shown above her speech bubble.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lulu"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lulu"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lulu"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ルル"
+          }
+        }
+      }
+    },
     "Mastery & Identity" : {
       "comment" : "Course title.",
       "extractionState" : "manual",
@@ -2851,6 +3091,36 @@
         }
       }
     },
+    "Mel" : {
+      "comment" : "Scenario character name, shown above her speech bubble.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mel"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mel"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mel"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "メル"
+          }
+        }
+      }
+    },
     "Mindset & Foundations" : {
       "comment" : "Course category name: a Courses tab filter chip and section header, a Home carousel card, and the category part of the Home 'continue' card. Analytics keeps the English name.",
       "extractionState" : "manual",
@@ -2877,6 +3147,36 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "マインドセットと土台"
+          }
+        }
+      }
+    },
+    "Molly" : {
+      "comment" : "Scenario character name, shown above her speech bubble.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Molly"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Molly"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Molly"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "モリー"
           }
         }
       }
@@ -2937,6 +3237,66 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "ほとんどの場合"
+          }
+        }
+      }
+    },
+    "Naomi" : {
+      "comment" : "Scenario character name, shown above her speech bubble.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Naomi"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Naomi"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Naomi"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ナオミ"
+          }
+        }
+      }
+    },
+    "Natalie" : {
+      "comment" : "Scenario character name, shown above her speech bubble.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Natalie"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Natalie"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Natalie"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ナタリー"
           }
         }
       }
@@ -3541,6 +3901,36 @@
         }
       }
     },
+    "Sara" : {
+      "comment" : "Scenario character name, shown above her speech bubble.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sara"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sara"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sara"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "サラ"
+          }
+        }
+      }
+    },
     "Sharing & Vulnerability" : {
       "comment" : "Course title.",
       "extractionState" : "manual",
@@ -3687,6 +4077,36 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "ときどき"
+          }
+        }
+      }
+    },
+    "Sophie" : {
+      "comment" : "Scenario character name, shown above her speech bubble.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sophie"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sophie"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sophie"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ソフィー"
           }
         }
       }
@@ -5367,6 +5787,36 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "頭の中で耕しているだけでは、畑は決して耕せない。"
+          }
+        }
+      }
+    },
+    "Zoe" : {
+      "comment" : "Scenario character name, shown above her speech bubble.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Zoe"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Zoe"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Zoe"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ゾーイ"
           }
         }
       }

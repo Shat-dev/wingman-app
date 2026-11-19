@@ -606,7 +606,10 @@ struct DialogueContentView: View {
     private var displayName: String {
         switch scene.type {
         case .userDialogue:  return userName
-        case .womanDialogue: return scene.characterName ?? String(localized: "Her")
+        // The name is data (`scenarios.woman_name`), so it is shown through
+        // the Content table: unchanged in English and in languages that
+        // spell it the same, katakana in Japanese to match the story text.
+        case .womanDialogue: return scene.characterName.map { L10n.content($0) } ?? String(localized: "Her")
         case .feedback:      return String(localized: "Feedback")
         default:             return ""
         }
