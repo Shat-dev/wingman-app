@@ -83,6 +83,16 @@ nonisolated enum PaywallPricing {
         String(localized: "one-time", comment: "Paywall plan row, under the lifetime plan's price ($149.99 one-time). It is paid once, not per year or per month.")
     }
 
+    /// Under the price of the plan with the "Most Popular" pill (lifetime or
+    /// yearly), in place of "one-time" / "per year": what it saves against
+    /// twelve months of the monthly plan.
+    static func savePercent(_ percent: Int) -> String {
+        String(
+            localized: "Save \(percent)%",
+            comment: "Paywall plan row, under the lifetime or yearly plan's price: how much it saves against paying monthly for a year. %lld is a whole number, for example 69."
+        )
+    }
+
     /// Under the lifetime plan's name, where the subscriptions show their
     /// weekly price. A one-time price has no weekly amount to show.
     static var payOnce: String {

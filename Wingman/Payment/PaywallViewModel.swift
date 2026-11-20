@@ -173,6 +173,17 @@ final class PaywallViewModel: ObservableObject {
         return lifetimePackage?.storeProduct.localizedPriceString ?? ""
     }
 
+    /// What `plan` saves against twelve months of the monthly plan, as a
+    /// whole percentage, truncated. Nil for monthly itself, or when either
+    /// price is missing or the number is implausible — then the row shows
+    /// its usual "one-time" / "per year" instead of a guessed claim.
+    func savingsPercentVersusMonthly(for plan: SubscriptionPlan) -> Int? {
+        guard plan != .monthly,
+              let planPrice = package(for: plan)?.storeProduct.price,
+              let monthlyPrice = monthlyPackage?.storeProduct.price else { return nil }
+        return OneTimeOfferPricing.savingsPercent(fullPrice: monthlyPrice * 12, discountedPrice: planPrice)
+    }
+
     func package(for plan: SubscriptionPlan) -> Package? {
         return currentOffering?.package(for: plan)
     }

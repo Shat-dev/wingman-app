@@ -15,7 +15,14 @@ struct PlanRow: View {
     let weeklySubtitle: String
     let isSelected: Bool
     var badgeText: String? = nil
+    /// A pill ("Most Popular") straddling the card's top edge. Drawn as an
+    /// overlay so it never changes the card's height; whoever places the row
+    /// leaves `highlightOverhang` of room above it.
+    var highlightText: String? = nil
     let onSelect: () -> Void
+
+    /// How far the highlight pill rises above the card's top edge.
+    static let highlightOverhang: CGFloat = 11
 
     var body: some View {
         Button {
@@ -86,6 +93,23 @@ struct PlanRow: View {
                 RoundedRectangle(cornerRadius: 5)
                     .stroke(isSelected ? Color.wingmanBlack : Color(hex: "#E8E8E8"), lineWidth: isSelected ? 1.5 : 1)
             )
+            .overlay(alignment: .topTrailing) {
+                if let highlightText {
+                    Text(highlightText)
+                        .font(.manropeBold(size: 11))
+                        .foregroundColor(.white)
+                        .lineLimit(1)
+                        .padding(.horizontal, 10)
+                        .frame(height: Self.highlightOverhang * 2)
+                        .background(Capsule().fill(Color.wingmanBlack))
+                        // A white ring keeps the pill distinct from the black
+                        // trial strip when that header is showing.
+                        .overlay(Capsule().stroke(Color.white, lineWidth: 2))
+                        .offset(y: -Self.highlightOverhang)
+                        // Lines up with the radio button's right edge.
+                        .padding(.trailing, 16)
+                }
+            }
             .animation(.easeInOut(duration: 0.2), value: badgeText != nil)
         }
         .buttonStyle(ScalePressStyle())
@@ -101,6 +125,7 @@ struct PlanRow: View {
             weeklySubtitle: "per week",
             isSelected: true,
             badgeText: "3-day Free Trial",
+            highlightText: "Most Popular",
             onSelect: {}
         )
         

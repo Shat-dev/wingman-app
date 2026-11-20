@@ -6419,6 +6419,35 @@
         }
       }
     },
+    "Most Popular" : {
+      "comment" : "Small pill above the lifetime or yearly plan on the paywall.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Am beliebtesten"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Más popular"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Le plus populaire"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "一番人気"
+          }
+        }
+      }
+    },
     "Most men regret the chances they didn't make" : {
       "localizations" : {
         "de" : {
@@ -8112,6 +8141,35 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "保存"
+          }
+        }
+      }
+    },
+    "Save %lld%%" : {
+      "comment" : "Paywall plan row, under the lifetime or yearly plan's price: how much it saves against paying monthly for a year. %lld is a whole number, for example 69.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Spare %lld %%"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ahorra un %lld %%"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Économise %lld %%"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld%%お得"
           }
         }
       }

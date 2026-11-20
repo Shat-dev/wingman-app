@@ -759,6 +759,8 @@ struct PaywallView: View {
             }
         }
         .padding(.horizontal, 20)
+        // Room for the "Most Popular" pill that rises above the first row.
+        .padding(.top, PlanRow.highlightOverhang)
         .padding(.bottom, 8) // Breathing room before the pinned Continue button
     }
 
@@ -766,7 +768,7 @@ struct PaywallView: View {
         let title: String
         let detail: String
         let price: String
-        let period: String
+        var period: String
 
         switch plan {
         case .yearly:
@@ -790,13 +792,26 @@ struct PaywallView: View {
             period = PaywallPricing.oneTime
         }
 
+        // The highlighted plan says what it saves instead of its billing
+        // period. Lifetime stays clear without "one-time": the line under
+        // its name and the disclosure both say it is paid once.
+        if let percent = viewModel.savingsPercentVersusMonthly(for: plan) {
+            period = PaywallPricing.savePercent(percent)
+        }
+
         return PlanRow(
             title: title,
             price: detail,
             weekly: price,
             weeklySubtitle: period,
             isSelected: viewModel.selectedPlan == plan,
-            badgeText: viewModel.selectedPlan == plan ? viewModel.trialBadge(for: plan) : nil
+            badgeText: viewModel.selectedPlan == plan ? viewModel.trialBadge(for: plan) : nil,
+            // The long-term plan: lifetime when the offering sells it,
+            // otherwise yearly. Never monthly.
+            highlightText: plan == .monthly ? nil : String(
+                localized: "Most Popular",
+                comment: "Small pill above the lifetime or yearly plan on the paywall."
+            )
         ) {
             withAnimation(.easeInOut(duration: 0.2)) {
                 viewModel.selectPlan(plan)
