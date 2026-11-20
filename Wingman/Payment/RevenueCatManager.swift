@@ -90,6 +90,10 @@ final class RevenueCatManager: NSObject, ObservableObject {
         // That is an analytics gap; the alternative was a revenue bug.
         Purchases.configure(withAPIKey: apiKey)
         Purchases.shared.delegate = self
+        // Sends Apple's AdServices token so RevenueCat can tie installs and
+        // purchases to Apple Ads campaigns and keywords. No ATT prompt is
+        // needed; the token is collected once per install.
+        Purchases.shared.attribution.enableAdServicesAttributionTokenCollection()
         log("🆔 RevenueCat: Identity: \(Purchases.shared.appUserID)")
 
         Task {
