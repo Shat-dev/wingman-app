@@ -58,7 +58,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Aujourd’hui, tu paies %1$@ pour tes %2$lld premiers mois, puis %3$@ par mois. Annule à tout moment dans les réglages de l’App Store."
+            "value" : "Aujourd’hui, tu paies %1$@ pour tes %2$lld premiers mois, puis %3$@ par mois. Résiliable à tout moment dans les réglages de l’App Store."
           }
         },
         "ja" : {
@@ -93,7 +93,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Aujourd’hui, tu paies %1$@ pour tes %2$lld premiers mois, puis %3$@ par an. Annule à tout moment dans les réglages de l’App Store."
+            "value" : "Aujourd’hui, tu paies %1$@ pour tes %2$lld premiers mois, puis %3$@ par an. Résiliable à tout moment dans les réglages de l’App Store."
           }
         },
         "ja" : {
@@ -128,7 +128,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Aujourd’hui, tu paies %1$@ pour tes %2$lld premières années, puis %3$@ par mois. Annule à tout moment dans les réglages de l’App Store."
+            "value" : "Aujourd’hui, tu paies %1$@ pour tes %2$lld premières années, puis %3$@ par mois. Résiliable à tout moment dans les réglages de l’App Store."
           }
         },
         "ja" : {
@@ -163,7 +163,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Aujourd’hui, tu paies %1$@ pour tes %2$lld premières années, puis %3$@ par an. Annule à tout moment dans les réglages de l’App Store."
+            "value" : "Aujourd’hui, tu paies %1$@ pour tes %2$lld premières années, puis %3$@ par an. Résiliable à tout moment dans les réglages de l’App Store."
           }
         },
         "ja" : {
@@ -198,7 +198,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Aujourd’hui, tu paies %1$@ pour ton premier mois, puis %2$@ par mois. Annule à tout moment dans les réglages de l’App Store."
+            "value" : "Aujourd’hui, tu paies %1$@ pour ton premier mois, puis %2$@ par mois. Résiliable à tout moment dans les réglages de l’App Store."
           }
         },
         "ja" : {
@@ -233,7 +233,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Aujourd’hui, tu paies %1$@ pour ton premier mois, puis %2$@ par an. Annule à tout moment dans les réglages de l’App Store."
+            "value" : "Aujourd’hui, tu paies %1$@ pour ton premier mois, puis %2$@ par an. Résiliable à tout moment dans les réglages de l’App Store."
           }
         },
         "ja" : {
@@ -268,7 +268,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Aujourd’hui, tu paies %1$@ pour ta première année, puis %2$@ par mois. Annule à tout moment dans les réglages de l’App Store."
+            "value" : "Aujourd’hui, tu paies %1$@ pour ta première année, puis %2$@ par mois. Résiliable à tout moment dans les réglages de l’App Store."
           }
         },
         "ja" : {
@@ -303,7 +303,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Aujourd’hui, tu paies %1$@ pour ta première année, puis %2$@ par an. Annule à tout moment dans les réglages de l’App Store."
+            "value" : "Aujourd’hui, tu paies %1$@ pour ta première année, puis %2$@ par an. Résiliable à tout moment dans les réglages de l’App Store."
           }
         },
         "ja" : {
@@ -338,7 +338,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Aujourd’hui, tu paies %1$@, puis %2$@ à chaque renouvellement. Annule à tout moment dans les réglages de l’App Store."
+            "value" : "Aujourd’hui, tu paies %1$@, puis %2$@ à chaque renouvellement. Résiliable à tout moment dans les réglages de l’App Store."
           }
         },
         "ja" : {
@@ -1119,7 +1119,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Parmi les hommes de 18 à 24 ans, 45 % n’ont jamais abordé une femme"
+            "value" : "45 % des hommes de 18 à 24 ans n’ont jamais abordé une femme"
           }
         },
         "ja" : {
@@ -1147,7 +1147,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Parmi les hommes de 26 à 40 ans, 48 % n’ont abordé personne au cours de l’année écoulée"
+            "value" : "48 % des hommes de 26 à 40 ans n’ont abordé aucune femme depuis un an"
           }
         },
         "ja" : {
@@ -1175,7 +1175,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Parmi les hommes qui abordent régulièrement, 58 % obtiennent un numéro, un rendez-vous ou une relation"
+            "value" : "58 % des hommes qui abordent régulièrement obtiennent un numéro, un rendez-vous ou une relation"
           }
         },
         "ja" : {
@@ -1203,7 +1203,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Parmi les hommes célibataires, 63 % regrettent de ne pas avoir abordé de femmes quand ils étaient plus jeunes"
+            "value" : "63 % des hommes célibataires regrettent de ne pas avoir abordé plus de femmes quand ils étaient plus jeunes"
           }
         },
         "ja" : {
@@ -1231,7 +1231,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Parmi les femmes de 18 à 30 ans, 77 % aimeraient qu’on les aborde plus souvent"
+            "value" : "77 % des femmes de 18 à 30 ans aimeraient qu’on les aborde plus souvent"
           }
         },
         "ja" : {
@@ -1371,7 +1371,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Autorise les notifications pour les conseils et les offres. Tu peux les désactiver à tout moment dans Réglages."
+            "value" : "Active les notifications pour recevoir conseils et offres. Tu peux les couper quand tu veux dans Réglages."
           }
         },
         "ja" : {
@@ -1399,7 +1399,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Presque fini, tu pourras explorer dans une seconde."
+            "value" : "Presque fini. Dans une seconde, tout est à toi."
           }
         },
         "ja" : {
@@ -1427,7 +1427,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Près de la moitié des hommes n’ont abordé personne au cours de l’année écoulée"
+            "value" : "Près de la moitié des hommes n’ont abordé aucune femme depuis un an"
           }
         },
         "ja" : {
@@ -1483,7 +1483,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Près de la moitié des hommes de ton âge n’ont abordé personne au cours de l’année écoulée"
+            "value" : "Près de la moitié des hommes de ton âge n’ont abordé aucune femme depuis un an"
           }
         },
         "ja" : {
@@ -2045,7 +2045,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Prélevé immédiatement. Annule à tout moment dans les réglages de l’App Store."
+            "value" : "Prélevé aujourd’hui. Résiliable à tout moment dans les réglages de l’App Store."
           }
         },
         "ja" : {
@@ -2073,7 +2073,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Des leçons courtes, à faire dans les transports ou pendant la pause déjeuner"
+            "value" : "Des leçons courtes, à faire dans les transports ou pendant la pause de midi"
           }
         },
         "ja" : {
@@ -2101,7 +2101,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Gagne l’assurance d’agir quand ça compte"
+            "value" : "Ose passer à l’action au bon moment"
           }
         },
         "ja" : {
@@ -2190,7 +2190,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Peut-on mettre un prix sur une vraie rencontre ?"
+            "value" : "Combien vaut une vraie rencontre ?"
           }
         },
         "ja" : {
@@ -2611,7 +2611,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Parais naturel, pas nerveux"
+            "value" : "Tu auras l’air naturel, pas stressé"
           }
         },
         "ja" : {
@@ -2669,7 +2669,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Engagé."
+            "value" : "Marché conclu !"
           }
         },
         "ja" : {
@@ -2839,7 +2839,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "La confiance est une compétence. Une compétence, ça se construit."
+            "value" : "La confiance, ça se travaille. Comme n’importe quelle compétence."
           }
         },
         "ja" : {
@@ -3345,7 +3345,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Cours. État d’esprit, aborder, flirter, donner suite.\nDes leçons courtes pour devenir l’homme qui agit, pas celui qui se fige."
+            "value" : "Les cours : état d’esprit, aborder, flirter, et l’après.\nDes leçons courtes pour devenir l’homme qui y va, pas celui qui bloque."
           }
         },
         "ja" : {
@@ -3626,7 +3626,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Jour 1 pour devenir l’homme qui se lance"
+            "value" : "Jour 1 : tu deviens l’homme qui ose"
           }
         },
         "ja" : {
@@ -3879,7 +3879,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Tu as souvent envie de parler à des femmes, mais tu ne le fais pas ?"
+            "value" : "Ça t’arrive souvent d’avoir envie d’aborder une fille… et de ne pas le faire ?"
           }
         },
         "ja" : {
@@ -3936,7 +3936,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Ne fais pas partie de cette statistique. Ton futur toi compte sur toi."
+            "value" : "Ne sois pas l’un d’eux. Dans quelques années, tu te remercieras."
           }
         },
         "ja" : {
@@ -4414,7 +4414,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Sois confiant, pas anxieux"
+            "value" : "Sûr de toi, pas angoissé"
           }
         },
         "ja" : {
@@ -4728,7 +4728,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "La moitié des hommes n’abordent pas. La plupart de ceux qui le font réussissent."
+            "value" : "La moitié des hommes n’osent jamais. La plupart de ceux qui osent y arrivent."
           }
         },
         "ja" : {
@@ -4898,7 +4898,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Je n’appréhende plus du tout les situations sociales. Ça vaut plus que n’importe quel rendez-vous."
+            "value" : "Les situations sociales ne me font plus peur du tout. Ça vaut plus que n’importe quel rendez-vous."
           }
         },
         "ja" : {
@@ -4926,7 +4926,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Avant, je me figeais en croisant une fille. Au bout de 3 semaines, j’ai eu ma première vraie conversation avec une inconnue. C’était ça, la victoire."
+            "value" : "Avant, je bloquais rien qu’en croisant une fille. Au bout de 3 semaines, j’ai eu ma première vraie conversation avec une inconnue. Pour moi, c’était déjà gagné."
           }
         },
         "ja" : {
@@ -4954,7 +4954,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "J’ai lu tous les livres sur le sujet, aucun ne m’a vraiment fait agir. La structure quotidienne a tout changé."
+            "value" : "J’avais lu tous les livres sur le sujet, aucun ne m’avait fait bouger. Avoir un truc à faire chaque jour, ça a tout changé."
           }
         },
         "ja" : {
@@ -5322,7 +5322,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Maintiens appuyé jusqu’à ce que le cercle soit plein."
+            "value" : "Reste appuyé jusqu’à ce que le cercle soit plein."
           }
         },
         "ja" : {
@@ -5350,7 +5350,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Fluide, sans silences gênants"
+            "value" : "Des échanges fluides, sans blancs"
           }
         },
         "ja" : {
@@ -5406,7 +5406,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Sais quoi dire pour commencer"
+            "value" : "Tu sauras quoi dire pour l’aborder"
           }
         },
         "ja" : {
@@ -5492,7 +5492,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Le dernier. Celui-là, c’est toi.\nVide aujourd’hui. Dans un mois, il racontera une histoire… ou pas."
+            "value" : "Et pour finir : celui-là, c’est toi.\nVide aujourd’hui. Dans un mois, il racontera une histoire… ou pas."
           }
         },
         "ja" : {
@@ -6803,7 +6803,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Pas de phrases de drague ringardes. Juste des conseils calmes et concrets pour être présent. Mon anxiété sociale a diminué de moitié."
+            "value" : "Pas de phrases de drague ringardes. Juste des conseils posés et concrets pour être dans l’instant. Mon anxiété sociale a été divisée par deux."
           }
         },
         "ja" : {
@@ -7228,7 +7228,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Une chose à la fois. Joue d’abord le scénario."
+            "value" : "Une chose à la fois. Fais d’abord ce scénario."
           }
         },
         "ja" : {
@@ -8389,7 +8389,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Des techniques fondées sur la science, qui s’ancrent vraiment"
+            "value" : "Des techniques fondées sur la science, qui tiennent sur la durée"
           }
         },
         "ja" : {
@@ -9121,7 +9121,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "La peur du rejet ne gagne plus"
+            "value" : "La peur du rejet ne décide plus"
           }
         },
         "ja" : {
@@ -9375,7 +9375,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Maintiens appuyé pour t’engager."
+            "value" : "Reste appuyé pour t’engager."
           }
         },
         "ja" : {
@@ -9403,7 +9403,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Touche pour continuer"
+            "value" : "Appuie pour continuer"
           }
         },
         "ja" : {
@@ -9431,7 +9431,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Touche pour terminer"
+            "value" : "Appuie pour terminer"
           }
         },
         "ja" : {
@@ -9656,7 +9656,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "La méthode pas à pas pour ne plus te figer et lancer la conversation."
+            "value" : "La méthode pas à pas pour arrêter de bloquer et oser aller lui parler."
           }
         },
         "ja" : {
@@ -9938,7 +9938,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Pour obtenir ce que je veux, je dois grandir. Je ne laisserai pas la peur décider à ma place. Je saisirai ma chance et j’apprendrai de ce qui arrivera."
+            "value" : "Pour obtenir ce que je veux, je dois évoluer. Je ne laisserai pas la peur décider à ma place. Je vais tenter ma chance et apprendre de ce qui se passera."
           }
         },
         "ja" : {
@@ -10109,7 +10109,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Des banalités à la vraie alchimie"
+            "value" : "Des banalités à une vraie complicité"
           }
         },
         "ja" : {
@@ -10137,7 +10137,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Transforme le « et si » en « salut »."
+            "value" : "Du « et si… ? » au « salut »."
           }
         },
         "ja" : {
@@ -10364,7 +10364,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Avec Wingman chaque jour"
+            "value" : "Avec Wingman tous les jours"
           }
         },
         "ja" : {
@@ -10564,7 +10564,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Bienvenue sur Wingman. Ici, c’est chez toi.\nL’entraînement du jour te garde affûté. Le journal se remplit de moments saisis, pas ressassés."
+            "value" : "Bienvenue sur Wingman. Voici ton accueil.\nL’entraînement du jour te garde en forme. Ton journal se remplit des moments que tu as saisis, pas de ceux que tu as ressassés."
           }
         },
         "ja" : {
@@ -10760,7 +10760,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Qu’est-ce qui t’en empêche d’habitude ?"
+            "value" : "Qu’est-ce qui te retient, en général ?"
           }
         },
         "ja" : {
@@ -11012,7 +11012,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "À quand remonte la dernière fois que tu as parlé à une femme dans un lieu public ?"
+            "value" : "Quand as-tu abordé une inconnue pour la dernière fois ?"
           }
         },
         "ja" : {
@@ -11326,7 +11326,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Tu n’es pas seul. Des millions d’hommes ont du mal à aborder."
+            "value" : "Tu n’es pas le seul. Des millions d’hommes ont du mal à faire le premier pas."
           }
         },
         "ja" : {
@@ -11354,7 +11354,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Tu n’es pas le seul à être resté bloqué."
+            "value" : "Tu n’es pas le seul à être passé par là."
           }
         },
         "ja" : {
@@ -11528,7 +11528,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "plus de progrès qu’en regardant des vidéos de conseils génériques"
+            "value" : "plus vite qu’avec des vidéos de conseils génériques"
           }
         },
         "ja" : {

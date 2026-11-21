@@ -2,6 +2,8 @@
 
 The first French version was a machine translation done line by line from English. Some sentences kept the English shape ("Parmi les hommes de 18 à 24 ans, 45 %…", "Ton futur toi compte sur toi"). This version is rewritten from what each screen is meant to do, not from the English sentence.
 
+**These New lines are already in the app** (from the next build on), so this file shows exactly what users will read.
+
 **For the reviewer:** for each **New** line, say **OK** or write how you would say it. A voice note is fine. Lines under "Kept" didn't change, so only flag them if something sounds off.
 
 Target: French from France, also read in Belgium, Switzerland and Canada (the same text shows everywhere). Use "tu" everywhere. Screen numbers match the Spanish review screenshots. The layout is the same in every language, so the Spanish screenshots also show where each French line sits.
@@ -183,22 +185,22 @@ Kept: Je deviens un homme qui passe à l’action. · Moi, [prénom], je deviens
 
 ## 18 · Paywall
 
-Three of the benefit lines below show at a time, picked at random. "Sais quoi dire" was a conjugation error: the command form of *savoir* is *sache*.
+Three of the benefit lines below show at a time, picked at random. Each must fit on one line (36 characters at most), which is why some are short. "Sais quoi dire" was a conjugation error: the command form of *savoir* is *sache*.
 
 | | |
 |---|---|
 | Now | Jour 1 pour devenir l’homme qui se lance |
 | **New** | **Jour 1 : tu deviens l’homme qui ose** |
 | Now | Sais quoi dire pour commencer |
-| **New** | **Tu sauras exactement comment engager la conversation** |
+| **New** | **Tu sauras quoi dire pour l’aborder** |
 | Now | Parais naturel, pas nerveux |
 | **New** | **Tu auras l’air naturel, pas stressé** |
 | Now | Sois confiant, pas anxieux |
 | **New** | **Sûr de toi, pas angoissé** |
 | Now | Fluide, sans silences gênants |
-| **New** | **Des conversations fluides, sans blancs gênants** |
+| **New** | **Des échanges fluides, sans blancs** |
 | Now | La peur du rejet ne gagne plus |
-| **New** | **Ne laisse plus la peur du rejet décider** |
+| **New** | **La peur du rejet ne décide plus** |
 | Now | Des banalités à la vraie alchimie |
 | **New** | **Des banalités à une vraie complicité** |
 | Now | Prélevé immédiatement. Annule à tout moment dans les réglages de l’App Store. |

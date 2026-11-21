@@ -1220,7 +1220,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Susciter l’attirance et l’intérêt romantique"
+            "value" : "Créer de l’attirance et de la complicité"
           }
         },
         "ja" : {
@@ -1460,7 +1460,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Lassé des applis de rencontre"
+            "value" : "Marre des applis de rencontre"
           }
         },
         "ja" : {
@@ -1760,7 +1760,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "À chaque fois"
+            "value" : "Tout le temps"
           }
         },
         "ja" : {
@@ -2000,7 +2000,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "La peur du rejet ou d’être ridicule"
+            "value" : "La peur du rejet ou du ridicule"
           }
         },
         "ja" : {
@@ -2210,7 +2210,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Je me fige face aux femmes qui me plaisent"
+            "value" : "Je bloque devant une femme qui me plaît"
           }
         },
         "ja" : {
@@ -3320,7 +3320,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Je n’ai jamais abordé personne"
+            "value" : "Je ne l’ai jamais fait"
           }
         },
         "ja" : {
@@ -3440,7 +3440,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Non, je me lance en général"
+            "value" : "Non, en général je me lance"
           }
         },
         "ja" : {
@@ -5000,7 +5000,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Fatigué d’être seul"
+            "value" : "Envie de ne plus être seul"
           }
         },
         "ja" : {
@@ -5090,7 +5090,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Avoir plus confiance en moi en général"
+            "value" : "Avoir plus confiance en moi"
           }
         },
         "ja" : {
@@ -5300,7 +5300,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Au cours du dernier mois"
+            "value" : "Il y a moins d’un mois"
           }
         },
         "ja" : {
@@ -5330,7 +5330,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Au cours de la dernière semaine"
+            "value" : "Il y a moins d’une semaine"
           }
         },
         "ja" : {
@@ -5360,7 +5360,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Peur de donner une mauvaise impression"
+            "value" : "La peur de faire mauvaise impression"
           }
         },
         "ja" : {
