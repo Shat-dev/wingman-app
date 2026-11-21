@@ -1113,7 +1113,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "De los hombres de 18 a 24 años, el 45 % nunca se ha acercado a una mujer"
+            "value" : "El 45 % de los hombres de 18 a 24 años nunca se ha animado a hablarle a una desconocida"
           }
         },
         "fr" : {
@@ -1141,7 +1141,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "De los hombres de 26 a 40 años, el 48 % no se ha acercado a nadie en el último año"
+            "value" : "El 48 % de los hombres de 26 a 40 años no le ha hablado a una desconocida en el último año"
           }
         },
         "fr" : {
@@ -1169,7 +1169,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "De los hombres que se acercan con constancia, el 58 % consigue un número, una cita o una relación"
+            "value" : "El 58 % de los hombres que lo intentan con regularidad consiguen un número, una cita o una pareja"
           }
         },
         "fr" : {
@@ -1197,7 +1197,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "De los hombres solteros, el 63 % lamenta no haberse acercado a mujeres cuando era más joven"
+            "value" : "El 63 % de los hombres solteros se arrepienten de no haberles hablado a más mujeres cuando eran jóvenes"
           }
         },
         "fr" : {
@@ -1225,7 +1225,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "De las mujeres de 18 a 30 años, el 77 % quiere que más hombres le hablen"
+            "value" : "Al 77 % de las mujeres de 18 a 30 años les gustaría que más hombres les hablaran"
           }
         },
         "fr" : {
@@ -1365,7 +1365,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Permite las notificaciones de consejos y ofertas. Puedes desactivarlas cuando quieras en Configuración."
+            "value" : "Activa las notificaciones para recibir consejos y ofertas. Puedes quitarlas cuando quieras en Configuración."
           }
         },
         "fr" : {
@@ -1393,7 +1393,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Ya casi: en un segundo podrás explorar."
+            "value" : "Ya casi. En un segundo, todo tuyo."
           }
         },
         "fr" : {
@@ -1421,7 +1421,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Casi la mitad de los hombres no se ha acercado a nadie en el último año"
+            "value" : "Casi la mitad de los hombres no le han hablado a una desconocida en el último año"
           }
         },
         "fr" : {
@@ -1449,7 +1449,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Casi la mitad de los hombres de tu edad nunca se ha acercado a una mujer"
+            "value" : "Casi la mitad de los hombres de tu edad nunca se han animado a hablarle a una desconocida"
           }
         },
         "fr" : {
@@ -1477,7 +1477,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Casi la mitad de los hombres de tu edad no se ha acercado a nadie en el último año"
+            "value" : "Casi la mitad de los hombres de tu edad no le han hablado a una desconocida en el último año"
           }
         },
         "fr" : {
@@ -2039,7 +2039,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Se cobra de inmediato. Cancela cuando quieras en la configuración del App Store."
+            "value" : "Se cobra hoy. Puedes cancelar cuando quieras desde la configuración del App Store."
           }
         },
         "fr" : {
@@ -2067,7 +2067,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Lecciones cortas para el trayecto o la hora de la comida"
+            "value" : "Lecciones cortas que puedes hacer en el camino o en tu descanso"
           }
         },
         "fr" : {
@@ -2095,7 +2095,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Construye la seguridad para actuar cuando importa"
+            "value" : "Gana confianza para dar el paso en el momento justo"
           }
         },
         "fr" : {
@@ -2184,7 +2184,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "¿Se le puede poner precio a conectar con alguien?"
+            "value" : "¿Cuánto vale conectar de verdad con alguien?"
           }
         },
         "fr" : {
@@ -2465,7 +2465,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Obtén %lld %% de descuento"
+            "value" : "Aprovecha el %lld %% de descuento"
           }
         },
         "fr" : {
@@ -2577,7 +2577,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Si cierras esto, no vuelve"
+            "value" : "Si la cierras, ya no vuelve"
           }
         },
         "fr" : {
@@ -2605,7 +2605,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Se te ve natural, no nervioso"
+            "value" : "Te verás natural, no nervioso"
           }
         },
         "fr" : {
@@ -2833,7 +2833,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "La seguridad es una habilidad. Las habilidades se construyen."
+            "value" : "La confianza se entrena, como cualquier habilidad."
           }
         },
         "fr" : {
@@ -3339,7 +3339,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Cursos. Mentalidad, acercarte, coquetear, dar seguimiento.\nLecciones cortas que forman al hombre que actúa, no al que se bloquea."
+            "value" : "Cursos: mentalidad, cómo acercarte, coqueteo y qué hacer después.\nLecciones cortas para ser el hombre que se lanza, no el que se queda paralizado."
           }
         },
         "fr" : {
@@ -3620,7 +3620,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Día 1 para convertirte en el hombre que se anima"
+            "value" : "Hoy empiezas a ser el hombre que se anima"
           }
         },
         "fr" : {
@@ -3873,7 +3873,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "¿Muchas veces quieres hablar con mujeres pero no lo haces?"
+            "value" : "¿Cuántas veces te quedas con ganas de hablarle a una chica y no lo haces?"
           }
         },
         "fr" : {
@@ -3930,7 +3930,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "No seas parte de esa estadística. Tu yo del futuro cuenta contigo."
+            "value" : "No seas uno de ellos. Tu yo del futuro te lo va a agradecer."
           }
         },
         "fr" : {
@@ -4408,7 +4408,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Siéntete seguro, no nervioso"
+            "value" : "Te sentirás seguro, no ansioso"
           }
         },
         "fr" : {
@@ -4493,7 +4493,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Da el primer paso sin darle vueltas"
+            "value" : "Darás el paso sin darle vueltas"
           }
         },
         "fr" : {
@@ -4722,7 +4722,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "La mitad de los hombres no se acerca. La mayoría de los que lo hacen, lo logra."
+            "value" : "La mitad de los hombres nunca da el paso. A la mayoría de los que se animan, les va bien."
           }
         },
         "fr" : {
@@ -4864,7 +4864,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Me estoy convirtiendo en un hombre que actúa."
+            "value" : "Me estoy convirtiendo en un hombre que se atreve."
           }
         },
         "fr" : {
@@ -4892,7 +4892,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Dejé de temerles por completo a las situaciones sociales. Eso vale más que cualquier cita."
+            "value" : "Ya no me da pavor ninguna situación social. Eso vale más que cualquier cita."
           }
         },
         "fr" : {
@@ -4920,7 +4920,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Antes me bloqueaba al pasar junto a una chica. A las 3 semanas tuve mi primera conversación de verdad con una desconocida. Ese fue el logro."
+            "value" : "Antes me paralizaba con solo pasar al lado de una chica. A las 3 semanas tuve mi primera conversación de verdad con una desconocida. Para mí, eso ya fue ganar."
           }
         },
         "fr" : {
@@ -4948,7 +4948,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Leí todos los libros sobre el tema y ninguno me hizo actuar. La estructura diaria lo cambió."
+            "value" : "Había leído todos los libros sobre el tema y ninguno me hizo moverme. Tener algo que hacer cada día lo cambió todo."
           }
         },
         "fr" : {
@@ -4977,7 +4977,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Yo, %@, me estoy convirtiendo en un hombre que actúa."
+            "value" : "Yo, %@, me estoy convirtiendo en un hombre que se atreve."
           }
         },
         "fr" : {
@@ -5287,7 +5287,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Únete a los hombres que pasan a la acción"
+            "value" : "Únete a los hombres que ya dieron el paso"
           }
         },
         "fr" : {
@@ -5344,7 +5344,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Fluye, sin silencios incómodos"
+            "value" : "Sin silencios incómodos"
           }
         },
         "fr" : {
@@ -5400,7 +5400,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Sabrás cómo iniciar la charla"
+            "value" : "Sabrás cómo empezar a hablarle"
           }
         },
         "fr" : {
@@ -5486,7 +5486,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "El último. Este eres tú.\nHoy está vacío. En un mes contará una historia… o no."
+            "value" : "Por último, este eres tú.\nHoy está vacío. En un mes contará una historia… o no."
           }
         },
         "fr" : {
@@ -6431,7 +6431,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Más popular"
+            "value" : "El más popular"
           }
         },
         "fr" : {
@@ -6459,7 +6459,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "La mayoría de los hombres lamenta las oportunidades que no aprovechó"
+            "value" : "La mayoría de los hombres se arrepienten de las oportunidades que dejaron pasar"
           }
         },
         "fr" : {
@@ -6487,7 +6487,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "La mayoría de las mujeres quiere que le hablen más"
+            "value" : "A la mayoría de las mujeres les gustaría que más hombres les hablaran"
           }
         },
         "fr" : {
@@ -6797,7 +6797,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Nada de frases cursis. Solo consejos tranquilos y prácticos para estar presente. Mi ansiedad social bajó a la mitad."
+            "value" : "Nada de frases cursis. Solo cosas prácticas y tranquilas para estar presente. Mi ansiedad social se redujo a la mitad."
           }
         },
         "fr" : {
@@ -7222,7 +7222,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Una cosa a la vez. Primero juega el escenario."
+            "value" : "Una cosa a la vez. Primero haz este escenario."
           }
         },
         "fr" : {
@@ -8383,7 +8383,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Técnicas con base científica que sí se te quedan"
+            "value" : "Técnicas basadas en la ciencia que de verdad se te quedan"
           }
         },
         "fr" : {
@@ -8467,7 +8467,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Elige todas las que correspondan"
+            "value" : "Puedes elegir varias"
           }
         },
         "fr" : {
@@ -9143,7 +9143,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Deja de convencerte de no hacerlo"
+            "value" : "Deja de buscarte excusas"
           }
         },
         "fr" : {
@@ -9650,7 +9650,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "El método paso a paso para dejar de bloquearte y empezar la conversación."
+            "value" : "Un método paso a paso para dejar de bloquearte y animarte a hablarle."
           }
         },
         "fr" : {
@@ -9678,7 +9678,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Solo están esperando que des el primer paso"
+            "value" : "Solo esperan a que des el primer paso"
           }
         },
         "fr" : {
@@ -9932,7 +9932,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Para lograr lo que quiero, tengo que crecer. No dejaré que el miedo decida por mí. Aprovecharé mi oportunidad y aprenderé de lo que pase."
+            "value" : "Para conseguir lo que quiero, tengo que crecer. No voy a dejar que el miedo decida por mí. Me voy a lanzar y voy a aprender de lo que pase."
           }
         },
         "fr" : {
@@ -10103,7 +10103,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "De la charla casual a la química"
+            "value" : "De la charla a la química de verdad"
           }
         },
         "fr" : {
@@ -10131,7 +10131,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Convierte el “¿y si…?” en “hola”."
+            "value" : "Del “¿y si…?” al “hola”."
           }
         },
         "fr" : {
@@ -10358,7 +10358,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Con Wingman cada día"
+            "value" : "Usando Wingman a diario"
           }
         },
         "fr" : {
@@ -10474,7 +10474,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Acércate a ella sin dudar"
+            "value" : "Te acercarás sin dudarlo"
           }
         },
         "fr" : {
@@ -10558,7 +10558,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Bienvenido a Wingman. Este es tu inicio.\nLa práctica diaria te mantiene en forma. El registro se llena de momentos que aprovechaste, no que repasaste en tu cabeza."
+            "value" : "Bienvenido a Wingman. Esta es tu pantalla principal.\nLa práctica diaria te mantiene en forma. Tu registro se va llenando con los momentos que aprovechaste, no con los que te quedaste repasando."
           }
         },
         "fr" : {
@@ -10586,7 +10586,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "¿Qué esperas mejorar principalmente?"
+            "value" : "¿Qué es lo que más quieres mejorar?"
           }
         },
         "fr" : {
@@ -10754,7 +10754,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "¿Qué suele impedírtelo?"
+            "value" : "¿Qué es lo que normalmente te frena?"
           }
         },
         "fr" : {
@@ -11006,7 +11006,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "¿Cuándo fue la última vez que le hablaste a una mujer en público?"
+            "value" : "¿Cuándo fue la última vez que le hablaste a una desconocida?"
           }
         },
         "fr" : {
@@ -11320,7 +11320,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "No estás solo. Millones de hombres tienen dificultades para acercarse."
+            "value" : "No eres el único. A millones de hombres les cuesta dar el primer paso."
           }
         },
         "fr" : {
@@ -11348,7 +11348,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "No eres el único que se ha quedado atascado aquí."
+            "value" : "No eres el único que ha estado en este punto."
           }
         },
         "fr" : {
@@ -11522,7 +11522,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "más progreso que ver videos de consejos genéricos"
+            "value" : "más rápido que con videos de consejos genéricos"
           }
         },
         "fr" : {
@@ -11899,7 +11899,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "paga una vez, tuyo para siempre"
+            "value" : "pagas una vez y es tuyo para siempre"
           }
         },
         "fr" : {

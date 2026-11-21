@@ -674,7 +674,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "De vuelta en la soltería tras una ruptura o un divorcio"
+            "value" : "Otra vez soltero después de una ruptura o un divorcio"
           }
         },
         "fr" : {
@@ -824,7 +824,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Mejor mentalidad y más seguridad"
+            "value" : "Más confianza y mejor mentalidad"
           }
         },
         "fr" : {
@@ -1214,7 +1214,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Generar atracción e interés romántico"
+            "value" : "Crear atracción y química"
           }
         },
         "fr" : {
@@ -1454,7 +1454,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Cansado de las apps de citas"
+            "value" : "Harto de las apps de citas"
           }
         },
         "fr" : {
@@ -2204,7 +2204,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Me bloqueo con las mujeres que me atraen"
+            "value" : "Me bloqueo cuando una mujer me gusta"
           }
         },
         "fr" : {
@@ -2804,7 +2804,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Mantener la conversación"
+            "value" : "Saber mantener la conversación"
           }
         },
         "fr" : {
@@ -2924,7 +2924,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Aprender a acercarme"
+            "value" : "Aprender a dar el primer paso"
           }
         },
         "fr" : {
@@ -3314,7 +3314,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Nunca me he acercado a nadie"
+            "value" : "Nunca lo he hecho"
           }
         },
         "fr" : {
@@ -3434,7 +3434,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "No, normalmente me animo"
+            "value" : "Nunca, yo me lanzo"
           }
         },
         "fr" : {
@@ -5084,7 +5084,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Quiero más seguridad en general"
+            "value" : "Quiero tener más confianza en mí mismo"
           }
         },
         "fr" : {
@@ -5294,7 +5294,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "En el último mes"
+            "value" : "Hace menos de un mes"
           }
         },
         "fr" : {
@@ -5324,7 +5324,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "En la última semana"
+            "value" : "Hace menos de una semana"
           }
         },
         "fr" : {
